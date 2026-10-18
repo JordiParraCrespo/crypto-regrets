@@ -8,8 +8,8 @@ const ext = (l: Snippet['lang']) => ({ solidity: '.sol', typescript: '.html', ya
 <div class="codetabs" data-codetabs>
   <div class="terminal">
     <div class="terminal-bar" aria-hidden="true"><i></i><i></i><i></i><span data-title>{`vulnerable${ext(vulnerable.lang)}`}</span></div>
-    <pre data-panel="vulnerable" id={`${id}-vulnerable`} role="tabpanel"><code>{vulnerable.code}</code></pre>
-    {fixed && <pre data-panel="fixed" id={`${id}-fixed`} role="tabpanel" hidden><code>{fixed.code}</code></pre>}
+    <pre data-panel="vulnerable" id={`${id}-vulnerable`} role="tabpanel" tabindex="0"><code>{vulnerable.code}</code></pre>
+    {fixed && <pre data-panel="fixed" id={`${id}-fixed`} role="tabpanel" tabindex="0" hidden><code>{fixed.code}</code></pre>}
   </div>
   {fixed && (
     <div class="tabs" role="tablist" aria-label="Code view">
