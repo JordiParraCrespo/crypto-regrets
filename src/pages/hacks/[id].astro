@@ -14,6 +14,10 @@ const c = CATEGORIES[i.category];
 const era = ERAS.find((e) => e.id === eraForYear(i.year))!;
 const similar = incidents.filter((x) => x.category === i.category && x.id !== i.id).sort((a, b) => Math.abs(a.year - i.year) - Math.abs(b.year - i.year) || (b.amountUsd ?? 0) - (a.amountUsd ?? 0)).slice(0, 6);
 const SOURCE_NAMES = { defillama: 'DefiLlama', defihacklabs: 'DeFiHackLabs', rekt: 'REKT', curated: 'Curated' } as const;
+const CLASSIFIED_BY = { defillama: 'DefiLlama label', keywords: 'Keyword rules', typesafe: 'TypeSafe (Jev)', curated: 'Curated post-mortem', none: 'Unclassified' } as const;
+const ai = i.ai;
+const aiAgrees = ai?.category === i.category;
+const pct = (p: number) => `${Math.round(p * 100)}%`;
 ---
 <Base title={i.name} description={`${i.name} (${i.date}): ${c.name}. ${i.rootCause ?? c.short}`}>
   <p class="small"><a href={href('/hacks')}>← All hacks</a></p>
@@ -40,9 +44,27 @@ const SOURCE_NAMES = { defillama: 'DefiLlama', defihacklabs: 'DeFiHackLabs', rek
         {i.audit && <><dt>Audit (per REKT)</dt><dd>{i.audit}</dd></>}
         <dt>Bridge</dt><dd>{i.bridge ? 'Yes' : 'No'}</dd>
         <dt>Sources</dt><dd>{i.sources.map((s) => SOURCE_NAMES[s]).join(', ')}</dd>
+        <dt>Classified by</dt><dd>{CLASSIFIED_BY[i.classifiedBy]}</dd>
       </dl>
     </div>
   </div>
+
+  {ai && (
+    <section class="card ai">
+      <h3>Model second opinion <span class="muted small">· TypeSafe {ai.model}</span></h3>
+      <p class="small">
+        {aiAgrees ? <>Agrees with the assigned pattern</> : <>Suggests <a href={href(`/patterns/${ai.category}`)}>{CATEGORIES[ai.category].name}</a> instead</>}
+        {' '}with confidence <strong>{ai.confidence.toFixed(2)}</strong>.
+        {!aiAgrees && i.classifiedBy !== 'typesafe' && <span class="muted"> We keep the {CLASSIFIED_BY[i.classifiedBy].toLowerCase()}; disagreements are worth a look.</span>}
+      </p>
+      <ul class="clean probs">
+        {ai.top.map((t) => (
+          <li><span class="plabel">{CATEGORIES[t.category].name}</span><span class="ptrack"><span class="pfill" style={`width:${t.p * 100}%`} /></span><span class="mono small">{pct(t.p)}</span></li>
+        ))}
+      </ul>
+      <p class="small muted" style="margin-bottom:0">From the write-up: flash loan used <strong>{pct(ai.flashLoan)}</strong> · attributed to a state actor <strong>{pct(ai.stateActor)}</strong>. These are model probabilities from the text above, not verified facts.</p>
+    </section>
+  )}
 
   {c.prevention.length > 0 && (
     <section>
@@ -62,5 +84,11 @@ const SOURCE_NAMES = { defillama: 'DefiLlama', defihacklabs: 'DeFiHackLabs', rek
   dl { display: grid; grid-template-columns: max-content 1fr; gap: 6px 16px; margin: 0; font-size: 0.92rem; }
   dt { color: var(--muted); }
   dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
+  .ai { margin-top: 16px; }
+  .probs li { display: grid; grid-template-columns: minmax(0, 14rem) 1fr 3rem; gap: 10px; align-items: center; border: 0; padding: 3px 0; }
+  .plabel { font-size: 0.85rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .ptrack { height: 8px; background: var(--surface-2); border-radius: 4px; overflow: hidden; }
+  .pfill { display: block; height: 100%; background: var(--s1); border-radius: 0 4px 4px 0; }
+  .probs .mono { text-align: right; }
   .btn { display: inline-block; border: 1px solid var(--border); padding: 6px 12px; border-radius: 8px; background: var(--surface-2); }
 </style>

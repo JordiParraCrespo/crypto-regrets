@@ -1,6 +1,19 @@
 ---
 import Base from '../layouts/Base.astro';
-import { sourceAudit, incidents, href } from '../lib/data';
+import { sourceAudit, incidents, href, fmtUsd } from '../lib/data';
+import CategoryChip from '../components/CategoryChip.astro';
+import { CATEGORIES } from '../lib/taxonomy';
+const withAi = incidents.filter((i) => i.ai);
+const llama = withAi.filter((i) => i.classifiedBy === 'defillama');
+const llamaAgree = llama.filter((i) => i.ai!.category === i.category).length;
+const curated = withAi.filter((i) => i.classifiedBy === 'curated');
+const curatedAgree = curated.filter((i) => i.ai!.category === i.category).length;
+const byTs = incidents.filter((i) => i.classifiedBy === 'typesafe').length;
+const replaced = incidents.filter((i) => i.classifiedBy === 'typesafe' && i.classificationNote?.includes('Replaced keyword')).length;
+const disagreements = withAi
+  .filter((i) => i.ai!.category !== i.category && i.ai!.confidence >= 0.9 && i.ai!.category !== 'unknown')
+  .sort((a, b) => (b.amountUsd ?? 0) - (a.amountUsd ?? 0));
+const model = withAi[0]?.ai?.model ?? 'jev';
 const groups = [...new Set(sourceAudit.map((s) => s.category))];
 const NAMES: Record<string, string> = { 'exploit-database': 'Hack & exploit databases', 'vulnerability-dataset': 'Vulnerability datasets', 'protocol-advisories': 'Client, consensus & protocol advisories', 'taxonomy-research': 'Taxonomies & research' };
 const count = (s: string) => incidents.filter((i) => i.sources.includes(s as never)).length;
@@ -15,8 +28,29 @@ const count = (s: string) => incidents.filter((i) => i.sources.includes(s as nev
     <li><strong>Root causes and PoCs: <a href="https://github.com/SunWeb3Sec/DeFiHackLabs">DeFiHackLabs</a></strong> ({count('defihacklabs')} incidents). Matched by name and date (±7 days), with technical root-cause text and a runnable Foundry exploit. Unmatched entries are added as new incidents.</li>
     <li><strong>Narrative and audit status: <a href="https://rekt.news/">REKT</a></strong> ({count('rekt')} incidents). The leaderboard adds an article link, excerpt and audit status (±10 days).</li>
     <li><strong>Infrastructure:</strong> Bitcoin Core, Geth and Cosmos advisories, plus {count('curated')} hand-curated records: base-layer failures (value overflow, chain splits, outages) and post-mortem root causes for landmark hacks (The DAO, Ronin, Wormhole, Bybit…).</li>
-    <li><strong>Classification:</strong> upstream labels are mapped onto our <a href={href('/patterns')}>taxonomy</a>, with documented overrides (e.g. 51% attacks that DefiLlama files as "Forged Proof"). Free-text sources go through ordered keyword rules. Every record is schema-validated (zod) at build time.</li>
+    <li><strong>Classification:</strong> upstream labels are mapped onto our <a href={href('/patterns')}>taxonomy</a>, with documented overrides (e.g. 51% attacks that DefiLlama files as "Forged Proof"). Free-text-only records are classified by TypeSafe (below), falling back to ordered keyword rules. Every record is schema-validated (zod) at build time.</li>
   </ol>
+  <h2>Model classification (TypeSafe)</h2>
+  <p>Every incident was also sent to <a href="https://typesafe.ai">TypeSafe</a>'s {model} model with three typed questions: a <em>Choice</em> over all {Object.keys(CATEGORIES).length - 1} patterns plus "not enough information" (each pattern's definition is the option description), and two yes/no <em>Noul</em> questions: was a flash loan used, and is it attributed to a state actor. The model sees the incident's facts and root-cause text, but not our label, so it judges independently.</p>
+  <div class="grid grid-4">
+    <div class="card stat"><div class="value">{Math.round((llamaAgree / Math.max(llama.length, 1)) * 100)}%</div><div class="label">agreement with DefiLlama's human labels ({llamaAgree}/{llama.length})</div></div>
+    <div class="card stat"><div class="value">{curatedAgree}/{curated.length}</div><div class="label">agreement with our curated post-mortems</div></div>
+    <div class="card stat"><div class="value">{byTs}</div><div class="label">incidents classified by TypeSafe (it replaced {replaced} keyword guesses)</div></div>
+    <div class="card stat"><div class="value">{disagreements.length}</div><div class="label">confident disagreements (≥ 0.9) worth reviewing</div></div>
+  </div>
+  <p class="small muted">Policy: the model's answer is adopted only when no human label exists (keyword guesses and unclassified incidents) and its confidence is ≥ 0.5. Human labels are never overwritten; the model's view is shown next to them. Answers are cached in <code>data/typesafe/classifications.json</code> and re-requested only when an incident's text changes.</p>
+  {disagreements.length > 0 && (
+    <details>
+      <summary>Show the {disagreements.length} confident disagreements</summary>
+      <div class="table-wrap" style="margin-top:8px">
+        <table>
+          <thead><tr><th>Incident</th><th>Assigned</th><th>Model says</th><th class="num">Conf.</th><th class="num">Lost</th></tr></thead>
+          <tbody>{disagreements.map((i) => <tr><td><a href={href(`/hacks/${i.id}`)}>{i.name}</a><div class="small muted">{i.technique}</div></td><td><CategoryChip id={i.category} /></td><td><CategoryChip id={i.ai!.category} /></td><td class="num">{i.ai!.confidence.toFixed(2)}</td><td class="num">{fmtUsd(i.amountUsd)}</td></tr>)}</tbody>
+        </table>
+      </div>
+    </details>
+  )}
+
   <p class="small muted">Amounts are nominal USD at the time of the incident, as reported by the source. Cross-source duplicates are merged with fuzzy name matching, so expect a small number of missed or incorrect merges. Corrections welcome.</p>
 
   <h2>Source audit</h2>

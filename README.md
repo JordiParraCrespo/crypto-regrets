@@ -41,6 +41,7 @@ scripts/curated.ts    hand-written landmark + base-layer incidents (post-mortem 
 src/lib/taxonomy.ts   layers, categories, eras ─ the classification is typed (CategoryId is a literal union)
 src/lib/types.ts      zod schemas: Incident, Advisory, SourceAudit (single source of truth for types)
 src/lib/data.ts       loads + validates data at build time, aggregations
+scripts/classify.ts   TypeSafe classification → data/typesafe/classifications.json
 src/pages/            Astro static pages
 ```
 
@@ -48,9 +49,22 @@ src/pages/            Astro static pages
 
 **Matching.** Records are joined by fuzzy name key + date window (DeFiHackLabs ±7 days, REKT ±10 days), with an alias table for renamed incidents (Wormhole ⇄ Portal, BNB ⇄ Binance Bridge…).
 
-## Plugging in another classifier / API
+## Model classification with TypeSafe
 
-Every incident must satisfy `incidentSchema` in `src/lib/types.ts`, and `category` must be a `CategoryId`. To use an external classification API, call it in `scripts/ingest.ts` after `build()` and overwrite `category` / `technique` / `classificationNote`. The zod parse at the end rejects any label outside the taxonomy, so the build fails loudly instead of silently mis-filing incidents.
+Every incident also gets a second opinion from [TypeSafe](https://docs.typesafe.ai)'s System One model (Jev): one request per incident, with three typed questions (`scripts/classify-spec.ts`):
+
+- `category`: a **Choice** over all taxonomy categories, with each category's definition as the option description
+- `flash_loan` and `state_actor`: **Noul** (probability that a statement is true)
+
+```sh
+export TYPESAFE_API_KEY=...   # never commit it; in CI use a repository secret
+npm run classify              # only incidents whose text changed since the last run
+npm run ingest                # applies the cached answers
+```
+
+Answers are cached in `data/typesafe/classifications.json` (keyed by incident id + a hash of the facts sent), so builds and CI never need the key. `scripts/typesafe.ts` is a small typed client: responses are zod-validated, and a Choice answer outside the option set is rejected.
+
+**Adoption policy** (`applyTypeSafe` in `scripts/ingest.ts`): the model's category is used only where no human label exists (keyword guesses and unclassified incidents) and confidence ≥ 0.5. DefiLlama and curated labels are never overwritten; disagreements are shown on each incident page, listed on `/sources`, and filterable at `/hacks?by=dis`. First run: 84% agreement with DefiLlama's labels, 445 incidents classified by the model, unclassified incidents down from 79 to 26.
 
 ## Data licensing & caveats
 

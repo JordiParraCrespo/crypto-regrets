@@ -14,7 +14,9 @@ const chains = [...new Set(incidents.flatMap((i) => i.chains))].sort((a, b) => i
     <select id="chain" aria-label="Chain"><option value="">All chains</option>{chains.map((c) => <option value={c}>{c}</option>)}</select>
     <select id="year" aria-label="Year"><option value="">All years</option>{[...YEARS].reverse().map((y) => <option value={y}>{y}</option>)}</select>
     <select id="min" aria-label="Minimum loss"><option value="0">Any amount</option><option value="1000000">≥ $1M</option><option value="10000000">≥ $10M</option><option value="100000000">≥ $100M</option></select>
+    <select id="by" aria-label="Classified by"><option value="">Any classifier</option><option value="defillama">DefiLlama label</option><option value="typesafe">TypeSafe (Jev)</option><option value="curated">Curated</option><option value="keywords">Keyword rules</option><option value="dis">Model disagrees</option></select>
     <label class="small"><input type="checkbox" id="poc" /> Has PoC</label>
+    <label class="small"><input type="checkbox" id="fl" /> Flash loan</label>
     <select id="sort" aria-label="Sort"><option value="date">Newest first</option><option value="amount">Largest first</option></select>
   </form>
   <p class="small muted" id="count" aria-live="polite"></p>
@@ -23,7 +25,7 @@ const chains = [...new Set(incidents.flatMap((i) => i.chains))].sort((a, b) => i
       <thead><tr><th>Date</th><th>Incident</th><th>Pattern</th><th>Chain</th><th class="num">Lost</th></tr></thead>
       <tbody id="rows">
         {incidents.map((i) => (
-          <tr data-c={i.category} data-ch={i.chains.join('|')} data-y={i.year} data-a={i.amountUsd ?? 0} data-d={i.date} data-p={i.poc ? 1 : 0} data-t={`${i.name} ${i.technique ?? ''} ${i.rootCause ?? ''}`.toLowerCase()}>
+          <tr data-c={i.category} data-ch={i.chains.join('|')} data-y={i.year} data-a={i.amountUsd ?? 0} data-d={i.date} data-p={i.poc ? 1 : 0} data-by={i.classifiedBy} data-dis={i.ai && i.ai.category !== i.category ? 1 : 0} data-fl={i.ai && i.ai.flashLoan >= 0.5 ? 1 : 0} data-t={`${i.name} ${i.technique ?? ''} ${i.rootCause ?? ''}`.toLowerCase()}>
             <td class="mono small" style="white-space:nowrap">{fmtDate(i.date)}</td>
             <td><a href={href(`/hacks/${i.id}`)}>{i.name}</a>{i.poc && <span class="muted small"> · PoC</span>}{i.technique && <div class="muted small">{i.technique}</div>}</td>
             <td><CategoryChip id={i.category} /></td>
@@ -38,17 +40,18 @@ const chains = [...new Set(incidents.flatMap((i) => i.chains))].sort((a, b) => i
     const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
     const tbody = $('rows');
     const rows = Array.from(tbody.querySelectorAll('tr')) as HTMLTableRowElement[];
-    const ids = ['q', 'cat', 'chain', 'year', 'min', 'poc', 'sort'];
+    const ids = ['q', 'cat', 'chain', 'year', 'min', 'by', 'poc', 'fl', 'sort'];
     const params = new URLSearchParams(location.search);
     for (const id of ids) { const v = params.get(id); const el = $<HTMLInputElement>(id); if (v != null) { if (el.type === 'checkbox') el.checked = v === '1'; else el.value = v; } }
     function apply() {
       const q = $<HTMLInputElement>('q').value.trim().toLowerCase();
       const cat = $<HTMLSelectElement>('cat').value, chain = $<HTMLSelectElement>('chain').value, year = $<HTMLSelectElement>('year').value;
       const min = Number($<HTMLSelectElement>('min').value), poc = $<HTMLInputElement>('poc').checked, sort = $<HTMLSelectElement>('sort').value;
+      const by = $<HTMLSelectElement>('by').value, fl = $<HTMLInputElement>('fl').checked;
       let n = 0;
       for (const r of rows) {
         const d = r.dataset;
-        const ok = (!q || d.t!.includes(q)) && (!cat || d.c === cat) && (!chain || d.ch!.split('|').includes(chain)) && (!year || d.y === year) && Number(d.a) >= min && (!poc || d.p === '1');
+        const ok = (!q || d.t!.includes(q)) && (!cat || d.c === cat) && (!chain || d.ch!.split('|').includes(chain)) && (!year || d.y === year) && Number(d.a) >= min && (!poc || d.p === '1') && (!fl || d.fl === '1') && (!by || (by === 'dis' ? d.dis === '1' : d.by === by));
         r.hidden = !ok; if (ok) n++;
       }
       const sorted = [...rows].sort(sort === 'amount' ? (a, b) => Number(b.dataset.a) - Number(a.dataset.a) : (a, b) => b.dataset.d!.localeCompare(a.dataset.d!));

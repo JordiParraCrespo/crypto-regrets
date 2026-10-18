@@ -6,7 +6,7 @@
  *
  * Output: src/data/incidents.json, src/data/advisories.json (both schema-validated).
  */
-import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { z } from 'zod';
 import { type CategoryId } from '../src/lib/taxonomy';
@@ -19,6 +19,7 @@ import {
   type SourceId,
 } from '../src/lib/types';
 import { CURATED } from './curated';
+import { CACHE_FILE, stateHash, type CachedClassification } from './classify-spec';
 
 const RAW = 'data/raw';
 const OUT = 'src/data';
@@ -195,6 +196,49 @@ function classifyText(text: string): CategoryId {
   return 'unknown';
 }
 
+function keywordCategory(text: string, from: string): Pick<Draft, 'category' | 'classificationNote' | 'classifiedBy'> {
+  const category = classifyText(text);
+  return {
+    category,
+    classifiedBy: category === 'unknown' ? 'none' : 'keywords',
+    classificationNote: category === 'unknown' ? null : `Classified by keyword rules from the ${from}.`,
+  };
+}
+
+function setKeywordCategory(d: Draft, category: CategoryId) {
+  if (category === 'unknown') return;
+  d.category = category;
+  d.classifiedBy = 'keywords';
+  d.classificationNote = 'Upstream label missing; classified by keyword rules from the root-cause text.';
+}
+
+// TypeSafe answers (see scripts/classify.ts). Only replace categories nobody has vouched for:
+// keyword guesses and unclassified incidents. Human labels (DefiLlama, curated) are kept and the
+// model's disagreement is surfaced on the incident page instead.
+const TYPESAFE_MIN_CONFIDENCE = 0.5;
+const typesafeCache: Record<string, CachedClassification> = existsSync(CACHE_FILE) ? JSON.parse(readFileSync(CACHE_FILE, 'utf8')) : {};
+
+function applyTypeSafe(i: Incident): Incident {
+  const c = typesafeCache[i.id];
+  if (!c || c.hash !== stateHash(i)) return i;
+  const top = (Object.entries(c.probabilities) as [CategoryId, number][])
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 3)
+    .map(([category, p]) => ({ category, p }));
+  const ai = { model: c.model, category: c.category, confidence: c.confidence, top, flashLoan: c.flashLoan, stateActor: c.stateActor };
+  const adopt =
+    (i.classifiedBy === 'keywords' || i.classifiedBy === 'none') && c.category !== 'unknown' && c.confidence >= TYPESAFE_MIN_CONFIDENCE;
+  if (!adopt) return { ...i, ai };
+  const replaced = i.classifiedBy === 'keywords' && i.category !== c.category ? ` Replaced keyword guess "${i.category}".` : '';
+  return {
+    ...i,
+    ai,
+    category: c.category,
+    classifiedBy: 'typesafe',
+    classificationNote: `Classified by TypeSafe ${c.model} (confidence ${c.confidence.toFixed(2)}).${replaced}`,
+  };
+}
+
 // ---------------------------------------------------------------- sources
 
 type Draft = Omit<Incident, 'id' | 'year'>;
@@ -213,6 +257,8 @@ function fromLlama(): Draft[] {
       category,
       technique: h.technique && h.technique !== 'Unknown' ? h.technique : null,
       classificationNote: note,
+      classifiedBy: category === 'unknown' ? 'none' : 'defillama',
+      ai: null,
       bridge: h.bridgeHack,
       language: h.language,
       rootCause: null,
@@ -322,7 +368,7 @@ function build(): { incidents: Incident[]; stats: Record<string, number> } {
       stats.dhlMatched++;
       match.rootCause ??= rootCause;
       match.poc ??= e.poc;
-      if (match.category === 'unknown' && e.title) match.category = classifyText(e.title);
+      if (match.category === 'unknown' && e.title) setKeywordCategory(match, classifyText(e.title));
       attach(match, 'defihacklabs', ref);
     } else {
       drafts.push({
@@ -332,9 +378,9 @@ function build(): { incidents: Incident[]; stats: Record<string, number> } {
         returnedUsd: null,
         chains: [],
         targetType: 'DeFi Protocol',
-        category: classifyText(`${e.title} ${e.lost ?? ''}`),
+        ...keywordCategory(`${e.title} ${e.lost ?? ''}`, 'DeFiHackLabs root-cause title'),
         technique: e.title.length > 0 && e.title.length <= 60 ? e.title : null,
-        classificationNote: 'Classified by keyword rules from the DeFiHackLabs root-cause title.',
+        ai: null,
         bridge: /bridge/i.test(e.name),
         language: 'Solidity',
         rootCause,
@@ -363,7 +409,7 @@ function build(): { incidents: Incident[]; stats: Record<string, number> } {
       stats.rektMatched++;
       match.audit ??= audit;
       match.rootCause ??= r.excerpt;
-      if (match.category === 'unknown') match.category = classifyText(r.excerpt);
+      if (match.category === 'unknown') setKeywordCategory(match, classifyText(r.excerpt));
       attach(match, 'rekt', ref);
     } else {
       drafts.push({
@@ -373,9 +419,9 @@ function build(): { incidents: Incident[]; stats: Record<string, number> } {
         returnedUsd: null,
         chains: [],
         targetType: null,
-        category: classifyText(`${r.excerpt} ${r.tags.join(' ')}`),
+        ...keywordCategory(`${r.excerpt} ${r.tags.join(' ')}`, 'REKT article excerpt'),
         technique: null,
-        classificationNote: 'Classified by keyword rules from the REKT article excerpt.',
+        ai: null,
         bridge: /bridge/i.test(r.title + r.excerpt),
         language: null,
         rootCause: r.excerpt,
@@ -398,6 +444,7 @@ function build(): { incidents: Incident[]; stats: Record<string, number> } {
         match.classificationNote = `Curated: reclassified from "${match.category}" based on the published post-mortem.`;
         match.category = c.category;
       }
+      match.classifiedBy = 'curated';
       for (const ref of c.references) attach(match, 'curated', ref);
       continue;
     }
@@ -411,6 +458,8 @@ function build(): { incidents: Incident[]; stats: Record<string, number> } {
       category: c.category,
       technique: c.technique,
       classificationNote: null,
+      classifiedBy: 'curated',
+      ai: null,
       bridge: false,
       language: null,
       rootCause: c.rootCause,
@@ -427,9 +476,9 @@ function build(): { incidents: Incident[]; stats: Record<string, number> } {
     let id = `${d.date}-${slugify(d.name)}`;
     for (let i = 2; ids.has(id); i++) id = `${d.date}-${slugify(d.name)}-${i}`;
     ids.add(id);
-    return incidentSchema.parse({ ...d, id, year: Number(d.date.slice(0, 4)) });
+    return applyTypeSafe({ ...d, id, year: Number(d.date.slice(0, 4)) });
   });
-  return { incidents, stats };
+  return { incidents: incidents.map((i) => incidentSchema.parse(i)), stats };
 }
 
 // ---------------------------------------------------------------- advisories
@@ -517,3 +566,6 @@ console.log(`incidents: ${incidents.length}, advisories: ${advisories.length}`);
 const byCat: Record<string, number> = {};
 for (const i of incidents) byCat[i.category] = (byCat[i.category] ?? 0) + 1;
 console.log(byCat);
+const byWho: Record<string, number> = {};
+for (const i of incidents) byWho[i.classifiedBy] = (byWho[i.classifiedBy] ?? 0) + 1;
+console.log(byWho, `typesafe answers: ${incidents.filter((i) => i.ai).length}`);

@@ -5,6 +5,9 @@ import { CATEGORY_IDS, type CategoryId } from './taxonomy';
 export const SOURCE_IDS = ['defillama', 'defihacklabs', 'rekt', 'curated'] as const;
 export type SourceId = (typeof SOURCE_IDS)[number];
 
+export const CLASSIFIERS = ['defillama', 'keywords', 'typesafe', 'curated', 'none'] as const;
+export type Classifier = (typeof CLASSIFIERS)[number];
+
 export const referenceSchema = z.object({
   source: z.enum(SOURCE_IDS),
   label: z.string(),
@@ -26,6 +29,22 @@ export const incidentSchema = z.object({
   technique: z.string().nullable(),
   /** Why we chose a category different from the upstream label, if we did. */
   classificationNote: z.string().nullable(),
+  /** Who decided `category`: upstream human label, our keyword rules, TypeSafe's model, or a curated post-mortem. */
+  classifiedBy: z.enum(CLASSIFIERS),
+  /** TypeSafe (Jev) second opinion, kept even when we don't adopt its category. */
+  ai: z
+    .object({
+      model: z.string(),
+      category: z.enum(CATEGORY_IDS as [CategoryId, ...CategoryId[]]),
+      confidence: z.number().min(0).max(1),
+      /** Top alternatives, highest first. */
+      top: z.array(z.object({ category: z.enum(CATEGORY_IDS as [CategoryId, ...CategoryId[]]), p: z.number() })),
+      /** P(attack used a flash loan). */
+      flashLoan: z.number().min(0).max(1),
+      /** P(attributed to a state-sponsored group, e.g. Lazarus). */
+      stateActor: z.number().min(0).max(1),
+    })
+    .nullable(),
   bridge: z.boolean(),
   language: z.string().nullable(),
   /** Technical root-cause narrative (DeFiHackLabs, REKT excerpt, or curated). */
