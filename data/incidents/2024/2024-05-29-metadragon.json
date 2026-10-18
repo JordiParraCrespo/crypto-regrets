@@ -1,0 +1,119 @@
+{
+  "id": "2024-05-29-metadragon",
+  "name": "MetaDragon",
+  "date": "2024-05-29",
+  "year": 2024,
+  "amountUsd": 181000,
+  "returnedUsd": null,
+  "chains": [
+    "BNB"
+  ],
+  "targetType": "NFTfi",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.85,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.86
+      },
+      {
+        "category": "logic-error",
+        "p": 0.14
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.93
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Lack of Access Control. Lost: ~ $180k",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Lack of Access Control. Lost: ~ $180k"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Incorrect logic check if (to == address(this) || to == erc721) {transform(value);} allows for unrestricted minting Vulnerable code snippet: https://bscscan.com/address/0xEF1f39d8391cdDcaee62b8b383cB992F46a6ce4f Attack tx: https://app.blocksec.com/explorer/tx/bsc/0x3ad998a01ad1f1bbe6dba6a08e658c1749dabfa4a07da20ded3c73bcd6970d20 Analysis: https://x.com/Phalcon_xyz/status/1795746828064854497"
+    },
+    {
+      "source": "SlowMist",
+      "text": "According to the SlowMist security team, potential suspicious activity has been detected in the GameFi protocol MetaDragon, and users are advised to remain vigilant. MetaDragon stated that users need to convert their META NFTs into tokens as soon as possible to minimize community losses. The META NFT contract has just been hacked. The hacker converted many NFTs in wallets to META tokens and sold them. The attack path originated from the META NFT."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "MetaDragon on BNB Chain was exploited on 2024-05-29 after its META transfer path could trigger unauthorized minting, and the observed exploit transaction swapped 3,665,200 META for 64.820147313674455403 BNB. The META contract routed transfers to transform(value) when the recipient was the token contract or the NFT contract, and that mint path lacked NFT ownership, caller authorization, and one-time-use checks."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x3ad998a01ad1f1bbe6dba6a08e658c1749dabfa4a07da20ded3c73bcd6970d20"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-05/MetaDragon_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-05/MetaDragon_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/Phalcon_xyz/status/1795746828064854497"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0xEF1f39d8391cdDcaee62b8b383cB992F46a6ce4f"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/bsc/0x3ad998a01ad1f1bbe6dba6a08e658c1749dabfa4a07da20ded3c73bcd6970d20"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x3ad998a01ad1f1bbe6dba6a08e658c1749dabfa4a07da20ded3c73bcd6970d20"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/MetaDragonDao/status/1795750901820665925"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/metadragon-2024-05-29"
+    },
+    {
+      "source": "revertiq",
+      "label": "api.llama.fi",
+      "url": "https://api.llama.fi/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "hacked.slowmist.io",
+      "url": "https://hacked.slowmist.io/?c=NFT"
+    }
+  ]
+}

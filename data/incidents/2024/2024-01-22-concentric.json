@@ -1,0 +1,94 @@
+{
+  "id": "2024-01-22-concentric",
+  "name": "Concentric",
+  "date": "2024-01-22",
+  "year": 2024,
+  "amountUsd": 1720000,
+  "returnedUsd": null,
+  "chains": [
+    "Arbitrum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "social-engineering",
+  "technique": "Phishing",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "social-engineering",
+    "confidence": 0.59,
+    "top": [
+      {
+        "category": "social-engineering",
+        "p": 0.61
+      },
+      {
+        "category": "key-compromise",
+        "p": 0.38
+      },
+      {
+        "category": "access-control",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "The DeFi protocol Concentric Finance, built on the Camelot v3 protocol, has suffered a severe security breach. In an official post on social media, Concentric.fi stated that the security breach due to a targeted social engineering attack on one of their team members holding the deployer wallet. The attacker exploited vulnerabilities to upgrade the vaults, mint new LP tokens, and subsequently drained the platform's assets.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The DeFi protocol Concentric Finance, built on the Camelot v3 protocol, has suffered a severe security breach. In an official post on social media, Concentric.fi stated that the security breach due to a targeted social engineering attack on one of their team members holding the deployer wallet. The attacker exploited vulnerabilities to upgrade the vaults, mint new LP tokens, and subsequently drained the platform's assets."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On January 22, 2024, Concentric Finance on Arbitrum was exploited after an attacker compromised a deployer wallet via social engineering. The attacker transferred ownership of vault contracts, upgraded them to malicious logic, and minted/burned LP tokens to drain over $1.7 million in user funds. The attacker compromised a deployer wallet through social engineering, transferred vault contract ownership to their address, upgraded the vaults to malicious implementations, and minted LP tokens to extract user assets."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xd9036566a2614045219e9bead34e490fc24c9d6ca695d5348b694c3280558e3b",
+    "0xb2fa31c9bc7d5e41955cb81224545588c1a0746b8564f14a2e143dc56364020a"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/ConcentricFi/status/1749418658818830622"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/concentric-finance-social-engineering-2024-01-31t20-31-55-00-00"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/de-fi-rekt-report-over-38-8m-lost-in-january-2024"
+    },
+    {
+      "source": "revertiq",
+      "label": "paragraph.com",
+      "url": "https://paragraph.com/%40concentrictreasury/concentric-immediate-post-mortem"
+    },
+    {
+      "source": "revertiq",
+      "label": "certik.com",
+      "url": "https://www.certik.com/blog/concentric-fi-incident-analysis"
+    }
+  ]
+}

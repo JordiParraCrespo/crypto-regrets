@@ -1,0 +1,81 @@
+{
+  "id": "2023-06-21-babydogecoin02",
+  "name": "BabyDogeCoin02",
+  "date": "2023-06-21",
+  "year": 2023,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Lack Slippage Protection",
+  "classificationNote": "Upstream label missing; classified by keyword rules from the root-cause text.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "market-manipulation",
+    "confidence": 0.33,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.37
+      },
+      {
+        "category": "market-manipulation",
+        "p": 0.37
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.23
+      }
+    ],
+    "flashLoan": 0.12,
+    "stateActor": 0.02,
+    "hasRootCause": 0.92
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Lack Slippage Protection. Lost: ~ 441 BNB",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Lack Slippage Protection. Lost: ~ 441 BNB"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "In the process between swapTokensForEth and addLiquidity, there exists a time window that attackers can exploit to manipulate the market price. Vulnerable code snippet: Attack tx: https://bscscan.com/tx/0xbaf3e4841614eca5480c63662b41cd058ee5c85dc69198b29e7ab63b84bc866c Analysis: https://x.com/hexagate_/status/1671517819840745475"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xbaf3e4841614eca5480c63662b41cd058ee5c85dc69198b29e7ab63b84bc866c"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-06/BabyDogeCoin02_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-06/BabyDogeCoin02_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/hexagate_/status/1671517819840745475"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0xbaf3e4841614eca5480c63662b41cd058ee5c85dc69198b29e7ab63b84bc866c"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/hexagate_/status/1671517819840745475"
+    }
+  ]
+}

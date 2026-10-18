@@ -1,0 +1,127 @@
+{
+  "id": "2025-06-06-alex",
+  "name": "ALEX",
+  "date": "2025-06-06",
+  "year": 2025,
+  "amountUsd": 8373000,
+  "returnedUsd": null,
+  "chains": [
+    "Stacks"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Caller Impersonation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.73,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.75
+      },
+      {
+        "category": "logic-error",
+        "p": 0.14
+      },
+      {
+        "category": "signature-crypto",
+        "p": 0.06
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.94
+  },
+  "bridge": false,
+  "language": "Clarity",
+  "rootCause": "Over $16 million drained by a fake that tricked their vaults using their own permissions. AlexLab got rekt - again. Last year it was a leaked key, this time it’s bad logic. Two exploits, two attack vectors - same protocol, still not learning.",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "Over $16 million drained by a fake that tricked their vaults using their own permissions. AlexLab got rekt - again. Last year it was a leaked key, this time it’s bad logic. Two exploits, two attack vectors - same protocol, still not learning."
+    },
+    {
+      "source": "SlowMist",
+      "text": "On June 6, 2025, ALEX Protocol was attacked due to a vulnerability in its on-chain self-listing verification logic, which is constrained by limitations on Stacks. As a result, multiple asset pools were drained, with total losses amounting to approximately $8.37 million."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "ALEX Lab’s June 6, 2025 self-listing exploit on Stacks drained liquidity pools after the protocol treated a mined-transaction signal as proof that a token listing was valid. The official grant terms list 8,403,867.57 STX, 21.85 sBTC, 149,850.00 aUSD, and 2.80 aBTC as unrecovered assets. ALEX’s self-listing verification path treated was-tx-mined-compact as if it proved that a token deployment or execution was valid. The Stacks Foundation later clarified that the function only shows whether a transaction was mined, not whether the target code executed successfully, so attacker-controlled token logic was admitted into the vault path."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On June 6, 2025, AlexLab on the Stacks smart contract layer was exploited for at least $8.4M after a flaw in its self-listing feature let an attacker list a malicious token. The attacker bypassed validation, drained assets from vaults through swaps and farms, and moved funds out. Full user reimbursement was later announced, but no primary on-chain data is present. AlexLab's self-listing feature allowed new tokens to be listed without robust verification of contract behavior. The system's checks were susceptible to bypass by a malicious token contract that returned crafted values. Once listed, the attacker gained vault-level permissions, enabling them t…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xe8b2ac705dcbb35d487a4efd7a0fe384bbad1d1d97ea970410ad82a3cd0d9daf"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: AlexLab - Rekt II",
+      "url": "https://rekt.news/alexlab-rekt2"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/ALEXLabBTC/status/1931014419133169734"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/alexlab-bitcoin-layer-2-2025-06-06"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/de-fi-rekt-report-june-2025-114-8-million-lost-across-11-exploits"
+    },
+    {
+      "source": "revertiq",
+      "label": "terms.alexlab.co",
+      "url": "https://terms.alexlab.co/terms-and-conditions-of-alex-protocol-exploit-treasury-grant-program-2025"
+    },
+    {
+      "source": "revertiq",
+      "label": "stacks.foundation",
+      "url": "https://stacks.foundation/june-6-alex-incident"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/explained-the-alex-protocol-2025-06-16t12-29-49-012000-00-00"
+    },
+    {
+      "source": "revertiq",
+      "label": "halborn.com",
+      "url": "https://www.halborn.com/blog/post/explained-the-alex-protocol-hack-june-2025"
+    },
+    {
+      "source": "revertiq",
+      "label": "vibraniumaudits.com",
+      "url": "https://www.vibraniumaudits.com/post/alex-protocol-hit-by-major-exploit-8-3-million-in-assets-stolen"
+    },
+    {
+      "source": "revertiq",
+      "label": "blockchainbreaches.com",
+      "url": "https://www.blockchainbreaches.com/en/victim/alex-lab"
+    }
+  ]
+}

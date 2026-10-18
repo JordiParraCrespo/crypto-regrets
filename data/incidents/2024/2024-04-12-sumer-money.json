@@ -1,0 +1,128 @@
+{
+  "id": "2024-04-12-sumer-money",
+  "name": "Sumer.money",
+  "date": "2024-04-12",
+  "year": 2024,
+  "amountUsd": 350000,
+  "returnedUsd": null,
+  "chains": [
+    "Base"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "reentrancy",
+  "technique": "Reentrancy",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "reentrancy",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "reentrancy",
+        "p": 0.99
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.09,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Reentrancy. Lost: 350K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Reentrancy. Lost: 350K"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "- The reentrancy in the function repayBorrowBehalf allows the attacker to manipulate the exchanged rate of ETH:sdrETH by borrowing against all of the assets held in the contract. Then he could redeem all the tokens to gain profits. Vulnerable code snippet: function repayBorrowBehalf(address borrower) external payable { uint256 received = msg.value; uint256 borrows = CEther(payable(this)).borrowBalanceCurrent(borrower); if (received > borrows) { // payable(msg.sender).transfer(received - borrows); (bool success, ) = msg.sender.call{value: received - borrows}(\"\"); require(success, \"Address: unable to send value, recipient may have reverted\"); } (uint256 err, ) = repayBorrowBehalfInternal(borrower, borrows); requireNoError(err, \"repayBorrowBehalf failed\"); } Attack tx: https://basescan.org/tx/0x619c44af9fedb8f5feea2dcae1da94b6d7e5e0e7f4f4a99352b6c4f5e43a4661 Analysis: https://medium.com/neptune-mutual/how-was-sumer-money-exploited-2c114ebffaa8"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Sumer Money was exploited on the Base chain due to a smart contract vulnerability, which resulted in a loss of assets worth approximately $310,000. The root cause of the exploit is a lack of reentrancy protection, which led to the manipulation of the underlying assets."
+    },
+    {
+      "source": "SlowMist",
+      "text": "Sumer Money was exploited on the Base chain due to a smart contract vulnerability, which resulted in a loss of assets worth approximately $310,000."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On April 12, 2024, the Sumer Money protocol on the Base chain was exploited in a reentrancy-enabled flash loan attack, resulting in a loss of approximately $300,000. The attacker used large flash loans to mint and borrow sdrETH and sdrUSDC tokens, recursively manipulating exchange rates to extract excess value. The protocol's lending markets allowed reentrancy during critical operations, enabling an attacker to recursively call repayment and borrowing logic via repayBorrowBehalf(), minting and withdrawing more sdrETH and sdrUSDC than should be possible based on their real deposits. Flash loan capital amplified the vulnerability by enabling large, atomi…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x619c44af9fedb8f5feea2dcae1da94b6d7e5e0e7f4f4a99352b6c4f5e43a4661"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-04/SumerMoney_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-04/SumerMoney_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "basescan.org",
+      "url": "https://basescan.org/tx/0x619c44af9fedb8f5feea2dcae1da94b6d7e5e0e7f4f4a99352b6c4f5e43a4661"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "medium.com",
+      "url": "https://medium.com/neptune-mutual/how-was-sumer-money-exploited-2c114ebffaa8"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x619c44af9fedb8f5feea2dcae1da94b6d7e5e0e7f4f4a99352b6c4f5e43a4661"
+    },
+    {
+      "source": "blocksec",
+      "label": "twitter.com",
+      "url": "https://twitter.com/0xNickLFranklin/status/1778986926705672698"
+    },
+    {
+      "source": "blocksec",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs?tab=readme-ov-file#20240412-sumermoney---reentrancy"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/sumer-money-2024-04-30t21-06-46-00-00"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/de-fi-rekt-report-over-12-4m-lost-in-april-2024"
+    },
+    {
+      "source": "revertiq",
+      "label": "olympix.security",
+      "url": "https://olympix.security/biweekly-exploits/4m-drained-pike-grand-base-sumer-and-squid-game-coin-fall-to-wallet-leaks-and-broken-logic"
+    },
+    {
+      "source": "revertiq",
+      "label": "olympixai.medium.com",
+      "url": "https://olympixai.medium.com/4m-drained-pike-grand-base-sumer-and-squid-game-coin-fall-to-wallet-leaks-and-broken-logic-e312d0d30321"
+    }
+  ]
+}

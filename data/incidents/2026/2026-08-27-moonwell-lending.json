@@ -1,0 +1,91 @@
+{
+  "id": "2026-08-27-moonwell-lending",
+  "name": "Moonwell Lending",
+  "date": "2026-08-27",
+  "year": 2026,
+  "amountUsd": 8700000,
+  "returnedUsd": null,
+  "chains": [
+    "Base"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.94,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.94
+      },
+      {
+        "category": "market-manipulation",
+        "p": 0.06
+      }
+    ],
+    "flashLoan": 0.06,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Base-based DeFi lending protocol Moonwell was attacked. The attacker inflated the price of the low-liquidity token MAMO, posted it as collateral, and borrowed real assets such as cbBTC and USDC from markets including mCBTC and mUSDC.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Base-based DeFi lending protocol Moonwell was attacked. The attacker inflated the price of the low-liquidity token MAMO, posted it as collateral, and borrowed real assets such as cbBTC and USDC from markets including mCBTC and mUSDC."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Moonwell's MAMO lending market on Base was exploited on August 27, 2026, via a sequence combining direct collateral-accounting inflation and spot price oracle manipulation. The attacker used thin-liquidity MAMO markets to spike the token’s oracle price, inflated collateral value, and borrowed assets totaling approximately $11M, with a net loss at $8.7M,$9M. Emergency response capped borrowing and supply immediately. Moonwell's Base deployment counted thin-liquidity MAMO as loan collateral, relying on an uncompounded spot oracle price without minimum liquidity, deviation bounds, or a TWAP. The attacker directly increased the mMAMO exchange rate by trans…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x96368d82e5a84f79e39c396b3d356c13827d99213f043b14d84b67c6c342b979",
+    "0xbb182106720e5c168bc4970e93241af0b938096182e36722b208a07c2593ae4a",
+    "0x6fd85b1f895e00661d10bc3cb5be1790cb8e71195040ebcc3533011f505b7205",
+    "0x79195be28aeb094cbeedb6073957116ebb849a07a0b957f4dd043826e12d8852",
+    "0x056597f42302ab7f9f5e91c7f84856d3ba73827da7f956645d1f26bdde109ce9",
+    "0xaf284d7f60dd8f2ebb41cba6a080e95a6deceb3a2c93ff58016996de61de3cd9",
+    "0x09687d741d92a2607a1d63014104bbad663347a79d7949d0f3073c84a395593e",
+    "0xb1fc41909fed850b8ba0f26223fa6fb57d1ae8b9079b9c1244bdd7c9291e4c53"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/blockaid_/status/2092914508666753081"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/moonwell-lending-2026-08-27"
+    },
+    {
+      "source": "revertiq",
+      "label": "forum.moonwell.fi",
+      "url": "https://forum.moonwell.fi/t/post-mortem-mamo-market-incident-on-base/2208"
+    },
+    {
+      "source": "revertiq",
+      "label": "shattered.io",
+      "url": "https://shattered.io/moonwell-hack-price-oracle-base-2026/"
+    }
+  ]
+}

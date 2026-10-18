@@ -1,0 +1,93 @@
+{
+  "id": "2024-10-11-p719token",
+  "name": "P719Token",
+  "date": "2024-10-11",
+  "year": 2024,
+  "amountUsd": 315072,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Price Manipulation Inflate Attack",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 1.00). Replaced keyword guess \"oracle-manipulation\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.93,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Price Manipulation Inflate Attack",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Price Manipulation Inflate Attack"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The P719 token's unverified transfer() function contains a business logic flaw: whenever tokens are transferred to the P719 contract address itself, the contract interprets it as a sell and executes a Uniswap-like swap to return BNB to the caller. Crucially, each such sell also burns the majority of the received tokens and distributes fee tokens from the contract's own reserve, artificially deflating supply and distorting the effective price upward. The attacker exploited this by taking a 4,000 WBNB flash loan from a PancakeV3 pool, deploying 47+ sub-contracts to purchase P719 tokens across multiple buys (140 WBNB in small lots plus 3,300 WBNB in larger lots), then distributing the purchased tokens across 100 sub-contracts each of which sold (transferred to the P719 address) their share. Each sell both drained BNB from the contract and further inflated the price via burning. The excess BNB profit was wrapped to WBNB and routed through a custom attacker-controlled MyToken/WBNB liquidity pair; upon removing that liquidity, the attacker netted approximately 547 BNB (~$315K). Vulnerable code snippet: Attack Tx: 0x9afcac8e82180fa5b2f346ca66cf6eb343cd1da5a2cd1b5117eb7eaaebe953b3 Analysis: TenArmorAlert post-mortem"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The root cause lies in the transfer() function of P719 contract. When tokens are transferred to P719, the action is processed as a sell, using a Uniswap-like swap mechanism to calculate the BNB amount to be swapped. However, after the swap, P719 burns the majority of sold tokens and transfers fee tokens from itself, which could wrongly inflates the token's price. The attacker repeatedly executed buy and sell operations, ultimately profiting from the price discrepancy. Vulnerable code snippet: The Contract is not verified on Bscscan https://bscscan.com/token/0x6beee2b57b064eac5f432fc19009e3e78734eabc Attack tx: https://bscscan.com/tx/0x9afcac8e82180fa5b2f346ca66cf6eb343cd1da5a2cd1b5117eb7eaaebe953b3 Analysis: https://x.com/TenArmorAlert/status/1844929489823989953"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x9afcac8e82180fa5b2f346ca66cf6eb343cd1da5a2cd1b5117eb7eaaebe953b3"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-10/P719Token_exp.sol",
+  "sources": [
+    "defihacklabs",
+    "blocksec"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-10/P719Token_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/TenArmorAlert/status/1844753750386426182"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x9afcac8e82180fa5b2f346ca66cf6eb343cd1da5a2cd1b5117eb7eaaebe953b3"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/TenArmorAlert/status/1844929489823989953"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/token/0x6beee2b57b064eac5f432fc19009e3e78734eabc"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x9afcac8e82180fa5b2f346ca66cf6eb343cd1da5a2cd1b5117eb7eaaebe953b3"
+    },
+    {
+      "source": "blocksec",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs?tab=readme-ov-file#20241011-p719token---price-manipulation-inflate-attack"
+    }
+  ]
+}

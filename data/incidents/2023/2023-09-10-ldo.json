@@ -1,0 +1,60 @@
+{
+  "id": "2023-09-10-ldo",
+  "name": "LDO",
+  "date": "2023-09-10",
+  "year": 2023,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": null,
+  "category": "logic-error",
+  "technique": "False top-up",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.93).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.93,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.93
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.05
+      },
+      {
+        "category": "input-validation",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.01,
+    "hasRootCause": 0.72
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "On September 10, according to on-chain intelligence from the SlowMist security team, when the LDO token contract is processing a transfer operation, if the transfer amount exceeds the amount actually held by the user, the operation will not trigger the rollback of the transaction. Instead, it will directly return a `false` as the processing result. This approach is different from many common ERC20 standard token contracts. Due to the above characteristics, there is a potential risk of \"fake top-up\", and malicious attackers may try to use this feature to conduct fraud. On September 11, Lido stated that this behavior was expected and complies with ERC20 token standards.…",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "On September 10, according to on-chain intelligence from the SlowMist security team, when the LDO token contract is processing a transfer operation, if the transfer amount exceeds the amount actually held by the user, the operation will not trigger the rollback of the transaction. Instead, it will directly return a `false` as the processing result. This approach is different from many common ERC20 standard token contracts. Due to the above characteristics, there is a potential risk of \"fake top-up\", and malicious attackers may try to use this feature to conduct fraud. On September 11, Lido stated that this behavior was expected and complies with ERC20 token standards.…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/SlowMist_Team/status/1700782725593268448"
+    }
+  ]
+}

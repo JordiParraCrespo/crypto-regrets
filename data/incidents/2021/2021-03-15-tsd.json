@@ -1,0 +1,81 @@
+{
+  "id": "2021-03-15-tsd",
+  "name": "TSD",
+  "date": "2021-03-15",
+  "year": 2021,
+  "amountUsd": 7095340,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": null,
+  "category": "governance",
+  "technique": "Contract Vulnerability",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.99). Replaced keyword guess \"bridge-crosschain\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "governance",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "governance",
+        "p": 0.99
+      },
+      {
+        "category": "access-control",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "A cross-chain stablecoin (TSD) on ETH and BSC stated that malicious attackers used TSD DAO to mint 11.8 billion TSD tokens in their accounts and sold them all on Pancakeswap. The specific process is that True Seigniorage Dollar stated that the developer account only has 9% of the DAO, and the malicious attacker has gradually controlled 33% of the DAO with the accumulation of low prices, and then proposed an implementation plan and voted in favor. In the implementation, the attacker added code to Mint and minted 11.8 billion TSDs for himself.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "A cross-chain stablecoin (TSD) on ETH and BSC stated that malicious attackers used TSD DAO to mint 11.8 billion TSD tokens in their accounts and sold them all on Pancakeswap. The specific process is that True Seigniorage Dollar stated that the developer account only has 9% of the DAO, and the malicious attacker has gradually controlled 33% of the DAO with the accumulation of low prices, and then proposed an implementation plan and voted in favor. In the implementation, the attacker added code to Mint and minted 11.8 billion TSDs for himself."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "True Seigniorage Dollar (TSD) on BNB Chain suffered a governance attack on or around 14,15 March 2021. An attacker used acquired TSD tokens to gain control over voting, passed a malicious proposal that upgraded the proxy to an attacker-controlled implementation, and minted ~11.6 billion TSD before dumping them for profit. The established loss is approximately $7.1M. Abuse of token-weighted governance allowed an attacker to pass a proposal replacing the token implementation with a malicious contract that minted excessive TSD to the attacker's address."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "slowmist",
+      "label": "tokenpost.com",
+      "url": "https://tokenpost.com/Stablecoin-TSD-Comes-Under-Attack-With-118B-Coins-Minted-And-Sold-By-Hacker-7404"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/tsd-2021-03-15"
+    },
+    {
+      "source": "revertiq",
+      "label": "defillama.com",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "certik.com",
+      "url": "https://www.certik.com/blog/exploitingasmartcontractwithoutsecurityvulnerabilitiesanalysisoftrueseignioragedollarattackevent"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/tsd-true-seigniorage-dollar-hack-2021"
+    }
+  ]
+}

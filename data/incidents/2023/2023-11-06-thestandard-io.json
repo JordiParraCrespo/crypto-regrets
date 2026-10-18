@@ -1,0 +1,137 @@
+{
+  "id": "2023-11-06-thestandard-io",
+  "name": "TheStandard.io",
+  "date": "2023-11-06",
+  "year": 2023,
+  "amountUsd": 290000,
+  "returnedUsd": null,
+  "chains": [
+    "Arbitrum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Swap Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.93,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.93
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.04
+      },
+      {
+        "category": "input-validation",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.07,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Lack of slippage protection. Lost: ~$290K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Lack of slippage protection. Lost: ~$290K"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "- There is no slippage protection when swapping out collateral. - There is no protection against bad debt. - There is no whitelist of tokens to trade. As a result, the attacker could force the vault contract to swap in a low-liquidity pool which is manipulated. As a result, all collaterals are lost. Vulnerable code snippet: Attack tx: https://explorer.phalcon.xyz/tx/arbitrum/0x51293c1155a1d33d8fc9389721362044c3a67e0ac732b3a6ec7661d47b03df9f Analysis: https://twitter.com/Phalcon_xyz/status/1721807569222549518"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The TheStandard.io SmartVaultV2 contract on Arbitrum set amountOutMinimum to zero on every Uniswap swap, providing absolutely no slippage protection. An attacker exploited this by first depositing liquidity to the PAXG/WBTC pool at a grossly inflated 1:1 ratio, severely overpricing PAXG relative to WBTC. The TheStandard.io vault then swapped its WBTC collateral into the attacker-controlled pool at the artificial price, receiving far less real value than the EUROs it had issued — leaving the vault critically undercollateralized. The attacker subsequently withdrew all liquidity from the pool, reclaiming approximately 9.9 WBTC, while still holding the over-issued EUROs. Essentially, the absence of any minimum output enforcement allowed the attacker to sandwich the vault's swap and extract approximately $290K in value (8,500 USDC and ~280,000 EUROs). Attack Tx: 0x51293c1155a1d33d8fc9389721362044c3a67e0ac732b3a6ec7661d47b03df9f Analysis: Thestandard.io Exploit — A Thorough Analysis by Dedaub"
+    },
+    {
+      "source": "SlowMist",
+      "text": "On November 7, TheStandard.io was exploited for ~$290k. The key vulnerability here was the low liquidity in the PAXG pool, which the attacker exploited to manipulate the market. On November 9, 243k $EUROs has been returned to the protocol from the attacker which will be burned in due process."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "TheStandard.io was exploited on Arbitrum One on November 6, 2023, due to a swap logic flaw in the SmartVaultV2 contract. The attacker manipulated pool liquidity to swap collateral at a price under their full control, allowing them to drain value and mint excess stablecoins. The protocol incurred approximately $290,000 of bad debt, with some funds later returned. The SmartVaultV2 contract allowed swaps using Uniswap V3 with amountOutMinimum set to zero and without slippage or price checks. This let the attacker force a swap through a liquidity pool they controlled, enabling extraction of collateral at a manipulated price."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x51293c1155a1d33d8fc9389721362044c3a67e0ac732b3a6ec7661d47b03df9f"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-11/TheStandard_io_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-11/TheStandard_io_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Phalcon_xyz/status/1721807569222549518"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/CertiKAlert/status/1721839125836321195"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "explorer.phalcon.xyz",
+      "url": "https://explorer.phalcon.xyz/tx/arbitrum/0x51293c1155a1d33d8fc9389721362044c3a67e0ac732b3a6ec7661d47b03df9f"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "arbiscan.io",
+      "url": "https://arbiscan.io/tx/0x51293c1155a1d33d8fc9389721362044c3a67e0ac732b3a6ec7661d47b03df9f"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "dedaub.com",
+      "url": "https://dedaub.com/blog/thestandard-io-exploit/"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x51293c1155a1d33d8fc9389721362044c3a67e0ac732b3a6ec7661d47b03df9f"
+    },
+    {
+      "source": "blocksec",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs?tab=readme-ov-file#20231106-thestandard_io---lack-of-slippage-protection"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/thestandard_io/status/1721823727925829842"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/thestandard-io-2023-11-06"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.solidityscan.com",
+      "url": "https://blog.solidityscan.com/thestandard-io-hack-analysis-e9d74aede42e/"
+    }
+  ]
+}

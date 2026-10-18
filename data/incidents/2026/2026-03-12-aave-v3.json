@@ -1,0 +1,105 @@
+{
+  "id": "2026-03-12-aave-v3",
+  "name": "Aave V3",
+  "date": "2026-03-12",
+  "year": 2026,
+  "amountUsd": 862000,
+  "returnedUsd": 862000,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Oracle Misconfiguration",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.99
+      },
+      {
+        "category": "logic-error",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.94
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "A misconfigured oracle cap triggered $27.78 million in healthy wstETH liquidations on Aave on March 10. 34 accounts liquidated for a configuration error they had no part in. No attacker, no hack, no market crash. Full reimbursement planned.",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "A misconfigured oracle cap triggered $27.78 million in healthy wstETH liquidations on Aave on March 10. 34 accounts liquidated for a configuration error they had no part in. No attacker, no hack, no market crash. Full reimbursement planned."
+    },
+    {
+      "source": "SlowMist",
+      "text": "Aave V3 suffered a CAPO (Capped Asset Price Oracle) misconfiguration by Chaos Labs, which undervalued wstETH by ~2.85%. This triggered wrongful liquidations on 34 healthy positions, resulting in ~$862,000 in losses. Aave DAO fully compensated affected users; no protocol funds were stolen."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Aave V3's wstETH CAPO oracle on Ethereum briefly undervalued wstETH on 2026-03-10, triggering 34 liquidations across Core and Prime and about 10,938 wstETH of liquidation volume. The protocol reported no bad debt and later moved to reimburse affected users. CAPO accepted a snapshotTimestamp that assumed a seven-day-old reference while snapshotRatio was still rate-limited to a smaller onchain increase, so the derived cap fell below the live wstETH rate and triggered liquidations on Ethereum Core and Prime."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x9064b507f16bd8b85fb5aea0185153b01fa23b3205f7153f986e5107ce988a9c"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Aave - Rekt",
+      "url": "https://rekt.news/aave-rekt"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x9064b507f16bd8b85fb5aea0185153b01fa23b3205f7153f986e5107ce988a9c"
+    },
+    {
+      "source": "blocksec",
+      "label": "x.com",
+      "url": "https://x.com/yieldsandmore/status/2031468808012210538"
+    },
+    {
+      "source": "slowmist",
+      "label": "rektautopsy.com",
+      "url": "https://www.rektautopsy.com/rekt/aave-v3-ethereum-2026-03-12"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/aave-v3-2026-03-12"
+    },
+    {
+      "source": "revertiq",
+      "label": "governance.aave.com",
+      "url": "https://governance.aave.com/t/post-mortem-exchange-rate-misallignment-on-wsteth-core-and-prime-instances/24269"
+    },
+    {
+      "source": "revertiq",
+      "label": "governance.aave.com",
+      "url": "https://governance.aave.com/t/direct-to-aip-wsteth-capo-oracle-incident-user-reimbursement/24275"
+    }
+  ]
+}

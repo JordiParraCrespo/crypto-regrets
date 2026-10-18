@@ -1,0 +1,89 @@
+{
+  "id": "2026-05-01-sharwa-finance",
+  "name": "Sharwa.Finance",
+  "date": "2026-05-01",
+  "year": 2026,
+  "amountUsd": 32850,
+  "returnedUsd": null,
+  "chains": [
+    "Arbitrum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.99
+      },
+      {
+        "category": "market-manipulation",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.08,
+    "stateActor": 0.02,
+    "hasRootCause": 0.73
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Hegic collateral spot price manipulation. Lost: 32.85K USDC",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Hegic collateral spot price manipulation. Lost: 32.85K USDC"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Sharwa.Finance on Arbitrum One was exploited on May 1, 2026, resulting in a loss of about $32,850. The attacker manipulated the spot price used to value Hegic option NFTs as collateral, allowing excessive borrowing followed by asset extraction. Sharwa.Finance valued deposited Hegic option NFTs for margin trading using a spot Uniswap V3 Quoter, without resistance to immediate spot price manipulation. The attacker used ERC721 callbacks and flash loans to push USDC into a thin pool, manipulated the spot price, deposited the NFT as inflated collateral, and borrowed assets well above safe limits."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x05cfcfe9bdf8d19aaea3ba417e6559aee37c82120974e75335d06e56030f4dad"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-05/SharwaMarginTrading_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-05/SharwaMarginTrading_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "t.me",
+      "url": "https://t.me/defimon_alerts/2975"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/sharwa-finance-2026-05-01"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/README.md#L2750"
+    },
+    {
+      "source": "revertiq",
+      "label": "raw.githubusercontent.com",
+      "url": "https://raw.githubusercontent.com/SunWeb3Sec/DeFiHackLabs/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/src/test/2026-05/SharwaMarginTrading_exp.sol"
+    }
+  ]
+}

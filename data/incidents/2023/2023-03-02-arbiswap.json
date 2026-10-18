@@ -1,0 +1,89 @@
+{
+  "id": "2023-03-02-arbiswap",
+  "name": "ArbiSwap",
+  "date": "2023-03-02",
+  "year": 2023,
+  "amountUsd": 100000,
+  "returnedUsd": null,
+  "chains": [
+    "Arbitrum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "rugpull",
+  "technique": "Liquidity Rug",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "rugpull",
+    "confidence": 0.98,
+    "top": [
+      {
+        "category": "rugpull",
+        "p": 0.98
+      },
+      {
+        "category": "access-control",
+        "p": 0.01
+      },
+      {
+        "category": "key-compromise",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.09,
+    "stateActor": 0.02,
+    "hasRootCause": 0.92
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "Arbitrum ecological DEX ArbiSwap is suspected of Rug Pull. ArbiSwap deployers minted 1 trillion ARBI before Rug Pull, and then converted ARBI into USDC, which caused a sharp drop in ARBI in the USDC/ARBI transaction pair. In the next block, the robot passed USDC to ARBI then traded ETH for spatial arbitrage, making a profit of 68.47 ETH. ArbiSwap has transferred 84 ETH to the Ethereum mainnet and sent it to TornadoCash.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Arbitrum ecological DEX ArbiSwap is suspected of Rug Pull. ArbiSwap deployers minted 1 trillion ARBI before Rug Pull, and then converted ARBI into USDC, which caused a sharp drop in ARBI in the USDC/ARBI transaction pair. In the next block, the robot passed USDC to ARBI then traded ETH for spatial arbitrage, making a profit of 68.47 ETH. ArbiSwap has transferred 84 ETH to the Ethereum mainnet and sent it to TornadoCash."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On March 2, 2023, the ArbiSwap decentralized exchange on Arbitrum was rug pulled by its own developer through unauthorized minting of ARBI tokens, draining over $100,000 worth of liquidity (≈85 ETH) which was subsequently bridged and laundered. The exploit rendered ARBI tokens nearly worthless and left minimal recovery pathways for affected users. Direct privileged access by the deployer enabled infinite minting of ARBI tokens, which were dumped into protocol-controlled liquidity pools by the owner account. Insufficient restrictions on the token's mint and potentially the recoverToken function allowed for a textbook liquidity rug."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x0c1c5bbcdb24ce89c56f18b02d8ea15dad06c9324c42eb0473fd3d7ec2b40abd",
+    "0x54ca307057b38110f60fce515ba35321fde82b876b4a2abf77368924903216e1"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "arbiscan.io",
+      "url": "https://arbiscan.io/tx/0x54ca307057b38110f60fce515ba35321fde82b876b4a2abf77368924903216e1"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/arbiswap-2023-03-02"
+    },
+    {
+      "source": "revertiq",
+      "label": "u.today",
+      "url": "https://u.today/rug-pull-alert-large-arbitrum-dex-arbiswap-hardrugging-its-users-heres-what-you-must-do"
+    },
+    {
+      "source": "revertiq",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/tech/2023/03/02/arbitrum-dex-arbiswap-rug-pulls-users-for-over-100k"
+    }
+  ]
+}

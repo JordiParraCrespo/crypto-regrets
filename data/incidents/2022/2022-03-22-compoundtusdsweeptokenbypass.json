@@ -1,0 +1,74 @@
+{
+  "id": "2022-03-22-compoundtusdsweeptokenbypass",
+  "name": "CompoundTUSDSweepTokenBypass",
+  "date": "2022-03-22",
+  "year": 2022,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "input-validation",
+  "technique": "Insufficient validation",
+  "classificationNote": "Classified by keyword rules from the DeFiHackLabs root-cause title.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "input-validation",
+    "confidence": 0.56,
+    "top": [
+      {
+        "category": "input-validation",
+        "p": 0.59
+      },
+      {
+        "category": "arbitrary-call",
+        "p": 0.37
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.91
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Insufficient validation",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Insufficient validation"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Insufficient validation. Vulnerable code snippet: https://etherscan.io/address/0xa035b9e130f2b1aedc733eefb1c67ba4c503491f#code#F1#L120 if contract can make calls into arbitrary addresses, this can be abused. Attacker use legacy TUSD smart contract to trick compound. Image from OZ"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-03/CompoundTusd_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-03/CompoundTusd_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "blog.openzeppelin.com",
+      "url": "https://blog.openzeppelin.com/compound-tusd-integration-issue-retrospective/"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/address/0xa035b9e130f2b1aedc733eefb1c67ba4c503491f#code#F1#L120"
+    }
+  ]
+}

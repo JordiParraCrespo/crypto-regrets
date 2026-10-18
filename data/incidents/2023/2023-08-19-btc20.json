@@ -1,0 +1,68 @@
+{
+  "id": "2023-08-19-btc20",
+  "name": "BTC20",
+  "date": "2023-08-19",
+  "year": 2023,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Price Manipulation",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 1.00).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Price Manipulation. Lost: ~$18ETH",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Price Manipulation. Lost: ~$18ETH"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The vulnerable fetchPrice function calls getAmountsIn on the Uniswap router using the WETH-BTC20 pair, which relies on the pair's reserves. The attacker bought a large amount of BTC20 in the WETH-BTC20 pair to manipulate the price Vulnerable Code Snippet: Attack Transaction: https://etherscan.io/tx/0xcdd93e37ba2991ce02d8ca07bf6563bf5cd5ae801cbbce3dd0babb22e30b2dbe Analysis: https://twitter.com/DecurityHQ/status/1692924369662513472"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xcdd93e37ba2991ce02d8ca07bf6563bf5cd5ae801cbbce3dd0babb22e30b2dbe"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-08/BTC20_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-08/BTC20_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/DecurityHQ/status/1692924369662513472"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xcdd93e37ba2991ce02d8ca07bf6563bf5cd5ae801cbbce3dd0babb22e30b2dbe"
+    }
+  ]
+}

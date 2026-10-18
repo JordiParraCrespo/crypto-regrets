@@ -1,0 +1,102 @@
+{
+  "id": "2026-06-08-flooring-protocol",
+  "name": "Flooring Protocol",
+  "date": "2026-06-08",
+  "year": 2026,
+  "amountUsd": 500000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "NFTfi",
+  "category": "accounting-math",
+  "technique": "Infinite Mint",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.01,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Flooring Protocol's NFT liquidity platform used a BT404-style hybrid token standard that blends fungible and non-fungible mechanics in a single contract. An integer overflow in the platform's token balance accounting logic enabled a \"ghost ownership\" attack: a malicious token ID could be used to satisfy one ownership check while simultaneously producing a different result in a second accounting path within the same transaction, allowing the attacker to artificially inflate their fpToken (the fungible claim token) balance to near-infinite levels. The attacker redeemed these inflated fpTokens against Flooring's NFT pools to claim underlying assets. Yuga Labs executed a white-hat intervention, pulling 68 NFTs (29 BAYC, 4 MAYC, 2 CryptoPunks, and others) worth ~$500K out of harm's way before the attacker could reach them; net losses were approximately $900K. The same vulnerable BT404/DN404 codebase was replicated in the Asterix fork, which was subsequently exploited for an additional ~$40K shortly afterward. Attack Tx: 0x5abc52a438734151ebd2cc122f7ae86ed04a390a6dc884f04abd679ed380aaad Analysis: 0xQuit on X",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Flooring Protocol's NFT liquidity platform used a BT404-style hybrid token standard that blends fungible and non-fungible mechanics in a single contract. An integer overflow in the platform's token balance accounting logic enabled a \"ghost ownership\" attack: a malicious token ID could be used to satisfy one ownership check while simultaneously producing a different result in a second accounting path within the same transaction, allowing the attacker to artificially inflate their fpToken (the fungible claim token) balance to near-infinite levels. The attacker redeemed these inflated fpTokens against Flooring's NFT pools to claim underlying assets. Yuga Labs executed a white-hat intervention, pulling 68 NFTs (29 BAYC, 4 MAYC, 2 CryptoPunks, and others) worth ~$500K out of harm's way before the attacker could reach them; net losses were approximately $900K. The same vulnerable BT404/DN404 codebase was replicated in the Asterix fork, which was subsequently exploited for an additional ~$40K shortly afterward. Attack Tx: 0x5abc52a438734151ebd2cc122f7ae86ed04a390a6dc884f04abd679ed380aaad Analysis: 0xQuit on X"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Flooring Protocol V2 and BitmapPunks (BT404 / $BMP) were exploited due to a BT404-style packed ownership logic vulnerability (malicious high-bit token ID alias + unchecked integer underflow). The attacker minted near-infinite fpTokens/$BMP with a dust amount of WETH, drained liquidity pools, and extracted high-value NFTs (e.g., BAYC, CryptoPunks) at low cost. Yuga Labs quickly intervened with a white-hat operation via GrailsOTC, rescuing 68 NFTs worth over $500,000, now held safely for return after fixes."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Flooring Protocol on Ethereum Mainnet suffered a critical accounting flaw on 8 June 2026, exposing over $500,000 in pooled NFTs to potential loss. A bug enabled unlimited minting of fpToken shares, creating a risk of draining pool assets. Yuga Labs led a documented white-hat rescue, securing 68 high-value NFTs, now in custody pending contract repair. All incident specifics are derived from technical press coverage and project participant statements; no chain forensics or official postmortem is available. An ownership verification and accounting logic flaw allowed unlimited minting of fpToken shares unbacked by actual NFTs. Underflow errors and ghost ow…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x5abc52a438734151ebd2cc122f7ae86ed04a390a6dc884f04abd679ed380aaad",
+    "0xb139f048033a9205c5a62ca43016263cfcca9bab74c48fdc06f43bd29307b26a"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x5abc52a438734151ebd2cc122f7ae86ed04a390a6dc884f04abd679ed380aaad"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/0xQuit/status/2063804118112829702"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x5abc52a438734151ebd2cc122f7ae86ed04a390a6dc884f04abd679ed380aaad"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/mfigge/status/2063782936399544740"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/flooring-protocol-2026-06-08"
+    },
+    {
+      "source": "revertiq",
+      "label": "banklesstimes.com",
+      "url": "https://www.banklesstimes.com/articles/2026/06/08/yuga-labs-completes-whitehat-rescue-of-nfts-in-flooring-protocol-exploit/"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptobriefing.com",
+      "url": "https://cryptobriefing.com/cryptopunks-nft-recovery-flooring-protocol-bug/"
+    }
+  ]
+}

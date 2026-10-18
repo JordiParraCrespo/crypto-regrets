@@ -1,0 +1,78 @@
+{
+  "id": "2024-07-23-dydx-v3",
+  "name": "dYdX V3",
+  "date": "2024-07-23",
+  "year": 2024,
+  "amountUsd": 31000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "frontend-infra",
+  "technique": "DNS Hijack",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "frontend-infra",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "frontend-infra",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "On July 23, the dydx.exchange domain was discovered to have been compromised. The attacker changed the DNS Nameservers from Cloudflare to DDoS-Guard. The attacker also successfully removed the DNSSEC settings on the domain. The attacker hosted a malicious site which requested that any connected wallets transfer ETH and other ERC20 tokens to the attacker’s Ethereum address. Two users were affected, resulting in a loss of approximately $31,000.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "On July 23, the dydx.exchange domain was discovered to have been compromised. The attacker changed the DNS Nameservers from Cloudflare to DDoS-Guard. The attacker also successfully removed the DNSSEC settings on the domain. The attacker hosted a malicious site which requested that any connected wallets transfer ETH and other ERC20 tokens to the attacker’s Ethereum address. Two users were affected, resulting in a loss of approximately $31,000."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On July 23, 2024, dYdX V3's frontend was hijacked via a DNS attack, redirecting users to a phishing site. Two users lost a total of approximately $31,000 after interacting with the fake interface. The backend smart contracts were unaffected, and dYdX quickly restored domain control. The incident was caused by a DNS nameserver hijacking following a registrar migration, allowing attackers to disable DNSSEC and redirect dydx.exchange to a phishing frontend. This exposed visiting users to malicious wallet connection prompts and token approval requests."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "dydx.exchange",
+      "url": "https://dydx.exchange/blog/dns-nameserver-hijacking-postmortem"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/dydx-v3-2024-07-23"
+    },
+    {
+      "source": "revertiq",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/business/2024/07/23/defi-giant-dydx-says-its-v3-platform-is-compromised-just-as-its-reportedly-up-for-sale"
+    },
+    {
+      "source": "revertiq",
+      "label": "quadrigainitiative.com",
+      "url": "https://quadrigainitiative.com/casestudy/dydxexchangednshijackingattack.php"
+    }
+  ]
+}

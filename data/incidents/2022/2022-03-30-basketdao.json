@@ -1,0 +1,78 @@
+{
+  "id": "2022-03-30-basketdao",
+  "name": "BasketDAO",
+  "date": "2022-03-30",
+  "year": 2022,
+  "amountUsd": 1200000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "arbitrary-call",
+  "technique": "Arbitrary External Call",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "arbitrary-call",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "arbitrary-call",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.07,
+    "stateActor": 0.02,
+    "hasRootCause": 0.4
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "According to BasketDAOOrg's official Twitter, there is a vulnerability in BMIZapper, which caused users to lose about 1.2 million US dollars.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "According to BasketDAOOrg's official Twitter, there is a vulnerability in BMIZapper, which caused users to lose about 1.2 million US dollars."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 30 March 2022, BasketDAO suffered an exploit on Ethereum Mainnet that allowed attackers to steal ~$1.2 million. Attackers abused improperly restricted external call mechanisms in two contracts, draining user-approved funds. The protocol ceased operations and was acquired by PieDAO. Two BasketDAO contracts allowed arbitrary external calls due to insufficient access control. Malicious actors used these functions to move funds from users who had granted token approvals, bypassing user consent and draining assets."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BasketDAOOrg/status/1509009439315034115"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/basketdao-2022-03-30"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/basketdao-hack-2022"
+    },
+    {
+      "source": "revertiq",
+      "label": "revoke.cash",
+      "url": "https://revoke.cash/en/exploits/basketdao"
+    }
+  ]
+}

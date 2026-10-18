@@ -1,0 +1,124 @@
+{
+  "id": "2022-07-13-spacegodzilla",
+  "name": "SpaceGodzilla",
+  "date": "2022-07-13",
+  "year": 2022,
+  "amountUsd": 25379,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.79,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.8
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.2
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.03,
+    "hasRootCause": 0.75
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Flashloans & Price Manipulation. Lost: 25,378 BUSD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Flashloans & Price Manipulation. Lost: 25,378 BUSD"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "incorrect access control. Vulnerable code snippet: https://bscscan.com/address/0x2287c04a15bb11ad1358ba5702c1c95e2d13a5e0#code#L1233"
+    },
+    {
+      "source": "SlowMist",
+      "text": "SpaceGodzilla was attacked by price manipulation and lost approximately 25,000 USDT."
+    },
+    {
+      "source": "SlowMist",
+      "text": "SpaceGodzilla, a project on the BSC chain, was attacked by hackers with a flash loan. Hackers used flash loans to borrow large amounts of money, manipulated the price of SpaceGodzilla in the trading pool on PancakeSwap, and exploited vulnerabilities in the project for arbitrage. At present, the hacker has exchanged the 25,378.78 BUSD profited from this attack to BNB and transferred it through Tornado.Cash."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On July 13, 2022, SpaceGodzilla on BNB Chain was exploited via a flash loan and price manipulation vulnerability, resulting in a loss of approximately 25,378 BUSD. The attacker manipulated the spot price of SpaceGodzilla tokens in a PancakeSwap pool, enabling profitable trades and laundering proceeds via Tornado.Cash. A logic flaw in the swapAndLiquifyStepv1() function allowed the attacker to add liquidity with both tokens in an unbalanced ratio, disrupting the AMM pool and causing an exploitable spot price manipulation."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x7f183df11f1a0225b5eb5bb2296b5dc51c0f3570e8cc15f0754de8e6f8b4cca4",
+    "0xa74e446aaf0b34a34a4193bda036820944ededbf4d151dcf9757294480c13f4e",
+    "0x67ba949a3fa10bea9ab78b6bb0866bef81370c269debcbae920692bc2081bdeb"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-07/SpaceGodzilla_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-07/SpaceGodzilla_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "mobile.twitter.com",
+      "url": "https://mobile.twitter.com/BlockSecTeam/status/1547456591900749824"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "medium.com",
+      "url": "https://medium.com/numen-cyber-labs/spacegodzilla-attack-event-analysis-d29a061b17e1"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "learnblockchain.cn",
+      "url": "https://learnblockchain.cn/article/4396"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0x2287c04a15bb11ad1358ba5702c1c95e2d13a5e0#code#L1233"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BlockSecTeam/status/1547456591900749824"
+    },
+    {
+      "source": "slowmist",
+      "label": "panewslab.com",
+      "url": "https://www.panewslab.com/zh/articledetails/u25j5p3kdvu9.html"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/spacegodzilla-2022-07-13"
+    },
+    {
+      "source": "revertiq",
+      "label": "panewslab.com",
+      "url": "https://www.panewslab.com/zh/articles/u25j5p3kdvu9"
+    }
+  ]
+}

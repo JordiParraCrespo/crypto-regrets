@@ -1,0 +1,124 @@
+{
+  "id": "2023-07-08-civnft",
+  "name": "CIVNFT",
+  "date": "2023-07-08",
+  "year": 2023,
+  "amountUsd": 180000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.98,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.98
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.06,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Lack of access control. Lost: ~$180k",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Lack of access control. Lost: ~$180k"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Because of a lack of Access control over specific functions 0x7ca06d68 , Attacker can manipulate the _uniswapV3MintCallback value and execute the attack contract directly. Code Snippet: Attack Tx: https://etherscan.io/tx/0x93a033917fcdbd5fe8ae24e9fe22f002949cba2f621a1c43a54f6519479caceb https://app.blocksec.com/explorer/tx/eth/0x93a033917fcdbd5fe8ae24e9fe22f002949cba2f621a1c43a54f6519479caceb Analysis: https://blog.solidityscan.com/civnft-hack-analysis-4ee79b8c33d1"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "CIVNFT suffered a smart contract exploit on Ethereum Mainnet on July 8, 2023, after deploying a function with no access control that allowed arbitrary token transfers. The attacker used this flaw to steal over $180,000 in tokens. A privileged contract function (0x7ca06d68) in CIVNFT lacked access control, enabling any address to trigger fund transfers, resulting in theft."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x93a033917fcdbd5fe8ae24e9fe22f002949cba2f621a1c43a54f6519479caceb"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-07/CIVNFT_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-07/CIVNFT_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Phalcon_xyz/status/1677722208893022210"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "news.civfund.org",
+      "url": "https://news.civfund.org/civtrade-hack-analysis-9a2398a6bc2e"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "blog.solidityscan.com",
+      "url": "https://blog.solidityscan.com/civnft-hack-analysis-4ee79b8c33d1"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x93a033917fcdbd5fe8ae24e9fe22f002949cba2f621a1c43a54f6519479caceb"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/eth/0x93a033917fcdbd5fe8ae24e9fe22f002949cba2f621a1c43a54f6519479caceb"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x93a033917fcdbd5fe8ae24e9fe22f002949cba2f621a1c43a54f6519479caceb"
+    },
+    {
+      "source": "blocksec",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs?tab=readme-ov-file#20230708-civnft---lack-of-access-control"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/civnft-2023-07-08"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.solidityscan.com",
+      "url": "https://blog.solidityscan.com/civnft-hack-analysis-4ee79b8c33d1/"
+    },
+    {
+      "source": "revertiq",
+      "label": "olympix.security",
+      "url": "https://olympix.security/biweekly-exploits/civnft-themis-shido-when-access-control-oracles-and-configs-all-fail-at-once"
+    }
+  ]
+}

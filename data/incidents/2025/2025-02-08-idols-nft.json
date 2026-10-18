@@ -1,0 +1,76 @@
+{
+  "id": "2025-02-08-idols-nft",
+  "name": "Idols NFT",
+  "date": "2025-02-08",
+  "year": 2025,
+  "amountUsd": 340000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum Mainnet"
+  ],
+  "targetType": null,
+  "category": "logic-error",
+  "technique": "Logic Error",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.99). Replaced keyword guess \"accounting-math\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.99
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "The Idols NFT contract was exploited on January 14, 2025, for roughly $340,000 in stETH due to flawed accounting in self-transfer logic. The attacker repeatedly self-transferred their NFT, resetting claimed rewards and allowing multiple inflated stETH payouts. The vulnerable _beforeTokenTransfer function failed to distinguish between a true token transfer and a self-transfer, resulting in the reset of claimedSnapshots and enabling repeated reward claims from a single NFT.",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "The Idols NFT contract was exploited on January 14, 2025, for roughly $340,000 in stETH due to flawed accounting in self-transfer logic. The attacker repeatedly self-transferred their NFT, resetting claimed rewards and allowing multiple inflated stETH payouts. The vulnerable _beforeTokenTransfer function failed to distinguish between a true token transfer and a self-transfer, resulting in the reset of claimedSnapshots and enabling repeated reward claims from a single NFT."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xa8289dbe3e49e9c5decaabd3777d9ad60a7b06863539b4948dd17e58a65f3e15",
+    "0x9ac08d865feefeb644d34533fe59fbf144e55fa2def302ede1e966a6b8ab025a",
+    "0x45d93aa6b24ac2c6606d81ecae3d8ec5609772cfab3839661d3ae7319e3763b4",
+    "0x5e989304b1fb61ea0652db4d0f9476b8882f27191c1f1d2841f8977cb8c5284c"
+  ],
+  "poc": null,
+  "sources": [
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/idols-nft-2025-02-08"
+    },
+    {
+      "source": "revertiq",
+      "label": "quillaudits.com",
+      "url": "https://www.quillaudits.com/blog/hack-analysis/idols-nft-exploit-self-transfer-bug"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.solidityscan.com",
+      "url": "https://blog.solidityscan.com/the-idols-nft-hack-analysis-95f3abdd0deb/"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/de-fi-rekt-report-january-2025-62-5-million-lost-across-11-incidents-zero-recovered"
+    }
+  ]
+}

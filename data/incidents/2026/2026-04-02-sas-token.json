@@ -1,0 +1,56 @@
+{
+  "id": "2026-04-02-sas-token",
+  "name": "SAS Token",
+  "date": "2026-04-02",
+  "year": 2026,
+  "amountUsd": 12000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": null,
+  "category": "logic-error",
+  "technique": "Smart Contract Vulnerability",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.99). Replaced keyword guess \"accounting-math\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.99
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "The SAS Token on BNB Chain was exploited via a flawed custom transfer logic (Deferred Burn Exploit). The token’s custom transfer logic had a flaw: sending SAS to the LP pool only incremented a global sellBurn counter, while any subsequent ordinary transfer could burn SAS directly from the pool and call sync() to rewrite reserves, bypassing the AMM’s swap logic. The attacker accumulated sellBurn credit through sells, triggered an unrelated ordinary transfer to burn SAS from the pool down to ~1 wei, and then reverse-swapped to extract profit.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The SAS Token on BNB Chain was exploited via a flawed custom transfer logic (Deferred Burn Exploit). The token’s custom transfer logic had a flaw: sending SAS to the LP pool only incremented a global sellBurn counter, while any subsequent ordinary transfer could burn SAS directly from the pool and call sync() to rewrite reserves, bypassing the AMM’s swap logic. The attacker accumulated sellBurn credit through sells, triggered an unrelated ordinary transfer to burn SAS from the pool down to ~1 wei, and then reverse-swapped to extract profit."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "slowmist",
+      "label": "blocksec.com",
+      "url": "https://blocksec.com/blog/weekly-web3-security-incident-roundup-mar-30-apr-5-2026"
+    }
+  ]
+}

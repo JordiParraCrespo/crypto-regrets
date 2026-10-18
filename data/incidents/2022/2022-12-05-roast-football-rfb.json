@@ -1,0 +1,77 @@
+{
+  "id": "2022-12-05-roast-football-rfb",
+  "name": "Roast Football (RFB)",
+  "date": "2022-12-05",
+  "year": 2022,
+  "amountUsd": 3600,
+  "returnedUsd": null,
+  "chains": [
+    "BNB Chain"
+  ],
+  "targetType": null,
+  "category": "logic-error",
+  "technique": "Predictable on-chain randomness; Brute-force lottery payout",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.77).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.77,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.78
+      },
+      {
+        "category": "signature-crypto",
+        "p": 0.21
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.95,
+    "stateActor": 0.01,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "RFB (Roast Football) on BNB Chain was exploited on December 5, 2022, after its on-chain lottery was brute-forced. Attackers predicted lottery outcomes using only publicly available inputs, repeatedly winning large payouts from the contract's reward pool. At least 12.17 WBNB (≈$3.6K at the time) was drained in one flash-loan-enabled attack, with no cooldown or anti-bot protection. The protocol used a fully on-chain, attacker-steerable pseudorandom number generator for its lottery payout, allowing the attacker to adjust buy sizes until the lottery seed hit a deterministic jackpot condition. This led to predictable, repeatable payouts with no restriction.",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "RFB (Roast Football) on BNB Chain was exploited on December 5, 2022, after its on-chain lottery was brute-forced. Attackers predicted lottery outcomes using only publicly available inputs, repeatedly winning large payouts from the contract's reward pool. At least 12.17 WBNB (≈$3.6K at the time) was drained in one flash-loan-enabled attack, with no cooldown or anti-bot protection. The protocol used a fully on-chain, attacker-steerable pseudorandom number generator for its lottery payout, allowing the attacker to adjust buy sizes until the lottery seed hit a deterministic jackpot condition. This led to predictable, repeatable payouts with no restriction."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xcc8fdb3c6af8bb9dfd87e913b743a13bbf138a143c27e0f387037887d28e3c7a"
+  ],
+  "poc": null,
+  "sources": [
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/rfb-2022-12-05"
+    },
+    {
+      "source": "revertiq",
+      "label": "defillama.com",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "crypto.training",
+      "url": "https://crypto.training/hacks/2022-12-rfb/"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/past/2022/README.md#L553"
+    }
+  ]
+}

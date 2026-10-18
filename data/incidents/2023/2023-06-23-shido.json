@@ -1,0 +1,124 @@
+{
+  "id": "2023-06-23-shido",
+  "name": "Shido",
+  "date": "2023-06-23",
+  "year": 2023,
+  "amountUsd": 238500,
+  "returnedUsd": null,
+  "chains": [
+    "BNB Chain"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.98,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.98
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.09,
+    "stateActor": 0.02,
+    "hasRootCause": 0.92
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Business Logic. Lost: ~997 WBNB",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Business Logic. Lost: ~997 WBNB"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The attacker took advantage of the lock and claim mechanism, as well as the price difference between the two pools. Vulnerable code snippet: Attack tx: https://bscscan.com/tx/0x72f8dd2bcfe2c9fbf0d933678170417802ac8a0d8995ff9a56bfbabe3aa712d6 Analysis: https://x.com/Phalcon_xyz/status/1672473343734480896"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Shido has been exploited for ~976 $BNB (~$238.5K). The exploiter transferred 1 $BNB to Tornado Cash and bridged the stolen funds to Ethereum, subsequently transferring 125 $ETH to Tornado Cash."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On June 23, 2023, Shido protocol on BNB Chain was exploited through a flaw in its token migration contract, allowing an attacker to drain about 976 WBNB (roughly $238,500) by abusing the lock and claim logic meant to convert V1 to V2 SHIDO tokens. The lock and claim logic in Shido's migration contract failed to properly update unlock times and validate proportional conversion, enabling the attacker to claim excess V2 tokens against V1 deposits, draining protocol funds."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x72f8dd2bcfe2c9fbf0d933678170417802ac8a0d8995ff9a56bfbabe3aa712d6"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-06/SHIDO_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-06/SHIDO_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Phalcon_xyz/status/1672473343734480896"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/AnciliaInc/status/1672382613473083393"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x72f8dd2bcfe2c9fbf0d933678170417802ac8a0d8995ff9a56bfbabe3aa712d6"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/Phalcon_xyz/status/1672473343734480896"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x72f8dd2bcfe2c9fbf0d933678170417802ac8a0d8995ff9a56bfbabe3aa712d6"
+    },
+    {
+      "source": "blocksec",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs?tab=readme-ov-file#20230623-shido---business-loigc"
+    },
+    {
+      "source": "slowmist",
+      "label": "panewslab.com",
+      "url": "https://panewslab.com/zh/sqarticledetails/5y6bi4cv.html"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/shido-2023-06-23"
+    },
+    {
+      "source": "revertiq",
+      "label": "olympix.security",
+      "url": "https://olympix.security/biweekly-exploits/civnft-themis-shido-when-access-control-oracles-and-configs-all-fail-at-once"
+    }
+  ]
+}

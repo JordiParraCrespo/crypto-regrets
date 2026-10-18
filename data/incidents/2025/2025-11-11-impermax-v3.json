@@ -1,0 +1,72 @@
+{
+  "id": "2025-11-11-impermax-v3",
+  "name": "Impermax V3",
+  "date": "2025-11-11",
+  "year": 2025,
+  "amountUsd": 380000,
+  "returnedUsd": null,
+  "chains": [
+    "Base"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Liquidation Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.98,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.98
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.01,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "On 11 November 2025, Impermax V3's cbBTC lending vault on Base was exploited, resulting in losses of about $380,000. The attacker manipulated liquidation routing and exchange rate logic, draining assets through a complex flaw without matching collateral or debt constraints. A liquidation routing logic flaw and exchange rate manipulation in the cbBTC lending vault allowed an attacker to repeatedly reduce collateral balances, trigger faulty underwater positions, and drain vault assets by breaking the intended accounting invariants.",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "On 11 November 2025, Impermax V3's cbBTC lending vault on Base was exploited, resulting in losses of about $380,000. The attacker manipulated liquidation routing and exchange rate logic, draining assets through a complex flaw without matching collateral or debt constraints. A liquidation routing logic flaw and exchange rate manipulation in the cbBTC lending vault allowed an attacker to repeatedly reduce collateral balances, trigger faulty underwater positions, and drain vault assets by breaking the intended accounting invariants."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/impermax-v3-2025-11-11"
+    },
+    {
+      "source": "revertiq",
+      "label": "monitoringroom.com",
+      "url": "https://monitoringroom.com/situation/crypto-hack/impermax-v3-2025"
+    },
+    {
+      "source": "revertiq",
+      "label": "defillama.com",
+      "url": "https://defillama.com/protocol/impermax-v3"
+    }
+  ]
+}

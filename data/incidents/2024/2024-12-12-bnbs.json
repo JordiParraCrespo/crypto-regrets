@@ -1,0 +1,80 @@
+{
+  "id": "2024-12-12-bnbs",
+  "name": "BNBS",
+  "date": "2024-12-12",
+  "year": 2024,
+  "amountUsd": 20300,
+  "returnedUsd": null,
+  "chains": [
+    "Binance"
+  ],
+  "targetType": "Token",
+  "category": "reentrancy",
+  "technique": "Reentrancy",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "reentrancy",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "reentrancy",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.76
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "A suspicious reentrancy attack involving bnbs (bnbs) occurred on the BSC chain, resulting in a loss of approximately $20,300.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "A suspicious reentrancy attack involving bnbs (bnbs) occurred on the BSC chain, resulting in a loss of approximately $20,300."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "BNBS suffered a reentrancy exploit on BNB Chain on 12 December 2024, resulting in a loss of approximately $20,300. The vulnerable removeLiquidity() function failed to update token balances before transferring funds, allowing the attacker to repeatedly withdraw assets. The removeLiquidity() function did not update internal token balances before transferring funds to users, leaving the contract vulnerable to reentrancy. An external call enabled the attacker to repeatedly invoke removeLiquidity() through re-entry before state changes, draining the pool."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x33c70f2aaf54960dc96b440061b9354fb40ef477b54755b79332f707d82909cc"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x33c70f2aaf54960dc96b440061b9354fb40ef477b54755b79332f707d82909cc"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/bnbs-2024-12-12"
+    },
+    {
+      "source": "revertiq",
+      "label": "quadrigainitiative.com",
+      "url": "https://www.quadrigainitiative.com/casestudy/evminkbnbscontractremoveliquidityreentrancyattack.php"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/bnbs-hack-2024"
+    }
+  ]
+}

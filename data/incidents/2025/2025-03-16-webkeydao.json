@@ -1,0 +1,68 @@
+{
+  "id": "2025-03-16-webkeydao",
+  "name": "WebKeyDAO",
+  "date": "2025-03-16",
+  "year": 2025,
+  "amountUsd": 73000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "Token",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "WebKeyDAO was exploited on BNB Chain in March 2025 after a publicly accessible sale configuration path allowed attackers to acquire wKeyDAO tokens at heavily discounted prices and resell them on decentralized exchanges. Public reporting on the total loss is inconsistent, with figures ranging from about $73,000 to about $737,000. Public reporting indicates that WebKeyDAO exposed privileged sale configuration logic without adequate access control. Attackers were reportedly able to modify pricing parameters through a SetSaleInfo() path and purchase wKeyDAO tokens below market value before selling them into PancakeSwap liquidity pools. The vulnerable histo…",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "WebKeyDAO was exploited on BNB Chain in March 2025 after a publicly accessible sale configuration path allowed attackers to acquire wKeyDAO tokens at heavily discounted prices and resell them on decentralized exchanges. Public reporting on the total loss is inconsistent, with figures ranging from about $73,000 to about $737,000. Public reporting indicates that WebKeyDAO exposed privileged sale configuration logic without adequate access control. Attackers were reportedly able to modify pricing parameters through a SetSaleInfo() path and purchase wKeyDAO tokens below market value before selling them into PancakeSwap liquidity pools. The vulnerable histo…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/webkeydao-2025-03-16"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/webkeydao-hack-2025"
+    },
+    {
+      "source": "revertiq",
+      "label": "techflowpost.com",
+      "url": "https://www.techflowpost.com/en-US/newsletter/78140"
+    }
+  ]
+}

@@ -1,0 +1,99 @@
+{
+  "id": "2026-05-31-aros",
+  "name": "AROS",
+  "date": "2026-05-31",
+  "year": 2026,
+  "amountUsd": 295000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "Token",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "signature-crypto",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "signature-crypto",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.92,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Signature Replay. Lost: ~$295K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Signature Replay. Lost: ~$295K"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "AROS gates its reward distribution behind admin-signed messages consumed by claimPrincipal(...) and claimYield(...), but the signature scheme is replayable / forgeable: the attacker supplies fixed (r,s,v) signatures to mint/withdraw large AROS principal and yield amounts to themselves. Backed by a long chain of V3 flash loans (Moolah, Balancer, Aave, Venus and ~25 Pancake/Uniswap V3 pools) for working capital, the attacker pumps the AROS/USDT pool, replays the signed claimPrincipal and claimYield calls to extract AROS, then dumps it back into USDT, draining the AROS/USDT LP for ~$295K. Root cause is missing nonce/binding validation on the claim signatures, allowing reuse of valid admin signatures to drain rewards. Vulnerable code snippet: Attack Tx: https://bscscan.com/tx/0xe89fe640ec5241edfca7d8dcae77a0a4270dee15e4bbd043fc60e393aabf41e1 Analysis: TenArmor"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The DeFi project AROS on BSC was exploited. The attacker interacted with the AROS/USDT PancakeSwap liquidity pool and drained approximately $295.3K USDT."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "AROS was exploited on BNB Chain on 30 May 2026, resulting in losses of approximately $295,000, with the attacker draining protocol assets via flash loans, contract calls, and signature-based withdrawals. The precise vulnerable operation is unconfirmed due to the absence of a published protocol-side postmortem. The incident involved rapid asset extraction using flash loans, approvals, and signature-based functions. Most evidence suggests a price/oracle manipulation or privileged claim/withdrawal path, but the exact contract vulnerability remains unconfirmed by the protocol due to the lack of an official postmortem or technical disclosure."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xe89fe640ec5241edfca7d8dcae77a0a4270dee15e4bbd043fc60e393aabf41e1"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-05/AROS_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-05/AROS_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0xe89fe640ec5241edfca7d8dcae77a0a4270dee15e4bbd043fc60e393aabf41e1"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/TenArmorAlert/status/2061289921990570349"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/aros-2026-05-31"
+    },
+    {
+      "source": "revertiq",
+      "label": "cb-terminal.dev",
+      "url": "https://cb-terminal.dev/en/topic/753e23c0-a705-4725-812f-336557e6c5f8"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptoadventure.com",
+      "url": "https://cryptoadventure.com/aros-attack-on-bnb-chain-adds-295k-loss-as-june-opens-with-defi-exploits/"
+    }
+  ]
+}

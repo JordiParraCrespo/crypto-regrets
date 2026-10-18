@@ -1,0 +1,72 @@
+{
+  "id": "2024-04-14-hackathon",
+  "name": "Hackathon",
+  "date": "2024-04-14",
+  "year": 2024,
+  "amountUsd": 20000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "business logic flaw",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.99).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.99
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.01,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "business logic flaw. Lost: ~20K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "business logic flaw. Lost: ~20K"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "A logic flaw in the _transfer function allows a malicious user to double their token balance by sending tokens to the pair address (pair) itself. Since the contract treats the transaction as both a buy and a sell, it applies both fees and credits the recipient’s balance twice, effectively minting tokens. The attacker can then use the skim()function to extract the inflated balance, leading to a severe economic exploit. Vulnerable code snippet: Attack tx: https://app.blocksec.com/explorer/tx/bsc/0xea181f730886ece947e255ab508f5af1d0f569fee3368b651d5dbb28549087b5?line=41 Analysis: The _transfer function incorrectly assumes that a transfer will either be a buy (when sender is a pair) or a sell (when recipient is a pair), but not both. However, when sender == recipient == pair, both conditions trigger, and the recipient’s balance is credited twice, once in each branch: This can be abused by pair:skim function by setting the pair address to be the to address. The attacker could use this to double the balance and gets it back via skim.(This is another type of self-transfer issue)."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xea181f730886ece947e255ab508f5af1d0f569fee3368b651d5dbb28549087b5"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-04/Hackathon_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-04/Hackathon_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/EXVULSEC/status/1779519508375613827"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/bsc/0xea181f730886ece947e255ab508f5af1d0f569fee3368b651d5dbb28549087b5?line=41"
+    }
+  ]
+}

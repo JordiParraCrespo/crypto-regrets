@@ -1,0 +1,78 @@
+{
+  "id": "2026-05-13-transit-finance",
+  "name": "Transit Finance",
+  "date": "2026-05-13",
+  "year": 2026,
+  "amountUsd": 1880000,
+  "returnedUsd": null,
+  "chains": [
+    "Tron"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.57
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Decentralized cross-chain aggregation protocol Transit Finance suffered an exploit on its deprecated (2022-era) TRON smart contract, resulting in approximately $1.88 million in DAI being drained. The stolen funds were transferred to an Ethereum address. The team confirmed it was isolated to legacy code, stated that current contracts are secure, completed remediation on May 12, and promised full user compensation. They sent an on-chain message to the attacker offering a bug bounty for return within 48 hours, or they would pursue legal action.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Decentralized cross-chain aggregation protocol Transit Finance suffered an exploit on its deprecated (2022-era) TRON smart contract, resulting in approximately $1.88 million in DAI being drained. The stolen funds were transferred to an Ethereum address. The team confirmed it was isolated to legacy code, stated that current contracts are secure, completed remediation on May 12, and promised full user compensation. They sent an on-chain message to the attacker offering a bug bounty for return within 48 hours, or they would pursue legal action."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Transit Finance was exploited on Tron in May 2026, losing ~$1.88 million when a deprecated bridge contract allowed attacker-controlled calldata to drain user-approved stablecoin balances. The vulnerability persisted for years due to unresolved on-chain approvals. A deprecated TransitMixSwapBridge contract allowed arbitrary calldata execution, enabling attackers to drain funds from users with lingering unlimited approvals. The lack of pause, self-destruct, or explicit approval revocation meant the legacy contract remained callable, exposing a persistent attack surface."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/BSCNews/status/2054613633460777265"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/transit-finance-2026-05-13"
+    },
+    {
+      "source": "revertiq",
+      "label": "coinalertnews.com",
+      "url": "https://coinalertnews.com/news/2026/05/13/transit-finance-exploit-compensation"
+    },
+    {
+      "source": "revertiq",
+      "label": "blocksec.com",
+      "url": "https://blocksec.com/blog/weekly-web3-security-roundup-2026-05-17"
+    }
+  ]
+}

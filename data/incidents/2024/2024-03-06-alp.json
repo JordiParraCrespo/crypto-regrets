@@ -1,0 +1,89 @@
+{
+  "id": "2024-03-06-alp",
+  "name": "ALP",
+  "date": "2024-03-06",
+  "year": 2024,
+  "amountUsd": 10000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.09,
+    "stateActor": 0.02,
+    "hasRootCause": 0.66
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Public internal function. Lost: ~10K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Public internal function. Lost: ~10K"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The _swap() is public which should be internal Vulnerable code snippet: Attack tx: https://phalcon.blocksec.com/explorer/tx/bsc/0x9983ca8eaee9ee69629f74537eaf031272af75f1e5a7725911d8b06df17c67ca Analysis:"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 6 March 2024, the ALP protocol on BNB Chain was exploited for approximately $10,000. The attack leveraged an externally callable privileged function, enabling unauthorized withdrawals of protocol assets. A privileged internal function was incorrectly exposed as external, allowing any address to trigger asset transfers intended only for protocol operations. Insufficient access control permitted an attacker to drain funds."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x9983ca8eaee9ee69629f74537eaf031272af75f1e5a7725911d8b06df17c67ca"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-03/ALP_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-03/ALP_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "phalcon.blocksec.com",
+      "url": "https://phalcon.blocksec.com/explorer/tx/bsc/0x9983ca8eaee9ee69629f74537eaf031272af75f1e5a7725911d8b06df17c67ca"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/alp-2024-03-06"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/alp-hack-2024"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/past/2024/README.md#L2622"
+    }
+  ]
+}

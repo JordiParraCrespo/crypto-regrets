@@ -1,0 +1,76 @@
+{
+  "id": "2024-02-05-burnsdefi",
+  "name": "BurnsDefi",
+  "date": "2024-02-05",
+  "year": 2024,
+  "amountUsd": 67000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Price Manipulation",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.97). Replaced keyword guess \"oracle-manipulation\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.97,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.97
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.02
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Price Manipulation. Lost: ~67K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Price Manipulation. Lost: ~67K"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The root cause of the exploit was a flaw that allowed the attacker to burn tokens twice to the same holder, resulting in the receipt of disproportionate rewards. This enabled the attacker to manipulate the reward distribution mechanism and collect an excessive amount of rewards. Vulnerable code snippet: Attack transaction: https://phalcon.blocksec.com/explorer/tx/bsc/0x1d0af3a963682748493f21bf9e955ce3a950bee5817401bf2486db7a0af104b4 Analysis: https://twitter.com/pennysplayer/status/1754342573815238946"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x1d0af3a963682748493f21bf9e955ce3a950bee5817401bf2486db7a0af104b4"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-02/BurnsDefi_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-02/BurnsDefi_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/pennysplayer/status/1754342573815238946"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "phalcon.blocksec.com",
+      "url": "https://phalcon.blocksec.com/explorer/tx/bsc/0x1d0af3a963682748493f21bf9e955ce3a950bee5817401bf2486db7a0af104b4"
+    }
+  ]
+}

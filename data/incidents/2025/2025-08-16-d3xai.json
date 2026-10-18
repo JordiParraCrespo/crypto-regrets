@@ -1,0 +1,81 @@
+{
+  "id": "2025-08-16-d3xai",
+  "name": "d3xai",
+  "date": "2025-08-16",
+  "year": 2025,
+  "amountUsd": 158900,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Price Manipulation",
+  "classificationNote": "Classified by keyword rules from the DeFiHackLabs root-cause title.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.49,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.52
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.41
+      },
+      {
+        "category": "market-manipulation",
+        "p": 0.07
+      }
+    ],
+    "flashLoan": 0.93,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Price Manipulation. Lost: 190 BNB",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Price Manipulation. Lost: 190 BNB"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The D3XAT project ran an internal swap proxy whose exchange(fromToken, toToken, amount) function priced D3XAT independently of (and more cheaply than) the PancakeSwap market price, while the on-market PancakeSwap pool reflected the real, higher price. The proxy effectively let anyone buy D3XAT low and sell it high without a sanity check tying its quote to a manipulation-resistant reference. The attacker flash-loaned 20M USDT from a PancakeV3 pool, then ran two parallel legs: buying D3XAT cheaply through the proxy's exchange() and selling it back at a higher rate, while simultaneously round-tripping through the PancakeSwap router across many helper buyer/seller contracts to harvest the spread. Repeating this across 27+ rounds drained the price discrepancy for a net profit of ~190 BNB, after which the USDT flash loan plus fee was repaid. Vulnerable code snippet: Attack Tx: https://bscscan.com/tx/0x26bcefc152d8cd49f4bb13a9f8a6846be887d7075bc81fa07aa8c0019bd6591f Analysis: https://x.com/suplabsyi/status/1956695597546893598"
+    },
+    {
+      "source": "SlowMist",
+      "text": "D3X AI (@D3X_AI) was attacked on BSC, resulting in a loss of approximately $158.9K. The root cause was that the exchange() function of contract 0xb8ad relied on the spot price of the d3xat token from a UniswapV2 pair, which the attacker exploited through a price manipulation attack."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x26bcefc152d8cd49f4bb13a9f8a6846be887d7075bc81fa07aa8c0019bd6591f"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-08/d3xai_exp.sol",
+  "sources": [
+    "defihacklabs",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-08/d3xai_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/suplabsyi/status/1956695597546893598"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x26bcefc152d8cd49f4bb13a9f8a6846be887d7075bc81fa07aa8c0019bd6591f"
+    }
+  ]
+}

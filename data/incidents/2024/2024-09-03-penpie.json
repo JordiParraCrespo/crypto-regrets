@@ -1,0 +1,181 @@
+{
+  "id": "2024-09-03-penpie",
+  "name": "Penpie",
+  "date": "2024-09-03",
+  "year": 2024,
+  "amountUsd": 27000000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "reentrancy",
+  "technique": "Reentrancy",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "reentrancy",
+    "confidence": 0.52,
+    "top": [
+      {
+        "category": "reentrancy",
+        "p": 0.55
+      },
+      {
+        "category": "input-validation",
+        "p": 0.42
+      },
+      {
+        "category": "logic-error",
+        "p": 0.03
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.93
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Reentrancy and Reward Manipulation. Lost: 11,113.6 ETH (~$27,348,259 USD)",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Reentrancy and Reward Manipulation. Lost: 11,113.6 ETH (~$27,348,259 USD)"
+    },
+    {
+      "source": "REKT",
+      "text": "The crypto world never sleeps and neither do its hackers. In the latest episode of Who Wants to Be a Millionaire - DeFi Edition, Penpie has found itself on the wrong end of a $27 million exploit."
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Its market registration process that assumed all markets created by Pendle Finance were legitimate without proper validation. The attacker exploited this by creating a malicious market with a custom SY (Simple Yield) contract through Pendle Finance's open market creation process. When Penpie interacted with this malicious SY contract during reward claiming, the attacker was able to manipulate the reward distribution logic Vulnerable code snippet: Attack tx: https://app.blocksec.com/explorer/tx/eth/0x67c5400da117b906f8c0fc5f5149e4ea10ed6358cd9ea2ec0ed8f559d757b7df https://app.blocksec.com/explorer/tx/eth/0x56e09abb35ff12271fdb38ff8a23e4d4a7396844426a94c4d3af2e8b7a0a2813 https://app.blocksec.com/explorer/tx/eth/0x42b2ec27c732100dd9037c76da415e10329ea41598de453bb0c0c9ea7ce0d8e5 https://app.blocksec.com/explorer/tx/eth/0x663b55a1ee992603f7636ef23ff5cf19d3b261ab81494d06e218c86482df5342 Analysis: https://slowmist.medium.com/slowmist-incident-analysis-penpie-hack-e6157975898f"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The decentralized liquidity yield project Penpie was attacked, resulting in nearly $30 million in losses. According to the analysis by the SlowMist security team, the core issue of this incident lies in Penpie’s erroneous assumption that all markets created by Pendle Finance are legitimate when registering new Pendle markets. However, Pendle Finance’s market creation process is open, allowing anyone to create a market with customizable key parameters such as the SY contract address. Exploiting this, the attacker created a market contract with a malicious SY contract. They leveraged Penpie’s mechanism, which required calls to external SY contracts to cl…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Penpie lost approximately $27M on September 3, 2024, after an attacker exploited a reentrancy vulnerability in reward harvesting. The attacker registered a malicious fake Pendle market and manipulated reward accounting to drain staked assets. Penpie deployed post-audit code that permitted permissionless market registration and lacked reentrancy protection in batch reward harvesting. An attacker registered a fake market and triggered reentrancy to manipulate reward accounting, extracting excess rewards from legitimate pools."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On September 3, 2024, Penpie Protocol was exploited for approximately $27 million through a reentrancy vulnerability in its PendleStaking reward harvesting mechanism. The attacker leveraged permissionless market registration and a fake SY token, manipulating reward calculation and draining assets across Ethereum and Arbitrum. The batchHarvestMarketRewards() function of the PendleStaking contract lacked a reentrancy guard and trusted any market registered through Pendle's permissionless market factory. This allowed an attacker to deploy a malicious SY token, register a fake market, and re-enter the function to inflate reward balances, extracting excessive assets."
+    }
+  ],
+  "audit": "Watch Pug, Zokyo",
+  "txHashes": [
+    "0x67c5400da117b906f8c0fc5f5149e4ea10ed6358cd9ea2ec0ed8f559d757b7df",
+    "0x56e09abb35ff12271fdb38ff8a23e4d4a7396844426a94c4d3af2e8b7a0a2813",
+    "0x42b2ec27c732100dd9037c76da415e10329ea41598de453bb0c0c9ea7ce0d8e5",
+    "0x663b55a1ee992603f7636ef23ff5cf19d3b261ab81494d06e218c86482df5342",
+    "0x7e7f9548f301d3dd863eac94e6190cb742ab6aa9d7730549ff743bf84cbd21d1"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-09/Penpiexyzio_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-09/Penpiexyzio_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/peckshield/status/1831072098669953388"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/AnciliaInc/status/1831080555292856476"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/hackenclub/status/1831383106554573099"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Penpie - Rekt",
+      "url": "https://rekt.news/penpie-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/eth/0x67c5400da117b906f8c0fc5f5149e4ea10ed6358cd9ea2ec0ed8f559d757b7df"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/eth/0x56e09abb35ff12271fdb38ff8a23e4d4a7396844426a94c4d3af2e8b7a0a2813"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x67c5400da117b906f8c0fc5f5149e4ea10ed6358cd9ea2ec0ed8f559d757b7df"
+    },
+    {
+      "source": "blocksec",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Phalcon_xyz/status/1831205911521599959"
+    },
+    {
+      "source": "slowmist",
+      "label": "odaily.news",
+      "url": "https://www.odaily.news/newsflash/388884"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/penpie-reentrancy-2024-09-03"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/de-fi-rekt-report-2024-over-1-45-billion-lost-to-crypto-exploits"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/de-fi-rekt-report-over-671-million-lost-in-q3-2024"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractaudit.com",
+      "url": "https://www.smartcontractaudit.com/guides/penpie-2024-reentrancy-exploit"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/decoding-penpie-protocol-s-27m-2024-09-06"
+    },
+    {
+      "source": "revertiq",
+      "label": "quillaudits.com",
+      "url": "https://www.quillaudits.com/blog/hack-analysis/penpie-protocol-exploit"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.solidityscan.com",
+      "url": "https://blog.solidityscan.com/penpie-hack-analysis-29034a6f2a61/"
+    },
+    {
+      "source": "revertiq",
+      "label": "zokyo.io",
+      "url": "https://zokyo.io/blog/penpie-postmortem/"
+    }
+  ]
+}

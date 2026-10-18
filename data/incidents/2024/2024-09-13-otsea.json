@@ -1,0 +1,102 @@
+{
+  "id": "2024-09-13-otsea",
+  "name": "OTSea",
+  "date": "2024-09-13",
+  "year": 2024,
+  "amountUsd": 26000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Reward Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Logic Flaw. Lost: 26k",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Logic Flaw. Lost: 26k"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The OTSeaStaking contract allowed repeated claiming and withdrawal of rewards for the same staking indexes without proper validation or restrictions. The attacker exploited this by calling the claim and withdraw functions multiple times for overlapping and specific indexes, accumulating an excessive amount of OTSea tokens. The contract lacked checks to prevent duplicate claims or withdrawals and failed to update staking states, enabling the attacker to drain rewards and swap them for ETH via Uniswap, profiting from the flawed logic. Vulnerable code snippet: Attack tx: https://etherscan.io/tx/0x90b4fcf583444d44efb8625e6f253cfcb786d2f4eda7198bdab67a54108cd5f4 Analysis:"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Peer-to-peer trading platform OTSea's staking contract on Ethereum was exploited by an EOA, resulting in the theft of approximately $26,000."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "OTSea's Ethereum staking contract was exploited in September 2024 due to a reward logic flaw, leading to losses of approximately $26,000. The attacker repeatedly withdrew against the same staking ID, bypassing correct accounting. Evidence suggests funds were later returned, and the token relaunched with stricter controls. The vulnerable OTSea staking contract allowed repeated reward withdrawals against a single staking identifier without proper accounting, enabling the attacker to claim excess rewards."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x90b4fcf583444d44efb8625e6f253cfcb786d2f4eda7198bdab67a54108cd5f4",
+    "0x9832a4f3d663db4f082b701d73caf8c12d8dd9db684b7a88e19d7019ec393088",
+    "0x599c982a58a00525e16bc863729d83f247a02b04f4e6863e9f5cc9f24519261a",
+    "0x1808fea416f6fd159397bbbca13552e0a9e9dbb2af8abdd69c41c7be03e138a9"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-09/OTSeaStaking_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-09/OTSeaStaking_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x90b4fcf583444d44efb8625e6f253cfcb786d2f4eda7198bdab67a54108cd5f4"
+    },
+    {
+      "source": "slowmist",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/address/0x000000003704bc4ffb86000046721f44ef3dbabe"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/otsea-2024-09-13"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/otsea-hack-2024"
+    },
+    {
+      "source": "revertiq",
+      "label": "defillama.com",
+      "url": "https://defillama.com/protocol/otsea"
+    }
+  ]
+}

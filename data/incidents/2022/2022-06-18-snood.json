@@ -1,0 +1,89 @@
+{
+  "id": "2022-06-18-snood",
+  "name": "SNOOD",
+  "date": "2022-06-18",
+  "year": 2022,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Miscalculation on \\_spendAllowance",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.83). Replaced keyword guess \"arbitrary-call\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.83,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.84
+      },
+      {
+        "category": "logic-error",
+        "p": 0.13
+      },
+      {
+        "category": "access-control",
+        "p": 0.03
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.89
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Miscalculation on \\_spendAllowance. Lost: 104 ETH",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Miscalculation on \\_spendAllowance. Lost: 104 ETH"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "miscalculation on _spendAllowance Vulnerable code snippet: https://etherscan.io/address/0xeac2a259f3ebb8fd1097aeccaa62e73b6e43d5bf#code#F2#L58 Misuses _getStandardAmount and should be _getReflectedAmount"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The SNOOD ERC-777 smart contract was attacked, causing the liquidity of the UniswapV2Pair token to be completely drained (104 ETH)."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-06/Snood_exp.sol",
+  "sources": [
+    "defihacklabs",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-06/Snood_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "ethereum.stackexchange.com",
+      "url": "https://ethereum.stackexchange.com/questions/130472/attack-on-erc-777-smart-contract-and-uniswapv2pair-resulting-in-104-eth-liquidit"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x9a6227ef97d7ce75732645bd604ef128bb5dfbc1bfbe0966ad1cd2870d45a20e"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "ethtx.info",
+      "url": "https://ethtx.info/mainnet/0x9a6227ef97d7ce75732645bd604ef128bb5dfbc1bfbe0966ad1cd2870d45a20e/"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/address/0xeac2a259f3ebb8fd1097aeccaa62e73b6e43d5bf#code#F2#L58"
+    }
+  ]
+}

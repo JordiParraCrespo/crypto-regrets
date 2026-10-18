@@ -1,0 +1,60 @@
+{
+  "id": "2024-11-18-arc-token",
+  "name": "ARC token",
+  "date": "2024-11-18",
+  "year": 2024,
+  "amountUsd": 749210,
+  "returnedUsd": null,
+  "chains": [
+    "Arbitrum"
+  ],
+  "targetType": null,
+  "category": "key-compromise",
+  "technique": "Compromised Private Key",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 1.00). Replaced keyword guess \"signature-crypto\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "key-compromise",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "key-compromise",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "The ARC token deployer or treasury private key on Arbitrum was compromised, granting the attacker unauthorized control over the protocol's privileged wallet. With access to the controlling key, the attacker was able to drain approximately $749K in assets from the protocol. The incident was catalogued in the November 2024 crypto security roundup as a private key compromise on Arbitrum. This attack follows a widespread pattern of private key exploits targeting DeFi protocols in 2024, where the reliance on a single signing key for critical operations—rather than a multi-signature scheme or time-locked governance—provides attackers with a single point of failure to target. Attack Tx: 0x0b91470698c04e24112cb1fa7d3f363c39ed23f7df14b3da24081702ad860a50",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The ARC token deployer or treasury private key on Arbitrum was compromised, granting the attacker unauthorized control over the protocol's privileged wallet. With access to the controlling key, the attacker was able to drain approximately $749K in assets from the protocol. The incident was catalogued in the November 2024 crypto security roundup as a private key compromise on Arbitrum. This attack follows a widespread pattern of private key exploits targeting DeFi protocols in 2024, where the reliance on a single signing key for critical operations—rather than a multi-signature scheme or time-locked governance—provides attackers with a single point of failure to target. Attack Tx: 0x0b91470698c04e24112cb1fa7d3f363c39ed23f7df14b3da24081702ad860a50"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x0b91470698c04e24112cb1fa7d3f363c39ed23f7df14b3da24081702ad860a50"
+  ],
+  "poc": null,
+  "sources": [
+    "defihacklabs",
+    "blocksec"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "arbiscan.io",
+      "url": "https://arbiscan.io/tx/0x0b91470698c04e24112cb1fa7d3f363c39ed23f7df14b3da24081702ad860a50"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x0b91470698c04e24112cb1fa7d3f363c39ed23f7df14b3da24081702ad860a50"
+    }
+  ]
+}

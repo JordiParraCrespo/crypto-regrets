@@ -1,0 +1,86 @@
+{
+  "id": "2025-12-27-flow",
+  "name": "Flow",
+  "date": "2025-12-27",
+  "year": 2025,
+  "amountUsd": 3900000,
+  "returnedUsd": null,
+  "chains": [
+    "Flow"
+  ],
+  "targetType": "Layer 1",
+  "category": "accounting-math",
+  "technique": "Infinite Mint",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.86,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.87
+      },
+      {
+        "category": "client-bug",
+        "p": 0.09
+      },
+      {
+        "category": "access-control",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.68
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "The Flow Foundation announced that an attacker exploited a vulnerability in the Flow execution layer, transferring approximately $3.9 million in assets off the network before validators were able to coordinate and halt operations. The incident did not affect existing user balances, and all user deposits remain intact.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The Flow Foundation announced that an attacker exploited a vulnerability in the Flow execution layer, transferring approximately $3.9 million in assets off the network before validators were able to coordinate and halt operations. The incident did not affect existing user balances, and all user deposits remain intact."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 27 December 2025, an attacker exploited a type confusion vulnerability in Flow’s Cadence runtime, enabling the duplication of over 87 billion FLOW tokens and other assets. Roughly $3.9 million worth of counterfeit tokens were bridged out or swapped before a coordinated network halt contained the rest. Validators and partners destroyed the remaining counterfeit supply, restoring full network and exchange operations. The incident was caused by a complex multi-stage type confusion exploit in the Cadence execution layer (v1.8.8), allowing resources (tokens) to be duplicated via malformed transaction arguments and contract deployment logic that failed to enforce static type integrity."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/findlabs/status/2005021008156078274"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/flow-2025-12-27"
+    },
+    {
+      "source": "revertiq",
+      "label": "flow.com",
+      "url": "https://flow.com/post/dec-27-technical-post-mortem"
+    },
+    {
+      "source": "revertiq",
+      "label": "flow.com",
+      "url": "https://flow.com/post/final-remediation-update-regarding-the-flow-security-incident-87-4-billion-counterfeit-tokens-have-been-destroyed-"
+    }
+  ]
+}

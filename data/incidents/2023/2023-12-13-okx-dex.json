@@ -1,0 +1,86 @@
+{
+  "id": "2023-12-13-okx-dex",
+  "name": "OKX DEX",
+  "date": "2023-12-13",
+  "year": 2023,
+  "amountUsd": 2700000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "key-compromise",
+  "technique": "Private Key Compromised",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "key-compromise",
+    "confidence": 0.9,
+    "top": [
+      {
+        "category": "key-compromise",
+        "p": 0.91
+      },
+      {
+        "category": "access-control",
+        "p": 0.08
+      },
+      {
+        "category": "arbitrary-call",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "CeDeFi strikes again. OKX’s DEX aggregator has fallen victim to one of the oldest tricks in the book, losing $2.7M to a private key compromise. If the compromised contract was deprecated, why did they wait until it got rekt?",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "CeDeFi strikes again. OKX’s DEX aggregator has fallen victim to one of the oldest tricks in the book, losing $2.7M to a private key compromise. If the compromised contract was deprecated, why did they wait until it got rekt?"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On December 13, 2023, the OKX DEX aggregator on Ethereum was exploited after a deprecated proxy-admin private key was compromised. The attacker used this key to upgrade the proxy to a malicious contract, enabling unauthorized withdrawals from user wallets with standing approvals. Losses are estimated at up to $2.7 million, with partial user reimbursement reported. A deprecated proxy-admin private key for the OKX DEX aggregator contract remained active and was compromised. This allowed an attacker to upgrade the contract to malicious code, using outstanding token approvals to drain user wallets."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: OKX DEX - REKT",
+      "url": "https://rekt.news/okx-dex-rekt"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/okx-dex-2023-12-13"
+    },
+    {
+      "source": "revertiq",
+      "label": "blockchainbreaches.com",
+      "url": "https://www.blockchainbreaches.com/en/breaches/okx-dex-2023"
+    },
+    {
+      "source": "revertiq",
+      "label": "en.cryptonomist.ch",
+      "url": "https://en.cryptonomist.ch/2023/12/13/okx-dex-falls-victim-to-a-hack-and-loses-2-7-million-after-a-proxy-contract-update/"
+    }
+  ]
+}

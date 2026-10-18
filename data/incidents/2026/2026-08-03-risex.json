@@ -1,0 +1,78 @@
+{
+  "id": "2026-08-03-risex",
+  "name": "RISEx",
+  "date": "2026-08-03",
+  "year": 2026,
+  "amountUsd": 673012,
+  "returnedUsd": null,
+  "chains": [
+    "RISE"
+  ],
+  "targetType": "Chain",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.87
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "On August 3, 2026, an unauthorized withdrawal of 673,011.56 USDC occurred from the RWA strategy linked to RISEx’s XLP vault due to a misconfiguration present since its July 13 deployment. The team detected it within minutes, patched it by 08:09 UTC, and fully compensated XLP depositors using a portion of July fees; the platform and other components continued operating normally.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "On August 3, 2026, an unauthorized withdrawal of 673,011.56 USDC occurred from the RWA strategy linked to RISEx’s XLP vault due to a misconfiguration present since its July 13 deployment. The team detected it within minutes, patched it by 08:09 UTC, and fully compensated XLP depositors using a portion of July fees; the platform and other components continued operating normally."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "RISEx disclosed an unauthorized withdrawal of 673,011.56 USDC from an XLP treasury strategy on 2026-08-03. Public statements attribute the loss to a vault configuration error introduced during deployment of an RWA-linked strategy rather than a confirmed flaw in the exchange matching engine or core perpetuals protocol. Public disclosures describe a misconfigured XLP treasury RWA strategy that allowed an unauthorized withdrawal of 673,011.56 USDC. The exact contract, configuration parameter, and transaction sequence have not been publicly documented, so the specific access-control or authorization failure remains unverified."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/risextrade/status/2084350396609520105"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/risex-2026-08-03"
+    },
+    {
+      "source": "revertiq",
+      "label": "bingx.com",
+      "url": "https://bingx.com/en/flash-news/post/risex-reports-usdc-unauthorized-withdrawal-from-xlp-vault-after-rwa-strategy-misconfiguration"
+    },
+    {
+      "source": "revertiq",
+      "label": "bingx.com",
+      "url": "https://bingx.com/en/flash-news/post/risex-reports-usdc-unauthorized-withdrawal-from-xlp-linked-rwa-strategy-on-aug"
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "id": "2023-06-01-ddcoin",
+  "name": "DDCoin",
+  "date": "2023-06-01",
+  "year": 2023,
+  "amountUsd": 300000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Flashloan attack and smart contract vulnerability",
+  "classificationNote": "Upstream label missing; classified by keyword rules from the root-cause text.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "reentrancy",
+    "confidence": 0.4,
+    "top": [
+      {
+        "category": "reentrancy",
+        "p": 0.44
+      },
+      {
+        "category": "logic-error",
+        "p": 0.29
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.2
+      }
+    ],
+    "flashLoan": 0.8,
+    "stateActor": 0.03,
+    "hasRootCause": 0.25
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Flashloan attack and smart contract vulnerability. Lost: ~$300k",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Flashloan attack and smart contract vulnerability. Lost: ~$300k"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Vulnerable code snippet: Attack tx: https://bscscan.com/tx/0xd92bf51b9bf464420e1261cfcd8b291ee05d5fbffbfbb316ec95131779f80809 Analysis:"
+    },
+    {
+      "source": "SlowMist",
+      "text": "DD Coin was attacked and lost about 126,000 USDT. The attacker initially received 1 BNB of funds from Tornado Cash about 17 days ago. DD Coin has lost 21%."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xd92bf51b9bf464420e1261cfcd8b291ee05d5fbffbfbb316ec95131779f80809"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-06/DDCoin_exp.sol",
+  "sources": [
+    "defihacklabs",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-06/DDCoin_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/ImmuneBytes/status/1664239580210495489"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/ChainAegis/status/1664192344726581255?cxt=HHwWjsDRldmHs5guAAAA"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0xd92bf51b9bf464420e1261cfcd8b291ee05d5fbffbfbb316ec95131779f80809"
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "id": "2023-09-23-stars-arena",
+  "name": "Stars Arena",
+  "date": "2023-09-23",
+  "year": 2023,
+  "amountUsd": 3000000,
+  "returnedUsd": null,
+  "chains": [
+    "Avalanche"
+  ],
+  "targetType": null,
+  "category": "reentrancy",
+  "technique": "Reentrancy",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 1.00).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "reentrancy",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "reentrancy",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "The Stars Arena smart contract on Avalanche C-Chain contained a reentrancy vulnerability in its share-pricing and selling logic. The sellShares function performed an external AVAX transfer to the caller before updating internal state, allowing the attacker to re-enter a separate function during that callback to manipulate the block-height variable used to calculate the AVAX payout. By setting this parameter to an artificially high value before the share price was finalized, the attacker inflated the value of a single share to approximately 274,000 AVAX (~$274K). With just 1 AVAX deposited, the attacker drained 266,103 AVAX (~$2.9M) from the contract, leaving it with only $0.05 in TVL. The contract was reportedly unaudited and did not follow the Checks-Effects-Interactions pattern or employ a reentrancy guard. Attack Tx: 0x49c5b3b414bf874689de9a5b98c55445659c2fd2ad6f8a3cdd4e0203937c395e Analysis: Stars Arena Hack — Oct 7, 2023 — Detailed Analysis (ImmuneBytes)",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The Stars Arena smart contract on Avalanche C-Chain contained a reentrancy vulnerability in its share-pricing and selling logic. The sellShares function performed an external AVAX transfer to the caller before updating internal state, allowing the attacker to re-enter a separate function during that callback to manipulate the block-height variable used to calculate the AVAX payout. By setting this parameter to an artificially high value before the share price was finalized, the attacker inflated the value of a single share to approximately 274,000 AVAX (~$274K). With just 1 AVAX deposited, the attacker drained 266,103 AVAX (~$2.9M) from the contract, leaving it with only $0.05 in TVL. The contract was reportedly unaudited and did not follow the Checks-Effects-Interactions pattern or employ a reentrancy guard. Attack Tx: 0x49c5b3b414bf874689de9a5b98c55445659c2fd2ad6f8a3cdd4e0203937c395e Analysis: Stars Arena Hack — Oct 7, 2023 — Detailed Analysis (ImmuneBytes)"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x49c5b3b414bf874689de9a5b98c55445659c2fd2ad6f8a3cdd4e0203937c395e"
+  ],
+  "poc": null,
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "snowtrace.io",
+      "url": "https://snowtrace.io/tx/0x49c5b3b414bf874689de9a5b98c55445659c2fd2ad6f8a3cdd4e0203937c395e"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "immunebytes.com",
+      "url": "https://immunebytes.com/blog/stars-arena-hack-oct-7-2023-detailed-analysis/"
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "id": "2022-10-11-rabby-wallet-swaprouter",
+  "name": "Rabby Wallet SwapRouter",
+  "date": "2022-10-11",
+  "year": 2022,
+  "amountUsd": 200000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "arbitrary-call",
+  "technique": "Arbitrary External Call Vulnerability",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 1.00).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "arbitrary-call",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "arbitrary-call",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.92
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Arbitrary External Call Vulnerability. Lost: ~200,000 US$",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Arbitrary External Call Vulnerability. Lost: ~200,000 US$"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "arbitrary external call vulnerability. Since data is controllable by an attacker, so he can perform arbitrary external calls via functionCallWithValue. In this incident, the attacker sends funds out over transferfrom function. Source code: https://github.com/RabbyHub/Rabby/blob/1860bdd69da09292171457cb08bfd4a0bf89617d/docs/PeckShield-Audit-Report-RabbyRouter-v1.0.pdf Check: https://twitter.com/1nf0s3cpt/status/1579844213562576897"
+    },
+    {
+      "source": "SlowMist",
+      "text": "DeBank plug-in wallet Rabby tweeted that its Rabby Swap smart contract has a vulnerability, and users who have used it should revoke Rabby Swap approvals on all chains as soon as possible. According to the analysis of the SlowMist security team, the Rabby Swap contract was attacked, and the token exchange function in the contract was directly called externally through the functionCallWithValue function in the OpenZeppelin Address library. The parameters passed in by the user are not checked, resulting in any external call problems. Attackers exploit this issue to steal funds from users authorized by this contract."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-10/RabbyWallet_SwapRouter_exp.sol",
+  "sources": [
+    "defihacklabs",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-10/RabbyWallet_SwapRouter_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Supremacy_CA/status/1579813933669486592"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/SlowMist_Team/status/1579839744128978945"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BeosinAlert/status/1579856733178331139"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "github.com",
+      "url": "https://github.com/RabbyHub/Rabby/blob/1860bdd69da09292171457cb08bfd4a0bf89617d/docs/PeckShield-Audit-Report-RabbyRouter-v1.0.pdf"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/1nf0s3cpt/status/1579844213562576897"
+    }
+  ]
+}

@@ -1,0 +1,123 @@
+{
+  "id": "2025-03-21-zoth-zeusd",
+  "name": "Zoth ZeUSD",
+  "date": "2025-03-21",
+  "year": 2025,
+  "amountUsd": 8850000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "key-compromise",
+  "technique": "Private Key Compromised",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "key-compromise",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "key-compromise",
+        "p": 0.99
+      },
+      {
+        "category": "access-control",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Admin keys stolen, $8.4M drained in minutes through a malicious contract upgrade. Zoth suffers two hacks in three weeks - first for logic, now for keys. Auditing code is easy. Auditing the humans behind it? That’s where protocols bleed out.",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "Admin keys stolen, $8.4M drained in minutes through a malicious contract upgrade. Zoth suffers two hacks in three weeks - first for logic, now for keys. Auditing code is easy. Auditing the humans behind it? That’s where protocols bleed out."
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The Zoth real-world asset (RWA) restaking protocol on Ethereum suffered a compromise of its deployer wallet's private key on March 21, 2025. With full administrative access, the attacker called upgradeToAndCall on the USD0PPSubVaultUpgradeable proxy contract, replacing the legitimate implementation with a malicious one that enabled unrestricted withdrawals. The attacker used this to drain 8,851,750 USD0++ tokens (~$8.85M), immediately converting them first to DAI and then to ETH before transferring the funds offchain. On-chain evidence showed the attack was premeditated weeks in advance, with all attacker-controlled accounts funded via ChangeNOW. The incident was Zoth's second exploit within a single month, following a $285K liquidity pool vulnerability earlier in March. Attack Tx: 0x33bf669d125d11c432ac9b52b9d56161101c072fd8b0ac2aa390f5760fb50ca4 Analysis: Zoth Protocol Statement Explained: The Zoth Hack (March 2025) - Halborn"
+    },
+    {
+      "source": "SlowMist",
+      "text": "RWA restaking platform Zoth suffered a $8.29 million hack after an attacker gained access to admin privileges that allowed them to modify the platform's smart contracts. The hacker \"upgraded\" the contract to a malicious version, then withdrew $8.45 million in USD0++, a token issued by the Usual protocol. After swapping the assets into various other tokens, they were left with 4,223 ETH (~$8.29 million)."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On March 21, 2025, an attacker compromised the Zoth ZeUSD deployer admin key on Ethereum and upgraded the protocol’s proxy contract to a malicious implementation. The attacker drained 8.85 million USD0++ tokens (about $8.48 million), rapidly swapped them for DAI and then ETH, and moved proceeds to secondary wallets. No complete recovery has been publicly documented. A privileged deployer wallet's private key was compromised. This allowed an unauthorized proxy upgrade to a malicious implementation, bypassing all protocol controls and enabling full withdrawal of vault assets."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x33bf669d125d11c432ac9b52b9d56161101c072fd8b0ac2aa390f5760fb50ca4",
+    "0xb2335f7bf58abbcaa006d0a2bed7db2c64a5dabed56fb1759260adc012c49abe",
+    "0xeb87081cfb61a5ec8ebab8a4e9e4734af51cdd2317c43c6c96e58394870f2b1f",
+    "0xef528f68bf9ed5e8b3d502435d4773fb70d4d682c8a019e20b6818692ade5dc3"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Zoth - Rekt",
+      "url": "https://rekt.news/zoth-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x33bf669d125d11c432ac9b52b9d56161101c072fd8b0ac2aa390f5760fb50ca4"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/zothdotio/status/1903447852418035986"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "halborn.com",
+      "url": "https://www.halborn.com/blog/post/explained-the-zoth-hack-march-2025"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x33bf669d125d11c432ac9b52b9d56161101c072fd8b0ac2aa390f5760fb50ca4"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/1903020756830974217"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/zoth-zeusd-2025-03-01"
+    },
+    {
+      "source": "revertiq",
+      "label": "quillaudits.com",
+      "url": "https://www.quillaudits.com/blog/hack-analysis/zoth-loose-8.4m-dollar-due-to-access-control"
+    },
+    {
+      "source": "revertiq",
+      "label": "research.blockscope.co",
+      "url": "https://research.blockscope.co/zoth-vault-breach"
+    }
+  ]
+}

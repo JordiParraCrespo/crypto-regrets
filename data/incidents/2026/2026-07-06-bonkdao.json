@@ -1,0 +1,111 @@
+{
+  "id": "2026-07-06-bonkdao",
+  "name": "BonkDAO",
+  "date": "2026-07-06",
+  "year": 2026,
+  "amountUsd": 20000000,
+  "returnedUsd": null,
+  "chains": [
+    "Solana"
+  ],
+  "targetType": "Token",
+  "category": "governance",
+  "technique": "Malicious Proposal",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "governance",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "governance",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.76
+  },
+  "bridge": false,
+  "language": "Rust",
+  "rootCause": "Malicious governance proposal drained 4.426 trillion BONK tokens (~$21.3M at transfer time) from treasury. Proposal stayed live for 6 days without intervention. Stolen tokens sent to 9bxWkNf3BtJ6iehq9KbX9uCWMjem4TFiPZ19T2sYJHvQ; ~$148K moved to OKX. Attack Tx: https://v2.realms.today/dao/84pGFuy1Y27ApK67ApethaPvexeDWA66zNV8gm38TVeQ/proposal/6wR1jdhhJ31bbdRNXva8MxqsgsNLKTxargcdAyZ7FcRj Source: https://twitter.com/CertiKAlert/status/2074295582131449903",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Malicious governance proposal drained 4.426 trillion BONK tokens (~$21.3M at transfer time) from treasury. Proposal stayed live for 6 days without intervention. Stolen tokens sent to 9bxWkNf3BtJ6iehq9KbX9uCWMjem4TFiPZ19T2sYJHvQ; ~$148K moved to OKX. Attack Tx: https://v2.realms.today/dao/84pGFuy1Y27ApK67ApethaPvexeDWA66zNV8gm38TVeQ/proposal/6wR1jdhhJ31bbdRNXva8MxqsgsNLKTxargcdAyZ7FcRj Source: https://twitter.com/CertiKAlert/status/2074295582131449903"
+    },
+    {
+      "source": "SlowMist",
+      "text": "BonkDAO suffered a governance attack. The attacker spent ~$4M to buy BONK tokens for sufficient voting power and passed a malicious governance proposal (BIP-76) to transfer ~$20M BONK from the treasury to controlled wallets. No smart contract exploit; used the DAO's own voting system."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On July 6, 2026, BonkDAO's treasury on Solana was drained of roughly $21.2M worth of BONK tokens after an attacker bought ~$4.4M of BONK to pass a malicious proposal. Flawed governance rules allowed instant asset movement by vote, with no timelock or secondary sign-off. BonkDAO's governance was configured with a quorum threshold priced below the value of its treasury (1% of BONK supply), no timelock, and allowed direct treasury transfers by vote alone. The attacker could cheaply acquire enough BONK to control the vote and execute asset movement in the same transaction, bypassing any review or intervention."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "5tPU1srcRcnmibB7KJi2WQ7cK4zuq5iKTMrSCLjq7hvGjuK4KUTmaHfwicixkJa5jZJmp3y98T7r2qecKV5mWw8P"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "v2.realms.today",
+      "url": "https://v2.realms.today/dao/84pGFuy1Y27ApK67ApethaPvexeDWA66zNV8gm38TVeQ/proposal/6wR1jdhhJ31bbdRNXva8MxqsgsNLKTxargcdAyZ7FcRj"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/CertiKAlert/status/2074295582131449903"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=5tPU1srcRcnmibB7KJi2WQ7cK4zuq5iKTMrSCLjq7hvGjuK4KUTmaHfwicixkJa5jZJmp3y98T7r2qecKV5mWw8P"
+    },
+    {
+      "source": "blocksec",
+      "label": "x.com",
+      "url": "https://x.com/bonk_inu/status/2074191403781906800"
+    },
+    {
+      "source": "slowmist",
+      "label": "cryptonews.net",
+      "url": "https://cryptonews.net/news/security/33109969/"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/bonkdao-2026-07-06"
+    },
+    {
+      "source": "revertiq",
+      "label": "quillaudits.com",
+      "url": "https://www.quillaudits.com/blog/hack-analysis/bonk-dao-governance-takeover-exploit"
+    },
+    {
+      "source": "revertiq",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/markets/2026/07/07/bonk-faces-usd20-million-treasury-drain-after-attacker-spends-usd4-million-to-pass-malicious-proposal"
+    },
+    {
+      "source": "revertiq",
+      "label": "blocksec.com",
+      "url": "https://blocksec.com/blog/web3-security-summerfi-bonzo-lend-exploits"
+    }
+  ]
+}

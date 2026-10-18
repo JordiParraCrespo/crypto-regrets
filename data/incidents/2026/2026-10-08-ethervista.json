@@ -1,0 +1,62 @@
+{
+  "id": "2026-10-08-ethervista",
+  "name": "Ethervista",
+  "date": "2026-10-08",
+  "year": 2026,
+  "amountUsd": 18600,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Arithmetic Error",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.98,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.98
+      },
+      {
+        "category": "logic-error",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.01,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "EtherVista’s liquidity pool was exploited due to an integer overflow in the K-invariant check inside EtherVistaPair.swap(). Both reserves are uint112, so their product can wrap around and the check can pass even when the real reserve product drops sharply. The attacker registered a self-controlled contract as an authorized router and ran two crafted swaps to drain WETH and VISTA, with a loss of about $18,600.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "EtherVista’s liquidity pool was exploited due to an integer overflow in the K-invariant check inside EtherVistaPair.swap(). Both reserves are uint112, so their product can wrap around and the check can pass even when the real reserve product drops sharply. The attacker registered a self-controlled contract as an authorized router and ran two crafted swaps to drain WETH and VISTA, with a loss of about $18,600."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/2108427455572918626"
+    }
+  ]
+}

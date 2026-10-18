@@ -1,0 +1,60 @@
+{
+  "id": "2023-03-13-opyn",
+  "name": "Opyn",
+  "date": "2023-03-13",
+  "year": 2023,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": null,
+  "category": "unknown",
+  "technique": "Affected by Euler Finance Attack",
+  "classificationNote": null,
+  "classifiedBy": "none",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.33,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.37
+      },
+      {
+        "category": "market-manipulation",
+        "p": 0.32
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.13
+      }
+    ],
+    "flashLoan": 0.08,
+    "stateActor": 0.01,
+    "hasRootCause": 0.5
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "Opyn built the first decentralized option protocol, developed the perpetual option Opyn Squeeth, and built a variety of income strategies on Suqeeth. This time Opyn is affected by the Zen Bull strategy, which combines the Crab strategy and ETH leveraged long positions, and is suitable for low-volatility markets where ETH prices are on an upward trend. Since this strategy requires mortgage assets to buy ETH through leverage, it may be a mortgage loan in Euler, resulting in losses. Opyn has not announced the amount of the loss and how it will be dealt with.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Opyn built the first decentralized option protocol, developed the perpetual option Opyn Squeeth, and built a variety of income strategies on Suqeeth. This time Opyn is affected by the Zen Bull strategy, which combines the Crab strategy and ETH leveraged long positions, and is suitable for low-volatility markets where ETH prices are on an upward trend. Since this strategy requires mortgage assets to buy ETH through leverage, it may be a mortgage loan in Euler, resulting in losses. Opyn has not announced the amount of the loss and how it will be dealt with."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/opyn_/status/1635279477738737673"
+    }
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "id": "2026-07-21-wanchain",
+  "name": "Wanchain",
+  "date": "2026-07-21",
+  "year": 2026,
+  "amountUsd": 10000000,
+  "returnedUsd": null,
+  "chains": [
+    "Cardano"
+  ],
+  "targetType": "Chain",
+  "category": "signature-crypto",
+  "technique": "Signature Verification Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "signature-crypto",
+    "confidence": 0.93,
+    "top": [
+      {
+        "category": "signature-crypto",
+        "p": 0.93
+      },
+      {
+        "category": "bridge-crosschain",
+        "p": 0.07
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.6
+  },
+  "bridge": true,
+  "language": "Haskell",
+  "rootCause": "Wanchain’s Cardano-to-BNB Chain cross-chain bridge was exploited. The attacker drained approximately 515 million NIGHT tokens from the Cardano-side lock address. The incident may involve signature validation or replay flaws. Wanchain suspended the bridge; Midnight’s core network was unaffected. Multiple exchanges froze related funds, and NIGHT price dropped sharply before partial recovery.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Wanchain’s Cardano-to-BNB Chain cross-chain bridge was exploited. The attacker drained approximately 515 million NIGHT tokens from the Cardano-side lock address. The incident may involve signature validation or replay flaws. Wanchain suspended the bridge; Midnight’s core network was unaffected. Multiple exchanges froze related funds, and NIGHT price dropped sharply before partial recovery."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "The Wanchain Cardano bridge was exploited on July 20, 2026, due to a fundamental flaw in its Plutus validator's message encoding. Attackers replayed a legitimate BNB Chain withdrawal signature to drain approximately $10 million in NIGHT tokens. Most stolen tokens were quickly liquidated and no confirmed recovery has been published. The TreasuryCheck validator on Cardano used raw concatenation of variable-length redeemer fields without explicit delimiters or length prefixes. This allowed different input sets to produce identical byte sequences, enabling attackers to replay a signature from a legitimate withdrawal on BNB Chain and drain much larger sums on Cardano."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/wanchain_org/status/2079444149066244340"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/wanchain-2026-07-21"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptotimes.io",
+      "url": "https://www.cryptotimes.io/2026/07/21/wanchain-cardano-bridge-exploited-hackers-stole-10m-in-night-tokens/"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptotimes.io",
+      "url": "https://www.cryptotimes.io/2026/07/31/wanchain-sets-august-6-deadline-for-cardano-bridge-hacker/"
+    }
+  ]
+}

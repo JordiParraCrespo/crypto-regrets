@@ -1,0 +1,90 @@
+{
+  "id": "2026-04-12-subquery-network",
+  "name": "SubQuery Network",
+  "date": "2026-04-12",
+  "year": 2026,
+  "amountUsd": 134000,
+  "returnedUsd": null,
+  "chains": [
+    "Base"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.03,
+    "hasRootCause": 0.7
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Settings access control. Lost: 218.07M SQT",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Settings access control. Lost: 218.07M SQT"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Attackers exploited a vulnerability in SubQuery Network’s Settings contract on the Base network (the setContractAddress() function missing the onlyOwner access control modifier). By repeatedly calling this function, the attacker set their address as StakingManager and RewardsDistributor, enabling drainage of pooled SQT from the Staking contract, impacting 272 individual staker/delegator wallets, RewardsBooster, and a small protocol Treasury. Approximately 382,433,441 SQT were drained (worth about $134,000 USD at the time). The team quickly responded by deploying a fix, pausing withdrawals, and committing to full compensation for all affected users. No user private keys were compromised.…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "SubQuery Network on Base suffered an access control exploit on 12 April 2026, allowing an attacker to drain over 218 million SQT from the Staking contract by replacing two privileged protocol roles, resulting in losses of approximately $131,000. The Settings contract had externally accessible setBatchAddress and setContractAddress functions without any owner or role checks, allowing arbitrary mutation of critical protocol role addresses and enabling unauthorized withdrawal of staking funds."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xd063b3848a6b8c67f46990ab166665d454147855819acb60c083c0aea0180b2d"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-04/SubQuerySettings_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-04/SubQuerySettings_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "t.me",
+      "url": "https://t.me/defimon_alerts/2909"
+    },
+    {
+      "source": "slowmist",
+      "label": "subquery.network",
+      "url": "https://subquery.network/blog/subquery-network-security-incident-report"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/subquery-network-2026-04-12"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/DarkNavySecurity/web3-exploit-analysis/blob/main/reports/subquery-settings-access-control/report.md"
+    }
+  ]
+}

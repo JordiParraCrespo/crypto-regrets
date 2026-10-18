@@ -1,0 +1,86 @@
+{
+  "id": "2019-04-11-tronwow",
+  "name": "TronWow",
+  "date": "2019-04-11",
+  "year": 2019,
+  "amountUsd": 57148,
+  "returnedUsd": null,
+  "chains": [
+    "Tron"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Random number attack",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.46,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.49
+      },
+      {
+        "category": "signature-crypto",
+        "p": 0.37
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.1
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.36
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "The hacker launched 1,203 attacks on the TronWow, made a total of 2,167,377 TRX profits.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The hacker launched 1,203 attacks on the TronWow, made a total of 2,167,377 TRX profits."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "TronWow, a dice game DApp on Tron, was exploited on 11 April 2019 via a contract flaw in betting parameter validation. Attackers directly invoked the contract to place bets guaranteeing 100% win rates and much higher payouts than allowed, extracting 2.16 million TRX. No direct attack transactions or contract addresses are publicly available. The TronWow contract failed to enforce server-side restrictions on bet parameters. By bypassing frontend limits, attackers supplied crafted inputs to the placeBet function that ensured every bet would win with inflated payout multipliers. The contract only checked win probability, not that the bet mask values match…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "jinse.com",
+      "url": "https://www.jinse.com/lives/89296.htm"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/tronwow-2019-04-11"
+    },
+    {
+      "source": "revertiq",
+      "label": "codercto.com",
+      "url": "https://www.codercto.com/a/69588.html"
+    },
+    {
+      "source": "revertiq",
+      "label": "hacked.slowmist.io",
+      "url": "https://hacked.slowmist.io/?page=94"
+    }
+  ]
+}

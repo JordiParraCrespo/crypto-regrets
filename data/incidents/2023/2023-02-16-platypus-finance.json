@@ -1,0 +1,145 @@
+{
+  "id": "2023-02-16-platypus-finance",
+  "name": "Platypus Finance",
+  "date": "2023-02-16",
+  "year": 2023,
+  "amountUsd": 8500000,
+  "returnedUsd": 222634,
+  "chains": [
+    "Avalanche"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.07,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Business Logic Flaw. Lost: ~$8.5M",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Business Logic Flaw. Lost: ~$8.5M"
+    },
+    {
+      "source": "REKT",
+      "text": "Evolution works in mysterious ways. Platypus Finance lost $8.5M to a flash loan attack on its recently-launched stablecoin. It’s a jungle out there... and, as ever, it’s survival of the fittest."
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The emergencyWithdraw function incorrectly evaluates the insolvency before the collateral removal, resulting in an insolvent debt position after the emergency withdrawal. Vulnerable code snippet: https://snowtrace.io/address/0xc007f27b757a782c833c568f5851ae1dfe0e6ec7#code#F1#L578 Attack tx: https://snowtrace.io/tx/0x1266a937c2ccd970e5d7929021eed3ec593a95c68a99b4920c2efa226679b430 Analysis: https://twitter.com/spreekaway/status/1626319585040338953 https://twitter.com/peckshield/status/1626367531480125440 https://twitter.com/danielvf/status/1626340324103663617"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The stablecoin trading project Platypus encountered a flash loan attack on AAVE, resulting in a total asset loss of approximately $9 million. According to the analysis, the vulnerability seems to lie in the verification of the MasterPlatypusV4 contract by the emergencyWithdraw function, which will only fail when the borrowed assets exceed the borrowing limit. The function then proceeds to transfer all of the user's deposit assets regardless of the value of the user's borrowed assets. On Feb. 18, The Block reported that at least $2.4 million has been recovered with the help of security firms after the Platypus hack."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "The Platypus Finance exploit involved a flawed emergency withdrawal function that released collateral before checking for outstanding debt, allowing a flash-loan attacker to borrow stablecoins backed by nothing and exit with $8.5M in profits. The MasterPlatypusV4 contract's emergencyWithdraw function transferred collateral before enforcing a solvency check, enabling users to remove collateral while debt was still outstanding and breaking the lending protocol's fundamental invariant."
+    }
+  ],
+  "audit": "Unaudited",
+  "txHashes": [
+    "0x1266a937c2ccd970e5d7929021eed3ec593a95c68a99b4920c2efa226679b430"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-02/Platypus_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-02/Platypus_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/peckshield/status/1626367531480125440"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/spreekaway/status/1626319585040338953"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Platypus Finance - REKT",
+      "url": "https://rekt.news/platypus-finance-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "snowtrace.io",
+      "url": "https://snowtrace.io/address/0xc007f27b757a782c833c568f5851ae1dfe0e6ec7#code#F1#L578"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "snowtrace.io",
+      "url": "https://snowtrace.io/tx/0x1266a937c2ccd970e5d7929021eed3ec593a95c68a99b4920c2efa226679b430"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x1266a937c2ccd970e5d7929021eed3ec593a95c68a99b4920c2efa226679b430"
+    },
+    {
+      "source": "blocksec",
+      "label": "blocksec.com",
+      "url": "https://blocksec.com/blog/5-platypus-finance-surviving-three-attacks-with-a-stroke-of-luck"
+    },
+    {
+      "source": "blocksec",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs?tab=readme-ov-file#20230217---platypusdefi---business-logic-flaw"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Platypusdefi/status/1626396538611310592"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/platypus-2023-02-17"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "medium.com",
+      "url": "https://medium.com/@omniscia.io/platypus-finance-incident-post-mortem-7b71a0a47a5e"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractaudit.com",
+      "url": "https://www.smartcontractaudit.com/guides/platypus-finance-2023-flash-loan-exploit"
+    }
+  ]
+}

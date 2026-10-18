@@ -1,0 +1,68 @@
+{
+  "id": "2025-05-27-usual-token-contract",
+  "name": "Usual Token Contract",
+  "date": "2025-05-27",
+  "year": 2025,
+  "amountUsd": 42800,
+  "returnedUsd": null,
+  "chains": [
+    "Base"
+  ],
+  "targetType": null,
+  "category": "logic-error",
+  "technique": "Logic Error; Capped Conversion Arbitrage",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.97). Replaced keyword guess \"oracle-manipulation\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.97,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.97
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.03
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.01,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "On May 27, 2025, Usual’s USD0++ 'Sky Vault' on Base was exploited through an arbitrage of its capped unwrap mechanism, resulting in about $42,800 in loss to protocol-controlled vault funds. No user deposits were affected, and the vault was promptly paused. A capped conversion mechanism for unwrapping USD0++ to USD0 during Sky Vault deposits created a transitory price discrepancy. This pricing edge let an attacker cycle deposits and withdrawals to repeatedly extract value from the vault.",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "On May 27, 2025, Usual’s USD0++ 'Sky Vault' on Base was exploited through an arbitrage of its capped unwrap mechanism, resulting in about $42,800 in loss to protocol-controlled vault funds. No user deposits were affected, and the vault was promptly paused. A capped conversion mechanism for unwrapping USD0++ to USD0 during Sky Vault deposits created a transitory price discrepancy. This pricing edge let an attacker cycle deposits and withdrawals to repeatedly extract value from the vault."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x585d8be6a0b07ca2f94cfa1d7542f1a62b0d3af5fab7823cbcf69fb243f271f8"
+  ],
+  "poc": null,
+  "sources": [
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/usual-token-contract-2025-05-27"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/de-fi-rekt-report-may-2025-275-9-million-lost-across-8-incidents-zero-recovered"
+    },
+    {
+      "source": "revertiq",
+      "label": "usual.money",
+      "url": "https://usual.money/blog/sky-vault-arbitrage-recap"
+    }
+  ]
+}

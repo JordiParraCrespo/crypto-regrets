@@ -1,0 +1,119 @@
+{
+  "id": "2022-06-23-harmony-bridge",
+  "name": "Harmony Bridge",
+  "date": "2022-06-23",
+  "year": 2022,
+  "amountUsd": 100000000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum",
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "key-compromise",
+  "technique": "Validator Key Compromised",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "key-compromise",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "key-compromise",
+        "p": 0.99
+      },
+      {
+        "category": "bridge-crosschain",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.03,
+    "hasRootCause": 0.91
+  },
+  "bridge": true,
+  "language": "Solidity",
+  "rootCause": "Private key compromised. Lost: $100 million",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Private key compromised. Lost: $100 million"
+    },
+    {
+      "source": "REKT",
+      "text": "Harmony has hit a bum note. To the tune of $100M. Were nine figures really secured by just two signatures? And is this the final encore for Harmony Network?"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "private key compromised Attacker control *2* of 5 wallet can sign the transaction."
+    },
+    {
+      "source": "SlowMist",
+      "text": "Harmony Horizon bridge was hacked. According to the analysis of SlowMist MistTrack, the attackers made more than 100 million US dollars, including 11 ERC20 tokens, 13,100 ETH, 5,000 BNB and 640,000 BUSD. On the 26th, Harmony founder Stephen Tse said on Twitter that Horizon was attacked not because of a smart contract vulnerability, but because of a private key leak. Although Harmony stored the private keys encrypted, the attacker decrypted some of them and signed some unauthorized transactions. At present, Harmony has migrated Horizon's verification authority on the Ethereum side to 4/5 multi-signature. It is reported that this incident is suspected to…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On June 23, 2022, attackers compromised two signing keys in the Harmony Horizon Bridge's Ethereum-side multisig, draining ~$100 million in ETH and stablecoins. The attack exploited insufficient operational security and a low 2-of-5 key quorum, not a contract code flaw. Attackers gained control of two out of five multisig signer keys for the Horizon Bridge, exploiting inadequate key separation and weak signing quorum. The bridge vault contract released assets upon legitimate signatures, functioning as designed."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x27981c7289c372e601c9475e5b5466310be18ed10b59d1ac840145f6e7804c97"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-06/Harmony_multisig_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-06/Harmony_multisig_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/harmonyprotocol/status/1540110924400324608"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/0xIvo/status/1540165571681128448"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/1nf0s3cpt/status/1540139812715261952"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Harmony Bridge - REKT",
+      "url": "https://rekt.news/harmony-rekt"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/harmony-bridge-2022-06-23"
+    },
+    {
+      "source": "revertiq",
+      "label": "certik.com",
+      "url": "https://www.certik.com/blog/harmony-incident-analysis"
+    },
+    {
+      "source": "revertiq",
+      "label": "merklescience.com",
+      "url": "https://www.merklescience.com/blog/hack-track-analysis-of-harmonys-horizon-bridge-exploit"
+    }
+  ]
+}

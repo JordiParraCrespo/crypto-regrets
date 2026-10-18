@@ -1,0 +1,132 @@
+{
+  "id": "2026-06-17-aztec-bridge",
+  "name": "Aztec Bridge",
+  "date": "2026-06-17",
+  "year": 2026,
+  "amountUsd": 2000000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "bridge-crosschain",
+  "technique": "Bridge Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.38,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.42
+      },
+      {
+        "category": "logic-error",
+        "p": 0.32
+      },
+      {
+        "category": "bridge-crosschain",
+        "p": 0.26
+      }
+    ],
+    "flashLoan": 0.06,
+    "stateActor": 0.02,
+    "hasRootCause": 0.64
+  },
+  "bridge": true,
+  "language": "Solidity",
+  "rootCause": "proof_id Accounting Bypass (whitehat reproduction). Lost: N/A (purely educational; worst-case impact would have been ~$2M, matching the separate vulnerability that actually drained the contracts)",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "proof_id Accounting Bypass (whitehat reproduction). Lost: N/A (purely educational; worst-case impact would have been ~$2M, matching the separate vulnerability that actually drained the contracts)"
+    },
+    {
+      "source": "DeFiHackLabs",
+      "text": "escapeHatch Proof-Forgery (permissionless RollupProcessor exit). Lost: ~$2.2M (1158 ETH + 150,000 DAI + 0.4696 renBTC)"
+    },
+    {
+      "source": "REKT",
+      "text": "One deprecated contract, one flawed escape hatch circuit, and a verifier that should have been retired years earlier. Aztec’s legacy rollup contract lost roughly $2.198 million after a ZK proof passed a broken root-binding check."
+    },
+    {
+      "source": "SlowMist",
+      "text": "On June 17, 2026, attackers exploited Aztec’s deprecated Private Rollup Bridge (launched in 2021 and shut down in 2022). They abused an immutable escape-hatch function that lacked proper ownership checks, using manipulated or fake rollup proofs to withdraw assets without corresponding deposits. Approximately $2.16 million (1,158 ETH, 150,000 DAI, and 0.47 renBTC) was drained. Aztec Labs confirmed the affected contract is unrelated to the current Aztec Network or the AZTEC ERC-20 token and that they have no control over the immutable old contracts."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On June 17, 2026, an attacker drained about 1,158 ETH from Aztec's deprecated Private Rollup Bridge on Ethereum by abusing the legacy escapeHatch(bytes,bytes,bytes) withdrawal path. The immutable rollup deployment accepted a proof whose withdrawal outputs were not correctly bound to the ownership state the proof was supposed to authorize, allowing the attacker to redirect bridge funds to an attacker-controlled address. The legacy Aztec Private Rollup Bridge trusted escape-hatch proof data whose withdrawal outputs were not sufficiently constrained to the ownership state represented inside the proof system. Public technical analyses described a missing b…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xab306cd2184d23b6ba3e151b10b3b9a0b81f211cc16f4f3b0c79f0b17a59c2b5"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-06/AztecEscapeHatch_exp2.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-06/AztecEscapeHatch_exp2.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "github.com",
+      "url": "https://github.com/AztecProtocol/aztec-2.0"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/ivanbogatyy/status/2069159603942596830"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-06/AztecEscapeHatch_exp.sol"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Aztec Bridge - Rekt",
+      "url": "https://rekt.news/aztec-bridge-rekt"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/aztecFND/status/2067511967237939636"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/aztec-legacy-rollup-2026-06-18"
+    },
+    {
+      "source": "revertiq",
+      "label": "blocksec.com",
+      "url": "https://blocksec.com/blog/efi-security-incidents-jaredfromsubway-aztec"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/DarkNavySecurity/web3-exploit-analysis/blob/main/reports/aztec-private-rollup-bridge-escape-hatch-drain/report.md"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptotimes.io",
+      "url": "https://www.cryptotimes.io/2026/06/18/aztec-networks-rollupprocessor-exploited-for-2-21-million/"
+    }
+  ]
+}

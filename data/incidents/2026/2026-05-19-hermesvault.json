@@ -1,0 +1,86 @@
+{
+  "id": "2026-05-19-hermesvault",
+  "name": "HermesVault",
+  "date": "2026-05-19",
+  "year": 2026,
+  "amountUsd": 30000,
+  "returnedUsd": 26000,
+  "chains": [
+    "Algorand"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Withdrawal Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.92,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.92
+      },
+      {
+        "category": "signature-crypto",
+        "p": 0.05
+      },
+      {
+        "category": "access-control",
+        "p": 0.03
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "JavaScript",
+  "rootCause": "HermesVault, an Algorand-based privacy protocol using zero-knowledge proofs for private transactions, was exploited. The attacker exploited a flaw in the key reset defense logic within the withdrawal verification script. This allowed bypassing the zero-knowledge (zk) verification process and unauthorized withdrawal of funds. The protocol permanently shut down operations following the incident. Lead engineer Giulio Pizzini confirmed that the core zk circuit remained secure, but the auxiliary withdrawal script had a vulnerability. The team patched the issue, refunded a large portion of the funds, and initiated a full refund process for affected users.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "HermesVault, an Algorand-based privacy protocol using zero-knowledge proofs for private transactions, was exploited. The attacker exploited a flaw in the key reset defense logic within the withdrawal verification script. This allowed bypassing the zero-knowledge (zk) verification process and unauthorized withdrawal of funds. The protocol permanently shut down operations following the incident. Lead engineer Giulio Pizzini confirmed that the core zk circuit remained secure, but the auxiliary withdrawal script had a vulnerability. The team patched the issue, refunded a large portion of the funds, and initiated a full refund process for affected users."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "HermesVault was exploited on Algorand on May 19, 2026 due to a withdrawal verifier bug allowing bypass of zero-knowledge checks, resulting in a loss of approximately 261,000 ALGO (~$30,000). Most stolen funds were refunded and the protocol was retired after a patch to its underlying zk verifier logic. A withdrawal LogicSig verifier allowed malicious rekeying, which bypassed zero-knowledge proof checks and permitted unauthorized withdrawals. The flaw was in the script’s guard logic, not the cryptographic zk circuit."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/giuliopizzini/status/2056858969403183292?referrer=grok-com"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/hermesvault-2026-05-19"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptoadventure.com",
+      "url": "https://cryptoadventure.com/hermesvault-exploit-drains-261000-algo-as-users-receive-refunds/"
+    },
+    {
+      "source": "revertiq",
+      "label": "cecuro.ai",
+      "url": "https://cecuro.ai/hacks/hermesvault"
+    }
+  ]
+}

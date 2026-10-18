@@ -1,0 +1,87 @@
+{
+  "id": "2022-11-09-brahtopg",
+  "name": "BrahTOPG",
+  "date": "2022-11-09",
+  "year": 2022,
+  "amountUsd": 89000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "arbitrary-call",
+  "technique": "Arbitrary External Call Vulnerability",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.99).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "arbitrary-call",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "arbitrary-call",
+        "p": 0.99
+      },
+      {
+        "category": "input-validation",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Arbitrary External Call Vulnerability. Lost: $89k",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Arbitrary External Call Vulnerability. Lost: $89k"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The contract zapper does not maintain enough validations, which allows attackers to manipulate the victims’ pre-approved funds with fake tokens. Vulnerable code snippet: https://vscode.blockscan.com/ethereum/0xd248b30a3207a766d318c7a87f5cf334a439446d Attack tx: https://etherscan.io/tx/0xeaef2831d4d6bca04e4e9035613be637ae3b0034977673c1c2f10903926f29c0 Analysis: 1. The attacker queried the USDC balance of one of the users 2. Invoke zapIn with an attacker-controlled token. 3. The zapIn invocation will trigger the zap function, transferring the pre-approved USDC tokens from the victim. https://medium.com/neptune-mutual/decoding-brahma-brahtopg-smart-contract-vulnerability-7b7c364b79d8"
+    },
+    {
+      "source": "SlowMist",
+      "text": "According to the monitoring of the SlowMist security team, the brahTOPG project on the ETH chain was attacked, and the attacker made a profit of about $89,879. The main reason for this attack is that the Zapper contract strictly checks the data passed in by the user, which leads to the problem of arbitrary external calls. The attacker uses this arbitrary external call problem to steal the tokens of users who are still authorized to the contract."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xeaef2831d4d6bca04e4e9035613be637ae3b0034977673c1c2f10903926f29c0"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-11/BrahTOPG_exp.sol",
+  "sources": [
+    "defihacklabs",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-11/BrahTOPG_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/SlowMist_Team/status/1590685173477101570"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "vscode.blockscan.com",
+      "url": "https://vscode.blockscan.com/ethereum/0xd248b30a3207a766d318c7a87f5cf334a439446d"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xeaef2831d4d6bca04e4e9035613be637ae3b0034977673c1c2f10903926f29c0"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "medium.com",
+      "url": "https://medium.com/neptune-mutual/decoding-brahma-brahtopg-smart-contract-vulnerability-7b7c364b79d8"
+    }
+  ]
+}

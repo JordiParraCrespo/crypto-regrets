@@ -1,0 +1,60 @@
+{
+  "id": "2021-02-27-yeld-finance",
+  "name": "Yeld.finance",
+  "date": "2021-02-27",
+  "year": 2021,
+  "amountUsd": 160000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": null,
+  "category": "logic-error",
+  "technique": "Flash loan attack",
+  "classificationNote": "Classified by keyword rules from the SlowMist label and description.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "reentrancy",
+    "confidence": 0.32,
+    "top": [
+      {
+        "category": "reentrancy",
+        "p": 0.36
+      },
+      {
+        "category": "logic-error",
+        "p": 0.33
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.27
+      }
+    ],
+    "flashLoan": 0.94,
+    "stateActor": 0.02,
+    "hasRootCause": 0.64
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "The DAI pool of Yeld.finance, the DeFi revenue aggregator, was attacked by a lightning loan, resulting in a loss of 160,000 DAI, involving more than 10 users. Tether, TrueUSD and USDC were not affected. According to reports, Yeld’s problem is consistent with the previous Yearn.Finance DAI pool vulnerability problem. The official also stated that the affected users will be repaid with tokens, which will be rewarded with income from the DAI pool to make up for some of their losses. Later, Yeld.finance officially stated that the 160,000 DAI caused by the lightning loan attack has been returned. This event is suspected to be the work of a white hat, and th…",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The DAI pool of Yeld.finance, the DeFi revenue aggregator, was attacked by a lightning loan, resulting in a loss of 160,000 DAI, involving more than 10 users. Tether, TrueUSD and USDC were not affected. According to reports, Yeld’s problem is consistent with the previous Yearn.Finance DAI pool vulnerability problem. The official also stated that the affected users will be repaid with tokens, which will be rewarded with income from the DAI pool to make up for some of their losses. Later, Yeld.finance officially stated that the 160,000 DAI caused by the lightning loan attack has been returned. This event is suspected to be the work of a white hat, and th…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/YeldF/status/1365623299552772096"
+    }
+  ]
+}

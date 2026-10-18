@@ -1,0 +1,92 @@
+{
+  "id": "2023-07-25-eralend",
+  "name": "EraLend",
+  "date": "2023-07-25",
+  "year": 2023,
+  "amountUsd": 3400000,
+  "returnedUsd": null,
+  "chains": [
+    "zkSync Era"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "reentrancy",
+  "technique": "Read-Only Reentrancy",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.74,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.76
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.24
+      }
+    ],
+    "flashLoan": 0.62,
+    "stateActor": 0.02,
+    "hasRootCause": 0.89
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "One more added to the list. EraLend lost $3.4M to the rampant read-only reentrancy bug plaguing protocols across the cryptosphere. Comments are not effective reentrancy protection.",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "One more added to the list. EraLend lost $3.4M to the rampant read-only reentrancy bug plaguing protocols across the cryptosphere. Comments are not effective reentrancy protection."
+    },
+    {
+      "source": "SlowMist",
+      "text": "On July 25th, according to reports from several users, Eralend, the lending protocol on Zksync, was attacked by lightning loans, and it is currently unable to borrow, but it can be proposed temporarily. On July 26, EraLend released the progress of the attack. EraLend stated that the attacker manipulated the price of the oracle machine, resulting in the USDC mining pool being used for about 2.76 million US dollars. All other pools remain safe and unaffected. The attackers used multiple bridges to spread the exploited funds across multiple wallets on various chains."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "EraLend, a lending protocol on zkSync Era, was exploited on 25 July 2023 via a read-only reentrancy vulnerability connected to price derivation from SyncSwap. The attacker used flash loans to manipulate reserve readings, leading to losses estimated between $2.7M and $3.4M. Borrowing was suspended and the protocol relaunched with new controls. EraLend derived collateral prices from a SyncSwap liquidity pair, which allowed re-entrancy during a burn callback before reserves were updated. The attacker exploited this window using flash loans, causing EraLend to price collateral off manipulated reserves."
+    }
+  ],
+  "audit": "Out of scope",
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: EraLend - REKT",
+      "url": "https://rekt.news/eralend-rekt"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Era_Lend/status/1683897328938389505"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/eralend-2023-07-25"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptobriefing.com",
+      "url": "https://cryptobriefing.com/defi-hack-strikes-eralend-zksyncs/"
+    },
+    {
+      "source": "revertiq",
+      "label": "itokenly.com",
+      "url": "https://itokenly.com/hacks/eralend"
+    }
+  ]
+}

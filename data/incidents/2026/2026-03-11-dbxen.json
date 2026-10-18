@@ -1,0 +1,110 @@
+{
+  "id": "2026-03-11-dbxen",
+  "name": "DBXen",
+  "date": "2026-03-11",
+  "year": 2026,
+  "amountUsd": 150000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "input-validation",
+  "technique": "Missing Input Validation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.51,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.54
+      },
+      {
+        "category": "access-control",
+        "p": 0.28
+      },
+      {
+        "category": "input-validation",
+        "p": 0.15
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "The DBXen burn-to-earn protocol mixed _msgSender() and msg.sender inconsistently within the same transaction flow, creating an identity-confusion vulnerability under ERC-2771 meta-transactions. In burnBatch(), the gasWrapper() modifier updated burn-accounting state (accCycleBatchesBurned) using _msgSender() — correctly identifying the actual user — but the subsequent onTokenBurned() callback used msg.sender, which resolved to the forwarder contract rather than the user. This caused lastActiveCycle to be recorded against the forwarder's address instead of the user's, leaving the user's lastActiveCycle at zero. By routing transactions through a permissionless open forwarder, the attacker's address appeared to the reward distribution logic as a brand-new account with no prior activity, entitling it to accumulated fees from all 1,085 historical cycles. The attacker claimed far more than earned across both Ethereum and BSC reward pools, draining approximately $149,000. Attack Tx: 0x914a5a...8bc37 Analysis: BlockSec Phalcon Alert DBXen Exploit Analysis – Verichains DBXen Staking Hack: Attacker Exploits ERC2771 Bug – CryptoTimes",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The DBXen burn-to-earn protocol mixed _msgSender() and msg.sender inconsistently within the same transaction flow, creating an identity-confusion vulnerability under ERC-2771 meta-transactions. In burnBatch(), the gasWrapper() modifier updated burn-accounting state (accCycleBatchesBurned) using _msgSender() — correctly identifying the actual user — but the subsequent onTokenBurned() callback used msg.sender, which resolved to the forwarder contract rather than the user. This caused lastActiveCycle to be recorded against the forwarder's address instead of the user's, leaving the user's lastActiveCycle at zero. By routing transactions through a permissionless open forwarder, the attacker's address appeared to the reward distribution logic as a brand-new account with no prior activity, entitling it to accumulated fees from all 1,085 historical cycles. The attacker claimed far more than earned across both Ethereum and BSC reward pools, draining approximately $149,000. Attack Tx: 0x914a5a...8bc37 Analysis: BlockSec Phalcon Alert DBXen Exploit Analysis – Verichains DBXen Staking Hack: Attacker Exploits ERC2771 Bug – CryptoTimes"
+    },
+    {
+      "source": "SlowMist",
+      "text": "According to monitoring by BlockSec Phalcon, the DBXen contract was attacked this morning, with estimated losses of approximately $150,000.The root cause lies in a sender identity inconsistency within the ERC-2771 meta-transaction mechanism."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "DBXen suffered a cross-chain exploit on Ethereum and BNB Chain in March 2026, with attackers abusing ERC-2771 meta-transaction integration flaws to drain ~$150,000 in ETH and DXN rewards. The vulnerability stemmed from inconsistent sender handling, allowing the attacker to repeatedly claim rewards from fee pools across cycles. The DBXen contracts inconsistently used _msgSender() and msg.sender for user identity in reward and fee accounting during ERC-2771 meta-transactions. This mismatch allowed attackers to desynchronize burn and cycle records, enabling repeated reward claims."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x914a5af790e55b8ea140a79da931fc037cb4c4457704d184ad21f54fb808bc37",
+    "0xe66e54586827d6a9e1c75bd1ea42fa60891ad341909d29ec896253ee2365d366"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x914a5af790e55b8ea140a79da931fc037cb4c4457704d184ad21f54fb808bc37"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/Phalcon_xyz/status/2031955394025996688"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "blog.verichains.io",
+      "url": "https://blog.verichains.io/p/dbxen-exploit-analysis"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x914a5af790e55b8ea140a79da931fc037cb4c4457704d184ad21f54fb808bc37"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/dbxen-2026-03-11"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/kismp123/DeFi-Security-Incident/blob/main/2026/2026-03-11_DBXen_BusinessLogic_ETH.md"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptotimes.io",
+      "url": "https://cryptotimes.io/2026/03/12/dbxen-staking-hack-attacker-exploits-erc2771-bug-to-drain-150k/"
+    }
+  ]
+}

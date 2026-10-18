@@ -1,0 +1,109 @@
+{
+  "id": "2018-04-22-beautychain",
+  "name": "BeautyChain",
+  "date": "2018-04-22",
+  "year": 2018,
+  "amountUsd": 900000000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "Token",
+  "category": "accounting-math",
+  "technique": "Infinite Mint",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.79
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Integer Overflow. Lost: $900 million",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Integer Overflow. Lost: $900 million"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Arithmetic Overflow Vulnerable code snippet: https://etherscan.io/address/0xc5d105e63711398af9bbff092d4b6769c82f793d#code#L259"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Hacker exploited the data overflow to attack the smart contract of BeautyChain, successfully transferred the BEC token to the two addresses resulted in the massive BEC being sold in the market, and the value of the digital currency was almost zero, which brought a crushing blow to BEC market."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "A critical integer overflow bug in BeautyChain’s BEC token contract on Ethereum allowed attackers to mint an arbitrary number of tokens on 22 April 2018 using batchTransfer, causing catastrophic supply inflation and trading suspensions. No fully verified recovery or precise loss figure is available. The BEC token’s batchTransfer function multiplied the number of recipients by the sent value without proper overflow protection, allowing attackers to overflow the internal computation and bypass balance checks, minting tokens far beyond their real holdings."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xad89ff16fd1ebe3a0a7cf4ed282302c06626c1af33221ebe0d3a470aba4a660f"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2018-04/BEC_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2018-04/BEC_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xad89ff16fd1ebe3a0a7cf4ed282302c06626c1af33221ebe0d3a470aba4a660f"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/address/0xc5d105e63711398af9bbff092d4b6769c82f793d#code"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/address/0xc5d105e63711398af9bbff092d4b6769c82f793d#code#L259"
+    },
+    {
+      "source": "slowmist",
+      "label": "blog.csdn.net",
+      "url": "https://blog.csdn.net/ffzhihua/article/details/81137233"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/beautychain-2018-04-22"
+    },
+    {
+      "source": "revertiq",
+      "label": "lancershield.github.io",
+      "url": "https://lancershield.github.io/docs/hacks-db/high/BeautyChain.html"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/beautychain-hack-2018"
+    }
+  ]
+}

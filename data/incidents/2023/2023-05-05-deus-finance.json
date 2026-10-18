@@ -1,0 +1,90 @@
+{
+  "id": "2023-05-05-deus-finance",
+  "name": "DEUS Finance",
+  "date": "2023-05-05",
+  "year": 2023,
+  "amountUsd": 6500000,
+  "returnedUsd": null,
+  "chains": [
+    "Arbitrum",
+    "BSC",
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Arithmetic Error",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.54,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.5700000000000001
+      },
+      {
+        "category": "access-control",
+        "p": 0.31
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.12
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.01,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "It’s a hat trick for Deus DAO.  Token holders lost a total of ~$6.5M and DEI depegged by over 80%. How many times can a thrice-hacked protocol be trusted?",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "It’s a hat trick for Deus DAO.  Token holders lost a total of ~$6.5M and DEI depegged by over 80%. How many times can a thrice-hacked protocol be trusted?"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "DEUS Finance's DEI burnFrom bug on Arbitrum let an attacker contract reverse allowance checks, pull 4.6028M DEI from the DEI/USDC pool, and receive 5.047M USDC in one transaction. DEUS and DefiLlama place the broader 5 May 2023 incident across Arbitrum, BNB Chain, and Ethereum at about $6.5M. DEI's custom burnFrom implementation read allowances with owner and spender reversed. Because the attacker contract had already approved the pair, burnFrom(pair, 0) caused DEI to emit Approval(pair, attacker contract, MAX), which gave the attacker contract transferFrom rights over the pair's DEI."
+    }
+  ],
+  "audit": "Unaudited",
+  "txHashes": [
+    "0xb1141785b7b94eb37c39c37f0272744c6e79ca1517529fec3f4af59d4c3c37ef"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Deus DAO - R3KT",
+      "url": "https://rekt.news/deus-dao-r3kt"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/deus-finance-2023-05-05"
+    },
+    {
+      "source": "revertiq",
+      "label": "docs.deus.finance",
+      "url": "https://docs.deus.finance/contracts/reimbursement-guide/dei-depeg/incident-analytic-summary"
+    },
+    {
+      "source": "revertiq",
+      "label": "docs.deus.finance",
+      "url": "https://docs.deus.finance/contracts/reimbursement-guide/reimbursement-process"
+    }
+  ]
+}

@@ -1,0 +1,166 @@
+{
+  "id": "2023-02-01-bonqdao",
+  "name": "BonqDAO",
+  "date": "2023-02-01",
+  "year": 2023,
+  "amountUsd": 1800000,
+  "returnedUsd": null,
+  "chains": [
+    "Polygon"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Oracle Misconfiguration",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.11,
+    "stateActor": 0.02,
+    "hasRootCause": 0.94
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Price Oracle Manipulation. Lost: BEUR stablecoin and ALBT Token (~88M US$)",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Price Oracle Manipulation. Lost: BEUR stablecoin and ALBT Token (~88M US$)"
+    },
+    {
+      "source": "REKT",
+      "text": "BonqDAO got bonked for $120M, but the anonymous attacker got away with less than $2M. The hacker was able to manually update the price feed of collateral by staking just $175 worth of TRB tokens."
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Price Oracle manipulation due to incorrect integration of the Tellor Oracle. Vulnerable code snippet: https://polygonscan.com/address/0x8f55d884cad66b79e1a131f6bcb0e66f4fd84d5b#code#F2#L282 Attack tx: 1st Txn: 0x31957ecc43774d19f54d9968e95c69c882468b46860f921668f2c55fadd51b19 2nd Txn: 0xa02d0c3d16d6ee0e0b6a42c3cc91997c2b40c87d777136dedebe8ee0f47f32b1 Analysis: https://quillaudits.medium.com/decoding-bonq-daos-120-million-exploit-quillaudits-bd8e50eec4ac https://twitter.com/BlockSecTeam/status/1621043757390123008"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Non-custodial lending platform BonqDAO and crypto infrastructure platform AllianceBlock were hacked due to a bug in BonqDAO's smart contracts, resulting in losses of approximately $120 million. Among them, hackers removed approximately 114 million WALBT ($11 million), AllianceBlock’s wrapped native token, and 98 million BEUR tokens ($108 million) from a BonqDAO vault. According to the analysis of SlowMist, the root cause of the attack is that the attacker uses the oracle machine to quote the required collateral, which is much lower than the profit obtained by the attack, thereby manipulating the market and liquidating other users by maliciously submitting wrong prices.…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On February 1, 2023, BonqDAO on Polygon lost approximately $120 million after an attacker manipulated the Tellor oracle price for ALBT, allowing them to mint excessive BEUR stablecoin against fake collateral and trigger mass liquidations. BonqDAO integrated the Tellor oracle as its ALBT collateral price feed but consumed the latest reported spot price without external verification, TWAP smoothing, or minting caps. The permissionless Tellor reporter model allowed a staker to report an artificial price, which was immediately accepted by BonqDAO, enabling excessive stablecoin minting and subsequent forced liquidations."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "BonqDAO was exploited on Polygon Mainnet on 1 February 2023 after an attacker manipulated the Tellor oracle for wALBT collateral. The protocol used the most recent price submitted to Tellor, enabling the attacker to inflate and then deflate wALBT’s price. This allowed borrowing massive amounts of BEUR against negligible collateral, forcibly liquidating other users’ troves, and seizing their wALBT. Loss estimates are nominally over $120 million, but actual liquidated amounts were much lower due to market illiquidity. BonqDAO integrated the Tellor oracle as a price feed for wALBT but consumed the latest reported price immediately via getCurrentValue with no time delay or dispute window.…"
+    }
+  ],
+  "audit": "Out of scope",
+  "txHashes": [
+    "0x31957ecc43774d19f54d9968e95c69c882468b46860f921668f2c55fadd51b19",
+    "0xa02d0c3d16d6ee0e0b6a42c3cc91997c2b40c87d777136dedebe8ee0f47f32b1",
+    "0xd276b1ddff1bea52a8839c37976f4accb4751ca3f70092e66f88e53090452898"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-02/BonqDAO_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-02/BonqDAO_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BlockSecTeam/status/1621043757390123008"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/SlowMist_Team/status/1621087651158966274"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: BonqDAO - REKT",
+      "url": "https://rekt.news/bonq-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "polygonscan.com",
+      "url": "https://polygonscan.com/address/0x8f55d884cad66b79e1a131f6bcb0e66f4fd84d5b#code#F2#L282"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "polygonscan.com",
+      "url": "https://polygonscan.com/tx/0x31957ecc43774d19f54d9968e95c69c882468b46860f921668f2c55fadd51b19"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "polygonscan.com",
+      "url": "https://polygonscan.com/tx/0xa02d0c3d16d6ee0e0b6a42c3cc91997c2b40c87d777136dedebe8ee0f47f32b1"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xa02d0c3d16d6ee0e0b6a42c3cc91997c2b40c87d777136dedebe8ee0f47f32b1"
+    },
+    {
+      "source": "blocksec",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs?tab=readme-ov-file#20230202---bonqdao---price-oracle-manipulation"
+    },
+    {
+      "source": "slowmist",
+      "label": "theblock.co",
+      "url": "https://www.theblock.co/post/207799/bonqdao-exploited-for-88-million-allianceblock-tokens-stolen-during-the-exploit"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/bonqdao-2023-01-12"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "halborn.com",
+      "url": "https://www.halborn.com/blog/post/explained-the-bonqdao-hack-february-2023"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/de-fi-rekt-report-crypto-losses-reach-1-95b-in-2023"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/bonqdao-2023-02-01"
+    },
+    {
+      "source": "revertiq",
+      "label": "medium.com",
+      "url": "https://medium.com/@omniscia.io/bonq-protocol-incident-post-mortem-4fd79fe5c932"
+    },
+    {
+      "source": "revertiq",
+      "label": "immunefi.com",
+      "url": "https://immunefi.com/blog/bug-fix-reviews/hack-analysis-bonqdao-february-2023/"
+    }
+  ]
+}

@@ -1,0 +1,102 @@
+{
+  "id": "2022-12-05-bbox",
+  "name": "BBOX",
+  "date": "2022-12-05",
+  "year": 2022,
+  "amountUsd": 12000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "Token",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.34,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.38
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.37
+      },
+      {
+        "category": "logic-error",
+        "p": 0.24
+      }
+    ],
+    "flashLoan": 0.94,
+    "stateActor": 0.02,
+    "hasRootCause": 0.89
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "FlashLoan price manipulation. Lost: 12k",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "FlashLoan price manipulation. Lost: 12k"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "FlashLoan price manipulation - _transfer() will burn the BBOX token incorrectly. Vulnerable code snippet: https://bscscan.com/address/0x5dfc7f3ebbb9cbfe89bc3fb70f750ee229a59f8c#code#L728 Attack tx: https://explorer.phalcon.xyz/tx/bsc/0xac57c78881a7c00dfbac0563e21b5ae3a8e3f9d1b07198a27313722a166cc0a3 Analysis: https://twitter.com/AnciliaInc/status/1599599614490877952"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "BBOX was exploited on BNB Chain on 5 December 2022 through spot price manipulation. The attacker distorted AMM prices via a flash loan to profit from token swaps. No official loss figure was published, and the incident relied on easily manipulated spot prices without protective checks. BBOX trusted manipulable spot prices from AMM pools for settlement logic. This allowed attackers to use flash loans and large swaps within a single transaction to distort token price and extract value. There were no resistance measures such as time-weighted oracles or deviation bounds."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xac57c78881a7c00dfbac0563e21b5ae3a8e3f9d1b07198a27313722a166cc0a3"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-12/BBOX_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-12/BBOX_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/AnciliaInc/status/1599599614490877952"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0x5dfc7f3ebbb9cbfe89bc3fb70f750ee229a59f8c#code#L728"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "explorer.phalcon.xyz",
+      "url": "https://explorer.phalcon.xyz/tx/bsc/0xac57c78881a7c00dfbac0563e21b5ae3a8e3f9d1b07198a27313722a166cc0a3"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/bbox-2022-12-05"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/bbox-hack-2022"
+    }
+  ]
+}

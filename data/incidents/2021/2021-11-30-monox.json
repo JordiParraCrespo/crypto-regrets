@@ -1,0 +1,144 @@
+{
+  "id": "2021-11-30-monox",
+  "name": "MonoX",
+  "date": "2021-11-30",
+  "year": 2021,
+  "amountUsd": 31400000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum",
+    "Polygon"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Swap Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "input-validation",
+    "confidence": 0.8,
+    "top": [
+      {
+        "category": "input-validation",
+        "p": 0.81
+      },
+      {
+        "category": "logic-error",
+        "p": 0.17
+      },
+      {
+        "category": "access-control",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.06,
+    "stateActor": 0.02,
+    "hasRootCause": 0.94
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Price Manipulation. Lost: $31 million",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Price Manipulation. Lost: $31 million"
+    },
+    {
+      "source": "REKT",
+      "text": "rekt by their own token. Mono X lost $31M via a price manipulation of their recently launched $MONO. How did two audits not prevent this?"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Insufficient validation Vulnerable code snippet: https://etherscan.io/address/0x66e7d7839333f502df355f5bd87aea24bac2ee63#code#F1#L471 (1)Due to to is controllable, attacker can remove anyone’s liquidity. (2) https://etherscan.io/address/0x66e7d7839333f502df355f5bd87aea24bac2ee63#code#F1#L824 Attack can input tokenIn and tokenOut with same token because of without any validation. so attacker can perform multiple swap to manipulate the token price."
+    },
+    {
+      "source": "SlowMist",
+      "text": "The automatic market maker protocol MonoX was hacked. In this attack, approximately US$18.2 million worth of WETH and 10.5 million US dollars of MATIC were stolen. Other stolen tokens included WBTC, LINK, GHST, DUCK, MIM and IMX. The total loss was approximately 31 million U.S. dollars."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "MonoX Finance lost approximately $31M on November 30, 2021, across Ethereum and Polygon due to a swap logic flaw. The protocol's single-sided liquidity pool design allowed the attacker to swap the MONO token for itself, inflating its price virtually and enabling the extraction of pool assets at manipulated rates. MonoX's swap function did not enforce token identity separation: it permitted swaps where the same token was set as both input and output. This allowed sequential 'self-swaps' of MONO, each artificially increasing its internal price due to non-cancelling accounting updates, ultimately enabling the attacker to drain real assets against the hyperinflated price."
+    }
+  ],
+  "audit": "Halborn, Peckshield",
+  "txHashes": [
+    "0x5a03b9c03eedcb9ec6e70c6841eaa4976a732d050a6218969e39483bb3004d5d",
+    "0x9f14d093a2349de08f02fc0fb018dadb449351d0cdb7d0738ff69cc6fef5f299"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2021-11/Mono_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2021-11/Mono_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "slowmist.medium.com",
+      "url": "https://slowmist.medium.com/detailed-analysis-of-the-31-million-monox-protocol-hack-574d8c44a9c8"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "knownseclab.com",
+      "url": "https://knownseclab.com/news/61a986811992da0067558749"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "www.tuoniaox.com",
+      "url": "https://www.tuoniaox.com/news/p-521076.html"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: MonoX - REKT",
+      "url": "https://rekt.news/monox-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/address/0x66e7d7839333f502df355f5bd87aea24bac2ee63#code#F1#L471"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/address/0x66e7d7839333f502df355f5bd87aea24bac2ee63#code#F1#L824"
+    },
+    {
+      "source": "slowmist",
+      "label": "medium.com",
+      "url": "https://medium.com/monoswap/exploit-post-mortem-33921a779b43"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/monox-2021-11-30"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "itokenly.com",
+      "url": "https://itokenly.com/hacks/monox-finance"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractaudit.com",
+      "url": "https://www.smartcontractaudit.com/guides/monox-finance-2021-single-sided-amm-exploit"
+    }
+  ]
+}

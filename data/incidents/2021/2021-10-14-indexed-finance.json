@@ -1,0 +1,134 @@
+{
+  "id": "2021-10-14-indexed-finance",
+  "name": "Indexed Finance",
+  "date": "2021-10-14",
+  "year": 2021,
+  "amountUsd": 16000000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.98,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.98
+      },
+      {
+        "category": "market-manipulation",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.06,
+    "stateActor": 0.02,
+    "hasRootCause": 0.2
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Price Manipulation. Lost: $16M",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Price Manipulation. Lost: $16M"
+    },
+    {
+      "source": "REKT",
+      "text": "$16 million taken from Indexed Finance. That’s one more protocol added to the rekt register, and $16 million more on our leaderboard. Is anonymity the only way to stay safe?"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Indexed Finance, a passive income agreement, was attacked, and the affected fund pools included DEFI5 and CC10. After the vulnerability was discovered, it triggered protection measures including DEGEN, NFTP, and FFF (including DEFI5 and CC10) fund pools, and was frozen. About half an hour ago, Indexed Finance officially stated that the root cause of the attack has been determined. The two index token fund pools, DEGEN and NFTP, have resumed normal operation, while the FFF pool is still in a frozen state. Officials stated in Discord that the damage caused by this attack was about 16 million U.S. dollars."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Indexed Finance suffered a $16 million loss on October 14, 2021, after its index pool rebalancing and valuation logic was exploited. The attacker manipulated internal pool balances using flash loans, allowing them to mint undervalued index tokens and redeem outsized amounts of valuable assets. The pool's value estimation used a single token's manipulated balance as an anchor, enabling flash loan attacks that mispriced pool tokens and allowed extraction of unearned assets. The contract did not enforce manipulation-resistant pricing, oracle anchoring, or slippage limits during re-index events."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Indexed Finance was exploited on Ethereum on 14 October 2021 due to a flaw in pool valuation logic. The attacker used flash loans to massively distort pool prices, minted inflated index tokens, and burned them to drain approximately $16 million in assets from index pools. The core flaw was in the way pools calculated the value of their assets. The contracts allowed an attacker to manipulate the oracle-based internal price using flash loans, resulting in a severe under-valuation and enabling cheap minting of index pool tokens."
+    }
+  ],
+  "audit": "Unaudited",
+  "txHashes": [
+    "0x44aad3b853866468161735496a5d9cc961ce5aa872924c5d78673076b1cd95aa",
+    "0xbde4521c5ac08d0033019993b0e7e1d29b1457e80e7743d318a3c27649ca4417"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2021-10/IndexedFinance_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2021-10/IndexedFinance_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "blocksecteam.medium.com",
+      "url": "https://blocksecteam.medium.com/the-analysis-of-indexed-finance-security-incident-8a62b9799836"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Indexed Finance - REKT",
+      "url": "https://rekt.news/indexed-finance-rekt"
+    },
+    {
+      "source": "slowmist",
+      "label": "ndxfi.medium.com",
+      "url": "https://ndxfi.medium.com/indexed-attack-post-mortem-b006094f0bdc"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/indexed-finance-2021-10-15"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "blockchainbreaches.com",
+      "url": "https://www.blockchainbreaches.com/en/breaches/indexed-finance-2021"
+    },
+    {
+      "source": "revertiq",
+      "label": "research.blockscope.co",
+      "url": "https://research.blockscope.co/andean-medjovic-case-and-investigation/the-indexed-finance-hack"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/indexed-finance-2023-03-21"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptobriefing.com",
+      "url": "https://cryptobriefing.com/defi-protocol-indexed-finance-suffers-16m-exploit/"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptobriefing.com",
+      "url": "https://cryptobriefing.com/inside-the-war-room-how-indexed-finance-traced-its-16m-hacker/"
+    }
+  ]
+}

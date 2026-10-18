@@ -1,0 +1,86 @@
+{
+  "id": "2025-03-14-h2o",
+  "name": "H2O",
+  "date": "2025-03-14",
+  "year": 2025,
+  "amountUsd": 22470,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Weak Random Mint",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.89).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.89,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.9
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.09
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Weak Random Mint. Lost: 22470 USD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Weak Random Mint. Lost: 22470 USD"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The exploit stemmed from a flawed logic within the transfer() function that triggered the minting of H2 and O2 tokens when H2O tokens were transferred from the PancakeSwap pair. This minting process, controlled by the _calulate function, was intended to reward users based on their H2O balance. However, the vulnerability arose from the fact that transferring H2O to the pair and subsequently calling the skim() function on the pair triggered the _calulate function again, this time with the pair as the from address and the attacker as the to address. This allowed the attacker to repeatedly mint H2 and O2 tokens. Furthermore, the \"randomness\" in the minting amount, determined by getRandomOnchain using predictable variables (block.timestamp, msg.sender, block.number), could potentially be influenced or predicted, although the attacker in this case resorted to repeatedly running the attack. The core issue was the unintended consequence of the transfer() logic interacting with the skim() function of the PancakeSwap pair, allowing for the uncontrolled minting of the underlying H2 and O2 tokens, which could then be used to drain value (in this case, indirectly leading to USDT loss). Vulnerable code snippet: Attack tx: https://bscscan.com/tx/0x994abe7906a4a955c103071221e5eaa734a30dccdcdaac63496ece2b698a0fc3 Analysis: https://blog.verichains.io/p/unsafe-transfers-leading-to-an-attack"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x994abe7906a4a955c103071221e5eaa734a30dccdcdaac63496ece2b698a0fc3"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-03/H2O_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-03/H2O_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/TenArmorAlert/status/1900525198157205692"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "github1s.com",
+      "url": "https://github1s.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-03/H2O_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x994abe7906a4a955c103071221e5eaa734a30dccdcdaac63496ece2b698a0fc3"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "blog.verichains.io",
+      "url": "https://blog.verichains.io/p/unsafe-transfers-leading-to-an-attack"
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "id": "2019-06-06-gatehub",
+  "name": "GateHub",
+  "date": "2019-06-06",
+  "year": 2019,
+  "amountUsd": 9500000,
+  "returnedUsd": null,
+  "chains": [
+    "Ripple"
+  ],
+  "targetType": "CEX",
+  "category": "key-compromise",
+  "technique": "Private Key Compromised",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "key-compromise",
+    "confidence": 0.37,
+    "top": [
+      {
+        "category": "key-compromise",
+        "p": 0.41000000000000003
+      },
+      {
+        "category": "access-control",
+        "p": 0.36
+      },
+      {
+        "category": "frontend-infra",
+        "p": 0.23
+      }
+    ],
+    "flashLoan": 0.01,
+    "stateActor": 0.02,
+    "hasRootCause": 0.8
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "The attacker controls some of the GateHub database account API permissions, but the user's private key is secure. GateHub officials have identified 103 wallets that were compromised and a total of 18,473 accounts that may have been affected, including 5,045 with active balances.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The attacker controls some of the GateHub database account API permissions, but the user's private key is secure. GateHub officials have identified 103 wallets that were compromised and a total of 18,473 accounts that may have been affected, including 5,045 with active balances."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "GateHub’s XRP wallet infrastructure was compromised in June 2019, resulting in losses of approximately 23.2 million XRP (about $9.5 million USD at the time) from more than 100 affected wallets. The breach was enabled by the attacker gaining access to valid wallet encryption tokens and exploiting GateHub’s API to access and drain user funds. Attackers gained access to valid API tokens and exploited GateHub’s internal storage, enabling them to decrypt and access user XRP wallet private keys. This allowed them to initiate unauthorized transfers and drain funds from user accounts."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "jinse.com",
+      "url": "https://www.jinse.com/lives/100522.htm"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/gatehub-2019-06-06"
+    },
+    {
+      "source": "revertiq",
+      "label": "gatehub.net",
+      "url": "https://gatehub.net/blog/gatehub-update-investigation-continues/"
+    },
+    {
+      "source": "revertiq",
+      "label": "gatehub.net",
+      "url": "https://gatehub.net/blog/gatehub-investigation-final-statement/"
+    }
+  ]
+}

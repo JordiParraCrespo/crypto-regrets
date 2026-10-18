@@ -1,0 +1,89 @@
+{
+  "id": "2022-02-23-flurry-finance",
+  "name": "Flurry Finance",
+  "date": "2022-02-23",
+  "year": 2022,
+  "amountUsd": 293000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Incorrect Share Accounting",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.92,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.92
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.05
+      },
+      {
+        "category": "logic-error",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.95,
+    "stateActor": 0.02,
+    "hasRootCause": 0.51
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Flurry Finance’s Vault contract was hit by a flash loan attack, resulting in the theft of approximately $293,000 worth of assets in the Vault contract.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Flurry Finance’s Vault contract was hit by a flash loan attack, resulting in the theft of approximately $293,000 worth of assets in the Vault contract."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Flurry Finance was exploited on BNB Chain in February 2022 after a flash loan manipulated the rebase multiplier for its rhoTokens, allowing the attacker to withdraw inflated token balances and steal approximately $293,000. The incident arose from incorrect share accounting tied to external contract dependencies within the protocol’s vault and rebasing workflow. The Flurry Vault's share accounting relied on multipliers that could be manipulated by external contract state during a flash loan, allowing the attacker to artificially lower and then raise the rebase multiplier, inflating withdrawable balances."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x923ea05dbe63217e5d680b90a4e72d5552ade9e4c3889694888a2c0c1174d830",
+    "0x646890dd8569f6a5728e637e0a5704b9ce8b5251e0c486df3c8d52005bec52df"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/CertiKCommunity/status/1496263106485444608"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/flurry-finance-2022-02-23"
+    },
+    {
+      "source": "revertiq",
+      "label": "csidb.net",
+      "url": "https://www.csidb.net/csidb/incidents/8a413bee-cb25-4a9f-9023-f9ddbe3fc9ee/"
+    },
+    {
+      "source": "revertiq",
+      "label": "theblockbeats.info",
+      "url": "https://www.theblockbeats.info/news/29401"
+    }
+  ]
+}

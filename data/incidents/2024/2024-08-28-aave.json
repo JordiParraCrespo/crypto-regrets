@@ -1,0 +1,113 @@
+{
+  "id": "2024-08-28-aave",
+  "name": "Aave",
+  "date": "2024-08-28",
+  "year": 2024,
+  "amountUsd": 56000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "arbitrary-call",
+  "technique": "Arbitrary External Call",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "arbitrary-call",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "arbitrary-call",
+        "p": 0.99
+      },
+      {
+        "category": "logic-error",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.09,
+    "stateActor": 0.02,
+    "hasRootCause": 0.94
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Arbitrary Call Error. Lost: 52000",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Arbitrary Call Error. Lost: 52000"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The root cause of the vulnerability in the *_buyOnParaSwap* function is that it leaves a high token allowance unadjusted if the swap fails, processes unvalidated/ unsanitized *paraswapData*, and lacks proper swap outcome verification, allowing attackers to exploit and withdraw unauthorized tokens. Vulnerable code snippet: Attack tx: https://etherscan.io/tx/0xc27c3ec61c61309c9af35af062a834e0d6914f9352113617400577c0f2b0e9de Analysis: https://blog.solidityscan.com/aave-repay-adapter-hack-analysis-aafd234e15b9"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The DeFi lending platform Aave was attacked due to a contract vulnerability. The attack occurred in a smart contract outside of Aave's core protocol, which is used to allow users to repay loans using existing collateral. The attacker exploited an arbitrary call error, successfully stealing around $56,000 from these various contracts. Aave representatives emphasized that the attack posed no risk to user funds and did not affect the security of the core Aave protocol."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On August 28, 2024, an attacker exploited a vulnerability in Aave's ParaSwap Repay Adapter periphery contract, stealing roughly $56,000 in DAO-owned tokens on Ethereum. The attacker crafted malicious swap data to extract leftover balances by leveraging arbitrary external call capability in the adapter. Core protocol and user funds were not at risk. The core cause was the adapter contract's unsanitized paraswapData input, allowing arbitrary external calls to the ParaSwap Augustus contract with unchecked token allowances, enabling funds in the adapter to be drained via malicious swap actions."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xc27c3ec61c61309c9af35af062a834e0d6914f9352113617400577c0f2b0e9de"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-08/AAVE_Repay_Adapter.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-08/AAVE_Repay_Adapter.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "www.vibraniumaudits.com",
+      "url": "https://www.vibraniumaudits.com/post/aave-hacked-via-periphery-contract-56kstolenfromtipjar"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xc27c3ec61c61309c9af35af062a834e0d6914f9352113617400577c0f2b0e9de"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "blog.solidityscan.com",
+      "url": "https://blog.solidityscan.com/aave-repay-adapter-hack-analysis-aafd234e15b9"
+    },
+    {
+      "source": "slowmist",
+      "label": "web3isgoinggreat.com",
+      "url": "https://www.web3isgoinggreat.com/?id=peripheral-aave-smart-contract-hackhttps://www.web3isgoinggreat.com/?id=peripheral-aave-smart-contract-hack"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/aave-2024-08-28"
+    },
+    {
+      "source": "revertiq",
+      "label": "governance.aave.com",
+      "url": "https://governance.aave.com/t/periphery-contracts-incident-august-28-2024/18821"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.solidityscan.com",
+      "url": "https://blog.solidityscan.com/aave-repay-adapter-hack-analysis-aafd234e15b9/"
+    }
+  ]
+}

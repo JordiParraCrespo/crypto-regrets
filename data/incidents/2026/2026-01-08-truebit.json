@@ -1,0 +1,128 @@
+{
+  "id": "2026-01-08-truebit",
+  "name": "Truebit",
+  "date": "2026-01-08",
+  "year": 2026,
+  "amountUsd": 26400000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Arithmetic Error",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.89,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.9
+      },
+      {
+        "category": "logic-error",
+        "p": 0.07
+      },
+      {
+        "category": "input-validation",
+        "p": 0.03
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "OverFlow. Lost: 8540ETH",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "OverFlow. Lost: 8540ETH"
+    },
+    {
+      "source": "REKT",
+      "text": "First major hack of 2026, as TrueBit was drained for $26.2 million through an overflow in unverified bytecode. The same attacker hit Sparkle weeks prior. Old code keeps bleeding - the archives have clearly become a shopping list."
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The Truebit bonding-curve pool prices TRU purchases via getPurchasePrice(), computed roughly as (200*amount*reserve*T + 100*amount^2*reserve) / (100*T^2 - parameter*T^2). The attacker chose a buy amount (solving the curve so (amount+T)^2 exceeds the safe range) that drove the numerator/denominator math past the boundary where the purchase price effectively underflows toward zero (or wraps), letting them mint a huge quantity of TRU for a negligible amount of ETH. They then immediately sellTRU() back into the pool at the legitimate sell price, extracting ETH. Looping this buy-cheap / sell-rich cycle drained the pool of ~8540 ETH. The core defect is that the pricing formula was not bounded/validated against extreme amount and totalSupply values, so an attacker-selected input produces an arithmetically valid but economically nonsensical (near-zero) purchase price. Vulnerable code snippet: Attack Tx: https://etherscan.io/tx/0xcd4755645595094a8ab984d0db7e3b4aabde72a5c87c4f176a030629c47fb014 Analysis: https://www.certik.com/zh-CN/resources/blog/truebit-incident-analysis"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The blockchain verification protocol Truebit was suspected to have been hacked, losing 8,535 ETH, valued at approximately $26.44 million."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On January 8, 2026, Truebit Protocol's Purchase contract was exploited through an unchecked integer overflow in its token pricing logic. Attackers supplied extremely large values to manipulate the calculation, minting massive TRU tokens for negligible ETH and immediately draining ~8,535 ETH (~$26.4M) from the contract. The protocol was running unaudited, legacy Solidity code without overflow protection, and no funds were recovered. The Purchase contract's getPurchasePrice() function calculated ETH prices for TRU tokens using arithmetic operations on user-supplied and contract state values. Compiled with Solidity 0.6.10 (pre-0.8.x, no built-in overflow…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xcd4755645595094a8ab984d0db7e3b4aabde72a5c87c4f176a030629c47fb014",
+    "0x71496352b02f974a3898c1b743e9fc2befb935e6c2a3e421134ec09b63052f4b"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-01/Truebit_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-01/Truebit_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "www.certik.com",
+      "url": "https://www.certik.com/zh-CN/resources/blog/truebit-incident-analysis"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Truebit - Rekt",
+      "url": "https://rekt.news/truebit-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xcd4755645595094a8ab984d0db7e3b4aabde72a5c87c4f176a030629c47fb014"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/lookonchain/status/2009303499927154909"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/truebit-s-26m-2026-01-16"
+    },
+    {
+      "source": "revertiq",
+      "label": "quillaudits.com",
+      "url": "https://www.quillaudits.com/blog/hack-analysis/truebit-26m-hack-explained"
+    },
+    {
+      "source": "revertiq",
+      "label": "cecuro.ai",
+      "url": "https://cecuro.ai/blog/truebit-exploit-integer-overflow-2026"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractaudit.com",
+      "url": "https://www.smartcontractaudit.com/guides/truebit-2026-integer-overflow-exploit"
+    }
+  ]
+}

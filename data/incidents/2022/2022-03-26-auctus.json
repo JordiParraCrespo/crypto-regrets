@@ -1,0 +1,103 @@
+{
+  "id": "2022-03-26-auctus",
+  "name": "Auctus",
+  "date": "2022-03-26",
+  "year": 2022,
+  "amountUsd": 726000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "arbitrary-call",
+  "technique": "Arbitrary External Call",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "arbitrary-call",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "arbitrary-call",
+        "p": 0.99
+      },
+      {
+        "category": "input-validation",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.9
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Arbitrary Call. Lost: $726 k",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Arbitrary Call. Lost: $726 k"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "arbitrary call via write(). Vulnerable code snippet: https://etherscan.io/address/0xE7597F774fD0a15A617894dc39d45A28B97AFa4f#code#F1#L101 exchangeData is controllable and without any input validation. Vulnerable point: https://etherscan.io/address/0xE7597F774fD0a15A617894dc39d45A28B97AFa4f#code#F1#L135"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Auctus lost 725,680.730375 USDC, about $726,000, on Ethereum mainnet on 2022-03-26 after an old beta contract allowed a caller to route arbitrary external calls that relayed transferFrom from previously approved wallets. The Auctus beta writer flow accepted caller-controlled external-call parameters. That let an attacker turn the write path into a USDC transferFrom relay against wallets that had already approved the contract. The exact historical source revision of that beta contract was not recovered."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x2e7d7e7a6eb157b98974c8687fbd848d0158d37edc1302ea08ee5ddb376befea"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-03/Auctus_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-03/Auctus_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/AuctusOptions/status/1508647849663291398?cxt=HHwWjICzpbzO5e8pAAAA"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x2e7d7e7a6eb157b98974c8687fbd848d0158d37edc1302ea08ee5ddb376befea"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/address/0xE7597F774fD0a15A617894dc39d45A28B97AFa4f#code#F1#L101"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/address/0xE7597F774fD0a15A617894dc39d45A28B97AFa4f#code#F1#L135"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/auctus-2022-03-26"
+    },
+    {
+      "source": "revertiq",
+      "label": "docs.auctus.org",
+      "url": "https://docs.auctus.org/"
+    }
+  ]
+}

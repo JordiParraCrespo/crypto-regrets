@@ -1,0 +1,58 @@
+{
+  "id": "2021-09-27-bitfinex",
+  "name": "Bitfinex",
+  "date": "2021-09-27",
+  "year": 2021,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [],
+  "targetType": null,
+  "category": "accounting-math",
+  "technique": "Handle inventory defects with fixed precision and extended value range",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.78).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.78,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.79
+      },
+      {
+        "category": "logic-error",
+        "p": 0.07
+      },
+      {
+        "category": "client-bug",
+        "p": 0.06
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.61
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "The non-custodial exchange DeversiFi released a post-mortem analysis report for the previous gas transaction that included 7676.62 ETH, saying that the potential problems in the EthereumJS library are combined with the gas fee changes related to the EIP-1559 upgrade in some cases, and the Ledger hardware wallet may exist The display problem of, may lead to extremely high transaction fees. When this happens, only wallets with very large funds will be affected, and other users will display transaction failures during transactions. In addition, after Bitfinex negotiated with the miners, the miners had returned 7,626 ETH, and the remaining 50 ETH was provided to the miners as a refund fee.…",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The non-custodial exchange DeversiFi released a post-mortem analysis report for the previous gas transaction that included 7676.62 ETH, saying that the potential problems in the EthereumJS library are combined with the gas fee changes related to the EIP-1559 upgrade in some cases, and the Ledger hardware wallet may exist The display problem of, may lead to extremely high transaction fees. When this happens, only wallets with very large funds will be affected, and other users will display transaction failures during transactions. In addition, after Bitfinex negotiated with the miners, the miners had returned 7,626 ETH, and the remaining 50 ETH was provided to the miners as a refund fee.…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "slowmist",
+      "label": "blog.deversifi.com",
+      "url": "https://blog.deversifi.com/23-7-million-dollar-ethereum-transaction-fee-post-mortem/"
+    }
+  ]
+}

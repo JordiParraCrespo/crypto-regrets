@@ -1,0 +1,68 @@
+{
+  "id": "2024-10-25-base-lending",
+  "name": "Base Lending",
+  "date": "2024-10-25",
+  "year": 2024,
+  "amountUsd": 1000000,
+  "returnedUsd": null,
+  "chains": [
+    "Base"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Deposit Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.06,
+    "stateActor": 0.01,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Base Lending was exploited on Base on 25 October 2024, resulting in a loss of approximately $1 million after the attacker manipulated a WETH price oracle in unverified lending contracts. The exploit was enabled by a lending contract using a single-source price oracle with limited liquidity for WETH. This setup allowed the attacker to manipulate the WETH price, inflate collateral value, and drain funds via excessive borrowing.",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "Base Lending was exploited on Base on 25 October 2024, resulting in a loss of approximately $1 million after the attacker manipulated a WETH price oracle in unverified lending contracts. The exploit was enabled by a lending contract using a single-source price oracle with limited liquidity for WETH. This setup allowed the attacker to manipulate the WETH price, inflate collateral value, and drain funds via excessive borrowing."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/base-lending-2024-10-25"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptonews.com",
+      "url": "https://cryptonews.com/news/cyvers-flags-1-5m-theft-in-base-blockchain-exploit/"
+    },
+    {
+      "source": "revertiq",
+      "label": "coinscreed.com",
+      "url": "https://coinscreed.com/base-blockchain-exploit-leads-to-1m-theft/"
+    }
+  ]
+}

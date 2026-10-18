@@ -1,0 +1,99 @@
+{
+  "id": "2025-05-26-dexodus-finance",
+  "name": "Dexodus Finance",
+  "date": "2025-05-26",
+  "year": 2025,
+  "amountUsd": 300000,
+  "returnedUsd": 300000,
+  "chains": [
+    "Base"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Stale Oracle Price",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.71,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.73
+      },
+      {
+        "category": "signature-crypto",
+        "p": 0.24
+      },
+      {
+        "category": "input-validation",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.06,
+    "stateActor": 0.01,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "On May 26, 2025, Dexodus Finance's leveraged trading protocol on Base was exploited for approximately $300,000 due to a replay of valid but outdated Chainlink price reports. The attacker opened a leveraged long position at a stale, artificially low ETH price and closed it at the market price within one transaction, extracting funds from the liquidity pool. The contract's Chainlink price report verification did not enforce freshness or uniqueness: it accepted any cryptographically valid report, regardless of timestamp or prior use. This allowed attackers to replay old signed oracle reports and manipulate position entry prices.",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "On May 26, 2025, Dexodus Finance's leveraged trading protocol on Base was exploited for approximately $300,000 due to a replay of valid but outdated Chainlink price reports. The attacker opened a leveraged long position at a stale, artificially low ETH price and closed it at the market price within one transaction, extracting funds from the liquidity pool. The contract's Chainlink price report verification did not enforce freshness or uniqueness: it accepted any cryptographically valid report, regardless of timestamp or prior use. This allowed attackers to replay old signed oracle reports and manipulate position entry prices."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On May 26, 2025, Dexodus Finance's perpetuals protocol on Base was exploited for nearly $300,000. An attacker submitted a cryptographically valid but month-old Chainlink price report to open a 100x leveraged long position at a much lower historical ETH price, then atomically closed it at current market value, extracting all protocol liquidity. The flaw was that the oracle integration accepted old reports without timestamp validation or replay protection. The Dexodus performUpkeep() function accepted Chainlink Data Streams price reports after only signature verification, without checking data freshness or preventing replay. This allowed an attacker to o…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x6ffb494293fc5c32c5a6ab7dc3fff1fcc6e90fba9a6d6e486ba0a15ce518147e",
+    "0x69fbc7f5890bb90fb433880b68b383db93003d79cf3b3fb4a1ff7eea38334e1d",
+    "0x265283b45cd5489a24a56334dd91828f251340b32efaa94e4f9c856a164b6aac"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/dexodus-finance-2025-05-28"
+    },
+    {
+      "source": "revertiq",
+      "label": "quillaudits.com",
+      "url": "https://www.quillaudits.com/blog/hack-analysis/dexodus-finance-exploit"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.solidityscan.com",
+      "url": "https://blog.solidityscan.com/dexodus-finance-hack-analysis-d699135f575c/"
+    },
+    {
+      "source": "revertiq",
+      "label": "olympix.security",
+      "url": "https://olympix.security/blog/how-dexodus-got-rekt-by-reused-signatures-and-how-olympix-wouldve-prevented-it"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/dexodus-oracle-2025-05-26"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/de-fi-rekt-report-may-2025-275-9-million-lost-across-8-incidents-zero-recovered"
+    }
+  ]
+}

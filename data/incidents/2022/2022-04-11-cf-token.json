@@ -1,0 +1,68 @@
+{
+  "id": "2022-04-11-cf-token",
+  "name": "CF Token",
+  "date": "2022-04-11",
+  "year": 2022,
+  "amountUsd": 1900000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "Token",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "There is a fundamental vulnerability in the CF token contract that allows anyone to transfer someone else's CF balance. The losses so far are around $1.9 million, while the CF/USDT trading pair on pancakeswap has been affected.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "There is a fundamental vulnerability in the CF token contract that allows anyone to transfer someone else's CF balance. The losses so far are around $1.9 million, while the CF/USDT trading pair on pancakeswap has been affected."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "CF Token was reportedly exploited on BNB Chain on 11 April 2022, resulting in an estimated loss of $1.9 million according to hack catalogue data. No technical documentation, contract address, chain transaction, or official postmortem has ever been located. The only established facts are from catalogue reporting. The incident is classified as an access control failure: improper access control permitted unauthorized use of privileged functions. No technical detail or code-level evidence exists to confirm the exact cause."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/peckshield/status/1513390068450308097"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/cf-token-2022-04-11"
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "id": "2022-12-12-polynomial-protocol",
+  "name": "Polynomial Protocol",
+  "date": "2022-12-12",
+  "year": 2022,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [],
+  "targetType": null,
+  "category": "arbitrary-call",
+  "technique": "Contract Vulnerability",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.73).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "arbitrary-call",
+    "confidence": 0.73,
+    "top": [
+      {
+        "category": "arbitrary-call",
+        "p": 0.75
+      },
+      {
+        "category": "input-validation",
+        "p": 0.21
+      },
+      {
+        "category": "access-control",
+        "p": 0.04
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "Polynomial Protocol has a loophole in optimism's deposit contract. The problem stems from the swapAndDeposit() function, which has no restrictions on its input. Anyone can pass in an address and maliciously construct swapData to steal contract-approved tokens.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Polynomial Protocol has a loophole in optimism's deposit contract. The problem stems from the swapAndDeposit() function, which has no restrictions on its input. Anyone can pass in an address and maliciously construct swapData to steal contract-approved tokens."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/0xPoor4ever/status/1602156729105788929"
+    }
+  ]
+}

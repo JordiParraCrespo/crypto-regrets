@@ -1,0 +1,132 @@
+{
+  "id": "2020-12-29-cover-protocol",
+  "name": "Cover Protocol",
+  "date": "2020-12-29",
+  "year": 2020,
+  "amountUsd": 9400000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Arithmetic Error",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.5,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.53
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.45
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.94
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Incorrect calculation via cached data",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Incorrect calculation via cached data"
+    },
+    {
+      "source": "REKT",
+      "text": "Next time, take care of your own shit. Infinite mint but it’s no Willy Wonka - this is a Hollywood classic insurance themed noir. The black and white outcomes of insurance policies lend themselves well to Hollywood storylines."
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Incorrect calculation via cached data. Vulnerable code snippet: https://etherscan.io/address/0xe0b94a7bb45dd905c79bb1992c9879f40f1caed5#code#F1#L115 pool data in storage but forgets to update the cached data. The outdated cached data is later used in calculations and that enables the hack."
+    },
+    {
+      "source": "SlowMist",
+      "text": "Twitter netizens said that due to a loophole in the award contract, the coverage agreement lost $3 million. Conversion, the data on the chain shows that attackers (0xf05Ca...943DF) have used the cover contract to issue a total of about 10,000 COVER, and have replaced them with assets such as WBTC and DAI. Later, the blockchain browser showed that the attacker (address label Grap Finance: Deployer) who made a profit of 3 million US dollars by issuing additional COVER returned 4350 ETH to the address labelled YieldFarming.insure: Deployer. CoverProtocol officially tweeted announcing that it will provide a new COVER token based on the snapshot before the breakthrough was repeated.…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On December 28, 2020, Cover Protocol suffered an infinite-mint exploit in its Blacksmith staking contract, enabling attackers to mint over 40 quintillion COVER tokens. Most of the proceeds were returned after the price collapsed, but the protocol and its users sustained significant losses. A critical bug in the Blacksmith staking contract's reward accounting allowed memory state to be used instead of persistent storage. This enabled the attacker to repeatedly accrue and mint rewards based on outdated pool data, producing a nearly unlimited token supply."
+    }
+  ],
+  "audit": "Arcadia Group",
+  "txHashes": [
+    "0xca135d1c4268d6354a019b66946d4fbe4de6f7ddf0ff56389a5cc2ba695b035f"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2020-12/Cover_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2020-12/Cover_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "mudit.blog",
+      "url": "https://mudit.blog/cover-protocol-hack-analysis-tokens-minted-exploit/"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "slowmist.medium.com",
+      "url": "https://slowmist.medium.com/a-brief-analysis-of-the-cover-protocol-hacked-event-700d747b309c"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Cover - REKT",
+      "url": "https://rekt.news/cover-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/address/0xe0b94a7bb45dd905c79bb1992c9879f40f1caed5#code#F1#L115"
+    },
+    {
+      "source": "slowmist",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/markets/2020/12/28/cover-protocol-attack-perpetrated-by-white-hat-funds-returned-hacker-claims/"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/cover-protocol-2020-12-28"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/markets/2020/12/28/cover-protocol-attack-perpetrated-by-white-hat-funds-returned-hacker-claims"
+    },
+    {
+      "source": "revertiq",
+      "label": "docs.tenderly.co",
+      "url": "https://docs.tenderly.co/debugger/guides/hack-investigation"
+    }
+  ]
+}

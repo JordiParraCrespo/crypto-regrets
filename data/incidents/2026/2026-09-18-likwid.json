@@ -1,0 +1,66 @@
+{
+  "id": "2026-09-18-likwid",
+  "name": "Likwid",
+  "date": "2026-09-18",
+  "year": 2026,
+  "amountUsd": 55721,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Smart Contract Vulnerability",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.98).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.98,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.98
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.08,
+    "stateActor": 0.02,
+    "hasRootCause": 0.92
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "missing pairDelta update in leverage=0 margin borrow freezes AMM quote. Lost: 74.31 BNB (reproduced to within 3 wei)",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "missing pairDelta update in leverage=0 margin borrow freezes AMM quote. Lost: 74.31 BNB (reproduced to within 3 wei)"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The BNB Chain DeFi protocol Likwid was exploited due to a margin-borrow contract bug. In the leverage=0 path of LikwidMarginPosition, pair reserves were not updated, so each borrow reused the same quote. The attacker first pumped a thin meme pool, then repeated the collateral/borrow cycle and drained 74.31 BNB (~$ 55,721) from the vault. The funds were later sent to Tornado Cash."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-09/Likwid_exp.sol",
+  "sources": [
+    "defihacklabs",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-09/Likwid_exp.sol"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/2100785330849009937"
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "id": "2024-03-11-binemon",
+  "name": "Binemon",
+  "date": "2024-03-11",
+  "year": 2024,
+  "amountUsd": 413000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "precission-loss",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 1.00).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.01,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "precission-loss. Lost: ~0.2 BNB",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "precission-loss. Lost: ~0.2 BNB"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Binemon's BIN token exposes a public sweepTokenForMarketing() function with no access control, intended as an admin-only routine that swaps the token's accumulated balance for marketing. Because it is permissionless, the attacker called it repeatedly in a tight loop, each call pushing the contract's large BIN holdings into the PancakeSwap pool and distorting the reserves. This drove the BIN/WBNB price down so the attacker could accumulate cheap BIN, then after honest users bought in (raising the price), sold the BIN back via swapExactTokensForTokensSupportingFeeOnTransferTokens for profit. Vulnerable code snippet: Attack Tx: https://app.blocksec.com/explorer/tx/bsc/0x1999bb5c11a8d8bfa7620fc5cc37f5bc59c1a99d7a9250a8d6076c93bbdbeb5f"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x1999bb5c11a8d8bfa7620fc5cc37f5bc59c1a99d7a9250a8d6076c93bbdbeb5f"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-03/Binemon_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-03/Binemon_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/bsc/0x1999bb5c11a8d8bfa7620fc5cc37f5bc59c1a99d7a9250a8d6076c93bbdbeb5f"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/2baf1a43c44d6cb3ce17a678701784fbe7edabad/src/test/2024-03/Binemon_exp.sol"
+    }
+  ]
+}

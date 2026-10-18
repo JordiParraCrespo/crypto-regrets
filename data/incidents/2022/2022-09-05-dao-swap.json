@@ -1,0 +1,81 @@
+{
+  "id": "2022-09-05-dao-swap",
+  "name": "DAO Swap",
+  "date": "2022-09-05",
+  "year": 2022,
+  "amountUsd": 580000,
+  "returnedUsd": null,
+  "chains": [
+    "Binance Smart Chain"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.55,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.58
+      },
+      {
+        "category": "access-control",
+        "p": 0.4
+      },
+      {
+        "category": "input-validation",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.94
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "On September 5th, DaoSwap lost 580,000 USDT in an attack that allowed users to set the inviter’s address as themselves due to mining rewards that were larger than the fees charged during the swap process and lack of verification.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "On September 5th, DaoSwap lost 580,000 USDT in an attack that allowed users to set the inviter’s address as themselves due to mining rewards that were larger than the fees charged during the swap process and lack of verification."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "DaoSwap was catalogued as a 2022 BNB Chain access-control incident with about $580,000 in reported losses. The available public evidence confirms the label and amount, but not the transaction path or vulnerable contract. Reported improper access control. The available evidence does not identify the exact privileged function, caller, or broken authorization check."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BlockSecTeam/status/1566606770650300416"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/dao-swap-2022-09-05"
+    },
+    {
+      "source": "revertiq",
+      "label": "daoswap.net",
+      "url": "https://daoswap.net/"
+    }
+  ]
+}

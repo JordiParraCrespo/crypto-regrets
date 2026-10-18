@@ -1,0 +1,109 @@
+{
+  "id": "2026-05-26-skp",
+  "name": "SKP",
+  "date": "2026-05-26",
+  "year": 2026,
+  "amountUsd": 212000,
+  "returnedUsd": null,
+  "chains": [
+    "BNB"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Incorrect Share Accounting",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "rugpull",
+    "confidence": 0.61,
+    "top": [
+      {
+        "category": "rugpull",
+        "p": 0.63
+      },
+      {
+        "category": "access-control",
+        "p": 0.25
+      },
+      {
+        "category": "logic-error",
+        "p": 0.07
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Owner Backdoor LP Burn + Price Manipulation. Lost: ~$212K USD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Owner Backdoor LP Burn + Price Manipulation. Lost: ~$212K USD"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The SKP token exposes ownerBurnLiquidityPairTokens(uint256), an owner-only backdoor that burns SKP held directly inside the SKP/USDT PancakeSwap LP pair. The deployer/owner-attacker first burns the bulk (~95%) of the SKP sitting in the pair, then calls sync() on the pair to force the reserves to match the now-depleted SKP balance. Because the USDT reserve is untouched while the SKP reserve is slashed, the on-chain SKP/USDT price spikes (~20x). The owner-attacker then supplies the over-valued SKP as collateral on Venus/Lista DAO and borrows out BTCB + USDT (~$212K). This is a privileged-backdoor + oracle/price-manipulation incident: the token contract should never have been able to burn assets out of an external LP pair on the owner's command. Vulnerable code snippet: Attack Tx: https://bscscan.com/tx/0xbc01ea37bd2ff8f6aa6afcfbe0406114ff27a01e9aa56102bfa4ad8a0c2f25ee Analysis: DeFiHackLabs PoC"
+    },
+    {
+      "source": "SlowMist",
+      "text": "On BSC, the SKP token suffered a token-side LP balance drain + sync attack. The attacker profited approximately $212.85k in a single transaction (162,854.21 USDT + 75.88 BNB). The root cause was a flaw in SKP token logic that allowed extra SKP tokens to be transferred out from the Pancake V2 SKP/USDT LP after a large buy, followed by calling sync() to write incorrect reserves, pushing the SKP reserve close to zero. The attacker used flash loans to amplify the attack."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On May 26, 2026, SKP on BNB Chain suffered a $212,000 exploit driven by a malicious transfer-hook that forced AMM reserve sync during trades. The attacker drained nearly all USDT from the PancakeSwap pair by manipulating reserves mid-transaction. The SKP token included a custom transfer-hook that conditionally called sync() on its PancakeSwap USDT pair during token transfers. This allowed the attacker to collapse the SKP reserve mid-swap, making USDT extraction possible. The hook was deliberately added in SKP's contract design, triggered via privileged whitelisting. The vulnerability was not a generic share-accounting flaw but a maliciously constructed…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xbc01ea37bd2ff8f6aa6afcfbe0406114ff27a01e9aa56102bfa4ad8a0c2f25ee",
+    "0xadf1b6ff02a917043c816bc8bd1ed67038d64a19d06544b09ceeb872518fda37",
+    "0xedb2b6a35cf9637d11bef3e440a36994fd6eb72e1dcbee3b8343757ab55699b4"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-05/SKP_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-05/SKP_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "www.cryptotimes.io",
+      "url": "https://www.cryptotimes.io/2026/05/27/skp-liquidity-exploit-drains-212k-across-bnb-chain-defi-protocols/"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0xbc01ea37bd2ff8f6aa6afcfbe0406114ff27a01e9aa56102bfa4ad8a0c2f25ee"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/TenArmorAlert/status/2059454844201562191"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/skp-2026-05-26"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptoadventure.com",
+      "url": "https://cryptoadventure.com/skp-attack-on-bnb-chain-triggers-212k-loss-warning/"
+    }
+  ]
+}

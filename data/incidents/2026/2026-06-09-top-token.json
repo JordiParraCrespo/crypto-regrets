@@ -1,0 +1,65 @@
+{
+  "id": "2026-06-09-top-token",
+  "name": "TOP Token",
+  "date": "2026-06-09",
+  "year": 2026,
+  "amountUsd": 1590000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": null,
+  "category": "governance",
+  "technique": "Governance Attack",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 1.00).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "governance",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "governance",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.01,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "The TOP Token governance system was built on Aragon DAO with a critically tiny total supply of only 16,384 TOP tokens, making it trivially inexpensive to seize majority control. The attacker acquired 8,192.000001 TOP — just over 50% of the total supply — and used this supermajority to pass a governance proposal that minted a large additional supply of TOP tokens directly to themselves. The newly minted tokens were then swapped through the TOP/WETH Balancer V1 BPool, draining 944.2 WETH (~$1.585M). The entire attack was executed in a single transaction via a dedicated exploit contract (0x25c6….729A21). Balancer V1 itself had no vulnerability; the pool was merely the exit venue where the attacker exchanged the minted tokens for liquid assets. This was a design-level failure: the governance mechanism placed no minimum token supply floor, no timelock, and no anti-dilution safeguard on minting proposals. Attack Tx: 0x967aa34c69b7775c718545c7f94d92e965eb5fc553c0f27f6f1a9c65c93ac156 Analysis: Phalcon on X",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The TOP Token governance system was built on Aragon DAO with a critically tiny total supply of only 16,384 TOP tokens, making it trivially inexpensive to seize majority control. The attacker acquired 8,192.000001 TOP — just over 50% of the total supply — and used this supermajority to pass a governance proposal that minted a large additional supply of TOP tokens directly to themselves. The newly minted tokens were then swapped through the TOP/WETH Balancer V1 BPool, draining 944.2 WETH (~$1.585M). The entire attack was executed in a single transaction via a dedicated exploit contract (0x25c6….729A21). Balancer V1 itself had no vulnerability; the pool was merely the exit venue where the attacker exchanged the minted tokens for liquid assets. This was a design-level failure: the governance mechanism placed no minimum token supply floor, no timelock, and no anti-dilution safeguard on minting proposals. Attack Tx: 0x967aa34c69b7775c718545c7f94d92e965eb5fc553c0f27f6f1a9c65c93ac156 Analysis: Phalcon on X"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x967aa34c69b7775c718545c7f94d92e965eb5fc553c0f27f6f1a9c65c93ac156"
+  ],
+  "poc": null,
+  "sources": [
+    "defihacklabs",
+    "blocksec"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x967aa34c69b7775c718545c7f94d92e965eb5fc553c0f27f6f1a9c65c93ac156"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/Phalcon_xyz/status/2064338161573269887"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x967aa34c69b7775c718545c7f94d92e965eb5fc553c0f27f6f1a9c65c93ac156"
+    }
+  ]
+}

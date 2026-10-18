@@ -1,0 +1,110 @@
+{
+  "id": "2026-05-18-echo-bridge",
+  "name": "Echo Bridge",
+  "date": "2026-05-18",
+  "year": 2026,
+  "amountUsd": 821000,
+  "returnedUsd": null,
+  "chains": [
+    "Monad"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "key-compromise",
+  "technique": "Private Key Compromised",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "key-compromise",
+    "confidence": 0.95,
+    "top": [
+      {
+        "category": "key-compromise",
+        "p": 0.95
+      },
+      {
+        "category": "access-control",
+        "p": 0.05
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": true,
+  "language": "Solidity",
+  "rootCause": "Echo Protocol, a Bitcoin liquidity layer deployed on the Monad blockchain (chain ID 143), had its admin private key compromised, granting the attacker full control over eBTC token minting permissions. Using this stolen key, the attacker minted approximately 1,000 eBTC — worth ~$76.7M at the time — without depositing any Bitcoin collateral. The only viable exit was through Curvance, the sole lending protocol on Monad with sufficient depth; the attacker deposited 45 eBTC as collateral into Curvance, borrowed ~11.29 WBTC, bridged those assets to Ethereum, and routed approximately 384–385 ETH through Tornado Cash — limiting actual extracted proceeds to ~$816K due to Monad's constrained liquidity. The Echo team subsequently regained control of the admin key and burned the remaining 955 eBTC still in the attacker's wallet. The incident was enabled by a single-signature admin role with no timelock, no minting rate limit, and no supply validation check for new collateral deposited into Curvance, meaning the entire compromise and drain completed with no window for detection or intervention. Attack Tx (attacker address on Monad): 0xd691b0aFed67F96CEC28Ab6308Cbe5b2C103b7e9 Analysis: PeckShield on X",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Echo Protocol, a Bitcoin liquidity layer deployed on the Monad blockchain (chain ID 143), had its admin private key compromised, granting the attacker full control over eBTC token minting permissions. Using this stolen key, the attacker minted approximately 1,000 eBTC — worth ~$76.7M at the time — without depositing any Bitcoin collateral. The only viable exit was through Curvance, the sole lending protocol on Monad with sufficient depth; the attacker deposited 45 eBTC as collateral into Curvance, borrowed ~11.29 WBTC, bridged those assets to Ethereum, and routed approximately 384–385 ETH through Tornado Cash — limiting actual extracted proceeds to ~$816K due to Monad's constrained liquidity. The Echo team subsequently regained control of the admin key and burned the remaining 955 eBTC still in the attacker's wallet. The incident was enabled by a single-signature admin role with no timelock, no minting rate limit, and no supply validation check for new collateral deposited into Curvance, meaning the entire compromise and drain completed with no window for detection or intervention. Attack Tx (attacker address on Monad): 0xd691b0aFed67F96CEC28Ab6308Cbe5b2C103b7e9 Analysis: PeckShield on X"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Echo Protocol’s eBTC on Monad was compromised due to an admin private key leak. The attacker granted themselves minting rights, minted 1,000 unbacked eBTC (~$76.7M nominal value), deposited 45 eBTC (~$3.45M) as collateral into Curvance to borrow ~11.29 WBTC (~$867K), bridged it to Ethereum, swapped for ETH, and sent ~384 ETH (~$821K) to Tornado Cash. The remaining 955 eBTC stays under attacker control, posing ongoing depegging risk."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On May 19, 2026, Echo Protocol's Monad deployment suffered an unauthorized minting incident when an attacker used a compromised admin key to create 1,000 unbacked eBTC, with a notional value of $76.7M. Rapid containment limited the actual stolen assets to about $816,000, extracted via collateralization, bridging, and laundering through Tornado Cash. Echo Protocol's eBTC mint authority on Monad depended on a single admin key with no multisig or timelock, enabling the attacker who obtained that key to mint unbacked assets without collateral or rate limits. This operational weakness allowed straightforward circumvention of supply and collateral checks."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xd691b0aFed67F96CEC28Ab6308Cbe5b2C103b7e9"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "monadvision.com",
+      "url": "https://monadvision.com/address/0xd691b0aFed67F96CEC28Ab6308Cbe5b2C103b7e9"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/PeckShieldAlert/status/2056519415211192670"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xd691b0aFed67F96CEC28Ab6308Cbe5b2C103b7e9"
+    },
+    {
+      "source": "slowmist",
+      "label": "kucoin.com",
+      "url": "https://www.kucoin.com/zh-hant/news/flash/peckshield-reports-821-000-stolen-in-echoprotocol-hack-on-monad"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/echo-protocol-2026-05-19"
+    },
+    {
+      "source": "revertiq",
+      "label": "blocksec.com",
+      "url": "https://blocksec.com/blog/defi-security-incidents-echo-protocol-stablr-more"
+    },
+    {
+      "source": "revertiq",
+      "label": "blocksec.com",
+      "url": "https://blocksec.com/blog/web3-security-verus-bridge-retoswap-more"
+    },
+    {
+      "source": "revertiq",
+      "label": "coincentral.com",
+      "url": "https://coincentral.com/how-did-echo-protocol-suffer-76m-ebtc-minting-exploit-on-monad/"
+    }
+  ]
+}

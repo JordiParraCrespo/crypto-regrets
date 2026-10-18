@@ -1,0 +1,77 @@
+{
+  "id": "2024-01-15-shell-mev-0xa898",
+  "name": "Shell_MEV_0xa898",
+  "date": "2024-01-15",
+  "year": 2024,
+  "amountUsd": 1000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "lack of access control",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.99).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.99
+      },
+      {
+        "category": "arbitrary-call",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "lack of access control. Lost: ~1K $BUSD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "lack of access control. Lost: ~1K $BUSD"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The Shell MEV bot contracts (Robot1 0xa898... and Robot2 0x923A...) exposed a swap-execution function (selector 0x5f90d725) that lacked any caller authorization (no owner/operator check). Because the bots already held token approvals from their associated victim wallets, the attacker could call this function directly, passing the victims' addresses and their full BUSD balances as parameters, instructing the bot to swap each victim's BUSD into SHELL tokens and deliver the resulting tokens to the attacker. The attacker repeated the call to drain the victims' BUSD, then swapped the SHELL back to BUSD via PancakeSwap. Vulnerable code snippet: Attack Tx: https://bscscan.com/tx/0x24f114c0ef65d39e0988d164e052ce8052fe4a4fd303399a8c1bb855e8da01e9"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x24f114c0ef65d39e0988d164e052ce8052fe4a4fd303399a8c1bb855e8da01e9"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-01/Shell_MEV_0xa898_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-01/Shell_MEV_0xa898_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/bsc/0x24f114c0ef65d39e0988d164e052ce8052fe4a4fd303399a8c1bb855e8da01e9"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/2bed06c31b1d9d328a097484b47168c8ce1bb682/src/test/2024-01/Shell_MEV_0xa898_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x24f114c0ef65d39e0988d164e052ce8052fe4a4fd303399a8c1bb855e8da01e9"
+    }
+  ]
+}

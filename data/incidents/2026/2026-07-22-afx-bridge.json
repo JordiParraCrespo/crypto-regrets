@@ -1,0 +1,75 @@
+{
+  "id": "2026-07-22-afx-bridge",
+  "name": "AFX Bridge",
+  "date": "2026-07-22",
+  "year": 2026,
+  "amountUsd": 24150000,
+  "returnedUsd": null,
+  "chains": [
+    "Arbitrum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "key-compromise",
+  "technique": "Validator Key Compromised",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "key-compromise",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "key-compromise",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.03,
+    "hasRootCause": 0.97
+  },
+  "bridge": true,
+  "language": "Solidity",
+  "rootCause": "5 of 7 bridge validator keys compromised, carrying 7,142/10,000 total power (exceeds 2/3 quorum). Two-phase attack: (1) Propose transaction with 5 compromised validator signatures, (2) Execute after 200-second dispute window to release 24.15M USDC via CCTP bridge to Ethereum. Stolen funds converted to 12,467.43 ETH at 0x627654B2782bfC57580ecD11d40869b350B6ebAC. Attack Tx: https://arbiscan.io/tx/0x50d0b3ec6c3f5fce0f10abf81540bbb508f421494aa2b3480c4a264b0436547b Source: https://twitter.com/1nf0s3cpt/status/2080082521778467217",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "5 of 7 bridge validator keys compromised, carrying 7,142/10,000 total power (exceeds 2/3 quorum). Two-phase attack: (1) Propose transaction with 5 compromised validator signatures, (2) Execute after 200-second dispute window to release 24.15M USDC via CCTP bridge to Ethereum. Stolen funds converted to 12,467.43 ETH at 0x627654B2782bfC57580ecD11d40869b350B6ebAC. Attack Tx: https://arbiscan.io/tx/0x50d0b3ec6c3f5fce0f10abf81540bbb508f421494aa2b3480c4a264b0436547b Source: https://twitter.com/1nf0s3cpt/status/2080082521778467217"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The AFX-operated cross-chain/USDC custody bridge on Arbitrum was exploited. The attacker used compromised validator hot keys to meet the quorum and drain approximately $24.15 million USDC. The funds were bridged to Ethereum and swapped for ETH. Arbitrum’s native bridge was unaffected, and AFX’s core trading infrastructure remained secure. The team suspended bridge operations and is investigating with security partners."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x50d0b3ec6c3f5fce0f10abf81540bbb508f421494aa2b3480c4a264b0436547b"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "arbiscan.io",
+      "url": "https://arbiscan.io/tx/0x50d0b3ec6c3f5fce0f10abf81540bbb508f421494aa2b3480c4a264b0436547b"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/1nf0s3cpt/status/2080082521778467217"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/AFX_XYZ/status/2080126901205770734"
+    }
+  ]
+}

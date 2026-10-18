@@ -1,0 +1,127 @@
+{
+  "id": "2023-06-19-ara-finance",
+  "name": "Ara Finance",
+  "date": "2023-06-19",
+  "year": 2023,
+  "amountUsd": 125000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "arbitrary-call",
+  "technique": "Token Approval Abuse",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "arbitrary-call",
+    "confidence": 0.62,
+    "top": [
+      {
+        "category": "arbitrary-call",
+        "p": 0.64
+      },
+      {
+        "category": "access-control",
+        "p": 0.23
+      },
+      {
+        "category": "logic-error",
+        "p": 0.13
+      }
+    ],
+    "flashLoan": 0.06,
+    "stateActor": 0.02,
+    "hasRootCause": 0.91
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "Incorrect handling of permissions. Lost: ~$125k",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Incorrect handling of permissions. Lost: ~$125k"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "A bug in the contract's handling of permissions, the approved token does not limit the funds transferred from the caller for swap purposes. Vulnerable code snippet: Attack tx: https://bscscan.com/tx/0xd87cdecd5320301bf9a985cc17f6944e7e7c1fbb471c80076ef2d031cc3023b2 Analysis:"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The Ara project was attacked by a flash loan. The attackers are suspected to have made about $124,000 in BUSD. attacker address: 0xF84efA8a9F7E68855CF17EAaC9c2f97A9d131366."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Ara Finance suffered a $125,000 loss on BNB Chain in June 2023 when an attacker exploited excessive token approvals and weak access control in a swap contract. The incident involved flash loans, price manipulation, and leveraged contract permissions to drain user funds. The swap contract failed to restrict token transfers to strictly authorized users, allowing an attacker to use approvals from external addresses to swap tokens and extract value. Unlimited token allowances and inadequate access controls enabled the exploit."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Ara Protocol on BNB Chain lost about $125K on 2023-06-18 after an attacker combined a flash loan with a swap path that spent another wallet's allowances and ended with 124,915.758354 USDT in the attacker wallet. The swap contract accepted allowance-based token pulls without binding them to the caller's authority or limiting transfer size, so the attacker could spend a preapproved wallet's ARA and USDT during a flash-loan-funded price move."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xd87cdecd5320301bf9a985cc17f6944e7e7c1fbb471c80076ef2d031cc3023b2",
+    "0xd7926f596154125b573f8f195e08c3eb47be4948d13b1fdfb48282938e122879"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-06/ARA_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-06/ARA_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BeosinAlert/status/1670638160550965248"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0xd87cdecd5320301bf9a985cc17f6944e7e7c1fbb471c80076ef2d031cc3023b2"
+    },
+    {
+      "source": "slowmist",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0xf84efa8a9f7e68855cf17eaac9c2f97a9d131366"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/ara-finance-2023-06-19"
+    },
+    {
+      "source": "revertiq",
+      "label": "quillaudits.com",
+      "url": "https://www.quillaudits.com/blog/hack-analysis/ara-protocol-flash-loan-hack"
+    },
+    {
+      "source": "revertiq",
+      "label": "monitoringroom.com",
+      "url": "https://monitoringroom.com/situation/crypto-hack/ara-finance"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/decoding-ara-protocol-s-flash-loan-2024-06-04"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/ara-finance-hack-2023"
+    }
+  ]
+}

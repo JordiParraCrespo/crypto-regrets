@@ -1,0 +1,78 @@
+{
+  "id": "2024-07-02-mintrisesprices",
+  "name": "MintRisesPrices",
+  "date": "2024-07-02",
+  "year": 2024,
+  "amountUsd": 59000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "reentrancy",
+  "technique": "Reentrancy",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "reentrancy",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "reentrancy",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.7
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "MintRisesPrices on BNBChain suffered a reentrancy attack, resulting in a loss of approximately $59,000.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "MintRisesPrices on BNBChain suffered a reentrancy attack, resulting in a loss of approximately $59,000."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On July 2, 2024, the MintRisesPrices protocol on BNB Chain suffered a reentrancy attack, resulting in a loss of approximately $59,000. The exploit led to a protocol relaunch under a new smart contract, but detailed technical and transaction-level evidence remains unavailable. Vulnerable protocol logic enabled reentrant calls, allowing an attacker to drain assets through repeated interactions with contract functions without proper state update checks."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/1808324198861004903"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/mintrisesprices-2024-07-02"
+    },
+    {
+      "source": "revertiq",
+      "label": "quadrigainitiative.com",
+      "url": "https://quadrigainitiative.com/casestudy/mintrisespriceswmrpreentrancypricemanipulationattack.php"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/mintrisesprices-hack-2024"
+    }
+  ]
+}

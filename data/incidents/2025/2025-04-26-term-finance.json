@@ -1,0 +1,94 @@
+{
+  "id": "2025-04-26-term-finance",
+  "name": "Term Finance",
+  "date": "2025-04-26",
+  "year": 2025,
+  "amountUsd": 1650000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Oracle Misconfiguration",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.77,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.78
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.2
+      },
+      {
+        "category": "logic-error",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.01,
+    "hasRootCause": 0.62
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "On April 26, 2025, lending protocol Term Labs introduced an internal inconsistency in decimal precision during an update to the tETH oracle, resulting in incorrect pricing of the tETH asset within the protocol. This mispricing triggered unintended liquidations, affecting approximately 918 ETH. The incident stemmed from human error during a sensitive system upgrade — a failure in operational execution rather than a flaw in the code or smart contracts. Through rapid response and negotiation efforts, Term Labs successfully recovered around 556 ETH, reducing the final net protocol loss to 362 ETH (approximately $650,000).",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "On April 26, 2025, lending protocol Term Labs introduced an internal inconsistency in decimal precision during an update to the tETH oracle, resulting in incorrect pricing of the tETH asset within the protocol. This mispricing triggered unintended liquidations, affecting approximately 918 ETH. The incident stemmed from human error during a sensitive system upgrade — a failure in operational execution rather than a flaw in the code or smart contracts. Through rapid response and negotiation efforts, Term Labs successfully recovered around 556 ETH, reducing the final net protocol loss to 362 ETH (approximately $650,000)."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On April 26, 2025, Term Labs experienced a $1.5 million loss due to a protocol upgrade that introduced a decimal mismatch in its tETH oracle feed. This error caused the protocol to misprice collateral, leading to over 900 ETH in unintended liquidations. A liquidator executed these liquidations according to the erroneous pricing, but most funds were later returned through negotiation. The incident originated from an internal operational failure, not a smart contract bug. An update to the tETH oracle introduced a mismatch in decimal precision, causing the oracle to output prices for tETH with 18 decimals instead of 8. This error led the protocol to misin…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x8da015d7c362a082fd23736b08dc17d3a9794086b713590273c9535a4c47a7e2",
+    "0xaa10cc076f27fcf7fc0b0a83ad170983e6791f5349d097ef4db0592a55d64048"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/term_labs/status/1916941405173485897"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/term-labs-2025-05-01"
+    },
+    {
+      "source": "revertiq",
+      "label": "quillaudits.com",
+      "url": "https://www.quillaudits.com/blog/hack-analysis/how-term-labs-lost-1.5m"
+    },
+    {
+      "source": "revertiq",
+      "label": "term.finance",
+      "url": "https://www.term.finance/post/tethpostmortem"
+    },
+    {
+      "source": "revertiq",
+      "label": "getfailsafe.com",
+      "url": "https://getfailsafe.com/post-mortem-term-finance"
+    }
+  ]
+}

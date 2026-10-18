@@ -1,0 +1,85 @@
+{
+  "id": "2024-03-29-ethfin",
+  "name": "ETHFIN",
+  "date": "2024-03-29",
+  "year": 2024,
+  "amountUsd": 1200,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.8
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "lack of access control. Lost: ~$1.24K (2.13 BNB)",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "lack of access control. Lost: ~$1.24K (2.13 BNB)"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "ETHFIN on BNB Chain was exploited on 29 March 2024 via missing access control, allowing an unauthorized contract to drain approximately 2.13 BNB (~$1,200). The attacker manipulated internal state and interactions to extract BNB through the protocol's privileged operations. The ETHFIN contract lacked necessary access control on functions that could transfer protocol assets, allowing any external caller or contract to trigger these operations and move funds without authorization."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xfe031685d84f3bae1785f5b2bd0ed480b87815c3f23ce6ced73b8573b7e367c6"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-03/ETHFIN_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-03/ETHFIN_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/bsc/0xfe031685d84f3bae1785f5b2bd0ed480b87815c3f23ce6ced73b8573b7e367c6"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/ethfin-2024-03-29"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/ethfin-hack-2024"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/past/2024/README.md#L2348"
+    }
+  ]
+}

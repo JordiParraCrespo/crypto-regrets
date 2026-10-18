@@ -1,0 +1,118 @@
+{
+  "id": "2024-07-24-spectra-finance",
+  "name": "Spectra Finance",
+  "date": "2024-07-24",
+  "year": 2024,
+  "amountUsd": 73000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "arbitrary-call",
+  "technique": "Arbitrary External Call",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "arbitrary-call",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "arbitrary-call",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.1,
+    "stateActor": 0.03,
+    "hasRootCause": 0.45
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Incorrect input validation. Lost: ~73K USD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Incorrect input validation. Lost: ~73K USD"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "arbitrary call Vulnerable code snippet: https://x.com/shoucccc/status/1815981585637990899/photo/1 Attack tx: https://app.blocksec.com/explorer/tx/eth/0x491cf8b2a5753fdbf3096b42e0a16bc109b957dc112d6537b1ed306e483d0744 Analysis: https://x.com/shoucccc/status/1815981585637990899"
+    },
+    {
+      "source": "SlowMist",
+      "text": "DeFi protocol Spectra suffered an attack, resulting in a loss of approximately $550,000. Spectra has disabled the application and terminated the router contract to contain the situation, while the core protocol contract remains unaffected. Security personnel Chaofan Shou indicated that the attack stemmed from an arbitrary call in the router contract, allowing the attacker to drain all tokens approved by the contract. On July 24th, Spectra released a security incident analysis report, stating that the attacker hijacked user transactions on Spectra, affecting a total of 4 wallets and causing a loss of approximately 168 ETH. The core protocol contract of…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Spectra Finance's router contract was exploited on Ethereum Mainnet on July 23, 2024, resulting in a loss of approximately 168 ETH (~$73,000). The attacker leveraged an input validation flaw, allowing arbitrary external calls. Four user wallets were drained, but core protocol funds remained unaffected. Absence of input validation in the router contract's command handler allowed arbitrary external calls, enabling the attacker to transfer tokens approved to the router."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x491cf8b2a5753fdbf3096b42e0a16bc109b957dc112d6537b1ed306e483d0744",
+    "0xda57ce2dc51ca7a04c797b06cb39842017da23242bc4836009fb7db293c4a253",
+    "0x184c4273489fa81fa5d9cf6ae80080b6277712dafec408d166ed1cf9c78037fe",
+    "0xedaf589eeadeef73cfea85e41b6995e299dba144d1ef2a6c72f03348b72c12e3"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-07/Spectra_finance_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-07/Spectra_finance_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/shoucccc/status/1815981585637990899"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/shoucccc/status/1815981585637990899/photo/1"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/eth/0x491cf8b2a5753fdbf3096b42e0a16bc109b957dc112d6537b1ed306e483d0744"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x491cf8b2a5753fdbf3096b42e0a16bc109b957dc112d6537b1ed306e483d0744"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/spectra_finance/status/1815813300111786488"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/spectra-finance-2024-07-24"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.solidityscan.com",
+      "url": "https://blog.solidityscan.com/spectra-finance-hack-analysis-2366cf9f5afc/"
+    },
+    {
+      "source": "revertiq",
+      "label": "olympix.security",
+      "url": "https://olympix.security/biweekly-exploits/deltaprime-ivest-and-spectra-finance-lose-1-25m-to-storage-collisions-burn-abuse-and-call-injection"
+    }
+  ]
+}

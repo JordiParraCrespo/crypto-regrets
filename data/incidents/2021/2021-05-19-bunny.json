@@ -1,0 +1,152 @@
+{
+  "id": "2021-05-19-bunny",
+  "name": "Bunny",
+  "date": "2021-05-19",
+  "year": 2021,
+  "amountUsd": 45000000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.37,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.41
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.31
+      },
+      {
+        "category": "logic-error",
+        "p": 0.27
+      }
+    ],
+    "flashLoan": 0.06,
+    "stateActor": 0.02,
+    "hasRootCause": 0.82
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Price Oracle Manipulation",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Price Oracle Manipulation"
+    },
+    {
+      "source": "REKT",
+      "text": "The BSC bloodbath continues. $45 million gone from \"PancakeBunny\". At its peak, Pancake Bunny had over $10 billion in TVL. At the time of writing, that TVL is down to just over $1 billion. “Aren’t Flash loans Earitating” said the hacker."
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Incorrect profit calculation via balanceOf Very similar PancakeHunny. Vulnerable code snippet: https://www.bscscan.com/address/0xed1443def66e4e8901377467d449499eaba1559a#code#F1#L235 https://bscscan.com/address/0x819eea71d3f93bb604816f1797d4828c90219b5d#code#F1#L204"
+    },
+    {
+      "source": "SlowMist",
+      "text": "PancakeBunny, the DeFi revenue aggregator on Binance Smart Chain (BSC), suffered a lightning loan attack and lost 114,631.5421 WBNB and 697,245.5699 BUNNY, totaling approximately US$45 million. The price of the token BUNNY crashed from 240 US dollars at around 6:35, and once fell below 2 US dollars, with the highest drop of more than 99% at one time. The official response stated that the hacker used PancakeSwap to borrow a large amount of BNB from a flash loan attack from an external developer, and then continued to manipulate the USDT/BNB and BUNNY/BNB prices to obtain a large amount of BUNNY and sell it, resulting in a flash crash of the BUNNY price.…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On May 19, 2021, PancakeBunny on BNB Chain was exploited with a flash loan-driven price manipulation, exploiting the reward-mint logic to mint about 7 million BUNNY tokens. The attacker profited by dumping these tokens, causing a 95% price crash and extracting roughly $45 million in BNB. The root cause was the use of manipulable spot AMM prices for reward minting without time-weighting oracles. PancakeBunny's reward minting logic used PancakeSwap's spot AMM prices as input, which could be manipulated within a flash-loan-funded transaction. The calculation relied on pool reserves at that instant and failed to use time-weighted or multi-source price orac…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 19 May 2021, PancakeBunny on BNB Chain was exploited via a flash loan,driven price manipulation attack, resulting in an estimated loss of $45 million. The attacker manipulated AMM pool spot prices to inflate reward calculations and minted millions of BUNNY tokens, crashing the token price and draining protocol assets. Reward minting depended on manipulable PancakeSwap spot prices in the same transaction, allowing a flash loan to distort the price oracle and inflate minting."
+    }
+  ],
+  "audit": "Unaudited",
+  "txHashes": [
+    "0x88fcffc3256faac76cde4bbd0df6ea3603b1438a5a0409b2e2b91e7c2ba3371a",
+    "0x897c2de73dd55d7701e1b69ffb3a17b0f4801ced88b0c75fe1551c5fcce6a979"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2021-05/PancakeBunny_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2021-05/PancakeBunny_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "rekt.news",
+      "url": "https://rekt.news/pancakebunny-rekt/"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x897c2de73dd55d7701e1b69ffb3a17b0f4801ced88b0c75fe1551c5fcce6a979"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: PancakeBunny - REKT",
+      "url": "https://rekt.news/pancakebunny-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://www.bscscan.com/address/0xed1443def66e4e8901377467d449499eaba1559a#code#F1#L235"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0x819eea71d3f93bb604816f1797d4828c90219b5d#code#F1#L204"
+    },
+    {
+      "source": "slowmist",
+      "label": "pancakebunny.medium.com",
+      "url": "https://pancakebunny.medium.com/hello-bunny-fam-a7bf0c7a07ba"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/pancakebunny-2021-05-19"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "halborn.com",
+      "url": "https://www.halborn.com/blog/post/explained-the-pancakebunny-protocol-hack-may-2021"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/bunny-2021-05-19"
+    },
+    {
+      "source": "revertiq",
+      "label": "dn.institute",
+      "url": "https://dn.institute/research/cyberattacks/incidents/2021-05-19-pancakebunny/"
+    },
+    {
+      "source": "revertiq",
+      "label": "cmichel.io",
+      "url": "https://cmichel.io/bsc-pancake-bunny-exploit-post-mortem/"
+    }
+  ]
+}

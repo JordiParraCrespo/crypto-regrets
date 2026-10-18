@@ -1,0 +1,78 @@
+{
+  "id": "2019-06-25-synthetix-v1-v2",
+  "name": "Synthetix v1+v2",
+  "date": "2019-06-25",
+  "year": 2019,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Oracle Misconfiguration",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.06,
+    "stateActor": 0.02,
+    "hasRootCause": 0.24
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Synthetix, a synthetic asset issuance platform built on Ethereum, experienced an oracle attack which netted the attacker over 37 million sETH, according to Etherscan. However, the true dollar value is difficult to calculate at this time given the relative illiquidity of sETH on secondary markets.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Synthetix, a synthetic asset issuance platform built on Ethereum, experienced an oracle attack which netted the attacker over 37 million sETH, according to Etherscan. However, the true dollar value is difficult to calculate at this time given the relative illiquidity of sETH on secondary markets."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Synthetix v1+v2 experienced an oracle misconfiguration on Ethereum Mainnet on June 25, 2019. An arbitrage bot exploited an inflated KRW price feed, converting sKRW to sETH for over 37 million synthetic Ether. The assets were returned after the team negotiated a bounty. No confirmed dollar-value loss was reported. Synthetix's oracle aggregation failed to handle price-feed outages properly. When two of three KRW sources went offline, the system averaged only the remaining faulty feed, producing a 1000× inflated KRW/USD rate. There was no outlier rejection or anomaly detection, allowing the bot to exploit the mispricing repeatedly."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "theblockcrypto.com",
+      "url": "https://www.theblockcrypto.com/tiny/synthetix-suffers-oracle-attack-potentially-looting-37-million-synthetic-ether/"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/synthetix-v1-v2-2019-06-25"
+    },
+    {
+      "source": "revertiq",
+      "label": "lancershield.github.io",
+      "url": "https://lancershield.github.io/docs/hacks-db/critical/Synthetix.html"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptonews.net",
+      "url": "https://cryptonews.net/news/security/181053/"
+    }
+  ]
+}

@@ -1,0 +1,113 @@
+{
+  "id": "2026-03-23-bce",
+  "name": "BCE",
+  "date": "2026-03-23",
+  "year": 2026,
+  "amountUsd": 679000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Incorrect Share Accounting",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.65,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.67
+      },
+      {
+        "category": "logic-error",
+        "p": 0.32
+      },
+      {
+        "category": "access-control",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.96,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Deflationary Token Logic Error. Lost: ~800,000 USDT",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Deflationary Token Logic Error. Lost: ~800,000 USDT"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The BCE token contract on BSC contained a flawed burn mechanism where the user-controlled state variable scheduledDestruction was accumulated during sell operations based on traded volume and current pool reserves, but was settled by burning tokens directly from the PancakeSwap BCE-USDT pair address rather than from the seller's balance. Because the attacker could influence both trade volume and pool reserves, they could inflate scheduledDestruction to an arbitrary value. The attacker deployed two malicious contracts to bypass BCE's buy/sell limits, flash-borrowed 123.5M USDT, swapped into BCE, transferred tokens between contracts (triggering the burn which compressed the pair's BCE reserve), then swapped remaining BCE out at the distorted price. After repaying all flash loans the attacker netted approximately $679K from the liquidity pool. Attack Tx: 0x85ac5d...6d452 Analysis: BlockSec Phalcon Alert Weekly Web3 Security Incident Roundup Mar 23–Mar 29 2026 – BlockSec"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 23 March 2026, the BCE token on BNB Chain was exploited for approximately $679,000. The attacker manipulated BCE's flawed burn mechanism, draining USDT from the PancakeSwap BCE/USDT pool by burning tokens from the pool's reserves, distorting the price and extracting value. BCE relied on the scheduledDestruction variable to accumulate pending token burns, which were executed directly against the liquidity pool's balance instead of the seller's balance. This allowed attackers to manipulate pool reserves and pricing, draining stablecoins from the pool."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x85ac5d15f16d49ae08f90ab0e554ebfcb145712342c5b7704e305d602146d452"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-03/bce_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-03/bce_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "t.me",
+      "url": "https://t.me/defimon_alerts/2814"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x85ac5d15f16d49ae08f90ab0e554ebfcb145712342c5b7704e305d602146d452"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/Phalcon_xyz/status/2035998829296984572"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "blocksec.com",
+      "url": "https://blocksec.com/blog/weekly-web3-security-incident-roundup-mar-23-mar-29-2026"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x85ac5d15f16d49ae08f90ab0e554ebfcb145712342c5b7704e305d602146d452"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/bce-2026-03-23"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptoadventure.com",
+      "url": "https://cryptoadventure.com/pancakeswap-bce-usdt-pool-hit-in-suspected-burn-mechanism-exploit/"
+    }
+  ]
+}

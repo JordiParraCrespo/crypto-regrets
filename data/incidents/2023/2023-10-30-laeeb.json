@@ -1,0 +1,81 @@
+{
+  "id": "2023-10-30-laeeb",
+  "name": "LaEeb",
+  "date": "2023-10-30",
+  "year": 2023,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Lack Slippage Protection",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.81).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.81,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.82
+      },
+      {
+        "category": "logic-error",
+        "p": 0.17
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.98,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Lack Slippage Protection. Lost: ~1.8 WBNB",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Lack Slippage Protection. Lost: ~1.8 WBNB"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The LaEeb token is a fee-on-transfer token, and its interaction with the PancakeSwap pair's skim() function let an attacker repeatedly extract value from the pool's balance. The attacker flash-loaned WBNB, swapped it for LaEeb, then in a loop transferred an enormous amount of LaEeb into the pair and immediately called Pair.skim(address(this)). Because skim() sends out the difference between the pair's actual token balance and its stored reserves, and the LaEeb transfer/fee accounting made the balance diverge from reserves, each skim returned more LaEeb than was effectively committed. The attacker then swapped the accumulated LaEeb back to WBNB using swapExactTokensForTokensSupportingFeeOnTransferTokens with amountOutMinimum = 0 (no slippage protection) and repaid the flash loan. Vulnerable code snippet: Attack Tx: https://app.blocksec.com/explorer/tx/bsc/0x0d13a61e9dc81cfae324d3d80e49830d9bbae300f760e016a15600889a896a1b Analysis: MetaSec_xyz on X"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x0d13a61e9dc81cfae324d3d80e49830d9bbae300f760e016a15600889a896a1b"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-10/LaEeb_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-10/LaEeb_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/MetaSec_xyz/status/1718964562165420076"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/97df63d8a33c18e3e8c926879b1d05dc4de8286d/src/test/2023-10/LaEeb_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/bsc/0x0d13a61e9dc81cfae324d3d80e49830d9bbae300f760e016a15600889a896a1b"
+    }
+  ]
+}

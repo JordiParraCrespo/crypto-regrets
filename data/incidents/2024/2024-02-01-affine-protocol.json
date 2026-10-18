@@ -1,0 +1,109 @@
+{
+  "id": "2024-02-01-affine-protocol",
+  "name": "Affine Protocol",
+  "date": "2024-02-01",
+  "year": 2024,
+  "amountUsd": 88000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "input-validation",
+  "technique": "Missing Input Validation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "input-validation",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "input-validation",
+        "p": 0.99
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.46,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "lack of validation userData. Lost: ~88K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "lack of validation userData. Lost: ~88K"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The contract's flashloan callback for Balancer only verified the caller but failed to validate user data from untrusted sources. This allowed attackers to exploit the function and steal collateral tokens by providing malicious inputs. Vulnerable code snippet: Attack transaction: https://phalcon.blocksec.com/explorer/tx/eth/0x03543ef96c26d6c79ff6c24219c686ae6d0eb5453b322e54d3b6a5ce456385e5 Analysis: https://medium.com/neptune-mutual/how-was-affine-protocol-exploited-f4933c4035b4"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Affine Protocol was exploited on Ethereum on 2024-02-01. The checked exploit transaction shows a two-phase Balancer flash loan sequence, including a second zero-amount call, that extracted exactly 33.698808979599562499 aEthwstETH. Public reconstructions attribute the bug to unvalidated flash loan callback userData, but the incident-time source code remains unavailable. The available evidence indicates insufficient validation of attacker-supplied Balancer flash loan callback userData in Affine's strategy path. The checked exploit transaction matches a published two-phase sequence in which a nonzero WETH flash loan is followed by a second zero-amount fla…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x03543ef96c26d6c79ff6c24219c686ae6d0eb5453b322e54d3b6a5ce456385e5",
+    "0x8b0cf1019933e0f8bd51ad29158c2cc11a21cef2f6771d997b561eb86be70d96"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-02/AffineDeFi_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-02/AffineDeFi_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Phalcon_xyz/status/1753020812284809440"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/CyversAlerts/status/1753040754287513655"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "phalcon.blocksec.com",
+      "url": "https://phalcon.blocksec.com/explorer/tx/eth/0x03543ef96c26d6c79ff6c24219c686ae6d0eb5453b322e54d3b6a5ce456385e5"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "medium.com",
+      "url": "https://medium.com/neptune-mutual/how-was-affine-protocol-exploited-f4933c4035b4"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/affine-protocol-2024-02-01"
+    },
+    {
+      "source": "revertiq",
+      "label": "publish.x.com",
+      "url": "https://publish.x.com/oembed?url=https%3A%2F%2Ftwitter.com%2FPhalcon_xyz%2Fstatus%2F1753020812284809440"
+    },
+    {
+      "source": "revertiq",
+      "label": "api.llama.fi",
+      "url": "https://api.llama.fi/hacks"
+    }
+  ]
+}

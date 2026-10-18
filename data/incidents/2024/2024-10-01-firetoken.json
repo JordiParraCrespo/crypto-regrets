@@ -1,0 +1,135 @@
+{
+  "id": "2024-10-01-firetoken",
+  "name": "FireToken",
+  "date": "2024-10-01",
+  "year": 2024,
+  "amountUsd": 20000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "Token",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.39,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.43
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.36
+      },
+      {
+        "category": "market-manipulation",
+        "p": 0.19
+      }
+    ],
+    "flashLoan": 0.96,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Pair Manipulation With Transfer Function. Lost: 8.45 ETH (~$20K USD)",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Pair Manipulation With Transfer Function. Lost: 8.45 ETH (~$20K USD)"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "the FIRE token exploited which involved an attacker manipulating the token's deflationary mechanism to drain its Uniswap liquidity pool. By taking out a flash loan of 20 ETH and using a malicious smart contract, the attacker repeatedly swapped FIRE tokens, burning them with each transaction to artificially increase their price. Vulnerable code snippet: Attack tx: https://etherscan.io/tx/0xd20b3b31a682322eb0698ecd67a6d8a040ccea653ba429ec73e3584fa176ff2b Analysis: https://www.quillaudits.com/blog/hack-analysis/fire-token-exploit"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The Fire ($FIRE) token on Ethereum was exploited just 24 seconds after its launch, resulting in the theft of 9 ETH (approximately $24,000). The root cause was related to the token burn mechanism within the transfer() function."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Fire Token was exploited within seconds of its launch on October 1, 2024, leading to a direct loss of approximately $24,000. The incident stemmed from a flawed burn-on-transfer mechanism that enabled repeated manipulation of Uniswap pool reserves and pricing. A special-case burn logic in Fire Token's transfer function reduced liquidity pool reserves on every transfer to the Uniswap pair, followed by a pool sync call, which allowed an attacker to repeatedly burn tokens and manipulate reserves and pricing. The faulty isContract check failed to prevent contract interactions, letting the attacker exploit the vulnerability through repeated contract deployments."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "The Fire Token exploit occurred on October 1, 2024, immediately after contract launch on Ethereum. The attacker used a 20 ETH flash loan to buy FIRE tokens, then exploited the token's indiscriminate hyper-deflationary burn-on-transfer logic by transferring tokens to the Uniswap pool, burning reserves and manipulating the price. The attacker swapped inflating FIRE for more ETH, ultimately draining the pool and profiting approximately $24,000. The FIRE token's _transfer() function applied a burn-and-sync logic on every transfer, including transfers into Uniswap pools, reducing pool reserves without a corresponding ETH outflow. This let an attacker manipulate spot price and drain the pool."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "FireToken was exploited on Ethereum on 1 October 2024, immediately following its launch. An attacker manipulated the token's burn-on-transfer mechanism to drain the project's key Uniswap pool, netting approximately 8.45 ETH (~$20,000) by manipulating pool reserves and the token's price. Defective custom LP burn/sync logic: When FireTokens were transferred to the Uniswap pair, tokens were burned and the pool reserves forcibly synced, enabling attackers to repeatedly reduce reserves, spike the price, and drain ETH. An 'isContract' check was insufficiently robust and could be bypassed via contract creation."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xd20b3b31a682322eb0698ecd67a6d8a040ccea653ba429ec73e3584fa176ff2b"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-10/FireToken_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-10/FireToken_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xd20b3b31a682322eb0698ecd67a6d8a040ccea653ba429ec73e3584fa176ff2b"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "quillaudits.com",
+      "url": "https://www.quillaudits.com/blog/hack-analysis/fire-token-exploit"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/fire-token-incident-24-000-2024-10-31t13-39-34-00-00"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/de-fi-rekt-report-october-2024-over-94-million-lost-to-defi-exploits"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.solidityscan.com",
+      "url": "https://blog.solidityscan.com/fire-token-hack-analysis-5a0dbb549dad/"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/unraveling-the-24k-fire-token-2024-10-14"
+    },
+    {
+      "source": "revertiq",
+      "label": "olympix.security",
+      "url": "https://olympix.security/biweekly-exploits/sunray-finance-fire-token-and-onyxdao-drained-via-key-compromise-launch-time-burn-flaw-and-exchange-rate-abuse"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/firetoken-2024-10-01"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/kismp123/DeFi-Security-Incident/blob/main/2024/2024-10-01_FireToken_TransferLPDrainExploit.md"
+    }
+  ]
+}

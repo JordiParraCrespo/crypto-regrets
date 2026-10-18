@@ -1,0 +1,102 @@
+{
+  "id": "2023-08-24-gss",
+  "name": "GSS",
+  "date": "2023-08-24",
+  "year": 2023,
+  "amountUsd": 25000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "Token",
+  "category": "accounting-math",
+  "technique": "Arithmetic Error",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.82,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.83
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.12
+      },
+      {
+        "category": "market-manipulation",
+        "p": 0.03
+      }
+    ],
+    "flashLoan": 0.36,
+    "stateActor": 0.03,
+    "hasRootCause": 0.94
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "skim token balance. Lost: ~$25K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "skim token balance. Lost: ~$25K"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The attack began with a loan of USDT. By manipulating the price-to-total supply relationship on PancakeSwap, the attacker unbalanced the GSS pool and distorted the GSS price. This allowed the final swap from GSS to USDT to yield more USDT for the attacker. Vulnerable Code Snippet: Attack Transaction: https://bscscan.com/tx/0x4f8cb9efb3cc9930bd38af5f5d34d15ce683111599a80df7ae50b003e746e336 Analysis: https://twitter.com/bbbb/status/1694571228185723099"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On August 24, 2023, GSS's liquidity pools on BNB Chain were exploited via manipulated pool accounting enabled by improper use of Uniswap/PancakeSwap skim and sync functions, resulting in a loss of approximately $25,000. The exploit occurred because pool contracts did not enforce proper invariants controlling surplus token transfers and reserve updates. The attacker leveraged the skim and sync functions to extract excess assets by transferring between pools without checks on recipients, exposing a design flaw in arithmetic and accounting logic."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x4f8cb9efb3cc9930bd38af5f5d34d15ce683111599a80df7ae50b003e746e336"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-08/GSS_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-08/GSS_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/bbbb/status/1694571228185723099"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x4f8cb9efb3cc9930bd38af5f5d34d15ce683111599a80df7ae50b003e746e336"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/gss-2023-08-24"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/gss-hack-2023"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/past/2023/README.md#L2151"
+    }
+  ]
+}

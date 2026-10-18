@@ -1,0 +1,70 @@
+{
+  "id": "2021-05-27-wild-credit",
+  "name": "Wild Credit",
+  "date": "2021-05-27",
+  "year": 2021,
+  "amountUsd": 637000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum Mainnet"
+  ],
+  "targetType": null,
+  "category": "access-control",
+  "technique": "Unauthorized contract initialization; Arbitrary minting; Unbacked withdrawal",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 1.00).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "Wild Credit's BNT-ETH lending pool was exploited in May 2021 via an unprotected LP token 'initialize' function. An attacker gained contract ownership, minted unbacked LP tokens, and withdrew 125,585 BNT (~$637k). A white-hat bot front-ran the final withdrawal and returned all assets, resulting in full recovery. The BNT-ETH LP token contract's initialize function was left public and reusable, allowing any address to become owner and mint arbitrary tokens. This broke collateralization by permitting withdrawal of real assets without deposits.",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "Wild Credit's BNT-ETH lending pool was exploited in May 2021 via an unprotected LP token 'initialize' function. An attacker gained contract ownership, minted unbacked LP tokens, and withdrew 125,585 BNT (~$637k). A white-hat bot front-ran the final withdrawal and returned all assets, resulting in full recovery. The BNT-ETH LP token contract's initialize function was left public and reusable, allowing any address to become owner and mint arbitrary tokens. This broke collateralization by permitting withdrawal of real assets without deposits."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xb4fffa0e824034a10af2807f1504ac247ae1dd6f2bcfed8085989bbfda434542",
+    "0xdbef3b393a64608756c284568217355f694a0e5c8edf80eac75ec087d642ce07"
+  ],
+  "poc": null,
+  "sources": [
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/wild-credit-2021-05-27"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "quadrigainitiative.com",
+      "url": "https://www.quadrigainitiative.com/casestudy/wildcreditmintingexploit.php"
+    },
+    {
+      "source": "revertiq",
+      "label": "quadrigainitiative.com",
+      "url": "https://quadrigainitiative.com/cryptocurrencyhackscamfraudwiki/index.php?title=Wild_Credit_Minting_Exploit"
+    }
+  ]
+}

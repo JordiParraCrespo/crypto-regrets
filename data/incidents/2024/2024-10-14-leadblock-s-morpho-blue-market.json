@@ -1,0 +1,107 @@
+{
+  "id": "2024-10-14-leadblock-s-morpho-blue-market",
+  "name": "LeadBlock's Morpho Blue Market",
+  "date": "2024-10-14",
+  "year": 2024,
+  "amountUsd": 250000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Oracle Misconfiguration",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.98,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.98
+      },
+      {
+        "category": "arbitrary-call",
+        "p": 0.01
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Overpriced Asset in Oracle. Lost: $230,000",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Overpriced Asset in Oracle. Lost: $230,000"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The MorphoBundler contract contained a critical vulnerability that allowed arbitrary users to set authorizations on behalf of others when using its multicall function. The exploit leveraged the setAuthorization function call through the bundler without proper verification of the caller's identity. This allowed the attacker to gain authorization to the victim's Morpho account, access the victim's collateral (PAXG), and borrow USDC against it. The vulnerability stems from the bundler not validating that the account setting authorization is the actual transaction initiator, allowing the attacker to impersonate the victim and authorize themselves to manipulate the victim's positions. Vulnerable code snippet: Attack tx: https://etherscan.io/tx/0x256979ae169abb7fbbbbc14188742f4b9debf48b48ad5b5207cadcc99ccb493b Analysis: https://blog.verichains.io/p/morpho-protocol-market-oracle-price"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "LeadBlock's Morpho Blue Market on Ethereum was exploited on October 13,14, 2024, due to a critical oracle misconfiguration in the PAXG/USDC lending market. The attacker deposited minimal PAXG collateral, then withdrew approximately $230,000,$250,000 in USDC, exploiting a faulty price that valued gold at trillions of dollars. The price oracle for the PAXG/USDC market failed to account for a 12-decimal difference between PAXG (18 decimals) and USDC (6 decimals). This caused the oracle to report a price more than 10^12 times too high for PAXG, letting a small deposit unlock excessive borrowing."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x256979ae169abb7fbbbbc14188742f4b9debf48b48ad5b5207cadcc99ccb493b"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-10/MorphoBlue_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-10/MorphoBlue_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/omeragoldberg/status/1845515843787960661"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x256979ae169abb7fbbbbc14188742f4b9debf48b48ad5b5207cadcc99ccb493b"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "blog.verichains.io",
+      "url": "https://blog.verichains.io/p/morpho-protocol-market-oracle-price"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/leadblock-s-morpho-blue-market-2024-10-14"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.solidityscan.com",
+      "url": "https://blog.solidityscan.com/morphoblue-hack-analysis-638b685f8bf2/"
+    },
+    {
+      "source": "revertiq",
+      "label": "monitoringroom.com",
+      "url": "https://monitoringroom.com/situation/crypto-hack/leadblock-s-morpho-blue-market"
+    }
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "id": "2021-06-25-xwin-finance",
+  "name": "xWin Finance",
+  "date": "2021-06-25",
+  "year": 2021,
+  "amountUsd": 270000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "input-validation",
+  "technique": "Missing Input Validation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "input-validation",
+    "confidence": 0.97,
+    "top": [
+      {
+        "category": "input-validation",
+        "p": 0.97
+      },
+      {
+        "category": "logic-error",
+        "p": 0.03
+      }
+    ],
+    "flashLoan": 0.07,
+    "stateActor": 0.03,
+    "hasRootCause": 0.43
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "subscription-incentive-mechanism. Lost: ~$300k",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "subscription-incentive-mechanism. Lost: ~$300k"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The DeFi protocol xWin Finance based on Binance Smart Chain was attacked by lightning loans. The xWin Finance token XWIN has fallen by nearly 90% in 24 hours. The attacker used xWin Finance's \"reward mechanism\" to continuously add and remove liquidity to obtain rewards. Under normal circumstances, due to the small amount of users added, the gains may be small, or even not enough to pay the handling fees; but in the face of huge amounts of funds, the rewards will become abnormally high."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 25 June 2021, xWin Finance on BNB Chain was exploited for $270,000. An attacker repeatedly used a flash loan and a flaw in the referral rewards and slippage control logic to claim excessive xWIN token rewards, converting them to BNB and draining value from the protocol. The vulnerability was caused by an invalid slippage control in the xWinFund contract, which, combined with a poorly implemented referral reward mechanism, allowed repeated flash-loan-based subscription and redemption cycles to mint excessive xWIN token rewards."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xba0fa8c150b2408eec9bbbbfe63f9ca63e99f3ff53ac46ee08d691883ac05c1d"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2021-06/xWin_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2021-06/xWin_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "peckshield.medium.com",
+      "url": "https://peckshield.medium.com/xwin-finance-incident-root-cause-analysis-71d0820e6bc1"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/xwin-finance-2021-06-25"
+    },
+    {
+      "source": "revertiq",
+      "label": "quadrigainitiative.com",
+      "url": "https://www.quadrigainitiative.com/casestudy/xwinfinanceflashloanattack.php"
+    }
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "id": "2022-05-29-novo-protocol",
+  "name": "NOVO Protocol",
+  "date": "2022-05-29",
+  "year": 2022,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Flashloan & Price Oracle Manipulation",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.98). Replaced keyword guess \"oracle-manipulation\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.98,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.98
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.46,
+    "stateActor": 0.02,
+    "hasRootCause": 0.83
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Flashloan & Price Oracle Manipulation. Lost: 279 BNB",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Flashloan & Price Oracle Manipulation. Lost: 279 BNB"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "No sender address validation. Vulnerable code snippet: https://bscscan.com/address/0xa0787daad6062349f63b7c228cbfd5d8a3db08f1#code#L2941 There is no sender address validation in the overridden transferFrom function"
+    },
+    {
+      "source": "SlowMist",
+      "text": "DeFi project Novo is suspected of being attacked, and hackers have transferred 280 BNB (about $89,600) to Tornado.cash."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-05/Novo_exp.sol",
+  "sources": [
+    "defihacklabs",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-05/Novo_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "www.panewslab.com",
+      "url": "https://www.panewslab.com/zh_hk/articledetails/f40t9xb4.html"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0xc346adf14e5082e6df5aeae650f3d7f606d7e08247c2b856510766b4dfcdc57f"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0xa0787daad6062349f63b7c228cbfd5d8a3db08f1#code"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0xa0787daad6062349f63b7c228cbfd5d8a3db08f1#code#L2941"
+    },
+    {
+      "source": "slowmist",
+      "label": "panewslab.com",
+      "url": "https://www.panewslab.com/zh/sqarticledetails/y3y02hxy.html"
+    }
+  ]
+}

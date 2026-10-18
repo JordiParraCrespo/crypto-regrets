@@ -1,0 +1,84 @@
+{
+  "id": "2026-09-11-ether-fi-liquid",
+  "name": "ether.fi Liquid",
+  "date": "2026-09-11",
+  "year": 2026,
+  "amountUsd": 43260,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "arbitrary-call",
+  "technique": "Arbitrary External Call",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "arbitrary-call",
+    "confidence": 0.6,
+    "top": [
+      {
+        "category": "arbitrary-call",
+        "p": 0.62
+      },
+      {
+        "category": "access-control",
+        "p": 0.38
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Users of ether.fi Liquid (liquidETH) lost ~15.45 ETH after an attacker exploited missing access control in AtomicQueue.solve() on the caller-supplied solver parameter. The attacker crafted a malicious AtomicRequest, forced already-approved victim addresses to act as solver, and drained funds via existing ERC-20 allowances with transferFrom. About 11 users were affected.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Users of ether.fi Liquid (liquidETH) lost ~15.45 ETH after an attacker exploited missing access control in AtomicQueue.solve() on the caller-supplied solver parameter. The attacker crafted a malicious AtomicRequest, forced already-approved victim addresses to act as solver, and drained funds via existing ERC-20 allowances with transferFrom. About 11 users were affected."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 2026-09-11, an attacker exploited missing authentication in ether.fi Liquid's legacy Veda AtomicQueue contract on Ethereum. By supplying victim wallets with stale ERC-20 approvals as the solver parameter in solve(), the attacker drained about 14.45 liquidETH and 7.05 USDC, then swapped the assets into 15.45 ETH. The legacy AtomicQueue contract accepted an arbitrary solver address in solve() without verifying that the caller was authorized to act for that solver. During settlement, the queue executed want.safeTransferFrom(solver, users[i], assetsToUser), allowing the attacker to spend tokens from wallets that had previously approved the queue contract."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x7cbe0b4349513fed6d03ba8bf9ed708e10e07a501d10b5f344a25ae10595599b"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/2098344499923784048"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/ether-fi-liquid-2026-09-11"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptotimes.io",
+      "url": "https://www.cryptotimes.io/2026/09/11/ether-fi-loses-15-45-eth-in-legacy-atomicqueue-exploit-ceo-pledges-full-user-reimbursement/"
+    },
+    {
+      "source": "revertiq",
+      "label": "crypto.training",
+      "url": "https://crypto.training/hacks/2026-09-etherfivedaatomicqueue/"
+    }
+  ]
+}

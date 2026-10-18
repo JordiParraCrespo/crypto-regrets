@@ -1,0 +1,112 @@
+{
+  "id": "2022-10-25-ulme",
+  "name": "ULME",
+  "date": "2022-10-25",
+  "year": 2022,
+  "amountUsd": 250000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.79,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.8
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.14
+      },
+      {
+        "category": "logic-error",
+        "p": 0.03
+      }
+    ],
+    "flashLoan": 0.97,
+    "stateActor": 0.02,
+    "hasRootCause": 0.94
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Access Control. Lost: ~250k US$ which resulted in ~50k profit",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Access Control. Lost: ~250k US$ which resulted in ~50k profit"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "buyMiner function in the contract UniverseGoldMountain (ULME) is public and could potentially enable price manipulation, it appears that the attacker is exploiting this vulnerability to their advantage. By leveraging the flashloan, the attacker can potentially manipulate the price of ULME tokens and benefit from the price changes in the process. Vulnerable code snippet: Attack tx: https://bscscan.com/tx/0xdb9a13bc970b97824e082782e838bdff0b76b30d268f1d66aac507f1d43ff4ed Analysis: 1. Utilize a Flashloan to borrow BUSD from the lending platform. 2. Execute a swap of the borrowed BUSD for ULME tokens via PancakeSwap. 3. Utilize pre-approved users who possess BUSD tokens to trigger the buyMiner function of the ULME token. 4. Employ indirect price manipulation to exchange ULME tokens back for BUSD. And this behavior will increase the ULME token again. 5. Repay the Flashloan and secure a profit of 50,646 BUSD as the profit. https://twitter.com/BlockSecTeam/status/1584839309781135361 https://twitter.com/BeosinAlert/status/1584888021299916801"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "ULME was attacked on BNB Chain on October 25, 2022, when an access control flaw in the buyMiner function enabled mass draining of users' USDT tokens via flash loan. The attacker profited about $50,646 BUSD, and total losses reached $250,000 across over 100 victim addresses. The buyMiner function in the ULME contract was public and lacked proper access checks. This allowed anyone to call it and withdraw USDT from approved addresses, abusing delegated allowances and draining funds from many users."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xdb9a13bc970b97824e082782e838bdff0b76b30d268f1d66aac507f1d43ff4ed"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-10/ULME_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-10/ULME_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BlockSecTeam/status/1584839309781135361"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BeosinAlert/status/1584888021299916801"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "medium.com",
+      "url": "https://medium.com/neptune-mutual/decoding-ulme-token-flash-loan-attack-56470d261787"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0xdb9a13bc970b97824e082782e838bdff0b76b30d268f1d66aac507f1d43ff4ed"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/ulme-2022-10-25"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/ulme-hack-2022"
+    },
+    {
+      "source": "revertiq",
+      "label": "autosaida.github.io",
+      "url": "https://autosaida.github.io/DeFiHackAnalysis/2022/221025_ULME/"
+    }
+  ]
+}

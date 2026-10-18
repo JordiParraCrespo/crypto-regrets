@@ -1,0 +1,112 @@
+{
+  "id": "2023-07-18-bno",
+  "name": "BNO",
+  "date": "2023-07-18",
+  "year": 2023,
+  "amountUsd": 500000,
+  "returnedUsd": null,
+  "chains": [
+    "BNB Chain"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.89,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.9
+      },
+      {
+        "category": "access-control",
+        "p": 0.09
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.03,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Invalid emergency withdraw mechanism. Lost: ~$505K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Invalid emergency withdraw mechanism. Lost: ~$505K"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Emergency withdrawals were made without withdrawing the staked NFTs, and the rewardDebt ledger is set to 0, resulting in them still being claimable when the stake was canceled. The attacker repeats this process and obtains a large reward. Attack TX: https://bscscan.com/tx/0x33fed54de490797b99b2fc7a159e43af57e9e6bdefc2c2d052dc814cfe0096b9 Analysis: https://twitter.com/BeosinAlert/status/1681116206663876610"
+    },
+    {
+      "source": "SlowMist",
+      "text": "BNO suffered a flash loan attack on BNBChain, resulting in a loss of about $500,000 due to business logic problems. The root cause of the attack is a problem with the reward calculation mechanism in the pool that supports NFT and ERC20 token rights. The pool has an \"emergencyWithdraw\" function that allows users to withdraw their ERC20 token stake immediately. Crucially, however, this feature does not process or interpret NFT stake records. Attackers exploited this flaw by depositing NFTs and ERC20 tokens into a pool and then executing the \"emergencyWithdraw\" function specifically for their ERC20 tokens. By doing so, an attacker can bypass the reward ca…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On July 18, 2023, BNO on BNB Chain was exploited for approximately $500,000. The attacker repeatedly called the emergencyWithdraw function, bypassing reward accounting and enabling extraction of excess rewards. The vulnerable pool contract's emergencyWithdraw function failed to reset reward debt and staking state fully. This allowed repeated withdrawals and reward claims, letting the attacker extract more tokens than permitted."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x33fed54de490797b99b2fc7a159e43af57e9e6bdefc2c2d052dc814cfe0096b9"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-07/BNO_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-07/BNO_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BeosinAlert/status/1681116206663876610"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x33fed54de490797b99b2fc7a159e43af57e9e6bdefc2c2d052dc814cfe0096b9"
+    },
+    {
+      "source": "slowmist",
+      "label": "blog.solidityscan.com",
+      "url": "https://blog.solidityscan.com/bno-hack-analysis-15436d73e44e"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/bno-2023-07-18"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/past/2023/README.md#L2593"
+    },
+    {
+      "source": "revertiq",
+      "label": "raw.githubusercontent.com",
+      "url": "https://raw.githubusercontent.com/SunWeb3Sec/DeFiHackLabs/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/src/test/2023-07/BNO_exp.sol"
+    }
+  ]
+}

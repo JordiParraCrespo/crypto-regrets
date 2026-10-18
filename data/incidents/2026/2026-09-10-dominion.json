@@ -1,0 +1,81 @@
+{
+  "id": "2026-09-10-dominion",
+  "name": "Dominion",
+  "date": "2026-09-10",
+  "year": 2026,
+  "amountUsd": 238000,
+  "returnedUsd": null,
+  "chains": [
+    "Solana"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "key-compromise",
+  "technique": "Private Key Compromised",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "key-compromise",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "key-compromise",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.94
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "Dominion Market’s Solana silver token $SILV suffered a treasury multisig compromise. With 3-of-5 keys, the attacker emptied the treasury and pulled SILV from loans, dumping about 46,909 tokens (face value ~$3 million) into thin DEX pools and realizing about $238,000 as the peg broke. The team pulled liquidity, rotated hardware, froze tokens bought in the incident window, and planned USDC refunds plus a repeg.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Dominion Market’s Solana silver token $SILV suffered a treasury multisig compromise. With 3-of-5 keys, the attacker emptied the treasury and pulled SILV from loans, dumping about 46,909 tokens (face value ~$3 million) into thin DEX pools and realizing about $238,000 as the peg broke. The team pulled liquidity, rotated hardware, froze tokens bought in the incident window, and planned USDC refunds plus a repeg."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Dominion’s SILV treasury on Solana was compromised on 2026-09-11 after three of five multisig signers were exposed, letting the attacker move treasury SILV, sell into thin liquidity, and bridge proceeds across Chainflip. The key theft method is still unknown. Three of five signers on Dominion’s Solana treasury and token-admin multisigs were compromised. That quorum let the attacker authorize treasury transfers, signer changes, and admin actions such as freezes and delegate movements. The chain does not show how the keys were stolen, and no vulnerable contract code has been identified."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x911870255c4cf5aab7aa4ed7edadd66a0ecf4be052173e925fa833956e131da8",
+    "0x110f9ab1d5e051c186a6854a623ffe8c9641ddfaf1e8a69c655e4cb47df59903"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/Dominion_Market/status/2098327452497924553"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/dominion-2026-09-10"
+    },
+    {
+      "source": "revertiq",
+      "label": "solanafloor.com",
+      "url": "https://solanafloor.com/news/dominion-freezes-silv-bought-after-exploit-as-token-collapses-70"
+    },
+    {
+      "source": "revertiq",
+      "label": "bitquery.io",
+      "url": "https://bitquery.io/investigations/dominion-silv-hack-3-million-silver-tokens"
+    }
+  ]
+}

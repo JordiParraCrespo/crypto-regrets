@@ -1,0 +1,60 @@
+{
+  "id": "2023-05-20-aave",
+  "name": "Aave",
+  "date": "2023-05-20",
+  "year": 2023,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [
+    "Polygon"
+  ],
+  "targetType": null,
+  "category": "logic-error",
+  "technique": "Compatibility issues",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.93). Replaced keyword guess \"governance\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.93,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.93
+      },
+      {
+        "category": "bridge-crosschain",
+        "p": 0.06
+      },
+      {
+        "category": "access-control",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.01,
+    "hasRootCause": 0.51
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "About 110 million USD in WETH, USDT, WBTC, WMATIC in Aave V2 on Polygon cannot be withdrawn, nor can it be borrowed and repaid. This is because the interest rate strategy contract is only compatible with Ethereum, not Polygon. At present, Aave has submitted a patch to fix this problem, which will be deployed after voting. Funds are not at risk, but it takes at least a week for funds to be unfrozen.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "About 110 million USD in WETH, USDT, WBTC, WMATIC in Aave V2 on Polygon cannot be withdrawn, nor can it be borrowed and repaid. This is because the interest rate strategy contract is only compatible with Ethereum, not Polygon. At present, Aave has submitted a patch to fix this problem, which will be deployed after voting. Funds are not at risk, but it takes at least a week for funds to be unfrozen."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "slowmist",
+      "label": "beincrypto.com",
+      "url": "https://beincrypto.com/aave-users-unable-to-access-over-100m/"
+    }
+  ]
+}

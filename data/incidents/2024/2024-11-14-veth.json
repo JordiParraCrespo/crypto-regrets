@@ -1,0 +1,107 @@
+{
+  "id": "2024-11-14-veth",
+  "name": "vETH",
+  "date": "2024-11-14",
+  "year": 2024,
+  "amountUsd": 447000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.99
+      },
+      {
+        "category": "market-manipulation",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.08,
+    "stateActor": 0.03,
+    "hasRootCause": 0.06
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Vulnerable Price Dependency. Lost: 447k",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Vulnerable Price Dependency. Lost: 447k"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The vETH token suffered an attack, resulting in approximately $450K in losses."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On November 14, 2024, an attacker exploited vETH’s lending logic by manipulating privileged contract interactions during liquidity additions to Uniswap V2 pairs on Ethereum. This flaw allowed minting of vETH tokens without corresponding collateral, producing a reported loss of approximately $450,000. A logical vulnerability in the factory contract’s liquidity-adding function enabled it to call vETH’s takeLoan in a context where the Uniswap pool state could be manipulated, bypassing intended collateral requirements and minting vETH at no proper cost."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x90db330d9e46609c9d3712b60e64e32e3a4a2f31075674a58dd81181122352f8",
+    "0x1ae40f26819da4f10bc7c894a2cc507cdb31c29635d31fa90c8f3f240f0327c0",
+    "0x900891b4540cac8443d6802a08a7a0562b5320444aa6d8eed19705ea6fb9710b"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-11/vETH_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-11/vETH_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/TenArmorAlert/status/1856984299905716645"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x90db330d9e46609c9d3712b60e64e32e3a4a2f31075674a58dd81181122352f8"
+    },
+    {
+      "source": "blocksec",
+      "label": "x.com",
+      "url": "https://x.com/Phalcon_xyz/status/1857002671124730233"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/1856987988632457708"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/decoding-veth-token-s-450k-2024-12-25"
+    },
+    {
+      "source": "revertiq",
+      "label": "quillaudits.com",
+      "url": "https://www.quillaudits.com/blog/hack-analysis/veth-token-450k-exploit-analysis"
+    }
+  ]
+}

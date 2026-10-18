@@ -1,0 +1,67 @@
+{
+  "id": "2026-07-19-rwt",
+  "name": "RWT",
+  "date": "2026-07-19",
+  "year": 2026,
+  "amountUsd": 118000,
+  "returnedUsd": null,
+  "chains": [
+    "BNB Chain"
+  ],
+  "targetType": null,
+  "category": "oracle-manipulation",
+  "technique": "Flash Loan",
+  "classificationNote": "Classified by keyword rules from the DeFiHackLabs explorer label and description.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.43,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.46
+      },
+      {
+        "category": "logic-error",
+        "p": 0.31
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.21
+      }
+    ],
+    "flashLoan": 0.97,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "Unprotected sell() contract in RWT token allowed burning tokens directly from the RWT/USDT PancakePair reserves. The sell contract holds the onlyOwner role on RWT.burn(), enabling it to collapse the pair's RWT reserve and artificially inflate RWT's price in USDT. Attacker flash-loaned 1M USDT and executed the exploit 18 times in a single transaction, extracting USDT at manipulated prices. Total drained: ~158.6K USDT and ~110M RWT from the pair. Attack Tx: https://bscscan.com/tx/0x22300140e7c44899c2602382a6e7a4a34a70f47f9736721744bc6434c07171dc Source: https://twitter.com/DefimonAlerts/status/2078826324320248147",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Unprotected sell() contract in RWT token allowed burning tokens directly from the RWT/USDT PancakePair reserves. The sell contract holds the onlyOwner role on RWT.burn(), enabling it to collapse the pair's RWT reserve and artificially inflate RWT's price in USDT. Attacker flash-loaned 1M USDT and executed the exploit 18 times in a single transaction, extracting USDT at manipulated prices. Total drained: ~158.6K USDT and ~110M RWT from the pair. Attack Tx: https://bscscan.com/tx/0x22300140e7c44899c2602382a6e7a4a34a70f47f9736721744bc6434c07171dc Source: https://twitter.com/DefimonAlerts/status/2078826324320248147"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x22300140e7c44899c2602382a6e7a4a34a70f47f9736721744bc6434c07171dc"
+  ],
+  "poc": null,
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x22300140e7c44899c2602382a6e7a4a34a70f47f9736721744bc6434c07171dc"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/DefimonAlerts/status/2078826324320248147"
+    }
+  ]
+}

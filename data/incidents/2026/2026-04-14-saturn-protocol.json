@@ -1,0 +1,74 @@
+{
+  "id": "2026-04-14-saturn-protocol",
+  "name": "Saturn Protocol",
+  "date": "2026-04-14",
+  "year": 2026,
+  "amountUsd": 0,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Vulnerability Disclosure",
+  "classificationNote": "Upstream label missing; classified by keyword rules from the root-cause text.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.49,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.52
+      },
+      {
+        "category": "logic-error",
+        "p": 0.47
+      },
+      {
+        "category": "rugpull",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.01,
+    "hasRootCause": 0.83
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Vulnerability Disclosure. Lost: 0 (Disclosure only; no exploit occurred)",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Vulnerability Disclosure. Lost: 0 (Disclosure only; no exploit occurred)"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "This is a vulnerability disclosure (no on-chain exploit) against Saturn Protocol's StakedUSDat (sUSDat) ERC4626 vault, covering two distinct bugs. SAT-001 (withdrawal freeze): convertFromStrc() computes vestedBalance = strcBalance - getUnvestedAmount(). After PROCESSOR calls transferInRewards() (adding to the linearly-vesting amount) and the WithdrawQueue then legitimately burns previously-vested shares via burnQueuedShares, strcBalance can drop below the still-unvested amount, causing a Solidity 0.8 arithmetic underflow (panic 0x11) that reverts and freezes all withdrawals for up to the 30-day vesting period — reachable through routine operations with no attacker and no admin escape hatch. SAT-002 (PROCESSOR extraction): _validateConversion() applies the same toleranceBps = 2000 (20%) tolerance independently to BOTH the price check and the amount check during convertFromUsdat(). Compounding the two 20% slacks lets a privileged PROCESSOR_ROLE credit the vault only 0.8/1.2 of fair value, extracting up to 1 - 0.8/1.2 = 33.33% of value per conversion. Vulnerable code snippet: Attack Tx: https://gist.github.com/sgInnora/b70ad98327649ed4ab976a122f45e485 Analysis: https://x.com/Innora_sg/status/2043979131617194043"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-04/SaturnProtocol_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-04/SaturnProtocol_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "gist.github.com",
+      "url": "https://gist.github.com/sgInnora/b70ad98327649ed4ab976a122f45e485"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/Innora_sg/status/2043979131617194043"
+    }
+  ]
+}

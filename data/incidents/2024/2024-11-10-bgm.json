@@ -1,0 +1,103 @@
+{
+  "id": "2024-11-10-bgm",
+  "name": "BGM",
+  "date": "2024-11-10",
+  "year": 2024,
+  "amountUsd": 450000,
+  "returnedUsd": null,
+  "chains": [
+    "BNB Chain"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.98,
+    "stateActor": 0.01,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "The BGM token contract on BSC calculated user reward payouts using the real-time spot price from a PancakeSwap pool, obtained via getSwapRouterAmountsOut(). Because this spot price can be transiently manipulated within a single transaction using a flash loan, the attacker borrowed a large quantity of tokens, inflated the BGM price in the PancakeSwap pool, and then claimed artificially inflated rewards based on that manipulated price. The attacker then repaid the flash loan and retained the excess profit, netting approximately $450K. The root cause was the contract's direct dependency on an AMM spot price rather than a manipulation-resistant price feed such as a TWAP oracle or a Chainlink price feed, making the reward calculation trivially exploitable. Attack Tx: 0x8580825008800b9e13266f40b41a838a521e4d0bb4abc1cb78684253b7bc9fd1 Analysis: BGM Token Vulnerable Price Dependency – Guardrail Docs Phalcon Alert",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The BGM token contract on BSC calculated user reward payouts using the real-time spot price from a PancakeSwap pool, obtained via getSwapRouterAmountsOut(). Because this spot price can be transiently manipulated within a single transaction using a flash loan, the attacker borrowed a large quantity of tokens, inflated the BGM price in the PancakeSwap pool, and then claimed artificially inflated rewards based on that manipulated price. The attacker then repaid the flash loan and retained the excess profit, netting approximately $450K. The root cause was the contract's direct dependency on an AMM spot price rather than a manipulation-resistant price feed such as a TWAP oracle or a Chainlink price feed, making the reward calculation trivially exploitable. Attack Tx: 0x8580825008800b9e13266f40b41a838a521e4d0bb4abc1cb78684253b7bc9fd1 Analysis: BGM Token Vulnerable Price Dependency – Guardrail Docs Phalcon Alert"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The BGM token on BSC was attacked, resulting in losses exceeding $450K, with the attacker profiting through price manipulation."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "The BGM protocol on BNB Chain was exploited on November 10, 2024, resulting in around $450,000 in losses. The attack leveraged a flaw in the project's inviter reward mechanism, allowing the attacker to abuse token transfer logic and manipulate protocol state via orchestrated batch transactions and spot price manipulation. The protocol's inviter reward mechanism allowed artificial inflation of rewards by reusing invitee addresses, with direct withdrawal logic permitting repeated extraction of assets. The design failed to prevent users from engineering reward loops and manipulating token balances using large, coordinated token transfers."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x8580825008800b9e13266f40b41a838a521e4d0bb4abc1cb78684253b7bc9fd1",
+    "0xc7c65abb41394e8d1d481e2e3568f5ec32c8251c9f4b5be21e85e8a810b41fab",
+    "0xc8d3bec5bdb66e31a8960e8d8cc9bf09e47a71d00c8da6de05e583991f9711e0"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x8580825008800b9e13266f40b41a838a521e4d0bb4abc1cb78684253b7bc9fd1"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "guardrail.gitbook.io",
+      "url": "https://guardrail.gitbook.io/cached-v2/threat-intel/incident-summaries/2024-11.10-bgm-token-vulnerable-price-dependency"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/Phalcon_xyz/status/1855798237770170415"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x8580825008800b9e13266f40b41a838a521e4d0bb4abc1cb78684253b7bc9fd1"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/bgm-2024-11-10"
+    },
+    {
+      "source": "revertiq",
+      "label": "quadrigainitiative.com",
+      "url": "https://quadrigainitiative.com/casestudy/bgmonbscbatchtransactionspricemanipulationexploit.php"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/bgm-hack-2024"
+    }
+  ]
+}

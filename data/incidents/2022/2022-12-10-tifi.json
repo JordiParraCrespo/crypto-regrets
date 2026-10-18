@@ -1,0 +1,94 @@
+{
+  "id": "2022-12-10-tifi",
+  "name": "TiFi",
+  "date": "2022-12-10",
+  "year": 2022,
+  "amountUsd": 43500,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "Token",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.97,
+    "stateActor": 0.02,
+    "hasRootCause": 0.85
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "FlashLoan price manipulation. Lost: 87 WBNB",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "FlashLoan price manipulation. Lost: 87 WBNB"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "FlashLoan price manipulation. Vulnerable code snippet: Not open sourced. Attack tx: https://explorer.phalcon.xyz/tx/bsc/0x1c5272ce35338c57c6b9ea710a09766a17bbf14b61438940c3072ed49bfec402 Analysis: https://twitter.com/peckshield/status/1601492605535399936"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "TiFi protocol on BNB Chain was exploited on 10 December 2022 due to spot price manipulation via its use of on-chain AMM reserves for price feeds. The attacker manipulated a liquidity pool’s reserves to inflate the value of collateral and extracted approximately $44,000 in tokens through a sequence of lending and swaps. The TiFi protocol relied on the spot price from a manipulable AMM liquidity pool to determine collateral and loan value. The attacker manipulated BNB-BUSD pool reserves to inflate borrowing capacity and drain protocol tokens."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x1c5272ce35338c57c6b9ea710a09766a17bbf14b61438940c3072ed49bfec402"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-12/TIFI_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-12/TIFI_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/peckshield/status/1601492605535399936"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "explorer.phalcon.xyz",
+      "url": "https://explorer.phalcon.xyz/tx/bsc/0x1c5272ce35338c57c6b9ea710a09766a17bbf14b61438940c3072ed49bfec402"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/tifi-2022-12-10"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/tifi-hack-2022"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/Oxjade/DeFi-Exploits/blob/main/src/test/2022-12/TIFI_exp.sol"
+    }
+  ]
+}

@@ -1,0 +1,127 @@
+{
+  "id": "2025-09-22-uxlink",
+  "name": "UXLINK",
+  "date": "2025-09-22",
+  "year": 2025,
+  "amountUsd": 11300000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum",
+    "Arbitrum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Delegatecall Hijack",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.8,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.81
+      },
+      {
+        "category": "arbitrary-call",
+        "p": 0.14
+      },
+      {
+        "category": "logic-error",
+        "p": 0.03
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "An admin coup on UXLink, followed by cross-chain laundering and billions of UXLINK minted led to an estimated $41 million exploit. Leading to a new contract with a 1 to 1 swap, hacker funds frozen, shaky compensation plans, leaving chaos, and unanswered questions.",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "An admin coup on UXLink, followed by cross-chain laundering and billions of UXLINK minted led to an estimated $41 million exploit. Leading to a new contract with a 1 to 1 swap, hacker funds frozen, shaky compensation plans, leaving chaos, and unanswered questions."
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The UXLINK multisig admin wallet was compromised via a delegateCall vulnerability embedded in the multisig contract's implementation logic. The attacker executed a delegateCall that ran arbitrary code within the multisig's storage context, invoking addOwnerWithThreshold to replace the legitimate signers with an attacker-controlled address and grant themselves full administrative privileges. With that control, the attacker seized approximately 490 million existing UXLINK tokens from the treasury and minted up to 10 trillion additional UXLINK tokens — made possible by the absence of a hardcoded supply cap and lax minting access controls. The attacker also drained ~$4M USDT, $500K USDC, 3.7 WBTC, and 25 ETH; stablecoins were converted to DAI and ETH, and approximately $8.1M in ETH was subsequently deposited into Tornado Cash across 46 separate 100-ETH transactions. UXLINK responded by migrating to a new audited contract that permanently removed the mint-burn function and executed a 1:1 token swap to exclude the fraudulently minted supply. Attack Tx: 0x9f4d507cb7d8279fd110ef13e59dbfd74a0cebaf456de909826a5761e32574e6 Analysis: CoinTelegraph — UXLink hack shows risks of centralized control in DeFi projects"
+    },
+    {
+      "source": "SlowMist",
+      "text": "AI-driven Web3 social platform UXLINK suffered an attack affecting platform-related assets, resulting in losses exceeding USD 11 million. Investigation showed that the attacker had prepared for months prior to the incident, impersonating a business partner and leveraging deepfake video conferencing as part of a social engineering scheme. Through these methods, the attacker gained access to the personal devices of several SAFE key holders and obtained sensitive information such as passwords and private keys. After gaining control over the legacy arb-UXLINK smart contract, the attacker executed unauthorized token minting and subsequently transferred and sold the assets.…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 2025-09-22, UXLINK's multisig on Ethereum and Arbitrum was taken over through a delegateCall path that let the attacker rewrite signer state, drain treasury assets, and mint 1,000,000,000 UXLINK. The direct treasury loss was about $11.3 million, while downstream liquidation and a later attacker-side phishing transfer produced larger figures that should not be conflated. A privileged delegateCall path in UXLINK's multisig executed attacker-controlled code in the wallet's storage context, which let the attacker rewrite signer and threshold state and then use that authority to drain treasury assets and authorize unauthorized minting. The public record…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x9f4d507cb7d8279fd110ef13e59dbfd74a0cebaf456de909826a5761e32574e6",
+    "0x35edac40767f65d4d1382f0f55cda2f4db321313e16fe059079f0113f9cb5696",
+    "0xa70674ccc9caa17d6efaf3f6fcbd5dec40011744c18a1057f391a822f11986ee"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: UXLink - Rekt",
+      "url": "https://rekt.news/uxlink-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x9f4d507cb7d8279fd110ef13e59dbfd74a0cebaf456de909826a5761e32574e6"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "cointelegraph.com",
+      "url": "https://cointelegraph.com/news/uxlink-hack-shows-risks-centralized-control-defi"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x9f4d507cb7d8279fd110ef13e59dbfd74a0cebaf456de909826a5761e32574e6"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/UXLINKofficial/status/1998228868365529555"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/uxlink-2025-09-22"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/defi-rekt-report-q3-2025-434m-lost-across-40-exploits"
+    },
+    {
+      "source": "revertiq",
+      "label": "docs.uxlink.io",
+      "url": "https://docs.uxlink.io/layer/announcement/notice"
+    },
+    {
+      "source": "revertiq",
+      "label": "dapp.uxlink.io",
+      "url": "https://dapp.uxlink.io/new-uxlink-tokens/claim"
+    }
+  ]
+}

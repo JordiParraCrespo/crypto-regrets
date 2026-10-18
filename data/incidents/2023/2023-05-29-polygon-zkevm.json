@@ -1,0 +1,58 @@
+{
+  "id": "2023-05-29-polygon-zkevm",
+  "name": "Polygon zkEVM",
+  "date": "2023-05-29",
+  "year": 2023,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [],
+  "targetType": null,
+  "category": "logic-error",
+  "technique": "Logic Vulnerability",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.92). Replaced keyword guess \"bridge-crosschain\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.92,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.92
+      },
+      {
+        "category": "input-validation",
+        "p": 0.04
+      },
+      {
+        "category": "client-bug",
+        "p": 0.03
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.92
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "Blockchain security researcher iczc tweeted that a vulnerability was found in Polygon zkEVM and received a bug bounty from Immunefi L2. The vulnerability prevents asset migration from L1 to L2 by preventing assets bridged from L1 to Polygon zkEVM (L2) from being properly claimed in L2. iczc found in the code logic of processing claim tx pre-execution results that malicious attackers can bypass the \"isReverted\" pre-execution check on claim transactions by setting the gas fee to non-zero, allowing them to send a large number of Low-cost claims DoS attacks on sequencers and validators, increasing computational overhead. Also, transactions are not immediat…",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Blockchain security researcher iczc tweeted that a vulnerability was found in Polygon zkEVM and received a bug bounty from Immunefi L2. The vulnerability prevents asset migration from L1 to L2 by preventing assets bridged from L1 to Polygon zkEVM (L2) from being properly claimed in L2. iczc found in the code logic of processing claim tx pre-execution results that malicious attackers can bypass the \"isReverted\" pre-execution check on claim transactions by setting the gas fee to non-zero, allowing them to send a large number of Low-cost claims DoS attacks on sequencers and validators, increasing computational overhead. Also, transactions are not immediat…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/0xiczc/status/1662090451493740545"
+    }
+  ]
+}

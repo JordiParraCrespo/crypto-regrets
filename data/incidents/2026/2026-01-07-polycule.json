@@ -1,0 +1,82 @@
+{
+  "id": "2026-01-07-polycule",
+  "name": "Polycule",
+  "date": "2026-01-07",
+  "year": 2026,
+  "amountUsd": 230000,
+  "returnedUsd": null,
+  "chains": [
+    "Polygon"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "key-compromise",
+  "technique": "Key Leaked via Infrastructure",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "key-compromise",
+    "confidence": 0.89,
+    "top": [
+      {
+        "category": "key-compromise",
+        "p": 0.9
+      },
+      {
+        "category": "frontend-infra",
+        "p": 0.1
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.12
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "The Polymarket-based trading bot project Polycule has been hacked. The Polycule team stated that approximately $230,000 in user funds were affected in this incident. The related bots have been taken offline, and patching and security audits are expected to be completed before the end of this week.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The Polymarket-based trading bot project Polycule has been hacked. The Polycule team stated that approximately $230,000 in user funds were affected in this incident. The related bots have been taken offline, and patching and security audits are expected to be completed before the end of this week."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Polycule’s Telegram-based trading bot for Polymarket was exploited on January 7, 2026, after attacker(s) gained access to user private keys stored on its backend server. This led to the theft of roughly $230,000 in user funds from custodial wallets on Polygon. The bot was taken offline and the team promised patching, auditing, and reimbursement, but no onchain addresses or detailed recovery transactions have been verified. User private keys were stored in recoverable form on Polycule’s backend. The attacker compromised the server, exported keys, and drained custodial wallets. The key leak was not limited to a central infrastructure credential; the risk extended to full user key custody."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/pmx_trade/status/2008997887678820862?s=20"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/polycule-2026-01-07"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/polycule-hack-2026"
+    }
+  ]
+}

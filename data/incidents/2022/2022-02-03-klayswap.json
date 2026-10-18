@@ -1,0 +1,87 @@
+{
+  "id": "2022-02-03-klayswap",
+  "name": "KlaySwap",
+  "date": "2022-02-03",
+  "year": 2022,
+  "amountUsd": 1900000,
+  "returnedUsd": null,
+  "chains": [
+    "Klaytn"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "frontend-infra",
+  "technique": "Frontend Compromise",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "frontend-infra",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "frontend-infra",
+        "p": 0.99
+      },
+      {
+        "category": "social-engineering",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.03,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "A South Korean DeFi project, KLAYswap stated it was hacked and lost over 2.2 billion won, or about $1.83 million, in the incident. The hacker modified the third-party JavaScript link on the front end of KLAYswap, causing the user to download malicious malware when accessing the KLAYswap page. This enabled funds to be transferred to the hacker's wallet address when conducting token-related transactions . During this time, 407 suspicious transactions were found in 325 wallets linked to this incident.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "A South Korean DeFi project, KLAYswap stated it was hacked and lost over 2.2 billion won, or about $1.83 million, in the incident. The hacker modified the third-party JavaScript link on the front end of KLAYswap, causing the user to download malicious malware when accessing the KLAYswap page. This enabled funds to be transferred to the hacker's wallet address when conducting token-related transactions . During this time, 407 suspicious transactions were found in 325 wallets linked to this incident."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On February 3, 2022, KlaySwap users lost approximately $1.9 million after attackers executed a BGP (Border Gateway Protocol) hijack that allowed them to serve a malicious Kakao JavaScript SDK file to the KlaySwap website. This frontend attack redirected DeFi user transactions to attacker-controlled wallets, leveraging fundamental weaknesses in internet routing and web supply-chain practices. Attackers used BGP hijacking to route traffic destined for Kakao's SDK servers to malicious infrastructure. They obtained a valid TLS certificate for the hijacked domain via manipulated domain control validation, then served a tampered JavaScript library to KlaySwap users.…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "medium.com",
+      "url": "https://medium.com/klayswap/klayswap-incident-report-feb-03-2022-f20ba2d8e4dd"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/klayswap-2022-02-03"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "therecord.media",
+      "url": "https://therecord.media/klayswap-crypto-users-lose-funds-after-bgp-hijack"
+    },
+    {
+      "source": "revertiq",
+      "label": "certik.com",
+      "url": "https://www.certik.com/blog/bgp-hijacking-the-usd1-9m-klayswap-attack-through-manipulated-network-flow"
+    }
+  ]
+}

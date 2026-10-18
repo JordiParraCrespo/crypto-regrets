@@ -1,0 +1,58 @@
+{
+  "id": "2026-09-11-gdc",
+  "name": "GDC",
+  "date": "2026-09-11",
+  "year": 2026,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [],
+  "targetType": "DeFi Protocol",
+  "category": "reentrancy",
+  "technique": null,
+  "classificationNote": "Classified by keyword rules from the DeFiHackLabs root-cause title.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "reentrancy",
+    "confidence": 0.39,
+    "top": [
+      {
+        "category": "reentrancy",
+        "p": 0.43
+      },
+      {
+        "category": "logic-error",
+        "p": 0.41
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.12
+      }
+    ],
+    "flashLoan": 0.08,
+    "stateActor": 0.03,
+    "hasRootCause": 0.9
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "chained EOA bypass, liquidity misclassification, burn mismatch, and reentrant tax-free exit. Lost: ~35.34 BNB (35.337151495976986490 BNB reproduced exact to the wei)",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "chained EOA bypass, liquidity misclassification, burn mismatch, and reentrant tax-free exit. Lost: ~35.34 BNB (35.337151495976986490 BNB reproduced exact to the wei)"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-09/GDC_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-09/GDC_exp.sol"
+    }
+  ]
+}

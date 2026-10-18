@@ -1,0 +1,130 @@
+{
+  "id": "2023-11-10-raft",
+  "name": "Raft",
+  "date": "2023-11-10",
+  "year": 2023,
+  "amountUsd": 3300000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Infinite Mint",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.08,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Donate Inflation ExchangeRate & Rounding Error. Lost: ~$3.2 M",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Donate Inflation ExchangeRate & Rounding Error. Lost: ~$3.2 M"
+    },
+    {
+      "source": "REKT",
+      "text": "Raft was raided by on-chain pirates for $3.3M on Friday, but the loot ended up falling overboard. When braving DeFi's stormy seas, we all must choose our vessel. Would you trust a Raft?"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "- Through donation and self-liquidation, the variable collateralIndex could be manipulated, thus the calculation for minted share amount could be manipulated via precision loss. - The minting in rcbETH-c uses rounding-up, which could mint 1 share instead of 0 when dust of amount collateral is added. - With shares of cbETH, attacker could redeem the shares for profits. Attack Path: (from blocksec) Attack tx: https://etherscan.io/tx/0xfeedbf51b4e2338e38171f6e19501327294ab1907ab44cfd2d7e7336c975ace7 Analysis: https://x.com/BlockSecTeam/status/1723229393529835972"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The stablecoin protocol Raft protocol on Ethereum was attacked and lost about $3.3 million in ETH."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Raft Finance, an Ethereum-based CDP stablecoin protocol, was exploited on November 10, 2023, due to a rounding flaw in its collateral index arithmetic. The attacker used a flash loan to inflate collateral shares, minting 6.7 billion unbacked R stablecoins. $3.3M in ETH collateral was drained, with most burned by the attacker, leaving both protocol and exploiter with net losses. A rounding error existed in Raft’s collateral share index arithmetic. By manipulating the index mid-transaction with flash-loan-scale collateral, an attacker could inflate their share count relative to actual collateral, enabling the minting of unbacked R stablecoins."
+    }
+  ],
+  "audit": "Trail of Bits, Hats Finance",
+  "txHashes": [
+    "0xfeedbf51b4e2338e38171f6e19501327294ab1907ab44cfd2d7e7336c975ace7"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-11/Raft_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-11/Raft_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BlockSecTeam/status/1723229393529835972"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Raft - REKT",
+      "url": "https://rekt.news/raft-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xfeedbf51b4e2338e38171f6e19501327294ab1907ab44cfd2d7e7336c975ace7"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/BlockSecTeam/status/1723229393529835972"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xfeedbf51b4e2338e38171f6e19501327294ab1907ab44cfd2d7e7336c975ace7"
+    },
+    {
+      "source": "blocksec",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs?tab=readme-ov-file#20231110-raft_fi---donate-inflation-exchangerate--rounding-error"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/raft_fi/status/1723057566664548623"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/raft-2023-11-10"
+    },
+    {
+      "source": "revertiq",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/tech/2023/11/10/defi-platform-raft-suffers-33m-exploit-but-hacker-likely-takes-a-loss-on-the-attack"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractaudit.com",
+      "url": "https://www.smartcontractaudit.com/guides/raft-finance-2023-collateral-inflation-exploit"
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "id": "2023-11-30-florence-finance",
+  "name": "Florence Finance",
+  "date": "2023-11-30",
+  "year": 2023,
+  "amountUsd": 1450000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "social-engineering",
+  "technique": "Address Poisoning",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "social-engineering",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "social-engineering",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Florence Finance lost $1.45 million USDC on Ethereum due to an address poisoning attack on November 28, 2023. The attacker crafted a scam address almost identical to the intended recipient, tricking Florence's operators into transferring funds to the fake account. Confirmed on-chain evidence establishes the loss and subsequent laundering steps. The Florence Finance team relied on wallet transaction history and visual similarity when selecting recipient addresses for a large USDC transfer, failing to verify the entire address. An attacker exploited this practice by inserting a lookalike vanity address through fake token transfers, leading to an inadvert…",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "Florence Finance lost $1.45 million USDC on Ethereum due to an address poisoning attack on November 28, 2023. The attacker crafted a scam address almost identical to the intended recipient, tricking Florence's operators into transferring funds to the fake account. Confirmed on-chain evidence establishes the loss and subsequent laundering steps. The Florence Finance team relied on wallet transaction history and visual similarity when selecting recipient addresses for a large USDC transfer, failing to verify the entire address. An attacker exploited this practice by inserting a lookalike vanity address through fake token transfers, leading to an inadvert…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x02bc1f12fcc13d7408e2643dae3d0c5e91f5b2bf6226e3cc0fd03dc1876c6d60",
+    "0x67a7a5f258378f953e1561a25f0e264d88ac229d4c6ec871b67a2b399137fed8",
+    "0x2cb15e1437d20c1ae1c3a176618950806150bbd01318f62a317969ccaa5ebd82"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/florence-finance-2023-11-30"
+    },
+    {
+      "source": "revertiq",
+      "label": "medium.com",
+      "url": "https://medium.com/%40gracious09/address-poisoning-in-defi-a-case-study-of-the-florence-finance-exploit-87c7047a8806"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/florence-finance-hack-2023"
+    }
+  ]
+}

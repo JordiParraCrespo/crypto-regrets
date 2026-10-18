@@ -1,0 +1,83 @@
+{
+  "id": "2025-11-04-dexodus-finance",
+  "name": "Dexodus Finance",
+  "date": "2025-11-04",
+  "year": 2025,
+  "amountUsd": 144000,
+  "returnedUsd": null,
+  "chains": [
+    "Base"
+  ],
+  "targetType": null,
+  "category": "oracle-manipulation",
+  "technique": "Price Manipulation",
+  "classificationNote": "Classified by keyword rules from the DeFiHackLabs explorer label and description.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "signature-crypto",
+    "confidence": 0.67,
+    "top": [
+      {
+        "category": "signature-crypto",
+        "p": 0.69
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.28
+      },
+      {
+        "category": "logic-error",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.94,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "The Dexodus Finance perpetuals protocol on Base used Chainlink price feeds but failed to implement replay protection for oracle-signed reports. The smart contract did not record previously consumed (configDigest, epoch, round) tuples from submitted reportContext payloads, meaning the same signed report could be replayed indefinitely. The attacker obtained an old signed Chainlink report that set the ETH price at approximately $1,816 — significantly below market — and replayed it to the Dexodus oracle contract. With the artificially depressed price in effect, the attacker took a flash loan, deposited collateral, and opened a 100× leveraged long ETH position. They then allowed the oracle to reflect the true market price and closed the position for profit, draining approximately $144,000 from the Dexodus liquidity pool. Attack Tx: 0x7501847c70d2cdcfbb8c6bd3585640f568cd287242b64027e5a829646e084257 Analysis: Dexodus Finance Exploit: How a Stale Chainlink Report Enabled a ~$291K Price Manipulation Attack – CoinsBench Dexodus Finance lost $300K in a Signature Replay Attack – QuillAudits",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The Dexodus Finance perpetuals protocol on Base used Chainlink price feeds but failed to implement replay protection for oracle-signed reports. The smart contract did not record previously consumed (configDigest, epoch, round) tuples from submitted reportContext payloads, meaning the same signed report could be replayed indefinitely. The attacker obtained an old signed Chainlink report that set the ETH price at approximately $1,816 — significantly below market — and replayed it to the Dexodus oracle contract. With the artificially depressed price in effect, the attacker took a flash loan, deposited collateral, and opened a 100× leveraged long ETH position. They then allowed the oracle to reflect the true market price and closed the position for profit, draining approximately $144,000 from the Dexodus liquidity pool. Attack Tx: 0x7501847c70d2cdcfbb8c6bd3585640f568cd287242b64027e5a829646e084257 Analysis: Dexodus Finance Exploit: How a Stale Chainlink Report Enabled a ~$291K Price Manipulation Attack – CoinsBench Dexodus Finance lost $300K in a Signature Replay Attack – QuillAudits"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x7501847c70d2cdcfbb8c6bd3585640f568cd287242b64027e5a829646e084257"
+  ],
+  "poc": null,
+  "sources": [
+    "defihacklabs",
+    "blocksec"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "basescan.org",
+      "url": "https://basescan.org/tx/0x7501847c70d2cdcfbb8c6bd3585640f568cd287242b64027e5a829646e084257"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "coinsbench.com",
+      "url": "https://coinsbench.com/dexodus-finance-exploit-how-a-stale-chainlink-report-enabled-a-291k-price-manipulation-attack-39dcee1efff0"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "quillaudits.com",
+      "url": "https://www.quillaudits.com/blog/hack-analysis/dexodus-finance-exploit"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x7501847c70d2cdcfbb8c6bd3585640f568cd287242b64027e5a829646e084257"
+    },
+    {
+      "source": "blocksec",
+      "label": "x.com",
+      "url": "https://x.com/DexodusFinance/status/1986418250935119961"
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "id": "2026-03-10-mt-wbnb-liquidity-pool",
+  "name": "MT-WBNB liquidity pool",
+  "date": "2026-03-10",
+  "year": 2026,
+  "amountUsd": 242000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": null,
+  "category": "logic-error",
+  "technique": "Reserve Manipulation Attack",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.70). Replaced keyword guess \"oracle-manipulation\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.7,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.72
+      },
+      {
+        "category": "access-control",
+        "p": 0.27
+      },
+      {
+        "category": "market-manipulation",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "According to BlockSec Phalcon's monitoring, a suspicious transaction targeting the MT-WBNB liquidity pool on BSC was detected several hours ago, resulting in an estimated loss of approximately $242,000. The root cause lies in a flaw within the buyer restriction mechanism: under deflationary mode, normal buy orders were reverted; however, the router and pair addresses were whitelisted. The attacker bypassed these restrictions by swapping and removing liquidity through the router to acquire MT tokens from the pair. Subsequently, the attacker sold MT to accumulate a pendingBurnAmount and invoked the distributeFees() function to directly burn MT from the t…",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "According to BlockSec Phalcon's monitoring, a suspicious transaction targeting the MT-WBNB liquidity pool on BSC was detected several hours ago, resulting in an estimated loss of approximately $242,000. The root cause lies in a flaw within the buyer restriction mechanism: under deflationary mode, normal buy orders were reverted; however, the router and pair addresses were whitelisted. The attacker bypassed these restrictions by swapping and removing liquidity through the router to acquire MT tokens from the pair. Subsequently, the attacker sold MT to accumulate a pendingBurnAmount and invoked the distributeFees() function to directly burn MT from the t…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/phalcon_xyz/status/2031226066572837313?s=46"
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "id": "2026-06-21-taiko-bridge",
+  "name": "Taiko Bridge",
+  "date": "2026-06-21",
+  "year": 2026,
+  "amountUsd": 1700000,
+  "returnedUsd": null,
+  "chains": [
+    "Taiko"
+  ],
+  "targetType": "Chain",
+  "category": "bridge-crosschain",
+  "technique": "Forged Proof",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "bridge-crosschain",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "bridge-crosschain",
+        "p": 0.99
+      },
+      {
+        "category": "signature-crypto",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": true,
+  "language": "Solidity",
+  "rootCause": "On June 21-22, 2026, Taiko (an Ethereum L2) suffered a bridge exploit targeting its ERC20 Vault. Attackers exploited a compromise in the chain state verification mechanism by forging SGX proofs to register a malicious prover, bypassing verification to submit fake bridge messages and drain approximately $1.7 million in assets (including USDC, ETH, and TAIKO tokens). Taiko quickly confirmed the verification compromise, paused the bridge and block production, initially urged users to withdraw funds, and later contained the incident while coordinating with exchanges to freeze attacker assets. A full post-mortem is forthcoming.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "On June 21-22, 2026, Taiko (an Ethereum L2) suffered a bridge exploit targeting its ERC20 Vault. Attackers exploited a compromise in the chain state verification mechanism by forging SGX proofs to register a malicious prover, bypassing verification to submit fake bridge messages and drain approximately $1.7 million in assets (including USDC, ETH, and TAIKO tokens). Taiko quickly confirmed the verification compromise, paused the bridge and block production, initially urged users to withdraw funds, and later contained the incident while coordinating with exchanges to freeze attacker assets. A full post-mortem is forthcoming."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On June 21, 2026, Taiko's Ethereum L1 bridge lost approximately $1.7M after an attacker exploited a leaked SGX enclave signing key to forge L2 state proofs. The attacker used the compromised key and unchecked enclave attributes to register a rogue prover, issue fraudulent bridge messages, and drain the protocol. Taiko replenished the loss from treasury, confirming no user funds were lost. An RSA‑3072 private key used to sign SGX enclave attestations was committed to Taiko’s public GitHub repository. The on-chain attestation contract failed to check enclave DEBUG attributes, allowing an attacker to register a malicious DEBUG-mode prover and forge valid-…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x2f44dc1b883522a88f9b0cbbdfabf9ec33884b69dd4326600c3fab7fb2277260",
+    "0x017292a7de5fef52a3274e37dda5ace4c4d0cdafe91b7b4ac9c700f02fae35ee",
+    "0x451423923ab3df56ce436a921d34d782681cf698b72ca61ad6b8a8b2aeee53b7"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/taikoxyz/status/2068858818352865626"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/taiko-2026-06-21"
+    },
+    {
+      "source": "revertiq",
+      "label": "quillaudits.com",
+      "url": "https://www.quillaudits.com/blog/hack-analysis/taiko-leaked-sgx-enclave-key"
+    },
+    {
+      "source": "revertiq",
+      "label": "blocksec.com",
+      "url": "https://blocksec.com/blog/web3-security-taiko-secondfi-exploits"
+    }
+  ]
+}

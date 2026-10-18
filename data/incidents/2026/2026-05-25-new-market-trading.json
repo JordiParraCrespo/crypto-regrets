@@ -1,0 +1,109 @@
+{
+  "id": "2026-05-25-new-market-trading",
+  "name": "New Market Trading",
+  "date": "2026-05-25",
+  "year": 2026,
+  "amountUsd": 3980000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum",
+    "Base",
+    "Arbitrum"
+  ],
+  "targetType": "Other",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.9,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.91
+      },
+      {
+        "category": "bridge-crosschain",
+        "p": 0.08
+      },
+      {
+        "category": "arbitrary-call",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "SquidRouterModule Missing Caller Check. Lost: ~$3.98M USD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "SquidRouterModule Missing Caller Check. Lost: ~$3.98M USD"
+    },
+    {
+      "source": "REKT",
+      "text": "$3.98 million drained from 88 Gnosis Safes across three chains on New Market Trading. A third-party Safe module trusted caller-supplied data over msg.sender. One missing require check. Anyone who read the source code could drain every wallet."
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The New Market Trading \"SquidRouterModule\" is a Gnosis Safe module built on Axelar's AxelarExpressExecutableWithToken. The Axelar express fast-path (expressExecuteWithToken) is permissionless by design (any relayer may front tokens) and performs NO gateway/cryptographic validation of the message. The module's _executeWithToken override only checks that a caller-SUPPLIED sourceAddress string equals the public squidRouter address — a value the caller fully controls — and never validates the real caller or a genuine Axelar gateway proof. _processPayload then decodes the target safe and delegate directly from the attacker-supplied payload and executes actions against the Safe, checking only that delegate holds permission (never msg.sender == delegate). The attacker called expressExecuteWithToken with amount = 0 (fronting nothing), the public squidRouter address string, and a forged payload naming the victim Safe, a real public NMT delegate that already held APPROVE+SWAP permission, and three actions (ERC20 approve -> Permit2 approve -> Uni V3 swap exact-in) that swap the Safe's entire USDC into a worthless attacker-controlled \"u\" token via the whitelisted Universal Router. This drained ~88 Safes (~$3.98M total). Root cause: missing caller/gateway authentication on the express path plus trusting payload-supplied delegate/safe. Vulnerable code snippet: Attack Tx: https://etherscan.io/tx/0x59d17fd31e31959b2d562508bf91c4fc1271682ba7d61a6209865e1151b69aea Analysis: https://rekt.news/newmarkettrading-rekt"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "An attacker exploited New Market Trading's SquidRouterModule by forging payloads that impersonated authorized delegates, draining $3.8M from 88 Gnosis Safe wallets across Ethereum, Base, and Arbitrum in under 15 minutes. A confused-deputy vulnerability in SquidRouterModule: the contract validated the delegate via a payload field without checking that msg.sender matched the delegate, so anyone could impersonate an approved delegate and drain Safes."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x59d17fd31e31959b2d562508bf91c4fc1271682ba7d61a6209865e1151b69aea"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-05/NewMarketTrading_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-05/NewMarketTrading_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "rekt.news",
+      "url": "https://rekt.news/newmarkettrading-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x59d17fd31e31959b2d562508bf91c4fc1271682ba7d61a6209865e1151b69aea"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/new-market-trading-2026-05-25"
+    },
+    {
+      "source": "revertiq",
+      "label": "quillaudits.com",
+      "url": "https://www.quillaudits.com/blog/hack-analysis/new-market-trading-exploit"
+    },
+    {
+      "source": "revertiq",
+      "label": "blocksec.com",
+      "url": "https://blocksec.com/blog/web3-security-dxsale-squidrouter-more"
+    }
+  ]
+}

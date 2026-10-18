@@ -1,0 +1,56 @@
+{
+  "id": "2023-02-10-sushiswap",
+  "name": "SushiSwap",
+  "date": "2023-02-10",
+  "year": 2023,
+  "amountUsd": 26000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": null,
+  "category": "oracle-manipulation",
+  "technique": "Price Manipulation",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.99).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.99
+      },
+      {
+        "category": "logic-error",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.97,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "SushiSwap's BentoBoxv1 contract was attacked, and the hacker made a profit of about $26,000. According to analysis, the attack is due to the Kashi Medium Risk ChainLink price update later than the mortgage/loan. In the two attack transactions, the attacker flashloaned 574,275 and 785,560 xSUSHI respectively. After mortgage and loan, the price of kmxSUSHI/USDT in LINK Oracle dropped by 16.9%. By exploiting this price gap, the attacker can call the liquidate() function to liquidate and obtain 15,429 and 11,333 USDT.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "SushiSwap's BentoBoxv1 contract was attacked, and the hacker made a profit of about $26,000. According to analysis, the attack is due to the Kashi Medium Risk ChainLink price update later than the mortgage/loan. In the two attack transactions, the attacker flashloaned 574,275 and 785,560 xSUSHI respectively. After mortgage and loan, the price of kmxSUSHI/USDT in LINK Oracle dropped by 16.9%. By exploiting this price gap, the attacker can call the liquidate() function to liquidate and obtain 15,429 and 11,333 USDT."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "slowmist",
+      "label": "panewslab.com",
+      "url": "https://www.panewslab.com/zh/sqarticledetails/dw2h404u.html"
+    }
+  ]
+}

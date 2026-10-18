@@ -1,0 +1,76 @@
+{
+  "id": "2024-09-16-wxeta",
+  "name": "WXETA",
+  "date": "2024-09-16",
+  "year": 2024,
+  "amountUsd": 110000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum",
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Uninitialized Proxy",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Logic Flaw. Lost: 110K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Logic Flaw. Lost: 110K"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "WXETA was exploited on BNB Chain on 16 September 2024 due to an uninitialized proxy, enabling an attacker to gain privileged control and drain approximately $110,000 in assets. No independent transaction evidence supports a direct exploit on Ethereum Mainnet. The WXETA protocol's upgradeable proxy contract on BNB Chain was deployed without being atomically initialized. This allowed an attacker to call initialize() first and take privileged ownership, leading to unauthorized minting and asset drain."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x614da880bd46e98131accd9a83917abf3d56dac94caf13ae98eeff504eea3704"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-09/WXETA_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-09/WXETA_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/TenArmorAlert/status/1835494807495659645"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/wxeta-2024-09-16"
+    }
+  ]
+}

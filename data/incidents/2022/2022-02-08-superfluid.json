@@ -1,0 +1,94 @@
+{
+  "id": "2022-02-08-superfluid",
+  "name": "Superfluid",
+  "date": "2022-02-08",
+  "year": 2022,
+  "amountUsd": 8700000,
+  "returnedUsd": null,
+  "chains": [
+    "Polygon"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "input-validation",
+  "technique": "Missing Input Validation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "input-validation",
+    "confidence": 0.97,
+    "top": [
+      {
+        "category": "input-validation",
+        "p": 0.97
+      },
+      {
+        "category": "arbitrary-call",
+        "p": 0.03
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.94
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "$8.7M drained from Superfluid. The crypto streaming protocol was exploited by an anonymous attacker, causing collateral damage to several other DAO's.",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "$8.7M drained from Superfluid. The crypto streaming protocol was exploited by an anonymous attacker, causing collateral damage to several other DAO's."
+    },
+    {
+      "source": "SlowMist",
+      "text": "The QI Vesting contract on the streaming digital asset protocol Superfluid has been exploited by an attacker by passing in incorrect call data. This vulnerability allows the attacker to transfer funds from Superfluid user wallets to Polygon and exchange them for ETH."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On February 8, 2022, an attacker exploited Superfluid on Polygon by forging calldata to impersonate user identities, draining roughly $8.7 million worth of assets from victim accounts. The attacker manipulated the context ('ctx') field during cross-contract calls, bypassing authentication and authorizing distributions from Super Token holders. The Superfluid protocol failed to validate that the context ('ctx') object decoded by agreement contracts was the same as the one stamped by the Host, allowing attackers to inject a forged sender and bypass user authorization during agreement calls."
+    }
+  ],
+  "audit": "Peckshield",
+  "txHashes": [
+    "0x396b6ee91216cf6e7c89f0c6044dfc97e84647f5007a658ca899040471ab4d67"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Superfluid - REKT",
+      "url": "https://rekt.news/superfluid-rekt"
+    },
+    {
+      "source": "slowmist",
+      "label": "medium.com",
+      "url": "https://medium.com/superfluid-blog/08-02-22-exploit-post-mortem-15ff9c97cdd"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/superfluid-2022-02-08"
+    },
+    {
+      "source": "revertiq",
+      "label": "quadrigainitiative.com",
+      "url": "https://www.quadrigainitiative.com/hackfraudscam/superfluidwalletimpersonation.php"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/superfluid-hack-2022"
+    }
+  ]
+}

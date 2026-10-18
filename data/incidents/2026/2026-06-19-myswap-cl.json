@@ -1,0 +1,82 @@
+{
+  "id": "2026-06-19-myswap-cl",
+  "name": "mySwap CL",
+  "date": "2026-06-19",
+  "year": 2026,
+  "amountUsd": 305000,
+  "returnedUsd": null,
+  "chains": [
+    "Starknet"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Incorrect Share Accounting",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.99
+      },
+      {
+        "category": "logic-error",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.34
+  },
+  "bridge": false,
+  "language": "Cairo",
+  "rootCause": "On June 19, 2026, at approximately 7:15 AM UTC, the mySwap CL (Concentrated Liquidity) protocol on Starknet was exploited, resulting in around $300,000–$305,000 being drained from its liquidity pools. The mySwap interface had been closed to new liquidity deposits for over six months, and the drained funds were mostly residual LP positions across more than 100,000 positions. The attacker bridged the stolen assets and used Railgun to obscure the transaction flow. The exploit nearly emptied all remaining liquidity in the protocol.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "On June 19, 2026, at approximately 7:15 AM UTC, the mySwap CL (Concentrated Liquidity) protocol on Starknet was exploited, resulting in around $300,000–$305,000 being drained from its liquidity pools. The mySwap interface had been closed to new liquidity deposits for over six months, and the drained funds were mostly residual LP positions across more than 100,000 positions. The attacker bridged the stolen assets and used Railgun to obscure the transaction flow. The exploit nearly emptied all remaining liquidity in the protocol."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On June 19, 2026, mySwap concentrated liquidity pools on Starknet were exploited using a malicious token, resulting in losses of approximately $305,000. The attacker manipulated pool accounting to withdraw honest LP assets from a dormant protocol vault. mySwap's accounting logic allowed arbitrary token contracts to be added to its concentrated liquidity pools, trusting their reported balances without strict validation. This let an attacker use a worthless, attacker-controlled token to inflate pool share claims and withdraw real assets from the shared vault."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/mySwapxyz/status/2067941891010711560"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/myswap-cl-2026-06-19"
+    },
+    {
+      "source": "revertiq",
+      "label": "myswap.xyz",
+      "url": "https://www.myswap.xyz/"
+    },
+    {
+      "source": "revertiq",
+      "label": "blockchainbreaches.com",
+      "url": "https://www.blockchainbreaches.com/en/breaches/myswap-2026"
+    }
+  ]
+}

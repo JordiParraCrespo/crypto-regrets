@@ -1,0 +1,75 @@
+{
+  "id": "2025-06-10-anome",
+  "name": "Anome",
+  "date": "2025-06-10",
+  "year": 2025,
+  "amountUsd": 120000,
+  "returnedUsd": null,
+  "chains": [
+    "Base"
+  ],
+  "targetType": null,
+  "category": "oracle-manipulation",
+  "technique": "Price Manipulation; Logic Error",
+  "classificationNote": "Classified by keyword rules from the RevertIQ label and description.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.69,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.71
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.16
+      },
+      {
+        "category": "market-manipulation",
+        "p": 0.13
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "On June 10, 2025, an attacker exploited Anome’s lending protocol on Base by purchasing massive amounts of essentially worthless Bnome tokens for 0.2 ETH, using them as collateral to borrow $120,000 in Anome USD. The exploit was enabled by flawed token valuation logic and absent collateral controls. Stolen funds were laundered through Tornado Cash. Anome’s lending protocol allowed the attacker to use large quantities of nearly worthless, illiquid Bnome tokens as collateral to borrow outsized amounts of Anome USD. The system's valuation logic failed to validate the token's real market value or liquidity, permitting collateral inflation and enabling excessive borrowing.…",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "On June 10, 2025, an attacker exploited Anome’s lending protocol on Base by purchasing massive amounts of essentially worthless Bnome tokens for 0.2 ETH, using them as collateral to borrow $120,000 in Anome USD. The exploit was enabled by flawed token valuation logic and absent collateral controls. Stolen funds were laundered through Tornado Cash. Anome’s lending protocol allowed the attacker to use large quantities of nearly worthless, illiquid Bnome tokens as collateral to borrow outsized amounts of Anome USD. The system's valuation logic failed to validate the token's real market value or liquidity, permitting collateral inflation and enabling excessive borrowing.…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/anome-2025-06-10"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/de-fi-rekt-report-june-2025-114-8-million-lost-across-11-exploits"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/anome-hack-2025"
+    },
+    {
+      "source": "revertiq",
+      "label": "chaincatcher.com",
+      "url": "https://www.chaincatcher.com/en/article/2185327"
+    }
+  ]
+}

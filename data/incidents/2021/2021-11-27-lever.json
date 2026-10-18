@@ -1,0 +1,88 @@
+{
+  "id": "2021-11-27-lever",
+  "name": "Lever",
+  "date": "2021-11-27",
+  "year": 2021,
+  "amountUsd": 652000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Borrow Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.88,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.89
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.07
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.03
+      }
+    ],
+    "flashLoan": 0.66,
+    "stateActor": 0.02,
+    "hasRootCause": 0.94
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Lever, a decentralized margin trading protocol based on AMM, was attacked by lightning loans. According to the official statement, Lever attacked contract A to borrow 2,100 BNB from PancakeSwap and deposit 2,000 BNB into Lever’s BNB vault. Then borrowed 1500 BNB from Lever’s BNB vault and transferred it to Lever Attack Contract B. Lever Attack Contract B deposited 1500 BNB and used it to consume 32.78 ETH, 1,068.05 BAKE, 167.25 XVS, 1,042.89 DAI, 674,360 USDT. BTC , 1,930.01 CAKE, 463.0078 DOT and 332.9184 WBNB. (Calculated at the current market price, the total loss is equal to US$652,941.949.)",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Lever, a decentralized margin trading protocol based on AMM, was attacked by lightning loans. According to the official statement, Lever attacked contract A to borrow 2,100 BNB from PancakeSwap and deposit 2,000 BNB into Lever’s BNB vault. Then borrowed 1500 BNB from Lever’s BNB vault and transferred it to Lever Attack Contract B. Lever Attack Contract B deposited 1500 BNB and used it to consume 32.78 ETH, 1,068.05 BAKE, 167.25 XVS, 1,042.89 DAI, 674,360 USDT. BTC , 1,930.01 CAKE, 463.0078 DOT and 332.9184 WBNB. (Calculated at the current market price, the total loss is equal to US$652,941.949.)"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 26 November 2021, Lever on BNB Chain suffered a logic exploit involving two attacker contracts and a flash loan. The attackers manipulated collateral and repayments to drain over $650,000 in various tokens due to an insufficient borrower-liability check. The MarginPool contract allowed a repay function caller to use tokens from a third party for repayment without checking that the caller was the actual debtor. This borrower-liability mismatch enabled the exploit."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xb5365a299c07c81670e52934893793ad7c225a5cf30b641e20b451b2b5815593"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "levernetwork.medium.com",
+      "url": "https://levernetwork.medium.com/full-report-of-the-lever-hack-ee508cf7488c"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/lever-2021-11-27"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/lever-hack-2021"
+    },
+    {
+      "source": "revertiq",
+      "label": "monitoringroom.com",
+      "url": "https://monitoringroom.com/situation/crypto-hack/lever"
+    }
+  ]
+}

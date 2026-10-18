@@ -1,0 +1,118 @@
+{
+  "id": "2022-12-25-rubic",
+  "name": "Rubic",
+  "date": "2022-12-25",
+  "year": 2022,
+  "amountUsd": 1410000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "arbitrary-call",
+  "technique": "Arbitrary External Call",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "arbitrary-call",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "arbitrary-call",
+        "p": 0.99
+      },
+      {
+        "category": "access-control",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": true,
+  "language": "Solidity",
+  "rootCause": "Arbitrary External Call Vulnerability. Lost: $1.5M",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Arbitrary External Call Vulnerability. Lost: $1.5M"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Arbitrary External Call The attacker abused that USDC had been added as a router (by the admin), leading to an arbitrary function call with USDC contract. Then the attacker invoked transferFrom to steal the victim's USDC. Vulnerable code snippet: Attack tx: https://explorer.phalcon.xyz/tx/eth/0x9a97d85642f956ad7a6b852cf7bed6f9669e2c2815f3279855acf7f1328e7d46 Analysis: https://twitter.com/BlockSecTeam/status/1606993118901198849 https://twitter.com/peckshield/status/1606937055761952770"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The multi-chain exchange protocol Rubic was hacked and lost more than $1.4 million. The attacker has transferred 1,100 ETH to the Tornado Cash mixing protocol. According to the analysis of the SlowMist security team, the root cause of the attack is that the Rubic protocol wrongly added USDC tokens to the Router whitelist, resulting in the theft of USDC tokens of users authorized to the RubicProxy contract."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On December 25, 2022, an attacker exploited a misconfiguration in Rubic's RubicProxy router whitelist on Ethereum, allowing them to drain over $1.4 million in user-approved USDC via arbitrary ‘transferFrom’ calls. The RubicProxy contract mistakenly whitelisted the USDC token contract as a router, enabling arbitrary smart contract calls to USDC using user approvals. This allowed the attacker to invoke transferFrom through RubicProxy and drain funds from multiple victims."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x9a97d85642f956ad7a6b852cf7bed6f9669e2c2815f3279855acf7f1328e7d46"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-12/Rubic_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-12/Rubic_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BlockSecTeam/status/1606993118901198849"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/peckshield/status/1606937055761952770"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "explorer.phalcon.xyz",
+      "url": "https://explorer.phalcon.xyz/tx/eth/0x9a97d85642f956ad7a6b852cf7bed6f9669e2c2815f3279855acf7f1328e7d46"
+    },
+    {
+      "source": "slowmist",
+      "label": "foresightnews.pro",
+      "url": "https://foresightnews.pro/news/h5Detail/15051"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/rubic-2022-12-25"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "bir.badjoke-lab.com",
+      "url": "https://bir.badjoke-lab.com/incident/rubic-2022-rubicproxy-approval-exploit/"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/past/2022/README.md#L305"
+    }
+  ]
+}

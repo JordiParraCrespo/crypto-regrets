@@ -1,0 +1,78 @@
+{
+  "id": "2026-07-12-phx",
+  "name": "PHX",
+  "date": "2026-07-12",
+  "year": 2026,
+  "amountUsd": 89500,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "Token",
+  "category": "accounting-math",
+  "technique": "Incorrect Share Accounting",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.65,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.67
+      },
+      {
+        "category": "logic-error",
+        "p": 0.29
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.04
+      }
+    ],
+    "flashLoan": 0.97,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "On July 12, 2026, the PHX token contract on BNB Chain was exploited for 156.205683367 WBNB (≈$89,532), after an attacker manipulated PancakeSwap pool reserves via the token's flawed burn-and-sync logic in a flash-loan-aided transaction. A sell transfer on the PHX token burned tokens directly from the PancakeSwap PHX/WBNB pair, then synced reserves before crediting the net sell amount. This sequence let the attacker set an artificial reserve baseline and drain nearly all WBNB at a mispriced swap, violating AMM invariants.",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "On July 12, 2026, the PHX token contract on BNB Chain was exploited for 156.205683367 WBNB (≈$89,532), after an attacker manipulated PancakeSwap pool reserves via the token's flawed burn-and-sync logic in a flash-loan-aided transaction. A sell transfer on the PHX token burned tokens directly from the PancakeSwap PHX/WBNB pair, then synced reserves before crediting the net sell amount. This sequence let the attacker set an artificial reserve baseline and drain nearly all WBNB at a mispriced swap, violating AMM invariants."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xb5a64c9c43da7b817b2450149b55cb542697d9a676b2f8a89ec748b37f821ebe"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/phx-2026-07-12"
+    },
+    {
+      "source": "revertiq",
+      "label": "anomly.rs",
+      "url": "https://anomly.rs/phx-pair-burn-reserve-manipulation"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptotimes.io",
+      "url": "https://www.cryptotimes.io/2026/07/13/phx-wbnb-liquidity-pool-drained-of-nearly-90k-in-bnb-chain-exploit/"
+    }
+  ]
+}

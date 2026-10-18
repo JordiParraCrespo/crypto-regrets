@@ -1,0 +1,80 @@
+{
+  "id": "2022-01-15-float-protocol",
+  "name": "Float Protocol",
+  "date": "2022-01-15",
+  "year": 2022,
+  "amountUsd": 1160000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.06,
+    "stateActor": 0.02,
+    "hasRootCause": 0.93
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "The attackers withdrew approximately 350 ETH (equivalent to $1.1 million) from Float Protocol’s Rari Capital pool. The reason is that Uniswap V3 FLOAT/USDC oracles lack liquidity, which allows attackers to manipulate the price in the pool and then deposit at a higher interest rate. The hackers returned about $250,000 for some reason.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The attackers withdrew approximately 350 ETH (equivalent to $1.1 million) from Float Protocol’s Rari Capital pool. The reason is that Uniswap V3 FLOAT/USDC oracles lack liquidity, which allows attackers to manipulate the price in the pool and then deposit at a higher interest rate. The hackers returned about $250,000 for some reason."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Float Protocol's RariCapital Pool 90 was exploited on Ethereum Mainnet on 15 January 2022 via oracle manipulation. An attacker used low liquidity and a narrow band in the Uniswap V3 FLOAT/USDC pool to inflate the FLOAT price and borrow against artificially overvalued collateral, causing losses estimated at ~$1.16 million. Partial funds were returned after negotiation. RariCapital Pool 90 relied on the spot price from the FLOAT/USDC Uniswap V3 pool as its oracle. Low liquidity and narrow allocation bands made the pool susceptible to manipulation, permitting the attacker to inflate FLOAT prices and borrow assets with artificially high-value collateral."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x560c93624e772bfd94ee1309c0ad4d9889f900aef1795528b1ec1944d9e7bb0e"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/FloatProtocol/status/1482184042850263042"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/float-protocol-2022-01-15"
+    },
+    {
+      "source": "revertiq",
+      "label": "coincodecap.com",
+      "url": "https://coincodecap.com/float-protocol-hacked"
+    },
+    {
+      "source": "revertiq",
+      "label": "threadreaderapp.com",
+      "url": "https://threadreaderapp.com/thread/1482184042850263042.html"
+    }
+  ]
+}

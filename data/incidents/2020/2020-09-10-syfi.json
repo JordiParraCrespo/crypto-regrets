@@ -1,0 +1,84 @@
+{
+  "id": "2020-09-10-syfi",
+  "name": "SYFI",
+  "date": "2020-09-10",
+  "year": 2020,
+  "amountUsd": 250000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Arithmetic Error",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.99
+      },
+      {
+        "category": "logic-error",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.1,
+    "stateActor": 0.02,
+    "hasRootCause": 0.63
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Amplify, a user of DeFi, discovered a bug in SYFI, a smart contract for DeFi, and made 747 ETH on a single transaction, but from other users. The project crashed.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Amplify, a user of DeFi, discovered a bug in SYFI, a smart contract for DeFi, and made 747 ETH on a single transaction, but from other users. The project crashed."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "SYFI, an adaptive cryptocurrency on Ethereum, suffered a rebase arithmetic exploit on 2020-09-03, draining roughly $250K from its Uniswap pool when faulty logic allowed one trader to massively inflate and sell their token balance for ETH. The SYFI rebase mechanism altered user balances without properly adjusting the Uniswap pool price, enabling an attacker to sell an inflated SYFI balance for ETH and drain most liquidity. Both arithmetic miscalculation and flawed sequencing enabled the exploit."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xbb45a3aaa222432f50974b4be0852445e446698d33b0fcd47a4f627a2764ea83"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/A_mplify/status/1302852331680051200"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/syfi-2020-09-10"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/syfi-hack-2020"
+    },
+    {
+      "source": "revertiq",
+      "label": "quadrigainitiative.com",
+      "url": "https://www.quadrigainitiative.com/casestudy/softyearnsfyirebaseexploit.php"
+    }
+  ]
+}

@@ -1,0 +1,110 @@
+{
+  "id": "2022-07-25-lpc",
+  "name": "LPC",
+  "date": "2022-07-25",
+  "year": 2022,
+  "amountUsd": 45000,
+  "returnedUsd": null,
+  "chains": [
+    "Binance Smart Chain"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Arithmetic Error",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.64,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.66
+      },
+      {
+        "category": "logic-error",
+        "p": 0.25
+      },
+      {
+        "category": "access-control",
+        "p": 0.08
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.87
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Business Logic Flaw : Incorrect recipient balance check, did not check sender!=recipient in transfer. Lost: 178 BNB (~45,715 US$)",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Business Logic Flaw : Incorrect recipient balance check, did not check sender!=recipient in transfer. Lost: 178 BNB (~45,715 US$)"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Incorrect recipient balance check, did not check sender!=recipient in transfer. Vulnerable code snippet: https://bscscan.com/address/0x1e813fa05739bf145c1f182cb950da7af046778d#code#L1240 Increase directly on the recipientAmount to recipient, deduct sender balance incorrectly. Fixed: https://etherscan.io/address/0x1c91aF03A390b4c619B444425b3119e553B5B44b#code#L414 Audius: The key difference in the patched Initialization contract is the two padding fields that disambiguate the proxyAdmin field used in the proxy contract from the initialized and initializing fields used in the implementation contract. This change prevents repetition of the initialization flow of the deployed contract."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On July 25, 2022, the LPC protocol on BNB Chain suffered an exploit caused by an arithmetic bug in its token's transfer logic, allowing an attacker to mint extra tokens via repeated self-transfers. The attacker drained approximately 178 BNB (about $45,000) by inflating their LPC token holdings, swapping them for BNB, and laundering the proceeds. The vulnerable LPC smart contract allowed users to transfer tokens to the same address without proper handling. Its _transfer function failed to handle sender==recipient correctly, so self-transfers improperly increased the user's balance, breaking accounting invariants and enabling inflation of LPC tokens."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-07/LPC_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-07/LPC_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "www.panewslab.com",
+      "url": "https://www.panewslab.com/zh_hk/articledetails/uwv4sma2.html"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BeosinAlert/status/1551535854681718784"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0x1e813fa05739bf145c1f182cb950da7af046778d#code#L1240"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/address/0x1c91aF03A390b4c619B444425b3119e553B5B44b#code#L414"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/lpc-2022-07-25"
+    },
+    {
+      "source": "revertiq",
+      "label": "medium.com",
+      "url": "https://medium.com/@FairyproofT/weekly-blockchain-security-watch-ff657dbb0a51"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/past/2022/README.md#L1979"
+    }
+  ]
+}

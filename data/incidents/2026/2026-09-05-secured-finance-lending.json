@@ -1,0 +1,92 @@
+{
+  "id": "2026-09-05-secured-finance-lending",
+  "name": "Secured Finance Lending",
+  "date": "2026-09-05",
+  "year": 2026,
+  "amountUsd": 104000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.99
+      },
+      {
+        "category": "market-manipulation",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.12,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "same-block self-trade manipulates getMarketUnitPrice to fabricate collateral. Lost: ~0.9 WBTC (~$72K single-drain; ~$104K across all actors exploiting the same public bug)",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "same-block self-trade manipulates getMarketUnitPrice to fabricate collateral. Lost: ~0.9 WBTC (~$72K single-drain; ~$104K across all actors exploiting the same public bug)"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Secured Finance’s fixed-rate lending protocol was exploited via an order-book accounting flaw that treated unfilled orders as filled and created invalid balances. Attackers used flash loans and self-trades to manipulate the current-block price and withdraw funds. Markets on Ethereum, Arbitrum, and Filecoin were paused. The team’s preliminary loss estimate is about $180,000; no recovery has been confirmed."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Secured Finance’s Ethereum lending market was reportedly manipulated on 2026-09-05 through same-block order-book price inflation, with public trackers placing the loss at about $104,000. Public reports indicate that the lending market valued collateral from the current block’s order-book average execution price, and self-trades were able to inflate that price enough to overstate collateral value before the borrow was executed. The exact on-chain transaction sequence and vulnerable historical contract revision were not established in the available public evidence."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-09/SecuredFi_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-09/SecuredFi_exp.sol"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/Secured_Fi/status/2097182727992963457"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/secured-finance-lending-2026-09-05"
+    },
+    {
+      "source": "revertiq",
+      "label": "docs.secured.finance",
+      "url": "https://docs.secured.finance/fixed-rate-lending/getting-started/platform-guide/trading"
+    },
+    {
+      "source": "revertiq",
+      "label": "docs.secured.finance",
+      "url": "https://docs.secured.finance/fixed-rate-lending/advanced-topics/emergency-global-settlement"
+    }
+  ]
+}

@@ -1,0 +1,124 @@
+{
+  "id": "2022-03-03-treasure",
+  "name": "Treasure",
+  "date": "2022-03-03",
+  "year": 2022,
+  "amountUsd": 1400000,
+  "returnedUsd": null,
+  "chains": [
+    "Arbitrum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "input-validation",
+  "technique": "Missing Input Validation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "input-validation",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "input-validation",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.93
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Zero Fee. Lost: $1 million",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Zero Fee. Lost: $1 million"
+    },
+    {
+      "source": "REKT",
+      "text": "Swiggity swooty, somebody plundered the Treasure DAO booty. ~$1.4M worth of NFTs has been stolen from the largest NFT marketplace on Arbritrum, leaving the OpenSea competitor stranded in deep water."
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Insufficient validation Vulnerable code snippet: https://arbiscan.io/address/0x812cda2181ed7c45a35a691e0c85e231d218e273#code#F17#L226 Since _quantity can be zero, so attacker can buy NFT for free"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The Arbitrum-based TreasureDAO NFT trading market was exposed and discovered a vulnerability. According to SlowMist analysis, the core of this vulnerability lies in the lack of judgment that the incoming _quantity parameter is not 0 before the ERC-721 standard NFT transfer, resulting in ERC -721 Standard NFT can be transferred directly and the cost of purchasing NFT is calculated as 0 when calculating the price. Hours after it was stolen, developers confirmed that hackers had begun returning stolen “Smol Brains” and other NFTs."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On March 3, 2022, TreasureDAO's NFT marketplace on Arbitrum was exploited through a logic flaw in its buyItem function: attackers bought NFTs by passing a quantity of zero, causing the protocol to transfer the NFT while charging zero MAGIC tokens. Over 100 high-value NFTs, including Smol Brains and Legions, were stolen with a reported total value of approximately $1.4 million. The contract was quickly shut down and most NFTs were later returned by the attacker or recovered through community action. The contract's buyItem function failed to check that the quantity parameter was greater than zero when processing ERC-721 purchases. This allowed attackers…"
+    }
+  ],
+  "audit": "Unaudited",
+  "txHashes": [
+    "0x82a5ff772c186fb3f62bf9a8461aeadd8ea0904025c3330a4d247822ff34bc02"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-03/TreasureDAO_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-03/TreasureDAO_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "slowmist.medium.com",
+      "url": "https://slowmist.medium.com/analysis-of-the-treasuredao-zero-fee-exploit-73791f4b9c14"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "arbiscan.io",
+      "url": "https://arbiscan.io/tx/0x82a5ff772c186fb3f62bf9a8461aeadd8ea0904025c3330a4d247822ff34bc02"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Treasure DAO - REKT",
+      "url": "https://rekt.news/treasure-dao-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "arbiscan.io",
+      "url": "https://arbiscan.io/address/0x812cda2181ed7c45a35a691e0c85e231d218e273#code#F17#L226"
+    },
+    {
+      "source": "slowmist",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/tech/2022/03/03/stolen-smol-brains-nfts-returned-to-users-hours-after-treasure-exploit/"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/treasure-dao-2022-03-03"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "official.beosin.com",
+      "url": "https://official.beosin.com/resources/beosin-analysis-of-the-arbitrum-based-treasuredao-exploit"
+    },
+    {
+      "source": "revertiq",
+      "label": "dappradar.com",
+      "url": "https://dappradar.com/blog/treasauredao-marketplace-suffers-exploit-153-nfts-stolen"
+    }
+  ]
+}

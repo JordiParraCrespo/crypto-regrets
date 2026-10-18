@@ -1,0 +1,103 @@
+{
+  "id": "2025-04-27-aventa",
+  "name": "Aventa",
+  "date": "2025-04-27",
+  "year": 2025,
+  "amountUsd": 7000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Flash Loan Attack",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.69,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.71
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.11
+      },
+      {
+        "category": "logic-error",
+        "p": 0.08
+      }
+    ],
+    "flashLoan": 0.35,
+    "stateActor": 0.02,
+    "hasRootCause": 0.28
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Claim Accounting. Lost: 16,019,528 AVENTA",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Claim Accounting. Lost: 16,019,528 AVENTA"
+    },
+    {
+      "source": "SlowMist",
+      "text": "According to the SlowMist MistEye security monitoring system, Aventa, which specializes in creating intuitive Web3 utilities for the crypto community, appears to have been attacked, resulting in a loss of approximately 3.9 ETH."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "AventaRewardClaim on Ethereum Mainnet let attackers recycle the same IntelliQuant balance through fresh helper contracts and claim AVENTA multiple times on 2025-04-27. Public catalogues place the loss at about $7,000. The claim path paid AVENTA from the caller’s current IntelliQuant balance and did not consume that entitlement or record a one-time claim, so a fresh helper contract could reuse the same economic position for another payout."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x59446b1f58457c83d18864bbfaa8930c9438da33017ad41f08397cf79a8c63e5"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-04/AventaRewardClaim_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-04/AventaRewardClaim_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "t.me",
+      "url": "https://t.me/defimon_alerts/927"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/1916405508833218995"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/aventa-2025-04-27"
+    },
+    {
+      "source": "revertiq",
+      "label": "api.llama.fi",
+      "url": "https://api.llama.fi/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "quadrigainitiative.com",
+      "url": "https://quadrigainitiative.com/casestudy/aventaprojectintelliquantrewardclaimflashloanattack.php"
+    }
+  ]
+}

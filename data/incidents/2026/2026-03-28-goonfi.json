@@ -1,0 +1,82 @@
+{
+  "id": "2026-03-28-goonfi",
+  "name": "GoonFi",
+  "date": "2026-03-28",
+  "year": 2026,
+  "amountUsd": 254000,
+  "returnedUsd": null,
+  "chains": [
+    "Solana"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Swap Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.93,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.93
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.07
+      }
+    ],
+    "flashLoan": 0.11,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Rust",
+  "rootCause": "Solana-based Prop AMM project GoonFi v2's WSOL/USDC pool was drained of ~$254k due to a program config/logic bug that caused mispricing. Searchers exploited the vulnerability in a single atomic transaction, and the project team has subsequently halted the program.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Solana-based Prop AMM project GoonFi v2's WSOL/USDC pool was drained of ~$254k due to a program config/logic bug that caused mispricing. Searchers exploited the vulnerability in a single atomic transaction, and the project team has subsequently halted the program."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 28 March 2026, Solana-based GoonFi v2's WSOL/USDC AMM pool was drained of about $254,000 after an externally sourced price feed was accepted without sanity checks, enabling swaps at a grossly mispriced rate. Arbitrage searchers exploited this for rapid pool depletion. The affected program was halted immediately. The GoonFi AMM accepted external price quotes with no bounds or continuity checks. A corrupted feed update set WSOL/USDC far below market, allowing profitable swaps at the erroneous price and draining all pool WSOL. The protocol lacked circuit breakers, minimum price enforcement, or pause logic to block severe mispricing."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/Cetipo/status/2037892924982038893"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/goonfi-2026-03-28"
+    },
+    {
+      "source": "revertiq",
+      "label": "yieldo.me",
+      "url": "https://yieldo.me/security/goonfi-2026"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/goonfi-hack-2026"
+    }
+  ]
+}

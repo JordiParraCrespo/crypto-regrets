@@ -1,0 +1,90 @@
+{
+  "id": "2024-11-23-ak1111",
+  "name": "AK1111",
+  "date": "2024-11-23",
+  "year": 2024,
+  "amountUsd": 31500,
+  "returnedUsd": null,
+  "chains": [
+    "BNB Chain"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.09
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Access Control. Lost: 31.5K USD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Access Control. Lost: 31.5K USD"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The Akashalife (AK1111) on BSC was suspected to have been attacked, resulting in a loss of approximately $31.5K."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "AK1111, a LayerZero OFT token contract on BNB Chain, was exploited on 23 November 2024. The attacker used a permissionless function to freely mint tokens, draining liquidity pools and causing losses of around $31,500. The vulnerable mint function bypassed LayerZero's intended access controls. The contract implemented a public mint-capable function (nonblockingLzReceive1) with no access control, allowing anyone to mint arbitrary amounts of AK1111 tokens outside the intended guarded cross-chain pipeline. This violated the fundamental invariant that new supply can only be created after verified cross-chain burns."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xc29c98da0c14f4ca436d38f8238f8da1c84c4b1ee6480c4b4facc4b81a013438"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-11/Ak1111_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-11/Ak1111_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/TenArmorAlert/status/1860554838897197135"
+    },
+    {
+      "source": "slowmist",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0xc29c98da0c14f4ca436d38f8238f8da1c84c4b1ee6480c4b4facc4b81a013438"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/ak1111-2024-11-23"
+    },
+    {
+      "source": "revertiq",
+      "label": "crypto.training",
+      "url": "https://crypto.training/hacks/2024-11-ak1111/"
+    }
+  ]
+}

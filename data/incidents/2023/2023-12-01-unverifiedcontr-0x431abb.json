@@ -1,0 +1,86 @@
+{
+  "id": "2023-12-01-unverifiedcontr-0x431abb",
+  "name": "UnverifiedContr_0x431abb",
+  "date": "2023-12-01",
+  "year": 2023,
+  "amountUsd": 500000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Business Logic Flaw",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.97).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.97,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.97
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.02
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.97,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Business Logic Flaw. Lost: ~$500k",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Business Logic Flaw. Lost: ~$500k"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The root cause is a logic flaw in reward calculation. The victim contract is unverified, and after decompilation by Blocksec team, we obtained the following results: v4 is the token amount to be distributed, which can be increased through a flash loan, reducing the token balance of v0. The attacker first staked some tokens and executed a flash loan of BSC-USD from the pair, then claimed the reward within the flash loan callback. Since the BSC-USD amount in the pair decreases, the reward token amount is calculated incorrectly, allowing the attacker to take an excessive amount of tokens as a reward. Vulnerable code snippet: Attack tx: - Claim Transaction - Stake Transaction Analysis: BlockSec Phalcon on Twitter / X"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xbeea4ff215b15870e22ed0e4d36ccd595974ffd55c3d75dad2230196cc379a52"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-12/UnverifiedContr_0x431abb_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-12/UnverifiedContr_0x431abb_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Phalcon_xyz/status/1730625352953901123"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0x431abb27dab05f4e7cdeaa18390fe39364197500"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0xbeea4ff215b15870e22ed0e4d36ccd595974ffd55c3d75dad2230196cc379a52"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/Phalcon_xyz/status/1730625352953901123"
+    }
+  ]
+}

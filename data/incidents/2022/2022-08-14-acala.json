@@ -1,0 +1,108 @@
+{
+  "id": "2022-08-14-acala",
+  "name": "Acala",
+  "date": "2022-08-14",
+  "year": 2022,
+  "amountUsd": 0,
+  "returnedUsd": null,
+  "chains": [
+    "Acala"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Infinite Mint",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.82,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.83
+      },
+      {
+        "category": "client-bug",
+        "p": 0.09
+      },
+      {
+        "category": "logic-error",
+        "p": 0.07
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.84
+  },
+  "bridge": false,
+  "language": "Rust",
+  "rootCause": "The Polkadot ecological project Acala caused an additional issuance of aUSD due to an error on the chain, allowing attackers to mint aUSD. The vulnerability caused aUSD to lose its peg to the US dollar, initially falling to $0.60 and hovering around $0.90. Acala suspended the protocol shortly after the attack and disabled the transfer of the stolen aUSD and the attackers exchanging Acala tokens for some of the aUSD.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The Polkadot ecological project Acala caused an additional issuance of aUSD due to an error on the chain, allowing attackers to mint aUSD. The vulnerability caused aUSD to lose its peg to the US dollar, initially falling to $0.60 and hovering around $0.90. Acala suspended the protocol shortly after the attack and disabled the transfer of the stolen aUSD and the attackers exchanging Acala tokens for some of the aUSD."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 2022-08-14, a misconfigured iBTC/aUSD pool on Acala Swap created unbacked aUSD and broke the stablecoin's peg. Acala froze major network functions the same day and later said 5,837,712 aUSD had to be re-collateralized before operations could resume, but the final USD loss is not reconciled in the available record. Acala and KuCoin both attributed the incident to a misconfiguration in the newly launched iBTC/aUSD liquidity pool on Acala Swap that allowed unbacked aUSD error mints. The exact historical runtime function, pallet, and source line that performed the erroneous issuance are not established by the available checked chain and code evidence."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Acala's iBTC/aUSD pool activated a deprecated reward path set to 50% of the pool's aUSD reserve every five blocks. Early unbacked issuance and an LP payout are recorded on August 13, 2022 UTC; the project later reported 3.022 billion aUSD error mints and a prolonged recovery. A nonzero DexSavingRewardRates configuration enabled deprecated stablecoin issuance in the incentives pallet. The 0.5 rate applied to the pool's aUSD reserve every five blocks, creating unbacked aUSD as rewards. Repeated liquidity additions could increase the base for later issuance."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x1859be72efac9f3d0e278f28d127376566113e170d360992cabde2f4c4598a67",
+    "0xa4d699ee67a0e3febf91e1a2bebce6834d1004c8db9fd75f851ee1e5581da388"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "medium.com",
+      "url": "https://medium.com/acalanetwork/updates-on-the-ausd-incident-22-august-2022-997efec98b35"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/acala-network-2021-08-13"
+    },
+    {
+      "source": "revertiq",
+      "label": "medium.com",
+      "url": "https://medium.com/acalanetwork/acalas-path-to-resuming-operations-bf8ffdff5bbf"
+    },
+    {
+      "source": "revertiq",
+      "label": "kucoin.com",
+      "url": "https://www.kucoin.com/announcement/en-kucoin-announcement-regarding-the-ausd-incident-20220906"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/acala-2022-08-14"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "medium.com",
+      "url": "https://medium.com/acalanetwork/acala-incident-report-14-08-2022-392089588642"
+    }
+  ]
+}

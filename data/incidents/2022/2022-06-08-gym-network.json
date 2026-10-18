@@ -1,0 +1,131 @@
+{
+  "id": "2022-06-08-gym-network",
+  "name": "Gym Network",
+  "date": "2022-06-08",
+  "year": 2022,
+  "amountUsd": 2100000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.66
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Accesscontrol. Lost: $2.1 million",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Accesscontrol. Lost: $2.1 million"
+    },
+    {
+      "source": "REKT",
+      "text": "Gym Network offers a “perfect workout for your tokens” but has pushed itself to failure, losing $2.1M. The project’s two audits were completed last month. Why introduce new code so soon and risk an injury?"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Incorrect access control. Vulnerable code snippet: https://bscscan.com/address/0x0288fba0bf19072d30490a0f3c81cd9b0634258a#code#F1#L291 Bug fixed https://bscscan.com/address/0xb131c1cc89d209fb5c7250f68d31eff0fb5640d3#code#F1#L299"
+    },
+    {
+      "source": "SlowMist",
+      "text": "GYM NETWORK Hacked, Lost $2.1M, Stolen Funds Moved to Tornado Cash. According to the official Twitter account, the attack was caused by an attack on the Claim & Pool function, which resulted in a significant price drop."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Gym Network was exploited on BNB Chain on June 8, 2022. Attackers used an unauthenticated deposit function to mint large amounts of GYMNET tokens without providing collateral, converting them to BNB and causing losses of at least $2.1 million. The vulnerable function was quickly patched. A newly deployed deposit function in GymSinglePool lacked authentication. It allowed any caller to create deposit records and mint tokens without transferring assets or verifying associated signatures. This missing check let attackers inflate balances and drain protocol funds."
+    }
+  ],
+  "audit": "Out of scope",
+  "txHashes": [
+    "0x171a448161f2c438cca0502599a6784561d11099c9218e2125c5f3c7a6705dd3",
+    "0x91f5e625447da3e7d0d409d5c7762c94c4d5793ab34430b81a9889e5ef9f37dd",
+    "0x12970f3962b4bacd01bb4e3dc086804e4e5861134db5dd80d7e4671aa7f23d16"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-06/Gym_2_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-06/Gym_2_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/peckshield/status/1534423219607719936"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/1nf0s3cpt/status/1534464698069884929"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "www.jinse.com",
+      "url": "https://www.jinse.com/news/blockchain/1658455.html"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Gym Network - REKT",
+      "url": "https://rekt.news/gymnet-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0x0288fba0bf19072d30490a0f3c81cd9b0634258a#code#F1#L291"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0xb131c1cc89d209fb5c7250f68d31eff0fb5640d3#code#F1#L299"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/GymNet_Official/status/1534452473754157056"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/gym-network-2022-06-08"
+    },
+    {
+      "source": "revertiq",
+      "label": "certik.com",
+      "url": "https://www.certik.com/blog/gym-network-exploit-analysis"
+    },
+    {
+      "source": "revertiq",
+      "label": "blockchainbreaches.com",
+      "url": "https://www.blockchainbreaches.com/en/breaches/gym-network-2022"
+    }
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "id": "2026-08-22-the-sandbox",
+  "name": "The Sandbox",
+  "date": "2026-08-22",
+  "year": 2026,
+  "amountUsd": 675000,
+  "returnedUsd": null,
+  "chains": [
+    "Base",
+    "BSC",
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "arbitrary-call",
+    "confidence": 0.44,
+    "top": [
+      {
+        "category": "arbitrary-call",
+        "p": 0.47000000000000003
+      },
+      {
+        "category": "access-control",
+        "p": 0.4
+      },
+      {
+        "category": "bridge-crosschain",
+        "p": 0.13
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.04,
+    "hasRootCause": 0.94
+  },
+  "bridge": true,
+  "language": "Solidity",
+  "rootCause": "LayerZero delegate hijack via approveAndCall. Lost: 10,000,000 SAND minted unbacked (~$517,170 face value, one of 400+ repeated txs in an ongoing campaign)",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "LayerZero delegate hijack via approveAndCall. Lost: 10,000,000 SAND minted unbacked (~$517,170 face value, one of 400+ repeated txs in an ongoing campaign)"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The Sandbox’s SAND cross-chain bridge (LayerZero OFT on Base and BNB Chain) was exploited. The attacker used a configuration function to gain sole verifier rights, minting large amounts of unbacked SAND and draining approximately 14.74 million real SAND (~$675,000) from the Ethereum vault. The project quickly halted affected bridging; Ethereum and Polygon assets remained unaffected."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "The Sandbox's cross-chain SAND bridge on Base and BNB Chain was exploited using a misconfigured approveAndCall function, enabling an attacker to hijack LayerZero delegate permissions and mint unbacked SAND tokens. Although billions in tokens were created, only about $675,000 was extracted before the bridges were halted. The approveAndCall function in the Base SAND OFT contract permitted arbitrary calls as the token, allowing an attacker to hijack bridge delegate permissions. This enabled the attacker to bypass verification by reconfiguring the LayerZero delegate stack, self-attest messages, and mint unbacked SAND without genuine supply backing."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x76ed03844ff61520a0fb99278f92f2f1453b24ccbacd20b91131703e4a56a446"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-08/SandboxOFT_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-08/SandboxOFT_exp.sol"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/TheSandboxGame/status/2091978565256417332"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/the-sandbox-2026-08-22"
+    },
+    {
+      "source": "revertiq",
+      "label": "shattered.io",
+      "url": "https://shattered.io/sandbox-sand-bridge-exploit-2026/"
+    },
+    {
+      "source": "revertiq",
+      "label": "crypto.training",
+      "url": "https://crypto.training/hacks/2026-08-sandboxoft/"
+    }
+  ]
+}

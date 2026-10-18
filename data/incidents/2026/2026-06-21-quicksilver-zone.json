@@ -1,0 +1,86 @@
+{
+  "id": "2026-06-21-quicksilver-zone",
+  "name": "Quicksilver Zone",
+  "date": "2026-06-21",
+  "year": 2026,
+  "amountUsd": 3500,
+  "returnedUsd": null,
+  "chains": [
+    "Quicksilver"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Unbacked Mint",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "bridge-crosschain",
+    "confidence": 0.87,
+    "top": [
+      {
+        "category": "bridge-crosschain",
+        "p": 0.88
+      },
+      {
+        "category": "input-validation",
+        "p": 0.06
+      },
+      {
+        "category": "access-control",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Go",
+  "rootCause": "Quicksilver Zone (Cosmos Liquid Staking protocol) was exploited via Unchecked Proof Minting vulnerability. The attacker forged proofs to mint large amounts of unbacked qATOM (~505K) and qOSMO (~10M). The chain was halted; actual drained loss was limited (~$3,500). The team is working with Cosmos Hub and Osmosis to burn fake tokens and recover.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Quicksilver Zone (Cosmos Liquid Staking protocol) was exploited via Unchecked Proof Minting vulnerability. The attacker forged proofs to mint large amounts of unbacked qATOM (~505K) and qOSMO (~10M). The chain was halted; actual drained loss was limited (~$3,500). The team is working with Cosmos Hub and Osmosis to burn fake tokens and recover."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 21 June 2026, Quicksilver Zone suffered an exploit involving forged proofs for delegation, allowing an attacker to mint unbacked liquid staking tokens (qATOM, qOSMO) on the Quicksilver chain. The drained value was about $3,500, and the exploit stemmed from a lack of proper proof validation before issuing qAssets. Failure to authenticate delegation proofs in the interchain liquid staking issuance flow enabled unbacked mints."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/Cosmos_Airdrops/status/2069848864643858660"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/quicksilver-zone-2026-06-21"
+    },
+    {
+      "source": "revertiq",
+      "label": "hacked.slowmist.io",
+      "url": "https://hacked.slowmist.io/?c=Other"
+    },
+    {
+      "source": "revertiq",
+      "label": "monitoringroom.com",
+      "url": "https://monitoringroom.com/situation/crypto-hack/quicksilver-zone"
+    }
+  ]
+}

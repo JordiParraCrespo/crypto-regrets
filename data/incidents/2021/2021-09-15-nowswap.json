@@ -1,0 +1,108 @@
+{
+  "id": "2021-09-15-nowswap",
+  "name": "NowSwap",
+  "date": "2021-09-15",
+  "year": 2021,
+  "amountUsd": 1069000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Arithmetic Error",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.95,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.95
+      },
+      {
+        "category": "logic-error",
+        "p": 0.05
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.73
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Incorrect calculation. Lost: 158.28 WETH and 535,706 USDT",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Incorrect calculation. Lost: 158.28 WETH and 535,706 USDT"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Incorrect calculation Same Uranium, NowSwap and Nimbus issue Vulnerable code snippet: inconsistent value in the code, 10000 vs 1000 https://etherscan.io/address/0xa14660a33cc608b902f5bb49c8213bd4c8a4f4ca#code unverified contract"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Nowswap, a decentralized exchange on Ethereum, was attacked by a flash loan. The attacker emptied Nowswap’s liquidity pool. The liquidity pool was reduced from US$1,069,197 to US$24.15. The attacker made a profit of 536,000 USDT and 158 WETH. A total of more than 1 million US dollars. The attacker used the K value verification vulnerability in the Nowswap USDT/WETH transaction pair contract to perform multiple exchanges, and each exchange obtained multiple times the normal due assets, until the assets in the trading pair pool were exhausted."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "NowSwap, a decentralized exchange on Ethereum, was exploited on 15 September 2021 due to a mismatched arithmetic constant in its AMM contract, enabling an attacker to swap a minimal input for nearly the entire pool. The incident resulted in the theft of over $1.1 million, including 158.29 WETH and 535,706 USDT, which were laundered via Tornado Cash. A critical arithmetic error stemmed from the inconsistent use of a pool constant ('K') after a contract update. One validation still used the old value, permitting attacker swaps that drained almost all pooled assets."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xf3158a7ea59586c5570f5532c22e2582ee9adba2408eabe61622595197c50713"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2021-09/NowSwap_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2021-09/NowSwap_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BlockSecTeam/status/1438100688215560192"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/address/0xa14660a33cc608b902f5bb49c8213bd4c8a4f4ca#code"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/PuPuThrashing/status/1438058002817323009"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/nowswap-2021-09-15"
+    },
+    {
+      "source": "revertiq",
+      "label": "monitoringroom.com",
+      "url": "https://monitoringroom.com/situation/crypto-hack/nowswap"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/liqtags/crypto-rekts/blob/main/rekts/NowSwap-Protocol.md"
+    }
+  ]
+}

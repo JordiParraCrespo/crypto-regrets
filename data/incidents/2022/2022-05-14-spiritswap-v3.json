@@ -1,0 +1,82 @@
+{
+  "id": "2022-05-14-spiritswap-v3",
+  "name": "SpiritSwap V3",
+  "date": "2022-05-14",
+  "year": 2022,
+  "amountUsd": 18000,
+  "returnedUsd": null,
+  "chains": [
+    "Fantom"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "frontend-infra",
+  "technique": "DNS Hijack",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "frontend-infra",
+    "confidence": 0.83,
+    "top": [
+      {
+        "category": "frontend-infra",
+        "p": 0.84
+      },
+      {
+        "category": "social-engineering",
+        "p": 0.16
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.03,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "SpiritSwap tweeted that the front-end server placed on AWS was compromised by hackers, the website was tampered with parameters, and $18,000 was currently stolen. According to official postmortem analysis, the attackers contacted GoDaddy and began a social engineering attack on one of its employees. After gaining access to the account, the attackers proceeded to modify DNS settings and change all credentials, effectively hijacking access and Take ownership for yourself. After securing access to the SpiritSwap domain, the attackers then proceeded to deploy a phishing site tricked into appearing to be SpiritSwap. The attacker then uses the \"send to\" func…",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "SpiritSwap tweeted that the front-end server placed on AWS was compromised by hackers, the website was tampered with parameters, and $18,000 was currently stolen. According to official postmortem analysis, the attackers contacted GoDaddy and began a social engineering attack on one of its employees. After gaining access to the account, the attackers proceeded to modify DNS settings and change all credentials, effectively hijacking access and Take ownership for yourself. After securing access to the SpiritSwap domain, the attackers then proceeded to deploy a phishing site tricked into appearing to be SpiritSwap. The attacker then uses the \"send to\" func…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "SpiritSwap V3, a Fantom-based DEX, was exploited via DNS hijacking on May 14, 2022. The attacker modified the website frontend, redirecting user funds during swaps to their own address, resulting in losses of about $18,000. The attacker gained access to SpiritSwap's domain provider, likely through stolen credentials or social engineering, and modified DNS records. This allowed them to serve a malicious frontend that rerouted user transactions to their own wallet."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Spirit_Swap/status/1525216379041116160"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/spiritswap-v3-2022-05-14"
+    },
+    {
+      "source": "revertiq",
+      "label": "defillama.com",
+      "url": "https://defillama.com/protocol/spiritswap-v3"
+    },
+    {
+      "source": "revertiq",
+      "label": "web3isgoinggreat.com",
+      "url": "https://www.web3isgoinggreat.com/?id=spiritswap-is-the-latest-victim-of-a-domain-hijacking-attack"
+    }
+  ]
+}

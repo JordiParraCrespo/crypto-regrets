@@ -1,0 +1,116 @@
+{
+  "id": "2022-12-02-ankr",
+  "name": "Ankr",
+  "date": "2022-12-02",
+  "year": 2022,
+  "amountUsd": 5000000,
+  "returnedUsd": 5000000,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "key-compromise",
+    "confidence": 0.86,
+    "top": [
+      {
+        "category": "key-compromise",
+        "p": 0.87
+      },
+      {
+        "category": "access-control",
+        "p": 0.13
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.82
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "18 quadrillion dollars. That’s the theoretical value of the 60 trillion aBNBc that was illegitimately minted from Ankr. Unfortunately, that’s more than the GDP of the entire world, and the aBNBc liquidity couldn’t stretch that far, so the hacker only got away with $5M.",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "18 quadrillion dollars. That’s the theoretical value of the 60 trillion aBNBc that was illegitimately minted from Ankr. Unfortunately, that’s more than the GDP of the entire world, and the aBNBc liquidity couldn’t stretch that far, so the hacker only got away with $5M."
+    },
+    {
+      "source": "SlowMist",
+      "text": "Ankr's deployer key was suspected to be leaked, and hackers minted a total of 60 trillion aBNBc. According to MistTrack analysis, some funds have been cross-chained from BSC to ETH and Polygon. The hacker used Celer Network, PancakeSwap, Multichain, deBridge, 1inch, PancakeSwap, SushiSwap, ParaSwap in the process of transferring funds, and 900 BNB has been transferred to Tornadocash so far. The Ankr team stated, “Our aBNB tokens (the proof tokens for BNB pledges) have been stolen and we are currently working with exchanges to stop trading immediately. Currently all underlying assets on Ankr pledges are safe and all infrastructure Services will not be affected.\""
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On December 1,2, 2022, Ankr's liquid staking token aBNBc on BNB Chain was exploited for $5 million. A compromised deployer key enabled a malicious upgrade with infinite minting privileges, allowing the attacker to create 60 quadrillion tokens and drain DEX liquidity. The single-key upgrade path, not controlled by a multisig or timelock, was the key operational failure. Ankr's aBNBc staking token contract on BNB Chain retained minting and upgrade authority in a single deployer externally owned account (EOA). A former team member, via a supply chain and internal security lapse, accessed this key and upgraded the proxy to a malicious implementation, then minted 60 quadrillion tokens.…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On December 1, 2022, Ankr's aBNBc liquid staking token on BNB Chain was exploited after a former team member compromised the deployer private key. The attacker minted trillions of aBNBc and dumped them, collapsing the price. A secondary attacker exploited Helio Protocol's stale price oracle to borrow $15M+ worth of HAY stablecoin against nearly worthless collateral. Combined losses reached approximately $20M. A former Ankr employee retained access to the deployer private key, which had not revoked its minting authority. The attacker used this key to mint 60 quadrillion aBNBc tokens. Helio Protocol's price oracle failed to update promptly after the coll…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Ankr & Helio - REKT",
+      "url": "https://rekt.news/ankr-helio-rekt"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/ankr/status/1598624443642703872"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/ankr-2022-12-02"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "ankr.com",
+      "url": "https://www.ankr.com/blog/the-abnbc-token-report/"
+    },
+    {
+      "source": "revertiq",
+      "label": "ankr.com",
+      "url": "https://www.ankr.com/blog/after-action-report-our-findings-from-abnbc-token-exploit/"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/explained-2022-12-06t15-03-49-00-00"
+    },
+    {
+      "source": "revertiq",
+      "label": "halborn.com",
+      "url": "https://www.halborn.com/blog/post/explained-the-ankr-and-helio-hacks-november-2022"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractaudit.com",
+      "url": "https://www.smartcontractaudit.com/guides/ankr-protocol-2022-deployer-key-exploit"
+    }
+  ]
+}

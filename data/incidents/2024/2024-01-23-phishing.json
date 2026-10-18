@@ -1,0 +1,98 @@
+{
+  "id": "2024-01-23-phishing",
+  "name": "Phishing",
+  "date": "2024-01-23",
+  "year": 2024,
+  "amountUsd": 12917550,
+  "returnedUsd": null,
+  "chains": [
+    "BNB Chain",
+    "Ethereum Mainnet"
+  ],
+  "targetType": null,
+  "category": "social-engineering",
+  "technique": "Phishing; Token Approval Abuse",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.96). Replaced keyword guess \"signature-crypto\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "social-engineering",
+    "confidence": 0.96,
+    "top": [
+      {
+        "category": "social-engineering",
+        "p": 0.96
+      },
+      {
+        "category": "arbitrary-call",
+        "p": 0.03
+      },
+      {
+        "category": "signature-crypto",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.03,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "In late January 2024, a coordinated phishing campaign used malicious signatures and contract wallet drainers to steal over $12.9 million in tokens,including collateral and interest-bearing assets,across Ethereum and BNB Chain. Attackers exploited ERC-20 Permit signatures, Create2 wallets, and increaseAllowance to rapidly drain victims’ wallets after signature authorization. Attackers lured victims to phishing sites, tricking them into signing ERC-20 permit or approval transactions. These signatures gave attacker-controlled contracts maximum allowance to drain tokens. The attacker then used Create2-deployed wallet drainers to transfer assets, exploiting…",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "In late January 2024, a coordinated phishing campaign used malicious signatures and contract wallet drainers to steal over $12.9 million in tokens,including collateral and interest-bearing assets,across Ethereum and BNB Chain. Attackers exploited ERC-20 Permit signatures, Create2 wallets, and increaseAllowance to rapidly drain victims’ wallets after signature authorization. Attackers lured victims to phishing sites, tricking them into signing ERC-20 permit or approval transactions. These signatures gave attacker-controlled contracts maximum allowance to drain tokens. The attacker then used Create2-deployed wallet drainers to transfer assets, exploiting…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On January 21, 2024, a single Ethereum user lost over $3.7 million in a phishing attack exploiting ERC-20 Permit signatures. The attacker received gasless off-chain permits and drained aEthWETH and aEthUNI tokens, dispersing funds to multiple addresses and obfuscating the flow. The victim was deceived into signing ERC-20 Permit (EIP-2612) messages on a phishing site. These signatures enabled the attacker to set unlimited token spending allowances, which were then exploited to drain the user's wallet. The attack used temporary addresses but the principal draining was mediated via EOAs and a malicious recipient contract, not strictly confirmed as CREATE2-deployed."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x93a0ce0711edaf7664c26b3654095f1052010bb7da62c135b6ef0c425c0c2f09",
+    "0xbc43a531861422a233a2d4ba884288e752b7ecddb3c47b78e89896153d71b583"
+  ],
+  "poc": null,
+  "sources": [
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/phishing-2024-01-23"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/de-fi-rekt-report-a-quarter-in-review-almost-415-million-lost-in-q1-2024"
+    },
+    {
+      "source": "revertiq",
+      "label": "drops.scamsniffer.io",
+      "url": "https://drops.scamsniffer.io/scamsniffer-report-over-55-million-stolen-due-to-crypto-phishing-in-january/"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/massive-phishing-hack-2024"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/single-user-incident-2024-01-31t20-31-55-00-00"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/de-fi-rekt-report-over-38-8m-lost-in-january-2024"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/unknown-user-hack-2024"
+    }
+  ]
+}

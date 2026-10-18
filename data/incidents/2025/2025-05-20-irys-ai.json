@@ -1,0 +1,99 @@
+{
+  "id": "2025-05-20-irys-ai",
+  "name": "IRYS AI",
+  "date": "2025-05-20",
+  "year": 2025,
+  "amountUsd": 69600,
+  "returnedUsd": null,
+  "chains": [
+    "Binance Smart Chain"
+  ],
+  "targetType": "Token",
+  "category": "rugpull",
+  "technique": "Backdoor Contract",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "rugpull",
+    "confidence": 0.59,
+    "top": [
+      {
+        "category": "rugpull",
+        "p": 0.61
+      },
+      {
+        "category": "access-control",
+        "p": 0.36
+      },
+      {
+        "category": "logic-error",
+        "p": 0.03
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "rug pull. Lost: 69.6K USD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "rug pull. Lost: 69.6K USD"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The IRYSAI token contract contained a privileged backdoor: the deployer/owner could call setTaxWallet() to designate an arbitrary address as the \"tax wallet\", and the token's transfer logic grants the tax wallet the ability to move tokens out of any account (including the PancakeSwap liquidity pair) without an allowance. The deployer first set the tax wallet to an attacker-controlled contract (the backdoor tx), then that contract called transferFrom(pair, attacker, ~99.99% of pair balance) to drain almost all IRYSAI from the liquidity pool, called sync() on the pair to update reserves, and swapped the stolen tokens out for ~107 BNB, a classic privileged rug pull (~$69.6K). Vulnerable code snippet: Attack Tx: https://bscscan.com/tx/0xe9a66bad8975f2a7b68c74992054c84d6d80ac4c543352e23bf23740b8858645 Analysis: TenArmorAlert"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "IRYS AI on BNB Chain suffered a rug pull on 20 May 2025, with $69,600 lost after the deployer exploited a backdoor in the token contract. The privileged tax wallet address was able to bypass allowance checks and transfer user funds, draining liquidity in a single transaction. A backdoor in the IRYS AI token contract allowed the designated _taxWallet address to transfer tokens from liquidity pools and user balances without passing standard allowance checks. The deployer assigned this role then used it to drain funds."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xe9a66bad8975f2a7b68c74992054c84d6d80ac4c543352e23bf23740b8858645",
+    "0x7d1a0e4200c47d90e5bba07f98c62756047aa1adf40569c8330a903a191b2fac",
+    "0x8c637fc98ad84b922e6301c0b697167963eee53bbdc19665f5d122ae55234ca6"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-05/IRYSAI_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-05/IRYSAI_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/TenArmorAlert/status/1925012844052975776"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0xe9a66bad8975f2a7b68c74992054c84d6d80ac4c543352e23bf23740b8858645"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/irys-ai-2025-05-20"
+    },
+    {
+      "source": "revertiq",
+      "label": "quadrigainitiative.com",
+      "url": "https://quadrigainitiative.com/casestudy/irysaiprogrammableblockchainrevolutionbackdoorrugpull.php"
+    }
+  ]
+}

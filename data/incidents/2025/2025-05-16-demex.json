@@ -1,0 +1,76 @@
+{
+  "id": "2025-05-16-demex",
+  "name": "Demex",
+  "date": "2025-05-16",
+  "year": 2025,
+  "amountUsd": 950559,
+  "returnedUsd": null,
+  "chains": [
+    "Arbitrum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.06,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Nitron, Demex’s lending platform, was exploited on May 16, 2025, through manipulation of the dGLP vault’s oracle, resulting in a $950,559 loss. The attacker inflated the collateral price in a deprecated vault, borrowed real assets against the fake value, and withdrew profits. Recovery efforts reclaimed about $78,000, with the remainder addressed via a restitution token. Demex’s Nitron oracle used a deprecated dGLP vault’s redemption rate for collateral valuation. Because the vault had low TVL and was no longer actively managed, the attacker could donate fsGLP tokens to artificially inflate the redemption rate. This inflated price was propagated by the…",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "Nitron, Demex’s lending platform, was exploited on May 16, 2025, through manipulation of the dGLP vault’s oracle, resulting in a $950,559 loss. The attacker inflated the collateral price in a deprecated vault, borrowed real assets against the fake value, and withdrew profits. Recovery efforts reclaimed about $78,000, with the remainder addressed via a restitution token. Demex’s Nitron oracle used a deprecated dGLP vault’s redemption rate for collateral valuation. Because the vault had low TVL and was no longer actively managed, the attacker could donate fsGLP tokens to artificially inflate the redemption rate. This inflated price was propagated by the…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x64e9c2eef1b65ef11d72e1ffde4d0b089533ba15d42854759f62f232cf671dfa",
+    "0x2bd26aee4b4f6de3a3b3806e334ea192deab682e00fa6707c5ecf2289392096d"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/nitron-demex-oracle-manipulation-2025-05-16"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/de-fi-rekt-report-may-2025-275-9-million-lost-across-8-incidents-zero-recovered"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.dem.exchange",
+      "url": "https://blog.dem.exchange/nitron-post-mortem/"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.dem.exchange",
+      "url": "https://blog.dem.exchange/nitron-exploit-update-restitution-next-steps/"
+    }
+  ]
+}

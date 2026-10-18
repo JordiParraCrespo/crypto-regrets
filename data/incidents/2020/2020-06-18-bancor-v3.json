@@ -1,0 +1,111 @@
+{
+  "id": "2020-06-18-bancor-v3",
+  "name": "Bancor V3",
+  "date": "2020-06-18",
+  "year": 2020,
+  "amountUsd": 544885,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.57
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Access Control",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Access Control"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "incorrect access control Vulnerable code snippet: https://etherscan.io/address/0x5f58058c0ec971492166763c8c22632b583f667f#code#L551 fixed"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Due to the unverified safeTransferFrom () function in the new Bancor network contract, user funds are about to be depleted. The Bancor team stated: 1. A security vulnerability was discovered in the new Bancor Network v0.6 contract released two days ago; 2. After the vulnerability was discovered, the team conducted a white hat attack to transfer funds to a secure address; 3. The audit of the smart contract has been completed.But there are still $135,229 preemptively traded by two unknown arbitrage robots."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Bancor V3 suffered a critical access control vulnerability on Ethereum mainnet in June 2020. Attackers and a Bancor white-hat team exploited a public safeTransferFrom function to drain user-approved tokens, resulting in losses and partial recovery. The exploit allowed arbitrary transfers from user wallets with unlimited approval. The safeTransferFrom function was inappropriately declared public in the Bancor contract, allowing anyone to invoke it to transfer tokens from any user who had approved the contract. This enabled direct theft of user funds."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xdba03739b4a29594fd3c89881caffa1862ce4bd630ed5f849b9f22707332e59e",
+    "0x29142513a7926a326ee726f167cb611a8c2f579255dd9d0d8fc598a369836347",
+    "0x4643b63dcbfc385b8ab8c86cbc46da18c2e43d277de3e5bc3b4516d3c0fdeb9f"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2020-06/Bancor_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2020-06/Bancor_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "blog.bancor.network",
+      "url": "https://blog.bancor.network/bancors-response-to-today-s-smart-contract-vulnerability-dc888c589fe4"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/address/0x5f58058c0ec971492166763c8c22632b583f667f"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/address/0x5f58058c0ec971492166763c8c22632b583f667f#code#L551"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Hex_Capital/status/1273469889622077441"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/bancor-v3-2020-06-18"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/kismp123/DeFi-Security-Incident/blob/main/2020/2020-06-18_Bancor_AccessControl.md"
+    },
+    {
+      "source": "revertiq",
+      "label": "1inch.com",
+      "url": "https://1inch.com/blog/post/bancor-network-hack-2020"
+    }
+  ]
+}

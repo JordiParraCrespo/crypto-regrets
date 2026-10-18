@@ -1,0 +1,77 @@
+{
+  "id": "2025-09-02-venus-protocol",
+  "name": "Venus Protocol",
+  "date": "2025-09-02",
+  "year": 2025,
+  "amountUsd": 13500000,
+  "returnedUsd": null,
+  "chains": [
+    "BNB Chain"
+  ],
+  "targetType": null,
+  "category": "social-engineering",
+  "technique": "phishing; malicious approval",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.94).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "social-engineering",
+    "confidence": 0.94,
+    "top": [
+      {
+        "category": "social-engineering",
+        "p": 0.94
+      },
+      {
+        "category": "arbitrary-call",
+        "p": 0.05
+      },
+      {
+        "category": "access-control",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "A Venus Protocol user on BNB Chain signed a malicious approval on 2025-09-02, letting an attacker move the account’s positions. Public reporting corrected the net loss to about $13.5 million after debt was excluded, and Venus paused then restored the affected markets the same day. The failure was a malicious wallet approval on BNB Chain. The signed approval granted another address authority over the user’s Venus positions, so later actions were treated as authorized even though the Venus contracts themselves were not shown to be compromised.",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "A Venus Protocol user on BNB Chain signed a malicious approval on 2025-09-02, letting an attacker move the account’s positions. Public reporting corrected the net loss to about $13.5 million after debt was excluded, and Venus paused then restored the affected markets the same day. The failure was a malicious wallet approval on BNB Chain. The signed approval granted another address authority over the user’s Venus positions, so later actions were treated as authorized even though the Venus contracts themselves were not shown to be compromised."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xee9928b8d1a212f4d7b7e9dca97598394005a7b8fef56856e52351bc7921be43"
+  ],
+  "poc": null,
+  "sources": [
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/venus-2025-09-02"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/defi-rekt-report-q3-2025-434m-lost-across-40-exploits"
+    },
+    {
+      "source": "revertiq",
+      "label": "bitdegree.org",
+      "url": "https://www.bitdegree.org/crypto/news/venus-protocol-halts-activity-after-user-falls-for-13-5-million-crypto-scam"
+    },
+    {
+      "source": "revertiq",
+      "label": "crypto.news",
+      "url": "https://crypto.news/venus-protocol-recovers-funds-phishing-attack-2025/"
+    }
+  ]
+}

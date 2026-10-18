@@ -1,0 +1,77 @@
+{
+  "id": "2026-03-14-goose-finance",
+  "name": "Goose Finance",
+  "date": "2026-03-14",
+  "year": 2026,
+  "amountUsd": 8435,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Incorrect Share Accounting",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.96,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.96
+      },
+      {
+        "category": "logic-error",
+        "p": 0.04
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.01,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Goose Finance, a yield farming protocol on BNB Chain, was exploited due to a share accounting flaw in the StrategyGooseEgg contract. The attacker repeatedly looped deposit() and withdraw() to mint inflated shares before rewards were settled, then redeemed them at higher value after harvest, profiting ~$8,435.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Goose Finance, a yield farming protocol on BNB Chain, was exploited due to a share accounting flaw in the StrategyGooseEgg contract. The attacker repeatedly looped deposit() and withdraw() to mint inflated shares before rewards were settled, then redeemed them at higher value after harvest, profiting ~$8,435."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Goose Finance was exploited on BNB Chain on March 14, 2026, losing about $8,435 due to an incorrect share-pricing mechanism in the StrategyGooseEgg contract. The incident enabled attackers to mint overvalued shares and redeem them for profit by exploiting inconsistent reward accounting. StrategyGooseEgg's deposit and withdrawal logic minted shares or burned shares before properly settling harvested rewards in its asset accounting. The share pricing denominator excluded pending rewards, allowing attackers to mint more shares than warranted and withdraw against a higher asset total."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "blocksec.com",
+      "url": "https://blocksec.com/blog/weekly-web3-security-incident-roundup-mar-9-mar-15-2026"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/goose-finance-2026-03-14"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/goose-finance-hack-2026"
+    }
+  ]
+}

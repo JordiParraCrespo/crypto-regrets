@@ -1,0 +1,119 @@
+{
+  "id": "2022-10-11-templedao",
+  "name": "TempleDAO",
+  "date": "2022-10-11",
+  "year": 2022,
+  "amountUsd": 2300000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.87
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Insufficient access control. Lost: $2.3 million",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Insufficient access control. Lost: $2.3 million"
+    },
+    {
+      "source": "REKT",
+      "text": "TempleDAO’s STAX was hacked for approximately $2.3M worth of LP tokens. The vulnerable contract had been live for four months. Why did it take so long to be exploited?"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "insufficient access control to the migrateStake function. Vulnerable code snippet: https://etherscan.io/address/0xd2869042e12a3506100af1d192b5b04d65137941#code#F1#L241"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The TempleDAO project was hacked, involving an amount of approximately $2.36 million. According to the analysis of the SlowMist security team, in this incident, because the migrateStake function did not check the oldStaking, the attacker could forge the oldStaking contract to add the balance arbitrarily."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On October 11, 2022, STAX's Ethereum staking contract lost 321,154.865567124596801893 xFraxTemple LP tokens, valued at approximately $2.3 million. An unchecked migration source let the attacker create an unbacked stake and withdraw real depositor assets. migrateStake() trusted a caller-selected oldStaking contract and credited the requested amount without validating the migration source or verifying receipt of LP tokens. A malicious callback returned successfully without funding the stake; withdrawAll(false) then redeemed the unsupported credit."
+    }
+  ],
+  "audit": "Unaudited",
+  "txHashes": [
+    "0x8c3f442fc6d640a6ff3ea0b12be64f1d4609ea94edd2966f42c01cd9bdcf04b5"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-10/Templedao_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-10/Templedao_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BlockSecTeam/status/1579843881893769222"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x8c3f442fc6d640a6ff3ea0b12be64f1d4609ea94edd2966f42c01cd9bdcf04b5"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: TempleDAO - REKT",
+      "url": "https://rekt.news/templedao-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/address/0xd2869042e12a3506100af1d192b5b04d65137941#code#F1#L241"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/SlowMist_Team/status/1579848760766926848"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/templedao-2022-10-11"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "rekt.news",
+      "url": "https://rekt.news/templedao-rekt/"
+    }
+  ]
+}

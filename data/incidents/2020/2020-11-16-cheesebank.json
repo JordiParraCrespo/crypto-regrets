@@ -1,0 +1,80 @@
+{
+  "id": "2020-11-16-cheesebank",
+  "name": "CheeseBank",
+  "date": "2020-11-16",
+  "year": 2020,
+  "amountUsd": 3300000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.15,
+    "stateActor": 0.02,
+    "hasRootCause": 0.93
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "Cheese Bank, a decentralized autonomous digital banking platform based on Ethereum, suffered a loss of USD 3.3 million due to a hacker attack. Hackers conducted a series of malicious lending operations on platforms such as dYdX and Uniswap by using automatic market maker (AMM)-based oracles, resulting in a total loss of over US$3.3 million, including US$2 million in USDC.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Cheese Bank, a decentralized autonomous digital banking platform based on Ethereum, suffered a loss of USD 3.3 million due to a hacker attack. Hackers conducted a series of malicious lending operations on platforms such as dYdX and Uniswap by using automatic market maker (AMM)-based oracles, resulting in a total loss of over US$3.3 million, including US$2 million in USDC."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "CheeseBank was exploited on Ethereum Mainnet on 6 November 2020 for approximately $3.3 million in USDC, USDT, and DAI. The attacker manipulated the spot price of CHEESE on UniswapV2 using a large flash loan, inflated collateral value, and borrowed the maximum from the protocol's lending pool before repaying the loan and withdrawing the stolen assets. CheeseBank calculated UniswapV2 LP token collateral value using a spot price oracle derived directly from the WETH balance in the Uniswap pool. This value could be manipulated via flash loans, allowing an attacker to temporarily and massively inflate the LP price, deceive the protocol's collateral logic, a…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x600a869aa3a259158310a233b815ff67ca41eab8961a49918c2031297a02f1cc"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "cointelegraph.com",
+      "url": "https://cointelegraph.com/news/cheese-bank-s-multi-million-dollar-hack-explained-by-security-firm"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/cheesebank-2020-11-16"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/liqtags/crypto-rekts/blob/main/rekts/Cheese-Bank.md"
+    },
+    {
+      "source": "revertiq",
+      "label": "forklog.com",
+      "url": "https://forklog.com/en/defi-project-cheese-bank-loses-3-3-million-in-hack"
+    }
+  ]
+}

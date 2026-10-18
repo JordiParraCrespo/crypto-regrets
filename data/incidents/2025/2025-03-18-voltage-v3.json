@@ -1,0 +1,78 @@
+{
+  "id": "2025-03-18-voltage-v3",
+  "name": "Voltage V3",
+  "date": "2025-03-18",
+  "year": 2025,
+  "amountUsd": 322113,
+  "returnedUsd": null,
+  "chains": [
+    "Fuse"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.29
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "On March 18, the Simple Staking pools of Voltage Finance, a DeFi platform built on the Fuse Network, suffered an unauthorized withdrawal, resulting in a total loss of $171,027.20 in USDCE and $151,085.87 in WETH.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "On March 18, the Simple Staking pools of Voltage Finance, a DeFi platform built on the Fuse Network, suffered an unauthorized withdrawal, resulting in a total loss of $171,027.20 in USDCE and $151,085.87 in WETH."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Voltage V3 on Fuse was exploited on March 18, 2025 via improper access control, allowing unauthorized access to privileged functions and resulting in a loss of approximately $322,113. The exploit specifically targeted staking pool contracts, reportedly by a party with unrelinquished developer privileges. No public technical exploit details, transaction trace, or vulnerable code have been released. Improper access control: staking pool contracts permitted privileged operations by unauthorized accounts due to missing or insufficient privilege checks and failure to revoke developer access promptly."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "medium.com",
+      "url": "https://medium.com/@voltage.finance/voltage-finance-transparency-post-mortem-report-simple-staking-hack-ecde06c6b8bc"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/voltage-v3-2025-03-18"
+    },
+    {
+      "source": "revertiq",
+      "label": "defillama.com",
+      "url": "https://defillama.com/protocol/voltage-v3"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/voltage-v3-hack-2025"
+    }
+  ]
+}

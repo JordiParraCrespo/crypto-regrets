@@ -1,0 +1,86 @@
+{
+  "id": "2026-06-09-asterix",
+  "name": "Asterix",
+  "date": "2026-06-09",
+  "year": 2026,
+  "amountUsd": 40000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "NFTfi",
+  "category": "arbitrary-call",
+  "technique": "Token Approval Abuse",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "arbitrary-call",
+    "confidence": 0.93,
+    "top": [
+      {
+        "category": "arbitrary-call",
+        "p": 0.93
+      },
+      {
+        "category": "access-control",
+        "p": 0.04
+      },
+      {
+        "category": "logic-error",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.01,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Asterix Labs (a fork of the Flooring Protocol NFT liquidity platform) suffered an exploit targeting its $ASTX token contract. Attackers drained approximately $40,000 by exploiting a smart contract vulnerability in the shared DN404/BT404 token standard codebase—the same flaw used in the Flooring Protocol attack the previous day. The project team immediately acknowledged the incident on X and stated they are investigating, with a full post-mortem to follow.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Asterix Labs (a fork of the Flooring Protocol NFT liquidity platform) suffered an exploit targeting its $ASTX token contract. Attackers drained approximately $40,000 by exploiting a smart contract vulnerability in the shared DN404/BT404 token standard codebase—the same flaw used in the Flooring Protocol attack the previous day. The project team immediately acknowledged the incident on X and stated they are investigating, with a full post-mortem to follow."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Asterix, an NFT liquidity protocol forked from Flooring Protocol, was exploited on Ethereum Mainnet on 9 June 2026, resulting in a loss of approximately $40,000. The incident leveraged a vulnerability inherited from DN404/BT404-style token approval and accounting logic, allowing repeated unauthorized withdrawals from the pool. A flawed token approval and accounting mechanism inherited from DN404/BT404-style logic enabled repeated illicit claims on pool assets, allowing attackers to drain funds via forged or reused token IDs."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/asterixlabs/status/2063916673724555336"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/asterix-2026-06-09"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptonews.net",
+      "url": "https://cryptonews.net/news/security/32987389/"
+    },
+    {
+      "source": "revertiq",
+      "label": "monitoringroom.com",
+      "url": "https://monitoringroom.com/situation/crypto-hack/asterix"
+    }
+  ]
+}

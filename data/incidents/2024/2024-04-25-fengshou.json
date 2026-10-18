@@ -1,0 +1,85 @@
+{
+  "id": "2024-04-25-fengshou",
+  "name": "FENGSHOU",
+  "date": "2024-04-25",
+  "year": 2024,
+  "amountUsd": 191000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "Token",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.99
+      },
+      {
+        "category": "arbitrary-call",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Shortly after the deployment of the FENGSHOU (NGFS) token, it was attacked, resulting in a loss of approximately $191,000. The vulnerability lies in a public `delegateCallReserves` function which allows the attacker to set an arbitrary address to a UniSwapV2 proxy.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Shortly after the deployment of the FENGSHOU (NGFS) token, it was attacked, resulting in a loss of approximately $191,000. The vulnerability lies in a public `delegateCallReserves` function which allows the attacker to set an arbitrary address to a UniSwapV2 proxy."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "FENGSHOU (NGFS) was exploited on BNB Chain on 25 April 2024, shortly after deployment, due to a public delegateCallReserves function with no access control. The attacker manipulated internal contract pointers and drained approximately $191,000 from liquidity pools. The NGFS token contract exposed delegateCallReserves with public visibility, allowing anyone to reset core pointers (_uniswapV2Proxy, _uniswapV2Library) and enable arbitrary fund transfers. The function lacked proper access restriction and initialization checks."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xada415135ab3cd4e2784ecbc024fc0500ca3907159023a4dfe6d874f46819eed",
+    "0x8ff764dde572928c353716358e271638fa05af54be69f043df72ad9ad054de25"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/ddimitrovv22/status/1784223165251489952"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/fengshou-2024-04-25"
+    },
+    {
+      "source": "revertiq",
+      "label": "quadrigainitiative.com",
+      "url": "https://www.quadrigainitiative.com/casestudy/fengshoungfsdelegatecallreservesattack.php"
+    },
+    {
+      "source": "revertiq",
+      "label": "olympix.security",
+      "url": "https://olympix.security/biweekly-exploits/6m-stolen-alexlab-ngfs-xbridge-and-yiedl-compromised-by-key-theft-and-broken-access-controls"
+    }
+  ]
+}

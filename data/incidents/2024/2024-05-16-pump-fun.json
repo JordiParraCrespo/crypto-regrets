@@ -1,0 +1,86 @@
+{
+  "id": "2024-05-16-pump-fun",
+  "name": "pump.fun",
+  "date": "2024-05-16",
+  "year": 2024,
+  "amountUsd": 1900000,
+  "returnedUsd": null,
+  "chains": [
+    "Solana"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "key-compromise",
+  "technique": "Private Key Compromised",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "rugpull",
+    "confidence": 0.49,
+    "top": [
+      {
+        "category": "rugpull",
+        "p": 0.52
+      },
+      {
+        "category": "key-compromise",
+        "p": 0.27
+      },
+      {
+        "category": "access-control",
+        "p": 0.21
+      }
+    ],
+    "flashLoan": 0.95,
+    "stateActor": 0.02,
+    "hasRootCause": 0.94
+  },
+  "bridge": false,
+  "language": "Rust/Anchor",
+  "rootCause": "pump.fun is a Solana-based memecoin generator. On May 16th, the project suffered a $1.9 million exploit by an attacker who then began airdropping the money to somewhat random wallets. pump.fun stated on Twitter that the attack was due to a former employee exploiting their privileges within the company to illegally obtain withdrawal permissions and using a lending protocol to carry out flash loan attacks.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "pump.fun is a Solana-based memecoin generator. On May 16th, the project suffered a $1.9 million exploit by an attacker who then began airdropping the money to somewhat random wallets. pump.fun stated on Twitter that the attack was due to a former employee exploiting their privileges within the company to illegally obtain withdrawal permissions and using a lending protocol to carry out flash loan attacks."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Pump.fun’s Solana launchpad was exploited on 16 May 2024 when a former employee abused privileged withdrawal authority, draining around 12,300 SOL (~$1.9 M). The attack combined flash loan-powered bonding curve purchases with unauthorized liquidity extraction. Trading was paused, contracts upgraded, and liquidity replacement promised. A privileged service account's private key (withdraw authority) was compromised and used by a former employee to withdraw platform liquidity directly, bypassing intended curve-to-pool flows."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/pumpdotfun/status/1791235050643636303"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/pump-fun-2024-05-16"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "theblock.co",
+      "url": "https://www.theblock.co/post/294089/pump-fun-exploited-for-nearly-2-million-by-former-employee"
+    }
+  ]
+}

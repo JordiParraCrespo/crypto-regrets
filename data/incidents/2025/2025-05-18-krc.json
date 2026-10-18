@@ -1,0 +1,81 @@
+{
+  "id": "2025-05-18-krc",
+  "name": "KRC",
+  "date": "2025-05-18",
+  "year": 2025,
+  "amountUsd": 7000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "deflationary token",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.93).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.93,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.93
+      },
+      {
+        "category": "logic-error",
+        "p": 0.05
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.97,
+    "stateActor": 0.04,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "deflationary token. Lost: 7k USD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "deflationary token. Lost: 7k USD"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "KRC is a fee-on-transfer (deflationary) token. The attacker exploited the interaction between its transfer fee/burn and the PancakeSwap pair's skim function to desynchronize the pair's cached reserves from its real token balances. With nested DODO and PancakeV3 flashloans of USDT, the attacker first swapped USDT into KRC to set up an imbalance, then performed a sequence of ~17 precise transfer(pair, amount) followed by pair.skim(this) calls. Because the deflationary token burns/taxes on each transfer, repeatedly sending KRC into the pair and skimming caused the pair's internal reserves to drift away from actual balances, lowering the effective KRC price. The attacker then executed a single pair.swap(0, 355361...) to extract a large amount of USDT against the corrupted reserves, repaid both flashloans, and netted ~$7k. Root cause: AMM pair reserve accounting being manipulable through a deflationary token's transfer fee combined with skim. Vulnerable code snippet: Attack Tx: https://bscscan.com/tx/0x78f242dee5b8e15a43d23d76bce827f39eb3ac54b44edcd327c5d63de3848daf Analysis: OpenZeppelin post-mortem"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x78f242dee5b8e15a43d23d76bce827f39eb3ac54b44edcd327c5d63de3848daf"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-05/KRCToken_pair_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-05/KRCToken_pair_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/CertikAIAgent/status/1924280794916536765"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x78f242dee5b8e15a43d23d76bce827f39eb3ac54b44edcd327c5d63de3848daf"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/OpenZeppelin/status/1953111764536561867"
+    }
+  ]
+}

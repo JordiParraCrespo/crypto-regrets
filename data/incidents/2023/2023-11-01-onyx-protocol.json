@@ -1,0 +1,140 @@
+{
+  "id": "2023-11-01-onyx-protocol",
+  "name": "Onyx Protocol",
+  "date": "2023-11-01",
+  "year": 2023,
+  "amountUsd": 2100000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Donation Attack",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.99
+      },
+      {
+        "category": "logic-error",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.97,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Precission Loss Vulnerability. Lost: ~$2M",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Precission Loss Vulnerability. Lost: ~$2M"
+    },
+    {
+      "source": "REKT",
+      "text": "Compound fork Onyx Protocol lost $2.1M to a high-profile, well-known vulnerability on Tuesday. Many protocols have fallen victim to repeated vulnerabilities so far this year. Are devs paying attention?"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Onyx is a Compound v2 fork that listed a brand-new oPEPE market with effectively empty supply. The attacker exploited the cToken exchange-rate formula exchangeRate = (cash + totalBorrows - totalReserves) / totalSupply: using a flash loan they minted oPEPE, redeemed totalSupply - 2 to leave only 2 wei of oPEPE outstanding, then donated a large amount of underlying PEPE directly to the oPEPE contract. With a near-zero denominator and inflated cash, the exchange rate (and thus the value of the 2 wei of collateral) became astronomically large. They entered the oPEPE market and borrowed nearly all liquidity out of every other market. Integer truncation in redeemUnderlying and liquidateCalculateSeizeTokens let them redeem their collateral back while keeping the borrowed assets. The root issue is the well-known empty-market precision/rounding flaw in Compound v2 forks that lack a minimum-liquidity / dead-shares guard. Vulnerable code snippet: Attack Tx: https://explorer.phalcon.xyz/tx/eth/0xf7c21600452939a81b599017ee24ee0dfd92aaaccd0a55d02819a7658a6ef635 Analysis: Phalcon_xyz analysis (Twitter)"
+    },
+    {
+      "source": "SlowMist",
+      "text": "DeFi lending protocol Onyx Protocol has been exploited and has currently lost ~$2.1 million."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Onyx Protocol, a Compound V2 fork, was exploited on Ethereum Mainnet on November 1, 2023 via a precision loss vulnerability in its newly launched PEPE market. The attacker manipulated the exchange rate by donating PEPE tokens to the empty market, borrowed other assets against inflated collateral, and drained over $2.1M in value. The oPEPE market was launched without initial liquidity, allowing attackers to manipulate its share price via token donation. A rounding/precision bug in share accounting enabled overvaluation of oPEPE collateral, which the attacker exploited to borrow and redeem assets from other Onyx markets."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xf7c21600452939a81b599017ee24ee0dfd92aaaccd0a55d02819a7658a6ef635",
+    "0x27a3788d504af542681436bfdecf1823f7a8a691d04309ad33e6d3825e899746"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-11/OnyxProtocol_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-11/OnyxProtocol_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Phalcon_xyz/status/1719697319824851051"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "defimon.xyz",
+      "url": "https://defimon.xyz/attack/mainnet/0xf7c21600452939a81b599017ee24ee0dfd92aaaccd0a55d02819a7658a6ef635"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/DecurityHQ/status/1719657969925677161"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Onyx Protocol - REKT",
+      "url": "https://rekt.news/onyx-protocol-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "explorer.phalcon.xyz",
+      "url": "https://explorer.phalcon.xyz/tx/eth/0xf7c21600452939a81b599017ee24ee0dfd92aaaccd0a55d02819a7658a6ef635"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xf7c21600452939a81b599017ee24ee0dfd92aaaccd0a55d02819a7658a6ef635"
+    },
+    {
+      "source": "blocksec",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs?tab=readme-ov-file#20231101-onyxprotocol---precission-loss-vulnerability"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/SlowMist_Team/status/1719667931926413679"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/onyx-protocol-2023-11-01"
+    },
+    {
+      "source": "revertiq",
+      "label": "halborn.com",
+      "url": "https://www.halborn.com/blog/post/explained-the-onyx-protocol-hack-october-2023"
+    },
+    {
+      "source": "revertiq",
+      "label": "hacken.io",
+      "url": "https://hacken.io/discover/onyx-protocol-hack/"
+    }
+  ]
+}

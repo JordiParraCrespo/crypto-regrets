@@ -1,0 +1,68 @@
+{
+  "id": "2022-06-24-horizon-bridge",
+  "name": "Horizon Bridge",
+  "date": "2022-06-24",
+  "year": 2022,
+  "amountUsd": 100000000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum Mainnet",
+    "BNB Chain"
+  ],
+  "targetType": null,
+  "category": "key-compromise",
+  "technique": "Private Key Compromise; Access Control",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 1.00).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "key-compromise",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "key-compromise",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.98,
+    "hasRootCause": 0.97
+  },
+  "bridge": true,
+  "language": null,
+  "rootCause": "On June 24, 2022, attackers compromised two of the four private keys securing the Horizon Bridge multisig wallet, allowing them to drain around $100 million from the bridge contracts on Ethereum. The stolen funds were laundered via Tornado Cash. The attack was later attributed to North Korea's Lazarus Group. The Horizon Bridge on Ethereum was protected by a 2-of-4 multisig wallet. Attackers obtained two signing keys, giving them full control to authorize large withdrawals. This low threshold, combined with poor key security, allowed the breach.",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "On June 24, 2022, attackers compromised two of the four private keys securing the Horizon Bridge multisig wallet, allowing them to drain around $100 million from the bridge contracts on Ethereum. The stolen funds were laundered via Tornado Cash. The attack was later attributed to North Korea's Lazarus Group. The Horizon Bridge on Ethereum was protected by a 2-of-4 multisig wallet. Attackers obtained two signing keys, giving them full control to authorize large withdrawals. This low threshold, combined with poor key security, allowed the breach."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/horizon-bridge-2022-06-24"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "fbi.gov",
+      "url": "https://www.fbi.gov/news/press-releases/fbi-confirms-lazarus-group-cyber-actors-responsible-for-harmonys-horizon-bridge-currency-theft"
+    },
+    {
+      "source": "revertiq",
+      "label": "merklescience.com",
+      "url": "https://www.merklescience.com/blog/hack-track-analysis-of-harmonys-horizon-bridge-exploit"
+    }
+  ]
+}

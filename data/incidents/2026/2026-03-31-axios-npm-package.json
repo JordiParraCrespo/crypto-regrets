@@ -1,0 +1,77 @@
+{
+  "id": "2026-03-31-axios-npm-package",
+  "name": "axios npm package",
+  "date": "2026-03-31",
+  "year": 2026,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum Mainnet"
+  ],
+  "targetType": null,
+  "category": "frontend-infra",
+  "technique": "Supply Chain Attack",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 1.00).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "frontend-infra",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "frontend-infra",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.01,
+    "stateActor": 0.02,
+    "hasRootCause": 0.9
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "Socket has detected an active supply chain attack targeting version 1.14.1 of the core npm package, axios. The attacker injected malicious code into axios by introducing a malicious dependency that first appeared today. Developers using axios are advised to pin their versions immediately and review their project lockfiles.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Socket has detected an active supply chain attack targeting version 1.14.1 of the core npm package, axios. The attacker injected malicious code into axios by introducing a malicious dependency that first appeared today. Developers using axios are advised to pin their versions immediately and review their project lockfiles."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Malicious versions of the Axios npm package published on March 31, 2026, incorporated a hidden dependency that installed a remote access trojan on developer systems. Attackers gained access to sensitive credentials, posing risks for cryptocurrency operations and CI/CD pipelines until discovery and rapid removal. A supply chain attack on the npm ecosystem enabled attackers to publish Axios package versions containing a malicious dependency (plain-crypto-js@4.2.1) that installed RAT malware. This was facilitated by compromised maintainer credentials following targeted social engineering and malware deployment."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/Cointelegraph/status/2038843819760734636"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/explained-the-axios-2026-03-31t20-05-00-617000-00-00"
+    },
+    {
+      "source": "revertiq",
+      "label": "halborn.com",
+      "url": "https://www.halborn.com/blog/post/explained-the-axios-hack-march-2026"
+    },
+    {
+      "source": "revertiq",
+      "label": "phoenix.security",
+      "url": "https://phoenix.security/axios-supply-chain-compromise-npm-rat-2026/"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/axios/axios/issues/10636"
+    }
+  ]
+}

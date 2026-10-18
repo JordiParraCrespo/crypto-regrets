@@ -1,0 +1,60 @@
+{
+  "id": "2026-06-03-apebond",
+  "name": "ApeBond",
+  "date": "2026-06-03",
+  "year": 2026,
+  "amountUsd": 3421,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": null,
+  "category": "input-validation",
+  "technique": "Smart Contract Vulnerability",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.89). Replaced keyword guess \"governance\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "input-validation",
+    "confidence": 0.89,
+    "top": [
+      {
+        "category": "input-validation",
+        "p": 0.9
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.04
+      },
+      {
+        "category": "logic-error",
+        "p": 0.03
+      }
+    ],
+    "flashLoan": 0.97,
+    "stateActor": 0.01,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "ApeBond's ApeYieldVault smart contract on BSC was exploited. The attacker used a public helper contract to call migrateToVotingEscrow with duplicate pool IDs, inflating a lock amount from ~1.71 quadrillion ABOND to ~29 quadrillion ABOND. They then unlocked, claimed the inflated lock, sold ABOND in the public ABOND/WBNB pool, repaid a Moolah flashloan, and kept ~5.72 WBNB profit. The entire flow was permissionless and on-chain.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "ApeBond's ApeYieldVault smart contract on BSC was exploited. The attacker used a public helper contract to call migrateToVotingEscrow with duplicate pool IDs, inflating a lock amount from ~1.71 quadrillion ABOND to ~29 quadrillion ABOND. They then unlocked, claimed the inflated lock, sold ABOND in the public ABOND/WBNB pool, repaid a Moolah flashloan, and kept ~5.72 WBNB profit. The entire flow was permissionless and on-chain."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/clarahacks/status/2062564868130029636"
+    }
+  ]
+}

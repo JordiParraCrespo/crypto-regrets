@@ -1,0 +1,98 @@
+{
+  "id": "2026-06-19-jb",
+  "name": "JB",
+  "date": "2026-06-19",
+  "year": 2026,
+  "amountUsd": 50000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "Token",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.6,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.62
+      },
+      {
+        "category": "market-manipulation",
+        "p": 0.26
+      },
+      {
+        "category": "arbitrary-call",
+        "p": 0.05
+      }
+    ],
+    "flashLoan": 0.08,
+    "stateActor": 0.03,
+    "hasRootCause": 0.83
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "JB helper repeated cycle drains JB/USDT pair. Lost: 49,958.06 USDT",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "JB helper repeated cycle drains JB/USDT pair. Lost: 49,958.06 USDT"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The JB DeFi protocol suffered an exploit involving flashloan and price manipulation, resulting in approximately $50,000 being drained. The attack exploited protocol logic through flash loan-enabled price manipulation on the Solidity-based contract."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On June 18, 2026, the JB token contract on BNB Chain was exploited using a flash-loan and reserve-manipulation sequence that abused a privileged token burn and sync function to drain around $50,000 from the JB/USDT PancakeSwap V2 pool. The attacker was able to repeatedly shrink the pool's JB reserve after each sell, enabling further extraction of USDT value in a single transaction. A privileged function in the JB token contract enabled an authorized route contract to burn tokens directly from the AMM pair and then call sync(), allowing the attacker to repeatedly reset reserves and manipulate the price curve out of normal trading bounds."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x54e120b8d62a9d7cef94bf51f1f5b8aa13565d76d8797a79afeeb25ed0e1dc25"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-06/JB_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-06/JB_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/audit_911/status/2067943961327763788"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/jb-2026-06-19"
+    },
+    {
+      "source": "revertiq",
+      "label": "darknavy.org",
+      "url": "https://www.darknavy.org/web3/exploits/jb-token-pair-burn-reserve-manipulation/"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/jb-hack-2026"
+    }
+  ]
+}

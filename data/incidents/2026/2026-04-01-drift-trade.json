@@ -1,0 +1,86 @@
+{
+  "id": "2026-04-01-drift-trade",
+  "name": "Drift Trade",
+  "date": "2026-04-01",
+  "year": 2026,
+  "amountUsd": 295000000,
+  "returnedUsd": null,
+  "chains": [
+    "Solana"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Proxy Upgrade Hijack",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.76,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.77
+      },
+      {
+        "category": "governance",
+        "p": 0.21
+      },
+      {
+        "category": "arbitrary-call",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.28
+  },
+  "bridge": false,
+  "language": "Rust",
+  "rootCause": "According to The Block, the Solana-based decentralized exchange Drift Protocol has been hit by a major exploit, with losses totaling at least $200 million. Some estimates suggest the figure is closer to $270 million, making it the second-largest DeFi security breach in the Solana ecosystem, trailing only the Wormhole bridge hack. The attack targeted multiple Drift vaults, including JLP Delta Neutral, SOL Super Staking, and BTC Super Staking. On-chain data reveals that the attacker swapped the stolen assets for USDC via Jupiter, then bridged them to Ethereum to purchase ETH. As of 17:45 UTC, the attacker held approximately 19,913 ETH (worth roughly $42 million).…",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "According to The Block, the Solana-based decentralized exchange Drift Protocol has been hit by a major exploit, with losses totaling at least $200 million. Some estimates suggest the figure is closer to $270 million, making it the second-largest DeFi security breach in the Solana ecosystem, trailing only the Wormhole bridge hack. The attack targeted multiple Drift vaults, including JLP Delta Neutral, SOL Super Staking, and BTC Super Staking. On-chain data reveals that the attacker swapped the stolen assets for USDC via Jupiter, then bridged them to Ethereum to purchase ETH. As of 17:45 UTC, the attacker held approximately 19,913 ETH (worth roughly $42 million).…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On April 1, 2026, Drift Protocol on Solana was compromised through a governance-layer attack. The attacker exploited durable nonce accounts and a low-threshold, zero-timelock multisig Security Council to pre-sign and execute administrative takeover, list fake collateral, manipulate oracles, and extract approximately $285 million through rapid protocol withdrawals. The attacker used durable nonce transaction mechanics to keep pre-signed multisig admin approvals valid indefinitely, exploited a zero-timelock and low signature threshold, and socially engineered signers to bypass review. Lack of atomic state checks allowed listing and manipulation of fake c…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/OnchainLens/status/2039507495044194391"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/drift-trade-2022-05-11"
+    },
+    {
+      "source": "revertiq",
+      "label": "blocksec.com",
+      "url": "https://blocksec.com/blog/drift-protocol-incident-multisig-governance-compromise-via-durable-nonce-exploitation"
+    },
+    {
+      "source": "revertiq",
+      "label": "breachhistory.com",
+      "url": "https://breachhistory.com/drift-protocol/drift-protocol2026"
+    }
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "id": "2021-10-20-pancake-hunny",
+  "name": "Pancake Hunny",
+  "date": "2021-10-20",
+  "year": 2021,
+  "amountUsd": 2000000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": null,
+  "category": "oracle-manipulation",
+  "technique": "Flash loan attack",
+  "classificationNote": "Upstream label missing; classified by keyword rules from the root-cause text.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.56,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.59
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.21000000000000002
+      },
+      {
+        "category": "logic-error",
+        "p": 0.09
+      }
+    ],
+    "flashLoan": 0.89,
+    "stateActor": 0.01,
+    "hasRootCause": 0.61
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "Pancake Hunny, the DeFi protocol on BSC, was attacked by lightning loans, and HUNNY tokens fell by about 70% in a short time. The hacked transactions included 513 transfers, and Gas consumption reached 19 million, of which a large number of transfers were related to Alpaca tokens.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Pancake Hunny, the DeFi protocol on BSC, was attacked by lightning loans, and HUNNY tokens fell by about 70% in a short time. The hacked transactions included 513 transfers, and Gas consumption reached 19 million, of which a large number of transfers were related to Alpaca tokens."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On October 20, 2021, PancakeHunny's Hunny TUSD vault on BNB Chain suffered a $2 million loss from a flash loan exploit. The attacker manipulated LP token prices, inflated vault profits, and minted excess HUNNY rewards, repeating the exploit 26 times before vault minting was halted. PancakeHunny's reward minting relied on spot LP token prices, allowing attackers to use flash loans to temporarily manipulate vault profit calculations and mint disproportionate HUNNY rewards. The protocol inherited this vulnerable logic from PancakeBunny and did not patch it, despite prior exploits."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x1b698231965b72f64d55c561634600b087154f71bc73fc775622a45112a94a77"
+  ],
+  "poc": null,
+  "sources": [
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "slowmist",
+      "label": "medium.com",
+      "url": "https://medium.com/pancakehunny/pancakehunny-incident-report-b5b74557b0ad"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/pancakehunny-2021-10-20"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "ambcrypto.com",
+      "url": "https://ambcrypto.com/binance-smart-chain-defi-protocol-pancakehunny-attacked-again/"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/pancakehunny-hack-2021"
+    }
+  ]
+}

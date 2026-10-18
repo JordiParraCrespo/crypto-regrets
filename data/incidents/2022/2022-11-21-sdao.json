@@ -1,0 +1,103 @@
+{
+  "id": "2022-11-21-sdao",
+  "name": "sDAO",
+  "date": "2022-11-21",
+  "year": 2022,
+  "amountUsd": 13000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "Token",
+  "category": "logic-error",
+  "technique": "Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.89,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.9
+      },
+      {
+        "category": "access-control",
+        "p": 0.1
+      }
+    ],
+    "flashLoan": 0.98,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Business Logic Flaw. Lost: $13k",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Business Logic Flaw. Lost: $13k"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "sDAO contract have the following pitfalls: 1. missing target token validation or access control on withdrawTeam, as the result, attacker may manipulate the reward output 2. logic flaw on reward generation, the user can get reward in the same block when to == address(LPInstance) Vulnerable code snippet: Attack tx: https://bscscan.com/tx/0xb3ac111d294ea9dedfd99349304a9606df0b572d05da8cedf47ba169d10791ed Analysis: 1. The attacker borrowed $500 USDT from DPPOracle in a flash loan. 2. They converted half of the USDT into sDAO. 3. They added liquidity to the sDAO/USDT pool with half of the remaining USDT and the sDAO they had just converted. 4. They staked half of the LP tokens they received in the previous step. 5. They sent the remaining sDAO to the liquidity pool, which increased the totalStakeReward. 6. They called sDAO.withdrawTeam with LP tokens address as the target, which decreased the LPInstance.balanceOf(address(this)) and increased the getPerTokenReward. They also sent a small amount of LP token to the pool to avoid division by zero. 7. They invoked getReward and repaid the flash loan. https://twitter.com/8olidity/status/1594693686398316544 https://twitter.com/CertiKAlert/status/1594615286556393478"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 21 November 2022, sDAO on BNB Chain was exploited due to a flawed reward calculation mechanism. The attacker manipulated LP token balances using withdrawTeam(), causing the denominator in getReward() to drop, and extracted amplified stablecoin rewards. The loss amounted to about $13,662 BUSD. The contract allowed unrestricted calls to withdrawTeam(), enabling removal of nearly all LP tokens held by the contract. This reduced the denominator in the reward formula, letting the attacker extract outsized rewards via getReward(). The protocol lacked access control and did not enforce a meaningful minimum balance, allowing reward amplification through manipulated accounting."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xb3ac111d294ea9dedfd99349304a9606df0b572d05da8cedf47ba169d10791ed"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-11/SDAO_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-11/SDAO_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/8olidity/status/1594693686398316544"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/CertiKAlert/status/1594615286556393478"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0xb3ac111d294ea9dedfd99349304a9606df0b572d05da8cedf47ba169d10791ed"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/sdao-2022-11-21"
+    },
+    {
+      "source": "revertiq",
+      "label": "chaincatcher.com",
+      "url": "https://chaincatcher.com/en/article/2083274"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/past/2022/README.md#L719"
+    }
+  ]
+}

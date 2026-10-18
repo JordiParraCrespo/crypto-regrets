@@ -1,0 +1,97 @@
+{
+  "id": "2026-06-23-secondfi",
+  "name": "SecondFi",
+  "date": "2026-06-23",
+  "year": 2026,
+  "amountUsd": 2400000,
+  "returnedUsd": null,
+  "chains": [
+    "Cardano"
+  ],
+  "targetType": "Wallet",
+  "category": "signature-crypto",
+  "technique": "Weak Key Generation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "signature-crypto",
+    "confidence": 0.87,
+    "top": [
+      {
+        "category": "signature-crypto",
+        "p": 0.88
+      },
+      {
+        "category": "key-compromise",
+        "p": 0.12
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Haskell",
+  "rootCause": "A single missing secret in SecondFi's signing code made every on-chain transaction a private key disclosure. Attackers drained $2.4 million from 374 wallets on Cardano. One line of missing code, nothing more. Just reading what was already there.",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "A single missing secret in SecondFi's signing code made every on-chain transaction a private key disclosure. Attackers drained $2.4 million from 374 wallets on Cardano. One line of missing code, nothing more. Just reading what was already there."
+    },
+    {
+      "source": "SlowMist",
+      "text": "SecondFi (formerly Yoroi) Cardano wallet suffered an exploit due to a vulnerability in its proprietary web wallet generation software, exposing private keys at the address level. Attackers drained ~16 million ADA ($2.4M) from 374 affected wallets across three attacks. The project secured ~129 million ADA (~$19.4M) through emergency rescue; affected users must wait for official recovery and are advised to use hardware wallets for migration."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "A cryptographic flaw in SecondFi's Ed25519 signing implementation enabled attackers to recover user private keys from Cardano transaction data. Approximately $2.4M in ADA was drained from 374 wallets before emergency rescue efforts secured further at-risk funds, and EMURGO permanently discontinued the wallet. SecondFi's Ed25519 signing code derived the signature nonce only from the public transaction message, omitting the secret prefix required by the Ed25519 standard. This made every signature publicly invertible: anyone could algebraically recover a wallet's private key from standard transaction data. The flaw affected every address that signed with…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: SecondFi - Rekt",
+      "url": "https://rekt.news/secondfi-rekt"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/secondfiapp/status/2071558652641870076"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/secondfi-2026-06-23"
+    },
+    {
+      "source": "revertiq",
+      "label": "blocksec.com",
+      "url": "https://blocksec.com/blog/web3-security-taiko-secondfi-exploits"
+    },
+    {
+      "source": "revertiq",
+      "label": "blocksec.com",
+      "url": "https://blocksec.com/blog/efi-security-incidents-jaredfromsubway-aztec"
+    },
+    {
+      "source": "revertiq",
+      "label": "beosin.com",
+      "url": "https://beosin.com/resources/ed25519-implementation-flaw-in-secondfi-wallet-leads-to-private-key-compromise"
+    }
+  ]
+}

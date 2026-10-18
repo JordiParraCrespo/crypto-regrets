@@ -1,0 +1,80 @@
+{
+  "id": "2025-09-28-dtrinity",
+  "name": "dTRINITY",
+  "date": "2025-09-28",
+  "year": 2025,
+  "amountUsd": 56000,
+  "returnedUsd": null,
+  "chains": [
+    "Sonic"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.56
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "The DeFi protocol dTRINITY suffered an exploit targeting its swap adapter contracts, resulting in the loss of approximately $56,000 belonging to core team members.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The DeFi protocol dTRINITY suffered an exploit targeting its swap adapter contracts, resulting in the loss of approximately $56,000 belonging to core team members."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On September 28, 2025, dTRINITY's dLEND module on Sonic was exploited via a swap adapter with insufficient input validation, enabling attackers to drain approximately $56,000 from internal team wallets. External user funds were not affected, and the protocol responded by disabling the vulnerable feature and covering the loss. The vulnerable Odos swap adapter allowed unsafe combinations of user parameters, lacked robust validation on swap routes, and failed to restrict flash-mint and manipulated transactions. Insufficient access control and missed validation allowed attackers to drain funds from wallets with high allowances."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xa6aef05387f5b86b1fd563256fc9223f3c22f74292d66ac796d3f08fd311d940"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/dTRINITY_DeFi/status/1972564217904644557"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/dtrinity-2025-09-28"
+    },
+    {
+      "source": "revertiq",
+      "label": "docs.dtrinity.org",
+      "url": "https://docs.dtrinity.org/security/incident-disclosures"
+    },
+    {
+      "source": "revertiq",
+      "label": "monitoringroom.com",
+      "url": "https://monitoringroom.com/situation/crypto-hack/dtrinity"
+    }
+  ]
+}

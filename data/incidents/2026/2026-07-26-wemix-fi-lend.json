@@ -1,0 +1,82 @@
+{
+  "id": "2026-07-26-wemix-fi-lend",
+  "name": "WEMIX.FI Lend",
+  "date": "2026-07-26",
+  "year": 2026,
+  "amountUsd": 737000,
+  "returnedUsd": null,
+  "chains": [
+    "WEMIX3.0"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.94,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.94
+      },
+      {
+        "category": "key-compromise",
+        "p": 0.06
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.94
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "The owner privileges of a WEMIX$-related smart contract were compromised, allowing the attacker to illegally mint approximately 5.23 million WEMIX$ stablecoins (worth about $6.25 million), which were swapped into WEMIX and USDC.e before being bridged out. The team has suspended bridges and related services while working with exchanges, security firms, and law enforcement to track the funds.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The owner privileges of a WEMIX$-related smart contract were compromised, allowing the attacker to illegally mint approximately 5.23 million WEMIX$ stablecoins (worth about $6.25 million), which were swapped into WEMIX and USDC.e before being bridged out. The team has suspended bridges and related services while working with exchanges, security firms, and law enforcement to track the funds."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "WEMIX.FI Lend suffered an access control incident on WEMIX3.0 on 2026-07-26 after an attacker obtained privileged authority over a WEMIX$-related contract. The attacker minted unauthorized WEMIX$ tokens, swapped part of the supply into WEMIX and USDC.e, and bridged assets to other chains. Public reporting consistently places the realized extraction near $724,000 to $737,000, but the exact compromise path and affected contract addresses remain undisclosed. Public disclosures describe a compromise of owner or administrator authority over a WEMIX$-related contract that enabled unauthorized token minting and liquidity extraction. The precise initial compro…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/coinbureau/status/2081559245653483870?s=46&t=DLwbX9Nw4QECiyZQ0av-fg"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/wemix-fi-lend-2026-07-26"
+    },
+    {
+      "source": "revertiq",
+      "label": "defillama.com",
+      "url": "https://defillama.com/protocol/wemix.fi-lend"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/wemix-hack-2026"
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "id": "2022-05-14-quickswap-v3",
+  "name": "Quickswap V3",
+  "date": "2022-05-14",
+  "year": 2022,
+  "amountUsd": 107600,
+  "returnedUsd": null,
+  "chains": [
+    "Polygon"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "frontend-infra",
+  "technique": "DNS Hijack",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "frontend-infra",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "frontend-infra",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.91
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "Decentralized exchange Quickswap has come under attack for a vulnerability in its hosting provider GoDaddy. The hijackers gained access to QuickSwap's DNS through a vulnerability in GoDaddy, where QuickSwap domains were hosted. Some DEX users lost around $107,600 through platform swaps before QuickSwap was able to regain control of our domain.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Decentralized exchange Quickswap has come under attack for a vulnerability in its hosting provider GoDaddy. The hijackers gained access to QuickSwap's DNS through a vulnerability in GoDaddy, where QuickSwap domains were hosted. Some DEX users lost around $107,600 through platform swaps before QuickSwap was able to regain control of our domain."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "QuickSwap’s frontend domain was hijacked through its GoDaddy-managed DNS configuration on 2022-05-14. Attackers redirected users to a modified QuickSwap interface that routed swap proceeds to attacker-controlled addresses. QuickSwap reported approximately $107,600 in user losses before regaining control of the domain and migrating DNS hosting. Attackers gained control of QuickSwap’s DNS records through a compromise of the protocol’s GoDaddy-managed domain account. The malicious frontend altered swap behavior so users interacting with the cloned interface sent assets to attacker-controlled addresses instead of receiving legitimate swap outputs."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "quickswap-layer2.medium.com",
+      "url": "https://quickswap-layer2.medium.com/quickswaps-godaddy-domain-hijack-how-it-happened-our-proposal-to-restore-the-community-35be9ddbb19a"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/quickswap-v3-2022-05-14"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.quickswap.exchange",
+      "url": "https://blog.quickswap.exchange/posts/godaddy-domain-hijack-how-it-happened"
+    },
+    {
+      "source": "revertiq",
+      "label": "certik.com",
+      "url": "https://www.certik.com/blog/how-hackers-use-dns-hijacking-attacks-to-steal-funds-and-clone-websites"
+    }
+  ]
+}

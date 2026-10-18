@@ -1,0 +1,74 @@
+{
+  "id": "2023-11-30-carolprotocol",
+  "name": "CAROLProtocol",
+  "date": "2023-11-30",
+  "year": 2023,
+  "amountUsd": 53000,
+  "returnedUsd": null,
+  "chains": [
+    "Base"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "reentrancy",
+  "technique": "Price Manipulation Via Reentrancy",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 1.00).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "reentrancy",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "reentrancy",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.94
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Price Manipulation Via Reentrancy. Lost: ~$53k",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Price Manipulation Via Reentrancy. Lost: ~$53k"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The Carol::sell function can be re-entered due to the lack of a reentrancy guard, allowing the attacker to swap more CAROL for WETH in each recursive call. The getTokenLiquidity() function will then return a disproportionate result, leading to the manipulation of ethReserved. Vulnerable code snippet: Attack tx: - Preparation Transaction 0x6462f5e358eb2c7769 | Phalcon Explorer - Attack Transaction 0xd962d397a7f8b3aadc | Phalcon Explorer Analysis: MetaSec on Twitter / X"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x6462f5e358eb2c7769e6aa59ce43277be4799b297bc4c9503610443b9d56cc24",
+    "0xd962d397a7f8b3aadce1622e705b9e33b430e86e0d306d6fb8ccbc5957b4185c"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-11/CAROLProtocol_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-11/CAROLProtocol_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/MetaSec_xyz/status/1730496513359647167"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/base/0x6462f5e358eb2c7769e6aa59ce43277be4799b297bc4c9503610443b9d56cc24"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/base/0xd962d397a7f8b3aadce1622e705b9e33b430e86e0d306d6fb8ccbc5957b4185c"
+    }
+  ]
+}

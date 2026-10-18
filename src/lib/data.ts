@@ -1,6 +1,6 @@
 import { z } from 'zod';
-import incidentsJson from '../data/incidents.json';
-import advisoriesJson from '../data/advisories.json';
+import incidentsJson from '../../data/incidents.json';
+import advisoriesJson from '../../data/advisories.json';
 import { incidentSchema, advisorySchema, sourceAuditSchema, type Incident, type SourceAudit } from './types';
 import { CATEGORIES, CATEGORY_IDS, LAYERS, ERAS, eraForYear, type CategoryId, type LayerId } from './taxonomy';
 

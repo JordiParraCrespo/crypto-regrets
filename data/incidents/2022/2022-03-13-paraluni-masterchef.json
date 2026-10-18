@@ -1,0 +1,123 @@
+{
+  "id": "2022-03-13-paraluni-masterchef",
+  "name": "Paraluni Masterchef",
+  "date": "2022-03-13",
+  "year": 2022,
+  "amountUsd": 1700000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "reentrancy",
+  "technique": "Reentrancy",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "reentrancy",
+    "confidence": 0.8,
+    "top": [
+      {
+        "category": "reentrancy",
+        "p": 0.81
+      },
+      {
+        "category": "input-validation",
+        "p": 0.19
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Flashloan & Reentrancy. Lost: $1.7 million",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Flashloan & Reentrancy. Lost: $1.7 million"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "reentrancy & insufficient validation Vulnerable code snippet: https://bscscan.com/address/0xa386f30853a7eb7e6a25ec8389337a5c6973421d#code#L2501 From Halborn: The depositByAddLiquidity function calls an internal depositByAddLiquidityInternal function that transfers the attacker’s deposit into the appropriate pool. However the pool ID value (_pid) used to look up the appropriate pool is not validated internally. The attacker takes advantage of this by directing this to an attacker-controlled contract, whose malicious transferFrom function is called. This function then exploits the reentrancy vulnerability to call the Masterchef deposit function before the internal state is updated. Between the initial and malicious deposits, the attacker is credited with excess tokens and able to extract more value from the contract than they deposited."
+    },
+    {
+      "source": "SlowMist",
+      "text": "The metaverse financial project Paraluni on the BSC chain was hacked, and the hackers made more than $1.7 million in profits. The problem lies in the depositByAddLiquidity method of the MasterCheif contract of the project side. This method does not check whether the token array parameter address[2] memory _tokens matches the LP pointed to by the pid parameter, and does not add lock when the LP amount changes."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 13 March 2022, Paraluni Masterchef on BNB Chain was exploited through a combined reentrancy and unchecked token logic bug, letting an attacker drain about $1.7M by crediting LP tokens twice per deposit cycle via a fake token callback. The MasterChef contract's depositByAddLiquidity function accepted user-supplied token addresses without validating them against the pool configuration and lacked a reentrancy guard. By deploying a malicious token contract whose transferFrom re-entered the deposit logic, the attacker was credited for the same LP tokens twice, enabling withdrawal of more assets than deposited."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x70f367b9420ac2654a5223cc311c7f9c361736a39fd4e7dff9ed1b85bab7ad54"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-03/Paraluni_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-03/Paraluni_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "halborn.com",
+      "url": "https://halborn.com/explained-the-paraluni-hack-march-2022/"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/peckshield/status/1502815435498176514"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "mobile.twitter.com",
+      "url": "https://mobile.twitter.com/paraluni/status/1502951606202994694"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0xa386f30853a7eb7e6a25ec8389337a5c6973421d#code#L2501"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "netfreeman.com",
+      "url": "https://netfreeman.com/2022/03/202203132332576318.html"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "coincodecap.com",
+      "url": "https://coincodecap.com/paraluni-hacked-reportedly-1-7m-lost"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/paraluni-masterchef-2022-03-13"
+    },
+    {
+      "source": "revertiq",
+      "label": "itokenly.com",
+      "url": "https://itokenly.com/hacks/paraluni"
+    },
+    {
+      "source": "revertiq",
+      "label": "monitoringroom.com",
+      "url": "https://monitoringroom.com/situation/crypto-hack/paraluni-masterchef"
+    }
+  ]
+}

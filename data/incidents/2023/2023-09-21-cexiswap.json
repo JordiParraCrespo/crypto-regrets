@@ -1,0 +1,73 @@
+{
+  "id": "2023-09-21-cexiswap",
+  "name": "CEXISWAP",
+  "date": "2023-09-21",
+  "year": 2023,
+  "amountUsd": 30000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Incorrect Access Control",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 1.00).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Incorrect Access Control. Lost: ~$30K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Incorrect Access Control. Lost: ~$30K"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The initialize function is not protected, allowing the attacker to take over the proxy contract and become the owner through the upgradeToAndCall method, subsequently stealing all the funds in the contract, transferring all the USDT out of the treasury. Vulnerable code snippet: Attack tx: Ethereum Transaction Hash (Txhash) Details | Etherscan Analysis: Decurity on Twitter / X"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xede72a74d8398875b42d92c550539d72c830d3c3271a7641ee1843dc105de59e"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-09/CEXISWAP_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-09/CEXISWAP_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/DecurityHQ/status/1704759560614126030"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/address/0xb8a5890d53df78dee6182a6c0968696e827e3305#code"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xede72a74d8398875b42d92c550539d72c830d3c3271a7641ee1843dc105de59e"
+    }
+  ]
+}

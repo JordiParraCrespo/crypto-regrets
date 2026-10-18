@@ -1,0 +1,75 @@
+{
+  "id": "2022-10-20-bego",
+  "name": "BEGO",
+  "date": "2022-10-20",
+  "year": 2022,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "signature-crypto",
+  "technique": "Incorrect signature verification",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.95).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "signature-crypto",
+    "confidence": 0.95,
+    "top": [
+      {
+        "category": "signature-crypto",
+        "p": 0.95
+      },
+      {
+        "category": "input-validation",
+        "p": 0.05
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Incorrect signature verification. Lost: 12 BNB",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Incorrect signature verification. Lost: 12 BNB"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Insufficient validation Vulnerable code snippet: https://www.bscscan.com/address/0xc342774492b54ce5f8ac662113ed702fc1b34972#code#L1232 Attacker can input empty data into _r, _s and _v to bypass all checks to mint BEGO token."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-10/BEGO_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-10/BEGO_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/AnciliaInc/status/1582828751250784256"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/peckshield/status/1582892058800685058"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://www.bscscan.com/address/0xc342774492b54ce5f8ac662113ed702fc1b34972#code#L1232"
+    }
+  ]
+}

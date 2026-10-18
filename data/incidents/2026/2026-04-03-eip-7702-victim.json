@@ -1,0 +1,60 @@
+{
+  "id": "2026-04-03-eip-7702-victim",
+  "name": "EIP-7702 Victim",
+  "date": "2026-04-03",
+  "year": 2026,
+  "amountUsd": 17200,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": null,
+  "category": "access-control",
+  "technique": "Smart Contract Vulnerability",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.92).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.92,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.92
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.05
+      },
+      {
+        "category": "arbitrary-call",
+        "p": 0.03
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "A user EOA on BNB Chain (with EIP-7702 delegation) that had set delegated code via an EIP-7702 Type-4 transaction was drained for ~$17.2K. The delegated code included a pancakeV3SwapCallback() function without proper access control. The attacker directly called this callback with crafted calldata, forcing the victim account to transfer its tokens to an attacker-controlled address. The victim had enabled the delegation to support swap-related logic.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "A user EOA on BNB Chain (with EIP-7702 delegation) that had set delegated code via an EIP-7702 Type-4 transaction was drained for ~$17.2K. The delegated code included a pancakeV3SwapCallback() function without proper access control. The attacker directly called this callback with crafted calldata, forcing the victim account to transfer its tokens to an attacker-controlled address. The victim had enabled the delegation to support swap-related logic."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "slowmist",
+      "label": "blocksec.com",
+      "url": "https://blocksec.com/blog/weekly-web3-security-incident-roundup-mar-30-apr-5-2026"
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "id": "2022-10-20-ethereum-alarm-clock",
+  "name": "Ethereum Alarm Clock",
+  "date": "2022-10-20",
+  "year": 2022,
+  "amountUsd": 260000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Reward Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.93
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "According to Cointelegraph, a vulnerability in the Ethereum Alarm Clock service (Ethereum Alarm Clock) has been exploited, and the hacker has so far made about $260,000 in profit. According to the analysis, hackers managed to exploit a loophole in the scheduled transaction process to profit from the refund of gas fees for canceled transactions. According to Etherscan transaction history, the hackers have obtained 204 ETH, worth about $259,800. It is reported that the Ethereum alarm clock service is to allow users to schedule future transactions by pre-determining the recipient address, sending amount and transaction time.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "According to Cointelegraph, a vulnerability in the Ethereum Alarm Clock service (Ethereum Alarm Clock) has been exploited, and the hacker has so far made about $260,000 in profit. According to the analysis, hackers managed to exploit a loophole in the scheduled transaction process to profit from the refund of gas fees for canceled transactions. According to Etherscan transaction history, the hackers have obtained 204 ETH, worth about $259,800. It is reported that the Ethereum alarm clock service is to allow users to schedule future transactions by pre-determining the recipient address, sending amount and transaction time."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Ethereum Alarm Clock was exploited on Ethereum Mainnet on 2022-10-19 through a cancel-path refund bug in TransactionRequestCore. Attackers inflated gas price on cancel calls, causing the contract to over-refund gas fees. Public reporting places losses at about 204 ETH, roughly $260,000. TransactionRequestCore's cancel function derived a refund from gas used multiplied by gas price and did not bound the reimbursement tightly enough to the caller's actual expense. A high gas price turned the refund into an overpayment, so the contract paid attacker profit from its own balance."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x4a84d0872887f91546cd5400cf99763b654975efb3376ee55e4463bcfbca4e97"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "cointelegraph.com",
+      "url": "https://cointelegraph.com/news/ethereum-alarm-clock-exploit-leads-to-260k-in-stolen-gas-fees-so-far"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/ethereum-alarm-clock-2022-10-20"
+    },
+    {
+      "source": "revertiq",
+      "label": "api.llama.fi",
+      "url": "https://api.llama.fi/hacks"
+    }
+  ]
+}

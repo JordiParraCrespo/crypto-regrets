@@ -1,0 +1,117 @@
+{
+  "id": "2023-01-03-gds",
+  "name": "GDS",
+  "date": "2023-01-03",
+  "year": 2023,
+  "amountUsd": 187000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Reward Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.97,
+    "stateActor": 0.03,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Business Logic Flaw. Lost: $180k",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Business Logic Flaw. Lost: $180k"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "abused the LP Mining mechanism. The attacker abused the LP Mining mechanism of the GDS token by first adding liquidity with flashloan, and then using multiple contracts to collect rewards. GDS token will reward the users who add liquidity to (GDS, USDT) pair in each epoch and the reward amount lpRewardAmount = x * LP token holding amount / LP token total supply (x is a global variable). Thus, the more staking amount, the more rewards users can get. Borrowing 2.38M USDT token with flashloan. Swapping 0.6M USDT token for 3.4M GDS token. Adding liquidity for PancakeSwap (1.7M USDT and 3.4M GDS) and get 2.2M LP tokens. Collecting rewards from GDS token contract and transferring LP tokens to another new contract. Repeating step 4 for more than 70 times. Removing liquidity and repaying the flashloan. 1.Borrowing 2.38M USDT token with flashloan. 1. Swapping 0.6M USDT token for 3.4M GDS token. 2. Adding liquidity for PancakeSwap (1.7M USDT and 3.4M GDS) and get 2.2M LP tokens. 3. Collecting rewards from GDS token contract and transferring LP tokens to another new contract. 5.Repeating step 4 for more than 70 times. 6.Removing liquidity and repaying the flashloan. 1.Borrowing 2.38M USDT token with flashloan. 1. Swapping 0.6M USDT token for 3.4M GDS token. 2. Adding liquidity for PancakeSwap (1.7M USDT and 3.4M GDS) and get 2.2M LP tokens. 3. Collecting rewards from GDS token contract and transferring LP tokens to another new contract. 5.Repeating step 4 for more than 70 times. 6.Removing liquidity and repaying the flashloan. Vulnerable code snippet: Attack tx: https://bscscan.com/tx/0xf9b6cc083f6e0e41ce5e5dd65b294abf577ef47c7056d86315e5e53aa662251e https://bscscan.com/tx/0x2bb704e0d158594f7373ec6e53dc9da6c6639f269207da8dab883fc3b5bf6694 Analysis: https://twitter.com/peckshield/status/1610095490368180224 https://twitter.com/BlockSecTeam/status/1610167174978760704"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On January 3, 2023, the GDS protocol on BNB Chain suffered a $187,000 loss due to a flaw in its LP reward logic. An attacker used flash loans and multiple contracts to extract outsized rewards, exploiting the lack of time and anti-flash-loan checks in the rewards calculation. The reward calculation for LP token staking failed to account for time or block-based restrictions, allowing rewards to be harvested within a single flash-loan-enabled transaction through repeated rapid LP token transfers."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xf9b6cc083f6e0e41ce5e5dd65b294abf577ef47c7056d86315e5e53aa662251e",
+    "0x2bb704e0d158594f7373ec6e53dc9da6c6639f269207da8dab883fc3b5bf6694",
+    "0x06d23624bd1edeb63665f41c4d3dd098d4c913a715c7b6fd9894575dcb0f43dc"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-01/GDS_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-01/GDS_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/peckshield/status/1610095490368180224"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BlockSecTeam/status/1610167174978760704"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0xf9b6cc083f6e0e41ce5e5dd65b294abf577ef47c7056d86315e5e53aa662251e"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x2bb704e0d158594f7373ec6e53dc9da6c6639f269207da8dab883fc3b5bf6694"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x2bb704e0d158594f7373ec6e53dc9da6c6639f269207da8dab883fc3b5bf6694"
+    },
+    {
+      "source": "blocksec",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs?tab=readme-ov-file#20230103---gds---business-logic-flaw"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/gds-2023-01-03"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.solidityscan.com",
+      "url": "https://blog.solidityscan.com/gds-chain-hack-analysis-flash-loan-exploit-c175772dec74/"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/gds-hack-2023"
+    }
+  ]
+}

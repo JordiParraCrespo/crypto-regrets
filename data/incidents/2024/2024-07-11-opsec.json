@@ -1,0 +1,86 @@
+{
+  "id": "2024-07-11-opsec",
+  "name": "OPSEC",
+  "date": "2024-07-11",
+  "year": 2024,
+  "amountUsd": 100000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "key-compromise",
+  "technique": "Private Key Compromised",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "key-compromise",
+    "confidence": 0.63,
+    "top": [
+      {
+        "category": "key-compromise",
+        "p": 0.65
+      },
+      {
+        "category": "access-control",
+        "p": 0.23
+      },
+      {
+        "category": "governance",
+        "p": 0.12
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "The OpSec staking contract was maliciously upgraded, allowing the attacker to withdraw and sell OPSEC tokens worth approximately 59 ETH (around $182,000).",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The OpSec staking contract was maliciously upgraded, allowing the attacker to withdraw and sell OPSEC tokens worth approximately 59 ETH (around $182,000)."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "OPSEC's Ethereum staking contract was compromised on 10,11 July 2024 through the theft of the contract admin key. The attacker transferred ownership, extracted funds, and caused the token price to collapse by nearly 90 percent. Estimated realized loss ranges from $100,000 to $182,000, but no primary transaction data or breach technicals are publicly available. The root cause was a private key compromise that granted the attacker admin-level control over the staking contract. This enabled unauthorized ownership transfer and asset extraction."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/OpSecCloud/status/1811074256220115283"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/opsec-2024-07-11"
+    },
+    {
+      "source": "revertiq",
+      "label": "99bitcoins.com",
+      "url": "https://99bitcoins.com/news/whats-going-on-with-opsec-crypto-hacked-or-team-exit-scam/"
+    },
+    {
+      "source": "revertiq",
+      "label": "ambcrypto.com",
+      "url": "https://ambcrypto.com/opsec-crypto-plummets-89-amid-security-breach-details-here/"
+    }
+  ]
+}

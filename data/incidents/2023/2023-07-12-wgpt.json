@@ -1,0 +1,91 @@
+{
+  "id": "2023-07-12-wgpt",
+  "name": "WGPT",
+  "date": "2023-07-12",
+  "year": 2023,
+  "amountUsd": 80000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Business Logic Flaw",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.78).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.78,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.79
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.14
+      },
+      {
+        "category": "market-manipulation",
+        "p": 0.03
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Business Logic Flaw. Lost: ~$80k",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Business Logic Flaw. Lost: ~$80k"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "In transferFrom(), the victim contract will swap $USDT in the contract for $WGPT, thereby raising the price of $WGPT. The attacker calls transferFrom multiple times to deposit into the pair and withdraws it through the skim function, repeatedly increasing the price of $WGPT. Finally, the attacker profits by swapping the held $WGPT → $USDT. Attack TX https://bscscan.com/tx/0x258e53526e5a48feb1e4beadbf7ee53e07e816681ea297332533371032446bfd Analysis: https://twitter.com/Phalcon_xyz/status/1679042549946933248"
+    },
+    {
+      "source": "SlowMist",
+      "text": "On July 12th, WGPT Token suffered from a flash loan attack, resulting in losses of ~$82.5k. Address (BSC): 0x1f415255f7E2a8546559a553E962dE7BC60d7942."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x258e53526e5a48feb1e4beadbf7ee53e07e816681ea297332533371032446bfd"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-07/WGPT_exp.sol",
+  "sources": [
+    "defihacklabs",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-07/WGPT_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Phalcon_xyz/status/1679042549946933248"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BeosinAlert/status/1679028240982368261"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x258e53526e5a48feb1e4beadbf7ee53e07e816681ea297332533371032446bfd"
+    },
+    {
+      "source": "slowmist",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0x1f415255f7e2a8546559a553e962de7bc60d7942"
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "id": "2024-02-23-compounduni",
+  "name": "CompoundUni",
+  "date": "2024-02-23",
+  "year": 2024,
+  "amountUsd": 439537,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Oracle bad price",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 1.00).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.12,
+    "stateActor": 0.02,
+    "hasRootCause": 0.89
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Oracle bad price. Lost: ~439,537 USD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Oracle bad price. Lost: ~439,537 USD"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The root cause is Compound prices have not been updated in time, so the attacker found the chance to arbitrage Attack tx: https://etherscan.io/tx/0xaee0f8d1235584a3212f233b655f87b89f22f1d4890782447c4ef742b37af58d Analysis: https://twitter.com/0xLEVI104/status/1762092203894276481"
+    },
+    {
+      "source": "SlowMist",
+      "text": "On the evening of February 23rd, UNI experienced a sudden price surge, causing Compound to fail in promptly updating UNI's price. As a result, the protocol used an incorrect price provided by Uniswap's TWAP (Time-Weighted Average Price). This allowed users to borrow UNI using collateral with a lower value than UNI's actual price, leading to $660,000 in bad debt."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xaee0f8d1235584a3212f233b655f87b89f22f1d4890782447c4ef742b37af58d"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-02/CompoundUni_exp.sol",
+  "sources": [
+    "defihacklabs",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-02/CompoundUni_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/0xLEVI104/status/1762092203894276481"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xaee0f8d1235584a3212f233b655f87b89f22f1d4890782447c4ef742b37af58d"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/0xLEVI104/status/1762092203894276481"
+    }
+  ]
+}

@@ -1,0 +1,137 @@
+{
+  "id": "2022-06-16-inverse-finance-frontier",
+  "name": "Inverse Finance Frontier",
+  "date": "2022-06-16",
+  "year": 2022,
+  "amountUsd": 5800000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.46,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.49
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.34
+      },
+      {
+        "category": "logic-error",
+        "p": 0.17
+      }
+    ],
+    "flashLoan": 0.07,
+    "stateActor": 0.02,
+    "hasRootCause": 0.89
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Flashloan & Price Oracle Manipulation. Lost: 53.2445 WBTC and 99,976.29 USDT",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Flashloan & Price Oracle Manipulation. Lost: 53.2445 WBTC and 99,976.29 USDT"
+    },
+    {
+      "source": "REKT",
+      "text": "Flipped again. $1.2M to the anonymous attacker, and $5.8M lost overall. After two hacks in such quick succession, will Inverse be able to survive this crypto winter?"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Incorrect LP price calculation via balanceOf. Vulnerable code snippet: https://etherscan.io/address/0xe8b3bc58774857732c6c1147bfc9b9e5fb6f427c#code#L120 Insecure way to calculation of LP price via balanceOf in the pool."
+    },
+    {
+      "source": "SlowMist",
+      "text": "Inverse Finance suffered a flash loan attack, resulting in a loss of approximately 1068.215 ETH (approximately $1.26 million). This is the second time that Inverse Finance has suffered a flash loan attack in the past two months. The main reason for this attack is the use of insecure oracles to calculate LP prices."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Inverse Finance's Frontier money market on Ethereum was exploited via a flash-loan oracle manipulation on June 16, 2022. The attacker borrowed 27,000 wBTC, manipulated the Curve-based price oracle to inflate collateral value, and extracted about $1.2 million in wBTC and USDT. Most proceeds were converted to ETH and laundered via Tornado Cash. Inverse paused borrowing after the incident. Frontier relied on a manipulated Curve-based oracle (YVCrv3CryptoFeed) to price LP collateral. The attacker used a flash loan to distort pool balances, causing the oracle to overvalue their collateral. This enabled over-borrowing of DOLA, which was swapped for other assets and extracted."
+    }
+  ],
+  "audit": "Unaudited",
+  "txHashes": [
+    "0x958236266991bc3fe3b77feaacea120f172c0708ad01c7a715b255f218f9313c"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-06/InverseFinance_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-06/InverseFinance_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/peckshield/status/1537382891230883841"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/SlowMist_Team/status/1537602909512376321"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "blocksecteam.medium.com",
+      "url": "https://blocksecteam.medium.com/price-oracle-manipulation-attack-on-inverse-finance-a5544218ea91"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Inverse Finance - REKT 2",
+      "url": "https://rekt.news/inverse-rekt2"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/address/0xe8b3bc58774857732c6c1147bfc9b9e5fb6f427c#code#L120"
+    },
+    {
+      "source": "slowmist",
+      "label": "panewslab.com",
+      "url": "https://www.panewslab.com/zh/articledetails/m20ffpy4.html"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/inverse-finance-2022-06-16"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "certik.com",
+      "url": "https://www.certik.com/blog/inverse-finance-incident-analysis"
+    },
+    {
+      "source": "revertiq",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/tech/2022/06/16/defi-protocol-inverse-finance-exploited-for-12m"
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "id": "2019-11-07-bethash",
+  "name": "BetHash",
+  "date": "2019-11-07",
+  "year": 2019,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [
+    "EOS"
+  ],
+  "targetType": null,
+  "category": "unknown",
+  "technique": "Malicious Code Injection Attack",
+  "classificationNote": null,
+  "classifiedBy": "none",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "reentrancy",
+    "confidence": 0.53,
+    "top": [
+      {
+        "category": "reentrancy",
+        "p": 0.56
+      },
+      {
+        "category": "arbitrary-call",
+        "p": 0.14
+      },
+      {
+        "category": "frontend-infra",
+        "p": 0.14
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.92
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "BetHash's betting game mechanism allows players to guess the ratio of the number between 0-100 and the random number given by the system to win the bonus of the corresponding odds. The smaller the bet number, the greater the odds. Every time a player makes a bet, the dicereceipt() function of the BetHash smart contract will be called to notify the player's account. At this point, the hacker can control the malicious program to hijack the notification and embed the inline operation to implement the attack. Although the attacker also needs to pay a certain amount of bet for every attack, as long as it keeps 0.1 EOS and is conservative",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "BetHash's betting game mechanism allows players to guess the ratio of the number between 0-100 and the random number given by the system to win the bonus of the corresponding odds. The smaller the bet number, the greater the odds. Every time a player makes a bet, the dicereceipt() function of the BetHash smart contract will be called to notify the player's account. At this point, the hacker can control the malicious program to hijack the notification and embed the inline operation to implement the attack. Although the attacker also needs to pay a certain amount of bet for every attack, as long as it keeps 0.1 EOS and is conservative"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "slowmist",
+      "label": "cmichel.io",
+      "url": "https://cmichel.io/what-really-happened-with-the-eos-play-hack/"
+    }
+  ]
+}

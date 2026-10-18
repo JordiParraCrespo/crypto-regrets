@@ -1,0 +1,54 @@
+{
+  "id": "2026-05-29-moneymon",
+  "name": "MoneyMon",
+  "date": "2026-05-29",
+  "year": 2026,
+  "amountUsd": 85519.47,
+  "returnedUsd": null,
+  "chains": [],
+  "targetType": null,
+  "category": "signature-crypto",
+  "technique": "Smart Contract Vulnerability",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.99).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "signature-crypto",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "signature-crypto",
+        "p": 0.99
+      },
+      {
+        "category": "access-control",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "The LegendaryMoneyMonNft contract’s cliamRewred function had a signature verification flaw. The verify() only checked if recoverSigner(...) == admin, without properly validating cases where ecrecover returns address(0). The attacker set admin to zero address, then used an invalid signature (r=0, s=0, v=27) to bypass checks, arbitrarily claim rewards, drain all tokens from the contract, and swap them for USDT via PancakeSwap.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The LegendaryMoneyMonNft contract’s cliamRewred function had a signature verification flaw. The verify() only checked if recoverSigner(...) == admin, without properly validating cases where ecrecover returns address(0). The attacker set admin to zero address, then used an invalid signature (r=0, s=0, v=27) to bypass checks, arbitrarily claim rewards, drain all tokens from the contract, and swap them for USDT via PancakeSwap."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/2060205558687486441"
+    }
+  ]
+}

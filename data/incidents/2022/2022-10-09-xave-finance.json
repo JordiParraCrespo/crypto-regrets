@@ -1,0 +1,117 @@
+{
+  "id": "2022-10-09-xave-finance",
+  "name": "Xave Finance",
+  "date": "2022-10-09",
+  "year": 2022,
+  "amountUsd": 700,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "governance",
+  "technique": "Malicious Proposal",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "governance",
+    "confidence": 0.74,
+    "top": [
+      {
+        "category": "governance",
+        "p": 0.76
+      },
+      {
+        "category": "access-control",
+        "p": 0.17
+      },
+      {
+        "category": "logic-error",
+        "p": 0.06
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Malicious Proposal Mint & Transfer Ownership. Lost: 100,000,000,000,000 RNBW",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Malicious Proposal Mint & Transfer Ownership. Lost: 100,000,000,000,000 RNBW"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Xave Finance used a Reality.eth-based DAO module (a Zodiac SafeSnap-style Gnosis Safe module) whose addProposal and proposal-execution flow were permissionless and trusted the Reality.eth oracle answer without proper validation or quorum/bond enforcement. Anyone could register an arbitrary proposal by precomputing transaction hashes with getTransactionHash, calling addProposal, then submitAnswer on the Reality.eth question with a tiny bond to mark it resolved \"true\". After the ~24h cooldown elapsed, the attacker called executeProposalWithIndex to push four arbitrary transactions through the Safe: minting a huge amount of RNBW to themselves and transferring ownership of the RNBW token, LPOP token, and the Primary Bridge to the attacker EOA. Vulnerable code snippet: Attack Tx: https://etherscan.io/tx/0xc18ec2eb7d41638d9982281e766945d0428aaeda6211b4ccb6626ea7cff31f4a Analysis: Post-mortem: SafeNap DAO Module Bug"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The Xave Finance project was hacked, resulting in a 1000x increase in RNBW issuance. The attack transaction is 0xc18ec2eb7d41638d9982281e766945d0428aaeda6211b4ccb6626ea7cff31f4a. The attacker first creates the attack contract 0xe167cdaac8718b90c03cf2cb75dc976e24ee86d3. The attack contract first calls the executeProposalWithIndex() function of the DaoModule contract 0x8f90 to execute the proposal. The content of the proposal is to call the mint() function to mint 100,000,000,000,000 RNBWs and transfer the ownership rights to the attacker. Finally, the hacker exchanged it for xRNBW, which was stored at the attacker's address (0x0f44f3489D17e42ab13A6beb76E57813081fc1E2)."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On October 8, 2022, Xave Finance (formerly HaloDAO) was exploited via a governance misconfiguration on Ethereum. An attacker used a malicious governance proposal to mint 100,000,000,000,000 RNBW tokens to themselves, compromising protocol control. The token's price collapsed, but the full USD impact remains unquantified. A DaoModule SafeSnap governance module was deployed with zero-value for both 'questionCooldown' and 'minimumBond' parameters, allowing instant unchallenged execution of attacker-proposed transactions using the Realitio oracle."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xc18ec2eb7d41638d9982281e766945d0428aaeda6211b4ccb6626ea7cff31f4a"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-10/XaveFinance_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-10/XaveFinance_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BeosinAlert/status/1579040051853303808"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xc18ec2eb7d41638d9982281e766945d0428aaeda6211b4ccb6626ea7cff31f4a"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "medium.com",
+      "url": "https://medium.com/xave-finance/post-mortem-safenap-dao-module-bug-505958e9c716"
+    },
+    {
+      "source": "slowmist",
+      "label": "mobile.twitter.com",
+      "url": "https://mobile.twitter.com/AnciliaInc/status/1578952542926491650"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/xave-finance-2022-10-09"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/past/2022/README.md#L1365"
+    },
+    {
+      "source": "revertiq",
+      "label": "beosin.com",
+      "url": "https://beosin.com/resources/web3-security-weekly-recap-of-m10w2"
+    }
+  ]
+}

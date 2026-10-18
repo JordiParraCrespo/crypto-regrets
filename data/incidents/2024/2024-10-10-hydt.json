@@ -1,0 +1,78 @@
+{
+  "id": "2024-10-10-hydt",
+  "name": "HYDT",
+  "date": "2024-10-10",
+  "year": 2024,
+  "amountUsd": 58000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Oracle Price Manipulation",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 1.00).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.98,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Oracle Price Manipulation",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Oracle Price Manipulation"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The HYDT token contract used the WBNB-USDT pair price as an unsafe oracle to determine token minting ratios This implementation allowed the attacker to manipulate the price by using a flash loan of 11 million USDT to significantly alter the WBNB-USDT exchange rate just before calling initialMint() with 11 BNB. After minting a large amount of HYDT tokens at the artificially favorable rate, the attacker swapped these tokens back to USDT through multiple DEX routes (Uniswap V3 and V2), generating approximately 5.8K USDT in profit after repaying the flash loan. Vulnerable code snippet: Attack tx: https://app.blocksec.com/explorer/tx/bsc/0xa9df1bd97cf6d4d1d58d3adfbdde719e46a1548db724c2e76b4cd4c3222f22b3?line=58 Analysis: https://x.com/TenArmorAlert/status/1844241843518951451"
+    },
+    {
+      "source": "SlowMist",
+      "text": "A suspicious attack involving HYDT tokens has occurred on BSC, resulting in a loss of approximately $58,000."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xa9df1bd97cf6d4d1d58d3adfbdde719e46a1548db724c2e76b4cd4c3222f22b3"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-10/HYDT_exp.sol",
+  "sources": [
+    "defihacklabs",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-10/HYDT_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/TenArmorAlert/status/1844241843518951451"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/bsc/0xa9df1bd97cf6d4d1d58d3adfbdde719e46a1548db724c2e76b4cd4c3222f22b3?line=58"
+    },
+    {
+      "source": "slowmist",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0xa9df1bd97cf6d4d1d58d3adfbdde719e46a1548db724c2e76b4cd4c3222f22b3"
+    }
+  ]
+}

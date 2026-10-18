@@ -1,0 +1,58 @@
+{
+  "id": "2026-09-15-rsethsafemodule",
+  "name": "RsETHSafeModule",
+  "date": "2026-09-15",
+  "year": 2026,
+  "amountUsd": 7800000,
+  "returnedUsd": null,
+  "chains": [],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": null,
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.81). Replaced keyword guess \"arbitrary-call\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.81,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.82
+      },
+      {
+        "category": "arbitrary-call",
+        "p": 0.11
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.05
+      }
+    ],
+    "flashLoan": 0.06,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "nested self-referential multicall authorization bypass drains Gnosis Safe via DELEGATECALL. Lost: 2,900 aEthrsETH (~$7.8M gross; 2,882.37 rsETH / ~$7.73M net to the MEV frontrunner)",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "nested self-referential multicall authorization bypass drains Gnosis Safe via DELEGATECALL. Lost: 2,900 aEthrsETH (~$7.8M gross; 2,882.37 rsETH / ~$7.73M net to the MEV frontrunner)"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-09/RsETHSafeModule_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-09/RsETHSafeModule_exp.sol"
+    }
+  ]
+}

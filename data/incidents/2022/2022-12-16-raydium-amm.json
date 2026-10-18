@@ -1,0 +1,97 @@
+{
+  "id": "2022-12-16-raydium-amm",
+  "name": "Raydium AMM",
+  "date": "2022-12-16",
+  "year": 2022,
+  "amountUsd": 4400000,
+  "returnedUsd": null,
+  "chains": [
+    "Solana"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "social-engineering",
+  "technique": "Malware",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "key-compromise",
+    "confidence": 0.97,
+    "top": [
+      {
+        "category": "key-compromise",
+        "p": 0.97
+      },
+      {
+        "category": "social-engineering",
+        "p": 0.03
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Rust",
+  "rootCause": "On Friday, Raydium, a Solana-based AMM, lost a total of $4.4M in fees from its liquidity pools. Post-FTX, the future of Solana feels uncertain...",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "On Friday, Raydium, a Solana-based AMM, lost a total of $4.4M in fees from its liquidity pools. Post-FTX, the future of Solana feels uncertain..."
+    },
+    {
+      "source": "SlowMist",
+      "text": "In response to an attack, Raydium tweeted that a patch has been put in place so far to prevent further attacks. This attack has nothing to do with the escalated privileges of the program itself. The vulnerability seems to stem from a Trojan horse attack and the leakage of the private key of the liquidity pool owner account. The attacker gained access to the pool owner account and was then able to call the withdraw pnl function, which is used to collect transaction/protocol fees earned on swaps in the pool. The affected pools include SOL-USDC, SOL-USDT, RAY-USDC, RAY-USDT, RAY-SOL, stSOL-USDC, ZBC-USDC, UXP-USDC, and whETH-USDC, with a total loss of approximately $4.395 million."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On December 16, 2022, an attacker used malware to extract Raydium's pool-admin private key, allowing them to sign privileged on-chain withdrawals of protocol fees from multiple Solana liquidity pools. Approximately $4.4 million in protocol fee balances was stolen. Liquidity provider (LP) deposits were not affected. Raydium responded by revoking the compromised key, migrating to a multisig protected by hardware signing, and implemented a compensation plan for affected pools. Endpoint malware (likely a trojan) compromised the exclusive pool-admin private key used for Raydium's privileged protocol-fee withdrawal functions. The attacker used this key to ex…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Raydium - REKT",
+      "url": "https://rekt.news/raydium-rekt"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/RaydiumProtocol/status/1603860540153028625"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/raydium-2022-12-16"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "halborn.com",
+      "url": "https://www.halborn.com/blog/post/explained-the-raydium-hack-november-2022"
+    },
+    {
+      "source": "revertiq",
+      "label": "certik.com",
+      "url": "https://www.certik.com/blog/raydium-protocol-exploit-incident-analysis"
+    }
+  ]
+}

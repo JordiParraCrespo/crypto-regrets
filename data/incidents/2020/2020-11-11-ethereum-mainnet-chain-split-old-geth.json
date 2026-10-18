@@ -1,0 +1,52 @@
+{
+  "id": "2020-11-11-ethereum-mainnet-chain-split-old-geth",
+  "name": "Ethereum mainnet chain split (old Geth)",
+  "date": "2020-11-11",
+  "year": 2020,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "Chain",
+  "category": "client-bug",
+  "technique": "Silently patched consensus bug; un-upgraded nodes forked",
+  "classificationNote": null,
+  "classifiedBy": "curated",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "client-bug",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "client-bug",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.01,
+    "hasRootCause": 0.67
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "A consensus bug fixed silently in Geth v1.9.17 was triggered on mainnet. Infura and others running older Geth followed a minority fork, breaking MetaMask, Binance withdrawals and many dapps for hours. Lesson: silent fixes require everyone to upgrade.",
+  "descriptions": [
+    {
+      "source": "Curated post-mortem",
+      "text": "A consensus bug fixed silently in Geth v1.9.17 was triggered on mainnet. Infura and others running older Geth followed a minority fork, breaking MetaMask, Binance withdrawals and many dapps for hours. Lesson: silent fixes require everyone to upgrade."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "curated"
+  ],
+  "references": [
+    {
+      "source": "curated",
+      "label": "Infura post-mortem",
+      "url": "https://blog.infura.io/post/infura-mainnet-outage-post-mortem-2020-11-11"
+    }
+  ]
+}

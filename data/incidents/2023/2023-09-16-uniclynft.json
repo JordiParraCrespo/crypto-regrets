@@ -1,0 +1,94 @@
+{
+  "id": "2023-09-16-uniclynft",
+  "name": "uniclyNFT",
+  "date": "2023-09-16",
+  "year": 2023,
+  "amountUsd": 2000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "reentrancy",
+  "technique": "Reentrancy",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "reentrancy",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "reentrancy",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Reentrancy. Lost: 1 NFT",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Reentrancy. Lost: 1 NFT"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "For the first step, the attacker deployed a malicious contract, swapped 0.5 ETH for 3528 uJENNY tokens, and deposited them to PointFarm to accumulate initial rewards. Two days later, the attacker launched the actual attack exploiting two bugs: 1. The deposit function allows a 0 _amount for minting new tokens. 2. user.rewardDebt is updated only after the external call to ERC1155 callback. During withdrawal, the attacker could only retrieve their initial deposit since user.amount wasn't updated during the reentrancy. Instead, they used their inflated balance in PointFarm to redeem a LootRealms NFT in the PointShop contract. This is a classic reentrancy vulnerability that does not follow the check-effect-interaction pattern. Vulnerable code snippet: Attack tx: Analysis: Decurity on Twitter / X"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "uniclyNFT's PointFarm contract on Ethereum Mainnet was exploited on September 16, 2023, through a reentrancy vulnerability, allowing the attacker to repeatedly mint rewards and acquire an NFT. Approximately $2,000 in value was lost. The PointFarm contract's deposit function allowed a reentrant call, enabling the attacker to inflate their reward before their debt was updated. This was possible because the contract updated the user.rewardDebt after an external call, violating checks-effects-interactions best practices."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xc42fe1ce2516e125a386d198703b2422aa0190b25ef6a7b0a1d3c6f5d199ffad"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-09/uniclyNFT_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-09/uniclyNFT_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/DecurityHQ/status/1703096116047421863"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xc42fe1ce2516e125a386d198703b2422aa0190b25ef6a7b0a1d3c6f5d199ffad"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/uniclynft-2023-09-16"
+    },
+    {
+      "source": "revertiq",
+      "label": "olympix.security",
+      "url": "https://olympix.security/biweekly-exploits/fantom-blackhole-uniclynft-keys-burns-and-reentrancy-all-over-again"
+    },
+    {
+      "source": "revertiq",
+      "label": "raw.githubusercontent.com",
+      "url": "https://raw.githubusercontent.com/SunWeb3Sec/DeFiHackLabs/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/src/test/2023-09/uniclyNFT_exp.sol"
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "id": "2023-06-11-selltoken04",
+  "name": "SellToken04",
+  "date": "2023-06-11",
+  "year": 2023,
+  "amountUsd": 109000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Price Manipulation",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 1.00).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.12,
+    "stateActor": 0.03,
+    "hasRootCause": 0.86
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Price Manipulation. Lost: ~$109k",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Price Manipulation. Lost: ~$109k"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The price in the USDT-SELLC pool was manipulated, and the sendMiner function relied on the price from that pool. Vulnerable code snippet: Attack tx: https://bscscan.com/tx/0xe968e648b2353cea06fc3da39714fb964b9354a1ee05750a3c5cc118da23444b Analysis:"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xe968e648b2353cea06fc3da39714fb964b9354a1ee05750a3c5cc118da23444b"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-06/SELLC03_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-06/SELLC03_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/EoceneSecurity/status/1668468933723328513"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0xe968e648b2353cea06fc3da39714fb964b9354a1ee05750a3c5cc118da23444b"
+    }
+  ]
+}

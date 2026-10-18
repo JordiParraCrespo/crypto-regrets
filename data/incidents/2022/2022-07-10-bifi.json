@@ -1,0 +1,56 @@
+{
+  "id": "2022-07-10-bifi",
+  "name": "BiFi",
+  "date": "2022-07-10",
+  "year": 2022,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": null,
+  "category": "key-compromise",
+  "technique": "Private Key Leakage",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.98). Replaced keyword guess \"signature-crypto\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "key-compromise",
+    "confidence": 0.98,
+    "top": [
+      {
+        "category": "key-compromise",
+        "p": 0.98
+      },
+      {
+        "category": "frontend-infra",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.03,
+    "hasRootCause": 0.94
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "BIFROST officially released a report saying that the BTC address registration server of the BiFi service was attacked. According to the analysis, the attack was limited to the BTC address registration server, and neither the smart contract nor the BiFi protocol detected the vulnerability. BiFi issues and uses an address for each user who deposits BTC. The deposit addresses are signed and delivered to the address issuing server and the addresses are reflected on BiFi only in the case when the signature is verified. In the attack, the server key of the address issuing server was exposed and the attacker was able to self-sign their own deposit address. Si…",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "BIFROST officially released a report saying that the BTC address registration server of the BiFi service was attacked. According to the analysis, the attack was limited to the BTC address registration server, and neither the smart contract nor the BiFi protocol detected the vulnerability. BiFi issues and uses an address for each user who deposits BTC. The deposit addresses are signed and delivered to the address issuing server and the addresses are reflected on BiFi only in the case when the signature is verified. In the attack, the server key of the address issuing server was exposed and the attacker was able to self-sign their own deposit address. Si…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "slowmist",
+      "label": "bifrost.medium.com",
+      "url": "https://bifrost.medium.com/post-mortem-bifi-btc-illegal-address-registration-c21ce3ba9fc8"
+    }
+  ]
+}

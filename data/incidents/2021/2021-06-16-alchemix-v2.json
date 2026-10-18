@@ -1,0 +1,104 @@
+{
+  "id": "2021-06-16-alchemix-v2",
+  "name": "Alchemix V2",
+  "date": "2021-06-16",
+  "year": 2021,
+  "amountUsd": 6500000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Borrow Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.98,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.98
+      },
+      {
+        "category": "input-validation",
+        "p": 0.01
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.01,
+    "hasRootCause": 0.91
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "DeFi is a volatile protoscience. The Alchemix post-mortem shows how modern-day alchemists almost succeeded at safely creating gold out of the ether.",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "DeFi is a volatile protoscience. The Alchemix post-mortem shows how modern-day alchemists almost succeeded at safely creating gold out of the ether."
+    },
+    {
+      "source": "SlowMist",
+      "text": "The DeFi lending agreement Alchemix alETH pool is suspected to have a loophole, and users can raise collateralized ETH when they have outstanding alETH debts. Alchemix released an alETH pool accident report stating that due to an error in the deployment of the alETH pool script, users have borrowed alETH at a 4:1 mortgage ratio but have no debt to be repaid, and the debt ceiling of nearly 2000 ETH has been released and new ones can be minted again. alETH, combined with Alchemix's use of the wrong index in the vault array, forced the transmuter to support the agreement mechanism to completely send the funds to repay the user's debt. The team has stopped the mortgage lending of the pool.…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 2021-06-16, Alchemix’s new alETH system on Ethereum forgave borrower debt after a deployment-script error created extra vault entries and harvest() used the wrong vault index. The protocol said this left alETH short by 2,688.634 ETH, about $6.53 million at the time, and let borrowers withdraw ETH collateral without repaying their alETH. A deployment-script error created additional alETH vault entries, and the Alchemist later used the wrong vault index during harvest(). That miscalculation sent transmuter funds to repay system alETH debt, cleared liabilities that users had not actually repaid, and reopened collateral withdrawals and fresh minting capacity."
+    }
+  ],
+  "audit": "Unaudited",
+  "txHashes": [
+    "0x38ecc8363836e43aca99d994bb9325a8f3770d7a1d1fffd62c82cf5230525836",
+    "0xc4dac8a2df7c34b1ca6e886a5447bab249518b503551b06828ba42fdc5fab802"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Alchemix - REKT",
+      "url": "https://rekt.news/alchemix-rekt"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/DefiantNews/status/1405152562110599171"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/alchemix-2021-06-16"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "forum.alchemix.fi",
+      "url": "https://forum.alchemix.fi/public/d/137-incident-report-06162021"
+    },
+    {
+      "source": "revertiq",
+      "label": "forum.alchemix.fi",
+      "url": "https://forum.alchemix.fi/public/d/150-aleth-return-program"
+    }
+  ]
+}

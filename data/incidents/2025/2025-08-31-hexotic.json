@@ -1,0 +1,70 @@
+{
+  "id": "2025-08-31-hexotic",
+  "name": "Hexotic",
+  "date": "2025-08-31",
+  "year": 2025,
+  "amountUsd": 500,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "input-validation",
+  "technique": "Incorrect Input Validation",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 1.00).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "input-validation",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "input-validation",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.77,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Incorrect Input Validation. Lost: 500 USD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Incorrect Input Validation. Lost: 500 USD"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The Hexotic contract's take(bytes32 id) function did not properly validate the supplied order/position id, allowing an attacker to call take with crafted ids (0x...43 and 0x...2b) and extract value on terms that should not have been claimable. The attacker bootstrapped the needed HEX liquidity with a flash swap from the Uniswap V3 HEX pool (paying back 0.037 ETH worth of WETH in the swap callback), approved Hexotic to pull HEX, and then invoked take twice with the chosen ids to drain value from the contract (~500 USD). The core flaw is missing/incorrect validation of the take parameter against the actual state it is supposed to reference. Vulnerable code snippet: Attack Tx: https://etherscan.io/tx/0x23b69bef57656f493548a5373300f7557777f352ade8131353ff87a1b27e2bb3 Analysis: https://t.me/defimon_alerts/1757"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x0000000000000000000000000000000000000000000000000000000000000043",
+    "0x000000000000000000000000000000000000000000000000000000000000002b",
+    "0x23b69bef57656f493548a5373300f7557777f352ade8131353ff87a1b27e2bb3"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-08/Hexotic_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-08/Hexotic_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "t.me",
+      "url": "https://t.me/defimon_alerts/1757"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x23b69bef57656f493548a5373300f7557777f352ade8131353ff87a1b27e2bb3"
+    }
+  ]
+}

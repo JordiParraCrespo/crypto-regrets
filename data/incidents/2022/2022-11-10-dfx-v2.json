@@ -1,0 +1,129 @@
+{
+  "id": "2022-11-10-dfx-v2",
+  "name": "DFX V2",
+  "date": "2022-11-10",
+  "year": 2022,
+  "amountUsd": 4000000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "reentrancy",
+  "technique": "Reentrancy",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "reentrancy",
+    "confidence": 0.88,
+    "top": [
+      {
+        "category": "reentrancy",
+        "p": 0.89
+      },
+      {
+        "category": "logic-error",
+        "p": 0.1
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.69,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Reentrancy. Lost: $4M",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Reentrancy. Lost: $4M"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The victim contract uses contract balance for the repayment judgment. As a result, the attacker uses deposit() to bypass the flashloan repayment. Vulnerable code snippet: Attack tx: https://etherscan.io/tx/0x6bfd9e286e37061ed279e4f139fbc03c8bd707a2cdd15f7260549052cbba79b7 Analysis: https://twitter.com/BlockSecTeam/status/1590960299246780417 https://twitter.com/BeosinAlert/status/1591012525914861570 https://twitter.com/AnciliaInc/status/1590839104731684865 https://twitter.com/peckshield/status/1590831589004816384"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The DFX Finance project on the ETH chain was attacked, and the attackers made a profit of about $231,138. According to SlowMist analysis, the main reason for this attack is that the Curve contract flash loan function does not have re-entrancy protection, which causes the attack to re-enter the deposit function to transfer tokens to judge the balance of flash loan repayments. The account so that the attacker can successfully withdraw money to profit."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On November 10, 2022, DFX Finance's V2 stablecoin pools on Ethereum were exploited via a flash-loan reentrancy vulnerability, enabling an attacker and a front-running MEV bot to drain over $7.4 million in forex-pegged stablecoins and ETH. The vulnerable contract failed to prevent reentrancy during flashloan callbacks, allowing pool state manipulation and asset extraction. The DFX Curve pool contract allowed reentrant calls to deposit() during a flashloan callback, before completing internal balance updates. This design let the attacker manipulate pool balances and bypass flashloan repayment checks, draining assets. No reentrancy guard or checks-effects…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x6bfd9e286e37061ed279e4f139fbc03c8bd707a2cdd15f7260549052cbba79b7",
+    "0x390def749b71f516d8bf4329a4cb07bb3568a3627c25e607556621182a17f1f9",
+    "0x9ef031cfedd1bd8ad91d84418ee6110e5558276a338fc11892f0013d269f27f8"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-11/DFX_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-11/DFX_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BlockSecTeam/status/1590960299246780417"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BeosinAlert/status/1591012525914861570"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/AnciliaInc/status/1590839104731684865"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x6bfd9e286e37061ed279e4f139fbc03c8bd707a2cdd15f7260549052cbba79b7"
+    },
+    {
+      "source": "slowmist",
+      "label": "odaily.news",
+      "url": "https://www.odaily.news/newsflash/304558"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/dfx-finance-2022-11-11"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "halborn.com",
+      "url": "https://www.halborn.com/blog/post/explained-the-dfx-finance-hack-november-2022"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainhint.com",
+      "url": "https://chainhint.com/cases/dfx-finance-hack"
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "id": "2022-10-21-olympusdao",
+  "name": "OlympusDAO",
+  "date": "2022-10-21",
+  "year": 2022,
+  "amountUsd": 292000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "input-validation",
+  "technique": "No input validation",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 1.00).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "input-validation",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "input-validation",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "No input validation. Lost: ~$292K (30500 OHM)",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "No input validation. Lost: ~$292K (30500 OHM)"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "insufficient validation Vulnerable code snippet: https://etherscan.io/address/0x007FE7c498A2Cf30971ad8f2cbC36bd14Ac51156#code#F1#L137 Due to token_ is controllable and does not validate properly on BondFixedExpiryTeller, attacker can create a custom contract to drain out the fund on BondFixedExpiryTeller. updated: funds are returned to OlympusDAO. --- OlympusDAO confirmed the exploit on its Discord channel today. There, it stated that the attacker “was able to withdraw roughly 30K OHM ($300K)” but that most of the project’s other funds remained safe."
+    },
+    {
+      "source": "SlowMist",
+      "text": "The redeem() function in OlympusDAO’s BondFixedExpiryTeller contract resulted in a loss of approximately $292,000 due to inability to properly validate inputs. The OlympusDAO hacker has returned the stolen funds to the DAO."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-10/OlympusDao_exp.sol",
+  "sources": [
+    "defihacklabs",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-10/OlympusDao_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/peckshield/status/1583416829237526528"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/address/0x007FE7c498A2Cf30971ad8f2cbC36bd14Ac51156#code#F1#L137"
+    },
+    {
+      "source": "slowmist",
+      "label": "panewslab.com",
+      "url": "https://www.panewslab.com/zh/sqarticledetails/1i3txm4e.html"
+    }
+  ]
+}

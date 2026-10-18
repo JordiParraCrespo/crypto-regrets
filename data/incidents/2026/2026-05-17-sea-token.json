@@ -1,0 +1,103 @@
+{
+  "id": "2026-05-17-sea-token",
+  "name": "SEA Token",
+  "date": "2026-05-17",
+  "year": 2026,
+  "amountUsd": 153000,
+  "returnedUsd": null,
+  "chains": [
+    "Arbitrum"
+  ],
+  "targetType": "Token",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.88,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.89
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.11
+      }
+    ],
+    "flashLoan": 0.96,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Business Logic Flaw. Lost: ~$110K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Business Logic Flaw. Lost: ~$110K"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The MetaSea \"Round\" position contract let users open a position with USDC and then redeemPosition() to receive SEA rewards funded by a separate SEA distributor. The redemption accounting was flawed: opening a position and immediately redeeming paid out more SEA from the distributor than the economics justified, letting the attacker repeatedly mint a profit each loop. Backed by an Aave V3 USDT flash loan, the attacker buys a little SEA on the SEA/USDT pool, opens a 3,000 USDC position, redeems it for distributor SEA, and dumps the SEA back to USDT, looping 12 times to drain ~245K SEA from the distributor and net ~$13.9K USDT after repaying the flash loan. The root cause is a business-logic/accounting flaw in the open-then-redeem flow that over-credits SEA rewards relative to the deposited value. Vulnerable code snippet: Attack Tx: https://arbiscan.io/tx/0x001cb16e17c4c5a5c4d02423c9e9b2f2b11ab6b2a1baf2ba53b8fcaf06167716 Analysis: https://anomly.rs/metasea-redeemposition-distributor-drain-arb-2026-05-17"
+    },
+    {
+      "source": "SlowMist",
+      "text": "SEA Token on Arbitrum was exploited through a flashloan-enabled price manipulation attack due to a protocol logic flaw in its Solidity smart contract. The attacker used a flash loan to artificially manipulate the token price (likely via liquidity pool imbalance or oracle dependency), allowing unauthorized extraction of approximately $153,000 in value."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "SEA Token's MetaSea round protocol on Arbitrum was exploited in May 2026. The attacker used a flash loan to repeatedly open and immediately redeem positions, draining reward tokens from a flawed settlement adapter and selling them for profit. Approximately $153,000 in value was extracted. The vulnerable settlement adapter allowed immediate redemption of positions that credited reward tokens (SEA) based on the distributor's current accumulated balance, not user-time-weighted participation. There was no block or time lock preventing atomic open and redeem. Distributor payouts were unthrottled, so a flash-loan-funded loop could sweep the entire pending pool."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x001cb16e17c4c5a5c4d02423c9e9b2f2b11ab6b2a1baf2ba53b8fcaf06167716"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-05/SEAToken_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-05/SEAToken_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "arbiscan.io",
+      "url": "https://arbiscan.io/tx/0x001cb16e17c4c5a5c4d02423c9e9b2f2b11ab6b2a1baf2ba53b8fcaf06167716"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "anomly.rs",
+      "url": "https://anomly.rs/metasea-redeemposition-distributor-drain-arb-2026-05-17"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/procur3/status/2057004818145952190"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/sea-token-2026-05-17"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/DarkNavySecurity/web3-exploit-analysis/blob/main/reports/sea-settlement-adapter-round-redemption-inflation/report.md"
+    }
+  ]
+}

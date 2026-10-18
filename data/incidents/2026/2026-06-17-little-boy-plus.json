@@ -1,0 +1,86 @@
+{
+  "id": "2026-06-17-little-boy-plus",
+  "name": "Little Boy Plus",
+  "date": "2026-06-17",
+  "year": 2026,
+  "amountUsd": 367000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "Token",
+  "category": "accounting-math",
+  "technique": "Arithmetic Error",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.66,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.68
+      },
+      {
+        "category": "logic-error",
+        "p": 0.23
+      },
+      {
+        "category": "input-validation",
+        "p": 0.06
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "On June 17, 2026, Little Boy Plus — a fully decentralized DeFi mining protocol on BSC claiming “no team, no admin keys” — was exploited. An attacker exploited a logic vulnerability in the LBPHashrate contract’s _update() function. By triggering it with a zero-value transferFrom call (bypassing OpenZeppelin authorization), the attacker unauthorizedly called _harvest and minted LBP tokens directly to the PancakeSwap LBP/USDT pair via mintReward. This inflated the pair’s balance without updating reserves, allowing the attacker to drain ~377,642 USDT (~$367k–$378k) through PancakePair.swap(). The funds were later sent to Tornado Cash.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "On June 17, 2026, Little Boy Plus — a fully decentralized DeFi mining protocol on BSC claiming “no team, no admin keys” — was exploited. An attacker exploited a logic vulnerability in the LBPHashrate contract’s _update() function. By triggering it with a zero-value transferFrom call (bypassing OpenZeppelin authorization), the attacker unauthorizedly called _harvest and minted LBP tokens directly to the PancakeSwap LBP/USDT pair via mintReward. This inflated the pair’s balance without updating reserves, allowing the attacker to drain ~377,642 USDT (~$367k–$378k) through PancakePair.swap(). The funds were later sent to Tornado Cash."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On June 18, 2026, Little Boy Plus was exploited on BNB Chain via an unauthorized minting bug. A zero-value transferFrom call bypassed allowance checks in the LBPHashrate contract, enabling the attacker to mint tokens directly into the PancakeSwap pair and desynchronize AMM reserves. The attacker drained approximately $377,642 USDT (about 610.5 BNB) through a single flash-loan-fueled swap, with no reported recovery or official mitigation published. Evidence is limited to technical monitoring and incident summaries; no direct block explorer transactions or full contract source are published. The LBPHashrate contract allowed a zero-value transferFrom call…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/2067424733747122259"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/little-boy-plus-2026-06-17"
+    },
+    {
+      "source": "revertiq",
+      "label": "blockchainbreaches.com",
+      "url": "https://www.blockchainbreaches.com/en/breaches/little-boy-plus-2026"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptoadventure.com",
+      "url": "https://cryptoadventure.com/littleboyplus-loses-377k-after-minting-bug-drains-bnb-chain-liquidity/"
+    }
+  ]
+}

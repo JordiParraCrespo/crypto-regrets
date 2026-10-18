@@ -1,0 +1,101 @@
+{
+  "id": "2021-09-16-sushiswap-miso",
+  "name": "SushiSwap Miso",
+  "date": "2021-09-16",
+  "year": 2021,
+  "amountUsd": 3000000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "input-validation",
+  "technique": "Insufficient validation",
+  "classificationNote": "Classified by keyword rules from the DeFiHackLabs root-cause title.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "input-validation",
+    "confidence": 0.98,
+    "top": [
+      {
+        "category": "input-validation",
+        "p": 0.98
+      },
+      {
+        "category": "access-control",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.06,
+    "stateActor": 0.02,
+    "hasRootCause": 0.25
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Insufficient validation. Lost: All funds returned",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Insufficient validation. Lost: All funds returned"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The DONA token auction of the Jay Pegs Auto Mart project on the SushiSwap Launchpad platform MISO was attacked. The attacker inserted malicious code into the MISO front end and changed the auction wallet address to his own wallet address. The loss has now reached 865 ETH (approximately 3.07 million). Dollar). Joseph Delong, CTO of SushiSwap, said on Twitter that the vulnerability has been fixed and that FTX and Binance have been asked to provide the attacker's KYC information, but both exchanges refused to cooperate. In addition, Joseph Delong also stated that he has reported the case to the FBI through his lawyer and reminded the project party to chec…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On September 16, 2021, SushiSwap's MISO launchpad was exploited by an insider who replaced the beneficiary address in the front-end code, diverting 864.8 ETH (~$3M) from the Jay Pegs Auto Mart auction. The funds were returned after public exposure and legal threats. A trusted contractor with commit access to MISO's front-end repository pushed a malicious change that replaced the auction payout address, enabling funds from the Jay Pegs Auto Mart auction to be diverted to the attacker's wallet. Smart contracts remained secure, but the deployment pipeline lacked branch protection and mandatory review, allowing the unchecked commit to reach production."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2021-09/Sushimiso_exp.sol",
+  "sources": [
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2021-09/Sushimiso_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "www.paradigm.xyz",
+      "url": "https://www.paradigm.xyz/2021/08/two-rights-might-make-a-wrong"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x78d6355703507f88f2090eb780d245b0ab26bf470eabdb004761cedf3b1cda44"
+    },
+    {
+      "source": "slowmist",
+      "label": "cointelegraph.com",
+      "url": "https://cointelegraph.com/news/sushi-s-token-launchpad-miso-hacked-for-3m"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/sushi-2021-09-16"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "namefi.io",
+      "url": "https://www.namefi.io/r/en/blog/the-sushiswap-miso-insider-attack"
+    },
+    {
+      "source": "revertiq",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/business/2021/09/17/3m-in-ether-stolen-from-sushiswaps-miso-launchpad"
+    }
+  ]
+}

@@ -1,0 +1,103 @@
+{
+  "id": "2023-04-16-swapos-v2",
+  "name": "Swapos V2",
+  "date": "2023-04-16",
+  "year": 2023,
+  "amountUsd": 468000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Swap Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.99
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.14,
+    "stateActor": 0.03,
+    "hasRootCause": 0.65
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "error k value Attack. Lost: ~$468k",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "error k value Attack. Lost: ~$468k"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Incorrect K check Vulnerable code snippet: Attack tx: https://etherscan.io/address/0x2df07c054138bf29348f35a12a22550230bd1405 Analysis: https://twitter.com/CertiKAlert/status/1647530789947469825 https://twitter.com/BeosinAlert/status/1647552192243728385"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Swapos V2 on Ethereum Mainnet was drained on 2023-04-16 after a broken swap invariant let an attacker use 10 wei dust inputs to withdraw most of the SWP/WETH pool. Public reports place the loss at about $468,000. A mismatched constant-product check in swap() scaled post-swap balances by 10,000 but compared them against _reserve0 * _reserve1 * 1000 2, making the invariant too weak and allowing dust-sized inputs to pass."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xbe643ccdcae57181b9fef554d63029e0605b2e860172d442c37eaabffdb44575"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-04/Swapos_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-04/Swapos_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/CertiKAlert/status/1647530789947469825"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BeosinAlert/status/1647552192243728385"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/address/0x2df07c054138bf29348f35a12a22550230bd1405"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/swapos-v2-2023-04-16"
+    },
+    {
+      "source": "revertiq",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xbe643ccdcae57181b9fef554d63029e0605b2e860172d442c37eaabffdb44575"
+    },
+    {
+      "source": "revertiq",
+      "label": "yinhui1984.github.io",
+      "url": "https://yinhui1984.github.io/analysis_of_swaposv2_attack/"
+    }
+  ]
+}

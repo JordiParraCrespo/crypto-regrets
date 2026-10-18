@@ -1,0 +1,72 @@
+{
+  "id": "2026-05-28-legendarymoneymonnft",
+  "name": "LegendaryMoneyMonNft",
+  "date": "2026-05-28",
+  "year": 2026,
+  "amountUsd": 85500,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "signature-crypto",
+  "technique": "ecrecover address(0) Signature Bypass",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.98).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "signature-crypto",
+    "confidence": 0.98,
+    "top": [
+      {
+        "category": "signature-crypto",
+        "p": 0.98
+      },
+      {
+        "category": "access-control",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "ecrecover address(0) Signature Bypass. Lost: ~$85.5K USD (85,519 USDT)",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "ecrecover address(0) Signature Bypass. Lost: ~$85.5K USD (85,519 USDT)"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "LegendaryMoneyMonNft.cliamRewred() lets a user pull an arbitrary ERC20 amount out of the contract as long as verify() returns true. verify() recovers the signer with recoverSigner() -> ecrecover(hash, v, r, s) and compares it to admin, but never checks for the address(0) return value. ecrecover returns address(0) for a malformed signature (e.g. r = s = 0), and changeadmin() had already been used to set admin to the zero address on-chain. The attacker therefore submits cliamRewred(...) with a 65-byte signature of (r=0, s=0, v=27): ecrecover returns address(0), which equals admin, verify() passes, and the contract transfers the requested amount to msg.sender. The attacker drained the contract's full MON balance and swapped it to USDT on PancakeSwap V3 (~$85.5K). The drain was run from the attacker EOA via an EIP-7702 SetCode (type-4) delegation. Vulnerable code snippet: Attack Tx: https://bscscan.com/tx/0x15c835c070672948b3487d35254bce96831bec9f5212f78b04e683fed74bf4a2 Analysis: SlowMist"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x15c835c070672948b3487d35254bce96831bec9f5212f78b04e683fed74bf4a2"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-05/LegendaryMoneyMonNft_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-05/LegendaryMoneyMonNft_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/2060205558687486441"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x15c835c070672948b3487d35254bce96831bec9f5212f78b04e683fed74bf4a2"
+    }
+  ]
+}

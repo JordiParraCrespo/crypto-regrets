@@ -1,0 +1,73 @@
+{
+  "id": "2025-01-10-jpulsepot",
+  "name": "JPulsepot",
+  "date": "2025-01-10",
+  "year": 2025,
+  "amountUsd": 21500,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Logic Flaw",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 1.00). Replaced keyword guess \"logic-error\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Logic Flaw. Lost: 21.5K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Logic Flaw. Lost: 21.5K"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The root cause of the exploit was that the swapProfitFees() function was missing access controls. This function swaps tokens owned by the contract to WBNB via PancakeSwap. Only admins should have access to trade with the contract’s earnings. The attacker traded WBNB for LINK externally, artificially increasing LINK token’s price in the pool. Then, the attacker called swapProfitFees() to swap the contract’s LINK back to WBNB at the higher rate, making a profit. Vulnerable code snippet: Attack tx: https://bscscan.com/tx/0xd6ba15ecf3df9aaae37450df8f79233267af41535793ee1f69c565b50e28f7da Analysis: https://www.cnblogs.com/ACaiGarden/p/18664999"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xd6ba15ecf3df9aaae37450df8f79233267af41535793ee1f69c565b50e28f7da"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-01/JPulsepot_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-01/JPulsepot_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/CertiKAlert/status/1877662352834793639"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0xd6ba15ecf3df9aaae37450df8f79233267af41535793ee1f69c565b50e28f7da"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "cnblogs.com",
+      "url": "https://www.cnblogs.com/ACaiGarden/p/18664999"
+    }
+  ]
+}

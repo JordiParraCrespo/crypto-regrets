@@ -1,0 +1,73 @@
+{
+  "id": "2023-09-11-0x0dex",
+  "name": "0x0DEX",
+  "date": "2023-09-11",
+  "year": 2023,
+  "amountUsd": 61000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Parameter manipulation",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 1.00). Replaced keyword guess \"oracle-manipulation\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Parameter manipulation. Lost: ~$61K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Parameter manipulation. Lost: ~$61K"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The 0x0DEX contract was exploited through parameter manipulation. It allows private fund transfers (ETH) via deposit and withdraw functions and added a swapOnWithdrawal function for private swaps of deposited funds. The swapOnWithdrawal function was exploited. The amount withdrawn, after fees, is set as _lastWithdrawal only when withdrawalData.wType is WithdrawalType.Swap. For normal withdrawals (withdrawalType.Direct), _lastWithdrawal isn't set. This oversight allowed exploitation: if Alice swaps 10 ETH (withdrawalType.Swap) and Bob swaps 0.1 ETH (withdrawalType.Direct), the _lastWithdrawal remains 10 ETH. Thus, Bob could receive 10 ETH worth of tokens instead of his intended 0.1 ETH. Vulnerable code snippet: Attack tx: 0x00b375f8e90fc54c13 | Phalcon Explorer Analysis: 0x0 Privacy DEX Exploit | Notion"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x00b375f8e90fc54c1345b33c686977ebec26877e2c8cac165429927a6c9bdbec"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-09/0x0DEX_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-09/0x0DEX_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "0x0ai.notion.site",
+      "url": "https://0x0ai.notion.site/0x0ai/0x0-Privacy-DEX-Exploit-25373263928b4f18b31c438b2a040e33"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "explorer.phalcon.xyz",
+      "url": "https://explorer.phalcon.xyz/tx/eth/0x00b375f8e90fc54c1345b33c686977ebec26877e2c8cac165429927a6c9bdbec"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "0x0ai.notion.site",
+      "url": "https://0x0ai.notion.site/0x0-Privacy-DEX-Exploit-25373263928b4f18b31c438b2a040e33"
+    }
+  ]
+}

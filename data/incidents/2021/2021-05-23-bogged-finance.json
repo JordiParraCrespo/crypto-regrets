@@ -1,0 +1,88 @@
+{
+  "id": "2021-05-23-bogged-finance",
+  "name": "Bogged Finance",
+  "date": "2021-05-23",
+  "year": 2021,
+  "amountUsd": 3000000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Arithmetic Error",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "reentrancy",
+    "confidence": 0.37,
+    "top": [
+      {
+        "category": "reentrancy",
+        "p": 0.41000000000000003
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.33
+      },
+      {
+        "category": "logic-error",
+        "p": 0.25
+      }
+    ],
+    "flashLoan": 0.84,
+    "stateActor": 0.02,
+    "hasRootCause": 0.91
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "The DeFi protocol Bogged Finance officially stated that hackers carried out a lightning loan attack on the staking function vulnerability of BOG token contracts and withdrew 3 million US dollars from the liquidity pool. The hackers used the Pancake Pair Swap code to withdraw the pledge before the contract verification was completed. income. The official team stated that the remaining 8 million US dollars in the current liquidity pool is safe. The vulnerabilities used by hackers have been \"blocked\" and cannot be reused. The tools provided by Bogged Finance are still safe to use, and the team is repairing the front end. Display the problem.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The DeFi protocol Bogged Finance officially stated that hackers carried out a lightning loan attack on the staking function vulnerability of BOG token contracts and withdrew 3 million US dollars from the liquidity pool. The hackers used the Pancake Pair Swap code to withdraw the pledge before the contract verification was completed. income. The official team stated that the remaining 8 million US dollars in the current liquidity pool is safe. The vulnerabilities used by hackers have been \"blocked\" and cannot be reused. The tools provided by Bogged Finance are still safe to use, and the team is repairing the front end. Display the problem."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Bogged Finance on BNB Chain was exploited on May 22, 2021, via a flash-loan-enabled inflation of staking rewards. The attacker drained over $3 million to $3.6 million in BNB from the protocol by manipulating the reward logic in the BOG token contract. A mismatch between the BOG token’s transfer-fee and staking-reward logic enabled repeated self-transfers to grant excess staking rewards, outpacing the transfer fee deducted and thus inflating profit. This arithmetic and logic flaw allowed a flash-loan-boosted attacker to drain liquidity from the protocol’s pool."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xa9860033322aefa39538db51a1ed47cfae7e4b161254d53dbf735f1f16502710"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "boggedfinance.medium.com",
+      "url": "https://boggedfinance.medium.com/bog-flash-loan-attack-what-happened-and-whats-next-token-migration-192a9d96b9b7"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/bogged-finance-2021-05-23"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainbulletin.com",
+      "url": "https://chainbulletin.com/bogged-finance-suffers-3m-flash-loan-exploit"
+    },
+    {
+      "source": "revertiq",
+      "label": "lancershield.github.io",
+      "url": "https://lancershield.github.io/docs/hacks-db/high/Bogged-Finance.html"
+    }
+  ]
+}

@@ -1,0 +1,71 @@
+{
+  "id": "2025-10-07-veloradex",
+  "name": "VeloraDEX",
+  "date": "2025-10-07",
+  "year": 2025,
+  "amountUsd": 20000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum Mainnet"
+  ],
+  "targetType": null,
+  "category": "arbitrary-call",
+  "technique": "Access Control; Token Approval Abuse",
+  "classificationNote": "Classified by keyword rules from the RevertIQ label and description.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "arbitrary-call",
+    "confidence": 0.6,
+    "top": [
+      {
+        "category": "arbitrary-call",
+        "p": 0.62
+      },
+      {
+        "category": "access-control",
+        "p": 0.38
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "On October 7, 2025, an attacker exploited a known lingering approval to the deprecated VeloraDEX (formerly ParaSwap) Augustus V6 router on Ethereum, draining $20,000 USDC from a user wallet nearly 18 months after the contract’s vulnerability was first disclosed. The Augustus V6 router contract on Ethereum retained an access control flaw in its swap callback functions, allowing arbitrary external callers to spend any tokens previously approved to the router. Because ERC-20 approvals persist until revoked by the user, the lingering approval enabled the attacker to drain funds long after the contract was deprecated.",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "On October 7, 2025, an attacker exploited a known lingering approval to the deprecated VeloraDEX (formerly ParaSwap) Augustus V6 router on Ethereum, draining $20,000 USDC from a user wallet nearly 18 months after the contract’s vulnerability was first disclosed. The Augustus V6 router contract on Ethereum retained an access control flaw in its swap callback functions, allowing arbitrary external callers to spend any tokens previously approved to the router. Because ERC-20 approvals persist until revoked by the user, the lingering approval enabled the attacker to drain funds long after the contract was deprecated."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/veloradex-2025-10-29t22-41-18-00-00"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/defi-rekt-report-october-2025-38-6-million-lost-across-9-exploits"
+    },
+    {
+      "source": "revertiq",
+      "label": "cecuro.ai",
+      "url": "https://cecuro.ai/hacks/veloradex"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/veloradex-hack-2025"
+    }
+  ]
+}

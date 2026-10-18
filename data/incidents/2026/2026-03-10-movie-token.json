@@ -1,0 +1,77 @@
+{
+  "id": "2026-03-10-movie-token",
+  "name": "Movie Token",
+  "date": "2026-03-10",
+  "year": 2026,
+  "amountUsd": 242000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Incorrect Share Accounting",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.97,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.97
+      },
+      {
+        "category": "logic-error",
+        "p": 0.03
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.01,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Movie Token was exploited on BNB Chain on 10 March 2026 for approximately $242,000, after a double-counting and burn flaw in its deflationary token contract allowed an attacker to manipulate pool reserves and profit via price distortion. A double-counting bug in the sell logic allowed both a transfer to the liquidity pair and a duplicate addition to the pending burn tracker. Burning from the pair's reserve without restriction created an artificial supply shock, inflating the token price for attacker profit.",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "Movie Token was exploited on BNB Chain on 10 March 2026 for approximately $242,000, after a double-counting and burn flaw in its deflationary token contract allowed an attacker to manipulate pool reserves and profit via price distortion. A double-counting bug in the sell logic allowed both a transfer to the liquidity pair and a duplicate addition to the pending burn tracker. Burning from the pair's reserve without restriction created an artificial supply shock, inflating the token price for attacker profit."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xfb57c980286ea8755a7b69de5a74483c44b1f74af4ab34b7c52e733fc62dfca6",
+    "0xb8127c3c65e915dffde8ce725b247e5b04e2e19d137e67c51d79eb625c1f55c9",
+    "0xc7ca9a0c99e433fc68fe20563193d5d442de74194befaf8afc508591f6822f45",
+    "0xac5b4c3a3cc43af97bc3c2ca58ac97e2f12aeb0737aa1fb91fd92bd5e6858577"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/movie-token-2026-03-10"
+    },
+    {
+      "source": "revertiq",
+      "label": "certik.com",
+      "url": "https://www.certik.com/blog/movie-token-incident-analysis"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/DarkNavySecurity/web3-exploit-analysis/blob/main/reports/movie-token-mt/movie-token-extractFromPoolForLpMining-burn-manipulation.md"
+    }
+  ]
+}

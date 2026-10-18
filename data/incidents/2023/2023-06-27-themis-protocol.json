@@ -1,0 +1,109 @@
+{
+  "id": "2023-06-27-themis-protocol",
+  "name": "Themis Protocol",
+  "date": "2023-06-27",
+  "year": 2023,
+  "amountUsd": 370000,
+  "returnedUsd": null,
+  "chains": [
+    "Arbitrum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.07,
+    "stateActor": 0.02,
+    "hasRootCause": 0.9
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Manipulation of prices using Flashloan. Lost: ~$370k",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Manipulation of prices using Flashloan. Lost: ~$370k"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The LP token price is determined by aggregating the total value of all tokens in the pool. In this case, the attacker managed to manipulate the oracle by exchanging tokens within the Balancer pool, leading to the hack. Vulnerable code snippet: (source code not available) Attack tx: https://arbiscan.io/tx/0xff368294ccb3cd6e7e263526b5c820b22dea2b2fd8617119ba5c3ab8417403d8 Analysis: https://twitter.com/BeosinAlert/status/1673930979348717570 https://twitter.com/BlockSecTeam/status/1673897088617426946"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Themis, a cryptographic lending protocol, has been subject to a prophecy machine manipulation attack, and the attackers have stolen approximately $370,000. The hack is due to a flawed oracle, exploited to inflate the B-wstETH-WETH-Stable-gauge price. Specifically, the deposit of 54.6 B-wstETH-WETH-Stable-gauge (obtained by joining the balancer pool w/ 55 WETH) is able to borrow 317 WETH, basically draining the lending funds."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Themis Protocol on Arbitrum was exploited on June 27, 2023 via oracle manipulation that allowed an attacker to inflate the value of Balancer LP tokens and borrow assets against their fake price, resulting in losses totaling approximately $370,000. The root cause was a vulnerable price oracle that calculated Balancer LP token value using spot pool reserves. The attacker manipulated pool composition through swaps, which caused the oracle to overestimate LP token price and enabled borrowing of unbacked assets."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xff368294ccb3cd6e7e263526b5c820b22dea2b2fd8617119ba5c3ab8417403d8"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-06/Themis_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-06/Themis_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BeosinAlert/status/1673930979348717570"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BlockSecTeam/status/1673897088617426946"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "arbiscan.io",
+      "url": "https://arbiscan.io/tx/0xff368294ccb3cd6e7e263526b5c820b22dea2b2fd8617119ba5c3ab8417403d8"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/ThemisProtocol/status/1673806486299099137"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/themis-protocol-2023-06-27"
+    },
+    {
+      "source": "revertiq",
+      "label": "olympix.security",
+      "url": "https://olympix.security/blog/themis-protocol-price-oracle-exploited-370k"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.solidityscan.com",
+      "url": "https://blog.solidityscan.com/themis-protocol-hack-analysis-7241f6470b2e/"
+    }
+  ]
+}

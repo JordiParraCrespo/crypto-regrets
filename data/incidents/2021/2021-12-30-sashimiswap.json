@@ -1,0 +1,78 @@
+{
+  "id": "2021-12-30-sashimiswap",
+  "name": "SashimiSwap",
+  "date": "2021-12-30",
+  "year": 2021,
+  "amountUsd": 210000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Swap Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.06,
+    "stateActor": 0.02,
+    "hasRootCause": 0.84
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "SashimiSwap was attacked due to a logic error in the swap function, and the attacker finally made a profit: 6,261.304 uni, 4,466,096 Sashimi and 63,762 usdt, nearly $200,000.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "SashimiSwap was attacked due to a logic error in the swap function, and the attacker finally made a profit: 6,261.304 uni, 4,466,096 Sashimi and 63,762 usdt, nearly $200,000."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On December 30, 2021, SashimiSwap's Ethereum router was exploited through a flash loan and swap logic flaw that allowed the attacker to drain assets from the protocol, resulting in a loss of approximately $210,000. The exploit involved the attacker creating fake token pairs and manipulating the router's calculation logic to withdraw excessive WETH via swap functions. The swapExactTokensForETHSupportingFeeOnTransferTokens function in the SashimiSwap router calculated output ETH based on the balance of the first token pair, enabling repeated withdrawal of WETH by swapping among forged token pairs. The architectural connection between the router and a vau…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "sashimisashimi5.medium.com",
+      "url": "https://sashimisashimi5.medium.com/statement-on-hackers-attack-322ab6a5c31d"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/sashimiswap-2021-12-30"
+    },
+    {
+      "source": "revertiq",
+      "label": "defillama.com",
+      "url": "https://defillama.com/protocol/sashimiswap"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/sashimiswap-hack-2021"
+    }
+  ]
+}

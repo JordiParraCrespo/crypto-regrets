@@ -1,0 +1,78 @@
+{
+  "id": "2021-04-05-polkatrain",
+  "name": "Polkatrain",
+  "date": "2021-04-05",
+  "year": 2021,
+  "amountUsd": 3000000,
+  "returnedUsd": null,
+  "chains": [
+    "Polkadot"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Reward Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.86
+  },
+  "bridge": false,
+  "language": "Rust",
+  "rootCause": "Polkatrain, an ecological IDO platform of Polkadot, had an accident this morning. According to SlowMist analysis, the contract in question is the POLT_LBP contract of the Polkatrain project. This contract has a swap function and a rebate mechanism. When users purchase through the swap function When the PLOT token is used, a certain amount of rebate will be obtained, and the rebate will be forwarded to the user in the form of calling transferFrom by the _update function in the contract. Since the _update function does not set the maximum amount of rebates for a pool, nor does it determine whether the total rebates have been used up when rebates are made…",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Polkatrain, an ecological IDO platform of Polkadot, had an accident this morning. According to SlowMist analysis, the contract in question is the POLT_LBP contract of the Polkatrain project. This contract has a swap function and a rebate mechanism. When users purchase through the swap function When the PLOT token is used, a certain amount of rebate will be obtained, and the rebate will be forwarded to the user in the form of calling transferFrom by the _update function in the contract. Since the _update function does not set the maximum amount of rebates for a pool, nor does it determine whether the total rebates have been used up when rebates are made…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On April 5, 2021, Polkatrain, a Polkadot-based fundraising platform, lost approximately $3 million (about 57,000 DOT at the time) when an attacker exploited a logic flaw in the platform's token launch pool rebate mechanism, allowing repeated extraction of rebates through a faulty contract function. The rebate mechanism in Polkatrain's LBP contract lacked proper limits and validation on the total amount of rebates distributed. The vulnerable _update function did not restrict pool rebates or check available rebate balances, enabling attackers to repeatedly call the swap and extract excess rebates."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "polkatrain-com.gitbook.io",
+      "url": "https://polkatrain-com.gitbook.io/polkatrian-en/the-response-for-hacker-attack-incident-from-polkatrain-team"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/polkatrain-2021-04-05"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/polkatrain-hack-2021"
+    },
+    {
+      "source": "revertiq",
+      "label": "latoken.com",
+      "url": "https://latoken.com/moments/4147/polkadot-ecosystem-platform-polkatrain-to-lose-3-million-in-a-rebate-arbitrage-attack/"
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "id": "2025-08-27-0xf340",
+  "name": "0xf340",
+  "date": "2025-08-27",
+  "year": 2025,
+  "amountUsd": 4000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Access Control",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 1.00).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Access Control. Lost: 4k USD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Access Control. Lost: 4k USD"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The victim contract (0xF340bd...63436) exposed an initVRF(address, address) function with no access control or initialization guard, letting anyone write attacker-chosen addresses into the contract's storage (an arbitrary recipient and the LINK token address). After seeding storage with its own address, the attacker repeatedly invoked function selector 0x607d60e6 (which pays out / transfers LINK to the configured recipient) with zero ETH, draining the contract's LINK balance over 80 iterations. The stolen LINK was then swapped to ETH via the Uniswap V2 router (~4k USD). Vulnerable code snippet: Attack Tx: https://etherscan.io/tx/0x103b4550a1a2bdb73e3cb5ea484880cd8bed7e4842ecdd18ed81bf67ed19e03c Analysis: https://t.me/defimon_alerts/1733"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x103b4550a1a2bdb73e3cb5ea484880cd8bed7e4842ecdd18ed81bf67ed19e03c"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-08/0xf340_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-08/0xf340_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "t.me",
+      "url": "https://t.me/defimon_alerts/1733"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x103b4550a1a2bdb73e3cb5ea484880cd8bed7e4842ecdd18ed81bf67ed19e03c"
+    }
+  ]
+}

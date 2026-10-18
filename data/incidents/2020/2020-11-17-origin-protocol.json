@@ -1,0 +1,85 @@
+{
+  "id": "2020-11-17-origin-protocol",
+  "name": "Origin Protocol",
+  "date": "2020-11-17",
+  "year": 2020,
+  "amountUsd": 7700000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "reentrancy",
+  "technique": "Reentrancy",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "reentrancy",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "reentrancy",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.97,
+    "stateActor": 0.01,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Stay at home, wear a mask, the hack epidemic is spreading.These are dark times for weak code. Developers need to put their protocols into lockdown. Greed is contagious, and hacks bring eye-catching prizes. In just 24 hours we hear of two more attacks.",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "Stay at home, wear a mask, the hack epidemic is spreading.These are dark times for weak code. Developers need to put their protocols into lockdown. Greed is contagious, and hacks bring eye-catching prizes. In just 24 hours we hear of two more attacks."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Origin Dollar (OUSD) was exploited for over $7 million on November 17, 2020, when a reentrancy vulnerability in its vault contract allowed an attacker to inflate their OUSD balance using a malicious token and a flash loan. The bug stemmed from a missing validation check that had been mistakenly removed during refactoring, leaving the contract exposed. A validation check preventing reentrancy was accidentally removed from the OUSD vault contract during a refactor, enabling external ERC-20 token contracts to reenter the vault via callback before vault accounting was updated."
+    }
+  ],
+  "audit": "Unaudited",
+  "txHashes": [
+    "0xe1c76241dda7c5fcf1988454c621142495640e708e3f8377982f55f8cf2a8401"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Hack Epidemic (Origin Protocol - REKT)",
+      "url": "https://rekt.news/hack-epidemic"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/origin-protocol-2020-11-17"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "originprotocol.com",
+      "url": "https://www.originprotocol.com/blog/what-weve-changed-since-the-ousd-attack"
+    },
+    {
+      "source": "revertiq",
+      "label": "originprotocol.com",
+      "url": "https://www.originprotocol.com/blog/origin-dollar-ousd-detailed-compensation-plan"
+    }
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "id": "2024-04-23-magpie-protocol",
+  "name": "Magpie Protocol",
+  "date": "2024-04-23",
+  "year": 2024,
+  "amountUsd": 129000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum",
+    "Polygon",
+    "BSC",
+    "Blast",
+    "Avalanche",
+    "Arbitrum",
+    "Optimism",
+    "Base",
+    "zkSync Era",
+    "Polygon zkEVM"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "input-validation",
+  "technique": "Missing Input Validation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "input-validation",
+    "confidence": 0.9,
+    "top": [
+      {
+        "category": "input-validation",
+        "p": 0.91
+      },
+      {
+        "category": "arbitrary-call",
+        "p": 0.07
+      },
+      {
+        "category": "access-control",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "The decentralized liquidity aggregation protocol Magpie Protocol was attacked due to a contract vulnerability, resulting in $129,000 being stolen from 221 wallets. The root cause is due to unchecked call data. The attacker called the contract's swap() function and passed in data which included a list of users to transfer tokens from.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The decentralized liquidity aggregation protocol Magpie Protocol was attacked due to a contract vulnerability, resulting in $129,000 being stolen from 221 wallets. The root cause is due to unchecked call data. The attacker called the contract's swap() function and passed in data which included a list of users to transfer tokens from."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 2024-04-23, attackers exploited a validation flaw in Magpie Protocol's MagpieRouterV2 router contracts to drain approved user tokens across multiple supported chains. Magpie stated that 221 wallets lost approximately $129,000 after crafted calldata bypassed selector-based transfer protections. The protocol paused its dApp, reset selectors, patched the router validation logic, and later reimbursed affected users in full. MagpieRouterV2 validated whether calldata contained approved function selectors, but did not verify the selector's position within the constructed input. According to Magpie's postmortem, an attacker crafted an address beginning with…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xb1c0f83cc030f31be216b8d0e41c4be16b0cae1cb6190d0017bf30c8b2401677",
+    "0x58dfc25f1135710b882e17723a5b5c6e8d990ceceaba93d30ea8583ce7074130",
+    "0xa8873581d38d71dfd5f27fb7c1d07a86690b85d15aa92c4b7963bb347ab4a933",
+    "0x305759acffe1475f6f6a8c2bad1ceab8e089c93426a200ecea9334d7f9949b38"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "medium.com",
+      "url": "https://medium.com/@Magpieprotocol/magpie-protocol-smart-contract-vulnerability-post-mortem-f6400db0a25e"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/magpie-protocol-2024-04-23"
+    },
+    {
+      "source": "revertiq",
+      "label": "bir.badjoke-lab.com",
+      "url": "https://bir.badjoke-lab.com/incident/magpie-protocol-2024-router-v2-exploit/"
+    },
+    {
+      "source": "revertiq",
+      "label": "revoke.cash",
+      "url": "https://revoke.cash/exploits/magpie"
+    }
+  ]
+}

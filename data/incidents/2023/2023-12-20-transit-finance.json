@@ -1,0 +1,121 @@
+{
+  "id": "2023-12-20-transit-finance",
+  "name": "Transit Finance",
+  "date": "2023-12-20",
+  "year": 2023,
+  "amountUsd": 110000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC",
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "input-validation",
+  "technique": "Missing Input Validation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "input-validation",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "input-validation",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Lack of Validation Pool. Lost: ~110k",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Lack of Validation Pool. Lost: ~110k"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "1. The vulnerability’s root cause was the lack of proper input validation. 2. The vulnerability allowed the attacker to use a forged pool and manipulate the WBNB/BUSD pool path. It can be seen on the vulnerable contract that along the swapping route, the pre-deployed fake token pair would return a false value without actually transferring any tokens to mislead the transit finance route into validating the unexpected swap. 3. The attacker manipulated the first swap by controlling the actualAmountIn parameter, substituting it with a forged value. 4. This led to the SwapRouter using the manipulated actualAmountIn as the initial value for the swap in the WBNB/BUSD pool. Vulnerable code snippet: https://bscscan.com/address/0x00000047bb99ea4d791bb749d970de71ee0b1a34#code fake pool: address pool_usd_wbnb = 0x36696169C63e42cd08ce11f5deeBbCeBae652050; Attack tx: https://www.oklink.com/es-la/multi-search#key=0x93ae5f0a121d5e1aadae052c36bc5ecf2d406d35222f4c6a5d63fef1d6de1081 https://app.blocksec.com/explorer/tx/bsc/0x93ae5f0a121d5e1aadae052c36bc5ecf2d406d35222f4c6a5d63fef1d6de1081 Analysis: https://blog.solidityscan.com/transit-finance-hack-analysis-998400e2bd0c https://lunaray.medium.com/transitfinace-hack-analysis-9304a4863aaa https://blog.verichains.io/p/decoding-transit-finance-attack"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Transit Finance's SwapRouter contract on BNB Chain was exploited on December 20, 2023, via missing input validation for swap path pools, resulting in approximately $110,000 in losses. The attacker manipulated pool parameters to reroute assets through a forged pool, draining USDT and receiving WBNB. The SwapRouter contract did not validate pool addresses and parameters in the swap path. This allowed an attacker to craft a swap request with rogue pool data, enabling illicit transfers by treating an attacker-controlled address as a valid pool."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x93ae5f0a121d5e1aadae052c36bc5ecf2d406d35222f4c6a5d63fef1d6de1081"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-12/TransitFinance_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-12/TransitFinance_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Phalcon_xyz/status/1737355152779030570"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "explorer.phalcon.xyz",
+      "url": "https://explorer.phalcon.xyz/tx/bsc/0x93ae5f0a121d5e1aadae052c36bc5ecf2d406d35222f4c6a5d63fef1d6de1081"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0x00000047bb99ea4d791bb749d970de71ee0b1a34#code"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0x36696169C63e42cd08ce11f5deeBbCeBae652050"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "oklink.com",
+      "url": "https://www.oklink.com/es-la/multi-search#key=0x93ae5f0a121d5e1aadae052c36bc5ecf2d406d35222f4c6a5d63fef1d6de1081"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x93ae5f0a121d5e1aadae052c36bc5ecf2d406d35222f4c6a5d63fef1d6de1081"
+    },
+    {
+      "source": "blocksec",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs?tab=readme-ov-file#20231220-transitfinance---lack-of-validation-pool"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/transit-finance-2023-12-20"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.solidityscan.com",
+      "url": "https://blog.solidityscan.com/transit-finance-hack-analysis-998400e2bd0c/"
+    },
+    {
+      "source": "revertiq",
+      "label": "academy.teleswap.xyz",
+      "url": "https://academy.teleswap.xyz/cross-chain-bridge-security-transit-finance-hacks/"
+    }
+  ]
+}

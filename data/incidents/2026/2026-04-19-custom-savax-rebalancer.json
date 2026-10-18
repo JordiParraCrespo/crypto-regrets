@@ -1,0 +1,74 @@
+{
+  "id": "2026-04-19-custom-savax-rebalancer",
+  "name": "Custom sAVAX Rebalancer",
+  "date": "2026-04-19",
+  "year": 2026,
+  "amountUsd": 64000,
+  "returnedUsd": null,
+  "chains": [
+    "Avalanche"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "arbitrary-call",
+  "technique": "Arbitrary External Call",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "arbitrary-call",
+    "confidence": 0.87,
+    "top": [
+      {
+        "category": "arbitrary-call",
+        "p": 0.88
+      },
+      {
+        "category": "access-control",
+        "p": 0.12
+      }
+    ],
+    "flashLoan": 0.06,
+    "stateActor": 0.01,
+    "hasRootCause": 0.9
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "On 19 April 2026, the Custom sAVAX Rebalancer contract on Avalanche was exploited through an arbitrary external call vulnerability while holding Aave V3 credit delegation. Approximately 7,000 WAVAX (~$64,000) was borrowed against a victim but a whitehat bot frontran and recovered the funds before any malicious withdrawal, leaving no net user loss. The Custom sAVAX Rebalancer contract exposed an unauthenticated external call interface, allowing anyone to execute arbitrary target calls,including Aave borrow actions,while holding unlimited credit delegation from victims. No access control or calldata validation prevented borrowing on behalf of other users.",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "On 19 April 2026, the Custom sAVAX Rebalancer contract on Avalanche was exploited through an arbitrary external call vulnerability while holding Aave V3 credit delegation. Approximately 7,000 WAVAX (~$64,000) was borrowed against a victim but a whitehat bot frontran and recovered the funds before any malicious withdrawal, leaving no net user loss. The Custom sAVAX Rebalancer contract exposed an unauthenticated external call interface, allowing anyone to execute arbitrary target calls,including Aave borrow actions,while holding unlimited credit delegation from victims. No access control or calldata validation prevented borrowing on behalf of other users."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xaaa1b2e561738399af890dde2b18252b698e9b0ae7c8430fdd855f426835001b"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/custom-savax-rebalancer-2026-04-19"
+    },
+    {
+      "source": "revertiq",
+      "label": "blocksec.com",
+      "url": "https://blocksec.com/blog/weekly-web3-security-roundup-2026-04-26"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/custom-savax-rebalancer-hack-2026"
+    }
+  ]
+}

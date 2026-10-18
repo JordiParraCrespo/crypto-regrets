@@ -1,0 +1,129 @@
+{
+  "id": "2024-07-16-lifi-finance",
+  "name": "LiFi Finance",
+  "date": "2024-07-16",
+  "year": 2024,
+  "amountUsd": 9730000,
+  "returnedUsd": null,
+  "chains": [
+    "zkSync Era",
+    "Linea",
+    "Metis"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "arbitrary-call",
+  "technique": "Token Approval Abuse",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "arbitrary-call",
+    "confidence": 0.97,
+    "top": [
+      {
+        "category": "arbitrary-call",
+        "p": 0.97
+      },
+      {
+        "category": "access-control",
+        "p": 0.01
+      },
+      {
+        "category": "bridge-crosschain",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.21
+  },
+  "bridge": true,
+  "language": "Solidity",
+  "rootCause": "According to the monitoring by the SlowMist security team, the cross-chain bridge aggregation protocol LI.FI has experienced suspicious transactions, resulting in user losses of over $10 million. Please revoke approvals to the related contracts.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "According to the monitoring by the SlowMist security team, the cross-chain bridge aggregation protocol LI.FI has experienced suspicious transactions, resulting in user losses of over $10 million. Please revoke approvals to the related contracts."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On July 16, 2024, LiFi Protocol suffered a $9.7M exploit on Ethereum. The attacker abused infinite token approvals and an arbitrary-call bug in the newly deployed GasZipFacet. This flaw let the attacker drain users’ funds via crafted transferFrom calls, echoing a nearly identical vulnerability exploited in March 2022. The GasZipFacet's depositToGasZipERC20() function allowed arbitrary external calls without target or calldata validation. This enabled the attacker to trigger transferFrom operations using the approvals users had previously granted to LiFi's diamond proxy, leading to the mass draining of ERC20 tokens from user wallets."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x82f47783e8d3029767090ed9a5ac3e2774d04b8fe908c9ca1f959d1b8c6a83a9",
+    "0x48be219ac50107de5a02b417624120f4148b4fe1c01a226c672f838a5e6e0986",
+    "0x96436532daf9d1028117945315c565b310f76a2d94e6d176b1aefe5cb0be9144",
+    "0x047056478cabe20b7c32a85b34f558dd90e7b3235b77d1a4342fdc15b74c910f",
+    "0x909f5000636dce99528ab9a14475744e481a6b4e060fc693cf6e0fca48fa7deb",
+    "0xaa88931369fc09f507c9a02b9ccbc6bec1eca83845745ceb551c1f9fba157c4a",
+    "0x728c9bf98fcb1f35dd6551fb7a411e841570d2f73ac408916698cecdcffde36a",
+    "0xa67d8a6d59dc258e74a93a22abd26d49d159fb123dbe243d3c5b6b41a499086b",
+    "0x0729eda09a8b5743d7328a717019d51b2a05634d6fe764d5213fd6fb3e303f59",
+    "0x46c001fb4149c2381196c8e1428d966dc44dd46061f8ecf8383a5363adeee312",
+    "0x65a92b189e4ae0b8a8a02cd59c5e9f6832586bd5167d41a24eb4f4d2ac692755",
+    "0x2cb7206f1067df3e9e4b9e5d05139c4a907f69e235f3ce0f64e424a874c65d54",
+    "0x57ff54bda419773a31653fe63dbb00981b6e971b4c2b2b650c2f10b4342f8464",
+    "0xde084e8c7cdec910d17ad7aeaa24a2973fc8c36add6d83a42de15446ddaaca5d",
+    "0xa63052e97b989eecd789b76f670d6a5ed8a72334ce99831a36d7a642b087537f",
+    "0x606a49471ebcb608bf034abd982750d626b7eaf45a963118d5aae5baae4a2da2",
+    "0x86fe6933f03c14f75167e560e6635a23fab59b268e68c86d60c4d46afe0aeabc",
+    "0xd82fe84e63b1aa52e1ce540582ee0895ba4a71ec5e7a632a3faa1aff3e763873",
+    "0x602d810c47a9022b422cf2fa32ec973f887a72df78d40e448d511e82eba5a38a",
+    "0xdf9b2b855e5a55f4add1b95f29f4c2be6917560c30e0de11ea55270eb711886e",
+    "0x8e27acf21089de72cd927e2efc44d99af9494d56c21fd49eaf0c5b7e56e7316e",
+    "0x11ddeef2d279de82717272301d6f6e08795a8ac83b90972c71761e015a9c644c",
+    "0xb4a4cb9084043b6fe2d789de51d6a15b6ce321cb6334ca033b5824562b2f5904",
+    "0x07dec7b53ed73e310757b9cc4d73abac6726f867a68a4910082b59ce224a5a6e"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x82f47783e8d3029767090ed9a5ac3e2774d04b8fe908c9ca1f959d1b8c6a83a9"
+    },
+    {
+      "source": "blocksec",
+      "label": "x.com",
+      "url": "https://x.com/lifiprotocol/status/1813207291778215955"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/1813195343057866972"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/same-mistake-twice-decoding-lifi-protocol-s-9-7m-2024-07-17"
+    },
+    {
+      "source": "revertiq",
+      "label": "quillaudits.com",
+      "url": "https://www.quillaudits.com/blog/hack-analysis/lifi-protocol-exploit"
+    },
+    {
+      "source": "revertiq",
+      "label": "metasleuth.io",
+      "url": "https://metasleuth.io/blog/illicit-fund-flow-case-study-lifi-attack-metasleuth"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/src/test/2024-07/Lifiprotocol_exp.sol"
+    }
+  ]
+}

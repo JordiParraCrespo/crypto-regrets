@@ -1,0 +1,77 @@
+{
+  "id": "2022-11-05-bdex",
+  "name": "BDEX",
+  "date": "2022-11-05",
+  "year": 2022,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Business Logic Flaw",
+  "classificationNote": "Classified by keyword rules from the DeFiHackLabs root-cause title.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.63,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.65
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.35
+      }
+    ],
+    "flashLoan": 0.09,
+    "stateActor": 0.02,
+    "hasRootCause": 0.93
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Business Logic Flaw. Lost: 16WBNB",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Business Logic Flaw. Lost: 16WBNB"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The underlying issue stems from the fact that the convertDustToEarned function within the BvaultsStrategy contract lacks price checks. This deficiency becomes particularly problematic for trading pairs with low liquidity, as they are more susceptible to experiencing significant price changes due to variations in trading volume. Vulnerable code snippet: https://bscscan.com/address/0xB2B1DC3204ee8899d6575F419e72B53E370F6B20#code Attack tx: https://bscscan.com/tx/0xe7b7c974e51d8bca3617f927f86bf907a25991fe654f457991cbf656b190fe94 Analysis: https://twitter.com/BeosinAlert/status/1588579143830343683"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xe7b7c974e51d8bca3617f927f86bf907a25991fe654f457991cbf656b190fe94"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-11/BDEX_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-11/BDEX_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BeosinAlert/status/1588579143830343683"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0xB2B1DC3204ee8899d6575F419e72B53E370F6B20#code"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0xe7b7c974e51d8bca3617f927f86bf907a25991fe654f457991cbf656b190fe94"
+    }
+  ]
+}

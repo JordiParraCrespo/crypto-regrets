@@ -1,0 +1,70 @@
+{
+  "id": "2026-09-21-gaslessreservoirenabler",
+  "name": "GaslessReservoirEnabler",
+  "date": "2026-09-21",
+  "year": 2026,
+  "amountUsd": 23800,
+  "returnedUsd": null,
+  "chains": [
+    "Polygon"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "arbitrary-call",
+  "technique": "Smart Contract Vulnerability",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.84).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "arbitrary-call",
+    "confidence": 0.84,
+    "top": [
+      {
+        "category": "arbitrary-call",
+        "p": 0.85
+      },
+      {
+        "category": "input-validation",
+        "p": 0.09
+      },
+      {
+        "category": "access-control",
+        "p": 0.06
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "erc20WithTransfersAndExecute lets a whitelisted module run unvalidated transferFrom calldata. Lost: 8.72 WETH (~$23.8K) across 466 victims with standing approvals to the Enabler; PoC reproduces 3 victims, 2.3546 WETH (~$6.4K, ~27% of the WETH-leg loss)",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "erc20WithTransfersAndExecute lets a whitelisted module run unvalidated transferFrom calldata. Lost: 8.72 WETH (~$23.8K) across 466 victims with standing approvals to the Enabler; PoC reproduces 3 victims, 2.3546 WETH (~$6.4K, ~27% of the WETH-leg loss)"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The Polygon contract GaslessReservoirEnabler had an authorization flaw: erc20WithTransfersAndExecute → _executeInternal checked module addresses but did not bind ERC-20 transferFrom calls to an authorized asset owner. An attacker could therefore spend victims’ existing allowances on whitelisted tokens (WETH and ZED). About 997 token-holder addresses were drained for roughly $23,000. The proceeds were consolidated and deposited into a bridge on Polygon."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-09/GaslessReservoirEnabler_exp.sol",
+  "sources": [
+    "defihacklabs",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-09/GaslessReservoirEnabler_exp.sol"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/2102227043979313539"
+    }
+  ]
+}

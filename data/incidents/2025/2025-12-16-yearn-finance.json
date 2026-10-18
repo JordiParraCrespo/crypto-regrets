@@ -1,0 +1,98 @@
+{
+  "id": "2025-12-16-yearn-finance",
+  "name": "Yearn Finance",
+  "date": "2025-12-16",
+  "year": 2025,
+  "amountUsd": 300000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Donation Attack",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.45,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.48
+      },
+      {
+        "category": "logic-error",
+        "p": 0.16
+      },
+      {
+        "category": "access-control",
+        "p": 0.08
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.03,
+    "hasRootCause": 0.1
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Deja vu, as Yearn suffers its 2nd hack in 6 weeks and its 4th exploit overall. A recycled 2023 error drained $293k. The archives are fast becoming a shopping list - Yearn x2, Balancer, Abracadabra. Could we have DeFi relic hunters aiming for old code?",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "Deja vu, as Yearn suffers its 2nd hack in 6 weeks and its 4th exploit overall. A recycled 2023 error drained $293k. The archives are fast becoming a shopping list - Yearn x2, Balancer, Abracadabra. Could we have DeFi relic hunters aiming for old code?"
+    },
+    {
+      "source": "SlowMist",
+      "text": "According to monitoring by Paidun, Yearn Finance V1 suffered a hacker attack, resulting in a total loss of approximately USD 300,000. The attacker has converted the stolen funds into 103 ETH, which are currently held at the address: 0x0F21...4066."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On December 11, 2025, Yearn's yETH weighted stableswap pool on Ethereum lost $9M when an attacker manipulated the pool's Newton-Raphson invariant solver, causing excessive LP minting and an infinite mint bug. Exploiting unchecked arithmetic and an ungated bootstrap path, the attacker drained yETH and WETH from both the stableswap and affiliated Curve pool. The yETH pool's invariant solver allowed unchecked integer division and underflow, enabling product terms to be zeroed by extreme imbalanced deposits. The bootstrap initialization path could be re-entered after draining supply to zero, allowing an unchecked underflow to mint an astronomical yETH total.…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x53fe7ef190c34d810c50fb66f0fc65a1ceedc10309cf4b4013d64042a0331156"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Yearn - Rekt IV",
+      "url": "https://rekt.news/yearn-rekt4"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/PeckShieldAlert/status/2001080131360842011"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/yearn-s-9m-invariant-solver-2025-12-11"
+    },
+    {
+      "source": "revertiq",
+      "label": "quillaudits.com",
+      "url": "https://www.quillaudits.com/blog/hack-analysis/yearn-9m-exploit"
+    },
+    {
+      "source": "revertiq",
+      "label": "blocksec.com",
+      "url": "https://blocksec.com/blog/yearn-finance-incident-unsafe-arithmetic-in-the-invariant-solver-earns-its-name"
+    }
+  ]
+}

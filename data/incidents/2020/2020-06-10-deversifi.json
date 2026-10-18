@@ -1,0 +1,58 @@
+{
+  "id": "2020-06-10-deversifi",
+  "name": "DeversiFi",
+  "date": "2020-06-10",
+  "year": 2020,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [],
+  "targetType": null,
+  "category": "logic-error",
+  "technique": "System design defect",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.77).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.77,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.78
+      },
+      {
+        "category": "input-validation",
+        "p": 0.2
+      },
+      {
+        "category": "frontend-infra",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.01,
+    "hasRootCause": 0.8
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "The new version of DeversiFi encountered a vulnerability in less than a week after it was launched. The official said that it would be fixed as soon as possible. The cause of this vulnerability was that a trader tried to submit an order larger than the limit, and the logic of why the system designed order limit is to avoid user's misoperation. After that, the system still repeatedly submitted the order, but it was continuously rejected by the system, which affected the processing of other orders.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The new version of DeversiFi encountered a vulnerability in less than a week after it was launched. The official said that it would be fixed as soon as possible. The cause of this vulnerability was that a trader tried to submit an order larger than the limit, and the logic of why the system designed order limit is to avoid user's misoperation. After that, the system still repeatedly submitted the order, but it was continuously rejected by the system, which affected the processing of other orders."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "slowmist",
+      "label": "quadrigainitiative.com",
+      "url": "https://www.quadrigainitiative.com/hackfraudscam/deversifilaunchexploit.php"
+    }
+  ]
+}

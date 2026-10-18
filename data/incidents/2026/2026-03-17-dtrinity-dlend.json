@@ -1,0 +1,96 @@
+{
+  "id": "2026-03-17-dtrinity-dlend",
+  "name": "dTRINITY dLEND",
+  "date": "2026-03-17",
+  "year": 2026,
+  "amountUsd": 257000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "First Depositor Attack",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.99
+      },
+      {
+        "category": "logic-error",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.06,
+    "stateActor": 0.02,
+    "hasRootCause": 0.47
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "dTRINITY disclosed on X that yesterday, the dLEND deployment on Ethereum suffered its first deposit inflation attack. This incident drained the dUSD liquidity in the lending pool, resulting in approximately $257,000 in bad debt.The protocol has been temporarily paused, and the team is actively working on remediation measures. They have committed to covering 100% of the losses using internal funds. Repayment of the bad debt will begin within 24 hours of the announcement, after which dLEND is expected to resume operations.Deployments of dTRINITY on Fraxtal and Katana were not affected, and user funds remain safe. Each deployment maintains isolated reserv…",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "dTRINITY disclosed on X that yesterday, the dLEND deployment on Ethereum suffered its first deposit inflation attack. This incident drained the dUSD liquidity in the lending pool, resulting in approximately $257,000 in bad debt.The protocol has been temporarily paused, and the team is actively working on remediation measures. They have committed to covering 100% of the losses using internal funds. Repayment of the bad debt will begin within 24 hours of the announcement, after which dLEND is expected to resume operations.Deployments of dTRINITY on Fraxtal and Katana were not affected, and user funds remain safe. Each deployment maintains isolated reserv…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "dTRINITY dLEND was exploited on Ethereum Mainnet on 17 March 2026 through liquidity index manipulation in its cbBTC lending market, enabling an attacker to borrow $257,000 in dUSD against phantom collateral created by flash loan premium dynamics. All bad debt was covered and the contract was paused. A liquidity index inflation bug allowed an attacker to drastically increase the collateral value in the cbBTC reserve by setting totalLiquidity near zero and repeatedly applying flash loan premiums. The vulnerable index update formula lacked a minimum bound and sanity checks, enabling phantom collateral creation."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x8d33d688def03551cb77b0463f55ae5a670f5ebf3bbb5b8aa0e284c040ae7139",
+    "0xbec4c8ae19c44990984fd41dc7dd1c9a22894adccf31ca6b61b5aa084fc33260"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x8d33d688def03551cb77b0463f55ae5a670f5ebf3bbb5b8aa0e284c040ae7139"
+    },
+    {
+      "source": "blocksec",
+      "label": "x.com",
+      "url": "https://x.com/Phalcon_xyz/status/2033927038172860814"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/dTRINITY_DeFi/status/2033934153738010779"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/dtrinity-dlend-2026-03-17"
+    },
+    {
+      "source": "revertiq",
+      "label": "olympix.security",
+      "url": "https://olympix.security/blog/the-257k-dtrinity-loss-and-how-olympix-would-have-prevented-it"
+    },
+    {
+      "source": "revertiq",
+      "label": "darknavy.org",
+      "url": "https://www.darknavy.org/web3/exploits/dtrinity-dlend-index-manipulation/"
+    }
+  ]
+}

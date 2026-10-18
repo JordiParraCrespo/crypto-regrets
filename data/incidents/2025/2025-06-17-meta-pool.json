@@ -1,0 +1,149 @@
+{
+  "id": "2025-06-17-meta-pool",
+  "name": "Meta Pool",
+  "date": "2025-06-17",
+  "year": 2025,
+  "amountUsd": 130000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Infinite Mint",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.86,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.87
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.12
+      },
+      {
+        "category": "logic-error",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.88,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Infinite Mint via unvalidated ERC4626 mint. Lost: 25k USD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Infinite Mint via unvalidated ERC4626 mint. Lost: 25k USD"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The mpETH liquid staking contract exposes a public mint(uint256 shares, address receiver) function with no access control — any address can call it to mint mpETH shares to an arbitrary receiver without depositing any ETH. Normally in an ERC-4626 vault, mint is meant to be paired with an equivalent asset deposit, but mpETH's implementation allowed free share minting. The attacker flashloaned 200 WETH from Balancer, legitimately deposited 107 ETH via depositETH to receive approximately 97 mpETH, then immediately called mint(97 ether, address(this)) to claim a second equal batch of mpETH for free, doubling their mpETH balance. Both batches were then swapped for ETH through the mpETH/ETH pool and Uniswap V3, generating approximately 8.98 ETH of profit per round. The exploit was carried out inside a contract constructor to bypass any Address.isContract() guard, and was repeated approximately 15 times across multiple blocks, draining an estimated $140K total. Vulnerable code snippet: Attack Tx: 0x57ee419a001d85085478d04dd2a73daa91175b1d7c11d8a8fb5622c56fd1fa69 Analysis: Meta Pool Announcement"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Meta Pool's mpETH liquid staking token allowed minting mpETH from ETH at the staking exchange rate (depositETH/mint) while the mpETH ETH liquidity pool and the Uniswap V3 pool priced mpETH higher than the mint cost, creating a risk-free arbitrage that the dedicated swap pool failed to guard against. Using a 200 WETH Balancer flash loan, the attacker converted 107 ETH into ~97 mpETH at the favorable mint rate, then swapped that mpETH back to ETH through the protocol's own swapmpETHforETH pool (and the Uniswap V3 mpETH/WETH pool) at the higher market price, receiving more ETH than was minted. After repaying the flash loan they kept ~9 ETH plus residual mpETH (~$25K reported; ~$27M TVL exposure). The flaw was the absence of slippage/price protection between mpETH minting and the redemption/swap pool, letting mint-and-dump arbitrage drain the pool's ETH liquidity. Vulnerable code snippet: Attack Tx: https://etherscan.io/tx/0x57ee419a001d85085478d04dd2a73daa91175b1d7c11d8a8fb5622c56fd1fa69 Analysis: PeckShield / CoinDesk"
+    },
+    {
+      "source": "SlowMist",
+      "text": "An attacker exploited a vulnerability in the staking contract for Meta Pool, which is a liquid staking project. This allowed them to mint 9,700 mpETH, the project's liquid staking token, which is notionally worth $27 million. However, very low liquidity for the token meant that the attacker was only able to swap 10 ETH (~$25,000) of tokens."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Meta Pool's Ethereum mpETH contract accepted a public mint path that issued unbacked shares on 2025-06-17. The main exploit transaction returned both 8.891824723356455409 ETH and 9,682.71863155466315162 mpETH to the attacker EOA, while thin liquidity kept the realized loss near $130K. The mpETH mint path let a public caller reach share issuance without enforcing a matching ETH or WETH transfer, so the contract created unbacked mpETH whenever the maxMint bound passed."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "A failure to restrict Meta Pool's ERC-4626 mint function allowed attackers to freely mint ~9,700 mpETH tokens (theoretically worth $27M) on June 17, 2025, without depositing collateral. Due to low pool liquidity, only ~52.5 ETH (about $130,000) could be exchanged for real value, limiting actual losses. The Meta Pool staking contract inherited the ERC-4626 standard's mint function without proper override or collateral validation. It allowed public minting of mpETH tokens with no ETH provided, violating the economic invariant that each mpETH must be fully backed."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x57ee419a001d85085478d04dd2a73daa91175b1d7c11d8a8fb5622c56fd1fa69",
+    "0x4858abc51876e1de9f506f34799d4f1852b4255f467b9e1f40951c631ddfa747",
+    "0x691c8070749f00a5a5be3135d3912ff97d0dad05a0fb2b77b235aaa13260f002",
+    "0x4f43fc6d674e85f7d306debb4a3d48e7688c2fe5a6332dd9ad57558a15c86ef9"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-06/MetaPool_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-06/MetaPool_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/peckshield/status/1934895187102454206"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x57ee419a001d85085478d04dd2a73daa91175b1d7c11d8a8fb5622c56fd1fa69"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/meta_pool/status/1935119387486519582"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/business/2025/06/17/liquid-staking-protocol-meta-pool-suffers-usd27m-exploit"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x57ee419a001d85085478d04dd2a73daa91175b1d7c11d8a8fb5622c56fd1fa69"
+    },
+    {
+      "source": "slowmist",
+      "label": "web3isgoinggreat.com",
+      "url": "https://www.web3isgoinggreat.com/?id=meta-pool-exploit"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/metapool-2025-06-17"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/de-fi-rekt-report-june-2025-114-8-million-lost-across-11-exploits"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/how-27m-stolen-tokens-led-to-130k-in-losses-meta-pool-2025-06-19"
+    },
+    {
+      "source": "revertiq",
+      "label": "quillaudits.com",
+      "url": "https://www.quillaudits.com/blog/hack-analysis/meta-pool-hack-analysis"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.solidityscan.com",
+      "url": "https://blog.solidityscan.com/meta-pool-hack-analysis-fef7796f2303/"
+    }
+  ]
+}

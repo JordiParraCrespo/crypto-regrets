@@ -1,0 +1,108 @@
+{
+  "id": "2026-06-20-jaredfromsubway-mev-bot",
+  "name": "JaredFromSubway MEV Bot",
+  "date": "2026-06-20",
+  "year": 2026,
+  "amountUsd": 7500000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "Other",
+  "category": "market-manipulation",
+  "technique": "MEV Bot Drained",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.26,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.3
+      },
+      {
+        "category": "access-control",
+        "p": 0.22
+      },
+      {
+        "category": "market-manipulation",
+        "p": 0.15
+      }
+    ],
+    "flashLoan": 0.18,
+    "stateActor": 0.02,
+    "hasRootCause": 0.1
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "JaredFromSubway MEV bot was exploited, resulting in a loss of 4,424 ETH (~$7.5M). Analysis: https://www.certik.com/blog/jaredfromsubway-mev-bot-incident-analysis Source: https://twitter.com/CertiKAlert/status/2070478621139935316",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "JaredFromSubway MEV bot was exploited, resulting in a loss of 4,424 ETH (~$7.5M). Analysis: https://www.certik.com/blog/jaredfromsubway-mev-bot-incident-analysis Source: https://twitter.com/CertiKAlert/status/2070478621139935316"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The MEV bot operated by JaredFromSubway.eth was drained of approximately $7.5 million. Attackers deployed fake token wrappers and liquidity pools to trick the bot’s automated MEV execution system into granting token approvals to attacker-controlled contracts. They then exploited the unrevoked approvals to transfer out WETH, USDC, and USDT via transferFrom. It was not a traditional phishing attack or a vulnerability in the victim contracts themselves, but a flaw in the bot’s automated approval-generation mechanism. Jared publicly offered a $1 million bounty for full recovery with full confidentiality."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On June 20, 2026, the JaredFromSubway MEV bot on Ethereum was drained of about $7.5 million in WETH, USDC, and USDT. The attacker constructed a honeypot of fake token contracts and pools, tricking the bot into approving tokens without consuming allowances. These unspent approvals were drained in a single sweep. The bot's automated trading logic granted token approvals to untrusted, attacker-controlled wrapper contracts and pools without verifying that allowances were actually consumed after trades. These standing permissions persisted, accumulating open exposures that the attacker harvested in a single batch transaction."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x2be8704f5a59b69e0b71f64aefdb99eb0e8ae9fb3926147c581910d71bcf3e65"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "certik.com",
+      "url": "https://www.certik.com/blog/jaredfromsubway-mev-bot-incident-analysis"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/CertiKAlert/status/2070478621139935316"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/PeckShieldAlert/status/2068457314416545978"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/jaredfromsubway-2026-06-20"
+    },
+    {
+      "source": "revertiq",
+      "label": "blocksec.com",
+      "url": "https://blocksec.com/blog/efi-security-incidents-jaredfromsubway-aztec"
+    },
+    {
+      "source": "revertiq",
+      "label": "blocksec.com",
+      "url": "https://blocksec.com/blog/web3-security-jaredfromsubway-aztec-more"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptotimes.io",
+      "url": "https://www.cryptotimes.io/2026/06/22/ethereum-mev-bot-jaredfromsubway-drained-in-15m-honeypot-attack/"
+    }
+  ]
+}

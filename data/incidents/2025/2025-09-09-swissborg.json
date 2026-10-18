@@ -1,0 +1,120 @@
+{
+  "id": "2025-09-09-swissborg",
+  "name": "SwissBorg",
+  "date": "2025-09-09",
+  "year": 2025,
+  "amountUsd": 41500000,
+  "returnedUsd": null,
+  "chains": [
+    "Solana"
+  ],
+  "targetType": "CEX",
+  "category": "key-compromise",
+  "technique": "API Key Compromised",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "key-compromise",
+    "confidence": 0.97,
+    "top": [
+      {
+        "category": "key-compromise",
+        "p": 0.97
+      },
+      {
+        "category": "frontend-infra",
+        "p": 0.02
+      },
+      {
+        "category": "access-control",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.9
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "Trusted partner Kiln got API-owned, letting hackers plant skeleton keys in SwissBorg 8 days early then drain 192.6K SOL. Eight days of patience, then $41.5 million gone in minutes through compromised withdrawal authority. Trusted partnerships can be expensive trust exercises.",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "Trusted partner Kiln got API-owned, letting hackers plant skeleton keys in SwissBorg 8 days early then drain 192.6K SOL. Eight days of patience, then $41.5 million gone in minutes through compromised withdrawal authority. Trusted partnerships can be expensive trust exercises."
+    },
+    {
+      "source": "SlowMist",
+      "text": "Swiss crypto platform SwissBorg suffered a security incident in which approximately 192,600 SOL (~$41.5M) was stolen on Solana. According to SwissBorg’s official statement, the incident was caused by a compromised partner API, impacting its SOL Earn program."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On September 8, 2025, SwissBorg lost approximately 192,600 SOL (about $41.5M) from its Solana Earn program when an attacker exploited Kiln's compromised API to silently transfer authority over stake accounts, enabling a rapid drain of funds. SwissBorg immediately paused Solana operations and used its treasury to cover user losses. Attackers compromised Kiln’s API infrastructure, allowing them to inject malicious unstaking transactions that reassigned withdrawer authority for SwissBorg-managed Solana stake accounts. The critical failure was in off-chain third-party systems: Kiln’s API lacked anomaly detection for authority changes and permitted blind si…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "SwissBorg lost approximately $41 million in SOL after an attacker compromised the API of staking partner Kiln, allowing hidden changes in stake account withdrawal authority. The attacker reassigned control of multiple accounts, waiting eight days before draining all funds. Attackers gained unauthorized access to Kiln’s API, which handled staking operations for SwissBorg. The API allowed the attacker to embed authority-reassignment instructions in a seemingly routine unstake transaction, transferring withdrawal authority to attacker-controlled addresses without detection. Existing monitoring focused on withdrawal actions failed to detect silent changes to staking account authorities."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Swissborg - Rekt",
+      "url": "https://rekt.news/swissborg-rekt"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/swissborg/status/1965123506477359471"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/explained-the-swissborg-2025-09-15t16-05-17-348000-00-00"
+    },
+    {
+      "source": "revertiq",
+      "label": "halborn.com",
+      "url": "https://www.halborn.com/blog/post/explained-the-swissborg-hack-september-2025"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/defi-rekt-report-q3-2025-434m-lost-across-40-exploits"
+    },
+    {
+      "source": "revertiq",
+      "label": "circuitsecurity.com",
+      "url": "https://www.circuitsecurity.com/blog/swissborg-kiln-exploit-breakdown"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/swissborg-s-41m-2025-09-15"
+    },
+    {
+      "source": "revertiq",
+      "label": "quillaudits.com",
+      "url": "https://www.quillaudits.com/blog/hack-analysis/swissborg-exploit"
+    },
+    {
+      "source": "revertiq",
+      "label": "crypto.news",
+      "url": "https://crypto.news/swissborg-crypto-loses-solana-api-related-hack-2025/"
+    }
+  ]
+}

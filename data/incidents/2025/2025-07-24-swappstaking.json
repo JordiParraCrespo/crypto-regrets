@@ -1,0 +1,72 @@
+{
+  "id": "2025-07-24-swappstaking",
+  "name": "SWAPPStaking",
+  "date": "2025-07-24",
+  "year": 2025,
+  "amountUsd": 32196.28,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Incorrect Reward calculation",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.80). Replaced keyword guess \"logic-error\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.8,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.81
+      },
+      {
+        "category": "logic-error",
+        "p": 0.19
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Incorrect Reward calculation. Lost: $32,196.28",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Incorrect Reward calculation. Lost: $32,196.28"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The SWAPP staking contract (0x245a...3461) lets users deposit tokens (e.g. cUSDC) and later withdraw them, with an emergencyWithdraw escape hatch. The accounting flaw is that emergencyWithdraw returns funds based on the contract's current token balance / the user's recorded balance rather than only the amount the user actually deposited net of others, so an attacker who deposits an amount equal to the entire pool balance can then call emergencyWithdraw and receive the full contract balance (their deposit plus everyone else's). The attacker first initialized all required epochs (manualEpochInit) so deposit would succeed, deposited cUSDC equal to the staking contract's entire cUSDC balance, then called emergencyWithdraw(cUSDC) to pull out the inflated amount, draining the pool of ~$32K. The root cause is incorrect reward/balance accounting in the emergency-withdraw path that fails to isolate per-user principal. Vulnerable code snippet: Attack Tx: https://app.blocksec.com/explorer/tx/eth/0xa02b159fb438c8f0fb2a8d90bc70d8b2273d06b55920b26f637cab072b7a0e3e Analysis: deeberiroz"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xa02b159fb438c8f0fb2a8d90bc70d8b2273d06b55920b26f637cab072b7a0e3e"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-07/SWAPPStaking_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-07/SWAPPStaking_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/deeberiroz/status/1947213692220710950"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/eth/0xa02b159fb438c8f0fb2a8d90bc70d8b2273d06b55920b26f637cab072b7a0e3e"
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "id": "2026-09-19-multiversx",
+  "name": "MultiversX",
+  "date": "2026-09-19",
+  "year": 2026,
+  "amountUsd": 0,
+  "returnedUsd": null,
+  "chains": [
+    "MultiversX"
+  ],
+  "targetType": "Chain",
+  "category": "logic-error",
+  "technique": "VM-level atomicity vulnerability",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "client-bug",
+    "confidence": 0.52,
+    "top": [
+      {
+        "category": "client-bug",
+        "p": 0.55
+      },
+      {
+        "category": "logic-error",
+        "p": 0.33
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.12
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.88
+  },
+  "bridge": false,
+  "language": "Go",
+  "rootCause": "An attacker attempted to exploit a virtual-machine-level atomicity issue on the MultiversX mainnet, causing invalid on-chain state changes. The network was paused to contain further impact. Engineers prepared a fix for validation on a shadow fork and are evaluating a targeted recovery that would keep finalized history and legitimate user state while reversing only incident-related invalid changes. Users were told not to submit or rebroadcast transactions and not to deposit or withdraw EGLD or ESDT via exchanges or bridges.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "An attacker attempted to exploit a virtual-machine-level atomicity issue on the MultiversX mainnet, causing invalid on-chain state changes. The network was paused to contain further impact. Engineers prepared a fix for validation on a shadow fork and are evaluating a targeted recovery that would keep finalized history and legitimate user state while reversing only incident-related invalid changes. Users were told not to submit or rebroadcast transactions and not to deposit or withdraw EGLD or ESDT via exchanges or bridges."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/multiversx/status/2101341591277391953?s=46&t=DLwbX9Nw4QECiyZQ0av-fg"
+    }
+  ]
+}

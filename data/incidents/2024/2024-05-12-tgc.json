@@ -1,0 +1,79 @@
+{
+  "id": "2024-05-12-tgc",
+  "name": "TGC",
+  "date": "2024-05-12",
+  "year": 2024,
+  "amountUsd": 32000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Business Logic Flaw",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.98). Replaced keyword guess \"logic-error\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.98,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.98
+      },
+      {
+        "category": "logic-error",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.06,
+    "stateActor": 0.03,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Business Logic Flaw. Lost: $32K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Business Logic Flaw. Lost: $32K"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The victim contract exposes a public function 0xc5d4d8c9that performs an arbitrage swap and then transfers all acquired BUSD to msg.sender. Due to the lack of access control, any external caller can trigger this function and drain the contract’s TGC tokens through repeated arbitrage execution. Vulnerable code snippet: Attack tx: https://app.blocksec.com/explorer/tx/bsc/0x12e8c24dec36a29fdd9b9d7a8b587b3abd2519089b6438c194e6e5eb357b68d8?line=1 Analysis: The 0xc5d4d8c9 function internally calls: After the swap, all received BUSD is forwarded to msg.sender, regardless of whether they are authorized or not. There is no validation, such as: - Ownership check - Role-based access - whitelisting of arbitrage executors As a result, the TGC token stored in the victim contract could be drained."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xfd5a466f00000000000000000000000000000000000000000000000000000000",
+    "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe0",
+    "0x12e8c24dec36a29fdd9b9d7a8b587b3abd2519089b6438c194e6e5eb357b68d8"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-05/TGC_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-05/TGC_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/ChainAegis/status/1789490986588205529"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/7ec35bee3c086d667f34d87ff850004812905c4d/src/test/2024-05/TGC_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/bsc/0x12e8c24dec36a29fdd9b9d7a8b587b3abd2519089b6438c194e6e5eb357b68d8?line=1"
+    }
+  ]
+}

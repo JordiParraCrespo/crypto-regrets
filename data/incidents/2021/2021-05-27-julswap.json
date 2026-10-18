@@ -1,0 +1,75 @@
+{
+  "id": "2021-05-27-julswap",
+  "name": "JulSwap",
+  "date": "2021-05-27",
+  "year": 2021,
+  "amountUsd": 1500000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Flash Loan",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.84). Replaced keyword guess \"logic-error\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.84,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.85
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.06
+      },
+      {
+        "category": "logic-error",
+        "p": 0.04
+      }
+    ],
+    "flashLoan": 0.92,
+    "stateActor": 0.02,
+    "hasRootCause": 0.67
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Flash Loan. Lost: 1.5M",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Flash Loan. Lost: 1.5M"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The JulSwap of the DEX protocol and the automated liquidity protocol on the BSC chain was attacked by lightning loans, and $JULB fell more than 95% in a short time."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2021-05/JulSwap_exp.sol",
+  "sources": [
+    "defihacklabs",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2021-05/JulSwap_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/tg_cryptos/status/1398090345368408064"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/tg_cryptos/status/1398090345368408064"
+    }
+  ]
+}

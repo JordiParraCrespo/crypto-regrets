@@ -1,0 +1,99 @@
+{
+  "id": "2022-10-26-n00dleswap",
+  "name": "N00dleSwap",
+  "date": "2022-10-26",
+  "year": 2022,
+  "amountUsd": 29000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "reentrancy",
+  "technique": "Reentrancy",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "reentrancy",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "reentrancy",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Reentrancy. Lost: $29k",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Reentrancy. Lost: $29k"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The root cause of this incident is the ERC777 token reentrancy which allows attacker to use old totalSushi and updated totalShares for mint. Vulnerable code snippet: Attack tx: https://etherscan.io/tx/0x8037b3dc0bf9d5d396c10506824096afb8125ea96ada011d35faa89fa3893aea Analysis: The attacker exploits the potential for reentrancy with the ERC777 token (sushi). Within theenter function, the reentrancy can be initiated through the sushi.transferFrom call. In this function, the mint process is invoked first, which updates the total token supply. However, the update of totalSushi occurs after the transferFrom is finished. As a consequence, the calculation result uint256 what = _amount.mul(totalShares).div(totalSushi); becomes magnified due to the unchanged totalSushi value, despite an increase in totalShares. https://twitter.com/BlockSecTeam/status/1584959295829180416 https://twitter.com/AnciliaInc/status/1584955717877784576"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "N00dleSwap, an NFT DEX on Ethereum, was exploited on October 25,26, 2022 via a reentrancy attack. The attacker drained approximately $29,000,$31,000 in ETH, primarily using a malicious contract. The exploit targeted a vulnerable smart contract and triggered repeated withdrawals before updating balances. The vulnerable N00dleSwap contract allowed an externally called function to trigger reentrancy, enabling a malicious contract to repeatedly invoke withdrawal logic and drain funds before balances were properly updated."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x8037b3dc0bf9d5d396c10506824096afb8125ea96ada011d35faa89fa3893aea"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-10/N00d_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-10/N00d_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BlockSecTeam/status/1584959295829180416"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/AnciliaInc/status/1584955717877784576"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x8037b3dc0bf9d5d396c10506824096afb8125ea96ada011d35faa89fa3893aea"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/n00dleswap-2022-10-26"
+    },
+    {
+      "source": "revertiq",
+      "label": "monitoringroom.com",
+      "url": "https://monitoringroom.com/situation/crypto-hack/n00dleswap"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/n00dleswap-hack-2022"
+    }
+  ]
+}

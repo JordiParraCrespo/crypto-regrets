@@ -1,0 +1,81 @@
+{
+  "id": "2023-06-06-vinu",
+  "name": "VINU",
+  "date": "2023-06-06",
+  "year": 2023,
+  "amountUsd": 6000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Price Manipulation",
+  "classificationNote": "Classified by keyword rules from the DeFiHackLabs root-cause title.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.39,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.43
+      },
+      {
+        "category": "input-validation",
+        "p": 0.33
+      },
+      {
+        "category": "access-control",
+        "p": 0.23
+      }
+    ],
+    "flashLoan": 0.08,
+    "stateActor": 0.02,
+    "hasRootCause": 0.93
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Price Manipulation. Lost: ~$6k",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Price Manipulation. Lost: ~$6k"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The exploiter passes an existing Uniswap pool as devaddr allowing him to manipulate the price. Vulnerable code snippet: Attack tx: https://etherscan.io/tx/0xaf46a42fe1ed7193b25c523723dc047c7500e50a00ecb7bbb822d665adb3e1f3 Analysis: https://x.com/hexagate_/status/1666051854386511873?cxt=HHwWgoC24bPVgJ8uAAAA"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xaf46a42fe1ed7193b25c523723dc047c7500e50a00ecb7bbb822d665adb3e1f3"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-06/VINU_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-06/VINU_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/hexagate_/status/1666051854386511873?cxt=HHwWgoC24bPVgJ8uAAAA"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xaf46a42fe1ed7193b25c523723dc047c7500e50a00ecb7bbb822d665adb3e1f3"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/hexagate_/status/1666051854386511873?cxt=HHwWgoC24bPVgJ8uAAAA"
+    }
+  ]
+}

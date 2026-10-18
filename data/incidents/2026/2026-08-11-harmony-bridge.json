@@ -1,0 +1,99 @@
+{
+  "id": "2026-08-11-harmony-bridge",
+  "name": "Harmony Bridge",
+  "date": "2026-08-11",
+  "year": 2026,
+  "amountUsd": 3200000,
+  "returnedUsd": null,
+  "chains": [
+    "Harmony"
+  ],
+  "targetType": "Chain",
+  "category": "bridge-crosschain",
+  "technique": "Bridge Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "bridge-crosschain",
+    "confidence": 0.49,
+    "top": [
+      {
+        "category": "bridge-crosschain",
+        "p": 0.52
+      },
+      {
+        "category": "logic-error",
+        "p": 0.36
+      },
+      {
+        "category": "access-control",
+        "p": 0.03
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": true,
+  "language": "Solidity",
+  "rootCause": "Estimated $3.2 million lost after unauthenticated proof fields let old cross-shard receipts replay, crediting ONE without a source debit. Harmony confirmed an initial 4 billion ONE mint, its broader reconstruction reached 3.01 trillion. A rollback is planned and exchanges remain unnamed.",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "Estimated $3.2 million lost after unauthenticated proof fields let old cross-shard receipts replay, crediting ONE without a source debit. Harmony confirmed an initial 4 billion ONE mint, its broader reconstruction reached 3.01 trillion. A rollback is planned and exchanges remain unnamed."
+    },
+    {
+      "source": "SlowMist",
+      "text": "The Harmony Layer-1 blockchain was exploited, allowing an attacker to unauthorizedly mint approximately 4 billion ONE tokens (about 26% of the supply) via empty blocks and related flaws. Large amounts were quickly funneled to exchanges for sale, causing the token price to crash ~30-40%. The team confirmed the incident, paused the cross-chain bridge, released an emergency validator patch to stop further minting, coordinated with exchanges to freeze funds, and is evaluating a chain rollback."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On August 11, 2026, Harmony's cross-shard protocol was exploited by replaying forged receipt proofs, enabling attackers to mint over two trillion ONE tokens. While the printed token total was massive, the realized market loss was about $3.2 million before Harmony rolled back the affected blocks and deployed a patch to fix the core chain-level logic flaw. The replay-protection check for cross-shard receipts relied on mutable, unauthenticated Merkle proof fields (ShardID, BlockNum) instead of the committee-signed source block header. This allowed attackers to alter valid already-spent receipts to evade single-use enforcement and repeatedly mint new tokens from the same proof."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xf3d4e8b12479ae14cd5eae973a5f61b07d567b142a6ca1385471d5c288242c7f",
+    "0x9a756ef9f95a4c737b3c7e87f04419e9391f226c631ff7b81c401619b0a4d678"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Harmony - Rekt",
+      "url": "https://rekt.news/harmony-rekt2"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/harmonyprotocol/status/2087487246148542527"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/harmony-bridge-2026-08-11"
+    },
+    {
+      "source": "revertiq",
+      "label": "quillaudits.com",
+      "url": "https://www.quillaudits.com/blog/hack-analysis/harmony-receipt-replay-exploit"
+    },
+    {
+      "source": "revertiq",
+      "label": "blocksec.com",
+      "url": "https://blocksec.com/blog/web3-security-harmony-kite-exploits"
+    }
+  ]
+}

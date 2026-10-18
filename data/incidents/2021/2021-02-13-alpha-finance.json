@@ -1,0 +1,125 @@
+{
+  "id": "2021-02-13-alpha-finance",
+  "name": "Alpha Finance",
+  "date": "2021-02-13",
+  "year": 2021,
+  "amountUsd": 37500000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Borrow Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.94,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.94
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.03
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.84,
+    "stateActor": 0.02,
+    "hasRootCause": 0.87
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "The dark arts of DeFi remain the most profitable. ~$37.5M gone in a tale of fake magic, confusion and accusation. The victim has singled out their attacker.",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "The dark arts of DeFi remain the most profitable. ~$37.5M gone in a tale of fake magic, confusion and accusation. The victim has singled out their attacker."
+    },
+    {
+      "source": "SlowMist",
+      "text": "The attacker uses Lightning Loan to Alpha Finance for leveraged lending, and uses Alpha Finance’s own Cream IronBank quota to return the Lightning Loan. In this process, the attacker obtains a large amount of cySUSD by adding liquidity to Cream, allowing the attacker to use it. These cySUSD are further borrowed in Cream Finance. Due to problems with Alpha Finance, both agreements suffered losses at the same time."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On February 13, 2021, Alpha Homora V2 was exploited for approximately $37.5 million by an attacker who used a custom contract to manipulate borrow share calculations in the sUSD pool. The attacker exploited rounding and debt logic flaws in Alpha Homora's integration with Cream Finance's Iron Bank, accumulating debt without valid collateral and draining multiple lending pools. Alpha Homora V2's sUSD lending setup allowed a custom 'spell' contract to exploit a rounding bug in borrow share calculation, combined with improper access to the reserve mechanism and protocol-to-protocol whitelisting. Cream Finance's Iron Bank extension did not enforce per-posit…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Alpha Homora V2 was exploited on February 13, 2021 through a series of manipulated protocol-to-protocol interactions with Cream's Iron Bank, resulting in a net loss of approximately $37,38 million. The attacker used custom spell contracts, rounding errors, and sUSD pool manipulation to borrow far in excess of collateral, draining multiple assets from Iron Bank's lending pools. The Iron Bank interface trusted Alpha Homora V2’s contract as a whitelisted borrower but failed to validate position-level collateral. This, combined with rounding miscalculations and the publicly callable resolveReserve function, allowed the attacker to inflate borrowable debt a…"
+    }
+  ],
+  "audit": "Quantstamp, Peckshield",
+  "txHashes": [
+    "0x2b419173c1f116e94e43afed15a46e3b3a109e118aba166fcca0ba583f686d23",
+    "0xcc57ac77dc3953de7832162ea4cd925970e064ead3f6861ee40076aca8e7e571",
+    "0x745ddedf268f60ea4a038991d46b33b7a1d4e5a9ff2767cdba2d3af69f43eb1b",
+    "0x4441eefe434fbef9d9b3acb169e35eb7b3958763b74c5617b39034decd4dd3ad",
+    "0xf31ee9d9e83db3592601b854fe4f8b872cecd0ea2a3247c475eea8062a20dd41",
+    "0x98f623af655f1e27e1c04ffe0bc8c9bbdb35d39999913bedfe712d4058c67c0e",
+    "0x2e387620bb31c067efc878346742637d650843210596e770d4e2d601de5409e3",
+    "0x64de824a7aa339ff41b1487194ca634a9ce35a32c65f4e78eb3893cc183532a4",
+    "0x7eb2436eedd39c8865fcc1e51ae4a245e89765f4c64a13200c623f676b3912f9"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Alpha Finance - REKT",
+      "url": "https://rekt.news/alpha-finance-rekt"
+    },
+    {
+      "source": "slowmist",
+      "label": "medium.com",
+      "url": "https://medium.com/cream-finance/alpha-homora-v2-exploit-post-mortem-344d277bdea6"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/alpha-finance-lab-cream-finance-2021-02-13"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.alphaventuredao.io",
+      "url": "https://blog.alphaventuredao.io/alpha-homora-v2-post-mortem/"
+    },
+    {
+      "source": "revertiq",
+      "label": "blockchainbreaches.com",
+      "url": "https://blockchainbreaches.com/en/victim/alpha-finance-iron-bank"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/explained-the-alpha-homora-defi-2021-02-13"
+    },
+    {
+      "source": "revertiq",
+      "label": "halborn.com",
+      "url": "https://www.halborn.com/blog/post/explained-the-alpha-homora-defi-hack-feb-2021"
+    }
+  ]
+}

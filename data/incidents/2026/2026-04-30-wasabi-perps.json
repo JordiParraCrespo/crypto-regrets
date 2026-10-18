@@ -1,0 +1,125 @@
+{
+  "id": "2026-04-30-wasabi-perps",
+  "name": "Wasabi Perps",
+  "date": "2026-04-30",
+  "year": 2026,
+  "amountUsd": 5500000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum",
+    "Base",
+    "Berachain",
+    "Blast"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "key-compromise",
+  "technique": "Deployer Key Compromised",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "key-compromise",
+    "confidence": 0.85,
+    "top": [
+      {
+        "category": "key-compromise",
+        "p": 0.86
+      },
+      {
+        "category": "access-control",
+        "p": 0.13
+      },
+      {
+        "category": "governance",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Admin key compromised, UUPS upgrades pushed to over a dozen vaults across four chains - Wasabi Protocol lost $5.9 million before most users saw a single alert. No multisig. No timelock. April 2026 was DeFi's worst month on record. Are we April Fools?",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "Admin key compromised, UUPS upgrades pushed to over a dozen vaults across four chains - Wasabi Protocol lost $5.9 million before most users saw a single alert. No multisig. No timelock. April 2026 was DeFi's worst month on record. Are we April Fools?"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The Wasabi Protocol deployer wallet (wasabideployer.eth) held unchecked ADMIN_ROLE across every upgradeable vault the protocol had ever deployed on Ethereum, Base, Blast, and Berachain — with no multisig requirement and no timelock. When an attacker compromised this single EOA private key, they used it to assign ADMIN_ROLE to a malicious smart contract they controlled. That contract then performed UUPS (Universal Upgradeable Proxy Standard) upgrades to Wasabi's vault contracts across all four chains simultaneously, replacing legitimate vault logic with malicious code that immediately drained all deposited assets. The drain — extracting USDC, WETH, REKT, PEPE, cbBTC, USDB, WBERA, and HONEY totaling ~$5.9M — completed in under three minutes. The absence of a multisig meant a single key was the entire security boundary; the absence of a timelock on upgrades eliminated any opportunity to detect and block the malicious changes before they executed. Stolen assets were bridged to Ethereum and partially routed through Tornado Cash. Attack Tx: 0x10b371603d42a672b0bffda526af8400885c65fa7b541678f2bd8dad6fcb7e40 Analysis: Wasabi Protocol on X"
+    },
+    {
+      "source": "SlowMist",
+      "text": "On April 30, 2026 (UTC), Wasabi Protocol experienced a security incident. Attackers exploited an analytics surface (Spring Boot Actuator heap dump) on the project’s AWS infrastructure, which leaked credentials and ultimately allowed them to obtain the private keys controlling the EVM smart contracts. The attackers then launched a withdrawal attack, draining $4.8 million in user funds from the listed EVM vaults and an additional $900,000 from Wasabi’s treasury. The breach was limited to EVM deployments on Ethereum Mainnet, Base, Blast, and Berachain. The Solana deployment and Prop AMM were completely unaffected. The team contained the attack within the…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On April 30, 2026, Wasabi Protocol lost about $5.7M after attackers compromised its deployer admin key, gaining unrestricted upgrade and withdrawal privileges across multiple EVM chains. The absence of multisig and timelock protections allowed rapid contract upgrades and draining of user vaults and protocol assets. The Wasabi admin/deployer key (wasabideployer.eth), controlling privileged contract upgrades and withdrawals, was compromised. No multisig or timelock protected the admin role, enabling immediate UUPS proxy upgrades and funds drainage once a single key was breached. The exact infrastructure/key extraction path remains undisclosed."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x10b371603d42a672b0bffda526af8400885c65fa7b541678f2bd8dad6fcb7e40",
+    "0xcd77423f1bfa362c43f98356360c1f6c6e5fe989f18036e874884e9ad4a70116",
+    "0xaf0f58cb8e11e5c22189181f703d4ba269cdba9a42ec5659cc7c7544e52850c6",
+    "0xf4934fe89ea19a9d5428c64b41319a33804e8158d84c38ad4df6885c270dbf5e"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Wasabi Protocol - Rekt",
+      "url": "https://rekt.news/wasabi-protocol-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "berascan.com",
+      "url": "https://berascan.com/tx/0x10b371603d42a672b0bffda526af8400885c65fa7b541678f2bd8dad6fcb7e40"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/wasabi_protocol/status/2052856772717682724"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x10b371603d42a672b0bffda526af8400885c65fa7b541678f2bd8dad6fcb7e40"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/wasabi-protocol-2026-04-30"
+    },
+    {
+      "source": "revertiq",
+      "label": "blocksec.com",
+      "url": "https://blocksec.com/blog/weekly-web3-security-roundup-2026-05-10"
+    },
+    {
+      "source": "revertiq",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/tech/2026/04/30/wasabi-protocol-drained-for-usd4-5-million-in-apparent-admin-key-compromise"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptotimes.io",
+      "url": "https://www.cryptotimes.io/2026/05/04/wasabi-protocol-update-evm-breach-triggers-lockdown-and-probe"
+    }
+  ]
+}

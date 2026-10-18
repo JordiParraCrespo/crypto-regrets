@@ -1,0 +1,77 @@
+{
+  "id": "2024-06-08-yystoken",
+  "name": "YYStoken",
+  "date": "2024-06-08",
+  "year": 2024,
+  "amountUsd": 28000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Business Logic Flaw",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.81).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.81,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.8200000000000001
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.18
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Business Logic Flaw. Lost: $28K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Business Logic Flaw. Lost: $28K"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Root cause is the same as STM token exploit, wrong calculation of liquidity amount to remove in \"sell\" function. Vulnerable code snippet: https://bscscan.com/address/0xcC0F0f41f4c4c17493517dd6c6d9DD1aDb134Fc9#code Attack tx: https://app.blocksec.com/explorer/tx/bsc/0x397a09af6494c0bfcd89e010f5dd65d90f3ee1cf1ff813ce5b0c1d42a1c8dec9 Analysis: It's similar to STM token, used \"sell\" function to drain pool. He swapped large amount of USDT to YYS, and in first \"sell\" function, he could remove some liquidity with a few YYS tokens, decrease k(x*y) value. Then swapped YYS to USDT https://www.notion.so"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x397a09af6494c0bfcd89e010f5dd65d90f3ee1cf1ff813ce5b0c1d42a1c8dec9"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-06/YYS_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-06/YYS_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0xcC0F0f41f4c4c17493517dd6c6d9DD1aDb134Fc9#code"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/bsc/0x397a09af6494c0bfcd89e010f5dd65d90f3ee1cf1ff813ce5b0c1d42a1c8dec9"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "notion.so",
+      "url": "https://www.notion.so"
+    }
+  ]
+}

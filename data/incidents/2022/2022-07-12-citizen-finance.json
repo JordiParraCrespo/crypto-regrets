@@ -1,0 +1,82 @@
+{
+  "id": "2022-07-12-citizen-finance",
+  "name": "Citizen Finance",
+  "date": "2022-07-12",
+  "year": 2022,
+  "amountUsd": 94300,
+  "returnedUsd": null,
+  "chains": [
+    "BSC",
+    "Polygon"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "key-compromise",
+  "technique": "Private Key Compromised",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "key-compromise",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "key-compromise",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.85
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Multi-chain NFT protocol Citizen Finance claims to have been attacked by an outside party that gained access to the private keys of BNB and the Polygon chain. The attackers used their access to transfer 244 BNB (~$55,000), 57,637 MATIC (~$32,300), and 7,000 USDC, for a total of about $94,300.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Multi-chain NFT protocol Citizen Finance claims to have been attacked by an outside party that gained access to the private keys of BNB and the Polygon chain. The attackers used their access to transfer 244 BNB (~$55,000), 57,637 MATIC (~$32,300), and 7,000 USDC, for a total of about $94,300."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Citizen Finance lost about $94,300 on 2022-07-11 UTC after a compromised wallet key moved funds from BNB Chain and Polygon wallets. The available evidence points to a private key compromise rather than a contract exploit. A private key that controlled Citizen Finance wallet access on BNB Chain and Polygon was compromised, allowing unauthorized withdrawals from both deployments. The public record does not establish how the key was obtained."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x3fe2204878587a18dcfd6001429f92282ad5960cb87fa54f6d429920b288e4f7",
+    "0xcf24e27679c25e1454a2532811c871ec0618660ee84c21cdec2c815966403ab0"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/citizen_finance/status/1546665208495673349"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/citizen-finance-2022-07-12"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/citizen-finance-hack-2022"
+    },
+    {
+      "source": "revertiq",
+      "label": "web3isgoinggreat.com",
+      "url": "https://www.web3isgoinggreat.com/?id=citizen-finance-claims-to-have-been-hacked-for-around-100000"
+    }
+  ]
+}

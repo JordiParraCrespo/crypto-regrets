@@ -1,0 +1,58 @@
+{
+  "id": "2022-03-17-ape",
+  "name": "APE",
+  "date": "2022-03-17",
+  "year": 2022,
+  "amountUsd": 500000,
+  "returnedUsd": null,
+  "chains": [],
+  "targetType": null,
+  "category": "logic-error",
+  "technique": "Airdrop Mechanism Vulnerability",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.96).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.96,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.96
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.02
+      },
+      {
+        "category": "access-control",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.95,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "According to a report by Twitter user Will Sheehan, the arbitrage bot took out more than 6w APE Coins (worth $8 each) through flash loans. After analysis, it was found that this was related to a loophole in the airdrop mechanism of APE Coin. Specifically, whether APE Coin can be airdropped depends on whether a user holds the instantaneous state of BYAC NFT, and this instantaneous state attacker can manipulate by borrowing a flash loan and then redeeming to obtain BYAC NFT. The attacker first borrows BYAC Token through flash loan, and then redeems to obtain BYAC NFT. Then use these NFTs to claim the airdropped APE, and finally use the BYAC NFT mint to o…",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "According to a report by Twitter user Will Sheehan, the arbitrage bot took out more than 6w APE Coins (worth $8 each) through flash loans. After analysis, it was found that this was related to a loophole in the airdrop mechanism of APE Coin. Specifically, whether APE Coin can be airdropped depends on whether a user holds the instantaneous state of BYAC NFT, and this instantaneous state attacker can manipulate by borrowing a flash loan and then redeeming to obtain BYAC NFT. The attacker first borrows BYAC Token through flash loan, and then redeems to obtain BYAC NFT. Then use these NFTs to claim the airdropped APE, and finally use the BYAC NFT mint to o…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/wilburforce_/status/1504437189979119622"
+    }
+  ]
+}

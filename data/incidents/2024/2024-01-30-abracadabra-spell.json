@@ -1,0 +1,99 @@
+{
+  "id": "2024-01-30-abracadabra-spell",
+  "name": "Abracadabra Spell",
+  "date": "2024-01-30",
+  "year": 2024,
+  "amountUsd": 6500000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Rounding Error",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.86,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.87
+      },
+      {
+        "category": "logic-error",
+        "p": 0.1
+      },
+      {
+        "category": "access-control",
+        "p": 0.03
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.86
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "On-chain black magic led to two of Abracadabra’s cauldrons springing a leak yesterday. $6.5M gone and MIM losing its magic... What dark arts are needed for a full repeg?",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "On-chain black magic led to two of Abracadabra’s cauldrons springing a leak yesterday. $6.5M gone and MIM losing its magic... What dark arts are needed for a full repeg?"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The DeFi protocol Abracadabra Money (MIM_Spell) has fallen victim to an attack, resulting in approximately $6.5 million in losses. Following the attack, Abracadabra.Money (MIM_Spell) provided an update on the situation via Twitter, stating that their technical team identified the vulnerability. Preliminary findings indicate the exploit targeted specific Cauldrons V3 & V4, allowing unauthorized MIM borrowing. They’ve mitigated the issue by setting borrowing limits to zero for these cauldrons."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On January 30, 2024, Abracadabra Money's Cauldron V4 contracts on Ethereum Mainnet were exploited via a rounding-error bug in debt accounting. The attacker manipulated debt share calculations, draining over $6.5M in MIM and ETH by enabling unbacked borrowing. The protocol’s stablecoin MIM temporarily lost its peg, prompting mitigation by the DAO. A rounding error in Cauldron V4's debt-share and total debt accounting allowed a mismatch between 'base' (borrow shares) and 'elastic' (real asset debt). This enabled solvency checks to pass even for uncollateralized borrows, facilitating extraction of unbacked assets."
+    }
+  ],
+  "audit": "Unaudited",
+  "txHashes": [
+    "0x26a83db7e28838dd9fee6fb7314ae58dcc6aee9a20bf224c386ff5e80f7e4cf2",
+    "0xa1f8e3c30917f33956ef0a96417987a07a70509a2e48b6426b65906462faad6b"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Abracadabra - REKT",
+      "url": "https://rekt.news/abra-rekt"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/MIM_Spell/status/1752368458715607261"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/abracadabra-spell-2024-01-30"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "theblock.co",
+      "url": "https://www.theblock.co/amp/post/275072/abracadabra-finance-drained-of-estimated-6-4-million-in-apparent-security-attack"
+    }
+  ]
+}

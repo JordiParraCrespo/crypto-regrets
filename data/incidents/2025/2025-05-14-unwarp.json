@@ -1,0 +1,68 @@
+{
+  "id": "2025-05-14-unwarp",
+  "name": "Unwarp",
+  "date": "2025-05-14",
+  "year": 2025,
+  "amountUsd": 9000,
+  "returnedUsd": null,
+  "chains": [
+    "Base"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "lack-of-access-control",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 1.00). Replaced keyword guess \"arbitrary-call\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.98,
+    "stateActor": 0.01,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "lack-of-access-control. Lost: 9K USD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "lack-of-access-control. Lost: 9K USD"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The vulnerable contract exposed an unwrapWETH(uint256, address) function with no access control, which would unwrap WETH held by the contract and send the resulting native ETH to an arbitrary caller-specified recipient. Using a Balancer flashloan of ~100.85 WETH, the attacker transferred the WETH into the vulnerable contract, then called unwrapWETH(...) directing the unwrapped ETH (including the contract's own pre-existing WETH balance) to itself, re-wrapped exactly the borrowed amount and repaid the flashloan, keeping the difference (~9k USDT worth). Root cause: missing authorization on a function that releases funds to an attacker-chosen address. Vulnerable code snippet: Attack Tx: https://app.blocksec.com/explorer/tx/base/0xac6f716c57bbb1a4c1e92f0a9531019ea2ecfcaea67794bbd27115d400ae9b41 Analysis: Vulnerable contract"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xac6f716c57bbb1a4c1e92f0a9531019ea2ecfcaea67794bbd27115d400ae9b41"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-05/Unwarp_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-05/Unwarp_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/base/0xac6f716c57bbb1a4c1e92f0a9531019ea2ecfcaea67794bbd27115d400ae9b41"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "basescan.org",
+      "url": "https://basescan.org/address/0x8befc1d90d03011a7d0b35b3a00ec50f8e014802"
+    }
+  ]
+}

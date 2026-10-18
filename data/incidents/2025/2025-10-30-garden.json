@@ -1,0 +1,122 @@
+{
+  "id": "2025-10-30-garden",
+  "name": "Garden",
+  "date": "2025-10-30",
+  "year": 2025,
+  "amountUsd": 11400000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum",
+    "Arbitrum",
+    "Base",
+    "Solana"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "key-compromise",
+  "technique": "Key Leaked via Infrastructure",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "key-compromise",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "key-compromise",
+        "p": 0.99
+      },
+      {
+        "category": "frontend-infra",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.81,
+    "hasRootCause": 0.94
+  },
+  "bridge": true,
+  "language": null,
+  "rootCause": "Garden Finance, a cross-chain Bitcoin bridge protocol, lost approximately $11 million after the private key controlling one of its solver accounts was compromised across multiple chains, including Arbitrum, Ethereum, and others. In Garden's architecture, solvers hold their own capital to fulfill cross-chain orders rapidly. The compromised solver address had received its initial gas funding through addresses linked to the Ren protocol and, per on-chain evidence surfaced by ZachXBT and researcher Tanuki42, appeared to be operated by a Garden team member rather than a fully independent third party — contradicting the team's initial framing of an external actor. The attacker drained all solver-held funds before Garden could respond; user-deposited funds were reportedly unaffected. The exploit was attributed by ZachXBT to a DPRK-affiliated threat group known as DangerousPassword. Garden sent an on-chain message offering a 10% white-hat bounty conditional on the attacker returning the funds and explaining the attack vector. Attack Tx: 0x71907833b95cbd129a3c18e9f73bfe33cdd37767b8c7ea373450fdb78a6f3433 Analysis: Attackers dig up $11M in Garden Finance crypto exploit – The Register Crypto bridge Garden Finance suffers $11M hack via compromised solver – CryptoBriefing",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Garden Finance, a cross-chain Bitcoin bridge protocol, lost approximately $11 million after the private key controlling one of its solver accounts was compromised across multiple chains, including Arbitrum, Ethereum, and others. In Garden's architecture, solvers hold their own capital to fulfill cross-chain orders rapidly. The compromised solver address had received its initial gas funding through addresses linked to the Ren protocol and, per on-chain evidence surfaced by ZachXBT and researcher Tanuki42, appeared to be operated by a Garden team member rather than a fully independent third party — contradicting the team's initial framing of an external actor. The attacker drained all solver-held funds before Garden could respond; user-deposited funds were reportedly unaffected. The exploit was attributed by ZachXBT to a DPRK-affiliated threat group known as DangerousPassword. Garden sent an on-chain message offering a 10% white-hat bounty conditional on the attacker returning the funds and explaining the attack vector. Attack Tx: 0x71907833b95cbd129a3c18e9f73bfe33cdd37767b8c7ea373450fdb78a6f3433 Analysis: Attackers dig up $11M in Garden Finance crypto exploit – The Register Crypto bridge Garden Finance suffers $11M hack via compromised solver – CryptoBriefing"
+    },
+    {
+      "source": "SlowMist",
+      "text": "According to CertiK Alert, the Garden attacker has transferred 501 BNB and 1,910 ETH (worth approximately $6.65 million) to Tornado Cash.The address starting with 0x98BC still holds around $910,000 in assets.It is reported that Garden Finance suffered an attack on October 31, resulting in a loss of about $10.8 million, after its solver was compromised."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On October 30, 2025, a private key leak from an independent solver's server led to the draining of approximately $11.4 million from Garden Finance solver balances across Ethereum Mainnet, Arbitrum, Base, and Solana. Protocol contracts and user funds were not compromised. The attacker gained unauthorized SSH access to the solver's server, extracted the hot-wallet private key from an environment variable, and used it to sweep the solver's assets across multiple blockchains. The vulnerability was limited to the solver's off-chain infrastructure."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x71907833b95cbd129a3c18e9f73bfe33cdd37767b8c7ea373450fdb78a6f3433",
+    "0x51bf1c3a4bdcc6ba8d8eca78c43d92105c457646fa0e51bd8315ffd2728c5d10",
+    "0x3b9d8f79b29ef2b179e9074f9734d6d84d6a782d71b01d1126cd8433098c6905",
+    "0x84b6c0e96a5cb5966af95290ce7487645f9ebc9780be5f60cc89bb0402674a6a",
+    "0xfbc4fe656ce9417ab9b4633bccfd2e68dc7240f28dbdc172082cadd83165b698",
+    "0xf3973c54bba92d12cb637fa987d3fcd9315166647ab66cd6478e58c00f5dc431",
+    "0x7d2cfdbcf2cd849dd9e9334ff0c71e853e31fa74a22b4e906de20df507069bac",
+    "0x4f5864279d045c2995e8c059feb31236fad6d50a5f7f412e886504ec4f1712d6",
+    "0x43f49a7a805ac644b1c1ba9be9d2fa9b09e9c537172530301a902471125a796e",
+    "0x4686d76fe35ccf0a17b1b4c0c00c52f2dc84f3da563dd081dba5e0f3e57b3012"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "arbiscan.io",
+      "url": "https://arbiscan.io/tx/0x71907833b95cbd129a3c18e9f73bfe33cdd37767b8c7ea373450fdb78a6f3433"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "theregister.com",
+      "url": "https://www.theregister.com/2025/10/31/attackers_dig_up_11m_in/"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "cryptobriefing.com",
+      "url": "https://cryptobriefing.com/garden-finance-bridge-11m-hack/"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x71907833b95cbd129a3c18e9f73bfe33cdd37767b8c7ea373450fdb78a6f3433"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/jzgulati/status/1984127214959624421"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/garden-2025-10-30"
+    },
+    {
+      "source": "revertiq",
+      "label": "garden.finance",
+      "url": "https://garden.finance/blog/garden-incident-report-october-30-2025"
+    },
+    {
+      "source": "revertiq",
+      "label": "itokenly.com",
+      "url": "https://itokenly.com/hacks/garden-finance"
+    }
+  ]
+}

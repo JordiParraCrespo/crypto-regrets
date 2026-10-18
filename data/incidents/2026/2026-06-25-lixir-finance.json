@@ -1,0 +1,90 @@
+{
+  "id": "2026-06-25-lixir-finance",
+  "name": "Lixir Finance",
+  "date": "2026-06-25",
+  "year": 2026,
+  "amountUsd": 12300,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "signature-crypto",
+  "technique": "Signature Verification Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "signature-crypto",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "signature-crypto",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.56
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Broken Signature Verification. Lost: 2.60 ETH, 4,477.72 USDC, 3,609.95 USDT, 24,182.56 LIX",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Broken Signature Verification. Lost: 2.60 ETH, 4,477.72 USDC, 3,609.95 USDT, 24,182.56 LIX"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Lixir Finance's vault tokens (lv_* wrappers over Uniswap V3 LP positions) were exploited due to a broken EIP-2612 permit signature verification. The attacker reused a single dummy signature to bypass checks, granting approval to their contract over dozens of holders' tokens, then drained underlying assets (WETH, USDC, USDT, LIX) via withdrawFrom/withdrawETHFrom, resulting in ~$12,300 loss."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 25 June 2026, Lixir Finance's Ethereum vault system was exploited via a forged permit signature vulnerability. The attacker reused a single EIP-2612 signature to gain fraudulent approvals, draining over $12,300 in USDC, USDT, ETH, and LIX from multiple vault-share contracts. Lixir's custom permit implementation failed to check that the recovered signer matched the provided owner. This enabled arbitrary approvals via forged signatures, allowing unauthorized withdrawal of vault-share assets."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x17026faca0b8e4cb7531e4fb277c390eb165e81229628e0192923ad1d90a41da"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-06/LixirPermitDrain_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-06/LixirPermitDrain_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/DefimonAlerts/status/2070362661691207935"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/lixir-finance-2026-06-25"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/lixir-finance-hack-2026"
+    },
+    {
+      "source": "revertiq",
+      "label": "darknavy.org",
+      "url": "https://www.darknavy.org/web3/exploits/lixir-vault-forged-permit-approval-drain/"
+    }
+  ]
+}

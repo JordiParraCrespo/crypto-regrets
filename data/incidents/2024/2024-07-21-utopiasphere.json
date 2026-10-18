@@ -1,0 +1,78 @@
+{
+  "id": "2024-07-21-utopiasphere",
+  "name": "UtopiaSphere",
+  "date": "2024-07-21",
+  "year": 2024,
+  "amountUsd": 521000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "Token",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.72,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.74
+      },
+      {
+        "category": "logic-error",
+        "p": 0.25
+      },
+      {
+        "category": "market-manipulation",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.97,
+    "stateActor": 0.01,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "UtopiaSphere on BNB Chain was exploited on 21 July 2024 for about $521,000. The attacker manipulated the UPS/USDT price using flash loans and the protocol's swapBurn() mechanism, draining USDT liquidity through an engineered reserve imbalance. The vulnerable swapBurn() mechanism allowed an attacker to burn nearly all UPS tokens in the UPS/USDT pool, leaving 1 wei of UPS and leveraging the distorted reserve ratio to extract disproportionate amounts of USDT. Price was derived from the manipulable pool reserves without additional resistance or sanity checks.",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "UtopiaSphere on BNB Chain was exploited on 21 July 2024 for about $521,000. The attacker manipulated the UPS/USDT price using flash loans and the protocol's swapBurn() mechanism, draining USDT liquidity through an engineered reserve imbalance. The vulnerable swapBurn() mechanism allowed an attacker to burn nearly all UPS tokens in the UPS/USDT pool, leaving 1 wei of UPS and leveraging the distorted reserve ratio to extract disproportionate amounts of USDT. Price was derived from the manipulable pool reserves without additional resistance or sanity checks."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x1ddf415a4b18d25e87459ad1416077fe7398d5504171d4ca36e757b1a889f604"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/utopiasphere-2024-07-21"
+    },
+    {
+      "source": "revertiq",
+      "label": "certik.com",
+      "url": "https://www.certik.com/blog/utopiasphere-incident-analysis"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/utopiasphere-hack-2024"
+    }
+  ]
+}

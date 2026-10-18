@@ -1,0 +1,128 @@
+{
+  "id": "2023-07-07-multichain",
+  "name": "Multichain",
+  "date": "2023-07-07",
+  "year": 2023,
+  "amountUsd": 126000000,
+  "returnedUsd": null,
+  "chains": [
+    "Moonriver",
+    "BSC",
+    "Fantom"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "key-compromise",
+  "technique": "Validator Key Compromised",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "key-compromise",
+    "confidence": 0.93,
+    "top": [
+      {
+        "category": "key-compromise",
+        "p": 0.93
+      },
+      {
+        "category": "bridge-crosschain",
+        "p": 0.05
+      },
+      {
+        "category": "access-control",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.03,
+    "hasRootCause": 0.19
+  },
+  "bridge": true,
+  "language": null,
+  "rootCause": "Multi-rekt. Multichain was drained yesterday for a total of $126M of Fantom and Moonriver backing. The project has quite the record… How many more victims will lose out to these ‘experiments’?",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "Multi-rekt. Multichain was drained yesterday for a total of $126M of Fantom and Moonriver backing. The project has quite the record… How many more victims will lose out to these ‘experiments’?"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Around $126 million worth of tokens have been withdrawn from the Multichain bridge on the Fantom network. 7,200 WETH (approximately $13.7 million) and $4 million in stablecoin DAI (the above four tokens are worth more than $100 million), which also includes other tokens such as Chainlink, YFI, Wootrade Network, and UniDex’s total supply nearly a quarter. Assets also appear to be moving on Multichain’s Moonriver bridge, including 4.8 million USDC and 1 million USDT. Dogechain also experienced abnormal fund flows, and at least 660,000 USDC were sent to the same wallet as Moonriver's fund flows. Multichain tweeted that the “team is unsure of what happened…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Multichain suffered catastrophic asset loss in July 2023 after unauthorized withdrawals followed the CEO’s detention, exposing the centralization risk of its off-chain key custody. At least $125m to $210m was drained from bridge contracts, with recovery limited to a partial asset freeze and liquidation proceedings. Multichain's bridge depended on a centralized MPC key infrastructure, operationally controlled by the CEO. When access to the keys was lost following the CEO's detention, unauthorized parties signed valid withdrawal messages, draining assets from bridge contracts on multiple chains."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On July 6, 2023, Multichain's bridge contracts on Ethereum Mainnet and other chains experienced abnormal outflows exceeding $125 million. The loss was traced to compromised centralized custody of MPC keys, not a smart contract bug, allowing unauthorized withdrawals to unknown addresses. Centralized custody of Multichain's bridge MPC keys enabled unauthorized withdrawals once control was lost, likely following the CEO's arrest. The protocol had a single-point-of-failure in its off-chain key management, with no contract-level protection against abnormal signatures."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x448f2a6a6c071cdce254937e06305a033538e1aeb9339227d0e59e0458e6185c",
+    "0xda80a8c8d5a8fdf0208a6fd01c39af018e400763b1d08f3543f52353345fe62e",
+    "0xbd29fe07555c28527fb0207aa0ac2b67d4afef0426793c35b76d005613477fc4",
+    "0xb9f52d5eb0d67c1038debe8e0f60ed265bd4937db0cfe5ef15b3f1fa28f31f8d",
+    "0x6bbc867004b4c6650f2b55131955075c4109c32138753147eb142fa431cc84c9"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Multichain - REKT 2",
+      "url": "https://rekt.news/multichain-rekt2"
+    },
+    {
+      "source": "slowmist",
+      "label": "theblock.co",
+      "url": "https://www.theblock.co/post/238206/tens-of-millions-of-dollars-withdrawn-from-multichain-on-fantom-in-possible-exploit"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/multichain-231-1m-2023-07-10"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/de-fi-rekt-report-486m-funds-lost-in-july-2023-top-defi-scams-and-exploits"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractaudit.com",
+      "url": "https://www.smartcontractaudit.com/guides/multichain-collapse-bridge-risk"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptonews.com",
+      "url": "https://cryptonews.com/news/multichain-liquidators-win-ruling-freeze-63m-stolen-usdc/"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/multichain-2023-02-15"
+    },
+    {
+      "source": "revertiq",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/business/2023/07/06/multichain-bridges-experience-unannounced-outflows-of-over-130m-in-crypto"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainscorelabs.com",
+      "url": "https://chainscorelabs.com/blog/security-post-mortems-hacks-and-exploits/formal-verification-case-studies/why-the-multichain-exploit-points-to-a-crisis-in-cross-chain-assumptions"
+    }
+  ]
+}

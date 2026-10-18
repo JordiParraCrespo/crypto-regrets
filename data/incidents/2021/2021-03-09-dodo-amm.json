@@ -1,0 +1,134 @@
+{
+  "id": "2021-03-09-dodo-amm",
+  "name": "DODO AMM",
+  "date": "2021-03-09",
+  "year": 2021,
+  "amountUsd": 3800000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.99
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.94,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Flashloan Attack. Lost: $700,000",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Flashloan Attack. Lost: $700,000"
+    },
+    {
+      "source": "REKT",
+      "text": "Is it dead or has it just gone to bed? DODO was hacked for $2 million using a fake token attack, but the motive remains unclear. One thing’s for sure, whether hat white or black - only $2 million? Must try harder."
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Incorrect access control Vulnerable code snippet: https://etherscan.io/address/0x051ebd717311350f1684f89335bed4abd083a2b6#code#L1419 The init() function in the pool creation contract could be called multiple times, leading to repeated initializations. The attackers took advantage of this and borrowed out the tokens in the liquidity pools using flash loans. The pool contract was then initialized again and counterfeit tokens created by the attackers were returned in lieu of the original tokens, bypassing the flash loan return check logic."
+    },
+    {
+      "source": "SlowMist",
+      "text": "The decentralized exchange DODO announced the progress of the attack on some fund pools. The main reason for this attack was that the crowdfunding fund pool contract initialization function did not prevent repeated calls, which led to hackers reinitializing the contract and completing the attack through lightning loans. In this incident, there were three participants, a hacker and two trading robots. A total of approximately US$3.8 million worth of funds were attacked. At present, the owners of the two trading robots have returned approximately US$3.1 million in tokens. In addition, funds worth approximately US$200,000 are frozen on the centralized exc…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On March 8, 2021, DODO’s Crowdpooling contracts on Ethereum were exploited via a logic flaw allowing repeated initialization with attacker-controlled tokens, enabling asset drainage through flash loans. Losses reached up to $3.8M before some recovery was negotiated. The DODO Crowdpooling contract's init() function lacked a one-time initialization guard. Attackers could reinitialize pools with counterfeit tokens, reset reserves, drain genuine tokens via flash loans, and in some cases restore the original state."
+    }
+  ],
+  "audit": "Unaudited",
+  "txHashes": [
+    "0x8b73c3c69bb8fe3d512ecc4cf759cc79239f7b179b0ffacaa9a75d522b39400f",
+    "0x395675b56370a9f5fe8b32badfa80043f5291443bd6c8273900476880fb5221e"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2021-03/dodo_flashloan_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2021-03/dodo_flashloan_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "blog.dodoex.io",
+      "url": "https://blog.dodoex.io/dodo-pool-incident-postmortem-with-a-little-help-from-our-friends-327e66872d42"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "halborn.com",
+      "url": "https://halborn.com/explained-the-dodo-dex-hack-march-2021/"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x395675b56370a9f5fe8b32badfa80043f5291443bd6c8273900476880fb5221e"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: DODO - REKT",
+      "url": "https://rekt.news/au-dodo-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/address/0x051ebd717311350f1684f89335bed4abd083a2b6#code#L1419"
+    },
+    {
+      "source": "slowmist",
+      "label": "dodoexhelp.zendesk.com",
+      "url": "https://dodoexhelp.zendesk.com/hc/en-us/articles/900004873746--3-1-million-assets-recovered-Crowdpooling-to-be-re-enabled-after-new-audits-next-week"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/dodo-2021-03-08"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "defirisk.co",
+      "url": "https://defirisk.co/learn/exploits/dodo-rekt/"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/past/2021/README.md#L840"
+    }
+  ]
+}

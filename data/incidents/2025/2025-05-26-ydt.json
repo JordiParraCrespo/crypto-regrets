@@ -1,0 +1,65 @@
+{
+  "id": "2025-05-26-ydt",
+  "name": "YDT",
+  "date": "2025-05-26",
+  "year": 2025,
+  "amountUsd": 41000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Logic Flaw",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.93). Replaced keyword guess \"logic-error\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.93,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.93
+      },
+      {
+        "category": "logic-error",
+        "p": 0.07
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Logic Flaw. Lost: 41k USD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Logic Flaw. Lost: 41k USD"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The YDT token contract exposed a flawed/unprotected transfer-style function (selector 0xec22f4c7, taking from/to/amount/tax-module arguments) that let any caller move YDT tokens out of an arbitrary holder, including the PancakeSwap pair, without owning the tokens or an allowance. The attacker invoked this function to pull nearly all YDT (pair balance minus 1000e6) from the liquidity pair to itself, then called sync() (selector 0xfff6cae9) on the pair to refresh reserves so the pool reflected the drained state, and finally swapped a portion of the stolen YDT for USDT via the fee-on-transfer router path, extracting ~$41K profit. Vulnerable code snippet: Attack Tx: N/A (attack tx not recorded in PoC; see analysis) Analysis: TenArmorAlert"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-05/YDTtoken_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-05/YDTtoken_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/TenArmorAlert/status/1926587721885040686"
+    }
+  ]
+}

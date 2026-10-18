@@ -1,0 +1,103 @@
+{
+  "id": "2023-07-12-platypus-finance",
+  "name": "Platypus Finance",
+  "date": "2023-07-12",
+  "year": 2023,
+  "amountUsd": 50000,
+  "returnedUsd": null,
+  "chains": [
+    "Avalanche"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Withdrawal Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.97,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.97
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.02
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Bussiness Logic Flaw. Lost: ~$51K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Bussiness Logic Flaw. Lost: ~$51K"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The Avalanche project Platypus has been attacked again. According to the analysis of SlowMist, since the price difference between the two pools was not taken into account during the token exchange via CoverageRatio, it resulted in users being able to arbitrage by depositing USDC and then withdrawing more USDT. Arbitrageurs have arbitraged around 50,000 USDC in this way."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On July 11, 2023, Platypus Finance on Avalanche suffered a $51,000 loss due to a liquidity conversion logic flaw between LP tokens and stablecoins. The exploit allowed an attacker to withdraw more funds than deposited by abusing inconsistent internal ratios for different LP tokens. The pool's withdrawal calculation let withdrawals be based on a faulty LP-token-to-asset ratio, allowing a user to withdraw more from one pool than what was deposited in another, leading to an accounting mismatch and net loss."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x4b544e5ffb0420977dacb589a6fb83e25347e0685275a3327ee202449b3bfac6"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-07/Platypus02_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-07/Platypus02_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/peckshield/status/1678800450303164431"
+    },
+    {
+      "source": "slowmist",
+      "label": "snowtrace.io",
+      "url": "https://snowtrace.io/address/0xc64afc460290ed3df848f378621b96cb7179521a"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/platypus-finance-2023-07-12"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.solidityscan.com",
+      "url": "https://blog.solidityscan.com/platypus-hack-analysis-a7d2f6d1f96e/"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/past/2023/README.md#L2653"
+    }
+  ]
+}

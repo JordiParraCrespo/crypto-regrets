@@ -1,0 +1,82 @@
+{
+  "id": "2021-06-19-visor-finance",
+  "name": "Visor Finance",
+  "date": "2021-06-19",
+  "year": 2021,
+  "amountUsd": 504845,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.98,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.98
+      },
+      {
+        "category": "key-compromise",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.88
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "The Visor Finance smart contract, a DeFi liquidity protocol based on Uniswap V3, was withdrawn with 230 ETH in an emergency, and the attacker gained access to an account that manages certain Hypervisor management functions, and then transferred the funds to Tornado.cash.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The Visor Finance smart contract, a DeFi liquidity protocol based on Uniswap V3, was withdrawn with 230 ETH in an emergency, and the attacker gained access to an account that manages certain Hypervisor management functions, and then transferred the funds to Tornado.cash."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On June 19, 2021, Visor Finance lost about $500,000 on Ethereum mainnet after an attacker compromised a privileged admin account. Using the emergency withdrawal function on Hypervisor contracts, the attacker drained unallocated deposits. All affected users were reimbursed, and protocol control migrated to a multisig wallet. Emergency withdrawal of Hypervisor vaults was controlled by a single admin account. This account was compromised, enabling an unauthorized withdrawal of unallocated user deposits. No smart contract code flaw was reported; the core failure was inadequate operational security and lack of enforced multisig control."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "visorfinance.medium.com",
+      "url": "https://visorfinance.medium.com/visor-beta-incident-report-1b2521b9266"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/visor-finance-2021-06-19"
+    },
+    {
+      "source": "revertiq",
+      "label": "quadrigainitiative.com",
+      "url": "https://www.quadrigainitiative.com/casestudy/visorfinanceemergencywithdrawal.php"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/visor-admin-key-hack-2021"
+    }
+  ]
+}

@@ -1,0 +1,117 @@
+{
+  "id": "2024-04-22-z123",
+  "name": "Z123",
+  "date": "2024-04-22",
+  "year": 2024,
+  "amountUsd": 136000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "Token",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.64,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.66
+      },
+      {
+        "category": "market-manipulation",
+        "p": 0.18
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.16
+      }
+    ],
+    "flashLoan": 0.07,
+    "stateActor": 0.02,
+    "hasRootCause": 0.93
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "price manipulation. Lost: 136k USD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "price manipulation. Lost: 136k USD"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "After each swap, it destroys liquidity. Good people, a lot of them have been destroyed. Isn’t this more and more replacements? The code is on this line, destroying liquidity and raising prices Vulnerable code snippet: https://bscscan.com/address/0xb000f121A173D7Dd638bb080fEe669a2F3Af9760 Attack tx: https://bscscan.com/tx/0xc0c4e99a76da80a4cf43d3110364840151226c0a197c1728bb60dc3f1b3a6a27 https://app.blocksec.com/explorer/tx/bsc/0xc0c4e99a76da80a4cf43d3110364840151226c0a197c1728bb60dc3f1b3a6a27 Analysis: https://hackfor.fun/z123-exploit-analysis-015b80672cde41f4bcfe53a618295b91 // First, tokens are exchanged from a pool with normal ratios using USD. // Then, each subsequent swap burns liquidity from the pool, resulting in disproportionate token ratios that can be exploited for arbitrage."
+    },
+    {
+      "source": "SlowMist",
+      "text": "Z123 on BSC was attacked by a hacker due to a contract vulnerability, resulting in a loss of approximately $136k. The .update() function of Z123 was repeatedly called which burned extra tokens and inflated the price."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On April 22, 2024, the Z123 token contract on BNB Chain was exploited through flash loan,driven spot price manipulation. The attacker repeatedly swapped and manipulated pool reserves, misleading the contract’s price logic and extracting approximately $136,000 from liquidity pools. The Z123 contract used immediate pool reserve ratios as the source of truth for token price calculations. This logic allowed an attacker to conduct flash loan,fueled swaps and update cycles, artificially increasing the pool's spot price without any manipulation resistance, enabling value extraction."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xc0c4e99a76da80a4cf43d3110364840151226c0a197c1728bb60dc3f1b3a6a27"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-04/Z123_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-04/Z123_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/PeckShieldAlert/status/1782322484911784385"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0xb000f121A173D7Dd638bb080fEe669a2F3Af9760"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0xc0c4e99a76da80a4cf43d3110364840151226c0a197c1728bb60dc3f1b3a6a27"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/bsc/0xc0c4e99a76da80a4cf43d3110364840151226c0a197c1728bb60dc3f1b3a6a27"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/SlowMist_Team/status/1782324056647516180"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/z123-2024-04-22"
+    },
+    {
+      "source": "revertiq",
+      "label": "quadrigainitiative.com",
+      "url": "https://www.quadrigainitiative.com/casestudy/z123smartcontractvulnerability.php"
+    }
+  ]
+}

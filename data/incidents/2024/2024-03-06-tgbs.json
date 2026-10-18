@@ -1,0 +1,97 @@
+{
+  "id": "2024-03-06-tgbs",
+  "name": "TGBS",
+  "date": "2024-03-06",
+  "year": 2024,
+  "amountUsd": 150000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Business Logic Flaw",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.88).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.88,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.89
+      },
+      {
+        "category": "access-control",
+        "p": 0.08
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.09,
+    "stateActor": 0.04,
+    "hasRootCause": 0.77
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Business Logic Flaw. Lost: ~150K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Business Logic Flaw. Lost: ~150K"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Vulnerable transfer() function Vulnerable code snippet: Attack tx: https://bscscan.com/address/0x1a8eb8eca01819b695637c55c1707f9497b51cd9 Analysis: https://twitter.com/Phalcon_xyz/status/1765285257949974747"
+    },
+    {
+      "source": "SlowMist",
+      "text": "On March 6, TGBS (TGBS) was exploited through a flash loan attack, resulting in a loss of approximately $151k."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xa0408770d158af99a10c60474d6433f4c20f3052e54423f4e590321341d4f2a4"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-03/TGBS_exp.sol",
+  "sources": [
+    "defihacklabs",
+    "blocksec",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-03/TGBS_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Phalcon_xyz/status/1765285257949974747"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0x1a8eb8eca01819b695637c55c1707f9497b51cd9"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xa0408770d158af99a10c60474d6433f4c20f3052e54423f4e590321341d4f2a4"
+    },
+    {
+      "source": "blocksec",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs?tab=readme-ov-file#20240306-tgbs---business-logic-flaw"
+    },
+    {
+      "source": "slowmist",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0xa0408770d158af99a10c60474d6433f4c20f3052e54423f4e590321341d4f2a4"
+    }
+  ]
+}

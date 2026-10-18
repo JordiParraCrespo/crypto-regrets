@@ -1,0 +1,70 @@
+{
+  "id": "2026-02-19-velar-perps",
+  "name": "Velar Perps",
+  "date": "2026-02-19",
+  "year": 2026,
+  "amountUsd": 401000,
+  "returnedUsd": null,
+  "chains": [
+    "Mezo"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Predictable Oracle Update",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Velar Perps on Mezo lost about $401,000 on February 19, 2026 when an attacker manipulated a predictable oracle update mechanism. The exploit involved cycling trades across hundreds of wallets to repeatedly trigger manipulated price updates, draining the BTC/MUSD perpetual pool. Detection and response were delayed, and funds were ultimately bridged off Mezo and washed. The Redstone oracle used by Velar Perps updated prices in response to contract activity, lacking timestamp validation and manipulation resistance. This allowed the attacker to cycle trades and dictate oracle updates, gradually draining pool liquidity.",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "Velar Perps on Mezo lost about $401,000 on February 19, 2026 when an attacker manipulated a predictable oracle update mechanism. The exploit involved cycling trades across hundreds of wallets to repeatedly trigger manipulated price updates, draining the BTC/MUSD perpetual pool. Detection and response were delayed, and funds were ultimately bridged off Mezo and washed. The Redstone oracle used by Velar Perps updated prices in response to contract activity, lacking timestamp validation and manipulation resistance. This allowed the attacker to cycle trades and dictate oracle updates, gradually draining pool liquidity."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xabd42540ca8b564a39ae677736b485be3af4c1b8e89cb4e7ce91513e45e4c140"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/velar-perps-2026-02-19"
+    },
+    {
+      "source": "revertiq",
+      "label": "mezo.org",
+      "url": "https://mezo.org/blog/velars-perpdex-exploited-on-mezo"
+    },
+    {
+      "source": "revertiq",
+      "label": "mezo.org",
+      "url": "https://mezo.org/blog/a-community-driven-response-to-velars-recent-exploit"
+    }
+  ]
+}

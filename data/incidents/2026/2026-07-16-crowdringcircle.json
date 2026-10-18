@@ -1,0 +1,84 @@
+{
+  "id": "2026-07-16-crowdringcircle",
+  "name": "CrowdRingCircle",
+  "date": "2026-07-16",
+  "year": 2026,
+  "amountUsd": 209100,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "Token",
+  "category": "accounting-math",
+  "technique": "Incorrect Share Accounting",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.92,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.92
+      },
+      {
+        "category": "logic-error",
+        "p": 0.08
+      }
+    ],
+    "flashLoan": 0.06,
+    "stateActor": 0.02,
+    "hasRootCause": 0.94
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "sell-destroy path burns CRC out of the pair on any non-exempt sell, collapsing the reserve so a follow-up swap drains the pool's USDT. Lost: ~201.36K USDT",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "sell-destroy path burns CRC out of the pair on any non-exempt sell, collapsing the reserve so a follow-up swap drains the pool's USDT. Lost: ~201.36K USDT"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "CrowdRingCircle was exploited on BNB Chain on 16 July 2026 due to a flawed sell-tax burn mechanism in its BEP-20 token, enabling an attacker to drain approximately $209,100 in USDT from the CRC/USDT PancakeSwap V2 pair by corrupting AMM reserves mid-transfer. The CRC token's _update() function burned tokens directly from the pair's balance and called sync() before crediting the sold principal, causing the AMM pair's cached reserves to reflect an artificially low CRC balance. This let an attacker drain nearly all USDT from the pool using a direct swap against manipulated reserves."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xeaef22325e02ac65a8e1f2e1a3a43f7b7ac8d2323ce6f698a90813e77017c834"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-10/CrowdRingCircle_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-10/CrowdRingCircle_exp.sol"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/crowdringcircle-2026-07-16"
+    },
+    {
+      "source": "revertiq",
+      "label": "crypto.training",
+      "url": "https://crypto.training/hacks/2026-07-crowdringcircle/"
+    },
+    {
+      "source": "revertiq",
+      "label": "anomly.rs",
+      "url": "https://anomly.rs/crowdringcircle-sell-destroy-amm-sync-exploit"
+    }
+  ]
+}

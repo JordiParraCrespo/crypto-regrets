@@ -1,0 +1,73 @@
+{
+  "id": "2024-01-25-swarm-markets",
+  "name": "Swarm Markets",
+  "date": "2024-01-25",
+  "year": 2024,
+  "amountUsd": 120000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": null,
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 1.00).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "On 25 January 2024, Swarm Markets on Ethereum was exploited after a legacy admin role allowed attackers to remap xToken contracts, enabling unauthorized minting and withdrawal of SMT, WETH, USDC, and DAI. An MEV bot intercepted most funds, mitigating total losses. An undocumented legacy admin role from a previous platform migration remained active, permitting the attacker to register fake, freely mintable xToken contracts and drain assets from the xTokenWrapper contract.",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "On 25 January 2024, Swarm Markets on Ethereum was exploited after a legacy admin role allowed attackers to remap xToken contracts, enabling unauthorized minting and withdrawal of SMT, WETH, USDC, and DAI. An MEV bot intercepted most funds, mitigating total losses. An undocumented legacy admin role from a previous platform migration remained active, permitting the attacker to register fake, freely mintable xToken contracts and drain assets from the xTokenWrapper contract."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x2b8e2a60a453d1903f9f5b1903c00a20cef3f3e94cb399252a1803a1826f6cab",
+    "0x3b380824408ae6d4945f8fac310c3d4fe09ad1be16f8601b60f2ff7306418032",
+    "0x1f53d0ad45c39a1bfabdadd543195e7a09ed65d1a1113f7575dba1232a8560ba",
+    "0x80fe95da4d2578f4cfb170d4b9e94feb3826dd2a9e483552f255d1fc41e41e94",
+    "0xe6e026e7a39e1548f5ae36424deb3580347337b0d59e66af1ab3925d63906fb5"
+  ],
+  "poc": null,
+  "sources": [
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/swarm-markets-2024-02-22"
+    },
+    {
+      "source": "revertiq",
+      "label": "defillama.com",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "medium.com",
+      "url": "https://medium.com/swarm-com/swarm-markets-exploit-post-mortem-3e1a1c9d5352"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/past/2024/README.md#L2773"
+    }
+  ]
+}

@@ -1,0 +1,107 @@
+{
+  "id": "2023-06-15-cfc",
+  "name": "CFC",
+  "date": "2023-06-15",
+  "year": 2023,
+  "amountUsd": 16000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Donation Attack",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "arbitrary-call",
+    "confidence": 0.9,
+    "top": [
+      {
+        "category": "arbitrary-call",
+        "p": 0.91
+      },
+      {
+        "category": "access-control",
+        "p": 0.06
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.03
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.03,
+    "hasRootCause": 0.92
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Uniswap Skim() token balance attack. Lost: ~$16k",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Uniswap Skim() token balance attack. Lost: ~$16k"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Attacker could initiate transferFrom from the DEX contract that allowed him to transfer users that gave an approval for that contract. Vulnerable code snippet: %20241501e1d4d2496a8c9e0984c15d0507/Untitled.png) Attack tx: https://explorer.phalcon.xyz/tx/bsc/0xa3c130ed8348919f73cbefce0f22d46fa381c8def93654e391ddc95553240c1e Analysis: https://twitter.com/hexagate_/status/1669280632738906113 https://x.com/Phalcon_xyz/status/1669262923758456833"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 15 June 2023, the CFC token contract on BNB Chain was exploited through repeated use of the UniswapV2 'skim' function to extract funds, resulting in an estimated loss of approximately $16,000. The vulnerability arose from improper handling of liquidity pool token balances and failed accounting safeguards. The root cause was a logical vulnerability in the handling of UniswapV2-like liquidity pools, allowing the attacker to repeatedly restore their own CFC token balance from the pool using the 'skim' function after transferring tokens directly to the pool. The contract did not enforce invariant checks that would prevent profit from repeated direct token transfers and skims."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xa3c130ed8348919f73cbefce0f22d46fa381c8def93654e391ddc95553240c1e"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-06/CFC_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-06/CFC_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/hexagate_/status/1669280632738906113"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "explorer.phalcon.xyz",
+      "url": "https://explorer.phalcon.xyz/tx/bsc/0xa3c130ed8348919f73cbefce0f22d46fa381c8def93654e391ddc95553240c1e"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/Phalcon_xyz/status/1669262923758456833"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/cfc-2023-06-15"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/past/2023/README.md#L3155"
+    },
+    {
+      "source": "revertiq",
+      "label": "raw.githubusercontent.com",
+      "url": "https://raw.githubusercontent.com/SunWeb3Sec/DeFiHackLabs/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/src/test/2023-06/CFC_exp.sol"
+    }
+  ]
+}

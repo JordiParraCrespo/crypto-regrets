@@ -1,0 +1,74 @@
+{
+  "id": "2026-04-27-qnt",
+  "name": "QNT",
+  "date": "2026-04-27",
+  "year": 2026,
+  "amountUsd": 125000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": null,
+  "category": "access-control",
+  "technique": "Access Control",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.95). Replaced keyword guess \"arbitrary-call\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.95,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.95
+      },
+      {
+        "category": "arbitrary-call",
+        "p": 0.05
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "The QNT reserve pool exploit abused Ethereum's EIP-7702 delegation mechanism introduced in the Pectra upgrade. The reserve pool's admin EOA had delegated execution logic via EIP-7702 to a BatchExecutor contract, which further invoked a BatchCall contract. The critical flaw was that BatchCall.batch() was entirely public with zero access control — no onlyOwner, no whitelist, no require(msg.sender == ...) guard. Any external caller could supply arbitrary target addresses and calldata, which the contract executed unconditionally. The attacker exploited this open function to route a forged call through the EIP-7702-delegated admin EOA, causing it to satisfy the QNT pool's _isAdmin(msg.sender) check inside forwardTransaction(). This authorized a transfer of 1,988.5 QNT (~$125K) directly to the attacker's address. SlowMist detected the exploit and traced the root cause to the missing access control on the batch execution pathway. Attack Tx: 0x4f31f68df9f240492f13df9ab23207ea231ec1b5a89af9c31cde58e7d98cb18c Analysis: EIP-7702 Flaw Drains 1,988 QNT From Ethereum Pool — CryptoTimes Defi_Nerd_sec on X",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The QNT reserve pool exploit abused Ethereum's EIP-7702 delegation mechanism introduced in the Pectra upgrade. The reserve pool's admin EOA had delegated execution logic via EIP-7702 to a BatchExecutor contract, which further invoked a BatchCall contract. The critical flaw was that BatchCall.batch() was entirely public with zero access control — no onlyOwner, no whitelist, no require(msg.sender == ...) guard. Any external caller could supply arbitrary target addresses and calldata, which the contract executed unconditionally. The attacker exploited this open function to route a forged call through the EIP-7702-delegated admin EOA, causing it to satisfy the QNT pool's _isAdmin(msg.sender) check inside forwardTransaction(). This authorized a transfer of 1,988.5 QNT (~$125K) directly to the attacker's address. SlowMist detected the exploit and traced the root cause to the missing access control on the batch execution pathway. Attack Tx: 0x4f31f68df9f240492f13df9ab23207ea231ec1b5a89af9c31cde58e7d98cb18c Analysis: EIP-7702 Flaw Drains 1,988 QNT From Ethereum Pool — CryptoTimes Defi_Nerd_sec on X"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x4f31f68df9f240492f13df9ab23207ea231ec1b5a89af9c31cde58e7d98cb18c"
+  ],
+  "poc": null,
+  "sources": [
+    "defihacklabs",
+    "blocksec"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "app.phalcon.blocksec.com",
+      "url": "https://app.phalcon.blocksec.com/explorer/tx/eth/0x4f31f68df9f240492f13df9ab23207ea231ec1b5a89af9c31cde58e7d98cb18c"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "cryptotimes.io",
+      "url": "https://www.cryptotimes.io/2026/04/29/eip-7702-flaw-drains-1988-qnt-from-ethereum-pool/"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/Defi_Nerd_sec/status/2049345620981539233"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x4f31f68df9f240492f13df9ab23207ea231ec1b5a89af9c31cde58e7d98cb18c"
+    }
+  ]
+}

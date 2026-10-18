@@ -1,0 +1,130 @@
+{
+  "id": "2023-04-02-allbridge-core",
+  "name": "Allbridge Core",
+  "date": "2023-04-02",
+  "year": 2023,
+  "amountUsd": 573000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Swap Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.72,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.74
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.26
+      }
+    ],
+    "flashLoan": 0.5,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": true,
+  "language": null,
+  "rootCause": "FlashLoan price manipulation. Lost: $550k",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "FlashLoan price manipulation. Lost: $550k"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "QuillAudits: The root cause of the issue was a logic flaw in the withdraw function. This flaw allowed for manipulation of the swap price of the pool. The exploiter acted as a liquidity provider and swapper, enabling them to manipulate the price and drain the funds from the pool. Vulnerable code snippet: Attack tx: https://bscscan.com/tx/0x7ff1364c3b3b296b411965339ed956da5d17058f3164425ce800d64f1aef8210 Analysis: https://twitter.com/peckshield/status/1642356701100916736 https://twitter.com/BeosinAlert/status/1642372700726505473 https://medium.com/coinmonks/decoding-allbridge-570k-flash-loan-exploit-quillaudits-8da8dccd729d"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The cross-chain bridge Allbridge was hacked and lost about $570,000 (including about 280,000 BUSD and about 290,000 USDT). The root cause appears to be manipulation of the Swap price of the pool. The hacker played the dual role of liquidity provider and trader, draining the funds in the pool. On April 4, Allbridge tweeted: \"The owner of address 0xC578 contacted us and refunded 1,500 BNB (approximately $463,600), and the remaining funds will be considered a white hat bounty for this individual."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Allbridge Core's BNB Chain pools were exploited on April 1, 2023. The attacker used flash loans to manipulate pool accounting, acting as both liquidity provider and swapper. The flaw in internal vUSD accounting allowed outsized payouts during withdrawals in imbalanced conditions, resulting in a loss of about $573,000. A partial asset return followed post-negotiation. Allbridge Core's pool withdrawal logic relied on a fixed vUSD-to-token exchange rate, failing to account for extreme pool imbalance. This allowed an attacker to manipulate pool accounts and withdraw more value than intended, combining liquidity provision, swaps, and withdrawals after flash loan funding."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x7ff1364c3b3b296b411965339ed956da5d17058f3164425ce800d64f1aef8210",
+    "0xb0323e5461e4cfc8e4c259f0b343ed17709c64474fd5615659164459dd76c15b"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-04/Allbridge_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-04/Allbridge_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/peckshield/status/1642356701100916736"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BeosinAlert/status/1642372700726505473"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x7ff1364c3b3b296b411965339ed956da5d17058f3164425ce800d64f1aef8210"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x7ff1364c3b3b296b411965339ed956da5d17058f3164425ce800d64f1aef8210"
+    },
+    {
+      "source": "blocksec",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs?tab=readme-ov-file#20230402-allbridge---flashloan-price-manipulation"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Allbridge_io/status/1642507995610329088"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/allbridge-2023-04-01"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/allbridge-core-hack-2023"
+    },
+    {
+      "source": "revertiq",
+      "label": "dn.institute",
+      "url": "https://dn.institute/research/cyberattacks/incidents/2023-04-02-allbridge/"
+    }
+  ]
+}

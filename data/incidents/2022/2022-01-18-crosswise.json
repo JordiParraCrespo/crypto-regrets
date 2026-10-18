@@ -1,0 +1,78 @@
+{
+  "id": "2022-01-18-crosswise",
+  "name": "Crosswise",
+  "date": "2022-01-18",
+  "year": 2022,
+  "amountUsd": 879000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Decentralized trading platform Crosswise was attacked in nearly an hour, losing about $879,000. The hacker exploited a publicly exposed privileged function, which was then used to set trustedForwarder and further hijack Crosswise's owner privileges. The stolen funds have now been transferred to Tornado Cash for mixing.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Decentralized trading platform Crosswise was attacked in nearly an hour, losing about $879,000. The hacker exploited a publicly exposed privileged function, which was then used to set trustedForwarder and further hijack Crosswise's owner privileges. The stolen funds have now been transferred to Tornado Cash for mixing."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Crosswise Finance suffered a $879,000 loss on BNB Chain on 18 January 2022 when an attacker exploited improper access controls in the MasterChef contract to take ownership, deploy a malicious strategy, and withdraw CRSS tokens. The MasterChef contract's access control mechanism failed because critical privilege checks relied on an insecure implementation of _msgSender. The setTrustedForwarder function was publicly accessible without adequate permission checks, allowing the attacker to become owner and execute pool withdrawals."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "cryptotimes.io",
+      "url": "https://www.cryptotimes.io/crosswise-was-exploited-leading-to-the-loss-of-879k/"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/crosswise-2022-01-18"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/crosswise-hack-2022"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptotimes.io",
+      "url": "https://cryptotimes.io/2022/01/18/crosswise-was-exploited-leading-to-the-loss-of-879k/"
+    }
+  ]
+}

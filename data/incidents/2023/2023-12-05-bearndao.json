@@ -1,0 +1,92 @@
+{
+  "id": "2023-12-05-bearndao",
+  "name": "BEARNDAO",
+  "date": "2023-12-05",
+  "year": 2023,
+  "amountUsd": 769000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Business Logic Flaw",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.86).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.86,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.87
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.07
+      },
+      {
+        "category": "market-manipulation",
+        "p": 0.06
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Business Logic Flaw. Lost: ~$769k",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Business Logic Flaw. Lost: ~$769k"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The attack exploited a bug in ConvertDustToEarned() and used a sandwich attack. Relied on the current balance of the wantToken token. But the strategy contract is not supposed to hold a huge amount of dust tokens. The attacker first manipulated the ALPACA/WBNB pool through large-valued swaps and invoked a call to the convertDustToEarned function, thereby artificially inflating the swap ratio of the tokens. The reverse swap allowed the attacker to perform a sandwich attack, letting them take away approximately $768,358 worth of assets as profits. Vulnerable code snippet: Attack tx: https://www.oklink.com/es-la/bsc/tx/0x51913be3f31d5ddbfc77da789e5f9653ed6b219a52772309802226445a1edd5f https://explorer.phalcon.xyz/tx/bsc/0x51913be3f31d5ddbfc77da789e5f9653ed6b219a52772309802226445a1edd5f Analysis: https://twitter.com/AnciliaInc/status/1732159377749180646 The stolen funds have been transferred to the following addresses. - 0x42df55549558b6119fe9c628b856dec6b86ed4c5 - 0x4d1f328e0dc4d3e8b7a81184cb89edc4cb7cd63a REF Link: https://neptunemutual.com/blog/how-was-bearn-dao-exploited/"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x51913be3f31d5ddbfc77da789e5f9653ed6b219a52772309802226445a1edd5f"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-12/BEARNDAO_exp.sol",
+  "sources": [
+    "defihacklabs",
+    "blocksec"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-12/BEARNDAO_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/AnciliaInc/status/1732159377749180646"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "explorer.phalcon.xyz",
+      "url": "https://explorer.phalcon.xyz/tx/bsc/0x51913be3f31d5ddbfc77da789e5f9653ed6b219a52772309802226445a1edd5f"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "oklink.com",
+      "url": "https://www.oklink.com/es-la/bsc/tx/0x51913be3f31d5ddbfc77da789e5f9653ed6b219a52772309802226445a1edd5f"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x51913be3f31d5ddbfc77da789e5f9653ed6b219a52772309802226445a1edd5f"
+    },
+    {
+      "source": "blocksec",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs#20231205-bearndao---business-logic-flaw"
+    }
+  ]
+}

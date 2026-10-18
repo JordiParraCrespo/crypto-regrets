@@ -1,0 +1,60 @@
+{
+  "id": "2026-03-12-am-usdt-pool",
+  "name": "AM/USDT pool",
+  "date": "2026-03-12",
+  "year": 2026,
+  "amountUsd": 131000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": null,
+  "category": "logic-error",
+  "technique": "Reserve Manipulation Attack",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.95). Replaced keyword guess \"oracle-manipulation\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.95,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.95
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.03
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "The AM/USDT pool on the BSC chain was exploited several hours ago, with estimated losses of approximately $131,000. The root cause lies in a vulnerability within the burn mechanism, which was exploited to manipulate the AM reserves in the pool and artificially inflate the token price. The attacker first manipulated the toBurnAmount and then triggered the burn logic after the AM balance in the pool had been adjusted. This drove the AM reserves down to an unnaturally low level, allowing the attacker to sell AM back to the pool at an inflated price to realize a profit.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The AM/USDT pool on the BSC chain was exploited several hours ago, with estimated losses of approximately $131,000. The root cause lies in a vulnerability within the burn mechanism, which was exploited to manipulate the AM reserves in the pool and artificially inflate the token price. The attacker first manipulated the toBurnAmount and then triggered the burn logic after the AM balance in the pool had been adjusted. This drove the AM reserves down to an unnaturally low level, allowing the attacker to sell AM back to the pool at an inflated price to realize a profit."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/Phalcon_xyz/status/2031957703451688970"
+    }
+  ]
+}

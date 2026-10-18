@@ -1,0 +1,123 @@
+{
+  "id": "2024-02-15-miner",
+  "name": "Miner",
+  "date": "2024-02-15",
+  "year": 2024,
+  "amountUsd": 466000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "Token",
+  "category": "input-validation",
+  "technique": "Missing Input Validation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "input-validation",
+    "confidence": 0.97,
+    "top": [
+      {
+        "category": "input-validation",
+        "p": 0.97
+      },
+      {
+        "category": "logic-error",
+        "p": 0.03
+      }
+    ],
+    "flashLoan": 0.6,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "lack of validation dst address. Lost: ~150k",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "lack of validation dst address. Lost: ~150k"
+    },
+    {
+      "source": "DeFiHackLabs",
+      "text": "Price Manipulation. Lost: ~3.5 WBNB"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The attack exploited a double spend vulnerability due to inadequate validation. Specifically, the system did not verify that the sender's address was different from the recipient's, enabling the attacker to repay the loan and send tokens to themselves. Vulnerable code snippet: Attack transaction: https://etherscan.io/tx/0x75e3aeb00df69882a1b15d424e5e642650326ca3b923d7fd1922d57c51bc2c78 Analysis: https://twitter.com/Phalcon_xyz/status/1757777340002681326"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The ERC-X protocol Miner (MINER) has been attacked, please do not interact. According to the Miner team's analysis, the _update function of the contract was exploited. The root cause of this exploit is a double-transfer vulnerability caused by a lack of input validation."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Miner's ERC-X contract was exploited on Ethereum Mainnet on 14 February 2024. An attacker used a double-spend loophole in the token transfer logic, inflating their MINER token balance and draining funds from Uniswap pools, causing losses of about $466,000. The contract allowed transfers where the sender and receiver were identical, causing balance inflation due to cached update logic and missing validation. This enabled the attacker to double their MINER balance via self-transfers."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x75e3aeb00df69882a1b15d424e5e642650326ca3b923d7fd1922d57c51bc2c78",
+    "0x27a01149b321eaab0b16d488aefaffa04517a5cf73397b1bbcb8192a4db692ae"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-02/Miner_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-02/Miner_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Phalcon_xyz/status/1757777340002681326"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-02/MINER_bsc_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/bsc/0x15ab671c9bf918fa4b6a9eed9ccb527f32aca40e926ede2aec2c84dfa9c30512?line=6"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x75e3aeb00df69882a1b15d424e5e642650326ca3b923d7fd1922d57c51bc2c78"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/shoucccc/status/1757777764646859121"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/miner-2024-02-15"
+    },
+    {
+      "source": "revertiq",
+      "label": "dn.institute",
+      "url": "https://dn.institute/research/cyberattacks/incidents/2024-02-14-miner/"
+    },
+    {
+      "source": "revertiq",
+      "label": "dev.to",
+      "url": "https://dev.to/cryptonstudio/erc-x-miner-contract-exploit-on-erc-404-standard-our-expert-analysis-46k2"
+    }
+  ]
+}

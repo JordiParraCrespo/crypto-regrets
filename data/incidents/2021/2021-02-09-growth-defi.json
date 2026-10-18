@@ -1,0 +1,92 @@
+{
+  "id": "2021-02-09-growth-defi",
+  "name": "Growth DeFi",
+  "date": "2021-02-09",
+  "year": 2021,
+  "amountUsd": 1400000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "input-validation",
+  "technique": "Missing Input Validation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "input-validation",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "input-validation",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "The days blur into one. Locked down, wired up and worn out. Millions of dollars gone but nobody blinks an eye. BT Finance? Growth DeFi? Small name backstreet protocols are easy prey for the serial killers who roam these streets without fear.",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "The days blur into one. Locked down, wired up and worn out. Millions of dollars gone but nobody blinks an eye. BT Finance? Growth DeFi? Small name backstreet protocols are easy prey for the serial killers who roam these streets without fear."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Growth DeFi's Ethereum staking contract was exploited on February 8, 2021, after it failed to verify that supplied deposit tokens matched the actual liquidity pool assets. An attacker minted staking shares against worthless LP tokens, then withdrew and redeemed genuine protocol assets, draining about $1.4 million. A user share ($168,000) was later compensated via protocol-issued SAFE tokens. The stkGRO/rAAVE staking contract did not validate that the user-supplied deposit token address matched one of the assets in the declared Uniswap pool. This unchecked trust in deposit arguments enabled attackers to mint protocol shares with fake pools and tokens, circumventing intended asset controls."
+    }
+  ],
+  "audit": "Consensys Dilligence",
+  "txHashes": [
+    "0x47cc8504f870020d5e5a8a5f0e2c242cc790b7fbc0dffb183e2f20a668fc076e",
+    "0xa3d64cd6541657c86331c8b1b037ad184216610d3653af9b7909601981ec32c1",
+    "0x2152214a6be27a904af5a25e77fdca92ae60c6a9d7d298a41f88558649a41a23",
+    "0xffef18b38096c96c1f6be784ea0ebb07964137858e38f3d65858a79e6a96797f",
+    "0xce020fabb3c56c75b23ac7d53d5259959a2b3ffe0b1a0d69aecaae9cd7757998",
+    "0x0a6b5c92abcfbf07fb31d9e6c402b82c8756a80823c309d063a9a735d3f817eb",
+    "0xac4407bf2fa52003960449cecc92d3a9e0175f40d9bf11b9d808c3282f2ec2b4",
+    "0x0391fa91f18873566a31f5a6dd73b6ae5c4aa48146b64edf615eaacf0fece735"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: The Big Combo (Growth DeFi - REKT)",
+      "url": "https://rekt.news/the-big-combo"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/growth-defi-2021-02-08"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "web.archive.org",
+      "url": "https://web.archive.org/web/20210208222027/https://growthdefi.medium.com/raave-farming-contract-exploit-explained-f3b6f0b3c1b3"
+    },
+    {
+      "source": "revertiq",
+      "label": "itokenly.com",
+      "url": "https://itokenly.com/hacks/growth-defi"
+    }
+  ]
+}

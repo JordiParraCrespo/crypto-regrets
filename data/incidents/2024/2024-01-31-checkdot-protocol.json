@@ -1,0 +1,69 @@
+{
+  "id": "2024-01-31-checkdot-protocol",
+  "name": "CheckDot Protocol",
+  "date": "2024-01-31",
+  "year": 2024,
+  "amountUsd": 120000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": null,
+  "category": "governance",
+  "technique": "Access Control",
+  "classificationNote": "Classified by keyword rules from the DeFiHackLabs explorer label and description.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "governance",
+    "confidence": 0.53,
+    "top": [
+      {
+        "category": "governance",
+        "p": 0.56
+      },
+      {
+        "category": "access-control",
+        "p": 0.44
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.01,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "CheckDot Protocol on BSC was targeted by an attacker who submitted a malicious governance proposal designed to drain approximately $120K from the protocol's treasury. The access control issue stemmed from insufficient validation or gatekeeping in the governance proposal execution pathway — the smart contract did not adequately restrict which proposal actions could be executed or failed to enforce a meaningful timelock, allowing a malicious proposal to be enacted before the community could respond. BlockSec's Phalcon system detected the attack and alerted the CheckDot team, who acknowledged the threat as critical and implemented a patch. The incident was confirmed by Phalcon on approximately February 1–4, 2024 (the on-chain submission date is recorded as January 31, 2024 in the incident list). Attack Tx: 0xdd19e3a1657f8381b561c4d6c9b61be67380e10fd4d367ccad6e8cf28c114e72 Analysis: Phalcon_xyz alert — CheckDot Protocol",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "CheckDot Protocol on BSC was targeted by an attacker who submitted a malicious governance proposal designed to drain approximately $120K from the protocol's treasury. The access control issue stemmed from insufficient validation or gatekeeping in the governance proposal execution pathway — the smart contract did not adequately restrict which proposal actions could be executed or failed to enforce a meaningful timelock, allowing a malicious proposal to be enacted before the community could respond. BlockSec's Phalcon system detected the attack and alerted the CheckDot team, who acknowledged the threat as critical and implemented a patch. The incident was confirmed by Phalcon on approximately February 1–4, 2024 (the on-chain submission date is recorded as January 31, 2024 in the incident list). Attack Tx: 0xdd19e3a1657f8381b561c4d6c9b61be67380e10fd4d367ccad6e8cf28c114e72 Analysis: Phalcon_xyz alert — CheckDot Protocol"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xdd19e3a1657f8381b561c4d6c9b61be67380e10fd4d367ccad6e8cf28c114e72"
+  ],
+  "poc": null,
+  "sources": [
+    "defihacklabs",
+    "blocksec"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0xdd19e3a1657f8381b561c4d6c9b61be67380e10fd4d367ccad6e8cf28c114e72"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Phalcon_xyz/status/1754130247409438738"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xdd19e3a1657f8381b561c4d6c9b61be67380e10fd4d367ccad6e8cf28c114e72"
+    }
+  ]
+}

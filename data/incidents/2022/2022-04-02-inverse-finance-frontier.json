@@ -1,0 +1,83 @@
+{
+  "id": "2022-04-02-inverse-finance-frontier",
+  "name": "Inverse Finance Frontier",
+  "date": "2022-04-02",
+  "year": 2022,
+  "amountUsd": 15600000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.93,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Inverse Finance got flipped for ~$15M. A professionally executed hack allowed an anonymous actor to manipulate the price of INV and help themself to an exclusive deal from the ETH based lending protocol.",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "Inverse Finance got flipped for ~$15M. A professionally executed hack allowed an anonymous actor to manipulate the price of INV and help themself to an exclusive deal from the ETH based lending protocol."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On April 2, 2022, Inverse Finance's Anchor lending protocol on Ethereum was exploited for approximately $15.6 million. The attacker manipulated the price oracle for the INV token by executing large trades in a thin SushiSwap pool, which the protocol's Keep3r-based TWAP oracle used for pricing collateral. With INV's price massively inflated, the attacker borrowed DOLA, ETH, WBTC, and YFI before markets reverted, leaving the protocol with bad debt. Anchor's collateral oracle relied on a Keep3r-based TWAP from a low-liquidity SushiSwap INV/ETH pool with a short averaging window. This setup allowed a flash-loan-funded price manipulation, enabling the attac…"
+    }
+  ],
+  "audit": "Unaudited",
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Inverse Finance - REKT",
+      "url": "https://rekt.news/inverse-finance-rekt"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/inverse-finance-2022-04-02"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractaudit.com",
+      "url": "https://smartcontractaudit.com/hacks/inverse-finance-2022"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractaudit.com",
+      "url": "https://smartcontractaudit.com/guides/inverse-finance-2022-oracle-manipulation"
+    }
+  ]
+}

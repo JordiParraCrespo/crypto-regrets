@@ -1,0 +1,90 @@
+{
+  "id": "2023-09-06-gmbl-computer",
+  "name": "GMBL.COMPUTER",
+  "date": "2023-09-06",
+  "year": 2023,
+  "amountUsd": 770000,
+  "returnedUsd": null,
+  "chains": [
+    "Arbitrum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "signature-crypto",
+  "technique": "Signature Verification Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "signature-crypto",
+    "confidence": 0.59,
+    "top": [
+      {
+        "category": "signature-crypto",
+        "p": 0.61
+      },
+      {
+        "category": "logic-error",
+        "p": 0.36
+      },
+      {
+        "category": "access-control",
+        "p": 0.03
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.86
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "GMBL COMPUTER was attacked, and the attacker withdrew GMBL worth approximately US$815,000 from the contract. GMBL said: “We believe that the vulnerability is caused by a flaw in the platform’s recommendation system, which allows people to place bets without depositing any funds and use them to generate referral bonuses. We have identified the exploiter and are working to recover all funds lost due to this exploit. The GMBL team stated that they provided a \"Bug Bounty\" to the attackers to return 90% of the stolen funds in exchange for a promise not to take legal action. On September 6, the attackers returned 235 ETH (approximately $382, ​​​000), which is 50% of the stolen funds.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "GMBL COMPUTER was attacked, and the attacker withdrew GMBL worth approximately US$815,000 from the contract. GMBL said: “We believe that the vulnerability is caused by a flaw in the platform’s recommendation system, which allows people to place bets without depositing any funds and use them to generate referral bonuses. We have identified the exploiter and are working to recover all funds lost due to this exploit. The GMBL team stated that they provided a \"Bug Bounty\" to the attackers to return 90% of the stolen funds in exchange for a promise not to take legal action. On September 6, the attackers returned 235 ETH (approximately $382, ​​​000), which is 50% of the stolen funds."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "GMBL.COMPUTER suffered an exploit on Arbitrum on 5,6 September 2023 after the compromise of an off-chain signature key allowed an attacker to claim referral bonuses and extract about 471 ETH (roughly $770,000), much of it later returned. An off-chain signature key was leaked, allowing the attacker to forge valid signatures. The attacker exploited this by generating referral claims and draining the protocol's funds. The flaw lay in operational key management, not in the on-chain contract logic."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x339cc90e63df46c12f7bc1feb6c44db1836782989660d5e15802a216caed8608",
+    "0xc8dbe61c1e71a57d78c7c29eef3d01165008dba8a379ee6fe9a2fe9534d75e8b",
+    "0xa020be4078384264b342fefb139a176e68341bccbfb836fc0d87963250c25685"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "gmblcomputer.medium.com",
+      "url": "https://gmblcomputer.medium.com/gmbl-computer-exploit-postmortem-a09aa3297405"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/gmbl-computer-2023-09-06"
+    },
+    {
+      "source": "revertiq",
+      "label": "monitoringroom.com",
+      "url": "https://monitoringroom.com/situation/crypto-hack/gmbl-computer"
+    },
+    {
+      "source": "revertiq",
+      "label": "chaincatcher.com",
+      "url": "https://www.chaincatcher.com/en/article/2100914"
+    }
+  ]
+}

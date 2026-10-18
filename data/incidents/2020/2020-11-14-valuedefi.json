@@ -1,0 +1,103 @@
+{
+  "id": "2020-11-14-valuedefi",
+  "name": "ValueDefi",
+  "date": "2020-11-14",
+  "year": 2020,
+  "amountUsd": 7400000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.98,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.98
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.01
+      },
+      {
+        "category": "market-manipulation",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.93,
+    "stateActor": 0.02,
+    "hasRootCause": 0.89
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Did they really know flashloan? The value of a reputation is volatile. Humility brings stability - boast too much and you will get rekt. Value DeFi was exploited today for $7,000,000. Another harsh lesson from the flash loan family.",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "Did they really know flashloan? The value of a reputation is volatile. Humility brings stability - boast too much and you will get rekt. Value DeFi was exploited today for $7,000,000. Another harsh lesson from the flash loan family."
+    },
+    {
+      "source": "SlowMist",
+      "text": "The Value DeFi protocol was attacked by a flash loan on Saturday. It is reported that the attacker borrowed 80,000 ETH from the Aave protocol, executed a lightning loan attack, and arbitrage between DAI and USDC. After the attacker used $7.4 million DAI, he refunded $2 million to Value DeFi and retained $5.4 million. In addition, the attacker left a mocking message to the Value DeFi team: \"Do you really understand lightning loans?\" Value DeFi claimed on Twitter on Friday that it has the function of preventing lightning loan attacks. After inquiry, the tweet no longer exists. Subsequently, the Value DeFi team tweeted to confirm that its MultiStables vau…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Value DeFi’s MultiStablesVault on Ethereum was exploited for approximately $6 million through a flash loan and oracle manipulation. The attacker used a flash loan to distort Curve stablecoin prices, allowing them to mint and redeem vault shares at artificially favorable rates in a single transaction. The vault’s price oracle trusted unreliable spot prices vulnerable to manipulation. The vault minted shares based on conversion rates from Curve pool spot prices. Because the price oracle did not account for manipulation risk, a flash loan could temporarily distort these prices and result in over-minting of vault shares. The protocol’s oracle and deposit l…"
+    }
+  ],
+  "audit": "Unaudited",
+  "txHashes": [
+    "0x46a03488247425f845e444b9c10b52ba3c14927c687d38287c0faddc7471150a"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Value DeFi - REKT",
+      "url": "https://rekt.news/value-defi-rekt"
+    },
+    {
+      "source": "slowmist",
+      "label": "decrypt.co",
+      "url": "https://decrypt.co/48256/saddest-hack-in-crypto-value-defi-hacked-for-6-million"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/value-defi-2020-11-14"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/Cerify-Systems/smart-contract-vulnerabilities/tree/master/2020-11-Value-DeFi-Flash-Loan"
+    },
+    {
+      "source": "revertiq",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/markets/2020/11/14/value-defi-suffers-6m-flash-loan-attack"
+    }
+  ]
+}

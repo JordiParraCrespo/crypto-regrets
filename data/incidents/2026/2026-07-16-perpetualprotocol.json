@@ -1,0 +1,58 @@
+{
+  "id": "2026-07-16-perpetualprotocol",
+  "name": "PerpetualProtocol",
+  "date": "2026-07-16",
+  "year": 2026,
+  "amountUsd": 3062.21,
+  "returnedUsd": null,
+  "chains": [],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": null,
+  "classificationNote": "Classified by keyword rules from the DeFiHackLabs root-cause title.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.55,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.58
+      },
+      {
+        "category": "access-control",
+        "p": 0.34
+      },
+      {
+        "category": "input-validation",
+        "p": 0.06
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.94
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "v2 (Curie) unguarded OrderBook funding-growth update lets anyone poison cached funding, draining the Vault. Lost: ~3,062.21 USDC",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "v2 (Curie) unguarded OrderBook funding-growth update lets anyone poison cached funding, draining the Vault. Lost: ~3,062.21 USDC"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-10/PerpetualProtocol_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-10/PerpetualProtocol_exp.sol"
+    }
+  ]
+}

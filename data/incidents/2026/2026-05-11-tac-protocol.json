@@ -1,0 +1,83 @@
+{
+  "id": "2026-05-11-tac-protocol",
+  "name": "TAC Protocol",
+  "date": "2026-05-11",
+  "year": 2026,
+  "amountUsd": 2854486,
+  "returnedUsd": null,
+  "chains": [
+    "TON",
+    "TAC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "bridge-crosschain",
+  "technique": "Proof Verifier Bug",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "bridge-crosschain",
+    "confidence": 0.87,
+    "top": [
+      {
+        "category": "bridge-crosschain",
+        "p": 0.88
+      },
+      {
+        "category": "signature-crypto",
+        "p": 0.12
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.3
+  },
+  "bridge": true,
+  "language": "Solidity",
+  "rootCause": "Following a security incident, TAC identified an exploit on the TON side of its cross-chain layer carried out by an external attacker. The incident resulted in a loss of approximately $2.8M across USDT, BLUM, and tsTON. The TAC token, TON, and all ERC-20 tokens bridged from Ethereum are NOT affected. The bridge remains paused while forensic analysis and remediation are ongoing. A post-mortem will be published soon. The team is working with law enforcement and security partners to trace funds and plans to make users whole via a structured sale of Foundation TAC token reserves.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Following a security incident, TAC identified an exploit on the TON side of its cross-chain layer carried out by an external attacker. The incident resulted in a loss of approximately $2.8M across USDT, BLUM, and tsTON. The TAC token, TON, and all ERC-20 tokens bridged from Ethereum are NOT affected. The bridge remains paused while forensic analysis and remediation are ongoing. A post-mortem will be published soon. The team is working with law enforcement and security partners to trace funds and plans to make users whole via a structured sale of Foundation TAC token reserves."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On August 22, 2026, TAC Protocol's Cosmos-EVM staking pool was drained of about 2.99 billion TAC tokens,28.6% of total supply,via an exploit targeting deficiencies in the shared EVM precompile module. The attacker sold roughly 1.26 billion TAC for around $1 million, with the rest still in attacker-controlled addresses. The vulnerability was in upstream code, and TAC halted its chain pending recovery and fixes. Three combined defects in the Cosmos EVM module allowed integer underflow and incorrect copying of balances, enabling a protocol-controlled staking pool to be drained: (1) locked, unspendable tokens could be staked and deducted against the spenda…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/TacBuild/status/2054620834879381870?s=20"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/tac-protocol-2026-05-11"
+    },
+    {
+      "source": "revertiq",
+      "label": "tac.build",
+      "url": "https://tac.build/blog/tac-mainnet-security-incident"
+    },
+    {
+      "source": "revertiq",
+      "label": "coinunited.io",
+      "url": "https://coinunited.io/en/pulse/2026-09-02/tac-chain-frozen-10-days-cosmos-evm-exploit-126b-token-bailout-and-what-leveraged-traders-must-know"
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "id": "2025-03-29-venus-core-pool",
+  "name": "Venus Core Pool",
+  "date": "2025-03-29",
+  "year": 2025,
+  "amountUsd": 902000,
+  "returnedUsd": null,
+  "chains": [
+    "zkSync Era"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Donation Attack",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.97,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.97
+      },
+      {
+        "category": "logic-error",
+        "p": 0.03
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Venus Core Pool on zkSync Era suffered a $902,000 loss on March 29, 2025, due to a donation attack exploiting a lack of first-depositor protection in a freshly deployed lending market using ERC-4626 shares. The Venus zkSync Era Core Pool listing allowed unprotected external token donations in an ERC-4626-based market without virtual initial liquidity or a first-depositor guard. This let the attacker manipulate share pricing and drain protocol assets.",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "Venus Core Pool on zkSync Era suffered a $902,000 loss on March 29, 2025, due to a donation attack exploiting a lack of first-depositor protection in a freshly deployed lending market using ERC-4626 shares. The Venus zkSync Era Core Pool listing allowed unprotected external token donations in an ERC-4626-based market without virtual initial liquidity or a first-depositor guard. This let the attacker manipulate share pricing and drain protocol assets."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/venus-core-pool-2025-03-29"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "community.venus.io",
+      "url": "https://community.venus.io/t/proposal-partial-liquidity-restoration-for-wusdm-on-venus-zksync/5013"
+    }
+  ]
+}

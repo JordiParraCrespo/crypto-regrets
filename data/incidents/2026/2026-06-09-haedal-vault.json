@@ -1,0 +1,50 @@
+{
+  "id": "2026-06-09-haedal-vault",
+  "name": "Haedal Vault",
+  "date": "2026-06-09",
+  "year": 2026,
+  "amountUsd": 915179,
+  "returnedUsd": null,
+  "chains": [],
+  "targetType": null,
+  "category": "logic-error",
+  "technique": "Smart Contract Vulnerability",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 1.00).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "Haedal Protocol’s Vault pools on Sui suffered an exploit due to a hidden cross-version logic flaw from a 2025 upgrade. The attacker used deprecated old deposit paths to mint inflated LP shares and redeemed them via new paths for excess underlying assets, causing ~$915k in direct losses. Haedal has paused the affected contracts, will fully compensate users, and is preparing a patched upgrade.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Haedal Protocol’s Vault pools on Sui suffered an exploit due to a hidden cross-version logic flaw from a 2025 upgrade. The attacker used deprecated old deposit paths to mint inflated LP shares and redeemed them via new paths for excess underlying assets, causing ~$915k in direct losses. Haedal has paused the affected contracts, will fully compensate users, and is preparing a patched upgrade."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/HaedalProtocol/status/2064337754969055568"
+    }
+  ]
+}

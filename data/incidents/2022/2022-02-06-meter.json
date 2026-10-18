@@ -1,0 +1,136 @@
+{
+  "id": "2022-02-06-meter",
+  "name": "Meter",
+  "date": "2022-02-06",
+  "year": 2022,
+  "amountUsd": 7700000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "input-validation",
+  "technique": "Missing Input Validation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "input-validation",
+    "confidence": 0.97,
+    "top": [
+      {
+        "category": "input-validation",
+        "p": 0.97
+      },
+      {
+        "category": "bridge-crosschain",
+        "p": 0.03
+      }
+    ],
+    "flashLoan": 0.1,
+    "stateActor": 0.03,
+    "hasRootCause": 0.56
+  },
+  "bridge": true,
+  "language": "Solidity",
+  "rootCause": "Bridge. Lost: $4.3 million",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Bridge. Lost: $4.3 million"
+    },
+    {
+      "source": "REKT",
+      "text": "Building bridges is a dangerous business. Another attack sees $4.4M taken from Meter.io on BSC, making Hundred Finance lose $3.3M in collateral damage."
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "insufficient validation Vulnerable code snippet: image from peckshield"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Meter.io's cross-chain bridge was hacked, resulting in a loss of around $4.3 million ( 1391.24945169 ETH and 2.74068396 BTC). The hacker was able to exploit a vulnerability in the deposit function, which allowed them to fake BNB or ETH transfers. Meter.io announced that Meter Passport (a cross-chain bridge extension) automatically wraps and unwraps Gas Tokens (such as ETH and BNB) for user convenience. However, the contract did not prohibit the wrapped ERC20 Token from interacting directly with the native Gas Token, nor did it properly transfer and verify the correct amount of WETH transferred from the caller address."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Meter Passport’s modified deposit path accepted wrapped-native bridge calls without proving that matching BNB or ETH had been sent, which let an attacker drain reserves on 2022-02-05 and left Meter with $4.25 million in direct liabilities. Meter Passport’s ERC20 handler trusted the wrapped-native deposit path to be funded, but the generic deposit() entrypoint could reach that branch without the native-value check enforced by the dedicated depositEth() flow. That broke the invariant that a claimed BNB or ETH bridge deposit had to be backed by an exact native transfer."
+    }
+  ],
+  "audit": "Unaudited",
+  "txHashes": [
+    "0x63f37aff7e40b85b0a6b3fd414389f6011cc09b276dc8e13b6afa19061f7ed8e",
+    "0xf70b4aa715c0a04079c56cd9036cc63cdb6101e400520a8f2c019ad2ced5358e",
+    "0x2d3987963b77159cfe4f820532d729b0364c7f05511f23547765c75b110b629c",
+    "0xd619ace8a8cca2f7eb72dbc0a896fc2d4d8b20aa11f4d747f1a5333305bbb875"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-02/Meter_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-02/Meter_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/ishwinder/status/1490227406824685569"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "blog.chainsafe.io",
+      "url": "https://blog.chainsafe.io/breaking-down-the-meter-io-hack-a46a389e7ae4"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "moonriver.moonscan.io",
+      "url": "https://moonriver.moonscan.io/tx/0x5a87c24d0665c8f67958099d1ad22e39a03aa08d47d00b7276b8d42294ee0591"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Meter - REKT",
+      "url": "https://rekt.news/meter-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/peckshield/status/1490121762847092736"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Meter_IO/status/1490103308421255168"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/meter-2022-02-06"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "docs.meter.io",
+      "url": "https://docs.meter.io/passport/meter-passport-architecture"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/meterio/meter_docs/blob/main/passport/security-audit-for-meter-passport.md"
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "id": "2024-05-22-yon",
+  "name": "YON",
+  "date": "2024-05-22",
+  "year": 2024,
+  "amountUsd": 118000,
+  "returnedUsd": null,
+  "chains": [
+    "BNB"
+  ],
+  "targetType": "Token",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "YON on BNBChain was exploited and lost 190 BNB (～$118K) as a result. The vulnerability in the transferFrom function of the target contract (YON) allowed the attacking contract to directly transfer YON to the LP contract.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "YON on BNBChain was exploited and lost 190 BNB (～$118K) as a result. The vulnerability in the transferFrom function of the target contract (YON) allowed the attacking contract to directly transfer YON to the LP contract."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x5b3ffec387b5e77b3fc1c6423ea2cbc47b2a8dacd74eb9f20bdfd852f5c28215"
+    }
+  ]
+}

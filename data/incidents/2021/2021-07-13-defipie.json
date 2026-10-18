@@ -1,0 +1,81 @@
+{
+  "id": "2021-07-13-defipie",
+  "name": "DeFiPie",
+  "date": "2021-07-13",
+  "year": 2021,
+  "amountUsd": 124999,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum",
+    "Binance Smart Chain"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "reentrancy",
+  "technique": "Reentrancy",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "reentrancy",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "reentrancy",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "DeFiPie (PIE), the lending protocol on the Ethereum and Binance smart chains, was hacked. It is recommended that all liquidity providers extract all liquidity from the application. PIE tokens fell by more than 66% in 24 hours. The attacker used a re-entry attack to over-borrow and lent a portion of valuable assets. Later, the counterfeit currency was used for liquidation operations and took away the mortgaged valuable assets, which led to the DeFiPie agreement not only lent assets, but also lost all mortgage assets, and liquidity was lost.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "DeFiPie (PIE), the lending protocol on the Ethereum and Binance smart chains, was hacked. It is recommended that all liquidity providers extract all liquidity from the application. PIE tokens fell by more than 66% in 24 hours. The attacker used a re-entry attack to over-borrow and lent a portion of valuable assets. Later, the counterfeit currency was used for liquidation operations and took away the mortgaged valuable assets, which led to the DeFiPie agreement not only lent assets, but also lost all mortgage assets, and liquidity was lost."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On July 13, 2021, DeFiPie was exploited via a reentrancy vulnerability on both Binance Smart Chain and Ethereum, resulting in losses reported between $125,000 and $269,000. The attacker created custom pools for malicious tokens and manipulated borrow and liquidation logic to drain nearly all available liquidity. A contract design flaw allowed attackers to create pools for custom tokens with modified transfer functions. Combined with a reentrancy vulnerability and weak validation on liquidation, this enabled recursive borrowing and liquidation cycles, draining protocol liquidity."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x45f6f792638d114f31f6608dca4c79b1216bd5c7c45218a5fd8f1c2e309c6d75"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "medium.com",
+      "url": "https://medium.com/defipie/hacking-investigation-85e07454f1c9"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/defipie-2021-07-13"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/defipie-hack-2021"
+    },
+    {
+      "source": "revertiq",
+      "label": "quadrigainitiative.com",
+      "url": "https://www.quadrigainitiative.com/casestudy/defipienestedborrows.php"
+    }
+  ]
+}

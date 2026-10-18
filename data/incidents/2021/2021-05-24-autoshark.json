@@ -1,0 +1,103 @@
+{
+  "id": "2021-05-24-autoshark",
+  "name": "AutoShark",
+  "date": "2021-05-24",
+  "year": 2021,
+  "amountUsd": 822800,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Reward Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.69,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.71
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.28
+      },
+      {
+        "category": "market-manipulation",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.86,
+    "stateActor": 0.02,
+    "hasRootCause": 0.88
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "Autoshark hacked, now they swim with the fishes, although the damage was small - only ~$745k profit. Perhaps the hacker who donated $100k DAI to the rekt.news treasury didn’t like to see Autoshark fishing for promotion in the replies.",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "Autoshark hacked, now they swim with the fishes, although the damage was small - only ~$745k profit. Perhaps the hacker who donated $100k DAI to the rekt.news treasury didn’t like to see Autoshark fishing for promotion in the replies."
+    },
+    {
+      "source": "SlowMist",
+      "text": "The DeFi protocol AutoShark Finance on the Binance Smart Chain (BSC) was attacked by a lightning loan, and the currency price suffered a flash crash, with a drop of more than 99% at one time, loss of 750,000 USD."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "AutoShark Finance on BNB Chain was exploited on 2021-05-24 through a flash-swapped reward-minting path that let the attacker inflate SharkMinter’s balance-based calculation and leave with about 2,213.386 WBNB, roughly $822,800. SharkMinter derived SHARK rewards from live token balances that could be changed inside the same transaction. The attacker injected SHARK and WBNB before getReward() ran, so the minter treated temporary balances as real profit and minted far more SHARK than the vault had earned."
+    }
+  ],
+  "audit": "Techrate",
+  "txHashes": [
+    "0xfbe65ad3eed6b28d59bf6043debf1166d3420d214020ef54f12d2e0583a66f13"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Autoshark - REKT",
+      "url": "https://rekt.news/autoshark-rekt"
+    },
+    {
+      "source": "slowmist",
+      "label": "rekt.news",
+      "url": "https://rekt.news/autoshark-rekt/"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/autoshark-finance-2021-05-24"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "medium.com",
+      "url": "https://medium.com/autosharkfin/how-pancakebunny-got-compromised-3ec34bbbdb07"
+    },
+    {
+      "source": "revertiq",
+      "label": "medium.com",
+      "url": "https://medium.com/amber-group/bsc-flash-loan-attack-the-three-copycats-e4cdbb65721e"
+    }
+  ]
+}

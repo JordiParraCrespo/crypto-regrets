@@ -1,0 +1,76 @@
+{
+  "id": "2023-12-09-bct",
+  "name": "BCT",
+  "date": "2023-12-09",
+  "year": 2023,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Price Manipulation",
+  "classificationNote": "Classified by keyword rules from the DeFiHackLabs root-cause title.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.69,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.71
+      },
+      {
+        "category": "logic-error",
+        "p": 0.26
+      },
+      {
+        "category": "market-manipulation",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.79,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Price Manipulation. Lost: ~10.2BNB",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Price Manipulation. Lost: ~10.2BNB"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "BCT is a fee/reward token whose buy and transfer logic mints inflated BCT rewards to a chain of registered \"inviters\" (referrers) based on the live PancakeSwap reserves. The attacker first ran a preparation transaction that created several self-controlled Tool contracts and registered them as each other's inviters so that the attacker controlled an entire referral chain. In the attack transaction, the attacker took a flash-swap of WBNB and, inside pancakeCall, repeatedly pumped WBNB into the BCT/WBNB pool and called buy(...) on each inviter. Because the reward calculation reads the manipulated pool reserves (getReserves) to size the BCT distributed to inviters, each loop iteration paid out far more BCT than was justified; the attacker then skimmed the LP and converted the accumulated BCT/BUSD back to WBNB. The root cause is that referral reward amounts were derived from instantaneous, attacker-manipulable AMM reserves while the referral chain was permissionlessly self-registrable. Vulnerable code snippet: Attack Tx: https://bscscan.com/tx/0xdae0b85e01670e6b6b317657a72fb560fc388664cf8bfdd9e1b0ae88e0679103"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xdae0b85e01670e6b6b317657a72fb560fc388664cf8bfdd9e1b0ae88e0679103"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-12/BCT_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-12/BCT_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0xdae0b85e01670e6b6b317657a72fb560fc388664cf8bfdd9e1b0ae88e0679103"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/4b55dffe3e9fd35099c95af728b4af58b75c6b2b/src/test/2023-12/BCT_exp.sol"
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "id": "2023-08-21-ehive",
+  "name": "EHIVE",
+  "date": "2023-08-21",
+  "year": 2023,
+  "amountUsd": 15000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Business Logic Flaw",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.98).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.98,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.98
+      },
+      {
+        "category": "input-validation",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.06,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Business Logic Flaw. Lost: ~$15K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Business Logic Flaw. Lost: ~$15K"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The attacker exploited a validation flaw between the stake and unstake functions. They created a position by staking nothing, waited 38 days, then took a WETH loan, swapped it to EHIVE, and sent it to initial contracts. By unstaking across all contracts, they received more WETH despite not having staked anything initially. Vulnerable Code Snippet: Attack Transaction: https://etherscan.io/tx/0xad818ec910def08c70ac519ab0fffa084b4178014a91cd8aa2f882d972a511c1 Analysis: https://twitter.com/bulu4477/status/1693636187485872583"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xad818ec910def08c70ac519ab0fffa084b4178014a91cd8aa2f882d972a511c1"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-08/EHIVE_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-08/EHIVE_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/bulu4477/status/1693636187485872583"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xad818ec910def08c70ac519ab0fffa084b4178014a91cd8aa2f882d972a511c1"
+    }
+  ]
+}

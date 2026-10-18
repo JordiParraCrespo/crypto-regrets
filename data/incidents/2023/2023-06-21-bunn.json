@@ -1,0 +1,76 @@
+{
+  "id": "2023-06-21-bunn",
+  "name": "BUNN",
+  "date": "2023-06-21",
+  "year": 2023,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Reflection tokens",
+  "classificationNote": "Upstream label missing; classified by keyword rules from the root-cause text.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.56,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.59
+      },
+      {
+        "category": "logic-error",
+        "p": 0.35
+      },
+      {
+        "category": "access-control",
+        "p": 0.04
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Reflection tokens. Lost: ~52BNB",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Reflection tokens. Lost: ~52BNB"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Attacker called deliver function to shrink _rTotal value which increased the BUNN token balance of the Pancake pair and allowed them to perform the swap with 52 BNB profit. Vulnerable code snippet: Attack tx: https://bscscan.com/tx/0x24a68d2a4bbb02f398d3601acfd87b09f543d935fc24862c314aaf64c295acdb Analysis: https://twitter.com/DecurityHQ/status/1671803688996806656"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x24a68d2a4bbb02f398d3601acfd87b09f543d935fc24862c314aaf64c295acdb"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-06//BUNN_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-06//BUNN_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/DecurityHQ/status/1671803688996806656"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x24a68d2a4bbb02f398d3601acfd87b09f543d935fc24862c314aaf64c295acdb"
+    }
+  ]
+}

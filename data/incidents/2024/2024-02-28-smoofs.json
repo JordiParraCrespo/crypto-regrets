@@ -1,0 +1,94 @@
+{
+  "id": "2024-02-28-smoofs",
+  "name": "Smoofs",
+  "date": "2024-02-28",
+  "year": 2024,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [
+    "Polygon"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "reentrancy",
+  "technique": "Reentrancy",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "reentrancy",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "reentrancy",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Reentrancy. Lost: Unclear",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Reentrancy. Lost: Unclear"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Because the _removeStake() call is too late, the attacker can call withdraw multiple times. Vulnerable code snippet: Attack tx: https://phalcon.blocksec.com/explorer/tx/polygon/0xde51af983193b1be3844934b2937a76c19610ddefcdd3ffcf127db3e68749a50 Analysis: https://twitter.com/AnciliaInc/status/1762893563103428783"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Smoofs on Polygon Mainnet suffered a reentrancy exploit on 28 February 2024, affecting MOOVE token rewards. The attacker used rapid repeated withdrawals by exploiting unguarded callback logic, draining approximately 4,350 MOOVE tokens. No official USD loss or recovery updates are available. The vulnerable Smoofs staking contract allowed reentrancy during NFT withdrawal operations, enabling an attacker-controlled contract to repeatedly trigger withdrawals before the internal accounting was updated. This flaw exposed MOOVE token rewards to unauthorized extraction."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xde51af983193b1be3844934b2937a76c19610ddefcdd3ffcf127db3e68749a50"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-02/SMOOFSStaking_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-02/SMOOFSStaking_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/AnciliaInc/status/1762893563103428783"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "phalcon.blocksec.com",
+      "url": "https://phalcon.blocksec.com/explorer/tx/polygon/0xde51af983193b1be3844934b2937a76c19610ddefcdd3ffcf127db3e68749a50"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/smoofs-2024-02-28"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/smoofs-hack-2024"
+    },
+    {
+      "source": "revertiq",
+      "label": "learnblockchain.cn",
+      "url": "https://learnblockchain.cn/index.php/article/11613"
+    }
+  ]
+}

@@ -1,0 +1,124 @@
+{
+  "id": "2023-01-10-bra",
+  "name": "BRA",
+  "date": "2023-01-10",
+  "year": 2023,
+  "amountUsd": 225000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "Token",
+  "category": "accounting-math",
+  "technique": "Incorrect Share Accounting",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.76,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.77
+      },
+      {
+        "category": "logic-error",
+        "p": 0.21
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.06,
+    "stateActor": 0.01,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Business Logic Flaw. Lost: 819 BNB (~224k$)",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Business Logic Flaw. Lost: 819 BNB (~224k$)"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The root cause is due to a logic flaw of the BRA contract, which doubles reward the tax fee to the pancake pair without invoking the sync() function after transferring. Vulnerable code snippet: Attack tx: 0x6759db55a4edec4f6bedb5691fc42cf024be3a1a534ddcc7edd471ef205d4047 (profit 675 WBNB) 0x4e5b2efa90c62f2b62925ebd7c10c953dc73c710ef06695eac3f36fe0f6b9348 (profit 144 WBNB) Analysis: https://twitter.com/BlockSecTeam/status/1612701106982862849"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The price of BRA token on BNB Chain is zero. According to the analysis, the token will be taxed during the transaction, and the tax collected will be directly sent to the transaction pair, and the tax will be added twice. Under this mechanism, after many such transactions, the number of tokens in the transaction pair continues to increase. At the same time, any user can call the skim function to retrieve the extra tokens in the transaction pair, which results in the actual number of tokens exceeding its issuance limit. This BRA token attack has caused 820 WBNB losses. The address of the attacker (0xE2Ba15be8C6Fb0d7C1F7bEA9106eb8232248FB8B)."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 10 January 2023, the BRA token contract on BNB Chain was exploited through a flawed tax and reserve accounting mechanism, resulting in a loss of approximately $225,000. The attacker used a flash loan followed by repeated BRA token transfers and 'skim' operations to drain WBNB from the liquidity pool. The BRA token contract imposed a double tax fee during transfers involving the liquidity pair but failed to call sync() after such transfers. This caused the LP token reserves to get out of sync, enabling attackers to repeatedly call skim() and accumulate excess BRA tokens, which were then swapped for profit."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x6759db55a4edec4f6bedb5691fc42cf024be3a1a534ddcc7edd471ef205d4047",
+    "0x4e5b2efa90c62f2b62925ebd7c10c953dc73c710ef06695eac3f36fe0f6b9348"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-01/BRA_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-01/BRA_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/CertiKAlert/status/1612674916070858753"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BlockSecTeam/status/1612701106982862849"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x4e5b2efa90c62f2b62925ebd7c10c953dc73c710ef06695eac3f36fe0f6b9348"
+    },
+    {
+      "source": "blocksec",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs?tab=readme-ov-file#20230110---bra---business-logic-flaw"
+    },
+    {
+      "source": "slowmist",
+      "label": "panewslab.com",
+      "url": "https://www.panewslab.com/zh/sqarticledetails/ql0656re.html"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/bra-2023-01-10"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.solidityscan.com",
+      "url": "https://blog.solidityscan.com/bra-token-hack-analysis-double-the-reward-e82ca060405e/"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/bra-hack-2023"
+    }
+  ]
+}

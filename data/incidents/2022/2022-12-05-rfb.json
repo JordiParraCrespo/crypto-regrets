@@ -1,0 +1,87 @@
+{
+  "id": "2022-12-05-rfb",
+  "name": "RFB",
+  "date": "2022-12-05",
+  "year": 2022,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "input-validation",
+  "technique": "Missing Input Validation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "signature-crypto",
+    "confidence": 0.29,
+    "top": [
+      {
+        "category": "signature-crypto",
+        "p": 0.33
+      },
+      {
+        "category": "input-validation",
+        "p": 0.32
+      },
+      {
+        "category": "logic-error",
+        "p": 0.29
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.94
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Predicting Random Numbers. Lost: 12BNB",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Predicting Random Numbers. Lost: 12BNB"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Bad randomness The attacker exploits this vulnerability by purchasing RFB tokens only when they are confident of winning. If their attempt fails, the function reverts, resulting in the attacker losing only the gas cost for the transaction. This strategy allows the attacker to optimize their attempts and minimize potential losses, making the system susceptible to manipulation. Vulnerable code snippet: https://bscscan.com/address/0x26f1457f067bF26881F311833391b52cA871a4b5#code#L419 Attack tx: https://explorer.phalcon.xyz/tx/bsc/0xcc8fdb3c6af8bb9dfd87e913b743a13bbf138a143c27e0f387037887d28e3c7a Analysis: https://twitter.com/BlockSecTeam/status/1599991294947778560 https://blog.solidityscan.com/roast-football-hack-analysis-e9316170c443 https://neptunemutual.com/blog/roast-football-lost-funds-through-exploited-reward-system/"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xcc8fdb3c6af8bb9dfd87e913b743a13bbf138a143c27e0f387037887d28e3c7a"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-12/RFB_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-12/RFB_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BlockSecTeam/status/1599991294947778560"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0x26f1457f067bF26881F311833391b52cA871a4b5#code#L419"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "explorer.phalcon.xyz",
+      "url": "https://explorer.phalcon.xyz/tx/bsc/0xcc8fdb3c6af8bb9dfd87e913b743a13bbf138a143c27e0f387037887d28e3c7a"
+    }
+  ]
+}

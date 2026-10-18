@@ -1,0 +1,76 @@
+{
+  "id": "2023-09-05-jumpfarm",
+  "name": "JumpFarm",
+  "date": "2023-09-05",
+  "year": 2023,
+  "amountUsd": 2,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Rebasing logic issue",
+  "classificationNote": "Classified by keyword rules from the DeFiHackLabs root-cause title.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.51,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.54
+      },
+      {
+        "category": "logic-error",
+        "p": 0.38
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.08
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Rebasing logic issue. Lost: ~$2.4ETH",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Rebasing logic issue. Lost: ~$2.4ETH"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The problem originated from the stake() function in the FloorDAO contract. This function sends funds to the caller before triggering a rebase. As a result, instead of distributing an amount of sJUMP equal to the newly minted JUMP in the next rebase, it includes the user's stake. This causes a mismatch between the contract's JUMP balance and the circulating sJUMP. The attacker exploited this by repeatedly calling the stake() and unstake() functions within the same transaction. Vulnerable Code Snippet: Attack Transaction: https://explorer.phalcon.xyz/tx/eth/0x6189ad07894507d15c5dff83f547294e72f18561dc5662a8113f7eb932a5b079 Analysis: https://twitter.com/DecurityHQ/status/1699384904218202618"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x6189ad07894507d15c5dff83f547294e72f18561dc5662a8113f7eb932a5b079"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-09/JumpFarm_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-09/JumpFarm_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/DecurityHQ/status/1699384904218202618"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "explorer.phalcon.xyz",
+      "url": "https://explorer.phalcon.xyz/tx/eth/0x6189ad07894507d15c5dff83f547294e72f18561dc5662a8113f7eb932a5b079"
+    }
+  ]
+}

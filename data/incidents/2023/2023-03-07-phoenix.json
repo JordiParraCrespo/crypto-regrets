@@ -1,0 +1,72 @@
+{
+  "id": "2023-03-07-phoenix",
+  "name": "Phoenix",
+  "date": "2023-03-07",
+  "year": 2023,
+  "amountUsd": 100000,
+  "returnedUsd": null,
+  "chains": [
+    "Polygon"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Access Control & Arbitrary External Call",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.83). Replaced keyword guess \"arbitrary-call\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.83,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.84
+      },
+      {
+        "category": "arbitrary-call",
+        "p": 0.16
+      }
+    ],
+    "flashLoan": 0.06,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Access Control & Arbitrary External Call. Lost: ~$100k",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Access Control & Arbitrary External Call. Lost: ~$100k"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "PhxProxy contract delegateCallSwap() function lack of access control and can be passed in any parameter // The lost money is mainly USDC in the d028 contract which the attacker converts into WETH in the 65ba contract through the buyLeverage() function and then swaps it into his own tokens by the delegateCallSwap() function, making a profit from it Vulnerable code snippet: Attack tx: https://polygonscan.com/tx/0x6fa6374d43df083679cdab97149af8207cda2471620a06d3f28b115136b8e2c4 Analysis: https://twitter.com/HypernativeLabs/status/1633090456157401088"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x6fa6374d43df083679cdab97149af8207cda2471620a06d3f28b115136b8e2c4"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-03/Phoenix_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-03/Phoenix_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/HypernativeLabs/status/1633090456157401088"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "polygonscan.com",
+      "url": "https://polygonscan.com/tx/0x6fa6374d43df083679cdab97149af8207cda2471620a06d3f28b115136b8e2c4"
+    }
+  ]
+}

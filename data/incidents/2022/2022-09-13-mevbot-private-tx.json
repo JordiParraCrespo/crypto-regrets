@@ -1,0 +1,90 @@
+{
+  "id": "2022-09-13-mevbot-private-tx",
+  "name": "MevBot private tx",
+  "date": "2022-09-13",
+  "year": 2022,
+  "amountUsd": 140000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Incorrect access control",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.97).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.97,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.97
+      },
+      {
+        "category": "input-validation",
+        "p": 0.03
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.01,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Incorrect access control. Lost: $140 K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Incorrect access control. Lost: $140 K"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Incorrect access control. Vulnerable code snippet: We can see a public function called pancakeCall, which means anyone can call this function. 1) Decompile contract https://bscscan.com/address/0x64dd59d6c7f09dc05b472ce5cb961b6e10106e1d We can see a public function called pancakeCall, which means anyone can call this function. 2)Check pancakeCall code logic Once pass all required check then perform 0x10a(v0, varg2, varg1); 3) Track into 0x10a(), we can see transfer funds to addree \"MEM[varg0.data+32]\". Since variable \"http://varg0.data\" attacker can control over calldata in pancakeCall. So that's why an attacker can drain out the funds from the MEV contract."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-09/BNB48MEVBot_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-09/BNB48MEVBot_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "blocksecteam.medium.com",
+      "url": "https://blocksecteam.medium.com/the-two-sides-of-the-private-tx-service-on-binance-smart-chain-a76917c3ce51"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/1nf0s3cpt/status/1577594615104172033"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0xd48758ef48d113b78a09f7b8c7cd663ad79e9965852e872fdfc92234c3e598d2"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0x64dd59d6c7f09dc05b472ce5cb961b6e10106e1d"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "varg0.data",
+      "url": "http://varg0.data"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "t.co",
+      "url": "https://t.co/KT6EufOI6Z"
+    }
+  ]
+}

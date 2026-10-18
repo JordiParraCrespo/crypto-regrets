@@ -1,0 +1,103 @@
+{
+  "id": "2023-12-13-hypr",
+  "name": "HYPR",
+  "date": "2023-12-13",
+  "year": 2023,
+  "amountUsd": 200000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Business Logic Flaw",
+  "classificationNote": "Classified by keyword rules from the DeFiHackLabs root-cause title.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.66,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.68
+      },
+      {
+        "category": "access-control",
+        "p": 0.32
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Business Logic Flaw. Lost: ~$200k",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Business Logic Flaw. Lost: ~$200k"
+    },
+    {
+      "source": "REKT",
+      "text": "What is this, a bridge hack for ants? Yesterday, Hypr Network lost $220k to a bridge exploit. Forking code can be risky, especially when devs aren't up to date with issues in the source."
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The root cause was that the attacker managed to circumvent the 'finalizeERC20Withdrawal' function check by reinitializing the contract, due to the existence of the 'clearLegacySlot' modifier. Vulnerable code snippet: https://www.oklink.com/es-la/eth/address/0x40c31236b228935b0329eff066b1ad96e319595e/contract ‍ The clearLegacySlot modifier here will reset the value of the storage slot 0. This action, in turn, resets the value of storage slot 0 of the Initializable contract (to verify this, we can inspect the inheritance chain of the L1StandardBridge contract). If we read the comments carefully, we’ll know that the current version of this code is not ready for production. So, that’s the reason why this function can be called multiple times. Attack tx: https://www.oklink.com/es-la/eth/tx/0x51ce3d9cfc85c1f6a532b908bb2debb16c7569eb8b76effe614016aac6635f65 https://explorer.phalcon.xyz/tx/eth/0x51ce3d9cfc85c1f6a532b908bb2debb16c7569eb8b76effe614016aac6635f65 Analysis: https://x.com/BlockSecTeam/status/1735197818883588574 https://blog.verichains.io/p/hypers-op-stack-bridge-exploit-analysis REF Link: https://www.hypr.network/articles/incident-postmortem-bridge-exploit"
+    }
+  ],
+  "audit": "Unaudited",
+  "txHashes": [
+    "0x51ce3d9cfc85c1f6a532b908bb2debb16c7569eb8b76effe614016aac6635f65"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-12/HYPR_exp.sol",
+  "sources": [
+    "defihacklabs",
+    "rekt",
+    "blocksec"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-12/HYPR_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BlockSecTeam/status/1735197818883588574"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Hypr Network - REKT",
+      "url": "https://rekt.news/hypr-network-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "oklink.com",
+      "url": "https://www.oklink.com/es-la/eth/address/0x40c31236b228935b0329eff066b1ad96e319595e/contract"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "oklink.com",
+      "url": "https://www.oklink.com/es-la/eth/tx/0x51ce3d9cfc85c1f6a532b908bb2debb16c7569eb8b76effe614016aac6635f65"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "explorer.phalcon.xyz",
+      "url": "https://explorer.phalcon.xyz/tx/eth/0x51ce3d9cfc85c1f6a532b908bb2debb16c7569eb8b76effe614016aac6635f65"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x51ce3d9cfc85c1f6a532b908bb2debb16c7569eb8b76effe614016aac6635f65"
+    },
+    {
+      "source": "blocksec",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs?tab=readme-ov-file#20231213-hypr---business-logic-flaw"
+    }
+  ]
+}

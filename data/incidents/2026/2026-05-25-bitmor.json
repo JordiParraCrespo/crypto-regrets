@@ -1,0 +1,72 @@
+{
+  "id": "2026-05-25-bitmor",
+  "name": "Bitmor",
+  "date": "2026-05-25",
+  "year": 2026,
+  "amountUsd": 6000,
+  "returnedUsd": null,
+  "chains": [
+    "Base"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "arbitrary-call",
+  "technique": "Token Approval Abuse",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "arbitrary-call",
+    "confidence": 0.81,
+    "top": [
+      {
+        "category": "arbitrary-call",
+        "p": 0.82
+      },
+      {
+        "category": "access-control",
+        "p": 0.18
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Bitmor, a Bitcoin-focused DeFi protocol on Base, suffered an exploit on 25 May 2026. Attackers abused the DCA contract's access to active ERC-20 token approvals, draining about $6,000 from user wallets. No primary on-chain evidence or team disclosure is available; findings rely on consistent reports across several monitoring platforms. The DCA contract was able to use persistent ERC-20 token approvals without enforcing adequate limits on who could invoke token transfers or under what conditions, allowing attackers to withdraw funds from any user who had previously granted an approval.",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "Bitmor, a Bitcoin-focused DeFi protocol on Base, suffered an exploit on 25 May 2026. Attackers abused the DCA contract's access to active ERC-20 token approvals, draining about $6,000 from user wallets. No primary on-chain evidence or team disclosure is available; findings rely on consistent reports across several monitoring platforms. The DCA contract was able to use persistent ERC-20 token approvals without enforcing adequate limits on who could invoke token transfers or under what conditions, allowing attackers to withdraw funds from any user who had previously granted an approval."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/bitmor-2026-05-25"
+    },
+    {
+      "source": "revertiq",
+      "label": "revoke.cash",
+      "url": "https://revoke.cash/exploits/bitmor"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/bitmor-hack-2026"
+    }
+  ]
+}

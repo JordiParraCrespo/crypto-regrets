@@ -1,0 +1,86 @@
+{
+  "id": "2026-07-21-flashtrade",
+  "name": "FlashTrade",
+  "date": "2026-07-21",
+  "year": 2026,
+  "amountUsd": 98000,
+  "returnedUsd": null,
+  "chains": [
+    "Solana"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "input-validation",
+  "technique": "Missing Input Validation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "input-validation",
+    "confidence": 0.96,
+    "top": [
+      {
+        "category": "input-validation",
+        "p": 0.96
+      },
+      {
+        "category": "access-control",
+        "p": 0.03
+      },
+      {
+        "category": "key-compromise",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.06,
+    "stateActor": 0.01,
+    "hasRootCause": 0.11
+  },
+  "bridge": false,
+  "language": "Rust",
+  "rootCause": "FlashTrade (a Solana perps protocol) detected an unauthorized $98,000 withdrawal from its ephemeral instance. As a precaution, trading, deposits, and withdrawals were paused. Thanks to the newly rolled-out withdrawal batching and monitoring system, the incident was detected quickly and contained. The team will fully cover the amount, with all user funds safe.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "FlashTrade (a Solana perps protocol) detected an unauthorized $98,000 withdrawal from its ephemeral instance. As a precaution, trading, deposits, and withdrawals were paused. Thanks to the newly rolled-out withdrawal batching and monitoring system, the incident was detected quickly and contained. The team will fully cover the amount, with all user funds safe."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "FlashTrade, a Solana-based perpetuals DEX, was exploited on July 21, 2026 after insufficient validation of the buffer account in MagicBlock's undelegation logic. A forged account bypassed program-derived address checks, enabling an unauthorized withdrawal of ~$98,000 USDC. The incident was detected within minutes and operations paused. All users were reimbursed and the vulnerable SDK was rapidly patched. The MagicBlock SDK's undelegation instruction accepted attacker-supplied buffer accounts without verifying that they matched the canonical program-derived address (PDA). This omission enabled a forged account to bypass intended authentication and withdraw funds."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/FlashTrade/status/2079727481574334544"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/flashtrade-2026-07-21"
+    },
+    {
+      "source": "revertiq",
+      "label": "coinalertnews.com",
+      "url": "https://coinalertnews.com/news/2026/07/22/flash-trade-usdc-exploit-solana"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/flashtrade-hack-2026"
+    }
+  ]
+}

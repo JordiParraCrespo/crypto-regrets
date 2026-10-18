@@ -1,0 +1,76 @@
+{
+  "id": "2022-10-21-bond-protocol",
+  "name": "Bond Protocol",
+  "date": "2022-10-21",
+  "year": 2022,
+  "amountUsd": 300000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "input-validation",
+  "technique": "Missing Input Validation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "input-validation",
+    "confidence": 0.89,
+    "top": [
+      {
+        "category": "input-validation",
+        "p": 0.9
+      },
+      {
+        "category": "access-control",
+        "p": 0.1
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "On October 21, 2022, Bond Protocol's BondFixedExpiryTeller contract, used in Olympus DAO's pilot bond program, was exploited on Ethereum due to missing input validation in the redeem function. About 30,437 OHM (~$300,000) were stolen; the funds were returned hours later. The attacker was able to withdraw all OHM reserves by calling redeem with arbitrary values, exploiting the absence of authorization or amount checks. The BondFixedExpiryTeller contract's redeem function did not check that the bond token and amount supplied by the caller were valid or authorized, allowing an attacker to redeem and transfer the full reserve of OHM from the contract.",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "On October 21, 2022, Bond Protocol's BondFixedExpiryTeller contract, used in Olympus DAO's pilot bond program, was exploited on Ethereum due to missing input validation in the redeem function. About 30,437 OHM (~$300,000) were stolen; the funds were returned hours later. The attacker was able to withdraw all OHM reserves by calling redeem with arbitrary values, exploiting the absence of authorization or amount checks. The BondFixedExpiryTeller contract's redeem function did not check that the bond token and amount supplied by the caller were valid or authorized, allowing an attacker to redeem and transfer the full reserve of OHM from the contract."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x3ed75df83d907412af874b7998d911fdf990704da87c2b1a8cf95ca5d21504cf",
+    "0xd38c92dc3de78ad282c2403a434db28fc47d3bbecdaece08c2bf91bd333c918e",
+    "0xdca75841cd3df92abf0da4ad8bb2218e3d44138923466640e28608baaaf6205f"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/bond-protocol-2022-10-21"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.solidityscan.com",
+      "url": "https://blog.solidityscan.com/olympus-dao-hack-analysis-f07d2a64f5ee/"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptobriefing.com",
+      "url": "https://cryptobriefing.com/olympusdao-hacker-returns-300k-hours-after-attack/"
+    }
+  ]
+}

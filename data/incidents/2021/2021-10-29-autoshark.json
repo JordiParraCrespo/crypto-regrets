@@ -1,0 +1,85 @@
+{
+  "id": "2021-10-29-autoshark",
+  "name": "AutoShark",
+  "date": "2021-10-29",
+  "year": 2021,
+  "amountUsd": 580000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Reward Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.98,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.98
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.83,
+    "stateActor": 0.02,
+    "hasRootCause": 0.52
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "The DeFi protocol AutoShark Finance on the Binance Smart Chain was attacked by hackers in a series of transactions, and the hackers made a profit of US$2 million (the protocol loss may be even greater). Previously, AutoShark was attacked by a flash loan in May, and the currency price crashed. AutoShark responded that it would issue a new token, JAWS, to compensate damaged users. Since then, AutoShark was attacked by lightning loan again in early October, and hackers made a profit of approximately US$580,000.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The DeFi protocol AutoShark Finance on the Binance Smart Chain was attacked by hackers in a series of transactions, and the hackers made a profit of US$2 million (the protocol loss may be even greater). Previously, AutoShark was attacked by a flash loan in May, and the currency price crashed. AutoShark responded that it would issue a new token, JAWS, to compensate damaged users. Since then, AutoShark was attacked by lightning loan again in early October, and hackers made a profit of approximately US$580,000."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "AutoShark's 2021-10-29 BNB Chain exploit let an attacker inflate the JAWS reward calculation with swap-driven balances, triggering excess minting. Public loss tracking records $580,000, while one contemporaneous report described about $2 million in profit. The reward minter read balances and fee inputs that the attacker could inflate inside the same transaction, so temporary swap activity was treated as realized performance and converted into excess reward minting."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xf90c49a90b1e0341ceb4a3c9029f42f39a32a90047e90399c1213c21af70a5cf",
+    "0x2fa4534f02988523ae050b42155c98c8ceb9671ea83199a30911a03e84e0400b"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/peckshield/status/1454026801869590529"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/autoshark-2021-10-29"
+    },
+    {
+      "source": "revertiq",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0xf90c49a90b1e0341ceb4a3c9029f42f39a32a90047e90399c1213c21af70a5cf"
+    },
+    {
+      "source": "revertiq",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x2fa4534f02988523ae050b42155c98c8ceb9671ea83199a30911a03e84e0400b"
+    }
+  ]
+}

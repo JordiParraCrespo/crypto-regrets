@@ -1,0 +1,85 @@
+{
+  "id": "2024-11-09-x319",
+  "name": "X319",
+  "date": "2024-11-09",
+  "year": 2024,
+  "amountUsd": 12900,
+  "returnedUsd": null,
+  "chains": [
+    "BNB Chain"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Access Control. Lost: $12.9 K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Access Control. Lost: $12.9 K"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 9 November 2024, the X319 staking contract on BNB Chain was exploited due to a missing access control on its claimEther function, resulting in the unauthorized withdrawal of approximately $12,900 in funds. The claimEther function in X319's staking contract lacked proper access control, allowing any caller to withdraw native tokens from the contract."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x679028cb0a5af35f57cbea120ec668a5caf72d74fcc6972adc7c75ef6c9a9092"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-11/X319_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-11/X319_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/TenArmorAlert/status/1855263208124416377"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/x319-2024-11-09"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/x319-hack-2024"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/past/2024/README.md#L293"
+    }
+  ]
+}

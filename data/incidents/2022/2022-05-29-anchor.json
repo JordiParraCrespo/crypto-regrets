@@ -1,0 +1,63 @@
+{
+  "id": "2022-05-29-anchor",
+  "name": "Anchor",
+  "date": "2022-05-29",
+  "year": 2022,
+  "amountUsd": 800000,
+  "returnedUsd": null,
+  "chains": [
+    "Terra"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Stale Oracle Price",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "On 29 May 2022, Anchor Protocol on Terra suffered an exploit due to a stale price reported by its LUNC oracle. The affected user deposited Luna Classic at an artificially high valuation and withdrew about $800,000 in UST, which the protocol was unable to recoup. Anchor responded by freezing its Earn & Borrow feature. Anchor's price oracle reported an inflated value for LUNC, allowing the exploiter to deposit large amounts at an incorrect valuation and borrow assets significantly above the true collateral value before the protocol fixed the oracle.",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "On 29 May 2022, Anchor Protocol on Terra suffered an exploit due to a stale price reported by its LUNC oracle. The affected user deposited Luna Classic at an artificially high valuation and withdrew about $800,000 in UST, which the protocol was unable to recoup. Anchor responded by freezing its Earn & Borrow feature. Anchor's price oracle reported an inflated value for LUNC, allowing the exploiter to deposit large amounts at an incorrect valuation and borrow assets significantly above the true collateral value before the protocol fixed the oracle."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/anchor-2022-05-29"
+    },
+    {
+      "source": "revertiq",
+      "label": "ambcrypto.com",
+      "url": "https://ambcrypto.com/analyzing-after-effects-of-anchor-protocol-freezing-earn-borrow-post-800k-exploit/"
+    }
+  ]
+}

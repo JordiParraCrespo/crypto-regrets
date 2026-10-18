@@ -1,0 +1,86 @@
+{
+  "id": "2026-06-25-nomic",
+  "name": "Nomic",
+  "date": "2026-06-25",
+  "year": 2026,
+  "amountUsd": 3150000,
+  "returnedUsd": null,
+  "chains": [
+    "Nomic",
+    "Osmosis"
+  ],
+  "targetType": null,
+  "category": "logic-error",
+  "technique": "Bridge Exploit; Double Spend; Unbacked Mint",
+  "classificationNote": "Classified by keyword rules from the REKT article excerpt.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "bridge-crosschain",
+    "confidence": 0.65,
+    "top": [
+      {
+        "category": "bridge-crosschain",
+        "p": 0.67
+      },
+      {
+        "category": "access-control",
+        "p": 0.32
+      },
+      {
+        "category": "logic-error",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "A flaw in Nomic’s forwarding logic minted 40.65 unbacked nBTC and left Osmosis allBTC about $3.15 million short. Osmosis froze 22.65 allBTC, but roughly 18 BTC-equivalent had already reached Tornado Cash before the 74-day-delayed discovery.",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "A flaw in Nomic’s forwarding logic minted 40.65 unbacked nBTC and left Osmosis allBTC about $3.15 million short. Osmosis froze 22.65 allBTC, but roughly 18 BTC-equivalent had already reached Tornado Cash before the 74-day-delayed discovery."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "A June 25 Nomic forwarding bug minted 40.650602 nBTC without BTC backing and left Osmosis allBTC short until a September freeze and recovery proposal. A public forensic reconstruction attributes the mint to a Nomic forwarding path that did not verify packet sender authorization and allowed escrow balance aliasing, so 25 self-referential ICS-20 packets minted nBTC without consuming new BTC backing."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "rekt",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "rekt",
+      "label": "REKT: Nomic - Rekt",
+      "url": "https://rekt.news/nomic-rekt"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/nomic-2026-09-09"
+    },
+    {
+      "source": "revertiq",
+      "label": "defillama.com",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "sigintzero.com",
+      "url": "https://sigintzero.com/blog/nomic-40-65-btc-escrow-self-transfer-mint"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptotimes.io",
+      "url": "https://www.cryptotimes.io/2026/09/09/osmosis-freezes-22-65-btc-after-nomic-exploit-hits-alloyed-btc-backing/"
+    }
+  ]
+}

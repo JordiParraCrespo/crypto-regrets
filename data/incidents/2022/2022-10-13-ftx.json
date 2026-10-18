@@ -1,0 +1,66 @@
+{
+  "id": "2022-10-13-ftx",
+  "name": "FTX",
+  "date": "2022-10-13",
+  "year": 2022,
+  "amountUsd": 70000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "CEX",
+  "category": "key-compromise",
+  "technique": "API Key Compromised",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.84,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.85
+      },
+      {
+        "category": "key-compromise",
+        "p": 0.08
+      },
+      {
+        "category": "input-validation",
+        "p": 0.03
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.91
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "According to the X-explore blog, the hacker address starting with 0x1d37 is stealing GAS by exploiting the FTX vulnerability, minting XEN tokens 17,000 times at zero cost. The reason for this attack is that FTX does not limit the gas limit of the withdrawal transaction while the withdrawal fee is free. Instead, the estimateGas method is used to evaluate the handling fee. This method causes the GAS LIMIT to be mostly 500,000, which exceeds the default value of 21,000 by 24%. times.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "According to the X-explore blog, the hacker address starting with 0x1d37 is stealing GAS by exploiting the FTX vulnerability, minting XEN tokens 17,000 times at zero cost. The reason for this attack is that FTX does not limit the gas limit of the withdrawal transaction while the withdrawal fee is free. Instead, the estimateGas method is used to evaluate the handling fee. This method causes the GAS LIMIT to be mostly 500,000, which exceeds the default value of 21,000 by 24%. times."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "mirror.xyz",
+      "url": "https://mirror.xyz/x-explore.eth/M2BJgQJaj2JK0mAO9OecByja3tU7mKXbHR_Agjs-MjA"
+    }
+  ]
+}

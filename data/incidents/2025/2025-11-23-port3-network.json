@@ -1,0 +1,86 @@
+{
+  "id": "2025-11-23-port3-network",
+  "name": "Port3 Network",
+  "date": "2025-11-23",
+  "year": 2025,
+  "amountUsd": 166000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Infinite Mint",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "bridge-crosschain",
+    "confidence": 0.39,
+    "top": [
+      {
+        "category": "bridge-crosschain",
+        "p": 0.43
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.42
+      },
+      {
+        "category": "input-validation",
+        "p": 0.12
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": true,
+  "language": "Solidity",
+  "rootCause": "The decentralized AI data network Port3 Network disclosed on X that its token PORT3 was maliciously minted by a hacker exploiting a cross-chain bridge vulnerability. According to on-chain analyst Yujin, the attacker used a contract flaw in the BridgeIn cross-chain bridge to mint 1 billion PORT3 tokens. The hacker then sold 162.75 million of these tokens on-chain, receiving 199.5 BNB (approximately USD 166,000) and causing the PORT3 price to plunge by 76%. Port3 Network later released an incident report explaining that the root cause stemmed from its use of NEXA Network’s CATERC20 cross-chain token solution. CATERC20 contains a boundary-condition valida…",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The decentralized AI data network Port3 Network disclosed on X that its token PORT3 was maliciously minted by a hacker exploiting a cross-chain bridge vulnerability. According to on-chain analyst Yujin, the attacker used a contract flaw in the BridgeIn cross-chain bridge to mint 1 billion PORT3 tokens. The hacker then sold 162.75 million of these tokens on-chain, receiving 199.5 BNB (approximately USD 166,000) and causing the PORT3 price to plunge by 76%. Port3 Network later released an incident report explaining that the root cause stemmed from its use of NEXA Network’s CATERC20 cross-chain token solution. CATERC20 contains a boundary-condition valida…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Port3 Network's BNB Chain token suffered a bridge contract exploit on November 23, 2025. An attacker minted 1 billion unauthorized PORT3 tokens due to a logic error triggered by a flawed ownership check after contract ownership was renounced. About 162.75 million PORT3 tokens were sold for ~$166,000, crashing the token price. The remainder were burned. Exchange listings paused and a new token contract was announced. A logic flaw in the adopted CATERC20 cross-chain contract allowed the owner check to pass when ownership was renounced (set to zero address), letting the attacker register a fake chain and invoke an unrestricted mint via BridgeIn."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/Port3Network/status/1992471015948210277"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/port3-network-2025-11-23"
+    },
+    {
+      "source": "revertiq",
+      "label": "coinalertnews.com",
+      "url": "https://coinalertnews.com/news/2025/11/23/1f4d25ec065aec98d03ebd968f4fb5ac"
+    },
+    {
+      "source": "revertiq",
+      "label": "discover.credshields.com",
+      "url": "https://discover.credshields.com/inside-the-port3-exploit-how-a-cross-chain-ownership-bug-enabled-a-billion-token-mint/"
+    }
+  ]
+}

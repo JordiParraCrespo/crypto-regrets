@@ -1,0 +1,118 @@
+{
+  "id": "2021-05-28-burgerswap",
+  "name": "BurgerSwap",
+  "date": "2021-05-28",
+  "year": 2021,
+  "amountUsd": 7200000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "reentrancy",
+  "technique": "Reentrancy",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "reentrancy",
+    "confidence": 0.65,
+    "top": [
+      {
+        "category": "reentrancy",
+        "p": 0.67
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.27
+      },
+      {
+        "category": "logic-error",
+        "p": 0.05
+      }
+    ],
+    "flashLoan": 0.81,
+    "stateActor": 0.02,
+    "hasRootCause": 0.88
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "Mathematical flaw + Reentrancy",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Mathematical flaw + Reentrancy"
+    },
+    {
+      "source": "REKT",
+      "text": "The hackers are really spoiling us this week with our fourth helping of the exact same meal. Can you ever really get tired of a classic? $7.2M was stolen from BurgerSwap in just 14 servings."
+    },
+    {
+      "source": "SlowMist",
+      "text": "BurgerSwap, an automatic market maker on the BSC chain, suffered a lightning loan attack and lost nearly 7 million U.S. dollars. This attack is a problem in the BurgerSwap architecture. Since the Pair layer completely trusts the data of the PaltForm layer, it did not perform another check on its own, which led to the attack."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "BurgerSwap, a BSC-based AMM, was exploited on May 27, 2021, losing approximately $7.2M due to a missing reentrancy guard and failure to update pool reserves before external calls, allowing repeated stale-reserve swaps via a flash loan and fake token pair. The vulnerable swap function allowed reentrant calls during external token transfers, resulting in repeated swaps using pre-reentry (stale) reserve values. The protocol did not update pool reserves before these calls and lacked a reentrancy guard. This allowed an attacker to withdraw excessive assets by exploiting a fake token's transferFrom() hook, combined with a flash loan."
+    }
+  ],
+  "audit": "Unaudited",
+  "txHashes": [
+    "0xac8a739c1f668b13d065d56a03c37a686e0aa1c9339e79fcbc5a2d0a6311e333"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2021-05/BurgerSwap_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2021-05/BurgerSwap_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Mudit__Gupta/status/1398156036574306304"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: BurgerSwap - REKT",
+      "url": "https://rekt.news/burgerswap-rekt"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/burger_swap/status/1398161871778115586"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/burgerswap-2021-05-28"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainhint.com",
+      "url": "https://chainhint.com/cases/burgerswap-hack"
+    },
+    {
+      "source": "revertiq",
+      "label": "quillhashteam.medium.com",
+      "url": "https://quillhashteam.medium.com/burgerswap-flash-loan-attack-analysis-888b1911daef"
+    }
+  ]
+}

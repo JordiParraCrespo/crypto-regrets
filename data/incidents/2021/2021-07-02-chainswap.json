@@ -1,0 +1,86 @@
+{
+  "id": "2021-07-02-chainswap",
+  "name": "ChainSwap",
+  "date": "2021-07-02",
+  "year": 2021,
+  "amountUsd": 800000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum",
+    "Binance Smart Chain"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "bridge-crosschain",
+  "technique": "Bridge Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "signature-crypto",
+    "confidence": 0.57,
+    "top": [
+      {
+        "category": "signature-crypto",
+        "p": 0.6
+      },
+      {
+        "category": "bridge-crosschain",
+        "p": 0.33
+      },
+      {
+        "category": "input-validation",
+        "p": 0.04
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.94
+  },
+  "bridge": true,
+  "language": "Solidity",
+  "rootCause": "Bridge, logic flaw. Lost: $.8 million",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Bridge, logic flaw. Lost: $.8 million"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "insufficient validation Vulnerable code snippet: https://bscscan.com/address/0xc5185d2c68aAa7c5f0921948f8135d01510D647F#code#L2386 Attacker only needs to generate a random address and generate the corresponding signature to trick ChainSwap."
+    },
+    {
+      "source": "SlowMist",
+      "text": "The cross-chain asset bridge Chainswap announced the details of the hacking incident today, saying that at 04:30 AM UTC on July 2nd, they noticed an abnormality on the cross-chain bridge. Some users reported that their tokens were actively removed from wallets interacting with ChainSwap. After it was taken out, the ChainSwap team immediately froze the cross-chain bridge, shut down all nodes, and deployed the fix within 30 minutes. The team of the affected project received an alert. According to the announcement, the stolen assets include 32237576.17 TSHP, 80052.82027 CORRA, 643405.7157 BLANK, 2922720 RAI, 19392.27712 ROOM, 4820309.98 DEXT, 210,108.22 UMB, 55476328.8 FAIR.…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2021-07/Chainswap_exp1.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2021-07/Chainswap_exp1.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "chain-swap.medium.com",
+      "url": "https://chain-swap.medium.com/chainswap-post-mortem-and-compensation-plan-90cad50898ab"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0xc5185d2c68aAa7c5f0921948f8135d01510D647F#code#L2386"
+    }
+  ]
+}

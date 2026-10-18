@@ -1,0 +1,76 @@
+{
+  "id": "2023-07-07-lusd",
+  "name": "LUSD",
+  "date": "2023-07-07",
+  "year": 2023,
+  "amountUsd": 9464,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Price manipulation attack",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.98).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.98,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.98
+      },
+      {
+        "category": "logic-error",
+        "p": 0.01
+      },
+      {
+        "category": "market-manipulation",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.6,
+    "stateActor": 0.02,
+    "hasRootCause": 0.93
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Price manipulation attack. Lost: ~9464USDT",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Price manipulation attack. Lost: ~9464USDT"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "the loan contract use getAmountsOut to calculate how many lusd should be mint,and the hacker manipulate the BTCB-BSC-USD pool, borrow 1BTC and return 800k BSC-USD,so the loan contract will mint extra lusd Vulnerable code snippet: Attack tx: https://explorer.phalcon.xyz/tx/bsc/0x1eeef7b9a12b13f82ba04a7951c163eb566aa048050d6e9318b725d7bcec6bfa Analysis:"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x1eeef7b9a12b13f82ba04a7951c163eb566aa048050d6e9318b725d7bcec6bfa"
+  ],
+  "poc": null,
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/AnciliaInc/status/1677391242878140417"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "explorer.phalcon.xyz",
+      "url": "https://explorer.phalcon.xyz/tx/bsc/0x1eeef7b9a12b13f82ba04a7951c163eb566aa048050d6e9318b725d7bcec6bfa"
+    }
+  ]
+}

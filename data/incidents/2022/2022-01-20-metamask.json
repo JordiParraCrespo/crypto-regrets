@@ -1,0 +1,58 @@
+{
+  "id": "2022-01-20-metamask",
+  "name": "MetaMask",
+  "date": "2022-01-20",
+  "year": 2022,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [],
+  "targetType": null,
+  "category": "unknown",
+  "technique": "Information Leakage",
+  "classificationNote": null,
+  "classifiedBy": "none",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "frontend-infra",
+    "confidence": 0.44,
+    "top": [
+      {
+        "category": "frontend-infra",
+        "p": 0.47000000000000003
+      },
+      {
+        "category": "input-validation",
+        "p": 0.36
+      },
+      {
+        "category": "client-bug",
+        "p": 0.1
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.01,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "@alxlpsc disclosed on medium that MetaMask has serious privacy leaks. The vulnerability mainly uses MetaMask to automatically load NFT image URLs. Basic attack idea: the attacker can set the URI of the NFT to a server URL that he can control, and transfer the NFT to the target account; when the user logs in to MetaMask, MetaMask will automatically scan the NFT owned by the account, and initiate a pointer to The HTTP request to the attacker's server; the attacker can obtain the victim's IP information from the access log.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "@alxlpsc disclosed on medium that MetaMask has serious privacy leaks. The vulnerability mainly uses MetaMask to automatically load NFT image URLs. Basic attack idea: the attacker can set the URI of the NFT to a server URL that he can control, and transfer the NFT to the target account; when the user logs in to MetaMask, MetaMask will automatically scan the NFT owned by the account, and initiate a pointer to The HTTP request to the attacker's server; the attacker can obtain the victim's IP information from the access log."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "slowmist",
+      "label": "medium.com",
+      "url": "https://medium.com/@alxlpsc/critical-privacy-vulnerability-getting-exposed-by-metamask-693c63c2ce94"
+    }
+  ]
+}

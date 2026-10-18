@@ -1,0 +1,82 @@
+{
+  "id": "2016-05-14-gatecoin",
+  "name": "Gatecoin",
+  "date": "2016-05-14",
+  "year": 2016,
+  "amountUsd": 2000000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "CEX",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.55,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.58
+      },
+      {
+        "category": "key-compromise",
+        "p": 0.42
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.12
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "Gatecoin experienced a cyberattack on its hot wallets that resulted in the loss of funds. A new update from the exchange team indicated that as much as $2m was lost, confirming rumors that circulated soon after the hack became apparent. Gatecoin has claimed that it lost as much as 185,000 ethers and 250 bitcoins, an amount worth roughly $2.14m at press time.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Gatecoin experienced a cyberattack on its hot wallets that resulted in the loss of funds. A new update from the exchange team indicated that as much as $2m was lost, confirming rumors that circulated soon after the hack became apparent. Gatecoin has claimed that it lost as much as 185,000 ethers and 250 bitcoins, an amount worth roughly $2.14m at press time."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Gatecoin, a Hong Kong-based cryptocurrency exchange, suffered a breach of its hot wallets between May 9 and May 13, 2016. Attackers redirected Ethereum and Bitcoin deposits from multisignature cold storage to a compromised hot wallet, resulting in losses of about 185,000 ETH and 250 BTC (roughly $2 million at the time). Cold wallet reserves remained safe, while customer reimbursement required raising new funds. The root cause was the bypass of access controls meant to protect customer assets. Attackers altered the exchange’s system such that ETH and BTC deposit flows bypassed multisignature cold wallet protections and were credited directly to the hot wallet, exposing them to theft.…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/gatecoin-2-million-bitcoin-ether-security-breach"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/gatecoin-2016-05-14"
+    },
+    {
+      "source": "revertiq",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/markets/2016/05/16/gatecoin-claims-2-million-in-bitcoins-and-ethers-lost-in-security-breach"
+    },
+    {
+      "source": "revertiq",
+      "label": "csidb.net",
+      "url": "https://www.csidb.net/csidb/incidents/8673c914-86b4-47c8-b3fe-0e776431f512/"
+    }
+  ]
+}

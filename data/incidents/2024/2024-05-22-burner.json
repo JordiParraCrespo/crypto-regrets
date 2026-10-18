@@ -1,0 +1,79 @@
+{
+  "id": "2024-05-22-burner",
+  "name": "Burner",
+  "date": "2024-05-22",
+  "year": 2024,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "sandwich ack",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.79).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.79,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.8
+      },
+      {
+        "category": "market-manipulation",
+        "p": 0.17
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.1,
+    "stateActor": 0.02,
+    "hasRootCause": 0.89
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "sandwich ack. Lost: 1.7 eth",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "sandwich ack. Lost: 1.7 eth"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Incorrect logic so sandwich. Vulnerable code snippet: https://etherscan.io/address/0x4d4d05e1205e3A412ae1469C99e0d954113aa76F#code Attack tx: https://app.blocksec.com/explorer/tx/eth/0x3bba4fb6de00dd38df3ad68e51c19fe575a95a296e0632028f101c5199b6f71 Analysis: https://medium.com/@daleewong/burner-exploit-analysis-0733a69ddc27"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-05/Burner_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-05/Burner_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/address/0x4d4d05e1205e3A412ae1469C99e0d954113aa76F#code"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/eth/0x3bba4fb6de00dd38df3ad68e51c19fe575a95a296e0632028f101c5199b6f71"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "medium.com",
+      "url": "https://medium.com/@daleewong/burner-exploit-analysis-0733a69ddc27"
+    }
+  ]
+}

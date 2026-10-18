@@ -1,0 +1,83 @@
+{
+  "id": "2022-11-23-numbers-protocol",
+  "name": "Numbers Protocol",
+  "date": "2022-11-23",
+  "year": 2022,
+  "amountUsd": 13836,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "bridge-crosschain",
+  "technique": "Bridge Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "signature-crypto",
+    "confidence": 0.38,
+    "top": [
+      {
+        "category": "signature-crypto",
+        "p": 0.42
+      },
+      {
+        "category": "bridge-crosschain",
+        "p": 0.24
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.15
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": true,
+  "language": "Solidity",
+  "rootCause": "According to the intelligence of the SlowMist security team, the Numbers Protocol (NUM) token project on the ETH chain was attacked, and the attacker made a profit of about $13,836. The main reason for this attack is that the NUM token does not have a permit function and has a callback function, so a fake signature can be passed in to deceive the cross-chain bridge and cause the user's assets to be transferred out unexpectedly.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "According to the intelligence of the SlowMist security team, the Numbers Protocol (NUM) token project on the ETH chain was attacked, and the attacker made a profit of about $13,836. The main reason for this attack is that the NUM token does not have a permit function and has a callback function, so a fake signature can be passed in to deceive the cross-chain bridge and cause the user's assets to be transferred out unexpectedly."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 23 November 2022, the Numbers Protocol NUM token suffered a targeted exploit due to a logic flaw when interacting with the Multichain bridge. The attacker emptied over 557,754 NUM (~$13,800) from a user’s account by abusing a missing permit function, converting the tokens to USDC and WETH on Ethereum. The NUM ERC-20 token did not implement the permit (EIP-2612) function expected by the Multichain bridge. The Multichain router attempted to use permit for in-transaction token approval but instead triggered the NUM token’s fallback behavior, allowing a fake signature to bypass permission checks and transfer tokens from user wallets."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x8a8145ab28b5d2a2e61d74c02c12350731f479b3175893de2014124f998bff32"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "panewslab.com",
+      "url": "https://www.panewslab.com/zh/articledetails/n3dbo2gk.html"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/numbers-protocol-2022-11-23"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/numbers-protocol-hack-2022"
+    }
+  ]
+}

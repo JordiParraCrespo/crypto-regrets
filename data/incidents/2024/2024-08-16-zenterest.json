@@ -1,0 +1,94 @@
+{
+  "id": "2024-08-16-zenterest",
+  "name": "Zenterest",
+  "date": "2024-08-16",
+  "year": 2024,
+  "amountUsd": 21000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Stale Oracle Price",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.93,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Price Out Of Date. Lost: ~21000 USD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Price Out Of Date. Lost: ~21000 USD"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The ZenLend protocol relied on outdated or manipulable price oracles for its lending calculations. The attacker exploited this by using a flash loan of 85 WHITE tokens from a Uniswap V3 pool to manipulate the collateral and borrowing mechanics. By transferring MPH tokens to the zenMPH contract, minting tokens, and borrowing WHITE tokens based on outdated price data, the attacker extracted more WHITE tokens than permitted, profiting from the discrepancy between the oracle price and actual market conditions. Vulnerable code snippet: Attack tx: https://etherscan.io/tx/0xfe8bc757d87e97a5471378c90d390df47e1b29bb9fca918b94acd8ecfaadc598 Analysis: https://learnblockchain.cn/article/9079"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Zenterest on Ethereum Mainnet was exploited on 16 August 2024 for approximately $21,000, caused by a stale oracle price. The attacker leveraged outdated price data to borrow WHITE tokens, profiting from an inaccurate collateral valuation. The Zenterest lending market failed to update its MPH,WHITE price feed for over 570 days. This allowed the attacker to mint zenMPH collateral at an inflated price, then borrow and withdraw WHITE tokens against the stale valuation."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xfe8bc757d87e97a5471378c90d390df47e1b29bb9fca918b94acd8ecfaadc598"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-08/Zenterest_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-08/Zenterest_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xfe8bc757d87e97a5471378c90d390df47e1b29bb9fca918b94acd8ecfaadc598"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "learnblockchain.cn",
+      "url": "https://learnblockchain.cn/article/9079"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/zenterest-2024-08-16"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/zenterest-hack-2024"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/past/2024/README.md#L1011"
+    }
+  ]
+}

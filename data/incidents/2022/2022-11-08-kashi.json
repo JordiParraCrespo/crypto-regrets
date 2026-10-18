@@ -1,0 +1,86 @@
+{
+  "id": "2022-11-08-kashi",
+  "name": "Kashi",
+  "date": "2022-11-08",
+  "year": 2022,
+  "amountUsd": 110000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Price-caching Design Defect",
+  "classificationNote": "Upstream label missing; classified by keyword rules from the root-cause text.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.44,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.47000000000000003
+      },
+      {
+        "category": "logic-error",
+        "p": 0.46
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.05
+      }
+    ],
+    "flashLoan": 0.16,
+    "stateActor": 0.02,
+    "hasRootCause": 0.93
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Price-caching Design Defect. Lost: $110k",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Price-caching Design Defect. Lost: $110k"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The borrow function uses the outdated exchangeRate to verify the borrowed share in the solvent modifier. Vulnerable code snippet: https://etherscan.io/address/0x2cba6ab6574646badc84f0544d05059e57a5dc42#code Attack tx: https://etherscan.io/tx/0x3d163bfbec5686d428a6d43e45e2626a220cc4fcfac7620c620b82c1f2537c78 Analysis: https://eigenphi.substack.com/p/casting-a-magic-spell-on-abracadabra https://twitter.com/BlockSecTeam/status/1603633067876155393"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x3d163bfbec5686d428a6d43e45e2626a220cc4fcfac7620c620b82c1f2537c78"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-11/Kashi_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-11/Kashi_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "eigenphi.substack.com",
+      "url": "https://eigenphi.substack.com/p/casting-a-magic-spell-on-abracadabra"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BlockSecTeam/status/1603633067876155393"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/address/0x2cba6ab6574646badc84f0544d05059e57a5dc42#code"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x3d163bfbec5686d428a6d43e45e2626a220cc4fcfac7620c620b82c1f2537c78"
+    }
+  ]
+}

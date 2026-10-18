@@ -1,0 +1,161 @@
+{
+  "id": "2025-04-14-kiloex",
+  "name": "KiloEx",
+  "date": "2025-04-14",
+  "year": 2025,
+  "amountUsd": 7500000,
+  "returnedUsd": 6750000,
+  "chains": [
+    "BSC",
+    "Base",
+    "Taiko"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.55,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.58
+      },
+      {
+        "category": "signature-crypto",
+        "p": 0.38
+      },
+      {
+        "category": "input-validation",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Oracle manipulation 101 - check your damn validation. KiloEx lost almost $7.5 million when their MinimalForwarder contract accepted any forged signature without verification. The attack hit Base, BNB Chain, opBNB, Taiko, and Manta simultaneously.",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "Oracle manipulation 101 - check your damn validation. KiloEx lost almost $7.5 million when their MinimalForwarder contract accepted any forged signature without verification. The attack hit Base, BNB Chain, opBNB, Taiko, and Manta simultaneously."
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The KiloEx perpetual DEX deployed a MinimalForwarder contract to support gasless meta-transactions. Its execute() function correctly recovered the signer address via ecrecover from the provided ECDSA signature, but critically failed to verify that the recovered signer matched the from field in the forwarded transaction payload. This allowed an attacker to forge a transaction appearing to originate from a trusted Keeper address without possessing the Keeper's private key. With the Keeper role impersonated, the attacker called the privileged setPrices() function on KiloPriceFeed with arbitrary values — first setting ETH/USD to $100 to open a leveraged position cheaply, then setting it to $10,000 to close that position for an ~$3.1M profit in a single transaction. This pattern was repeated across Base, BNB Chain, and opBNB, draining a combined $8.4M before the platform was suspended. Attack Tx: 0xf0fcce0807a82041d050a60461e187f0e81a6f7fbda69bb600c04049d924e138 Analysis: KiloEx Security Incident Root Cause Analysis Post-Mortem Inside the $7.5M KiloEx Hack - Ackee Blockchain"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The decentralized perpetual futures exchange KiloEx was attacked, involving assets across multiple chains including BNB and Base. According to an analysis by the SlowMist Security Team, the root cause of the incident was the lack of access control checks in KiloEx's top-level contract (MinimalForwarder), which allowed the manipulation of oracle prices. Thanks to the active response from the project team and collaboration with SlowMist and others, all stolen assets were successfully recovered after 3.5 days of effort."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On April 14, 2025, KiloEx, a multi-chain perpetual DEX, suffered a $7.4M loss due to a critical access control failure in its TrustedForwarder contract. The attacker abused the absence of proper verification to manipulate oracle prices, opening and closing leveraged positions for profit across Base and other chains. Funds were returned after negotiations. The TrustedForwarder contract inherited OpenZeppelin's MinimalForwarderUpgradeable without adding permission or signature verification, enabling any caller to execute with an arbitrary 'from' address. This gave the attacker unauthorized oracle access and price manipulation capability."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On April 14, 2025, KiloEx was exploited across Base, BNB Chain, and opBNB, losing about $7.4M through a privilege-escalation bug in the MinimalForwarder contract. The attacker bypassed signature checks, manipulated oracle prices, and extracted profits by opening and closing leveraged positions at artificial valuations. About 90% of the stolen funds were recovered days later through whitehat negotiation. A missing signature binding and insufficient access control in the MinimalForwarder (TrustedForwarder) contract allowed arbitrary callers to impersonate privileged roles, enabling unauthorized oracle price manipulation and draining protocol funds."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xf0fcce0807a82041d050a60461e187f0e81a6f7fbda69bb600c04049d924e138",
+    "0x38b25be14b83fd549d5e0b29ba962db83d41f5f9072d0eac4f692fa8e7110bc0",
+    "0xde7f5e78ea63cbdcd199f4b109db2a551b4462dec79e4dba37711f6c814b26e6",
+    "0x6b378c84aa57097fb5845f285476e33d6832b8090d36d02fe0e1aed909228edd",
+    "0x1aaf5d1dc3cd07feb5530fbd6aa09d48b02cbd232f78a40c6ce8e12c55927d03",
+    "0xa0fa4ab8ded0c07085d244e1981919b440f78b609e1cf8d7f8ee32d358dfdf46",
+    "0x79eb28ae21698733048e2dae9f9fe3d913396dc9d93a0e30d659df6065127964"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: KiloEx - Rekt",
+      "url": "https://rekt.news/kiloex-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "basescan.org",
+      "url": "https://basescan.org/tx/0xf0fcce0807a82041d050a60461e187f0e81a6f7fbda69bb600c04049d924e138"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "medium.com",
+      "url": "https://medium.com/@KiloEx/kiloex-security-incident-root-cause-analysis-post-mortem-3d899caac08c"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "ackee.xyz",
+      "url": "https://ackee.xyz/blog/inside-the-7-5m-kiloex-hack/"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xf0fcce0807a82041d050a60461e187f0e81a6f7fbda69bb600c04049d924e138"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/KiloEx_perp/status/1913168299292328115"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/kiloex-2025-04-15"
+    },
+    {
+      "source": "revertiq",
+      "label": "quillaudits.com",
+      "url": "https://www.quillaudits.com/blog/hack-analysis/kiloex-exploit-breakdown"
+    },
+    {
+      "source": "revertiq",
+      "label": "halborn.com",
+      "url": "https://www.halborn.com/blog/post/explained-the-kiloex-hack-april-2025"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptonews.net",
+      "url": "https://cryptonews.net/news/security/30842222/"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/kiloex-access-control-2025-04-14"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/de-fi-rekt-report-april-2025-5-9-billion-lost-across-10-incidents-2-8-million-recovered"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.solidityscan.com",
+      "url": "https://blog.solidityscan.com/kiloex-vault-hack-analysis-123a086ccae3/"
+    },
+    {
+      "source": "revertiq",
+      "label": "blockchainbreaches.com",
+      "url": "https://www.blockchainbreaches.com/en/breaches/kiloex-2025"
+    }
+  ]
+}

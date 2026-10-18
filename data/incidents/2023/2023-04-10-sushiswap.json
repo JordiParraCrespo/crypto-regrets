@@ -1,0 +1,176 @@
+{
+  "id": "2023-04-10-sushiswap",
+  "name": "SushiSwap",
+  "date": "2023-04-10",
+  "year": 2023,
+  "amountUsd": 3300000,
+  "returnedUsd": 3300000,
+  "chains": [
+    "Ethereum",
+    "Arbitrum",
+    "Optimism",
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "input-validation",
+  "technique": "Missing Input Validation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "input-validation",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "input-validation",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.08,
+    "stateActor": 0.02,
+    "hasRootCause": 0.94
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Unchecked User Input. Lost: >$3.3M",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Unchecked User Input. Lost: >$3.3M"
+    },
+    {
+      "source": "REKT",
+      "text": "Yoink. Over $3.3M was stolen from SushiSwap users over the weekend via a new routing contract. This is a bad look for an already-embattled protocol. How many more scandals can Sushi take?"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Sushi RouteProcessor2 does not check user input route carefully. The root cause is that ProcessRoute does not perform any checks on the user-provided route parameter, allowing the attacker to exploit this issue by constructing a malicious route parameter that causes the contract to read a Pool created by the attacker. Vulnerable code snippet: https://etherscan.io/address/0x044b75f554b886A065b9567891e45c79542d7357#code#F1#L53 /// @notice Processes the route generated off-chain. Has a lock /// @param tokenIn Address of the input token /// @param amountIn Amount of the input token /// @param tokenOut Address of the output token /// @param amountOutMin Minimum amount of the output token /// @return amountOut Actual amount of the output token function processRoute( address tokenIn, uint256 amountIn, address tokenOut, uint256 amountOutMin, address to, bytes memory route ) external payable lock returns (uint256 amountOut) { return processRouteInternal(tokenIn, amountIn, tokenOut, amountOutMin, to, route); } Attack tx: Attack tx: https://www.notion.so https://library.dedaub.com/ethereum/tx/0x04b166e7b4ab5105a8e9c85f08f6346de1c66368687215b0e0b58d6e5002bc32 Analysis: https://twitter.com/peckshield/status/1644907207530774530 https://twitter.com/SlowMist_Team/status/1644936375924584449 https://twitter.com/AnciliaInc/status/1644925421006520320"
+    },
+    {
+      "source": "SlowMist",
+      "text": "SUSHI RouteProcessor2 was attacked and lost about 1800 ETH, about $3.34 million. According to the analysis of SlowMist, the root cause is that ProcessRoute does not perform any checks on the route parameters passed in by the user, which leads the attacker to use this problem to construct a malicious route parameter so that the Pool read by the contract is created by the attacker. On April 19, SushiSwap released a postmortem analysis report stating that due to 18 replayed transactions, the 1,800 WETH initially depleted from the first user’s wallet ended up in multiple wallets. A total of 885 ETH have been refunded so far. Of these, approximately 685 ETH…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On April 9-10, 2023, SushiSwap's RouteProcessor2 contract on Ethereum (and other chains) was exploited due to missing validation of the route input. Attackers crafted malicious swap routes to steal funds from approved users, resulting in losses of about $3.3 million. The RouteProcessor2 contract failed to validate the user-supplied route argument in processRoute(), allowing attackers to redirect swaps to attacker-controlled pools. This bypassed pool verification and enabled malicious callback execution, leading to unauthorized asset transfers."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On April 9, 2023, SushiSwap's RouteProcessor2 contract was exploited on Ethereum and several EVM chains for approximately $3.3 million. Attackers crafted route data that caused the contract to call transferFrom on token contracts, draining funds from users who had previously approved RouteProcessor2. White-hat rescues recovered a fraction of the funds by front-running the exploit. RouteProcessor2 accepted user-supplied external call targets and calldata without validating them against an allowlist. This allowed attackers to encode crafted routeData so the contract executed transferFrom on behalf of victim wallets, enabled by existing token approvals."
+    }
+  ],
+  "audit": "Unaudited",
+  "txHashes": [
+    "0x04b166e7b4ab5105a8e9c85f08f6346de1c66368687215b0e0b58d6e5002bc32",
+    "0x11d069cbe4490cc483b1ae2e77c9c79493213347b42a8dec2ded25724e2f1835",
+    "0x40be81f859227aa952e70fe1f5e8c84feed6aa3c2a4d6bf38125cd6bc222560a",
+    "0xbb9aac794415b2fbe2c947fe37ebb29c75526c150d33dd408ccddbcb52534828",
+    "0x6ac2d60c8f48144f2adb10ab161efdd491a791c6a666c450d4b33c6889fc0925",
+    "0xea3480f1f1d1f0b32283f8f282ce16403fe22ede35c0b71a732193e56c5c45e8",
+    "0x8e28bc58897f35e71b727f3066ae57b4d597014db6778bbf70838347c112e0e1",
+    "0x542838429f32b49d71264cc1036bb7cfd66824613ba0c437f7ce4269edb58f74",
+    "0x3610d3e3f2381c73f4bd128df9be90de87482802f30712dd555619b8bf3462a4",
+    "0x43ff7e01423044cfb501b4fe9ef1386725c0ddc117dadd6e6620cb68bdeaf4f9"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-04/Sushi_Router_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-04/Sushi_Router_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/peckshield/status/1644907207530774530"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/SlowMist_Team/status/1644936375924584449"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/AnciliaInc/status/1644925421006520320"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: SushiSwap - REKT",
+      "url": "https://rekt.news/sushi-yoink-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/address/0x044b75f554b886A065b9567891e45c79542d7357#code#F1#L53"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "notion.so",
+      "url": "https://www.notion.so"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "library.dedaub.com",
+      "url": "https://library.dedaub.com/ethereum/tx/0x04b166e7b4ab5105a8e9c85f08f6346de1c66368687215b0e0b58d6e5002bc32"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x11d069cbe4490cc483b1ae2e77c9c79493213347b42a8dec2ded25724e2f1835"
+    },
+    {
+      "source": "blocksec",
+      "label": "blocksec.com",
+      "url": "https://blocksec.com/blog/8-sushi-swap-incident-a-clumsy-rescue-attempt-leads-to-a-series-of-copycat-attacks"
+    },
+    {
+      "source": "blocksec",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs?tab=readme-ov-file#20230409-sushiswap---unchecked-user-input"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/sushiswap-2023-04-10"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.solidityscan.com",
+      "url": "https://blog.solidityscan.com/sushiswap-hack-analysis-improper-router-approve-parameters-68bfd266c33b/"
+    },
+    {
+      "source": "revertiq",
+      "label": "certik.com",
+      "url": "https://www.certik.com/blog/post-mortem-sushiswap"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/sushi-2023-04-09"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "blocksec.com",
+      "url": "https://www.blocksec.com/blog/8-sushi-swap-incident-a-clumsy-rescue-attempt-leads-to-a-series-of-copycat-attacks"
+    }
+  ]
+}

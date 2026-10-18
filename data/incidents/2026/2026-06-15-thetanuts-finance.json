@@ -1,0 +1,109 @@
+{
+  "id": "2026-06-15-thetanuts-finance",
+  "name": "Thetanuts Finance",
+  "date": "2026-06-15",
+  "year": 2026,
+  "amountUsd": 105471.5,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Rounding Error",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.63,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.65
+      },
+      {
+        "category": "logic-error",
+        "p": 0.35
+      }
+    ],
+    "flashLoan": 0.98,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Index vault component-share accounting flaw. Lost: 105471.50 USDC",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Index vault component-share accounting flaw. Lost: 105471.50 USDC"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The Thetanuts index vault lets holders claim() a proportional basket of underlying component-vault shares (BTC/ETH/AVAX/BNB/MATIC USD vaults) for their index shares, and mint() new index shares by depositing component shares. The accounting is broken: an attacker can claim out the component shares and then re-mint replacement index shares while the component-vault transfer amounts pulled by mint stay at zero (the mint does not actually charge/transfer the component shares it should). The attacker flash-loans nearly the entire index-share balance from Aave's aToken, claims the component shares from the borrowed index shares, then loops mint() to fabricate enough index shares to repay the Aave flash loan - at no real cost. After repaying the loan, the claimed component vault shares (later converted to USDC via initWithdraw) plus residual shares are pure profit, ~105,471 USDC. Vulnerable code snippet: Attack Tx: https://etherscan.io/tx/0xbba9f138fe39503bfd1aa62932dbd6ab35d37d23d48e4b7bf2988a9d5dc39fec Analysis: https://x.com/PeckShieldAlert/status/2066540451126190312"
+    },
+    {
+      "source": "SlowMist",
+      "text": "A legacy vault of Thetanuts Finance on Ethereum was exploited due to a flaw in redemption math and integer calculations in the mint/claim functions. The attacker used flash loans to drain approximately $2.1 million after reducing token supply to near zero. A whitehat recovered most funds (~$2M), resulting in a net loss of around $105K according to the project. Current products and active contracts were unaffected."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Thetanuts Finance's deprecated options vault on Ethereum was exploited for $2.1M through a rounding bug in share/claim accounting, allowing free minting and redemption of option tokens. Most funds were recovered by a white-hat. The legacy vault's mint logic performed integer division that could round deposit amounts to zero under specific low-supply states, enabling attackers to repeatedly mint new option tokens without paying for collateral."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xbba9f138fe39503bfd1aa62932dbd6ab35d37d23d48e4b7bf2988a9d5dc39fec",
+    "0x4c0a75e27855f350c95e3dc64906b1b2f19e6649fdfd0d9374f3915067418bc1"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-06/Thetanuts_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-06/Thetanuts_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/PeckShieldAlert/status/2066540451126190312"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xbba9f138fe39503bfd1aa62932dbd6ab35d37d23d48e4b7bf2988a9d5dc39fec"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/ThetanutsFi/status/2066795181123543070"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/thetanuts-finance-2026-06-15"
+    },
+    {
+      "source": "revertiq",
+      "label": "blockchainbreaches.com",
+      "url": "https://www.blockchainbreaches.com/en/breaches/thetanuts-2026"
+    },
+    {
+      "source": "revertiq",
+      "label": "coinalertnews.com",
+      "url": "https://coinalertnews.com/news/2026/06/15/thetanuts-finance-exploit-2m-recovery"
+    }
+  ]
+}

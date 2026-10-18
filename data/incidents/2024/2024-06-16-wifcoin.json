@@ -1,0 +1,100 @@
+{
+  "id": "2024-06-16-wifcoin",
+  "name": "WIFCOIN",
+  "date": "2024-06-16",
+  "year": 2024,
+  "amountUsd": 13189920,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "Token",
+  "category": "logic-error",
+  "technique": "Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "business logic flaw. Lost: ~3.4 ETH (WIF token)",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "business logic flaw. Lost: ~3.4 ETH (WIF token)"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Double claimEarned, Each time the claimEarned function is called, the code iterates through all the stakes and accumulates the calculated _earned amount. However, after calculating the rewards, the already calculated rewards are not marked as claimed. As a result, the next time claimEarned is called, it will recalculate those already claimed rewards, allowing users to claim rewards multiple times. Vulnerable code snippet: Attack tx: https://etherscan.io/tx/0x58424115c6576b19cfb78b0b7ff00e0c13daa06d259f2a67210c112731519e09 Analysis: https://x.com/ChainAegis/status/1802550962977964139"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The meme coin WIFCOIN_ETH was suspected to be attacked, with a loss of ~$16K."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 16 June 2024, the WIFCOIN staking contract on Ethereum Mainnet was exploited due to a logic flaw in the claimEarned function, allowing an attacker to repeatedly claim rewards and drain the pool. The attacker converted 0.3 ETH to WIF tokens, staked them, then performed numerous reward claims, extracting an estimated 3.4 ETH. The vulnerable function failed to reset or invalidate claimable rewards after each claim. The staking contract's claimEarned function allowed repeated reward claims without resetting or properly accounting for already distributed rewards. The state was improperly updated, so the attacker could call the function in a loop and repe…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x58424115c6576b19cfb78b0b7ff00e0c13daa06d259f2a67210c112731519e09",
+    "0xda8f6a4bed7e5689a343d111632d37480c0316f1d20b732803c4bd482823e284"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-06/WIFCOIN_ETH_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-06/WIFCOIN_ETH_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/ChainAegis/status/1802550962977964139"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x58424115c6576b19cfb78b0b7ff00e0c13daa06d259f2a67210c112731519e09"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/WIFCOIN_ETH/status/1803841123204382926"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/wifcoin-2024-06-16"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/kismp123/DeFi-Security-Incident/blob/main/2024/2024-06-XX_WIFCOIN_ClaimEarnedBurnRateRepeat.md"
+    }
+  ]
+}

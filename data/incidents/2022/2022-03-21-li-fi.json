@@ -1,0 +1,117 @@
+{
+  "id": "2022-03-21-li-fi",
+  "name": "LI.FI",
+  "date": "2022-03-21",
+  "year": 2022,
+  "amountUsd": 600000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "arbitrary-call",
+  "technique": "Token Approval Abuse",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "arbitrary-call",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "arbitrary-call",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.06,
+    "stateActor": 0.03,
+    "hasRootCause": 0.87
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Bridges. Lost: $570K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Bridges. Lost: $570K"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Arbitrary call via swap Vulnerable code snippet: https://etherscan.io/address/0x73a499e043b03fc047189ab1ba72eb595ff1fc8e#code#F7#L30 _swapData is controllable"
+    },
+    {
+      "source": "SlowMist",
+      "text": "According to official reports, attackers exploited Li.finance’s smart contracts and managed to steal around $600,000 (currently worth $587,500 or 205 ETH) from 29 wallets. Attackers took various tokens from users’ wallets, including USDC, MATIC, RPL, GNO, USDT, MVI, AUDIO, AAVE, JRT, and DAI. The project team has found the vulnerability and created a fix, compensating most of the affected users in less than 18 hours."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On March 20, 2022, Li Finance's swap contract on Ethereum was exploited for approximately $600,000. An attacker drained tokens from 29 user wallets by abusing unchecked external-call permissions in the swap logic, targeting users who had previously granted approval. The swap function allowed arbitrary external calls with user-supplied destination and calldata. Because users had approved the contract to spend their tokens, attackers could craft calldata that instructed the contract to call transferFrom on user tokens and drain funds without restriction."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-03/LiFi_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-03/LiFi_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "blog.li.fi",
+      "url": "https://blog.li.fi/20th-march-the-exploit-e9e1c5c03eb9"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/lifiprotocol/status/1505738407938387971"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x4b4143cbe7f5475029cf23d6dcbb56856366d91794426f2e33819b9b1aac4e96"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/address/0x73a499e043b03fc047189ab1ba72eb595ff1fc8e#code#F7#L30"
+    },
+    {
+      "source": "slowmist",
+      "label": "blog.li.finance",
+      "url": "https://blog.li.finance/20th-march-the-exploit-e9e1c5c03eb9"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/li-finance-2022-03-21"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "bir.badjoke-lab.com",
+      "url": "https://bir.badjoke-lab.com/incident/li-fi-2022-approval-drain-exploit/"
+    },
+    {
+      "source": "revertiq",
+      "label": "blocksec.com",
+      "url": "https://blocksec.com/blog/li-fi-attack-a-cross-chain-bridge-vulnerability-no-it-s-due-to-unchecked-external-call"
+    }
+  ]
+}

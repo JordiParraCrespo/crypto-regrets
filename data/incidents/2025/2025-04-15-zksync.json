@@ -1,0 +1,104 @@
+{
+  "id": "2025-04-15-zksync",
+  "name": "ZKsync",
+  "date": "2025-04-15",
+  "year": 2025,
+  "amountUsd": 5000000,
+  "returnedUsd": null,
+  "chains": [
+    "zkSync Era"
+  ],
+  "targetType": "Other",
+  "category": "key-compromise",
+  "technique": "Private Key Compromised",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "key-compromise",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "key-compromise",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.01,
+    "stateActor": 0.02,
+    "hasRootCause": 0.49
+  },
+  "bridge": false,
+  "language": "Vyper",
+  "rootCause": "The ZKsync security team discovered that an admin account had been compromised, giving the hacker control of approximately $5 million worth of ZK tokens — the remaining unclaimed tokens from the ZKsync airdrop. The ZKsync Security Council sent an onchain message to the hacker on Monday, April 21st at 15:03 UTC. In an effort to resolve this matter in the spirit of safe harbor, they offered a 10% bounty for returning 90% of the funds involved in the exploit. On Wednesday, April 23rd at 14:39 UTC, 90% of the funds were returned to the Era and Ethereum L1 addresses controlled by the Security Council.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The ZKsync security team discovered that an admin account had been compromised, giving the hacker control of approximately $5 million worth of ZK tokens — the remaining unclaimed tokens from the ZKsync airdrop. The ZKsync Security Council sent an onchain message to the hacker on Monday, April 21st at 15:03 UTC. In an effort to resolve this matter in the spirit of safe harbor, they offered a 10% bounty for returning 90% of the funds involved in the exploit. On Wednesday, April 23rd at 14:39 UTC, 90% of the funds were returned to the Era and Ethereum L1 addresses controlled by the Security Council."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "In April 2025, a compromised admin key for three ZKsync airdrop Merkle distributor contracts enabled the unauthorized minting of 111 million ZK tokens, worth roughly $5 million. After incident response and negotiations, all funds were returned. A procedural failure left the admin of the ZKsync airdrop Merkle distributors controlled by a single-key multisig. This admin key was compromised, enabling the attacker to mint the remaining unclaimed tokens via the still-accessible sweepUnclaimed() function."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "A compromised admin account exploited ZKsync's airdrop distribution contracts, minting approximately 111 million ZK tokens ($5 million) by calling a privileged sweep function. The loss was limited to unclaimed airdrop tokens and later fully recovered through a negotiated bounty. The airdrop distributor contracts used a single-signature admin multisig with no timelock or multi-party approval. When the admin key was compromised, the attacker could authorize sweepUnclaimed() calls and mint all unclaimed tokens without further security checks."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xa344a0e759652246e51b1def91c8081b3527bdbbcab92128100f8fbc11c204df"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "zksync.mirror.xyz",
+      "url": "https://zksync.mirror.xyz/W5vPDZqEqf2NuwQ5x7SyFnIxqqpE1szAFD69iaaBFnI"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/zksync-smart-contract-2025-04-15"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/de-fi-rekt-report-april-2025-5-9-billion-lost-across-10-incidents-2-8-million-recovered"
+    },
+    {
+      "source": "revertiq",
+      "label": "zksync.io",
+      "url": "https://www.zksync.io/blog/incident-report-compromised-admin-key"
+    },
+    {
+      "source": "revertiq",
+      "label": "coin360.com",
+      "url": "https://coin360.com/news/zksync-airdrop-exploit-5m-loss-token-crash"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/explained-the-zksync-2025-04-22t10-17-14-655000-00-00"
+    },
+    {
+      "source": "revertiq",
+      "label": "halborn.com",
+      "url": "https://www.halborn.com/blog/post/explained-the-zksync-hack-april-2025"
+    },
+    {
+      "source": "revertiq",
+      "label": "web3exploit.com",
+      "url": "https://web3exploit.com/case-research/zksync-2025-airdrop-admin-compromise-case-research"
+    }
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "id": "2024-01-25-nebula-revelation",
+  "name": "Nebula Revelation",
+  "date": "2024-01-25",
+  "year": 2024,
+  "amountUsd": 180264,
+  "returnedUsd": null,
+  "chains": [
+    "Optimism"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "reentrancy",
+  "technique": "Reentrancy",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "reentrancy",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "reentrancy",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.61
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "On January 25th, the staking contract of the space-themed open-world Web3 game Nebula Revelation suffered a reentrancy attack. On January 28th, Nebula Revelation announced a compensation plan of 159,831 USDT. The team promises comprehensive compensation and has decided to reimburse users at the price before the theft to ensure fairness.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "On January 25th, the staking contract of the space-themed open-world Web3 game Nebula Revelation suffered a reentrancy attack. On January 28th, Nebula Revelation announced a compensation plan of 159,831 USDT. The team promises comprehensive compensation and has decided to reimburse users at the price before the theft to ensure fairness."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Nebula Revelation's staking contract was exploited on Optimism on January 25, 2024, through a reentrancy vulnerability in its withdrawal function, leading to losses of about $180,264 (~81.3 WETH). The attacker used a self-destructing contract to facilitate the exploit, then bridged stolen funds to Ethereum. The Nebula Revelation team later announced a compensation plan. Absence of reentrancy protection in the staking contract’s withdrawal logic allowed the attacker contract to make repeated calls and drain funds in a single transaction."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xf4fc3b638f1a377cf22b729199a9aeb27fc62fe2983a65c4d14b99ee5c5b2328",
+    "0x48beb06d6f1d8518b79985f00ade1646fc450b89be32d0bf9a406e631d6e99cb"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/NBLGAME/status/1750503951294976436"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/nebula-revelation-2024-01-25"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/nebula-revelation-hack-2024"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/pcaversaccio/reentrancy-attacks/issues/22"
+    }
+  ]
+}

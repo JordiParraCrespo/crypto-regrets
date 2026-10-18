@@ -1,0 +1,75 @@
+{
+  "id": "2022-10-24-quickswap-market",
+  "name": "QuickSwap Market",
+  "date": "2022-10-24",
+  "year": 2022,
+  "amountUsd": 220000,
+  "returnedUsd": null,
+  "chains": [
+    "Polygon"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "reentrancy",
+    "confidence": 0.82,
+    "top": [
+      {
+        "category": "reentrancy",
+        "p": 0.83
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.17
+      }
+    ],
+    "flashLoan": 0.97,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "QuickSwap's Market.xyz lending pool on Polygon was exploited on 24 October 2022 via a flash loan and Curve LP oracle manipulation. The attacker distorted collateral prices to borrow more funds, resulting in losses around $220,000. The incident led QuickSwap to close its lending service. The Curve LP oracle used by Market.xyz was vulnerable to read-only reentrancy in the get_virtual_price() function. Removing liquidity triggered contract fallback logic before pool balances updated, allowing the attacker to inflate the reported LP price and borrow undercollateralized funds.",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "QuickSwap's Market.xyz lending pool on Polygon was exploited on 24 October 2022 via a flash loan and Curve LP oracle manipulation. The attacker distorted collateral prices to borrow more funds, resulting in losses around $220,000. The incident led QuickSwap to close its lending service. The Curve LP oracle used by Market.xyz was vulnerable to read-only reentrancy in the get_virtual_price() function. Removing liquidity triggered contract fallback logic before pool balances updated, allowing the attacker to inflate the reported LP price and borrow undercollateralized funds."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xb8efe839da0c89daa763f39f30577dc21937ae351c6f99336a0017e63d387558",
+    "0x303c770b81d8866693aa341774eaa2cd5dc3a5f1d2ad855b9d6f0c10b5c36d5d"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/quickswap-market-2022-10-24"
+    },
+    {
+      "source": "revertiq",
+      "label": "quillaudits.medium.com",
+      "url": "https://quillaudits.medium.com/decoding-220k-read-only-reentrancy-exploit-quillaudits-30871d728ad5"
+    },
+    {
+      "source": "revertiq",
+      "label": "ambergroup.medium.com",
+      "url": "https://ambergroup.medium.com/mai-finances-oracle-manipulation-vulnerability-explained-55e4b5cc2b82"
+    }
+  ]
+}

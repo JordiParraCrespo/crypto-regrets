@@ -1,0 +1,78 @@
+{
+  "id": "2026-02-22-blend-pools-v2",
+  "name": "Blend Pools V2",
+  "date": "2026-02-22",
+  "year": 2026,
+  "amountUsd": 10970000,
+  "returnedUsd": null,
+  "chains": [
+    "Stellar"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "Blend Pools V2 (specifically the YieldBlox DAO-managed lending pool on Stellar) was exploited. The attacker manipulated the price of the low-liquidity asset USTRY ~100x higher in a single trade on Stellar DEX (SDEX). This manipulated the Reflector oracle price feed. The attacker then deposited the overvalued USTRY as collateral into the Blend Pools V2 lending pool and borrowed approximately $10.2M–$10.97M worth of XLM and USDC. Stellar validators and Blockaid responded quickly, freezing a large portion (~48M XLM / ~$7.3M) of the funds. Most of the stolen assets were contained, though some USDC was bridged out.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Blend Pools V2 (specifically the YieldBlox DAO-managed lending pool on Stellar) was exploited. The attacker manipulated the price of the low-liquidity asset USTRY ~100x higher in a single trade on Stellar DEX (SDEX). This manipulated the Reflector oracle price feed. The attacker then deposited the overvalued USTRY as collateral into the Blend Pools V2 lending pool and borrowed approximately $10.2M–$10.97M worth of XLM and USDC. Stellar validators and Blockaid responded quickly, freezing a large portion (~48M XLM / ~$7.3M) of the funds. Most of the stolen assets were contained, though some USDC was bridged out."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 22 February 2026, the Blend Pools V2 community-managed lending pool on Stellar was drained of about $10.9M through a spot price oracle manipulation. The attacker used a thinly traded USTRY/USDC pair to inflate collateral value via the Reflector oracle, enabling excessive borrowing and triggering a cascading pool liquidation. The exploited Blend V2 pool relied on a spot price from the Reflector oracle pointed at an extremely thin USTRY/USDC market on Stellar. The attacker executed a single manipulated trade, causing the oracle to read a 100x inflated price. Pool risk logic accepted this price, allowing borrow against vastly overvalued collateral."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/blockaid_/status/2057118828740374669?s=46&t=DLwbX9Nw4QECiyZQ0av-fg"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/blend-pools-v2-2026-02-22"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/saariuslystoned/blnd-huntr"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/0xdefence/0xdefence-stellar-oracle-manipulation"
+    }
+  ]
+}

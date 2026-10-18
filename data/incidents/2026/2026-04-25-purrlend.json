@@ -1,0 +1,83 @@
+{
+  "id": "2026-04-25-purrlend",
+  "name": "Purrlend",
+  "date": "2026-04-25",
+  "year": 2026,
+  "amountUsd": 1500000,
+  "returnedUsd": null,
+  "chains": [
+    "MegaETH",
+    "Hyperliquid L1"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Caller Impersonation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "key-compromise",
+    "confidence": 0.92,
+    "top": [
+      {
+        "category": "key-compromise",
+        "p": 0.92
+      },
+      {
+        "category": "access-control",
+        "p": 0.08
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "According to Purrlend's official post-mortem report, Purrlend suffered a security incident on April 25. The deployments on HyperEVM and MegaETH incurred a total loss of approximately $1.52 million. The attacker compromised the team's 2/3-admin multi-signature wallet, granting malicious addresses various administrative permissions, including the BRIDGE_ROLE. Subsequently, the attacker used the mintUnbacked function to mint approximately 2 million unbacked pUSDm and 4.85 million pUSDC without collateral. These tokens were then used as collateral to borrow real assets from the liquidity pools. HyperEVM suffered a loss of about $1.2 million, while MegaETH lost approximately $325,000.…",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "According to Purrlend's official post-mortem report, Purrlend suffered a security incident on April 25. The deployments on HyperEVM and MegaETH incurred a total loss of approximately $1.52 million. The attacker compromised the team's 2/3-admin multi-signature wallet, granting malicious addresses various administrative permissions, including the BRIDGE_ROLE. Subsequently, the attacker used the mintUnbacked function to mint approximately 2 million unbacked pUSDm and 4.85 million pUSDC without collateral. These tokens were then used as collateral to borrow real assets from the liquidity pools. HyperEVM suffered a loss of about $1.2 million, while MegaETH lost approximately $325,000.…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Purrlend paused its HyperEVM and MegaETH lending deployments on 2026-04-25 after an attacker used privileged bridge permissions to mint unbacked collateral tokens and borrow approximately $1.5 million in real assets. Public reporting attributes the incident to a compromised 2-of-3 administrator multisig that granted BRIDGE_ROLE access to an attacker-controlled address. Public reporting attributes the incident to compromise of Purrlend's 2-of-3 administrator multisig. The multisig reportedly granted BRIDGE_ROLE privileges to an attacker-controlled address without a timelock or secondary validation, allowing the attacker to call a bridge minting function…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/purrlend/status/2049807764944458094?s=46"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/purrlend-2026-04-25"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "blockonomi.com",
+      "url": "https://blockonomi.com/purrlend-exploit-defi-lender-loses-1-5-million-in-coordinated-dual-network-attack/"
+    }
+  ]
+}

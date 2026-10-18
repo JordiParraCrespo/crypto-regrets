@@ -1,0 +1,121 @@
+{
+  "id": "2024-07-05-defiplaza",
+  "name": "DefiPlaza",
+  "date": "2024-07-05",
+  "year": 2024,
+  "amountUsd": 200000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Swap Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.89,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.9
+      },
+      {
+        "category": "logic-error",
+        "p": 0.1
+      }
+    ],
+    "flashLoan": 0.06,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "loss of precision. Lost: ~200K USD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "loss of precision. Lost: ~200K USD"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The vulnerability lies in the removeLiquidity function of the DefiPlaza contract. Specifically, it involved a rounding error when inputting a LPamount that exceeded 15/16ths of the total LP amount. For sufficiently large input fractions, F_ it will be rounded down to zero at line 322. The result of this rounding error is that all liquidity for this token was removed Vulnerable code snippet: Attack tx: https://app.blocksec.com/explorer/tx/eth/0xa245deda8553c6e4c575baff9b50ef35abf4c8f990f8f36897696f896f240e3a Analysis: https://defiplaza.net/blog/post-mortem-of-defiplaza-ethereum-exploit/"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "DefiPlaza’s Ethereum deployment was drained on July 5, 2024 after an attacker exploited a precision loss bug in the removeLiquidity path. The exploit used large flash loans to gain dominant LP ownership, emptied the ETH side of the pool through a rounding condition, then drained remaining assets with sequential near-zero swaps. An MEV bot front ran the original attacker and captured the exploit transaction first. A rounding error in DefiPlaza V2’s removeLiquidity logic allowed a liquidity-removal fraction greater than 15/16 of the total LP supply to round a token balance factor down to zero. After the pool reached a zero-liquidity state for one asset,…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xa245deda8553c6e4c575baff9b50ef35abf4c8f990f8f36897696f896f240e3a",
+    "0xe00b0998d71b0e657379be196babd1637a653c100e8162853ca6616c3970790d",
+    "0x454219fb25d36590279fd9c17fccb5b5a29acbbb3f90f318a3e4d9d2ad104e7c"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-07/DeFiPlaza_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-07/DeFiPlaza_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/DecurityHQ/status/1809222922998808760"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/eth/0xa245deda8553c6e4c575baff9b50ef35abf4c8f990f8f36897696f896f240e3a"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "defiplaza.net",
+      "url": "https://defiplaza.net/blog/post-mortem-of-defiplaza-ethereum-exploit/"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xa245deda8553c6e4c575baff9b50ef35abf4c8f990f8f36897696f896f240e3a"
+    },
+    {
+      "source": "blocksec",
+      "label": "x.com",
+      "url": "https://x.com/DefiPlaza/status/1810998905326252535"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/defiplaza-200-000-2024-07-12"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/defi-rekt-report-over-250m-lost-in-july-2024"
+    },
+    {
+      "source": "revertiq",
+      "label": "cms.defiplaza.net",
+      "url": "https://cms.defiplaza.net/blog/post-mortem-of-defiplaza-ethereum-exploit/"
+    },
+    {
+      "source": "revertiq",
+      "label": "research.lido.fi",
+      "url": "https://research.lido.fi/t/defiplaza-exploit-request-for-comment/8241"
+    }
+  ]
+}

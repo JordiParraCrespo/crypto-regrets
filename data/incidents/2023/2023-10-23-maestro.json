@@ -1,0 +1,145 @@
+{
+  "id": "2023-10-23-maestro",
+  "name": "Maestro",
+  "date": "2023-10-23",
+  "year": 2023,
+  "amountUsd": 500000,
+  "returnedUsd": 465000,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "arbitrary-call",
+  "technique": "Arbitrary External Call",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "arbitrary-call",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "arbitrary-call",
+        "p": 0.99
+      },
+      {
+        "category": "access-control",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.93
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "Arbitrary External Call. Lost: ~$280ETH",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Arbitrary External Call. Lost: ~$280ETH"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The 0x9239127f function in the Maestro Router 2 contract has an external call vulnerability. Attackers can pass in a token address and use the transferFrom function with the victim's and their own addresses to transfer the victim's tokens. Vulnerable code snippet: Attack tx: - transaction 1 - transaction 2 - transaction 3 - transaction 4 - transaction 5 - transaction 6 - transaction 7 - transaction 8 Ethereum Transaction Hash (Txhash) Details | Etherscan - transaction 9 - transaction 10 - transaction 11 Ethereum Transaction Hash (Txhash) Details | Etherscan - transaction 12 Analysis: BlockSec Phalcon on Twitter / X Beosin Alert on Twitter / X"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Maestro Router was compromised and approximately $ 510,000 was stolen."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Maestro’s Router 2 contract on Ethereum was exploited on 2023-10-24 through an arbitrary external call path that allowed attackers to execute token transferFrom calls against users who had approved the router. The attacker drained multiple meme and low liquidity tokens from approved wallets, swapped the proceeds for ETH, and extracted roughly 280 ETH before Maestro disabled the exploit path. The Maestro Router 2 contract exposed a function identified by selector 0x9239127f that accepted attacker-controlled call data and executed arbitrary external calls without validating the target contract or permitted calldata. Attackers used the function to invoke…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xc087fbd68b9349b71838982e789e204454bfd00eebf9c8e101574376eb990d92",
+    "0xede874f9a4333a26e97d3be9d1951e6a3c2a8861e4e301787093cfb1293d4756",
+    "0xe60c5a3154094828065049121e244dfd362606c2a5390d40715ba54699ba9da6",
+    "0xf4ae22177c3abbb0f21defe51dd14eff68eb1b0c52ac4104186220138e8e5bb2",
+    "0x6cba3a67d6b8de664d860b096c8c558a1d65e5fa9735c657ddc98f67969561a2",
+    "0xddd1048fe3f2df1fb98e534a97173b32a9fca662dbd257a72725482431d3f25e",
+    "0xffb4bd29825bdd41adf344028f759692021cbadc2d4cb5b587e68fd8285c5eb1",
+    "0xa9948c8f0500a867091a090d12125f88868ac29e52af6391569094e82d416904",
+    "0xc49499325cb5ad3bf4391ae95855ce2ee2b0222f9282c524daa1c4586a8fcd8b",
+    "0xcfe1d2b333e1b9da5e2d5f1d7697b628c818cc41f9f3020187d4ce2c2610a05c",
+    "0x33f6adf410bbd0ae08b0cd44410de1e5b28e516434567113982fcac36ed9e1a4",
+    "0x4f4d6909a442b4d86f79a9044dcada6a128ddd9f62c26f410134a72d2fc31389"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-10/MaestroRouter2_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-10/MaestroRouter2_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Phalcon_xyz/status/1717014871836098663"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BeosinAlert/status/1717013965203804457"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xc087fbd68b9349b71838982e789e204454bfd00eebf9c8e101574376eb990d92"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xede874f9a4333a26e97d3be9d1951e6a3c2a8861e4e301787093cfb1293d4756"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xe60c5a3154094828065049121e244dfd362606c2a5390d40715ba54699ba9da6"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xc087fbd68b9349b71838982e789e204454bfd00eebf9c8e101574376eb990d92"
+    },
+    {
+      "source": "blocksec",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs?tab=readme-ov-file#20231024-maestrorouter2---arbitrary-external-call"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/MaestroBots/status/1716969767804747820"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/maestro-2023-10-23"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/past/2023/README.md#L1509"
+    },
+    {
+      "source": "revertiq",
+      "label": "raw.githubusercontent.com",
+      "url": "https://raw.githubusercontent.com/SunWeb3Sec/DeFiHackLabs/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/src/test/2023-10/MaestroRouter2_exp.sol"
+    }
+  ]
+}

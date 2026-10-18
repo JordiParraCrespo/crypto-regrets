@@ -1,0 +1,105 @@
+{
+  "id": "2026-09-16-flamincome",
+  "name": "Flamincome",
+  "date": "2026-09-16",
+  "year": 2026,
+  "amountUsd": 595000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.44,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.47000000000000003
+      },
+      {
+        "category": "logic-error",
+        "p": 0.36
+      },
+      {
+        "category": "market-manipulation",
+        "p": 0.09999999999999999
+      }
+    ],
+    "flashLoan": 0.08,
+    "stateActor": 0.02,
+    "hasRootCause": 0.94
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "permissionless Convex stakeFor inflates Strategy NAV and lets VaultYUSDT overpay on withdrawAll. Lost: ~$345.9K USDT net attacker profit (gross Strategy loss ~$595K in aUSDT+USDT)",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "permissionless Convex stakeFor inflates Strategy NAV and lets VaultYUSDT overpay on withdrawAll. Lost: ~$345.9K USDT net attacker profit (gross Strategy loss ~$595K in aUSDT+USDT)"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Flamincome (legacy contracts of Flamingo Finance) was exploited due to unsafe asset accounting and valuation. The attacker flash-loaned ~$18M USDT, injected USDP/3CRV LP into the Strategy (treating a permissionlessly injectable Convex BaseRewardPool balance as its own assets and overvaluing it via Curve’s get_virtual_price() in a depegged pool), inflated the VaultYUSDT share price, and redeemed real Aave aUSDT liquidity for ~$345.9K profit."
+    },
+    {
+      "source": "SlowMist",
+      "text": "Flamincome’s legacy USDT strategy (VaultYUSDT) was exploited. The attacker took an ~$18 million USDT flash loan via Morpho, staked manipulated Curve USDP LP into the Strategy to inflate the vault share price, then redeemed aUSDT for about $345,900 in profit.4."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 2026-09-16, legacy Ethereum Flamincome vault contracts associated with Flamingo Finance were exploited through share-price manipulation. Public incident reports state that the attacker used an approximately $18 million USDT flash loan to inject value into a Convex-linked strategy accounting path, inflate VaultYUSDT valuation, and extract about $345,900 in profit. Public reporting and third-party incident analyses attribute the exploit to unsafe asset accounting in a legacy Flamincome USDT strategy. The strategy reportedly counted a permissionlessly injectable Convex BaseRewardPool balance as protocol-owned assets, allowing an attacker to inflate Vau…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-09/Flamincome_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-09/Flamincome_exp.sol"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/2100256590716907706"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/blockaid_/status/2100226158046461984"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/flamincome-2026-09-16"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptotimes.io",
+      "url": "https://www.cryptotimes.io/2026/09/16/blockaid-flags-flamingofinance-contract-exploit-345-9k-stolen/"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/flamincome-hack-2026"
+    }
+  ]
+}

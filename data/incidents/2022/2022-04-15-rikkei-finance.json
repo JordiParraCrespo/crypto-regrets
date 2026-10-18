@@ -1,0 +1,113 @@
+{
+  "id": "2022-04-15-rikkei-finance",
+  "name": "Rikkei Finance",
+  "date": "2022-04-15",
+  "year": 2022,
+  "amountUsd": 1100000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.98,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.98
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.91
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Access control & Price Oracle Manipulation. Lost: $1.1 million (2671 BNB)",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Access control & Price Oracle Manipulation. Lost: $1.1 million (2671 BNB)"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "incorrect access control Vulnerable code snippet: https://bscscan.com/address/0xd55f01b4b51b7f48912cd8ca3cdd8070a1a9dba5#code#F1#L29 SetOracleData() function whose visibility is public and can be called externally. Anyone can call SetOracleData to manipulate price."
+    },
+    {
+      "source": "SlowMist",
+      "text": "Metaverse DeFi protocol Rikkei Finance was attacked because the attacker changed the oracle machine to a malicious contract. Rikkei Finance said users affected by the exploit will be fully compensated, and the team said the bug is being fixed and services have been fully restored. The total loss value is approximately $1.1 million (2671 BNB)."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Rikkei Finance was exploited on BNB Chain on 15 April 2022 through public access to the price oracle contract, allowing an attacker to substitute a malicious oracle and drain collateral pools. Estimated loss was about 2,672 BNB (~$1.1M). The contract's setOracleData function was not restricted, enabling any user to replace the price oracle address. This allowed manipulation of collateral prices and unauthorized lending withdrawals."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x93a9b022df260f1953420cd3e18789e7d1e095459e36fe2eb534918ed1687492"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-04/Rikkei_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-04/Rikkei_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "blockmagnates.com",
+      "url": "https://blockmagnates.com/rikkei-finance-hack/"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "knownseclab.com",
+      "url": "https://knownseclab.com/news/625e865cf1c544005a4bdaf2"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "rikkeifinance.medium.com",
+      "url": "https://rikkeifinance.medium.com/rikkei-finance-incident-investigation-report-b5b1745b0155"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0xd55f01b4b51b7f48912cd8ca3cdd8070a1a9dba5#code#F1#L29"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/RikkeiFinance/status/1514838355758161920"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/rikkei-finance-2022-04-15"
+    },
+    {
+      "source": "revertiq",
+      "label": "certik.com",
+      "url": "https://www.certik.com/blog/revisiting-rikkei-finance-exploit"
+    }
+  ]
+}

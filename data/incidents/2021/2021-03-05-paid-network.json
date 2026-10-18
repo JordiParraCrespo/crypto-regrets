@@ -1,0 +1,113 @@
+{
+  "id": "2021-03-05-paid-network",
+  "name": "Paid Network",
+  "date": "2021-03-05",
+  "year": 2021,
+  "amountUsd": 27000000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Infinite Mint",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "key-compromise",
+    "confidence": 0.87,
+    "top": [
+      {
+        "category": "key-compromise",
+        "p": 0.88
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.1
+      },
+      {
+        "category": "access-control",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.03,
+    "hasRootCause": 0.53
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "Private key compromised. Lost: $3 million",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Private key compromised. Lost: $3 million"
+    },
+    {
+      "source": "REKT",
+      "text": "Willy Wonka returns with the infinite mint, creating 59,471,745.571 PAID tokens before dumping them onto the unsuspecting Oompa Loompas who were providing liquidity to the PAID/ETH pair on Uniswap."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On March 5, 2021, the PAID Network token contract on Ethereum was compromised after an attacker obtained the deployer's private key, enabling them to upgrade the proxy and mint nearly 59.5 million PAID tokens. The attacker sold over 2.5 million tokens for around 2,040 ETH before the team withdrew liquidity. The deployer private key controlling the PAID Network token proxy was compromised. This allowed the attacker to upgrade the implementation to one with a malicious mint function and freely mint new tokens. No multisig or timelock protected the upgrade path."
+    }
+  ],
+  "audit": "Unaudited",
+  "txHashes": [
+    "0x28494ebcd854735e4d84f55890f0a92376d1af17553d998b2ee391a25dbc18c7",
+    "0x733dd279b3d24f3415f3850b8eceafc651c1998163dcd0352b9e83c46e2b33d9",
+    "0xfe6eb5800741e986d6375d8e3f94eefd00cc64ba8896389142fdb6162a34d9b8",
+    "0x3a483dd881d98541ebbd51e9a64daa700546bae9c2b33a30c2192f9981334b9b",
+    "0x4bb10927ea7afc2336033574b74ebd6f73ef35ac0db1bb96229627c9d77555a0",
+    "0x1a23506c2a53e9811ebe7ab9d78ba1ab9e02766d2440ff152437a3176a314a38"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2021-03/PAID_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2021-03/PAID_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "paidnetwork.medium.com",
+      "url": "https://paidnetwork.medium.com/paid-network-attack-postmortem-march-7-2021-9e4c0fef0e07"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x4bb10927ea7afc2336033574b74ebd6f73ef35ac0db1bb96229627c9d77555a0"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Paid Network - REKT",
+      "url": "https://rekt.news/paid-rekt"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/paid-network-2021-03-05"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "certik.com",
+      "url": "https://www.certik.com/blog/paid-network-post-mortem"
+    }
+  ]
+}

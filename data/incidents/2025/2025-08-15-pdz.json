@@ -1,0 +1,72 @@
+{
+  "id": "2025-08-15-pdz",
+  "name": "PDZ",
+  "date": "2025-08-15",
+  "year": 2025,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Price Manipulation",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.99).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.99
+      },
+      {
+        "category": "logic-error",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.98,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Price Manipulation. Lost: 3.3 BNB",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Price Manipulation. Lost: 3.3 BNB"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The TbBuild contract (0x6642...BDda) for the PDZ token lets a holder burn PDZ in exchange for a BNB reward, and computes that reward on the fly using uniswapRouter.getAmountsOut against the live PDZ/WBNB PancakeSwap pool. Because getAmountsOut reflects the instantaneous pool reserves, the reward is directly manipulable by moving the pool price within the same transaction. The attacker flash-swapped 10 WBNB from the pair, bought PDZ to inflate its pool price, then called burnToHolder (and receiveRewards) so the burn was valued at the manipulated high price, paying out an outsized BNB reward. After selling remaining PDZ and repaying the flash loan (10.25 WBNB), the attacker netted ~3.3 BNB. Vulnerable code snippet: Attack Tx: https://bscscan.com/tx/0x81fd00eab3434eac93bfdf919400ae5ca280acd891f95f47691bbe3cbf6f05a5 Analysis: tikkalaresearch on X"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x81fd00eab3434eac93bfdf919400ae5ca280acd891f95f47691bbe3cbf6f05a5"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-08/PDZ_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-08/PDZ_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/tikkalaresearch/status/1957500585965678828"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x81fd00eab3434eac93bfdf919400ae5ca280acd891f95f47691bbe3cbf6f05a5"
+    }
+  ]
+}

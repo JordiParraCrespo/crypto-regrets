@@ -1,0 +1,149 @@
+{
+  "id": "2025-02-21-bybit",
+  "name": "Bybit",
+  "date": "2025-02-21",
+  "year": 2025,
+  "amountUsd": 1400000000,
+  "returnedUsd": 1400000000,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "CEX",
+  "category": "social-engineering",
+  "technique": "Compromised Safe{Wallet} UI; signers blind-signed delegatecall",
+  "classificationNote": null,
+  "classifiedBy": "curated",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "frontend-infra",
+    "confidence": 0.94,
+    "top": [
+      {
+        "category": "frontend-infra",
+        "p": 0.9400000000000001
+      },
+      {
+        "category": "social-engineering",
+        "p": 0.05
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.86,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Lazarus compromised a Safe{Wallet} developer machine and injected JavaScript into the Safe web UI served from AWS S3, targeting only Bybit's cold wallet. Signers saw a normal transfer but signed a delegatecall that swapped the Safe implementation for a malicious one, which then drained ~401k ETH. The largest crypto theft ever. Lesson: verify the raw calldata on independent hardware.",
+  "descriptions": [
+    {
+      "source": "Curated post-mortem",
+      "text": "Lazarus compromised a Safe{Wallet} developer machine and injected JavaScript into the Safe web UI served from AWS S3, targeting only Bybit's cold wallet. Signers saw a normal transfer but signed a delegatecall that swapped the Safe implementation for a malicious one, which then drained ~401k ETH. The largest crypto theft ever. Lesson: verify the raw calldata on independent hardware."
+    },
+    {
+      "source": "DeFiHackLabs",
+      "text": "Phishing attack. Lost: 1.5B"
+    },
+    {
+      "source": "REKT",
+      "text": "$1.43B heist on ByBit claims the throne on our Rekt Leaderboard! Lazarus pulled off the perfect digital sleight-of-hand, making multisig signers see legitimate transactions while signing away the keys to the kingdom. Now ByBit's offering $140M to catch the hackers."
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Through a phishing attack on the Ethereum cold wallet multisig signers, the transaction and Safe UI was spoofed, allowing the hacker to change the smart contract logic of the multisig wallet. This allowed the hacker to gain control of the Bybit cold wallet, and to transfer out the funds. Our team is still investigating how the hacker was able to spoof the cold wallet, and we will release a full postmortem report shortly. Reference: https://learn.bybit.com/this-week-in-bybit/bybit-security-incident-timeline/"
+    },
+    {
+      "source": "SlowMist",
+      "text": "On February 21, 2025, on-chain investigator ZachXBT revealed a large-scale outflow of funds from the Bybit platform, resulting in the theft of over $1.46 billion."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On February 21, 2025, Bybit's main Ethereum multisig cold wallet was compromised via supply-chain JavaScript injection, causing signers to approve a delegatecall transaction that swapped the wallet's logic, enabling attackers to drain over $1.4 billion in ETH and other tokens. Injected malicious JavaScript in the Safe{Wallet} web interface caused authorized signers to approve a masked delegatecall transaction, replacing the wallet’s masterCopy with an attacker-controlled backdoor contract. This gave full control to the attacker, enabling asset theft."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xb61413c495fdad6114a7aa863a00b2e3c28945979a10885b12b30316ea9f072c",
+    "0xbcf316f5835362b7f1586215173cc8b294f5499c60c029a3de6318bf25ca7b20",
+    "0xa284a1bc4c7e0379c924c73fcea1067068635507254b03ebbbd3f4e222c1fae0",
+    "0x847b8403e8a4816a4de1e63db321705cdb6f998fb01ab58f653b863fda988647",
+    "0x25800d105db4f21908d646a7a3db849343737c5fba0bc5701f782bf0e75217c9",
+    "0x46deef0f52e3a983b67abf4714448a41dd7ffd6d32d32da69d62081c68ad7882"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-02/Bybit_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "blocksec",
+    "slowmist",
+    "revertiq",
+    "curated"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-02/Bybit_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/dhkleung/status/1893073663391604753"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: ByBit - Rekt",
+      "url": "https://rekt.news/bybit-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "learn.bybit.com",
+      "url": "https://learn.bybit.com/this-week-in-bybit/bybit-security-incident-timeline/"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xb61413c495fdad6114a7aa863a00b2e3c28945979a10885b12b30316ea9f072c"
+    },
+    {
+      "source": "blocksec",
+      "label": "blocksec.com",
+      "url": "https://blocksec.com/blog/bybit-1-5-b-hack-in-depth-analysis-of-the-malicious-safe-wallet-upgrade-attack"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/1892963250385592345"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/bybit-2025-02-25t17-00-09-003000-00-00"
+    },
+    {
+      "source": "revertiq",
+      "label": "halborn.com",
+      "url": "https://www.halborn.com/blog/post/bybit-hack-smart-contract-audits-wont-stop-off-chain-attacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "halborn.com",
+      "url": "https://www.halborn.com/blog/post/explained-the-bybit-hack-february-2025"
+    },
+    {
+      "source": "revertiq",
+      "label": "halborn.com",
+      "url": "https://www.halborn.com/blog/post/explained-the-bybit-hack-revisited"
+    },
+    {
+      "source": "curated",
+      "label": "Sygnia / Verichains investigation summary (Safe)",
+      "url": "https://x.com/safe/status/1894768522720350673"
+    }
+  ]
+}

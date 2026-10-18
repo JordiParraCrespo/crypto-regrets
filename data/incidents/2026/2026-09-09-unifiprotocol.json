@@ -1,0 +1,58 @@
+{
+  "id": "2026-09-09-unifiprotocol",
+  "name": "UnifiProtocol",
+  "date": "2026-09-09",
+  "year": 2026,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": null,
+  "classificationNote": "Classified by keyword rules from the DeFiHackLabs root-cause title.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "input-validation",
+    "confidence": 0.52,
+    "top": [
+      {
+        "category": "input-validation",
+        "p": 0.55
+      },
+      {
+        "category": "access-control",
+        "p": 0.26
+      },
+      {
+        "category": "logic-error",
+        "p": 0.17
+      }
+    ],
+    "flashLoan": 0.07,
+    "stateActor": 0.02,
+    "hasRootCause": 0.89
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "unregistered caller-supplied pool trusted for reward eligibility and math. Lost: ~5.86 BNB (treasury still holds ~9.17 BNB, contract unpaused — bug remains re-exploitable)",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "unregistered caller-supplied pool trusted for reward eligibility and math. Lost: ~5.86 BNB (treasury still holds ~9.17 BNB, contract unpaused — bug remains re-exploitable)"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-09/UnifiProtocol_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-09/UnifiProtocol_exp.sol"
+    }
+  ]
+}

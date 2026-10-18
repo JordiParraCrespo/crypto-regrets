@@ -1,0 +1,95 @@
+{
+  "id": "2025-08-13-coinbase",
+  "name": "Coinbase",
+  "date": "2025-08-13",
+  "year": 2025,
+  "amountUsd": 300000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "CEX",
+  "category": "arbitrary-call",
+  "technique": "Token Approval Abuse",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "arbitrary-call",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "arbitrary-call",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Misconfiguration. Lost: 300k USD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Misconfiguration. Lost: 300k USD"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "This was a misconfiguration loss rather than a contract bug. A Coinbase fee-receiver account (0x382f...2bA1) mistakenly granted ERC-20 token approvals to the 0x mainnet Settler contract (0xDf31...fd0f), which by design lets anyone submit and execute arbitrary actions. The attacker called the Settler's execute with a crafted action that wrapped an IERC20.transferFrom(coinbaseFee, attacker, balance) call. Because the Settler held the approval, it pulled the full ANDY (and other) token balances out of the Coinbase fee account to the attacker, draining ~300K USD. The root cause is the dangerous combination of a permissionless arbitrary-call router plus a token approval from a wallet holding real funds. Vulnerable code snippet: Attack Tx: https://etherscan.io/tx/0x33b2cb5bc3c0ccb97f0cc21e231ecb6457df242710dfce8d1b68935f0e05773b Analysis: deeberiroz on X"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On August 13, 2025, Coinbase's corporate DEX fee-receiver wallet on Ethereum Mainnet lost approximately $300,000 after misconfiguring ERC-20 token approvals to the permissionless 0x Settler contract. An MEV bot exploited these allowances by draining diverse fee tokens. Customer funds were unaffected; the loss was limited to operational assets. A Coinbase operational wallet granted unlimited ERC-20 token allowances to the public 0x Settler contract. Since Settler allows anyone to execute fund-moving calls, an MEV bot used these approvals to transfer tokens out of the Coinbase wallet."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x33b2cb5bc3c0ccb97f0cc21e231ecb6457df242710dfce8d1b68935f0e05773b",
+    "0x8df54ebe76c09cda530f1fccb591166c716000ec95ee5cb37dff997b2ee269f2"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-08/coinbase_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-08/coinbase_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/deeberiroz/status/1955718986894549344"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x33b2cb5bc3c0ccb97f0cc21e231ecb6457df242710dfce8d1b68935f0e05773b"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/coinbase-2025-08-13"
+    },
+    {
+      "source": "revertiq",
+      "label": "research.blockscope.co",
+      "url": "https://research.blockscope.co/coinbase-approval-exploit"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/coinbase-hack-2025"
+    }
+  ]
+}

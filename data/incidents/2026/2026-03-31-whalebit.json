@@ -1,0 +1,85 @@
+{
+  "id": "2026-03-31-whalebit",
+  "name": "WhaleBit",
+  "date": "2026-03-31",
+  "year": 2026,
+  "amountUsd": 10500,
+  "returnedUsd": null,
+  "chains": [
+    "Polygon"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.1,
+    "stateActor": 0.02,
+    "hasRootCause": 0.91
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Algebra spot-price oracle manipulation. Lost: 824K USD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Algebra spot-price oracle manipulation. Lost: 824K USD"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "WhaleBit was exploited on Polygon Mainnet on March 31, 2026, via a same-transaction spot price oracle manipulation. The attacker moved the price of the CES/USDT0 pool, inflating redemptions and netting 10,506 CES (about $10,500). The manipulation succeeded because the protocol's price module relied on a live, manipulable spot price. The WhaleBit staking protocol's deposit and withdrawal paths used the live spot price from the CES/USDT0 Algebra pool. This price could be manipulated within the same transaction by the attacker, allowing them to inflate the amount of CES redeemed after depressing the pool price. No TWAP (time-weighted average price) or tig…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x5d54fa839821e370b020d13a9b11b6f4f8cadc4eaed0a404ea17ad1bd725dbde"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-03/WhalebitOracleManipulation_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-03/WhalebitOracleManipulation_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/DefimonAlerts/status/2039372077686251787"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/whalebit-2026-03-31"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/DarkNavySecurity/web3-exploit-analysis/blob/main/reports/whalebit-ces-igt-staking-oracle-manipulation/report.md"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/whalebit-hack-2026"
+    }
+  ]
+}

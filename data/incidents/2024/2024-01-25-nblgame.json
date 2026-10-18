@@ -1,0 +1,89 @@
+{
+  "id": "2024-01-25-nblgame",
+  "name": "NBLGAME",
+  "date": "2024-01-25",
+  "year": 2024,
+  "amountUsd": 180000,
+  "returnedUsd": null,
+  "chains": [
+    "Optimism"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "reentrancy",
+  "technique": "Reentrancy",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 1.00).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "reentrancy",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "reentrancy",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.91
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Reentrancy. Lost: ~180K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Reentrancy. Lost: ~180K"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Lack of reentry protection on the withdrawNft() Vulnerable code snippet: Attack transaction: https://phalcon.blocksec.com/explorer/tx/optimism/0xf4fc3b638f1a377cf22b729199a9aeb27fc62fe2983a65c4d14b99ee5c5b2328 Analysis: https://twitter.com/AnciliaInc/status/1750558426382635036"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xf4fc3b638f1a377cf22b729199a9aeb27fc62fe2983a65c4d14b99ee5c5b2328"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-01/NBLGAME_exp.sol",
+  "sources": [
+    "defihacklabs",
+    "blocksec"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-01/NBLGAME_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/SlowMist_Team/status/1750526097106915453"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/AnciliaInc/status/1750558426382635036"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "phalcon.blocksec.com",
+      "url": "https://phalcon.blocksec.com/explorer/tx/optimism/0xf4fc3b638f1a377cf22b729199a9aeb27fc62fe2983a65c4d14b99ee5c5b2328"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xf4fc3b638f1a377cf22b729199a9aeb27fc62fe2983a65c4d14b99ee5c5b2328"
+    },
+    {
+      "source": "blocksec",
+      "label": "twitter.com",
+      "url": "https://twitter.com/AnciliaInc/status/1750559452435222841"
+    },
+    {
+      "source": "blocksec",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs?tab=readme-ov-file#20240125-nblgame---reentrancy"
+    }
+  ]
+}

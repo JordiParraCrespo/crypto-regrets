@@ -1,0 +1,76 @@
+{
+  "id": "2026-09-16-nimiq",
+  "name": "Nimiq",
+  "date": "2026-09-16",
+  "year": 2026,
+  "amountUsd": 50400,
+  "returnedUsd": null,
+  "chains": [
+    "Polygon"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "signature-crypto",
+  "technique": "Signature Verification Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "signature-crypto",
+    "confidence": 0.88,
+    "top": [
+      {
+        "category": "signature-crypto",
+        "p": 0.89
+      },
+      {
+        "category": "access-control",
+        "p": 0.08
+      },
+      {
+        "category": "arbitrary-call",
+        "p": 0.03
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "GSN forwarder skips signature check, relying solely on attacker-chosen paymaster. Lost: ~$50,463.79 (USDC, USDT0, USDC.e drained from a swap-liquidity wallet's standing approvals)",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "GSN forwarder skips signature check, relying solely on attacker-chosen paymaster. Lost: ~$50,463.79 (USDC, USDT0, USDC.e drained from a swap-liquidity wallet's standing approvals)"
+    },
+    {
+      "source": "SlowMist",
+      "text": "An attacker abused an OpenGSN meta-transaction auth flaw on Polygon HTLC contracts: open/execute accepted a spoofed from without a real user signature. Posing as liquidity wallet 0x24cb…6773, they used leftover near-unlimited ERC-20 allowances to lock 26,130.64171 USDC, 24,332.489269 USDT0 and 0.661117 USDC.e into HTLCs with attacker-chosen recipient and secretHash=sha256(1), then redeemed via a CREATE2 contract with secret=1. Single-tx loss was about $50,463."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-09/Nimiq_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-09/Nimiq_exp.sol"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/DefimonAlerts/status/2100868892742602793"
+    }
+  ]
+}

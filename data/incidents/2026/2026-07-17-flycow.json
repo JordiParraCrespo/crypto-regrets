@@ -1,0 +1,80 @@
+{
+  "id": "2026-07-17-flycow",
+  "name": "FlyCow",
+  "date": "2026-07-17",
+  "year": 2026,
+  "amountUsd": 65300,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "Token",
+  "category": "accounting-math",
+  "technique": "Incorrect Share Accounting",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.48,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.51
+      },
+      {
+        "category": "logic-error",
+        "p": 0.43
+      },
+      {
+        "category": "access-control",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "On July 17, 2026, the FlyCow (FCOW) token contract on BNB Chain was exploited via reserve manipulation of its PancakeSwap pair, resulting in a confirmed loss of roughly $65,258 USDT and BNB. The exploit abused a token transfer path that burned tokens from the liquidity pair and forcibly updated reserves during swap calculations. The FCOW token's transfer logic allowed unauthorized burns and an immediate sync of the PancakeSwap FCOW/USDT pair during transferFrom() into the pair. This broke the DEX router's assumption that reserves would remain stable throughout the swap, enabling price distortion and draining the pool.",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "On July 17, 2026, the FlyCow (FCOW) token contract on BNB Chain was exploited via reserve manipulation of its PancakeSwap pair, resulting in a confirmed loss of roughly $65,258 USDT and BNB. The exploit abused a token transfer path that burned tokens from the liquidity pair and forcibly updated reserves during swap calculations. The FCOW token's transfer logic allowed unauthorized burns and an immediate sync of the PancakeSwap FCOW/USDT pair during transferFrom() into the pair. This broke the DEX router's assumption that reserves would remain stable throughout the swap, enabling price distortion and draining the pool."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x9dbfcfcf2474b7e8644c9b9b8b2f0fa51cb527fcaf7d0ad13f103a7cfb629f5f",
+    "0x9773970d0ce51f1a2dcf8c3b77a7c7043a227b19c63962ff32bdc29e6f5f511b",
+    "0x78a6463e1b74607d62aba5e834836f9b34d2df3993fbd9d120b15e4b71e5c601"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/flycow-2026-07-17"
+    },
+    {
+      "source": "revertiq",
+      "label": "anomly.rs",
+      "url": "https://anomly.rs/flycow-fcow-pair-sync-burn-exploit"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/flycow-hack-2026"
+    }
+  ]
+}

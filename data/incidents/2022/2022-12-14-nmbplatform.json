@@ -1,0 +1,79 @@
+{
+  "id": "2022-12-14-nmbplatform",
+  "name": "Nmbplatform",
+  "date": "2022-12-14",
+  "year": 2022,
+  "amountUsd": 76000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "FlashLoan price manipulation",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 1.00).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.73,
+    "stateActor": 0.02,
+    "hasRootCause": 0.93
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "FlashLoan price manipulation. Lost: 76k",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "FlashLoan price manipulation. Lost: 76k"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Staking reward is based on spot price. The price feed of NIMB and GNIMB (the reward token) will be needed when calculating the staking reward. However, the price of NIMB is calculated based on the manipulated NIMB - NBU_WBNB pair. Vulnerable code snippet: Attack tx: https://bscscan.com/tx/0x7d2d8d2cda2d81529e0e0af90c4bfb39b6e74fa363c60b031d719dd9d153b012 https://bscscan.com/tx/0x42f56d3e86fb47e1edffa59222b33b73e7407d4b5bb05e23b83cb1771790f6c1 Analysis: https://twitter.com/BlockSecTeam/status/1602881707958407168 https://twitter.com/BlockSecTeam/status/1602881707958407168"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x7d2d8d2cda2d81529e0e0af90c4bfb39b6e74fa363c60b031d719dd9d153b012",
+    "0x42f56d3e86fb47e1edffa59222b33b73e7407d4b5bb05e23b83cb1771790f6c1"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-12/Nmbplatform_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-12/Nmbplatform_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BlockSecTeam/status/1602877048124735489"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x7d2d8d2cda2d81529e0e0af90c4bfb39b6e74fa363c60b031d719dd9d153b012"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x42f56d3e86fb47e1edffa59222b33b73e7407d4b5bb05e23b83cb1771790f6c1"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BlockSecTeam/status/1602881707958407168"
+    }
+  ]
+}

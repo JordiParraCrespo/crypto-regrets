@@ -1,0 +1,76 @@
+{
+  "id": "2024-10-06-sashatoken",
+  "name": "SASHAToken",
+  "date": "2024-10-06",
+  "year": 2024,
+  "amountUsd": 600000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Price Manipulation",
+  "classificationNote": "Classified by keyword rules from the DeFiHackLabs root-cause title.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.55,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.58
+      },
+      {
+        "category": "market-manipulation",
+        "p": 0.38
+      },
+      {
+        "category": "logic-error",
+        "p": 0.03
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Price Manipulation",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Price Manipulation"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The SASHA token contract and its associated Uniswap V2 and V3 pools were vulnerable to price manipulation due to insufficient liquidity and lack of slippage protection. The attacker used a small initial deposit (0.07 ETH) to swap for SASHA tokens via Uniswap V2, then transferred 1,000,000,000,000,000,000 SASHA tokens to the Uniswap V2 pool (UniswapV2_SASHA21), artificially inflating the pool's SASHA balance. This manipulation enabled a subsequent swap of 99,000,000,000,000,000,000,000 SASHA tokens for 249.276 ETH via Uniswap V3, exploiting the skewed price caused by the pool imbalance. The contract's lack of anti-manipulation mechanisms or transfer restrictions allowed the attacker to drain significant ETH from the pool, resulting in a profit of ~249 ETH. Vulnerable code snippet: https://etherscan.io/address/0xd1456d1b9ceb59abd4423a49d40942a9485ceef6 Attack tx: https://app.blocksec.com/explorer/tx/eth/0xd9fdc7d03eec28fc2453c5fa68eff82d4c297f436a6a5470c54ca3aecd2db17e Analysis:"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xd9fdc7d03eec28fc2453c5fa68eff82d4c297f436a6a5470c54ca3aecd2db17e"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-10/SASHAToken_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-10/SASHAToken_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/address/0xd1456d1b9ceb59abd4423a49d40942a9485ceef6"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/eth/0xd9fdc7d03eec28fc2453c5fa68eff82d4c297f436a6a5470c54ca3aecd2db17e"
+    }
+  ]
+}

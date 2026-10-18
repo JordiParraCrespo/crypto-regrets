@@ -1,0 +1,84 @@
+{
+  "id": "2022-05-10-ownly",
+  "name": "OWNLY",
+  "date": "2022-05-10",
+  "year": 2022,
+  "amountUsd": 37000,
+  "returnedUsd": null,
+  "chains": [
+    "Binance Smart Chain"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Withdrawal Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.93,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.93
+      },
+      {
+        "category": "access-control",
+        "p": 0.07
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.01,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "The ownlyio project's NFTStaking contract was attacked, with a total of 115 BNB stolen and a loss of about $36,418. The reason for this attack is that the unstake function of the pledge contract of the ownio project does not check the user's claim status, so the attacker can use the unstake function to receive the own tokens in the contract infinitely, thereby extracting all the own tokens in the pledge contract, and finally the attacker The acquired owned tokens are exchanged for 115 BNB through the pair transaction.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The ownlyio project's NFTStaking contract was attacked, with a total of 115 BNB stolen and a loss of about $36,418. The reason for this attack is that the unstake function of the pledge contract of the ownio project does not check the user's claim status, so the attacker can use the unstake function to receive the own tokens in the contract infinitely, thereby extracting all the own tokens in the pledge contract, and finally the attacker The acquired owned tokens are exchanged for 115 BNB through the pair transaction."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 10 May 2022, OWNLY's Stake-to-Own Mustachio Marauder NFT staking contract on BNB Chain was exploited, resulting in the loss of approximately 930 million OWN tokens (worth about $37,000 at the time). The attack exploited missing claim status checks in the unstake logic, enabling repeated withdrawals. The team responded by pausing staking and distributing a 15 million OWN airdrop as reimbursement. The unstake() function failed to check and update claim status, allowing attackers to repeatedly withdraw tokens for the same stake until the contract balance was drained."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x2cbe47edb040c710b7f139cbea7a4bced4d6a0d6c5aa4380f445880437ea072f"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/ownlyio/status/1524149988837580800"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/ownly-2022-05-10"
+    },
+    {
+      "source": "revertiq",
+      "label": "certik.com",
+      "url": "https://www.certik.com/blog/ownly-incident-analysis"
+    },
+    {
+      "source": "revertiq",
+      "label": "bitpinas.com",
+      "url": "https://bitpinas.com/news/ownly-hacked-reimburses-funds/"
+    }
+  ]
+}

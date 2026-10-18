@@ -1,0 +1,117 @@
+{
+  "id": "2026-04-29-aftermath-perps",
+  "name": "Aftermath Perps",
+  "date": "2026-04-29",
+  "year": 2026,
+  "amountUsd": 1140000,
+  "returnedUsd": null,
+  "chains": [
+    "Sui"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Withdrawal Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.6,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.62
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.35
+      },
+      {
+        "category": "input-validation",
+        "p": 0.03
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Move",
+  "rootCause": "Aftermath Finance's perpetuals clearing house on Sui contained a signed integer flaw in its integrator fee accounting system. The protocol allowed third-party developers to register as integrators and earn custom fee rates on trades routed through their integrations. A critical design oversight permitted negative fee values to be set, inverting the fee flow: instead of collecting a fee from the trader, the protocol's vault would pay the integrator on each trade. An attacker registered as their own integrator, configured a negative 100,000 taker fee, then opened and closed market orders against real counterparties, each time receiving a payout from the vault rather than paying in. The inflated synthetic collateral generated was then withdrawn as real USDC. Eleven successful drain transactions across 36 minutes (08:55–09:31 UTC) extracted approximately $1.14M in USDC; six other attempts failed. The vulnerability was introduced on August 29, 2025 and was missed during an OtterSec audit in November 2025. Mysten Labs and the Sui Foundation pledged to reimburse all affected users in full. Attack Tx: 4pGQdfFG96Ghqj1xqkaeeAgMQCpttivdkgSRUGc6wVD8 Analysis: Phalcon on X",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Aftermath Finance's perpetuals clearing house on Sui contained a signed integer flaw in its integrator fee accounting system. The protocol allowed third-party developers to register as integrators and earn custom fee rates on trades routed through their integrations. A critical design oversight permitted negative fee values to be set, inverting the fee flow: instead of collecting a fee from the trader, the protocol's vault would pay the integrator on each trade. An attacker registered as their own integrator, configured a negative 100,000 taker fee, then opened and closed market orders against real counterparties, each time receiving a payout from the vault rather than paying in. The inflated synthetic collateral generated was then withdrawn as real USDC. Eleven successful drain transactions across 36 minutes (08:55–09:31 UTC) extracted approximately $1.14M in USDC; six other attempts failed. The vulnerability was introduced on August 29, 2025 and was missed during an OtterSec audit in November 2025. Mysten Labs and the Sui Foundation pledged to reimburse all affected users in full. Attack Tx: 4pGQdfFG96Ghqj1xqkaeeAgMQCpttivdkgSRUGc6wVD8 Analysis: Phalcon on X"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Aftermath Finance, a decentralized perpetuals trading platform built on the Sui blockchain, suffered a security exploit in its perpetuals (perps) protocol. The vulnerability stemmed from a flaw in the fee accounting logic, specifically allowing negative \"builder code\" fees to be set. This enabled the attacker to inflate synthetic collateral and drain funds from the protocol's vault.The attacker drained approximately $1.14 million in USDC across 11 transactions within about 36 minutes. Blockchain security firm Blockaid detected and flagged the attack in real time (attacker address starting with 0x1a65...2d41e). Aftermath Finance promptly paused the affe…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On April 29, 2026, Aftermath Finance's Sui-based perpetuals exchange lost roughly $1.14M USDC after an attacker exploited a signed/unsigned integer mismatch in its integrator fee validation logic, converting negative fee values into free collateral that could be withdrawn. Aftermath Perpetuals failed to enforce non-negative bounds on integrator taker fee inputs and used a signed comparison on unsigned values. By setting a fee cap to zero and submitting a negative fee, an attacker passed validation and inflated their collateral through settlement arithmetic."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "4pGQdfFG96Ghqj1xqkaeeAgMQCpttivdkgSRUGc6wVD8",
+    "0x1a65086c85114c1a3f8dc74140115c6e18438d48d33a21fd112311561112d41e",
+    "0x21d001e8b07da2e3facb3e2d636bbaef43ba3c978bd84810368840b7d57c5068",
+    "0x9e208bed81b7072fa75af8f9eaca42ced3ec8154bb04f5b948c2a9455125d136"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "suiscan.xyz",
+      "url": "https://suiscan.xyz/mainnet/tx/4pGQdfFG96Ghqj1xqkaeeAgMQCpttivdkgSRUGc6wVD8"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/Phalcon_xyz/status/2049509576488403365"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=4pGQdfFG96Ghqj1xqkaeeAgMQCpttivdkgSRUGc6wVD8"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/AftermathFi/status/2049681357559808130"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/aftermath-finance-2026-04-29"
+    },
+    {
+      "source": "revertiq",
+      "label": "blocksec.com",
+      "url": "https://blocksec.com/blog/weekly-web3-security-roundup-2026-05-10"
+    },
+    {
+      "source": "revertiq",
+      "label": "blockport.io",
+      "url": "https://blockport.io/latest-news/aftermath-finance-sui-perpetuals-exploit-1-14m-usdc/"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptotimes.io",
+      "url": "https://www.cryptotimes.io/2026/04/29/aftermath-finance-perps-on-sui-exploited-for-1-14m/"
+    }
+  ]
+}

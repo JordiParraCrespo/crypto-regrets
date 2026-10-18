@@ -1,0 +1,82 @@
+{
+  "id": "2026-02-28-wise-lending-v2",
+  "name": "Wise Lending V2",
+  "date": "2026-02-28",
+  "year": 2026,
+  "amountUsd": 66000,
+  "returnedUsd": null,
+  "chains": [
+    "Arbitrum",
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.53,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.56
+      },
+      {
+        "category": "logic-error",
+        "p": 0.4
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.96,
+    "stateActor": 0.01,
+    "hasRootCause": 0.88
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "The DeFi lending protocol Wise Lending V2 was exploited via a flash loan attack. The attacker drained approximately $66,000 from the protocol’s pools by exploiting logic vulnerabilities. The incident affected deployments on Ethereum and Arbitrum.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The DeFi lending protocol Wise Lending V2 was exploited via a flash loan attack. The attacker drained approximately $66,000 from the protocol’s pools by exploiting logic vulnerabilities. The incident affected deployments on Ethereum and Arbitrum."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Wise Lending V2 suffered an exploit on February 28, 2026, draining approximately $66,000 from its pools on Arbitrum and Ethereum. The attack has been classified as an improper access control or protocol logic failure, possibly using a flash loan, but the precise vulnerability and on-chain exploit sequence have not been made public. The exploited vulnerability is classified as improper access control or a protocol-logic flaw, likely involving insufficient validation on a privileged or core function. No public technical postmortem or specific function has been released."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/wise-lending-v2-hack-2026"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/wise-lending-v2-2026-02-28"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    }
+  ]
+}

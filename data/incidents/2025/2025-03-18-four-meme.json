@@ -1,0 +1,91 @@
+{
+  "id": "2025-03-18-four-meme",
+  "name": "four.meme",
+  "date": "2025-03-18",
+  "year": 2025,
+  "amountUsd": 80000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.79,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.8
+      },
+      {
+        "category": "logic-error",
+        "p": 0.19
+      },
+      {
+        "category": "input-validation",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "BNB-based memecoin launchpad Four.Meme was attacked. According to the SlowMist security team’s analysis, the attacker purchased a small amount of tokens before launch through the 0x7f79f6df function of Four.Meme, and used this feature to send tokens to a specified PancakeSwap Pair address that had not yet been created. This allowed the attacker to create the Pair and add liquidity without needing to transfer the yet-to-be-launched tokens to the Pair, bypassing the transfer restrictions (MODE_TRANSFER_RESTRICTED) that applied before the Four.Meme Token launch. Ultimately, the attacker was able to add liquidity at an unintended price to steal pool liquidity.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "BNB-based memecoin launchpad Four.Meme was attacked. According to the SlowMist security team’s analysis, the attacker purchased a small amount of tokens before launch through the 0x7f79f6df function of Four.Meme, and used this feature to send tokens to a specified PancakeSwap Pair address that had not yet been created. This allowed the attacker to create the Pair and add liquidity without needing to transfer the yet-to-be-launched tokens to the Pair, bypassing the transfer restrictions (MODE_TRANSFER_RESTRICTED) that applied before the Four.Meme Token launch. Ultimately, the attacker was able to add liquidity at an unintended price to steal pool liquidity."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Four Meme's launchpad on BNB Chain was exploited on March 18, 2025 for around $120,000. The attacker bypassed intended transfer restrictions, sent pre-launch tokens to a liquidity pool, and manipulated the launch to drain funds. The technical root cause is a failure to enforce pre-launch transfer locks on the token contract. The Four Meme token's transfer function did not enforce the intended pre-launch restriction. This allowed direct transfers of pre-launch tokens,including to the predicted PancakeSwap pair address,allowing the attacker to manipulate liquidity before official trading began."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/1901845958767657072"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/four-meme-s-120k-2025-03-18"
+    },
+    {
+      "source": "revertiq",
+      "label": "quillaudits.com",
+      "url": "https://www.quillaudits.com/blog/hack-analysis/four-meme-attack-analysis"
+    },
+    {
+      "source": "revertiq",
+      "label": "decrypt.co",
+      "url": "https://decrypt.co/310388/meme-coin-launchpad-four-meme-falls-victim-to-another-exploit"
+    },
+    {
+      "source": "revertiq",
+      "label": "bitdegree.org",
+      "url": "https://www.bitdegree.org/crypto/news/120000-vanished-four-meme-restores-services-post-hack"
+    }
+  ]
+}

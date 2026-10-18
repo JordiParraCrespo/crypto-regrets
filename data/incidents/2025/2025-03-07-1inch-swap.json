@@ -1,0 +1,142 @@
+{
+  "id": "2025-03-07-1inch-swap",
+  "name": "1inch Swap",
+  "date": "2025-03-07",
+  "year": 2025,
+  "amountUsd": 5000000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "arbitrary-call",
+  "technique": "Arbitrary External Call",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "arbitrary-call",
+    "confidence": 0.49,
+    "top": [
+      {
+        "category": "arbitrary-call",
+        "p": 0.52
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.26
+      },
+      {
+        "category": "input-validation",
+        "p": 0.2
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.01,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Arbitrary Yul Calldata. Lost: 4.5M",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Arbitrary Yul Calldata. Lost: 4.5M"
+    },
+    {
+      "source": "REKT",
+      "text": "One hacker transformed 1inch resolver contracts into a $5 million ATM through an integer underflow exploit - all with a negative 512 value. Attacker pocketed $450K as a \"bounty\" for exposing two years of an undetected vulnerability."
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The deprecated 1inch Fusion V1 settlement contract contained an EVM-level calldata corruption vulnerability in its _settleOrder function. The suffix pointer was calculated as ptr + interactionOffset + interactionLength, where interactionLength was attacker-supplied and treated as an unsigned integer. By setting interactionLength to a value equivalent to -512 in signed arithmetic, the attacker triggered pointer underflow, causing the suffix to be written to an earlier memory location — overwriting the resolver address field. This allowed the attacker to hijack the settlement callback and redirect it to an arbitrary target, specifically the TrustedVolumes market maker, which held substantial liquidity. The attacker forged an order to swap 6 wei USDT for 1,000,000 USDC with TrustedVolumes unknowingly footing the difference, draining approximately $5M (2.4M USDC and 1,276 WETH). The vulnerability affected only third-party resolvers still using the unsupported Fusion V1 contracts; 1inch's core protocol and end-user funds were not at risk. Funds were recovered after the attacker accepted a 10% bounty. Attack Tx: 0x04975648e0db631b0620759ca934861830472678dae82b4bed493f1e1e3ed03a Analysis: Yul Calldata Corruption — 1inch Postmortem (Decurity)"
+    },
+    {
+      "source": "SlowMist",
+      "text": "An attacker exploited a smart contract belonging to the 1inch DEX aggregator, stealing $5 million in the USDC stablecoin and wETH. According to the platform, the vulnerability existed in \"smart contracts using the obsolete Fusion v1 implementation\", and the stolen funds belonged to resolvers (that is, entities that fulfill 1inch orders) rather than users."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On March 5, 2025, an attacker used a low-level calldata corruption bug in 1inch's deprecated Fusion v1 Settlement contract to impersonate a trusted resolver, draining over $5 million (2.4M USDC and 1,276 WETH) from market-making resolver contracts still approving the old logic. The Fusion v1 Settlement contract's _settleOrder() function allowed an attacker-controlled interactionLength value, causing a pointer arithmetic underflow during settlement calldata assembly. This enabled forged resolver context to be injected, letting the attacker bypass access checks based only on msg.sender and a resolver address they supplied. Vulnerable resolvers had not re…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x04975648e0db631b0620759ca934861830472678dae82b4bed493f1e1e3ed03a",
+    "0xb5c94efa0c8fd8f5c8cc2826e374a99620b01061d395b59b8f45dddc9fce1c60",
+    "0xb16bbf03d324b66685c94d62dbe31c739ee23c114b3915d169c74cd7c98eec8c",
+    "0xc69b4c8029c70ae468e92af31120ac6b01bb89c6e35d34818413e9942aedebb6",
+    "0xefcb740bf9ec17ed99839ffcc05393fae5ec2d44149aee91ba119f48bc20a1ef",
+    "0x74bc4d5dc7f8da468788da6087bb9f73465966ab5b8cf9cf1053d98e78a9bf96",
+    "0x3947e5a4d98104e313e08ee321673e1183db3d6ff8b7207f3eabb36f71436c1d",
+    "0x9ce5187c7160f531189e4765f21af5975dc2a62d961fb61ae09866d082918256",
+    "0xb0688eb1f46c28f36d7397366146fced23d3f8da7e08b760a5f612ce134ee9d2",
+    "0x62734ce80311e64630a009dd101a967ea0a9c012fabbfce8eac90f0f4ca090d6"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-03/OneInchFusionV1SettlementHack.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-03/OneInchFusionV1SettlementHack.sol"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: 1Inch - Rekt",
+      "url": "https://rekt.news/1inch-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x04975648e0db631b0620759ca934861830472678dae82b4bed493f1e1e3ed03a"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "blog.decurity.io",
+      "url": "https://blog.decurity.io/yul-calldata-corruption-1inch-postmortem-a7ea7a53bfd9"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x04975648e0db631b0620759ca934861830472678dae82b4bed493f1e1e3ed03a"
+    },
+    {
+      "source": "slowmist",
+      "label": "blog.1inch.io",
+      "url": "https://blog.1inch.io/vulnerability-discovered-in-resolver-contract/"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/explained-the-1inch-2025-03-11t11-36-18-165000-00-00"
+    },
+    {
+      "source": "revertiq",
+      "label": "halborn.com",
+      "url": "https://www.halborn.com/blog/post/explained-the-1inch-hack-march-2025"
+    },
+    {
+      "source": "revertiq",
+      "label": "blocksec.com",
+      "url": "https://blocksec.com/blog/1inch-incident-from-calldata-corruption-to-forged-settlement-binary-exploitation-goes-on-chain"
+    },
+    {
+      "source": "revertiq",
+      "label": "coincentral.com",
+      "url": "https://coincentral.com/1inch-exchange-reports-5-million-loss-in-smart-contract-exploit/"
+    }
+  ]
+}

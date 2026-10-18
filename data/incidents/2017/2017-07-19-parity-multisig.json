@@ -1,0 +1,107 @@
+{
+  "id": "2017-07-19-parity-multisig",
+  "name": "Parity Multisig",
+  "date": "2017-07-19",
+  "year": 2017,
+  "amountUsd": 30000000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "delegatecall to unprotected initWallet",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.99).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.99
+      },
+      {
+        "category": "arbitrary-call",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.03,
+    "hasRootCause": 0.92
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "delegatecall to unprotected initWallet. Lost: 153,037 ETH (~$30M)",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "delegatecall to unprotected initWallet. Lost: 153,037 ETH (~$30M)"
+    },
+    {
+      "source": "SlowMist",
+      "text": "On July 29, 2017, the Ethereum multi-signature wallet company Parity issued a security alert, notifying users of serious vulnerabilities in its wallet v1.5 or later. That day, a black hat hacker used the vulnerability to exhaust the Parity wallets of three Ethereum projects, stealing a total of 153,037 ETH from Swarm City, Edgeless, and Aeternity."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "The Parity multisig wallet vulnerability on Ethereum Mainnet in July 2017 allowed an attacker to take ownership of high-profile wallets by calling an unprotected initialization function. The attacker drained over 153,000 ETH (~$30M at the time) from three major crowdsale wallets. A white-hat group later rescued additional funds using the same exploit. The Parity multisig proxy architecture exposed an unprotected initializer function via delegatecall, allowing anyone to reinitialize ownership after deployment and drain funds. No access control or one-time-use guard was enforced."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xff261a49c61861884d0509dac46ed67577a7d48cb73c2f51f149c0bf96b29660",
+    "0x0e0d16475d2ac6a4802437a35a21776e5c9b681a77fef1693b0badbb6afdb083",
+    "0x97f7662322d56e1c54bd1bab39bccf98bc736fcb9c7e61640e6ff1f633637d38",
+    "0x9dbf0326a03a2a3719c27be4fa69aacc9857fd231a8d9dcaede4bb083def75ec",
+    "0xeef10fc5170f669b86c4cd0444882a96087221325f8bf2f55d6188633aa7be7c"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2017-07/Parity_first_hack_exp.sol",
+  "sources": [
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2017-07/Parity_first_hack_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "www.openzeppelin.com",
+      "url": "https://www.openzeppelin.com/news/on-the-parity-wallet-multisig-hack-405a8c12e8f7"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "haseebq.com",
+      "url": "https://haseebq.com/a-hacker-stole-31m-of-ether/"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x9dbf0326a03a2a3719c27be4fa69aacc9857fd231a8d9dcaede4bb083def75ec"
+    },
+    {
+      "source": "slowmist",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/30-million-ether-reported-stolen-parity-wallet-breach"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/parity-2017-07-01"
+    },
+    {
+      "source": "revertiq",
+      "label": "defillama.com",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/Cerify-Systems/smart-contract-vulnerabilities/tree/master/2017-07-Parity%20Multisig%20Wallet"
+    }
+  ]
+}

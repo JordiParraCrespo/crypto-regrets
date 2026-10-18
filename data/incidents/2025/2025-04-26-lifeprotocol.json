@@ -1,0 +1,87 @@
+{
+  "id": "2025-04-26-lifeprotocol",
+  "name": "Lifeprotocol",
+  "date": "2025-04-26",
+  "year": 2025,
+  "amountUsd": 15114,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Price Manipulation",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.99).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.99
+      },
+      {
+        "category": "logic-error",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.98,
+    "stateActor": 0.01,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Price Manipulation. Lost: 15114 BUSD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Price Manipulation. Lost: 15114 BUSD"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "LifeProtocol's buy/sell functions priced LIFE tokens against BUSD using internal accounting that could be skewed by the actor's own repeated trades within a single transaction. Using a DODO DPP flashloan of 110,000 BUSD, the attacker repeatedly called buy(1000e18) 53 times to inflate the protocol's internal price/reserve state, then called sell(1000e18) 53 times to redeem at the manipulated favorable rate, extracting more BUSD than was put in before repaying the flashloan. The vulnerability is a manipulable internal price curve with no slippage/oracle protection, allowing a single flashloan-funded buy-then-sell loop to drain ~15,114 BUSD. Vulnerable code snippet: Attack Tx: https://bscscan.com/tx/0x487fb71e3d2574e747c67a45971ec3966d275d0069d4f9da6d43901401f8f3c0 Analysis: Vulnerable contract code"
+    },
+    {
+      "source": "SlowMist",
+      "text": "According to the SlowMist MistEye security monitoring system, LIFE Protocol has been attacked, resulting in a loss of over $51,000."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x487fb71e3d2574e747c67a45971ec3966d275d0069d4f9da6d43901401f8f3c0"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-04/Lifeprotocol_exp.sol",
+  "sources": [
+    "defihacklabs",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-04/Lifeprotocol_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/TenArmorAlert/status/1916312483792408688"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x487fb71e3d2574e747c67a45971ec3966d275d0069d4f9da6d43901401f8f3c0"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0x42e2773508e2ae8ff9434bea599812e28449e2cd#code"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/1916391258664174045"
+    }
+  ]
+}

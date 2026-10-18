@@ -1,0 +1,137 @@
+{
+  "id": "2025-09-02-bunni-v2",
+  "name": "Bunni V2",
+  "date": "2025-09-02",
+  "year": 2025,
+  "amountUsd": 8400000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum",
+    "Unichain"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Rounding Error",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.99
+      },
+      {
+        "category": "logic-error",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.08,
+    "stateActor": 0.02,
+    "hasRootCause": 0.08
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Innovation meets reality check -  fancy LDF curves and rehypothecation magic caught a hacker's attention. Bunni's basic rounding bug became an $8.4 million lesson in precision. TVL went up overnight in August, funds went down by September. Move fast, break things, get rekt.",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "Innovation meets reality check -  fancy LDF curves and rehypothecation magic caught a hacker's attention. Bunni's basic rounding bug became an $8.4 million lesson in precision. TVL went up overnight in August, funds went down by September. Move fast, break things, get rekt."
+    },
+    {
+      "source": "SlowMist",
+      "text": "Bunni, a DEX built on Uniswap v4, was exploited on Ethereum and UniChain, with total losses of approximately $8.4 million."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "A precision bug in Bunni V2’s withdrawal logic allowed an attacker to drain over $8.4M using repeated micro-withdrawals and sandwich swaps across Ethereum and Unichain pools. The Bunni V2 contract used floor (rounding down) when reducing idle pool balances during liquidity removal. This compounded rounding errors through repeated withdrawals, enabling drastic underestimation of pool liquidity and facilitating large arbitrage profits."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On September 2, 2025, Bunni DEX suffered a major exploit across Ethereum and Unichain, draining over $8.3 million. The attacker manipulated Bunni's custom liquidity curve using precision trades and exploited a rounding vulnerability in liquidity accounting, leading to systematic fund extraction from various pools. A rounding-direction vulnerability in BunniHubLogic::withdraw(), combined with miscalculation in Bunni's custom Liquidity Distribution Function, allowed systematic manipulation of liquidity-share accounting during precisely sized swaps and micro-withdrawals."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x1c27c4d625429acfc0f97e466eda725fd09ebdc77550e529ba4cbdbc33beb97b",
+    "0x4776f31156501dd456664cd3c91662ac8acc78358b9d4fd79337211eb6a1d451",
+    "0x9a21d674c35efc6be2433bfe33f3e15b7bd9ef5e42910cf99ffd51ad52fbd307"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Bunni - Rekt",
+      "url": "https://rekt.news/bunni-rekt"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x1c27c4d625429acfc0f97e466eda725fd09ebdc77550e529ba4cbdbc33beb97b"
+    },
+    {
+      "source": "blocksec",
+      "label": "x.com",
+      "url": "https://x.com/Phalcon_xyz/status/1962743751568433416"
+    },
+    {
+      "source": "slowmist",
+      "label": "blog.bunni.xyz",
+      "url": "https://blog.bunni.xyz/posts/exploit-post-mortem/"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/bunni-v2-2025-09-03"
+    },
+    {
+      "source": "revertiq",
+      "label": "quillaudits.com",
+      "url": "https://www.quillaudits.com/blog/hack-analysis/bunni-v2-exploit"
+    },
+    {
+      "source": "revertiq",
+      "label": "blocksec.com",
+      "url": "https://blocksec.com/blog/bunni-incident-repeated-small-withdrawals-compound-a-rounding-error-into-an-8.4m-drain"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptonews.com",
+      "url": "https://cryptonews.com/news/bunni-hit-by-8-4m-flash-loan-exploit-rounding-error-blamed"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/explained-the-bunni-2025-09-09t08-26-51-677000-00-00"
+    },
+    {
+      "source": "revertiq",
+      "label": "halborn.com",
+      "url": "https://www.halborn.com/blog/post/explained-the-bunni-hack-september-2025"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/defi-rekt-report-q3-2025-434m-lost-across-40-exploits"
+    },
+    {
+      "source": "revertiq",
+      "label": "halborn.com",
+      "url": "https://halborn.com/blog/post/explained-the-bunni-hack-september-2025"
+    }
+  ]
+}

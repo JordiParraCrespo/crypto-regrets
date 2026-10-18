@@ -1,0 +1,86 @@
+{
+  "id": "2023-06-15-hashflow",
+  "name": "Hashflow",
+  "date": "2023-06-15",
+  "year": 2023,
+  "amountUsd": 605000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum",
+    "Arbitrum",
+    "Avalanche",
+    "BSC",
+    "Polygon"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "arbitrary-call",
+  "technique": "Token Approval Abuse",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "arbitrary-call",
+    "confidence": 0.97,
+    "top": [
+      {
+        "category": "arbitrary-call",
+        "p": 0.97
+      },
+      {
+        "category": "access-control",
+        "p": 0.03
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.03,
+    "hasRootCause": 0.3
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Decentralized trading platform Hashflow is suspected to have suffered an authorization-related attack, though this may be a white-hat hacking operation. The loss from the theft was approximately $600,000, and all affected users were able to retrieve all of their assets.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Decentralized trading platform Hashflow is suspected to have suffered an authorization-related attack, though this may be a white-hat hacking operation. The loss from the theft was approximately $600,000, and all affected users were able to retrieve all of their assets."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Hashflow suffered a $605,000 exploit across five chains when attackers abused lingering ERC20 token approvals on a deprecated contract with an exposed transferFrom function. The affected contract was outside Hashflow's audited codebase and lacked proper access controls, enabling unauthorized asset transfers. Most user funds were ultimately rescued by a white-hat recovery contract after users revoked stale allowances. A deprecated contract remained live and callable across five chains, exposing a function that invoked transferFrom using any user's existing ERC20 token approvals. This function lacked proper access control and was not part of Hashflow's a…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/hashflow/status/1669031128307572766"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/hashflow-2023-06-15"
+    },
+    {
+      "source": "revertiq",
+      "label": "certik.com",
+      "url": "https://www.certik.com/blog/post-mortem-hashflow"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/hashflow-hack-2023"
+    }
+  ]
+}

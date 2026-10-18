@@ -1,0 +1,81 @@
+{
+  "id": "2023-02-06-fdp",
+  "name": "FDP",
+  "date": "2023-02-06",
+  "year": 2023,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Reflection token",
+  "classificationNote": "Upstream label missing; classified by keyword rules from the root-cause text.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.54,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.5700000000000001
+      },
+      {
+        "category": "logic-error",
+        "p": 0.41
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.79,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Reflection token. Lost: ~16 WBNB",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Reflection token. Lost: ~16 WBNB"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Price Manipulation of deflationary tokens via flashloan Vulnerable code snippet: https://bscscan.com/address/0x1954b6bd198c29c3ecf2d6f6bc70a4d41ea1cc07#code#L575 The attacker uses the tAmount to call deliver function, which is to reduce the user-specified tAmount and add it to the fee. After calling deliver, _getRate becomes smaller when _rTotal is 28% less and _tTotal remains the same. Since transaction pair is not a deflation excluded address, the balance obtained becomes larger. The attacker can directly withdraw the increased FDP and swap into WBNB Attack tx: https://bscscan.com/tx/0x09925028ce5d6a54801d04ff8f39e79af6c24289e84b301ddcdb6adfa51e901b Analysis: https://twitter.com/BeosinAlert/status/1622806011269771266"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x09925028ce5d6a54801d04ff8f39e79af6c24289e84b301ddcdb6adfa51e901b"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-02/FDP_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-02/FDP_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BeosinAlert/status/1622806011269771266"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0x1954b6bd198c29c3ecf2d6f6bc70a4d41ea1cc07#code#L575"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x09925028ce5d6a54801d04ff8f39e79af6c24289e84b301ddcdb6adfa51e901b"
+    }
+  ]
+}

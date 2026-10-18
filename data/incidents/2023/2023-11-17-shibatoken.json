@@ -1,0 +1,76 @@
+{
+  "id": "2023-11-17-shibatoken",
+  "name": "ShibaToken",
+  "date": "2023-11-17",
+  "year": 2023,
+  "amountUsd": 31000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Business Logic Flaw",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.98).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.98,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.98
+      },
+      {
+        "category": "access-control",
+        "p": 0.01
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.01,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Business Logic Flaw. Lost: ~$31K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Business Logic Flaw. Lost: ~$31K"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "- The balanceOf function of Shiba is not changed, so it will return all balances(including the locked amount). This is not a best practice. - User could transferLockToken or batchTransferLockToken to the pair address. And the pair itself could not identify if the token is locked or not. As a result, the swap would still succeed. And the user could sell the locked token. Vulnerable code snippet: Attack tx: https://explorer.phalcon.xyz/tx/bsc/0x75a26224da9faf37c2b3a4a634a096af7fec561f631a02c93e11e4a19d159477 Analysis: https://app.blocksec.com/explorer/tx/bsc/0x75a26224da9faf37c2b3a4a634a096af7fec561f631a02c93e11e4a19d159477"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x75a26224da9faf37c2b3a4a634a096af7fec561f631a02c93e11e4a19d159477"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-11/ShibaToken_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-11/ShibaToken_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "explorer.phalcon.xyz",
+      "url": "https://explorer.phalcon.xyz/tx/bsc/0x75a26224da9faf37c2b3a4a634a096af7fec561f631a02c93e11e4a19d159477"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/bsc/0x75a26224da9faf37c2b3a4a634a096af7fec561f631a02c93e11e4a19d159477"
+    }
+  ]
+}

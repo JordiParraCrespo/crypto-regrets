@@ -1,0 +1,91 @@
+{
+  "id": "2025-04-01-upcx",
+  "name": "UPCX",
+  "date": "2025-04-01",
+  "year": 2025,
+  "amountUsd": 70000000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Proxy Upgrade Hijack",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.53,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.56
+      },
+      {
+        "category": "key-compromise",
+        "p": 0.38
+      },
+      {
+        "category": "governance",
+        "p": 0.06
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.16
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "According to an announcement from blockchain payment platform UPCX, unauthorized activity was detected in its management accounts. As a precaution, the platform has urgently suspended UPC deposits and withdrawals. The official statement assures that user assets remain unaffected, and an active investigation is underway to determine the cause of the incident, with further updates to follow. Earlier reports suggested that an unauthorized party had accessed UPCX’s official addresses. The attacker allegedly transferred a total of 18.4 million UPC (approximately $70 million) from three management accounts. On April 4, UPCX posted on Twitter that, despite di…",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "According to an announcement from blockchain payment platform UPCX, unauthorized activity was detected in its management accounts. As a precaution, the platform has urgently suspended UPC deposits and withdrawals. The official statement assures that user assets remain unaffected, and an active investigation is underway to determine the cause of the incident, with further updates to follow. Earlier reports suggested that an unauthorized party had accessed UPCX’s official addresses. The attacker allegedly transferred a total of 18.4 million UPC (approximately $70 million) from three management accounts. On April 4, UPCX posted on Twitter that, despite di…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On April 1, 2025, an attacker exploited UPCX's ProxyAdmin contract on Ethereum to upgrade core protocol logic with a malicious withdrawByAdmin function, draining $70 million (18.4 million UPC tokens) from protocol management wallets. No user wallets were affected. A single privileged ProxyAdmin key was compromised, permitting an instant malicious contract upgrade. The new implementation exposed a drain primitive (withdrawByAdmin) with no access control or delay, allowing the attacker to withdraw all UPC tokens from protocol management accounts. No multisig or timelock was enforced, leaving the protocol vulnerable to single-point takeover."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/Upcxofficial/status/1907024397497749647"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/explained-the-upcx-2025-04-08t10-45-05-419000-00-00"
+    },
+    {
+      "source": "revertiq",
+      "label": "halborn.com",
+      "url": "https://www.halborn.com/blog/post/explained-the-upcx-hack-april-2025"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/de-fi-rekt-report-april-2025-5-9-billion-lost-across-10-incidents-2-8-million-recovered"
+    },
+    {
+      "source": "revertiq",
+      "label": "yfarmx.com",
+      "url": "https://yfarmx.com/tools/exploit-tracker/exploit-0121/"
+    }
+  ]
+}

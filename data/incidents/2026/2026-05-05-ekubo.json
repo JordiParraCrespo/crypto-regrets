@@ -1,0 +1,118 @@
+{
+  "id": "2026-05-05-ekubo",
+  "name": "Ekubo",
+  "date": "2026-05-05",
+  "year": 2026,
+  "amountUsd": 1400000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "arbitrary-call",
+  "technique": "Token Approval Abuse",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "arbitrary-call",
+    "confidence": 0.44,
+    "top": [
+      {
+        "category": "arbitrary-call",
+        "p": 0.47000000000000003
+      },
+      {
+        "category": "logic-error",
+        "p": 0.22
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.15
+      }
+    ],
+    "flashLoan": 0.1,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "Business Logic Flaw. Lost: ~$1.4M",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Business Logic Flaw. Lost: ~$1.4M"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Ekubo's flash-accounting lock/forward/pay/withdraw flow let the attacker settle a victim's funds against the protocol's own balance accounting instead of their own. Inside the locked callback the attacker called CORE.forward(WBTC) and CORE.withdraw(WBTC, attacker, 20_000_000) to pull WBTC out, then satisfied the resulting debt via pay, whose payCallback transferred the owed WBTC from the victim (who had approved Ekubo Core) rather than from the attacker. Because the core trusted the router's accounting and the pay was sourced from the victim's standing approval, each lock iteration netted 0.2 WBTC of the victim's funds to the attacker for free. Repeating the lock 85 times drained 1,700,000 (17 WBTC, ~$1.4M) entirely from the victim's approved balance. Vulnerable code snippet: Attack Tx: https://etherscan.io/tx/0x770bc9a1f7c32cb63a5002b9ceb5c7994cd3af0fc6b2309cb32d3c46f629daa0 Analysis: https://x.com/EkuboProtocol/status/2051754481465856038"
+    },
+    {
+      "source": "SlowMist",
+      "text": "According to Blockaid, Ekubo Protocol’s custom extension contract on Ethereum was attacked in the early hours, resulting in a loss of approximately $1.4 million. Ekubo users themselves were not directly affected. Only users who had previously approved the V2 contract as a token spender were exposed to risk. The root cause lies in the IPayer.pay callback function within the Ekubo extension contract. Specifically, the payer, token, and amount parameters in the token.transferFrom call were directly sourced from the lock payload and could be fully controlled by the attacker. The contract failed to verify whether the payer was the initiator of the lock or an authorized payment source.…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Ekubo’s EVM-based swap router contract was exploited on Ethereum Mainnet on May 5, 2026. Attackers drained about 17 WBTC (~$1.4M) by abusing access to ERC-20 token approvals, allowing repeated unauthorized withdrawals from users who had granted allowances. The impacted functionality failed to check whether the withdrawal initiator was the rightful owner, targeting only EVM deployments and leaving liquidity-provider and Starknet users unaffected. The Ekubo swap router’s payCallback and withdrawal logic lacked verification of the true payer or lock initiator. This allowed an attacker contract to repeatedly trigger token transfers from victim accounts wit…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x770bc9a1f7c32cb63a5002b9ceb5c7994cd3af0fc6b2309cb32d3c46f629daa0"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-05/Ekubo_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-05/Ekubo_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x770bc9a1f7c32cb63a5002b9ceb5c7994cd3af0fc6b2309cb32d3c46f629daa0"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/EkuboProtocol/status/2051754481465856038"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/blockaid_/status/2051757787714118125"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x770bc9a1f7c32cb63a5002b9ceb5c7994cd3af0fc6b2309cb32d3c46f629daa0"
+    },
+    {
+      "source": "blocksec",
+      "label": "x.com",
+      "url": "https://x.com/Phalcon_xyz/status/2051852450496495710"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/ekubo-2026-05-05"
+    },
+    {
+      "source": "revertiq",
+      "label": "merklescience.com",
+      "url": "https://www.merklescience.com/blog/hack-track-ekubo-approval-exploit-drains-1-4m"
+    }
+  ]
+}

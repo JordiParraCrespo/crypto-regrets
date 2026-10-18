@@ -1,0 +1,81 @@
+{
+  "id": "2026-01-05-tmx-tribe",
+  "name": "TMX TRIBE",
+  "date": "2026-01-05",
+  "year": 2026,
+  "amountUsd": 1400000,
+  "returnedUsd": null,
+  "chains": [
+    "Arbitrum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Arithmetic Error",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "$1.4 million lost on TMXTribe due to a logic bug. The team wallets deployed contracts during the exploit, never paused, and continue deploying days later. Meanwhile, complete radio silence from the team. Logic bug or choreographed exit?",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "$1.4 million lost on TMXTribe due to a logic bug. The team wallets deployed contracts during the exploit, never paused, and continue deploying days later. Meanwhile, complete radio silence from the team. Logic bug or choreographed exit?"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "TMX TRIBE, a decentralized futures protocol on Arbitrum One, was exploited in January 2026 due to an arithmetic error in its share accounting logic. The protocol's AUM calculation failed to consider liabilities from minted USDG, allowing an attacker to redeem inflated LP tokens for more than the protocol's net equity. This error enabled repeated over-redemption, draining approximately $1.4 million. No evidence of recovery exists, and no official public postmortem was issued. A critical accounting flaw in the AUM calculation ignored USDG (debt) liabilities, causing GLP/TLP share price to be computed from gross assets only. As a result, redemptions could…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x0b8087dc9b6dfce217f9a9c70266373216a92f764b2d51bddaab1b1a6d8bffa8",
+    "0x00eed3660badc8f02855d6cf5b8e2fbb521a1208752745e1419077c42e948a0f"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: TMXTribe - Rekt",
+      "url": "https://rekt.news/tmztribe-rekt"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/tmx-tribe-2026-01-05"
+    },
+    {
+      "source": "revertiq",
+      "label": "darknavy.org",
+      "url": "https://www.darknavy.org/web3/exploits/tmx-tribe/"
+    },
+    {
+      "source": "revertiq",
+      "label": "monitoringroom.com",
+      "url": "https://monitoringroom.com/situation/crypto-hack/tmx-tribe"
+    }
+  ]
+}

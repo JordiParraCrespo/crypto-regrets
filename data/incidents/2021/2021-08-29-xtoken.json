@@ -1,0 +1,96 @@
+{
+  "id": "2021-08-29-xtoken",
+  "name": "xToken",
+  "date": "2021-08-29",
+  "year": 2021,
+  "amountUsd": 4500000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.97,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.97
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.01
+      },
+      {
+        "category": "logic-error",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.75,
+    "stateActor": 0.02,
+    "hasRootCause": 0.57
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Some sequels should never be written. Three months ago this team lost $24 million - in the same token, to the same attack technique. Why did they let it happen again?",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "Some sequels should never be written. Three months ago this team lost $24 million - in the same token, to the same attack technique. Why did they let it happen again?"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The DeFi pledge and liquidity strategy platform xToken, which suffered a lightning loan attack, released an analysis report on the vulnerability of the xSNX contract. At 4:43 UTC on August 29th, a vulnerability in the xSNX contract was exploited, and the holder's loss was estimated to be 4.5 million U.S. dollars. xToken believes that it is best to stop providing xSNX products at this time. xToken stated that it will no longer use the xSNX contract for SNX pledge."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "xToken's xSNX product on Ethereum was exploited on August 29, 2021 via a flash loan and spot price manipulation, resulting in an estimated $4.5 million loss. The attacker exploited an access control flaw and manipulated SNX prices to extract profits from the protocol. A callback function in the xSNXAdmin contract intended to be callable only by dYdX's SoloMargin contract used the wrong access check, leaving it exposed to anyone. The attacker used this alongside aggressive SNX price manipulation to purchase underpriced SNX and drain value."
+    }
+  ],
+  "audit": "Unaudited",
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: X-Token - REKT X2",
+      "url": "https://rekt.news/xtoken-rekt-x2"
+    },
+    {
+      "source": "slowmist",
+      "label": "medium.com",
+      "url": "https://medium.com/xtoken/xsnx-post-mortem-666d35071f38"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/xtoken-2021-08-29"
+    },
+    {
+      "source": "revertiq",
+      "label": "crypto.news",
+      "url": "https://crypto.news/defi-project-xtoken-second-attack-4-5-million-hackers/"
+    },
+    {
+      "source": "revertiq",
+      "label": "coingeek.com",
+      "url": "https://coingeek.com/xtoken-defi-protocol-loses-7m-in-yet-another-exploit/"
+    }
+  ]
+}

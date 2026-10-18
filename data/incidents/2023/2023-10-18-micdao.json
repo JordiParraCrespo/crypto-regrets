@@ -1,0 +1,112 @@
+{
+  "id": "2023-10-18-micdao",
+  "name": "MicDao",
+  "date": "2023-10-18",
+  "year": 2023,
+  "amountUsd": 13000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.45,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.48
+      },
+      {
+        "category": "access-control",
+        "p": 0.32
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.13
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.9
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Price Manipulation. Lost: ~$13K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Price Manipulation. Lost: ~$13K"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The MicDao exploit occurred due to a vulnerability in the private _transfer() function. This function burned MicDao tokens whenever triggered, allowing the attacker to artificially reduce the total supply and inflate the token price.\" Vulnerable code snippet: Attack tx: Analysis: CertiK Alert on Twitter / X ChainAegis on Twitter / X"
+    },
+    {
+      "source": "SlowMist",
+      "text": "MicDao suffered from a flash loan attack. The attacker gained $12,263. Contract address: 0xf6876f6AB2637774804b85aECC17b434a2B57168."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "MicDao on BNB Chain was exploited on 2023-10-18 through a DODO flash loan and repeated helper contracts that cycled through a fixed-rate MicDao swap path, producing about $13,000 in loss and 12,260.251676860937684429 USDT in attacker profit. MicDao's intermediary swap path used a fixed internal pricing rule and a per-address swap cap that could be bypassed by creating fresh helper contracts for each call. A burn-on-transfer rule on direct pair transfers also let the attacker skew pool accounting while keeping the profitable leg on the helper path."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x24a2fbb27d433d91372525954f0d7d1af7509547b9ada29cc6c078e732c6d075"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-10/MicDao_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-10/MicDao_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/CertiKAlert/status/1714677875427684544"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/ChainAegis/status/1714837519488205276"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x24a2fbb27d433d91372525954f0d7d1af7509547b9ada29cc6c078e732c6d075"
+    },
+    {
+      "source": "slowmist",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0xf6876f6AB2637774804b85aECC17b434a2B57168"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/micdao-2023-10-18"
+    },
+    {
+      "source": "revertiq",
+      "label": "autosaida.github.io",
+      "url": "https://autosaida.github.io/DeFiHackAnalysis/2023/231018_MicDao/"
+    }
+  ]
+}

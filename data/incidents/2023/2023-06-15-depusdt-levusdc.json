@@ -1,0 +1,93 @@
+{
+  "id": "2023-06-15-depusdt-levusdc",
+  "name": "DEPUSDT_LEVUSDC",
+  "date": "2023-06-15",
+  "year": 2023,
+  "amountUsd": 105000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Incorrect access control",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.95).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.95,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.95
+      },
+      {
+        "category": "arbitrary-call",
+        "p": 0.05
+      }
+    ],
+    "flashLoan": 0.06,
+    "stateActor": 0.02,
+    "hasRootCause": 0.94
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Incorrect access control. Lost: ~$105k",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Incorrect access control. Lost: ~$105k"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "A public function that enabled the attacker to obtain approval as a spender for $DEPUSDT and $LEVUSDC tokens. Vulnerable code snippet: Attack tx: Attack Tx DEPUSDT : https://etherscan.io/tx/0xf0a13b445674094c455de9e947a25bade75cac9f5176695fca418898ea25742f Attack Tx LEVUSDC : https://etherscan.io/tx/0x800a5b3178f680feebb81af69bd3dff791b886d4ce31615e601f2bb1f543bb2e Analysis: https://blog.solidityscan.com/depusdt-and-levusdc-hack-analysis-d27032d8f2cd"
+    },
+    {
+      "source": "SlowMist",
+      "text": "DEP/USDT and LEV/USDC pools were stolen with 105,800 stablecoins worth (36,000 USDC and 69,960,000 USDT), and the attackers initially received 1 ETH of initial funding from Tornado Cash."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xf0a13b445674094c455de9e947a25bade75cac9f5176695fca418898ea25742f",
+    "0x800a5b3178f680feebb81af69bd3dff791b886d4ce31615e601f2bb1f543bb2e"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-06/DEPUSDT_LEVUSDC_exp.sol",
+  "sources": [
+    "defihacklabs",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-06/DEPUSDT_LEVUSDC_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/numencyber/status/1669278694744150016?cxt=HHwWgMDS9Z2IvKouAAAA"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xf0a13b445674094c455de9e947a25bade75cac9f5176695fca418898ea25742f"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x800a5b3178f680feebb81af69bd3dff791b886d4ce31615e601f2bb1f543bb2e"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "blog.solidityscan.com",
+      "url": "https://blog.solidityscan.com/depusdt-and-levusdc-hack-analysis-d27032d8f2cd"
+    },
+    {
+      "source": "slowmist",
+      "label": "panewslab.com",
+      "url": "https://www.panewslab.com/zh/sqarticledetails/xbxdm9ar.html"
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "id": "2025-04-06-filament-finance",
+  "name": "Filament Finance",
+  "date": "2025-04-06",
+  "year": 2025,
+  "amountUsd": 572000,
+  "returnedUsd": null,
+  "chains": [
+    "Sei"
+  ],
+  "targetType": null,
+  "category": "market-manipulation",
+  "technique": "Order Book Price Manipulation; Self-Liquidation Abuse; Sybil Attack",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.76). Replaced keyword guess \"oracle-manipulation\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "market-manipulation",
+    "confidence": 0.76,
+    "top": [
+      {
+        "category": "market-manipulation",
+        "p": 0.77
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.22
+      },
+      {
+        "category": "logic-error",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "On April 6, 2025, Filament Finance, an order book DEX on Sei, was exploited for approximately $572,000. The attacker used multiple accounts to spoof order book prices, opened leveraged positions, and strategically self-liquidated these positions to drain most protocol funds. Filament Finance relied on thinly traded order book pricing without circuit breakers or Sybil/multi-account defenses. The design allowed coordinated actors to spoof prices, trigger self-liquidations at manipulated prices, and drain user assets without detection.",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "On April 6, 2025, Filament Finance, an order book DEX on Sei, was exploited for approximately $572,000. The attacker used multiple accounts to spoof order book prices, opened leveraged positions, and strategically self-liquidated these positions to drain most protocol funds. Filament Finance relied on thinly traded order book pricing without circuit breakers or Sybil/multi-account defenses. The design allowed coordinated actors to spoof prices, trigger self-liquidations at manipulated prices, and drain user assets without detection."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x3bc6f9a1d51e1afa57a25de570c3e628de3efe56e4765d2c7d2769f049b2e9dc",
+    "0x539e0904936a5d7118d4b0e6920754d101c364a337ec83b8d2c811d785a91b14",
+    "0x5aa38ada9b075f4b4c2b5278459a4b3d345cb58fb0077bea4f8624926295d892",
+    "0x05aa8e4df48739cf9c4b1ff41aad58bcec02c64e24f74cec2b0c75f8fc15505f"
+  ],
+  "poc": null,
+  "sources": [
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/how-filament-finance-got-exploited-of-572k-2025-04-10"
+    },
+    {
+      "source": "revertiq",
+      "label": "quillaudits.com",
+      "url": "https://www.quillaudits.com/blog/hack-analysis/how-filament-finance-got-exploited"
+    },
+    {
+      "source": "revertiq",
+      "label": "crypto.news",
+      "url": "https://crypto.news/sei-ecosystem-based-filament-dex-exploited-for-572k/"
+    }
+  ]
+}

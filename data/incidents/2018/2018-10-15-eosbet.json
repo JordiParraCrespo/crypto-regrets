@@ -1,0 +1,86 @@
+{
+  "id": "2018-10-15-eosbet",
+  "name": "EOSBet",
+  "date": "2018-10-15",
+  "year": 2018,
+  "amountUsd": 338000,
+  "returnedUsd": null,
+  "chains": [
+    "EOS"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Donation Attack",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.48,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.51
+      },
+      {
+        "category": "input-validation",
+        "p": 0.16
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.1
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.88
+  },
+  "bridge": false,
+  "language": "C++",
+  "rootCause": "The attacker exploited the vulnerabilities in the EOSBet contract to falsify the transfer prompt.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The attacker exploited the vulnerabilities in the EOSBet contract to falsify the transfer prompt."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On October 15, 2018, attackers exploited a smart contract vulnerability in the EOSBet gambling application on EOS, using a donation attack to siphon approximately $338,000 in EOS from the platform. The exploit allowed malicious users to trigger unauthorized fund transfers from EOSBet’s operational accounts to attacker-controlled wallets. EOSBet’s smart contract trusted the origin of incoming EOS transfers and allowed unverified transfer logic. Attackers injected malicious code into their accounts, sending specifically crafted EOS token transfers that caused the contract to match their deposit with an equal outgoing transfer from the platform’s operational wallet.…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "jinse.com",
+      "url": "https://www.jinse.com/lives/57970.htm"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/eosbet-2018-10-15"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/eosbet-hack-2018"
+    },
+    {
+      "source": "revertiq",
+      "label": "thenextweb.com",
+      "url": "https://thenextweb.com/news/eos-dapp-hacked"
+    }
+  ]
+}

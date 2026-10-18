@@ -1,0 +1,81 @@
+{
+  "id": "2024-03-21-sss",
+  "name": "SSS",
+  "date": "2024-03-21",
+  "year": 2024,
+  "amountUsd": 4800000,
+  "returnedUsd": null,
+  "chains": [
+    "Blast"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Token Balance Doubles on Transfer to self",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.89).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.89,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.9
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.06
+      },
+      {
+        "category": "access-control",
+        "p": 0.04
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.03,
+    "hasRootCause": 0.93
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Token Balance Doubles on Transfer to self. Lost: 4.8M",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Token Balance Doubles on Transfer to self. Lost: 4.8M"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Simple logic error transferFrom(me, me, amount) will multiply The balance. Code Snippets: Attack Tx: https://blastscan.io/tx/0x62e6b906bb5aafdc57c72cd13e20a18d2de3a4a757cd2f24fde6003ce5c9f2c6 Analysis: https://twitter.com/SSS_HQ/status/1771054306520867242 https://twitter.com/dot_pengun/status/1770989208125272481"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x62e6b906bb5aafdc57c72cd13e20a18d2de3a4a757cd2f24fde6003ce5c9f2c6"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-03/SSS_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-03/SSS_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/dot_pengun/status/1770989208125272481"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "blastscan.io",
+      "url": "https://blastscan.io/tx/0x62e6b906bb5aafdc57c72cd13e20a18d2de3a4a757cd2f24fde6003ce5c9f2c6"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/SSS_HQ/status/1771054306520867242"
+    }
+  ]
+}

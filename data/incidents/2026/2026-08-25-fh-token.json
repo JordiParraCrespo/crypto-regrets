@@ -1,0 +1,92 @@
+{
+  "id": "2026-08-25-fh-token",
+  "name": "FH Token",
+  "date": "2026-08-25",
+  "year": 2026,
+  "amountUsd": 20000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "Token",
+  "category": "logic-error",
+  "technique": "Swap Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.96,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.96
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.04
+      }
+    ],
+    "flashLoan": 0.08,
+    "stateActor": 0.02,
+    "hasRootCause": 0.9
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "sell-tax reserve mismatch via premature sync(). Lost: 19,999.018106552928530404 USDT (~$20K)",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "sell-tax reserve mismatch via premature sync(). Lost: 19,999.018106552928530404 USDT (~$20K)"
+    },
+    {
+      "source": "SlowMist",
+      "text": "FH Token on the BSC chain was exploited in its FH/USDT liquidity pool on PancakeSwap V2. A flaw in the token’s _transfer function and isSell logic caused incorrect token burns during sells, allowing the attacker to drain funds from the pool through repeated buy-and-sell loops, resulting in a loss of approximately $20,000."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "FH Token was exploited on BNB Chain on August 25, 2026, via a flaw in its sell-tax logic, allowing the attacker to drain about $20,000 from the PancakeSwap FH/USDT pool through repeated buy-sell loops that manipulated token reserve accounting. A vulnerability in FH Token's _transfer function and isSell logic caused premature token burns and an incorrect sync, allowing manipulated reserve inflation and repeated pool draining."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-08/FHToken_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-08/FHToken_exp.sol"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/TenArmorAlert/status/2092427353456812207"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/fh-token-2026-08-25"
+    },
+    {
+      "source": "revertiq",
+      "label": "hacked.slowmist.io",
+      "url": "https://hacked.slowmist.io/?c=BSC"
+    },
+    {
+      "source": "revertiq",
+      "label": "en.cryptonomist.ch",
+      "url": "https://en.cryptonomist.ch/2026/08/26/fhtoken-security-exploit-loss/"
+    }
+  ]
+}

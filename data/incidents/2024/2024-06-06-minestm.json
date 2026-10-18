@@ -1,0 +1,72 @@
+{
+  "id": "2024-06-06-minestm",
+  "name": "MineSTM",
+  "date": "2024-06-06",
+  "year": 2024,
+  "amountUsd": 13800,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Business Logic Flaw",
+  "classificationNote": "Classified by keyword rules from the DeFiHackLabs root-cause title.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.54,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.5700000000000001
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.43
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Business Logic Flaw. Lost: $13.8K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Business Logic Flaw. Lost: $13.8K"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Incorrect uses reserve of pair for liquidity calculation Vulnerable code snippet: https://bscscan.com/address/0xb7D0A1aDaFA3e9e8D8e244C20B6277Bee17a09b6#code Attack tx: https://app.blocksec.com/explorer/tx/bsc/0x849ed7f687cc2ebd1f7c4bed0849893e829a74f512b7f4a18aea39a3ef4d83b1 Analysis: There's \"sell\" function in \"MineSTM\" contract, and it uses reserve of pair for liquidity calculation. Hacker manipulated reserve amount by swapping large amount of tokens, and then called \"sell\" function to get lots of tokens."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x849ed7f687cc2ebd1f7c4bed0849893e829a74f512b7f4a18aea39a3ef4d83b1"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-06/MineSTM_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-06/MineSTM_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0xb7D0A1aDaFA3e9e8D8e244C20B6277Bee17a09b6#code"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/bsc/0x849ed7f687cc2ebd1f7c4bed0849893e829a74f512b7f4a18aea39a3ef4d83b1"
+    }
+  ]
+}

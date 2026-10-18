@@ -1,0 +1,83 @@
+{
+  "id": "2026-07-16-defituna-lending",
+  "name": "DefiTuna Lending",
+  "date": "2026-07-16",
+  "year": 2026,
+  "amountUsd": 580000,
+  "returnedUsd": null,
+  "chains": [
+    "Solana"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Swap Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.06,
+    "stateActor": 0.02,
+    "hasRootCause": 0.35
+  },
+  "bridge": false,
+  "language": "Rust",
+  "rootCause": "The Solana-based DeFi protocol DefiTuna's lending pools were exploited by an attacker who drained approximately $580K, creating a matching deficit in the USDC lending pool. The attack vector has been identified and patched; the team is investigating and working on fund recovery.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The Solana-based DeFi protocol DefiTuna's lending pools were exploited by an attacker who drained approximately $580K, creating a matching deficit in the USDC lending pool. The attack vector has been identified and patched; the team is investigating and working on fund recovery."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On July 16, 2026, the Solana-based DeFiTuna protocol lost approximately $570,000 after an attacker exploited a logic flaw in its position health check. The attacker used a manipulated, nearly empty AMM pool and a rounding bug to create and extract unbacked debt, bypassing solvency enforcement. The vulnerable branch in DeFiTuna's position health check treated any position with asset value rounded to zero as healthy, regardless of outstanding debt. This allowed an attacker to create a debt position where the purported collateral, after a manipulated swap, was so small it rounded to zero, evading proper insolvency detection."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/DeFiTuna/status/2077772502521053668"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/defituna-2026-07-16"
+    },
+    {
+      "source": "revertiq",
+      "label": "blocksec.com",
+      "url": "https://blocksec.com/blog/web3-security-barnbridge-defituna-exploits"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/NanoJS10/Defi-tuna-exploit-/tree/main"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/defituna-hack-2026"
+    }
+  ]
+}

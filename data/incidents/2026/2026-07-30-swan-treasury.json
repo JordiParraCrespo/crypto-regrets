@@ -1,0 +1,105 @@
+{
+  "id": "2026-07-30-swan-treasury",
+  "name": "Swan Treasury",
+  "date": "2026-07-30",
+  "year": 2026,
+  "amountUsd": 625000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "key-compromise",
+  "technique": "Private Key Compromised",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "key-compromise",
+    "confidence": 0.95,
+    "top": [
+      {
+        "category": "key-compromise",
+        "p": 0.95
+      },
+      {
+        "category": "signature-crypto",
+        "p": 0.03
+      },
+      {
+        "category": "access-control",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.96,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Off-chain signer key (0xdEb4...8284) hardcoded in ZhaiquanBuy contract was compromised. Attacker forged valid signatures to purchase STY at 100x discount (~687K STY for ~19.7K USDT via PancakeSwap flash loan), then dumped tokens for ~$625K USDT profit. Attack Tx: https://bscscan.com/tx/0xc8c3325ba2c942a674b26de2063d278c144e92dbc91497ca0c766c915d96cbd4 Source: https://twitter.com/DefimonAlerts/status/2083039796784410802",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Off-chain signer key (0xdEb4...8284) hardcoded in ZhaiquanBuy contract was compromised. Attacker forged valid signatures to purchase STY at 100x discount (~687K STY for ~19.7K USDT via PancakeSwap flash loan), then dumped tokens for ~$625K USDT profit. Attack Tx: https://bscscan.com/tx/0xc8c3325ba2c942a674b26de2063d278c144e92dbc91497ca0c766c915d96cbd4 Source: https://twitter.com/DefimonAlerts/status/2083039796784410802"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The decentralized asset management protocol Swan Treasury on BNB Chain was exploited due to the leakage of an off-chain signer's private key (the _signer key hardcoded in the ZhaiquanBuy contract). The attacker forged valid signatures and used PancakeSwap flash loans to purchase approximately 687,000 STY tokens at around a 100x discount (spending approximately 19,700 USDT). The attacker then forged the related claim()/transfer signatures and dumped the tokens into the STY/USDT pool, making a profit of approximately $625,000."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On July 30, 2026, Swan Treasury suffered a $625,246 loss on BNB Chain due to a compromised off-chain signer key. The attacker forged a purchase order, using a flash loan and manipulated the discount parameter to buy STY tokens at one-hundredth the intended price, extracting over 871,000 STY and swiftly converting to USDT. The loss was caused by a compromised off-chain signing key and the absence of on-chain bounds on critical economic parameters. The buy() function authenticated with the signer address but allowed arbitrary discount values, enabling the attacker to mint tokens at an extreme discount."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xc8c3325ba2c942a674b26de2063d278c144e92dbc91497ca0c766c915d96cbd4",
+    "0xb16c4b4f213d23b6cb4e06abb0b53316ac39e4c1b211a40e8869b437cefb5e44",
+    "0x2f35e9f302247d6df824fcc212d535cb5c5e3b228fbe7991357df2370e781442"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0xc8c3325ba2c942a674b26de2063d278c144e92dbc91497ca0c766c915d96cbd4"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/DefimonAlerts/status/2083039796784410802"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/DefimonAlerts/status/2083039796784410802"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/swan-treasury-2026-07-30"
+    },
+    {
+      "source": "revertiq",
+      "label": "sigintzero.com",
+      "url": "https://sigintzero.com/blog/swan-treasury-625k-signer-key-discount-abuse"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptonews.net",
+      "url": "https://cryptonews.net/news/security/33229560/"
+    }
+  ]
+}

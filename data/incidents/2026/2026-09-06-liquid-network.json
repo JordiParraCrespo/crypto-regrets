@@ -1,0 +1,96 @@
+{
+  "id": "2026-09-06-liquid-network",
+  "name": "Liquid Network",
+  "date": "2026-09-06",
+  "year": 2026,
+  "amountUsd": 320000000,
+  "returnedUsd": null,
+  "chains": [
+    "Liquid"
+  ],
+  "targetType": "Chain",
+  "category": "bridge-crosschain",
+  "technique": "Unbacked Cross-Chain Mint",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "bridge-crosschain",
+    "confidence": 0.67,
+    "top": [
+      {
+        "category": "bridge-crosschain",
+        "p": 0.69
+      },
+      {
+        "category": "client-bug",
+        "p": 0.15
+      },
+      {
+        "category": "logic-error",
+        "p": 0.06
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": true,
+  "language": "C++",
+  "rootCause": "An actor exploited a range-proof cache-key collision in Elements to mint ~4,000 unbacked L-BTC, draining $320 million from Liquid Network. The actor returned 3,400 BTC and kept roughly 598.5 BTC. Was it a bounty or theft? The dispute continues.",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "An actor exploited a range-proof cache-key collision in Elements to mint ~4,000 unbacked L-BTC, draining $320 million from Liquid Network. The actor returned 3,400 BTC and kept roughly 598.5 BTC. Was it a bounty or theft? The dispute continues."
+    },
+    {
+      "source": "SlowMist",
+      "text": "Bitcoin sidechain Liquid Network was exploited via an Elements range-proof verification cache bug, allowing creation of about 4,000 unbacked LBTC. The actor then used SideSwap’s standard peg-out path to withdraw about 4,000 BTC ($320,000,000) from the federation reserve. Liquid said no private keys were compromised. The actor, claiming to be a white hat, returned 3,400 BTC on September 7 and still holds about 598.5 BTC ($47,000,000). The network remains paused."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Liquid Network halted peg operations on 2026-09-06 after attackers reportedly exploited an Elements range-proof cache collision bug to mint unbacked L-BTC and redeem it for nearly 4,000 BTC from federation reserves. Public reporting states that about 3,400 BTC was later returned while roughly 598.5 BTC remained outstanding. Public reporting attributes the incident to a consensus validation bug in the Elements codebase used by Liquid Network. Reported analyses state that range-proof verification cache keys were constructed from variable-length fields without explicit length prefixes, allowing cache-key collisions that caused nodes to reuse a cached succ…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Liquid Network - Rekt",
+      "url": "https://rekt.news/liquid-network-rekt"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/Liquid_BTC/status/2097404704028545175"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/liquid-network-2026-09-06"
+    },
+    {
+      "source": "revertiq",
+      "label": "status.blockstream.com",
+      "url": "https://status.blockstream.com/incidents/b8b719f3-db70-4487-9cff-946e69509228"
+    },
+    {
+      "source": "revertiq",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/markets/2026/09/07/bitcoin-network-used-by-exchanges-hit-by-usd320-million-exploit-hackers-claim-they-re-the-good-guys"
+    }
+  ]
+}

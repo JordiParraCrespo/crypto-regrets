@@ -1,0 +1,84 @@
+{
+  "id": "2021-10-01-coinbase",
+  "name": "Coinbase",
+  "date": "2021-10-01",
+  "year": 2021,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [],
+  "targetType": "CEX",
+  "category": "key-compromise",
+  "technique": "Session Key Compromised",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.42,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.45
+      },
+      {
+        "category": "logic-error",
+        "p": 0.24000000000000002
+      },
+      {
+        "category": "key-compromise",
+        "p": 0.22
+      }
+    ],
+    "flashLoan": 0.01,
+    "stateActor": 0.02,
+    "hasRootCause": 0.94
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "According to a notification letter submitted by Coinbase to the California Attorney General’s Office to affected customers, a vulnerability that allows hackers to bypass Coinbase’s multi-factor authentication SMS option has affected at least 6,000 Coinbase users between March and May 2021. During the 20th day, hackers took advantage of this omission to access the accounts of affected users and transfer user funds from Coinbase. After Coinbase learned of this issue, it immediately updated its SMS account recovery agreement to prevent hackers from further bypassing the authentication process. In addition, Coinbase will deposit funds of the same value into the accounts of affected users.…",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "According to a notification letter submitted by Coinbase to the California Attorney General’s Office to affected customers, a vulnerability that allows hackers to bypass Coinbase’s multi-factor authentication SMS option has affected at least 6,000 Coinbase users between March and May 2021. During the 20th day, hackers took advantage of this omission to access the accounts of affected users and transfer user funds from Coinbase. After Coinbase learned of this issue, it immediately updated its SMS account recovery agreement to prevent hackers from further bypassing the authentication process. In addition, Coinbase will deposit funds of the same value into the accounts of affected users.…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Coinbase suffered a credential and SMS-based account recovery attack impacting at least 6,000 customer accounts between March and May 2021. Attackers gained access via phishing and exploited a vulnerability in SMS 2FA reset, enabling unauthorized withdrawals. Coinbase reimbursed affected users. No public blockchain withdrawal addresses or loss figures are available. A vulnerable SMS-based account recovery process allowed attackers to bypass the intended two-factor authentication protection if the account password, email, and phone number were known. This flaw, combined with targeted phishing, enabled attackers to reset 2FA and withdraw funds from affected accounts."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "cpomagazine.com",
+      "url": "https://www.cpomagazine.com/cyber-security/coinbase-hack-attributed-to-a-multi-factor-authentication-flaw-that-allowed-scammers-to-steal-cryptocurrenc"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/coinbase-2021-10-01"
+    },
+    {
+      "source": "revertiq",
+      "label": "oag.ca.gov",
+      "url": "https://www.oag.ca.gov/system/files/09-24-2021%20Customer%20Notification.pdf"
+    },
+    {
+      "source": "revertiq",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/business/2021/10/01/coinbase-multi-factor-authentication-hack-affects-at-least-6000-customers"
+    }
+  ]
+}

@@ -1,0 +1,105 @@
+{
+  "id": "2023-03-08-dkp",
+  "name": "DKP",
+  "date": "2023-03-08",
+  "year": 2023,
+  "amountUsd": 80000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "Token",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.92,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "FlashLoan price manipulation. Lost: ~$80K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "FlashLoan price manipulation. Lost: ~$80K"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "QuillAudits: The contract was not verified. So, after decompiling it, we found that the vulnerability was present in the exchange() function, which was used to swap USDT for DKP tokens. The problem arises because the price Oracle relies on the balance ratio of the two tokens in the USDT-DKP pair, making it vulnerable to flash loan attacks that allow the attacker to manipulate the pool. Vulnerable code snippet: https://bscscan.com/address/0x89257A52Ad585Aacb1137fCc8abbD03a963B9683#code https://library.dedaub.com/decompile?md5=0795fc50f96b806a37007ea095b360de Attack tx: https://bscscan.com/tx/0x0c850f54c1b497c077109b3d2ef13c042bb70f7f697201bcf2a4d0cb95e74271 https://bscscan.com/tx/0x2d31e45dce58572a99c51357164dc5283ff0c02d609250df1e6f4248bd62ee01 Analysis: https://twitter.com/CertiKAlert/status/1633421908996763648 https://blog.solidityscan.com/dkp-hack-analysis-improper-token-pair-ratio-calculation-282672cd0450 https://medium.com/coinmonks/decoding-dkp-token-s-80k-exploit-quillaudits-45c67df973d6"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "DKP suffered an $80K exploit on BNB Chain via spot price manipulation on March 8, 2023. The attacker used flash loans to distort the USDT-DKP pair's reserve ratio, enabling them to swap a small USDT amount for an outsized DKP amount and liquidate for profit. The DKP protocol's exchange function relied on the spot reserve ratio of a USDT-DKP liquidity pair as its price reference without safeguards against manipulation. A flash loan allowed the attacker to temporarily adjust the reserves and obtain DKP tokens at a falsely favorable rate."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x0c850f54c1b497c077109b3d2ef13c042bb70f7f697201bcf2a4d0cb95e74271",
+    "0x2d31e45dce58572a99c51357164dc5283ff0c02d609250df1e6f4248bd62ee01"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-03/DKP_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-03/DKP_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/CertiKAlert/status/1633421908996763648"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0x89257A52Ad585Aacb1137fCc8abbD03a963B9683#code"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "library.dedaub.com",
+      "url": "https://library.dedaub.com/decompile?md5=0795fc50f96b806a37007ea095b360de"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x0c850f54c1b497c077109b3d2ef13c042bb70f7f697201bcf2a4d0cb95e74271"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/dkp-2023-03-08"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.solidityscan.com",
+      "url": "https://blog.solidityscan.com/dkp-hack-analysis-improper-token-pair-ratio-calculation-282672cd0450/"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/dkp-hack-2023"
+    }
+  ]
+}

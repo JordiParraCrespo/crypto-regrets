@@ -1,0 +1,143 @@
+{
+  "id": "2026-06-14-aztec-connect",
+  "name": "Aztec Connect",
+  "date": "2026-06-14",
+  "year": 2026,
+  "amountUsd": 2100000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "bridge-crosschain",
+  "technique": "Forged Proof",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "bridge-crosschain",
+    "confidence": 0.74,
+    "top": [
+      {
+        "category": "bridge-crosschain",
+        "p": 0.76
+      },
+      {
+        "category": "logic-error",
+        "p": 0.23
+      },
+      {
+        "category": "input-validation",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": true,
+  "language": "Solidity",
+  "rootCause": "numRealTxs Proof/Settlement Mismatch (permissionless RollupProcessorV3). Lost: ~$2.19M (this PoC reproduces the 908.99 ETH leg)",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "numRealTxs Proof/Settlement Mismatch (permissionless RollupProcessorV3). Lost: ~$2.19M (this PoC reproduces the 908.99 ETH leg)"
+    },
+    {
+      "source": "REKT",
+      "text": "$2.28 million drained from Aztec Connect on June 14th, a deprecated ZK-rollup built by Aztec Labs, across two consecutive days. The ZK proof and settlement layer processed different transaction sets, attackers exploited the gap to mint unbacked balances and drain real funds."
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "In the deprecated Aztec Connect RollupProcessorV3 (core/Decoder.sol), the numRealTxs field lives at proofData[0x11c0], OUTSIDE the 0..0x11c0 header region that the zk proof hashes/commits, so it is not bound by the proof. decodeProof() commits public inputs in FULL inner-rollup chunks of 32 slots (ceil(numRealTxs/32)), so any numRealTxs in [1..32] maps to the same single chunk and verifies all 32 slots' notes into L2 state. However processDepositsAndWithdrawals() settles EXACTLY numRealTxs txs (end = ptr + numRealTxs*256). By declaring numRealTxs = 1 while placing a real DEPOSIT in slot 1, the deposit's note is proven and minted into L2 state, but its L1 backing validation (decreasePendingDepositBalance + shield signature) is skipped, creating unbacked L2 balance that is later withdrawn for real assets. Because processRollup() is permissionless on the sunset V3, anyone can submit these rollups. The attacker chained 14 rollups to drain ~$2.19M including 908.99 ETH. The PoC's testBugIsOneField proves restoring numRealTxs=2 (honest count) with the identical proof makes settlement validate the deposit and revert with INSUFFICIENT_DEPOSIT. Vulnerable code snippet: Attack Tx: https://etherscan.io/tx/0x074ec9317d8336db37e8c348fbdd7515573ff4088239c77ab429f522509aeeb1 Analysis: https://www.cryptotimes.io/2026/06/15/aztec-exploit-drains-2-19m-from-dormant-privacy-protocol/"
+    },
+    {
+      "source": "SlowMist",
+      "text": "An attacker exploited a vulnerability in the incomplete proof verification logic of the deprecated Aztec Connect Router contract on Ethereum, draining approximately $2.1 million in assets. The protocol had been deprecated for three years with no team control over the immutable contract. The current Aztec Network and AZTEC token were unaffected."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On June 14, 2026, an attacker drained roughly $2.15M to $2.19M from Aztec Connect's deprecated RollupProcessorV3 on Ethereum by exploiting a mismatch between zk-proof commitments and Layer 1 settlement accounting. The exploit minted unbacked L2 balances that were later withdrawn as real ETH and ERC20 assets from the immutable legacy bridge. RollupProcessorV3 trusted a numRealTransactions value that was not fully bound into the proof commitment used by settlement verification. The zk proof committed transaction slots that included attacker-controlled deposit operations, but the Layer 1 settlement loop processed only the first numRealTransactions entries.…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x074ec9317d8336db37e8c348fbdd7515573ff4088239c77ab429f522509aeeb1"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-06/AztecConnect_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-06/AztecConnect_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "www.cryptotimes.io",
+      "url": "https://www.cryptotimes.io/2026/06/15/aztec-exploit-drains-2-19m-from-dormant-privacy-protocol/"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "dev.to",
+      "url": "https://dev.to/cryip/how-a-single-validation-mismatch-can-drain-millions-lessons-from-the-aztec-connect-exploit-2598"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Aztec Connect - Rekt",
+      "url": "https://rekt.news/aztec-connect-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x074ec9317d8336db37e8c348fbdd7515573ff4088239c77ab429f522509aeeb1"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x074ec9317d8336db37e8c348fbdd7515573ff4088239c77ab429f522509aeeb1"
+    },
+    {
+      "source": "blocksec",
+      "label": "x.com",
+      "url": "https://x.com/Phalcon_xyz/status/2066372912635097155"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/AztecLabs_/status/2066175340926345555"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/aztec-connect-2026-06-14"
+    },
+    {
+      "source": "revertiq",
+      "label": "blocksec.com",
+      "url": "https://blocksec.com/blog/efi-security-incidents-jaredfromsubway-aztec"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/adshao/flounder/tree/main/reports/aztec-connect-exploit"
+    },
+    {
+      "source": "revertiq",
+      "label": "raw.githubusercontent.com",
+      "url": "https://raw.githubusercontent.com/SunWeb3Sec/DeFiHackLabs/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/src/test/2026-06/AztecConnect_exp.sol"
+    }
+  ]
+}

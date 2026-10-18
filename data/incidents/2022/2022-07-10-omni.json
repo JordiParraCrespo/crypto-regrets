@@ -1,0 +1,112 @@
+{
+  "id": "2022-07-10-omni",
+  "name": "Omni",
+  "date": "2022-07-10",
+  "year": 2022,
+  "amountUsd": 1400000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "reentrancy",
+  "technique": "Reentrancy",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "reentrancy",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "reentrancy",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.01,
+    "hasRootCause": 0.94
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Reentrancy. Lost: $1.4M",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Reentrancy. Lost: $1.4M"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "safeTransferFrom in burn function. project without nonReentrant protection. Vulnerable code snippet: https://etherscan.io/address/0x50c7a557d408a5f5a7fdbe1091831728ae7eba45#code#F7#L280 executeWithdrawERC721 trigger burn function https://etherscan.io/address/0x4e21f48add00e579b774cdad1656c6625c280381#code#F1#L106#116 In burn function trigger safeTransferFrom. As we know this function will call external OnERC721Received. So we can control execution flow to do reentrancy here."
+    },
+    {
+      "source": "SlowMist",
+      "text": "Decentralized NFT financialization protocol Omni X has been attacked and stolen funds have been transferred to Tornado.cash. The main reason for this attack is that the burn function will call the callback function externally to cause the reentrancy problem, and the liquidation function uses the old vars value for judgment, resulting in the user's status identification even after reentrancy and then borrowing. Being set as unborrowed results in no repayments."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Omni, an NFT lending protocol on Ethereum Mainnet, lost about 1,300 ETH (~$1.4 million) from protocol testing funds on July 10, 2022, due to a reentrancy vulnerability in its liquidation logic. No customer funds were lost. The vulnerable smart contract allowed reentrant calls during NFT liquidation, enabling an attacker to clear or reduce their debt after entering the liquidation process but before accounting was updated. This broke the intended checks-effects-interactions order, letting the attacker extract more Ether than their collateral justified."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-07/Omni_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-07/Omni_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/SlowMist_Team/status/1546379086792388609"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x05d65e0adddc5d9ccfe6cd65be4a7899ebcb6e5ec7a39787971bcc3d6ba73996"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/address/0x50c7a557d408a5f5a7fdbe1091831728ae7eba45#code#F7#L280"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/address/0x4e21f48add00e579b774cdad1656c6625c280381#code#F1#L106#116"
+    },
+    {
+      "source": "slowmist",
+      "label": "theblock.co",
+      "url": "https://www.theblock.co/post/156800/hacker-drains-1-4-million-worth-of-eth-from-nft-lender-omni"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/omni-2022-07-10"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptopotato.com",
+      "url": "https://cryptopotato.com/nft-platform-omni-hit-by-re-entrancy-exploit-lost-1-4m-in-eth/"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptonews.net",
+      "url": "https://cryptonews.net/news/security/9133333/"
+    }
+  ]
+}

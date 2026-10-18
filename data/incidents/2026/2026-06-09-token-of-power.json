@@ -1,0 +1,80 @@
+{
+  "id": "2026-06-09-token-of-power",
+  "name": "Token of Power",
+  "date": "2026-06-09",
+  "year": 2026,
+  "amountUsd": 1580000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "Token",
+  "category": "governance",
+  "technique": "Malicious Proposal",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "governance",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "governance",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Token of Power (TOP) suffered a governance takeover exploit due to misconfiguration in its Aragon DAO (no timelock). The attacker used funds from Tornado Cash to acquire majority voting power (>50% of the small 16,384 TOP supply), passed a malicious proposal in a single transaction to mint billions of new TOP tokens, and drained 944.2 WETH (~$1.58M) from the TOP/WETH Balancer V1 liquidity pool. Balancer protocol itself was not exploited.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Token of Power (TOP) suffered a governance takeover exploit due to misconfiguration in its Aragon DAO (no timelock). The attacker used funds from Tornado Cash to acquire majority voting power (>50% of the small 16,384 TOP supply), passed a malicious proposal in a single transaction to mint billions of new TOP tokens, and drained 944.2 WETH (~$1.58M) from the TOP/WETH Balancer V1 liquidity pool. Balancer protocol itself was not exploited."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 9 June 2026, Token of Power's Aragon DAO on Ethereum was exploited when an attacker bought a majority of TOP tokens, passed an atomic governance proposal to mint 10 billion TOP, and drained 944.2 WETH (~$1.58M) from a Balancer pool. Net liquidity provider loss was ~281 WETH (~$472K), after accounting for the attacker's buy-in capital. The DAO was vulnerable due to three missing defenses: uncapped minting in TokenManager (a code defect), no governance execution timelock (configuration flaw), and buyable majority through token concentration in the liquidity pool. The critical exploit vector was the uncapped mint."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x967aa34c69b7775c718545c7f94d92e965eb5fc553c0f27f6f1a9c65c93ac156"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "crypto.news",
+      "url": "https://crypto.news/token-of-power-exploit-drains-1-58m-from-balancer-pool/"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/token-of-power-2026-06-09"
+    },
+    {
+      "source": "revertiq",
+      "label": "coinalertnews.com",
+      "url": "https://coinalertnews.com/news/2026/06/09/token-power-governance-exploit"
+    },
+    {
+      "source": "revertiq",
+      "label": "olympix.security",
+      "url": "https://olympix.security/blog/token-of-powers-472k-loss-and-how-olympix-would-have-prevented-it"
+    }
+  ]
+}

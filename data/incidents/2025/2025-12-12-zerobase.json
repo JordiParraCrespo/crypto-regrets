@@ -1,0 +1,86 @@
+{
+  "id": "2025-12-12-zerobase",
+  "name": "ZEROBASE",
+  "date": "2025-12-12",
+  "year": 2025,
+  "amountUsd": 250000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "arbitrary-call",
+  "technique": "Token Approval Abuse",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "frontend-infra",
+    "confidence": 0.73,
+    "top": [
+      {
+        "category": "frontend-infra",
+        "p": 0.75
+      },
+      {
+        "category": "social-engineering",
+        "p": 0.19
+      },
+      {
+        "category": "arbitrary-call",
+        "p": 0.06
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "According to SlowMist founder Yu Cos and ZEROBASE officials, a malicious contract on the BSC chain, “Vault” (0x0dd2…2396), impersonated the ZEROBASE frontend to trick users into authorizing USDT. The incident is suspected to have occurred due to a compromise of the ZEROBASE frontend and was not an issue with the Binance Web3 wallet itself. So far, hundreds of addresses have been affected, with the largest single loss reaching $123,000. The stolen funds have been transferred to the Ethereum address 0x4a57…fc84. ZEROBASE has enabled an authorization monitoring mechanism, and the community is urging users to quickly revoke risky authorizations via revoke.cash.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "According to SlowMist founder Yu Cos and ZEROBASE officials, a malicious contract on the BSC chain, “Vault” (0x0dd2…2396), impersonated the ZEROBASE frontend to trick users into authorizing USDT. The incident is suspected to have occurred due to a compromise of the ZEROBASE frontend and was not an issue with the Binance Web3 wallet itself. So far, hundreds of addresses have been affected, with the largest single loss reaching $123,000. The stolen funds have been transferred to the Ethereum address 0x4a57…fc84. ZEROBASE has enabled an authorization monitoring mechanism, and the community is urging users to quickly revoke risky authorizations via revoke.cash."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "ZEROBASE's BNB Chain front-end was compromised on December 12, 2025. Attackers replaced the legitimate interface with a phishing page, tricking users into approving token transfers to a malicious contract. Over $240,000 USDT was stolen from more than 270 wallets. The protocol contracts themselves were not directly exploited; the loss came from supply-chain and interface compromise. Attackers gained access to ZEROBASE's front-end infrastructure (via supply-chain or middleware compromise) and deployed a phishing interface. Users unknowingly approved USDT transfers to an attacker-controlled contract, enabling direct wallet draining through ERC-20 allowance abuse.…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/zerobasezk/status/1999466921314648585"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/zerobase-2025-12-12"
+    },
+    {
+      "source": "revertiq",
+      "label": "bingx.com",
+      "url": "https://bingx.com/en/news/post/zerobase-front-end-compromise-drains-over-k-usdt-from-users-on-bnb-chain"
+    },
+    {
+      "source": "revertiq",
+      "label": "coinness.com",
+      "url": "https://coinness.com/en/news/1145447"
+    }
+  ]
+}

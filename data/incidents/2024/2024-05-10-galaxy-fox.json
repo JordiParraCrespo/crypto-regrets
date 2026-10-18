@@ -1,0 +1,106 @@
+{
+  "id": "2024-05-10-galaxy-fox",
+  "name": "Galaxy Fox",
+  "date": "2024-05-10",
+  "year": 2024,
+  "amountUsd": 330000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "Token",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "The Galaxy Fox (GFOX) token's unverified NFT/staking contract on Ethereum exposed a setMerkleRoot function with public visibility and no access control modifier. Any address could call this function to overwrite the Merkle root used to validate the claim function. On May 10, 2024, the attacker replaced the legitimate Merkle root with a malicious one, then called claim to falsely prove eligibility and withdraw 108 ETH (~$289K) worth of GFOX tokens from the contract. A copycat attacker subsequently executed the same exploit, extracting an additional ~$41K. The attack resulted in a 77% drop in the GFOX token price. The root cause was the complete absence of an onlyOwner or equivalent modifier on the setMerkleRoot function. Attack Tx: 0x12fe79f1de8aed0ba947cec4dce5d33368d649903cb45a5d3e915cc459e751fc Analysis: How Was Galaxy Fox Token Exploited?",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The Galaxy Fox (GFOX) token's unverified NFT/staking contract on Ethereum exposed a setMerkleRoot function with public visibility and no access control modifier. Any address could call this function to overwrite the Merkle root used to validate the claim function. On May 10, 2024, the attacker replaced the legitimate Merkle root with a malicious one, then called claim to falsely prove eligibility and withdraw 108 ETH (~$289K) worth of GFOX tokens from the contract. A copycat attacker subsequently executed the same exploit, extracting an additional ~$41K. The attack resulted in a 77% drop in the GFOX token price. The root cause was the complete absence of an onlyOwner or equivalent modifier on the setMerkleRoot function. Attack Tx: 0x12fe79f1de8aed0ba947cec4dce5d33368d649903cb45a5d3e915cc459e751fc Analysis: How Was Galaxy Fox Token Exploited?"
+    },
+    {
+      "source": "SlowMist",
+      "text": "According to the monitoring of the SlowMist Security Alert system, the Web3 game project Galaxy Fox has been attacked, resulting in a loss of approximately $300,000."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Galaxy Fox's Ethereum contract was exploited on 10 May 2024, allowing attackers to drain approximately $330,000 after a critical access control flaw enabled anyone to set the Merkle root that gated withdrawals. The setMerkleRoot() function was publicly callable with no access restriction, allowing attackers to set an arbitrary Merkle root and claim funds. The exploit bypassed intended distribution controls."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x12fe79f1de8aed0ba947cec4dce5d33368d649903cb45a5d3e915cc459e751fc"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x12fe79f1de8aed0ba947cec4dce5d33368d649903cb45a5d3e915cc459e751fc"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "medium.com",
+      "url": "https://medium.com/neptune-mutual/how-was-galaxy-fox-token-exploited-c0860520cdc2"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x12fe79f1de8aed0ba947cec4dce5d33368d649903cb45a5d3e915cc459e751fc"
+    },
+    {
+      "source": "blocksec",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Phalcon_xyz/status/1788751977263882585"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/SlowMist_Team/status/1788757935017079258"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/galaxy-fox-2024-05-10"
+    },
+    {
+      "source": "revertiq",
+      "label": "quadrigainitiative.com",
+      "url": "https://www.quadrigainitiative.com/casestudy/galaxyfoxtokensuspicioustransaction.php"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-05/GFOX_exp.sol"
+    }
+  ]
+}

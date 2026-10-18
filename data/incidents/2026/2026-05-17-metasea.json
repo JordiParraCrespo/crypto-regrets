@@ -1,0 +1,70 @@
+{
+  "id": "2026-05-17-metasea",
+  "name": "MetaSea",
+  "date": "2026-05-17",
+  "year": 2026,
+  "amountUsd": 110000,
+  "returnedUsd": null,
+  "chains": [
+    "Arbitrum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Withdrawal Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.96,
+    "stateActor": 0.01,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "MetaSea's SEA round product on Arbitrum was drained on 2026-05-17 when a flash-loan-funded helper contract repeatedly opened and redeemed positions in the same transaction, extracting SEA from a shared distributor and netting 13,904.941068 USDT in the focal exploit. The round contract let a caller open and redeem in the same transaction, then claim SEA from a shared distributor using accumulated rewards rather than a time-weighted, per-position entitlement.",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "MetaSea's SEA round product on Arbitrum was drained on 2026-05-17 when a flash-loan-funded helper contract repeatedly opened and redeemed positions in the same transaction, extracting SEA from a shared distributor and netting 13,904.941068 USDT in the focal exploit. The round contract let a caller open and redeem in the same transaction, then claim SEA from a shared distributor using accumulated rewards rather than a time-weighted, per-position entitlement."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x001cb16e17c4c5a5c4d02423c9e9b2f2b11ab6b2a1baf2ba53b8fcaf06167716"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/metasea-2026-05-17"
+    },
+    {
+      "source": "revertiq",
+      "label": "anomly.rs",
+      "url": "https://anomly.rs/metasea-redeemposition-distributor-drain-arb-2026-05-17"
+    },
+    {
+      "source": "revertiq",
+      "label": "darknavy.org",
+      "url": "https://www.darknavy.org/web3/exploits/sea-settlement-adapter-round-redemption-inflation/"
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "id": "2024-03-20-dolomite",
+  "name": "Dolomite",
+  "date": "2024-03-20",
+  "year": 2024,
+  "amountUsd": 1800000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.81
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "On March 20th, Dolomite, a decentralized trading protocol in the Arbitrum ecosystem, was attacked due to a vulnerability in its old contracts on the Ethereum mainnet. Approximately 187 victims suffered asset losses totaling $1.8 million, including 1,245,271 USDC, 94,423 DAI, and 165.9 WETH. As of March 24th, Dolomite has recovered 90% of the assets taken by the attacker.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "On March 20th, Dolomite, a decentralized trading protocol in the Arbitrum ecosystem, was attacked due to a vulnerability in its old contracts on the Ethereum mainnet. Approximately 187 victims suffered asset losses totaling $1.8 million, including 1,245,271 USDC, 94,423 DAI, and 165.9 WETH. As of March 24th, Dolomite has recovered 90% of the assets taken by the attacker."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Dolomite's legacy Loopring-based contract on Ethereum Mainnet was exploited on March 20, 2024, exposing users with lingering token approvals. Approximately $1.8 million in USDC, DAI, and WETH was stolen from 187 victims. The team recovered most assets and reimbursed remaining losses. The incident resulted from excessive gas-saving optimizations and defensive coding in a legacy Loopring Trade Delegate contract. Attackers were able to manipulate order state, bypass signature validation, and trigger unauthorized withdrawals from wallets holding stale ERC-20 approvals."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x0b4dd1fa64d94322bfec73e59996792f1094e7fe3bdb7981829888bacbfc30ba",
+    "0x901bb0d61100a581a6098a6bd3ec678f2add4f2b63395ee2a3ef9be08eb7c612",
+    "0x808d8a54d9860c43fb38989743b7b9eed68f95e427a9e3a09d8bb446b4522292",
+    "0x34b292a0d41f92c3ae498f1bc97db924dd850ae90f55fb02596c35a836a9db71",
+    "0xd0810c1bbe5d07e52e8426056d4896c4d35e251c6a9ce56825c62a37b11f61c4"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Dolomite_io/status/1770499040741859645"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/dolomite-2024-03-20"
+    },
+    {
+      "source": "revertiq",
+      "label": "zeroshadow.io",
+      "url": "https://zeroshadow.io/blog/dolomite-legacy-smart-contract-vulnerability-post-mortem-analysis/"
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "id": "2026-08-31-ankr",
+  "name": "Ankr",
+  "date": "2026-08-31",
+  "year": 2026,
+  "amountUsd": 410000,
+  "returnedUsd": null,
+  "chains": [
+    "Flow"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Unbacked Mint",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.51,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.54
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.28
+      },
+      {
+        "category": "access-control",
+        "p": 0.09
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "An attacker exploited a vulnerability in Ankr’s ankrFLOW liquid staking contract to mint approximately 8.6 million unbacked ankrFLOW tokens, then used them as collateral with More Markets’ E-mode to drain about 15.5 million WFLOW (~$410,000 at spot) from the lending reserve. The attacker realized roughly $246,000 after slippage. The Flow Foundation stated the root cause was in Ankr’s Solidity contract, not Flow EVM or More Markets.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "An attacker exploited a vulnerability in Ankr’s ankrFLOW liquid staking contract to mint approximately 8.6 million unbacked ankrFLOW tokens, then used them as collateral with More Markets’ E-mode to drain about 15.5 million WFLOW (~$410,000 at spot) from the lending reserve. The attacker realized roughly $246,000 after slippage. The Flow Foundation stated the root cause was in Ankr’s Solidity contract, not Flow EVM or More Markets."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 31 August 2026, a flaw in Ankr's ankrFLOW contract on Flow EVM allowed an attacker to mint 8.6 million unbacked ankrFLOW tokens and use them as collateral on More Markets, draining 15.5 million WFLOW (worth ~$410,000). Flow Foundation later replaced the reserve, ensuring no user deposits were lost. The ankrFLOW Solidity contract did not enforce collateralization in its minting logic, enabling creation of unbacked tokens that broke the token's backing invariant."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/flow_blockchain/status/2094506622429307061"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/ankr-2026-08-31"
+    },
+    {
+      "source": "revertiq",
+      "label": "flow.com",
+      "url": "https://flow.com/post/statement-on-the-ankr-liquid-staking-exploit"
+    },
+    {
+      "source": "revertiq",
+      "label": "avoid.net",
+      "url": "https://avoid.net/ankr-ankrflow-collateral-exploit"
+    }
+  ]
+}

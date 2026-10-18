@@ -1,0 +1,72 @@
+{
+  "id": "2026-06-09-topbpool",
+  "name": "TOPBPool",
+  "date": "2026-06-09",
+  "year": 2026,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "governance",
+  "technique": "Governance-controlled token mint and Balancer pool drain",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.98).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "governance",
+    "confidence": 0.98,
+    "top": [
+      {
+        "category": "governance",
+        "p": 0.98
+      },
+      {
+        "category": "access-control",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Governance-controlled token mint and Balancer pool drain. Lost: 944.20 WETH",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Governance-controlled token mint and Balancer pool drain. Lost: 944.20 WETH"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "TOP's Aragon governance had a snapshot supply of only 16,384 TOP, of which the historical attack contract held 8,192.000001 TOP - a majority. Because a single address controlled >50% of the snapshot voting power, it could create and pass an Aragon vote in the same transaction. The attacker built an execution script that calls TokenManager.mint to mint 10 billion TOP to itself, submitted it via newVote, then immediately voted it through with executesIfDecided=true so it executed atomically. The freshly minted TOP was then sold into the TOP/WETH Balancer BPool in repeated max-ratio swaps, draining ~944 WETH. Root cause: governance with a tiny/concentrated token supply allowed a single holder to self-mint unlimited tokens and dump them. Vulnerable code snippet: Attack Tx: https://etherscan.io/tx/0x967aa34c69b7775c718545c7f94d92e965eb5fc553c0f27f6f1a9c65c93ac156 Analysis: https://x.com/DefimonAlerts/status/2064616112822583505"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x967aa34c69b7775c718545c7f94d92e965eb5fc553c0f27f6f1a9c65c93ac156"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-06/TOPBPool_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-06/TOPBPool_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/DefimonAlerts/status/2064616112822583505"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x967aa34c69b7775c718545c7f94d92e965eb5fc553c0f27f6f1a9c65c93ac156"
+    }
+  ]
+}

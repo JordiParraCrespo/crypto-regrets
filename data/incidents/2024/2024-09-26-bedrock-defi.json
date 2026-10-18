@@ -1,0 +1,134 @@
+{
+  "id": "2024-09-26-bedrock-defi",
+  "name": "Bedrock_DeFi",
+  "date": "2024-09-26",
+  "year": 2024,
+  "amountUsd": 1700000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Swap ETH/BTC 1/1 in mint function",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.80).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.8,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.81
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.18
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.13,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Swap ETH/BTC 1/1 in mint function. Lost: 27.83925883 BTC (~$1.7M USD)",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Swap ETH/BTC 1/1 in mint function. Lost: 27.83925883 BTC (~$1.7M USD)"
+    },
+    {
+      "source": "REKT",
+      "text": "Bedrock just got a lesson in why you should always double-check your math homework. In a twist that would make even a quantum physicist's head spin, their uniBTC vault decided to play fast and loose with exchange rates, turning Ethereum deposits into a $2m Bitcoin bonanza."
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The cause of this vulnerability is that the exchange ratio of WETH and uniBTC was not properly handled, resulting in WETH and uniBTC being exchanged at 1:1, and the value of WETH was magnified tens of thousands of times. The attacker used the distorted price to make a profit through lending, and eventually the attacker used the borrowed WETH to empty the project’s uniBTC tokens. Vulnerable code snippet: Attack tx: https://etherscan.io/tx/0x725f0d65340c859e0f64e72ca8260220c526c3e0ccde530004160809f6177940 Analysis: https://lunaray.medium.com/bedrock-unibtc-hack-analysis-7808902e5a7c"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The multi-chain liquidity re-staking protocol Bedrock announced on social media that the team is aware of a security vulnerability involving uniBTC, with the total estimated loss from the theft around $2 million. According to the SlowMist security team’s analysis, the attack was caused by Bedrock mistakenly supporting the minting of uniBTC at a 1:1 exchange rate with the native token."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Bedrock’s uniBTC protocol was exploited on Ethereum on Sept. 26, 2024 after a flaw in the SigmaSupplier and vault minting logic allowed uniBTC to be minted using unsupported native-token paths. The attacker minted 30.8 uniBTC and swapped the tokens through liquidity pools, extracting roughly $2 million before Bedrock paused the affected contracts. The uniBTC minting system incorrectly handled native-token accounting on non-native BTC chains. Bedrock’s post-mortem stated that the SigmaSupplier contract returned a zero total supply for unregistered NATIVE_BTC assets, which caused vault cap checks to pass even though native-token minting should have been disallowed.…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x725f0d65340c859e0f64e72ca8260220c526c3e0ccde530004160809f6177940",
+    "0x539744aceacdc24438f91e10720671c1096d4239d49230a9a631ee1d4a36bc8c",
+    "0x60f098016f31d22e2e1127247948cfe59d39016a64c94e4569ca5d124fdbb404",
+    "0xd3ff8d55c26d87213a24178820907245f5b9b2563d6ea2cb4d9c114fd301a4d0"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-09/Bedrock_DeFi_exp.sol",
+  "sources": [
+    "defihacklabs",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-09/Bedrock_DeFi_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/certikalert/status/1839403126694326374"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x0fe3716431f8c2e43217c3ca6d25eed87e14d0fbfa9c9ee8ce4cef2e5ec4583c"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Bedrock - Rekt",
+      "url": "https://rekt.news/bedrock-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x725f0d65340c859e0f64e72ca8260220c526c3e0ccde530004160809f6177940"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "lunaray.medium.com",
+      "url": "https://lunaray.medium.com/bedrock-unibtc-hack-analysis-7808902e5a7c"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/Bedrock_DeFi/status/1839479965685100780"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/decoding-what-went-wrong-with-bedrock-2m-2024-10-18"
+    },
+    {
+      "source": "revertiq",
+      "label": "quillaudits.com",
+      "url": "https://www.quillaudits.com/blog/hack-analysis/bedrock-2million-exploit"
+    },
+    {
+      "source": "revertiq",
+      "label": "paragraph.com",
+      "url": "https://paragraph.com/%40bedrock-2/post-mortem-report"
+    },
+    {
+      "source": "revertiq",
+      "label": "itokenly.com",
+      "url": "https://itokenly.com/hacks/bedrock-unibtc"
+    }
+  ]
+}

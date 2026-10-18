@@ -1,0 +1,122 @@
+{
+  "id": "2026-04-27-zetachain",
+  "name": "ZetaChain",
+  "date": "2026-04-27",
+  "year": 2026,
+  "amountUsd": 333868,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum",
+    "Base",
+    "Polygon",
+    "Arbitrum",
+    "Avalanche",
+    "BSC"
+  ],
+  "targetType": "Chain",
+  "category": "arbitrary-call",
+  "technique": "Token Approval Abuse",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "arbitrary-call",
+    "confidence": 0.81,
+    "top": [
+      {
+        "category": "arbitrary-call",
+        "p": 0.82
+      },
+      {
+        "category": "access-control",
+        "p": 0.17
+      },
+      {
+        "category": "bridge-crosschain",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": true,
+  "language": "Solidity",
+  "rootCause": "The ZetaChain GatewayEVM cross-chain bridge exploit chained three compounding design flaws. First, the GatewayZEVM.call() function on the ZetaChain side contained no access control and no input validation, permitting any external address to trigger arbitrary cross-chain messages targeting any destination. Second, GatewayEVM.execute() on the Ethereum receiving side accepted those incoming commands — including transferFrom instructions — using the gateway contract itself as the execution context, and the gateway already held depositor-granted token approvals. Third, users (including ZetaChain's own internal team wallets) who had previously deposited assets through GatewayEVM.deposit() had granted unlimited ERC-20 spending allowances that were never revoked. The attacker combined all three weaknesses across nine cross-chain transactions to drain $334K in USDC and USDT from three internal team-controlled wallets. Critically, a prior bug bounty submission that described this exact attack surface had been dismissed as 'intended behavior' by the ZetaChain team. Attack Tx: 0x81fc9b2457b3ea66e2cefe2afe65d083ce358a11520e0f4aa5faad0bfea18a56 Analysis: How a 'Perfect Storm' of 3 Bugs Led to ZetaChain's $333K GatewayEVM Exploit — CryptoTimes ZetaChain on X",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The ZetaChain GatewayEVM cross-chain bridge exploit chained three compounding design flaws. First, the GatewayZEVM.call() function on the ZetaChain side contained no access control and no input validation, permitting any external address to trigger arbitrary cross-chain messages targeting any destination. Second, GatewayEVM.execute() on the Ethereum receiving side accepted those incoming commands — including transferFrom instructions — using the gateway contract itself as the execution context, and the gateway already held depositor-granted token approvals. Third, users (including ZetaChain's own internal team wallets) who had previously deposited assets through GatewayEVM.deposit() had granted unlimited ERC-20 spending allowances that were never revoked. The attacker combined all three weaknesses across nine cross-chain transactions to drain $334K in USDC and USDT from three internal team-controlled wallets. Critically, a prior bug bounty submission that described this exact attack surface had been dismissed as 'intended behavior' by the ZetaChain team. Attack Tx: 0x81fc9b2457b3ea66e2cefe2afe65d083ce358a11520e0f4aa5faad0bfea18a56 Analysis: How a 'Perfect Storm' of 3 Bugs Led to ZetaChain's $333K GatewayEVM Exploit — CryptoTimes ZetaChain on X"
+    },
+    {
+      "source": "SlowMist",
+      "text": "ZetaChain disclosed in a post on X that its GatewayEVM contract was attacked today, affecting only wallets belonging to the internal ZetaChain team. The attack vector has been blocked to prevent further loss of funds. As a precautionary measure, cross-chain transactions on ZetaChain are currently suspended. The investigation is still ongoing, and no user funds have been affected so far. On April 29, ZetaChain announced on X that on April 27 it had suffered a premeditated and targeted attack. The attacker funded addresses using Tornado Cash and impersonated wallet addresses. Cross-chain ZETA transfers were not affected, and user funds remained safe. All…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On April 26,27, 2026, ZetaChain was exploited through unauthenticated cross-chain calls and outstanding unlimited token approvals, resulting in a ~$333,625 loss from internal team wallets across four chains. No user funds were affected. The GatewayZEVM contract allowed any external account to trigger protocol-signed arbitrary execution on GatewayEVM. Combined with existing unlimited ERC-20 token allowances from team wallets, this enabled attackers to drain funds through transferFrom calls."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x81fc9b2457b3ea66e2cefe2afe65d083ce358a11520e0f4aa5faad0bfea18a56",
+    "0x40bcbd603595c3f27a58b44bbc32bd9cc416c83d94af9c67e537f5a75b789caa",
+    "0xc24f306867cf6b75e2d5fa7e18b214d3298fde5a1e391ea6bedb49dd03edde51",
+    "0x34c996cbd39b8e672815bd76fd8a679deaaf859b4c2685ec58535e185dbc70a9"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.phalcon.blocksec.com",
+      "url": "https://app.phalcon.blocksec.com/explorer/tx/eth/0x81fc9b2457b3ea66e2cefe2afe65d083ce358a11520e0f4aa5faad0bfea18a56"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "cryptotimes.io",
+      "url": "https://www.cryptotimes.io/2026/04/29/how-a-perfect-storm-of-3-bugs-led-to-zetachains-333k-gatewayevm-exploit/"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/ZetaChain/status/2048854107633631356"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x81fc9b2457b3ea66e2cefe2afe65d083ce358a11520e0f4aa5faad0bfea18a56"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/ZetaChain/status/2048854107633631356?s=20"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/zetachain-2026-04-27"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "theblock.co",
+      "url": "https://www.theblock.co/post/399315/zetachain-post-mortem"
+    }
+  ]
+}

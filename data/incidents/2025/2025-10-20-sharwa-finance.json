@@ -1,0 +1,126 @@
+{
+  "id": "2025-10-20-sharwa-finance",
+  "name": "Sharwa.Finance",
+  "date": "2025-10-20",
+  "year": 2025,
+  "amountUsd": 146000,
+  "returnedUsd": null,
+  "chains": [
+    "Arbitrum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Swap Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.99
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.99,
+    "stateActor": 0.01,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Post Insolvency Check. Lost: 146,000 USD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Post Insolvency Check. Lost: 146,000 USD"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Sharwa Finance's margin trading system contains a logic flaw: LP pool shares deposited as collateral could be immediately withdrawn by the same depositor within the same transaction, with no accounting check that an open leveraged position was still relying on those funds. In the first attack transaction, the attacker flashloaned 40M USDC from Morpho, deposited it into the SF-LP-USDC supply pool to receive LP shares, provided 2.2M USDC as margin collateral to open a long WBTC position, and then immediately called pool.withdraw to reclaim all LP shares — effectively opening a leveraged position with zero net capital locked. In the second transaction, the attacker flashloaned WBTC, sold it on Uniswap V3 to suppress the WBTC/USDC price, called decreaseLongPosition to close at the depressed price (which, due to the accounting mismatch between the opening and closing valuations, released excess USDC), swapped the USDC back to WBTC, and repaid the flash loan, netting approximately $146K. Vulnerable code snippet: Attack Tx: 0xd64729c528e6689cb18b0c90345ab0c9ed18fea44247c89af2f1374643fc89c2 Analysis: Phalcon Alert"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Sharwa Finance's margin trading system failed to properly enforce solvency on a margin account across the increase/decrease long position flow. Using a Morpho flash loan of USDC, the attacker created a margin account, supplied liquidity to the SF LP pool, provided collateral, and opened a large WBTC long via increaseLongPosition. In a second transaction (next block) the attacker flash-loaned WBTC, swapped it on Uniswap V3 to skew accounting, and called decreaseLongPosition with nearly the full position size. Because the position/collateral accounting and the post-trade insolvency check were inadequate (the check happened in a way the attacker could game across the swap and position-decrease), the attacker was able to withdraw more value than they put in, draining ~146K USD in WBTC. The flaw is a missing/incorrect post-operation insolvency validation on the margin account. Vulnerable code snippet: Attack Tx: https://app.blocksec.com/explorer/tx/arbitrum/0xd64729c528e6689cb18b0c90345ab0c9ed18fea44247c89af2f1374643fc89c2 Analysis: https://blog.verichains.io/p/vulnerability-analysis-deconstructing"
+    },
+    {
+      "source": "SlowMist",
+      "text": "According to a BlockSec Phalcon alert, Sharwa.Finance disclosed that it had suffered an attack and subsequently suspended operations. However, several hours later, multiple suspicious transactions occurred again, suggesting that the attacker might have exploited the same underlying vulnerability through slightly different attack paths.In general, the attacker first created a margin account, then used the provided collateral to borrow additional assets through leveraged lending, and finally launched a sandwich attack targeting the swap operations involving the borrowed assets. The root cause appears to lie in the lack of a bankruptcy check in the swap()…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Sharwa.Finance on Arbitrum One was exploited via price manipulation on October 20, 2025. Attackers drained approximately $146,000 by leveraging a swap logic flaw, manipulating Uniswap V3 spot prices and bypassing slippage and post-swap solvency checks to extract excess value from margin positions. Sharwa.Finance's router trusted Uniswap V3 spot price quotes as an oracle without slippage protection or post-swap solvency validation. This let attackers manipulate pool prices shortly before a swap, causing false collateral valuations and enabling withdrawal of more assets than were legitimately owned."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xd64729c528e6689cb18b0c90345ab0c9ed18fea44247c89af2f1374643fc89c2",
+    "0xb0bf77475818b2501e78f0927f4131e52c6efd45bc4978992cbbe218a57e6f7f",
+    "0x35a523bdaf60a9e8b66ab92bb8b78d5012e102e462b665e98ce46f7e07addd36",
+    "0x9f8b4841f805ec50cc6632068f759216d85633fbbe34afde86b97bbc41c23ead"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-10/SharwaFinance_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-10/SharwaFinance_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/phalcon_xyz/status/1980219745480946087?s=46"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/arbitrum/0xd64729c528e6689cb18b0c90345ab0c9ed18fea44247c89af2f1374643fc89c2"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/Phalcon_xyz/status/1980220633335349598"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "blog.verichains.io",
+      "url": "https://blog.verichains.io/p/vulnerability-analysis-deconstructing"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xb0bf77475818b2501e78f0927f4131e52c6efd45bc4978992cbbe218a57e6f7f"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/sharwa-finance-2025-10-20"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.solidityscan.com",
+      "url": "https://blog.solidityscan.com/draft_sharwa-finance-hack-analysis-5ac653f6d877/"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.verichains.io",
+      "url": "https://blog.verichains.io/p/vulnerability-analysis-deconstructing?utm_source=chatgpt.com"
+    }
+  ]
+}

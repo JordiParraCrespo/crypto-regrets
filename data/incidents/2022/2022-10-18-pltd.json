@@ -1,0 +1,75 @@
+{
+  "id": "2022-10-18-pltd",
+  "name": "PLTD",
+  "date": "2022-10-18",
+  "year": 2022,
+  "amountUsd": 24000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Transfer Logic Flaw",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.93).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.93,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.93
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.03
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.97,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Transfer Logic Flaw. Lost: $ 24k",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Transfer Logic Flaw. Lost: $ 24k"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The PLTD project was attacked by hackers, all BUSD in its trading pool was sold out, and the attackers gained a total of 24,497 BUSD. This attack mainly exploits the code loopholes in the PLTD contract, reduces the PLTD token balance in Cake-LP (0x4397c7) to 1 through a flash loan attack, and then uses the PLTD in hand to exchange all BUSD into the attack contract ."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-10/PLTD_exp.sol",
+  "sources": [
+    "defihacklabs",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-10/PLTD_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BeosinAlert/status/1582181583343484928"
+    },
+    {
+      "source": "slowmist",
+      "label": "panewslab.com",
+      "url": "https://www.panewslab.com/zh/sqarticledetails/p4ochu0v.html"
+    }
+  ]
+}

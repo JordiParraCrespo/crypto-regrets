@@ -1,0 +1,97 @@
+{
+  "id": "2023-11-25-thenftv2",
+  "name": "TheNFTV2",
+  "date": "2023-11-25",
+  "year": 2023,
+  "amountUsd": 19000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Withdrawal Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.84,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.85
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.09
+      },
+      {
+        "category": "access-control",
+        "p": 0.05
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.94
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "logic flaw. Lost: ~$19K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "logic flaw. Lost: ~$19K"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The attackers keep approving NFT token ID 1071 to themselves and burn the token. After the burn operation, they can retrieve the token through transferFrom and re-burn it repeatedly. During each operation, the attacker receives some $THEDAO tokens as a reward. Vulnerable code snippet: - transferFrom - Burn Attack tx: Analysis: MetaTrustAlert on Twitter / X"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "TheNFTV2 protocol on Ethereum Mainnet was exploited on November 25, 2023 due to a withdrawal logic flaw in its NFT/DAO token design, allowing an attacker to repeatedly burn and reacquire a single NFT and extract $19,000 in value. TheNFTV2 contract failed to enforce single-use of NFTs for withdrawal. It allowed the same NFT to be burned and then transferred from the burn ('dead') address back to the attacker, permitting repeated withdrawals of DAO tokens without proper validation of burn and ownership state."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xd5b4d68432cbbd912130bbb5b93399031ddbb400d8f723c78050574de7533106"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-11/TheNFTV2_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-11/TheNFTV2_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/MetaTrustAlert/status/1728616715825848377"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xd5b4d68432cbbd912130bbb5b93399031ddbb400d8f723c78050574de7533106"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/MetaTrustAlert/status/1728616715825848377?s=20"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/thenftv2-2023-11-25"
+    }
+  ]
+}

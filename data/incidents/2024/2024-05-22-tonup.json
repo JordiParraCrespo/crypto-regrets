@@ -1,0 +1,82 @@
+{
+  "id": "2024-05-22-tonup",
+  "name": "TonUP",
+  "date": "2024-05-22",
+  "year": 2024,
+  "amountUsd": 107600,
+  "returnedUsd": null,
+  "chains": [
+    "TON"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Reward Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.99
+      },
+      {
+        "category": "access-control",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.01,
+    "hasRootCause": 0.93
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "The TON ecosystem Launchpad platform TonUP announced on social media that its recently launched staking contract was attacked, resulting in a loss of 307,264 UP tokens. Upon investigation, it was found that the incident was due to the smart contract engineer incorrectly configuring script parameters, leading to users mistakenly claiming staked UP assets.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The TON ecosystem Launchpad platform TonUP announced on social media that its recently launched staking contract was attacked, resulting in a loss of 307,264 UP tokens. Upon investigation, it was found that the incident was due to the smart contract engineer incorrectly configuring script parameters, leading to users mistakenly claiming staked UP assets."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "TonUP's staking contract on the TON blockchain suffered an exploit on 22 May 2024, allowing unauthorized claims of 307,264 UP tokens due to a smart contract misconfiguration. The team proposed compensation by buying back and destroying stolen UP tokens, with a reported loss near $107,600 USD at the time. Misconfiguration in the staking contract's parameters allowed unauthorized users to claim staked UP tokens, resulting in an excessive withdrawal of reward assets."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/TonUP_io/status/1793006027413258631"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/tonup-2024-05-22"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/tonup-hack-2024"
+    },
+    {
+      "source": "revertiq",
+      "label": "quadrigainitiative.com",
+      "url": "https://quadrigainitiative.com/casestudy/tonupsmartcontractconfigurationerror.php"
+    }
+  ]
+}

@@ -1,0 +1,92 @@
+{
+  "id": "2023-08-26-svt",
+  "name": "SVT",
+  "date": "2023-08-26",
+  "year": 2023,
+  "amountUsd": 400000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "flawed price calculation",
+  "classificationNote": "Classified by keyword rules from the DeFiHackLabs root-cause title.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.61,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.63
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.21
+      },
+      {
+        "category": "logic-error",
+        "p": 0.15
+      }
+    ],
+    "flashLoan": 0.46,
+    "stateActor": 0.02,
+    "hasRootCause": 0.87
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "flawed price calculation. Lost: ~$400K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "flawed price calculation. Lost: ~$400K"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The exploit starts out by loaning BUSD from dodo private pool, half of which is then used to buy SVT repeatedly, the second time a much smaller amount than the first. its all then sold leaving the attacker with more than SVT than was originally bought Vulnerable Code Snippet: Attack Transaction: https://twitter.com/Phalcon_xyz/status/1695285435671392504?s=20 Analysis: https://twitter.com/Phalcon_xyz/status/1695285435671392504?s=20"
+    },
+    {
+      "source": "SlowMist",
+      "text": "SVT tokens were attacked by flash loans, and the economic model loopholes of SVT transaction contracts were exploited. The attackers made approximately $400,000 in profit from repeated buying and selling operations. According to MistTrack analysis, the attacker’s initial funds came from SwftSwap, and 1070 BNB has been transferred to Tornado Cash​."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xf2a0c957fef493af44f55b201fbc6d82db2e4a045c5c856bfe3d8cb80fa30c12"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-08/SVT_exp.sol",
+  "sources": [
+    "defihacklabs",
+    "blocksec",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-08/SVT_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Phalcon_xyz/status/1695285435671392504?s=20"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xf2a0c957fef493af44f55b201fbc6d82db2e4a045c5c856bfe3d8cb80fa30c12"
+    },
+    {
+      "source": "blocksec",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs?tab=readme-ov-file#20230826-svt---flawed-price-calculation"
+    },
+    {
+      "source": "slowmist",
+      "label": "panewslab.com",
+      "url": "https://www.panewslab.com/zh/sqarticledetails/99qr51p5.html"
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "id": "2025-08-10-numa",
+  "name": "numa.",
+  "date": "2025-08-10",
+  "year": 2025,
+  "amountUsd": 313000,
+  "returnedUsd": null,
+  "chains": [
+    "Sonic"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Incorrect Share Accounting",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.52,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.55
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.42
+      },
+      {
+        "category": "market-manipulation",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.06,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Numa was exploited on Sonic on August 10, 2025, through a manipulation of synthetic minting logic that allowed the attacker to force liquidations and seize collateral, resulting in a loss of approximately $313,000. Manipulable synthetic asset minting logic allowed an attacker to inflate synthetic value, depress cNuma collateral prices, and mass-liquidate accounts for profit.",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "Numa was exploited on Sonic on August 10, 2025, through a manipulation of synthetic minting logic that allowed the attacker to force liquidations and seize collateral, resulting in a loss of approximately $313,000. Manipulable synthetic asset minting logic allowed an attacker to inflate synthetic value, depress cNuma collateral prices, and mass-liquidate accounts for profit."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x56abdbc84232658617853f233f52e6b4c855129c7ab163a588c2bac62ea30408"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/numa-2025-08-10"
+    },
+    {
+      "source": "revertiq",
+      "label": "certik.com",
+      "url": "https://www.certik.com/blog/numa-incident-analysis"
+    },
+    {
+      "source": "revertiq",
+      "label": "olympix.security",
+      "url": "https://olympix.security/biweekly-exploits/bunni-numa-woo-x-22-7m-lost-to-rounding-bugs-forced-liquidations-and-malware"
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "id": "2026-05-13-shapeshift-fox-colony",
+  "name": "ShapeShift FOX Colony",
+  "date": "2026-05-13",
+  "year": 2026,
+  "amountUsd": 132700,
+  "returnedUsd": null,
+  "chains": [
+    "Arbitrum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "arbitrary-call",
+  "technique": "Arbitrary External Call",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "arbitrary-call",
+    "confidence": 0.74,
+    "top": [
+      {
+        "category": "arbitrary-call",
+        "p": 0.76
+      },
+      {
+        "category": "access-control",
+        "p": 0.21
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "ShapeShift’s FOX Colony (a community governance and participation program for FOX token holders) on Arbitrum was exploited via a smart contract vulnerability in its Colony Network contracts. The attacker drained approximately $132.7K in USDC and FOX tokens in a single sophisticated transaction by exploiting a meta-transaction self-call flaw combined with DSAuth authorization logic. The core exchange platform was unaffected; this impacted the DAO/community treasury.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "ShapeShift’s FOX Colony (a community governance and participation program for FOX token holders) on Arbitrum was exploited via a smart contract vulnerability in its Colony Network contracts. The attacker drained approximately $132.7K in USDC and FOX tokens in a single sophisticated transaction by exploiting a meta-transaction self-call flaw combined with DSAuth authorization logic. The core exchange platform was unaffected; this impacted the DAO/community treasury."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "ShapeShift’s FOX Colony treasury contracts on Arbitrum were exploited on 2026-05-13 through a meta-transaction authorization flaw in Colony Network’s EtherRouter architecture. Public analyses report that the attacker used executeMetaTransaction to trigger an internally authorized self-call, replace the contract resolver with malicious routing logic, and drain roughly $132,700 in USDC and FOX tokens. Public postmortems attribute the exploit to an authorization bypass created by the interaction between Colony Network’s executeMetaTransaction meta-transaction flow and the legacy DSAuth authorization model. The contract executed attacker-controlled calldat…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/blockaid_/status/2054593377438421492?s=46&t=DLwbX9Nw4QECiyZQ0av-fg"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/fox-market-2026-05-13"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/shapeshift-fox-colony-hack-2026"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptotimes.io",
+      "url": "https://www.cryptotimes.io/2026/05/13/shapeshift-fox-colony-loses-132k-in-smart-contract-exploit-on-arbitrum/"
+    }
+  ]
+}

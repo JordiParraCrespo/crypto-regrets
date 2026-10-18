@@ -1,0 +1,85 @@
+{
+  "id": "2023-05-03-neverfall",
+  "name": "NeverFall",
+  "date": "2023-05-03",
+  "year": 2023,
+  "amountUsd": 74000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Price Manipulation",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.99).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.99
+      },
+      {
+        "category": "logic-error",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.08,
+    "stateActor": 0.02,
+    "hasRootCause": 0.89
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Price Manipulation. Lost: ~74K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Price Manipulation. Lost: ~74K"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "KALOS: The root cause lies in the logic that evaluates the price of the token, which is based on the Pair from PancakeSwap. If you examine the sell() function of the NeverFall contract, you can easily identify the cause. Vulnerable code snippet: Attack tx: https://bscscan.com/address/0x5ABDe8B434133C98c36F4B21476791D95D888bF5#contracts Analysis: https://twitter.com/BeosinAlert/status/1653619782317662211 https://twitter.com/kalos_security/status/1668092312906514433"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Neverfall protocol Hacked, $75,000 Lost. The attackers have deposited funds into TornadoCash."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-05/NeverFall_exp.sol",
+  "sources": [
+    "defihacklabs",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-05/NeverFall_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BeosinAlert/status/1653619782317662211"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0x5ABDe8B434133C98c36F4B21476791D95D888bF5#contracts"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/kalos_security/status/1668092312906514433"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/hexagate_/status/1653663881191993344"
+    }
+  ]
+}

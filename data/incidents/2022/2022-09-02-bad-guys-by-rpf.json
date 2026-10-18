@@ -1,0 +1,108 @@
+{
+  "id": "2022-09-02-bad-guys-by-rpf",
+  "name": "Bad Guys by RPF",
+  "date": "2022-09-02",
+  "year": 2022,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "NFTfi",
+  "category": "accounting-math",
+  "technique": "Incorrect Share Accounting",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "input-validation",
+    "confidence": 0.73,
+    "top": [
+      {
+        "category": "input-validation",
+        "p": 0.75
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.14
+      },
+      {
+        "category": "access-control",
+        "p": 0.1
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.03,
+    "hasRootCause": 0.93
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Business Logic Flaw : Missing Check For Number of NFT to Mint. Lost: Bad Guys by RPF(400 NFTs)",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Business Logic Flaw : Missing Check For Number of NFT to Mint. Lost: Bad Guys by RPF(400 NFTs)"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Insufficient validation Vulnerable code snippet: https://etherscan.io/address/0xb84cbaf116eb90fd445dd5aeadfab3e807d2cbac?utm_source=icy.tools#code#L1190 Missing check for \"chosenAmount\" in the WhiteListMint function which allowed the attacker to pass the number of NFTs he/she wanted to mint. ---"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Bad Guys by RPF suffered an exploit on Ethereum Mainnet during its whitelist mint event on September 2, 2022. Attackers bypassed the one-per-wallet restriction in the mint contract, allowing them to mint over 450 NFTs instead of the intended limit. Most of these NFTs were recovered after negotiation, but 84 remained unrecovered. The whitelist mint logic failed to enforce a one-per-wallet minting limit. Attackers exploited this flaw by setting the mint quantity to several hundred in a single transaction, minting far more NFTs than intended."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xb613c68b00c532fe9b28a50a91c021d61a98d907d0217ab9b44cd8d6ae441d9f",
+    "0x27e64a8215ae1528245c912bcca09883fdd7cce69249bd5d5d1c0eecf5297b96"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-09/BadGuysbyRPF_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-09/BadGuysbyRPF_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/RugDoctorApe/status/1565739119606890498"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x27e64a8215ae1528245c912bcca09883fdd7cce69249bd5d5d1c0eecf5297b96"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/address/0xb84cbaf116eb90fd445dd5aeadfab3e807d2cbac?utm_source=icy.tools#code#L1190"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/bad-guys-by-rpf-2022-09-02"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/bad-guys-by-rpf-hack-2022"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptotimes.io",
+      "url": "https://www.cryptotimes.io/2022/09/05/rug-pull-finder-falls-victim-to-smart-contract-exploit/"
+    }
+  ]
+}

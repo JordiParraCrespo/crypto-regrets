@@ -1,0 +1,139 @@
+{
+  "id": "2024-11-11-deltaprime",
+  "name": "DeltaPrime",
+  "date": "2024-11-11",
+  "year": 2024,
+  "amountUsd": 4800000,
+  "returnedUsd": null,
+  "chains": [
+    "Arbitrum",
+    "Avalanche"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "input-validation",
+  "technique": "Missing Input Validation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "input-validation",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "input-validation",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.95,
+    "stateActor": 0.01,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Reentrancy. Lost: $12.9 K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Reentrancy. Lost: $12.9 K"
+    },
+    {
+      "source": "REKT",
+      "text": "Audited multiple times, hacked twice in two months. DeltaPrime loses another $4.85M after ignoring explicit warnings about admin key security. Like leaving your mansion unlocked after security consultants kept telling you to change the locks."
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The exploit stemmed from two primary vulnerabilities: the claimReward() function in TraderJoeV2ArbitrumFacet lacked validation on the input pair parameter, allowing for the submission of malicious data to manipulate system logic, and the swapDebtParaSwap() function, inherited by the smart loan instance, inconsistently handled the _repayAmount parameter without proper validation between processing steps, enabling the attacker to set it to zero and bypass repayment obligations. By combining these flaws through a flash loan, the attacker fabricated a \"swap fee\" using the unvalidated claimReward() function after performing a zero-repayment \"swap\" via the malleable _repayAmount, ultimately siphoning 66 WETH from the DeltaPrime pool. The absence of robust input sanitization and consistent variable handling were the fundamental root causes that enabled this sophisticated attack. Vulnerable code snippet: Attack tx: https://arbiscan.io/tx/0x6a2f989b5493b52ffc078d0a59a3bf9727d134b403aa6e0bf309fd513a728f7f Analysis: https://blog.verichains.io/p/deltaprime-exploit-analysis"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The DeltaPrime DeFi protocol, was attacked on Avalanche and Arbitrum, with an initial estimated loss of $4.75 million."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "DeltaPrime's November 11, 2024 exploit on Arbitrum and Avalanche used attacker-controlled reward callbacks and weak repayment validation to drain about $4.75 million, then routed part of the proceeds into pools and bridges. DeltaPrime's Prime Account let attacker-supplied pair contracts participate in claimReward() before reward accounting finalized, so a malicious callback could change the wrapped balance that the contract later treated as a reward. In the Arbitrum path, swapDebtParaSwap() also let borrowed assets be redirected while _repayAmount stayed at zero, so the debt leg was not settled when the collateral was moved."
+    }
+  ],
+  "audit": "Peckshield",
+  "txHashes": [
+    "0x6a2f989b5493b52ffc078d0a59a3bf9727d134b403aa6e0bf309fd513a728f7f",
+    "0x94cf7f33fa1cec194419174c50060c82ef80d82b80b5c4b003e6c0617378ac17",
+    "0xece4efbe11e59d457cb1359ebdc4efdffdd310f0a82440be03591f2e27d2b59e",
+    "0xca2b006558ec99f491c7a2a030f8190aa1462bca70299263dd93f5344f152e0d",
+    "0x2ec5b7e439a446676234b4540e05519ad113ac1dde0aa9ccfa800fd50ae08033",
+    "0xac2d68d225c00dbaced446281e034a52d6edef330b87352bf7679c3f463501a0",
+    "0x69c200046ef7848435eadc1eb072832c94f8f785f1907b2fe72ec031ce2eb530",
+    "0x42740f84891a9a32581a66919292118fb5ce923fd0c91adf5c38aadaaa4e0efa",
+    "0x991559bd8e1725714724267071c9ec8cbf31117497cdf259cfd662b0151c2da1"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-11/DeltaPrime_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-11/DeltaPrime_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/peckshield/status/1855910524460159197"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: DeltaPrime - Rekt II",
+      "url": "https://rekt.news/deltaprime-rekt2"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "arbiscan.io",
+      "url": "https://arbiscan.io/tx/0x6a2f989b5493b52ffc078d0a59a3bf9727d134b403aa6e0bf309fd513a728f7f"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "blog.verichains.io",
+      "url": "https://blog.verichains.io/p/deltaprime-exploit-analysis"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x94cf7f33fa1cec194419174c50060c82ef80d82b80b5c4b003e6c0617378ac17"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/1855880812941738311"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/delta-prime-2024-11-11"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/de-fi-rekt-report-november-2024-over-69-million-lost-in-crypto-exploits"
+    },
+    {
+      "source": "revertiq",
+      "label": "medium.com",
+      "url": "https://medium.com/%40DeltaPrimeDefi/deltaprime-post-mortem-reimbursement-plan-07-12-2024-2d654912715b"
+    },
+    {
+      "source": "revertiq",
+      "label": "certik.medium.com",
+      "url": "https://certik.medium.com/deltaprime-incident-analysis-21ba7d9a00a1"
+    }
+  ]
+}

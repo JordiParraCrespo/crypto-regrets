@@ -1,0 +1,152 @@
+{
+  "id": "2023-10-18-hope-lend",
+  "name": "HOPE Lend",
+  "date": "2023-10-18",
+  "year": 2023,
+  "amountUsd": 825000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Arithmetic Error",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.97,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.97
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.02
+      },
+      {
+        "category": "logic-error",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.08,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Div Precision Loss. Lost: ~$825K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Div Precision Loss. Lost: ~$825K"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "In the first step, the attacker exploited the liquidity imbalance in the pool of the target asset, manipulating the liquidity index of the related hToken to control its value. By leveraging minimal hToken collateral, the attacker borrowed all other underlying assets. The attacker then repeatedly deposited and withdrew to drain the underlying assets due to a precision loss vulnerability. This process ultimately drained all assets from Hopelend. Vulnerable code snippet: Attack tx: Analysis: Deep dive into HopeLend Hack"
+    },
+    {
+      "source": "SlowMist",
+      "text": "On October 18, 2023, , the HopeLend protocol fell victim to a hacker attack. The attack resulted in a loss of approximately 528 ETH, out of which 263.91 ETH were bribed by the frontrunner to a Validator (managed by Lido). The exploit frontrunner eventually profited by 264.08 ETH. On October 20, Hope.money tweeted that a frontrunner from Armor Team voluntarily returned the acquired assets."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "HopeLend suffered an $835,000 exploit on October 18, 2023 due to a precision loss in its hEthWBTC lending pool. The attacker manipulated the liquidity index through flashloans and repeated deposit and withdrawal cycles, but a front-running MEV bot captured most proceeds. HopeLend's hEthWBTC pool used integer division (rayDiv) for share accounting, causing truncated burns and precision loss. The liquidityIndex update allowed attacker manipulation on an uninitialized pool, inflating collateral and enabling excessive withdrawals."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On October 18, 2023, HopeLend protocol on Ethereum was exploited via a liquidity index inflation bug, caused by unchecked precision loss and rounding in its Aave-fork accounting. The attacker used flash loans and manipulated the reserve's total supply to extract funds far in excess of their actual collateral, draining $825,000 across all pools. The protocol allowed the liquidity index of a reserve to be inflated to extreme values if the total liquidity became tiny. By draining the WBTC hToken supply to 1 wei and repeatedly folding flash-loan premiums into that supply, the index was multiplied by over a billion. Combined with fixed-point ray division ro…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x1a7ee0a7efc70ed7429edef069a1dd001fbff378748d91f17ab1876dc6d10392"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-10/Hopelend_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-10/Hopelend_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/immunefi/status/1722810650387517715"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "lunaray.medium.com",
+      "url": "https://lunaray.medium.com/deep-dive-into-hopelend-hack-5962e8b55d3f"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x1a7ee0a7efc70ed7429edef069a1dd001fbff378748d91f17ab1876dc6d10392"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x1a7ee0a7efc70ed7429edef069a1dd001fbff378748d91f17ab1876dc6d10392"
+    },
+    {
+      "source": "blocksec",
+      "label": "x.com",
+      "url": "https://x.com/BlockSecTeam/status/1714701696189034664"
+    },
+    {
+      "source": "blocksec",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs?tab=readme-ov-file#20231018-hopelend---div-precision-loss"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/SlowMist_Team/status/1714655324395704423"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/hope-lend-835k-2023-10-18"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/de-fi-rekt-report-20-7m-funds-lost-in-october-2023-top-defi-scams-and-exploits"
+    },
+    {
+      "source": "revertiq",
+      "label": "quillaudits.com",
+      "url": "https://www.quillaudits.com/blog/hack-analysis/hopelend-835k-exploit"
+    },
+    {
+      "source": "revertiq",
+      "label": "certik.com",
+      "url": "https://www.certik.com/blog/hopelend-incident-analysis"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/decoding-hopelend-s-835k-2024-06-04"
+    },
+    {
+      "source": "revertiq",
+      "label": "crypto.training",
+      "url": "https://crypto.training/hacks/2023-10-hopelend/"
+    }
+  ]
+}

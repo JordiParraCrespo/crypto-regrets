@@ -1,0 +1,94 @@
+{
+  "id": "2024-04-25-ngfs",
+  "name": "NGFS",
+  "date": "2024-04-25",
+  "year": 2024,
+  "amountUsd": 190000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Bad Access Control",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 1.00).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.03,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Bad Access Control. Lost: ~190K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Bad Access Control. Lost: ~190K"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Access Control Vulnerable code snippet: https://bscscan.com/address/0xa608985f5b40cdf6862bec775207f84280a91e3a#code Attack tx: https://bscscan.com/tx/0x8ff764dde572928c353716358e271638fa05af54be69f043df72ad9ad054de25 https://app.blocksec.com/explorer/tx/bsc/0x8ff764dde572928c353716358e271638fa05af54be69f043df72ad9ad054de25 Analysis: https://blog.solidityscan.com/ngfs-token-hack-analysis-7a17f183e6a1 - The attacker initiated a call to delegateCallReserves, thereby assigning the uniswapV2Proxy to the attacker’s address. - Then the attacker gained the ability to manipulate the _uniswapV2Library to any desired address, facilitating access to the crucial third function. - Leveraging the reserveMultiSync function, the attacker was able to siphon off all funds from the PancakeSwap BSC-USD — NGFS pool to their own address, resulting in a loss of approximately $191k."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x8ff764dde572928c353716358e271638fa05af54be69f043df72ad9ad054de25"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-04/NGFS_exp.sol",
+  "sources": [
+    "defihacklabs",
+    "blocksec"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-04/NGFS_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/CertiKAlert/status/1783476515331616847"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0xa608985f5b40cdf6862bec775207f84280a91e3a#code"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x8ff764dde572928c353716358e271638fa05af54be69f043df72ad9ad054de25"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/bsc/0x8ff764dde572928c353716358e271638fa05af54be69f043df72ad9ad054de25"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x8ff764dde572928c353716358e271638fa05af54be69f043df72ad9ad054de25"
+    },
+    {
+      "source": "blocksec",
+      "label": "twitter.com",
+      "url": "https://twitter.com/0xNickLFranklin/status/1783640967062663252"
+    },
+    {
+      "source": "blocksec",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs?tab=readme-ov-file#20240425-ngfs---bad-access-control"
+    }
+  ]
+}

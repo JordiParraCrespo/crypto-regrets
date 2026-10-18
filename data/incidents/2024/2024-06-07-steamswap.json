@@ -1,0 +1,95 @@
+{
+  "id": "2024-06-07-steamswap",
+  "name": "SteamSwap",
+  "date": "2024-06-07",
+  "year": 2024,
+  "amountUsd": 105000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.99
+      },
+      {
+        "category": "market-manipulation",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.08,
+    "stateActor": 0.02,
+    "hasRootCause": 0.1
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Logic Flaw. Lost: ~$91k",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Logic Flaw. Lost: ~$91k"
+    },
+    {
+      "source": "SlowMist",
+      "text": "According to monitoring by the SlowMist security team, SteamSwap(STM) on BNBChain was attacked, resulting in a loss of approximately $105K."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "SteamSwap was exploited on BNB Chain in June 2024 after an attacker manipulated AMM reserves and exploited a lack of access control in the MineSTM contract’s updateAllowance function, enabling extraction of over $105,000 in various tokens through two coordinated attacks. The MineSTM contract allowed anyone to call updateAllowance(), which updated internal accounting based on externally manipulated AMM reserves. This lack of access control, combined with reliance on manipulable AMM spot prices, enabled attackers to extract excess funds."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x40f3bdd0a3a8d0476ae6aa2875dc2ec60b80812e2a394b67a88260df57c65522",
+    "0x849ed7f687cc2ebd1f7c4bed0849893e829a74f512b7f4a18aea39a3ef4d83b1"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-06/SteamSwap_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-06/SteamSwap_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/1798905797440897386"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/steamswap-2024-06-07"
+    },
+    {
+      "source": "revertiq",
+      "label": "quadrigainitiative.com",
+      "url": "https://www.quadrigainitiative.com/casestudy/steamswapstmvulnerablereservebalance.php"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/kismp123/DeFi-Security-Incident/blob/main/2024/2024-06-XX_MineSTM_UpdateAllowanceSellExploit.md"
+    }
+  ]
+}

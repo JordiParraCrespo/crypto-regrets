@@ -1,0 +1,108 @@
+{
+  "id": "2023-01-30-bevo",
+  "name": "BEVO",
+  "date": "2023-01-30",
+  "year": 2023,
+  "amountUsd": 45000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "Token",
+  "category": "accounting-math",
+  "technique": "Incorrect Share Accounting",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.99
+      },
+      {
+        "category": "logic-error",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.93
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Reflection token. Lost: 144 BNB",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Reflection token. Lost: 144 BNB"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "BEVO is a deflationary token. By invoking function deliver(), the value _rTotal will decrease. Vulnerable code snippet: The attacker calls the function deliver(), and the value of _rTotal will decrease, which further affects the return value of getRate() used to calculate the balance. Attack tx: https://bscscan.com/tx/0xb97502d3976322714c828a890857e776f25c79f187a32e2d548dda1c315d2a7d Analysis: https://x.com/QuillAudits_AI/status/1620377951836708865"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The BEVO NFT Art Token (BEVO) on BSC was exploited with a total loss of approximately $45,000. The root cause is that BEVO is a deflationary token, and the attacker calls the function deliver(), the value of _rTotal will decrease, which will further affect the return value of getRate() used to calculate the balance. After the attacker manipulates the token balance, he calls the function skim to transfer the increased PancakePair balance to his own account. Finally, the attacker calls the function deliver() again and exchanges the increased BEVO back to WBNB."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "BEVO's NFT Art Token on BNB Chain was exploited on January 30, 2023, leading to a loss of about $45,000. The vulnerability was tied to faulty accounting in its deflationary token design, specifically misuse of the deliver() function, which allowed attackers to manipulate the token's internal balance and profit from the attack through swaps and flashloan operations. The BEVO contract used a deflationary mechanism where calling deliver() reduced the _rTotal supply, but failed to prevent attackers from exploiting this to manipulate the token’s internal accounting and drain liquidity. Insufficient safeguards allowed attackers to abuse the deliver mechanism…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xb97502d3976322714c828a890857e776f25c79f187a32e2d548dda1c315d2a7d"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-01/BEVO_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-01/BEVO_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/QuillAudits/status/1620377951836708865"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0xb97502d3976322714c828a890857e776f25c79f187a32e2d548dda1c315d2a7d"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/QuillAudits_AI/status/1620377951836708865"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BlockSecTeam/status/1620030206571593731"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/bevo-2023-01-30"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/past/2023/README.md#L4606"
+    }
+  ]
+}

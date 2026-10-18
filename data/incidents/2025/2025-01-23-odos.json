@@ -1,0 +1,116 @@
+{
+  "id": "2025-01-23-odos",
+  "name": "ODOS",
+  "date": "2025-01-23",
+  "year": 2025,
+  "amountUsd": 50000,
+  "returnedUsd": null,
+  "chains": [
+    "Base"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "arbitrary-call",
+  "technique": "invalid-signature-verification",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.84). Replaced keyword guess \"signature-crypto\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "arbitrary-call",
+    "confidence": 0.84,
+    "top": [
+      {
+        "category": "arbitrary-call",
+        "p": 0.85
+      },
+      {
+        "category": "signature-crypto",
+        "p": 0.1
+      },
+      {
+        "category": "input-validation",
+        "p": 0.04
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "invalid-signature-verification. Lost: ~50k",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "invalid-signature-verification. Lost: ~50k"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The exploit was caused by an arbitrary call vulnerability in the OdosLimitOrderRouter contract. The contract allowed unverified user input to control a call that deployed an ERC-6492 contract. The attacker leveraged this to call ERC20.transfer to steal tokens. To bypass the signature check (IERC1271Wallet(_signer).isValidSignature), which normally requires the _signer contract to have executable code, the attacker cleverly used the 0x4 Identity pre-compiled contract. Pre-compiled contracts have zero code length but can still execute. By using 0x4 as the _signer, the call to isValidSignature succeeded without reverting, thus bypassing the intended security measure and allowing the arbitrary call to proceed with the token transfer. The core vulnerability was the lack of proper validation of user-supplied data in the arbitrary call mechanism, combined with the unexpected behavior of pre-compiled contracts in the context of the signature verification. Vulnerable code snippet: Attack tx: https://basescan.org/tx/0xd10faa5b33ddb501b1dc6430896c966048271f2510ff9ed681dd6d510c5df9f6 Analysis: https://coinsbench.com/odos-siganture-validation-hack-deep-analysis-906dd158db93"
+    },
+    {
+      "source": "SlowMist",
+      "text": "According to monitoring by the SlowMist security team, due to a lack of input validation in @odosprotocol, the vulnerability has been exploited across multiple chains, resulting in approximately $100,000 in losses. ODOS stated in a post that the attack exploited a vulnerability in its audited executor contract, allowing the theft of revenue stored within the contract but not affecting any user funds."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On January 23, 2025, Odos Protocol's Limit Order Contracts on Base were exploited for nearly $50,000. The attacker abused the isValidSigImpl function via unvalidated calldata, leveraging EVM precompile behavior and ERC-1271 signature bypasses to drain the contract’s token holdings. The isValidSigImpl function in OdosLimitOrderRouter allowed arbitrary calls with fully user-controlled calldata to a factory contract when signature conditions were met. The signature verification code lacked sufficient checks on the _signer address and signature structure, enabling the attacker to use a precompiled contract at address 0x04 (Identity precompile) which return…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xd10faa5b33ddb501b1dc6430896c966048271f2510ff9ed681dd6d510c5df9f6"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-01/ODOS_exp.sol",
+  "sources": [
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-01/ODOS_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/base/0xd10faa5b33ddb501b1dc6430896c966048271f2510ff9ed681dd6d510c5df9f6"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "basescan.org",
+      "url": "https://basescan.org/tx/0xd10faa5b33ddb501b1dc6430896c966048271f2510ff9ed681dd6d510c5df9f6"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "coinsbench.com",
+      "url": "https://coinsbench.com/odos-siganture-validation-hack-deep-analysis-906dd158db93"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/odosprotocol/status/1882668362045821146"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/what-went-wrong-with-odos-protocol-2025-01-30"
+    },
+    {
+      "source": "revertiq",
+      "label": "quillaudits.com",
+      "url": "https://www.quillaudits.com/blog/hack-analysis/odos-protocol-arbitrary-call-vulnerability"
+    },
+    {
+      "source": "revertiq",
+      "label": "olympix.security",
+      "url": "https://olympix.security/biweekly-exploits/bybit-odos-and-bbx-hacked-1-5b-drained-via-social-engineering-signature-bypass-and-burn-exploit"
+    },
+    {
+      "source": "revertiq",
+      "label": "bshyuunn.github.io",
+      "url": "https://bshyuunn.github.io/exploit%20analysis/blockchain/2025/04/20/ODOS-Protocol-Exploit-Analysis.html"
+    }
+  ]
+}

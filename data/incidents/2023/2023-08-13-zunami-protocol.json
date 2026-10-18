@@ -1,0 +1,150 @@
+{
+  "id": "2023-08-13-zunami-protocol",
+  "name": "Zunami Protocol",
+  "date": "2023-08-13",
+  "year": 2023,
+  "amountUsd": 2100000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.86,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.87
+      },
+      {
+        "category": "logic-error",
+        "p": 0.08
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.04
+      }
+    ],
+    "flashLoan": 0.93,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Price Manipulation. Lost: ~$2M",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Price Manipulation. Lost: ~$2M"
+    },
+    {
+      "source": "REKT",
+      "text": "The Curve ecosystem can't catch a break... Yesterday, Zunami Protocol lost $2.1M to a price manipulation attack. Keeping DeFi safe is a constant game of cat-and-mouse, one that can’t always be won."
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Zunami Protocol's contract calculates account balances using the cacheAssetPrice() value, which depends on totalHoldings. The attacker manipulated totalHoldings by flash loaning in funds from multiple sources, then swapping these funds for 4.8M UZD on Curve. Vulnerable Code Snippet: Attack Transaction: https://etherscan.io/tx/0x0788ba222970c7c68a738b0e08fb197e669e61f9b226ceec4cab9b85abe8cceb Analysis: https://twitter.com/peckshield/status/1690877589005778945 https://twitter.com/BlockSecTeam/status/1690931111776358400"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The Zunami Protocol on Ethereum suffered a price manipulation attack and lost 1,179 ETH (approximately $2.2 million). The reason for the incident is that the calculation of LP price in the vulnerable contract depends on the CRV balance of the contract itself and the conversion ratio of CRV in the wETH/CRV pool. The attacker manipulated the LP price by transferring CRV to the contract and manipulating the conversion ratio of the wETH/CRV pool. According to MistTrack analysis, ETH has been transferred to Tornado Cash at present."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On August 13, 2023, Zunami Protocol lost $2.1M to a flash loan-driven price manipulation exploit on Ethereum. The attacker skewed Curve pool balances, manipulated on-chain price readings, and drained the vaults by redeeming inflated collateral. Zunami Protocol priced LP collateral using spot Curve pool balances, not manipulation-resistant sources like Curve's virtual price or TWAPs. This allowed a flash loan-funded attacker to transiently inflate collateral value and extract more assets than held."
+    }
+  ],
+  "audit": "Hashex",
+  "txHashes": [
+    "0x0788ba222970c7c68a738b0e08fb197e669e61f9b226ceec4cab9b85abe8cceb",
+    "0x91b41d5b5b30a941c65d5da952c4b11390f364b41cf81a1a87fba9b67b69fe22",
+    "0x773db62b2328cf2173526ec346dfebffa96e9d9a08715abf7b99cc347ad6556d",
+    "0x3370d955b854a98b6578212e085c67ab94329740856dbd4da23ca05f0200d182",
+    "0x1b315017748bf8b7aca7d58771e172e88a5d9b08a972f8f7027dc7014433b5cb",
+    "0x27f5665edacc30a7bae57d27e964272087b7b9f8276c468a48b6b6fe13e653a1",
+    "0x5ad68e8ae2b68b3ffc76f94dbf6933ce234b5c0f47c2f310bb7f07f744ed770a",
+    "0x2a1dc84d940feeb0253f926affe9d7a7639768c5475a2296401d1d099b111b17"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-08/Zunami_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-08/Zunami_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/peckshield/status/1690877589005778945"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BlockSecTeam/status/1690931111776358400"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Zunami Protocol - REKT",
+      "url": "https://rekt.news/zunami-protocol-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x0788ba222970c7c68a738b0e08fb197e669e61f9b226ceec4cab9b85abe8cceb"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x0788ba222970c7c68a738b0e08fb197e669e61f9b226ceec4cab9b85abe8cceb"
+    },
+    {
+      "source": "blocksec",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs?tab=readme-ov-file#20230814-zunamiprotocol---price-manipulation"
+    },
+    {
+      "source": "slowmist",
+      "label": "odaily.news",
+      "url": "https://www.odaily.news/newsflash/332604?source=share"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/zunami-protocol-2-2m-2023-08-13"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/de-fi-rekt-report-29m-funds-lost-in-august-2023-top-defi-scams-and-exploits"
+    },
+    {
+      "source": "revertiq",
+      "label": "certik.com",
+      "url": "https://www.certik.com/blog/zunami-protocol-incident-analysis"
+    },
+    {
+      "source": "revertiq",
+      "label": "rekt.news",
+      "url": "https://www.rekt.news/zunami-protocol-case-file"
+    }
+  ]
+}

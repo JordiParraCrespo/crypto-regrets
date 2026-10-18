@@ -1,0 +1,90 @@
+{
+  "id": "2025-07-20-stepp2p",
+  "name": "Stepp2p",
+  "date": "2025-07-20",
+  "year": 2025,
+  "amountUsd": 43000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.98,
+    "stateActor": 0.01,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Logic Flaw. Lost: 43k USD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Logic Flaw. Lost: 43k USD"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The Stepp2p contract (0x9985...6DCe) implements a P2P sale-order system where a user creates a sale order by depositing funds, and can later cancel or modify the order to retrieve/adjust those funds. The flaw is that cancelSaleOrder and modifySaleOrder both pay out funds tied to the same saleId without invalidating the order or coordinating their state — so an attacker can call both on the same order and be paid twice for a single deposit (a double-spend). The attacker flash-loaned 50,000 BSC-USD, created a sale order with the full BSC-USD balance of the contract, then called cancelSaleOrder(saleId) (refunding the funds) and modifySaleOrder(saleId, amount, false) on the same order (paying out again), draining the contract before repaying the flash loan, netting ~$43K. The root cause is missing state invalidation/validation: a cancelled order remains modifiable and both paths transfer funds. Vulnerable code snippet: Attack Tx: https://bscscan.com/tx/0xe94752783519da14315d47cde34da55496c39546813ef4624c94825e2d69c6a8 Analysis: TenArmorAlert"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 20 July 2025, the Stepp2p protocol on BNB Chain was exploited via a logic flaw in its sale order management, enabling the attacker to double-withdraw ~43,782 BSC-USD, a loss valued at $44,000. The exploit used a flash loan and manipulated order cancellation and modification logic. The Stepp2p smart contract allowed both cancellation and modification of the same sale order without strictly exclusive state transitions. As a result, an attacker could withdraw funds from an order multiple times using a sequence of cancel and modify operations, enabling double-spending from a single deposit."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xe94752783519da14315d47cde34da55496c39546813ef4624c94825e2d69c6a8",
+    "0xbcd37be24c3a0dedd8789ba5aeeaa1f20333812062941465de21e9f60f36d33d"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-07/Stepp2p_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-07/Stepp2p_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/TenArmorAlert/status/1946887946877149520"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0xe94752783519da14315d47cde34da55496c39546813ef4624c94825e2d69c6a8"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/stepp2p-2025-07-20"
+    },
+    {
+      "source": "revertiq",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0xbcd37be24c3a0dedd8789ba5aeeaa1f20333812062941465de21e9f60f36d33d"
+    }
+  ]
+}

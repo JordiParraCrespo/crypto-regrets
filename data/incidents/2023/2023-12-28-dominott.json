@@ -1,0 +1,76 @@
+{
+  "id": "2023-12-28-dominott",
+  "name": "DominoTT",
+  "date": "2023-12-28",
+  "year": 2023,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Precision loss",
+  "classificationNote": "Classified by keyword rules from the DeFiHackLabs root-cause title.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.36,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.4
+      },
+      {
+        "category": "access-control",
+        "p": 0.37
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.17
+      }
+    ],
+    "flashLoan": 0.98,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Precision loss. Lost: ~5 $WBNB",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Precision loss. Lost: ~5 $WBNB"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "DominoTT (an ERC20 with burn and multicall) was paired with WBNB on PancakeSwap. The attacker took a DODO flashloan, swapped WBNB for DominoTT, and then used an EIP-2771 meta-transaction Forwarder.execute (with a valid signature) to invoke DominoTT.multicall([burn(... of the pair address)]), burning a large amount of DominoTT tokens directly out of the PancakeSwap pair's reserves. Calling Pair.sync() then forced the pool to recognize the reduced DominoTT reserve, sharply skewing the price, after which they swapped their DominoTT back to WBNB at the inflated rate and repaid the flashloan. The core flaw is that token holdings inside the AMM pair could be burned by an external caller and synced, manipulating the reserve ratio. Vulnerable code snippet: Attack Tx: https://app.blocksec.com/explorer/tx/bsc/0x1ee617cd739b1afcc673a180e60b9a32ad3ba856226a68e8748d58fcccc877a8"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x1ee617cd739b1afcc673a180e60b9a32ad3ba856226a68e8748d58fcccc877a8"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-12/DominoTT_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-12/DominoTT_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/bsc/0x1ee617cd739b1afcc673a180e60b9a32ad3ba856226a68e8748d58fcccc877a8"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/4b55dffe3e9fd35099c95af728b4af58b75c6b2b/src/test/2023-12/Channels_exp.sol"
+    }
+  ]
+}

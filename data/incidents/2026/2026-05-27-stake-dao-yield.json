@@ -1,0 +1,88 @@
+{
+  "id": "2026-05-27-stake-dao-yield",
+  "name": "Stake DAO Yield",
+  "date": "2026-05-27",
+  "year": 2026,
+  "amountUsd": 91000,
+  "returnedUsd": null,
+  "chains": [
+    "Arbitrum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "key-compromise",
+  "technique": "Deployer Key Compromised",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "key-compromise",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "key-compromise",
+        "p": 0.99
+      },
+      {
+        "category": "bridge-crosschain",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": true,
+  "language": "Solidity",
+  "rootCause": "On May 27, 2026, an attacker compromised StakeDAO’s deployer EOA private key and used it to repoint the vsdCRV LayerZero OFT peer on Arbitrum, forging a mint of ~5.44 trillion unbacked vsdCRV. The attacker drained ~43.8 ETH (~$91K) from the vasdCRV Curve pool before bridging the proceeds. StakeDAO core contracts were never at risk; legitimate backing was secured within 47 minutes, the product was deprecated, and a governance proposal was issued to fully compensate affected users.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "On May 27, 2026, an attacker compromised StakeDAO’s deployer EOA private key and used it to repoint the vsdCRV LayerZero OFT peer on Arbitrum, forging a mint of ~5.44 trillion unbacked vsdCRV. The attacker drained ~43.8 ETH (~$91K) from the vasdCRV Curve pool before bridging the proceeds. StakeDAO core contracts were never at risk; legitimate backing was secured within 47 minutes, the product was deprecated, and a governance proposal was issued to fully compensate affected users."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Stake DAO lost approximately $91,000 on Arbitrum One after a compromised deployer key allowed an attacker to fraudulently mint and swap 5.4 trillion vsdCRV tokens by hijacking cross-chain trust via LayerZero. The incident was contained within an hour, with user backing secured and a compensation plan launched. The deployer EOA retained owner privileges on the vsdCRV token contract for over two years because the governance handover process was never completed. This allowed the attacker, who compromised the deployer's key, to hijack the contract’s cross-chain trust and mint unbacked tokens."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xf97ddff0d7e8ea757f4b37f063103915cd5b400542790339de84bc0abd8b39cd",
+    "0x7489ec5f5dba1de6e6c92f2c0f1dd93bd4a2f307c3bd2305b2f93f569a3e5fe5",
+    "0xce66dac962880459d025a27cc5624227fc168ecb21504d5d00a3f37c80f97f8f",
+    "0xff79bec3f20529826975f347aee45248d3677e90fa8373ca81f8bbac889bb458",
+    "0xa553a5321d488010d0ceaed080b1b20fdac97f6b1dda50dac97120b3fb5c344e"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/stakedaohq/status/2064366142685094064?s=46&t=DLwbX9Nw4QECiyZQ0av-fg"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/stake-dao-2026-05-27"
+    },
+    {
+      "source": "revertiq",
+      "label": "app.stakedao.org",
+      "url": "https://app.stakedao.org/blog/incident-disclosure-27-05-2026"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptotimes.io",
+      "url": "https://www.cryptotimes.io/2026/05/27/stake-dao-exploited-as-hacker-mints-5-4-trillion-fake-vsdcrv/"
+    }
+  ]
+}

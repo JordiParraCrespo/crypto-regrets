@@ -1,0 +1,105 @@
+{
+  "id": "2022-08-16-circle",
+  "name": "Circle",
+  "date": "2022-08-16",
+  "year": 2022,
+  "amountUsd": 151600,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Price Manipulation",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.93).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.93,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.93
+      },
+      {
+        "category": "logic-error",
+        "p": 0.03
+      },
+      {
+        "category": "market-manipulation",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.14,
+    "stateActor": 0.02,
+    "hasRootCause": 0.84
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Price Manipulation. Lost: ~$151.6K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Price Manipulation. Lost: ~$151.6K"
+    },
+    {
+      "source": "DeFiHackLabs",
+      "text": "Price Manipulation. Lost: ~$50.5K"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "the attacker manipulated MakerDAO’s CDP (Collateralized Debt Position) system and a vulnerable UniswapV2 LP token contract Vulnerable code snippet: Attack tx: https://etherscan.io/tx/0xf1818f62c635e5c80ef16b7857da812c74ce330ebed46682b4d173bffe84c666 Analysis: https://app.blocksec.com/explorer/tx/eth/0xf1818f62c635e5c80ef16b7857da812c74ce330ebed46682b4d173bffe84c666?line=74"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The attacker exploit MakerDAO's systems to manipulate collateralized debt positions (CDPs) Vulnerable code snippet: https://etherscan.io/address/0xae461ca67b15dc8dc81ce7615e0320da1a9ab8d5 Attack tx: https://etherscan.io/tx/0xa4e650772f6e6b7ecc0964fe4c3854850669d1467570a2fa2b6edfa0f112c4b7 Analysis:"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xf1818f62c635e5c80ef16b7857da812c74ce330ebed46682b4d173bffe84c666",
+    "0xa4e650772f6e6b7ecc0964fe4c3854850669d1467570a2fa2b6edfa0f112c4b7"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-08/Circle_exp2.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-08/Circle_exp2.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/eth/0xf1818f62c635e5c80ef16b7857da812c74ce330ebed46682b4d173bffe84c666?line=74"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-08/Circle_exp1.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/eth/0xa4e650772f6e6b7ecc0964fe4c3854850669d1467570a2fa2b6edfa0f112c4b7"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xf1818f62c635e5c80ef16b7857da812c74ce330ebed46682b4d173bffe84c666"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/address/0xae461ca67b15dc8dc81ce7615e0320da1a9ab8d5"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xa4e650772f6e6b7ecc0964fe4c3854850669d1467570a2fa2b6edfa0f112c4b7"
+    }
+  ]
+}

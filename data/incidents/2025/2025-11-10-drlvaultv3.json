@@ -1,0 +1,90 @@
+{
+  "id": "2025-11-10-drlvaultv3",
+  "name": "DRLVaultV3",
+  "date": "2025-11-10",
+  "year": 2025,
+  "amountUsd": 100000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.98,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Price Manipulation. Lost: 100k USD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Price Manipulation. Lost: 100k USD"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "DRLVaultV3's swapToWETH() performed a swap of USDC to WETH through the USDC/WETH pool without adequate slippage protection (the vault trusts the live pool price / accepts whatever the manipulated pool returns). The attacker took a large Morpho USDC flash loan and used it to massively skew the USDC/WETH Uniswap/Pancake V3 pool price, then called the vault's swapToWETH(100000 USDC); because the vault executed at the manipulated spot price with no real minimum-out guard, it swapped at a wildly unfavorable rate, transferring value to the attacker. After restoring the pool with reverse swaps and repaying the flash loan, the attacker kept ~100K USDT. The root cause is the vault swapping against a manipulable spot pool with insufficient slippage / price-validation. Vulnerable code snippet: Attack Tx: https://etherscan.io/tx/0xe3eab35b288c086afa9b86a97ab93c7bb61d21b1951a156d2a8f6f5d5715c475 Analysis: https://blog.verichains.io/p/the-drlvaultv3-exploit-a-slippage"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "DRLVaultV3 on Ethereum Mainnet was exploited on 10 November 2025 for approximately $100,000, when its on-chain slippage computation enabled an attacker to manipulate the reference swap price and drain value using a flashloan-powered price distortion, followed by a vault swap at the inflated rate. The DRLVaultV3 vault computed minimum swap output (amountOutMinimum) using the spot on-chain pool price, allowing an attacker to manipulate the price in the same transaction and bypass meaningful slippage protection."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xe3eab35b288c086afa9b86a97ab93c7bb61d21b1951a156d2a8f6f5d5715c475"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-11/DRLVaultV3_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-11/DRLVaultV3_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "blog.verichains.io",
+      "url": "https://blog.verichains.io/p/the-drlvaultv3-exploit-a-slippage"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xe3eab35b288c086afa9b86a97ab93c7bb61d21b1951a156d2a8f6f5d5715c475"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xe3eab35b288c086afa9b86a97ab93c7bb61d21b1951a156d2a8f6f5d5715c475"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/drlvaultv3-2025-11-10"
+    }
+  ]
+}

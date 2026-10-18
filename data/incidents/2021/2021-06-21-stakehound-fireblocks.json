@@ -1,0 +1,86 @@
+{
+  "id": "2021-06-21-stakehound-fireblocks",
+  "name": "StakeHound / Fireblocks",
+  "date": "2021-06-21",
+  "year": 2021,
+  "amountUsd": 72000000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "signature-crypto",
+  "technique": "Key Brute Forced",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "key-compromise",
+    "confidence": 0.96,
+    "top": [
+      {
+        "category": "key-compromise",
+        "p": 0.96
+      },
+      {
+        "category": "logic-error",
+        "p": 0.03
+      },
+      {
+        "category": "signature-crypto",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.01,
+    "hasRootCause": 0.78
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "According to Calcalist, the cryptocurrency company StakeHound has filed a lawsuit against the institutional security company Fireblocks, claiming that ETH worth 245.5 million Israeli new shekels (approximately US$75 million) was lost due to Fireblocks’ mistakes. StakeHound stated that as Fireblocks deleted the key for no reason without backing up the key, 38,178 ETH were lost.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "According to Calcalist, the cryptocurrency company StakeHound has filed a lawsuit against the institutional security company Fireblocks, claiming that ETH worth 245.5 million Israeli new shekels (approximately US$75 million) was lost due to Fireblocks’ mistakes. StakeHound stated that as Fireblocks deleted the key for no reason without backing up the key, 38,178 ETH were lost."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "In June 2021, StakeHound lost access to 38,178 ETH (valued ~$72,$75M) after Fireblocks failed to properly generate and back up critical key shares for withdrawal from ETH 2.0 staking contracts. No funds were stolen; instead, the ETH became irretrievable due to operational key-management failure. StakeHound's ETH2 withdrawal keys were lost after Fireblocks generated two key shares in a non-production environment and failed to back up the decryption keys. Both keys were deleted or misplaced, making recovery impossible. This was an operational off-chain failure, not a smart contract bug or brute-force attack."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "calcalistech.com",
+      "url": "https://www.calcalistech.com/ctech/articles/0,7340,L-3910671,00.html"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/stakehound-fireblocks-2021-06-21"
+    },
+    {
+      "source": "revertiq",
+      "label": "quadrigainitiative.com",
+      "url": "https://quadrigainitiative.com/casestudy/stakehoundgotfireblocked.php"
+    },
+    {
+      "source": "revertiq",
+      "label": "stakehound.com",
+      "url": "https://stakehound.com/blog-post/fireblocks-eth-2-key-management-incident/"
+    }
+  ]
+}

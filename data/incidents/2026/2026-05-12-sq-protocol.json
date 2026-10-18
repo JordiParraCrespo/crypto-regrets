@@ -1,0 +1,99 @@
+{
+  "id": "2026-05-12-sq-protocol",
+  "name": "SQ Protocol",
+  "date": "2026-05-12",
+  "year": 2026,
+  "amountUsd": 346137,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Access Control. Lost: ~$346.1K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Access Control. Lost: ~$346.1K"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The SQTokenStaking contract exposed privileged owner-only functions without proper access control protection. The attacker (using an EIP-7702 delegated EOA) simply called transferOwnership to seize ownership of the staking contract, then abused owner-gated functions: bind, setUintArray (to set stake lockup days to 0), stakeOwner (to credit themselves arbitrary stakes for free), unstake (to claim those stakes), and finally withdrawalTokens to sweep the entire SQi balance out of the contract. The looted SQi was then dumped into the PancakeSwap SQi/USDT pool for ~$346K of USDT. The root cause is a complete absence of (or trivially bypassable) ownership/authorization checks: transferOwnership was callable by anyone, handing full administrative control to the attacker. Vulnerable code snippet: Attack Tx: https://bscscan.com/tx/0x1bae633eda9b3d98999ea116bc403712eaa07093ec32bd6d559085cc4607f5b8 Analysis: https://x.com/Defi_Nerd_sec/status/2054425936746148148"
+    },
+    {
+      "source": "SlowMist",
+      "text": "On May 12, 2026, at approximately 10:11 UTC, the SQ Protocol on BNB Chain was exploited for $346,137. The attacker abused a hardcoded owner backdoor in the verified Staking contract (0x404404a845fff0201f3a4d419b4839fc419c99f7). Using a type-0x4 transaction with authorizationList, they took ownership, minted fake staking claims, redeemed ~296.5K USDT, swept SQi tokens, and dumped them in the SQi/USDT pool for additional profit. Total realized loss: approximately $346.1K."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On BNB Chain, SQ Protocol's staking contract was exploited on 12 May 2026 for roughly $346,137 after an attacker used a hardcoded owner backdoor, forging staking positions and redeeming them for USDT. The attack drained both protocol and liquidity pair funds. A privileged staking contract owner's access-control check included a hardcoded EOA exception, allowing the attacker to bypass ownership and execute admin-only mint, unlock, and token sweep operations."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x1bae633eda9b3d98999ea116bc403712eaa07093ec32bd6d559085cc4607f5b8"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-05/SQTokenStaking_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-05/SQTokenStaking_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x1bae633eda9b3d98999ea116bc403712eaa07093ec32bd6d559085cc4607f5b8"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/Defi_Nerd_sec/status/2054425936746148148"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/sq-protocol-2026-05-12"
+    },
+    {
+      "source": "revertiq",
+      "label": "darknavy.org",
+      "url": "https://www.darknavy.org/web3/exploits/sq-token-staking-owner-backdoor-drain/"
+    },
+    {
+      "source": "revertiq",
+      "label": "yieldo.me",
+      "url": "https://yieldo.me/security/sq-protocol-2026"
+    }
+  ]
+}

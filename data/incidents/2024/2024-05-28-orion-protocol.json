@@ -1,0 +1,128 @@
+{
+  "id": "2024-05-28-orion-protocol",
+  "name": "Orion Protocol",
+  "date": "2024-05-28",
+  "year": 2024,
+  "amountUsd": 645000,
+  "returnedUsd": null,
+  "chains": [
+    "BNB"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.88,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.89
+      },
+      {
+        "category": "access-control",
+        "p": 0.07
+      },
+      {
+        "category": "input-validation",
+        "p": 0.04
+      }
+    ],
+    "flashLoan": 0.06,
+    "stateActor": 0.02,
+    "hasRootCause": 0.93
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Business Logic Flaw. Lost: ~645K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Business Logic Flaw. Lost: ~645K"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "When removing user’s liabilities, the removeLiability function incorrectly breaks the loop instead of continuing. However, since there could be duplicated liabilities, the removeLiability function doesn’t work as expected. Vulnerable code snippet: Attack tx: https://app.blocksec.com/explorer/tx/bsc/0x660837a1640dd9cc0561ab7ff6c85325edebfa17d8b11a3bb94457ba6dcae18c Analysis: When removing user’s liabilities, the removeLiability function incorrectly breaks the loop instead of continuing. However, since there could be duplicated liabilities, the removeLiability function doesn’t work as expected. As a result, the attacker could manipulate the liabilites array, thus doubling his value of collateral. Reference: https://x.com/MetaSec_xyz/status/1796012102244798941"
+    },
+    {
+      "source": "SlowMist",
+      "text": "According to the SlowMist security team, the liquidity aggregator protocol Orion's contract was attacked, resulting in a loss of approximately $616,000."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 28 May 2024, Orion Protocol's BNB Chain deployment was exploited due to improper access control and broken liability accounting, allowing an attacker to withdraw assets far beyond intended limits. The mechanism involved repeated liability entries for the same asset. Loss estimates range between $616,000 and $645,000, but no official postmortem or confirmed patch has been published. The Orion Protocol contract allowed repeated liability entries for the same asset, breaking the invariant that liabilities should be recorded only once per token. This flaw enabled attackers to manipulate health checks and withdraw excess funds. The susceptible functions…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x660837a1640dd9cc0561ab7ff6c85325edebfa17d8b11a3bb94457ba6dcae18c"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-05/Tradeonorion_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-05/Tradeonorion_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/MetaSec_xyz/status/1796008961302258001"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/bsc/0x660837a1640dd9cc0561ab7ff6c85325edebfa17d8b11a3bb94457ba6dcae18c"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/MetaSec_xyz/status/1796012102244798941"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x660837a1640dd9cc0561ab7ff6c85325edebfa17d8b11a3bb94457ba6dcae18c"
+    },
+    {
+      "source": "blocksec",
+      "label": "x.com",
+      "url": "https://x.com/Phalcon_xyz/status/1795355758235693089"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/1795326102157816192"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/orion-protocol-2024-05-28"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/orion-protocol-hack-2024"
+    },
+    {
+      "source": "revertiq",
+      "label": "quadrigainitiative.com",
+      "url": "https://www.quadrigainitiative.com/hackfraudscam/orionnetworksetliabilityvulnerability.php"
+    }
+  ]
+}

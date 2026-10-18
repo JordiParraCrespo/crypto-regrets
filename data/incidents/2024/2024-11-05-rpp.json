@@ -1,0 +1,88 @@
+{
+  "id": "2024-11-05-rpp",
+  "name": "RPP",
+  "date": "2024-11-05",
+  "year": 2024,
+  "amountUsd": 14100,
+  "returnedUsd": null,
+  "chains": [
+    "BNB Chain"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Logic Error",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.94,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.94
+      },
+      {
+        "category": "access-control",
+        "p": 0.05
+      },
+      {
+        "category": "input-validation",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.01,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Logic Flaw. Lost: ~ $14.1K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Logic Flaw. Lost: ~ $14.1K"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 5 November 2024, the RPP protocol on BNB Chain was exploited via a protocol logic flaw, resulting in a loss of approximately $14,100. The attacker manipulated the contract logic to burn tokens from an LP pair and bypass intended restrictions. The RPP contract allowed arbitrary users to trigger token burns by transferring tokens to the LP pair, due to improper controls around the burn mechanism and insufficient validation of the lastLpBurnTime variable."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x76c39537374e7fa7f206ed3c99aa6b14ccf1d2dadaabe6139164cc37966e40bd"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-11/RPP_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-11/RPP_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/TenArmorAlert/status/1853984974309142768"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/rpp-2024-11-05"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/rpp-hack-2024"
+    }
+  ]
+}

@@ -1,0 +1,128 @@
+{
+  "id": "2024-06-13-holograph",
+  "name": "Holograph",
+  "date": "2024-06-13",
+  "year": 2024,
+  "amountUsd": 1200000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Infinite Mint",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.71,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.73
+      },
+      {
+        "category": "rugpull",
+        "p": 0.24
+      },
+      {
+        "category": "key-compromise",
+        "p": 0.03
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.01,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "A disgruntled former contractor retained privileged admin access to Holograph Protocol's v1 smart contracts on Ethereum and Mantle, which they had deliberately planted as a backdoor months in advance (starting April 2024). On June 13, 2024, the attacker exploited this backdoor — deploying an unverified contract on Mantle — to mint 1 billion HLG tokens across nine transactions. The attacker then liquidated the newly minted tokens across five centralized exchanges (Backpack, Gate, Bybit, Bitget, KuCoin), netting approximately $1.3M before roughly 200M tokens were frozen by exchanges. The root cause was a failure to revoke legacy admin/operator privileges from a former contractor, combined with a lack of multi-sig or time-lock controls on the minting function. Attack Tx: 0x0cc143ccf3316d47b36a2e45577922f4ebe2374966bb22c1e9cf49c747d46396 Analysis: Holograph Protocol Faces Exploit, Hacker Mints 1 Billion HLG",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "A disgruntled former contractor retained privileged admin access to Holograph Protocol's v1 smart contracts on Ethereum and Mantle, which they had deliberately planted as a backdoor months in advance (starting April 2024). On June 13, 2024, the attacker exploited this backdoor — deploying an unverified contract on Mantle — to mint 1 billion HLG tokens across nine transactions. The attacker then liquidated the newly minted tokens across five centralized exchanges (Backpack, Gate, Bybit, Bitget, KuCoin), netting approximately $1.3M before roughly 200M tokens were frozen by exchanges. The root cause was a failure to revoke legacy admin/operator privileges from a former contractor, combined with a lack of multi-sig or time-lock controls on the minting function. Attack Tx: 0x0cc143ccf3316d47b36a2e45577922f4ebe2374966bb22c1e9cf49c747d46396 Analysis: Holograph Protocol Faces Exploit, Hacker Mints 1 Billion HLG"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The Omnichain NFT protocol Holograph protocol was exploited, resulting in a loss of approximately $14.4 million. According to the team, a former contractor exploited an infinite mint vulnerability in their smart contract to release an additional 1 billion HLG tokens, which were further dumped. This malicious actor, who had funded the operator contract roughly 26 days before the attack, deployed an unverified contract on Mantle, which was used to mint the additional tokens caused by a function that exploited the protocol's verification method."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On June 13, 2024, the Holograph protocol suffered a $14.4 million loss after a former contractor exploited privileged admin access to mint 1 billion HLG tokens. The attacker bridged and dumped the tokens, causing an almost 80% collapse in price before patching and exchange freezes limited further loss. A privileged actor with lingering admin access exploited insufficient access control protections on Holograph Protocol v1 contracts. This allowed unauthorized minting via a proxy wallet, resulting in 1 billion new HLG tokens and severe supply inflation."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 2024-06-13, Holograph's Operator contract was abused to mint 1 billion unauthorized HLG tokens. The attacker used a privileged execution path tied to the protocol's minting flow, then sold part of the inflated supply as HLG market value collapsed. The available evidence points to an authorization failure in Holograph's Operator execution flow. Public statements and later investigation summaries described a former contractor or other privileged actor retaining access capable of invoking HLG minting operations without sufficient authorization constraints."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x0cc143ccf3316d47b36a2e45577922f4ebe2374966bb22c1e9cf49c747d46396"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x0cc143ccf3316d47b36a2e45577922f4ebe2374966bb22c1e9cf49c747d46396"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "cryptonews.com",
+      "url": "https://cryptonews.com/news/holograph-protocol-faces-exploit-hacker-mints-1-billion-native-hlg-token/"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x0cc143ccf3316d47b36a2e45577922f4ebe2374966bb22c1e9cf49c747d46396"
+    },
+    {
+      "source": "blocksec",
+      "label": "x.com",
+      "url": "https://x.com/holographxyz/status/1801702424236990600"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/holograph-2024-07-11t12-41-03-00-00"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/cexs-are-under-threat-q2-2024-de-fi-hacks-a-report-analysis"
+    },
+    {
+      "source": "revertiq",
+      "label": "itokenly.com",
+      "url": "https://itokenly.com/hacks/holograph"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/Cerify-Systems/smart-contract-vulnerabilities/tree/master/2024-06-Holograph"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/holograph-2024-06-13"
+    },
+    {
+      "source": "revertiq",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/tech/2024/06/13/hlg-down-over-60-as-exploiter-mints-1-billion-new-tokens"
+    }
+  ]
+}

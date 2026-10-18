@@ -1,0 +1,156 @@
+{
+  "id": "2023-02-10-dforce-lending",
+  "name": "dForce Lending",
+  "date": "2023-02-10",
+  "year": 2023,
+  "amountUsd": 3650000,
+  "returnedUsd": null,
+  "chains": [
+    "Arbitrum",
+    "Optimism"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "reentrancy",
+  "technique": "Read-Only Reentrancy",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "reentrancy",
+    "confidence": 0.97,
+    "top": [
+      {
+        "category": "reentrancy",
+        "p": 0.97
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.03
+      }
+    ],
+    "flashLoan": 0.12,
+    "stateActor": 0.02,
+    "hasRootCause": 0.88
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Read-Only-Reentrancy. Lost: ~$3.65M",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Read-Only-Reentrancy. Lost: ~$3.65M"
+    },
+    {
+      "source": "REKT",
+      "text": "dForce Network was hit for $3.65M on both Arbitrum and Optimism. This attack on two fronts exploited a common reentrancy vulnerability. How much more will be lost to this bug?"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Read-only Reentrancy in the get_virtual_price function of the Curve LP Oracle. Vulnerable code snippet: https://arbiscan.io/address/0x6eb2dc694eb516b16dc9fbc678c60052bbdd7d80#code#L253 https://arbiscan.io/address/0x6eb2dc694eb516b16dc9fbc678c60052bbdd7d80#code#L487 Attack tx: https://arbiscan.io/tx/0x5db5c2400ab56db697b3cc9aa02a05deab658e1438ce2f8692ca009cc45171dd https://optimistic.etherscan.io/tx/0x6c19762186c9f32c81eb2a79420fc7ad4485aa916cab37ec278b216757bfba0d Analysis: https://quillaudits.medium.com/decoding-dforce-protocol-read-only-reentrancy-exploit-quillaudits-c012aed4d666 https://twitter.com/SlowMist_Team/status/1623956763598000129 https://twitter.com/BlockSecTeam/status/1623901011680333824"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The DeFi aggregation platform dForce was attacked in Arbitrum and Optimism, and the attackers made a profit of about 3.65 million US dollars. According to the analysis of SlowMist, the root cause of this attack is that the attacker used the process of first transferring Native tokens and then burning LP when removing liquidity in wstETH/ETH Pool, triggering the callback of receiving Native tokens to re-enter to manipulate the virtual price and Liquidate other users for profit. On February 13, dForce tweeted that the attackers had returned all stolen funds to the project multi-signature addresses on Arbitrum and Optimism, and all affected users would be compensated."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On February 9,13, 2023, dForce’s lending protocol lost approximately $3.65 million on Arbitrum and Optimism to a read-only reentrancy exploit involving Curve Finance’s wstETH/ETH pool. The attacker manipulated collateral pricing via Curve’s remove_liquidity callback, draining assets. All funds were returned after negotiations. dForce integrated Curve’s wstETH/ETH pool’s get_virtual_price() as an oracle for LP token collateral valuation. Curve’s remove_liquidity can transfer ETH to a caller before updating balances, allowing a reentrant callback where get_virtual_price returns an inflated value. dForce did not check for safe state, enabling attackers to…"
+    }
+  ],
+  "audit": "Out of scope",
+  "txHashes": [
+    "0x5db5c2400ab56db697b3cc9aa02a05deab658e1438ce2f8692ca009cc45171dd",
+    "0x6c19762186c9f32c81eb2a79420fc7ad4485aa916cab37ec278b216757bfba0d"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-02/dForce_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-02/dForce_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/SlowMist_Team/status/1623956763598000129"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BlockSecTeam/status/1623901011680333824"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/peckshield/status/1623910257033617408"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: dForce Network - REKT",
+      "url": "https://rekt.news/dforce-network-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "arbiscan.io",
+      "url": "https://arbiscan.io/address/0x6eb2dc694eb516b16dc9fbc678c60052bbdd7d80#code#L253"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "arbiscan.io",
+      "url": "https://arbiscan.io/address/0x6eb2dc694eb516b16dc9fbc678c60052bbdd7d80#code#L487"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "arbiscan.io",
+      "url": "https://arbiscan.io/tx/0x5db5c2400ab56db697b3cc9aa02a05deab658e1438ce2f8692ca009cc45171dd"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x6c19762186c9f32c81eb2a79420fc7ad4485aa916cab37ec278b216757bfba0d"
+    },
+    {
+      "source": "blocksec",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs?tab=readme-ov-file#20230210---dforce---read-only-reentrancy"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/dForcenet/status/1623904209161830401"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/dforce-2023-02-13"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "defirisk.co",
+      "url": "https://defirisk.co/learn/exploits/dforce-network/"
+    },
+    {
+      "source": "revertiq",
+      "label": "certik.com",
+      "url": "https://www.certik.com/blog/curve-conundrum-the-dforce-attack-via-a-read-only-reentrancy-vector-exploit"
+    }
+  ]
+}

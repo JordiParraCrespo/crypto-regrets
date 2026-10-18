@@ -1,0 +1,124 @@
+{
+  "id": "2024-08-12-ivest",
+  "name": "iVest",
+  "date": "2024-08-12",
+  "year": 2024,
+  "amountUsd": 190000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "Token",
+  "category": "logic-error",
+  "technique": "Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.66,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.68
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.32
+      }
+    ],
+    "flashLoan": 0.07,
+    "stateActor": 0.02,
+    "hasRootCause": 0.94
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Business logic flaw. Lost: ~338 WBNB",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Business logic flaw. Lost: ~338 WBNB"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The attack focused on the MakeDonation function, which is invoked when transferring iVest tokens. This function burns or donates additional tokens from the sender in certain cases. Deducting more tokens than the sending amount from the sender causes serious issues in the swap pool because the attacker can use it to decrease the number of tokens in the pool, altering the k ratio and enabling price manipulation. Vulnerable code snippet: Attack tx: https://app.blocksec.com/explorer/tx/bsc/0x12f27e81e54684146ec50973ea94881c535887c2e2f30911b3402a55d67d121d Analysis: https://blog.verichains.io/p/ivest-token-vulnerability-how-an"
+    },
+    {
+      "source": "SlowMist",
+      "text": "iVest DAO was attacked due to a smart contract vulnerability, resulting in a loss of approximately $172,000."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On August 12, 2024, iVest on BNB Chain was exploited for approximately $172,000 (338 WBNB) through price manipulation enabled by a business logic flaw in the iVest token's supply-reducing burn mechanism. The attacker borrowed WBNB via a flash loan, swapped for iVest tokens, exploited the supply reduction, and exited at inflated prices. A business logic flaw in iVest's custom token allowed supply-reducing burns to be triggered in a way that directly distorted the pool price. This exposed the protocol to manipulation via interactions that bypassed intended supply accounting constraints. The precise permission boundary of the vulnerable burn/donation func…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x12f27e81e54684146ec50973ea94881c535887c2e2f30911b3402a55d67d121d"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-08/IvestDao_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-08/IvestDao_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/AnciliaInc/status/1822870201698050064"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/bsc/0x12f27e81e54684146ec50973ea94881c535887c2e2f30911b3402a55d67d121d"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "blog.verichains.io",
+      "url": "https://blog.verichains.io/p/ivest-token-vulnerability-how-an"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x12f27e81e54684146ec50973ea94881c535887c2e2f30911b3402a55d67d121d"
+    },
+    {
+      "source": "blocksec",
+      "label": "twitter.com",
+      "url": "https://twitter.com/AnciliaInc/status/1822871242086699203"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/1822888837670113330"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/ivest-2024-08-12"
+    },
+    {
+      "source": "revertiq",
+      "label": "olympix.security",
+      "url": "https://olympix.security/biweekly-exploits/deltaprime-ivest-and-spectra-finance-lose-1-25m-to-storage-collisions-burn-abuse-and-call-injection"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/past/2024/README.md#L1077"
+    }
+  ]
+}

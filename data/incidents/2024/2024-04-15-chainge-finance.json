@@ -1,0 +1,117 @@
+{
+  "id": "2024-04-15-chainge-finance",
+  "name": "Chainge Finance",
+  "date": "2024-04-15",
+  "year": 2024,
+  "amountUsd": 716000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "arbitrary-call",
+  "technique": "Arbitrary External Call",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.85,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.86
+      },
+      {
+        "category": "arbitrary-call",
+        "p": 0.14
+      }
+    ],
+    "flashLoan": 0.06,
+    "stateActor": 0.02,
+    "hasRootCause": 0.9
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Arbitrary External Call. Lost: ~560K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Arbitrary External Call. Lost: ~560K"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "setReward without access control. Everyone can set reward. Vulnerable code snippet: https://bscscan.com/address/0xbCbCb0e7E28414e084c4a40C1cCC30B75629a7DE#code Attack tx: https://bscscan.com/tx/0xe15d6f7fa891c2626819209edf2d5ded6948310eaada067b400062aa022ce718 https://app.blocksec.com/explorer/tx/bsc/0xe15d6f7fa891c2626819209edf2d5ded6948310eaada067b400062aa022ce718 Analysis: https://x.com/ChainAegis/status/1779809931962827055"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On April 15, 2024, Chainge Finance's cross-chain aggregator contract on BNB Chain was exploited via its swap routing logic, allowing attackers to drain tokens from a victim EOA. Attackers crafted calldata to invoke transferFrom on approved tokens, resulting in ~$700K in losses across multiple assets. The incident stemmed from arbitrary external call parameters in the swap function, affecting a vault EOA that had granted approvals to the vulnerable contract. The MinterProxyV2 contract's swap function allowed callers to specify both the target contract and arbitrary callData without restriction. Attackers used this to invoke transferFrom on tokens approved by the vault EOA, draining balances.…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xe15d6f7fa891c2626819209edf2d5ded6948310eaada067b400062aa022ce718",
+    "0x051276afa96f2a2bd2ac224339793d82f6076f76ffa8d1b9e6febd49a4ec11b2",
+    "0x407e09faabf7072cd10dc86b7fa3180ccc1701f52f7fdca29464568498c30997",
+    "0x21d8b164f0cb8beb1ed27d164ed986c3fc26b33655ce18226b05b9cfcf6cd93c",
+    "0xd348b5fc00b26fc1457b70d02f9cb5e5a66a564cc4eba2136a473866a47dac08"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-04/ChaingeFinance_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-04/ChaingeFinance_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/CyversAlerts/status/1779875922381860920"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0xbCbCb0e7E28414e084c4a40C1cCC30B75629a7DE#code"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0xe15d6f7fa891c2626819209edf2d5ded6948310eaada067b400062aa022ce718"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/bsc/0xe15d6f7fa891c2626819209edf2d5ded6948310eaada067b400062aa022ce718"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/chainge-finance-2024-04-30t21-06-46-00-00"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/de-fi-rekt-report-over-12-4m-lost-in-april-2024"
+    },
+    {
+      "source": "revertiq",
+      "label": "louistsai.com",
+      "url": "https://www.louistsai.com/2024/09/14/Postmortem/Postmortem/2024-04-15-Chainge-Exploit/"
+    },
+    {
+      "source": "revertiq",
+      "label": "autosaida.github.io",
+      "url": "https://autosaida.github.io/DeFiHackAnalysis/2024/240415_ChaingeFinance/"
+    }
+  ]
+}

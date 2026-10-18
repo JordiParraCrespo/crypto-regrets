@@ -1,0 +1,138 @@
+{
+  "id": "2026-01-21-saga",
+  "name": "Saga",
+  "date": "2026-01-21",
+  "year": 2026,
+  "amountUsd": 7000000,
+  "returnedUsd": null,
+  "chains": [
+    "Saga"
+  ],
+  "targetType": "Chain",
+  "category": "accounting-math",
+  "technique": "Infinite Mint",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.44,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.47000000000000003
+      },
+      {
+        "category": "logic-error",
+        "p": 0.33
+      },
+      {
+        "category": "access-control",
+        "p": 0.09
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Forged IBC messages, $7 million minted from thin air. Saga’s bridge swallowed the fiction whole. Cosmos Labs traced it to Ethermint's codebase, they're now reaching out to other affected Cosmos EVM chains with short-term fixes.",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "Forged IBC messages, $7 million minted from thin air. Saga’s bridge swallowed the fiction whole. Cosmos Labs traced it to Ethermint's codebase, they're now reaching out to other affected Cosmos EVM chains with short-term fixes."
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The SagaEVM chainlet (chain ID 5464) was exploited for approximately $7M due to a vulnerability in Ethermint's EVM precompile code that SagaEVM inherited from its Cosmos-based EVM implementation. An attacker crafted transactions that bypassed collateral validation and accounting limit checks in the EVM precompile bridge, enabling the uncollateralized minting of the protocol's Saga Dollar (D) stablecoin. With a virtually unlimited supply of artificially created Saga Dollars, the attacker exchanged them for real user-deposited assets — USDC, yUSD, ETH, and tBTC — then bridged the proceeds to Ethereum and converted them into over 2,000 ETH (~$6M), with an additional $800K deployed into Uniswap V4 liquidity positions. The attack caused the Saga Dollar to depeg to $0.75 and protocol TVL to collapse by approximately 55%. The Saga team halted SagaEVM at block 6,593,800 and subsequently implemented a Cosmos security patch to remediate the precompile vulnerability before relaunching the network. Attack Tx: 0x1fc886dcacbc3e186941236be0e6a1605348d724c0368e21fbf485cb6157ba8f Analysis: Halborn — Explained: The SagaEVM Hack (January 2026)"
+    },
+    {
+      "source": "SlowMist",
+      "text": "According to an official announcement from Saga, the SagaEVM chain has suffered an attack involving a series of malicious contract deployments, cross-chain operations, and liquidity withdrawals. The attacker transferred approximately $7 million worth of USDC, yUSD, ETH, and tBTC, which have since been consolidated into ETH and sent to the address 0x2044…6ecb. Following the incident, SagaEVM was halted at block height 6,593,800. The Saga team is currently working with exchanges and cross-chain bridge providers to block the attacker’s address. A comprehensive technical post-mortem will be released in due course. The Saga SSC mainnet and other chains remain unaffected."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On January 21, 2026, SagaEVM suffered a $7M loss after an attacker forged IBC messages to trigger unlimited Saga Dollar minting via a precompile bridge. Assets were bridged to Ethereum before the chain was paused. No primary attack transactions or attacker addresses are public. The Ethermint ICS20 precompile bridge on SagaEVM failed to validate incoming IBC messages, allowing an attacker to mint unbacked tokens using forged cross-chain payloads."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "SagaEVM paused its chain at block 6,593,800 after a reported $7 million exploit that minted unbacked Saga Dollar through an Ethermint based precompile bridge and moved value to Ethereum. The available record points to a validation failure in an Ethermint based bridge precompile. Crafted IBC messages were accepted as legitimate mint requests, which let the attacker create Saga Dollar without backing. The exact historical precompile function, source revision, and patch diff were not independently recovered here."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x1fc886dcacbc3e186941236be0e6a1605348d724c0368e21fbf485cb6157ba8f"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Saga - Rekt",
+      "url": "https://rekt.news/saga-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "halborn.com",
+      "url": "https://www.halborn.com/blog/post/explained-the-sagaevm-hack-january-2026"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x1fc886dcacbc3e186941236be0e6a1605348d724c0368e21fbf485cb6157ba8f"
+    },
+    {
+      "source": "blocksec",
+      "label": "x.com",
+      "url": "https://x.com/Sagaxyz__/status/2014013472342761896"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/Sagaxyz__/status/2014144936631738532"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/saga-2026-01-21"
+    },
+    {
+      "source": "revertiq",
+      "label": "onchainattack.org",
+      "url": "https://onchainattack.org/document/examples/2026-q1-q2-mint-and-tokenomics-exploit-cohort/"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/cosmos/evm/security/advisories/GHSA-54gx-3cgr-7mfm"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/explained-the-sagaevm-2026-01-26t12-21-30-807000-00-00"
+    },
+    {
+      "source": "revertiq",
+      "label": "invezz.com",
+      "url": "https://www.invezz.com/news/2026/01/22/saga-pauses-sagaevm-after-7m-exploit-drains-bridged-assets/"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptonews.com",
+      "url": "https://cryptonews.com/news/saga-temporarily-shuts-sagaevm-chain-7m-exploit/"
+    }
+  ]
+}

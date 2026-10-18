@@ -1,0 +1,80 @@
+{
+  "id": "2026-05-25-squidroutermodule",
+  "name": "SquidRouterModule",
+  "date": "2026-05-25",
+  "year": 2026,
+  "amountUsd": 3200000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Missing caller check",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 1.00).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.73
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Missing caller check. Lost: 0.25 WBTC + 0.29 wTAO + 0.02 WETH",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Missing caller check. Lost: 0.25 WBTC + 0.29 wTAO + 0.02 WETH"
+    },
+    {
+      "source": "SlowMist",
+      "text": "A third-party Gnosis Safe module named SquidRouterModule was exploited, draining approximately $3-3.2 million from 86 Gnosis Safe wallets on Ethereum and Base within about 2 hours. The module has no affiliation with the official Squid Router protocol—confusion arose solely due to the contract name on Basescan. Victims had previously added this faulty third-party module as a trusted Safe Module, granting it permission to spend any tokens without signatures. The attacker exploited weak authentication (accepting a publicly visible constant string as \"message security\" proof) to execute arbitrary calldata, forcing fake Uniswap V3 swaps (real tokens for wor…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xd29d1c8d9a1b424d4e0f472bd7b4a994028d35e9737c591eae51d917543bb854"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-05/SquidRouterModule_exp.sol",
+  "sources": [
+    "defihacklabs",
+    "blocksec",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-05/SquidRouterModule_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "t.me",
+      "url": "https://t.me/defimon_alerts/3045"
+    },
+    {
+      "source": "blocksec",
+      "label": "x.com",
+      "url": "https://x.com/Phalcon_xyz/status/2058899283634692200"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xd29d1c8d9a1b424d4e0f472bd7b4a994028d35e9737c591eae51d917543bb854"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/squidrouter/status/2058890710611276238"
+    }
+  ]
+}

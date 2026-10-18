@@ -1,0 +1,78 @@
+{
+  "id": "2026-09-05-dream-health-chain",
+  "name": "Dream Health Chain",
+  "date": "2026-09-05",
+  "year": 2026,
+  "amountUsd": 71800,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Reward Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Dream Health Chain’s staking/reward contracts on BSC were exploited for about 71,851 USDT. A broken award state machine allowed a claimed reward to be reset with a tiny or zero-effective DHC deposit, so the same fixed payout could be claimed repeatedly from the shared pool. The attacker looped pledge and claim, then sold about 542,070 DHC into the DHC-USDT pool.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Dream Health Chain’s staking/reward contracts on BSC were exploited for about 71,851 USDT. A broken award state machine allowed a claimed reward to be reset with a tiny or zero-effective DHC deposit, so the same fixed payout could be claimed repeatedly from the shared pool. The attacker looped pledge and claim, then sold about 542,070 DHC into the DHC-USDT pool."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Dream Health Chain lost about $71,800 on 2026-09-05 after an award state machine let a claimed reward be reset and paid again from a shared proxy balance on BNB Chain's BSC network. The award workflow lacked per-award reserve locking and let participateAward() restore a claimed award to an unclaimed state, so claimAward() could pay the same fixed reward repeatedly from a shared proxy balance."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/2096152539767120259"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/dream-health-chain-2026-09-05"
+    },
+    {
+      "source": "revertiq",
+      "label": "kucoin.com",
+      "url": "https://www.kucoin.com/news/insight/ETH/6a9bf6e5cc8a200007909b8d"
+    },
+    {
+      "source": "revertiq",
+      "label": "publicaml.org",
+      "url": "https://publicaml.org/news/2026-09-05-dream-health-chain/"
+    }
+  ]
+}

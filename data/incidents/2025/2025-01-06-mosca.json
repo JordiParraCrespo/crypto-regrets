@@ -1,0 +1,113 @@
+{
+  "id": "2025-01-06-mosca",
+  "name": "Mosca",
+  "date": "2025-01-06",
+  "year": 2025,
+  "amountUsd": 37600,
+  "returnedUsd": null,
+  "chains": [
+    "Binance"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Incorrect Share Accounting",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.57,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.6
+      },
+      {
+        "category": "logic-error",
+        "p": 0.4
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "Logic Flaw. Lost: 19K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Logic Flaw. Lost: 19K"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The hack was due to an inconsistency in how user balances were updated during the exit process. When a user called exitProgram(), their user.balance was correctly set to zero. However, the associated user.balanceUSDT and user.balanceUSDC fields were not reset. The withdrawAll() function, which transfers rewards to the user upon exiting, calculated the total reward as the sum of user.balance, user.balanceUSDT, and user.balanceUSDC. The attacker exploited this by joining the protocol, triggering reward accrual, and then repeatedly calling join() and exitProgram(). Each time they exited, they could withdraw the accumulated USDC rewards because user.balanceUSDC retained its value, while a new entry upon rejoining would allow for further reward accumulation. The failure to reset all relevant balance fields (user.balanceUSDT and user.balanceUSDC) in the exitProgram() function, violating the Checks-Effects-Interactions pattern, was the fundamental cause of the vulnerability. Vulnerable code snippet: Attack tx: https://bscscan.com/tx/0x4e5bb7e3f552f5ee6ee97db9a9fcf07287aae9a1974e24999690855741121aff Analysis: https://blog.verichains.io/p/mosca-hack-analysis"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Mosca was reportedly attacked on BSC, resulting in an approximate loss of $19,500."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On January 8, 2025, the Mosca Token contract on Binance Smart Chain was exploited due to incomplete balance resets when processing withdrawals in the exitProgram function. The attacker repeatedly withdrew funds by leveraging residual USDT and USDC balances, resulting in a total theft of roughly $19,500. The exitProgram function only reset user.balance to zero after withdrawals, leaving user.balanceUSDT and user.balanceUSDC untouched. This incomplete state reset allowed the attacker to repeatedly withdraw funds."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x4e5bb7e3f552f5ee6ee97db9a9fcf07287aae9a1974e24999690855741121aff"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-01/Mosca_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-01/Mosca_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x4e5bb7e3f552f5ee6ee97db9a9fcf07287aae9a1974e24999690855741121aff"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "blog.verichains.io",
+      "url": "https://blog.verichains.io/p/mosca-hack-analysis"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/1876156823637770441"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/mosca-token-2025-01-08"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/de-fi-rekt-report-january-2025-62-5-million-lost-across-11-incidents-zero-recovered"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.solidityscan.com",
+      "url": "https://blog.solidityscan.com/mosca-hack-analysis-85485d0e6bb2/"
+    },
+    {
+      "source": "revertiq",
+      "label": "quadrigainitiative.com",
+      "url": "https://quadrigainitiative.com/casestudy/moscaexitprogramdoublewithdrawalexploit1.php"
+    }
+  ]
+}

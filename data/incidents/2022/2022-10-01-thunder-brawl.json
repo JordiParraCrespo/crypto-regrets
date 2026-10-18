@@ -1,0 +1,76 @@
+{
+  "id": "2022-10-01-thunder-brawl",
+  "name": "Thunder Brawl",
+  "date": "2022-10-01",
+  "year": 2022,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "reentrancy",
+  "technique": "Reentrancy",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 1.00).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "reentrancy",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "reentrancy",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.93
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Reentrancy",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Reentrancy"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "claimReward() - rewards are being drained due to a reentrancy bug. Vulnerable code snippet: https://bscscan.com/address/0xae191Ca19F0f8E21d754c6CAb99107eD62B6fe53#code#L252 https://bscscan.com/address/0x72e901f1bb2bfa2339326dfb90c5cec911e2ba3c#code#L1536 --- %201993bab05ffe48ccbc707af915e70f59/1.png)"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-09/THB_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-09/THB_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/peckshield/status/1575890733373849601"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x57aa9c85e03eb25ac5d94f15f22b3ba3ab2ef60b603b97ae76f855072ea9e3a0"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0xae191Ca19F0f8E21d754c6CAb99107eD62B6fe53#code#L252"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0x72e901f1bb2bfa2339326dfb90c5cec911e2ba3c#code#L1536"
+    }
+  ]
+}

@@ -58,7 +58,7 @@ export const CURATED: CuratedIncident[] = [
   {
     name: 'Ronin Bridge',
     date: '2022-03-23',
-    category: 'key-compromise',
+    category: 'social-engineering',
     technique: '5 of 9 validator keys compromised',
     chains: ['Ronin', 'Ethereum'],
     amountUsd: 624000000,

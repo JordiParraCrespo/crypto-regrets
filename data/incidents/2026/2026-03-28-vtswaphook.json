@@ -1,0 +1,85 @@
+{
+  "id": "2026-03-28-vtswaphook",
+  "name": "VTSwapHook",
+  "date": "2026-03-28",
+  "year": 2026,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [
+    "Arbitrum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Swap Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.08,
+    "stateActor": 0.02,
+    "hasRootCause": 0.66
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Pricing Error in UniswapV4 Hook. Lost: 4,507,034.03 vATH + 2,007,935.14 ATH",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Pricing Error in UniswapV4 Hook. Lost: 4,507,034.03 vATH + 2,007,935.14 ATH"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On March 28, 2026, the VTSwapHook contract on Arbitrum was exploited through a pricing and accounting flaw in its custom Uniswap v4 hook, allowing an attacker to drain the pool of approximately 2 million ATH and 4.5 million vATH. The exploit abused a midpoint price approximation and reserve inflation bug, resulting in substantial loss to liquidity providers. The exploit arose from two compounding bugs in the VTSwapHook custom Uniswap v4 hook: (1) a midpoint approximation that systematically overestimated swap output on a nonlinear logarithmic curve, and (2) improper reserve updates that credited the pool's reserves with pre-fee gross input, inflating state and further distorting pricing."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x61a37afac7991e25391d72846819644a0938ce20ebab25ccf3a1123e1bb9459d"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-03/VTSwapHook_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-03/VTSwapHook_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/DefimonAlerts/status/2038647146098954283"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/vtswaphook-2026-03-28"
+    },
+    {
+      "source": "revertiq",
+      "label": "sit-cybersecurity.com",
+      "url": "https://sit-cybersecurity.com/vtswaphook-pricing-error/"
+    },
+    {
+      "source": "revertiq",
+      "label": "darknavy.org",
+      "url": "https://www.darknavy.org/web3/exploits/vtswaphook-pricing-error/"
+    }
+  ]
+}

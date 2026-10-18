@@ -1,0 +1,79 @@
+{
+  "id": "2024-02-22-swarm-markets",
+  "name": "Swarm Markets",
+  "date": "2024-02-22",
+  "year": 2024,
+  "amountUsd": 472892,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "lack of validation. Lost: ~7k $DAI",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "lack of validation. Lost: ~7k $DAI"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Swarm Markets used an xTokenWrapper that maps native tokens (DAI, USDC, SMT, WETH) to corresponding xTokens and lets holders unwrap xTokens back into the underlying assets held by the wrapper. During a platform migration, an undocumented admin role was never revoked, leaving the wrapper's token-registry controllable by an outsider. The attacker registered attacker-controlled, freely-mintable fake xToken contracts in place of the legitimate ones, minted those fake xTokens to themselves, then called wrapper.unwrap(...) to redeem the real DAI/USDC sitting in the wrapper. There was no validation that the registered xToken was a trusted contract and the mint function carried no access control. Vulnerable code snippet: Attack Tx: https://app.blocksec.com/explorer/tx/eth/0xa4d7ee2ddb9db06961a17e2a5ae71743a266bcb720be138670f4a10e8dfc13e9 Analysis: Swarm Markets exploit: Post Mortem"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xa4d7ee2ddb9db06961a17e2a5ae71743a266bcb720be138670f4a10e8dfc13e9"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-02/SwarmMarkets_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-02/SwarmMarkets_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/eth/0xa4d7ee2ddb9db06961a17e2a5ae71743a266bcb720be138670f4a10e8dfc13e9"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/2baf1a43c44d6cb3ce17a678701784fbe7edabad/src/test/2024-02/SwarmMarkets_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "medium.com",
+      "url": "https://medium.com/swarm-com/swarm-markets-exploit-post-mortem-3e1a1c9d5352"
+    }
+  ]
+}

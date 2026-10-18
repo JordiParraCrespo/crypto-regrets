@@ -1,0 +1,109 @@
+{
+  "id": "2023-03-15-poolz-network",
+  "name": "Poolz Network",
+  "date": "2023-03-15",
+  "year": 2023,
+  "amountUsd": 390000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Arithmetic Error",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.93
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "integer overflow. Lost: ~$390K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "integer overflow. Lost: ~$390K"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The attacker called the vulnerable function ‘CreateMassPools’ and triggered an integer overflow vulnerability in the parameter _StartAmount. Vulnerable code snippet: Attack tx: All TX within this contract : https://bscscan.com/address/0x058bae36467a9fc5e1045dbdffc2fd65b91c2203 Analysis: https://twitter.com/BeosinAlert/status/1635878098452492288"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Poolz Finance's LockedDeal contract was hacked and lost about $500,000. The attacker called the vulnerable function CreateMassPools in the LockedDeal contract, and triggered an integer overflow vulnerability in the parameter _StartAmount. In addition to obtaining a large number of poolz tokens, the attacker also obtained other tokens."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On March 15, 2023, Poolz Network's vesting contract was exploited on BNB Chain due to an integer overflow vulnerability. The attacker created pools with manipulated parameters, allowing unauthorized withdrawal of large token amounts, resulting in estimated losses of $390,000. The LockedDeal vesting smart contract on BNB Chain failed to handle array sum operations in CreateMassPools() safely. The lack of overflow checks allowed an attacker to cause an integer overflow, enabling them to withdraw more tokens than permitted."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x39718b03ae346dfe0210b1057cf9f0c378d9ab943512264f06249ae14030c5d5"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-03/poolz_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-03/poolz_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/peckshield/status/1635860470359015425"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0x058bae36467a9fc5e1045dbdffc2fd65b91c2203"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BeosinAlert/status/1635878098452492288"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Poolz__/status/1635899850918178817"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/poolz-network-2023-03-15"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.solidityscan.com",
+      "url": "https://blog.solidityscan.com/poolz-finance-hack-analysis-still-experiencing-overflow-fcf35ab8a6c5/"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainwire.org",
+      "url": "https://chainwire.org/2023/03/16/poolz-security-incident-prompts-rapid-response-and-platform-restructuring/"
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "id": "2023-04-02-zksync",
+  "name": "zkSync",
+  "date": "2023-04-02",
+  "year": 2023,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": null,
+  "category": "logic-error",
+  "technique": "Downtime",
+  "classificationNote": "Classified by keyword rules from the SlowMist label and description.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "client-bug",
+    "confidence": 0.52,
+    "top": [
+      {
+        "category": "client-bug",
+        "p": 0.55
+      },
+      {
+        "category": "frontend-infra",
+        "p": 0.45
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.01,
+    "hasRootCause": 0.29
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "According to official news, the zkSync team announced the cause of the downtime on Twitter. Block generation stopped due to a block queue database failure. Despite this, the server API was not affected. Transactions continue to be added to the mempool, and queries are served normally. Although all components had comprehensive monitoring, logging, and alerting, no alerts were triggered because the API was functioning properly.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "According to official news, the zkSync team announced the cause of the downtime on Twitter. Block generation stopped due to a block queue database failure. Despite this, the server API was not affected. Transactions continue to be added to the mempool, and queries are served normally. Although all components had comprehensive monitoring, logging, and alerting, no alerts were triggered because the API was functioning properly."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/zksync/status/1642277369632227334"
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "id": "2023-07-17-newfi",
+  "name": "NewFi",
+  "date": "2023-07-17",
+  "year": 2023,
+  "amountUsd": 31000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Lack Slippage Protection",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.80).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.8,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.81
+      },
+      {
+        "category": "logic-error",
+        "p": 0.13
+      },
+      {
+        "category": "market-manipulation",
+        "p": 0.05
+      }
+    ],
+    "flashLoan": 0.08,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Lack Slippage Protection. Lost: ~$31K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Lack Slippage Protection. Lost: ~$31K"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The root cause is the lack of slippage check. Specifically, the pool's slippage check for token swaps relied solely on a spot price, which allowed the attacker to manipulate the price, make the pool to execute a one-directional token swap, and then profit by sandwiching the swap. Attack TX: https://bscscan.com/tx/0x557628123d137ea49564e4dccff5f5d1e508607e96dd20fe99a670519b679cb5 Analysis: https://twitter.com/Phalcon_xyz/status/1680961588323557376"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x557628123d137ea49564e4dccff5f5d1e508607e96dd20fe99a670519b679cb5"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-07/NewFi_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-07/NewFi_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Phalcon_xyz/status/1680961588323557376"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x557628123d137ea49564e4dccff5f5d1e508607e96dd20fe99a670519b679cb5"
+    }
+  ]
+}

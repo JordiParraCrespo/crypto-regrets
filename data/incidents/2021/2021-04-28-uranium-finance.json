@@ -1,0 +1,124 @@
+{
+  "id": "2021-04-28-uranium-finance",
+  "name": "Uranium Finance",
+  "date": "2021-04-28",
+  "year": 2021,
+  "amountUsd": 57200000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Arithmetic Error",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.97,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.97
+      },
+      {
+        "category": "logic-error",
+        "p": 0.03
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.81
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Miscalculation. Lost: $50 million",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Miscalculation. Lost: $50 million"
+    },
+    {
+      "source": "REKT",
+      "text": "Cross-chain hacks are on the rise. Uranium Finance exploded again, leaving BSC users to cope with the fall out. $57 million gone, in the latest hack on Binance Smart Chain."
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Incorrect calculation Vulnerable code snippet: same Nimbus’s issue https://bscscan.com/address/0xA943eA143cd7E79806d670f4a7cf08F8922a454F#code#F3#L180 inconsistent value in the code, 10000 vs 1000"
+    },
+    {
+      "source": "SlowMist",
+      "text": "A loophole in the BSC ecosystem Uranium Finance resulted in the theft of US$50 million in funds. Research analyst Igor Igamberdiev pointed out an error in the Pair contract in Uranium v​​2. Due to calculation errors, this was used to withdraw almost all tokens. The balance of these Pair contracts has also been overstated. After the hack, Uranium Finance shut down, and the victims received no financial compensation. On February 25, 2025, U.S. authorities seized approximately $31 million in cryptocurrency linked to the 2021 Uranium Finance hack. This seizure was the result of joint efforts by the U.S. District Court for the Southern District of New York…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On April 28, 2021, Uranium Finance on BNB Chain was exploited for $57.2 million due to a math error in its Uniswap V2 fork's swap validation, allowing attackers to drain nearly all liquidity from pools using minimal inputs. A misplaced constant in the swap invariant check applied an incorrect scaling factor. Uranium's modified balance adjustment used 10,000 for fees, but the required post-swap check used 1,000,000, not 100,000,000, letting attackers bypass the swap's intended constraints."
+    }
+  ],
+  "audit": "Unaudited",
+  "txHashes": [
+    "0x86bd367b42afebef3eb2f5581b326c1c83f8dcf8acafa11e87087f0ec33c59f0",
+    "0x5a504fe72ef7fc76dfeb4d979e533af4e23fe37e90b5516186d5787893c37991"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2021-04/Uranium_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2021-04/Uranium_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/FrankResearcher/status/1387347025742557186"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x5a504fe72ef7fc76dfeb4d979e533af4e23fe37e90b5516186d5787893c37991"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Uranium Finance - REKT",
+      "url": "https://rekt.news/uranium-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0xA943eA143cd7E79806d670f4a7cf08F8922a454F#code#F3#L180"
+    },
+    {
+      "source": "slowmist",
+      "label": "c.foresightnews.pro",
+      "url": "https://c.foresightnews.pro/news/detail/66454"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/uranium-finance-2021-04-28"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "hjklvfr.github.io",
+      "url": "https://hjklvfr.github.io/dn-institute/research/cyberattacks/incidents/2021-04-28-uranium-finance/"
+    }
+  ]
+}

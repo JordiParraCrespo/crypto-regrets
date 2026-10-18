@@ -1,0 +1,66 @@
+{
+  "id": "2026-09-11-orb",
+  "name": "ORB",
+  "date": "2026-09-11",
+  "year": 2026,
+  "amountUsd": 32610.72,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "reentrancy",
+  "technique": "Smart Contract Vulnerability",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.99).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "reentrancy",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "reentrancy",
+        "p": 0.99
+      },
+      {
+        "category": "logic-error",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.14,
+    "stateActor": 0.02,
+    "hasRootCause": 0.94
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "leveraged pool buyout + refund-before-sell reentrancy drains burnLP-depleted reserve. Lost: ~44.9-45 BNB (~$32,610.72)",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "leveraged pool buyout + refund-before-sell reentrancy drains burnLP-depleted reserve. Lost: ~44.9-45 BNB (~$32,610.72)"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Attackers exploited ORBToken’s receive() function (which auto-granted max allowance) and ORBCore’s whitelist tax exemption. The addPoolAndSell function lacked a reentrancy guard, enabling repeated tax-free sells. Combined with burnLP destroying large amounts of ORB in the LP and a subsequent sync() to manipulate reserves, the attacker extracted about $32,610.72."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-09/ORB_exp.sol",
+  "sources": [
+    "defihacklabs",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-09/ORB_exp.sol"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/2098662550019694645"
+    }
+  ]
+}

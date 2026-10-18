@@ -1,0 +1,58 @@
+{
+  "id": "2026-10-06-makerdao-eth-a-liquidation-keeper-bot",
+  "name": "MakerDAO ETH-A Liquidation Keeper Bot",
+  "date": "2026-10-06",
+  "year": 2026,
+  "amountUsd": 538000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "A Tornado Cash-funded address called an unprotected drain function on a dormant MakerDAO ETH-A liquidation keeper. The upgradeable proxy had won auctions #1457–1460 in 2020 (200 WETH total) but never called deal(), leaving the collateral in the Flipper. The attacker called deal(), moved the collateral to the keeper via Vat.flux, then used GemJoin.exit() to withdraw 200 WETH to an attacker-chosen address and unwrap it to ETH. The flaw was in the third-party keeper, not MakerDAO core.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "A Tornado Cash-funded address called an unprotected drain function on a dormant MakerDAO ETH-A liquidation keeper. The upgradeable proxy had won auctions #1457–1460 in 2020 (200 WETH total) but never called deal(), leaving the collateral in the Flipper. The attacker called deal(), moved the collateral to the keeper via Vat.flux, then used GemJoin.exit() to withdraw 200 WETH to an attacker-chosen address and unwrap it to ETH. The flaw was in the third-party keeper, not MakerDAO core."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/DefimonAlerts/status/2107391959853600812"
+    }
+  ]
+}

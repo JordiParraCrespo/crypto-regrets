@@ -1,0 +1,81 @@
+{
+  "id": "2025-03-16-wkeydao",
+  "name": "wKeyDAO",
+  "date": "2025-03-16",
+  "year": 2025,
+  "amountUsd": 737,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "unprotected function",
+  "classificationNote": "Classified by keyword rules from the DeFiHackLabs root-cause title.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.56,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.59
+      },
+      {
+        "category": "access-control",
+        "p": 0.23
+      },
+      {
+        "category": "market-manipulation",
+        "p": 0.09
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "unprotected function. Lost: 737,000",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "unprotected function. Lost: 737,000"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The exploit was caused by incorrect operational security and parameter misconfiguration rather than a direct flaw in the smart contract's code logic. The designated operator of the contract, through the setSaleInfo function, had set a very low price for the wkeyDao tokens combined with a non-zero immediateReleaseTokens value. This misconfiguration, which occurred roughly 120 days prior to the attack, created an arbitrage opportunity. The attacker exploited this by repeatedly calling the buy function to purchase wkeyDao tokens at the artificially low price and immediately receiving them due to the immediateReleaseTokens setting. They then sold these tokens on PancakeSwap at the prevailing, much higher market price, profiting from the difference. Vulnerable code snippet:https://bscscan.com/address/0xc39c54868a4f842b02a99339f4a57a44efc310b8#code Attack tx: https://app.blocksec.com/explorer/tx/bsc/0xc9bccafdb0cd977556d1f88ac39bf8b455c0275ac1dd4b51d75950fb58bad4c8?line=12 Analysis: https://blog.verichains.io/p/webkeydao-hack-analysis"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xc9bccafdb0cd977556d1f88ac39bf8b455c0275ac1dd4b51d75950fb58bad4c8"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-03/wKeyDAO_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-03/wKeyDAO_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/Phalcon_xyz/status/1900809936906711549"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0xc39c54868a4f842b02a99339f4a57a44efc310b8#code"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/bsc/0xc9bccafdb0cd977556d1f88ac39bf8b455c0275ac1dd4b51d75950fb58bad4c8?line=12"
+    }
+  ]
+}

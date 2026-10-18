@@ -1,0 +1,84 @@
+{
+  "id": "2023-12-14-ledger-connect-kit",
+  "name": "Ledger Connect Kit",
+  "date": "2023-12-14",
+  "year": 2023,
+  "amountUsd": 484000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "Wallet",
+  "category": "frontend-infra",
+  "technique": "Supply Chain Attack",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "frontend-infra",
+    "confidence": 0.98,
+    "top": [
+      {
+        "category": "frontend-infra",
+        "p": 0.98
+      },
+      {
+        "category": "social-engineering",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "the Ledger Connect Kit suffered a supply chain attack, with attackers stealing at least $600,000. The SlowMist security team immediately initiated an analysis of the relevant code and discovered that the attackers implanted malicious JavaScript code in versions @ledgerhq/connect-kit=1.1.5/1.1.6/1.1.7. They directly replaced the normal window logic with a Drainer class, triggering not only a fake DrainerPopup popup but also handling the transfer logic for various assets. Attackers launched phishing attacks against cryptocurrency users through CDN.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "the Ledger Connect Kit suffered a supply chain attack, with attackers stealing at least $600,000. The SlowMist security team immediately initiated an analysis of the relevant code and discovered that the attackers implanted malicious JavaScript code in versions @ledgerhq/connect-kit=1.1.5/1.1.6/1.1.7. They directly replaced the normal window logic with a Drainer class, triggering not only a fake DrainerPopup popup but also handling the transfer logic for various assets. Attackers launched phishing attacks against cryptocurrency users through CDN."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Ledger Connect Kit suffered a supply chain attack on December 14, 2023, after a malicious package was published to npmjs. Malicious code was dynamically loaded into DApps, tricking users into signing draining transactions. Stolen funds totaled around $484,000, primarily from EVM chains. Attacker gained access to a former Ledger employee's npmjs account, which had not been properly revoked during offboarding. This permitted the upload of malicious Ledger Connect Kit package versions, which were then loaded by DApps using the kit's loader, injecting draining malware code."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xf2b76233561ded9382612352eb4cd511e081b715b577c2e2236704af9e8050f4"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/SlowMist_Team/status/1735299228866613465"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/ledger-connect-kit-2023-12-14"
+    },
+    {
+      "source": "revertiq",
+      "label": "ledger.com",
+      "url": "https://www.ledger.com/blog/security-incident-report"
+    },
+    {
+      "source": "revertiq",
+      "label": "support.ledger.com",
+      "url": "https://support.ledger.com/article/15580506579101-zd"
+    }
+  ]
+}

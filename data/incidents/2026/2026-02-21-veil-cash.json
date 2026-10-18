@@ -1,0 +1,84 @@
+{
+  "id": "2026-02-21-veil-cash",
+  "name": "Veil Cash",
+  "date": "2026-02-21",
+  "year": 2026,
+  "amountUsd": 5000,
+  "returnedUsd": null,
+  "chains": [
+    "Base"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "bridge-crosschain",
+  "technique": "Proof Verifier Bug",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "signature-crypto",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "signature-crypto",
+        "p": 0.99
+      },
+      {
+        "category": "bridge-crosschain",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.01,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Veil.Cash (a zk-SNARK privacy protocol on Base, forked from Tornado Cash) suffered an exploit on its legacy fixed-denomination privacy pools. Due to a misconfigured Groth16 zk-SNARK verifier (where delta2 equaled gamma2), an attacker was able to forge valid zero-knowledge proofs and drain approximately 2.9 ETH (~$5,000) in a single transaction by making multiple fraudulent withdrawals without corresponding deposits. Whitehat interveners and the exploiter voluntarily returned the funds, resulting in 100% recovery. The project’s newer/live pools were unaffected.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Veil.Cash (a zk-SNARK privacy protocol on Base, forked from Tornado Cash) suffered an exploit on its legacy fixed-denomination privacy pools. Due to a misconfigured Groth16 zk-SNARK verifier (where delta2 equaled gamma2), an attacker was able to forge valid zero-knowledge proofs and drain approximately 2.9 ETH (~$5,000) in a single transaction by making multiple fraudulent withdrawals without corresponding deposits. Whitehat interveners and the exploiter voluntarily returned the funds, resulting in 100% recovery. The project’s newer/live pools were unaffected."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On February 20, 2026, Veil Cash's ETH privacy pool on Base was drained for 2.9 ETH (~$5,700) due to a verifier bug. A Groth16 misconfiguration let an attacker forge zero-knowledge proofs and trigger 29 unbacked withdrawals in a single exploit transaction. The verifier contract was deployed with identical delta and gamma verification key parameters, breaking Groth16 soundness. This let attackers forge proofs and withdraw without any valid deposit."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x5ff6dbc33e77fab8dc086bb9ea3c88f1ba81df198d24ec9fc0c5b50fb1a4a17d"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/Veildotcash/status/2025293773891404225"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/veil-cash-2026-02-21"
+    },
+    {
+      "source": "revertiq",
+      "label": "darknavy.org",
+      "url": "https://www.darknavy.org/web3/exploits/veil-cash-groth16-forgery/"
+    },
+    {
+      "source": "revertiq",
+      "label": "avoid.net",
+      "url": "https://avoid.net/veil-cash"
+    }
+  ]
+}

@@ -1,0 +1,96 @@
+{
+  "id": "2022-07-02-crema-finance",
+  "name": "Crema Finance",
+  "date": "2022-07-02",
+  "year": 2022,
+  "amountUsd": 8800000,
+  "returnedUsd": null,
+  "chains": [
+    "Solana"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.73,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.75
+      },
+      {
+        "category": "access-control",
+        "p": 0.21
+      },
+      {
+        "category": "input-validation",
+        "p": 0.04
+      }
+    ],
+    "flashLoan": 0.96,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Rust",
+  "rootCause": "~$8.8M skimmed off the top. Crema Finance, a concentrated liquidity AMM on Solana, was exploited into issuing millions in excess LP fees.",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "~$8.8M skimmed off the top. Crema Finance, a concentrated liquidity AMM on Solana, was exploited into issuing millions in excess LP fees."
+    },
+    {
+      "source": "SlowMist",
+      "text": "The centralized liquidity DeFi application Crema Finance on the Solana chain announced its shutdown due to a hacker attack. The official Twitter of the protocol quoted information from the on-chain browser SolanaFM, saying that the value of the lost encrypted assets was $8.782 million. Early this morning, Crema Finance disclosed the attacked thread, saying that hackers bypassed contract checks by creating a fake price change data account (Tickaccount), and then used fake price data and flash loans to steal huge fees from the fund pool. On July 7, Crema Finance said on Twitter that after a long negotiation, Crema Finance attackers agreed to collect 45,4…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Crema Finance's Solana-based concentrated liquidity AMM was exploited on 2 July 2022, resulting in a loss of approximately $8.8M. The attacker forged tick accounts with inflated fee-growth values, bypassing insufficient program-derived address (PDA) validation. Most stolen funds were later returned after an on-chain negotiation. Crema Finance failed to validate that tick accounts passed to fee-claim instructions were the canonical program-derived addresses (PDAs) for the claimed pool and tick index. Ownership checks alone allowed attacker-created accounts with arbitrarily large fee-growth values to pass as genuine."
+    }
+  ],
+  "audit": "Bramah Systems",
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Crema Finance - REKT",
+      "url": "https://rekt.news/crema-finance-rekt"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Crema_Finance/status/1543416225622941696"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/crema-finance-2022-07-02"
+    },
+    {
+      "source": "revertiq",
+      "label": "certik.com",
+      "url": "https://www.certik.com/blog/crema-finance-exploit"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractaudit.com",
+      "url": "https://www.smartcontractaudit.com/guides/crema-finance-2022-solana-clmm-exploit"
+    }
+  ]
+}

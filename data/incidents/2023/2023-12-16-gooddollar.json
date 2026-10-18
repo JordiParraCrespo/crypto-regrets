@@ -1,0 +1,108 @@
+{
+  "id": "2023-12-16-gooddollar",
+  "name": "GoodDollar",
+  "date": "2023-12-16",
+  "year": 2023,
+  "amountUsd": 2000000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "reentrancy",
+  "technique": "Reentrancy",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "reentrancy",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "reentrancy",
+        "p": 0.99
+      },
+      {
+        "category": "input-validation",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.06,
+    "stateActor": 0.02,
+    "hasRootCause": 0.86
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Lack of Input Validation & Reentrancy. Lost: ~$2M",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Lack of Input Validation & Reentrancy. Lost: ~$2M"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "_stakingContracts lack of Input Validation & Reentrancy Vulnerable code snippet: https://www.oklink.com/es-la/eth/address/0x0c6c80d2061afa35e160f3799411d83bdeea0a5a/contract Attack tx: https://www.oklink.com/es-la/eth/tx/0x726459a46839c915ee2fb3d8de7f986e3c7391c605b7a622112161a84c7384d0 https://app.blocksec.com/explorer/tx/eth/0x726459a46839c915ee2fb3d8de7f986e3c7391c605b7a622112161a84c7384d0 Analysis: https://x.com/MetaSec_xyz/status/1736428284756607386"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 16 December 2023, GoodDollar was exploited on Ethereum Mainnet through a reentrancy vulnerability in the GoodFundManager contract. The attacker used a malicious staking contract to repeatedly reenter critical mint/burn operations, extracting about $2 million in DAI and G$ tokens. The GoodFundManager contract lacked both input validation on supplied staking contract addresses and a reentrancy guard on its collectInterest() function. This enabled an attacker-controlled contract to reenter mint/burn logic during a callback, inflating withdrawals from the reserve."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x726459a46839c915ee2fb3d8de7f986e3c7391c605b7a622112161a84c7384d0"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-12/GoodDollar_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-12/GoodDollar_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/MetaSec_xyz/status/1736428284756607386"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "oklink.com",
+      "url": "https://www.oklink.com/es-la/eth/address/0x0c6c80d2061afa35e160f3799411d83bdeea0a5a/contract"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "oklink.com",
+      "url": "https://www.oklink.com/es-la/eth/tx/0x726459a46839c915ee2fb3d8de7f986e3c7391c605b7a622112161a84c7384d0"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/eth/0x726459a46839c915ee2fb3d8de7f986e3c7391c605b7a622112161a84c7384d0"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/gooddollar-2023-12-16"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/gooddollar-hack-2023"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/pcaversaccio/reentrancy-attacks"
+    }
+  ]
+}

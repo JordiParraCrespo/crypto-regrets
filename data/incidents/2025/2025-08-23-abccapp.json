@@ -1,0 +1,77 @@
+{
+  "id": "2025-08-23-abccapp",
+  "name": "ABCCApp",
+  "date": "2025-08-23",
+  "year": 2025,
+  "amountUsd": 10100,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Lack of Access Control",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.95).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.95,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.95
+      },
+      {
+        "category": "logic-error",
+        "p": 0.05
+      }
+    ],
+    "flashLoan": 0.98,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Lack of Access Control. Lost: ~ $10.1K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Lack of Access Control. Lost: ~ $10.1K"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The ABCCApp contract issued DDDD reward tokens based on user-controlled deposit and configuration state without restricting who could set the reward parameters or how rewards scaled relative to the deposited stake. Using a BUSD flash loan, the attacker deposited into ABCCApp, then called the unprotected addFixedDay(1_000_000_000) to inflate the reward accrual basis, and finally claimDDDD() to mint/claim a disproportionate amount of DDDD tokens. The harvested DDDD was swapped through a PancakeSwap V3 multi-hop path (DDDD -> WBNB -> BSC-USD) back into BUSD, the flash loan was repaid, and the attacker kept the spread (~10,062 BUSD). Vulnerable code snippet: Attack Tx: https://bscscan.com/tx/0xee4eae6f70a6894c09fda645fb24ab841e9847a788b1b2e8cb9cc50c1866fb12 Analysis: https://x.com/TenArmorAlert/status/1959457212914352530"
+    },
+    {
+      "source": "SlowMist",
+      "text": "ABCCApp on BSC was reportedly attacked, resulting in a loss of approximately $10.1K. The root cause was that the contract’s addFixedDay() function lacked access control, and fixedDay was used in calculating claimable USDT."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xee4eae6f70a6894c09fda645fb24ab841e9847a788b1b2e8cb9cc50c1866fb12"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-08/ABCCApp_exp.sol",
+  "sources": [
+    "defihacklabs",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-08/ABCCApp_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/TenArmorAlert/status/1959457212914352530"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0xee4eae6f70a6894c09fda645fb24ab841e9847a788b1b2e8cb9cc50c1866fb12"
+    }
+  ]
+}

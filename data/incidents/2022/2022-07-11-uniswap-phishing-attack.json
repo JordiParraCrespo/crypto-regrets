@@ -1,0 +1,84 @@
+{
+  "id": "2022-07-11-uniswap-phishing-attack",
+  "name": "Uniswap (Phishing Attack)",
+  "date": "2022-07-11",
+  "year": 2022,
+  "amountUsd": 8000000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "social-engineering",
+  "technique": "Phishing",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "social-engineering",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "social-engineering",
+        "p": 0.99
+      },
+      {
+        "category": "arbitrary-call",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "More than 70,000 addresses connected to Uniswap were airdropped tokens that tricked users into approving transactions that would allow attackers to control their wallets. The airdrop links users to a phishing site that resembles the real Uniswap site. Users are tricked into signing contracts, and cryptocurrencies and NFTs are stolen from wallets. One of the wallets lost more than $6.5 million worth of ether and bitcoin, and the other lost about $1.68 million worth of cryptocurrency.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "More than 70,000 addresses connected to Uniswap were airdropped tokens that tricked users into approving transactions that would allow attackers to control their wallets. The airdrop links users to a phishing site that resembles the real Uniswap site. Users are tricked into signing contracts, and cryptocurrencies and NFTs are stolen from wallets. One of the wallets lost more than $6.5 million worth of ether and bitcoin, and the other lost about $1.68 million worth of cryptocurrency."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On July 11, 2022, a large-scale phishing campaign targeted Uniswap V3 liquidity providers on Ethereum. Attackers airdropped fake tokens with links to a phishing site, tricked users into approving malicious ERC-721 permissions, and stole their Uniswap V3 Positions NFTs. The attackers redeemed these NFTs for ETH and WBTC, converting the haul to roughly $8.6,$8.7 million, most of which was then laundered through Tornado Cash. Victims interacted with a phishing website linked from a malicious token airdrop. The site mimicked Uniswap's interface and prompted users to grant SetApprovalForAll access on their Uniswap V3 Positions NFTs, allowing the attacker to seize and redeem these assets."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xdfa99059d33b0f6dd23b2c82921f57709604e40e7f580b260347c317addee89c"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/sniko_/status/1546535668247060481"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/uniswap-2022-07-11"
+    },
+    {
+      "source": "revertiq",
+      "label": "certik.com",
+      "url": "https://www.certik.com/blog/uniswap-phishing-incident-analysis"
+    },
+    {
+      "source": "revertiq",
+      "label": "therecord.media",
+      "url": "https://therecord.media/millions-in-cryptocurrency-stolen-in-phishing-attacks-on-uniswap-users"
+    }
+  ]
+}

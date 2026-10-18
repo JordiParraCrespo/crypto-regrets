@@ -1,0 +1,84 @@
+{
+  "id": "2024-11-07-vrug",
+  "name": "VRug",
+  "date": "2024-11-07",
+  "year": 2024,
+  "amountUsd": 8400,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "Token",
+  "category": "rugpull",
+  "technique": "Liquidity Rug",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "rugpull",
+    "confidence": 0.98,
+    "top": [
+      {
+        "category": "rugpull",
+        "p": 0.98
+      },
+      {
+        "category": "access-control",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.01,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Rug pull. Lost: $8.4 K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Rug pull. Lost: $8.4 K"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On November 7, 2024, the VRug token on Ethereum was exploited in a liquidity rug pull, resulting in a loss of approximately $8,400. The contract owner removed the pool's WETH liquidity, transferring it to an MEV bot, which extracted the remaining funds. The VRug token owner retained control over the liquidity pool and was able to withdraw all WETH, leaving users with worthless tokens. A competing MEV bot quickly captured the liquidity in the same block, securing the proceeds."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x5e151627dc06ec4f2db5be2f48248f320ad3450aba42b1bbd00131bcbaa4f0ae"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-11/VRug_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-11/VRug_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/TenArmorAlert/status/1854702463737380958"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/vrug-2024-11-07"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/vrug-hack-2024"
+    }
+  ]
+}

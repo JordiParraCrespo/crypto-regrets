@@ -1,0 +1,105 @@
+{
+  "id": "2026-07-23-lien",
+  "name": "Lien",
+  "date": "2026-07-23",
+  "year": 2026,
+  "amountUsd": 542000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "input-validation",
+  "technique": "Missing Input Validation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "input-validation",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "input-validation",
+        "p": 0.99
+      },
+      {
+        "category": "access-control",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "GeneralizedDotc OTC pools drained via permissionless bond group registration and flawed multiset integrity in BondMakerCollateralizedEth.exchangeEquivalentBonds(); attacker-deployed contract minted unbacked bonds with crafted payoff functions, repeated exception bondIDs to mask missing inputs, swapped worthless bonds for USDC via three pre-authorized liquidity pools; _calcRateBondToErc20 oracle inflated bond valuations. Attack Tx: https://etherscan.io/tx/0xb96d572b557a12f5ef193e88cca86123a6ae1b6e98b0eeee265870c85848e0e7 Source: https://twitter.com/DefimonAlerts/status/2080531008365920472",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "GeneralizedDotc OTC pools drained via permissionless bond group registration and flawed multiset integrity in BondMakerCollateralizedEth.exchangeEquivalentBonds(); attacker-deployed contract minted unbacked bonds with crafted payoff functions, repeated exception bondIDs to mask missing inputs, swapped worthless bonds for USDC via three pre-authorized liquidity pools; _calcRateBondToErc20 oracle inflated bond valuations. Attack Tx: https://etherscan.io/tx/0xb96d572b557a12f5ef193e88cca86123a6ae1b6e98b0eeee265870c85848e0e7 Source: https://twitter.com/DefimonAlerts/status/2080531008365920472"
+    },
+    {
+      "source": "SlowMist",
+      "text": "On July 24, 2026, Lien Finance (an Ethereum DeFi structured products protocol) was exploited. The attacker abused a validation flaw in the exchangeEquivalentBonds function of the BondMakerCollateralizedEth contract (missing multiset integrity checks), minting unbacked bond tokens and draining approximately $542K USDC via OTC pools."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 23 July 2026, Lien Finance on Ethereum Mainnet was exploited via a permissionless bond group registration flaw and inadequate input validation that enabled an attacker to mint unbacked bond tokens, manipulate OTC pool pricing, and extract approximately $542,144 in USDC from protocol liquidity pools. The Lien protocol failed to adequately validate bond group registration and exchange logic in its GeneralizedDotc OTC pools. The bond group registration was permissionless, and the rate calculation function did not check for the economic legitimacy of new bond groups, enabling arbitrary creation and redemption of unbacked bond tokens."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xb96d572b557a12f5ef193e88cca86123a6ae1b6e98b0eeee265870c85848e0e7"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xb96d572b557a12f5ef193e88cca86123a6ae1b6e98b0eeee265870c85848e0e7"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/DefimonAlerts/status/2080531008365920472"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xb96d572b557a12f5ef193e88cca86123a6ae1b6e98b0eeee265870c85848e0e7"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/2080555677811171459"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/lien-2026-07-23"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptotimes.io",
+      "url": "https://www.cryptotimes.io/2026/07/24/ethereum-defi-protocol-lien-finance-hacked-for-542k-in-usdc-exploit/"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/lien-hack-2026"
+    }
+  ]
+}

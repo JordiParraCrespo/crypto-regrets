@@ -1,0 +1,78 @@
+{
+  "id": "2026-07-17-across",
+  "name": "Across",
+  "date": "2026-07-17",
+  "year": 2026,
+  "amountUsd": 4500000,
+  "returnedUsd": null,
+  "chains": [
+    "Solana"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "bridge-crosschain",
+  "technique": "Spoofed Event Log",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "bridge-crosschain",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "bridge-crosschain",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.92
+  },
+  "bridge": true,
+  "language": "Rust",
+  "rootCause": "Cross-chain bridge protocol Across was attacked on its Solana deployment on July 17, 2026. The attacker exploited a gap in Solana’s event system to spoof deposit signals, tricking relayers into paying out on fake deposits. User funds remained completely safe with zero losses; all transactions were completed or fully refunded. Losses were contained to the Risk Labs-operated relayer. The team paused Solana deposits and restored operations the next day, with a full post-mortem planned.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Cross-chain bridge protocol Across was attacked on its Solana deployment on July 17, 2026. The attacker exploited a gap in Solana’s event system to spoof deposit signals, tricking relayers into paying out on fake deposits. User funds remained completely safe with zero losses; all transactions were completed or fully refunded. Losses were contained to the Risk Labs-operated relayer. The team paused Solana deposits and restored operations the next day, with a full post-mortem planned."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Across's Solana relayer accepted forged deposit events and advanced about $4.5 million in relayer capital before Solana routing was paused and later rerouted through CCTP. User funds were reportedly unaffected, but the final net loss and recovery are still not fully reconciled. The offchain Solana relayer trusted event-shaped inner instructions as real deposits after matching the Across program id and event-authority PDA, but it did not fully verify the Anchor event discriminator or reject failed transactions. That let a reverted transaction look like a valid deposit to the relayer."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "startupfortune.com",
+      "url": "https://startupfortune.com/across-protocol-got-hacked-on-solana-and-no-user-lost-a-cent/"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/across-2026-07-17"
+    },
+    {
+      "source": "revertiq",
+      "label": "api.llama.fi",
+      "url": "https://api.llama.fi/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.asymmetric.re",
+      "url": "https://blog.asymmetric.re/across-solana-event-spoofing/"
+    }
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "id": "2026-08-22-tac",
+  "name": "TAC",
+  "date": "2026-08-22",
+  "year": 2026,
+  "amountUsd": 7500000,
+  "returnedUsd": null,
+  "chains": [
+    "TAC"
+  ],
+  "targetType": "Chain",
+  "category": "logic-error",
+  "technique": "Withdrawal Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.93,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.93
+      },
+      {
+        "category": "access-control",
+        "p": 0.04
+      },
+      {
+        "category": "client-bug",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Go",
+  "rootCause": "An attacker drained 2.985B TAC (~$7.5M) from its bonded-token pool via the Cosmos EVM underflow bug that hit MANTRA. TAC halted four hours too late, funds already bridged out. Cosmos Labs had the bug since April but apparently misjudged its severity.",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "An attacker drained 2.985B TAC (~$7.5M) from its bonded-token pool via the Cosmos EVM underflow bug that hit MANTRA. TAC halted four hours too late, funds already bridged out. Cosmos Labs had the bug since April but apparently misjudged its severity."
+    },
+    {
+      "source": "SlowMist",
+      "text": "Layer 1 blockchain TAC was exploited when an attacker used a vulnerability in the shared Cosmos EVM precompile layer to drain approximately 2.985 billion TAC tokens (valued at around $7.5 million) from a single account. The project confirmed it was a drain (not a mint), total supply unchanged, only $TAC affected, and the flaw is not in TAC-specific code. The chain was halted at block 24,671,475; the team is coordinating with SEAL 911 and exchanges to track funds and plans to release a post-mortem and relaunch plan."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On August 22, 2026, TAC's bonded staking pool was drained in a flash exploit attributed to a logic flaw in the Cosmos EVM module. Approximately 2.985 billion TAC (28.6% of supply) was moved in a single transaction, with most proceeds bridged to BNB Chain and partially sold for USDT. The chain remains halted, and recovery plans involve treasury replacement and targeted account edits. The root cause was an unchecked integer underflow and spendable-balance mismatch in the Cosmos EVM module. Delegating locked/vesting tokens from an Ethereum-compatible account incorrectly deducted from zero spendable balance, causing a subtraction wraparound that enabled an…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xae4e9b708ecef134a18aef8a1da9b4d24aa2a0e87f98d02695beae588cda46fc"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: TAC - Rekt",
+      "url": "https://rekt.news/tac-rekt"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/TacBuild/status/2091873937655574938"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/tac-2026-08-22"
+    },
+    {
+      "source": "revertiq",
+      "label": "tac.build",
+      "url": "https://tac.build/blog/tac-mainnet-security-incident"
+    },
+    {
+      "source": "revertiq",
+      "label": "blockport.io",
+      "url": "https://blockport.io/latest-news/tac-chain-frozen-10-days-after-2-985b-tac-exploit/"
+    }
+  ]
+}

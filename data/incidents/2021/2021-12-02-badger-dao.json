@@ -1,0 +1,117 @@
+{
+  "id": "2021-12-02-badger-dao",
+  "name": "Badger DAO",
+  "date": "2021-12-02",
+  "year": 2021,
+  "amountUsd": 120000000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "frontend-infra",
+  "technique": "CDN Compromise",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "frontend-infra",
+    "confidence": 0.85,
+    "top": [
+      {
+        "category": "frontend-infra",
+        "p": 0.86
+      },
+      {
+        "category": "key-compromise",
+        "p": 0.060000000000000005
+      },
+      {
+        "category": "access-control",
+        "p": 0.04
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.1
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "rekt roadkill. $120M taken in a front-end attack, placing Badger at number four on the leaderboard. rekt repeats; \"infinite approval means unlimited trust.\"",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "rekt roadkill. $120M taken in a front-end attack, placing Badger at number four on the leaderboard. rekt repeats; \"infinite approval means unlimited trust.\""
+    },
+    {
+      "source": "SlowMist",
+      "text": "The decentralized organization Badger DAO was attacked by hackers, and user assets were transferred without authorization. According to the developer's initial inventory of damaged assets, 136,000 bcvxCRV, 64,000 bveCVX, 38 ibBTC/sBTC, 13 bibBTC/sBTC, and 19 DIGG have been lost in this incident."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "BadgerDAO users lost roughly $120 million on 2021-12-02 after attackers compromised the protocol's Cloudflare-based frontend infrastructure and injected malicious ERC-20 approval requests into the live application. Users who signed the altered transactions granted token allowances that were later used to drain wallets through standard transferFrom calls rather than a flaw in BadgerDAO smart contracts. Attackers gained access to BadgerDAO's Cloudflare Workers deployment through a compromised API key and injected malicious JavaScript into the production frontend. The injected code prompted selected users to sign ERC-20 approval transactions authorizing a…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "In December 2021, BadgerDAO lost approximately $120 million to a frontend supply-chain attack after an attacker used a compromised Cloudflare API key to inject malicious JavaScript. Hundreds of user wallets unknowingly approved unlimited spend allowances to the attacker's address; these allowances were later used to drain user assets. The root cause was a compromised Cloudflare API key, which allowed an attacker to inject malicious JavaScript into BadgerDAO's frontend. This script manipulated user wallet prompts to request unlimited ERC-20 token approvals for attacker-controlled addresses. The protocol contracts were not directly exploited."
+    }
+  ],
+  "audit": "Unaudited",
+  "txHashes": [
+    "0x951babdddbfbbba81bbbb7991a959d9815e80cc5d9418d10e692f41541029869"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Badger - REKT",
+      "url": "https://rekt.news/badger-rekt"
+    },
+    {
+      "source": "slowmist",
+      "label": "badger.com",
+      "url": "https://badger.com/technical-post-mortem"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/badger-dao-2021-12-02"
+    },
+    {
+      "source": "revertiq",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/business/2021/12/10/badgerdao-reveals-details-of-how-it-was-hacked-for-120m"
+    },
+    {
+      "source": "revertiq",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/business/2021/12/02/badger-dao-protocol-suffers-10m-exploit"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/badgerdao-2021-12-02"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractaudit.com",
+      "url": "https://smartcontractaudit.com/hacks/badger-2021"
+    }
+  ]
+}

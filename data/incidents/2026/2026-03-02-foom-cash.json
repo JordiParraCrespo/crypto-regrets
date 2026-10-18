@@ -1,0 +1,127 @@
+{
+  "id": "2026-03-02-foom-cash",
+  "name": "FOOM Cash",
+  "date": "2026-03-02",
+  "year": 2026,
+  "amountUsd": 2260000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum",
+    "Base"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "bridge-crosschain",
+  "technique": "Forged Proof",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "signature-crypto",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "signature-crypto",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.01,
+    "stateActor": 0.01,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "FOOMCASH, a zkSNARK-powered private lottery protocol on Base (and Ethereum), deployed its Groth16 verifier with a fatal trusted-setup error: the circuit-specific Phase 2 contribution step in snarkjs was skipped during deployment, leaving the verification key parameters gamma and delta set to identical values (both equal to the G2 generator point). This collapsed the pairing equation's soundness guarantee entirely. An attacker exploited proof malleability — by slightly modifying a legitimate withdrawal proof to produce a forged proof that still satisfied the weakened verifier — and repeatedly called the withdraw function with crafted forged proofs, each accepted by the broken verifier. The attack required no flash loans, reentrancy, or oracle manipulation; it was a pure cryptographic parameter misconfiguration. The attacker drained approximately $2.26M across Base and Ethereum. The exploit was a copycat of the Veil Cash attack disclosed days earlier; a coordinated white-hat effort subsequently recovered ~$1.84M (81%) of the stolen funds. Attack Tx: 0xce2044...5e48 Analysis: BlockSec Phalcon Alert FOOMCASH Loses $2.26M in Copycat zkSNARK Exploit – CryptoTimes Foom Cash – zkSNARK Proof Forgery Exploit – NomosLabs",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "FOOMCASH, a zkSNARK-powered private lottery protocol on Base (and Ethereum), deployed its Groth16 verifier with a fatal trusted-setup error: the circuit-specific Phase 2 contribution step in snarkjs was skipped during deployment, leaving the verification key parameters gamma and delta set to identical values (both equal to the G2 generator point). This collapsed the pairing equation's soundness guarantee entirely. An attacker exploited proof malleability — by slightly modifying a legitimate withdrawal proof to produce a forged proof that still satisfied the weakened verifier — and repeatedly called the withdraw function with crafted forged proofs, each accepted by the broken verifier. The attack required no flash loans, reentrancy, or oracle manipulation; it was a pure cryptographic parameter misconfiguration. The attacker drained approximately $2.26M across Base and Ethereum. The exploit was a copycat of the Veil Cash attack disclosed days earlier; a coordinated white-hat effort subsequently recovered ~$1.84M (81%) of the stolen funds. Attack Tx: 0xce2044...5e48 Analysis: BlockSec Phalcon Alert FOOMCASH Loses $2.26M in Copycat zkSNARK Exploit – CryptoTimes Foom Cash – zkSNARK Proof Forgery Exploit – NomosLabs"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The privacy gaming platform FOOMCASH was attacked on Base and Ethereum, resulting in a loss of 24,283,773,519,600 $FOOM (approximately $2.26 million). The vulnerability was caused by a misconfiguration of the verification key, which the attacker exploited to forge zkSNARK proofs and subsequently extract a massive amount of $FOOM from the compromised contracts."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "FOOM Cash lost about $2.26 million in a cross-chain exploit on Ethereum and Base, caused by a misconfigured zero-knowledge verifier contract. The vulnerability allowed attackers to forge proofs, systematically draining funds. Coordinated white-hat intervention recovered approximately $1.84 million. The deployed Groth16 verifier contract had gamma and delta constants set to identical elliptic curve points, breaking proof soundness. This allowed algebraic forging of valid proofs with attacker-controlled public inputs, enabling unauthorized withdrawals."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "The FoomCash protocol suffered a $1.6M loss on February 26, 2026, when attackers exploited a misconfigured Groth16 zkSNARK verifier. Identical gamma and delta values in the verifier enabled forged proofs, allowing systematic draining of FOOM tokens on Ethereum and Base. Partial recovery occurred from a whitehat address. The Groth16 verifier was deployed with gamma and delta set to the same elliptic curve point,the BN254 G2 generator. This broke zk-proof soundness, enabling attackers to forge proofs and withdraw funds without legitimate deposits or witnesses."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xce20448233f5ea6b6d7209cc40b4dc27b65e07728f2cbbfeb29fc0814e275e48",
+    "0xa88317a105155b464118431ce1073d272d8b43e87aba528a24b62075e48d929d"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "basescan.org",
+      "url": "https://basescan.org/tx/0xce20448233f5ea6b6d7209cc40b4dc27b65e07728f2cbbfeb29fc0814e275e48"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/Phalcon_xyz/status/2026941738141778394"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "cryptotimes.io",
+      "url": "https://www.cryptotimes.io/2026/02/26/foomcash-loses-2-26m-in-copycat-zksnark-exploit/"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xce20448233f5ea6b6d7209cc40b4dc27b65e07728f2cbbfeb29fc0814e275e48"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/gopluszh/status/2027002497911623960?s=46&t=DLwbX9Nw4QECiyZQ0av-fg"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/foom-cash-2026-03-02"
+    },
+    {
+      "source": "revertiq",
+      "label": "financefeeds.com",
+      "url": "https://financefeeds.com/foom-cash-recovers-1-84m-after-2-26m-exploit-with-help-from-white-hat-hacker/"
+    },
+    {
+      "source": "revertiq",
+      "label": "dev.to",
+      "url": "https://dev.to/cryip/front-running-the-exploiter-a-technical-breakdown-of-the-184m-foomcash-white-hat-rescue-14bl"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/foomcash-1-6m-2026-02-27"
+    },
+    {
+      "source": "revertiq",
+      "label": "quillaudits.com",
+      "url": "https://www.quillaudits.com/blog/hack-analysis/foomcash-exploit-explained"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/tohaml1/foomcash-trace-report"
+    }
+  ]
+}

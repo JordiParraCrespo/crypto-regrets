@@ -1,0 +1,81 @@
+{
+  "id": "2023-09-30-firebirdpair",
+  "name": "FireBirdPair",
+  "date": "2023-09-30",
+  "year": 2023,
+  "amountUsd": 3200,
+  "returnedUsd": null,
+  "chains": [
+    "Polygon"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Lack Slippage Protection",
+  "classificationNote": "Upstream label missing; classified by keyword rules from the root-cause text.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.81,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.8200000000000001
+      },
+      {
+        "category": "input-validation",
+        "p": 0.14
+      },
+      {
+        "category": "market-manipulation",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.09,
+    "stateActor": 0.03,
+    "hasRootCause": 0.3
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Lack Slippage Protection. Lost: ~$3.2K MATIC",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Lack Slippage Protection. Lost: ~$3.2K MATIC"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "sink incorrect slippage protection Vulnerable code snippet: Attack tx: Analysis:"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x96d80c609f7a39b45f2bb581c6ba23402c20c2b6cd528317692c31b8d3948328"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-09/FireBirdPair_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-09/FireBirdPair_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "explorer.phalcon.xyz",
+      "url": "https://explorer.phalcon.xyz/tx/polygon/0x96d80c609f7a39b45f2bb581c6ba23402c20c2b6cd528317692c31b8d3948328"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "polygonscan.com",
+      "url": "https://polygonscan.com/address/0x5e9cd0861f927adeccfeb2c0124879b277dd66ac"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "polygonscan.com",
+      "url": "https://polygonscan.com/tx/0x96d80c609f7a39b45f2bb581c6ba23402c20c2b6cd528317692c31b8d3948328"
+    }
+  ]
+}

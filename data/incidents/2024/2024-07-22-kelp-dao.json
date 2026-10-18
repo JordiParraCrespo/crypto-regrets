@@ -1,0 +1,56 @@
+{
+  "id": "2024-07-22-kelp-dao",
+  "name": "Kelp DAO",
+  "date": "2024-07-22",
+  "year": 2024,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": null,
+  "category": "frontend-infra",
+  "technique": "DNS Attack",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.86). Replaced keyword guess \"social-engineering\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "frontend-infra",
+    "confidence": 0.86,
+    "top": [
+      {
+        "category": "frontend-infra",
+        "p": 0.87
+      },
+      {
+        "category": "social-engineering",
+        "p": 0.13
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "On July 22, 2024, Kelp's DApp began displaying malicious wallet activity transactions aimed at draining funds. Kelp's engineering team evaluated the situation and identified the root cause to be faulty nameservers routing users to different application code that was attempting to trick the users into phishing. The attackers gained access to Kelp’s domain registrar account impersonating Kelp team and successfully convinced GoDaddy’s customer support that they were the legitimate owners of the account bypassing the 2-FA that was in place.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "On July 22, 2024, Kelp's DApp began displaying malicious wallet activity transactions aimed at draining funds. Kelp's engineering team evaluated the situation and identified the root cause to be faulty nameservers routing users to different application code that was attempting to trick the users into phishing. The attackers gained access to Kelp’s domain registrar account impersonating Kelp team and successfully convinced GoDaddy’s customer support that they were the legitimate owners of the account bypassing the 2-FA that was in place."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "slowmist",
+      "label": "blog.kelpdao.xyz",
+      "url": "https://blog.kelpdao.xyz/kelp-dapp-ui-attack-post-mortem-53f3e71d033e"
+    }
+  ]
+}

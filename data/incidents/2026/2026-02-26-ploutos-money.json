@@ -1,0 +1,101 @@
+{
+  "id": "2026-02-26-ploutos-money",
+  "name": "Ploutos Money",
+  "date": "2026-02-26",
+  "year": 2026,
+  "amountUsd": 390000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Oracle Misconfiguration",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "The Ploutos protocol (an Aave v3 fork) on Ethereum suffered a $390K loss due to a single misconfigured Chainlink price feed in its lending pool (0xD060EbD4f56bE8866376a3616B6e5aEF87F945D2). A configuration transaction in block 24538896 mistakenly assigned the BTC/USD Chainlink oracle to price USDC, causing the protocol to treat each USDC as worth tens of thousands of dollars. An attacker — who was either monitoring the mempool or may have had insider knowledge — acted in the immediately following block (24538897), depositing only 8 USDC as collateral and borrowing approximately 187 ETH (~$390K) before the oracle could be corrected. The protocol's website and X account were subsequently scrubbed, raising strong suspicions of a planned exit rather than a purely opportunistic external exploit. Attack Tx: 0xa17dc37e1b65c65d20042212fb834974f7faaa961442e3fc05393778705f8474 Analysis: BlockSec Phalcon — Ploutos Oracle Misconfiguration Alert",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The Ploutos protocol (an Aave v3 fork) on Ethereum suffered a $390K loss due to a single misconfigured Chainlink price feed in its lending pool (0xD060EbD4f56bE8866376a3616B6e5aEF87F945D2). A configuration transaction in block 24538896 mistakenly assigned the BTC/USD Chainlink oracle to price USDC, causing the protocol to treat each USDC as worth tens of thousands of dollars. An attacker — who was either monitoring the mempool or may have had insider knowledge — acted in the immediately following block (24538897), depositing only 8 USDC as collateral and borrowing approximately 187 ETH (~$390K) before the oracle could be corrected. The protocol's website and X account were subsequently scrubbed, raising strong suspicions of a planned exit rather than a purely opportunistic external exploit. Attack Tx: 0xa17dc37e1b65c65d20042212fb834974f7faaa961442e3fc05393778705f8474 Analysis: BlockSec Phalcon — Ploutos Oracle Misconfiguration Alert"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The DeFi lending protocol Ploutos Money suffered an exploit due to a misconfigured price oracle (using Chainlink’s BTC/USD feed for USDC price), allowing an attacker to deposit minimal USDC collateral and borrow ~187.36 ETH, draining approximately $390K. The project’s website and social accounts were deleted shortly after, raising strong suspicions of an inside job or exit scam."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On February 26, 2026, Ploutos Money suffered a $390,000 loss on Ethereum after its lending protocol mapped the USDC collateral asset to a BTC/USD price feed. This misconfiguration let an attacker deposit less than 9 USDC and borrow nearly all protocol ETH liquidity, draining the lending pool in a single exploit. Ploutos Money's lending pool mapped its USDC collateral to a BTC/USD Chainlink oracle instead of a stablecoin-appropriate feed, causing massive overvaluation of USDC collateral and enabling catastrophic undercollateralized borrowing."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xa17dc37e1b65c65d20042212fb834974f7faaa961442e3fc05393778705f8474"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xa17dc37e1b65c65d20042212fb834974f7faaa961442e3fc05393778705f8474"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/Phalcon_xyz/status/2026943448734114011"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xa17dc37e1b65c65d20042212fb834974f7faaa961442e3fc05393778705f8474"
+    },
+    {
+      "source": "blocksec",
+      "label": "x.com",
+      "url": "https://x.com/pennysplayer/status/2026892250786242687"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/ploutos-money-2026-02-26"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/ploutos-money-hack-2026"
+    }
+  ]
+}

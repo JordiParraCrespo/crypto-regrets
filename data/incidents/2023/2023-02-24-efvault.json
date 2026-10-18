@@ -1,0 +1,109 @@
+{
+  "id": "2023-02-24-efvault",
+  "name": "EFVault",
+  "date": "2023-02-24",
+  "year": 2023,
+  "amountUsd": 5100000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Storage Collision",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.97). Replaced keyword guess \"accounting-math\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.97,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.97
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.02
+      },
+      {
+        "category": "access-control",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Storage Collision. Lost: ~$5.1M",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Storage Collision. Lost: ~$5.1M"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Bad contract upgrades cause storage collision Details: The upgrade introduced new storage items, and modifications were made to the existing storage structure. The original storage order of variables was not maintained. The data storage structure of the old version was not taken into account, so when reading the assetDecimal variable in the new implementation contract, the data read is still the proxy contract slot, which is the value of the maxDeposit variable of the old version. Vulnerable code snippet: https://etherscan.io/address/0x80cb73074a6965f60df59bf8fa3ce398ffa2702c#code#F1#L145 Due to the Storage Collision, The value of maxDeposit was set to 5000000000000, which is much higher than the value it is expected to set. This results in the return value of the assetPerShare function being much larger and thus the value of assets becomes larger. Attack txns: Upgrade tx: 0xab86672eb5335264c4c4b75262630ae1fb8dcf2a68aaafe4bb9fc3232b886712 Exploit tx: 0x31565843d565ecab7ab65965d180e45a99d4718fa192c2f2221410f65ea03743 Analysis: https://twitter.com/BeosinAlert/status/1630884733671579653 Recommendation: To prevent similar attacks during contract upgrades, it is crucial to follow best practices and ensure that the original storage order of variables remains unchanged. ---"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xab86672eb5335264c4c4b75262630ae1fb8dcf2a68aaafe4bb9fc3232b886712",
+    "0x31565843d565ecab7ab65965d180e45a99d4718fa192c2f2221410f65ea03743",
+    "0x1fe5a53405d00ce2f3e15b214c7486c69cbc5bf165cf9596e86f797f62e81914"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-02/EFVault_exp.sol",
+  "sources": [
+    "defihacklabs",
+    "blocksec"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-02/EFVault_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/peckshield/status/1630490333716029440"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/drdr_zz/status/1630500170373685248"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/gbaleeeee/status/1630587522698080257"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/address/0x80cb73074a6965f60df59bf8fa3ce398ffa2702c#code#F1#L145"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xab86672eb5335264c4c4b75262630ae1fb8dcf2a68aaafe4bb9fc3232b886712"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x31565843d565ecab7ab65965d180e45a99d4718fa192c2f2221410f65ea03743"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x1fe5a53405d00ce2f3e15b214c7486c69cbc5bf165cf9596e86f797f62e81914"
+    },
+    {
+      "source": "blocksec",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs?tab=readme-ov-file#20230224---efvault---storage-collision"
+    }
+  ]
+}

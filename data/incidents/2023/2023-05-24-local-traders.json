@@ -1,0 +1,111 @@
+{
+  "id": "2023-05-24-local-traders",
+  "name": "Local Traders",
+  "date": "2023-05-24",
+  "year": 2023,
+  "amountUsd": 118000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.97,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.97
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.03
+      }
+    ],
+    "flashLoan": 0.07,
+    "stateActor": 0.03,
+    "hasRootCause": 0.94
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Improper Access Control of Close-source contract. Lost: ~384 BNB",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Improper Access Control of Close-source contract. Lost: ~384 BNB"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Improper Access Control of Close-source contract, involved modifying certain contract parameters and exploiting vulnerabilities in the getTokenPrice() function. Vulnerable code snippet: https://library.dedaub.com/decompile?md5=eac769a0f6ce1325c4c553270fd17362 Attack tx: 1. https://bscscan.com/tx/0x57b589f631f8ff20e2a89a649c4ec2e35be72eaecf155fdfde981c0fec2be5ba 2. https://bscscan.com/tx/0xbea605b238c85aabe5edc636219155d8c4879d6b05c48091cf1f7286bd4702ba 3. https://bscscan.com/tx/0x49a3038622bf6dc3672b1b7366382a2c513d713e06cb7c91ebb8e256ee300dfb 4. https://bscscan.com/tx/0x042b8dc879fa193acc79f55a02c08f276eaf1c4f7c66a33811fce2a4507cea63 Analysis: https://twitter.com/numencyber/status/1661213691893944320"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Local Traders lost approximately 379.32 BNB on BNB Chain in May 2023 after an attacker exploited a missing access-control check that allowed unauthorized ownership changes and token price manipulation. The attacker acquired LCT tokens at an artificially reduced price and sold them through PancakeSwap. The vulnerable Local Traders contract exposed an administrative function without authorization checks. According to incident analyses, the function identified by selector 0xb5863c10 could be called by any address and allowed the caller to change the contract owner. After taking ownership, the attacker used another privileged function to change the LCT tok…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x57b589f631f8ff20e2a89a649c4ec2e35be72eaecf155fdfde981c0fec2be5ba",
+    "0xbea605b238c85aabe5edc636219155d8c4879d6b05c48091cf1f7286bd4702ba",
+    "0x49a3038622bf6dc3672b1b7366382a2c513d713e06cb7c91ebb8e256ee300dfb",
+    "0x042b8dc879fa193acc79f55a02c08f276eaf1c4f7c66a33811fce2a4507cea63"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-05/LocalTrader_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-05/LocalTrader_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/numencyber/status/1661213691893944320"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "library.dedaub.com",
+      "url": "https://library.dedaub.com/decompile?md5=eac769a0f6ce1325c4c553270fd17362"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x57b589f631f8ff20e2a89a649c4ec2e35be72eaecf155fdfde981c0fec2be5ba"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0xbea605b238c85aabe5edc636219155d8c4879d6b05c48091cf1f7286bd4702ba"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/local-traders-2023-05-24"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.solidityscan.com",
+      "url": "https://blog.solidityscan.com/local-traders-hack-analysis-missing-access-control-4a863ea22184/"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/local-traders-hack-2023"
+    }
+  ]
+}

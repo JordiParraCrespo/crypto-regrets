@@ -1,0 +1,82 @@
+{
+  "id": "2024-04-12-zest",
+  "name": "Zest",
+  "date": "2024-04-12",
+  "year": 2024,
+  "amountUsd": 1000000,
+  "returnedUsd": null,
+  "chains": [
+    "Stacks"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.99
+      },
+      {
+        "category": "market-manipulation",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.94
+  },
+  "bridge": false,
+  "language": "Clarity",
+  "rootCause": "The Bitcoin-native lending protocol, Zest Protocol twitted that it experienced an attack. The attacker lent out an amount exceeding the value of their collateral by artificially inflating its value. The attack has been mitigated, and all unauthorized access has been disabled. The attacker removed 324,000 STX from the protocol, and this loss will be compensated from the Zest Protocol's treasury, ensuring full reimbursement of user assets.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The Bitcoin-native lending protocol, Zest Protocol twitted that it experienced an attack. The attacker lent out an amount exceeding the value of their collateral by artificially inflating its value. The attack has been mitigated, and all unauthorized access has been disabled. The attacker removed 324,000 STX from the protocol, and this loss will be compensated from the Zest Protocol's treasury, ensuring full reimbursement of user assets."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Zest Protocol was exploited on Stacks in April 2024, allowing an attacker to borrow more STX than their collateral permitted by manipulating the collateral calculation, resulting in a loss of approximately 324,000 STX (~$1,000,000). User assets were reimbursed from the treasury, and the protocol paused operations for audit and recovery. A vulnerable collateral calculation allowed manipulation by submitting a collateral list with repeated entries, causing the contract to overvalue collateral and authorize excessive borrowing."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/ZestProtocol/status/1778533650520490342"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/zest-2024-04-12"
+    },
+    {
+      "source": "revertiq",
+      "label": "quadrigainitiative.com",
+      "url": "https://www.quadrigainitiative.com/casestudy/zestprotocollendingcollateralvulnerability.php"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/zest-hack-2024"
+    }
+  ]
+}

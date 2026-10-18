@@ -1,0 +1,72 @@
+{
+  "id": "2023-12-27-levana-perps",
+  "name": "Levana Perps",
+  "date": "2023-12-27",
+  "year": 2023,
+  "amountUsd": 1100000,
+  "returnedUsd": null,
+  "chains": [
+    "Osmosis"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Stale Oracle Price",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.99
+      },
+      {
+        "category": "client-bug",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Rust",
+  "rootCause": "Levana Perps on Osmosis was exploited in December 2023 due to stale oracle prices, resulting in losses of about $1.15 million. Attackers manipulated trading against outdated prices by exploiting protocol and infrastructure vulnerabilities during network congestion. Levana Perps allowed the opening and closing of positions using stale Pyth oracle prices. Due to Osmosis network congestion and a fee-market bug, bots updating prices were delayed, which attackers exploited to drain liquidity pools.",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "Levana Perps on Osmosis was exploited in December 2023 due to stale oracle prices, resulting in losses of about $1.15 million. Attackers manipulated trading against outdated prices by exploiting protocol and infrastructure vulnerabilities during network congestion. Levana Perps allowed the opening and closing of positions using stale Pyth oracle prices. Due to Osmosis network congestion and a fee-market bug, bots updating prices were delayed, which attackers exploited to drain liquidity pools."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/levana-perps-2023-12-27"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.levana.finance",
+      "url": "https://blog.levana.finance/levana-exploit-postmortem-df89a72cc92b"
+    },
+    {
+      "source": "revertiq",
+      "label": "range.org",
+      "url": "https://range.org/blog/levana-security-incident-in-depth-analysis"
+    }
+  ]
+}

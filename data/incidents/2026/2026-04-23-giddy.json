@@ -1,0 +1,94 @@
+{
+  "id": "2026-04-23-giddy",
+  "name": "Giddy",
+  "date": "2026-04-23",
+  "year": 2026,
+  "amountUsd": 1300000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "input-validation",
+  "technique": "Incomplete Signature Coverage",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "signature-crypto",
+    "confidence": 0.95,
+    "top": [
+      {
+        "category": "signature-crypto",
+        "p": 0.95
+      },
+      {
+        "category": "access-control",
+        "p": 0.05
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.03,
+    "hasRootCause": 0.67
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Incomplete Signature Coverage. Lost: $1.3M",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Incomplete Signature Coverage. Lost: $1.3M"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The DeFi protocol Giddy’s GiddyVaultV3 contract was exploited, resulting in a loss of approximately $1.3 million. The attack was caused by a design flaw in its authorization validation logic. When using the EIP-712 signature scheme, the contract only validated part of the data within the SwapInfo structure, failing to cover critical parameters such as aggregator, fromToken, toToken, and amount, leading to incomplete signature coverage. The attacker exploited this flaw by replaying a valid signature and crafting malicious transaction parameters: replacing fromToken with the strategy’s LP tokens, setting the aggregator to a contract controlled by the att…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "GiddyVaultV3 was exploited on Ethereum mainnet on April 23, 2026, for approximately $1.3M. The attacker replayed valid EIP-712 signatures with modified SwapInfo parameters, abusing incomplete signature coverage to drain vault assets via malicious aggregator contracts. Incomplete EIP-712 signature coverage in VaultAuth. Critical SwapInfo fields (aggregator, fromToken, toToken, amount) were not included in the signed struct, allowing an attacker to substitute them and drain vault funds using a reused signature."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x5edb66a4c2ea55bba95d36d27713e3bb1c67c3c4199a8a1759e754c6f25482e5"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-04/giddyvaultv3_compound_auth_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-04/giddyvaultv3_compound_auth_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/DefimonAlerts/status/2047334517535642024"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/giddy-2026-04-23"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "x.com",
+      "url": "https://x.com/leviathan_news/status/2047332923292954690"
+    }
+  ]
+}

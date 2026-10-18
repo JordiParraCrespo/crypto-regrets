@@ -1,0 +1,71 @@
+{
+  "id": "2025-12-04-us-permissionless-dollar",
+  "name": "US Permissionless Dollar",
+  "date": "2025-12-04",
+  "year": 2025,
+  "amountUsd": 1000000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Proxy Upgrade Hijack",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.03,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "US Permissionless Dollar (USPD) suffered a loss of over $1 million on 4 December 2025 after an attacker exploited a race condition during proxy contract deployment, inserting a malicious 'proxy-in-the-middle' (CPIMP) backdoor. This allowed the attacker to evade detection for months before upgrading the logic contract to drain protocol collateral. The proxy contract for USPD was left uninitialized after deployment, making it possible for a third party to initialize it. An attacker exploited this window, inserting a CPIMP shim that mimicked normal behavior while concealing admin backdoor access and an attacker-controlled implementation. The exploit was n…",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "US Permissionless Dollar (USPD) suffered a loss of over $1 million on 4 December 2025 after an attacker exploited a race condition during proxy contract deployment, inserting a malicious 'proxy-in-the-middle' (CPIMP) backdoor. This allowed the attacker to evade detection for months before upgrading the logic contract to drain protocol collateral. The proxy contract for USPD was left uninitialized after deployment, making it possible for a third party to initialize it. An attacker exploited this window, inserting a CPIMP shim that mimicked normal behavior while concealing admin backdoor access and an attacker-controlled implementation. The exploit was n…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xc0b7e490caac2b8cfa5e62d1b28a5e7dba7600e623c71352acbc9b23c2b65b7c",
+    "0xa7cab072bf0453301a0ab1b06c49a9405d115824fc617fb42cba9b70f3b893c2"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/us-permissionless-dollar-2025-12-04"
+    },
+    {
+      "source": "revertiq",
+      "label": "itokenly.com",
+      "url": "https://itokenly.com/hacks/us-permissionless-dollar"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptonomist.ch",
+      "url": "https://cryptonomist.ch/2025/12/05/uspd-stablecoin-proxy-attack/"
+    }
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "id": "2024-05-10-gfox",
+  "name": "GFOX",
+  "date": "2024-05-10",
+  "year": 2024,
+  "amountUsd": 330000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "lack of access control",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.84).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.84,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.85
+      },
+      {
+        "category": "bridge-crosschain",
+        "p": 0.15
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.9
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "lack of access control. Lost: 330K USD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "lack of access control. Lost: 330K USD"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "attacker can set merkleroot. Vulnerable code snippet: https://etherscan.io/address/0x47c4b3144de2c87a458d510c0c0911d1903d1686 Attack tx: https://etherscan.io/tx/0x12fe79f1de8aed0ba947cec4dce5d33368d649903cb45a5d3e915cc459e751fc Analysis: https://x.com/CertiKAlert/status/1788751142144401886"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x12fe79f1de8aed0ba947cec4dce5d33368d649903cb45a5d3e915cc459e751fc"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-05/GFOX_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-05/GFOX_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/CertiKAlert/status/1788751142144401886"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/address/0x47c4b3144de2c87a458d510c0c0911d1903d1686"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x12fe79f1de8aed0ba947cec4dce5d33368d649903cb45a5d3e915cc459e751fc"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/CertiKAlert/status/1788751142144401886"
+    }
+  ]
+}

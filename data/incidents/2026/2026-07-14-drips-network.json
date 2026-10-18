@@ -1,0 +1,99 @@
+{
+  "id": "2026-07-14-drips-network",
+  "name": "Drips Network",
+  "date": "2026-07-14",
+  "year": 2026,
+  "amountUsd": 24883,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Arithmetic Error",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.99
+      },
+      {
+        "category": "logic-error",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Signed-integer cast vulnerability in DaiDripsHub._give() function. Attacker passed amt = 2^128 - reserveBalance, causing int128(amt) to wrap to a negative value. -int128(amt) then became positive, flipping the intended deposit into a reserve withdrawal, draining entire DaiReserve to attacker. Attack Tx: https://etherscan.io/tx/0xc38a6e2259a85ced94238a0b0a49697992f2a6b8140c28f3fd2343d3d8434130 Source: https://twitter.com/DefimonAlerts/status/2077085434849411365",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Signed-integer cast vulnerability in DaiDripsHub._give() function. Attacker passed amt = 2^128 - reserveBalance, causing int128(amt) to wrap to a negative value. -int128(amt) then became positive, flipping the intended deposit into a reserve withdrawal, draining entire DaiReserve to attacker. Attack Tx: https://etherscan.io/tx/0xc38a6e2259a85ced94238a0b0a49697992f2a6b8140c28f3fd2343d3d8434130 Source: https://twitter.com/DefimonAlerts/status/2077085434849411365"
+    },
+    {
+      "source": "SlowMist",
+      "text": "DeFi streaming payments protocol Drips Network was exploited on July 14, 2026. The attacker used an unsafe integer cast vulnerability (uint128 to int128) in the DaiDripsHub.give() function on Ethereum, causing a negative value to flip positive and reverse the transfer direction, draining 24,882.99 DAI (~$24,900) from the DaiReserve."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Drips Network suffered a loss of approximately 24,883 DAI on Ethereum Mainnet due to an unsafe integer conversion in the DaiDripsHub contract's give() function. The attacker exploited a silent uint128 to int128 cast that inverted transfer direction, draining the reserve via a crafted call. Unsafe casting from uint128 to int128 in DaiDripsHub.give(address,uint128), enabling a sign flip that reversed transfer direction and allowed attackers to drain the DAI reserve."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xc38a6e2259a85ced94238a0b0a49697992f2a6b8140c28f3fd2343d3d8434130"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xc38a6e2259a85ced94238a0b0a49697992f2a6b8140c28f3fd2343d3d8434130"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/DefimonAlerts/status/2077085434849411365"
+    },
+    {
+      "source": "slowmist",
+      "label": "olympixai.medium.com",
+      "url": "https://olympixai.medium.com/summer-fi-lumi-finance-drips-network-6-3m-lost-to-assumptions-nobody-tested-57f1769bda14"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/drips-network-2026-07-14"
+    },
+    {
+      "source": "revertiq",
+      "label": "phemex.com",
+      "url": "https://phemex.com/news/article/drips-network-suffers-25000-dai-loss-from-integer-conversion-flaw-93153"
+    },
+    {
+      "source": "revertiq",
+      "label": "olympix.security",
+      "url": "https://olympix.security/biweekly-exploits/summer-fi-lumi-finance-drips-network-6-3m-lost-to-assumptions-nobody-tested"
+    }
+  ]
+}

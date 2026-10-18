@@ -1,0 +1,117 @@
+{
+  "id": "2026-04-13-dango",
+  "name": "Dango",
+  "date": "2026-04-13",
+  "year": 2026,
+  "amountUsd": 1900000,
+  "returnedUsd": 410000,
+  "chains": [
+    "Dango"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "input-validation",
+  "technique": "Missing Input Validation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "input-validation",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "input-validation",
+        "p": 0.99
+      },
+      {
+        "category": "logic-error",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.01,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "The Dango perpetuals protocol was exploited via a business logic flaw in its insurance fund donation mechanism. The donation contract accepted user-submitted amounts without validating that the value was a positive number, permitting the submission of negative donation values. The attacker exploited this missing guard to manipulate the protocol's internal accounting state and extract approximately $410K USDC, which was successfully bridged to Ethereum. An additional $1.49M remained locked on-chain due to bridge rate-limiting controls that capped per-window withdrawal amounts — a design feature that inadvertently contained the blast radius and gave the team time to respond. Dango paused its chain and engaged the Security Alliance. The attacker was subsequently identified as a white-hat researcher and returned all funds following a bug bounty agreement, leaving users fully unaffected. Attack Tx: 0x06c2c3109999500fe3a0213bf33c3a1e99e3b6c86b0595d7804e57193bb4d9ae Analysis: Dango DeFi Platform Exploited for $410,010 USDC — Phemex dango on X",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The Dango perpetuals protocol was exploited via a business logic flaw in its insurance fund donation mechanism. The donation contract accepted user-submitted amounts without validating that the value was a positive number, permitting the submission of negative donation values. The attacker exploited this missing guard to manipulate the protocol's internal accounting state and extract approximately $410K USDC, which was successfully bridged to Ethereum. An additional $1.49M remained locked on-chain due to bridge rate-limiting controls that capped per-window withdrawal amounts — a design feature that inadvertently contained the blast radius and gave the team time to respond. Dango paused its chain and engaged the Security Alliance. The attacker was subsequently identified as a white-hat researcher and returned all funds following a bug bounty agreement, leaving users fully unaffected. Attack Tx: 0x06c2c3109999500fe3a0213bf33c3a1e99e3b6c86b0595d7804e57193bb4d9ae Analysis: Dango DeFi Platform Exploited for $410,010 USDC — Phemex dango on X"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The DeFi project Dango released an update three hours after disclosing a security incident last night, stating that the white-hat hacker has fully returned the stolen funds and received a bug bounty. User funds were not affected. The founder of Dango said that fixes will be deployed, additional security measures will be implemented, and preparations are underway to restart the blockchain. According to the earlier announcement, the attacker exploited a logic flaw in the insurance fund to steal USDC collateral. The vulnerability arose because the insurance fund allowed anyone to make donations but failed to verify that the donation amount was positive. T…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Dango suffered an exploit on April 13, 2026, when its insurance fund donation logic failed to validate positive input amounts. This allowed an attacker to drain about $1.9 million USDC from the perps contract, though bridge controls limited losses and all funds were ultimately returned after negotiations. The insurance fund donation contract did not check that donation amounts were positive. Accepting negative values enabled an attacker to drain USDC collateral from the perps contract."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x06c2c3109999500fe3a0213bf33c3a1e99e3b6c86b0595d7804e57193bb4d9ae",
+    "0x7c846ed31368320f146af1290fceafa75c29ccb33c9c652409823f8b31d071aa",
+    "0xa7f9754a356277f28661b457aa9c03b007bb9959fec9a7f550e30a530b4eb342",
+    "0xbf51b9b057c9844efc06463fc16b351c473e9a892012d8c794e08b2af3b55205",
+    "0xc74ad3c33c267e435fe8d9c7c2f5a6b0ebaf4bdd40da521ee9a0aa24c2b46ec2",
+    "0x09690b5020c3c92467db96c630959570ac9dc0a0664aa9549017471a4ecde350",
+    "0x9f0ab90c357ec988bcb74cf92dd6d0fb1f056c4d0eac5dc5611027b382bce190",
+    "0x2ebfd1cdc40fdcc27b5f56a4d5cc83ac8b841f3ab8270bc12c94871ea0dfc9c8"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.phalcon.blocksec.com",
+      "url": "https://app.phalcon.blocksec.com/explorer/tx/eth/0x06c2c3109999500fe3a0213bf33c3a1e99e3b6c86b0595d7804e57193bb4d9ae"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "phemex.com",
+      "url": "https://phemex.com/news/article/dango-defi-platform-suffers-410010-usdc-exploit-due-to-logic-flaw-72936"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/dango/status/2043669424805216745?s=20"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x06c2c3109999500fe3a0213bf33c3a1e99e3b6c86b0595d7804e57193bb4d9ae"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/dango/status/2043710283244331409"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/dango-2026-04-13"
+    },
+    {
+      "source": "revertiq",
+      "label": "ambcrypto.com",
+      "url": "https://ambcrypto.com/dango-exploit-resolved-after-white-hat-returns-funds-users-unaffected/"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptonews.net",
+      "url": "https://cryptonews.net/news/market/33199803/"
+    }
+  ]
+}

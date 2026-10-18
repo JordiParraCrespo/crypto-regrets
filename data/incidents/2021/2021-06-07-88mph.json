@@ -1,0 +1,99 @@
+{
+  "id": "2021-06-07-88mph",
+  "name": "88mph",
+  "date": "2021-06-07",
+  "year": 2021,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "input-validation",
+  "technique": "Missing Input Validation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.88
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Access control",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Access control"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "incorrect access control Vulnerable code snippet: https://etherscan.io/address/0xF0b7DE03134857391d8D43Ed48e20EDF21461097#code#F14#L39 Contract init function without modifier check and there was also no initializer modifier to prevent a re-initialization. Anyone could have taken ownership of the NFT contract."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "88mph disclosed a June 2021 Ethereum vulnerability in three deposit NFT clones. A repeatable init() let any caller take NFT ownership, burn and remint deposit receipts, and withdraw the linked positions. Checked chain data shows a June 8 whitehat rescue to treasury and a June 10 repayment transaction, with no verified malicious drain in the available record. The affected 88mph deposit NFT clones exposed an init() function that any address could call more than once. Re-initializing the NFT changed its owner, and the new owner could use privileged burn() and mint() functions to reassign live deposit IDs before withdrawing the linked positions from the pool contracts."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x9e3b6fa80a5970516933fd61b443f78e39d8add69d8967f5e7cd3da31f535f94",
+    "0x30107c15bb1173828c822d8c5492583c4b13dabd4251134643969dfccb17ffc4",
+    "0xe35ce03238bf9231071edd3785cab9018f138f2ee35cdde590f73f7084c084aa",
+    "0x03886ecbaacf916b9181acc5651dc6613d92465f9f40425c82d5cf9f3b8e550a",
+    "0x079ae0328cfd99fc93fc522174d21ee0d771be2633233127bc7abca9a24d32a0",
+    "0x2bad99e8f1360dc2c630853154230de5b2fca7cb8412da491dd5ceb74ff0063b"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2021-06/88mph_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2021-06/88mph_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "medium.com",
+      "url": "https://medium.com/immunefi/88mph-function-initialization-bug-fix-postmortem-c3a2282894d3"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/address/0xF0b7DE03134857391d8D43Ed48e20EDF21461097#code#F14#L39"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/88mph-2021-06-07"
+    },
+    {
+      "source": "revertiq",
+      "label": "iosiro.com",
+      "url": "https://iosiro.com/blog/88mph-bug-bounty-post-mortem"
+    },
+    {
+      "source": "revertiq",
+      "label": "immunefi.com",
+      "url": "https://immunefi.com/blog/bug-fix-reviews/88mph-function-initialization-bugfix-review/"
+    }
+  ]
+}

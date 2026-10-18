@@ -1,0 +1,118 @@
+{
+  "id": "2023-06-17-midas-capital",
+  "name": "Midas Capital",
+  "date": "2023-06-17",
+  "year": 2023,
+  "amountUsd": 340000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Rounding Error",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Precision Loss. Lost: ~$600K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Precision Loss. Lost: ~$600K"
+    },
+    {
+      "source": "REKT",
+      "text": "Midas can’t keep hold of their gold. On Saturday they lost $600k to a known vulnerability, again. Weaknesses, once discovered, instantly propagate through the ecosystem… When will they learn?"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Cross-chain money market solution Midas Capital has been hacked, causing losses of more than $600,000 after an integer rounding problem in its lending protocol (derived from a fork of the well-known Compound Finance v2 codebase) was exploited. The same situation was also exploited in the previous attack on Hundred Finance. The attacker deposited 400 BNB into Tornado Cash, and some other proceeds were bridged to Ethereum."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On June 17, 2023, Midas Capital’s BNB Chain lending pool was exploited through a Compound V2 style redemption rounding bug after the attacker reduced the market to a 1001 wei supply and used donated LP tokens to inflate the exchange rate. Public loss estimates conflict, ranging from about $340K to about $600K. A Compound V2 style redeem path rounded a fractional cToken entitlement down to 1 wei after the attacker pushed the market into a tiny-supply state and donated LP tokens that inflated the exchange rate. The pool lacked a guard against donation-driven rate inflation in an almost empty market."
+    }
+  ],
+  "audit": "Out of scope",
+  "txHashes": [
+    "0x4a304ff08851106691f626045b0f55d403e3a0958363bdf82b96e8ce7209c3a6",
+    "0x1ebc03f0f2257c275f4990b4130e6c3e451125aa98ee8bbde8aba5dc0320c659",
+    "0x6ca209d77d19d5b09d816c8446389be17a367d97c832b19167a33e0d5269cc00"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-06/MidasCapitalXYZ_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-06/MidasCapitalXYZ_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "medium.com",
+      "url": "https://medium.com/midas-capital/midas-exploit-post-mortem-1ae266222994"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Midas Capital - REKT 2",
+      "url": "https://rekt.news/midas-rekt2"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x4a304ff08851106691f626045b0f55d403e3a0958363bdf82b96e8ce7209c3a6"
+    },
+    {
+      "source": "blocksec",
+      "label": "x.com",
+      "url": "https://x.com/BlockSecTeam/status/1670145829204819969"
+    },
+    {
+      "source": "slowmist",
+      "label": "panewslab.com",
+      "url": "https://www.panewslab.com/zh/articledetails/7xmbgnkh.html"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/midas-capital-hack-june-17-2023-detailed-analysis-2023-06-17"
+    },
+    {
+      "source": "revertiq",
+      "label": "immunebytes.com",
+      "url": "https://immunebytes.com/blog/midas-capital-hack-june-17-2023-detailed-analysis"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/midas-capital-hack-2023"
+    }
+  ]
+}

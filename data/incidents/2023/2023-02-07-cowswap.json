@@ -1,0 +1,115 @@
+{
+  "id": "2023-02-07-cowswap",
+  "name": "CoWSwap",
+  "date": "2023-02-07",
+  "year": 2023,
+  "amountUsd": 180000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "arbitrary-call",
+  "technique": "Arbitrary External Call",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "arbitrary-call",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "arbitrary-call",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Arbitrary External Call Vulnerability. Lost: ~$120k",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Arbitrary External Call Vulnerability. Lost: ~$120k"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Arbitrary External Call Vulnerability The settle function allows arbitrary calls, and the solver contract doesn't validate the interaction data. This vulnerability allows attackers to have the GPv2 contract approve their malicious contract, ultimately leading to a drain of the settlement contract. Vulnerable code snippet: https://etherscan.io/address/0x9008d19f58aabd9ed0d60971565aa8510560ab41#code#F1#L121 https://etherscan.io/address/0x9008d19f58aabd9ed0d60971565aa8510560ab41#code#F2#L41 Attack tx: https://etherscan.io/tx/0x92f906bce94bab417cccc87ae046448d7fb8c2c0350b7ed911545577acb3bfc1 https://etherscan.io/tx/0x90b468608fbcc7faef46502b198471311baca3baab49242a4a85b73d4924379b Analysis: https://twitter.com/MevRefund/status/1622793836291407873 https://twitter.com/peckshield/status/1622801412727148544"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On February 7, 2023, CoW Swap's GPv2Settlement contract on Ethereum was exploited, allowing an attacker to execute an unauthorized transfer of over 114,000 DAI by abusing arbitrary call permissions granted to a malicious solver contract via SwapGuard. Project funds were affected, but user trading funds remained safe. Losses were covered via the protocol's bonding mechanism. The GPv2Settlement contract permitted arbitrary external calls and lacked sufficient validation and restriction of the SwapGuard solver's interaction data, enabling a malicious solver to trigger a DAI approval and subsequent unauthorized DAI transfer from the protocol settlement contract."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x92f906bce94bab417cccc87ae046448d7fb8c2c0350b7ed911545577acb3bfc1",
+    "0x90b468608fbcc7faef46502b198471311baca3baab49242a4a85b73d4924379b"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-02/CowSwap_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-02/CowSwap_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/MevRefund/status/1622793836291407873"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/peckshield/status/1622801412727148544"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/address/0x9008d19f58aabd9ed0d60971565aa8510560ab41#code#F1#L121"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/address/0x9008d19f58aabd9ed0d60971565aa8510560ab41#code#F2#L41"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x92f906bce94bab417cccc87ae046448d7fb8c2c0350b7ed911545577acb3bfc1"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/cow-swap-2023-02-07"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "cow.fi",
+      "url": "https://cow.fi/learn/cow-swap-solver-exploit-post-mortem"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.solidityscan.com",
+      "url": "https://blog.solidityscan.com/cow-swap-hack-analysis-arbitrary-callable-swapguard-6a6ee3de346f/"
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "id": "2021-08-13-neko",
+  "name": "NEKO",
+  "date": "2021-08-13",
+  "year": 2021,
+  "amountUsd": 2200000,
+  "returnedUsd": null,
+  "chains": [
+    "Binance Smart Chain"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.94
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "The Neko Network, a lending protocol on the Binance Smart Chain (BSC), was attacked. The attacker used vulnerabilities in the protocol to mortgage assets in the name of the user and sent the borrowed funds directly to the attacker’s own address. All asset pools on the Neko Network have been frozen to avoid changes. Multiple attacks occur. Due to the setting of the time lock, it takes 24 hours to develop the fund pool and allow users to raise funds in the pool. Neko Network is a product developed by the Zero Coupon Money Market Protocol Maze Protocol team.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The Neko Network, a lending protocol on the Binance Smart Chain (BSC), was attacked. The attacker used vulnerabilities in the protocol to mortgage assets in the name of the user and sent the borrowed funds directly to the attacker’s own address. All asset pools on the Neko Network have been frozen to avoid changes. Multiple attacks occur. Due to the setting of the time lock, it takes 24 hours to develop the fund pool and allow users to raise funds in the pool. Neko Network is a product developed by the Zero Coupon Money Market Protocol Maze Protocol team."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 13 August 2021, NEKO Network was exploited on BNB Chain due to improper access control, leading to a loss of about $2.2 million. The attacker drained lending pools, converted the stolen stablecoins into BNB, partially returned proceeds, and laundered the remainder. Public reporting confirms the exploit and partial fund return but lacks technical implementation detail or a primary postmortem. Improper access control allowed unauthorized users to perform privileged operations, enabling an attacker to withdraw funds that should have been restricted. Detailed implementation specifics and code are not available."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "blog.mazeprotocol.com",
+      "url": "https://blog.mazeprotocol.com/neko-hacking-incident-report-e46cdf179fd9"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/neko-2021-08-13"
+    },
+    {
+      "source": "revertiq",
+      "label": "techflowpost.com",
+      "url": "https://www.techflowpost.com/en-US/newsletter/19788"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/neko-hack-2021"
+    }
+  ]
+}

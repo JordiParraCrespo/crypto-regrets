@@ -1,0 +1,161 @@
+{
+  "id": "2024-10-16-radiant-v2",
+  "name": "Radiant V2",
+  "date": "2024-10-16",
+  "year": 2024,
+  "amountUsd": 50000000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC",
+    "Arbitrum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "social-engineering",
+  "technique": "Blind Signing",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "key-compromise",
+    "confidence": 0.59,
+    "top": [
+      {
+        "category": "key-compromise",
+        "p": 0.61
+      },
+      {
+        "category": "social-engineering",
+        "p": 0.36
+      },
+      {
+        "category": "access-control",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Radiant Capital gets a $53M haircut. Thought multi-sigs were safe? Think again. Radiant's \"robust\" 3/11 setup crumbled like a house of cards. Exploited twice in 2024, the future of Radiant looks about as bright as a black hole.",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "Radiant Capital gets a $53M haircut. Thought multi-sigs were safe? Think again. Radiant's \"robust\" 3/11 setup crumbled like a house of cards. Exploited twice in 2024, the future of Radiant looks about as bright as a black hole."
+    },
+    {
+      "source": "SlowMist",
+      "text": "Radiant Capital posted on X acknowledging issues with its lending markets on BNB Chain and Arbitrum. Trading on Base and Mainnet markets has been paused. According to SlowMist’s security team analysis, the incident occurred after the Radiant attacker illegally gained control of 3 multisig permissions and upgraded to a malicious contract to steal funds. The incident analysis report released by Radiant reveals that the attackers successfully compromised the devices of at least three core contributors through sophisticated malware injection techniques. These compromised devices were then used to sign malicious transactions."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On October 16, 2024, Radiant Capital suffered a cross-chain exploit where an attacker compromised three out of eleven multisig signers controlling upgrade permissions. The attacker used malware and manipulated wallet interfaces to approve malicious multicall transactions, upgraded pool contracts, and drained approximately $58 million in assets across Arbitrum and BNB Chain. The attacker gained control of three out of eleven multisig signers through malware-injected signatures, allowing them to execute unauthorized upgrades to core lending pool contracts. This access control failure was possible because the multisig threshold (3-of-11) was too low for u…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "In October 2024, Radiant Capital's cross-chain lending protocol was exploited for over $50 million on Arbitrum and BNB Chain when attackers compromised key multisig signers via targeted malware, enabling contract upgrades and mass outflows. The incident revealed critical operational-security shortfalls in multisig and admin controls. Attackers compromised the devices of at least three multisig signers using malware. This enabled them to execute arbitrary admin transactions,including proxy upgrades,and gain full control of core lending contracts to drain user funds."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Radiant V2 suffered a $50 million exploit on October 16, 2024, affecting both Arbitrum and BNB Chain deployments after attackers compromised its multisig using malware. The intrusion enabled an attacker to upgrade lending pool contracts and drain funds from all supported markets. Malware compromised devices of three multisig signers, allowing the attacker to manipulate hardware wallet signing, alter transaction payloads for ownership and implementation upgrades, and drain protocol funds across chains."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xd97b93f633aee356d992b49193e60a571b8c466bf46aaf072368f975dc11841c",
+    "0x7856552db409fe51e17339ab1e0e1ce9c85d68bf0f4de4c110fc4e372ea02fb1",
+    "0xa5dc1b97d72d11940d186596cb7478dedc27c8812c9d3bdf78eba5e8cf4f1006",
+    "0x873c2382689cad921427e30f16a814ffb2c1e2550e316e767e66759f7abf4a34"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Radiant Capital - Rekt II",
+      "url": "https://rekt.news/radiant-capital-rekt2"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xd97b93f633aee356d992b49193e60a571b8c466bf46aaf072368f975dc11841c"
+    },
+    {
+      "source": "blocksec",
+      "label": "x.com",
+      "url": "https://x.com/RDNTCapital/status/1847121278974480779"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/RDNTCapital/status/1846634050100039881"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/explained-the-radiant-capital-2024-10-21t11-04-38-363000-00-00"
+    },
+    {
+      "source": "revertiq",
+      "label": "halborn.com",
+      "url": "https://www.halborn.com/blog/post/explained-the-radiant-capital-hack-october-2024"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/de-fi-rekt-report-2024-over-1-45-billion-lost-to-crypto-exploits"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/de-fi-rekt-report-october-2024-over-94-million-lost-to-defi-exploits"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/yet-again-decoding-how-radiant-capital-got-hacked-of-58m-2024-10-18"
+    },
+    {
+      "source": "revertiq",
+      "label": "quillaudits.com",
+      "url": "https://www.quillaudits.com/blog/hack-analysis/radiant-capital-58million-hack"
+    },
+    {
+      "source": "revertiq",
+      "label": "hacken.io",
+      "url": "https://hacken.io/insights/radiant-hack-review/"
+    },
+    {
+      "source": "revertiq",
+      "label": "coinunited.io",
+      "url": "https://coinunited.io/en/pulse/2026-06-01/radiant-capital-winds-down-after-50m-north-korea-linked-hack-defi-lending-risk-in-focus"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/radiant-v2-2024-10-16"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "cointelegraph.com",
+      "url": "https://cointelegraph.com/news/radiant-capital-hacked-multi-sig-wallet-compromised"
+    }
+  ]
+}

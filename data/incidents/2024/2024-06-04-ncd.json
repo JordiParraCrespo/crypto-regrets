@@ -1,0 +1,73 @@
+{
+  "id": "2024-06-04-ncd",
+  "name": "NCD",
+  "date": "2024-06-04",
+  "year": 2024,
+  "amountUsd": 6400,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Business Logic Flaw",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 1.00).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Business Logic Flaw. Lost: $6.4K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Business Logic Flaw. Lost: $6.4K"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The NCD token incorrectly treats tokens received via a skim() call on the pair contract as a buy action. As a result, the mineStartTime is incorrectly initialized for the recipient, enabling attackers to create multiple contracts that start mining rewards without making legitimate buys. This leads to disproportionate reward claims and potential inflation of the reward pool. Vulnerable code snippet: Attack tx: https://bscscan.com/tx/0xbfb9b3b8a0d3c589a02f06c516b5c7b7569739edd00f9836645080f2148aefc7 Analysis: In the _transfer function of the NCD token, the contract checks if the sender == uniswapV2Pair to determine a buy action, however, the following check could be bypassed via a skim call to the uniswapV2pool The attacker exploits this by: 1. Buying tokens once. 2. Sending tokens to the pair. 3. Creating new contracts and calling skim() to retrieve the tokens. Each recipient contract now has a valid mineStartTime, despite not performing a legitimate buy."
+    },
+    {
+      "source": "SlowMist",
+      "text": "According to monitoring by the SlowMist security team, NCD on BNBChain was attacked, resulting in a loss of approximately $20,000."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xbfb9b3b8a0d3c589a02f06c516b5c7b7569739edd00f9836645080f2148aefc7"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-06/NCD_exp.sol",
+  "sources": [
+    "defihacklabs",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-06/NCD_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/1797821034319765604"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0xbfb9b3b8a0d3c589a02f06c516b5c7b7569739edd00f9836645080f2148aefc7"
+    }
+  ]
+}

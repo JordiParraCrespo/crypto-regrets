@@ -1,0 +1,89 @@
+{
+  "id": "2024-09-26-unibtc",
+  "name": "uniBTC",
+  "date": "2024-09-26",
+  "year": 2024,
+  "amountUsd": 2000000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "social-engineering",
+  "technique": "Malware",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.86,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.87
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.09
+      },
+      {
+        "category": "access-control",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.03,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Bedrock's uniBTC protocol was exploited on Ethereum on 26 September 2024, allowing an attacker to mint uniBTC at an improper 1:1 ratio with ETH and drain about $1.7M from DEX liquidity pools. The vulnerability stemmed from a faulty mint function, and was enabled by insider access and malware. A vulnerable mint function in the uniBTC contract failed to account for the real price difference between ETH and BTC, enabling minting at an incorrect 1:1 ratio. Insider access via malware enabled early discovery and exploitation.",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "Bedrock's uniBTC protocol was exploited on Ethereum on 26 September 2024, allowing an attacker to mint uniBTC at an improper 1:1 ratio with ETH and drain about $1.7M from DEX liquidity pools. The vulnerability stemmed from a faulty mint function, and was enabled by insider access and malware. A vulnerable mint function in the uniBTC contract failed to account for the real price difference between ETH and BTC, enabling minting at an incorrect 1:1 ratio. Insider access via malware enabled early discovery and exploitation."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x725f0d65340c859e0f64e72ca8260220c526c3e0ccde530004160809f6177940"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "blocksec",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x725f0d65340c859e0f64e72ca8260220c526c3e0ccde530004160809f6177940"
+    },
+    {
+      "source": "blocksec",
+      "label": "x.com",
+      "url": "https://x.com/Bedrock_DeFi/status/1839712719630676051"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/unibtc-2024-09-26"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptonews.com",
+      "url": "https://cryptonews.com/news/ex-employee-hacks-bedrock-unibtc-for-2m-fuzzland-uncovers-insider-exploit/"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptonews.com",
+      "url": "https://cryptonews.com/news/liquid-restaking-protocol-bedrock-loses-2-million-in-unibtc-security-exploit/"
+    }
+  ]
+}

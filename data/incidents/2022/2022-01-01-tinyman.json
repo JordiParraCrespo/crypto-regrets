@@ -1,0 +1,91 @@
+{
+  "id": "2022-01-01-tinyman",
+  "name": "Tinyman",
+  "date": "2022-01-01",
+  "year": 2022,
+  "amountUsd": 3000000,
+  "returnedUsd": null,
+  "chains": [
+    "Algorand"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Incorrect Share Accounting",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.9,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.91
+      },
+      {
+        "category": "access-control",
+        "p": 0.06
+      },
+      {
+        "category": "logic-error",
+        "p": 0.03
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.89
+  },
+  "bridge": false,
+  "language": "PyTeal",
+  "rootCause": "An attack occurred at Tinyman Pools on January 1 /2, algorand-based automated market maker (AMM) Tinyman tweeted. The attack exploits a previously unknown hole in the contract and allows the attacker to extract assets from a pool to which he has no access. So far, attacks have been executed on multiple pools, but not all of them have been attacked.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "An attack occurred at Tinyman Pools on January 1 /2, algorand-based automated market maker (AMM) Tinyman tweeted. The attack exploits a previously unknown hole in the contract and allows the attacker to extract assets from a pool to which he has no access. So far, attacks have been executed on multiple pools, but not all of them have been attacked."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Tinyman, a decentralized exchange on Algorand, was exploited on January 1, 2022, due to a flaw in its liquidity pool contract. Attackers manipulated the pool-token burn logic to extract more valuable assets, draining about $3 million across several pools. Tinyman's liquidity pool burn logic failed to enforce the correct two-asset redemption. Attackers could invoke the pool-token redemption in a way that returned two transfers of the same asset, disproportionately extracting high-value tokens."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "tinymanorg.medium.com",
+      "url": "https://tinymanorg.medium.com/technical-report-1-first-insights-cbc12109ef08"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/tinyman-2022-01-01"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "blockchainbreaches.com",
+      "url": "https://www.blockchainbreaches.com/en/breaches/tinyman-2022"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/tinyman-hack-2022"
+    }
+  ]
+}

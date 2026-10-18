@@ -1,0 +1,78 @@
+{
+  "id": "2022-08-18-celer-cbridge",
+  "name": "Celer cBridge",
+  "date": "2022-08-18",
+  "year": 2022,
+  "amountUsd": 240000,
+  "returnedUsd": null,
+  "chains": [
+    "Multi-Chain"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "frontend-infra",
+  "technique": "DNS Hijack",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "frontend-infra",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "frontend-infra",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.03,
+    "hasRootCause": 0.88
+  },
+  "bridge": true,
+  "language": null,
+  "rootCause": "Celer said that cBridge's front-end interface suffered from DNS cache poisoning attacks. This attack targeted third-party DNS providers. Celer's own contract was not affected, and users who suffered losses in this incident, Celer, will be fully compensated.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Celer said that cBridge's front-end interface suffered from DNS cache poisoning attacks. This attack targeted third-party DNS providers. Celer's own contract was not affected, and users who suffered losses in this incident, Celer, will be fully compensated."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Celer cBridge's frontend was compromised on August 17, 2022, through a BGP/DNS hijack, enabling the attacker to redirect users to malicious contracts and steal approximately $240,000. Protocol and core contracts remained unaffected. A BGP/DNS hijack at the infrastructure level allowed the attacker to alter frontend routing, serving a tampered UI that directed users to attacker-controlled contracts. There was no smart contract vulnerability."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/CelerNetwork/status/1560123830844411904"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/celer-cbridge-2022-08-18"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptotimes.io",
+      "url": "https://www.cryptotimes.io/2022/08/18/celer-protocol-shuts-down-cbridge-over-dns-exploit/"
+    },
+    {
+      "source": "revertiq",
+      "label": "coinbase.com",
+      "url": "https://www.coinbase.com/blog/celer-bridge-incident-analysis"
+    }
+  ]
+}

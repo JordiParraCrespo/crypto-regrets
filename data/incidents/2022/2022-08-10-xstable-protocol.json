@@ -1,0 +1,94 @@
+{
+  "id": "2022-08-10-xstable-protocol",
+  "name": "XSTABLE Protocol",
+  "date": "2022-08-10",
+  "year": 2022,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.88
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Incorrect Logic Check",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Incorrect Logic Check"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Incorrect Logic Check, get rewards over skim() Vulnerable code snippet: https://etherscan.io/address/0xb276647e70cb3b81a1ca302cf8de280ff0ce5799#code#F5#L208 transfer more XST token to pair, to get more XST token. ---"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 9 August 2022, an attacker exploited a logic vulnerability in XSTABLE Protocol's token distribution on Ethereum, siphoning approximately 27 WETH from the Uniswap WETH/XST pool. The incident was a technical contract exploit, not a deployer rug pull. The contract incorrectly classified certain internal pool operations as legitimate XST purchases, leading to excessive XST rewards during the Uniswap 'skim' operation. This allowed unauthorized profit extraction via a logic flaw."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x873f7c77d5489c1990f701e9bb312c103c5ebcdcf0a472db726730814bfd55f3"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-08/XST_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-08/XST_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "mobile.twitter.com",
+      "url": "https://mobile.twitter.com/BlockSecTeam/status/1557195012042936320"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/address/0xb276647e70cb3b81a1ca302cf8de280ff0ce5799#code#F5#L208"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/xstable-protocol-2022-08-10"
+    },
+    {
+      "source": "revertiq",
+      "label": "threadreaderapp.com",
+      "url": "https://threadreaderapp.com/thread/1557195012042936320.html"
+    },
+    {
+      "source": "revertiq",
+      "label": "tools.blocksec.com",
+      "url": "https://tools.blocksec.com/tx/eth/0x873f7c77d5489c1990f701e9bb312c103c5ebcdcf0a472db726730814bfd55f3"
+    }
+  ]
+}

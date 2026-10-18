@@ -1,0 +1,137 @@
+{
+  "id": "2025-02-11-four-meme",
+  "name": "four.meme",
+  "date": "2025-02-11",
+  "year": 2025,
+  "amountUsd": 183000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Swap Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.96,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.96
+      },
+      {
+        "category": "access-control",
+        "p": 0.04
+      }
+    ],
+    "flashLoan": 0.97,
+    "stateActor": 0.01,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Logic Flaw. Lost: ~186k",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Logic Flaw. Lost: ~186k"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Four.MeMe, a BSC-based meme coin launchpad, was exploited for approximately $183,000 through a business logic flaw in its token launch and liquidity migration mechanism. The protocol's internal transfer restrictions on pre-launch tokens could be bypassed using specific contract functions (e.g., buyTokenAMAP), allowing tokens to be transferred to a PancakeSwap pair address that did not yet exist. The attacker pre-seeded liquidity into the predicted pair address before the official launch migration occurred. When the bonding curve reached 100% and Four.MeMe triggered migration to PancakeSwap, the protocol failed to account for the possibility of pre-existing liquidity in the pair. The attacker then sandwiched the migration transaction using MEV: they surrounded it with their own transactions to drain the pool — first withdrawing pre-added liquidity and then swapping held meme tokens to exhaust the WBNB in the pool — before repaying a flash loan and keeping the profit. Attack Tx: 0x2f77c6d50074b5b89aec04cf066419f7e2acc4bfed6edfc3238d012130303d62 Analysis: BSC-Based Meme Coin LaunchPad Four.Meme Suffers $183K Exploit"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The root cause lies in the ability to transfer tokens to the predictable PancakeSwap pair address before the official migration to the DEX occurred. The buyTokenAMAP function allowed users to buy memecoins using BNB or other BEP20 tokens and specify a recipient address. The attacker exploited this by predicting the address of the WBNB-MubaraKing PancakeSwap pair *before* it was officially created during the migration. They then used buyTokenAMAP to transfer a significant amount of MubaraKing tokens to this pre-determined pair address. When the official migration happened, liquidity was added to a pair that already contained a large balance of the memecoin due to the attacker's prior action. This setup allowed the attacker to perform a sandwich attack using MEV (Miner Extractable Value). They added liquidity just before the official migration, withdrew their liquidity after the official liquidity was added (gaining a large amount of the officially added memecoin), and then swapped the acquired memecoin for WBNB, profiting significantly. The core vulnerability was the lack of restriction on transferring internally traded tokens to predictable external DEX pair addresses before migration, which enabled the attacker to front-run and manipulate the liquidity addition. Vulnerable code snippet: Attack tx: https://bscscan.com/tx/0x2902f93a0e0e32893b6d5c907ee7bb5dabc459093efa6dbc6e6ba49f85c27f61 Analysis: https://blog.verichains.io/p/fourmeme-hack-analysis"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The memecoin platform Four.Meme was attacked. According to an analysis by the SlowMist security team, the attacker was able to execute a frontrunning attack by pre-creating a liquidity pool on PancakeSwap v3 with an extremely high token price. When the token was integrated into PancakeSwap v3, liquidity was added based on the unbalanced pool set up by the attacker. Since the project team did not verify the pool's price, the added liquidity followed the maliciously set price. As a result, the attacker was able to exploit this mechanism to drain assets from the pool."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Four.Meme was exploited on BNB Chain on 11 February 2025, resulting in losses of approximately $183,000. The attacker manipulated the launchpad's liquidity pool creation by front-running the launch, bypassing transfer restrictions, and extracting funds through an unauthorized swap. A transfer restriction flaw allowed an attacker to front-run the PancakeSwap pool creation. By preemptively creating the pair, the attacker bypassed restrictions and manipulated pool pricing, draining liquidity from the protocol."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x2f77c6d50074b5b89aec04cf066419f7e2acc4bfed6edfc3238d012130303d62",
+    "0x2902f93a0e0e32893b6d5c907ee7bb5dabc459093efa6dbc6e6ba49f85c27f61",
+    "0xe0daa3bf68c1a714f255294bd829ae800a381624417ed4b474b415b9d2efeeb5",
+    "0x4235b006b94a79219181623a173a8a6aadacabd01d6619146ffd6fbcbb206dff",
+    "0xdb5d43317ab8e5d67cdd5006b30a6f2ced513237ac189eb1e57f0f06f630d582"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-02/FourMeme_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-02/FourMeme_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "www.chaincatcher.com",
+      "url": "https://www.chaincatcher.com/en/article/2167296"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x2f77c6d50074b5b89aec04cf066419f7e2acc4bfed6edfc3238d012130303d62"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "cryptopotato.com",
+      "url": "https://cryptopotato.com/bsc-based-meme-coin-launchpad-four-meme-suffers-183k-exploit/"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x2902f93a0e0e32893b6d5c907ee7bb5dabc459093efa6dbc6e6ba49f85c27f61"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "blog.verichains.io",
+      "url": "https://blog.verichains.io/p/fourmeme-hack-analysis"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x2f77c6d50074b5b89aec04cf066419f7e2acc4bfed6edfc3238d012130303d62"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/1889206331644789244"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/four-meme-2025-02-11"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "cointelegraph.com",
+      "url": "https://cointelegraph.com/news/bnb-chain-memecoin-fourmeme-hacked-183k"
+    }
+  ]
+}

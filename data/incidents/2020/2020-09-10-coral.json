@@ -1,0 +1,78 @@
+{
+  "id": "2020-09-10-coral",
+  "name": "Coral",
+  "date": "2020-09-10",
+  "year": 2020,
+  "amountUsd": 420000,
+  "returnedUsd": null,
+  "chains": [
+    "EOS"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "reentrancy",
+  "technique": "Reentrancy",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "reentrancy",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "reentrancy",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.2
+  },
+  "bridge": false,
+  "language": "C++",
+  "rootCause": "The wRAM of the EOS ecological DeFi liquidity mining project Coral was attacked by hackers and lost more than 120,000 EOS.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The wRAM of the EOS ecological DeFi liquidity mining project Coral was attacked by hackers and lost more than 120,000 EOS."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Coral Finance, a DeFi project on EOS, was exploited on September 10, 2020, resulting in the draining of over 120,000 EOS, valued at approximately $420,000. The attack was enabled by a reentrancy flaw likely involving wRAM handling, with no verifiable recovery or technical postmortem published. A missing checks-effects-interactions pattern in Coral Finance's EOS smart contract allowed a reentrancy attack. The contract failed to update user balances before executing external calls, particularly involving wRAM transfers. This enabled repeated withdrawals and draining of the protocol's assets."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "sohu.com",
+      "url": "https://www.sohu.com/a/417422116_100217347"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/coral-2020-09-10"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/coral-hack-2020"
+    },
+    {
+      "source": "revertiq",
+      "label": "quadrigainitiative.com",
+      "url": "https://quadrigainitiative.com/cryptocurrencyhackscamfraudwiki/index.php?title=Coral_Finance_Reentrancy_Attack"
+    }
+  ]
+}

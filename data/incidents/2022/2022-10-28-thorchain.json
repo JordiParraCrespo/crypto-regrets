@@ -1,0 +1,58 @@
+{
+  "id": "2022-10-28-thorchain",
+  "name": "THORChain",
+  "date": "2022-10-28",
+  "year": 2022,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [],
+  "targetType": null,
+  "category": "bridge-crosschain",
+  "technique": "Network interruption",
+  "classificationNote": "Classified by keyword rules from the SlowMist label and description.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "client-bug",
+    "confidence": 0.93,
+    "top": [
+      {
+        "category": "client-bug",
+        "p": 0.93
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.04
+      },
+      {
+        "category": "logic-error",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.3
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "The THORChain network of the cross-chain DeFi protocol was interrupted. The official said that the consensus problem has been identified and a patch will be released. The code pushes cosmos.Uint (instead of uint64) into the string, which causes the string to get an arbitrarily large integer instead of the actual value, causing the memo string to be on a different node. On October 28th, THORChain was back online and produced blocks. The network is signing block transactions, so pending transactions should start going through. Once the queue is cleared, the transaction will be re-enabled. Expect 2-3 hours. During the network outage, investors did not lose any funds.…",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The THORChain network of the cross-chain DeFi protocol was interrupted. The official said that the consensus problem has been identified and a patch will be released. The code pushes cosmos.Uint (instead of uint64) into the string, which causes the string to get an arbitrarily large integer instead of the actual value, causing the memo string to be on a different node. On October 28th, THORChain was back online and produced blocks. The network is signing block transactions, so pending transactions should start going through. Once the queue is cleared, the transaction will be re-enabled. Expect 2-3 hours. During the network outage, investors did not lose any funds.…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/THORChain/status/1585800482764730369"
+    }
+  ]
+}

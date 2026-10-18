@@ -1,0 +1,85 @@
+{
+  "id": "2026-06-24-dlmc",
+  "name": "DLMC",
+  "date": "2026-06-24",
+  "year": 2026,
+  "amountUsd": 222600,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "Token",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.08,
+    "stateActor": 0.02,
+    "hasRootCause": 0.86
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Reserve-derived livePrice manipulation. Lost: 222,560.22 USDT",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Reserve-derived livePrice manipulation. Lost: 222,560.22 USDT"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "DLMC on BNB Chain lost ~$222,600 USDT in a flash-loan driven spot price manipulation exploit. The attacker inflated the token price by flash-swapping USDT, manipulating the protocol’s self-pricing logic, and redeeming referral rewards at the synthetic price to drain the treasury. The protocol’s internal price calculation used USDT reserves divided by externally circulating supply, excluding most freshly minted DLMC tokens held by the contract itself. This allowed flash-loan deposits to inflate the price, enabling extraction of referral rewards at artificially high value."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x151025d3f0a782340a74d30ef33a5fad044b838e74437a803f0652e70c231306"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-06/DLMC_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-06/DLMC_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/TenArmorAlert/status/2069957542109958498"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/dlmc-2026-06-24"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptotimes.io",
+      "url": "https://www.cryptotimes.io/2026/06/25/dlmc-token-on-bnb-chain-loses-approximately-222600-in-flash-loan-exploit/"
+    },
+    {
+      "source": "revertiq",
+      "label": "darknavy.org",
+      "url": "https://www.darknavy.org/web3/exploits/dlmc-referral-reward-price-inflation-drain/"
+    }
+  ]
+}

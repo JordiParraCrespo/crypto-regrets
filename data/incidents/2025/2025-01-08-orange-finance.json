@@ -1,0 +1,99 @@
+{
+  "id": "2025-01-08-orange-finance",
+  "name": "Orange Finance",
+  "date": "2025-01-08",
+  "year": 2025,
+  "amountUsd": 840000,
+  "returnedUsd": null,
+  "chains": [
+    "Arbitrum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "key-compromise",
+  "technique": "Private Key Compromised",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "key-compromise",
+    "confidence": 0.48,
+    "top": [
+      {
+        "category": "key-compromise",
+        "p": 0.51
+      },
+      {
+        "category": "access-control",
+        "p": 0.47
+      },
+      {
+        "category": "logic-error",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.01,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "The Arbitrum-based liquidity management project Orange Finance suffered a $830,000 asset theft due to a misconfigured multi-sig. The attacker gained ownership of each vault, modified their implementations, and withdrew both the deposited assets and excessively approved funds. About 94% (roughly $780,000) of the total loss came from deposited assets, while the remaining 6% (around $47,000) resulted from excessive approvals.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The Arbitrum-based liquidity management project Orange Finance suffered a $830,000 asset theft due to a misconfigured multi-sig. The attacker gained ownership of each vault, modified their implementations, and withdrew both the deposited assets and excessively approved funds. About 94% (roughly $780,000) of the total loss came from deposited assets, while the remaining 6% (around $47,000) resulted from excessive approvals."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On January 8, 2025, Orange Finance on Arbitrum suffered an ~$843K loss after an attacker gained admin control via a misconfigured multisig wallet. The attacker used their upgrade authority to replace vault contracts and drain user assets from multiple pools. Misconfiguration of the controlling multisig wallet allowed protocol upgrades with only one signature. The attacker compromised the admin's private key, then upgraded vault proxies to malicious contracts, enabling asset drains without further approval."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x093673927fc38783d37717b4bd14693c29035fceff6a0c7747db21e88c4ea28f",
+    "0x855625c6775b0acd5048b0c94466f76c3c361e2269445e66ae7ae352f04f538f",
+    "0x14535a9c8e7d5fa2c94de52067a3cf93369273517532e0a06871ddceb3e67dd7",
+    "0xad0d094c8ea32110ee3bc00d9ba040a79f5ba411296cef5e9b4d25a2c2e2a888",
+    "0x1bab3323ed9d1bdea9f57809e47b93b0fc0cd154e003e96812c333dedd74c500",
+    "0xecd160e3027b7bdd23423358f68b25eaaee08a9156f745390e14c7b7e9363195",
+    "0xe31cc5011c7c4ee0720674a38147f9d4765f09e138c4f1d15c45079e2b5507b3"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "mirror.xyz",
+      "url": "https://mirror.xyz/0x6FA2aF9a4d6fFe654361F713780963C10412e7c3/gN17YMrLhKKg9YT9a391U74pWr9IhqBUDWUqDyDamjE"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/orange-finance-2025-01-08"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/de-fi-rekt-report-january-2025-62-5-million-lost-across-11-incidents-zero-recovered"
+    },
+    {
+      "source": "revertiq",
+      "label": "paragraph.com",
+      "url": "https://paragraph.com/@orange-finance/orange-finance-jan-9th-follow-up-investigation-report-on-the-incident"
+    },
+    {
+      "source": "revertiq",
+      "label": "defirisk.co",
+      "url": "https://defirisk.co/learn/exploits/orange-finance-rekt/"
+    }
+  ]
+}

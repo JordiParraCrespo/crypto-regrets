@@ -1,0 +1,86 @@
+{
+  "id": "2014-03-04-poloniex",
+  "name": "Poloniex",
+  "date": "2014-03-04",
+  "year": 2014,
+  "amountUsd": 50000,
+  "returnedUsd": null,
+  "chains": [
+    "Bitcoin"
+  ],
+  "targetType": "CEX",
+  "category": "logic-error",
+  "technique": "Withdrawal Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.97,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.97
+      },
+      {
+        "category": "key-compromise",
+        "p": 0.02
+      },
+      {
+        "category": "access-control",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.34
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "Digital currency exchange Poloniex, which trades bitcoin and other popular digital currencies such as litecoin, namecoin and dogecoin, has lost 12.3% of its total bitcoin supply in an attack. The exchange took to Bitcoin Forum on 4th March to report it had been compromised by a previously unknown vulnerability in its coding.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Digital currency exchange Poloniex, which trades bitcoin and other popular digital currencies such as litecoin, namecoin and dogecoin, has lost 12.3% of its total bitcoin supply in an attack. The exchange took to Bitcoin Forum on 4th March to report it had been compromised by a previously unknown vulnerability in its coding."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "In March 2014, Poloniex lost about 12.3% of its Bitcoin, approximately 97 BTC, after an attacker exploited withdrawal logic to perform simultaneous withdrawals exceeding their balance. Users were initially given a temporary balance reduction, but Poloniex later reimbursed all customers in full. Concurrent handling of multiple withdrawal requests allowed an attacker to withdraw more bitcoin than their account balance without sufficient checks for negative balances."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/poloniex-loses-12-3-bitcoins-latest-bitcoin-exchange-hack"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/poloniex-2014-03-04"
+    },
+    {
+      "source": "revertiq",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/markets/2014/03/05/poloniex-loses-123-of-its-bitcoins-in-latest-bitcoin-exchange-hack"
+    },
+    {
+      "source": "revertiq",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/markets/2014/07/02/poloniex-claims-all-customers-repaid-following-march-bitcoin-hack"
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "id": "2026-09-15-unknown-gnosis-safe-wallet",
+  "name": "Unknown Gnosis Safe Wallet",
+  "date": "2026-09-15",
+  "year": 2026,
+  "amountUsd": 7730000,
+  "returnedUsd": null,
+  "chains": [],
+  "targetType": null,
+  "category": "access-control",
+  "technique": "Smart Contract Vulnerability",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.74). Replaced keyword guess \"arbitrary-call\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.74,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.76
+      },
+      {
+        "category": "arbitrary-call",
+        "p": 0.24
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "An unidentified user’s Gnosis Safe wallet on Ethereum was drained of about $7,730,000. The attacker exploited an authorization bypass in a Router multicall function, used the victim Safe module to DelegateCall attacker-crafted data, injected aEthrsETH into a malicious Uniswap V4 hooked pool, then swapped and redeemed it as rsETH. Kelp later placed a 24-hour pause on an address that received the stolen rsETH.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "An unidentified user’s Gnosis Safe wallet on Ethereum was drained of about $7,730,000. The attacker exploited an authorization bypass in a Router multicall function, used the victim Safe module to DelegateCall attacker-crafted data, injected aEthrsETH into a malicious Uniswap V4 hooked pool, then swapped and redeemed it as rsETH. Kelp later placed a 24-hour pause on an address that received the stolen rsETH."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/2099779127662493875"
+    }
+  ]
+}

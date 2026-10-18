@@ -1,0 +1,73 @@
+{
+  "id": "2024-08-06-novax",
+  "name": "Novax",
+  "date": "2024-08-06",
+  "year": 2024,
+  "amountUsd": 25000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Price Manipulation",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 1.00).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.9,
+    "stateActor": 0.01,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Price Manipulation. Lost: ~25K USD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Price Manipulation. Lost: ~25K USD"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The Novax protocol relied on an oracle that calculated token prices based on token pair reserves, which were susceptible to manipulation via flash loans. The staking and withdrawal functions used real-time oracle prices without validation, allowing the attacker to manipulate the NovaX token price by borrowing USDT, purchasing and staking NovaX tokens, and withdrawing inflated amounts, exploiting the lack of time delays or circuit breakers. Vulnerable code snippet: Attack tx: https://bscscan.com/tx/0xb1ad1188d620746e2e64785307a7aacf2e8dbda4a33061a4f2fbc9721048e012 Analysis: https://blog.verichains.io/p/novax-incident-price-manupilation"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xb1ad1188d620746e2e64785307a7aacf2e8dbda4a33061a4f2fbc9721048e012"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-08/NovaXM2E_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-08/NovaXM2E_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/EXVULSEC/status/1820676684410147276"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0xb1ad1188d620746e2e64785307a7aacf2e8dbda4a33061a4f2fbc9721048e012"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "blog.verichains.io",
+      "url": "https://blog.verichains.io/p/novax-incident-price-manupilation"
+    }
+  ]
+}

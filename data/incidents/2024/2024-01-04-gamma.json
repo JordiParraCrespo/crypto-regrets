@@ -1,0 +1,177 @@
+{
+  "id": "2024-01-04-gamma",
+  "name": "Gamma",
+  "date": "2024-01-04",
+  "year": 2024,
+  "amountUsd": 4500000,
+  "returnedUsd": null,
+  "chains": [
+    "Arbitrum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.66,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.68
+      },
+      {
+        "category": "logic-error",
+        "p": 0.3
+      },
+      {
+        "category": "input-validation",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.07,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Price manipulation. Lost: ~6.3M",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Price manipulation. Lost: ~6.3M"
+    },
+    {
+      "source": "REKT",
+      "text": "Gamma Strategies, an Arbitrum-based concentrated liquidity management protocol, was exploited for at least $4.5M, earlier today. Recently we wondered, \"Can we do better this year?\". So far, it’s not looking good."
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The primary issue stemmed from the deposit proxy settings related to the price change threshold, which were set excessively high. This oversight allowed for significant price fluctuations of -50% to +100% in certain LST and stablecoin vaults. The attacker exploited this flaw by targeting these specific vaults. Vulnerable code snippet: Attack transaction: https://arbiscan.io/tx/0x025cf2858723369d606ee3abbc4ec01eab064a97cc9ec578bf91c6908679be75 Analysis: https://medium.com/neptune-mutual/how-was-gamma-protocol-exploited-6b63e6c127ba"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The liquidity management protocol Gamma has been attacked, and its post-mortem indicates that there was a flaw in the deposit agent configuration. This flaw allowed the attacker to manipulate the price up to the price change threshold and mint a disproportionately high number of LP tokens."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Gamma Strategies suffered a major exploit on Arbitrum in January 2024 due to a misconfigured price change threshold, allowing attackers to mint disproportionate LP tokens and withdraw assets. At least $3.4M in tokens was stolen. Deposit protection measures in Gamma vaults allowed too wide a price change threshold (up to 50,200%), letting attackers use flash loans to manipulate pool prices and mint excessive LP tokens. The root cause was the unsafe configuration combined with arithmetic misalignment between deposit and withdrawal accounting."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On January 4, 2024, Gamma Strategies was exploited on Arbitrum via flash loan-induced price manipulation. Misconfigured price-change thresholds in the deposit proxy allowed attackers to mint excessive LP tokens, causing a loss of approximately $6.2M. The deposit proxy contract's price-change threshold was set too broad, permitting up to 200% price deviation. This failed to restrict flash loan-driven pool manipulation, allowing deposits at manipulated prices to mint disproportionate LP tokens."
+    }
+  ],
+  "audit": "Out of scope",
+  "txHashes": [
+    "0x025cf2858723369d606ee3abbc4ec01eab064a97cc9ec578bf91c6908679be75",
+    "0xa96584f8ab7c27daea33798bb8a66286c75a2ba57eee3b4192c771f4eb4ac609",
+    "0xcbb7ba9aca8467c561e7a1213556fc0da0a7d80d076c08856b590de9ff03f838",
+    "0xbbc005af95fdb0decf477989059f70ebae8433955ac3ab1cf77a30ff30f0b615",
+    "0xe4bf6f1c964a89d48af60216ce110f4bf54fcbada20b7cefaf6bea55c9f4d542",
+    "0xcfdc8147022e8133e74d3576d43ffb56543de30ecf2a4c8c154e51ab18551926",
+    "0xf99d4164aa91d94b8b2237a4fbe789c0d117460dcbe2242e832f95447166892b",
+    "0xfb044b7d892b812b430decba322922d17c3f902db6040d872d0f845e6eae7ce1",
+    "0xe63c77d4a205e1036a230b483753876a93915706af24264e64e470919339ab98",
+    "0xff88d10bc452c3dcf04e4ea42c585b86ac521728a40d70ec97e846ed0f0d1597",
+    "0xf23c38b79806433fdd85c9b2aa70971d97d284e8ec155e0cd4141d2957911ea7",
+    "0xe2301118a4ad24b944a6190b24fac26ed5a340a4a7f52788484dcce0d6f9585e",
+    "0xadb209cc735cec128adc9dff43bc4666cf37037efd375970eaf23a2f9fda6e03",
+    "0xb678ceb8da285bd6367a3e01af245d93dd23ab8f00a15157955c033a2b3b92c3",
+    "0xf71e6e5164f8fb866873eb2ac6a600a5148c374d92b89ecbb37ce540a86a4550",
+    "0x9d82ff833fd56004d046a90658313a811f6f4aacd66d5326ccc2bdd993ecd251"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-01/Gamma_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-01/Gamma_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/officer_cia/status/1742772207997050899"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/shoucccc/status/1742765618984829326"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Gamma Strategies - REKT",
+      "url": "https://rekt.news/gamma-strategies-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "arbiscan.io",
+      "url": "https://arbiscan.io/tx/0x025cf2858723369d606ee3abbc4ec01eab064a97cc9ec578bf91c6908679be75"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "medium.com",
+      "url": "https://medium.com/neptune-mutual/how-was-gamma-protocol-exploited-6b63e6c127ba"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xa96584f8ab7c27daea33798bb8a66286c75a2ba57eee3b4192c771f4eb4ac609"
+    },
+    {
+      "source": "blocksec",
+      "label": "medium.com",
+      "url": "https://medium.com/gamma-strategies/post-mortem-remediation-plan-9a62f10d90f3"
+    },
+    {
+      "source": "blocksec",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs?tab=readme-ov-file#20240104-gamma---price-manipulation"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/gamma-2021-12-21"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.solidityscan.com",
+      "url": "https://blog.solidityscan.com/gamma-hack-analysis-6c074e61709e/"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptonews.com",
+      "url": "https://cryptonews.com/news/gamma-strategies-identifies-root-cause-of-exploit-attack-attempts-negotiation-for-fund-return/"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/gamma-strategies-price-manipulation-2024-01-31t20-31-55-00-00"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/de-fi-rekt-report-over-38-8m-lost-in-january-2024"
+    },
+    {
+      "source": "revertiq",
+      "label": "olympix.security",
+      "url": "https://olympix.security/biweekly-exploits/gamma-telcoin-pine-same-bugs-new-chains"
+    }
+  ]
+}

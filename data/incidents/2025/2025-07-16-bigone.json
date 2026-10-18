@@ -1,0 +1,119 @@
+{
+  "id": "2025-07-16-bigone",
+  "name": "BigONE",
+  "date": "2025-07-16",
+  "year": 2025,
+  "amountUsd": 27000000,
+  "returnedUsd": null,
+  "chains": [
+    "Bitcoin",
+    "BSC",
+    "Ethereum",
+    "Solana",
+    "TRON"
+  ],
+  "targetType": "CEX",
+  "category": "frontend-infra",
+  "technique": "Supply Chain Attack",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "frontend-infra",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "frontend-infra",
+        "p": 0.99
+      },
+      {
+        "category": "logic-error",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.03,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "Supply chain attack hit BigONE for $27 million when attackers compromised production servers and reprogrammed withdrawal systems to approve unauthorized drains. No private keys stolen - just someone who convinced the vault it was payday.",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "Supply chain attack hit BigONE for $27 million when attackers compromised production servers and reprogrammed withdrawal systems to approve unauthorized drains. No private keys stolen - just someone who convinced the vault it was payday."
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "BigONE suffered a supply chain attack in which adversaries deployed malicious binaries to the exchange's backend account-operation servers via compromised CI/CD or server management channels. The injected code silently modified the platform's account and risk-control logic to automatically approve withdrawal requests without legitimate authorization, bypassing normal security checks entirely without ever requiring the exchange's private keys. Attackers then drained funds across multiple chains — total losses reached approximately $27 million — of which roughly $4 million in ETH was the on-chain portion tracked on Ethereum. BigONE committed to covering all user losses from internal reserves. Attack Tx: 0x354e1d2b418fe303d66a1eaab66d15535616042c35305c2464983e5c92645da7 Analysis: Explained: The BigONE Hack (July 2025)"
+    },
+    {
+      "source": "SlowMist",
+      "text": "According to monitoring by the SlowMist security team, cryptocurrency exchange BigONE has suffered a supply chain attack, with losses exceeding $27 million. The attacker breached the production network and altered the operating logic of servers related to account management and risk control, enabling unauthorized fund withdrawals. Notably, no private keys were leaked in this incident."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On July 16, 2025, BigONE crypto exchange lost $27 million in a supply-chain attack targeting back-end server logic. Hackers modified account control systems, enabling unauthorized withdrawals across multiple blockchains. User funds were not directly compromised, as private keys remained secure; BigONE publicly committed to fully reimburse all affected customers. Attackers exploited a supply-chain vulnerability to compromise BigONE's production servers, altering back-end account and risk control logic. This allowed them to bypass standard withdrawal checks and drain hot wallet balances without triggering private key or risk alerts."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x354e1d2b418fe303d66a1eaab66d15535616042c35305c2464983e5c92645da7"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: BigONE - Rekt",
+      "url": "https://rekt.news/bigone-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x354e1d2b418fe303d66a1eaab66d15535616042c35305c2464983e5c92645da7"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "halborn.com",
+      "url": "https://www.halborn.com/blog/post/explained-the-big-one-hack-july-2025"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x354e1d2b418fe303d66a1eaab66d15535616042c35305c2464983e5c92645da7"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/1945346830222680330"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/explained-the-bigone-2025-07-22t15-27-57-498000-00-00"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/defi-rekt-report-q3-2025-434m-lost-across-40-exploits"
+    },
+    {
+      "source": "revertiq",
+      "label": "coinnews.com",
+      "url": "https://coinnews.com/news/bigone-exchange-hacked-for-27m-what-happened-and-what-comes-next/"
+    }
+  ]
+}

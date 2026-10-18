@@ -1,0 +1,127 @@
+{
+  "id": "2024-12-23-moonhacker",
+  "name": "Moonhacker",
+  "date": "2024-12-23",
+  "year": 2024,
+  "amountUsd": 318900,
+  "returnedUsd": null,
+  "chains": [
+    "Optimism"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "input-validation",
+  "technique": "improper input validation",
+  "classificationNote": "Classified by keyword rules from the DeFiHackLabs root-cause title.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "input-validation",
+    "confidence": 0.63,
+    "top": [
+      {
+        "category": "input-validation",
+        "p": 0.65
+      },
+      {
+        "category": "access-control",
+        "p": 0.27
+      },
+      {
+        "category": "arbitrary-call",
+        "p": 0.08
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "improper input validation. Lost: 318.9 k",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "improper input validation. Lost: 318.9 k"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The exploit stemmed from improper input validation and a lack of access control in the executeOperation function of the MoonHacker Vault contract. This vulnerability allowed the attacker to pass a malicious contract as the mToken address, bypassing intended security checks. By doing so, the attacker gained unauthorized token approvals and could manipulate the contract's logic to their advantage, ultimately leading to the unauthorized withdrawal of funds. The absence of a whitelist for the mToken address and inadequate restrictions on who could call executeOperation were the fundamental flaws that enabled this exploit. Vulnerable code snippet: Attack tx: https://app.blocksec.com/explorer/tx/optimism/0xd12016b25d7aef681ade3dc3c9d1a1cc12f35b2c99953ff0e0ee23a59454c4fe Analysis: https://blog.verichains.io/p/moonhacker-vault-hack-analysis"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The Moonhacker contract suffered a flash loan attack, resulting in a loss of approximately $320,000."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "MoonHacker vaults on Optimism were exploited on December 23, 2024, due to missing validation and access control in the executeOperation function. The attacker drained over $318,000 USDC via flash loans and unauthorized token approvals. The MoonHacker vault contracts failed to validate the mToken argument in executeOperation and did not limit access to this function. This allowed any external address to authorize malicious contracts, enabling USDC to be drained through an attack sequence."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xd12016b25d7aef681ade3dc3c9d1a1cc12f35b2c99953ff0e0ee23a59454c4fe"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-12/Moonhacker_exp.sol",
+  "sources": [
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-12/Moonhacker_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "blog.solidityscan.com",
+      "url": "https://blog.solidityscan.com/moonhacker-vault-hack-analysis-ab122cb226f6"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/optimism/0xd12016b25d7aef681ade3dc3c9d1a1cc12f35b2c99953ff0e0ee23a59454c4fe"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "blog.verichains.io",
+      "url": "https://blog.verichains.io/p/moonhacker-vault-hack-analysis"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xd12016b25d7aef681ade3dc3c9d1a1cc12f35b2c99953ff0e0ee23a59454c4fe"
+    },
+    {
+      "source": "blocksec",
+      "label": "x.com",
+      "url": "https://x.com/CertiKAlert/status/1871347300918030409"
+    },
+    {
+      "source": "slowmist",
+      "label": "optimistic.etherscan.io",
+      "url": "https://optimistic.etherscan.io/tx/0xd12016b25d7aef681ade3dc3c9d1a1cc12f35b2c99953ff0e0ee23a59454c4fe"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/moonhacker-2025-01-02"
+    },
+    {
+      "source": "revertiq",
+      "label": "defillama.com",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.solidityscan.com",
+      "url": "https://blog.solidityscan.com/moonhacker-vault-hack-analysis-ab122cb226f6/"
+    },
+    {
+      "source": "revertiq",
+      "label": "olympix.security",
+      "url": "https://olympix.security/biweekly-exploits/dexxs-21m-key-leak-moonhackers-contract-hijack-and-clippers-liquidity-fragility"
+    }
+  ]
+}

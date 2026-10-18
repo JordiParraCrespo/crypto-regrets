@@ -1,0 +1,75 @@
+{
+  "id": "2021-09-03-siren",
+  "name": "Siren",
+  "date": "2021-09-03",
+  "year": 2021,
+  "amountUsd": 3500000,
+  "returnedUsd": null,
+  "chains": [
+    "Polygon"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "reentrancy",
+  "technique": "Reentrancy",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "reentrancy",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "reentrancy",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.01,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "A reentrancy flaw in SIREN Protocol's Polygon-based AMM let an attacker repeatedly withdraw funds before accounting updated, draining approximately $3.5 million across multiple pools on September 3, 2021. The vulnerable withdrawal path in SIREN Protocol's AMM transferred ERC1155 tokens via an external call before updating internal balances. This allowed an attacker contract’s onERC1155Received callback to recursively re-enter the withdrawal function, exploiting stale accounting and draining funds.",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "A reentrancy flaw in SIREN Protocol's Polygon-based AMM let an attacker repeatedly withdraw funds before accounting updated, draining approximately $3.5 million across multiple pools on September 3, 2021. The vulnerable withdrawal path in SIREN Protocol's AMM transferred ERC1155 tokens via an external call before updating internal balances. This allowed an attacker contract’s onERC1155Received callback to recursively re-enter the withdrawal function, exploiting stale accounting and draining funds."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xf95fd54b4b1ed0bc109a04df16d1d75106a4d007b186543467c975df94cd3276"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/explained-the-siren-protocol-2021-09-03"
+    },
+    {
+      "source": "revertiq",
+      "label": "halborn.com",
+      "url": "https://www.halborn.com/blog/post/explained-the-siren-protocol-hack-september-2021"
+    },
+    {
+      "source": "revertiq",
+      "label": "quadrigainitiative.com",
+      "url": "https://www.quadrigainitiative.com/casestudy/sirenmarketreentrancybug.php"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/NomosLabs-Security/poc-siren-protocol-2021"
+    }
+  ]
+}

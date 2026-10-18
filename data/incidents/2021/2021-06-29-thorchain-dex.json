@@ -1,0 +1,98 @@
+{
+  "id": "2021-06-29-thorchain-dex",
+  "name": "THORChain DEX",
+  "date": "2021-06-29",
+  "year": 2021,
+  "amountUsd": 350000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "bridge-crosschain",
+  "technique": "Bridge Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.72,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.74
+      },
+      {
+        "category": "input-validation",
+        "p": 0.13
+      },
+      {
+        "category": "bridge-crosschain",
+        "p": 0.12
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.92
+  },
+  "bridge": true,
+  "language": "Go",
+  "rootCause": "THORChain, a decentralized cross-chain transaction protocol, tweeted that a malicious attack against THORChain was discovered. THORChain nodes have responded and isolated defenses. The capital loss caused by this attack was US$140,000, but THORChain stated that user funds will not be affected. The fund pool will be used to make up for the leaked funds. The team stated that the path of the attack was that EthBifrost had a logical error in processing the same symbol as ETH. THORChain claimed that it repaired Bifrost within 30 minutes and adopted node defense to stop Bifrost and THORNode. The team said it will also invest funds for ongoing code reviews and monitoring.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "THORChain, a decentralized cross-chain transaction protocol, tweeted that a malicious attack against THORChain was discovered. THORChain nodes have responded and isolated defenses. The capital loss caused by this attack was US$140,000, but THORChain stated that user funds will not be affected. The fund pool will be used to make up for the leaked funds. The team stated that the path of the attack was that EthBifrost had a logical error in processing the same symbol as ETH. THORChain claimed that it repaired Bifrost within 30 minutes and adopted node defense to stop Bifrost and THORNode. The team said it will also invest funds for ongoing code reviews and monitoring."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On June 28, 2021, THORChain halted swaps after an attacker exploited a parsing flaw in the Ethereum Bifröst integration. A crafted ERC-20 token using the symbol ETH was interpreted as the native ETH asset, allowing the attacker to swap fake deposits for real assets worth about $139,000 before nodes paused the network and deployed a patch. THORChain's Ethereum Bifröst parser initialized non-ETH assets as common.ETHAsset and skipped ERC-20 address qualification when a token symbol resolved to ETH. A malicious ERC-20 could therefore be interpreted as the native asset ETH.ETH instead of a distinct token identifier such as ETH. , causing THORChain to credit…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x966cb083d116da2e0d1d115a99381db2200bd39ff75d38cfacdc17b1368f1159",
+    "0xb74f4860e24f04e9e32ace36735285d518a8a36bf8e8dcc868d7508bb60947c9",
+    "0xb56df76d4bf1384dc2744692d744de44efadcec7226c6255532a0d1ebdb5abcc",
+    "0x7cf72852118597e6ff65226a17eae5a078b6de7af791a6324906d9d456f2b1b6",
+    "0x514c90c817c270663513e91492d77e9f7282598f5afc3711800e311b6e00be99",
+    "0xae3fab1e5cfae0a04f25155ec9047cf0f99df4ddf7dda1f1351ed4720fa3c030"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/THORChain/status/1409637636638011395"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/thorchain-2021-06-28"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.thorchain.org",
+      "url": "https://blog.thorchain.org/eth-parsing-error-and-exploit"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.thorchain.org",
+      "url": "https://blog.thorchain.org/post-mortem-eth-router-exploits-1-2-and-premature-return-to-trading-incident"
+    }
+  ]
+}

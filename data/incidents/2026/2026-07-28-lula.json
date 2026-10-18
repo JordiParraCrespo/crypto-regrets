@@ -1,0 +1,89 @@
+{
+  "id": "2026-07-28-lula",
+  "name": "LULA",
+  "date": "2026-07-28",
+  "year": 2026,
+  "amountUsd": 578000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "Token",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.8,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.81
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.14
+      },
+      {
+        "category": "logic-error",
+        "p": 0.04
+      }
+    ],
+    "flashLoan": 0.95,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "The LULA token on BSC was exploited when attackers abused the privileged recycle() function in its contract, combined with an approximately $237 million flash loan to manipulate PancakeSwap V2 liquidity pool reserves, resulting in a loss of about $578,100.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The LULA token on BSC was exploited when attackers abused the privileged recycle() function in its contract, combined with an approximately $237 million flash loan to manipulate PancakeSwap V2 liquidity pool reserves, resulting in a loss of about $578,100."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "LULA on BNB Chain lost about $578,000 on 2026-07-28 after an attacker abused a privileged recycle() path that could transfer tokens directly out of a PancakeSwap V2 pair and immediately resynchronize reserves with sync(). The attacker combined the reserve rewrite primitive with large flash-loan-backed swaps to distort the LULA/USDT pool price and extract USDT. Public incident analyses and the checked exploit transaction indicate that LULA exposed an attacker-reachable path to a privileged recycle() function. The function reportedly allowed the Rental contract to transfer LULA directly out of the PancakeSwap V2 pair through an internal balance update an…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xa219ab9d57e520e5235b15a8801f4ebac8cc45551be0430ce4e49caea0411d7c",
+    "0x392fc1d6cb1b3c832983c7eabb94a96b895c2f1c16c472a15930d4d7c4efc52d"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/CertiKAlert/status/2082309959484911845"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/lula-2026-07-28"
+    },
+    {
+      "source": "revertiq",
+      "label": "blocksec.com",
+      "url": "https://blocksec.com/blog/web3-security-coldcard-entropy-lula-exploits"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptotimes.io",
+      "url": "https://www.cryptotimes.io/2026/07/29/lula-token-on-bsc-exploited-for-578k-in-reserve-manipulation-attack/"
+    }
+  ]
+}

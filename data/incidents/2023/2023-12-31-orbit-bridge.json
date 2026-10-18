@@ -1,0 +1,122 @@
+{
+  "id": "2023-12-31-orbit-bridge",
+  "name": "Orbit Bridge",
+  "date": "2023-12-31",
+  "year": 2023,
+  "amountUsd": 81700000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "signature-crypto",
+  "technique": "Signature Verification Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "signature-crypto",
+    "confidence": 0.83,
+    "top": [
+      {
+        "category": "signature-crypto",
+        "p": 0.84
+      },
+      {
+        "category": "access-control",
+        "p": 0.14
+      },
+      {
+        "category": "input-validation",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": true,
+  "language": "Solidity",
+  "rootCause": "Incorrect input validation. Lost: ~81M",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Incorrect input validation. Lost: ~81M"
+    },
+    {
+      "source": "REKT",
+      "text": "It wasn’t just fireworks blowing up on New Year’s Eve... Orbit Chain’s Ethereum bridge lost $81.5M. What will 2024 bring?"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The root cause is a combination of inadequate input validation in the \"withdraw\" function and flawed signature verification in the \"_validate\" function. These issues allowed the attacker to bypass access controls, manipulate withdrawal parameters, and execute unauthorized transfers Vulnerable code snippet: Attack transaction: https://bscscan.com/tx/0x1d0af3a963682748493f21bf9e955ce3a950bee5817401bf2486db7a0af104b4 Analysis: https://blog.solidityscan.com/orbit-chain-hack-analysis-b71c36a54a69"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Cross-chain bridge protocol Orbit Chain has suffered an attack, resulting in a loss of $81.6 million. Orbit Chain has tweeted that the team has requested major cryptocurrency exchanges worldwide to freeze the stolen assets."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On December 31, 2023, attackers drained Orbit Bridge’s Ethereum vaults of approximately $81.5 million by compromising the multi-signature signing authority. The exploit did not involve a smart contract bug but instead bypassed the intended security threshold by controlling the majority of signing keys. Attackers obtained control over a majority (reported 7 of 10) of the Orbit Bridge Ethereum vault multisig signing keys, allowing them to authorize and execute withdrawals."
+    }
+  ],
+  "audit": "Out of scope",
+  "txHashes": [
+    "0x1d0af3a963682748493f21bf9e955ce3a950bee5817401bf2486db7a0af104b4"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-01/OrbitChain_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-01/OrbitChain_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "blog.solidityscan.com",
+      "url": "https://blog.solidityscan.com/orbit-chain-hack-analysis-b71c36a54a69"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Orbit Bridge - REKT",
+      "url": "https://rekt.news/orbit-bridge-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x1d0af3a963682748493f21bf9e955ce3a950bee5817401bf2486db7a0af104b4"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Orbit_Chain/status/1741725778956730778"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/orbit-bridge-2023-12-31"
+    },
+    {
+      "source": "revertiq",
+      "label": "defi-intel.com",
+      "url": "https://defi-intel.com/incidents/orbit-bridge-2023/"
+    },
+    {
+      "source": "revertiq",
+      "label": "blockchain.news",
+      "url": "https://blockchain.news/news/cross-chain-orbit-bridge-allegedly-experiences-a-82-million-exploit"
+    }
+  ]
+}

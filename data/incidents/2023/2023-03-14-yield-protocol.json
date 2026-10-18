@@ -1,0 +1,60 @@
+{
+  "id": "2023-03-14-yield-protocol",
+  "name": "Yield Protocol",
+  "date": "2023-03-14",
+  "year": 2023,
+  "amountUsd": 1500000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": null,
+  "category": "logic-error",
+  "technique": "Affected by Euler Finance Attack",
+  "classificationNote": "Classified by keyword rules from the SlowMist label and description.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.24,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.28
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.22
+      },
+      {
+        "category": "logic-error",
+        "p": 0.16
+      }
+    ],
+    "flashLoan": 0.1,
+    "stateActor": 0.02,
+    "hasRootCause": 0.12
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "Yield Protocol, a fixed-rate lending agreement, posted an update on Twitter saying: \"All collateral deposited by borrowers on Yield Protocol appears to be safe. Collateral is not deposited into Euler, but is kept in Yield Protocol. Euler hack Affected our mainnet liquidity pool. The Yield liquidity pool holds two assets: Euler eTokens and Yield fyTokens. We do not yet have exact figures for the value of eTokens held prior to the attack, but believe the total value is less than $1.5 million. \" On April 25, Yield Protocol tweeted that \"we have successfully claimed the recovered funds from Euler. The funds are being held in the timelock. We are now taking…",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Yield Protocol, a fixed-rate lending agreement, posted an update on Twitter saying: \"All collateral deposited by borrowers on Yield Protocol appears to be safe. Collateral is not deposited into Euler, but is kept in Yield Protocol. Euler hack Affected our mainnet liquidity pool. The Yield liquidity pool holds two assets: Euler eTokens and Yield fyTokens. We do not yet have exact figures for the value of eTokens held prior to the attack, but believe the total value is less than $1.5 million. \" On April 25, Yield Protocol tweeted that \"we have successfully claimed the recovered funds from Euler. The funds are being held in the timelock. We are now taking…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/yield/status/1635339497067130881"
+    }
+  ]
+}

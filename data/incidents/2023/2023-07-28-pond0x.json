@@ -1,0 +1,84 @@
+{
+  "id": "2023-07-28-pond0x",
+  "name": "Pond0x",
+  "date": "2023-07-28",
+  "year": 2023,
+  "amountUsd": 2200000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "Token",
+  "category": "arbitrary-call",
+  "technique": "Arbitrary External Call",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.51,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.54
+      },
+      {
+        "category": "arbitrary-call",
+        "p": 0.46
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.01,
+    "hasRootCause": 0.94
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "A serious flaw in Pond0x, the Pepe the Frog-branded MEME coin launched by Pauly0x, caused traders to lose at least $2.2 million after it was discovered that anyone could transfer tokens belonging to someone else. People quickly started scrambling to steal money from each other. Pauly0x responded by blaming traders who were buying and selling tokens, with various Twitter posts the next day saying he was teaching people a lesson that it wasn’t his fault that people lost money. He wrote to angry traders accusing him of rug pulling. He added a message to the website: \"GREED KILLS\".",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "A serious flaw in Pond0x, the Pepe the Frog-branded MEME coin launched by Pauly0x, caused traders to lose at least $2.2 million after it was discovered that anyone could transfer tokens belonging to someone else. People quickly started scrambling to steal money from each other. Pauly0x responded by blaming traders who were buying and selling tokens, with various Twitter posts the next day saying he was teaching people a lesson that it wasn’t his fault that people lost money. He wrote to angry traders accusing him of rug pulling. He added a message to the website: \"GREED KILLS\"."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On July 28, 2023, the Pond0x protocol on Ethereum was exploited due to a flawed access control in its token transfer function, leading to at least $2.2M in losses. The vulnerability allowed unauthorized transfers from user accounts, verified by chain evidence for a principal loss transaction. The Pond0x token contract exposed a transfer function without proper access controls, enabling any address to initiate token transfers from any source address. This access control flaw allowed attackers to move user tokens arbitrarily."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x486a39badd5c0601c9e5d68066a035684edc97f35362567f66c7855f923a62a8"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/YazanXBT/status/1684971383590199325"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/pond0x-2023-07-28"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/pond0x-hack-2023"
+    },
+    {
+      "source": "revertiq",
+      "label": "defillama.com",
+      "url": "https://defillama.com/protocol/pond0x"
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "id": "2024-10-05-ega-token",
+  "name": "EGA Token",
+  "date": "2024-10-05",
+  "year": 2024,
+  "amountUsd": 554000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": null,
+  "category": "oracle-manipulation",
+  "technique": "Lack of Slippage Protection",
+  "classificationNote": "Classified by keyword rules from the DeFiHackLabs explorer label and description.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.59,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.61
+      },
+      {
+        "category": "logic-error",
+        "p": 0.36
+      },
+      {
+        "category": "input-validation",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.98,
+    "stateActor": 0.01,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "The EGA token contract on BSC, which was unverified at the time of the incident, contained a function responsible for purchasing EGA tokens from a PancakeSwap pair without any slippage protection or price-impact guard. The absence of minimum-output enforcement meant the contract would execute swaps regardless of how far the price had moved. The attacker exploited this by using flash loans to manipulate the EGA token price in the liquidity pool, then triggering the unprotected buy function at the inflated price, draining approximately $554K from the protocol. The lack of on-chain slippage controls on AMM interactions—combined with the unverified, unaudited contract—made the protocol unable to defend against intra-transaction price manipulation. Attack Tx: 0xece4a4ac46660618ecee43826fc6f89fe4beaef87ca5e5786f763892b48bc999",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The EGA token contract on BSC, which was unverified at the time of the incident, contained a function responsible for purchasing EGA tokens from a PancakeSwap pair without any slippage protection or price-impact guard. The absence of minimum-output enforcement meant the contract would execute swaps regardless of how far the price had moved. The attacker exploited this by using flash loans to manipulate the EGA token price in the liquidity pool, then triggering the unprotected buy function at the inflated price, draining approximately $554K from the protocol. The lack of on-chain slippage controls on AMM interactions—combined with the unverified, unaudited contract—made the protocol unable to defend against intra-transaction price manipulation. Attack Tx: 0xece4a4ac46660618ecee43826fc6f89fe4beaef87ca5e5786f763892b48bc999"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xece4a4ac46660618ecee43826fc6f89fe4beaef87ca5e5786f763892b48bc999"
+  ],
+  "poc": null,
+  "sources": [
+    "defihacklabs",
+    "blocksec"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0xece4a4ac46660618ecee43826fc6f89fe4beaef87ca5e5786f763892b48bc999"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xece4a4ac46660618ecee43826fc6f89fe4beaef87ca5e5786f763892b48bc999"
+    }
+  ]
+}

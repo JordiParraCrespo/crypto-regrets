@@ -1,0 +1,122 @@
+{
+  "id": "2024-05-08-gpu",
+  "name": "GPU",
+  "date": "2024-05-08",
+  "year": 2024,
+  "amountUsd": 32400,
+  "returnedUsd": null,
+  "chains": [
+    "BNB"
+  ],
+  "targetType": "Token",
+  "category": "accounting-math",
+  "technique": "Arithmetic Error",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.97,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.97
+      },
+      {
+        "category": "access-control",
+        "p": 0.02
+      },
+      {
+        "category": "logic-error",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.09,
+    "stateActor": 0.03,
+    "hasRootCause": 0.4
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "self transfer. Lost: ~32K USD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "self transfer. Lost: ~32K USD"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "self transfer Vulnerable code snippet: https://bscscan.com/address/0xf51cbf9f8e089ca48e454eb79731037a405972ce Attack tx: https://bscscan.com/tx/0x2c0ada695a507d7a03f4f308f545c7db4847b2b2c82de79e702d655d8c95dadb https://app.blocksec.com/explorer/tx/bsc/0x2c0ada695a507d7a03f4f308f545c7db4847b2b2c82de79e702d655d8c95dadb Analysis: https://blog.solidityscan.com/gpu-hack-analysis-bf11f7c00534"
+    },
+    {
+      "source": "SlowMist",
+      "text": "GPU on BNBChain was attacked, with a loss of about $32,000. There is a logic vulnerability in the _transfer function of the contract. When transferring money to yourself, the balance will increase by the amount of the transfer."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "GPU’s BNB Chain token was exploited on May 8, 2024, due to a contract bug that allowed attackers to double their token balance via self-transfers. The repeated inflation led to a rapid collapse and an estimated $32,400 loss. The GPU token contract failed to handle self-transfer correctly, allowing the sender’s balance to be increased instead of remaining unchanged whenever tokens were transferred to the sender’s own address."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x2c0ada695a507d7a03f4f308f545c7db4847b2b2c82de79e702d655d8c95dadb"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-05/GPU_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-05/GPU_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/PeckShieldAlert/status/1788153869987611113"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0xf51cbf9f8e089ca48e454eb79731037a405972ce"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x2c0ada695a507d7a03f4f308f545c7db4847b2b2c82de79e702d655d8c95dadb"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/bsc/0x2c0ada695a507d7a03f4f308f545c7db4847b2b2c82de79e702d655d8c95dadb"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/SlowMist_Team/status/1788153412019978733"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/gpu-2024-05-08"
+    },
+    {
+      "source": "revertiq",
+      "label": "quadrigainitiative.com",
+      "url": "https://quadrigainitiative.com/casestudy/gputokentransfervulnerability.php"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.solidityscan.com",
+      "url": "https://blog.solidityscan.com/gpu-hack-analysis-bf11f7c00534/"
+    }
+  ]
+}

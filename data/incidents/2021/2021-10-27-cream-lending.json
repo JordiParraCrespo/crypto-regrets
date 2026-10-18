@@ -1,0 +1,113 @@
+{
+  "id": "2021-10-27-cream-lending",
+  "name": "CREAM Lending",
+  "date": "2021-10-27",
+  "year": 2021,
+  "amountUsd": 130000000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.96,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.96
+      },
+      {
+        "category": "access-control",
+        "p": 0.01
+      },
+      {
+        "category": "market-manipulation",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.39,
+    "stateActor": 0.02,
+    "hasRootCause": 0.31
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Price Manipulation. Lost: $130M",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Price Manipulation. Lost: $130M"
+    },
+    {
+      "source": "REKT",
+      "text": "Cream Finance has been hacked (again) for ~$130 million. The Yearn Finance decentralised monopoly has grown too large. Why accumulate so many protocols if you don’t care for their users?"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Cream Finance, the DeFi lending agreement, was attacked and lost approximately US$130 million. The stolen funds were mainly Cream LP tokens and other ERC-20 tokens. It is reported that this is the third largest DeFi hacking in history (although the two larger hacking incidents have funds returned), in addition, Cream Finance has suffered multiple lightning loan attacks before, and lost 37.5 million US dollars in February. Another $19 million was lost."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Cream Finance lost more than $130 million on October 27, 2021 to a flash-loan-driven oracle manipulation. The attacker used recursive collateral amplification and spot vault price manipulation to inflate yUSD collateral value, then borrowed nearly all of Cream's liquid assets in a single transaction. Cream Finance's oracle for yUSD collateral accepted the instantaneous pricePerShare value from a Yearn vault. This spot exchange rate was manipulable in a single block via flash loan injection of vault assets, enabling the attacker to inflate collateral value and drain lending pools."
+    }
+  ],
+  "audit": "Unaudited",
+  "txHashes": [
+    "0x0fe2542079644e107cbf13690eb9c2c65963ccb79089ff96bfaf8dced2331c92"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2021-10/Cream_2_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2021-10/Cream_2_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "medium.com",
+      "url": "https://medium.com/immunefi/hack-analysis-cream-finance-oct-2021-fc222d913fc5"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Cream Finance - REKT 2",
+      "url": "https://rekt.news/cream-rekt-2"
+    },
+    {
+      "source": "slowmist",
+      "label": "medium.com",
+      "url": "https://medium.com/cream-finance/post-mortem-exploit-oct-27-507b12bb6f8e"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/cream-finance-2021-10-27"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractaudit.com",
+      "url": "https://www.smartcontractaudit.com/guides/cream-finance-2021-v2-oracle-exploit"
+    }
+  ]
+}

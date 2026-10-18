@@ -1,0 +1,85 @@
+{
+  "id": "2024-09-20-doggo",
+  "name": "DOGGO",
+  "date": "2024-09-20",
+  "year": 2024,
+  "amountUsd": 7000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "Token",
+  "category": "logic-error",
+  "technique": "Withdrawal Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.96,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Logic Flaw. Lost: 7K USD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Logic Flaw. Lost: 7K USD"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "DOGGO was exploited on Ethereum Mainnet on September 20, 2024, with the attacker draining ~$7,000 by manipulating the token contract’s self-balance threshold via flash loans and swaps, triggering a flawed branch in transfer logic. The DOGGO token contract’s transfer logic used its own self-balance (balanceOf(address(this))) as a conditional branch. The attacker used flash loans and swaps to manipulate this balance below a threshold, triggering a special branch, enabling favorable swap behavior and draining value."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x9e074d70e4f9022cba33c1417a6f6338d8248b67d6141c9a32913ca567d0efca"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-09/DOGGO_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-09/DOGGO_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/TenArmorAlert/status/1837358462076080521"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/doggo-2024-09-20"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/kismp123/DeFi-Security-Incident/blob/main/2024/2024-09-12_DOGGO_TokenSelfBalanceExploit.md"
+    },
+    {
+      "source": "revertiq",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/phalcon/explorer/tx/eth/0x9e074d70e4f9022cba33c1417a6f6338d8248b67d6141c9a32913ca567d0efca?line=0"
+    }
+  ]
+}

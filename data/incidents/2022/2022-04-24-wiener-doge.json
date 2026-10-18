@@ -1,0 +1,118 @@
+{
+  "id": "2022-04-24-wiener-doge",
+  "name": "Wiener DOGE",
+  "date": "2022-04-24",
+  "year": 2022,
+  "amountUsd": 30000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Rounding Error",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.95,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.95
+      },
+      {
+        "category": "logic-error",
+        "p": 0.05
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.94
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Flashloan. Lost: 78 BNB",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Flashloan. Lost: 78 BNB"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "LPs should be excluded from fees and token burns. Vulnerable code snippet: https://www.bscscan.com/address/0x46ba8a59f4863bd20a066fd985b163235425b5f9#code#L206 if an LP sends 100 WDOGE, its balance will decrease by 104 WDOGE, attacker exhaust the deflationary tokens in the LP pair; LPs should be excluded from fees and token burns."
+    },
+    {
+      "source": "SlowMist",
+      "text": "The Wiener DOGE project was exploited maliciously, causing $30,000 in damages. Attackers exploited the inconsistency between WDODGE's charging mechanism and swap pools to launch the attack. The root cause of the incident is that the sender's LP pair is not excluded from the transfer fee through the tightened token contract. As a result, the attacker is able to drain the deflationary tokens in the LP pair, which in turn causes the pair price to become unbalanced."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Wiener DOGE, a deflationary token on BNB Chain, was exploited on April 25, 2022, through a flash loan and manipulation of the liquidity pool’s token burns, resulting in an estimated loss of 78 BNB (~$30,000). The vulnerability arose because LP pairs were not excluded from WDOGE’s burn-and-fee mechanism, enabling the attacker to drain tokens and disturb the pool pricing. The Wiener DOGE token contract did not exclude liquidity pool (LP) pairs from its deflationary mechanics (fee and token burn), allowing the attacker to manipulate token transfers between the pool and themselves, causing destructive burns and disturbing the pool’s invariant. This imbalan…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x4f2005e3815c15d1a9abd8588dd1464769a00414a6b7adcbfd75a5331d378e1d"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-04/Wdoge_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-04/Wdoge_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "coinyuppie.com",
+      "url": "https://coinyuppie.com/four-combinations-of-hackers-analysis-of-attacks-on-wiener-doge-last-kilometer-medamon-and-pidao-projects/"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/solid_group_1/status/1519034573354676224"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x4f2005e3815c15d1a9abd8588dd1464769a00414a6b7adcbfd75a5331d378e1d"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://www.bscscan.com/address/0x46ba8a59f4863bd20a066fd985b163235425b5f9#code#L206"
+    },
+    {
+      "source": "slowmist",
+      "label": "mp.weixin.qq.com",
+      "url": "https://mp.weixin.qq.com/s/l6XES9gtYlclw59AF1whdg"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/wiener-doge-2022-04-24"
+    },
+    {
+      "source": "revertiq",
+      "label": "certik.com",
+      "url": "https://www.certik.com/blog/wiener-doge-exploit"
+    },
+    {
+      "source": "revertiq",
+      "label": "beosin.com",
+      "url": "https://beosin.com/resources/beosins-analysis-of-the-wiener-doge-flash-loan-attack-"
+    }
+  ]
+}

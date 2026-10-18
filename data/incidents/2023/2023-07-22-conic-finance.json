@@ -1,0 +1,97 @@
+{
+  "id": "2023-07-22-conic-finance",
+  "name": "Conic Finance",
+  "date": "2023-07-22",
+  "year": 2023,
+  "amountUsd": 300000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "reentrancy",
+    "confidence": 0.5,
+    "top": [
+      {
+        "category": "reentrancy",
+        "p": 0.53
+      },
+      {
+        "category": "logic-error",
+        "p": 0.36
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.07
+      }
+    ],
+    "flashLoan": 0.08,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Price Manipulation. Lost: ~$934K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Price Manipulation. Lost: ~$934K"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Incorrect assumption about the address returned by the Curve element registry for ETH as the underlying for the Curve v2 pool. Specifically, the Conic ETH Omnipool uses the CurveHandlerV3 to check whether we are currently in a reentrant call. This check was only executed if the pool being interacted with contains ETH, which was checked by calling the _isETH method. Our assumption was that Curve v2 pools using ETH have the ETH address (0xeee…eee) as one of their coins. However, they instead have the WETH address. This led to _isETH returning false, and in turn, to the reentrancy guard of the rETH pool being bypassed. After bypass the check, attacker can manipulate the price of rETH Curve LP Token. Attack TX: https://etherscan.io/tx/0x37acd17a80a5f95728459bfea85cb2e1f64b4c75cf4a4c8dcb61964e26860882 Analysis: https://twitter.com/spreekaway/status/1682467603518726144"
+    },
+    {
+      "source": "SlowMist",
+      "text": "This second attack was unrelated to the ETH Omnipool's re-entrancy exploit. The attacker was able to realize a profit of approximately $300k by exploiting the crvUSD Omnipool. We will share more updates as we continue to investigate."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x37acd17a80a5f95728459bfea85cb2e1f64b4c75cf4a4c8dcb61964e26860882"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-07/Conic02_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-07/Conic02_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "medium.com",
+      "url": "https://medium.com/@ConicFinance/post-mortem-eth-and-crvusd-omnipool-exploits-c9c7fa213a3d"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/spreekaway/status/1682467603518726144"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x37acd17a80a5f95728459bfea85cb2e1f64b4c75cf4a4c8dcb61964e26860882"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/ConicFinance/status/1682524319518269440"
+    }
+  ]
+}

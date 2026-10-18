@@ -1,0 +1,86 @@
+{
+  "id": "2021-08-17-xsurge",
+  "name": "XSURGE",
+  "date": "2021-08-17",
+  "year": 2021,
+  "amountUsd": 5000000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "reentrancy",
+  "technique": "Flashloan Attack + Reentrancy",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 1.00).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "reentrancy",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "reentrancy",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.77,
+    "stateActor": 0.02,
+    "hasRootCause": 0.87
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Flashloan Attack + Reentrancy. Lost: $5 million",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Flashloan Attack + Reentrancy. Lost: $5 million"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Reentrancy Vulnerable code snippet: https://bscscan.com/address/0xe1e1aa58983f6b8ee8e4ecd206cea6578f036c21#code#L581 Don’t follow check-effect-interaction pattern."
+    },
+    {
+      "source": "SlowMist",
+      "text": "On August 17, the DeFi project XSURGE on BSC suffered a lightning loan attack. On August 16, local time, XSURGE officially issued a statement about the SurgeBNB vulnerability before the attack. Since the SurgeBNB contract cannot be changed and has been abandoned, the vulnerability cannot be patched. XSURGE said that it did not disclose any specific details about the nature of this vulnerability, but strongly recommends that users migrate out of SurgereBnb as soon as possible. The vulnerability may be triggered by an attacker at any time. After the announcement, XSURGE was subsequently attacked, and the attacker stole $5 million from SurgeBNB."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2021-08/XSURGE_exp.sol",
+  "sources": [
+    "defihacklabs",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2021-08/XSURGE_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "beosin.medium.com",
+      "url": "https://beosin.medium.com/a-sweet-blow-fb0a5e08657d"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "medium.com",
+      "url": "https://medium.com/@Knownsec_Blockchain_Lab/knownsec-blockchain-lab-comprehensive-analysis-of-xsurge-attacks-c83d238fbc55"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x8c93d6e5d6b3ec7478b4195123a696dbc82a3441be090e048fe4b33a242ef09d"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0xe1e1aa58983f6b8ee8e4ecd206cea6578f036c21#code#L581"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/XSURGEDEFI/status/1427359459102404609"
+    }
+  ]
+}

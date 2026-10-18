@@ -1,0 +1,98 @@
+{
+  "id": "2026-07-11-bonzo-lend",
+  "name": "Bonzo Lend",
+  "date": "2026-07-11",
+  "year": 2026,
+  "amountUsd": 9050000,
+  "returnedUsd": null,
+  "chains": [
+    "Hedera"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.1,
+    "stateActor": 0.03,
+    "hasRootCause": 0.42
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Zero equals zero. Supra’s oracle verifier accepted a zeroed signature against a zeroed key, and Bonzo Finance on Hedera lost $9.05 million because the math checked out and nobody questioned the premise.",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "Zero equals zero. Supra’s oracle verifier accepted a zeroed signature against a zeroed key, and Bonzo Finance on Hedera lost $9.05 million because the math checked out and nobody questioned the premise."
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Oracle exploit Source: https://twitter.com/Phalcon_xyz/status/2077314420993404941"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Bonzo Lend on Hedera was exploited through a third-party oracle (Supra) vulnerability. An attacker submitted a massively manipulated SAUCE price, allowing them to borrow approximately $9.05 million in assets with minimal collateral. The borrowed funds were subsequently swapped on SaucerSwap and bridged to Ethereum via LayerZero (over $5M tracked on-chain). Bonzo Lend paused the protocol shortly after detecting abnormal activity."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On July 11, 2026, Bonzo Lend on Hedera suffered a $9.05M loss when Supra's oracle verifier allowed an attacker to publish a forged SAUCE price update with a zeroed signature, enabling massive undercollateralized borrowing. Supra's on-chain oracle verifier failed to reject zeroed BLS signature and public key inputs when given a committee ID outside the valid range. This let the Hedera pairing precompile accept a mathematically valid but non-authorized signature, allowing an attacker to submit a manipulated price update."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Bonzo Finance - Rekt",
+      "url": "https://rekt.news/bonzo-finance-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Phalcon_xyz/status/2077314420993404941"
+    },
+    {
+      "source": "slowmist",
+      "label": "bonzo.finance",
+      "url": "https://bonzo.finance/blog/bonzo-lend-incident-report-oracle-provider-exploit"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/bonzo-finance-2026-07-11"
+    },
+    {
+      "source": "revertiq",
+      "label": "quillaudits.com",
+      "url": "https://www.quillaudits.com/blog/hack-analysis/bonzo-fiance-zero-signature-exploit"
+    },
+    {
+      "source": "revertiq",
+      "label": "blocksec.com",
+      "url": "https://blocksec.com/blog/web3-security-summerfi-bonzo-lend-exploits"
+    }
+  ]
+}

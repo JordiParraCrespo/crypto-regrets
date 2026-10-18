@@ -1,0 +1,95 @@
+{
+  "id": "2024-11-21-matez",
+  "name": "Matez",
+  "date": "2024-11-21",
+  "year": 2024,
+  "amountUsd": 80000,
+  "returnedUsd": null,
+  "chains": [
+    "BNB Chain"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Arithmetic Error",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.06,
+    "stateActor": 0.02,
+    "hasRootCause": 0.1
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Integer Truncation. Lost: 80k USD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Integer Truncation. Lost: 80k USD"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The Matez (MATEZ) on BSC is suspected to have been attacked, resulting in a loss of at least $80K."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Matez on BNB Chain lost about $80,000 after a staking input was truncated to zero but still counted toward claim eligibility. The linked exploit transaction mined on 2024-11-22 shows the helper contract receiving MATEZ through PancakeSwap after the faulty claim path executed. Unchecked integer truncation in the Matez staking accounting path let an oversized stake amount collapse to zero credit, then the claim logic accepted that truncated state as proof of participation."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x840b0dc64dbb91e8aba524f67189f639a0bc94ee9256c57d79083bb3fd46ec91"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-11/Matez_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-11/Matez_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/TenArmorAlert/status/1859830885966905670"
+    },
+    {
+      "source": "slowmist",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x840b0dc64dbb91e8aba524f67189f639a0bc94ee9256c57d79083bb3fd46ec91"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/matez-2024-11-21"
+    },
+    {
+      "source": "revertiq",
+      "label": "api.llama.fi",
+      "url": "https://api.llama.fi/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/past/2024/README.md#L193"
+    }
+  ]
+}

@@ -1,0 +1,99 @@
+{
+  "id": "2022-12-10-mu-mug",
+  "name": "MU&MUG",
+  "date": "2022-12-10",
+  "year": 2022,
+  "amountUsd": 57000,
+  "returnedUsd": null,
+  "chains": [
+    "Avalanche"
+  ],
+  "targetType": "Token",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.97,
+    "stateActor": 0.02,
+    "hasRootCause": 0.91
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "FlashLoan price manipulation. Lost: $57k",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "FlashLoan price manipulation. Lost: $57k"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "FlashLoan price manipulation. Vulnerable code snippet: https://snowtrace.io/address/0x4aa679402c6afce1e0f7eb99ca4f09a30ce228ab#code#F9#L167 Attack tx: https://explorer.phalcon.xyz/tx/avax/0xab39a17cdc200c812ecbb05aead6e6f574712170eafbd73736b053b168555680 Analysis: https://docs.mu.money/more-mu-info/mu-hack https://www.certik.com/resources/blog/3pdPXDWLvf0wKZ9yy3HeHz-mu-coin-incident-analysis"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 10 December 2022, MU&MUG on Avalanche was exploited for approximately $57,000 due to manipulation of the spot price in AMM liquidity pools. The attacker used flash loans to depress the price relied on by bond minting contracts, allowing them to acquire undervalued tokens and drain protocol assets. The protocol's bond contracts sourced prices directly from instantly manipulable AMM spot rates, lacking protections such as TWAP oracles or deviation bounds. This allowed a flash loan to transiently deflate the price and enable cheap token minting."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xab39a17cdc200c812ecbb05aead6e6f574712170eafbd73736b053b168555680"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-12/MUMUG_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-12/MUMUG_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BeosinAlert/status/1601422462012469248"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "snowtrace.io",
+      "url": "https://snowtrace.io/address/0x4aa679402c6afce1e0f7eb99ca4f09a30ce228ab#code#F9#L167"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "explorer.phalcon.xyz",
+      "url": "https://explorer.phalcon.xyz/tx/avax/0xab39a17cdc200c812ecbb05aead6e6f574712170eafbd73736b053b168555680"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "docs.mu.money",
+      "url": "https://docs.mu.money/more-mu-info/mu-hack"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/mu-mug-2022-12-10"
+    },
+    {
+      "source": "revertiq",
+      "label": "certik.com",
+      "url": "https://www.certik.com/blog/mu-coin-incident-analysis"
+    }
+  ]
+}

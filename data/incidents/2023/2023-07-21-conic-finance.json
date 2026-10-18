@@ -1,0 +1,146 @@
+{
+  "id": "2023-07-21-conic-finance",
+  "name": "Conic Finance",
+  "date": "2023-07-21",
+  "year": 2023,
+  "amountUsd": 3300000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "reentrancy",
+  "technique": "Read-Only Reentrancy",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "reentrancy",
+    "confidence": 0.92,
+    "top": [
+      {
+        "category": "reentrancy",
+        "p": 0.92
+      },
+      {
+        "category": "logic-error",
+        "p": 0.07
+      },
+      {
+        "category": "access-control",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.08,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Read-Only-Reentrancy && MisConfiguration. Lost: ~$3.25M",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Read-Only-Reentrancy && MisConfiguration. Lost: ~$3.25M"
+    },
+    {
+      "source": "REKT",
+      "text": "Lightning does strike twice. Conic Finance got double-rekt on Friday, losing a total of $4.2M from their ETH and crvUSD omnipools. Will such a promising protocol survive this double blow?"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Incorrect assumption about the address returned by the Curve element registry for ETH as the underlying for the Curve v2 pool. Specifically, the Conic ETH Omnipool uses the CurveHandlerV3 to check whether we are currently in a reentrant call. This check was only executed if the pool being interacted with contains ETH, which was checked by calling the _isETH method. Our assumption was that Curve v2 pools using ETH have the ETH address (0xeee…eee) as one of their coins. However, they instead have the WETH address. This led to _isETH returning false, and in turn, to the reentrancy guard of the rETH pool being bypassed. After bypass the check, attacker can manipulate the price of rETH Curve LP Token. Attack TX: https://etherscan.io/tx/0x8b74995d1d61d3d7547575649136b8765acb22882960f0636941c44ec7bbe146 Analysis: https://twitter.com/BlockSecTeam/status/1682356244299010049 https://medium.com/@ConicFinance/post-mortem-eth-and-crvusd-omnipool-exploits-c9c7fa213a3d"
+    },
+    {
+      "source": "SlowMist",
+      "text": "On July 21, Conic Finance ’s ETH omnipool was hit by a series of small hacks that cost around $3.2 million. Conic Finance issued an update on the attack, saying, “The root cause of the attack is due to an incorrect assumption about the address returned by the ETH’s Curve meta-registry in the Curve V2 pool, which enables reentrancy attacks and is deploying fixes for the affected contracts."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On July 21, 2023, Conic Finance's ETH Omnipool was exploited for over $3.26 million due to a read-only reentrancy vulnerability triggered by a misidentified ETH/WETH address. The attacker used flash loans to manipulate Curve pool prices and drained funds from Omnipools before the team paused operations. The vulnerable CurveLPOracleV2 code wrongly assumed Curve v2 pools used the native ETH address for ETH-related pools but Curve actually employed the WETH address. This mistake caused the _isETH check to return false, which led to the reentrancy guard not activating. The attacker exploited this gap to recursively call withdrawals in the midst of liquidit…"
+    }
+  ],
+  "audit": "Out of scope",
+  "txHashes": [
+    "0x8b74995d1d61d3d7547575649136b8765acb22882960f0636941c44ec7bbe146",
+    "0xf56f34a092d8864549052d8a1072e8477a4fb45382ec9549a25c63bb566630b4",
+    "0x5cf6288c7940150e3624c3459f26f837109262002add2f89488b07b64b0ef3a8",
+    "0x40553e26e227854fcc26e55e3f90c877322e70f9213666172cba9e4e30821d96"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-07/Conic_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-07/Conic_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "medium.com",
+      "url": "https://medium.com/@ConicFinance/post-mortem-eth-and-crvusd-omnipool-exploits-c9c7fa213a3d"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BlockSecTeam/status/1682356244299010049"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Conic Finance - REKT",
+      "url": "https://rekt.news/conic-finance-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x8b74995d1d61d3d7547575649136b8765acb22882960f0636941c44ec7bbe146"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x8b74995d1d61d3d7547575649136b8765acb22882960f0636941c44ec7bbe146"
+    },
+    {
+      "source": "blocksec",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs?tab=readme-ov-file#20230721-conic-finance---read-only-reentrancy--misconfiguration"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/ConicFinance/status/1682385596700844032"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/explained-the-conic-finance-2023-07-25t10-25-21-597000-00-00"
+    },
+    {
+      "source": "revertiq",
+      "label": "halborn.com",
+      "url": "https://www.halborn.com/blog/post/explained-the-conic-finance-hack-july-2023"
+    },
+    {
+      "source": "revertiq",
+      "label": "certik.com",
+      "url": "https://www.certik.com/blog/conic-finance-incident-analysis"
+    },
+    {
+      "source": "revertiq",
+      "label": "merklescience.com",
+      "url": "https://www.merklescience.com/blog/hack-track-investigating-conic-finance-flow-of-funds"
+    }
+  ]
+}

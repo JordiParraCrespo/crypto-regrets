@@ -1,0 +1,86 @@
+{
+  "id": "2018-10-26-eosroyale",
+  "name": "EosRoyale",
+  "date": "2018-10-26",
+  "year": 2018,
+  "amountUsd": 60000,
+  "returnedUsd": null,
+  "chains": [
+    "EOS"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Random number attack",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "signature-crypto",
+    "confidence": 0.52,
+    "top": [
+      {
+        "category": "signature-crypto",
+        "p": 0.55
+      },
+      {
+        "category": "logic-error",
+        "p": 0.41
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.04
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.94
+  },
+  "bridge": false,
+  "language": "C++",
+  "rootCause": "Vulnerability of the random number generator, the attacker can try to calculate the future number of random number generator algorithms by using the information of the previous block and stolen $60,000 from the EosRoyale wallet.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Vulnerability of the random number generator, the attacker can try to calculate the future number of random number generator algorithms by using the information of the previous block and stolen $60,000 from the EosRoyale wallet."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "EosRoyale, an EOS gambling application, was exploited on 2018-10-26 through predictable on-chain randomness. Contemporary EOS security reporting stated that attackers calculated future game outcomes from previous block information, leading to reported losses of about 10,800 EOS. Later incident catalogues estimated the impact near $60,000. EosRoyale reportedly derived game randomness from deterministic EOS chain data that attackers could reproduce off-chain. Contemporary incident reporting stated that attackers calculated future random numbers from previous block information. The vulnerable historical contract source and exact random number implementation were not recovered."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "jinse.com",
+      "url": "https://www.jinse.com/lives/61280.htm"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/eosroyale-2018-10-26"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/liyue201/eos-security"
+    },
+    {
+      "source": "revertiq",
+      "label": "igaojin.me",
+      "url": "https://igaojin.me/2018/11/23/%E6%AD%A4%E5%9C%B0%E6%97%A0%E4%BA%BA%E7%94%9F%E8%BF%98%EF%BC%9A%E5%8C%BA%E5%9D%97%E9%93%BE%E9%9A%8F%E6%9C%BA%E6%95%B0%E7%9A%84%E5%8E%9F%E7%BD%AA%E4%B8%8E%E6%95%91%E8%B5%8E/"
+    }
+  ]
+}

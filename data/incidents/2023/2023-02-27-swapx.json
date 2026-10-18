@@ -1,0 +1,125 @@
+{
+  "id": "2023-02-27-swapx",
+  "name": "swapX",
+  "date": "2023-02-27",
+  "year": 2023,
+  "amountUsd": 1000000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.93,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.93
+      },
+      {
+        "category": "arbitrary-call",
+        "p": 0.07
+      }
+    ],
+    "flashLoan": 0.1,
+    "stateActor": 0.02,
+    "hasRootCause": 0.62
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Access Control. Lost: ~$1M",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Access Control. Lost: ~$1M"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "determined that Contract X mentioned above is the implementation contract of SwapX Proxy (not yet verified and audited), the Proxy will allow users to pass data and call the implementation contract: https://bscscan.com/address/0x0ccee62efec983f3ec4bad3247153009fb483551 Vulnerable code snippet: Attack tx: https://bscscan.com/tx/0x3ee23c1585474eaa4f976313cafbc09461abb781d263547c8397788c68a00160 Analysis: https://twitter.com/BlockSecTeam/status/1630111965942018049 https://twitter.com/peckshield/status/1630100506319413250"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "SwapX V2 suffered an exploit on BNB Chain on February 27, 2023, due to improper access control on its token approval mechanism. The attacker was able to manipulate token prices and force unauthorized trades, resulting in losses estimated at around $1,000,000. The vulnerable contract lacked proper access control on the approve and token swap functions. This allowed an attacker to operate on behalf of users who had granted approvals, resulting in unauthorized token transfers and price manipulation."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x3ee23c1585474eaa4f976313cafbc09461abb781d263547c8397788c68a00160",
+    "0xf3a5d378a7c5184a75f8a1783733ce5816836ef716c4d56214439e25ec744e75"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-02/SwapX_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-02/SwapX_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BlockSecTeam/status/1630111965942018049"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/peckshield/status/1630100506319413250"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/CertiKAlert/status/1630241903839985666"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0x0ccee62efec983f3ec4bad3247153009fb483551"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x3ee23c1585474eaa4f976313cafbc09461abb781d263547c8397788c68a00160"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x3ee23c1585474eaa4f976313cafbc09461abb781d263547c8397788c68a00160"
+    },
+    {
+      "source": "blocksec",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs?tab=readme-ov-file#20230227---swapx---access-control"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/swapx-v2-2023-02-27"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.solidityscan.com",
+      "url": "https://blog.solidityscan.com/swapx-hack-analysis-improper-access-control-8cb272cc33ff/"
+    },
+    {
+      "source": "revertiq",
+      "label": "monitoringroom.com",
+      "url": "https://monitoringroom.com/situation/crypto-hack/swapx-v2"
+    }
+  ]
+}

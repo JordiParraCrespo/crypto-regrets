@@ -1,0 +1,163 @@
+{
+  "id": "2025-11-03-balancer-v2",
+  "name": "Balancer V2",
+  "date": "2025-11-03",
+  "year": 2025,
+  "amountUsd": 128000000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum",
+    "Arbitrum",
+    "Base",
+    "Polygon",
+    "Sonic",
+    "Optimism"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Rounding Error",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Precision Loss. Lost: 120M USD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Precision Loss. Lost: 120M USD"
+    },
+    {
+      "source": "REKT",
+      "text": "A rounding function with one direction – down - became a $128 million exploit across several chains. Attackers manipulated rates in Balancer's pools, then some forks of Balancer realized they'd copy-pasted the same bug. Open source means everyone copies the code - including the bugs."
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Balancer V2 ComposableStablePools scale token amounts by per-token rate-based scaling factors before running StableMath. The attacker exploited a rounding/precision-loss flaw in the scaling: when computing amountOutScaled = mulDown(tokenAmountOut, scalingFactor), the downward rounding combined with a chosen trickAmt = 10000 / ((scalingFactor - 1e18) * 10000 / 1e18) allowed swaps where the rounded-down scaled output systematically understated the input required, letting the attacker repeatedly extract value while the pool invariant barely moved. Through a carefully crafted multi-step batchSwap (GIVEN_OUT) sequence (phase 1 to drain balances toward a tiny initBalance, phase 2 to iterate the rounding trick over many rounds, phase 3 to mint/extract BPT), the attacker manipulated the invariant/BPT pricing and withdrew internal balances to the beneficiary, draining roughly 120M USD across multiple pools (osETH/wETH, wstETH/wETH). Vulnerable code snippet: Attack Tx: https://app.blocksec.com/explorer/tx/eth/0x6ed07db1a9fe5c0794d44cd36081d6a6df103fab868cdd75d581e3bd23bc9742 Analysis: https://x.com/BlockSecTeam/status/1986057732810518640"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The DeFi protocol Balancer V2 suffered a vulnerability exploit that affected its Composable Stable Pools. The root cause of the incident was an incorrect rounding direction in the Stable Pool’s “exact-out” swap path. This flaw was amplified under conditions of precision errors introduced by rate providers and extremely low liquidity, allowing the attacker to manipulate the invariant and distort the BPT price calculation. As a result, the attacker was able to withdraw large amounts of assets from the pool at a cost far below their real value.The attack caused a total loss of $121.1 million across Ethereum, Arbitrum, Base, Optimism, and Polygon. As of No…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Balancer V2 Composable Stable Pools were exploited across multiple chains, losing over $120M due to a precision rounding mismatch in scaling operations. Attackers manipulated batch swaps to systematically deflate pool invariants and BPT prices, withdrawing discounted assets through atomic transactions. A rounding inconsistency between upscaling (mulDown, rounds down) and downscaling (divUp/divDown) let batch swaps push token balances to rounding cliffs. This caused precision loss in pool invariant D, which deflated BPT price below true pool value. Each micro-swap compounded the loss, draining pools without triggering protocol protections."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x6ed07db1a9fe5c0794d44cd36081d6a6df103fab868cdd75d581e3bd23bc9742",
+    "0x5258dcfdd5fa04a81648e1e6d8caffd7438cf27d6bcfc8d1cb0e8c005307eee1",
+    "0x2a0ead4ee9b17a1afa5bfe3dc152833a957f2d25dd9b4b86d68f2c87bdacf69c",
+    "0x6256d6e9e6effe2692ba97f7f5047c0e3f6d8cc6407e84b80cf9e7c89636c422",
+    "0xb8a978185e834620f5572aaa9b3858630abfcdbe09459c512f54b3a26ef643d4",
+    "0x0861b2a70d67d0f8c81030e9ef1bc645e9799b2535df401a425465ea5efae457",
+    "0x48e5994a82d9a24a90f3039ae9870065f968d3760da8de2569295a6fb2152813",
+    "0xec04ee95f8b8569fa3c1f97f7cc7896a5bbb8584b322552ea5e39b38116acc8a",
+    "0x962e95dfa66936d96c25e75cf7aba023e0486b3d63f477664899dbbf54d7aa86",
+    "0xbc21983ea3422d31cd18625a907349f543f255a22abe2bc6eb5ffcb7ec7ced96",
+    "0xfe3d66d50b4f837994d0a06220e3b14f7652e79c12bc92362f6a760b630c6999",
+    "0xe4dfc8b8b54eb7e101d59cd9f87f389186b2e8f6e188557ae9dfdbea2b12e703",
+    "0xd7996c8e187b9bd539a04a4f39de4d8c7c1670c601134329937738b4dfa6f8ad",
+    "0xcba2f515e89ab593ea7641ee48c24f8d89054878cdcec0a09922bf8bf51a552a",
+    "0x29135f912d67db38478d0be70b9f2a1fab3b121b74d776f835ac66d6df134ec5",
+    "0x167993d4cc39771923a6cd11d2d6e73a1b68c7464ea3c76ba41fbd32df7a96da",
+    "0x29970a8aacba2fc2111d187f3efec76071b81cd86e2d33cdeb2ee94aaa9c4602",
+    "0x4ffc4dc12e8b7c469f999e92525c518543a5e58927620b93a024f8e49c0e8615",
+    "0xd155207261712c35fa3d472ed1e51bfcd816e616dd4f517fa5959836f5b48569"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-11/BalancerV2_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-11/BalancerV2_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/BlockSecTeam/status/1986057732810518640"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/1986379316935205299"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/hklst4r/status/1985872151077953827"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Balancer - Rekt II",
+      "url": "https://rekt.news/balancer-rekt2"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/eth/0x6ed07db1a9fe5c0794d44cd36081d6a6df103fab868cdd75d581e3bd23bc9742"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x5258dcfdd5fa04a81648e1e6d8caffd7438cf27d6bcfc8d1cb0e8c005307eee1"
+    },
+    {
+      "source": "blocksec",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BlockSecTeam/status/1986057732810518640"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/balancer/status/1990856260988670132"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/balancer-2025-11-07"
+    },
+    {
+      "source": "revertiq",
+      "label": "quillaudits.com",
+      "url": "https://www.quillaudits.com/blog/hack-analysis/the-balancer-hack"
+    },
+    {
+      "source": "revertiq",
+      "label": "halborn.com",
+      "url": "https://www.halborn.com/blog/post/explained-the-balancer-hack-november-2025"
+    },
+    {
+      "source": "revertiq",
+      "label": "blocksec.com",
+      "url": "https://blocksec.com/blog/in-depth-analysis-the-balancer-v2-exploit"
+    }
+  ]
+}

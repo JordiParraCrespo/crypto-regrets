@@ -1,0 +1,102 @@
+{
+  "id": "2023-09-02-dappsocial",
+  "name": "DAppSocial",
+  "date": "2023-09-02",
+  "year": 2023,
+  "amountUsd": 16000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.43,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.46
+      },
+      {
+        "category": "access-control",
+        "p": 0.44
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.09
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Business Logic Flaw. Lost: ~$16K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Business Logic Flaw. Lost: ~$16K"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The withdrawTokensWithAlt() function determined the withdrawal amount by subtracting a user-controlled balance from the msg.sender's balance. This vulnerability allowed the attacker to manipulate the user-controlled balance and profit from the exploit. Vulnerable Code Snippet: Attack Transaction: https://etherscan.io/tx/0xbd72bccec6dd824f8cac5d9a3a2364794c9272d7f7348d074b580e3c6e44312e Analysis: https://twitter.com/DecurityHQ/status/1698064511230464310"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 2 September 2023, DAppSocial was exploited for approximately $16,000 on Ethereum Mainnet due to a business logic and access control flaw in the contract's withdrawal functions. The attacker drained both USDT and USDC from the vulnerable pool by manipulating token balances through improper access control and insufficient checks. The vulnerable DAppSocialPoolModel contract failed to enforce strict access control and balance checks in withdrawal functions. Specifically, it allowed unauthorized manipulation of token balances by lacking proper checks on the caller and did not prevent integer underflows when withdrawing tokens for an 'alt' account."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xbd72bccec6dd824f8cac5d9a3a2364794c9272d7f7348d074b580e3c6e44312e"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-09/DAppSocial_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-09/DAppSocial_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/DecurityHQ/status/1698064511230464310"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xbd72bccec6dd824f8cac5d9a3a2364794c9272d7f7348d074b580e3c6e44312e"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/dappsocial-2023-09-02"
+    },
+    {
+      "source": "revertiq",
+      "label": "monitoringroom.com",
+      "url": "https://monitoringroom.com/situation/crypto-hack/dappsocial"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.solidityscan.com",
+      "url": "https://blog.solidityscan.com/dappsocial-hack-analysis-3b8bf243a850/"
+    }
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "id": "2026-08-18-maya-protocol",
+  "name": "Maya Protocol",
+  "date": "2026-08-18",
+  "year": 2026,
+  "amountUsd": 1700000,
+  "returnedUsd": null,
+  "chains": [
+    "Mayachain"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Withdrawal Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.68,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.7
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.3
+      }
+    ],
+    "flashLoan": 0.06,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": true,
+  "language": "Go",
+  "rootCause": "Maya Protocol (MAYAChain) suffered a security vulnerability attack. The attacker exploited 6 chained edge-case bugs in Trade Account, outbound handling, and pool math, inflating accounting via false subsidy (e.g., ARB.LINK pool), then added/removed liquidity to extract ~48.87M CACAO and convert to ~20.83 BTC plus other assets, causing ~$1.7 million loss. The team paused global operations to fix the issues and seeks fund recovery.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Maya Protocol (MAYAChain) suffered a security vulnerability attack. The attacker exploited 6 chained edge-case bugs in Trade Account, outbound handling, and pool math, inflating accounting via false subsidy (e.g., ARB.LINK pool), then added/removed liquidity to extract ~48.87M CACAO and convert to ~20.83 BTC plus other assets, causing ~$1.7 million loss. The team paused global operations to fix the issues and seeks fund recovery."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "MAYAChain halted on 2026-08-18 after a six-bug withdrawal and accounting exploit let an attacker inflate a thin CACAO pool, withdraw real reserves, and cause about $1.7 million in direct losses. A withdrawal compensation path treated a legitimate outbound transfer as missing, calculated an uncapped CACAO subsidy against a thin pool, and failed to roll back the inflated pool credit when the reserve transfer could not be funded."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/AaluxxMyth/status/2089792721086996703"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/maya-protocol-2026-08-18"
+    },
+    {
+      "source": "revertiq",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/markets/2026/08/19/maya-protocol-exploit-drains-bitcoin-and-other-assets-as-pool-value-drops-usd11-million"
+    },
+    {
+      "source": "revertiq",
+      "label": "en.cryptonomist.ch",
+      "url": "https://en.cryptonomist.ch/2026/08/19/maya-protocol-exploit-theft/"
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "id": "2024-05-06-perpy",
+  "name": "Perpy",
+  "date": "2024-05-06",
+  "year": 2024,
+  "amountUsd": 132000,
+  "returnedUsd": null,
+  "chains": [
+    "Arbitrum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Uninitialized Proxy",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.01,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "The Social Fi project Perpy Finance was attacked. A hacker was able to update the contract and illicitly withdrew 58,489,594 PRY tokens. These were then transferred and exchanged for 41.895 ETH. According to Perpy Finance's incident analysis report, \"this breach was made possible by an error in initializing the proxy contract for the staking liquid module, which was a fork of the staking vested model previously audited and used by Camelot. We overconfidently chose not to audit this fork, incorrectly considering it risk-free, a decision that led to this exploit.\"",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The Social Fi project Perpy Finance was attacked. A hacker was able to update the contract and illicitly withdrew 58,489,594 PRY tokens. These were then transferred and exchanged for 41.895 ETH. According to Perpy Finance's incident analysis report, \"this breach was made possible by an error in initializing the proxy contract for the staking liquid module, which was a fork of the staking vested model previously audited and used by Camelot. We overconfidently chose not to audit this fork, incorrectly considering it risk-free, a decision that led to this exploit.\""
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Perpy’s Arbitrum staking-liquid proxy was left uninitialized on 2024-05-06, letting the first caller seize privileged control. Public disclosures say 58,489,594 PRY were withdrawn and swapped for 41.895 ETH, while the catalogue loss estimate was about $132,000. An upgradeable staking-liquid proxy was deployed before its initializer was consumed, leaving a public initialization window that allowed an unauthorized caller to acquire the privileged role."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xbe163f651d23f0c9e4d4a443c0cc163134a31a1c2761b60188adcfd33178f50f"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "perpy-finance.beehiiv.com",
+      "url": "https://perpy-finance.beehiiv.com/p/update-recent-exploit"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/perpy-2024-05-06"
+    },
+    {
+      "source": "revertiq",
+      "label": "quadrigainitiative.com",
+      "url": "https://www.quadrigainitiative.com/hackfraudscam/perpyfinancecontractinitializationissue.php"
+    }
+  ]
+}

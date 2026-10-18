@@ -1,0 +1,73 @@
+{
+  "id": "2026-04-03-silo-v2",
+  "name": "Silo V2",
+  "date": "2026-04-03",
+  "year": 2026,
+  "amountUsd": 359000,
+  "returnedUsd": null,
+  "chains": [
+    "Arbitrum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Oracle Misconfiguration",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.92
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "The attacker exploited a Misconfigured Oracle Exploit in combination with protocol logic issues to launch an attack against the Silo V2 contracts on Arbitrum. The incident involved price manipulation or configuration flaws in the oracle mechanism, which ultimately enabled unauthorized fund extraction. This was a relatively small-scale incident affecting Silo Finance V2, with limited impact on core user funds. Similar to other cases, the affected contracts were likely peripheral or experimental components rather than the core protocol. Following the attack, the stolen funds were obfuscated through mixers and/or cross-chain bridges. Although Silo Finance…",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The attacker exploited a Misconfigured Oracle Exploit in combination with protocol logic issues to launch an attack against the Silo V2 contracts on Arbitrum. The incident involved price manipulation or configuration flaws in the oracle mechanism, which ultimately enabled unauthorized fund extraction. This was a relatively small-scale incident affecting Silo Finance V2, with limited impact on core user funds. Similar to other cases, the affected contracts were likely peripheral or experimental components rather than the core protocol. Following the attack, the stolen funds were obfuscated through mixers and/or cross-chain bridges. Although Silo Finance…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On April 3, 2026, Silo V2’s soUSDC managed vault on Arbitrum was exploited due to a misconfigured oracle and protocol logic flaws, resulting in about $392,000 in losses. The attack focused on a peripheral meta-vault, with stale or preset price data combined with errors in accounting and cap logic. A peripheral managed vault in Silo V2 on Arbitrum relied on an immutable, hardcoded oracle price for wstUSR, causing severe overvaluation of collateral after the asset depegged. This, together with protocol logic flaws in supply cap enforcement and asset accounting, allowed the attacker to extract excess funds."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/silo-v2-hack-2026"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/silo-v2-2026-04-03"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    }
+  ]
+}

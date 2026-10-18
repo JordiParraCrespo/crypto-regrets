@@ -1,0 +1,80 @@
+{
+  "id": "2024-11-20-mainnetsettler",
+  "name": "MainnetSettler",
+  "date": "2024-11-20",
+  "year": 2024,
+  "amountUsd": 66000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "arbitrary-call",
+  "technique": "Token Approval Abuse",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "arbitrary-call",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "arbitrary-call",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Access Control. Lost: $66K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Access Control. Lost: $66K"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 2024-11-20, the MainnetSettler contract on Ethereum was used to execute an arbitrary ERC20 transferFrom against a wallet that had previously approved the contract to spend HOLD tokens. The attacker drained about 308.45 million HOLD tokens, valued at roughly $66,000 at the time of the incident. A wallet had granted the MainnetSettler contract a large HOLD token allowance, and the contract's execution flow allowed externally supplied call data to trigger arbitrary token operations. The attacker used this capability to execute a transferFrom against the approved wallet and move HOLD tokens to an attacker-controlled address."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xfab5912f858b3768b7b7d312abcc02b64af7b1e1b62c4f29a2c1a2d1568e9fa2"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-11/MainnetSettler_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-11/MainnetSettler_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/TenArmorAlert/status/1859416451473604902"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/mainnetsettler-2024-11-20"
+    },
+    {
+      "source": "revertiq",
+      "label": "quadrigainitiative.com",
+      "url": "https://quadrigainitiative.com/casestudy/coinbasemainnetsettlerapprovalissueholdtokentheft1.php"
+    }
+  ]
+}

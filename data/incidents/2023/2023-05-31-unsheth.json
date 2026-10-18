@@ -1,0 +1,78 @@
+{
+  "id": "2023-05-31-unsheth",
+  "name": "unshETH",
+  "date": "2023-05-31",
+  "year": 2023,
+  "amountUsd": 375000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "key-compromise",
+  "technique": "Key Stored Publicly",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "key-compromise",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "key-compromise",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.4
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "The LSDFi protocol unshETH stated that at around 22:00 on May 31, one of the deployment private keys of the unshETH contract was leaked. For the sake of caution, the official has urgently suspended the withdrawal of unshETH's ETH. According to the security model, unshETH's ETH deposit (TVL up to 35 million US dollars) is protected by multi-signature + time lock and is not at risk.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The LSDFi protocol unshETH stated that at around 22:00 on May 31, one of the deployment private keys of the unshETH contract was leaked. For the sake of caution, the official has urgently suspended the withdrawal of unshETH's ETH. According to the security model, unshETH's ETH deposit (TVL up to 35 million US dollars) is protected by multi-signature + time lock and is not at risk."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On May 31, 2023, unshETH suffered a loss of around $375,000 on Ethereum after a developer accidentally published a private key to a public GitHub repository. The attacker used the leaked key to drain rewards funds from auxiliary farm contracts, prompting emergency response from the team and no user deposit losses. A deployer private key with authority over unshETH's farm contracts was accidentally committed to a public GitHub repository, allowing an attacker to drain farm rewards."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/unsheth_xyz/status/1664534089704275968"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/unsheth-2023-05-31"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/unsheth-hack-2023"
+    },
+    {
+      "source": "revertiq",
+      "label": "certik.com",
+      "url": "https://www.certik.com/blog/unsheth-private-key-slip-usd375-000-loss-from-a-github-post"
+    }
+  ]
+}

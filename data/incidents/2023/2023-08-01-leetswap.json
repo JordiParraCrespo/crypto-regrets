@@ -1,0 +1,121 @@
+{
+  "id": "2023-08-01-leetswap",
+  "name": "LeetSwap",
+  "date": "2023-08-01",
+  "year": 2023,
+  "amountUsd": 620000,
+  "returnedUsd": null,
+  "chains": [
+    "Base"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Access Control. Lost: ~$630K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Access Control. Lost: ~$630K"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "This exploit was a result of incorrect access control, where the _transferFeesSupportingTaxTokens() function was incorrectly marked as public. This enabled the attacker to misuse the function to transfer tokens to LeetSwap's fee collection address, reducing axlUSD token liquidity and artificially inflating its price for their own gain. Vulnerable Code Snippet: Attack Transaction: https://basescan.org/tx/0xbb837d417b76dd237b4418e1695a50941a69259a1c4dee561ea57d982b9f10ec Analysis: https://twitter.com/BlockSecTeam/status/1686217464051539968 https://twitter.com/peckshield/status/1686209024587710464"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The axlUSD/WETH pool in LeetSwap, the largest DEX on the Base chain, suffered a price manipulation attack and has suspended trading for investigation. It appears that 342.5 ETH (~$624,000) was exploited. On August 3, LeetSwap stated that it had withdrawn about 400 ETH from the risky liquidity pool. According to the analysis of SlowMist, the main cause of this attack was that the _transferFeesSupportingTaxTokens function in the Pair contract was externally callable. This function allowed the transfer of any specified tokens in the contract to the address that collects fees. The attacker initiated a normal small-swap operation first to acquire the necessary tokens for the next swap.…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "LeetSwap lost over $630,000 on Base on 1 August 2023 after a missing access control allowed attackers to drain liquidity by manipulating a public fee-transfer function in the LeetSwapV2Pair contract. The attack exploited reserve misalignment, enabling outsized token withdrawals through AMM price manipulation. The LeetSwapV2Pair contract exposed the _transferFeesSupportingTaxTokens function as public, allowing anyone to move tokens from the liquidity pool. This function did not restrict callers or update internal reserves, breaking AMM invariants when combined with external sync() calls."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xbb837d417b76dd237b4418e1695a50941a69259a1c4dee561ea57d982b9f10ec",
+    "0xf0c2ed12a446713d6e38e7a4f0e05d45360ee9305b7d6e0b796fc44f848f6052"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-08/Leetswap_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-08/Leetswap_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BlockSecTeam/status/1686217464051539968"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/peckshield/status/1686209024587710464"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "basescan.org",
+      "url": "https://basescan.org/tx/0xbb837d417b76dd237b4418e1695a50941a69259a1c4dee561ea57d982b9f10ec"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xf0c2ed12a446713d6e38e7a4f0e05d45360ee9305b7d6e0b796fc44f848f6052"
+    },
+    {
+      "source": "blocksec",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs?tab=readme-ov-file#20230801-leetswap---access-control"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/LeetSwap/status/1686190488506769408"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/leetswap-2023-08-01"
+    },
+    {
+      "source": "revertiq",
+      "label": "crypto.news",
+      "url": "https://crypto.news/biggest-base-dex-leetswap-pauses-trading-amid-exploit-concerns/"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/kismp123/DeFi-Security-Incident/blob/main/2023/2023-08-01_LeetSwap_AccessControl_Base.md"
+    }
+  ]
+}

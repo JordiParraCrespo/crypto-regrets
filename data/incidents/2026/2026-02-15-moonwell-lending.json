@@ -1,0 +1,121 @@
+{
+  "id": "2026-02-15-moonwell-lending",
+  "name": "Moonwell Lending",
+  "date": "2026-02-15",
+  "year": 2026,
+  "amountUsd": 1780000,
+  "returnedUsd": null,
+  "chains": [
+    "Base"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Oracle Misconfiguration",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.98,
+    "stateActor": 0.01,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Faulty Oracle. Lost: 1.78M USD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Faulty Oracle. Lost: 1.78M USD"
+    },
+    {
+      "source": "REKT",
+      "text": "An oracle misconfiguration priced cbETH on Moonwell at $1.12 instead of $2,200. Liquidation bots seized 1,096 cbETH, leading to $1.78M in bad debt. The commit was co-authored by Claude Opus 4.6, possibly the first major exploit of vibe-coded smart contracts."
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Moonwell's Chainlink oracle adapter on Base (0xEC942bE8...) returned a stale / incorrect price for cbETH, causing the cbETH collateral backing a victim borrower's mWETH loan to be massively over-valued. With cbETH priced too high, the protocol viewed the victim's position as healthy/liquidatable on terms favorable to the liquidator. The attacker flash-borrowed WETH from an Aerodrome CL pool, called mWETH.liquidateBorrow(victim, amount, mcbETH) to seize the mcbETH collateral at the faulty oracle price, redeemed mcbETH for cbETH, and sold the cbETH on Aerodrome for WETH. Because the seized collateral (valued at the bad oracle price) exceeded what the liquidation actually cost, the attacker repaid the flashloan and pocketed the difference, leaving ~$1.78M of bad debt across the protocol. Root cause: reliance on an oracle feed that reported an inaccurate cbETH price. Vulnerable code snippet: Attack Tx: https://basescan.org/tx/0x2f4ff77c77ce2a52c80fcd59a4cac4b05f4285afe1f3b92118b0a004a325953c Analysis: https://forum.moonwell.fi/t/mip-x43-cbeth-oracle-incident-summary/2068"
+    },
+    {
+      "source": "SlowMist",
+      "text": "According to Decrypt, the DeFi lending protocol Moonwell incurred approximately $1.78 million in bad debt due to an oracle configuration error."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Moonwell Lending on Base suffered a $1.78 million loss on February 15, 2026, after a governance proposal misconfigured the cbETH oracle. This caused the protocol to undervalue cbETH collateral, resulting in mass liquidations and protocol bad debt. A governance proposal introduced a misconfigured price oracle for cbETH, setting its price to the cbETH/ETH exchange rate without multiplying by ETH/USD. This undervalued cbETH collateral, enabling liquidators to seize it for far less than market value."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x2f4ff77c77ce2a52c80fcd59a4cac4b05f4285afe1f3b92118b0a004a325953c",
+    "0xb1ec075c35b2add189477c9509ab344fe8fdf2976d2f329593ca10e47435233b"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-02/Moonwell_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-02/Moonwell_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "forum.moonwell.fi",
+      "url": "https://forum.moonwell.fi/t/mip-x43-cbeth-oracle-incident-summary/2068"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "forum.moonwell.fi",
+      "url": "https://forum.moonwell.fi/t/recovery-plan-cbeth-incident-and-moonwell-apollo-onboarding/2084"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/pashov/status/2023872510077616223"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Moonwell - Rekt",
+      "url": "https://rekt.news/moonwell-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "basescan.org",
+      "url": "https://basescan.org/tx/0x2f4ff77c77ce2a52c80fcd59a4cac4b05f4285afe1f3b92118b0a004a325953c"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xb1ec075c35b2add189477c9509ab344fe8fdf2976d2f329593ca10e47435233b"
+    },
+    {
+      "source": "slowmist",
+      "label": "decrypt.co",
+      "url": "https://decrypt.co/358374/oracle-error-leaves-defi-lender-moonwell-1-8-million-bad-debt"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/moonwell-lending-2026-02-15"
+    }
+  ]
+}

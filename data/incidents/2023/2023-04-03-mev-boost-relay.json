@@ -1,0 +1,103 @@
+{
+  "id": "2023-04-03-mev-boost-relay",
+  "name": "MEV-Boost Relay",
+  "date": "2023-04-03",
+  "year": 2023,
+  "amountUsd": 20000000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "Other",
+  "category": "key-compromise",
+  "technique": "Key Leaked via Infrastructure",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "client-bug",
+    "confidence": 0.4,
+    "top": [
+      {
+        "category": "client-bug",
+        "p": 0.44
+      },
+      {
+        "category": "logic-error",
+        "p": 0.19
+      },
+      {
+        "category": "market-manipulation",
+        "p": 0.15
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.9
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "On April 3, MEV bots suffered a malicious sandwich attack that cost them around $25 million. Data on the chain shows that the malicious verifier who attacked the MEV bots today has been punished by Slash and kicked out of the verifier queue. According to SlowMist analysis, the reason why the MEV bots was attacked was that even if the beacon block was incorrect, the relay still returned the payload to the proposer, which resulted in the proposer being able to access the content of the block before another block was finalized. The attacker takes advantage of this problem to maliciously construct an invalid block, so that the block cannot be verified, and…",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "On April 3, MEV bots suffered a malicious sandwich attack that cost them around $25 million. Data on the chain shows that the malicious verifier who attacked the MEV bots today has been punished by Slash and kicked out of the verifier queue. According to SlowMist analysis, the reason why the MEV bots was attacked was that even if the beacon block was incorrect, the relay still returned the payload to the proposer, which resulted in the proposer being able to access the content of the block before another block was finalized. The attacker takes advantage of this problem to maliciously construct an invalid block, so that the block cannot be verified, and…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "A malicious proposer exploited a mev-boost relay validation flaw on Ethereum mainnet on 2023-04-03 and reused revealed block contents to capture MEV from sandwich bots. Public loss estimates range from about $20M to just over $25M. The relay disclosed the block body after receiving a signed header without first requiring successful beacon-node publication or validating that the header represented a publishable block. That broke the commit-reveal boundary between proposer and builder and let a malicious proposer read the payload, suppress the canonical path with an invalid header, and rebuild a competing block from the revealed transactions."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "A malicious Ethereum proposer exploited the mev-boost relay publication path on 3 April 2023, exposed private builder payloads from an invalid signed header, and stole about $20 million from sandwich bots. The relay released the block body after a proposer signed a header, even when local beacon nodes rejected that header as invalid. That broke the commit-reveal boundary and let the proposer read private builder payloads before publishing a competing block."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xd534c46ba5a444e886feedeb4dbe698b68be74a65356b5cc46c49f2dd07f7edf",
+    "0xd7bb6353f03a7ee1bf20d553e2df77a2cef44717dbe4afc38737540189d0c305"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "panewslab.com",
+      "url": "https://www.panewslab.com/zh/sqarticledetails/yov8heci.html"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/mev-boost-26-1m-2023-06-28t17-03-13-00-00"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/de-fi-rekt-report-over-204m-lost-in-q2-2023"
+    },
+    {
+      "source": "revertiq",
+      "label": "collective.flashbots.net",
+      "url": "https://collective.flashbots.net/t/post-mortem-april-3rd-2023-mev-boost-relay-incident-and-related-timing-issue/1540"
+    },
+    {
+      "source": "revertiq",
+      "label": "collective.flashbots.net",
+      "url": "https://collective.flashbots.net/t/flashbots-transparency-report-mev-share-relay-exploits-shapella-and-rev/1742"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/mev-boost-relay-2023-04-03"
+    }
+  ]
+}

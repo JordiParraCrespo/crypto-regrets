@@ -1,0 +1,81 @@
+{
+  "id": "2024-04-12-fil314",
+  "name": "FIL314",
+  "date": "2024-04-12",
+  "year": 2024,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "arbitrary-call",
+  "technique": "Insufficient Validation And Price Manipulation",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.79). Replaced keyword guess \"oracle-manipulation\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "arbitrary-call",
+    "confidence": 0.79,
+    "top": [
+      {
+        "category": "arbitrary-call",
+        "p": 0.8
+      },
+      {
+        "category": "input-validation",
+        "p": 0.1
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.1
+      }
+    ],
+    "flashLoan": 0.15,
+    "stateActor": 0.03,
+    "hasRootCause": 0.59
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Insufficient Validation And Price Manipulation. Lost: ~14 BNB",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Insufficient Validation And Price Manipulation. Lost: ~14 BNB"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Arbitrary call Vulnerable code snippet: https://bscscan.com/address/0x80a0d7a6fd2a22982ce282933b384568e5c852bf#code Attack tx: https://bscscan.com/tx/0x051276afa96f2a2bd2ac224339793d82f6076f76ffa8d1b9e6febd49a4ec11b2 https://app.blocksec.com/explorer/tx/bsc/0x051276afa96f2a2bd2ac224339793d82f6076f76ffa8d1b9e6febd49a4ec11b2 Analysis: https://x.com/Phalcon_xyz/status/1779843813151739918"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x051276afa96f2a2bd2ac224339793d82f6076f76ffa8d1b9e6febd49a4ec11b2"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-04/FIL314_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-04/FIL314_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0x80a0d7a6fd2a22982ce282933b384568e5c852bf#code"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x051276afa96f2a2bd2ac224339793d82f6076f76ffa8d1b9e6febd49a4ec11b2"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/bsc/0x051276afa96f2a2bd2ac224339793d82f6076f76ffa8d1b9e6febd49a4ec11b2"
+    }
+  ]
+}

@@ -1,0 +1,125 @@
+{
+  "id": "2026-05-17-verus-ethereum-bridge",
+  "name": "Verus-Ethereum Bridge",
+  "date": "2026-05-17",
+  "year": 2026,
+  "amountUsd": 11500000,
+  "returnedUsd": null,
+  "chains": [
+    "Verus"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "bridge-crosschain",
+  "technique": "Forged Proof",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "bridge-crosschain",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "bridge-crosschain",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": true,
+  "language": "Solidity",
+  "rootCause": "Insufficient Validation. Lost: ~$11.58M",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Insufficient Validation. Lost: ~$11.58M"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The Verus Ethereum bridge's submitImports path (proxy -> SubmitImports._createImports -> VerusProof.proveImports -> TokenManager.processTransactions) accepted a CReserveTransferImport containing a partial transaction proof and serialized reserve transfers, but the Merkle/MMR proof verification was insufficient: the attacker was able to craft a partialtransactionproof (hand-built branch/index/size values and serialized component data) that the bridge's proof logic accepted as valid against the confirmed state root, even though no corresponding deposit existed on the Verus chain. With a single forged import the attacker released ETH, tBTC and USDC reserves to a receiver address by encoding spoofed reserve transfers, draining ~1,625 ETH, ~103 tBTC and ~147K USDC (~$11.58M). The root cause is a flaw in the import/Merkle-proof validation that let a forged proof pass verification and mint/release bridge reserves. Vulnerable code snippet: Attack Tx: https://etherscan.io/tx/0x6990f01720f57fc515d0e976a0c4f8157e0a9529194c4c15d190e98d087eb321 Analysis: https://x.com/VerusCoin/status/2056829444124213652"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Blockaid detected an ongoing exploit on the Verus-Ethereum Bridge. The attacker drained approximately $11.58 million in assets (including ~1,625 ETH, ~103.6 tBTC, and ~147k USDC). The funds were swapped and consolidated into a drainer wallet (e.g., 0x65Cb8b128Bf6e690761044CCECA422bb239C25F9). This is a cross-chain bridge incident affecting the bridge infrastructure, not the core Verus blockchain. The project had recently issued an urgent update, but the exploit still occurred. Funds remain in the attacker's control as of the latest reports. On May 22, PeckShield's monitoring revealed that the exploiter of the Verus cross-chain bridge has returned 4,052…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On May 18, 2026, the Verus-Ethereum Bridge suffered a $11.4,11.7M exploit when the Ethereum-side contract failed to verify that a proven Verus export object was a valid payout instruction. The attacker used crafted supplemental export data to trigger unauthorized release of ETH, tBTC, and USDC. Roughly 75% of assets were returned after negotiations. The Ethereum bridge contract proved that a Verus export object existed but did not validate its type. It accepted supplemental export objects,which are not intended for payout,and parsed them as legitimate, enabling unauthorized asset release."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x6990f01720f57fc515d0e976a0c4f8157e0a9529194c4c15d190e98d087eb321"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-05/VerusBridge_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-05/VerusBridge_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x6990f01720f57fc515d0e976a0c4f8157e0a9529194c4c15d190e98d087eb321"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/VerusCoin/status/2057465214975492358"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/VerusCoin/status/2056829444124213652"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x6990f01720f57fc515d0e976a0c4f8157e0a9529194c4c15d190e98d087eb321"
+    },
+    {
+      "source": "blocksec",
+      "label": "x.com",
+      "url": "https://x.com/Phalcon_xyz/status/2056203534811660416"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/MetaEraHK/status/2056192367716380711"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/verus-ethereum-bridge-2026-05-18"
+    },
+    {
+      "source": "revertiq",
+      "label": "blocksec.com",
+      "url": "https://blocksec.com/blog/web3-security-verus-bridge-retoswap-more"
+    },
+    {
+      "source": "revertiq",
+      "label": "blocksec.com",
+      "url": "https://blocksec.com/blog/defi-security-incidents-echo-protocol-stablr-more"
+    },
+    {
+      "source": "revertiq",
+      "label": "bir.badjoke-lab.com",
+      "url": "https://bir.badjoke-lab.com/incident/verus-ethereum-bridge-2026-may-import-verification-exploit/"
+    }
+  ]
+}

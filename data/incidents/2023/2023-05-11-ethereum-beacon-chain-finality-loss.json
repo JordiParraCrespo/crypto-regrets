@@ -1,0 +1,52 @@
+{
+  "id": "2023-05-11-ethereum-beacon-chain-finality-loss",
+  "name": "Ethereum beacon chain finality loss",
+  "date": "2023-05-11",
+  "year": 2023,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "Chain",
+  "category": "client-bug",
+  "technique": "Expensive attestation processing in Prysm/Teku",
+  "classificationNote": null,
+  "classifiedBy": "curated",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "client-bug",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "client-bug",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.8
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "Prysm and Teku clients became overloaded processing old-but-valid attestations, so the beacon chain lost finality twice (~25 min and ~1 hour). Blocks kept being produced thanks to client diversity; patches limited the reprocessing.",
+  "descriptions": [
+    {
+      "source": "Curated post-mortem",
+      "text": "Prysm and Teku clients became overloaded processing old-but-valid attestations, so the beacon chain lost finality twice (~25 min and ~1 hour). Blocks kept being produced thanks to client diversity; patches limited the reprocessing."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "curated"
+  ],
+  "references": [
+    {
+      "source": "curated",
+      "label": "Prysm post-mortem",
+      "url": "https://offchain.medium.com/post-mortem-report-ethereum-mainnet-finality-05-11-2023-95e271dfd8b2"
+    }
+  ]
+}

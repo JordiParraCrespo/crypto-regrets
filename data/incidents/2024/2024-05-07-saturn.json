@@ -1,0 +1,117 @@
+{
+  "id": "2024-05-07-saturn",
+  "name": "SATURN",
+  "date": "2024-05-07",
+  "year": 2024,
+  "amountUsd": 9000,
+  "returnedUsd": null,
+  "chains": [
+    "BNB"
+  ],
+  "targetType": "Token",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.44,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.47000000000000003
+      },
+      {
+        "category": "logic-error",
+        "p": 0.36
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.16
+      }
+    ],
+    "flashLoan": 0.08,
+    "stateActor": 0.02,
+    "hasRootCause": 0.94
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Price Manipulation. Lost: ~15 BNB",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Price Manipulation. Lost: ~15 BNB"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The vulnerability in this case occurred due to the synchronization (sync) operation being performed on the PancakeSwap (WBNB-SATURN) pool before processing the incoming token transfers. This led to distorted reserves in the PancakeSwap (WBNB-SATURN) pool and a significant increase in the value of SATURN tokens. Vulnerable code snippet: https://bscscan.com/address/0x9BDF251435cBC6774c7796632e9C80B233055b93#code Attack tx: https://bscscan.com/tx/0x948132f219c0a1adbffbee5d9dc63bec676dd69341a6eca23790632cb9475312 https://app.blocksec.com/explorer/tx/bsc/0x948132f219c0a1adbffbee5d9dc63bec676dd69341a6eca23790632cb9475312 Analysis: https://lunaray.medium.com/saturn-hack-analysis-187eea27725b"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Saturn, the new token issuance protocol, was exploited on the BNB chain, which resulted in a loss of 14.16 BNB, worth approximately $8,343. The protocol would reportedly burn and sync the asset amount before any prior token transfers, which led to a price manipulation attack that caused their SATURN/WBNB pool to be entirely empty."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "SATURN was exploited on BNB Chain in May 2024, resulting in a loss of approximately $9,000 due to spot price manipulation of an on-chain oracle. The attacker used a flash loan, manipulated AMM reserves, and executed swaps against the vulnerable SATURN/WBNB pair, extracting roughly 15 BNB. SATURN's price oracle used direct AMM spot prices without averaging or manipulation resistance. The attacker was able to manipulate the SATURN token price through flash loans and aggressive swaps, bypassing sell limits and draining value from the pool."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x948132f219c0a1adbffbee5d9dc63bec676dd69341a6eca23790632cb9475312"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-05/SATURN_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-05/SATURN_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/ChainAegis/status/1787667253435195841"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0x9BDF251435cBC6774c7796632e9C80B233055b93#code"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x948132f219c0a1adbffbee5d9dc63bec676dd69341a6eca23790632cb9475312"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/bsc/0x948132f219c0a1adbffbee5d9dc63bec676dd69341a6eca23790632cb9475312"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/saturn-2024-05-07"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/saturn-hack-2024"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/past/2024/README.md#L1872"
+    }
+  ]
+}

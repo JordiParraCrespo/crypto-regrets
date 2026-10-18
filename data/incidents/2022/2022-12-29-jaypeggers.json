@@ -1,0 +1,70 @@
+{
+  "id": "2022-12-29-jaypeggers",
+  "name": "Jaypeggers",
+  "date": "2022-12-29",
+  "year": 2022,
+  "amountUsd": 18500,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "reentrancy",
+  "technique": "Reentrancy",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "reentrancy",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "reentrancy",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.97,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Jaypeggers, an NFT tax-loss harvesting protocol on Ethereum, was exploited on December 29, 2022, via a flash loan-enabled reentrancy vulnerability in its buyJay function. The attacker manipulated token price calculations and extracted about 15.32 ETH, laundering proceeds through Tornado Cash and Aztec. The buyJay function trusted arbitrary ERC-721 token addresses, including malicious contracts. It performed external calls before updating internal minting state, allowing a contract-level reentrancy that manipulated the ETH/JAY price calculation and enabled extraction of excess value.",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "Jaypeggers, an NFT tax-loss harvesting protocol on Ethereum, was exploited on December 29, 2022, via a flash loan-enabled reentrancy vulnerability in its buyJay function. The attacker manipulated token price calculations and extracted about 15.32 ETH, laundering proceeds through Tornado Cash and Aztec. The buyJay function trusted arbitrary ERC-721 token addresses, including malicious contracts. It performed external calls before updating internal minting state, allowing a contract-level reentrancy that manipulated the ETH/JAY price calculation and enabled extraction of excess value."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xd4fafa1261f6e4f9c8543228a67caf9d02811e4ad3058a2714323964a8db61f6"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/jaypeggers-2022-12-29"
+    },
+    {
+      "source": "revertiq",
+      "label": "hypernative.io",
+      "url": "https://www.hypernative.io/insights/blog/jaypeggers-exploit"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.solidityscan.com",
+      "url": "https://blog.solidityscan.com/jay-token-exploit-reentrancy-attack-d7a4923b6333/"
+    }
+  ]
+}

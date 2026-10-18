@@ -1,0 +1,76 @@
+{
+  "id": "2023-05-23-lfi-token",
+  "name": "LFI Token",
+  "date": "2023-05-23",
+  "year": 2023,
+  "amountUsd": 36000,
+  "returnedUsd": null,
+  "chains": [
+    "Polygon"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Business Logic Flaw",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.98).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.98,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.98
+      },
+      {
+        "category": "access-control",
+        "p": 0.01
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.09,
+    "stateActor": 0.02,
+    "hasRootCause": 0.88
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Business Logic Flaw. Lost: ~36K USD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Business Logic Flaw. Lost: ~36K USD"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "There is no time lock for the user 'staking' amount(balance). Vulnerable code snippet: Attack tx: https://polygonscan.com/tx/0xa0480d0f7c8d8bf898cadde954e773ddc3740f1ffa31cdd98fe4c5f5d8266243 Analysis: https://twitter.com/AnciliaInc/status/1660767088699666433"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xa0480d0f7c8d8bf898cadde954e773ddc3740f1ffa31cdd98fe4c5f5d8266243"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-05/LFI_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-05/LFI_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/AnciliaInc/status/1660767088699666433"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "polygonscan.com",
+      "url": "https://polygonscan.com/tx/0xa0480d0f7c8d8bf898cadde954e773ddc3740f1ffa31cdd98fe4c5f5d8266243"
+    }
+  ]
+}

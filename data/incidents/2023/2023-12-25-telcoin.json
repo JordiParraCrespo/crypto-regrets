@@ -1,0 +1,119 @@
+{
+  "id": "2023-12-25-telcoin",
+  "name": "Telcoin",
+  "date": "2023-12-25",
+  "year": 2023,
+  "amountUsd": 1250000,
+  "returnedUsd": null,
+  "chains": [
+    "Polygon"
+  ],
+  "targetType": "Payments",
+  "category": "access-control",
+  "technique": "Uninitialized Proxy",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.94
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Storage Collision. Lost: ~1,24M",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Storage Collision. Lost: ~1,24M"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The vulnerability stems from improper initialization of wallet contracts, which is due to a mismatch between the wallet’s actual implementation and its corresponding proxy. Specifically, during the initialization process, the proxy initialized storage slot 0 to a non-zero state by writing to the least significant bits of the storage location. Subsequently, the wallet code also wrote to storage slot 0, thereby overwriting the proxy’s initial value in the least significant bits. This issue is not the result of an inherent vulnerability in either of the smart contracts but rather the interaction between the two. Consequently, after the initialization process, the least significant two bytes of slot 0 will be reset to zero. This effectively sets both _initialized and _initializing to zero. As a result, the CloneableProxy:Proxy contract becomes vulnerable to re-initialization through the initialize() function, as the initializer modifier’s protection can be circumvented. Vulnerable code snippet: https://polygonscan.com/address/0x56bcadff30680ebb540a84d75c182a5dc61981c0 Note that slot 0 is allocated for _state, which stores the next 32 bytes from the calldata following the function selector, as indicated in line 21. For additional detailed information, refer to the commentary at the beginning of the Wallet contract: Attack tx: https://www.oklink.com/es-la/polygon/tx/0x35f50851c3b754b4565dc3e69af8f9bdb6555edecc84cf0badf8c1e8141d902d https://phalcon.blocksec.com/explorer/tx/polygon/0x35f50851c3b754b4565dc3e69af8f9bdb6555edecc84cf0badf8c1e8141d902d Analysis: https://blocksecteam.medium.com/telcoin-security-incident-in-depth-analysis-d1945e22818f"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Recently, Telcoin Wallet was subjected to a targeted attack, and Telcoin tweeted that it is aware of the situation with the Telcoin app. Use of the app has been temporarily frozen while the issue is investigated and an update will be provided as soon as possible."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On December 25, 2023, Telcoin Polygon wallets were exploited due to improper proxy initialization. Attackers reinitialized vulnerable wallet contracts, bypassed access controls, and drained over $1.2 million in TEL tokens from affected wallets, mostly those with no prior transactions. The root cause was a storage collision between wallet contract and proxy initialization variables. This allowed the attacker to reinitialize Cloneable Proxy wallets and redirect ownership, bypassing protection against repeated initialization."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x35f50851c3b754b4565dc3e69af8f9bdb6555edecc84cf0badf8c1e8141d902d"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-12/Telcoin_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-12/Telcoin_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "blocksec.com",
+      "url": "https://blocksec.com/phalcon/blog/telcoin-security-incident-in-depth-analysis"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "hacked.slowmist.io",
+      "url": "https://hacked.slowmist.io/?c=&page=2"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "polygonscan.com",
+      "url": "https://polygonscan.com/address/0x56bcadff30680ebb540a84d75c182a5dc61981c0"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "miro.medium.com",
+      "url": "https://miro.medium.com/v2/resize:fit:700/0*UCUIqPH2Bg1hQoEC"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "miro.medium.com",
+      "url": "https://miro.medium.com/v2/resize:fit:700/0*kgGmJnrkrW32KYTj"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/telcoin/status/1739394228361310678"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/telcoin-2023-12-25"
+    },
+    {
+      "source": "revertiq",
+      "label": "blocksec.com",
+      "url": "https://blocksec.com/blog/telcoin-security-incident-in-depth-analysis"
+    },
+    {
+      "source": "revertiq",
+      "label": "dn.institute",
+      "url": "https://dn.institute/research/cyberattacks/incidents/2023-12-25-telcoin/"
+    }
+  ]
+}

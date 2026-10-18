@@ -1,0 +1,125 @@
+{
+  "id": "2024-03-22-super-sushi-samurai",
+  "name": "Super Sushi Samurai",
+  "date": "2024-03-22",
+  "year": 2024,
+  "amountUsd": 4800000,
+  "returnedUsd": null,
+  "chains": [
+    "Blast"
+  ],
+  "targetType": "Gaming",
+  "category": "accounting-math",
+  "technique": "Infinite Mint",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.98,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.98
+      },
+      {
+        "category": "access-control",
+        "p": 0.01
+      },
+      {
+        "category": "logic-error",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.86
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Blast L2-based game Super Sushi Samurai's LP drained $4.8m in contract bug exploit shortly after its launch, and the price dropped 99.9%.",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "Blast L2-based game Super Sushi Samurai's LP drained $4.8m in contract bug exploit shortly after its launch, and the price dropped 99.9%."
+    },
+    {
+      "source": "SlowMist",
+      "text": "The new blockchain game Super Sushi Samurai, based on the Blast layer-2, was attacked due to a vulnerability in its token contract, resulting in a loss of approximately $4.6 million. Shortly after the theft, the attacker contacted the project, claiming to be a whitehat. Later, Super Sushi Samurai confirmed that the funds had been returned, minus a 5% bounty."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Super Sushi Samurai suffered an exploit on Blast in March 2024 through a flawed token transfer logic, enabling infinite balance inflation via self-transfers. The attacker drained liquidity pools for a loss of approximately $4.8 million. The defect was traceable to the contract’s handling of transfers between identical addresses. The contract's transfer logic allowed balance doubling during self-transfers by mishandling same-address transfers, resulting in infinite mint and catastrophic loss."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On March 21, 2024, the Super Sushi Samurai (SSS) token on Blast L2 was exploited for over $4.6 million. The contract's mint logic allowed attackers to multiply their balance with repeated self-transfers, collapsing liquidity and token price. The SSS token contract's mint or transfer logic failed to correctly update balances during self-transfer. When a user transferred tokens to their own address, the contract doubled their balance instead of leaving it unchanged, enabling unbounded minting and draining liquidity pools."
+    }
+  ],
+  "audit": "Verichains",
+  "txHashes": [
+    "0x80012bf784b83baaf28f5549a9f233cae5f70be7afcd8f594dc757d431ed93c4",
+    "0xfa0b9e704296c1614c54f125e135f8b612b62c5c07f68a23a3179db738c027e4",
+    "0x62e6b906bb5aafdc57c72cd13e20a18d2de3a4a757cd2f24fde6003ce5c9f2c6",
+    "0xac3400e3d536ac23c10fdd2c06e1faf8d5de5b797df8433e9b5ab74b102a4e35"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Super Sushi Samurai - REKT",
+      "url": "https://rekt.news/sss-rekt"
+    },
+    {
+      "source": "slowmist",
+      "label": "s.foresightnews.xyz",
+      "url": "https://s.foresightnews.xyz/news/detail/41275"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/super-sushi-samurai-2024-03-22"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptodaily.co.uk",
+      "url": "https://www.cryptodaily.co.uk/2024/03/white-hat-hacker-exploits-super-sushi-samurai-crypto-game-for-46m"
+    },
+    {
+      "source": "revertiq",
+      "label": "blockapex.io",
+      "url": "https://blockapex.io/super-sushi-samurai-hack-analysis/"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/blast-2024-03-02t13-56-49-00-00"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/defi-rekt-report-over-148-million-lost-in-february-2024"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptobriefing.com",
+      "url": "https://cryptobriefing.com/sss-on-blast-game-exploit/"
+    },
+    {
+      "source": "revertiq",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/business/2024/03/21/newly-issued-gaming-token-exploited-on-blast-with-46m-drained"
+    }
+  ]
+}

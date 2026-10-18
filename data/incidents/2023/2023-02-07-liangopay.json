@@ -1,0 +1,86 @@
+{
+  "id": "2023-02-07-liangopay",
+  "name": "LianGoPay",
+  "date": "2023-02-07",
+  "year": 2023,
+  "amountUsd": 1600000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "rugpull",
+  "technique": "Admin Drain",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "rugpull",
+    "confidence": 0.62,
+    "top": [
+      {
+        "category": "rugpull",
+        "p": 0.64
+      },
+      {
+        "category": "input-validation",
+        "p": 0.13
+      },
+      {
+        "category": "logic-error",
+        "p": 0.08
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "The LianGoPay project announced on February 7 that its assets in the LGTPool pledge contract on the BNB Chain were stolen, 6,148,859 LGT reward coins were stolen, and the loss was about 1.6 million US dollars. According to analysis, the reason for the theft was that the owner administrator of LGTPool created a fake LP token pledge pool (Pool No. 3), and then the thief put a large amount of LP tokens into the pool for pledge, and obtained 6.14 million pieces LGT reward token.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The LianGoPay project announced on February 7 that its assets in the LGTPool pledge contract on the BNB Chain were stolen, 6,148,859 LGT reward coins were stolen, and the loss was about 1.6 million US dollars. According to analysis, the reason for the theft was that the owner administrator of LGTPool created a fake LP token pledge pool (Pool No. 3), and then the thief put a large amount of LP tokens into the pool for pledge, and obtained 6.14 million pieces LGT reward token."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "LianGoPay was exploited on BNB Chain on 7 February 2023 through a fake LP staking pool, resulting in a loss of approximately $1.6 million of LGT tokens. The attacker controlled newly introduced contract permissions and drained the token pool by minting massive fake LP tokens. The protocol's administrative privileges were compromised, allowing an attacker to change the legitimate LP token address to a malicious contract. This enabled unlimited creation of fake LP tokens, which were used to drain rewards from the LGT pool."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "panewslab.com",
+      "url": "https://www.panewslab.com/zh/sqarticledetails/tycwc1sv.html"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/liangopay-2023-02-07"
+    },
+    {
+      "source": "revertiq",
+      "label": "certik.com",
+      "url": "https://www.certik.com/blog/liango-protocol-incident-analysis"
+    },
+    {
+      "source": "revertiq",
+      "label": "halborn.com",
+      "url": "https://www.halborn.com/blog/post/explained-the-liangopay-hack-february-2023"
+    }
+  ]
+}

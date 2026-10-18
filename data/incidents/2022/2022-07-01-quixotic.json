@@ -1,0 +1,122 @@
+{
+  "id": "2022-07-01-quixotic",
+  "name": "Quixotic",
+  "date": "2022-07-01",
+  "year": 2022,
+  "amountUsd": 100000,
+  "returnedUsd": null,
+  "chains": [
+    "Optimism"
+  ],
+  "targetType": "NFTfi",
+  "category": "signature-crypto",
+  "technique": "Signature Verification Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "signature-crypto",
+    "confidence": 0.83,
+    "top": [
+      {
+        "category": "signature-crypto",
+        "p": 0.84
+      },
+      {
+        "category": "access-control",
+        "p": 0.14
+      },
+      {
+        "category": "logic-error",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.83
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Optimism NFT Marketplace. Lost: $100K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Optimism NFT Marketplace. Lost: $100K"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "fillSellOrder function only check seller signature. Vulnerable code snippet: https://optimistic.etherscan.io/address/0x065e8a87b8f11aed6facf9447abe5e8c5d7502b6#code#L1670 Quixotic only check buyers signature only. ---"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Quiuixotic, the largest NFT platform in the Optimism ecosystem, has a serious vulnerability, and a large number of user assets have been stolen. Users who have traded on this market should cancel their authorization as soon as possible. According to SlowMist analysis, only the sell order is checked in the fillSellOrder function of the market contract, and the buyer's buy order is not checked. Therefore, the attacker first creates an arbitrary NFT contract, calls the fillSellOrder function to generate a sell order, and passes the buyer parameter as the victim's address and the paymentERC20 parameter as the token address to be stolen, then the user who i…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Quixotic, a major NFT marketplace on Optimism, was exploited in July 2022 after a contract update introduced a signature verification flaw in its Offer system. Attackers were able to transfer out users’ approved ERC-20 tokens, resulting in an estimated $100,000 in losses. The marketplace paused activity and later refunded affected users. The Quixotic marketplace's 'Offer' system only validated the seller's signature, missing buyer-side authentication. This allowed attackers to exploit the fillSellOrder function to execute unauthorized transfers of ERC-20 tokens by presenting forged offers."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x5dc519726e1236eb846271f6699e03cdd1a8fd593a2900c71cd2aabbdb7c92e6"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-07/Quixotic_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-07/Quixotic_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/1nf0s3cpt/status/1542808565349777408"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/SlowMist_Team/status/1542795627603857409"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "optimistic.etherscan.io",
+      "url": "https://optimistic.etherscan.io/tx/0x5dc519726e1236eb846271f6699e03cdd1a8fd593a2900c71cd2aabbdb7c92e6"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "optimistic.etherscan.io",
+      "url": "https://optimistic.etherscan.io/address/0x065e8a87b8f11aed6facf9447abe5e8c5d7502b6#code#L1670"
+    },
+    {
+      "source": "slowmist",
+      "label": "defidaonews.com",
+      "url": "https://www.defidaonews.com/article/6762124"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/quixotic-2022-07-01"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptotimes.io",
+      "url": "https://www.cryptotimes.io/2022/07/02/optimisms-quixotic-nft-marketplace-exploited-losing-erc-20-tokens/"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/past/2022/README.md#L2095"
+    }
+  ]
+}

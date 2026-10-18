@@ -4,7 +4,7 @@ import CategoryChip from '../../components/CategoryChip.astro';
 import IncidentTable from '../../components/IncidentTable.astro';
 import { incidents, fmtUsd, fmtDate, href } from '../../lib/data';
 import { CATEGORIES, LAYERS, ERAS, eraForYear } from '../../lib/taxonomy';
-import type { Incident } from '../../lib/types';
+import type { Incident, SourceId } from '../../lib/types';
 
 export function getStaticPaths() {
   return incidents.map((i) => ({ params: { id: i.id }, props: { i } }));
@@ -13,7 +13,7 @@ const { i } = Astro.props as { i: Incident };
 const c = CATEGORIES[i.category];
 const era = ERAS.find((e) => e.id === eraForYear(i.year))!;
 const similar = incidents.filter((x) => x.category === i.category && x.id !== i.id).sort((a, b) => Math.abs(a.year - i.year) - Math.abs(b.year - i.year) || (b.amountUsd ?? 0) - (a.amountUsd ?? 0)).slice(0, 6);
-const SOURCE_NAMES = { defillama: 'DefiLlama', defihacklabs: 'DeFiHackLabs', rekt: 'REKT', curated: 'Curated' } as const;
+const SOURCE_NAMES = { defillama: 'DefiLlama', defihacklabs: 'DeFiHackLabs', rekt: 'REKT', slowmist: 'SlowMist', blocksec: 'BlockSec', revertiq: 'RevertIQ', curated: 'Curated' } as const satisfies Record<SourceId, string>;
 const CLASSIFIED_BY = { defillama: 'DefiLlama label', keywords: 'Keyword rules', typesafe: 'TypeSafe (Jev)', curated: 'Curated post-mortem', none: 'Unclassified' } as const;
 const ai = i.ai;
 const aiAgrees = ai?.category === i.category;
@@ -62,6 +62,7 @@ const pct = (p: number) => `${Math.round(p * 100)}%`;
           <li><span class="plabel">{CATEGORIES[t.category].name}</span><span class="ptrack"><span class="pfill" style={`width:${t.p * 100}%`} /></span><span class="mono small">{pct(t.p)}</span></li>
         ))}
       </ul>
+      {ai.hasRootCause < 0.5 && <p class="small muted">The model judged that the available descriptions don't explain how the attack worked ({pct(ai.hasRootCause)}), so its answer is a weak guess.</p>}
       <p class="small muted" style="margin-bottom:0">From the write-up: flash loan used <strong>{pct(ai.flashLoan)}</strong> · attributed to a state actor <strong>{pct(ai.stateActor)}</strong>. These are model probabilities from the text above, not verified facts.</p>
     </section>
   )}
@@ -72,6 +73,22 @@ const pct = (p: number) => `${Math.round(p * 100)}%`;
       <ul>{c.prevention.map((p) => <li>{p}</li>)}</ul>
       <p class="small"><a href={href(`/patterns/${i.category}`)}>Full pattern guide: {c.name} →</a></p>
     </section>
+  )}
+
+  {i.descriptions.length > 1 && (
+    <>
+      <h2>What each source says</h2>
+      <div class="grid grid-2">
+        {i.descriptions.map((d) => <div class="card"><p class="small muted" style="margin-top:0"><strong>{d.source}</strong></p><p class="small" style="margin-bottom:0">{d.text}</p></div>)}
+      </div>
+    </>
+  )}
+
+  {i.txHashes.length > 0 && (
+    <>
+      <h2>Attack transactions</h2>
+      <ul class="mono small">{i.txHashes.slice(0, 8).map((h) => <li style="overflow-wrap:anywhere">{h}</li>)}</ul>
+    </>
   )}
 
   <h2>References</h2>

@@ -1,0 +1,65 @@
+{
+  "id": "2026-04-28-ycdeal3",
+  "name": "Ycdeal3",
+  "date": "2026-04-28",
+  "year": 2026,
+  "amountUsd": 398000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": null,
+  "category": "access-control",
+  "technique": "Access Control",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 1.00).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.01,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "The Ycdeal3 contract on Ethereum lacked proper access controls on a privileged function, allowing an unauthorized external caller to interact with restricted functionality and drain approximately $398K from the protocol. No whitelist, role check, or msg.sender guard protected the sensitive entry point, enabling any address to invoke it at will. The attack was flagged by the exvulsec security team on April 28, 2026; detailed technical post-mortem information was not publicly released beyond the initial on-chain alert. Attack Tx: 0x6b04344d5627df59d3bc645e7454f4605a90272852a91e435e370376643353b3 Analysis: exvulsec on X",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The Ycdeal3 contract on Ethereum lacked proper access controls on a privileged function, allowing an unauthorized external caller to interact with restricted functionality and drain approximately $398K from the protocol. No whitelist, role check, or msg.sender guard protected the sensitive entry point, enabling any address to invoke it at will. The attack was flagged by the exvulsec security team on April 28, 2026; detailed technical post-mortem information was not publicly released beyond the initial on-chain alert. Attack Tx: 0x6b04344d5627df59d3bc645e7454f4605a90272852a91e435e370376643353b3 Analysis: exvulsec on X"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x6b04344d5627df59d3bc645e7454f4605a90272852a91e435e370376643353b3"
+  ],
+  "poc": null,
+  "sources": [
+    "defihacklabs",
+    "blocksec"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "app.phalcon.blocksec.com",
+      "url": "https://app.phalcon.blocksec.com/explorer/tx/eth/0x6b04344d5627df59d3bc645e7454f4605a90272852a91e435e370376643353b3"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/exvulsec/status/2049156204757446960"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x6b04344d5627df59d3bc645e7454f4605a90272852a91e435e370376643353b3"
+    }
+  ]
+}

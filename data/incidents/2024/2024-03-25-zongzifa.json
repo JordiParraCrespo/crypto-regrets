@@ -1,0 +1,119 @@
+{
+  "id": "2024-03-25-zongzifa",
+  "name": "ZongZiFa",
+  "date": "2024-03-25",
+  "year": 2024,
+  "amountUsd": 229000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.99
+      },
+      {
+        "category": "logic-error",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.08,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Price Manipulation. Lost: ~223K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Price Manipulation. Lost: ~223K"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The Root cause is in burnToHolder(), it used getAmountsOut() to calculate exchange rate of ZongZi and Bnb. Attacker can manipulated this rate by exchanging huge amount of BnB to ZongZi. Code Snippet: Attack Tx: https://phalcon.blocksec.com/explorer/tx/bsc/0x247f4b3dbde9d8ab95c9766588d80f8dae835129225775ebd05a6dd2c69cd79f Analysis:"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The project ZongZiFa on BSC was exploited through a flash loan, resulting in a loss of approximately $229,000. The attacker manipulated the price of ZongZi to gain invitation rewards."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "ZongZiFa was exploited on BNB Chain on 25 March 2024 via a flash loan and spot price manipulation attack, enabling the attacker to drain approximately $229,000 by distorting the oracle price and claiming excessive rewards. The vulnerable ZongZi contract calculated its reward and asset transfer amounts using spot prices from manipulable AMM reserves. The attacker used a flash loan and a sequence of swaps to distort the pool's perceived price, inflating the value of rewards and enabling unauthorized extraction of protocol funds."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x247f4b3dbde9d8ab95c9766588d80f8dae835129225775ebd05a6dd2c69cd79f"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-03/ZongZi_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-03/ZongZi_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "phalcon.blocksec.com",
+      "url": "https://phalcon.blocksec.com/explorer/tx/bsc/0x247f4b3dbde9d8ab95c9766588d80f8dae835129225775ebd05a6dd2c69cd79f"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x247f4b3dbde9d8ab95c9766588d80f8dae835129225775ebd05a6dd2c69cd79f"
+    },
+    {
+      "source": "blocksec",
+      "label": "twitter.com",
+      "url": "https://twitter.com/0xNickLFranklin/status/1772195949638775262"
+    },
+    {
+      "source": "blocksec",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs?tab=readme-ov-file#20240325-zongzi---price-manipulation"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/SlowMist_Team/status/1772184743053762886"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/zongzifa-2024-03-25"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/zongzi-hack-2024"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/shuo-young/BlockWatchdog/tree/master/attack_usecases"
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "id": "2026-07-23-solido-cash",
+  "name": "Solido Cash",
+  "date": "2026-07-23",
+  "year": 2026,
+  "amountUsd": 900000,
+  "returnedUsd": null,
+  "chains": [
+    "Supra"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Oracle Misconfiguration",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.08,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Move",
+  "rootCause": "Solido Cash (the largest DeFi protocol on Supra) was exploited due to an oracle misassignment on SOLID collateral (stale feed fallback to CASH oracle, severely overvaluing collateral). The attacker, in two waves (one atomic tx + one multi-wallet manual), deposited cheap collateral, minted excess CASH, and sold it on DEXs for SUPRA, netting ~293.7M SUPRA. No user funds were affected; losses primarily hit LPs (mostly the foundation) and protocol reserves. The protocol paused relevant functions and released a forensic report.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Solido Cash (the largest DeFi protocol on Supra) was exploited due to an oracle misassignment on SOLID collateral (stale feed fallback to CASH oracle, severely overvaluing collateral). The attacker, in two waves (one atomic tx + one multi-wallet manual), deposited cheap collateral, minted excess CASH, and sold it on DEXs for SUPRA, netting ~293.7M SUPRA. No user funds were affected; losses primarily hit LPs (mostly the foundation) and protocol reserves. The protocol paused relevant functions and released a forensic report."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Solido Cash was exploited on Supra on July 23, 2026, when a misconfigured oracle fallback assigned collateral tokens a value of $1 each, enabling attackers to mint synthetic tokens against inflated collateral. The incident resulted in losses of approximately $900,000, with most proceeds transferred to centralized exchanges. A misconfigured oracle fallback assigned an inflated $1 valuation to collateral tokens, allowing attackers to mint synthetic assets against value that did not exist. This overvaluation enabled draining protocol liquidity."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/SolidoMoney/status/2081323242854469730"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/solido-cash-2026-07-23"
+    },
+    {
+      "source": "revertiq",
+      "label": "moneycheck.com",
+      "url": "https://moneycheck.com/solido-money-hack-293-7m-supra-tokens-traced-to-major-crypto-exchanges/"
+    },
+    {
+      "source": "revertiq",
+      "label": "vibraniumaudits.com",
+      "url": "https://www.vibraniumaudits.com/post/oracle-manipulation-attacks-defi-security"
+    }
+  ]
+}

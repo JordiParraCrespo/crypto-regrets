@@ -1,0 +1,100 @@
+{
+  "id": "2022-12-01-apc",
+  "name": "APC",
+  "date": "2022-12-01",
+  "year": 2022,
+  "amountUsd": 6000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "Token",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.96,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "FlashLoan & price manipulation. Lost: $6k",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "FlashLoan & price manipulation. Lost: $6k"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Incorrect price calculation via getReverse APC price relies on the reserve balances of the corresponding PancakeSwap pair. You dump APC token price by flashloan. Vulnerable code snippet: Attack tx: https://explorer.phalcon.xyz/tx/bsc/0xbcaecea2044101c80f186ce5327bec796cd9e054f0c240ddce93e2aead337370 https://explorer.phalcon.xyz/tx/bsc/0xf2d4559aeb945fb8e4304da5320ce6a2a96415aa70286715c9fcaf5dbd9d7ed2 Analysis: https://twitter.com/BlockSecTeam/status/1598262002010378241"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "The APC (ArenaPlay) swap contract on BNB Chain was exploited on 1 December 2022 via flash-loan-driven spot price manipulation, allowing attackers to drain approximately $6,000 in project token reserves by abusing a vulnerable on-chain price oracle. The swap contract priced internal APC–MUSD conversions using the live spot price from a PancakeSwap AMM pool. Attackers manipulated the spot price with flash loans, allowing them to swap at artificially inflated/deflated rates in the same transaction without resistance."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xbcaecea2044101c80f186ce5327bec796cd9e054f0c240ddce93e2aead337370",
+    "0xf2d4559aeb945fb8e4304da5320ce6a2a96415aa70286715c9fcaf5dbd9d7ed2"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-12/APC_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-12/APC_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BlockSecTeam/status/1598262002010378241"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "explorer.phalcon.xyz",
+      "url": "https://explorer.phalcon.xyz/tx/bsc/0xbcaecea2044101c80f186ce5327bec796cd9e054f0c240ddce93e2aead337370"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "explorer.phalcon.xyz",
+      "url": "https://explorer.phalcon.xyz/tx/bsc/0xf2d4559aeb945fb8e4304da5320ce6a2a96415aa70286715c9fcaf5dbd9d7ed2"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/apc-2022-12-01"
+    },
+    {
+      "source": "revertiq",
+      "label": "crypto.training",
+      "url": "https://crypto.training/hacks/2022-12-apc/"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/src/test/2022-12/APC_exp.sol"
+    }
+  ]
+}

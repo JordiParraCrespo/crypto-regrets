@@ -1,0 +1,76 @@
+{
+  "id": "2022-12-30-dfs",
+  "name": "DFS",
+  "date": "2022-12-30",
+  "year": 2022,
+  "amountUsd": 1450,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "input-validation",
+  "technique": "Insufficient validation + flashloan",
+  "classificationNote": "Classified by keyword rules from the DeFiHackLabs root-cause title.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "input-validation",
+    "confidence": 0.42,
+    "top": [
+      {
+        "category": "input-validation",
+        "p": 0.45
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.28
+      },
+      {
+        "category": "logic-error",
+        "p": 0.21
+      }
+    ],
+    "flashLoan": 0.33,
+    "stateActor": 0.02,
+    "hasRootCause": 0.94
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Insufficient validation + flashloan. Lost: $1450",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Insufficient validation + flashloan. Lost: $1450"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Price Manipulation. When the receiving address of the dFS token transfer is the pair, a certain percentage of the tokens at this address will be additionally destroyed, and the attacker manipulates the price by invoking the transfer() and skim() function to burn the dfs tokens in the pair. Vulnerable code snippet: Attack tx: https://bscscan.com/tx/0xcddcb447d64c2ce4b3ac5ebaa6d42e26d3ed0ff3831c08923c53ea998f598a7c Analysis: https://twitter.com/CertiKAlert/status/1608788290785665024"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xcddcb447d64c2ce4b3ac5ebaa6d42e26d3ed0ff3831c08923c53ea998f598a7c"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-12/DFS_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-12/DFS_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/CertiKAlert/status/1608788290785665024"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0xcddcb447d64c2ce4b3ac5ebaa6d42e26d3ed0ff3831c08923c53ea998f598a7c"
+    }
+  ]
+}

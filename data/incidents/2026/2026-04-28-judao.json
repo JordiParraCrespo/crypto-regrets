@@ -1,0 +1,109 @@
+{
+  "id": "2026-04-28-judao",
+  "name": "JUDAO",
+  "date": "2026-04-28",
+  "year": 2026,
+  "amountUsd": 228000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "Token",
+  "category": "accounting-math",
+  "technique": "Arithmetic Error",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.95,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.95
+      },
+      {
+        "category": "logic-error",
+        "p": 0.03
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.08,
+    "stateActor": 0.03,
+    "hasRootCause": 0.7
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "JUDAO sell-hook reserve drain. Lost: 205K USDT + 36 BNB",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "JUDAO sell-hook reserve drain. Lost: 205K USDT + 36 BNB"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The JUDAO token / liquidity pool on BSC was exploited via Flashloan-assisted Manipulation. The attacker used flash loans to manipulate pool reserves or pricing, draining funds through PancakeSwap V2 routes (e.g., BUSD-JUDAO pair). Losses included at least 205,259 USDT plus 36 BNB."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "JUDAO's T3 token on BNB Chain was exploited on April 28, 2026, through a flawed ERC-20 sell-transfer hook. The attacker manipulated PancakeSwap pair reserves to withdraw 205,259 USDT and 36 BNB (~$227.9K) from the liquidity pool. The exploit abused tokenomics logic that debited pair tokens and updated reserves mid-transfer, breaking AMM accounting assumptions. JUDAO's sell-transfer hook performed reserve manipulations and sync() calls inside the transfer logic, causing a mismatch between actual token balances and stored reserves. The vulnerable implementation allowed the attacker to create excess sellable reserves and extract more USDT than permitted by normal swap pricing."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x956e38b8ddb40ba080c8042c685ae52ee5c1b096f1d7f0c4a6c59be3eb4265bd"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-04/JUDAO_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-04/JUDAO_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "t.me",
+      "url": "https://t.me/defimon_alerts/2955"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x956e38b8ddb40ba080c8042c685ae52ee5c1b096f1d7f0c4a6c59be3eb4265bd"
+    },
+    {
+      "source": "blocksec",
+      "label": "x.com",
+      "url": "https://x.com/TenArmorAlert/status/2048942654281470143"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/DefimonAlerts/status/2049019388947321334"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/judao-2026-04-28"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    }
+  ]
+}

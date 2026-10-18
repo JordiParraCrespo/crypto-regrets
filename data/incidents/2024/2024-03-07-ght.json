@@ -1,0 +1,98 @@
+{
+  "id": "2024-03-07-ght",
+  "name": "GHT",
+  "date": "2024-03-07",
+  "year": 2024,
+  "amountUsd": 57000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.96,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.96
+      },
+      {
+        "category": "logic-error",
+        "p": 0.04
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Business Logic Flaw. Lost: ~57K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Business Logic Flaw. Lost: ~57K"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The GHT token's transferFrom is broken: it lets an arbitrary caller move tokens out of any from address without a valid allowance (no allowance check). The attacker exploited this to first pull almost all GHT out of the WETH/GHT Uniswap V2 pair into the GHT contract and call sync() to crash the recorded reserve, then push GHT back into the pair. With the pair's recorded reserves now far below its actual GHT balance, the attacker computed the standard constant-product amountOut and called swap(0, amountOut, ...) to extract WETH essentially for free. Vulnerable code snippet: Attack Tx: https://app.blocksec.com/explorer/tx/eth/0xd17266bcdf30cbcbd7d0b5a006f43141981aeee2e1f860f68c9a1805ecacbc68"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On March 7, 2024, the GHT token's Uniswap V2 pool on Ethereum Mainnet was exploited via a logic flaw. The attacker manipulated pooled GHT token reserves, allowing them to drain approximately $57,000 in WETH from the pool through a series of unauthorized transfers and state synchronization steps. The Uniswap V2 pool implementation allowed direct GHT token transfers out of the pool contract without requiring reserve synchronization. This broke the internal accounting, enabling the attacker to execute swaps at artificially favorable rates based on manipulated reserves. This exploit pattern is supported by a reproduction, but lack of verified victim-contra…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xd17266bcdf30cbcbd7d0b5a006f43141981aeee2e1f860f68c9a1805ecacbc68"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-03/GHT_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-03/GHT_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/2baf1a43c44d6cb3ce17a678701784fbe7edabad/src/test/2024-03/GHT_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/eth/0xd17266bcdf30cbcbd7d0b5a006f43141981aeee2e1f860f68c9a1805ecacbc68"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/ght-2024-03-07"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/ght-hack-2024"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/past/2024/README.md#L2606"
+    }
+  ]
+}

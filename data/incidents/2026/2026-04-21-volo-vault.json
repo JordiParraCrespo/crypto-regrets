@@ -1,0 +1,92 @@
+{
+  "id": "2026-04-21-volo-vault",
+  "name": "Volo Vault",
+  "date": "2026-04-21",
+  "year": 2026,
+  "amountUsd": 3500000,
+  "returnedUsd": null,
+  "chains": [
+    "Sui"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "key-compromise",
+  "technique": "Private Key Compromised",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "key-compromise",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "key-compromise",
+        "p": 0.99
+      },
+      {
+        "category": "access-control",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.16
+  },
+  "bridge": false,
+  "language": "Move",
+  "rootCause": "$3.5 million drained from Volo on Sui after an admin private key was compromised, likely via social engineering. Three vaults hit - WBTC, XAUm, USDC. Volo self-disclosed first, and recovered nearly all of it, with a net loss of just $60K.",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "$3.5 million drained from Volo on Sui after an admin private key was compromised, likely via social engineering. Three vaults hit - WBTC, XAUm, USDC. Volo self-disclosed first, and recovered nearly all of it, with a net loss of just $60K."
+    },
+    {
+      "source": "SlowMist",
+      "text": "Volo, a protocol in the Sui ecosystem, disclosed on X that Volo Vaults experienced a security vulnerability today, resulting in approximately $3.5 million in assets (WBTC, XAUm, and USDC) being stolen. Volo stated that it detected the attack and immediately notified the Sui Foundation and ecosystem partners, and has frozen all vaults to prevent further losses."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On April 21, 2026, Volo Vault on Sui lost $3.5 million across WBTC, XAUm, and USDC vaults after an attacker gained access to the protocol's single-signature admin key through social engineering. No contract logic flaw was involved; asset freezes partially limited further loss. A single admin private key, exposed via social engineering, allowed the attacker privileged access to directly drain three vaults. The design lacked multi-party authorization or separation of critical privileges, making one compromised operator a single point of failure. No smart-contract bug was exploited."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Volo - Rekt",
+      "url": "https://rekt.news/volo-rekt"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/volo_sui/status/2046715584201511351"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/volo-vault-2026-04-21"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/markets/2026/04/22/another-defi-protocol-loses-millions-in-hack-days-after-kelpdao-breach"
+    }
+  ]
+}

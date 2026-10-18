@@ -1,0 +1,101 @@
+{
+  "id": "2026-08-23-termfinance-vaults",
+  "name": "TermFinance Vaults",
+  "date": "2026-08-23",
+  "year": 2026,
+  "amountUsd": 8500000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "governance",
+  "technique": "Malicious Proposal",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "governance",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "governance",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.06,
+    "stateActor": 0.02,
+    "hasRootCause": 0.89
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Governance capture via thinly-wrapped Aragon voting power. Lost: 2,841.743535791961701401 WETH (attacker net gain, ETH meta-vault)",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Governance capture via thinly-wrapped Aragon voting power. Lost: 2,841.743535791961701401 WETH (attacker net gain, ETH meta-vault)"
+    },
+    {
+      "source": "REKT",
+      "text": "Near-zero voter participation let one wallet seize control of Term Labs’ vaults for minimal cost, bypass the governance delay, and drain approximately $8.5 million. The attack exploited governance, not a core vault-code bug."
+    },
+    {
+      "source": "SlowMist",
+      "text": "On August 23, 2026, Term Finance’s Strategy Vaults (Ethereum-based fixed-rate lending protocol by Term Labs) suffered a governance exploit. The attacker acquired majority voting power (100% on several USDC vaults, ~91% on the ETH Meta Vault), passed malicious proposals to disable the timelock and drain ~2,843 ETH and 1.68M USDC (later swapped to DAI), resulting in ~$8.5 million losses (about 68% of the vaults’ then-TVL)."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On August 23, 2026, TermFinance Vaults on Ethereum was compromised in a governance exploit, resulting in the theft of approximately $8.5 million in WETH and USDC. The attacker used a malicious proposal to disable safety timelocks and drain the vaults through the system's own execution path. The protocol's governance module allowed a malicious proposal from an attacker with a trivial stake to bypass review, disable the enforced execution timelock, and direct vault funds to a malicious contract. No effective veto or proposal threshold blocked this path, enabling withdrawal of nearly all assets by anyone able to queue such a proposal."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xd354a15b15cb73d30908f411aee3f795ec86737a4d080e9a818ac4d6d3014129",
+    "0x9f273f9a5a20c2fc957b06bbfa45db486390eede4a7f44fbe1a2eb6744c2e8a0"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-08/TermFinance_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-08/TermFinance_exp.sol"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Term Labs - Rekt",
+      "url": "https://rekt.news/term-labs-rekt"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/term_labs/status/2091428394130886740"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/termfinance-vaults-2026-08-23"
+    },
+    {
+      "source": "revertiq",
+      "label": "ukey.com",
+      "url": "https://ukey.com/blog/en/blog/term-finance-governance-exploit-audited-defi-vaults"
+    },
+    {
+      "source": "revertiq",
+      "label": "defiprime.com",
+      "url": "https://defiprime.com/term-finance-governance-exploit"
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "id": "2022-11-03-pnetwork",
+  "name": "pNetwork",
+  "date": "2022-11-03",
+  "year": 2022,
+  "amountUsd": 4300000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "key-compromise",
+  "technique": "Key Leaked via Infrastructure",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "bridge-crosschain",
+    "confidence": 0.74,
+    "top": [
+      {
+        "category": "bridge-crosschain",
+        "p": 0.76
+      },
+      {
+        "category": "key-compromise",
+        "p": 0.2
+      },
+      {
+        "category": "access-control",
+        "p": 0.03
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.88
+  },
+  "bridge": true,
+  "language": "Solidity",
+  "rootCause": "An address on the BNB Chain minted more than $1 billion of pGALA tokens out of thin air, and sold them through PancakeSwap to make a profit. The pGALA contract hacker has made a profit of $4.3 million. One Smart Money address arbitraged nearly $6.5 million in this attack, even more than the attacker's profit. Multi-link is tweeted by the protocol pNetwork, and the pGALA contract on the BNB Chain needs to be redeployed due to the misconfiguration of the cross-chain bridge. Huobi Global announced that it would re-list GALA after proposing that the GALA purchased after the abnormal event would be renamed pGALA, and the project party agreed to pay full com…",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "An address on the BNB Chain minted more than $1 billion of pGALA tokens out of thin air, and sold them through PancakeSwap to make a profit. The pGALA contract hacker has made a profit of $4.3 million. One Smart Money address arbitraged nearly $6.5 million in this attack, even more than the attacker's profit. Multi-link is tweeted by the protocol pNetwork, and the pGALA contract on the BNB Chain needs to be redeployed due to the misconfiguration of the cross-chain bridge. Huobi Global announced that it would re-list GALA after proposing that the GALA purchased after the abnormal event would be renamed pGALA, and the project party agreed to pay full com…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 3 November 2022, pNetwork's pGALA bridge on BNB Chain suffered a loss of contract owner privileges, enabling arbitrary minting of unbacked pGALA tokens. pNetwork executed an emergency drain, minting and selling 55.6 billion pGALA to extract 12,977 BNB (~$4.3 million) from PancakeSwap, but recovery and reimbursement remain disputed. A misconfiguration during deployment resulted in lost control over the pGALA mint authority on BNB Chain. The contract owner could mint unlimited tokens, bypassing collateralization. Project accounts report this was due to a leaked governance key, possibly via a public GitHub repository, but direct proof of the leak location is not established."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/pNetworkDeFi/status/1588266897061031936"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/pnetwork-2022-11-03"
+    },
+    {
+      "source": "revertiq",
+      "label": "itokenly.com",
+      "url": "https://itokenly.com/hacks/pnetwork-pgala"
+    },
+    {
+      "source": "revertiq",
+      "label": "prnewswire.com",
+      "url": "https://www.prnewswire.com/news-releases/gala-sues-pnetwork-on-behalf-of-pgala-victims-301775263.html"
+    }
+  ]
+}

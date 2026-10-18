@@ -1,0 +1,112 @@
+{
+  "id": "2025-07-09-zkswap",
+  "name": "ZKSwap",
+  "date": "2025-07-09",
+  "year": 2025,
+  "amountUsd": 5000000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "bridge-crosschain",
+  "technique": "Forged Proof",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "bridge-crosschain",
+    "confidence": 0.66,
+    "top": [
+      {
+        "category": "bridge-crosschain",
+        "p": 0.68
+      },
+      {
+        "category": "logic-error",
+        "p": 0.25
+      },
+      {
+        "category": "signature-crypto",
+        "p": 0.07
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": true,
+  "language": "Solidity",
+  "rootCause": "ZKSwap's Layer 1 Ethereum bridge contained a critical business logic flaw in its emergency withdrawal (Exodus Mode) path. The verifyExitProof() function, which was supposed to cryptographically validate zero-knowledge proof withdrawal requests, was implemented to unconditionally return true without performing any actual verification. A faulty \"exited\" mapping (nullifier) that should have prevented duplicate withdrawal claims was also broken. The attacker triggered Exodus Mode, submitted fabricated proofs asserting arbitrary token balances across multiple token IDs, bypassed the broken verification, and repeatedly claimed balances, draining approximately $5 million from the bridge in about ten minutes. Attack Tx: 0x5488f6bbfabf7f1ada8e529c23dfc1fd129b4237536e9b5500b47d63f773e054 Analysis: How ZKSWap's $5M Exploit Could've Been Prevented with Onchain Monitoring",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "ZKSwap's Layer 1 Ethereum bridge contained a critical business logic flaw in its emergency withdrawal (Exodus Mode) path. The verifyExitProof() function, which was supposed to cryptographically validate zero-knowledge proof withdrawal requests, was implemented to unconditionally return true without performing any actual verification. A faulty \"exited\" mapping (nullifier) that should have prevented duplicate withdrawal claims was also broken. The attacker triggered Exodus Mode, submitted fabricated proofs asserting arbitrary token balances across multiple token IDs, bypassed the broken verification, and repeatedly claimed balances, draining approximately $5 million from the bridge in about ten minutes. Attack Tx: 0x5488f6bbfabf7f1ada8e529c23dfc1fd129b4237536e9b5500b47d63f773e054 Analysis: How ZKSWap's $5M Exploit Could've Been Prevented with Onchain Monitoring"
+    },
+    {
+      "source": "SlowMist",
+      "text": "ZKSwap’s Ethereum Layer 1 bridge suffered an exploit in which the attacker leveraged its emergency withdrawal mechanism, resulting in a loss of approximately $5 million. Analysis revealed that the component responsible for verifying zero-knowledge proofs had failed to actually perform the verification. This critical oversight allowed the attacker to forge arbitrary withdrawal proofs, effectively bypassing the bridge’s core security guarantees."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On July 9, 2025, ZKSwap's Ethereum L1 bridge was exploited due to a critical flaw in its Exodus Mode withdrawal logic, resulting in the theft of approximately $5 million. The incident was caused by a verifyExitProof() function that unconditionally returned true, allowing attackers to forge withdrawal proofs and claim unbacked assets from the bridge contract. The ZKSwap Exodus Mode bridge contract contained a verifyExitProof() function that always returned true, bypassing any cryptographic proof checks. This allowed attackers to submit fabricated withdrawal claims without valid evidence and receive assets from the bridge."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x5488f6bbfabf7f1ada8e529c23dfc1fd129b4237536e9b5500b47d63f773e054",
+    "0xfdb93e00f3b1d24303db7f43eaa5ef50d3fde957ddeec7c0feb8c5497ba11182",
+    "0xfa9f0f7bcf2961c1b341eef17f31734e4476b225f0bd16cb707093c9c13256a3",
+    "0xde0c7a65d6b684970f9490139f1e0e27debbdd95ca07589bde1c1e538a620aab"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x5488f6bbfabf7f1ada8e529c23dfc1fd129b4237536e9b5500b47d63f773e054"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "blockaid.io",
+      "url": "https://www.blockaid.io/blog/how-zkswaps-5m-exploit-couldve-been-prevented-with-onchain-monitoring"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x5488f6bbfabf7f1ada8e529c23dfc1fd129b4237536e9b5500b47d63f773e054"
+    },
+    {
+      "source": "blocksec",
+      "label": "x.com",
+      "url": "https://x.com/R4ZN1V/status/1948448167734673838"
+    },
+    {
+      "source": "slowmist",
+      "label": "blockaid.io",
+      "url": "https://blockaid.io/blog/how-zkswaps-5m-exploit-couldve-been-prevented-with-onchain-monitoring"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/zkswap-2025-07-09"
+    },
+    {
+      "source": "revertiq",
+      "label": "quadrigainitiative.com",
+      "url": "https://quadrigainitiative.com/casestudy/zkswapexodusmodeflawenabledfakeproofwithdrawals.php"
+    }
+  ]
+}

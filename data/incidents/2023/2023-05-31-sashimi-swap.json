@@ -1,0 +1,60 @@
+{
+  "id": "2023-05-31-sashimi-swap",
+  "name": "Sashimi Swap",
+  "date": "2023-05-31",
+  "year": 2023,
+  "amountUsd": 3500,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": null,
+  "category": "logic-error",
+  "technique": "Flash Loan Attack",
+  "classificationNote": "Classified by keyword rules from the SlowMist label and description.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.52,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.55
+      },
+      {
+        "category": "market-manipulation",
+        "p": 0.2
+      },
+      {
+        "category": "logic-error",
+        "p": 0.08
+      }
+    ],
+    "flashLoan": 0.96,
+    "stateActor": 0.01,
+    "hasRootCause": 0.8
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "A MEV bot (0xb2…2B96 is the MEV bot call contract, 0xb4…0343 is the single-use MEV bot) borrowed 95,000 WETH (worth nearly $180 million) via flash loan to attack Sashimi Swap. The bot swept away the last remaining money in Sashimi’s investment contract and slETH contract, but only about $3,500. It is reported that Sashimi Swap was attacked in December 2021 and lost $210,000, and the project was subsequently abandoned.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "A MEV bot (0xb2…2B96 is the MEV bot call contract, 0xb4…0343 is the single-use MEV bot) borrowed 95,000 WETH (worth nearly $180 million) via flash loan to attack Sashimi Swap. The bot swept away the last remaining money in Sashimi’s investment contract and slETH contract, but only about $3,500. It is reported that Sashimi Swap was attacked in December 2021 and lost $210,000, and the project was subsequently abandoned."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/ArkhamIntel/status/1664210608865042435"
+    }
+  ]
+}

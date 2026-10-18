@@ -1,0 +1,82 @@
+{
+  "id": "2026-07-22-zilliqa",
+  "name": "Zilliqa",
+  "date": "2026-07-22",
+  "year": 2026,
+  "amountUsd": 1640000,
+  "returnedUsd": null,
+  "chains": [
+    "Zilliqa"
+  ],
+  "targetType": "Chain",
+  "category": "signature-crypto",
+  "technique": "Weak Key Generation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "signature-crypto",
+    "confidence": 0.98,
+    "top": [
+      {
+        "category": "signature-crypto",
+        "p": 0.98
+      },
+      {
+        "category": "key-compromise",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "Zilliqa announced that ZIL was stolen from a cold wallet of one of its exchange partners. Investigation confirmed the root cause was a nonce-generation vulnerability in the Zilliqa Ledger app (present since 2019), allowing private key recovery from on-chain Schnorr signatures (after ~5+ native transactions). It was not due to the exchange’s operations. Native transactions were suspended and a fix is being coordinated.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Zilliqa announced that ZIL was stolen from a cold wallet of one of its exchange partners. Investigation confirmed the root cause was a nonce-generation vulnerability in the Zilliqa Ledger app (present since 2019), allowing private key recovery from on-chain Schnorr signatures (after ~5+ native transactions). It was not due to the exchange’s operations. Native transactions were suspended and a fix is being coordinated."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "The Zilliqa legacy chain suffered a critical key exposure incident affecting Ledger hardware wallets, enabling attackers to reconstruct private keys from biased Schnorr signatures. 683,130,969.66 ZIL was stolen across 66 confirmed theft transactions between March and July 2026, with legacy transactions paused for migration and recovery. A nonce copying defect in the Zilliqa Ledger app for Schnorr signatures biased the nonce's high 64 bits to zero, enabling private key recovery from just four or five publicly posted signatures."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/zilliqa/status/2079847348780536050"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/zilliqa-2026-07-22"
+    },
+    {
+      "source": "revertiq",
+      "label": "zilliqa.com",
+      "url": "https://www.zilliqa.com/ledger-incident/post-mortem/"
+    },
+    {
+      "source": "revertiq",
+      "label": "zilliqa.com",
+      "url": "https://www.zilliqa.com/ledger-incident/"
+    }
+  ]
+}

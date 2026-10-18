@@ -1,0 +1,63 @@
+{
+  "id": "2026-08-04-nereus",
+  "name": "Nereus",
+  "date": "2026-08-04",
+  "year": 2026,
+  "amountUsd": 23760,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": null,
+  "category": "key-compromise",
+  "technique": "Proxy Upgrade Attack",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.96). Replaced keyword guess \"logic-error\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "key-compromise",
+    "confidence": 0.96,
+    "top": [
+      {
+        "category": "key-compromise",
+        "p": 0.96
+      },
+      {
+        "category": "access-control",
+        "p": 0.04
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "NereusShapeshiftersMarket NFT marketplace (TransparentUpgradeableProxy 0x6de0...6d73) drained via malicious implementation upgrade. Proxy admin key (0x863b...4076, EIP-7702-delegated EOA) was compromised and used to call ProxyAdmin.upgradeAndCall, swapping implementation to a freshly deployed drainer contract (0x60f8...23d1). Drainer's selector 0x8961ec50 swept entire ETH balance to attacker address. Attacker (0xd9cb...8f5f) extracted 12.74 ETH. Attack Tx: https://etherscan.io/tx/0x125e0a7046004a5886cd0908907ae85bf8716567b4464e11570d588425b0bc93 Source: https://twitter.com/DefimonAlerts/status/2084871269854384356",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "NereusShapeshiftersMarket NFT marketplace (TransparentUpgradeableProxy 0x6de0...6d73) drained via malicious implementation upgrade. Proxy admin key (0x863b...4076, EIP-7702-delegated EOA) was compromised and used to call ProxyAdmin.upgradeAndCall, swapping implementation to a freshly deployed drainer contract (0x60f8...23d1). Drainer's selector 0x8961ec50 swept entire ETH balance to attacker address. Attacker (0xd9cb...8f5f) extracted 12.74 ETH. Attack Tx: https://etherscan.io/tx/0x125e0a7046004a5886cd0908907ae85bf8716567b4464e11570d588425b0bc93 Source: https://twitter.com/DefimonAlerts/status/2084871269854384356"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x125e0a7046004a5886cd0908907ae85bf8716567b4464e11570d588425b0bc93"
+  ],
+  "poc": null,
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x125e0a7046004a5886cd0908907ae85bf8716567b4464e11570d588425b0bc93"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/DefimonAlerts/status/2084871269854384356"
+    }
+  ]
+}

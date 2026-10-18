@@ -1,0 +1,83 @@
+{
+  "id": "2025-05-09-lnd",
+  "name": "LND",
+  "date": "2025-05-09",
+  "year": 2025,
+  "amountUsd": 1180000,
+  "returnedUsd": null,
+  "chains": [
+    "Sonic",
+    "Hyperliquid L1"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.77,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.78
+      },
+      {
+        "category": "rugpull",
+        "p": 0.22
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.03,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "In May 2025, LND.fi on the Sonic blockchain was drained of approximately $1.18 million after a trusted developer embedded a backdoor in the core lending contracts, expanding admin privileges to enable fund extraction. The exploit leveraged a malicious change in an access-control check, letting the Pool Admin directly transfer out user deposits. A developer with deployment privileges altered the 'onlyPool' access-control modifier in LND's AToken and VariableDebtToken contracts, allowing any address with the Pool Admin role,not only the protocol's own Pool contract,to execute fund-transfer functions. After launch, the developer, holding the Pool Admin ro…",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "In May 2025, LND.fi on the Sonic blockchain was drained of approximately $1.18 million after a trusted developer embedded a backdoor in the core lending contracts, expanding admin privileges to enable fund extraction. The exploit leveraged a malicious change in an access-control check, letting the Pool Admin directly transfer out user deposits. A developer with deployment privileges altered the 'onlyPool' access-control modifier in LND's AToken and VariableDebtToken contracts, allowing any address with the Pool Admin role,not only the protocol's own Pool contract,to execute fund-transfer functions. After launch, the developer, holding the Pool Admin ro…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xd03b7d80cf7fcd4d14076ca53d42bcfac0115674699adecb99dd3a769d5ea41a",
+    "0x931136dce8055f7cd54df4de73f969bd48694a541c82a09f0624bcb6cd9fb462",
+    "0xd52f317b548bd0f67d32d35404d046e4e60f5af23dac8a502495a8714780bffe",
+    "0x74fadb3d2bdbcc215485537b69c8f25c2562981eee37c7014931941bdb39b913"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/explained-the-lnd-2025-05-21t09-06-01-211000-00-00"
+    },
+    {
+      "source": "revertiq",
+      "label": "halborn.com",
+      "url": "https://www.halborn.com/blog/post/explained-the-lnd-hack-may-2025"
+    },
+    {
+      "source": "revertiq",
+      "label": "hackmd.io",
+      "url": "https://hackmd.io/@michaelmai/LND-Postmortem"
+    },
+    {
+      "source": "revertiq",
+      "label": "defirisk.co",
+      "url": "https://defirisk.co/learn/exploits/lndfi/"
+    }
+  ]
+}

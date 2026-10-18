@@ -1,0 +1,90 @@
+{
+  "id": "2026-06-07-syscoin-bridge",
+  "name": "Syscoin Bridge",
+  "date": "2026-06-07",
+  "year": 2026,
+  "amountUsd": 10000000,
+  "returnedUsd": null,
+  "chains": [
+    "Syscoin"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "bridge-crosschain",
+  "technique": "Forged Proof",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "bridge-crosschain",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "bridge-crosschain",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": true,
+  "language": null,
+  "rootCause": "5 billion SYS minted from a malformed SPV proof that slipped past Syscoin’s bridge relay parser. The team published the receipts, coordinated a whitehat recovery, and the funds came back. No public audit record for the relay path that failed.",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "5 billion SYS minted from a malformed SPV proof that slipped past Syscoin’s bridge relay parser. The team published the receipts, coordinated a whitehat recovery, and the funds came back. No public audit record for the relay path that failed."
+    },
+    {
+      "source": "SlowMist",
+      "text": "Syscoin Bridge was exploited. The attacker leveraged a validation issue in the bridge flow, resulting in an unauthorized creation of approximately 5 billion SYS on the UTXO side. The funds were subsequently moved and split. The team has paused the bridge, is actively tracing the tainted outputs, coordinating with exchanges for blacklisting/monitoring, and working on a fix and remediation."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On June 7, 2026, Syscoin's bridge was exploited via a proof-validation flaw, allowing an attacker to mint 5 billion unauthorized SYS tokens, valued near $10 million. The team paused the bridge, recovered the funds, and burned the excess supply. The root cause was a parsing ambiguity between Syscoin Core and its NEVM relay leading to inconsistent asset interpretation. A parsing ambiguity between Syscoin Core and the NEVM relay allowed a UTXO burn to be interpreted as a native SYS burn on one side and as a custom asset on the other. This mismatch let the bridge release SYS tokens without proper proof."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x0021cc76a64e69eb81ec2c9a0aded3285d5cc372acd6f62a103fee3cfe0a7868"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Syscoin - Rekt",
+      "url": "https://rekt.news/syscoin-rekt"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/syscoin/status/2063749418365665413"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/syscoin-bridge-2026-06-07"
+    },
+    {
+      "source": "revertiq",
+      "label": "syscoin.org",
+      "url": "https://syscoin.org/news/technical-postmortem-syscoin-bridge-incident-recovery-and-remediation"
+    },
+    {
+      "source": "revertiq",
+      "label": "blockchainbreaches.com",
+      "url": "https://blockchainbreaches.com/en/breaches/syscoin-bridge-2026"
+    }
+  ]
+}

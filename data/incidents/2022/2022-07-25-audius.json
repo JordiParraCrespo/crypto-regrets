@@ -1,0 +1,140 @@
+{
+  "id": "2022-07-25-audius",
+  "name": "Audius",
+  "date": "2022-07-25",
+  "year": 2022,
+  "amountUsd": 6000000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "governance",
+  "technique": "Malicious Proposal",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "governance",
+    "confidence": 0.63,
+    "top": [
+      {
+        "category": "governance",
+        "p": 0.65
+      },
+      {
+        "category": "access-control",
+        "p": 0.35
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.88
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Storage Collision & Malicious Proposal. Lost: 704 ETH (~1.08M US$)",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Storage Collision & Malicious Proposal. Lost: 704 ETH (~1.08M US$)"
+    },
+    {
+      "source": "REKT",
+      "text": "Audius has fallen victim to a governance attack, losing $6M of its native token, AUDIO. Let’s hope their debut is a one-hit wonder."
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Storage Collision & Malicious Proposal Vulnerable code snippet: AudiusAdminUpgradabilityProxy uses storage slot 0 for the address of the proxyAdmin: https://etherscan.io/address/0x4deca517d6817b6510798b7328f2314d3003abac#code Re-define voting on the Audius protocol and modify the governance contract’s guardian address via initialize(). _votingPeriod to 3 blocks. _executionDelay to 0 block _guardianAddress"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Web3 music streaming service platform Audius community treasury was hacked, losing 18.5 million AUDIO Tokens. The hackers exchanged the funds for about 705 ETH on Uniswap. Audius officially stated that the problem has been found and is currently being repaired. All Audius smart contracts on Ethereum must be stopped, including tokens. The team believes that there is no further capital risk. Before the repair is completed, token balances, transfers, etc. will be temporarily unavailable. use."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Audius's Ethereum governance was compromised on 2022-07-23 after repeated initialize() calls on upgradeable proxies let an attacker rewrite governance state, pass proposal 85, and move 18,564,497.819999999999735541 AUDIO before swapping it for 704.177543861243828018 ETH. Audius's proxy stored admin metadata in slot 0, which collided with OpenZeppelin Initializable state in the same slot. That overlap let repeated initialize() calls on the live Governance, Staking, and DelegateManagerV2 proxies bypass the intended one-time initializer guard and rewrite governance and delegation state."
+    }
+  ],
+  "audit": "Kudelski, OpenZeppelin",
+  "txHashes": [
+    "0xfefd829e246002a8fd061eede7501bccb6e244a9aacea0ebceaecef5d877a984",
+    "0x3c09c6306b67737227edc24c663462d870e7c2bf39e9ab66877a980c900dd5d5",
+    "0x4227bca8ed4b8915c7eec0e14ad3748a88c4371d4176e716e8007249b9980dc9",
+    "0x82fc23992c7433fffad0e28a1b8d11211dc4377de83e88088d79f24f4a3f28b3",
+    "0x13347615a94b2e3ad385277f5145102f50fe112f274b0e5300c6d8ce507eeb80",
+    "0x4addea66274252d42fdef43798d5c926e1186ee7778dc7d0bf3d1e79ed8d711e",
+    "0x5aafd3675b47110d12ae9306e1d9a9a5c5a442df4084de1680866a90d35f4def",
+    "0x1eaeb997ce7baed0a906a1f3194835441821f89e129c718c7374f336350202cc"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-07/Audius_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-07/Audius_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/AudiusProject/status/1551000725169180672"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/1nf0s3cpt/status/1551050841146400768"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "blog.audius.co",
+      "url": "https://blog.audius.co/article/audius-governance-takeover-post-mortem-7-23-22"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Audius - REKT",
+      "url": "https://rekt.news/audius-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/address/0x4deca517d6817b6510798b7328f2314d3003abac#code"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/AudiusProject/status/1551377708722008065"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/audius-2022-07-24"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.audius.co",
+      "url": "https://blog.audius.co/posts/audius-governance-takeover-post-mortem-7-23-22"
+    },
+    {
+      "source": "revertiq",
+      "label": "docs.audius.co",
+      "url": "https://docs.audius.co/reference/eth-contracts/"
+    }
+  ]
+}

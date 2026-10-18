@@ -1,0 +1,77 @@
+{
+  "id": "2018-07-09-bancor-v3",
+  "name": "Bancor V3",
+  "date": "2018-07-09",
+  "year": 2018,
+  "amountUsd": 23500000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "key-compromise",
+  "technique": "Hot Wallet Key Compromised",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "key-compromise",
+    "confidence": 0.97,
+    "top": [
+      {
+        "category": "key-compromise",
+        "p": 0.97
+      },
+      {
+        "category": "access-control",
+        "p": 0.03
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.03,
+    "hasRootCause": 0.82
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "The Bancor platform theft was related to the BancorConverter contract, and the attacker (hacker/mole) is very likely to get the private key of the 0x009bb5e9fcf28e5e601b7d0e9e821da6365d0a9c.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The Bancor platform theft was related to the BancorConverter contract, and the attacker (hacker/mole) is very likely to get the private key of the 0x009bb5e9fcf28e5e601b7d0e9e821da6365d0a9c."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On July 9, 2018, Bancor's Ethereum deployment suffered a hot wallet key compromise, resulting in losses of approximately $23.5 million across ETH, BNT, and NPXS. The attackers accessed a wallet responsible for contract upgrades, withdrew tokens, and forced Bancor to freeze its own BNT while collaborating with exchanges in unsuccessful attempts to block the liquidation of ETH and NPXS. An attacker obtained the private key for Bancor's upgrade wallet, allowing unauthorized withdrawals of token balances controlled by Bancor's contracts."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "zhuanlan.zhihu.com",
+      "url": "https://zhuanlan.zhihu.com/p/39758950"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/bancor-v3-2018-07-09"
+    },
+    {
+      "source": "revertiq",
+      "label": "techcrunch.com",
+      "url": "https://techcrunch.com/2018/07/10/bancor-loses-23.5m/"
+    }
+  ]
+}

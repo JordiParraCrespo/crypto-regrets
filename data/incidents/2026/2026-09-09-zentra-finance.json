@@ -1,0 +1,92 @@
+{
+  "id": "2026-09-09-zentra-finance",
+  "name": "Zentra Finance",
+  "date": "2026-09-09",
+  "year": 2026,
+  "amountUsd": 140030,
+  "returnedUsd": null,
+  "chains": [
+    "Citrea"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Rounding Error",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.89,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.9
+      },
+      {
+        "category": "logic-error",
+        "p": 0.1
+      }
+    ],
+    "flashLoan": 0.06,
+    "stateActor": 0.02,
+    "hasRootCause": 0.91
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "aToken burn safeguard clamps to zero, repayWithATokens clears debt without burning. Lost: ~140,000 ctUSD + 30 USDC.e (~$143K)",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "aToken burn safeguard clamps to zero, repayWithATokens clears debt without burning. Lost: ~140,000 ctUSD + 30 USDC.e (~$143K)"
+    },
+    {
+      "source": "SlowMist",
+      "text": "On September 9, 2026, an attacker used a single transaction on Citrea mainnet and ~200,000 USDC.e of flash liquidity as temporary collateral to drain 140,000 ctUSD and 30 USDC.e from Zentra’s lending pool. The root cause was an accounting edge case in repayWithATokens: the debt path could complete while the matching aToken burn was reduced to zero. The operations multisig paused all markets about 17 minutes later; no second exploit occurred."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Zentra Finance's ctUSD reserve on Citrea was reportedly drained through a repayWithATokens accounting edge case that let debt clear without a matching aToken burn. Reported cause: the custom aToken burn helper clamped an oversize burn to the caller's remaining balance instead of reverting, and the Pool burned variable debt before that helper ran in repayWithATokens()."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-09/ZentraFinance_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-09/ZentraFinance_exp.sol"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/ZentraFinance/status/2098415552293195831"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/zentra-finance-2026-09-09"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/ZentraFinance/public_contracts/blob/main/README.md"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/sanbir/evm-hack-registry/blob/main/2026-09-ZentraFinance_exp/ZentraFinance_exp.md"
+    }
+  ]
+}

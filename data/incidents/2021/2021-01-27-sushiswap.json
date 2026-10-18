@@ -1,0 +1,88 @@
+{
+  "id": "2021-01-27-sushiswap",
+  "name": "SushiSwap",
+  "date": "2021-01-27",
+  "year": 2021,
+  "amountUsd": 103842,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Swap Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.51,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.54
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.4
+      },
+      {
+        "category": "market-manipulation",
+        "p": 0.05
+      }
+    ],
+    "flashLoan": 0.06,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "On January 27, 2021, SushiSwap was attacked again. This attack took advantage of the fact that DIGG itself did not have a WETH trading pair, and the attacker created this trading pair and manipulated the initial transaction price, resulting in a huge slippage during the fee exchange process. The attacker only needs to use a small amount of DIGG and WETH provide initial liquidity to obtain huge profits.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "On January 27, 2021, SushiSwap was attacked again. This attack took advantage of the fact that DIGG itself did not have a WETH trading pair, and the attacker created this trading pair and manipulated the initial transaction price, resulting in a huge slippage during the fee exchange process. The attacker only needs to use a small amount of DIGG and WETH provide initial liquidity to obtain huge profits."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On January 25, 2021, a flaw in SushiSwap’s DIGG/WBTC pool fee routing logic on Ethereum allowed an attacker to harvest ~81.68 ETH in protocol fee revenue. Only protocol earnings were affected, not LP or user funds. The team restored correct routing by configuring a fee bridge for the pool. Protocol fee conversion logic failed to set a custom bridge for new pools, causing SushiMaker to convert large accumulated DIGG fees via an attacker-created, illiquid DIGG/WETH pool. The attacker exploited outsized slippage by creating the missing pair and supplying minimal liquidity, capturing the protocol fees."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x0af5a6d2d8b49f68dcfd4599a0e767450e76e08a5aeba9b3d534a604d308e60b"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "beincrypto.com",
+      "url": "https://beincrypto.com/sushiswap-suffers-another-attack-hacker-steals-81-eth/"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/sushiswap-2021-01-27"
+    },
+    {
+      "source": "revertiq",
+      "label": "rekt.news",
+      "url": "https://rekt.news/badgers-digg-sushi"
+    },
+    {
+      "source": "revertiq",
+      "label": "cmichel.io",
+      "url": "https://cmichel.io/replaying-ethereum-hacks-sushiswap-badger-dao-digg/"
+    }
+  ]
+}

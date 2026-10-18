@@ -1,0 +1,96 @@
+{
+  "id": "2024-07-19-rho-markets",
+  "name": "Rho Markets",
+  "date": "2024-07-19",
+  "year": 2024,
+  "amountUsd": 7600000,
+  "returnedUsd": null,
+  "chains": [
+    "Scroll"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.92,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.92
+      },
+      {
+        "category": "access-control",
+        "p": 0.03
+      },
+      {
+        "category": "market-manipulation",
+        "p": 0.03
+      }
+    ],
+    "flashLoan": 0.06,
+    "stateActor": 0.02,
+    "hasRootCause": 0.82
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "An oracle's misconfiguration turns into a $7.5 million windfall for an alert MEV bot. What began as a simple misstep in Rho Market's oracle configuration turned into a payday for an opportunistic MEV bot on July 19th, as it swiftly seized upon the opening within the protocol built on Scroll.",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "An oracle's misconfiguration turns into a $7.5 million windfall for an alert MEV bot. What began as a simple misstep in Rho Market's oracle configuration turned into a payday for an opportunistic MEV bot on July 19th, as it swiftly seized upon the opening within the protocol built on Scroll."
+    },
+    {
+      "source": "SlowMist",
+      "text": "A misconfiguration in the Rho Markets lending protocol allowed an MEV bot operator to take $7.6 million from the project's users across multiple chains. The MEV bot operator sent an on-chain message indicating their willingness to return all the funds. Subsequently, the MEV bot operator returned the funds as planned."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Rho Markets on Scroll suffered a $7.6M loss on 19 July 2024 after a misconfigured price oracle caused ETH collateral to be valued at BTC's price. An MEV bot exploited this error to drain lending pools, but returned all funds after the team admitted the issue was a configuration mistake. A price feed misconfiguration: the ETH oracle address was set to a WBTC/USD Chainlink feed, causing ETH to be valued at roughly twenty times its real price. This error let an MEV bot deposit overvalued collateral and borrow far more than it was actually worth."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Rho Market - Rekt",
+      "url": "https://rekt.news/rho-market-rekt"
+    },
+    {
+      "source": "slowmist",
+      "label": "panewslab.com",
+      "url": "https://www.panewslab.com/zh/sqarticledetails/wdq528s5.html"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/rho-markets-2024-07-19"
+    },
+    {
+      "source": "revertiq",
+      "label": "itokenly.com",
+      "url": "https://itokenly.com/hacks/rho-markets"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptobriefing.com",
+      "url": "https://cryptobriefing.com/rho-markets-exploit-scroll/"
+    }
+  ]
+}

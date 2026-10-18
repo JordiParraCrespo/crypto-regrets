@@ -1,0 +1,123 @@
+{
+  "id": "2023-05-10-snk",
+  "name": "SNK",
+  "date": "2023-05-10",
+  "year": 2023,
+  "amountUsd": 197000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Reward Calculation Error",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.98).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.98,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.98
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.97,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Reward Calculation Error. Lost: ~$197k",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Reward Calculation Error. Lost: ~$197k"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Phalcon: The attacker exploits the bindParent function in contract SNKMiner to amplify his staking rewards. Specifically, this function binds one account as a staking account's child. SNKMiner depends on SNK balance of staking accounts' children to calculate the amount of reward(SNK) distributing to staking accounts. As a result, the attacker leverages flashloan to increase the SNK balance of children, which can further lift their parents' staking rewards. KALOS: The vulnerability lies in the bindParent() and getReward() functions. The bindParent() function allows setting the parent and child nodes, while the dynamicEarned() function within the getReward() function calculates rewards based on the balances of those child nodes. As a result, it is possible to receive a much larger amount of rewards than what should actually be obtained. Vulnerable code snippet: Attack tx: https://bscscan.com/address/0xA3f5ea945c4970f48E322f1e70F4CC08e70039ee#code Analysis: https://twitter.com/Phalcon_xyz/status/1656176776425644032 https://twitter.com/kalos_security/status/1668092691262091265"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The SNK project was attacked. The hacker used SNK's invitation reward mechanism to make a profit of 190,000 US dollars."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 10 May 2023, the Snooker (SNK) token staking protocol on BNB Chain was exploited through an invitation-reward mechanism flaw, enabling the attacker to withdraw inflated rewards multiple times. The loss amounted to approximately $190,000 in BUSD, affecting the contract at 0xa3f5ea945c4970f48e322f1e70f4cc08e70039ee. No funds were recovered. Vulnerable business logic in the invitation-reward calculation allowed the attacker to artificially inflate the reward withdrawn by parent stakers. The contract failed to restrict rewards based on actual eligible child balances, making the reward function exploitable by orchestrating child contracts with controlled staking and repeated exits."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x7394f2520ff4e913321dd78f67dd84483e396eb7a25cbb02e06fe875fc47013a"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-05/SNK_exp.sol",
+  "sources": [
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-05/SNK_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Phalcon_xyz/status/1656176776425644032"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0xA3f5ea945c4970f48E322f1e70F4CC08e70039ee#code"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/kalos_security/status/1668092691262091265"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x7394f2520ff4e913321dd78f67dd84483e396eb7a25cbb02e06fe875fc47013a"
+    },
+    {
+      "source": "blocksec",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs?tab=readme-ov-file#20230510-snk---reward-calculation-error"
+    },
+    {
+      "source": "slowmist",
+      "label": "panewslab.com",
+      "url": "https://www.panewslab.com/zh/sqarticledetails/iizfq6j2.html"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/snk-2023-05-10"
+    },
+    {
+      "source": "revertiq",
+      "label": "defillama.com",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.solidityscan.com",
+      "url": "https://blog.solidityscan.com/snooker-token-hack-analysis-acd89cce6311/"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/past/2023/README.md#L3668"
+    }
+  ]
+}

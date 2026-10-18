@@ -1,0 +1,80 @@
+{
+  "id": "2023-03-07-tender-finance",
+  "name": "Tender Finance",
+  "date": "2023-03-07",
+  "year": 2023,
+  "amountUsd": 1590000,
+  "returnedUsd": null,
+  "chains": [
+    "Arbitrum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Stale Oracle Price",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.07,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Tender.fi is suspected of being attacked by white hat hackers and lost $1.59 million. Hackers used Tender.fi’s misconfigured oracles to borrow $1.59 million worth of crypto assets with just $70 worth of GMX tokens as collateral. On March 8, on-chain data showed that the hackers who attacked the Arbitrum ecological lending protocol Tender.fi had returned their funds, and the Tender.fi team agreed to pay the hackers 62 ETH ($96,500) as a bounty.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Tender.fi is suspected of being attacked by white hat hackers and lost $1.59 million. Hackers used Tender.fi’s misconfigured oracles to borrow $1.59 million worth of crypto assets with just $70 worth of GMX tokens as collateral. On March 8, on-chain data showed that the hackers who attacked the Arbitrum ecological lending protocol Tender.fi had returned their funds, and the Tender.fi team agreed to pay the hackers 62 ETH ($96,500) as a bounty."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Tender Finance suffered a major exploit on Arbitrum on 7 March 2023. An oracle integration bug caused the GMX collateral price to be drastically inflated, allowing an attacker to drain $1.6 million in assets. The exploiter returned the funds after negotiation. A miscalculation in Tender Finance's GMX oracle caused it to report tGMX values with 38 decimals instead of 18, inflating collateral prices and enabling massive over-borrowing by depositing 1 GMX."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xf14df8a4220bdcc26e1615ab777e3777e5d164097ef524ab0c1bf2c64d6c63de"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "theblock.co",
+      "url": "https://www.theblock.co/post/217823/tender-fi-hacker-returns-stolen-funds-gets-bounty-reward"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/tender-finance-2023-03-07"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.solidityscan.com",
+      "url": "https://blog.solidityscan.com/tender-finance-hack-analysis-improper-oracle-price-calculation-408f424d8548/"
+    },
+    {
+      "source": "revertiq",
+      "label": "cointelegraph.com",
+      "url": "https://cointelegraph.com/news/defi-lender-tender-fi-suffers-exploit-white-hat-hacker-suspected"
+    }
+  ]
+}

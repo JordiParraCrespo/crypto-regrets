@@ -1,0 +1,123 @@
+{
+  "id": "2023-05-12-lw-token",
+  "name": "LW Token",
+  "date": "2023-05-12",
+  "year": 2023,
+  "amountUsd": 50000,
+  "returnedUsd": null,
+  "chains": [
+    "Binance Smart Chain"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "rugpull",
+    "confidence": 0.77,
+    "top": [
+      {
+        "category": "rugpull",
+        "p": 0.78
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.16
+      },
+      {
+        "category": "access-control",
+        "p": 0.05
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.3
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "FlashLoan Price Manipulation. Lost: ~$50k",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "FlashLoan Price Manipulation. Lost: ~$50k"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "KALOS: LW was hacked on May 11, 2023. This vulnerability is under the category of Rugpull cases, which, unlike other instances, were exploited by owners. A total of 6 accounts had funds forcefully drained. Vulnerable code snippet: Attack tx: https://bscscan.com/tx/0xb846f3aeb9b3027fe138b23bbf41901c155bd6d4b24f08d6b83bd37a975e4e4a https://bscscan.com/tx/0x96b34dc3a98cd4055a984132d7f3f4cc5a16b2525113b8ef83c55ac0ba2b3713 Analysis: https://twitter.com/PeckShieldAlert/status/1656850634312925184 https://twitter.com/hexagate_/status/1657051084131639296 https://twitter.com/kalos_security/status/1668092799512907777"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The LW token on BSC was attacked, with a loss of 48,415 USDT, and the price of LW token plummeted by 69%. The attackers have transferred about 150 BNB to Tornado Cash."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "LW Token on BNB Chain was exploited via manipulation of its spot price on PancakeSwap on 12 May 2023. The attacker drained approximately $48,000 USDT-equivalent, causing the token price to plunge by around 69%. Two exploit transactions have been traced and verified on-chain. LW Token relied on its spot price from PancakeSwap as a collateral or settlement reference. This allowed an attacker to manipulate the price through flashloan-driven trades, triggering a marketing wallet buyback and inflating the token's price, then selling at the artificially high price for profit. No checks were enforced against rapid price deviation or manipulation."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xb846f3aeb9b3027fe138b23bbf41901c155bd6d4b24f08d6b83bd37a975e4e4a",
+    "0x96b34dc3a98cd4055a984132d7f3f4cc5a16b2525113b8ef83c55ac0ba2b3713"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-05/LW_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-05/LW_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/PeckShieldAlert/status/1656850634312925184"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/hexagate_/status/1657051084131639296"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0xb846f3aeb9b3027fe138b23bbf41901c155bd6d4b24f08d6b83bd37a975e4e4a"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x96b34dc3a98cd4055a984132d7f3f4cc5a16b2525113b8ef83c55ac0ba2b3713"
+    },
+    {
+      "source": "slowmist",
+      "label": "panewslab.com",
+      "url": "https://www.panewslab.com/zh/sqarticledetails/4jq3adah.html"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/lw-token-2023-05-12"
+    },
+    {
+      "source": "revertiq",
+      "label": "quadrigainitiative.com",
+      "url": "https://quadrigainitiative.com/casestudy/lwtokenpricemanipulationattack.php"
+    },
+    {
+      "source": "revertiq",
+      "label": "publish.x.com",
+      "url": "https://publish.x.com/oembed?url=https%3A%2F%2Ftwitter.com%2FPeckShieldAlert%2Fstatus%2F1656850634312925184"
+    }
+  ]
+}

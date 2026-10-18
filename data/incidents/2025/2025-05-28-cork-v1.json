@@ -1,0 +1,154 @@
+{
+  "id": "2025-05-28-cork-v1",
+  "name": "Cork V1",
+  "date": "2025-05-28",
+  "year": 2025,
+  "amountUsd": 12000000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "input-validation",
+    "confidence": 0.66,
+    "top": [
+      {
+        "category": "input-validation",
+        "p": 0.68
+      },
+      {
+        "category": "access-control",
+        "p": 0.32
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Access Control. Lost: 12M USD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Access Control. Lost: 12M USD"
+    },
+    {
+      "source": "REKT",
+      "text": "Fake tokens just popped the Cork protocol for $12 million. The protocol built to hedge depeg risk got depegged from reality by trusting counterfeit contracts."
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Cork Protocol's DS/CT (Depeg Swap / Cover Token) market creation logic failed to validate the assets passed into module/market initialization. The attacker abused CorkConfig.initializeModuleCore() and issueNewDs() to create a new, attacker-controlled market that reused a legitimate Cork-issued DS token (ds2) as if it were the redemption asset (RA), pairing it against WstETH. Because the protocol trusted attacker-supplied parameters and the Uniswap V4 CorkHook accepted attacker-driven swaps/exchange-rate callbacks, the attacker could mint/swap CT and DS tokens within the rigged market and then redeem them (returnRaWithCtDs, depositPsm) against the real PSM vault holding WstETH. By orchestrating swaps through the PoolManager unlock/unlockCallback flow with a self-implemented hook (beforeSwap, rate() returning attacker-chosen values), the attacker extracted ~$12M of WstETH from the protocol's liquidity. Vulnerable code snippet: Attack Tx: https://app.blocksec.com/explorer/tx/eth/0xfd89cdd0be468a564dd525b222b728386d7c6780cf7b2f90d2b54493be09f64d Analysis: SlowMist"
+    },
+    {
+      "source": "SlowMist",
+      "text": "On May 28, SlowMist detected potential suspicious activity related to Cork Protocol. According to the SlowMist security team’s analysis, the root cause of the attack was the lack of strict validation on user-supplied data, allowing the protocol’s liquidity to be manipulated and transferred to unintended markets, which attackers then exploited to perform unauthorized redemptions and profit illegally."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On May 28, 2025, the Cork Protocol’s wstETH:weETH market on Ethereum was exploited for 3,761.88 wstETH (worth about $12M). The attacker manipulated HIYA price during market rollover and abused access control flaws in CorkHook to extract both Cover Tokens (CT) and Depeg Swap (DS) tokens, redeeming them for wstETH and draining legitimate reserves. Two independent flaws combined: HIYA price manipulation enabled the attacker to acquire large amounts of underpriced Cover Tokens (CT) during market rollover, while missing msg.sender authentication in CorkHook.beforeSwap allowed direct calls with crafted parameters, enabling fake market creation and unauthorized DS extraction.…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On May 28, 2025, Cork Protocol on Ethereum was exploited for $12 million when an attacker abused missing validation in the protocol’s Uniswap v4 hook, creating a fake market that siphoned real assets. The incident drained over 3,760 wstETH from protocol reserves by redeeming artificially acquired tokens. The critical failure was the lack of proper validation in the beforeSwap (CorkCall) callback of CorkHook, which let an attacker create a fake market using real protocol derivatives as redemption assets. Combined with permissionless market creation and a design allowing arbitrary token types, the attacker synthesized token pairs to redeem protocol reserves."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Cork V1 on Ethereum was exploited on 28 May 2025 for about $12 million due to a combination of mispriced token issuance from HIYA manipulation and missing access control in a Uniswap v4 hook. The attacker created a fake market and redeemed synthetic derivatives for real assets. The incident was caused by the protocol's failure to validate the redemption asset (RA) and lack of access control on a critical Uniswap v4 hook function (CorkHook.beforeSwap), allowing attackers to manipulate market parameters and call entry points directly with crafted data."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xfd89cdd0be468a564dd525b222b728386d7c6780cf7b2f90d2b54493be09f64d",
+    "0x605e653fb580a19f26dfa0a6f1366fac053044ac5004e1b10e7901b058150c50",
+    "0x14cdf1a643fc94a03140b7581239d1b7603122fbb74a80dd4704dfb336c1dec0"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-05/Corkprotocol_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-05/Corkprotocol_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/1928100756156194955"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Cork Protocol - Rekt",
+      "url": "https://rekt.news/cork-protocol-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/eth/0xfd89cdd0be468a564dd525b222b728386d7c6780cf7b2f90d2b54493be09f64d"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xfd89cdd0be468a564dd525b222b728386d7c6780cf7b2f90d2b54493be09f64d"
+    },
+    {
+      "source": "blocksec",
+      "label": "x.com",
+      "url": "https://x.com/hklst4r/status/1927755386557255717"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/cork-yield-aggregator-2025-05-28"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/de-fi-rekt-report-may-2025-275-9-million-lost-across-8-incidents-zero-recovered"
+    },
+    {
+      "source": "revertiq",
+      "label": "blocksec.com",
+      "url": "https://blocksec.com/blog/cork-protocol-incident-two-independent-flaws-combine-into-one-devastating-exploit-chain"
+    },
+    {
+      "source": "revertiq",
+      "label": "certik.com",
+      "url": "https://www.certik.com/blog/cork-protocol-incident-analysis"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/how-a-critical-bug-in-cork-protocol-led-to-a-12m-2025-05-30"
+    },
+    {
+      "source": "revertiq",
+      "label": "quillaudits.com",
+      "url": "https://www.quillaudits.com/blog/hack-analysis/cork-protocol-hack-explained"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/cork-v1-2025-05-28"
+    }
+  ]
+}

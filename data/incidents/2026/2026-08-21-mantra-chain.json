@@ -1,0 +1,96 @@
+{
+  "id": "2026-08-21-mantra-chain",
+  "name": "MANTRA Chain",
+  "date": "2026-08-21",
+  "year": 2026,
+  "amountUsd": 0,
+  "returnedUsd": null,
+  "chains": [
+    "MANTRA"
+  ],
+  "targetType": "Chain",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.88,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.89
+      },
+      {
+        "category": "access-control",
+        "p": 0.09
+      },
+      {
+        "category": "client-bug",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Go",
+  "rootCause": "An attacker drained 720M MANTRA, worth $3.6 million per Mantra’s postmortem, through a confirmed Cosmos EVM underflow bug. The halt came too late for 94.7% of it, which had already reached an exchange. Three more chains fell to the same flaw days later.",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "An attacker drained 720M MANTRA, worth $3.6 million per Mantra’s postmortem, through a confirmed Cosmos EVM underflow bug. The halt came too late for 94.7% of it, which had already reached an exchange. Three more chains fell to the same flaw days later."
+    },
+    {
+      "source": "SlowMist",
+      "text": "An attacker exploited an unsigned integer underflow vulnerability in the upstream Cosmos EVM module to unauthorizedly transfer approximately 720.9 million MANTRA from two MANTRA-managed addresses (the burn address and a dormant genesis-era multisig). The chain was halted to contain the threat and later resumed after a v8.4.0 patch. No validator keys, admin privileges, or user funds were compromised."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "MANTRA Chain halted block production between Aug. 20 and Aug. 22, 2026 after attackers exploited a reported arithmetic flaw in the upstream Cosmos EVM dependency used by the network’s EVM module. Public postmortem reporting states that about 720.9 million MANTRA tokens were moved from a burn address and a legacy multisig wallet, with an estimated impact near $3.6 million and no reported user fund losses. MANTRA’s published postmortem summaries and subsequent reporting attribute the incident to an arithmetic flaw in the upstream cosmos/evm dependency. The reported vulnerable balance-deduction logic used unsigned integer arithmetic without validating tha…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Mantra - Rekt",
+      "url": "https://rekt.news/mantra-rekt"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/MANTRA_Chain/status/2093311678205374867"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/mantra-chain-2026-08-21"
+    },
+    {
+      "source": "revertiq",
+      "label": "crypto.news",
+      "url": "https://crypto.news/mantra-chain-resumes-blocks-after-cosmos-evm-fix/"
+    },
+    {
+      "source": "revertiq",
+      "label": "bitzo.com",
+      "url": "https://bitzo.com/2026/08/mantra-chain-halt-cosmos-evm-exploit-attempt"
+    }
+  ]
+}

@@ -1,0 +1,101 @@
+{
+  "id": "2023-10-13-wiselending",
+  "name": "WiseLending",
+  "date": "2023-10-13",
+  "year": 2023,
+  "amountUsd": 260000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Rounding Error",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.09,
+    "stateActor": 0.03,
+    "hasRootCause": 0.84
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Donate Inflation ExchangeRate && Rounding Error. Lost: ~$260K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Donate Inflation ExchangeRate && Rounding Error. Lost: ~$260K"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On October 13, 2023, WiseLending on Ethereum Mainnet was exploited for approximately $260,000 due to a share rounding and accounting error. The attacker artificially inflated share value through a donation, then exploited a conversion bug to drain pool assets. The protocol's share accounting allowed a user to manipulate share value by direct token donation, then extract excess assets due to unsafe rounding in the share-to-token conversion logic. Withdrawal and loan calculations operated on mismatched units."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x7ac4a98599596adbf12fffa2bd23e2a2d2ac7e8989b6ea043fcc412a29126555"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-10/WiseLending_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-10/WiseLending_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/bbbb/status/1712841315522638034"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BlockSecTeam/status/1712871304993689709"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x7ac4a98599596adbf12fffa2bd23e2a2d2ac7e8989b6ea043fcc412a29126555"
+    },
+    {
+      "source": "blocksec",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs?tab=readme-ov-file#20231013-wiselending---donate-inflation-exchangerate--rounding-error"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/wiselending-2023-10-13"
+    },
+    {
+      "source": "revertiq",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x7ac4a98599596adbf12fffa2bd23e2a2d2ac7e8989b6ea043fcc412a29126555"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/past/2023/README.md#L1637"
+    }
+  ]
+}

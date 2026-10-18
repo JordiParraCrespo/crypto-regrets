@@ -1,0 +1,118 @@
+{
+  "id": "2022-04-21-zeed-finance",
+  "name": "Zeed Finance",
+  "date": "2022-04-21",
+  "year": 2022,
+  "amountUsd": 1000000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Arithmetic Error",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.83,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.84
+      },
+      {
+        "category": "logic-error",
+        "p": 0.16
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.92
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Incorrect calculation. Lost: $1 million",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Incorrect calculation. Lost: $1 million"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "incorrect reward calculation. Vulnerable code snippet: https://bscscan.com/address/0xe7748fce1d1e2f2fd2dddb5074bd074745dda8ea#code#L857 Initially, 5% fee in a selling order were divided into three parts for rewarding liquidity providers. However, based on the token contract loopholes, that part of tokens hadn’t been divided by the system so the LP reward was two times greater than the previous one, leading to extra token distribution."
+    },
+    {
+      "source": "SlowMist",
+      "text": "The DeFi ecological protocol ZEED was attacked and lost about $1 million. At present, the attacker's gains are all in the attack contract."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On April 21, 2022, Zeed Finance on BNB Chain was exploited through the protocol’s reward calculation logic, allowing an attacker to mint excessive YEED tokens. Although the attacker sold the minted rewards, their exploit contract was self-destructed before assets could be withdrawn, leaving stolen funds inaccessible and causing a crash in the YEED token value. Estimated loss is approximately $1,043,070. The vulnerable contract used direct balance manipulation via an unchecked reward fee parameter for calculating liquidity provider rewards, instead of separating calculations for different reward types and enforcing accounting invariants. This arithmetic…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x0507476234193a9a5c7ae2c47e4c4b833a7c3923cefc6fd7667b72f3ca3fa83a"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-04/Zeed_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-04/Zeed_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "www.cryptotimes.io",
+      "url": "https://www.cryptotimes.io/hacker-leaves-1m-to-self-destruct-after-zeed-protocol-exploit/"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "medium.com",
+      "url": "https://medium.com/@zeedcommunity/the-solution-for-the-yeed-lp-pool-attack-a120c53948cd"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x0507476234193a9a5c7ae2c47e4c4b833a7c3923cefc6fd7667b72f3ca3fa83a"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0xe7748fce1d1e2f2fd2dddb5074bd074745dda8ea#code#L857"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BlockSecTeam/status/1517052623354232832"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/zeed-finance-2022-04-21"
+    },
+    {
+      "source": "revertiq",
+      "label": "vaas.beosin.com",
+      "url": "https://vaas.beosin.com/resources/beosins-analysis-of-the-zeed-exploit-"
+    },
+    {
+      "source": "revertiq",
+      "label": "csidb.net",
+      "url": "https://www.csidb.net/csidb/incidents/667c68b5-2556-4b2c-82f0-b24acdace135/"
+    }
+  ]
+}

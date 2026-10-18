@@ -1,0 +1,112 @@
+{
+  "id": "2026-08-09-usm",
+  "name": "USM",
+  "date": "2026-08-09",
+  "year": 2026,
+  "amountUsd": 136000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Arithmetic Error",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.51,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.54
+      },
+      {
+        "category": "logic-error",
+        "p": 0.45
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.95,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "defund() price split-invariance rounding exploit. Lost: ~70.83 ETH",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "defund() price split-invariance rounding exploit. Lost: ~70.83 ETH"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Attacker flash-loaned WETH from Balancer and exploited pricing logic flaw in USM's defund() function. The function calculates ETH redemption value using arithmetic mean of current and estimated final FUM sell prices, but lacks 'split invariance.' By calling defund() 64–65 times instead of once for a large position burn, combined with per-redemption state contraction (adjShrinkFactor) and integer rounding, attacker extracted significantly more ETH than fair value. The chunked exits inflated the effective FUM sell price far above the oracle mark, draining ~70.83 ETH from the USM ETH pool. - Attacker EOA: 0xb92b2e47680c89da8f951b8963ef469f461a50fc - Attacker Contract: 0x5a5e29ba89663a3558273354e990426f3cac7de7 - Victim Contract: 0x2a7fff44c19f39468064ab5e5c304de01d591675 Attack Tx: https://etherscan.io/tx/0xfae5e751b8ce01457cbb6b529839f24a0cff50faaabcbd0fd02ca0cf559b050e Source: https://twitter.com/CertiKAlert/status/2086641169078055208"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The USM protocol suffered an exploit due to a pricing logic flaw in the ethFromDefund() function within defund(). It uses the arithmetic mean of the current and estimated final FUM sell prices for a single redemption but lacks “split invariance.” Combined with the per-redemption state contraction (adjShrinkFactor) and integer rounding, an attacker used a flash loan to call fund() to manipulate internal pricing, then split the same FUM amount into 64 small defund() calls, extracting more ETH than a single large call and causing a loss of ~70.83 ETH."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 9 August 2026, the USM protocol on Ethereum Mainnet lost approximately 70.83 ETH (~$136,000) when an attacker exploited a flaw in the FUM redemption logic. By splitting the redemption into 64 small transactions, the attacker bypassed the contract's intended pricing mechanism and extracted more ETH than would have been possible with a single call. The USM contract's ethFromDefund() function used an arithmetic mean pricing formula that was not invariant under split transactions. This allowed the attacker to receive a higher total payout by splitting one large redemption into multiple smaller redemptions, which the protocol did not prevent or account for."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xfae5e751b8ce01457cbb6b529839f24a0cff50faaabcbd0fd02ca0cf559b050e"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-08/USM_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-08/USM_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xfae5e751b8ce01457cbb6b529839f24a0cff50faaabcbd0fd02ca0cf559b050e"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/CertiKAlert/status/2086641169078055208"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/2086644725143183639"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/usm-2026-08-09"
+    },
+    {
+      "source": "revertiq",
+      "label": "anomly.rs",
+      "url": "https://anomly.rs/usm-fum-fund-defund-splitting-exploit"
+    },
+    {
+      "source": "revertiq",
+      "label": "btctiming.com",
+      "url": "https://btctiming.com/en/blog/usm-protocol-arithmetic-mean-split-exploit"
+    }
+  ]
+}

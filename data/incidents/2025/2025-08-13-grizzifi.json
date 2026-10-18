@@ -1,0 +1,93 @@
+{
+  "id": "2025-08-13-grizzifi",
+  "name": "Grizzifi",
+  "date": "2025-08-13",
+  "year": 2025,
+  "amountUsd": 61000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Reward Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.01,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Logic Flaw. Lost: 61k USD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Logic Flaw. Lost: 61k USD"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Grizzifi (0x21ab...266b) is an investment/referral (\"HoneyPot\") scheme whose _incrementUplineTeamCount logic gates referral and milestone bonuses on each user's cumulative totalInvested value, which includes amounts that were later withdrawn, rather than on the user's currently active investment. The attacker deployed 30 attack contracts chained as a referral upline, had each deposit and immediately withdraw via harvestHoney, so every contract registered inflated totalInvested while holding no real active stake. They then called collectRefBonus across the chain to harvest referral/milestone bonuses far exceeding any genuine deposits, extracting ~61K USD. The flaw is using a never-decremented lifetime-invested counter as the basis for bonus eligibility. Vulnerable code snippet: Attack Tx: https://bscscan.com/tx/0x36438165d701c883fd9a03631ee0cdeec35a138153720006ab59264db7e075c1 Analysis: MetaTrustAlert on X"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Grizzifi was exploited on BNB Chain on 13 August 2025, resulting in losses of approximately $61,000. The attacker manipulated milestone rewards using self-created referral contracts, enabling reward extraction based on cumulative investments,including withdrawn funds,rather than active deposits. Exploit transactions drained the protocol within hours. The vulnerable contract calculated team milestone rewards using cumulative total investments (including amounts already withdrawn), rather than only active deposits. This enabled attackers to game referral and milestone bonuses through contract chaining and repeated investment/withdrawal cycles."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x36438165d701c883fd9a03631ee0cdeec35a138153720006ab59264db7e075c1",
+    "0xb0f4b1d86dd6831af958bcf5138e884cf74ea3a9e2aeebd5fd73463b6e99ba68",
+    "0x4302de51c8126e7934da9be1affbde73e5153fe1f9d0200a738a269fe07d22c7",
+    "0xdb5296b19693c3c5032abe5c385a4f0cd14e863f3d44f018c1ed318fa20058f7",
+    "0xdb4f2c0d2ab8f029d9576dc96b0a9b547ef6c90e17a7a3146b27514dfeba6bba"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-08/Grizzifi_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-08/Grizzifi_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/MetaTrustAlert/status/1955967862276829375"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x36438165d701c883fd9a03631ee0cdeec35a138153720006ab59264db7e075c1"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/grizzifi-2025-08-13"
+    },
+    {
+      "source": "revertiq",
+      "label": "quadrigainitiative.com",
+      "url": "https://www.quadrigainitiative.com/hackfraudscam/grizzifimilestonerewardmechanismcollectrefbonusexploit.php"
+    }
+  ]
+}

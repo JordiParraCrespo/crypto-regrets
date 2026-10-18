@@ -1,0 +1,87 @@
+{
+  "id": "2023-04-20-tales-of-elleria",
+  "name": "Tales of Elleria",
+  "date": "2023-04-20",
+  "year": 2023,
+  "amountUsd": 280000,
+  "returnedUsd": null,
+  "chains": [
+    "Arbitrum"
+  ],
+  "targetType": "Gaming",
+  "category": "bridge-crosschain",
+  "technique": "Forged Proof",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "signature-crypto",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "signature-crypto",
+        "p": 0.99
+      },
+      {
+        "category": "access-control",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Wayne, the co-founder of the NFT game Tales of Elleria, tweeted early this morning: \"The bridge contract of Tales of Elleria was exploited, causing its LP to be depleted and losing more than $280,000. The attacker seems to have generated his own signature , and extracted a large amount of ELM tokens, draining the LP. The current findings suspect that the hacker exploited the ecrecover function and was able to generate authorized signatures without our private key.\"",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Wayne, the co-founder of the NFT game Tales of Elleria, tweeted early this morning: \"The bridge contract of Tales of Elleria was exploited, causing its LP to be depleted and losing more than $280,000. The attacker seems to have generated his own signature , and extracted a large amount of ELM tokens, draining the LP. The current findings suspect that the hacker exploited the ecrecover function and was able to generate authorized signatures without our private key.\""
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On April 19, 2023, an attacker exploited the Tales of Elleria bridge contract on Arbitrum One by forging signature authorizations, extracting escalating amounts of ELM tokens in four rapid transactions. Losses exceeded $280,000, and the vulnerability stemmed from improper signature verification lacking domain separation and nonce replay protection. The bridge contract accepted forged signatures due to missing domain separation and nonce replay protection,anyone able to control the hash structure could generate authorizations the contract would accept, allowing unauthorized ELM withdrawals."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x411938ac2e40c0c0011187427760c7bf37a3a94606343da2e626d13d8b8e92c8",
+    "0x376aaa9b8bdf452ea4bbc4a185e639cf30eff456d96ee117571dcbb6e9cf318c",
+    "0x51ec11ef35c4a558c4d266c310f9a643513f46d97a65f8369c2b30ee10e67c8d",
+    "0x1184e6e0970595572c27242a42e33682d41a3b0e676c269b8da164bd2477f0e2"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/crwy__/status/1648776712157794312"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/tales-of-elleria-2023-04-20"
+    },
+    {
+      "source": "revertiq",
+      "label": "cointime.ai",
+      "url": "https://www.cointime.ai/news/tales-of-elleria-gamefi-project-on-arbitrum-one-suffers-over-280000-loss-in-exploit-10706"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/tales-of-elleria-hack-2023"
+    }
+  ]
+}

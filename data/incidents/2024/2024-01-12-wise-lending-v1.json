@@ -1,0 +1,134 @@
+{
+  "id": "2024-01-12-wise-lending-v1",
+  "name": "Wise Lending V1",
+  "date": "2024-01-12",
+  "year": 2024,
+  "amountUsd": 464000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Donation Attack",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Bad HealthFactor Check. Lost: ~464K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Bad HealthFactor Check. Lost: ~464K"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Wise Lending's share-based accounting for PLP-stETH pool tokens was vulnerable to share-price inflation. The attacker deposited 1e9 pool tokens via depositExactAmount to receive shares, then directly transferred 1e9 pool tokens to the contract address to inflate pseudoTotalPool without minting new shares. Over 20 iterations of depositing pseudoTotalPool * 2 - 1 tokens and immediately withdrawing, rounding left a residual in pseudoTotalPool each round, doubling it without a corresponding increase in totalDepositShares. This exponentially inflated the share-to-token exchange rate. A second address then deposited legitimate collateral and received very few shares, but maximumBorrowToken computed an inflated collateral value based on the distorted share price, allowing the victim to borrow wstETH far exceeding real collateral worth. Vulnerable code snippet: Attack Tx: 0x04e16a79ff928db2fa88619cdd045cdfc7979a61d836c9c9e585b3d6f6d8bc31 Analysis: Wise Lending Exploit by EXVULSEC"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Wise Lending's system was exploited due to a rounding issue in the _calculateShares function and manipulation of donation safeguards. The attacker bypassed donation limits and exploited rounding errors through strategic deposits and withdrawals, gaining a disproportionately large share of donations. Vulnerable code snippet: Attack transaction: https://etherscan.io/tx/0x04e16a79ff928db2fa88619cdd045cdfc7979a61d836c9c9e585b3d6f6d8bc31 Analysis: https://twitter.com/EXVULSEC/status/1746138811862577515"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The @Wise_Lending market was exploited today, resulting in ~177 ETH loss (~$464K). Our initial analysis shows the share accounting logic is flawed with a precision issue to drain the market funds."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Wise Lending was exploited on January 12, 2024 on Ethereum. An attacker drained the protocol by abusing a rounding error in share price calculation in a newly deployed, nearly empty market (PLP-stETH-Dec2025), leading to over 178 ETH lost (approx $464k). The share accounting logic in the Wise Lending lending pool market suffered from a precision loss, specifically a rounding error in the _calculateShares function. This allowed an attacker to artificially inflate share price and drain funds from the protocol."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x04e16a79ff928db2fa88619cdd045cdfc7979a61d836c9c9e585b3d6f6d8bc31"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-01/WiseLending02_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-01/WiseLending02_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/danielvf/status/1746303616778981402"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x04e16a79ff928db2fa88619cdd045cdfc7979a61d836c9c9e585b3d6f6d8bc31"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/EXVULSEC/status/1746138811862577515"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x04e16a79ff928db2fa88619cdd045cdfc7979a61d836c9c9e585b3d6f6d8bc31"
+    },
+    {
+      "source": "blocksec",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BlockSecTeam/status/1746022970265342111"
+    },
+    {
+      "source": "blocksec",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/WiseLending02_exp.sol"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/peckshield/status/1745907642118123774?s=46&t=DLwbX9Nw4QECiyZQ0av-fg"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/wise-lending-protocol-2024-01-12"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/de-fi-rekt-report-over-38-8m-lost-in-january-2024"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.solidityscan.com",
+      "url": "https://blog.solidityscan.com/wise-lending-hack-analysis-f652f389e397/"
+    },
+    {
+      "source": "revertiq",
+      "label": "cointelegraph.com",
+      "url": "https://cointelegraph.com/news/wise-lending-drained-440k-crypto-apparent-flash-loan-exploit"
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "id": "2024-04-27-ember-sword",
+  "name": "Ember Sword",
+  "date": "2024-04-27",
+  "year": 2024,
+  "amountUsd": 196000,
+  "returnedUsd": null,
+  "chains": [
+    "Polygon"
+  ],
+  "targetType": null,
+  "category": "arbitrary-call",
+  "technique": "Access Control",
+  "classificationNote": "Classified by keyword rules from the DeFiHackLabs explorer label and description.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "arbitrary-call",
+    "confidence": 0.47,
+    "top": [
+      {
+        "category": "arbitrary-call",
+        "p": 0.5
+      },
+      {
+        "category": "access-control",
+        "p": 0.48
+      },
+      {
+        "category": "logic-error",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "The Ember Sword NFT auction contract on the Polygon network was exploited on April 27, 2024, with an attacker draining approximately 60 WETH (~$195K) from 159 users who had previously granted token approvals to the contract. The contract was unverified — its source code was never publicly published on Polygon's block explorer — and had been effectively abandoned: Ember Sword officially ceased supporting the Polygon platform from December 1, 2023. Users who had approved the auction contract during Ember Sword's earlier NFT land sales (dating to 2021) never revoked those approvals, leaving them exposed years later. The attacker leveraged these stale, unrevoked approvals to pull funds directly from victim wallets. CertiK first detected the vulnerability and alerted users to revoke approvals for the affected contract; SlowMist independently recorded the incident and classified the attack method as a Contract Vulnerability. The Ember Sword team confirmed they were collaborating with audit firms, multiple agencies, and authorities to investigate and consider compensation for affected players. Attack Tx: 0x11a62441b20e74d586e761885659c3cb45cbc447c89c73c5fd892a634cb8af76 Analysis: Phalcon_xyz alert — Ember Sword",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The Ember Sword NFT auction contract on the Polygon network was exploited on April 27, 2024, with an attacker draining approximately 60 WETH (~$195K) from 159 users who had previously granted token approvals to the contract. The contract was unverified — its source code was never publicly published on Polygon's block explorer — and had been effectively abandoned: Ember Sword officially ceased supporting the Polygon platform from December 1, 2023. Users who had approved the auction contract during Ember Sword's earlier NFT land sales (dating to 2021) never revoked those approvals, leaving them exposed years later. The attacker leveraged these stale, unrevoked approvals to pull funds directly from victim wallets. CertiK first detected the vulnerability and alerted users to revoke approvals for the affected contract; SlowMist independently recorded the incident and classified the attack method as a Contract Vulnerability. The Ember Sword team confirmed they were collaborating with audit firms, multiple agencies, and authorities to investigate and consider compensation for affected players. Attack Tx: 0x11a62441b20e74d586e761885659c3cb45cbc447c89c73c5fd892a634cb8af76 Analysis: Phalcon_xyz alert — Ember Sword"
+    },
+    {
+      "source": "SlowMist",
+      "text": "A vulnerability has been detected in the unverified Ember Sword NFT auction that allowed the extraction of 60 WETH, equivalent to approximately $195,000, from 159 victims who approved the contract."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x11a62441b20e74d586e761885659c3cb45cbc447c89c73c5fd892a634cb8af76"
+  ],
+  "poc": null,
+  "sources": [
+    "defihacklabs",
+    "blocksec",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "polygonscan.com",
+      "url": "https://polygonscan.com/tx/0x11a62441b20e74d586e761885659c3cb45cbc447c89c73c5fd892a634cb8af76"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Phalcon_xyz/status/1784412609103446097"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x11a62441b20e74d586e761885659c3cb45cbc447c89c73c5fd892a634cb8af76"
+    },
+    {
+      "source": "slowmist",
+      "label": "binance.com",
+      "url": "https://www.binance.com/en/square/post/2024-04-28-unverified-ember-sword-nft-auction-contract-vulnerability-detected-users-cautioned-7364618042609"
+    }
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "id": "2023-05-29-fapen",
+  "name": "FAPEN",
+  "date": "2023-05-29",
+  "year": 2023,
+  "amountUsd": 600,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Wrong balance check",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.99). Replaced keyword guess \"accounting-math\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.99
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Wrong balance check. Lost: ~$600",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Wrong balance check. Lost: ~$600"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "It does not update the timestamp after the registration. In this case, the attacker can invoke the function register for multiple times. Vulnerable code snippet: SheepFarm | Address 0x4726010da871f4b57b5031E3EA48Bde961F122aA | BscScan The register() function rewards the double gems token if you statisfy the if condition. The hacker abuse the register() function to get extra GEM bonuse. Attack tx: https://bscscan.com/tx/0x5735026e5de6d1968ab5baef0cc436cc0a3f4de4ab735335c5b1bd31fa60c582 Analysis: - https://twitter.com/AnciliaInc/status/1592658104394473472 - https://twitter.com/BlockSecTeam/status/1592734292727455744"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x5735026e5de6d1968ab5baef0cc436cc0a3f4de4ab735335c5b1bd31fa60c582"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-05/FAPEN_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-05/FAPEN_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/hexagate_/status/1663501550600302601"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0x4726010da871f4b57b5031E3EA48Bde961F122aA#code#107"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x5735026e5de6d1968ab5baef0cc436cc0a3f4de4ab735335c5b1bd31fa60c582"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/AnciliaInc/status/1592658104394473472"
+    }
+  ]
+}

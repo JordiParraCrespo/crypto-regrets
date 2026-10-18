@@ -288,9 +288,9 @@ export const CATEGORIES = {
   'frontend-infra': {
     name: 'Infrastructure, frontend & supply chain',
     layer: 'operational',
-    short: 'Servers, DNS, CDN, npm packages or cloud accounts were breached.',
+    short: 'DNS, frontend, CDN, npm packages or backend systems were hijacked.',
     description:
-      'The contracts are fine, but the systems around them are compromised: breached exchange servers and hosting providers (common in 2011–2014), DNS hijacks, scripts injected via a CDN or third-party analytics, malicious npm package releases, compromised cloud or API keys, or a signing UI swapped for a malicious one.',
+      'The contracts and keys are fine, but the path users take to them is compromised: DNS hijacks, scripts injected via a CDN or third-party analytics, malicious npm/PyPI package releases, breached databases or backend systems, or a signing UI swapped for a malicious one. (Breaches whose prize was a private key are classified as key compromise.)',
     anatomy: [
       'Attacker takes over the DNS registrar, CDN, cloud account or a package dependency.',
       'Serves a modified frontend that requests approvals to an attacker address.',

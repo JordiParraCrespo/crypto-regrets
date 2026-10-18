@@ -1,0 +1,121 @@
+{
+  "id": "2026-02-21-iotex",
+  "name": "IoTeX",
+  "date": "2026-02-21",
+  "year": 2026,
+  "amountUsd": 4400000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "key-compromise",
+  "technique": "Validator Key Compromised",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "key-compromise",
+    "confidence": 0.96,
+    "top": [
+      {
+        "category": "key-compromise",
+        "p": 0.96
+      },
+      {
+        "category": "access-control",
+        "p": 0.04
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": true,
+  "language": "Solidity",
+  "rootCause": "The IoTeX ioTube cross-chain bridge on Ethereum was drained of approximately $4.4M after an attacker compromised the private key of the account owning the bridge's Validator contract. Using the stolen key, the attacker executed a malicious contract upgrade that bypassed signature validation checks and assumed control over both the TokenSafe and MintPool contracts. The attacker then minted 410 million CIOTX tokens and drained reserve holdings of USDC, USDT, WBTC, and WETH. All stolen assets were swapped to ETH via Uniswap and bridged to Bitcoin via THORChain before any freeze could be applied. IoTeX's co-founder described it as a sophisticated, long-planned attack — with preparation spanning 6 to 18 months — consistent with insider access or advanced social engineering against key custodians. The bridge's reliance on a single validator owner key created a critical single point of failure that the attacker fully exploited. Attack Tx: 0x1b5772b2a0e1f71327e227ed4ff3ef9fbdc63a47cc8a7fb8995aab41dc7d7c3d Analysis: Halborn — Explained: The IoTeX Hack (February 2026)",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The IoTeX ioTube cross-chain bridge on Ethereum was drained of approximately $4.4M after an attacker compromised the private key of the account owning the bridge's Validator contract. Using the stolen key, the attacker executed a malicious contract upgrade that bypassed signature validation checks and assumed control over both the TokenSafe and MintPool contracts. The attacker then minted 410 million CIOTX tokens and drained reserve holdings of USDC, USDT, WBTC, and WETH. All stolen assets were swapped to ETH via Uniswap and bridged to Bitcoin via THORChain before any freeze could be applied. IoTeX's co-founder described it as a sophisticated, long-planned attack — with preparation spanning 6 to 18 months — consistent with insider access or advanced social engineering against key custodians. The bridge's reliance on a single validator owner key created a critical single point of failure that the attacker fully exploited. Attack Tx: 0x1b5772b2a0e1f71327e227ed4ff3ef9fbdc63a47cc8a7fb8995aab41dc7d7c3d Analysis: Halborn — Explained: The IoTeX Hack (February 2026)"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The IoT-focused public chain IoTeX suffered a professional hacker attack caused by a private key compromise of the ioTube bridge’s Ethereum-side validator owner. This allowed the attacker to gain administrative privileges and illicitly extract assets from the token safe. According to the official confirmation on February 24, the incident resulted in approximately $4.4 million in asset losses (including USDC, USDT, IOTX, and WBTC). The hacker converted most of the stolen funds into roughly 2,183 ETH and bridged them to the Bitcoin network via THORChain (with approximately 66.6 BTC currently tracked). The IoTeX team has implemented security enhancements…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "IoTeX's ioTube Ethereum-side bridge was exploited on February 21, 2026, after an attacker compromised the validator-owner private key. The breach allowed malicious contract upgrades, unauthorized CIOTX minting, and a drain of approximately $4.4 million in bridge reserves. Most affected assets were traced and frozen, but funds bridged to Bitcoin remain unrecovered. The incident resulted from the compromise of the validator-owner private key controlling the Ethereum-side ioTube bridge. This granted the attacker full administrative control, enabling them to upgrade contracts, disable signature checks, and drain both minted tokens and bridge reserve assets."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x1b5772b2a0e1f71327e227ed4ff3ef9fbdc63a47cc8a7fb8995aab41dc7d7c3d",
+    "0x349a6c4f74bc94740769b0124bf6d6835fa19aeed809599cf44d18efaf89222d",
+    "0x28a25931aeb91c683ccda007df50aebfc43260f8185eff75fa86fdc229af3e94",
+    "0xb90ae1e5fffba85edd12952dd11d98267f3b19d56b2d3cee35e830fa31fa85d7",
+    "0x9f8005da554be3092a18fb3bb905d77ab524d0f73fdebcc4999f153d113a1adc",
+    "0x16d84937049c6163e0a3dbb9236d8b488e0f17a45c2f8969833e729326384814",
+    "0xebbfc6288d2a0ddea830d4344b38487e7fdd691932d7958cfd6e5335f5c63196",
+    "0x6ca9880a253db8e421738884e3077855b4a27fc0137a8dd0b97bdb50bf6443d2",
+    "0x9333cbd048064d2b8252054fb25100ef2798ae02b49212ecd81c014d873ccb0c",
+    "0x559b322872271e8f32f2fc9dfe1fef97b6da2b59e28fdf6b9c83e14fb5bab0aa",
+    "0xe9e7f33ebfe2230c147e6e0321f5f2c7de1b89fe9fc08830fc3f8ac5845bc9f0",
+    "0xc9c53b28a2aec4f8641394d2ba086a4d0b0a93e40d0a86c578c7fc20ab6351b8"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x1b5772b2a0e1f71327e227ed4ff3ef9fbdc63a47cc8a7fb8995aab41dc7d7c3d"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "halborn.com",
+      "url": "https://www.halborn.com/blog/post/explained-the-iotex-hack-february-2026"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x1b5772b2a0e1f71327e227ed4ff3ef9fbdc63a47cc8a7fb8995aab41dc7d7c3d"
+    },
+    {
+      "source": "blocksec",
+      "label": "x.com",
+      "url": "https://x.com/iotex_io/status/2025824807120412842?s=46"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/iotex_io/status/2025824807120412842"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/iotex-2026-02-21"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.iotex.io",
+      "url": "https://blog.iotex.io/blog/security-incident-update-iotube-bridge-exploit-and-recovery-roadmap/"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.iotex.io",
+      "url": "https://blog.iotex.io/blog/how-iotex-responded-to-the-iotube-bridge-incident-a-full-month-in-review/"
+    }
+  ]
+}

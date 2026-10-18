@@ -1,0 +1,60 @@
+{
+  "id": "2018-12-19-trustbet",
+  "name": "TRUSTBET",
+  "date": "2018-12-19",
+  "year": 2018,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [
+    "EOS"
+  ],
+  "targetType": null,
+  "category": "logic-error",
+  "technique": "Replay attack",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.82). Replaced keyword guess \"signature-crypto\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.82,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.83
+      },
+      {
+        "category": "signature-crypto",
+        "p": 0.15
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "The attacker (panming12345) launched an attack on the EOS quiz game TRUSTBET game contract (trustbetgame), profiting a total of 11,501 EOS, and then transferred the EOS obtained from the attack to the Huobideposit account in two times. The attacker took advantage of the replay attack vulnerability. This is a form of attack that first appeared in the early days of the EOS DApp ecosystem. Due to the serious flaws in the random lottery algorithm designed by the developer, the attacker can use the contract vulnerabilities to draw the lottery repeatedly. Lower-level errors.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The attacker (panming12345) launched an attack on the EOS quiz game TRUSTBET game contract (trustbetgame), profiting a total of 11,501 EOS, and then transferred the EOS obtained from the attack to the Huobideposit account in two times. The attacker took advantage of the replay attack vulnerability. This is a form of attack that first appeared in the early days of the EOS DApp ecosystem. Due to the serious flaws in the random lottery algorithm designed by the developer, the attacker can use the contract vulnerabilities to draw the lottery repeatedly. Lower-level errors."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "slowmist",
+      "label": "jinse.com",
+      "url": "https://www.jinse.com/lives/71724.htm"
+    }
+  ]
+}

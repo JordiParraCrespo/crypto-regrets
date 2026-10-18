@@ -1,0 +1,134 @@
+{
+  "id": "2021-08-30-cream-lending",
+  "name": "CREAM Lending",
+  "date": "2021-08-30",
+  "year": 2021,
+  "amountUsd": 18800000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "reentrancy",
+  "technique": "Reentrancy",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "reentrancy",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "reentrancy",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Flashloan Attack + Reentrancy. Lost: $18 million",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Flashloan Attack + Reentrancy. Lost: $18 million"
+    },
+    {
+      "source": "REKT",
+      "text": "Inspector rekt back once again. $18.8M lost to a ghostface killer, this time from an old school DeFi protocol."
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Reentrancy via ERC777 hook Vulnerable code snippet: https://etherscan.io/address/0x96cc0f947b6c8f4675159ea03144f8c17d5a2fc8#code#F1#L79 https://etherscan.io/address/0xfF20817765cB7f73d4bde2e66e067E58D11095C2#code#L1671 use tokensReceived hook to reenter borrow()"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The mortgage lending platform Cream Finance had a flash loan attack. In its post-mortem analysis report on the flash loan attack, it stated that a total of 460 million AMP tokens and 2804 ETH (worth approximately US$34 million at the time) were stolen from the vulnerability and promised 20% of all agreed fees will be used for repayment until it is fully repaid. This security incident has a major vulnerability attacker and an imitator. On October 4, according to a Cointelegraph report, DeFi security agency Lossless has assisted in recovering the stolen 5152.6 ETH worth nearly $16.7 million."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On August 30, 2021, Cream Finance was exploited for $18+ million through a reentrancy attack enabled by the AMP token's ERC-777 transfer hooks, allowing the attacker to borrow more than collateral permitted by reentering the borrow flow before internal accounting updated. Cream Finance listed AMP, an ERC-777 token with transfer hooks, without restricting reentrancy or updating its borrow logic. The borrow operation transferred AMP before updating the borrower's account state. AMP's hook let the attacker reenter to borrow again, bypassing collateral checks."
+    }
+  ],
+  "audit": "Unaudited",
+  "txHashes": [
+    "0xa9a1b8ea288eb9ad315088f17f7c7386b9989c95b4d13c81b69d5ddad7ffe61e"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2021-08/Cream_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2021-08/Cream_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/peckshield/status/1432249600002478081"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/creamdotfinance/status/1432249773575208964"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xa9a1b8ea288eb9ad315088f17f7c7386b9989c95b4d13c81b69d5ddad7ffe61e"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Cream Finance - REKT",
+      "url": "https://rekt.news/cream-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/address/0x96cc0f947b6c8f4675159ea03144f8c17d5a2fc8#code#F1#L79"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/address/0xfF20817765cB7f73d4bde2e66e067E58D11095C2#code#L1671"
+    },
+    {
+      "source": "slowmist",
+      "label": "medium.com",
+      "url": "https://medium.com/cream-finance/c-r-e-a-m-finance-post-mortem-amp-exploit-6ceb20a630c5"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/cream-finance-2021-08-30"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/idek12311/silica-audit/blob/main/research/case-studies/cream-october-2021.md"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/dtr0x/cream-finance-reentrancy"
+    }
+  ]
+}

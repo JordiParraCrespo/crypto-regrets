@@ -1,0 +1,127 @@
+{
+  "id": "2024-05-20-gala",
+  "name": "Gala",
+  "date": "2024-05-20",
+  "year": 2024,
+  "amountUsd": 22300000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Infinite Mint",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "key-compromise",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "key-compromise",
+        "p": 0.99
+      },
+      {
+        "category": "access-control",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Possible hacker seized control of an admin address to mint a whopping 5 billion GALA tokens worth $216 million, rapidly offloading 592 million tokens for $21.8 million in ETH before Gala Games could blacklist the rogue address.",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "Possible hacker seized control of an admin address to mint a whopping 5 billion GALA tokens worth $216 million, rapidly offloading 592 million tokens for $21.8 million in ETH before Gala Games could blacklist the rogue address."
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "An attacker gained control of a dormant MINTER-privileged wallet on the GALA token contract on Ethereum — a wallet that had not been used for approximately six months — by compromising its private key. On May 20, 2024, the attacker used this privileged account to mint 5 billion GALA tokens (nominally worth ~$219M at the time). The attacker swapped 592 million GALA for approximately 5,952 ETH (~$21.8M) via 0xProject before Gala Games' deployer added the exploiter's address to the contract's blocklist, roughly 2 hours and 16 minutes after the first mint. The remaining ~4.4 billion tokens were effectively frozen. The breach may have been facilitated by an insider — several Gala team members, including the President of Blockchain, departed three days before the exploit. The root cause was inadequate key management and lack of multi-sig controls over the privileged minter role. Attack Tx: 0xa6d90abe17d17743a9cecab84bcefb0fd0bbfa0c61bba60fd2f680b0a2f077fe Analysis: Explained: The Gala Games Hack (May 2024)"
+    },
+    {
+      "source": "SlowMist",
+      "text": "On May 20, 2024, the Web3 gaming platform Gala Games was attacked, resulting in a loss of approximately $21.8 million. The attacker minted 5 billion GALA tokens, worth over $200 million, and quickly sold 592 million GALA, receiving 5,952 ETH. On May 22, according to on-chain records and a statement from Gala Games on Discord, the digital wallet associated with the Gala Games hacker transferred 5,913.2 ETH, which was the hacker returning the stolen funds."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On May 20, 2024, Gala Games suffered an unauthorized mint of 5 billion GALA tokens on Ethereum by an attacker who gained control of a privileged minter/admin address through flawed access controls. Roughly 600 million tokens were sold for ETH, causing a swift 20% drop in GALA's price, while the remaining tokens were frozen and effectively burned. Gala Games contained the breach within 45 minutes and began collaborating with authorities. Compromise of a privileged minter/admin address enabled an unauthorized actor to mint GALA tokens. The cause was an access control failure: a dormant minter address on the GALA contract could still approve new mints aft…"
+    }
+  ],
+  "audit": "Anchain, Certik",
+  "txHashes": [
+    "0xa6d90abe17d17743a9cecab84bcefb0fd0bbfa0c61bba60fd2f680b0a2f077fe",
+    "0x273c6b54fea8b0d616fb3270698dd4387ec3fefc7b0e290330b4019c35a984b1",
+    "0x15129c219a94e24d40541e622757973c0664338f117ff6c4b68d845854b167b9"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Gala Games - Rekt",
+      "url": "https://rekt.news/gala-games-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xa6d90abe17d17743a9cecab84bcefb0fd0bbfa0c61bba60fd2f680b0a2f077fe"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "halborn.com",
+      "url": "https://www.halborn.com/blog/post/explained-the-gala-games-hack-may-2024"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xa6d90abe17d17743a9cecab84bcefb0fd0bbfa0c61bba60fd2f680b0a2f077fe"
+    },
+    {
+      "source": "blocksec",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Benefactor0101/status/1792698768166715776"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/Benefactor0101/status/1792698768166715776"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/gala-games-2024-07-11t12-41-03-00-00"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/cexs-are-under-threat-q2-2024-de-fi-hacks-a-report-analysis"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptonews.com",
+      "url": "https://cryptonews.com/news/gala-games-hit-by-23-million-token-exploit-due-to-messed-up-internal-controls/"
+    },
+    {
+      "source": "revertiq",
+      "label": "bitdigest.io",
+      "url": "https://www.bitdigest.io/posts/gala-games-confirms-exploit-resulting-in-240-million-token-theft"
+    }
+  ]
+}

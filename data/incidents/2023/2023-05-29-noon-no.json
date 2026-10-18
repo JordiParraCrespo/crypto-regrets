@@ -1,0 +1,77 @@
+{
+  "id": "2023-05-29-noon-no",
+  "name": "NOON (NO)",
+  "date": "2023-05-29",
+  "year": 2023,
+  "amountUsd": 2000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Wrong visibility in function",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.83).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.83,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.84
+      },
+      {
+        "category": "logic-error",
+        "p": 0.16
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.74
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Wrong visibility in function. Lost: ~$2K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Wrong visibility in function. Lost: ~$2K"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Incorrect function visibility Vulnerable code snippet https://library.dedaub.com/decompile?md5=505e4227fb452bfde125eed91b9f861b The _transfer function has wrong visibility which does not follow standard ERC20 implentation. Attack tx: 0x23fb7f093e827ed061 | Phalcon Analysis: https://twitter.com/hexagate_/status/1663501545105702912"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x23fb7f093e827ed061aafb574cfd420eab879621c7f78cb341292e106a3a88c0"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-05/NOON_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-05/NOON_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/hexagate_/status/1663501545105702912"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "library.dedaub.com",
+      "url": "https://library.dedaub.com/decompile?md5=505e4227fb452bfde125eed91b9f861b"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "explorer.phalcon.xyz",
+      "url": "https://explorer.phalcon.xyz/tx/eth/0x23fb7f093e827ed061aafb574cfd420eab879621c7f78cb341292e106a3a88c0"
+    }
+  ]
+}

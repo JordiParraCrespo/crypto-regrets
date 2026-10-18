@@ -1,0 +1,76 @@
+{
+  "id": "2024-02-22-tectonic",
+  "name": "Tectonic",
+  "date": "2024-02-22",
+  "year": 2024,
+  "amountUsd": 250000,
+  "returnedUsd": null,
+  "chains": [
+    "Cronos"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Price manipulation; Oracle/protocol logic; Governance failure (stale collateral factor)",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.62,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.64
+      },
+      {
+        "category": "market-manipulation",
+        "p": 0.33
+      },
+      {
+        "category": "governance",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "The Tectonic protocol on Cronos suffered a major price-manipulation exploit on February 22, 2024, when an attacker inflated the TONIC token price, used it as collateral, and borrowed $120.4M in assets. Cronos validators coordinated a rollback that restored $111.2M, but $9.19M bridged out before the rollback remains unrecovered. Tectonic allowed its governance token TONIC to remain eligible as collateral with a high collateral factor, despite vanishing trading liquidity. This enabled an attacker to manipulate TONIC’s price, post overvalued collateral, and borrow far more than the token's true worth. The protocol's oracle and risk controls did not prevent this.",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "The Tectonic protocol on Cronos suffered a major price-manipulation exploit on February 22, 2024, when an attacker inflated the TONIC token price, used it as collateral, and borrowed $120.4M in assets. Cronos validators coordinated a rollback that restored $111.2M, but $9.19M bridged out before the rollback remains unrecovered. Tectonic allowed its governance token TONIC to remain eligible as collateral with a high collateral factor, despite vanishing trading liquidity. This enabled an attacker to manipulate TONIC’s price, post overvalued collateral, and borrow far more than the token's true worth. The protocol's oracle and risk controls did not prevent this."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/tectonic-2024-02-22"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/tectonic-hack-2024-203"
+    },
+    {
+      "source": "revertiq",
+      "label": "techtoken.in",
+      "url": "https://www.techtoken.in/cronos-rollback-tectonic-exploit/"
+    }
+  ]
+}

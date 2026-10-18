@@ -1,0 +1,74 @@
+{
+  "id": "2025-11-07-dimo",
+  "name": "DIMO",
+  "date": "2025-11-07",
+  "year": 2025,
+  "amountUsd": 40000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "key-compromise",
+  "technique": "Deployer Key Compromised",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "key-compromise",
+    "confidence": 0.96,
+    "top": [
+      {
+        "category": "key-compromise",
+        "p": 0.96
+      },
+      {
+        "category": "access-control",
+        "p": 0.04
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": true,
+  "language": null,
+  "rootCause": "On November 7, 2025, the DIMO bridge proxy on Ethereum was exploited through a compromised deployer key, allowing the attacker to upgrade the proxy and withdraw nearly 30 million DIMO tokens. The stolen tokens were sold for around $40,000 before ownership was moved to a multisig to contain the incident. The bridge proxy contract's upgrade and emergency withdrawal authority was concentrated in a single deployer key. When this key was compromised, the attacker was able to authorize privileged operations without restriction, leading to the loss.",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "On November 7, 2025, the DIMO bridge proxy on Ethereum was exploited through a compromised deployer key, allowing the attacker to upgrade the proxy and withdraw nearly 30 million DIMO tokens. The stolen tokens were sold for around $40,000 before ownership was moved to a multisig to contain the incident. The bridge proxy contract's upgrade and emergency withdrawal authority was concentrated in a single deployer key. When this key was compromised, the attacker was able to authorize privileged operations without restriction, leading to the loss."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x274edfde9c12b1e9ec44d983b4fbe6ec2861fe78d2f46dd86ce5843f5f978950"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/dimo-2025-11-07"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/dimo-hack-2025"
+    },
+    {
+      "source": "revertiq",
+      "label": "news.superex.com",
+      "url": "https://news.superex.com/flash/14830.html"
+    }
+  ]
+}

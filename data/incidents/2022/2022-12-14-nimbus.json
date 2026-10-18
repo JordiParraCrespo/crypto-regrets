@@ -1,0 +1,75 @@
+{
+  "id": "2022-12-14-nimbus",
+  "name": "Nimbus",
+  "date": "2022-12-14",
+  "year": 2022,
+  "amountUsd": 76000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Reward Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.93,
+    "stateActor": 0.01,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "The NimbusPlatform project on the BSC chain was attacked, and the attacker made a profit of about 278 BNB. According to the analysis of SlowMist, the main reason for this attack is that the calculation of rewards only depends on the number of tokens in the pool, which leads to being manipulated by flash loans, thereby obtaining more rewards than expected.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The NimbusPlatform project on the BSC chain was attacked, and the attacker made a profit of about 278 BNB. According to the analysis of SlowMist, the main reason for this attack is that the calculation of rewards only depends on the number of tokens in the pool, which leads to being manipulated by flash loans, thereby obtaining more rewards than expected."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Nimbus was exploited on BNB Chain on 14 December 2022 via a flash loan-driven oracle price manipulation in its reward calculation logic. The attacker was able to extract roughly 278 BNB (~$76,000) by tricking reward functions into paying outsized rewards. The reward computation depended directly on the pool’s token ratios and oracle-derived prices, which could be manipulated via flash loan. The attacker used a flash loan to alter the pool and inflated staking rewards."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x42f56d3e86fb47e1edffa59222b33b73e7407d4b5bb05e23b83cb1771790f6c1"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/SlowMist_Team/status/1602942551753101312"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/nimbus-2022-12-14"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.solidityscan.com",
+      "url": "https://blog.solidityscan.com/nimbus-dao-hack-analysis-oracle-price-manipulation-bug-9e256e17aaf4/"
+    }
+  ]
+}

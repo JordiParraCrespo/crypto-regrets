@@ -1,0 +1,98 @@
+{
+  "id": "2022-07-28-nirvana-v1",
+  "name": "Nirvana V1",
+  "date": "2022-07-28",
+  "year": 2022,
+  "amountUsd": 3500000,
+  "returnedUsd": null,
+  "chains": [
+    "Solana"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.97,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.97
+      },
+      {
+        "category": "access-control",
+        "p": 0.01
+      },
+      {
+        "category": "logic-error",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.98,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Rust",
+  "rootCause": "Nirvana Finance lost $3.5M yesterday to a flash loan attack. It seems Solana’s relevance is waning, but will Nirvana get a chance at reincarnation?",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "Nirvana Finance lost $3.5M yesterday to a flash loan attack. It seems Solana’s relevance is waning, but will Nirvana get a chance at reincarnation?"
+    },
+    {
+      "source": "SlowMist",
+      "text": "According to SlowMist Intelligence, Nirvana, a stablecoin project on the Solana chain, was attacked by a flash loan. The attacker used a flash loan to borrow 10,250,000 USDC from Solend by deploying a malicious contract, and then called the Nirvana contract buy3 method to buy a large amount of ANA tokens. Nirvana contract swap method to sell part of ANA, get USDT and USDC, after repaying the flash loan, a total profit of 3,490,563.69 USDT, 21,902.48 USDC and 393,230.32 ANA tokens, then the hacker sold ANA tokens and passed all the dirty money through the cross-chain bridge transfer."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Nirvana V1 was exploited on Solana on July 28, 2022, via manipulation of the ANA token's price using a flash loan. The attacker profited roughly $3.5 million by purchasing ANA at an artificially low price and selling it back at an inflated price. All treasury funds were drained, causing Nirvana's shutdown. The protocol used its AMM's spot price for ANA token valuation without resistance to manipulation. The vulnerable logic allowed a flash loan attacker to buy ANA at a low price, then sell it at a much higher price immediately after the manipulation, draining the treasury."
+    }
+  ],
+  "audit": "Sec3 Auto Audit Software",
+  "txHashes": [
+    "0xb5a89c01da58ec7ec8a4b0d0361d8f1719966d4deceaa01efc1362601a76339c"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Nirvana Finance - REKT",
+      "url": "https://rekt.news/nirvana-rekt"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/nirvana_fi/status/1552635546626818058"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/nirvana-v1-2022-07-28"
+    },
+    {
+      "source": "revertiq",
+      "label": "trmlabs.com",
+      "url": "https://www.trmlabs.com/resources/blog/engineer-admits-to-exploits-on-nirvana-and-another-decentralized-cryptocurrency-exchange-in-first-ever-conviction-for-the-hack-of-a-smart-contract"
+    },
+    {
+      "source": "revertiq",
+      "label": "certik.com",
+      "url": "https://www.certik.com/blog/nirvana-finance-incident-analysis"
+    }
+  ]
+}

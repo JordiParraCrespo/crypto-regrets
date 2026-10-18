@@ -1,0 +1,74 @@
+{
+  "id": "2025-03-01-hegic-old-contract",
+  "name": "Hegic(old contract)",
+  "date": "2025-03-01",
+  "year": 2025,
+  "amountUsd": 80000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Withdrawal Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.99
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "On March 1, 2025, Hegic's old options contract on Ethereum was exploited due to a withdrawal logic flaw, allowing an attacker to repeatedly drain funds from the same tranche. Losses are estimated at around $80,000. The withdrawWithoutHedge() function and its internal _withdraw() handler did not enforce or update the tranche's Open/Closed state correctly. This flaw let an attacker repeatedly withdraw from a single eligible tranche, extracting value multiple times instead of once.",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "On March 1, 2025, Hegic's old options contract on Ethereum was exploited due to a withdrawal logic flaw, allowing an attacker to repeatedly drain funds from the same tranche. Losses are estimated at around $80,000. The withdrawWithoutHedge() function and its internal _withdraw() handler did not enforce or update the tranche's Open/Closed state correctly. This flaw let an attacker repeatedly withdraw from a single eligible tranche, extracting value multiple times instead of once."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x260d5eb9151c565efda80466de2e7eee9c6bd4973d54ff68c8e045a26f62ea73"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/hegic-2025-03-01"
+    },
+    {
+      "source": "revertiq",
+      "label": "olympix.security",
+      "url": "https://olympix.security/biweekly-exploits/sir-cardex-and-hegic-exploited-transient-storage-flaw-leaked-signer-and-tranche-abuse-cost-835k"
+    },
+    {
+      "source": "revertiq",
+      "label": "monitoringroom.com",
+      "url": "https://monitoringroom.com/situation/crypto-hack/hegic-old-contract"
+    }
+  ]
+}

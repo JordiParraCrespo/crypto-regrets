@@ -1,0 +1,76 @@
+{
+  "id": "2021-07-15-thorchain-dex",
+  "name": "THORChain DEX",
+  "date": "2021-07-15",
+  "year": 2021,
+  "amountUsd": 5000000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "bridge-crosschain",
+  "technique": "Bridge Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.63,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.65
+      },
+      {
+        "category": "bridge-crosschain",
+        "p": 0.17
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.09
+      }
+    ],
+    "flashLoan": 0.2,
+    "stateActor": 0.02,
+    "hasRootCause": 0.93
+  },
+  "bridge": true,
+  "language": "Solidity",
+  "rootCause": "Even the old gods cannot escape the exploits. As the cross-chain attacks continue, THORChain becomes the latest victim. $5 million lost.",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "Even the old gods cannot escape the exploits. As the cross-chain attacks continue, THORChain becomes the latest victim. $5 million lost."
+    },
+    {
+      "source": "SlowMist",
+      "text": "The decentralized cross-chain transaction protocol THORChain (RUNE) updated the attack situation, claiming that the amount of lost assets was about 4000 ETH. The initial assessment is that the attack was a logical vulnerability when Eth Bifrost used the routing contract to capture ERC-20 tokens. The attacker use. Not long ago, THORChain updated Eth Bifrost to allow the routing contract to be \"encapsulated\" by the contract. The attacker uses this to send a transaction with msg.value = 200 ETH and immediately uses the contract to transfer it back to itself, while Bifrost will report msg. value = 200 instead of depositAmount = 0, so as to realize the prof…"
+    }
+  ],
+  "audit": "Unaudited",
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: THORChain - REKT",
+      "url": "https://rekt.news/thorchain-rekt"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/THORChain/status/1415813696857591813"
+    }
+  ]
+}

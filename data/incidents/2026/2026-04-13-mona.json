@@ -1,0 +1,117 @@
+{
+  "id": "2026-04-13-mona",
+  "name": "MONA",
+  "date": "2026-04-13",
+  "year": 2026,
+  "amountUsd": 60950,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "Token",
+  "category": "accounting-math",
+  "technique": "Incorrect Share Accounting",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.82,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.83
+      },
+      {
+        "category": "rugpull",
+        "p": 0.07
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.06
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "reward-farming / BurnAddress accounting exploit!. Lost: ~60.95K USDT",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "reward-farming / BurnAddress accounting exploit!. Lost: ~60.95K USDT"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "MONA's node-staking vault (LisaVault) paid out a fixed referral split on every 220 USDT node purchase: 80 USDT to the vault reserve, 20 USDT converted to WBNB, 70 USDT to the Level-1 referrer and 50 USDT to the Level-2 referrer. The vault enforced a one-node-per-address limit, but that limit was trivially bypassed by deploying a fresh helper contract per node. The attacker pre-registered an attacker-controlled L2 referrer, then deployed 25 NodeBuyer proxy contracts that each bound the attack contract as their L1 referrer before buying a node, so the attacker captured both referral tiers (70 + 50 USDT) on each of its own purchases. Combined with an insider component where the vault deployer (who also owned ~100% of the MONA/USDT LP) had that LP redeemed to release ~66,450 USDT, the attack netted ~60,950 USDT. The MONA token's transfer restriction (only burn/join addresses) was worked around by leaving MONA with the owner and routing only USDT to the attacker. Vulnerable code snippet: Attack Tx: https://bscscan.com/tx/0x3a60e1b3a4b0736be4f31839bfd7abc8bfc53b93ddbd3702e77fbc64561a7ea4 Analysis: https://app.blocksec.com/phalcon/explorer/tx/bsc/0x3a60e1b3a4b0736be4f31839bfd7abc8bfc53b93ddbd3702e77fbc64561a7ea4"
+    },
+    {
+      "source": "SlowMist",
+      "text": "On April 14, 2026, attackers exploited the BurnAddress mechanism in the MONA token on BSC via a Deferred LP Burn / reserve manipulation attack. The attacker first farmed 10,000 MONA through 25 fresh accounts, sold 9,900 MONA to create a deferred burn credit, bought out most of the pool's MONA inventory, then triggered BurnAddress.burn() with a zero-value transferFrom to burn MONA directly from the LP and call sync(). This left the MONA/USDT pair with near-zero MONA but almost full USDT reserves. Finally, selling the remaining ~100 MONA drained a large amount of USDT. Flash loans from Moolah and borrowing from Venus were used for funding and fully repaid in the same transaction.…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On April 14, 2026, MONA was exploited on BNB Chain when a flawed deferred burn mechanism allowed an attacker to drain the MONA/USDT liquidity pool, resulting in approximately $60,950 in USDT lost. The exploit relied on delayed LP-token burning that could be triggered at attacker-chosen timing after the reserves had been manipulated. The MONA token’s burn mechanism allowed tokens to be removed from the liquidity pool (LP) through a separate burn step, decoupled from the initial sell. The burn could be triggered via an ordinary token transfer (even zero-value), after the attacker had manipulated pool reserves, breaking the AMM’s pricing relationship and…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x3a60e1b3a4b0736be4f31839bfd7abc8bfc53b93ddbd3702e77fbc64561a7ea4"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-04/MONA_LisaVault_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-04/MONA_LisaVault_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/exvulsec/status/2043928546662592949"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x3a60e1b3a4b0736be4f31839bfd7abc8bfc53b93ddbd3702e77fbc64561a7ea4"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/phalcon/explorer/tx/bsc/0x3a60e1b3a4b0736be4f31839bfd7abc8bfc53b93ddbd3702e77fbc64561a7ea4"
+    },
+    {
+      "source": "slowmist",
+      "label": "darknavy.org",
+      "url": "https://www.darknavy.org/web3/exploits/burnaddress-mona-deferred-lp-burn/"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/mona-2026-04-13"
+    },
+    {
+      "source": "revertiq",
+      "label": "a-star.group",
+      "url": "https://a-star.group/community/the-mona-exploit-an-in-depth-analysis"
+    },
+    {
+      "source": "revertiq",
+      "label": "darknavy.org",
+      "url": "https://darknavy.org/web3/exploits/burnaddress-mona-deferred-lp-burn/"
+    }
+  ]
+}

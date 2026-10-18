@@ -1,0 +1,86 @@
+{
+  "id": "2021-07-02-xdx-swap",
+  "name": "XDX Swap",
+  "date": "2021-07-02",
+  "year": 2021,
+  "amountUsd": 176000,
+  "returnedUsd": null,
+  "chains": [
+    "Huobi Eco Chain"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "bridge-crosschain",
+  "technique": "Bridge Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "bridge-crosschain",
+    "confidence": 0.5,
+    "top": [
+      {
+        "category": "bridge-crosschain",
+        "p": 0.53
+      },
+      {
+        "category": "rugpull",
+        "p": 0.28
+      },
+      {
+        "category": "logic-error",
+        "p": 0.13
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.67
+  },
+  "bridge": true,
+  "language": "Solidity",
+  "rootCause": "The XDX Swap (DDEX) on the Heco chain's cross-chain decentralized exchange DDEX was attacked. The attacker made a profit of 85.17 ETH (approximately $176,000) and cross-chained it to Ethereum. The DDEX code appears to have a backdoor. With the support and cooperation of DDEX, Star Labs, and HECO White Hat Security Alliance, XDX Swap has successively recovered most of the funds involved in this attack, with a total value of more than 5 million US dollars.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The XDX Swap (DDEX) on the Heco chain's cross-chain decentralized exchange DDEX was attacked. The attacker made a profit of 85.17 ETH (approximately $176,000) and cross-chained it to Ethereum. The DDEX code appears to have a backdoor. With the support and cooperation of DDEX, Star Labs, and HECO White Hat Security Alliance, XDX Swap has successively recovered most of the funds involved in this attack, with a total value of more than 5 million US dollars."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "XDX Swap on Huobi Eco Chain was exploited on 2021-07-02, with secondary reporting converging on about 85.17 ETH, roughly $176,000, taken through a bridge logic flaw and bridged to Ethereum. A bridge logic flaw in the DDEX or XDX Swap cross-chain contract, described in secondary reporting as a suspected backdoor, allowed unauthorized withdrawal of funds. The exact vulnerable function and deployed code revision were not independently verified."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "tuoniaox.com",
+      "url": "https://www.tuoniaox.com/newsflash/p-507462.html"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/xdx-swap-2021-07-02"
+    },
+    {
+      "source": "revertiq",
+      "label": "hacked.slowmist.io",
+      "url": "https://hacked.slowmist.io/?c=HECO"
+    },
+    {
+      "source": "revertiq",
+      "label": "monitoringroom.com",
+      "url": "https://monitoringroom.com/situation/crypto-hack/xdx-swap"
+    }
+  ]
+}

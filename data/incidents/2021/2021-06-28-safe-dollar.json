@@ -1,0 +1,128 @@
+{
+  "id": "2021-06-28-safe-dollar",
+  "name": "Safe Dollar",
+  "date": "2021-06-28",
+  "year": 2021,
+  "amountUsd": 248000,
+  "returnedUsd": null,
+  "chains": [
+    "Polygon"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Reward Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.57,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.6
+      },
+      {
+        "category": "logic-error",
+        "p": 0.4
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.89
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Deflationary token uncompatible. Lost: $.2 million",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Deflationary token uncompatible. Lost: $.2 million"
+    },
+    {
+      "source": "REKT",
+      "text": "Your dollars are not safe and they never were. Just $248k taken from a protocol that was called \"SafeDollar.\""
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Incorrect calculation & Deflationary token uncompatible Same ZABU finance incident Vulnerable code snippet: https://polygonscan.com/address/0xd4a7d5ca5232976ebf9c28b7231bfdbf4c4eee95#code#L1913 https://polygonscan.com/address/0x17684f4d5385fac79e75ceafc93f22d90066ed5c#code#L730 Due to PLX is a deflationary token 1.Deposit PLX tokens to SdoRewardPOOL to deduct PLX token in SdoRewardPOOL contract. 2.Until lp token balance in contract is 2. Then calculate a big reward value in updatePool function."
+    },
+    {
+      "source": "SlowMist",
+      "text": "The algorithmic stablecoin project SafeDollar on Polygon is suspected of being hacked, and an unconfirmed contract seems to have taken away 250,000 USD in USDC and USDT."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On June 28, 2021, SafeDollar, an algorithmic stablecoin protocol on Polygon, suffered an exploit that allowed an attacker to mint an enormous supply of SDO tokens and drain $248,000 USDC and USDT from the protocol. The exploit destroyed the SDO peg, leading to its price collapse and the protocol's effective shutdown. The SafeDollar reward contract failed to account for the transfer fee of the PLX token used in yield pools. This allowed repeated deposit and withdrawal operations to artificially inflate staking rewards to an extreme amount, enabling infinite SDO supply minting and draining protocol reserves."
+    }
+  ],
+  "audit": "Unaudited",
+  "txHashes": [
+    "0x1360315a16aec1c7403d369bd139f0fd55a99578d117cb5637b234a0a0ee5c14"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2021-06/SafeDollar_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2021-06/SafeDollar_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/peckshield/status/1409443556251430918"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: SafeDollar - REKT",
+      "url": "https://rekt.news/safedollar-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "polygonscan.com",
+      "url": "https://polygonscan.com/address/0xd4a7d5ca5232976ebf9c28b7231bfdbf4c4eee95#code#L1913"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "polygonscan.com",
+      "url": "https://polygonscan.com/address/0x17684f4d5385fac79e75ceafc93f22d90066ed5c#code#L730"
+    },
+    {
+      "source": "slowmist",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/markets/2021/06/28/stablecoin-safedollar-hit-by-cyberattack/"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/safedollar-2021-06-28"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "blockchainbreaches.com",
+      "url": "https://www.blockchainbreaches.com/en/breaches/safedollar-2021"
+    },
+    {
+      "source": "revertiq",
+      "label": "wccftech.com",
+      "url": "https://wccftech.com/safedollar-sdo-stablecoin-finds-safety-at-the-0-level-after-an-exploit-manages-to-trick-the-polygon-based-platforms-transaction-fee-algorithm/"
+    }
+  ]
+}

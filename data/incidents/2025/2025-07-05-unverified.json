@@ -1,0 +1,68 @@
+{
+  "id": "2025-07-05-unverified",
+  "name": "Unverified",
+  "date": "2025-07-05",
+  "year": 2025,
+  "amountUsd": 285700,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Access Control",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 1.00).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Access Control. Lost: ~ $285.7K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Access Control. Lost: ~ $285.7K"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The vulnerable ERC1967Proxy contract (0x54Cd...3525) exposed a privileged function (selector 0x03b79c24) that had no access-control check on the caller. The attacker invoked this function passing their own attack contract as the argument, which effectively authorized/registered the attacker as an operator over the contract's weETH holdings. The attacker then executed a Uniswap V3 swap on the weETH/WETH pool (0x202A...9b93) and, in the uniswapV3SwapCallback, paid for the swap using the victim contract's own weETH tokens (which the prior privileged call gave the attacker control over), receiving ~114.5 WETH out. The WETH was unwrapped to ETH and sent to the attacker, netting roughly $285.7K. The core flaw is a missing onlyOwner/authorization modifier on a state-changing privileged function, letting any external caller take control of the protocol's assets. Vulnerable code snippet: Attack Tx: https://app.blocksec.com/explorer/tx/eth/0xa57ec56af91ec70517ca71ca50101958d9c2ec9fdb61edcf35a9081c375725c2 Analysis: TenArmorAlert"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xa57ec56af91ec70517ca71ca50101958d9c2ec9fdb61edcf35a9081c375725c2"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-07/unverified_54cd_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-07/unverified_54cd_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/TenArmorAlert/status/1941689712621576493"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/eth/0xa57ec56af91ec70517ca71ca50101958d9c2ec9fdb61edcf35a9081c375725c2"
+    }
+  ]
+}

@@ -1,0 +1,125 @@
+{
+  "id": "2022-06-26-xcarnival",
+  "name": "XCarnival",
+  "date": "2022-06-26",
+  "year": 2022,
+  "amountUsd": 3800000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Deposit Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.96,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.96
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.03
+      },
+      {
+        "category": "access-control",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Infinite Number of Loans. Lost: 3087 ETH (~$3.87M)",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Infinite Number of Loans. Lost: 3087 ETH (~$3.87M)"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "call XToken contract's borrow(), there is no judgment that the NFT has been withdrawn. Vulnerable code snippet: https://etherscan.io/address/0x39360ac1239a0b98cb8076d4135d0f72b7fd9909#code#F1#L108 Parameter xToken can control, attakcer can withdraw pledged NFT."
+    },
+    {
+      "source": "SlowMist",
+      "text": "The NFT liquidity solver XCarnival was attacked, the hacker made a profit of 3,087 ETH (about 3.8 million US dollars), and the hacker has returned 1,467 ETH after the negotiation. The core of this vulnerability is that when borrowing, there is no judgment on whether the NFT in the order has been withdrawn."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "XCarnival's NFT lending protocol on Ethereum was exploited on 26 June 2022, losing about 3,087 ETH (~$3.8 million). The attacker reused withdrawn NFT collateral order IDs to repeatedly borrow ETH. Around half the stolen funds were later returned after bounty negotiations. Withdrawn NFT collateral order IDs remained valid for borrowing. The protocol did not deactivate the order state after the NFT was withdrawn, allowing multiple borrow operations with the same asset."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x422e7b0a449deba30bfe922b5c34282efbdbf860205ff04b14fd8129c5b91433",
+    "0xabfcfaf3620bbb2d41a3ffea6e31e93b9b5f61c061b9cfc5a53c74ebe890294d",
+    "0x51cbfd46f21afb44da4fa971f220bd28a14530e1d5da5009cfbdfee012e57e35",
+    "0xcc3fda1e5540486de15f707ccc82a6f9c8c78e0ef3ef02e4318b3bea24ace701"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-06/XCarnival_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-06/XCarnival_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/XCarnival_Lab/status/1541226298399653888"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/peckshield/status/1541047171453034501"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BlockSecTeam/status/1541070850505723905"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/address/0x39360ac1239a0b98cb8076d4135d0f72b7fd9909#code#F1#L108"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/XCarnival_Lab/status/1541060630748479488"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/xcarnival-2022-06-26"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/kismp123/DeFi-Security-Incident/blob/main/2022/2022-06-26_XCarnival_NFTPledgeReentrancy.md"
+    },
+    {
+      "source": "revertiq",
+      "label": "tokenview.io",
+      "url": "https://tokenview.io/en/learn/nft-xcarnival.html"
+    }
+  ]
+}

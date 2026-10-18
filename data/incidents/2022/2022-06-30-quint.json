@@ -1,0 +1,58 @@
+{
+  "id": "2022-06-30-quint",
+  "name": "Quint",
+  "date": "2022-06-30",
+  "year": 2022,
+  "amountUsd": 130000,
+  "returnedUsd": null,
+  "chains": [],
+  "targetType": null,
+  "category": "logic-error",
+  "technique": "Contract Vulnerability",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.82).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.82,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.83
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.1
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.07
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.01,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "Metaverse project Quint was hacked and lost $130,000. The root cause of the attack is that when the reStake function executes the reStake reward reStake, the reward amount of the LP token is not updated, so that the attacker can claim the issued reward multiple times.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Metaverse project Quint was hacked and lost $130,000. The root cause of the attack is that when the reStake function executes the reStake reward reStake, the reward amount of the LP token is not updated, so that the attacker can claim the issued reward multiple times."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BeosinAlert/status/1542493260114931712"
+    }
+  ]
+}

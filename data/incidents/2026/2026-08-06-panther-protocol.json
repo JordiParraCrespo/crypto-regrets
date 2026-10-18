@@ -1,0 +1,82 @@
+{
+  "id": "2026-08-06-panther-protocol",
+  "name": "Panther Protocol",
+  "date": "2026-08-06",
+  "year": 2026,
+  "amountUsd": 7578,
+  "returnedUsd": null,
+  "chains": [
+    "Base"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "governance",
+  "technique": "Malicious Proposal",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "governance",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "governance",
+        "p": 0.99
+      },
+      {
+        "category": "access-control",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Attacker submitted a governance proposal named 'zkp-reexploit' to upgrade each ZKP proxy to a drainer implementation. The attacker posted a 'yes' answer with 0.5 ETH bond. No honest party counter-bonded within the 12h timeout + 8h cooldown. The answer finalized and governance module executed the drain. Source: https://twitter.com/DefimonAlerts/status/2085673531409400047",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Attacker submitted a governance proposal named 'zkp-reexploit' to upgrade each ZKP proxy to a drainer implementation. The attacker posted a 'yes' answer with 0.5 ETH bond. No honest party counter-bonded within the 12h timeout + 8h cooldown. The answer finalized and governance module executed the drain. Source: https://twitter.com/DefimonAlerts/status/2085673531409400047"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Panther Protocol’s Base deployment was exploited on 6 August 2026 through a malicious governance proposal using the Reality.eth module, allowing an attacker to drain approximately 5.12 million ZKP tokens and 0.12 ETH. No user funds were affected. The Reality.eth governance module on Panther Base allowed anyone to submit and self-answer a governance proposal. Its attack path was unopposed due to missing safety checks, enabling proxy upgrades and fund draining. The module was not disabled on Base when no active DAO proposals existed."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/DefimonAlerts/status/2085673531409400047"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/panther-protocol-2026-08-06"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptotimes.io",
+      "url": "https://www.cryptotimes.io/2026/08/07/panther-protocol-hit-by-governance-attack-5-12m-zkp-drained-on-base/"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/panther-protocol-hack-2026"
+    }
+  ]
+}

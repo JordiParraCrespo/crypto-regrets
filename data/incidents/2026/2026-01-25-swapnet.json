@@ -1,0 +1,83 @@
+{
+  "id": "2026-01-25-swapnet",
+  "name": "SwapNet",
+  "date": "2026-01-25",
+  "year": 2026,
+  "amountUsd": 13410000,
+  "returnedUsd": null,
+  "chains": [
+    "Arbitrum"
+  ],
+  "targetType": null,
+  "category": "arbitrary-call",
+  "technique": "Arbitrary Call",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 1.00).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "arbitrary-call",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "arbitrary-call",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "The SwapNet DEX aggregator router lost $13.41M across Ethereum, Arbitrum, Base, and BNB Smart Chain due to an arbitrary call vulnerability in its closed-source swap routing function (selector 0x87395540). For certain DEX type codes embedded in msg.data, the router performed a low-level call to a user-supplied address with user-supplied calldata and performed no validation on the call target. An attacker exploited this by specifying the USDC token contract as the target address and encoding a transferFrom(SwapNetRouter, attacker, amount) payload as calldata. Because the SwapNet router held broad (unlimited) ERC-20 approvals from users, the transferFrom call succeeded and drained all approved USDC. Twenty users were affected across four chains, with one victim losing approximately $13.34M. The vulnerability remained undetected prior to the attack because both SwapNet and its sister protocol Aperture Finance (which fell the same day for $3.67M in a related attack) were closed-source, preventing public scrutiny. Attack Tx: 0x25c08b3882ade18cbbda81521afff7239c0e91d050f6c178968802cb1b2e2b04 Analysis: BlockSec — $17M Closed-Source Smart Contract Exploit: SwapNet and Aperture Finance",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The SwapNet DEX aggregator router lost $13.41M across Ethereum, Arbitrum, Base, and BNB Smart Chain due to an arbitrary call vulnerability in its closed-source swap routing function (selector 0x87395540). For certain DEX type codes embedded in msg.data, the router performed a low-level call to a user-supplied address with user-supplied calldata and performed no validation on the call target. An attacker exploited this by specifying the USDC token contract as the target address and encoding a transferFrom(SwapNetRouter, attacker, amount) payload as calldata. Because the SwapNet router held broad (unlimited) ERC-20 approvals from users, the transferFrom call succeeded and drained all approved USDC. Twenty users were affected across four chains, with one victim losing approximately $13.34M. The vulnerability remained undetected prior to the attack because both SwapNet and its sister protocol Aperture Finance (which fell the same day for $3.67M in a related attack) were closed-source, preventing public scrutiny. Attack Tx: 0x25c08b3882ade18cbbda81521afff7239c0e91d050f6c178968802cb1b2e2b04 Analysis: BlockSec — $17M Closed-Source Smart Contract Exploit: SwapNet and Aperture Finance"
+    },
+    {
+      "source": "SlowMist",
+      "text": "SwapNet’s closed-source aggregator contracts were exploited via an arbitrary-call vulnerability due to insufficient input validation on user-controlled parameters. This allowed attackers to abuse existing token approvals (especially from users who disabled Matcha Meta’s One-Time Approval) to execute unauthorized transferFrom calls, draining ~$13.43M across Base, Ethereum, Arbitrum, and BSC. The attacker swapped large amounts of USDC to ETH on Base and bridged funds. Matcha Meta and 0x core contracts were unaffected."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x25c08b3882ade18cbbda81521afff7239c0e91d050f6c178968802cb1b2e2b04",
+    "0x6d49748bb1c5c127c5e8adca075caf37510b9e1a065f357706aaab632033d834",
+    "0x6ce28d386c852241fdb5b5e32424fc8fe0ec7846023e62be8b31a34023e03bf6",
+    "0xc15df1d131e98d24aa0f107a67e33e66cf2ea27903338cc437a3665b6404dd57"
+  ],
+  "poc": null,
+  "sources": [
+    "defihacklabs",
+    "blocksec",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "arbiscan.io",
+      "url": "https://arbiscan.io/tx/0x25c08b3882ade18cbbda81521afff7239c0e91d050f6c178968802cb1b2e2b04"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "blocksec.com",
+      "url": "https://blocksec.com/blog/17m-closed-source-smart-contract-exploit-arbitrary-call-swapnet-aperture"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x25c08b3882ade18cbbda81521afff7239c0e91d050f6c178968802cb1b2e2b04"
+    },
+    {
+      "source": "blocksec",
+      "label": "x.com",
+      "url": "https://x.com/Phalcon_xyz/status/2015614087443697738"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/PeckShieldAlert/status/2015608261119217671"
+    }
+  ]
+}

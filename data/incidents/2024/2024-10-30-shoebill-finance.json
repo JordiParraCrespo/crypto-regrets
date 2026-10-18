@@ -1,0 +1,82 @@
+{
+  "id": "2024-10-30-shoebill-finance",
+  "name": "Shoebill Finance",
+  "date": "2024-10-30",
+  "year": 2024,
+  "amountUsd": 1520000,
+  "returnedUsd": null,
+  "chains": [
+    "BOB"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Oracle Misconfiguration",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.99
+      },
+      {
+        "category": "logic-error",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.09,
+    "stateActor": 0.02,
+    "hasRootCause": 0.88
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "On Oct 31st, Collaterizable Leverage Lending Platform Shoebill Finance experienced a security incident affecting the BTC Market on the BOB chain. The incident stemmed from an unexpected interaction within the oracle configuration during the integration of solvBTC and solvBTC.BBN assets. This interaction inadvertently created an exploitable condition that was leveraged by the attacker through a multi-stage exploit.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "On Oct 31st, Collaterizable Leverage Lending Platform Shoebill Finance experienced a security incident affecting the BTC Market on the BOB chain. The incident stemmed from an unexpected interaction within the oracle configuration during the integration of solvBTC and solvBTC.BBN assets. This interaction inadvertently created an exploitable condition that was leveraged by the attacker through a multi-stage exploit."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "A misconfigured oracle in Shoebill Finance's BTC market on BOB allowed attackers to borrow 19.5 wBTC and 1.6 tBTC with insufficient collateral on October 31, 2024. This led to losses of about $1.52 million, with funds bridged off BOB. No public exploit transaction, vulnerable code, or detailed on-chain forensic evidence has been published. A new collateral integration (solvBTC/solvBTC.BBN) introduced a misconfiguration in the price oracle, permitting loans to be made against under-collateralized positions due to broken price or risk checks. This allowed large unauthorized BTC-backed asset withdrawals."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "medium.com",
+      "url": "https://medium.com/@shoebill.finance/shoebill-finance-incident-report-btc-market-on-bob-chain-8b5b487eed7c"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/shoebill-finance-2024-10-30"
+    },
+    {
+      "source": "revertiq",
+      "label": "quadrigainitiative.com",
+      "url": "https://www.quadrigainitiative.com/hackfraudscam/shoebillfinancebtcmarketcollateraloracleexploit.php"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/shoebill-finance-hack-2024"
+    }
+  ]
+}

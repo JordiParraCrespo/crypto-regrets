@@ -1,0 +1,88 @@
+{
+  "id": "2026-08-19-allbridge",
+  "name": "Allbridge",
+  "date": "2026-08-19",
+  "year": 2026,
+  "amountUsd": 191000,
+  "returnedUsd": null,
+  "chains": [
+    "Base"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "bridge-crosschain",
+  "technique": "Bridge Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "bridge-crosschain",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "bridge-crosschain",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.94
+  },
+  "bridge": true,
+  "language": "Solidity",
+  "rootCause": "Phantom deposit via unverified message attestation. Lost: ~189,751.554381 USDC",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Phantom deposit via unverified message attestation. Lost: ~189,751.554381 USDC"
+    },
+    {
+      "source": "SlowMist",
+      "text": "On August 19, 2026, the cross-chain bridge Allbridge was attacked. The attacker had prepared on July 26 by calling Circle’s MessageTransmitterV2.sendMessage on Polygon to forge a CCTP-style message claiming a 1M USDC transfer (with no actual burn) and obtained a valid attestation. On Aug 19, after a real CCTP deposit brought the Base Router balance to ~191k USDC, the attacker used the forged message via receiveCctpMessage (which lacked proper verification and credited it as a real deposit), flash-loaned ~809k USDC from Aave to match the claimed amount, and withdrew ~999k USDC, netting ~$189,800."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On August 19, 2026, Allbridge’s Base cross-chain USDC router was exploited for approximately $190,000. The attacker forged a Circle CCTP message weeks before the attack, then combined it with a flash loan to withdraw unbacked USDC, exploiting the bridge contract’s failure to properly verify the underlying mint and balance change. Allbridge’s Base router trusted Circle CCTP attestations as proof of a valid cross-chain USDC deposit without independently verifying an actual mint or increase in balance. The lack of sender, recipient, and mint validation allowed a forged but attestable message to be redeemed for real funds when router liquidity was sufficient."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-08/AllbridgeCCTP_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-08/AllbridgeCCTP_exp.sol"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/2090994186346790999"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/allbridge-2026-08-19"
+    },
+    {
+      "source": "revertiq",
+      "label": "shattered.io",
+      "url": "https://shattered.io/allbridge-hack-cctp-forged-message-2026/"
+    },
+    {
+      "source": "revertiq",
+      "label": "kucoin.com",
+      "url": "https://www.kucoin.com/news/flash/slowmist-reveals-allbridge-cross-chain-bridge-attack-details-fake-cctp-messages-flash-loans-and-insufficient-minting-verification"
+    }
+  ]
+}

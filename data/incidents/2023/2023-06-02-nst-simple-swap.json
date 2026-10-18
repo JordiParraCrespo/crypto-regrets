@@ -1,0 +1,76 @@
+{
+  "id": "2023-06-02-nst-simple-swap",
+  "name": "NST Simple Swap",
+  "date": "2023-06-02",
+  "year": 2023,
+  "amountUsd": 40000,
+  "returnedUsd": null,
+  "chains": [
+    "Polygon"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "arbitrary-call",
+  "technique": "Unverified contract, wrong approval",
+  "classificationNote": "Classified by keyword rules from the DeFiHackLabs root-cause title.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "arbitrary-call",
+    "confidence": 0.82,
+    "top": [
+      {
+        "category": "arbitrary-call",
+        "p": 0.83
+      },
+      {
+        "category": "access-control",
+        "p": 0.1
+      },
+      {
+        "category": "logic-error",
+        "p": 0.04
+      }
+    ],
+    "flashLoan": 0.08,
+    "stateActor": 0.05,
+    "hasRootCause": 0.3
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Unverified contract, wrong approval. Lost: $40k",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Unverified contract, wrong approval. Lost: $40k"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Vulnerable code snippet: Attack tx: https://polygonscan.com/tx/0xa1f2377fc6c24d7cd9ca084cafec29e5d5c8442a10aae4e7e304a4fbf548be6d Analysis:"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xa1f2377fc6c24d7cd9ca084cafec29e5d5c8442a10aae4e7e304a4fbf548be6d"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-06/NST_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-06/NST_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "discord.com",
+      "url": "https://discord.com/channels/1100129537603407972/1100129538056396870/1114142216923926528"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "polygonscan.com",
+      "url": "https://polygonscan.com/tx/0xa1f2377fc6c24d7cd9ca084cafec29e5d5c8442a10aae4e7e304a4fbf548be6d"
+    }
+  ]
+}

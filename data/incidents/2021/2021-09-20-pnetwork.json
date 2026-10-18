@@ -1,0 +1,89 @@
+{
+  "id": "2021-09-20-pnetwork",
+  "name": "pNetwork",
+  "date": "2021-09-20",
+  "year": 2021,
+  "amountUsd": 12500000,
+  "returnedUsd": null,
+  "chains": [
+    "BNB Chain"
+  ],
+  "targetType": null,
+  "category": "bridge-crosschain",
+  "technique": "Contract Vulnerability",
+  "classificationNote": "Classified by keyword rules from the SlowMist label and description.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "bridge-crosschain",
+    "confidence": 0.68,
+    "top": [
+      {
+        "category": "bridge-crosschain",
+        "p": 0.7
+      },
+      {
+        "category": "access-control",
+        "p": 0.15
+      },
+      {
+        "category": "logic-error",
+        "p": 0.07
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.3
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "The cross-chain protocol pNetwork released an analysis report in response to the previous attack that resulted in the theft of 277 BTC, stating that at 17:20 UTC on September 19, 2021, the pNetwork system was attacked by hackers who attacked multiple pToken bridges. Including pBTC-on-BSC, TLOS-on-BSC, PNT-on-BSC, pBTC-on-ETH, TLOS-on-ETH and pSAFEMOON-on-ETH. However, hackers only cross-chain bridges in pBTC-on-BSC The attack was successful and 277 BTC were stolen from the pBTC-on-BSC collateral. Other pToken bridges were not affected and the funds were safe.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The cross-chain protocol pNetwork released an analysis report in response to the previous attack that resulted in the theft of 277 BTC, stating that at 17:20 UTC on September 19, 2021, the pNetwork system was attacked by hackers who attacked multiple pToken bridges. Including pBTC-on-BSC, TLOS-on-BSC, PNT-on-BSC, pBTC-on-ETH, TLOS-on-ETH and pSAFEMOON-on-ETH. However, hackers only cross-chain bridges in pBTC-on-BSC The attack was successful and 277 BTC were stolen from the pBTC-on-BSC collateral. Other pToken bridges were not affected and the funds were safe."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On September 19, 2021, pNetwork's pBTC-on-BSC bridge suffered an exploit, allowing an attacker to mint 277 pBTC (approximately $12.5 million) without corresponding collateral. The breach resulted from flawed log event extraction in the attestation validation logic, enabling spoofed messages to trigger unauthorized minting. The bridge's attestation processing logic failed to verify the origin of event logs, erroneously treating logs emitted by attacker contracts as legitimate peg-out requests. The Rust-side event extraction did not differentiate between authentic pNetwork events and externally crafted logs, enabling the attacker to mint pBTC without BTC collateral."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x23db0ee27e10517dea0659a743fd6df92d482ad6796851c71127e5049e7bbd88",
+    "0x0eb55e02bce39ec1d2d2e911eca7dcca54e74841b53412c078185e43c5a2a551",
+    "0x5937ba4b846dfdae2119ff674716db6b9dabd264eec2f7c7b3f1b25889006ccb"
+  ],
+  "poc": null,
+  "sources": [
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/pNetworkDeFi/status/1439690593211490324"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/pnetwork-2021-09-20"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "medium.com",
+      "url": "https://medium.com/pnetwork/pnetwork-post-mortem-pbtc-on-bsc-exploit-170890c58d5f"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptobriefing.com",
+      "url": "https://cryptobriefing.com/12-4m-lost-defi-platform-pnetwork-suffers-exploit/"
+    }
+  ]
+}

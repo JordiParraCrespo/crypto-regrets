@@ -1,0 +1,71 @@
+{
+  "id": "2024-08-30-tectonic",
+  "name": "Tectonic",
+  "date": "2024-08-30",
+  "year": 2024,
+  "amountUsd": 9190000,
+  "returnedUsd": null,
+  "chains": [
+    "Cronos"
+  ],
+  "targetType": null,
+  "category": "oracle-manipulation",
+  "technique": "Price Manipulation; Pump-and-borrow",
+  "classificationNote": "Classified by keyword rules from the RevertIQ label and description.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.6,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.62
+      },
+      {
+        "category": "market-manipulation",
+        "p": 0.38
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "On August 30, 2024, the Tectonic lending protocol on Cronos was exploited through TONIC price manipulation. The attacker inflated TONIC’s price and used it as collateral to borrow assets, triggering ~$120M in borrowing. Cronos halted the chain and rolled back to restore balances, leaving ~$9.2M unrecovered. Tectonic accepted TONIC,a governance token with low liquidity,as collateral at a 20% collateral factor. The protocol failed to guard against TONIC price manipulation, enabling the attacker to artificially drive up TONIC’s price and borrow large sums against the inflated collateral. Tectonic relied on open market TONIC pricing without minimum liquidi…",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "On August 30, 2024, the Tectonic lending protocol on Cronos was exploited through TONIC price manipulation. The attacker inflated TONIC’s price and used it as collateral to borrow assets, triggering ~$120M in borrowing. Cronos halted the chain and rolled back to restore balances, leaving ~$9.2M unrecovered. Tectonic accepted TONIC,a governance token with low liquidity,as collateral at a 20% collateral factor. The protocol failed to guard against TONIC price manipulation, enabling the attacker to artificially drive up TONIC’s price and borrow large sums against the inflated collateral. Tectonic relied on open market TONIC pricing without minimum liquidi…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/tectonic-2024-11-18"
+    },
+    {
+      "source": "revertiq",
+      "label": "defillama.com",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "matchsystems.com",
+      "url": "https://matchsystems.com/blog/investigations/cronos-halts-blockchain-after-75m-tectonic-defi-exploit"
+    },
+    {
+      "source": "revertiq",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/tech/2026/08/31/cronos-halts-blockchain-after-usd75-million-lending-exploit-hits-lending-app-tectonic"
+    }
+  ]
+}

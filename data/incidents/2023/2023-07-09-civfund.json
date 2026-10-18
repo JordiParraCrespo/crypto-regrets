@@ -1,0 +1,117 @@
+{
+  "id": "2023-07-09-civfund",
+  "name": "CivFund",
+  "date": "2023-07-09",
+  "year": 2023,
+  "amountUsd": 180000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "arbitrary-call",
+  "technique": "Token Approval Abuse",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.85,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.86
+      },
+      {
+        "category": "arbitrary-call",
+        "p": 0.12
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Lack of access control. Lost: ~$165k",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Lack of access control. Lost: ~$165k"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The root cause is that uniswapV3MintCallback lack of access control so the attacker can call uniswapV3MintCallback to transfer the funds approved by other users. Code Snippet: %20lack%20of%20Access%20control%20322736af06834171b2d67a0a99303b33/Untitled.png) Attack Tx: https://etherscan.io/tx/0xc42fc0e22a0f60cc299be80eb0c0ddce83c21c14a3dddd8430628011c3e20d6b Analysis https://twitter.com/HypernativeLabs/status/1677529544062803969 https://twitter.com/BeosinAlert/status/1677548773269213184"
+    },
+    {
+      "source": "SlowMist",
+      "text": "CivFund's ETH contract was attacked and lost $180,000. The attacker calls uniswapV3MintCallback to transfer funds approved by other users. Please revoke approval for the contract under attack as soon as possible."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "CivFund/CivTrade was exploited on Ethereum on July 8, 2023 due to missing access controls in a callback function. Attackers used existing token approvals to drain user funds, resulting in losses estimated around $180,000. The CivTrade contract exposed an unauthenticated uniswapV3MintCallback function. Attackers could trigger this callback and use previously granted token approvals to steal user assets. No proper access control restricted the caller."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xc42fc0e22a0f60cc299be80eb0c0ddce83c21c14a3dddd8430628011c3e20d6b"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-07/Civfund_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-07/Civfund_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/HypernativeLabs/status/1677529544062803969"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BeosinAlert/status/1677548773269213184"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xc42fc0e22a0f60cc299be80eb0c0ddce83c21c14a3dddd8430628011c3e20d6b"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/revokecash/status/1677729762653995011?s=46&t=DLwbX9Nw4QECiyZQ0av-fg"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/civfund-2023-07-09"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/civfund-hack-2023"
+    },
+    {
+      "source": "revertiq",
+      "label": "defillama.com",
+      "url": "https://defillama.com/protocol/civfund"
+    }
+  ]
+}

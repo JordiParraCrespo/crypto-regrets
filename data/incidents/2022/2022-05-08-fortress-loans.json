@@ -1,0 +1,129 @@
+{
+  "id": "2022-05-08-fortress-loans",
+  "name": "Fortress Loans",
+  "date": "2022-05-08",
+  "year": 2022,
+  "amountUsd": 2976004,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "governance",
+  "technique": "Malicious Proposal",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.46,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.49
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.36
+      },
+      {
+        "category": "governance",
+        "p": 0.07
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.92
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Malicious Proposal & Price Oracle Manipulation. Lost: 1,048.1 ETH + 400,000 DAI (~$3.00M)",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Malicious Proposal & Price Oracle Manipulation. Lost: 1,048.1 ETH + 400,000 DAI (~$3.00M)"
+    },
+    {
+      "source": "REKT",
+      "text": "Fortress is in ruins after $3M was stolen by an oracle manipulation and malicious governance act. The UI is paused, but the contracts remain live. Will Fortress's ecosystem bail out users for the lost funds?"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Insufficient validation in submit() in chain contract. Vulnerable code snippet: https://bscscan.com/address/0xc11b687cd6061a6516e23769e4657b6efa25d78e#code#F1#L142 L142 was commented out. There is no verification to ensure the function call is triggered properly. Anyone can call submit function to manipulate price oracle."
+    },
+    {
+      "source": "SlowMist",
+      "text": "Fortress Protocol, a lending protocol on BNB Chain, was suspected of being attacked. Token FTS fell by 42% in a short time. Currently, 1,048 Ethereum and 400,000 DAI have been transferred to Tornado.cash."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On May 8, 2022, Fortress Loans on BNB Chain was exploited via a combination of malicious governance and price oracle manipulation, resulting in losses totaling 1,048.1 ETH and 400,000 DAI (~$2.98M). The attacker manipulated collateral values by submitting fraudulent price updates and executing a crafted governance proposal. Fortress Loans suffered from two critical flaws: the Chain oracle contract's submit function lacked proper signature and power validation, allowing arbitrary price updates, and the governance design allowed a low-priced token to control malicious proposals, ultimately enabling an attacker to inflate collateral value and drain funds."
+    }
+  ],
+  "audit": "Hash0x, EtherAuthority",
+  "txHashes": [
+    "0x12bea43496f35e7d92fb91bf2807b1c95fcc6fedb062d66678c0b5cfe07cc002",
+    "0x83a4f8f52b8f9e6ff1dd76546a772475824d9aa5b953808dbc34d1f39250f29d",
+    "0x13d19809b19ac512da6d110764caee75e2157ea62cb70937c8d9471afcb061bf"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-05/FortressLoans_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-05/FortressLoans_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BlockSecTeam/status/1523530484877209600"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "www.certik.com",
+      "url": "https://www.certik.com/resources/blog/k6eZOpnK5Kdde7RfHBZgw-fortress-loans-exploit"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Fortress Protocol - REKT",
+      "url": "https://rekt.news/fortress-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0xc11b687cd6061a6516e23769e4657b6efa25d78e#code#F1#L142"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Fortressloans/status/1523495202115051520"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/fortress-loans-2022-05-08"
+    },
+    {
+      "source": "revertiq",
+      "label": "certik.com",
+      "url": "https://www.certik.com/blog/k6eZOpnK5Kdde7RfHBZgw-fortress-loans-exploit"
+    },
+    {
+      "source": "revertiq",
+      "label": "official.beosin.com",
+      "url": "https://official.beosin.com/resources/beosin-detailed-analysis-of-fortresss-oracle-attack"
+    }
+  ]
+}

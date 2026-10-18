@@ -1,0 +1,81 @@
+{
+  "id": "2025-03-01-zoth-zeusd",
+  "name": "Zoth ZeUSD",
+  "date": "2025-03-01",
+  "year": 2025,
+  "amountUsd": 285000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Swap Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.01,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "The Zoth protocol's mintWithStable() function contained a critical logic flaw in its Loan-to-Value (LTV) validation: the contract checked collateral adequacy against the user's initial stablecoin deposit amount (amount) rather than the actual collateral tokens received after the Uniswap V3 swap (collateralReceived). No slippage protection was enforced on the swap. The attacker first manipulated the relevant Uniswap V3 pool to severely distort swap rates, then called mintWithStable() with a large USDC deposit. Due to the manipulated pool, the swap returned only ~7,669 collateral tokens, but the flawed contract recorded 330,979 collateral tokens as provided. With the system falsely believing full collateralization, the attacker minted a disproportionate amount of ZeUSD and then burned it to withdraw 330,979 collateral tokens they never actually deposited — netting approximately $285,000 in profit. Attack Tx: 0xc3f70057e261af554c6acf6a372389899f0c2d7d1ebd27311e39525dee88fb39 Analysis: Explained: The Zoth Hack (March 2025)",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The Zoth protocol's mintWithStable() function contained a critical logic flaw in its Loan-to-Value (LTV) validation: the contract checked collateral adequacy against the user's initial stablecoin deposit amount (amount) rather than the actual collateral tokens received after the Uniswap V3 swap (collateralReceived). No slippage protection was enforced on the swap. The attacker first manipulated the relevant Uniswap V3 pool to severely distort swap rates, then called mintWithStable() with a large USDC deposit. Due to the manipulated pool, the swap returned only ~7,669 collateral tokens, but the flawed contract recorded 330,979 collateral tokens as provided. With the system falsely believing full collateralization, the attacker minted a disproportionate amount of ZeUSD and then burned it to withdraw 330,979 collateral tokens they never actually deposited — netting approximately $285,000 in profit. Attack Tx: 0xc3f70057e261af554c6acf6a372389899f0c2d7d1ebd27311e39525dee88fb39 Analysis: Explained: The Zoth Hack (March 2025)"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Zoth, a restaking platform for \"real world assets\" (or RWAs), was hacked for around $ 285,000 when an exploiter discovered a bug in the platform's collateral calculations."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xc3f70057e261af554c6acf6a372389899f0c2d7d1ebd27311e39525dee88fb39"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xc3f70057e261af554c6acf6a372389899f0c2d7d1ebd27311e39525dee88fb39"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "halborn.com",
+      "url": "https://www.halborn.com/blog/post/explained-the-zoth-hack-march-2025"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xc3f70057e261af554c6acf6a372389899f0c2d7d1ebd27311e39525dee88fb39"
+    },
+    {
+      "source": "slowmist",
+      "label": "web3isgoinggreat.com",
+      "url": "https://www.web3isgoinggreat.com/?id=zoth-hack-1"
+    }
+  ]
+}

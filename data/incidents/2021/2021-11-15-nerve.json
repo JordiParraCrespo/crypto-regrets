@@ -1,0 +1,110 @@
+{
+  "id": "2021-11-15-nerve",
+  "name": "Nerve",
+  "date": "2021-11-15",
+  "year": 2021,
+  "amountUsd": 537000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Swap Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.99
+      },
+      {
+        "category": "bridge-crosschain",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.08,
+    "stateActor": 0.02,
+    "hasRootCause": 0.93
+  },
+  "bridge": true,
+  "language": "Solidity",
+  "rootCause": "The Nerve cross-chain bridge MetaPool was attacked. This attack was an exploit of the logical vulnerabilities of fUSDT and UST MetaPool on the Nerve cross-chain bridge BSC, causing the fUSDT and UST liquidity in the Nerve staking pool to be exhausted, and the attacker made a profit of about 900 BNB . The attacked contract code Fork is from Saddle.Finance.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The Nerve cross-chain bridge MetaPool was attacked. This attack was an exploit of the logical vulnerabilities of fUSDT and UST MetaPool on the Nerve cross-chain bridge BSC, causing the fUSDT and UST liquidity in the Nerve staking pool to be exhausted, and the attacker made a profit of about 900 BNB . The attacked contract code Fork is from Saddle.Finance."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Nerve Finance was exploited on Binance Smart Chain on 14,15 November 2021 due to a swap logic flaw in its MetaSwap module, allowing an attacker to drain stablecoin liquidity by manipulating the LP token pricing. Around $537,000 was lost, with most funds sent to Tornado Cash for laundering. The MetaSwap contract's swap function failed to account for virtual price changes in LP token redemption, enabling attackers to repeatedly withdraw more underlying stablecoins than intended by abusing inconsistent pricing paths across its swap and liquidity removal mechanisms."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On November 14, 2021, NerveBridge's MetaPool contracts on Binance Smart Chain (BSC) were exploited due to inconsistent handling of LP token pricing in swap logic, leading to a loss of approximately $537,000. The attacker drained pool liquidity using repeated flash loans and flawed swap functions. The MetaPool contract, inherited from a flawed Saddle.Finance implementation, computed swaps between LP tokens and stablecoins inconsistently. The swap function underestimated LP token value by omitting virtual price adjustments, unlike swapUnderlying, allowing attackers to extract more assets than correctly valued."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xea95925eb0438e04d0d81dc270a99ca9fa18b94ca8c6e34272fc9e09266fcf1d",
+    "0xcf43eefbfd8cf94a8daeaa5b05d9530782852018f487927be2dd391ed50aec90",
+    "0x55bd06a000af99dc662685b69f5d093905f07bee5e7b9e84b5c4adf2d8190a53",
+    "0x2dbc18c67be69213497b250934e877306fa7763de8b4d7787ff9c0d61e23067b",
+    "0x17cd04cb3f3162eb983af4eb74bf8a0c0804da9f95733f8311c605c77e334e7c",
+    "0xe5a0a0588b3d1e615b82c30a8baba83b0b700f8a3fa6abc19db82527ce4fa1f4",
+    "0x16ec28d4c386b6ee34488739122d0d75c4e7c4cd699af999bbe7d278b1896581",
+    "0x7f6b43137d3787626613f0908f92af4c589fd20491dc21384ba84eca780bb3c1"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "mp.weixin.qq.com",
+      "url": "https://mp.weixin.qq.com/s/bqSAwKQn9ZN79r6cELIi9w"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/nerve-2021-11-15"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/nerve-finance-hack-2021"
+    },
+    {
+      "source": "revertiq",
+      "label": "defillama.com",
+      "url": "https://defillama.com/protocol/nerve"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/nervebridge-2021-12-14"
+    },
+    {
+      "source": "revertiq",
+      "label": "blocksecteam.medium.com",
+      "url": "https://blocksecteam.medium.com/the-analysis-of-nerve-bridge-security-incident-ead361a21025"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/nervebridge-hack-2021"
+    }
+  ]
+}

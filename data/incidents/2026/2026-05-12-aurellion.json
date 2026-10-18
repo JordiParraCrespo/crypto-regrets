@@ -1,0 +1,80 @@
+{
+  "id": "2026-05-12-aurellion",
+  "name": "Aurellion",
+  "date": "2026-05-12",
+  "year": 2026,
+  "amountUsd": 456442,
+  "returnedUsd": null,
+  "chains": [
+    "Arbitrum"
+  ],
+  "targetType": "RWA",
+  "category": "access-control",
+  "technique": "Uninitialized Proxy",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Aurellion Labs' Diamond Proxy contract (EIP-2535) was exploited due to an unprotected initialize(address) function in the SafeOwnable Facet. Although an owner was set, the OpenZeppelin-style _initialized storage slot remained 0, allowing re-initialization. The attacker called initialize() to take ownership, used diamondCut to add a malicious facet with pullERC20/sweep functions, and drained USDC from wallets that had previously approved the diamond proxy. The project paused operations, committed to reimbursing users, and advised revoking old approvals.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Aurellion Labs' Diamond Proxy contract (EIP-2535) was exploited due to an unprotected initialize(address) function in the SafeOwnable Facet. Although an owner was set, the OpenZeppelin-style _initialized storage slot remained 0, allowing re-initialization. The attacker called initialize() to take ownership, used diamondCut to add a malicious facet with pullERC20/sweep functions, and drained USDC from wallets that had previously approved the diamond proxy. The project paused operations, committed to reimbursing users, and advised revoking old approvals."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Aurellion Labs lost 456,442.536622 USDC on Arbitrum One after an attacker reinitialized its Diamond proxy and drained preapproved wallets. An initialize(address) path in the SafeOwnable facet remained callable because the proxy's _initialized version slot was never set, which let the attacker reinitialize the diamond and take ownership of the upgrade path."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x19cbafae517791e7e73403313d70440abf60558350e419df05c04f816998fe0a"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/2054163700035289446"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/aurellion-2026-05-12"
+    },
+    {
+      "source": "revertiq",
+      "label": "arbiscan.io",
+      "url": "https://arbiscan.io/tx/0x19cbafae517791e7e73403313d70440abf60558350e419df05c04f816998fe0a"
+    },
+    {
+      "source": "revertiq",
+      "label": "hacked.slowmist.io",
+      "url": "https://hacked.slowmist.io/?c=Arbitrum"
+    }
+  ]
+}

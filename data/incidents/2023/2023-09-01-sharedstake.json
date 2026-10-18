@@ -1,0 +1,67 @@
+{
+  "id": "2023-09-01-sharedstake",
+  "name": "SharedStake",
+  "date": "2023-09-01",
+  "year": 2023,
+  "amountUsd": 175000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Ownership Takeover",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "SharedStake's sgETH minting contract was exploited on Ethereum on September 1, 2023. An attacker gained privileged ownership, minted 100 sgETH tokens without collateral, then withdrew the backed ETH. Approximate loss was $175,000. The sgETH contract failed to restrict ownership and admin roles, allowing anyone to gain control and mint tokens without collateral. The attacker exploited this weakness, transferred admin privileges, and drained ETH from the protocol.",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "SharedStake's sgETH minting contract was exploited on Ethereum on September 1, 2023. An attacker gained privileged ownership, minted 100 sgETH tokens without collateral, then withdrew the backed ETH. Approximate loss was $175,000. The sgETH contract failed to restrict ownership and admin roles, allowing anyone to gain control and mint tokens without collateral. The attacker exploited this weakness, transferred admin privileges, and drained ETH from the protocol."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x0e57d49c17a0df63f3d513a30ed0d49328372acd6cc3deac40316b97e77b9f44",
+    "0x42d9892a6f82715babd245d5fb76b1acc7ad62b5efef456f9ce64d5ee7e9d507",
+    "0x8af817dfbb743ab50a43fe24bc5ae615ccea3cc326205d7269c969b589cea725"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/sharedstake-2023-09-01"
+    },
+    {
+      "source": "revertiq",
+      "label": "medium.com",
+      "url": "https://medium.com/@chimera_defi/sharedstake-exploit-postmortem-sep-1-2023-50a85061d58c"
+    }
+  ]
+}

@@ -1,0 +1,112 @@
+{
+  "id": "2024-02-19-ruggedart",
+  "name": "RuggedArt",
+  "date": "2024-02-19",
+  "year": 2024,
+  "amountUsd": 10000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "reentrancy",
+  "technique": "Reentrancy",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "reentrancy",
+    "confidence": 0.95,
+    "top": [
+      {
+        "category": "reentrancy",
+        "p": 0.95
+      },
+      {
+        "category": "arbitrary-call",
+        "p": 0.03
+      },
+      {
+        "category": "input-validation",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "reentrancy. Lost: ~10k",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "reentrancy. Lost: ~10k"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "In the function targetedPurchase(), an user could give an arbitrary swapParam which includes the field commands to 4. It then calls the UNIVERSAL_ROUTER.execute() function. According to the Uniswap Technical Reference, commands 4 is SWEEP and it will call the sweep() function. As pointed from the following figure, the sweep() function will send back ETH to the user contract and cause a re-entrancy issue. Vulnerable code snippet: %207d03daf3ed664eca9d847af4b9ce00dd/Untitled.png) %207d03daf3ed664eca9d847af4b9ce00dd/Untitled%201.png) Attack tx: https://etherscan.io/tx/0x5a63da39b5b83fccdd825fed0226f330f802e995b8e49e19fbdd246876c67e1f Analysis: https://twitter.com/AnciliaInc/status/1760718167582888148"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The ERC 404 project Rugged Art was attacked due to a reentrancy vulnerability, resulting in a loss of 11 ETH."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "RuggedArt was exploited on Ethereum on 2024-02-19 through a reentrancy issue affecting staking and reward-related flows. Publicly available evidence is limited, but a linked attack transaction and published reproduction indicate the attacker repeatedly re-entered staking logic during an external callback and extracted roughly 5 ETH to 10 ETH worth of value. Available evidence indicates a reentrancy flaw in RuggedArt staking and reward handling. A published reproduction shows the attack contract re-entering stake() from a payable fallback during a purchase and unstake sequence, allowing state changes to be executed in an unsafe order. The vulnerable his…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x5a63da39b5b83fccdd825fed0226f330f802e995b8e49e19fbdd246876c67e1f"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-02/RuggedArt_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-02/RuggedArt_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/EXVULSEC/status/1759822545875025953"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x5a63da39b5b83fccdd825fed0226f330f802e995b8e49e19fbdd246876c67e1f"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/AnciliaInc/status/1760718167582888148"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/ruggedart-2024-02-19"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/past/2024/README.md#L2845"
+    },
+    {
+      "source": "revertiq",
+      "label": "raw.githubusercontent.com",
+      "url": "https://raw.githubusercontent.com/SunWeb3Sec/DeFiHackLabs/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/src/test/2024-02/RuggedArt_exp.sol"
+    }
+  ]
+}

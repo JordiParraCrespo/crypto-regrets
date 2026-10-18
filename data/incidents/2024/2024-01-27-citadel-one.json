@@ -1,0 +1,118 @@
+{
+  "id": "2024-01-27-citadel-one",
+  "name": "Citadel.one",
+  "date": "2024-01-27",
+  "year": 2024,
+  "amountUsd": 93000,
+  "returnedUsd": null,
+  "chains": [
+    "Arbitrum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.81,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.8200000000000001
+      },
+      {
+        "category": "access-control",
+        "p": 0.12
+      },
+      {
+        "category": "logic-error",
+        "p": 0.06
+      }
+    ],
+    "flashLoan": 0.09,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Price Manipulation. Lost: ~93K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Price Manipulation. Lost: ~93K"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The vulnerability in the redeem() function of the Redemption smart contract allowed the attacker to manipulate the WETH/USDC.E pool price on Camelot. This caused the getAmountsOut() function to overestimate the value of deposited LP tokens, resulting in inflated redemption amounts. Vulnerable code snippet: Attack transaction: https://phalcon.blocksec.com/explorer/tx/arbitrum/0xf52a681bc76df1e3a61d9266e3a66c7388ef579d62373feb4fd0991d36006855 Analysis: https://medium.com/neptune-mutual/how-was-citadel-finance-exploited-a5f9acd0b408"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Citadel Finance was exploited on the Arbitrum chain, which resulted in a loss of 43 ETH, worth approximately $93,000. The root cause of the exploit is price manipulation of the underlying assets."
+    },
+    {
+      "source": "SlowMist",
+      "text": "Portfolio management tool Citadel.one has been attacked, resulting in a loss of approximately $93K."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Citadel.one was exploited on Arbitrum on January 27, 2024. The attacker used a flash loan to manipulate the WETH/USDC price in the Camelot liquidity pool, allowing them to redeem protocol assets at inflated rates and steal around $93,000. The redeem function relied directly on a manipulable spot price from Camelot's WETH/USDC pair. The contract failed to restrict or cross-check the price input, allowing flash loan manipulation to overvalue redemptions."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xf52a681bc76df1e3a61d9266e3a66c7388ef579d62373feb4fd0991d36006855",
+    "0xcf75802229d440e4fbabb4d357fa1886c25e9a6b5c693e9e9573c71c15e2b0d3",
+    "0x09105b771ada0c66f48786260929c0967fc822e037904ced6eac61284b6992d9"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-01/CitadelFinance_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-01/CitadelFinance_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "medium.com",
+      "url": "https://medium.com/neptune-mutual/how-was-citadel-finance-exploited-a5f9acd0b408"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "phalcon.blocksec.com",
+      "url": "https://phalcon.blocksec.com/explorer/tx/arbitrum/0xf52a681bc76df1e3a61d9266e3a66c7388ef579d62373feb4fd0991d36006855"
+    },
+    {
+      "source": "slowmist",
+      "label": "neptunemutual.com",
+      "url": "https://neptunemutual.com/blog/how-was-citadel-finance-exploited/"
+    },
+    {
+      "source": "slowmist",
+      "label": "odaily.news",
+      "url": "https://www.odaily.news/newsflash/352032"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/citadel-one-2024-01-27"
+    },
+    {
+      "source": "revertiq",
+      "label": "olympixai.medium.com",
+      "url": "https://olympixai.medium.com/incident-analysis-price-manipulation-exploit-in-citadel-one-afab79e349fd"
+    }
+  ]
+}

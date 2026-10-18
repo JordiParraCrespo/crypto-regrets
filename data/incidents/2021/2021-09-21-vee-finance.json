@@ -1,0 +1,101 @@
+{
+  "id": "2021-09-21-vee-finance",
+  "name": "Vee Finance",
+  "date": "2021-09-21",
+  "year": 2021,
+  "amountUsd": 34000000,
+  "returnedUsd": null,
+  "chains": [
+    "Avalanche"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.87,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.88
+      },
+      {
+        "category": "key-compromise",
+        "p": 0.09
+      },
+      {
+        "category": "access-control",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.03,
+    "hasRootCause": 0.11
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Top ten thievery. $34 million taken from Vee Finance earns them the number 7 spot on our leaderboard, yet nobody seems surprised. What’s normal for us is not normal elsewhere.",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "Top ten thievery. $34 million taken from Vee Finance earns them the number 7 spot on our leaderboard, yet nobody seems surprised. What’s normal for us is not normal elsewhere."
+    },
+    {
+      "source": "SlowMist",
+      "text": "According to official sources, the loan agreement Vee.Finance officially released an explanation about the attack. The content is as follows: On September 20, the Vee.Finance team noticed multiple abnormal transfers. After further monitoring, a total of 8804.7 ETH and 213.93 BTC were stolen (total Worth more than 35 million U.S. dollars). The attacker's address is: 0xeeeE458C3a5eaAfcFd68681D405FB55Ef80595BA. After investigation, the suspected attacker launched the attack through the above address and has obtained the stolen assets from this address. In order to ensure the safety of more users' assets, the team has suspended the platform contract and su…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On September 21, 2021, Vee Finance was exploited for $34,35 million on Avalanche through price oracle manipulation compounded by a decimal bug in its slippage validation. The attacker manipulated Pangolin DEX prices monitored by the protocol's oracle, bypassing protections and draining ETH and BTC vaults. Two critical flaws enabled the exploit: Vee Finance relied on a single, manipulable DEX price as its oracle, and the slippage check failed to account for discrepancies in decimal representation between assets, allowing the attacker to bypass value checks when the DEX price was manipulated."
+    }
+  ],
+  "audit": "Slowmist",
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Vee Finance - REKT",
+      "url": "https://rekt.news/veefinance-rekt"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/VeeFinance/status/1440102406499356675"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/vee-finance-2021-09-21"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/tech/2021/09/21/vee-finance-hit-for-35m-in-second-major-exploit-on-avalanche"
+    },
+    {
+      "source": "revertiq",
+      "label": "lancershield.github.io",
+      "url": "https://lancershield.github.io/docs/hacks-db/critical/Vee-Finance.html"
+    }
+  ]
+}

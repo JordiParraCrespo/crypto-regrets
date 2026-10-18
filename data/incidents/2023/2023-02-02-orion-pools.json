@@ -1,0 +1,151 @@
+{
+  "id": "2023-02-02-orion-pools",
+  "name": "Orion Pools",
+  "date": "2023-02-02",
+  "year": 2023,
+  "amountUsd": 3000000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "reentrancy",
+  "technique": "Reentrancy",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "reentrancy",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "reentrancy",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.95,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Reentrancy. Lost: $3M",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Reentrancy. Lost: $3M"
+    },
+    {
+      "source": "REKT",
+      "text": "The hunter has become the hunted. Orion Protocol fell prey to a  $3M reentrancy exploit on ETH and BSC. The loss was contained to an internal broker account and user funds are safe. Let's hope they take a more Sirius approach in future."
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Reentrancy in the doSwapThroughOrionPool function The doswapThroughOrionPool function allows a user-provided swap path to be used with malicious tokens that can be used to re-enter deposits. After the transfer happens, the curBalance is updated. Therefore, a callback function is added to the transfer in the fake token. The callback code calls the depositAsset function, causing the curBalance to be updated incorrectly. Then, the attacker calls the withdraw function to take away the funds after paying back the flash loan. Vulnerable code snippet: https://etherscan.io/address/0x420a50a62b17c18b36c64478784536ba980feac8#code#F1#L78 Attack tx: https://etherscan.io/tx/0xa6f63fcb6bec8818864d96a5b1bb19e8bd85ee37b2cc916412e720988440b2aa https://bscscan.com/tx/0xfb153c572e304093023b4f9694ef39135b6ed5b2515453173e81ec02df2e2104 Analysis: https://twitter.com/BlockSecTeam/status/1621263393054420992 https://www.numencyber.com/analysis-of-orionprotocol-reentrancy-attack-with-poc/ Similar events https://github.com/SunWeb3Sec/DeFiHackLabs#20221223---defrost---reentrancy https://github.com/SunWeb3Sec/DeFiHackLabs#20221110---dfxfinance---reentrancy"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Orion Protocol, an exchange aggregation platform, suffered a reentrancy attack and lost about $3 million in assets. The attackers have transferred some of the cryptocurrency to Tornado Cash. Orion Protocol CEO Alexey Koloskov tweeted that no users suffered any losses in the incident and all users’ funds are safe, including staking, Orion Pool, bridges, and liquidity providers. Assets at risk are held in in-house brokerage accounts run by the Orion team. This problem is not caused by a flaw in the core protocol code, but may be caused by a bug in a mix of third-party libraries in its experimental and smart contracts used by private brokers."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On February 2, 2023, Orion Protocol suffered a $3 million exploit across Ethereum and BNB Chain. An attacker used a malicious token to re-enter the protocol's deposit logic during a swap, inflating their internal balance without depositing real assets. The vulnerability was a lack of reentrancy protection on an exposed deposit function. The core swap function accepted arbitrary swap paths and called a depositAsset function without any reentrancy guard. This enabled a reentrant call via a malicious token's transfer callback, letting the attacker double-credit internal balances before the real asset transfer resolved."
+    }
+  ],
+  "audit": "Unaudited",
+  "txHashes": [
+    "0xa6f63fcb6bec8818864d96a5b1bb19e8bd85ee37b2cc916412e720988440b2aa",
+    "0xfb153c572e304093023b4f9694ef39135b6ed5b2515453173e81ec02df2e2104"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-02/Orion_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-02/Orion_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/peckshield/status/1621337925228306433"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BlockSecTeam/status/1621263393054420992"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "www.numencyber.com",
+      "url": "https://www.numencyber.com/analysis-of-orionprotocol-reentrancy-attack-with-poc/"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Orion Protocol - REKT",
+      "url": "https://rekt.news/orion-protocol-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/address/0x420a50a62b17c18b36c64478784536ba980feac8#code#F1#L78"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xa6f63fcb6bec8818864d96a5b1bb19e8bd85ee37b2cc916412e720988440b2aa"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0xfb153c572e304093023b4f9694ef39135b6ed5b2515453173e81ec02df2e2104"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xa6f63fcb6bec8818864d96a5b1bb19e8bd85ee37b2cc916412e720988440b2aa"
+    },
+    {
+      "source": "blocksec",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs?tab=readme-ov-file#20230203---orion-protocol---reentrancy"
+    },
+    {
+      "source": "slowmist",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/business/2023/02/02/orion-protocol-loses-3m-of-crypto-in-trading-pool-exploit/"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/orion-protocol-2023-02-03"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "certik.com",
+      "url": "https://www.certik.com/blog/hunting-orion-the-usd3m-loss-from-a-reentrancy-attack"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.solidityscan.com",
+      "url": "https://blog.solidityscan.com/orion-protocol-hack-analysis-missing-reentrancy-protection-f9af6995acb3/"
+    }
+  ]
+}

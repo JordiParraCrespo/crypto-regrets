@@ -1,0 +1,60 @@
+{
+  "id": "2022-06-21-whaleswap-finance",
+  "name": "whaleswap.finance",
+  "date": "2022-06-21",
+  "year": 2022,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": null,
+  "category": "logic-error",
+  "technique": "K value verification vulnerability",
+  "classificationNote": "Classified by keyword rules from the SlowMist label and description.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.59,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.61
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.24
+      },
+      {
+        "category": "input-validation",
+        "p": 0.14
+      }
+    ],
+    "flashLoan": 0.97,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "The whaleswap.finance project was attacked, and at least 5946 BUSD and 5964 USDT were lost. The reason may be that there is a problem with the K value verification of the whaleswap.finance Pair contract. Whenever the user exchanges, there is a problem with the parameter magnitude passed in the K value verification, which causes the K value verification to fail. The attacker first borrows a BSC-USD through a flash loan, and then returns the flash loan when the K value verification parameter is on the order of 10000^4. The parameter verification level used in the K value verification is 10000^2, which causes the K verification to fail.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The whaleswap.finance project was attacked, and at least 5946 BUSD and 5964 USDT were lost. The reason may be that there is a problem with the K value verification of the whaleswap.finance Pair contract. Whenever the user exchanges, there is a problem with the parameter magnitude passed in the K value verification, which causes the K value verification to fail. The attacker first borrows a BSC-USD through a flash loan, and then returns the flash loan when the K value verification parameter is on the order of 10000^4. The parameter verification level used in the K value verification is 10000^2, which causes the K verification to fail."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "slowmist",
+      "label": "panewslab.com",
+      "url": "https://www.panewslab.com/zh/sqarticledetails/xa9zc04d.html"
+    }
+  ]
+}

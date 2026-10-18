@@ -1,0 +1,58 @@
+{
+  "id": "2026-09-05-dhc",
+  "name": "DHC",
+  "date": "2026-09-05",
+  "year": 2026,
+  "amountUsd": 71800,
+  "returnedUsd": null,
+  "chains": [],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "repeatable claim due to missing claimed-flag",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.90).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.9,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.91
+      },
+      {
+        "category": "access-control",
+        "p": 0.08
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.03,
+    "hasRootCause": 0.93
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "repeatable claim due to missing claimed-flag. Lost: ~$71.8K USDT",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "repeatable claim due to missing claimed-flag. Lost: ~$71.8K USDT"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-09/DHC_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-09/DHC_exp.sol"
+    }
+  ]
+}

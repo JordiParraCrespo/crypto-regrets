@@ -1,0 +1,82 @@
+{
+  "id": "2022-08-02-slope-wallet",
+  "name": "Slope Wallet",
+  "date": "2022-08-02",
+  "year": 2022,
+  "amountUsd": 4100000,
+  "returnedUsd": null,
+  "chains": [
+    "Solana"
+  ],
+  "targetType": "Wallet",
+  "category": "key-compromise",
+  "technique": "Key Stored Publicly",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "key-compromise",
+    "confidence": 0.87,
+    "top": [
+      {
+        "category": "key-compromise",
+        "p": 0.88
+      },
+      {
+        "category": "frontend-infra",
+        "p": 0.12
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.65
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "A large-scale coin theft event occurred on the Solana public chain, and a large number of users were transferred SOL and SPL tokens without their knowledge. The SlowMist security team analyzed the Slope wallet application at the invitation of the Slope team. The analysis showed that the version of the Slope wallet released on or after June 24, 2022 has the phenomenon of sending private keys or mnemonic words to third-party application monitoring services. However, from the investigation of the Slope wallet application, there is no temporary way to clearly prove that the root cause of the incident is the problem of the Slope wallet.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "A large-scale coin theft event occurred on the Solana public chain, and a large number of users were transferred SOL and SPL tokens without their knowledge. The SlowMist security team analyzed the Slope wallet application at the invitation of the Slope team. The analysis showed that the version of the Slope wallet released on or after June 24, 2022 has the phenomenon of sending private keys or mnemonic words to third-party application monitoring services. However, from the investigation of the Slope wallet application, there is no temporary way to clearly prove that the root cause of the incident is the problem of the Slope wallet."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On August 2, 2022, attackers drained over $4 million from roughly 9,200 Solana wallets,almost all belonging to users of the Slope Finance mobile wallet. The breach resulted from Slope's mobile app leaking unencrypted private keys to a misconfigured logging server, enabling theft of user assets. The Slope mobile wallet's integration with the Sentry error monitoring service sent and logged unencrypted private keys to a central server. This happened due to a developer change that bypassed Sentry's sensitive-data filters combined with a server-side configuration that logged this data in plaintext, making keys accessible and enabling wallet theft."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/zachxbt/status/1711748033954590900"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/slope-wallet-2022-08-02"
+    },
+    {
+      "source": "revertiq",
+      "label": "grokipedia.com",
+      "url": "https://grokipedia.com/page/August_2022_Solana_wallet_hack"
+    },
+    {
+      "source": "revertiq",
+      "label": "solana.com",
+      "url": "https://solana.com/news/8-2-2022-application-wallet-incident"
+    }
+  ]
+}

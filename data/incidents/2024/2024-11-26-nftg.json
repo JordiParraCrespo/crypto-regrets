@@ -1,0 +1,80 @@
+{
+  "id": "2024-11-26-nftg",
+  "name": "NFTG",
+  "date": "2024-11-26",
+  "year": 2024,
+  "amountUsd": 10000,
+  "returnedUsd": null,
+  "chains": [
+    "BNB Chain"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.01,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Access Control. Lost: 10k USD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Access Control. Lost: 10k USD"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "NFTG was exploited on BNB Chain on 26 November 2024 due to improper access control in its presale contract, allowing an attacker to extract approximately $10,000 in USDT through repeated unauthorized presale calls enabled by a helper contract. The vulnerable NFTG presale contract lacked proper access control on a presale function callable with arbitrary parameters, allowing unauthorized contracts to repeatedly invoke privileged mint or withdrawal operations and drain funds."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xbd330fd17d0f825042474843a223547132a49abb0746a7e762a0b15cf4bd28f6"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-11/NFTG_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-11/NFTG_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/TenArmorAlert/status/1861430745572745245"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/nftg-2024-11-26"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/nftg-hack-2024"
+    }
+  ]
+}

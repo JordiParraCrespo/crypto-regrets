@@ -1,0 +1,128 @@
+{
+  "id": "2023-11-07-curve-finance-mev-bot",
+  "name": "Curve Finance MEV Bot",
+  "date": "2023-11-07",
+  "year": 2023,
+  "amountUsd": 2000000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.12,
+    "stateActor": 0.02,
+    "hasRootCause": 0.91
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Lack of access control. Lost: ~$2M",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Lack of access control. Lost: ~$2M"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "- The function 0xf6ebebbb has no access control, and it could be called by anyone to perform swap in Curve pool. - The attacker could use the funds in the MEV to pump the price of tokens like WBTC to gain profits for his own token. Attack Path: (from blocksec) Attack tx: https://explorer.phalcon.xyz/tx/eth/0xbc08860cd0a08289c41033bdc84b2bb2b0c54a51ceae59620ed9904384287a38 Analysis: https://twitter.com/BlockSecTeam/status/1722101942061601052"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The MEV Bot (0x05f016765c6c601fd05a10dba1abe21a04f924a5) was exploited and lost about 1k ETH! The core reason is that the 0xf6ebebbb function used to trigger arbitrage in the contract lacks authentication. The attacker calls this function to exchange the tokens in the contract into the pool on curve, and then uses funds of the flash loan to reverse exchange and obtain profit."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "A Curve Finance MEV bot on Ethereum was exploited on November 7, 2023 for approximately $2 million due to an unprotected privileged function. The attacker used this function to swap and drain the contract's assets through Curve pools. The MEV bot contract exposed an unprotected function (0xf6ebebbb) allowing any caller to conduct privileged swaps and transfer assets. No access control (e.g., onlyOwner) gated this critical function, permitting arbitrary draining of contract funds."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "A Curve Finance-linked MEV bot was exploited on Ethereum mainnet on November 7, 2023, losing about $2 million. The attacker abused an unauthenticated swap function, manipulating Curve pool prices via a flash loan and capturing arbitrage proceeds. A public swap function (0xf6ebebbb) in the MEV bot's contract lacked proper access control, enabling unauthorized manipulation of pool prices by any user."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xbc08860cd0a08289c41033bdc84b2bb2b0c54a51ceae59620ed9904384287a38"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-11/bot_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-11/bot_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BlockSecTeam/status/1722101942061601052"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "explorer.phalcon.xyz",
+      "url": "https://explorer.phalcon.xyz/tx/eth/0xbc08860cd0a08289c41033bdc84b2bb2b0c54a51ceae59620ed9904384287a38"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/SlowMist_Team/status/1722081647028478029"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/unknown-mev-bot-2023-12-01t17-05-15-00-00"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/de-fi-rekt-report-over-331m-lost-in-november-2023"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/curve-finance-mev-bot-hack-2023"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/past/2023/README.md#L1285"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/curve-finance-mev-bot-2023-11-07"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/mev-bot-hack-2023"
+    },
+    {
+      "source": "revertiq",
+      "label": "crypto.news",
+      "url": "https://crypto.news/mev-bot-in-curve-finance-pool-lost-2m-following-hack/"
+    }
+  ]
+}

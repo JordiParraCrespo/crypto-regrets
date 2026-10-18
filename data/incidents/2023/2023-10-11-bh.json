@@ -1,0 +1,97 @@
+{
+  "id": "2023-10-11-bh",
+  "name": "BH",
+  "date": "2023-10-11",
+  "year": 2023,
+  "amountUsd": 1270000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Price manipulation",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.83).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.83,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.84
+      },
+      {
+        "category": "market-manipulation",
+        "p": 0.13
+      },
+      {
+        "category": "logic-error",
+        "p": 0.03
+      }
+    ],
+    "flashLoan": 0.97,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Price manipulation. Lost: ~$1.27M",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Price manipulation. Lost: ~$1.27M"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The attacker used a flashloan to manipulate the BH/USDT trading pair on PancakeSwap, creating significant slippage. They added liquidity, swapped a large amount of USDT for BH tokens, and then burned BH tokens to remove liquidity, altering the ratio to withdraw more USDT than initially provided. The attacker repaid the flash loan, profited substantially, and laundered the funds through Tornado Cash. Vulnerable code snippet: Attack tx: Analysis: Beosin Alert on Twitter / X Decurity on Twitter / X"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xc11e4020c0830bcf84bfa197696d7bfad9ff503166337cb92ea3fade04007662"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-10/BH_exp.sol",
+  "sources": [
+    "defihacklabs",
+    "blocksec"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-10/BH_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BeosinAlert/status/1712139760813375973"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/DecurityHQ/status/1712118881425203350"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0xcc61cc9f2632314c9d452aca79104ddf680952b5"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0xc11e4020c0830bcf84bfa197696d7bfad9ff503166337cb92ea3fade04007662"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xc11e4020c0830bcf84bfa197696d7bfad9ff503166337cb92ea3fade04007662"
+    },
+    {
+      "source": "blocksec",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs?tab=readme-ov-file#20231011-bh---price-manipulation"
+    }
+  ]
+}

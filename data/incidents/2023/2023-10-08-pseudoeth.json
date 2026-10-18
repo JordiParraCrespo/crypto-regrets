@@ -1,0 +1,86 @@
+{
+  "id": "2023-10-08-pseudoeth",
+  "name": "pSeudoEth",
+  "date": "2023-10-08",
+  "year": 2023,
+  "amountUsd": 2300,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Pool manipulation",
+  "classificationNote": "Upstream label missing; classified by keyword rules from the root-cause text.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.6,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.62
+      },
+      {
+        "category": "logic-error",
+        "p": 0.28
+      },
+      {
+        "category": "market-manipulation",
+        "p": 0.05
+      }
+    ],
+    "flashLoan": 0.95,
+    "stateActor": 0.02,
+    "hasRootCause": 0.93
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Pool manipulation. Lost: ~$2.3K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Pool manipulation. Lost: ~$2.3K"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "It is a flash loan exploit on pSeudoEth, where an attacker took ~$2.3k by causing an imbalance in the pETH/WETH pair and calling skim() to gain 1.43 WETH. Vulnerable code snippet: Attack tx: Ethereum Transaction Hash (Txhash) Details | Etherscan Analysis: Root cause: Vulnerable code snippet: Attack tx: Analysis: CertiK Alert on Twitter / X"
+    },
+    {
+      "source": "SlowMist",
+      "text": "On Oct 8, the pSeudoEth token on ETH was exploited for ~$2.3K in a flash loan attack. Contract: 0x62aBdd605E710Cc80a52062a8cC7c5d659dDDbE7. Attacker: 0xea75AeC151f968b8De3789CA201a2a3a7FaeEFbA."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x4ab68b21799828a57ea99c1288036889b39bf85785240576e697ebff524b3930"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-10/pSeudoEth_exp.sol",
+  "sources": [
+    "defihacklabs",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-10/pSeudoEth_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/CertiKAlert/status/1710979615164944729"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/address/0x2033b54b6789a963a02bfcbd40a46816770f1161"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x4ab68b21799828a57ea99c1288036889b39bf85785240576e697ebff524b3930"
+    }
+  ]
+}

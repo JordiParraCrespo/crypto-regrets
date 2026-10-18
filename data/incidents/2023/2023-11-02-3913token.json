@@ -1,0 +1,81 @@
+{
+  "id": "2023-11-02-3913token",
+  "name": "3913Token",
+  "date": "2023-11-02",
+  "year": 2023,
+  "amountUsd": 31354,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Deflationary Token Attack",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.98). Replaced keyword guess \"accounting-math\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.98,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.98
+      },
+      {
+        "category": "access-control",
+        "p": 0.01
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.06,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Deflationary Token Attack. Lost: ~$31354 USD$",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Deflationary Token Attack. Lost: ~$31354 USD$"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "- The token uses pair.reserves() and token.balanceOf(pair) to determine if the current transaction is purchase or sell. However, this could be manipulated via sending tokens to the pair address and call skim - The token will distribute inviteBonus to the to address without setting a upper limit for the reward. Vulnerable code snippet: Attack tx: https://bscscan.com/tx/0x8163738d6610ca32f048ee9d30f4aa1ffdb3ca1eddf95c0eba086c3e936199ed Analysis: https://defimon.xyz/attack/bsc/0x8163738d6610ca32f048ee9d30f4aa1ffdb3ca1eddf95c0eba086c3e936199ed https://www.immunebytes.com/blog/list-of-crypto-hacks-in-the-month-of-november/#Nov_"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x8163738d6610ca32f048ee9d30f4aa1ffdb3ca1eddf95c0eba086c3e936199ed"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-11/3913_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-11/3913_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "defimon.xyz",
+      "url": "https://defimon.xyz/attack/bsc/0x8163738d6610ca32f048ee9d30f4aa1ffdb3ca1eddf95c0eba086c3e936199ed"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x8163738d6610ca32f048ee9d30f4aa1ffdb3ca1eddf95c0eba086c3e936199ed"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "immunebytes.com",
+      "url": "https://www.immunebytes.com/blog/list-of-crypto-hacks-in-the-month-of-november/#Nov_"
+    }
+  ]
+}

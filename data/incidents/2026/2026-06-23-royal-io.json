@@ -1,0 +1,103 @@
+{
+  "id": "2026-06-23-royal-io",
+  "name": "Royal.io",
+  "date": "2026-06-23",
+  "year": 2026,
+  "amountUsd": 263000,
+  "returnedUsd": null,
+  "chains": [
+    "Polygon"
+  ],
+  "targetType": "NFTfi",
+  "category": "accounting-math",
+  "technique": "Incorrect Share Accounting",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.83,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.84
+      },
+      {
+        "category": "input-validation",
+        "p": 0.15
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.92
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Zero-amount ERC1155 batch transfer inflated Royal LDA tier balance. Lost: 261,162.93 USDC",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Zero-amount ERC1155 batch transfer inflated Royal LDA tier balance. Lost: 261,162.93 USDC"
+    },
+    {
+      "source": "SlowMist",
+      "text": "A legacy royalties contract (Royal1155LD) associated with Royal.io on Polygon was exploited due to a logic flaw in reward/pro-rata royalty accounting. The attacker used a flash loan and 100 zero-value ERC1155 transfers to manipulate the beforeLdaTransfer function, inflating balances and withdrawing ~$263K USDC."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On June 23, 2026, Royal.io’s legacy Polygon royalties contract was exploited via a zero-amount ERC1155 batch transfer that inflated tier accounting, causing an unauthorized USDC withdrawal of about $261,000. The root cause was inconsistent custom share accounting in the Royal1155LDA contract. The Royal1155LDA contract failed to check and process nonzero transfer amounts in its custom ownership accounting hook. Zero-amount batch transfers could incorrectly increment the recipient's tier balance, inflating pro-rata royalty entitlement without real ERC1155 ownership."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x7a92106f145045b7a2bdce60a22109739f9b0cd0185bf16ff83fd1fac98cb42e"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-06/RoyalRoyalties_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-06/RoyalRoyalties_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/TenArmorAlert/status/2069596801725002121"
+    },
+    {
+      "source": "slowmist",
+      "label": "cryptorank.io",
+      "url": "https://cryptorank.io/news/feed/c9d17-legacy-polygon-royalties-contract-exploit-drains-261k-through-reward-logic-flaw"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/royal-io-2026-06-23"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/DarkNavySecurity/web3-exploit-analysis/blob/main/reports/royal-lda-zero-amount-batch-transfer-royalties-drain/report.md"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptotimes.io",
+      "url": "https://www.cryptotimes.io/2026/06/24/legacy-polygon-royalties-contract-drained-of-261k-via-logic-error/"
+    }
+  ]
+}

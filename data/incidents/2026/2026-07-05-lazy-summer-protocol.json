@@ -1,0 +1,114 @@
+{
+  "id": "2026-07-05-lazy-summer-protocol",
+  "name": "Lazy Summer Protocol",
+  "date": "2026-07-05",
+  "year": 2026,
+  "amountUsd": 6040000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Donation Attack",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.99
+      },
+      {
+        "category": "logic-error",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.07,
+    "stateActor": 0.02,
+    "hasRootCause": 0.94
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "FleetCommander NAV Inflation via Depegged xUSD. Lost: ~$6M (DAI + LVUSDC shares)",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "FleetCommander NAV Inflation via Depegged xUSD. Lost: ~$6M (DAI + LVUSDC shares)"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Donation-sensitive valuation in Ark integrations (MorphoV2VaultArk and SiloManagedVaultArk) allowed reported totalAssets to be inflated intra-transaction. Attacker accumulated deprecated vgUSDC at negligible cost, triggered vault reallocations that distorted downstream share pricing, deposited $64.8M to obtain inflated vault exposure, then redeemed $70.9M against inflated FleetCommander accounting. Attack Tx: https://etherscan.io/tx/0x0db528c44f23fc7fa4544684a2fab81096450a14aae8bc89f42cd0592d43da12 Source: https://twitter.com/CertiKAlert/status/2074043519422099514"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Lazy Summer Protocol (under Summer.fi) USDC vaults were exploited due to NAV/share price calculation flaw. The attacker used flash loans and pre-accumulated overvalued Silo tokens to inflate vault NAV (~9.5%), redeeming at inflated price and extracting ~$6.04M from other depositors."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On July 6, 2026, Lazy Summer Protocol (Summer.fi) lost $6.04M when an attacker inflated two USDC vault share prices by donating overvalued Silo tokens to a still-active Ark pending removal. The stale Ark had its deposit cap set to zero nine months earlier but remained in the vault's asset calculation, allowing the attacker to withdraw much more than deposited. A strategy adapter (Ark) holding impaired Silo \"Varlamore USDC Growth\" tokens was capped for offboarding but never fully removed. The vault's NAV still counted these tokens at their pre-collapse valuation, permitting share-price manipulation via donation of cheap, overvalued tokens."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x0db528c44f23fc7fa4544684a2fab81096450a14aae8bc89f42cd0592d43da12",
+    "0x1143847e4a297f630788503f06da8a68c168e1e7d3c4301cfd3d49d4f46649f7"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-07/SummerFi_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-07/SummerFi_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x0db528c44f23fc7fa4544684a2fab81096450a14aae8bc89f42cd0592d43da12"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/CertiKAlert/status/2074043519422099514"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/summerfinance_/status/2074214443261509721"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/lazy-summer-protocol-2026-07-06"
+    },
+    {
+      "source": "revertiq",
+      "label": "quillaudits.com",
+      "url": "https://www.quillaudits.com/blog/hack-analysis/summer-protocol-donation-attack"
+    },
+    {
+      "source": "revertiq",
+      "label": "blocksec.com",
+      "url": "https://blocksec.com/blog/web3-security-summerfi-bonzo-lend-exploits"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.summer.fi",
+      "url": "https://blog.summer.fi/lazy-summer-usdc-vault-exploit-post-mortem-what-happened-and-what-comes-next/"
+    }
+  ]
+}

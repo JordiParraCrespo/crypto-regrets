@@ -1,0 +1,93 @@
+{
+  "id": "2022-10-27-vtf-token",
+  "name": "VTF Token",
+  "date": "2022-10-27",
+  "year": 2022,
+  "amountUsd": 50000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Incorrect Reward calculation",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.99).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.99
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.95,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Incorrect Reward calculation. Lost: $50k",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Incorrect Reward calculation. Lost: $50k"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The function updateUserBalance does not ascertain the duration for which a user has retained the token. Exploiting this, the attacker pre-deploys numerous malicious contracts, secures the initial $VTF via a flashloan, and subsequently transfers the VTF tokens to each attack contract sequentially. This maneuver enables the attacker to claim the rewards for holding. Vulnerable code snippet: https://bscscan.com/address/0xc6548caf18e20f88cc437a52b6d388b0d54d830d#code Attack tx: https://bscscan.com/tx/0xeeaf7e9662a7488ea724223c5156e209b630cdc21c961b85868fe45b64d9b086 https://bscscan.com/tx/0xc2d2d7164a9d3cfce1e1dac7dc328b350c693feb0a492a6989ceca7104eef9b7 Analysis: https://twitter.com/BlockSecTeam/status/1585575129936977920 https://twitter.com/peckshield/status/1585572694241988609 https://twitter.com/BeosinAlert/status/1585587030981218305"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xeeaf7e9662a7488ea724223c5156e209b630cdc21c961b85868fe45b64d9b086",
+    "0xc2d2d7164a9d3cfce1e1dac7dc328b350c693feb0a492a6989ceca7104eef9b7"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-10/VTF_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-10/VTF_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BlockSecTeam/status/1585575129936977920"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/peckshield/status/1585572694241988609"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BeosinAlert/status/1585587030981218305"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0xc6548caf18e20f88cc437a52b6d388b0d54d830d#code"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0xeeaf7e9662a7488ea724223c5156e209b630cdc21c961b85868fe45b64d9b086"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0xc2d2d7164a9d3cfce1e1dac7dc328b350c693feb0a492a6989ceca7104eef9b7"
+    }
+  ]
+}

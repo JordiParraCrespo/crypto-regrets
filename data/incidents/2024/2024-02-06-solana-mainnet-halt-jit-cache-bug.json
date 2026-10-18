@@ -1,0 +1,52 @@
+{
+  "id": "2024-02-06-solana-mainnet-halt-jit-cache-bug",
+  "name": "Solana mainnet halt (JIT cache bug)",
+  "date": "2024-02-06",
+  "year": 2024,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [
+    "Solana"
+  ],
+  "targetType": "Chain",
+  "category": "client-bug",
+  "technique": "Infinite recompile loop in program cache",
+  "classificationNote": null,
+  "classifiedBy": "curated",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "client-bug",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "client-bug",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.01,
+    "stateActor": 0.01,
+    "hasRootCause": 0.74
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "A bug in the Agave JIT program cache caused an infinite recompile loop when a legacy loader program was invoked, stalling block production for ~5 hours until validators upgraded and restarted.",
+  "descriptions": [
+    {
+      "source": "Curated post-mortem",
+      "text": "A bug in the Agave JIT program cache caused an infinite recompile loop when a legacy loader program was invoked, stalling block production for ~5 hours until validators upgraded and restarted."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "curated"
+  ],
+  "references": [
+    {
+      "source": "curated",
+      "label": "Solana post-mortem",
+      "url": "https://solana.com/news/02-06-24-solana-mainnet-beta-outage-report"
+    }
+  ]
+}

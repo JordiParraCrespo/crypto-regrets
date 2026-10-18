@@ -1,0 +1,119 @@
+{
+  "id": "2024-09-10-caterpillar-coin",
+  "name": "Caterpillar Coin",
+  "date": "2024-09-10",
+  "year": 2024,
+  "amountUsd": 1400000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "Token",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.7,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.72
+      },
+      {
+        "category": "logic-error",
+        "p": 0.26
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.95,
+    "stateActor": 0.01,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Price Manipulation. Lost: ~1.4M USD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Price Manipulation. Lost: ~1.4M USD"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The CUT token's price protection mechanism, implemented via the transferFunDealTypeContractAddress contract, was vulnerable to price manipulation. The mechanism relied on reserve ratios to calculate rewards and token transfers during liquidity pool operations. The attacker used a flash loan of 4,500,000 USDT to manipulate the USDT-CUT PancakeSwap pool's reserve ratio, adding liquidity with disproportionate token amounts and triggering flawed reward calculations in valuePreservationByRemoveLP(). This allowed the attacker to receive significantly more CUT tokens (275e9 instead of 60.7e9) when removing liquidity, which were then swapped for profit. The vulnerability stemmed from naive conversion of USDT differences to CUT tokens based on manipulable current prices, repeated 40 times to maximize gains. Vulnerable code snippet: Attack tx: https://bscscan.com/tx/0x2c123d08ca3d50c4b875c0b5de1b5c85d0bf9979dffbf87c48526e3a67396827 https://bscscan.com/tx/0xce6e474dc9555ef971473fee19f87716f38ba01a0df39e78207b71eda134c420 https://bscscan.com/tx/0x6262c0f15c88aed6f646ed1996eb6aae9ccc5d5704d5faccd1e1397dd047bc8a Analysis: https://www.certik.com/resources/blog/caterpillar-coin-cut-token-incident-analysis"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Caterpillar Coin suffered a flashloan attack resulting in a loss of ~$1.4M and causing a 99% slippage on the token. The attack exploited vulnerabilities in the \"price protection mechanisms\", which led to the manipulation of token reserves and rewards."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Caterpillar Coin was exploited on BNB Chain on 10 September 2024, losing approximately $1.4 million. The attacker used flashloans and manipulated the protocol’s reward calculation and price-protection mechanism linked to LP operations. The vulnerable reward and price-protection mechanism naively calculated rewards and bonus token grants based on the instantaneous LP reserve ratios, allowing exploitation via rapid liquidity and swap operations during manipulated conditions."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x2c123d08ca3d50c4b875c0b5de1b5c85d0bf9979dffbf87c48526e3a67396827",
+    "0xce6e474dc9555ef971473fee19f87716f38ba01a0df39e78207b71eda134c420",
+    "0x6262c0f15c88aed6f646ed1996eb6aae9ccc5d5704d5faccd1e1397dd047bc8a"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "www.certik.com",
+      "url": "https://www.certik.com/zh-CN/resources/blog/caterpillar-coin-cut-token-incident-analysis"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-09/Caterpillar_Coin_CUT_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x2c123d08ca3d50c4b875c0b5de1b5c85d0bf9979dffbf87c48526e3a67396827"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0xce6e474dc9555ef971473fee19f87716f38ba01a0df39e78207b71eda134c420"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/caterpillar-coin-2024-09-10"
+    },
+    {
+      "source": "revertiq",
+      "label": "olympix.security",
+      "url": "https://olympix.security/biweekly-exploits/deltaprime-caterpillar-coin-and-bankroll-network-lose-7-6m-in-key-compromise-price-manipulation-and-input-validation-flaws"
+    },
+    {
+      "source": "revertiq",
+      "label": "certik.com",
+      "url": "https://www.certik.com/blog/caterpillar-coin-cut-token-incident-analysis"
+    }
+  ]
+}

@@ -1,0 +1,154 @@
+{
+  "id": "2024-11-16-polter-finance",
+  "name": "Polter Finance",
+  "date": "2024-11-16",
+  "year": 2024,
+  "amountUsd": 8700000,
+  "returnedUsd": null,
+  "chains": [
+    "Fantom"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.97,
+    "stateActor": 0.01,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "FlashLoan Attack. Lost: $7M",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "FlashLoan Attack. Lost: $7M"
+    },
+    {
+      "source": "REKT",
+      "text": "After losing roughly $8.7 million to a textbook case of oracle manipulation, Polter Finance is scrambling to clean up the mess. Their unaudited protocol left key vulnerabilities wide open, and now they’re facing the fallout. Another day, another lesson in DeFi’s recklessness."
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The attack was caused by a flawed price oracle implementation in the ChainlinkUniV2Adapter contract for the BOO token. Instead of solely relying on the Chainlink oracle price feed, the contract combined it with the reserve ratio of the BOO/FTM Uniswap V2 pool to determine the final price. This allowed the attacker to manipulate the Uniswap V2 pool's reserve ratio through a flash loan of BOO tokens, artificially inflating the reported price of BOO. By leveraging this inflated price, the attacker could then over-collateralize their positions and borrow a significant amount of other assets from the Polter Finance protocol. The core issue was the improper blending of a potentially manipulable on-chain metric (Uniswap V2 reserve ratio) with a trusted off-chain oracle price. Vulnerable code snippet: Attack tx: https://ftmscan.com/tx/0x5118df23e81603a64c7676dd6b6e4f76a57e4267e67507d34b0b26dd9ee10eac Analysis: https://threesigma.xyz/blog/exploit/polter-finance-exploit-explained-usd12m-loss"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The lending project Polter Finance on Fantom lost ~$12 million due to an oracle price-related flash loan attack on its newly launched SpookySwap (BOO) market."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Polter Finance lost over $12 million on Fantom in November 2024 when an attacker used flash loans to drain BOO liquidity, manipulate the lending protocol's oracle, and borrow against artificially inflated collateral. Polter Finance's price oracle calculated BOO token value from manipulable spot AMM reserves, lacking time-weighted average and deviation checks. The protocol did not validate liquidity depth or apply independent audits after forking established lending code."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Polter Finance, a Fantom-based lending protocol, was exploited for at least $8.7M when an attacker manipulated the BOO token oracle through flash loans, inflating collateral far beyond its true value and draining multiple pools. Polter Finance’s oracle system depended on spot prices from SpookySwap pools, using a ChainlinkUniV2Adapter without checks against sudden price shifts. A flash loan drained BOO liquidity, spiking its reported price, which the lending protocol used to calculate collateral, enabling outsized borrowing and pool drain."
+    }
+  ],
+  "audit": "Unaudited",
+  "txHashes": [
+    "0x5118df23e81603a64c7676dd6b6e4f76a57e4267e67507d34b0b26dd9ee10eac"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-11/PolterFinance_exploit.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-11/PolterFinance_exploit.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Bcpaintball26/status/1857865758551805976"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Polter Finance",
+      "url": "https://rekt.news/polter-finance-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "ftmscan.com",
+      "url": "https://ftmscan.com/tx/0x5118df23e81603a64c7676dd6b6e4f76a57e4267e67507d34b0b26dd9ee10eac"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "threesigma.xyz",
+      "url": "https://threesigma.xyz/blog/exploit/polter-finance-exploit-explained-usd12m-loss"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x5118df23e81603a64c7676dd6b6e4f76a57e4267e67507d34b0b26dd9ee10eac"
+    },
+    {
+      "source": "blocksec",
+      "label": "x.com",
+      "url": "https://x.com/Phalcon_xyz/status/1858436357674381516"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/polterfinance/status/1857971122043551898"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/decoding-polter-finance-s-12m-2024-12-24"
+    },
+    {
+      "source": "revertiq",
+      "label": "quillaudits.com",
+      "url": "https://www.quillaudits.com/blog/hack-analysis/polter-finance-12m-hack-analysis"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainhint.com",
+      "url": "https://chainhint.com/cases/polter-finance-hack"
+    },
+    {
+      "source": "revertiq",
+      "label": "certik.com",
+      "url": "https://www.certik.com/blog/polter-finance-incident-analysis"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/polter-finance-oracle-2024-11-16"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/de-fi-rekt-report-november-2024-over-69-million-lost-in-crypto-exploits"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.solidityscan.com",
+      "url": "https://blog.solidityscan.com/polter-finance-hack-analysis-c5eaa6dcfd40/"
+    }
+  ]
+}

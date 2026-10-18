@@ -1,0 +1,118 @@
+{
+  "id": "2022-03-27-revest-finance",
+  "name": "Revest Finance",
+  "date": "2022-03-27",
+  "year": 2022,
+  "amountUsd": 2010000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "reentrancy",
+  "technique": "Reentrancy",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "reentrancy",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "reentrancy",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.07,
+    "stateActor": 0.02,
+    "hasRootCause": 0.93
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Reentrancy. Lost: $11.2 million",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Reentrancy. Lost: $11.2 million"
+    },
+    {
+      "source": "REKT",
+      "text": "~$2M taken from Revest Finance. “One audit is never enough” says Revest, as they found that a reentrancy vulnerability was not picked up in their security checks."
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "classic re-entrancy pattern: use fnftId -> external call with callback mechanism -> update fnftId. Vulnerable code snippet: Attack tx: https://etherscan.io/tx/0xe0b0c2672b760bef4e2851e91c69c8c0ad135c6987bbf1f43f5846d89e691428 Analysis: https://blocksecteam.medium.com/revest-finance-vulnerabilities-more-than-re-entrancy-1609957b742f"
+    },
+    {
+      "source": "SlowMist",
+      "text": "DeFi protocol Revest Finance has been hacked. Hackers stole nearly 7.7 million ECO, 579 LYXe, nearly 715 million BLOCKS, and over 350,000 RENA. According to SlowMist analysis, this attack is because the handleMultipleDeposits function in the tokenVault contract does not determine whether the newly minted NFT exists, so the attacker uses this point to directly modify the information of the NFT that has been minted, and in the Revest contract The key functions in this are not restricted by reentrant locks, which lead to being used by callbacks."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On March 27, 2022, Revest Finance was exploited via a reentrancy vulnerability affecting its Ethereum smart contracts, resulting in losses exceeding $2 million across several supported tokens. The attacker manipulated the FNFT minting flow to mint and redeem tokens without backing deposits, draining vaults for assets including RENA, BLOCKS, ECO, LYXe, and others. The root cause was a reentrancy vulnerability in the FNFT minting and deposit mechanism. Specifically, the protocol failed to update internal accounting variables before allowing external calls, permitting reentrant manipulation of FNFT supply and vault balances to mint and redeem unbacked tokens."
+    }
+  ],
+  "audit": "Solidity Finance",
+  "txHashes": [
+    "0xe0b0c2672b760bef4e2851e91c69c8c0ad135c6987bbf1f43f5846d89e691428",
+    "0x613b2de3bb9043884a219296eeb1ada8c47b5a0262b9c68ca06ffd2de3a5d9f5",
+    "0x19b10c6d38f0b911fdc0e722d681a70a56699d70559eefef3d4d6fe88276c813",
+    "0x2b73bc0af8eaaff12eda97105071ac093ea610c00fd2ee7d33c0020f617feeeb",
+    "0x3b902013ea6e15587dd876d37182cfc09d208cac27fb33ddfa850e8eae4a8597"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-03/Revest_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-03/Revest_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "blocksecteam.medium.com",
+      "url": "https://blocksecteam.medium.com/revest-finance-vulnerabilities-more-than-re-entrancy-1609957b742f"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xe0b0c2672b760bef4e2851e91c69c8c0ad135c6987bbf1f43f5846d89e691428"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Revest Finance - REKT",
+      "url": "https://rekt.news/revest-finance-rekt"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/RevestFinance/status/1507968623792607233"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/revest-finance-2022-03-27"
+    },
+    {
+      "source": "revertiq",
+      "label": "csidb.net",
+      "url": "https://www.csidb.net/csidb/incidents/37a541f0-301f-4de1-aaab-38e8d0f7b7f1/"
+    },
+    {
+      "source": "revertiq",
+      "label": "therecord.media",
+      "url": "https://therecord.media/2-million-stolen-from-defi-protocol-revest-finance-platform-unable-to-reimburse-victims"
+    }
+  ]
+}

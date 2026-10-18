@@ -1,0 +1,72 @@
+{
+  "id": "2023-11-14-okc-project",
+  "name": "OKC Project",
+  "date": "2023-11-14",
+  "year": 2023,
+  "amountUsd": 6268,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Instant Rewards, Unlocked",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.93).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.93,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.93
+      },
+      {
+        "category": "access-control",
+        "p": 0.07
+      }
+    ],
+    "flashLoan": 0.93,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Instant Rewards, Unlocked. Lost: ~$6268",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Instant Rewards, Unlocked. Lost: ~$6268"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "- The victim contract MinerPool requires extcodesize!=0(EOA check) before adding an address to lpRewardProcessor array to be eligible for rewards. - The victim contract MinerPool will distribute the rewards regardless of the LP holding time. The attacker leveraged substantial flash loans to borrow a significant amount of USDT and exchanged it for a large quantity of OKC tokens to add liquidity. Additionally, due to the absence of lock-up requirements for LP reward distribution in the OKC project, the hacker promptly withdrew liquidity after receiving rewards, thereby claiming the incentives intended for liquidity providers from the project. Vulnerable code snippet: (Screenshot from the detailed analysis) 1. The check of EOA could be bypassed during the initialization of the contract. 1. The reward is distributed regardless of the LP holding time. Attack tx: https://bscscan.com/tx/0xd85c603f71bb84437bc69b21d785f982f7630355573566fa365dbee4cd236f08 Analysis: https://lunaray.medium.com/okc-project-hack-analysis-0907312f519b"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xd85c603f71bb84437bc69b21d785f982f7630355573566fa365dbee4cd236f08"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-11/OKC_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-11/OKC_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "lunaray.medium.com",
+      "url": "https://lunaray.medium.com/okc-project-hack-analysis-0907312f519b"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0xd85c603f71bb84437bc69b21d785f982f7630355573566fa365dbee4cd236f08"
+    }
+  ]
+}

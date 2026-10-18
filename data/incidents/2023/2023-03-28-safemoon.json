@@ -1,0 +1,138 @@
+{
+  "id": "2023-03-28-safemoon",
+  "name": "Safemoon",
+  "date": "2023-03-28",
+  "year": 2023,
+  "amountUsd": 8900000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Access Control. Lost: $8.9M",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Access Control. Lost: $8.9M"
+    },
+    {
+      "source": "REKT",
+      "text": "Not so safe after all. Yesterday, Safemoon lost $8.9M worth of supposedly locked LP thanks to a bug introduced in the project’s latest upgrade. How much longer can Safemoon last?"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The root cause of the attack was that during an upgrade of the Safe Moon contract, an access control vulnerability was introduced in the Public burn function. This vulnerability allowed an attacker to burn tokens from any address. Vulnerable code can be found here. Vulnerable code snippet: Attack tx: https://bscscan.com/tx/0x48e52a12cb297354a2a1c54cbc897cf3772328e7e71f51c9889bb8c5e533a934 Analysis: https://twitter.com/peckshield/status/1640855857910149122 https://www.zellic.io/blog/safemoon-exploit-explained https://medium.com/coinmonks/decoding-safemoon-protocols-8-9-million-exploit-quillaudits-a5b11417f0b9"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Safemoon, a DeFi protocol based on the BNB chain, was attacked, and its liquidity pool lost nearly $8.9 million. Safemoon CEO John Karony said on Twitter: \"This security incident affected the SFM:BNB LP pool and other LP pools on DEX were not affected. We have located the suspected vulnerability and fixed it. \" According to analysis, the recent update may have introduced a \"public destruction vulnerability\", which facilitated hacker attacks. The hacker was able to use code functionality to artificially inflate the price of SFM tokens, then sell enough tokens back to the liquidity pool in the same transaction, effectively draining WBNB from the contract.…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On March 29, 2023, SafeMoon’s SFM/BNB liquidity pool on BNB Chain was exploited for $8.9 million after a contract upgrade introduced a burn function that could destroy tokens from any address. The attacker burned nearly all SFM pool tokens, manipulated the price, and swapped pre-purchased SFM for BNB at an inflated rate. A contract upgrade introduced a public burn function without access control, allowing anyone to burn tokens from arbitrary addresses,including the liquidity pool,enabling an attacker to manipulate SFM price and drain pool BNB."
+    }
+  ],
+  "audit": "Unaudited",
+  "txHashes": [
+    "0x48e52a12cb297354a2a1c54cbc897cf3772328e7e71f51c9889bb8c5e533a934",
+    "0xcb8573807b1db40215840f690eeba6af6ec8fcc5a98eb5d545d40f7f775b0d1b",
+    "0x3307500ebaf50fb72c82a62829c8a0b20d8a076e9beae1ff97d87ba32843e219",
+    "0x71273e731752457892f73d2ad8b89060bd4f0bf131ed403d5dfc149319c1c01d",
+    "0xf98a8b7e3ffee676f06f0c037141483ec2c9cf8753a57fbcdbd718590e4d77ff"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-03/safeMoon_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "blocksec",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-03/safeMoon_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/zokyo_io/status/1641014520041840640"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Safemoon - REKT",
+      "url": "https://rekt.news/safemoon-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0xeb11a0a0bef1ac028b8c2d4cd64138dd5938ca7a#code%23L1737"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x48e52a12cb297354a2a1c54cbc897cf3772328e7e71f51c9889bb8c5e533a934"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/peckshield/status/1640855857910149122"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x48e52a12cb297354a2a1c54cbc897cf3772328e7e71f51c9889bb8c5e533a934"
+    },
+    {
+      "source": "blocksec",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs?tab=readme-ov-file#20230328-safemoon-hack"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/safemoon-2023-03-29"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "halborn.com",
+      "url": "https://www.halborn.com/blog/post/explained-the-safe-moon-hack-march-2023"
+    },
+    {
+      "source": "revertiq",
+      "label": "zellic.io",
+      "url": "https://www.zellic.io/blog/safemoon-exploit-explained/"
+    }
+  ]
+}

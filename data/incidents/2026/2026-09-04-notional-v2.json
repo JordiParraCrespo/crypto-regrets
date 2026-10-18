@@ -1,0 +1,91 @@
+{
+  "id": "2026-09-04-notional-v2",
+  "name": "Notional V2",
+  "date": "2026-09-04",
+  "year": 2026,
+  "amountUsd": 1727782,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Arithmetic Error",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.86
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "ERC1155 fCash mint overflow drains escrow. Lost: ~69,257.37 DAI + ~1,658,524.86 USDC (~$1.73M)",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "ERC1155 fCash mint overflow drains escrow. Lost: ~69,257.37 DAI + ~1,658,524.86 USDC (~$1.73M)"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Notional Finance’s legacy V1 Escrow contract was exploited. The attacker abused an unsafe uint128 cast in free-collateral valuation so that a fabricated liability of about 2^128 truncated to zero, bypassing solvency checks, minting fake fCash claims, and withdrawing about 69,257.37 DAI and 1,658,524.86 USDC (~$1.73M). The funds were swapped into roughly 689.2 ETH and deposited into Tornado Cash. The team paused the affected contract, said other user assets were not at risk, and is pursuing recovery."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Notional V1’s legacy Ethereum escrow lost about $1.73 million after an integer truncation in the free-collateral path let a 2^128 liability read as zero. An unsafe signed-to-uint128 conversion in the V1 escrow’s ETH valuation path truncated an engineered 2^128 liability to zero, so the free-collateral check accepted an insolvent account and allowed withdrawals from the legacy escrow."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xe1589a19fe742f0d553889214abade69551fe944acffac014c28cc07b325d60a",
+    "0xc3f3e318f7ab2d0daaba59e6ec901d25d1fe8a89aafe2b2b62e3b9aee1a24efa"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-09/NotionalFinance_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-09/NotionalFinance_exp.sol"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/NotionalFinance/status/2095905726094856391"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/notional-v2-2026-09-04"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.notional.finance",
+      "url": "https://blog.notional.finance/notional-v1-exploit-post-mortem/"
+    },
+    {
+      "source": "revertiq",
+      "label": "docs.notional.finance",
+      "url": "https://docs.notional.finance/v3-technical-docs/security/audits"
+    }
+  ]
+}

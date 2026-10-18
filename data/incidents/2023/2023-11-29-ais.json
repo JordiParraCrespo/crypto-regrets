@@ -1,0 +1,77 @@
+{
+  "id": "2023-11-29-ais",
+  "name": "AIS",
+  "date": "2023-11-29",
+  "year": 2023,
+  "amountUsd": 61000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Insufficient validation",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.96). Replaced keyword guess \"input-validation\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.96,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.96
+      },
+      {
+        "category": "input-validation",
+        "p": 0.04
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Insufficient validation. Lost: ~$61k",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Insufficient validation. Lost: ~$61k"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "There is no access control in AIS::setSwapPairs, allowing the attacker to set pairs to arbitrary addresses. The attacker sets Pancakeswap as a valid pair and transfers tokens to the pair through AIS::transfer, subsequently executing the Pancakeswap::skim operation to profit. Vulnerable code snippet: Attack tx: Analysis: BlockSec Phalcon on Twitter / X"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x0be817b6a522a111e06293435c233dab6576d7437d0e148b45efcf7ab8a10de0"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-11/AIS_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-11/AIS_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Phalcon_xyz/status/1729861048004391306"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x0be817b6a522a111e06293435c233dab6576d7437d0e148b45efcf7ab8a10de0"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/Phalcon_xyz/status/1729861048004391306/photo/1"
+    }
+  ]
+}

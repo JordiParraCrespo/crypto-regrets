@@ -1,0 +1,76 @@
+{
+  "id": "2022-11-19-annexfinance",
+  "name": "AnnexFinance",
+  "date": "2022-11-19",
+  "year": 2022,
+  "amountUsd": 3000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "arbitrary-call",
+  "technique": "Verify flashLoan Callback",
+  "classificationNote": "Upstream label missing; classified by keyword rules from the root-cause text.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "input-validation",
+    "confidence": 0.6,
+    "top": [
+      {
+        "category": "input-validation",
+        "p": 0.62
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.14
+      },
+      {
+        "category": "access-control",
+        "p": 0.09
+      }
+    ],
+    "flashLoan": 0.31,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Verify flashLoan Callback. Lost: $3k",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Verify flashLoan Callback. Lost: $3k"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Missing validation on target token for the liquidator Vulnerable code snippet: Attack tx: https://bscscan.com/tx/0x3757d177482171dcfad7066c5e88d6f0f0fe74b28f32e41dd77137cad859c777 Analysis: 1. The attacker prepares a new token and creates pool(add liquidity) for the new token 2. Invoke the swap function with new pair and trigger the liquidating process 3. Since there is no limitation on the liquidate target, the attacker put the attack contract address for three times for the liquidate information: 1. Since the repayAToken is the attacker's address, it will not use the allowance in the liquidateBorrow 2. The attacker utilizes the allowance to remove funds from the liquidator https://twitter.com/AnciliaInc/status/1593690338526273536"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x3757d177482171dcfad7066c5e88d6f0f0fe74b28f32e41dd77137cad859c777"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-11/Annex_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-11/Annex_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/AnciliaInc/status/1593690338526273536"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x3757d177482171dcfad7066c5e88d6f0f0fe74b28f32e41dd77137cad859c777"
+    }
+  ]
+}

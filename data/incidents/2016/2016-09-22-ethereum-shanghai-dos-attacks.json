@@ -1,0 +1,65 @@
+{
+  "id": "2016-09-22-ethereum-shanghai-dos-attacks",
+  "name": "Ethereum Shanghai DoS attacks",
+  "date": "2016-09-22",
+  "year": 2016,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "Chain",
+  "category": "client-bug",
+  "technique": "Underpriced opcodes (EXTCODESIZE, SUICIDE)",
+  "classificationNote": null,
+  "classifiedBy": "curated",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "client-bug",
+    "confidence": 0.72,
+    "top": [
+      {
+        "category": "client-bug",
+        "p": 0.74
+      },
+      {
+        "category": "logic-error",
+        "p": 0.21
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "Attackers spammed transactions calling underpriced opcodes that forced heavy disk I/O, slowing block processing dramatically during Devcon 2. Fixed by gas repricing in the Tangerine Whistle (EIP-150) and Spurious Dragon (EIP-158/161) hard forks.",
+  "descriptions": [
+    {
+      "source": "Curated post-mortem",
+      "text": "Attackers spammed transactions calling underpriced opcodes that forced heavy disk I/O, slowing block processing dramatically during Devcon 2. Fixed by gas repricing in the Tangerine Whistle (EIP-150) and Spurious Dragon (EIP-158/161) hard forks."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "curated"
+  ],
+  "references": [
+    {
+      "source": "curated",
+      "label": "EIP-150",
+      "url": "https://eips.ethereum.org/EIPS/eip-150"
+    },
+    {
+      "source": "curated",
+      "label": "Ethereum blog: transaction spam attack",
+      "url": "https://blog.ethereum.org/2016/09/22/transaction-spam-attack-next-steps"
+    }
+  ]
+}

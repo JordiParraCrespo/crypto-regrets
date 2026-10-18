@@ -1,0 +1,91 @@
+{
+  "id": "2022-08-28-ddc",
+  "name": "DDC",
+  "date": "2022-08-28",
+  "year": 2022,
+  "amountUsd": 100000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "input-validation",
+  "technique": "Unchecked External Calls",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.84).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "input-validation",
+    "confidence": 0.84,
+    "top": [
+      {
+        "category": "input-validation",
+        "p": 0.85
+      },
+      {
+        "category": "access-control",
+        "p": 0.11
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.92
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Unchecked External Calls",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Unchecked External Calls"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "handleDeductFee function does not validate feeAmount and does not check the incoming addresses. Vulnerable code snippet: - Manipulating balanceOf: The attacker utilized the balanceOf function to ascertain the total amount of $DDC in the pool. Following this, the attacker proceeded to call the handleDeductFee function of the DDC contract. Attack tx: https://bscscan.com/tx/0xd08cfb22d14bc4f2808970b5ce2557124ae3d7dc9fda756647a3427b8275f054 Analysis: https://x.com/BeosinAlert/status/1564240190851383302 https://immunebytes.com/blog/ddc-token-hack-aug-28-2022-detailed-analysis/"
+    },
+    {
+      "source": "SlowMist",
+      "text": "DDC was exploited and lost $104,600. The cause of the event is the problem of arbitrarily deducting pool fees."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xd08cfb22d14bc4f2808970b5ce2557124ae3d7dc9fda756647a3427b8275f054"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-08/DDC_exp.sol",
+  "sources": [
+    "defihacklabs",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-08/DDC_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/BeosinAlert/status/1564240190851383302"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "immunebytes.com",
+      "url": "https://immunebytes.com/blog/ddc-token-hack-aug-28-2022-detailed-analysis/"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0xd08cfb22d14bc4f2808970b5ce2557124ae3d7dc9fda756647a3427b8275f054"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BeosinAlert/status/1564240190851383302"
+    }
+  ]
+}

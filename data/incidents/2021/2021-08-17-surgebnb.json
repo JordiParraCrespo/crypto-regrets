@@ -1,0 +1,70 @@
+{
+  "id": "2021-08-17-surgebnb",
+  "name": "SurgeBNB",
+  "date": "2021-08-17",
+  "year": 2021,
+  "amountUsd": 5000000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "reentrancy",
+  "technique": "Reentrancy",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "reentrancy",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "reentrancy",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.94,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "On August 16, 2021, the SurgeBNB token on BNB Chain was exploited for over $5 million after an attacker used reentrancy in the sell function to buy tokens at stale prices, repeatedly cycling flash loans to drain BNB from the contract. The SurgeBNB sell() function transferred BNB to sellers before updating internal supply and balance state. A contract-based attacker used this ordering with a reentrancy vector (flash-loan-funded) to repeatedly re-enter via the fallback function and buy tokens at outdated prices, draining the reserve.",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "On August 16, 2021, the SurgeBNB token on BNB Chain was exploited for over $5 million after an attacker used reentrancy in the sell function to buy tokens at stale prices, repeatedly cycling flash loans to drain BNB from the contract. The SurgeBNB sell() function transferred BNB to sellers before updating internal supply and balance state. A contract-based attacker used this ordering with a reentrancy vector (flash-loan-funded) to repeatedly re-enter via the fallback function and buy tokens at outdated prices, draining the reserve."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x7e2a6ec08464e8e0118368cb933dc64ed9ce36445ecf9c49cacb970ea78531d2"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/surgebnb-2021-08-17"
+    },
+    {
+      "source": "revertiq",
+      "label": "itokenly.com",
+      "url": "https://itokenly.com/hacks/surgebnb"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/surgebnb-hack-2021"
+    }
+  ]
+}

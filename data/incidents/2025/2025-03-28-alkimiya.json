@@ -1,0 +1,103 @@
+{
+  "id": "2025-03-28-alkimiya",
+  "name": "Alkimiya",
+  "date": "2025-03-28",
+  "year": 2025,
+  "amountUsd": 95500,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Arithmetic Error",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.99
+      },
+      {
+        "category": "logic-error",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.92,
+    "stateActor": 0.01,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "unsafecast. Lost: ~ 95.5 K (1.14015390 WBTC)",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "unsafecast. Lost: ~ 95.5 K (1.14015390 WBTC)"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Alkimiya's SilicaPools collateralizedMint accepts a shares amount as a uint256 but later down-casts it to uint128 with an unsafe cast. By passing shares = uint256(type(uint128).max) + 2, the attacker made the collateral-accounting path (which used the full uint256 value) record a huge deposit, while the minted ERC1155 position used the truncated uint128(shares) value. The mismatch between the full-width value used for one calculation and the truncated value used for the share/redeem accounting let the attacker mint a position worth far more than the collateral actually supplied. Funded by a Morpho WBTC flash loan, the attacker minted, transferred, and then started/ended the pool and called redeemShort to extract ~1.14 WBTC (~$95.5K) of excess value. Vulnerable code snippet: Attack Tx: https://etherscan.io/tx/0x9b9a6dd05526a8a4b40e5e1a74a25df6ecccae6ee7bf045911ad89a1dd3f0814 Analysis: PoC author rotcivegaf on X/Twitter"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Alkimiya's SilicaPools contract on Ethereum was exploited on 28 March 2025 due to an unsafe downcast in share accounting. An attacker used a flash loan to mint an enormous number of shares, leveraging a uint256-to-uint128 cast that caused storage values to wrap, letting the attacker redeem much more collateral than deposited. The net loss was about 1.14 WBTC (~$95,500), but a whitehat MEV bot frontran the attacker and all funds were ultimately recovered. The SilicaPools contract performed an unchecked downcast from uint256 to uint128 for the number of shares minted. This allowed the attacker to input a shares value greater than 2^128, which was truncat…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x9b9a6dd05526a8a4b40e5e1a74a25df6ecccae6ee7bf045911ad89a1dd3f0814"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-03/Alkimiya_io_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-03/Alkimiya_io_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/TenArmorAlert/status/1906371419807568119"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x9b9a6dd05526a8a4b40e5e1a74a25df6ecccae6ee7bf045911ad89a1dd3f0814"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/rotcivegaf"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/alkimiya-2025-03-28"
+    },
+    {
+      "source": "revertiq",
+      "label": "quadrigainitiative.com",
+      "url": "https://quadrigainitiative.com/casestudy/alkimiyasilicapoolsuint128truncationunsafedowncasting.php"
+    },
+    {
+      "source": "revertiq",
+      "label": "olympix.security",
+      "url": "https://olympix.security/biweekly-exploits/kiloex-nitron-and-alkimiya-lose-8-4m-no-checks-no-controls-no-excuses"
+    }
+  ]
+}

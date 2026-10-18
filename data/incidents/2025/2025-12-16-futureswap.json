@@ -1,0 +1,92 @@
+{
+  "id": "2025-12-16-futureswap",
+  "name": "FutureSwap",
+  "date": "2025-12-16",
+  "year": 2025,
+  "amountUsd": 270000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "governance",
+  "technique": "Flashloan Governance Attack",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "governance",
+    "confidence": 0.98,
+    "top": [
+      {
+        "category": "governance",
+        "p": 0.98
+      },
+      {
+        "category": "access-control",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.94,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "According to monitoring by SlowMist’s MistEye security monitoring system, potential suspicious activities related to @futureswapx have been detected. Further analysis indicates that the root cause lies in an attacker creating a malicious proposal and leveraging flash loans to vote, ultimately granting privileges to the attack contract and enabling it to transfer tokens from other users.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "According to monitoring by SlowMist’s MistEye security monitoring system, potential suspicious activities related to @futureswapx have been detected. Further analysis indicates that the root cause lies in an attacker creating a malicious proposal and leveraging flash loans to vote, ultimately granting privileges to the attack contract and enabling it to transfer tokens from other users."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On December 16, 2025, FutureSwap suffered a $269,000 exploit on Ethereum due to a flashloan-enabled governance attack. The attacker used temporarily borrowed voting power to grant themselves critical contract permissions, allowing theft of user funds. The FutureSwap governance system determined voting power at the moment of execution and lacked a timelock and snapshot, allowing a flashloan holder to immediately pass and execute a malicious proposal. This let the attacker gain privileged access and extract funds from user accounts."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x39e584cdb52adf6b2ed5bb44bfda0e1b254cb0a3925911cc33d842feaf0a8b95",
+    "0x761f0286f2af28cf552bf92c30cae37b137bf5f3bb9b6aa7804704e803d750bd",
+    "0x23c6a1e3fa409fcf17b4a6c385924a17546772ce77b314d001cbf0dab9469ba3"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x39e584cdb52adf6b2ed5bb44bfda0e1b254cb0a3925911cc33d842feaf0a8b95"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/2001138489656766726"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/futureswap-2025-12-16"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/DK27ss/FutureSwap-270k-PoC/blob/main/README.md"
+    },
+    {
+      "source": "revertiq",
+      "label": "defillama.com",
+      "url": "https://defillama.com/protocol/futureswap"
+    }
+  ]
+}

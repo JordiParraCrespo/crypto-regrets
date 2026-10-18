@@ -1,0 +1,119 @@
+{
+  "id": "2024-09-23-bankroll-network",
+  "name": "Bankroll Network",
+  "date": "2024-09-23",
+  "year": 2024,
+  "amountUsd": 234800,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "input-validation",
+  "technique": "Missing Input Validation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "input-validation",
+    "confidence": 0.98,
+    "top": [
+      {
+        "category": "input-validation",
+        "p": 0.98
+      },
+      {
+        "category": "logic-error",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.95,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Incorrect input validation. Lost: ~404 WBNB (~234.8K USD)",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Incorrect input validation. Lost: ~404 WBNB (~234.8K USD)"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The buyfor function in the Bankroll Network's smart contract lacked input validation, allowing the attacker to set the _customerAddress as the contract itself. This enabled repeated calls to buyfor without transferring WBNB, inflating the profitPerShare_ value. The inflated profitPerShare_, combined with the attacker's initial share purchase using a 16,000 WBNB flash loan from PancakeSwap, allowed excessive withdrawals via the withdraw function, which calculated payouts based on myDividends. The absence of restrictions on self-referential purchases and failure to validate _customerAddress led to the attacker draining 16,412 WBNB, yielding a profit of 403 WBNB after repaying the flash loan. Vulnerable code snippet: Attack tx: https://bscscan.com/tx/0xd4c7c11c46f81b6bf98284e4921a5b9f0ff97b4c71ebade206cb10507e4503b0 Analysis: https://lunaray.medium.com/bankroll-hack-analysis-49ca196c6844"
+    },
+    {
+      "source": "SlowMist",
+      "text": "On September 22, Bankroll Network on BNB was attacked due to a contract vulnerability, resulting in a loss of approximately $230,000."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Bankroll Network was exploited on BNB Chain on September 23, 2024. The attacker abused an input validation flaw in the buyFor function to artificially inflate dividend accounting, draining approximately 404 WBNB ($235,000) without legitimate deposits. A lack of input validation in the buyFor function allowed users to set _customerAddress to the contract itself, enabling manipulation of the profitPerShare_ variable. The contract failed to prevent unauthorized addresses from being used as recipients and lacked checks to ensure real value was deposited before credits and withdrawals."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xd4c7c11c46f81b6bf98284e4921a5b9f0ff97b4c71ebade206cb10507e4503b0"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/Phalcon_xyz/status/1838042368018137547"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-09/Bankroll_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0xd4c7c11c46f81b6bf98284e4921a5b9f0ff97b4c71ebade206cb10507e4503b0"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "lunaray.medium.com",
+      "url": "https://lunaray.medium.com/bankroll-hack-analysis-49ca196c6844"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xd4c7c11c46f81b6bf98284e4921a5b9f0ff97b4c71ebade206cb10507e4503b0"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/bankroll-network-2024-09-23"
+    },
+    {
+      "source": "revertiq",
+      "label": "olympix.security",
+      "url": "https://olympix.security/biweekly-exploits/deltaprime-caterpillar-coin-and-bankroll-network-lose-7-6m-in-key-compromise-price-manipulation-and-input-validation-flaws"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.solidityscan.com",
+      "url": "https://blog.solidityscan.com/bankroll-network-hack-analysis-e77fd8442dfa/"
+    }
+  ]
+}

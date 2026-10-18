@@ -1,0 +1,86 @@
+{
+  "id": "2023-09-07-hct",
+  "name": "HCT",
+  "date": "2023-09-07",
+  "year": 2023,
+  "amountUsd": 30,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Price Manipulation",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.70). Replaced keyword guess \"oracle-manipulation\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.7,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.72
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.2
+      },
+      {
+        "category": "market-manipulation",
+        "p": 0.05
+      }
+    ],
+    "flashLoan": 0.06,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Price Manipulation. Lost: ~$30.5BNB",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Price Manipulation. Lost: ~$30.5BNB"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "the burn function which was left as an external function. here is called repeatedly to burn portions of the HCT tokens held by the contract to reduce the supply , then the sync function is called on the router to inflate the price based tokens available, then sell at that inflated price Vulnerable Code Snippet: Attack Transaction: https://bscscan.com/tx/0x84bd77f25cc0db493c339a187c920f104a69f89053ab2deabb93c35220e6dfc0 Analysis: https://twitter.com/leovctech/status/1699775506785198499"
+    },
+    {
+      "source": "SlowMist",
+      "text": "We have detected a malicious flash loan on HCT token. BSC: 0x0FDfcfc398Ccc90124a0a41d920d6e2d0bD8CcF5. Approximately 30.5 BNB was lost. 30 BNB has been deposited into Tornado Cash by EOA 0xC89."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x84bd77f25cc0db493c339a187c920f104a69f89053ab2deabb93c35220e6dfc0"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-09/HCT_exp.sol",
+  "sources": [
+    "defihacklabs",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-09/HCT_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/leovctech/status/1699775506785198499"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x84bd77f25cc0db493c339a187c920f104a69f89053ab2deabb93c35220e6dfc0"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/leo_web3sec/status/1699775506785198499"
+    }
+  ]
+}

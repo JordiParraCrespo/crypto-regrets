@@ -3,6 +3,7 @@ import Base from '../../layouts/Base.astro';
 import IncidentTable from '../../components/IncidentTable.astro';
 import { categoryStats, byCategory, yearCategorySeries, fmtUsd, fmtDate, href, layerSlot } from '../../lib/data';
 import { CATEGORIES, CATEGORY_IDS, LAYERS, type CategoryId, type Category } from '../../lib/taxonomy';
+import { RUBRIC } from '../../lib/rubric';
 
 export function getStaticPaths() {
   return CATEGORY_IDS.map((id) => ({ params: { id } }));
@@ -17,6 +18,7 @@ const peak = [...series].sort((a, b) => b.count - a.count)[0];
 const withPoc = all.filter((i) => i.poc).slice(0, 12);
 const techniques = Object.entries(all.reduce<Record<string, number>>((m, i) => { if (i.technique) m[i.technique] = (m[i.technique] ?? 0) + 1; return m; }, {})).sort((a, b) => b[1] - a[1]).slice(0, 10);
 const slot = layerSlot(c.layer);
+const rubric = id === 'unknown' ? undefined : RUBRIC[id];
 ---
 <Base title={c.name} description={`${c.name}: ${c.short} ${s.count} incidents, ${fmtUsd(s.usd)} lost.`}>
   <p class="small"><a href={href('/patterns')}>← All patterns</a> · <span class={`dot l${slot}`} /> {LAYERS[c.layer].name}</p>
@@ -52,6 +54,15 @@ const slot = layerSlot(c.layer);
       </div>
     )}
   </div>
+
+  {rubric && (
+    <div class="card" style="margin-top:16px">
+      <h3>How to tell it apart</h3>
+      <p class="small"><strong>Not to be confused with:</strong> {rubric.not_for}</p>
+      <p class="small" style="margin-bottom:4px"><strong>Typical examples</strong></p>
+      <ul class="small">{rubric.examples.map((e) => <li>{e}</li>)}</ul>
+    </div>
+  )}
 
   {techniques.length > 0 && (
     <>

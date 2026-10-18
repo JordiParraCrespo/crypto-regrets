@@ -1,0 +1,64 @@
+{
+  "id": "2026-03-26-unknown-stake",
+  "name": "Unknown Stake",
+  "date": "2026-03-26",
+  "year": 2026,
+  "amountUsd": 133500,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": null,
+  "category": "oracle-manipulation",
+  "technique": "Business Logic Flaw",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.90). Replaced keyword guess \"logic-error\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.9,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.91
+      },
+      {
+        "category": "logic-error",
+        "p": 0.09
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "According to monitoring by BlockSec Phalcon, a suspicious transaction targeting an unknown contract (Stake) on the BSC chain has been detected, resulting in a loss of approximately $133,000. The attacker exploited a spot price dependency vulnerability within the Stake contract. By manipulating the price of TUR in the TUR-NOBEL pool and subsequently staking TUR, the attacker triggered reward calculations based on the artificially inflated price. They then claimed the amplified rewards through a referral account and ultimately profited by swapping the stolen TUR for USDT.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "According to monitoring by BlockSec Phalcon, a suspicious transaction targeting an unknown contract (Stake) on the BSC chain has been detected, resulting in a loss of approximately $133,000. The attacker exploited a spot price dependency vulnerability within the Stake contract. By manipulating the price of TUR in the TUR-NOBEL pool and subsequently staking TUR, the attacker triggered reward calculations based on the artificially inflated price. They then claimed the amplified rewards through a referral account and ultimately profited by swapping the stolen TUR for USDT."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x96c9ce3c527681bf0da18511d142efb5769ad8dac1d9d659a6b70a697381e348"
+  ],
+  "poc": null,
+  "sources": [
+    "blocksec",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x96c9ce3c527681bf0da18511d142efb5769ad8dac1d9d659a6b70a697381e348"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/Phalcon_xyz/status/2037245722454876304"
+    }
+  ]
+}

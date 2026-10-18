@@ -1,0 +1,92 @@
+{
+  "id": "2026-07-31-coldcard",
+  "name": "COLDCARD",
+  "date": "2026-07-31",
+  "year": 2026,
+  "amountUsd": 116000000,
+  "returnedUsd": null,
+  "chains": [
+    "Bitcoin"
+  ],
+  "targetType": "Wallet",
+  "category": "signature-crypto",
+  "technique": "Weak Key Generation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "signature-crypto",
+    "confidence": 0.98,
+    "top": [
+      {
+        "category": "signature-crypto",
+        "p": 0.98
+      },
+      {
+        "category": "key-compromise",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.01,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "C++",
+  "rootCause": "A firmware vulnerability silently routed Coldcard's hardware RNG for a guessable software fallback, letting attackers brute-force seeds offline. No phishing, no malware. $130 million reported stolen so far, at least 15 attackers, most funds still untouched, nobody caught.",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "A firmware vulnerability silently routed Coldcard's hardware RNG for a guessable software fallback, letting attackers brute-force seeds offline. No phishing, no malware. $130 million reported stolen so far, at least 15 attackers, most funds still untouched, nobody caught."
+    },
+    {
+      "source": "SlowMist",
+      "text": "Coldcard hardware wallets (by Coinkite) suffered from a firmware bug (since March 2021 on certain versions) that generated seeds with insufficient entropy (~40 bits on Mk3, ~72 bits on newer models vs. the intended 128 bits). Attackers offline brute-forced predictable private keys and drained numerous single-signature Bitcoin addresses across multiple waves without ever accessing the devices, with cumulative losses exceeding $100 million and the incident ongoing."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Between July 30 and August 4, 2026, a firmware flaw in the Coldcard hardware wallet permitted attackers to brute-force weakly generated Bitcoin seeds, resulting in losses exceeding $116 million. The incident stemmed from a software bug that bypassed hardware-based entropy during wallet seed generation. A build configuration error in Coldcard firmware released March 2021 caused the device to generate wallet seeds using a weak software-based pseudorandom number generator (PRNG) instead of the intended hardware random number generator, producing seeds with as little as 40 bits of entropy. This made the resulting private keys susceptible to brute-force att…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Cold Card - Rekt",
+      "url": "https://rekt.news/coldcard-rekt"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/glxyresearch/status/2084411904924045370"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/coldcard-2026-07-31"
+    },
+    {
+      "source": "revertiq",
+      "label": "trmlabs.com",
+      "url": "https://www.trmlabs.com/resources/blog/the-largest-hardware-wallet-exploit-of-2026-inside-the-usd-116-million-coldcard-hack"
+    },
+    {
+      "source": "revertiq",
+      "label": "shattered.io",
+      "url": "https://shattered.io/coldcard-hack-116-million-rng-flaw-2026/"
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "id": "2022-11-06-pando-rings",
+  "name": "Pando Rings",
+  "date": "2022-11-06",
+  "year": 2022,
+  "amountUsd": 22000000,
+  "returnedUsd": null,
+  "chains": [
+    "Mixin"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Go",
+  "rootCause": "Pando Rings was exploited via spot price oracle manipulation on Mixin in November 2022. The attacker manipulated the sBTC-WBTC price feed, transferred out $21.9 million in assets before services were halted and funds frozen, and attempted to steal up to $70 million. Mixin and project partners froze substantial remaining assets, and recovery efforts included forensic tracking and a promise to reimburse affected users. The attacker manipulated the spot price oracle for the sBTC-WBTC liquidity pool, causing the protocol to misprice collateral and enabling unauthorized withdrawals. The oracle relied on manipulable AMM reserves without adequate sanity checks.",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "Pando Rings was exploited via spot price oracle manipulation on Mixin in November 2022. The attacker manipulated the sBTC-WBTC price feed, transferred out $21.9 million in assets before services were halted and funds frozen, and attempted to steal up to $70 million. Mixin and project partners froze substantial remaining assets, and recovery efforts included forensic tracking and a promise to reimburse affected users. The attacker manipulated the spot price oracle for the sBTC-WBTC liquidity pool, causing the protocol to misprice collateral and enabling unauthorized withdrawals. The oracle relied on manipulable AMM reserves without adequate sanity checks."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/pando-rings-2022-11-06"
+    },
+    {
+      "source": "revertiq",
+      "label": "pando.im",
+      "url": "https://pando.im/news/2022/2022-11-06-alert-to-pando-community-hack-of-pando-rings/"
+    }
+  ]
+}

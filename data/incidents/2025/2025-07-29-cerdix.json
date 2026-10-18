@@ -1,0 +1,73 @@
+{
+  "id": "2025-07-29-cerdix",
+  "name": "CerdiX",
+  "date": "2025-07-29",
+  "year": 2025,
+  "amountUsd": 4400000,
+  "returnedUsd": null,
+  "chains": [
+    "146"
+  ],
+  "targetType": null,
+  "category": "key-compromise",
+  "technique": "Compromised Private Key",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.96).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "key-compromise",
+    "confidence": 0.96,
+    "top": [
+      {
+        "category": "key-compromise",
+        "p": 0.96
+      },
+      {
+        "category": "rugpull",
+        "p": 0.03
+      },
+      {
+        "category": "access-control",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "The CerdiX protocol on the Sonic chain (chain ID 146, also reported publicly as 'CrediX Finance') suffered a compromised admin private key incident in which an attacker — widely suspected to be an insider — gained full administrative control over the protocol's ACLManager contract. As early as six days before the main fund drain, the attacker escalated their own on-chain privileges to encompass multiple high-level roles: pool administrator, BRIDGE_ROLE, asset-listing authority, and emergency shutdown access. With BRIDGE_ROLE control, the attacker minted unbacked acUSDC and acscUSD tokens without depositing any collateral, then used these synthetic assets as collateral to borrow and drain over $4.4M in USDC, scUSD, wS, staked tokens, and WETH from the protocol's liquidity pools. Stolen funds were bridged from Sonic to Ethereum and distributed across three wallets; initial attack funding came from Tornado Cash. Following the exploit, the CerdiX/CrediX team deleted all social media channels and the project website without fulfilling their public promise of full user reimbursement, leading CertiK, Stability DAO, and affected counterparties to suspect an exit scam or insider rug pull. Attack Tx: 0x0cc3520951a2b41281dcc9a0d37ef3f7f139b75675d83ae72e3b8e903334f35e Analysis: CoinDesk — DeFi Protocol CrediX Hit by $4.5M Exploit, Taken Offline",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The CerdiX protocol on the Sonic chain (chain ID 146, also reported publicly as 'CrediX Finance') suffered a compromised admin private key incident in which an attacker — widely suspected to be an insider — gained full administrative control over the protocol's ACLManager contract. As early as six days before the main fund drain, the attacker escalated their own on-chain privileges to encompass multiple high-level roles: pool administrator, BRIDGE_ROLE, asset-listing authority, and emergency shutdown access. With BRIDGE_ROLE control, the attacker minted unbacked acUSDC and acscUSD tokens without depositing any collateral, then used these synthetic assets as collateral to borrow and drain over $4.4M in USDC, scUSD, wS, staked tokens, and WETH from the protocol's liquidity pools. Stolen funds were bridged from Sonic to Ethereum and distributed across three wallets; initial attack funding came from Tornado Cash. Following the exploit, the CerdiX/CrediX team deleted all social media channels and the project website without fulfilling their public promise of full user reimbursement, leading CertiK, Stability DAO, and affected counterparties to suspect an exit scam or insider rug pull. Attack Tx: 0x0cc3520951a2b41281dcc9a0d37ef3f7f139b75675d83ae72e3b8e903334f35e Analysis: CoinDesk — DeFi Protocol CrediX Hit by $4.5M Exploit, Taken Offline"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x0cc3520951a2b41281dcc9a0d37ef3f7f139b75675d83ae72e3b8e903334f35e"
+  ],
+  "poc": null,
+  "sources": [
+    "defihacklabs",
+    "blocksec"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "sonicscan.org",
+      "url": "https://sonicscan.org/tx/0x0cc3520951a2b41281dcc9a0d37ef3f7f139b75675d83ae72e3b8e903334f35e"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/business/2025/08/04/defi-protocol-credix-taken-offline-after-usd4-5m-exploit"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x0cc3520951a2b41281dcc9a0d37ef3f7f139b75675d83ae72e3b8e903334f35e"
+    }
+  ]
+}

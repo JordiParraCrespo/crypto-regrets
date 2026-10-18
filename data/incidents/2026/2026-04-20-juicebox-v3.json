@@ -1,0 +1,96 @@
+{
+  "id": "2026-04-20-juicebox-v3",
+  "name": "Juicebox V3",
+  "date": "2026-04-20",
+  "year": 2026,
+  "amountUsd": 52000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "input-validation",
+  "technique": "Missing Input Validation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "input-validation",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "input-validation",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.08,
+    "stateActor": 0.02,
+    "hasRootCause": 0.88
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Fake terminal loan source validation bypass. Lost: 21.77 ETH",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Fake terminal loan source validation bypass. Lost: 21.77 ETH"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Juicebox V3 (via its REVLoans borrowing extension) was exploited through a borrowFrom Spoof Attack. The vulnerability stemmed from insufficient validation in the borrowFrom function, particularly the caller-supplied \"source\" parameter (a REVLoanSource struct with .terminal and .token). This allowed forging an accounting context; when currency matched the destination, the protocol skipped the oracle and used attacker-controlled decimals/balances, enabling borrowing at an inflated share price. The attack used two transactions (one to seed fake accounting, one to drain against a legitimate terminal), draining approximately 21.77 ETH (worth ~$52,000)."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Juicebox V3's REVLoans extension on Ethereum was exploited on April 20, 2026. The attacker drained approximately $52,000 in ETH by injecting fake loan sources with excessive decimals, manipulating protocol accounting to artificially inflate borrowable amounts and withdraw funds. Exploit and withdrawal transactions are now independently established. REVLoans.borrowFrom() accepted arbitrary loan source terminal/token pairs without validating protocol registration or normalizing decimals. The attacker deployed a fake terminal reporting 36 decimal ETH context, seeded fake debt, and exploited mis-scaled accounting to borrow almost the entire pool."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xc46cb7af8830b7ff4c2373cce26a7b99cf60c1ad21f348a2358a50ae24dead1f",
+    "0x9adbd62355eb72b4ff6c58716a503133672ed9317ab930a4c6aa31c7a1a8f938"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-04/JuiceboxREVLoans_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-04/JuiceboxREVLoans_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/DefimonAlerts/status/2046862935650345139"
+    },
+    {
+      "source": "slowmist",
+      "label": "academy.teleswap.xyz",
+      "url": "https://academy.teleswap.xyz/defi-protocol-hacks-april-2026-exploits-analyzed/"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/juicebox-v3-2026-04-20"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "anomly.rs",
+      "url": "https://anomly.rs/rev-loans-fake-debt"
+    }
+  ]
+}

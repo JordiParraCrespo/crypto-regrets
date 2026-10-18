@@ -1,0 +1,77 @@
+{
+  "id": "2024-06-28-will",
+  "name": "Will",
+  "date": "2024-06-28",
+  "year": 2024,
+  "amountUsd": 52000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "business logic flaw",
+  "classificationNote": "Classified by keyword rules from the DeFiHackLabs root-cause title.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.56,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.59
+      },
+      {
+        "category": "input-validation",
+        "p": 0.3
+      },
+      {
+        "category": "market-manipulation",
+        "p": 0.09
+      }
+    ],
+    "flashLoan": 0.06,
+    "stateActor": 0.02,
+    "hasRootCause": 0.92
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "business logic flaw. Lost: $52K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "business logic flaw. Lost: $52K"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The updateExpiredOrders function will iterate through all orders to find all orders that are expired and needs to be settled. Later the settleExpiredPositions will buy back the tokens using the accumulated USDT calculated in updateExpiredOrders. When the back back amount is huge enough, this will greatly influence the price of the token. Vulnerable code snippet: Attack tx: TX1 : https://app.blocksec.com/explorer/tx/bsc/0xc12ccc3bdaf3f0ec1efa09d089a0c1dbad05519e1eb0fa6475ffcc6317cbde4d TX2 :https://app.blocksec.com/explorer/tx/bsc/0xefe58a14fc0022872262678b358aaae64a26fe2389d09093eb14752ea99415e9 Analysis: The updateExpiredOrders function will iterate through all orders to find all orders that are expired and needs to be settled. Later the settleExpiredPositions will buy back the tokens using the accumulated USDT calculated in updateExpiredOrders. When the back back amount is huge enough, this will greatly influence the price of the token. Anyone could call settleExpiredPositions with minTokensToReceive set to zero, this could pose the protocol into a vulnerable state. Due to lack of slippage control, the attacker could sandwich the transaction and make profits."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xc12ccc3bdaf3f0ec1efa09d089a0c1dbad05519e1eb0fa6475ffcc6317cbde4d",
+    "0xefe58a14fc0022872262678b358aaae64a26fe2389d09093eb14752ea99415e9"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-06/Will_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-06/Will_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/bsc/0xc12ccc3bdaf3f0ec1efa09d089a0c1dbad05519e1eb0fa6475ffcc6317cbde4d"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/bsc/0xefe58a14fc0022872262678b358aaae64a26fe2389d09093eb14752ea99415e9"
+    }
+  ]
+}

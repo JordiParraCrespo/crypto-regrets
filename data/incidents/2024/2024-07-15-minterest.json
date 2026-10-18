@@ -1,0 +1,117 @@
+{
+  "id": "2024-07-15-minterest",
+  "name": "Minterest",
+  "date": "2024-07-15",
+  "year": 2024,
+  "amountUsd": 1400000,
+  "returnedUsd": null,
+  "chains": [
+    "Mantle"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "reentrancy",
+  "technique": "Reentrancy",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "reentrancy",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "reentrancy",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.92,
+    "stateActor": 0.02,
+    "hasRootCause": 0.91
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Reentrancy. Lost: ~427 ETH",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Reentrancy. Lost: ~427 ETH"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Attackers can lend tokens inside flashloan callbacks and then redeem more tokens after the flashloan. Vulnerable code snippet: https://x.com/shoucccc/status/1812659977464729991/photo/1 Attack tx: https://app.blocksec.com/explorer/tx/mantle/0xb3c4c313a8d3e2843c9e6e313b199d7339211cdc70c2eca9f4d88b1e155fd6bd Analysis:"
+    },
+    {
+      "source": "SlowMist",
+      "text": "According to Fuzzland co-founder Chaofan Shou, the cross-chain lending protocol Minterest was attacked. The attacker used a flash loan attack, resulting in a loss of approximately $1.4 million for the protocol."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On July 14, 2024, Minterest’s Mantle deployment was exploited for $1.4M through a reentrancy vulnerability in its mUSDY market. The attacker used a flash loan and reentrant lending to manipulate the exchange rate, mint excess mTokens, borrow from collateral markets, and bridge proceeds to Ethereum. The mUSDY market contract permitted reentrant operations during flash loans. Exchange rate calculations relied on intermediate cash balances, allowing the attacker to inflate mUSDY minting by reentering before state was consistent. Critical functions lacked both checks-effects-interactions ordering and reentrancy protection."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xb3c4c313a8d3e2843c9e6e313b199d7339211cdc70c2eca9f4d88b1e155fd6bd",
+    "0x6a78d9ae41e5254643410171bea70955b47c68d7d2b4bd960b4c3552ecacad84",
+    "0x880d6c582d04f43adc82a1bb2ab8a8a94778cdb16ee80ecb0dcf42aa362fbade"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-07/Minterest_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-07/Minterest_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/shoucccc/status/1812659977464729991/photo/1"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/mantle/0xb3c4c313a8d3e2843c9e6e313b199d7339211cdc70c2eca9f4d88b1e155fd6bd"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xb3c4c313a8d3e2843c9e6e313b199d7339211cdc70c2eca9f4d88b1e155fd6bd"
+    },
+    {
+      "source": "blocksec",
+      "label": "minterest.com",
+      "url": "https://minterest.com/blog/minterest-security-incident-post-mortem-report/"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/Minterest/status/1812540672248820033"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/minterest-1-460-000-2024-07-15"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/defi-rekt-report-over-250m-lost-in-july-2024"
+    },
+    {
+      "source": "revertiq",
+      "label": "docs.minterest.com",
+      "url": "https://docs.minterest.com/minterest-faq/security-audits/minterest-security-incident-documentation"
+    }
+  ]
+}

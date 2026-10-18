@@ -1,0 +1,54 @@
+{
+  "id": "2026-09-30-mus",
+  "name": "MUS",
+  "date": "2026-09-30",
+  "year": 2026,
+  "amountUsd": 36900,
+  "returnedUsd": null,
+  "chains": [],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": null,
+  "classificationNote": "Classified by keyword rules from the DeFiHackLabs root-cause title.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.6,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.62
+      },
+      {
+        "category": "logic-error",
+        "p": 0.38
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.03,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "deposit refunds a first-deposit bonus and also credits it as withdrawable allocation, so a single deposit-withdraw from a fresh address returns more ETH than deposited. Lost: ~0.400168 ETH per deposit-withdraw cycle (exactly reproduced) on Ethereum; the MUS pool's standing 5.335 ETH was drained to 0 across the attack block, reported campaign total ~$36.9k across many fresh addresses",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "deposit refunds a first-deposit bonus and also credits it as withdrawable allocation, so a single deposit-withdraw from a fresh address returns more ETH than deposited. Lost: ~0.400168 ETH per deposit-withdraw cycle (exactly reproduced) on Ethereum; the MUS pool's standing 5.335 ETH was drained to 0 across the attack block, reported campaign total ~$36.9k across many fresh addresses"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-09/MUS_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-09/MUS_exp.sol"
+    }
+  ]
+}

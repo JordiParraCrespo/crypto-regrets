@@ -1,0 +1,103 @@
+{
+  "id": "2020-11-12-akropolis",
+  "name": "Akropolis",
+  "date": "2020-11-12",
+  "year": 2020,
+  "amountUsd": 2000000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "reentrancy",
+  "technique": "Reentrancy",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "reentrancy",
+    "confidence": 0.98,
+    "top": [
+      {
+        "category": "reentrancy",
+        "p": 0.98
+      },
+      {
+        "category": "input-validation",
+        "p": 0.01
+      },
+      {
+        "category": "logic-error",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "The Akropolis has not been this rekt since the battle of Salamina in 480 B.C. A modern day King Xerses has razed the Akropolis once more, stealing $2,000,000 DAI via a combination of flash loans and re-entrancy.",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "The Akropolis has not been this rekt since the battle of Salamina in 480 B.C. A modern day King Xerses has razed the Akropolis once more, stealing $2,000,000 DAI via a combination of flash loans and re-entrancy."
+    },
+    {
+      "source": "SlowMist",
+      "text": "Hackers took advantage of the storage asset verification flaws in the Akropolis project of the Polkadot ecosystem to launch multiple consecutive reentry attacks on the contract, causing the Akropolis contract to issue a large number of pooltokens out of thin air without new asset injection, and then reuse these pooltokens. Withdrawing DAI from the YCurve and sUSD pools resulted in the loss of 2.03 million DAI in the project contract."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On November 12, 2020, Akropolis's Ethereum savings pools were exploited for over 2 million DAI. The attacker used a flash loan and a custom ERC-20 token to trigger reentrancy in the pool's deposit function, manipulating pool share credits and draining funds. The Akropolis savings pool deposit function violated the Checks-Effects-Interactions (CEI) pattern, calling external ERC-20 transferFrom before updating share and pool balances. This, combined with lack of reentrancy protection and an absence of token allowlist, let a malicious token re-enter deposit(), causing share inflation and draining funds."
+    }
+  ],
+  "audit": "CertiK, SmartDec",
+  "txHashes": [
+    "0xf15623567231c67df2b8bcc5540236fbda2c3ac11ecbec427048f11b582cb869"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Akropolis - REKT",
+      "url": "https://rekt.news/akropolis-rekt"
+    },
+    {
+      "source": "slowmist",
+      "label": "cointelegraph.com",
+      "url": "https://cointelegraph.com/news/akropolis-defi-protocol-paused-as-hackers-get-away-with-2m-in-dai"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/akropolis-2020-11-12"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractaudit.com",
+      "url": "https://www.smartcontractaudit.com/guides/akropolis-2020-flash-loan-reentrancy-exploit"
+    },
+    {
+      "source": "revertiq",
+      "label": "defirisk.co",
+      "url": "https://defirisk.co/learn/exploits/akropolis-rekt/"
+    }
+  ]
+}

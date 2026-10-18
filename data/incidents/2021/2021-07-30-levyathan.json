@@ -1,0 +1,114 @@
+{
+  "id": "2021-07-30-levyathan",
+  "name": "Levyathan",
+  "date": "2021-07-30",
+  "year": 2021,
+  "amountUsd": 1500000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "key-compromise",
+  "technique": "Key Stored Publicly",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "key-compromise",
+    "confidence": 0.76,
+    "top": [
+      {
+        "category": "key-compromise",
+        "p": 0.77
+      },
+      {
+        "category": "access-control",
+        "p": 0.12
+      },
+      {
+        "category": "logic-error",
+        "p": 0.09
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.04,
+    "hasRootCause": 0.85
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "(I) Lost keys and minting (II) Vulnerable emergencyWithdraw. Lost: $1.5 million",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "(I) Lost keys and minting (II) Vulnerable emergencyWithdraw. Lost: $1.5 million"
+    },
+    {
+      "source": "REKT",
+      "text": "Levyathan Finance sank last week, along with its TVL of $1.5M. Basic errors lead to total destruction. Bad intentions or just raw incompetence? You decide."
+    },
+    {
+      "source": "SlowMist",
+      "text": "Levyathan, the encryption index protocol on the BSC chain, was attacked. According to the official event update, the hacker minted 100,000,000,000,000,000,0 billion LEV tokens, which caused the price of LEV to return to zero. The loss of this attack was approximately USD 1.5 million. The official attributed the accident to the leak of the developer's private key."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On July 30, 2021, Levyathan on BNB Chain was destroyed after an attacker found the MasterChef contract owner's private key in a public GitHub repository. Using this key, the attacker regained contract control, minted 100 septillion LEV tokens, and dumped them into liquidity pools, draining roughly $1.5 million in value and reducing the token price near zero. The team attempted limited restitution but the project never recovered. The private key for the contract owner role was committed to a public GitHub repository, allowing anyone to seize minting control over LEV. This operational security lapse enabled complete compromise even though direct on-chain…"
+    }
+  ],
+  "audit": "Unaudited",
+  "txHashes": [
+    "0xfd30def124c1345606598ae4817ae184fc1918fc638111c6e71bc9752361fd87",
+    "0xe6e504208ba90d121c3212a4f2547ae28e69790ab541d459c080ec8b1f3efab2"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2021-07/Levyathan_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2021-07/Levyathan_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "levyathan-index.medium.com",
+      "url": "https://levyathan-index.medium.com/post-mortem-levyathan-c3ff7f9a6f65"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Levyathan - REKT",
+      "url": "https://rekt.news/levyathan-rekt"
+    },
+    {
+      "source": "slowmist",
+      "label": "bsc.news",
+      "url": "https://www.bsc.news/post/levyathan-falls-casualty-to-unlimited-mint-exploit-despite-certik-audit"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/levyathan-2021-07-30"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainhint.com",
+      "url": "https://chainhint.com/cases/levyathan-hack"
+    }
+  ]
+}

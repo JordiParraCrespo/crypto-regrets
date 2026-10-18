@@ -1,0 +1,72 @@
+{
+  "id": "2025-08-20-multicallwithxera",
+  "name": "MulticallWithXera",
+  "date": "2025-08-20",
+  "year": 2025,
+  "amountUsd": 17000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Access Control",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.96).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.96,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.96
+      },
+      {
+        "category": "arbitrary-call",
+        "p": 0.04
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Access Control. Lost: 17k USD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Access Control. Lost: 17k USD"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The Xera token contract derived the effective caller via a _msgSender() implementation that trusted a meta-transaction style sender encoding rather than the real msg.sender. When a call to Xera's transferFrom was routed through the canonical Multicall3 contract (0xcA11...CA11) using aggregate3, Xera resolved the spender/authorizer to the victim address embedded in the call context instead of the Multicall contract itself. Because the victim had previously approved the Multicall contract to spend its Xera, the attacker crafted a transferFrom(victim, cakeLP, 27.9M XERA) call inside aggregate3, which Xera incorrectly treated as authorized by the victim. The attacker then swapped the stolen Xera in the PancakeSwap LP for WBNB and unwrapped to BNB (~17k USD). Vulnerable code snippet: Attack Tx: https://bscscan.com/tx/0xed6fd61c1eb2858a1594616ddebaa414ad3b732dcdb26ac7833b46803c5c18db Analysis: https://x.com/TenArmorAlert/status/1958354933247590450"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xed6fd61c1eb2858a1594616ddebaa414ad3b732dcdb26ac7833b46803c5c18db"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-08/MulticallWithXera_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-08/MulticallWithXera_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/TenArmorAlert/status/1958354933247590450"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0xed6fd61c1eb2858a1594616ddebaa414ad3b732dcdb26ac7833b46803c5c18db"
+    }
+  ]
+}

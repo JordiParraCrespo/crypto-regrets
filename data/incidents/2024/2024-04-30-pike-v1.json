@@ -1,0 +1,161 @@
+{
+  "id": "2024-04-30-pike-v1",
+  "name": "Pike V1",
+  "date": "2024-04-30",
+  "year": 2024,
+  "amountUsd": 1600000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum",
+    "Optimism",
+    "Arbitrum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Proxy Upgrade Hijack",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.1,
+    "stateActor": 0.02,
+    "hasRootCause": 0.84
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Uninitialized Proxy. Lost: 1.4M",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Uninitialized Proxy. Lost: 1.4M"
+    },
+    {
+      "source": "REKT",
+      "text": "Pike Finance swims in turbulent waters, storage vulnerability nets hackers over $1.9 million in multiple attacks."
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "uninitialized proxy Vulnerable code snippet: https://etherscan.io/address/0xfc7599cffea9de127a9f9c748ccb451a34d2f063#code Attack tx: https://etherscan.io/tx/0xe2912b8bf34d561983f2ae95f34e33ecc7792a2905a3e317fcc98052bce66431 https://app.blocksec.com/explorer/tx/eth/0xe2912b8bf34d561983f2ae95f34e33ecc7792a2905a3e317fcc98052bce66431 Analysis: https://blog.solidityscan.com/pike-finance-hack-analysis-30bcca9f072b https://quillaudits.medium.com/decoding-pike-finance-exploit-quillaudits-40a1662d3f8a"
+    },
+    {
+      "source": "SlowMist",
+      "text": "On April 30th, the cross-chain lending protocol Pike Finance tweeted that its Pike Beta protocol had been attacked, resulting in losses of 99,970.48 ARB, 64,126 OP, and 479.39 ETH. The exploit was caused by weak security measures in Pike's contract functions when handling CCTP transfers. On April 26th, Pike Finance's USDC pool was hacked, resulting in losses of approximately $300,000."
+    },
+    {
+      "source": "SlowMist",
+      "text": "The cross-chain lending protocol Pike Finance tweeted that the USDC pool on Pike Beta has been exploited by a hacker. The total amount of USDC exploited is 299,127. The root cause is led by forged CCTP message to drain USDC on Ethereum, Arbitrum and Optimism chain."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On April 26, 2024, Pike Finance lost approximately $299,000 in USDC from Ethereum, Arbitrum, and Optimism due to a failure in cross-chain message validation. The vulnerability allowed an attacker to manipulate withdrawal approvals and drain USDC from Pike's pools. Pike Finance's integration with Circle CCTP for USDC cross-chain transfers failed to properly validate withdrawal requests, allowing an attacker to submit forged messages and unauthorized withdrawal parameters."
+    }
+  ],
+  "audit": "unaudited",
+  "txHashes": [
+    "0xe2912b8bf34d561983f2ae95f34e33ecc7792a2905a3e317fcc98052bce66431",
+    "0xdac6af5695ba00b3d229574dbf7fcc326d16b9f8a52ad2620637d3022956d157",
+    "0x6baa6332f9a3ed75e727311d6317fb636844d61d9df5e199f9f68711eb632d6f",
+    "0x167c97b5897d11b23a6694f30acb71e8deead771d22fe88aee04ca8696a2bffa",
+    "0x979ad9b7f5331ea8034305a83b5cd50aea88adec395fff8298dd90eb1b87667f",
+    "0x12770a7284c8c89f19489e125376dda48afa4d7662a1c5b32872c83adda890e2"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-04/PikeFinance_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-04/PikeFinance_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Phalcon_xyz/status/1785508900093194591"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Pike Finance - Rekt",
+      "url": "https://rekt.news/pike-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/address/0xfc7599cffea9de127a9f9c748ccb451a34d2f063#code"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xe2912b8bf34d561983f2ae95f34e33ecc7792a2905a3e317fcc98052bce66431"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/eth/0xe2912b8bf34d561983f2ae95f34e33ecc7792a2905a3e317fcc98052bce66431"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xe2912b8bf34d561983f2ae95f34e33ecc7792a2905a3e317fcc98052bce66431"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x167c97b5897d11b23a6694f30acb71e8deead771d22fe88aee04ca8696a2bffa"
+    },
+    {
+      "source": "blocksec",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Phalcon_xyz/status/1784523042531819733"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/PikeFinance/status/1785572875124330644"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/PikeFinance/status/1783989069212799321"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/pike-finance-2024-04-30t21-06-46-00-00"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/de-fi-rekt-report-over-12-4m-lost-in-april-2024"
+    },
+    {
+      "source": "revertiq",
+      "label": "paragraph.com",
+      "url": "https://paragraph.com/%40pikedao/post-mortem-report-pike-usdc-withdrawal-vulnerability"
+    },
+    {
+      "source": "revertiq",
+      "label": "certik.com",
+      "url": "https://www.certik.com/blog/pike-finance-incident-analysis"
+    }
+  ]
+}

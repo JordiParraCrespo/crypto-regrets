@@ -1,0 +1,98 @@
+{
+  "id": "2024-04-27-bnbx",
+  "name": "BNBX",
+  "date": "2024-04-27",
+  "year": 2024,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "Token",
+  "category": "accounting-math",
+  "technique": "Arithmetic Error",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.97,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.97
+      },
+      {
+        "category": "arbitrary-call",
+        "p": 0.03
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.01,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "precission loss. Lost: ~75 $BNB",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "precission loss. Lost: ~75 $BNB"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The victim contract exposes a dangerous function (0x11834d4c) that allows any external user to drain the full token balance (BNBX) of any address that has granted an allowance to the contract. This occurs due to a complete lack of access control or sender validation on a transferFrom call. Vulnerable code snippet: Attack tx: https://bscscan.com/address/0x389a9ae29fbe53cca7bc8b7a4d9d0a04078e1c24 Analysis: The function 0x11834d4c executes the following logic: 1. Reads the BNBXtoken balance of an arbitrary address varg0. 2. Transfers the entire balance from varg0 to msg.sender using transferFrom. There are no checks to ensure: - That msg.sender is authorized to perform the action. Since the attacker can repeatedly call 0x11834d4c to use up the allowance of all victim users."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "BNBX was exploited on BNB Chain on 27 April 2024 due to an arithmetic error in share accounting. The attacker drained user balances by exploiting incorrect share-value tracking, extracting value via PancakeSwap. The estimated loss is about 75 BNB; USD impact is unconfirmed. An arithmetic error in the BNBX token contract's share-to-value accounting enabled withdrawals that did not properly reflect actual reserves, allowing an attacker to drain user funds."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xea88dc6dbd81d09c572b5849e0d4508598edcf8f11c9a995cd8fe7e6c194f39e"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-04/BNBX_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-04/BNBX_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/ChainAegis/status/1784431544557514896"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/7ec35bee3c086d667f34d87ff850004812905c4d/src/test/2024-04/BNBX_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0x389a9ae29fbe53cca7bc8b7a4d9d0a04078e1c24"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/bnbx-2024-04-27"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/bnbx-hack-2024"
+    }
+  ]
+}

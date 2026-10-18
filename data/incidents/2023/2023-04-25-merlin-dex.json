@@ -1,0 +1,98 @@
+{
+  "id": "2023-04-25-merlin-dex",
+  "name": "MERLIN DEX",
+  "date": "2023-04-25",
+  "year": 2023,
+  "amountUsd": 1820000,
+  "returnedUsd": null,
+  "chains": [
+    "zkSync Era"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "rugpull",
+  "technique": "Admin Drain",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "rugpull",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "rugpull",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.9
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "$1.8M disappeared in a puff of smoke as Merlin pulled the classic DeFi magic trick. The zksync-native DEX had just completed its audit with Certik. How can such an easily ruggable protocol be green-lit? Or are users also to blame?",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "$1.8M disappeared in a puff of smoke as Merlin pulled the classic DeFi magic trick. The zksync-native DEX had just completed its audit with Certik. How can such an easily ruggable protocol be green-lit? Or are users also to blame?"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Bobie, the founder of 0xScope, the Web3 knowledge graph protocol, tweeted that the liquidity of the zkSync ecological DEX Merlin was exhausted, and hackers stole $1.82 million in funds and bridged to Ethereum. According to analysis, this is an internal Rug Pull, and Merlin internal members maliciously used the privileges of the owner's wallet."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Merlin DEX on zkSync Era lost about $1.82 million in April 2023 after pair initialization granted the deployment-controlled feeTo role unlimited token approval, letting privileged operators drain liquidity and later route part of the proceeds to Ethereum exchange deposits. The pair initializer granted the feeTo address unlimited allowance over both pool tokens. That turned a privileged role into a direct withdrawal path through transferFrom, and the live deployment kept that authority in place at launch."
+    }
+  ],
+  "audit": "Certik",
+  "txHashes": [
+    "0x6ce101943b300fe12f18e7bc4c2797d59aa9eab426c10d7914b0362f9278adfa",
+    "0xf6f1d15d60267ce90d673e9434528a7fdd19a985558411509a7a4a2a87252370",
+    "0x95f323dc0ebabec85510cf9292ff3d42a557379a9b983e71376fe2acf7434f93",
+    "0x21fc1306bffe20c11b66b2db4365ed240952dc3e99ddc572910100b3cf57a41f"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Merlin DEX - REKT",
+      "url": "https://rekt.news/merlin-dex-rekt"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/0xBobie/status/1651051380155744256"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/merlin-2023-04-27"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "certik.com",
+      "url": "https://www.certik.com/blog/initialization-oversight-the-merlin-dex-exploit"
+    },
+    {
+      "source": "revertiq",
+      "label": "certik.com",
+      "url": "https://www.certik.com/ko/blog/certiks-update-on-the-merlin-dex-rugpull"
+    }
+  ]
+}

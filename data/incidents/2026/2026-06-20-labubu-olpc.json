@@ -1,0 +1,103 @@
+{
+  "id": "2026-06-20-labubu-olpc",
+  "name": "LABUBU/OLPC",
+  "date": "2026-06-20",
+  "year": 2026,
+  "amountUsd": 1100000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "Liquidity Pool",
+  "category": "accounting-math",
+  "technique": "Decimal Miscalculation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.86,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.87
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.1
+      },
+      {
+        "category": "logic-error",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.07,
+    "stateActor": 0.02,
+    "hasRootCause": 0.74
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "OLPC pair reserve manipulation. Lost: 1,115,903.66 USDT",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "OLPC pair reserve manipulation. Lost: 1,115,903.66 USDT"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The OLPC/LABUBU liquidity pool on PancakeSwap V2 (BNB Chain) was exploited, resulting in approximately $1.1 million in losses. The attacker exploited a logic vulnerability in the OLPC token contract’s _update function. Approximately 46 days prior, the OLPC owner had maliciously changed the decimalsValue parameter to an extremely large value (7326680472586200649) and later renounced ownership. A small OLPC transfer triggered massive burns of OLPC and LABUBU tokens from the pool (to the dead address), desynchronizing the pair’s cached reserves. This allowed the attacker to drain a large amount of LABUBU, which was swapped through intermediate pools for ~1.115 million USDT.…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "LABUBU/OLPC's PancakeSwap V2 pool on BNB Chain was exploited on June 20, 2026, resulting in a $1.12M loss through a reserve mismatch triggered by OLPC's amplified burn mechanism, allowing the attacker to drain LABUBU at distorted prices. The OLPC token applied an amplified burn on pair-originated transfers, using an unbounded owner-set multiplier decimalsValue, which interacted destructively with PancakeSwap's public skim/sync mechanics, collapsing pool reserves and enabling the attacker to drain LABUBU at mispriced rates."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x8dabb60a94e5124462e5f494a25c14bcd52f6f4d1f7c665a249496f4c6c24764"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-06/OLPC_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-06/OLPC_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/exvulsec/status/2068308334512365924"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/PeckShieldAlert/status/2068314444422402515"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/labubu-olpc-2026-06-20"
+    },
+    {
+      "source": "revertiq",
+      "label": "blockchainbreaches.com",
+      "url": "https://www.blockchainbreaches.com/en/breaches/bnblabubu-2026"
+    },
+    {
+      "source": "revertiq",
+      "label": "ambcrypto.com",
+      "url": "https://ambcrypto.com/bnblabubu-exploit-drains-1-1mln-after-olpc-reserve-mismatch-details/"
+    }
+  ]
+}

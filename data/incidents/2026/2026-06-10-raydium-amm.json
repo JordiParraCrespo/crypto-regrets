@@ -1,0 +1,107 @@
+{
+  "id": "2026-06-10-raydium-amm",
+  "name": "Raydium AMM",
+  "date": "2026-06-10",
+  "year": 2026,
+  "amountUsd": 1340000,
+  "returnedUsd": null,
+  "chains": [
+    "Solana"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Infinite Mint",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "input-validation",
+    "confidence": 0.96,
+    "top": [
+      {
+        "category": "input-validation",
+        "p": 0.96
+      },
+      {
+        "category": "access-control",
+        "p": 0.02
+      },
+      {
+        "category": "logic-error",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Rust",
+  "rootCause": "The legacy Raydium AMM V3 program deployed on Solana lacked proper validation of the LP (liquidity provider) mint address during the liquidity withdrawal function. Because the deprecated program failed to verify that the caller-supplied LP mint matched the pool's actual registered LP mint, an attacker was able to craft a fraudulent LP mint and pass it to the withdrawal instruction, bypassing the proportion checks that govern how much liquidity can be removed. Five pools that had been deprecated since the Serum sunset in 2021 (Sollet USDT-RAY, Sollet ETH-RAY, SRM-RAY, USDC-RAY, and RAY-SOL) were drained of approximately 150,177 RAY, 5,603 SOL, and 893,700 USDC. The contracts were unreachable through Raydium's front-end but remained fully callable on-chain. Stolen assets were subsequently bridged to Ethereum and routed through Tornado Cash. Raydium's current programs use a virtual supply mechanism and enforce LP mint verification, preventing this class of attack. Attack Tx: 1csN6vZKFKpeJEcwZhoiM99xoRJVY7EC3P28CE6kHYrKyrVfj2L5Sf5HfhxeBGxSsuhtFvWmkhVYXtyUAQH3s7s Analysis: 0xINFRA on X",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The legacy Raydium AMM V3 program deployed on Solana lacked proper validation of the LP (liquidity provider) mint address during the liquidity withdrawal function. Because the deprecated program failed to verify that the caller-supplied LP mint matched the pool's actual registered LP mint, an attacker was able to craft a fraudulent LP mint and pass it to the withdrawal instruction, bypassing the proportion checks that govern how much liquidity can be removed. Five pools that had been deprecated since the Serum sunset in 2021 (Sollet USDT-RAY, Sollet ETH-RAY, SRM-RAY, USDC-RAY, and RAY-SOL) were drained of approximately 150,177 RAY, 5,603 SOL, and 893,700 USDC. The contracts were unreachable through Raydium's front-end but remained fully callable on-chain. Stolen assets were subsequently bridged to Ethereum and routed through Tornado Cash. Raydium's current programs use a virtual supply mechanism and enforce LP mint verification, preventing this class of attack. Attack Tx: 1csN6vZKFKpeJEcwZhoiM99xoRJVY7EC3P28CE6kHYrKyrVfj2L5Sf5HfhxeBGxSsuhtFvWmkhVYXtyUAQH3s7s Analysis: 0xINFRA on X"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Solana-based decentralized exchange Raydium disclosed a vulnerability in its deprecated AMM V3 program (phased out in 2021), which allowed an attacker to drain approximately $1.34 million from five inactive liquidity pools (Sollet USDT-RAY, Sollet ETH-RAY, SRM-RAY, USDC-RAY, and RAY-SOL). The flaw was due to insufficient validation of LP mint addresses, enabling the attacker to create a fake LP token and bypass proportion checks to withdraw funds. No current users, active programs, SDK, or dApp were affected. Raydium will fully compensate losses from its treasury and is conducting a security review of mainnet programs."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 10 June 2026, five deprecated Raydium AMM V3 pools on Solana were exploited via a logic flaw in LP mint validation, allowing an attacker to drain $1.34 million by faking LP tokens. No active users or current infrastructure were affected; Raydium pledged full reimbursement from protocol treasury. The legacy AMM V3 withdraw function failed to validate that the LP token provided matched the pool's authorized mint address. This let an attacker mint a fake LP token and withdraw the entire pool's assets, a vulnerability in on-chain legacy code left callable with real funds."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "1csN6vZKFKpeJEcwZhoiM99xoRJVY7EC3P28CE6kHYrKyrVfj2L5Sf5HfhxeBGxSsuhtFvWmkhVYXtyUAQH3s7s",
+    "2gwZ1P37p3S3963YwovvzE1FF7zXY3g1Dj8BUVwzsUAQaJD2W7sxXx9geFcxaUny4tAEguzv187ha1YmE9iBZTMN",
+    "5877QVfgQqtNjHrmdfuQDZh1VbtUbdEKszPZdn8LGEAaUcpzjGRf831HosdHCViTVze5qTm7X6MnBiU6zcvub1Ts",
+    "9jBVvs6stJfpVan97pzkW2huUdynQ41yzWJh14w6j1jXee2MKZwPjCGQ5zHyBdSMBdHX9mbhTYzNMfD1tupbxbR"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "solscan.io",
+      "url": "https://solscan.io/tx/1csN6vZKFKpeJEcwZhoiM99xoRJVY7EC3P28CE6kHYrKyrVfj2L5Sf5HfhxeBGxSsuhtFvWmkhVYXtyUAQH3s7s"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/0xINFRA/status/2064738005697384476"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=1csN6vZKFKpeJEcwZhoiM99xoRJVY7EC3P28CE6kHYrKyrVfj2L5Sf5HfhxeBGxSsuhtFvWmkhVYXtyUAQH3s7s"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/raydium-amm-2026-06-10"
+    },
+    {
+      "source": "revertiq",
+      "label": "community.chainbounty.io",
+      "url": "https://community.chainbounty.io/posts/019ec8ef-7235-711a-adfb-b196ac5dd2be"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptonews.com",
+      "url": "https://cryptonews.com/news/raydium-exploit-fake-lp-tokens-deprecated-solana-pools/"
+    }
+  ]
+}

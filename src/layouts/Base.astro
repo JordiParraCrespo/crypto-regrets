@@ -13,6 +13,7 @@ const nav = [
   ['/patterns', 'Patterns'],
   ['/infrastructure', 'Infrastructure'],
   ['/developers', 'For developers'],
+  ['/data', 'Data'],
   ['/sources', 'Sources'],
 ] as const;
 const isActive = (p: string) => (p === '/' ? path === href('/') || path === href('/') + '/' : path.startsWith(href(p)));
@@ -45,8 +46,8 @@ const isActive = (p: string) => (p === '/' ? path === href('/') || path === href
     <footer class="site-footer wrap">
       <p>
         Data compiled from <a href="https://defillama.com/hacks">DefiLlama</a>, <a href="https://github.com/SunWeb3Sec/DeFiHackLabs">DeFiHackLabs</a> (Apache-2.0),
-        <a href="https://rekt.news/">REKT</a>, and the Bitcoin Core, Geth and Cosmos security advisories. Classification is ours; see <a href={href('/sources')}>sources &amp; method</a>.
-        Raw data: <a href={href('/api/incidents.json')}>/api/incidents.json</a>. For education only.
+        <a href="https://rekt.news/">REKT</a>, <a href="https://hacked.slowmist.io/en/">SlowMist</a>, <a href="https://blocksec.com/security-incident">BlockSec</a>, <a href="https://revertiq.ai/hacks">RevertIQ</a>, and the Bitcoin Core, Geth and Cosmos security advisories. Classification is ours; see <a href={href('/sources')}>sources &amp; method</a>.
+        Download everything on the <a href={href('/data')}>data page</a>. For education only.
       </p>
     </footer>
     <script is:inline>

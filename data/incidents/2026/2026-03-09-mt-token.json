@@ -1,0 +1,74 @@
+{
+  "id": "2026-03-09-mt-token",
+  "name": "MT Token",
+  "date": "2026-03-09",
+  "year": 2026,
+  "amountUsd": 242000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": null,
+  "category": "logic-error",
+  "technique": "Business Logic Flaw",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.96). Replaced keyword guess \"access-control\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.96,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.96
+      },
+      {
+        "category": "access-control",
+        "p": 0.04
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "The MT Token deflationary contract on Ethereum implemented buy/sell restrictions designed to limit trading activity, but the restriction logic was flawed: it relied on a whitelist of router and trading-pair addresses to enforce limits while failing to prevent manipulation via those whitelisted paths. Attackers exploited the deflationary mode's trading restriction mechanism by leveraging whitelisted router and pair addresses to exchange tokens and remove liquidity in ways the restrictions were intended to prevent, effectively bypassing the economic safeguards. By manipulating the MT-WBNB pool price through these unrestricted operations, the attacker extracted approximately $242,000 from the protocol. Attack Tx: 0xfb57c9...dfca6 Analysis: BlockSec Phalcon Alert BSC Chain's MT Token Exploit Nets Hackers $242,000 – Phemex",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The MT Token deflationary contract on Ethereum implemented buy/sell restrictions designed to limit trading activity, but the restriction logic was flawed: it relied on a whitelist of router and trading-pair addresses to enforce limits while failing to prevent manipulation via those whitelisted paths. Attackers exploited the deflationary mode's trading restriction mechanism by leveraging whitelisted router and pair addresses to exchange tokens and remove liquidity in ways the restrictions were intended to prevent, effectively bypassing the economic safeguards. By manipulating the MT-WBNB pool price through these unrestricted operations, the attacker extracted approximately $242,000 from the protocol. Attack Tx: 0xfb57c9...dfca6 Analysis: BlockSec Phalcon Alert BSC Chain's MT Token Exploit Nets Hackers $242,000 – Phemex"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xfb57c980286ea8755a7b69de5a74483c44b1f74af4ab34b7c52e733fc62dfca6"
+  ],
+  "poc": null,
+  "sources": [
+    "defihacklabs",
+    "blocksec"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xfb57c980286ea8755a7b69de5a74483c44b1f74af4ab34b7c52e733fc62dfca6"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/Phalcon_xyz/status/2031226066572837313"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "phemex.com",
+      "url": "https://phemex.com/news/article/bsc-chains-mt-token-exploit-nets-hackers-242000-65506"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xfb57c980286ea8755a7b69de5a74483c44b1f74af4ab34b7c52e733fc62dfca6"
+    }
+  ]
+}

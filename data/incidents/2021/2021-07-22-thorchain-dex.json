@@ -1,0 +1,117 @@
+{
+  "id": "2021-07-22-thorchain-dex",
+  "name": "THORChain DEX",
+  "date": "2021-07-22",
+  "year": 2021,
+  "amountUsd": 8000000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Withdrawal Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.79,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.8
+      },
+      {
+        "category": "social-engineering",
+        "p": 0.09
+      },
+      {
+        "category": "arbitrary-call",
+        "p": 0.06
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.94
+  },
+  "bridge": true,
+  "language": "Solidity",
+  "rootCause": "THORChain took a hammering. Recently the protocol was hit for $5M. A second strike saw them lose another $8M. What's next for THOR and their fanatical followers?",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "THORChain took a hammering. Recently the protocol was hit for $5M. A second strike saw them lose another $8M. What's next for THOR and their fanatical followers?"
+    },
+    {
+      "source": "SlowMist",
+      "text": "THORChain (RUNE), a decentralized cross-chain transaction protocol, claims that hackers airdrop UniH tokens to Ethereum addresses as bait to steal RUNE tokens in users' wallets. Hackers have airdropped UniH tokens with malicious contracts to at least 76,000 Ethereum addresses. Once receiving users sell their newly received UniH tokens (or even just approve the sale) on decentralized trading platforms such as Uniswap, the hackers will They can steal any RUNE tokens they have in their wallets. This is because the RUNE token uses a non-standard token contract called \"tx.origin\". According to Thorchain’s RUNE token contract code “Beware of phishing contrac…"
+    },
+    {
+      "source": "SlowMist",
+      "text": "THORChain (RUNE), a decentralized cross-chain transaction protocol, said it was attacked again, and many ERC20 tokens including XRUNE were affected. This attack targeted ETH routing and lost 8 million U.S. dollars. The attacker \"intentionally limited the impact of the attack, which seems to be done by a white hat.\""
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On July 23, 2021, THORChain was exploited via its ETH Router, allowing an attacker to trick the protocol into crediting assets based on spoofed deposit events. This resulted in a direct loss of around $8 million in ETH and ERC-20 tokens. The ETH Router contract failed to fully validate deposit events, enabling a crafted contract to emit fake deposits that the Bifrost module trusted without independent asset verification. As a result, the attacker received credit for funds that were not actually deposited."
+    }
+  ],
+  "audit": "THORChain",
+  "txHashes": [
+    "0x10352e6ec052771a92f05f93e037e066873f64bb502d4488726697987f054595",
+    "0x1c6ef4d5122f1287085097ac37df076d43f389bfc62a1bdfcd3163254b5fe94a",
+    "0x0b39a878f1bf3daa78be149222dd8e5fa3e37b54d0451872b3d7a2cbf7f070e2",
+    "0x01f38f17ba838b54350f8e2a2bd54fcdd9cf3c45fa1d2a735f5311507671be9e",
+    "0xa89d90f300fed8d1d987dec86d0d628f31ffd2d8aefdd857ad90151084531d4c",
+    "0x9db403ad39d3fe78de378af0b49f03d244326662f7fee230db87d12a624f564b"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: THORChain - REKT 2",
+      "url": "https://rekt.news/thorchain-rekt2"
+    },
+    {
+      "source": "slowmist",
+      "label": "coinvoice.cn",
+      "url": "https://www.coinvoice.cn/news_flashes/8328"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/THORChain/status/1418360743523618825"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/thorchain-2021-07-23"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.thorchain.org",
+      "url": "https://blog.thorchain.org/post-mortem-eth-router-exploits-1-2-and-premature-return-to-trading-incident"
+    },
+    {
+      "source": "revertiq",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/markets/2021/07/23/blockchain-protocol-thorchain-suffers-8m-hack"
+    }
+  ]
+}

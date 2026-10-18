@@ -1,0 +1,90 @@
+{
+  "id": "2026-09-09-beatxswap",
+  "name": "BeatXswap",
+  "date": "2026-09-09",
+  "year": 2026,
+  "amountUsd": 77512,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.08,
+    "stateActor": 0.02,
+    "hasRootCause": 0.93
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "slot0 spot-price oracle with no TWAP guard drains vesting BTX reserves. Lost: ~$63.7K USDT net profit (2,984,557 BTX / ~$77.5K drained from two vesting reserves)",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "slot0 spot-price oracle with no TWAP guard drains vesting BTX reserves. Lost: ~$63.7K USDT net profit (2,984,557 BTX / ~$77.5K drained from two vesting reserves)"
+    },
+    {
+      "source": "SlowMist",
+      "text": "BeatXswap’s LiquidityVestingConvert used the Uniswap/Pancake V3 slot0() spot price as its only oracle, with no TWAP or deviation checks. An attacker flash-loaned 6,000,000 BTX, dumped it to crash the pool price, then called deposit() twice (10,000 + 2,000 USDT) to mint LP at the manipulated quote and drain 2,984,557 BTX (~$77,512)."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "BeatXswap’s LV Convert contracts on BNB Chain were drained on 2026-09-09 after an attacker flash-borrowed BTX, pushed down the Pancake V3 spot price used as the only oracle, and minted LP against protocol-owned BTX. Public trackers put the loss at about 2.985 million BTX, roughly $77,512. The converter contracts trusted a single Pancake V3 slot0() spot read for BTX pricing and reused that same manipulated quote to size the mint and the slippage floor. A same-transaction BTX dump could move the pool price before deposit() ran, so the contracts minted LP against a crashed oracle price and spent protocol-owned BTX reserves."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xcc71a3bb131c73462b0f25533070113a63c85e942a22e18bc945eec184eb5799"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-09/BeatXswap_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-09/BeatXswap_exp.sol"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/2098314846765015062"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/beatxswap-2026-09-09"
+    },
+    {
+      "source": "revertiq",
+      "label": "hacked.slowmist.io",
+      "url": "https://hacked.slowmist.io/en/"
+    },
+    {
+      "source": "revertiq",
+      "label": "crypto.training",
+      "url": "https://crypto.training/hacks/2026-09-beatxswapvestingoracle/"
+    }
+  ]
+}

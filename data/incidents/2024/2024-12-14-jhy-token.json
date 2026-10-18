@@ -1,0 +1,89 @@
+{
+  "id": "2024-12-14-jhy-token",
+  "name": "JHY Token",
+  "date": "2024-12-14",
+  "year": 2024,
+  "amountUsd": 12000,
+  "returnedUsd": null,
+  "chains": [
+    "Binance"
+  ],
+  "targetType": "Token",
+  "category": "accounting-math",
+  "technique": "Incorrect Share Accounting",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.92,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.92
+      },
+      {
+        "category": "logic-error",
+        "p": 0.08
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.01,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "Logic Flaw. Lost: 11k BSC-USD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Logic Flaw. Lost: 11k BSC-USD"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "JHY Token was exploited on BNB Chain on 14 December 2024 due to flawed share accounting in the TokenDividendTracker contract. The attacker manipulated their address balance, draining rewards and swapping more tokens than held, resulting in a loss estimated between $11,200 and $12,000. The TokenDividendTracker contract set a user's balance equal to their LP token balance, allowing them to swap and withdraw more tokens than they actually held. This broke the intended reward and share accounting logic."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xb6a9055e3ce7f006391760fbbcc4e4bc8df8228dc47a8bb4ff657370ccc49256"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-12/JHY_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-12/JHY_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/TenArmorAlert/status/1867950089156575317"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/jhy-token-2024-12-14"
+    },
+    {
+      "source": "revertiq",
+      "label": "quadrigainitiative.com",
+      "url": "https://quadrigainitiative.com/casestudy/jhytokendividendtrackercontractvulnerability.php"
+    },
+    {
+      "source": "revertiq",
+      "label": "quadrigainitiative.com",
+      "url": "https://quadrigainitiative.com/cryptocurrencyhackscamfraudwiki/index.php?title=JHY_Token_Dividend_Tracker_Contract_Vulnerability"
+    }
+  ]
+}

@@ -1,0 +1,143 @@
+{
+  "id": "2026-01-20-makina",
+  "name": "Makina",
+  "date": "2026-01-20",
+  "year": 2026,
+  "amountUsd": 4200000,
+  "returnedUsd": 3410000,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.96,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Price Oracle Manipulation. Lost: 5.1M USD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Price Oracle Manipulation. Lost: 5.1M USD"
+    },
+    {
+      "source": "REKT",
+      "text": "Flash loan goes in, pools get manipulated, permissionless oracle trusts the lie, $4.13 million walks out. Makina's code worked exactly as designed. MEV bots front-ran the attacker and kept most of the stolen funds."
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Makina's AUM accounting relies on accountForPosition in the Caliber contract, which reads live Curve pool spot balances to compute position values, and updateTotalAum in the Machine contract persists this figure as the protocol's total assets. Because these spot values reflect real-time on-chain pool balances, they can be temporarily distorted by large pool imbalances within the same transaction. The attacker flashloaned 280M USDC and executed a two-pronged manipulation: 100M USDC were added to the DUSD/USDC Curve pool and 10M USDC were swapped for DUSD to inflate the apparent DUSD price; simultaneously, 170M USDC were deposited into the 3Pool for 3CRV, which was then used to skew the MIM/3CRV pool. With both Curve prices distorted, the attacker called accountForPosition and updateTotalAum to snap inflated values into Makina's state. They then sold DUSD and LP tokens back to the pools at the artificially favorable implied rate, extracting a profit. The cycle was executed twice in succession, draining approximately $5M from the protocol. Vulnerable code snippet: Attack Tx: 0x569733b8016ef9418f0b6bde8c14224d9e759e79301499908ecbcd956a0651f5 Analysis: Phalcon Alert"
+    },
+    {
+      "source": "SlowMist",
+      "text": "According to PeckShieldAlert monitoring, the Makinafi protocol was exploited by hackers, resulting in a loss of approximately 1,299 ETH (about $4.13 million). The stolen funds are currently held in two addresses: 0xbed2...dE25 (around $3.3 million) and 0x573d...910e (around $880,000). News on January 23: Makina, a DeFi execution engine, posted on X stating that at 21:15 on January 22, the MEV Builder returned funds according to the SEAL Safe Harbor, deducting a 10% bounty. Approximately 920 ETH (out of 1,023 ETH collected) was returned, accounting for a portion of the total ~1,299 ETH stolen. The funds have been transferred to the recovery multi-sig address 0xc22F...8AB9.…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 2026-01-20, Makina Finance’s DUSD/USDC Curve pool on Ethereum was drained after a flash-loan attacker manipulated Curve-derived accounting inputs used by Makina’s share-price oracle. Roughly 1,299 ETH, commonly valued near $4.13 million at the time, was extracted after temporary liquidity distortions inflated Makina’s AUM and DUSD share price within a single transaction. Makina’s accounting and pricing pipeline accepted manipulable spot-state data from external Curve pools during permissionless accountForPosition() and updateTotalAum() calls. Flash-loaned liquidity temporarily inflated values derived from Curve pool balances and calc_withdraw_one_co…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x569733b8016ef9418f0b6bde8c14224d9e759e79301499908ecbcd956a0651f5",
+    "0xc244aecf26d9f800179984d8bc747e2ab543f505d6da99bfbc0e098e302dbbb5",
+    "0xacffb5e680946cf0e7872271d465e8fa777f364a2027d5363efbcf70ff673177",
+    "0xc5c5898eaf8c9ac7bee2c28eb971e8c5fee51c9ecdaf48b42c3357186c0235bf"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-01/makina_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-01/makina_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/nn0b0dyyy/status/2013472538832314630"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/TenArmorAlert/status/2013460083078836342"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/CertiKAlert/status/2013473512116363734"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Makina - Rekt",
+      "url": "https://rekt.news/makina-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x569733b8016ef9418f0b6bde8c14224d9e759e79301499908ecbcd956a0651f5"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/Phalcon_xyz/status/2014026567043916033"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x569733b8016ef9418f0b6bde8c14224d9e759e79301499908ecbcd956a0651f5"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/PeckShieldAlert/status/2013468943193645085"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/makina-s-4m-2026-01-22"
+    },
+    {
+      "source": "revertiq",
+      "label": "quillaudits.com",
+      "url": "https://www.quillaudits.com/blog/hack-analysis/makina-4m-hack-explained"
+    },
+    {
+      "source": "revertiq",
+      "label": "raw.githubusercontent.com",
+      "url": "https://raw.githubusercontent.com/SunWeb3Sec/DeFiHackLabs/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/src/test/2026-01/makina_exp.sol"
+    },
+    {
+      "source": "revertiq",
+      "label": "certik.com",
+      "url": "https://www.certik.com/blog/makina-incident-analysis"
+    }
+  ]
+}

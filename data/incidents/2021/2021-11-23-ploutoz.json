@@ -1,0 +1,102 @@
+{
+  "id": "2021-11-23-ploutoz",
+  "name": "Ploutoz",
+  "date": "2021-11-23",
+  "year": 2021,
+  "amountUsd": 365000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Flash Loan. Lost: 365K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Flash Loan. Lost: 365K"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Ploutoz Finance, the BSC loan agreement, was attacked. Hackers made a profit of 365,000 US dollars, and the agreement suffered even greater losses. The hacker manipulated the oracle price of DOP tokens and used DOP as collateral to lend assets such as CAKE, ETH, BTCB, etc. After that, the hackers used ParaSwap and PancakeSwap to trade for BNB and then transferred to Tornado.Cash."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On November 23, 2021, Ploutoz Finance was exploited on BNB Chain through a flash loan and DOP token price oracle manipulation, allowing the attacker to drain ~$365,000 in assets by pumping collateral value and borrowing against it. Ploutoz Finance's lending contracts relied on the spot price of the DOP token from manipulable AMM pools as collateral value. The protocol lacked robust oracle design and sanity checks, enabling the attacker to artificially inflate DOP's price using flash loans before borrowing other assets."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x7fe46c2746855dd57e18f4d33522849ff192e4e26c74835799ba8dab89099457",
+    "0x9f7d19368939dfd5f08241b9a10385e91e42c911e1779ffa6268f1f59e81ec3d",
+    "0x3f7ca0eb201b18d6356a60b4e53af0486d20b1cde10a4d0c3a49d2792c0e7abd",
+    "0x93b1f71d69dc0a3e826fc7af2659fb4dfd3e558ce337ecc1f847afcf8bbdcb04",
+    "0xfeeb8639c6f129589632bf4196f94039078a00db6d2ae8657a31cc3b441bd118",
+    "0x0cd229b7e85a861057bfc23b646288cf7484c8a7a8bf33dd76acae963d50effd",
+    "0x12462e5084304c5e25a96751034fad132f5ab4094cef86b837367e1f8f32330d",
+    "0x01900c3182ef0d410b513821dae50e8c37d7361eac76d601df3f5b62b09bb34b"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2021-11/Ploutoz_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2021-11/Ploutoz_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/peckshield/status/1463113809111896065"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/peckshield/status/1463113809111896065?s=21"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/ploutoz-2021-11-23"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/ploutoz-finance-hack-2021"
+    },
+    {
+      "source": "revertiq",
+      "label": "quadrigainitiative.com",
+      "url": "https://www.quadrigainitiative.com/casestudy/ploutozfinanceoracleattack.php"
+    }
+  ]
+}

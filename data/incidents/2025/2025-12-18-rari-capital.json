@@ -1,0 +1,85 @@
+{
+  "id": "2025-12-18-rari-capital",
+  "name": "Rari Capital",
+  "date": "2025-12-18",
+  "year": 2025,
+  "amountUsd": 2000000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Uninitialized Proxy",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "key-compromise",
+    "confidence": 0.89,
+    "top": [
+      {
+        "category": "key-compromise",
+        "p": 0.9
+      },
+      {
+        "category": "access-control",
+        "p": 0.06
+      },
+      {
+        "category": "rugpull",
+        "p": 0.03
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Rari Capital was exploited via malicious upgrades to its lending pool's comptroller contracts on Ethereum, enabling attackers to borrow without collateral and drain over $2 million. Evidence confirms key compromise and insider manipulation, not a simple uninitialized proxy error. A compromised multisig allowed malicious upgrades to the comptroller, introducing backdoor logic that exempted attacker addresses from collateral checks. This insider/key-compromise bypassed access control on upgradeable proxies.",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "Rari Capital was exploited via malicious upgrades to its lending pool's comptroller contracts on Ethereum, enabling attackers to borrow without collateral and drain over $2 million. Evidence confirms key compromise and insider manipulation, not a simple uninitialized proxy error. A compromised multisig allowed malicious upgrades to the comptroller, introducing backdoor logic that exempted attacker addresses from collateral checks. This insider/key-compromise bypassed access control on upgradeable proxies."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x097ed63b74c14c949157925657c22cf1b978569ed80299f823d421837e38e053",
+    "0x542d696cc9e45227041074308f1dd6f045a69e85744d08b335ced53c5845dfa4",
+    "0x17125e1f1e16b4e0cbd6225cb9431505419525257fa4365724abf40c7cd01f5c",
+    "0x99d61f772f9be43b927b5f05b15822d0512ee4e1c74a772120ede2cefc459fb5",
+    "0x318c3989aec28fdf4a2069b820562ae047e6d5f0a0ff18de6fcf773dfcddab96",
+    "0x57c266abbe5af19fb82e79fdaab6a7d2cd1326ffbc6dc8a48deabf7fbaa7627a",
+    "0x01a1907aefda007960439ac4dd95df740d15e63e674a2d729312c0076a3c5a9b",
+    "0x733959c5b8558f73e706f85ddaaaab26bc551872f5a7784bd32e1356f04cf91f"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/rari-capital-2025-12-18"
+    },
+    {
+      "source": "revertiq",
+      "label": "gist.github.com",
+      "url": "https://gist.github.com/Hephyrius/8b5136a7c189f2dafccf4d011d570319"
+    },
+    {
+      "source": "revertiq",
+      "label": "monitoringroom.com",
+      "url": "https://monitoringroom.com/situation/crypto-hack/rari-capital-2025"
+    }
+  ]
+}

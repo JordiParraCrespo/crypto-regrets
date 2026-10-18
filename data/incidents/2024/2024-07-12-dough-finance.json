@@ -1,0 +1,143 @@
+{
+  "id": "2024-07-12-dough-finance",
+  "name": "Dough Finance",
+  "date": "2024-07-12",
+  "year": 2024,
+  "amountUsd": 1960000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "arbitrary-call",
+  "technique": "Arbitrary External Call",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "arbitrary-call",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "arbitrary-call",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.5,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Incorrect input validation. Lost: ~1.8M USD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Incorrect input validation. Lost: ~1.8M USD"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The ConnectorDeleverageParaswap.flashloanReq() function accepted a bytes[] memory swapData parameter and passed its contents verbatim to external calls with no validation of the call target, function selector, or encoded arguments. Because the connector held Aave approvals and could act on behalf of other users (via an onBehalfOf address), the attacker crafted two malicious swapData entries: the first encoded a call with selector 0x75b4b22d that swapped USDC from the victim's Aave position into WETH; the second encoded an ERC20 transferFrom() (selector 0x23b872dd) that moved that WETH from the victim's address (onBehalfOf) directly to the attacker. The connector executed both calls without questioning their content, effectively giving the attacker arbitrary code execution in the context of a privileged connector, and draining ~596 WETH (~$1.8M) from the victim position. Vulnerable code snippet: Attack Tx: 0x92cdcc732eebf47200ea56123716e337f6ef7d5ad714a2295794fdc6031ebb2e Analysis: Phalcon_xyz thread"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "*ConnectorDeleverageParaswap* contract did not validate flash loan callback data which led to WETH transfer. Vulnerable code snippet: https://etherscan.io/address/0x9f54e8eAa9658316Bb8006E03FFF1cb191AafBE6#code#F1#L331 Attack tx: https://app.blocksec.com/explorer/tx/eth/0x92cdcc732eebf47200ea56123716e337f6ef7d5ad714a2295794fdc6031ebb2e Analysis: https://blog.solidityscan.com/doughfina-hack-analysis-685ed56adb19"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Dough Finance was attacked due to a contract vulnerability. Some unauthorized funds were extracted by hackers, resulting in a loss of approximately $2.1 million. Around 76 ETH (approximately $260,000) has been returned by white hat hackers."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On July 12, 2024, Dough Finance on Ethereum was exploited for over $1.8 million (approximately 608 ETH) in a flash loan attack. The attacker manipulated unchecked calldata in the ConnectorDeleverageParaswap contract to withdraw collateral from multiple victim accounts. Most stolen funds were laundered via Tornado Cash, with only partial returns to the protocol. The ConnectorDeleverageParaswap contract accepted arbitrary external byte array input for swap/flash loan operations without validating its contents or enforcing sender and target restrictions. This allowed an attacker to craft malicious calldata, escalate token allowances, and execute unauthori…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x92cdcc732eebf47200ea56123716e337f6ef7d5ad714a2295794fdc6031ebb2e",
+    "0x589e9a809ba14ff30fa22333f2432c364377df9ebf2681b6321aaca3028ff613",
+    "0x4d52f0dad3ddb7ac5523c51a75a9acd47b244e536b240d692784305b69ca6ab5",
+    "0xf356d1b05d26de824baddf1a575a33dcf63e2ecec2a0eaa37b15653b94845b63",
+    "0x28a934816ed0371a3fbb2f89986eecf87a22937c40309ff2f58697792215b4da"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-07/DoughFina_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-07/DoughFina_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/CertiKAlert/status/1811668992882307478"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/eth/0x92cdcc732eebf47200ea56123716e337f6ef7d5ad714a2295794fdc6031ebb2e"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/Phalcon_xyz/status/1811661050707607889"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/address/0x9f54e8eAa9658316Bb8006E03FFF1cb191AafBE6#code#F1#L331"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "blog.solidityscan.com",
+      "url": "https://blog.solidityscan.com/doughfina-hack-analysis-685ed56adb19"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x589e9a809ba14ff30fa22333f2432c364377df9ebf2681b6321aaca3028ff613"
+    },
+    {
+      "source": "blocksec",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs?tab=readme-ov-file#20240712-doughfina---incorrect-input-validation"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/1811655943056425236"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/dough-finance-1-800-000-2024-07-12"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/defi-rekt-report-over-250m-lost-in-july-2024"
+    },
+    {
+      "source": "revertiq",
+      "label": "certik.com",
+      "url": "https://www.certik.com/blog/dough-finance-incident-analysis"
+    },
+    {
+      "source": "revertiq",
+      "label": "avoid.net",
+      "url": "https://avoid.net/dough-finance"
+    }
+  ]
+}

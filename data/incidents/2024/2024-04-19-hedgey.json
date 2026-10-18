@@ -1,0 +1,165 @@
+{
+  "id": "2024-04-19-hedgey",
+  "name": "Hedgey",
+  "date": "2024-04-19",
+  "year": 2024,
+  "amountUsd": 44700000,
+  "returnedUsd": null,
+  "chains": [
+    "Arbitrum",
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "input-validation",
+  "technique": "Missing Input Validation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "input-validation",
+    "confidence": 0.96,
+    "top": [
+      {
+        "category": "input-validation",
+        "p": 0.96
+      },
+      {
+        "category": "logic-error",
+        "p": 0.02
+      },
+      {
+        "category": "access-control",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.96,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Logic Flaw. Lost: 48M USD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Logic Flaw. Lost: 48M USD"
+    },
+    {
+      "source": "REKT",
+      "text": "Not a good strategy to hedge your bets. Hedgey Finance rocked by $44.7 million flash loan attack across both the Arbitrum and Ethereum platforms."
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The createLockedCampaign function accepted an attacker-controlled claimLockup.tokenLocker address with no validation. When cancelCampaign was subsequently called, the contract approved the campaign's tokenLocker — set by the attacker to their own address — to spend the contract's entire token balance, rather than directly transferring funds back to the manager. The attacker flash-loaned 1,305,000 USDC from Balancer, created a campaign designating themselves as tokenLocker, immediately cancelled it (which triggered an unlimited approval of HedgeyFinance's USDC balance to the attacker), repaid the flash loan with the returned USDC, then drained the remaining USDC from the contract via transferFrom. Vulnerable code snippet: Attack Tx: 0x2606d459a50ca4920722a111745c2eeced1d8a01ff25ee762e22d5d4b1595739 Analysis: Hedgey Finance Hack Detected by CUBE3.AI"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Incorrect logic, After the user cancels the campaign, the contract withdraws all the locked tokens to the campaign manager. The vulnerability lies in the failure to revoke the allowance for the campaign manager. Vulnerable code snippet: https://etherscan.io/address/0xBc452fdC8F851d7c5B72e1Fe74DFB63bb793D511#code Attack tx: https://etherscan.io/tx/0x2606d459a50ca4920722a111745c2eeced1d8a01ff25ee762e22d5d4b1595739 Analysis: https://x.com/Cube3AI/status/1781294512716820918 https://medium.com/@CUBE3AI/hedgey-finance-hack-detected-by-cube3-ai-minutes-before-exploit-1f500e7052d4"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Hedgey Finance suffered two exploits, one on the Ethereum and another on the Arbitrum network. The ETH attack resulted in a loss of $1.9 million, while the Arbitrum exploit led to a theft of $42.8 million in ARB tokens."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Hedgey Finance’s ClaimCampaigns contracts were exploited on Ethereum and Arbitrum on 2024-04-19 after campaign cancellation logic failed to revoke ERC-20 allowances granted to attacker-controlled locker contracts. Attackers used flash-loaned funds to create and immediately cancel malicious campaigns, then drained token balances with lingering approvals. Widely reported losses near $44.7 million were driven largely by illiquid BONUS token valuations, while several analyses estimated realized liquid losses closer to $2 million. The exploited ClaimCampaigns implementation granted ERC-20 approvals to a user-supplied tokenLocker address during createLockedC…"
+    }
+  ],
+  "audit": "Consensys Diligence",
+  "txHashes": [
+    "0x2606d459a50ca4920722a111745c2eeced1d8a01ff25ee762e22d5d4b1595739",
+    "0x03c73a343b5a481c9431af2f4a2146a0e77522a23e5cca9b2ea024778589967f",
+    "0x9215b87e49fdd5b0e9fd4688f2d315dfdefc73655be529cc68aa3547f8828879",
+    "0xe118170da24b23a7b05cffbb830fea48ca8b64bc5a0217322c68c30952004cab",
+    "0x0e655a77d225838499f340f5ad928acb0571b8f0e6f6fde87e0ce5f3856422d0",
+    "0x83cf8aae6477932bcbde5fde814f8ca40c5acec4db04f5924c8f166401d34985",
+    "0x353a710d9a52a919a5d7220211f11e7851cf99f1243373376c8eb2e48a94b396",
+    "0x91ef02e6a99bf97cf5ff54d7084736f826fb280b1af14819c4d86a63c4145099",
+    "0x9edb3c12cd3d3352ec56c8222aaa51bbec3e47b693deb9ffa3bcd0a0060a420c",
+    "0xf336ff5c7465893a87c79ac514abe2e3fac1b3e06cbe185c00ea6af18d4e7a84",
+    "0x108a52c403fe206bafb34ce1880138f22591f82b0f45c6c77de7c8787dc6a834",
+    "0x51988f56315afb8417c48948092fb6c6b1007b52aac98e71b21010ddeafea95c",
+    "0x4eb093c25d111efa1e8b7f6dc32cc47573c4651b6ea2e30d74bf2449c796692f",
+    "0xd0c23f115c66a060ffab78c91c6f9085db5af6257a72858b7fd4def6b7735617",
+    "0xe4dbeba25b0c0d67f8ecaff5ec7c0a9569ddc10c817ab6815d5bc3dfb22e9ec0",
+    "0x47da1ac72d488f746865891c9196c1632ae04f018b285b762b2b564ad1d3a9e5",
+    "0xa17fdb804728f226fcd10e78eae5247abd984e0f03301312315b89cae25aa517",
+    "0x688aaa6f16a6f7bbfd3e0c86c9b79f388967ce849343fc280c47dc792bde0624"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-04/HedgeyFinance_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-04/HedgeyFinance_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Cube3AI/status/1781294512716820918"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Hedgey Finance - Rekt",
+      "url": "https://rekt.news/hedgey-finance-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x2606d459a50ca4920722a111745c2eeced1d8a01ff25ee762e22d5d4b1595739"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/address/0xBc452fdC8F851d7c5B72e1Fe74DFB63bb793D511#code"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/Cube3AI/status/1781294512716820918"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x03c73a343b5a481c9431af2f4a2146a0e77522a23e5cca9b2ea024778589967f"
+    },
+    {
+      "source": "slowmist",
+      "label": "cryptonews.com",
+      "url": "https://cryptonews.com/news/hedgey-finance-suffers-dual-exploits-losing-44-7-million-in-funds.htm"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/explained-the-hedgey-finance-2024-04-24t15-41-17-091000-00-00"
+    },
+    {
+      "source": "revertiq",
+      "label": "halborn.com",
+      "url": "https://www.halborn.com/blog/post/explained-the-hedgey-finance-hack-april-2024"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/de-fi-rekt-report-over-12-4m-lost-in-april-2024"
+    },
+    {
+      "source": "revertiq",
+      "label": "certik.com",
+      "url": "https://www.certik.com/blog/hedgey-finance-incident-analysis"
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "id": "2022-03-17-apecoin",
+  "name": "ApeCoin",
+  "date": "2022-03-17",
+  "year": 2022,
+  "amountUsd": 820000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "Token",
+  "category": "governance",
+  "technique": "Flashloan Governance Attack",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.97,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.97
+      },
+      {
+        "category": "governance",
+        "p": 0.02
+      },
+      {
+        "category": "access-control",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.93,
+    "stateActor": 0.01,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "On March 17, 2022, an attacker exploited the ApeCoin airdrop contract on Ethereum by using flash loaned NFTs to claim 60,564 APE tokens. The contract checked airdrop eligibility based solely on current NFT ownership, enabling manipulation and resulting in a reported loss of approximately $820,000. The airdrop contract determined eligibility for ApeCoin distribution based only on the spot state of NFT ownership. There were no checks against temporary or flash-loan-based ownership changes, allowing an attacker to momentarily control sufficient NFTs to claim excess airdrop rewards.",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "On March 17, 2022, an attacker exploited the ApeCoin airdrop contract on Ethereum by using flash loaned NFTs to claim 60,564 APE tokens. The contract checked airdrop eligibility based solely on current NFT ownership, enabling manipulation and resulting in a reported loss of approximately $820,000. The airdrop contract determined eligibility for ApeCoin distribution based only on the spot state of NFT ownership. There were no checks against temporary or flash-loan-based ownership changes, allowing an attacker to momentarily control sufficient NFTs to claim excess airdrop rewards."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/apecoin-2022-03-17"
+    },
+    {
+      "source": "revertiq",
+      "label": "blocksec.com",
+      "url": "https://blocksec.com/blog/the-short-analysis-of-the-flashloan-attack-to-the-ape-air-drop"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/apecoin-hack-2022"
+    }
+  ]
+}

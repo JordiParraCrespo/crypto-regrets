@@ -1,0 +1,121 @@
+{
+  "id": "2023-08-08-steadefi",
+  "name": "Steadefi",
+  "date": "2023-08-08",
+  "year": 2023,
+  "amountUsd": 1157000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "key-compromise",
+  "technique": "Deployer Key Compromised",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "key-compromise",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "key-compromise",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.93
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "Steady lads. Steadefi lost $1.14M to a compromised deployer address on Monday. The attacker drained lending contracts after transferring their ownership. Phishing or an inside job?",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "Steady lads. Steadefi lost $1.14M to a compromised deployer address on Monday. The attacker drained lending contracts after transferring their ownership. Phishing or an inside job?"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Steadefi, an automated yield leveraged strategy platform, tweeted: “Our protocol deployer wallet (which is also the owner of all vaults in the protocol) has been compromised. Attackers have transferred ownership of all vaults (borrows and strategies) to them in a wallet controlled by the user and continue to take various owner-only operations, such as allowing any wallet to be able to borrow any available funds from the lending vault. Currently, all available lending capacity on Arbitrum and Avalanche has been exhausted by the attackers, and the assets have been swapped for ETH and bridged to Ethereum. On-chain messages have been sent to the attacker wallet address for negotiation.…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Steadefi suffered an exploit on August 7, 2023, due to the compromise of its deployer key. The attacker took control of vault contracts on Arbitrum and Avalanche, drained lending vaults, bridged stolen assets to Ethereum, and laundered funds. Approximately $1.15 million was lost before partial recovery and reimbursement efforts. The attacker gained access to Steadefi's deployer private key, allowing ownership and admin control over core protocol contracts. This enabled them to approve themselves for borrow actions and drain vault assets."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Steadefi's deployer admin key, which held sole owner privileges for all vault contracts across Arbitrum and Avalanche, was compromised via malware. The attacker drained $1.1M+ from lending vaults, swapped assets to ETH, bridged funds to Ethereum, and deposited proceeds into TornadoCash. Only partial funds were recovered. Compromise of the single deployer key (via malware/social engineering) enabled unrestricted owner actions across all vault contracts. No multisig or timelock blocked or delayed critical operations, making the system a single-point-of-failure admin structure."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xf8e831bd00834b20ecbe2a9e37629c6f0605ecca09c737091501736eb9c83d12",
+    "0x28b73c203d5b8851b8a5d2e4eba88bfc3235dd64ba030b07492f242c04f7f5c1",
+    "0xdfc31c31e07f9007a15680e9c98a4d523cc440d4349515cebf22196086c889d4",
+    "0x348ca019b360a14602d03c25a41c4365e41adb0785fb0adac3cd3739a5bea277",
+    "0xd7d8fc84eb7c0fe1e02ce3e554004da7243f71262b824c15e19a27cb683d67ac",
+    "0xde1cc436d8360fa444a5f3d1ae025b93a10eedc07ab2112e3bb85f3d660070bd",
+    "0x377bbbc60b99ac9b3459d2aa757232c94cec34176840db5b48505c4f844bb01c",
+    "0x239fbabbcb8eba217b639ecea34b416bf08098b8031b2439f1fe013bde41e83d"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Steadefi - REKT",
+      "url": "https://rekt.news/steadefi-rekt"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/steadefi/status/1688619454178144264"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/steadefi-1-1m-2023-08-07"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/de-fi-rekt-report-29m-funds-lost-in-august-2023-top-defi-scams-and-exploits"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.steadefi.com",
+      "url": "https://blog.steadefi.com/exploit-analysis-and-reimbursement-plan"
+    },
+    {
+      "source": "revertiq",
+      "label": "defirisk.co",
+      "url": "https://defirisk.co/learn/exploits/steadefi-rekt/"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/explained-the-steadefi-2023-08-10t13-30-34-162000-00-00"
+    },
+    {
+      "source": "revertiq",
+      "label": "halborn.com",
+      "url": "https://www.halborn.com/blog/post/explained-the-steadefi-hack-august-2023"
+    },
+    {
+      "source": "revertiq",
+      "label": "itokenly.com",
+      "url": "https://itokenly.com/hacks/steadefi"
+    }
+  ]
+}

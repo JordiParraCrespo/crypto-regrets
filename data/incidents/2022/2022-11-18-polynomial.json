@@ -1,0 +1,107 @@
+{
+  "id": "2022-11-18-polynomial",
+  "name": "Polynomial",
+  "date": "2022-11-18",
+  "year": 2022,
+  "amountUsd": 7000,
+  "returnedUsd": null,
+  "chains": [
+    "Optimism"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "input-validation",
+  "technique": "Missing Input Validation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "input-validation",
+    "confidence": 0.56,
+    "top": [
+      {
+        "category": "input-validation",
+        "p": 0.59
+      },
+      {
+        "category": "arbitrary-call",
+        "p": 0.39
+      },
+      {
+        "category": "access-control",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "No input validation. Lost: ~1.4K USD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "No input validation. Lost: ~1.4K USD"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "From the swapAndDeposit() function, which had no restrictions on its input. Anyone could arbitrarily pass in a address and maliciously constructed swapData to steal tokens approve to the contract Vulnerable code snippet: Attack tx: https://app.blocksec.com/explorer/tx/optimism/0x9f34ae044cbbf3f1603769dcd90163add48348dde7e1dda41817991935ebfa2f Analysis: https://x.com/0xPoor4ever/status/1602156729105788929"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Polynomial Protocol's Zap contract on Optimism was exploited on November 18, 2022, allowing an attacker to drain USDC from users who had approved the contract. The vulnerability arose from lack of input validation, leading to an unauthorized call that spent victim allowances. The swapAndDeposit function allowed arbitrary values for parameters swapTarget and swapData, enabling attackers to call transferFrom on the USDC token and drain pre-approved allowances from victims without access control or selector validation."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x9f34ae044cbbf3f1603769dcd90163add48348dde7e1dda41817991935ebfa2f"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-11/Polynomial_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-11/Polynomial_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/peckshield/status/1602216000187174912"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/0xPoor4ever/status/1602156729105788929"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/optimism/0x9f34ae044cbbf3f1603769dcd90163add48348dde7e1dda41817991935ebfa2f"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/polynomial-2022-11-18"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/kismp123/DeFi-Security-Incident/blob/main/2022/2022-11_Polynomial_SwapDepositArbitraryCall.md"
+    },
+    {
+      "source": "revertiq",
+      "label": "crypto.training",
+      "url": "https://crypto.training/hacks/2022-11-polynomial/"
+    }
+  ]
+}

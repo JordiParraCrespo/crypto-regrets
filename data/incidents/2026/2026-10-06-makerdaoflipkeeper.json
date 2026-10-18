@@ -1,0 +1,50 @@
+{
+  "id": "2026-10-06-makerdaoflipkeeper",
+  "name": "MakerDAOFlipKeeper",
+  "date": "2026-10-06",
+  "year": 2026,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": null,
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 1.00).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.01,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "the dormant ETH-A flip-keeper proxy's drain selector has no ds-auth check, so anyone can call it to make the keeper vat.hope() a caller-supplied worker and then deal its four undealt 2020 ETH-A auctions and flux/exit the freed 200 WETH of collateral out. Lost: exactly 200 ETH (200.000000000000000000 WETH, 0xad78ebc5ac6200000 wei, reproduced with zero variance) to a fresh attacker on Ethereum; the dormant keeper proxy's unprotected drain settled its four undealt 2020 ETH-A liquidation auctions (#1457-1460, 50 WETH each) and swept the freed collateral out - not a MakerDAO core bug, the keeper impl's drain selector simply omits the ds-auth modifier that the contract's other functions carry",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "the dormant ETH-A flip-keeper proxy's drain selector has no ds-auth check, so anyone can call it to make the keeper vat.hope() a caller-supplied worker and then deal its four undealt 2020 ETH-A auctions and flux/exit the freed 200 WETH of collateral out. Lost: exactly 200 ETH (200.000000000000000000 WETH, 0xad78ebc5ac6200000 wei, reproduced with zero variance) to a fresh attacker on Ethereum; the dormant keeper proxy's unprotected drain settled its four undealt 2020 ETH-A liquidation auctions (#1457-1460, 50 WETH each) and swept the freed collateral out - not a MakerDAO core bug, the keeper impl's drain selector simply omits the ds-auth modifier that the contract's other functions carry"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-10/MakerDAOFlipKeeper_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-10/MakerDAOFlipKeeper_exp.sol"
+    }
+  ]
+}

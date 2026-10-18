@@ -1,0 +1,56 @@
+{
+  "id": "2013-03-11-bitcoin-0-8-chain-fork",
+  "name": "Bitcoin 0.8 chain fork",
+  "date": "2013-03-11",
+  "year": 2013,
+  "amountUsd": 10000,
+  "returnedUsd": null,
+  "chains": [
+    "Bitcoin"
+  ],
+  "targetType": "Chain",
+  "category": "client-bug",
+  "technique": "Consensus split between client versions",
+  "classificationNote": null,
+  "classifiedBy": "curated",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "client-bug",
+    "confidence": 0.98,
+    "top": [
+      {
+        "category": "client-bug",
+        "p": 0.98
+      },
+      {
+        "category": "consensus-attack",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.01,
+    "stateActor": 0.01,
+    "hasRootCause": 0.7
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "Bitcoin 0.8 switched from BerkeleyDB to LevelDB. A large block exceeded BerkeleyDB lock limits in 0.7 nodes, so 0.7 rejected it and 0.8 accepted it, splitting the chain. Miners coordinated a downgrade; one merchant lost ~$10k to a double-spend. (BIP 50, CVE-2013-3220)",
+  "descriptions": [
+    {
+      "source": "Curated post-mortem",
+      "text": "Bitcoin 0.8 switched from BerkeleyDB to LevelDB. A large block exceeded BerkeleyDB lock limits in 0.7 nodes, so 0.7 rejected it and 0.8 accepted it, splitting the chain. Miners coordinated a downgrade; one merchant lost ~$10k to a double-spend. (BIP 50, CVE-2013-3220)"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "curated"
+  ],
+  "references": [
+    {
+      "source": "curated",
+      "label": "BIP 50 post-mortem",
+      "url": "https://github.com/bitcoin/bips/blob/master/bip-0050.mediawiki"
+    }
+  ]
+}

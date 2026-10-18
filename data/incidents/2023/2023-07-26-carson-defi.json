@@ -1,0 +1,151 @@
+{
+  "id": "2023-07-26-carson-defi",
+  "name": "Carson DeFi",
+  "date": "2023-07-26",
+  "year": 2023,
+  "amountUsd": 150000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.92,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.92
+      },
+      {
+        "category": "market-manipulation",
+        "p": 0.05
+      },
+      {
+        "category": "logic-error",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.97,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Price manipulation. Lost: ~$150K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Price manipulation. Lost: ~$150K"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The root cause was the attacker repeatedly called the swapExactTokensForTokensSupportingFeeOnTransferTokens function in the 0x2bdf...341a contract (not open-source) through flash loans, swapped for $BUSD and burned $Carson in the pair, then repeatedly inflated the price of $Carson for profit. Attack TX: https://bscscan.com/tx/0x37d921a6bb0ecdd8f1ec918d795f9c354727a3ff6b0dba98a512fceb9662a3ac Analysis: https://twitter.com/Phalcon_xyz/status/1684503154023448583"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The BSC ecology Carson was attacked and lost about $145,000. At present, the price of Carson tokens has dropped by 96%, and the attacker has exchanged the stolen assets for 600 BNB and transferred them to Tornado Cash. The attacker repeatedly called the swapExactTokensForTokensSupportingFeeOnTransferTokens function in the 0x2bdf...341a contract (not open-source) through flash loans, swapped for BUSD and burned Carson in the pair, then repeatedly inflated the price of Carson for profit."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Carson DeFi was exploited on BNB Chain on July 26, 2023, for approximately $150,000, through flash-loan-assisted price manipulation targeting a custom AMM pool. The attacker skewed the pool's price using large BUSDT flash loans, repeated swaps, and extracted value via unsafe fee-on-transfer token handling. Unsafe handling of a fee-on-transfer token in a custom, closed-source AMM pool allowed price and reserve distortion. The AMM pool's reserve and pricing logic failed to account for the deflationary mechanics of Carson, enabling manipulation with flash-loan-amplified liquidity."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x37d921a6bb0ecdd8f1ec918d795f9c354727a3ff6b0dba98a512fceb9662a3ac",
+    "0xcd781fec34b46f8c7372a9fcc7604c210b40442dc4f1a5c274fc3f9283df39ce",
+    "0xed52a42b2f45e4dea8d07f70d645931e4f6da65e9ab281cd3dbb9d9d21febb45",
+    "0x6a94a644856c3aa1db8249b700956379b6b3a18de9b8811566fbd56c89240a01"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-07/Carson_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-07/Carson_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BeosinAlert/status/1684393202252402688"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Phalcon_xyz/status/1684503154023448583"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/hexagate_/status/1684475526663004160"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/search?q=%24BUSD&src=cashtag_click"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/search?q=%24Carson&src=cashtag_click"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x37d921a6bb0ecdd8f1ec918d795f9c354727a3ff6b0dba98a512fceb9662a3ac"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xcd781fec34b46f8c7372a9fcc7604c210b40442dc4f1a5c274fc3f9283df39ce"
+    },
+    {
+      "source": "blocksec",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Phalcon_xyz/status/1684272129859289088"
+    },
+    {
+      "source": "blocksec",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs?tab=readme-ov-file#20230726-carson---price-manipulation"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BeosinAlert/status/1684393202252402688?s=20"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/carson-defi-2023-07-26"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/carson-hack-2023"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/src/test/2023-07/Carson_exp.sol"
+    }
+  ]
+}

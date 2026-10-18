@@ -1,0 +1,71 @@
+{
+  "id": "2022-10-06-bsc-token-hub",
+  "name": "BSC Token Hub",
+  "date": "2022-10-06",
+  "year": 2022,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [
+    "BNB Smart Chain",
+    "BNB Beacon Chain"
+  ],
+  "targetType": null,
+  "category": "bridge-crosschain",
+  "technique": "Bridge exploit; Forged IAVL proof verification",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 1.00).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "bridge-crosschain",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "bridge-crosschain",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.03,
+    "hasRootCause": 0.97
+  },
+  "bridge": true,
+  "language": null,
+  "rootCause": "On 2022-10-06, BNB Chain's BSC Token Hub accepted forged proof data, minted 2 million BNB on BNB Smart Chain, and triggered a validator-coordinated pause that stopped most of the value from leaving the chain. BNB Chain later said about $100 million remained unrecovered after containment. The bridge's proof-verification path accepted forged IAVL proof data as if it came from a real Beacon Chain event. That let BSC Token Hub mint BNB on BSC without a valid source-chain commitment.",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "On 2022-10-06, BNB Chain's BSC Token Hub accepted forged proof data, minted 2 million BNB on BNB Smart Chain, and triggered a validator-coordinated pause that stopped most of the value from leaving the chain. BNB Chain later said about $100 million remained unrecovered after containment. The bridge's proof-verification path accepted forged IAVL proof data as if it came from a real Beacon Chain event. That let BSC Token Hub mint BNB on BSC without a valid source-chain commitment."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x05356fd06ce56a9ec5b4eaf9c075abd740cae4c21eab1676440ab5cd2fe5c57a",
+    "0x79575ff791606ef2c7d69f430d1fee1c25ef8d56275da94e6ac49c9c4cc5f433"
+  ],
+  "poc": null,
+  "sources": [
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/million-dollars-bsc-token-hub-bridge-2024-06-19"
+    },
+    {
+      "source": "revertiq",
+      "label": "quillaudits.com",
+      "url": "https://www.quillaudits.com/blog/hack-analysis/bsc-token-hub-bridge-hack"
+    },
+    {
+      "source": "revertiq",
+      "label": "bnbchain.org",
+      "url": "https://www.bnbchain.org/en/blog/bnb-chain-ecosystem-update"
+    },
+    {
+      "source": "revertiq",
+      "label": "bnbchain.org",
+      "url": "https://www.bnbchain.org/en/blog/bnb-chain-a-decentralized-response"
+    }
+  ]
+}

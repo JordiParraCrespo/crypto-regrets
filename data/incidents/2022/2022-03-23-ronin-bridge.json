@@ -1,0 +1,138 @@
+{
+  "id": "2022-03-23-ronin-bridge",
+  "name": "Ronin Bridge",
+  "date": "2022-03-23",
+  "year": 2022,
+  "amountUsd": 624000000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "social-engineering",
+  "technique": "5 of 9 validator keys compromised",
+  "classificationNote": "Curated: reclassified from \"key-compromise\" based on the published post-mortem.",
+  "classifiedBy": "curated",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "key-compromise",
+    "confidence": 0.73,
+    "top": [
+      {
+        "category": "key-compromise",
+        "p": 0.75
+      },
+      {
+        "category": "social-engineering",
+        "p": 0.15000000000000002
+      },
+      {
+        "category": "bridge-crosschain",
+        "p": 0.06
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.96,
+    "hasRootCause": 0.97
+  },
+  "bridge": true,
+  "language": null,
+  "rootCause": "Lazarus Group compromised a Sky Mavis engineer via a fake job offer, obtaining 4 Sky Mavis validator keys. A stale allow-list that let Sky Mavis sign on behalf of the Axie DAO validator supplied the 5th signature. The theft went unnoticed for 6 days. Lessons: validator independence, monitoring, revoking temporary permissions.",
+  "descriptions": [
+    {
+      "source": "Curated post-mortem",
+      "text": "Lazarus Group compromised a Sky Mavis engineer via a fake job offer, obtaining 4 Sky Mavis validator keys. A stale allow-list that let Sky Mavis sign on behalf of the Axie DAO validator supplied the 5th signature. The theft went unnoticed for 6 days. Lessons: validator independence, monitoring, revoking temporary permissions."
+    },
+    {
+      "source": "DeFiHackLabs",
+      "text": "Bridge. Lost: $624 million"
+    },
+    {
+      "source": "REKT",
+      "text": "A new number one on the leaderboard. ~$624M stolen from Ronin Network, but nobody even noticed for 6 days. Will the attacker try to launder the loot?"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The attacker compromised Sky Mavis systems and then exploited this allowlist to generate a signature from the third-party validator controlled by Axie DAO. Vulnerable code snippet: Attack tx: https://etherscan.io/tx/0xc28fad5e8d5e0ce6a2eaf67b6687be5d58113e16be590824d6cfa1a94467d0b7 https://etherscan.io/tx/0xed2c72ef1a552ddaec6dd1f5cddf0b59a8f37f82bdda5257d9c7c37db7bb9b08 Analysis: https://rekt.news/ronin-rekt/ https://www.halborn.com/blog/post/explained-the-ronin-hack-march-2022"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Axie Infinity sidechain Ronin Network issued a community alert today. Ronin Network experienced a security breach. Ronin bridge 17.36w ETH and 25.5M USDC were stolen, with a loss of more than 610 million US dollars. As stated by the Ronin developers, the attacker used the hacked private key to forge fake withdrawals, pulling funds out of the Ronin bridge in just two transactions. It is reported that this incident is suspected to be related to the North Korean hacker group Lazarus Group."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Ronin's Ethereum bridge lost 173,600 ETH and 25.5 million USDC on March 23, 2022. Compromised validator authority and a lingering Axie DAO approval path let the attacker reach the bridge's five-signature threshold. Discovery followed six days later. Ronin attributed the withdrawals to compromised validator authority. Sky Mavis controlled four approval paths, while residual Axie DAO delegation supplied a fifth. Correlated signer control and an unrevoked temporary permission defeated the practical independence of the 5-of-9 threshold."
+    }
+  ],
+  "audit": "Unaudited",
+  "txHashes": [
+    "0xc28fad5e8d5e0ce6a2eaf67b6687be5d58113e16be590824d6cfa1a94467d0b7",
+    "0xed2c72ef1a552ddaec6dd1f5cddf0b59a8f37f82bdda5257d9c7c37db7bb9b08"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-03/Ronin_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "slowmist",
+    "revertiq",
+    "curated"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-03/Ronin_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "rekt.news",
+      "url": "https://rekt.news/ronin-rekt/"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xc28fad5e8d5e0ce6a2eaf67b6687be5d58113e16be590824d6cfa1a94467d0b7"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xed2c72ef1a552ddaec6dd1f5cddf0b59a8f37f82bdda5257d9c7c37db7bb9b08"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Ronin Network - REKT",
+      "url": "https://rekt.news/ronin-rekt"
+    },
+    {
+      "source": "slowmist",
+      "label": "roninblockchain.substack.com",
+      "url": "https://roninblockchain.substack.com/p/community-alert-ronin-validators?s=w"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/ronin-network-2022-03-29"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.roninchain.com",
+      "url": "https://blog.roninchain.com/p/the-ronin-bridge-is-open-"
+    },
+    {
+      "source": "curated",
+      "label": "Ronin post-mortem",
+      "url": "https://roninchain.com/blog/posts/back-to-building-ronin-security-breach-6513cc78a5edc1001b03c364"
+    }
+  ]
+}

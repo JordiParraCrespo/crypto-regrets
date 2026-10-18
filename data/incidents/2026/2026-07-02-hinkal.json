@@ -1,0 +1,112 @@
+{
+  "id": "2026-07-02-hinkal",
+  "name": "Hinkal",
+  "date": "2026-07-02",
+  "year": 2026,
+  "amountUsd": 820000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Deposit Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.82,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.83
+      },
+      {
+        "category": "signature-crypto",
+        "p": 0.17
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Double-spend attack on shielded pool via legacy note format flaw. Attacker derived multiple nullifiers from single deposit, circumventing withdrawal restrictions. Circuit-level binding gap failed to bind nullifier uniquely to original note, enabling repeated withdrawals. Source: https://twitter.com/Phalcon_xyz/status/2075140868886155637",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Double-spend attack on shielded pool via legacy note format flaw. Attacker derived multiple nullifiers from single deposit, circumventing withdrawal restrictions. Circuit-level binding gap failed to bind nullifier uniquely to original note, enabling repeated withdrawals. Source: https://twitter.com/Phalcon_xyz/status/2075140868886155637"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Hinkal privacy DeFi protocol's Ethereum contract was exploited. The attacker used a \"proofless deposit\" vulnerability to drain approximately $820K USDC, then converted it to ETH and laundered via Tornado Cash and THORChain. The team paused contracts, limited the incident to one Ethereum pool, and committed to 1:1 user compensation."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On July 2, 2026, Hinkal's shielded-pool protocol on Ethereum was exploited for about $800K in a double-spend attack. The incident resulted from a legacy note format flaw that allowed a single deposit to be withdrawn multiple times, with proceeds laundered through Tornado Cash and THORChain. The legacy note format permitted multiple valid nullifiers per deposit because the nullifying key (nk) was only bound through its product with a random value, rather than directly. This weak binding enabled one deposit to be spent repeatedly, as the contract delegated nullifier uniqueness enforcement entirely to the zero-knowledge circuit rather than an independent on-chain check."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x93a63d649878bb7e57741117362b7bc99b602f90335ea5fbff0365c4f2486228",
+    "0xbf7252af56be8867a12e27cc332f85e8f39e906756e559d6a076dc8bd9d50008",
+    "0xfbedf0cd7ffb36b17cb963789ec68529a9125bb891aa3bede9fd66e9ce8c2f11"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Phalcon_xyz/status/2075140868886155637"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x93a63d649878bb7e57741117362b7bc99b602f90335ea5fbff0365c4f2486228"
+    },
+    {
+      "source": "blocksec",
+      "label": "x.com",
+      "url": "https://x.com/hinkal_protocol/status/2073005660946551226"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/hinkal_protocol/status/2073136163880149417"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/hinkal-2026-07-02"
+    },
+    {
+      "source": "revertiq",
+      "label": "blocksec.com",
+      "url": "https://blocksec.com/blog/web3-security-hinkal-double-spend"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptotimes.io",
+      "url": "https://www.cryptotimes.io/2026/07/03/hinkal-protocol-exploited-820k-laundered-via-tornado-cash-thorchain/"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptotimes.io",
+      "url": "https://www.cryptotimes.io/2026/07/03/hinkal-protocol-reveals-initial-cause-behind-820k-ethereum-exploit/"
+    }
+  ]
+}

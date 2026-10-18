@@ -1,0 +1,92 @@
+{
+  "id": "2025-03-30-leveragesir",
+  "name": "LeverageSIR",
+  "date": "2025-03-30",
+  "year": 2025,
+  "amountUsd": 353800,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Storage SLOT1 collision",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.74).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.74,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.76
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.11
+      },
+      {
+        "category": "logic-error",
+        "p": 0.11
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Storage SLOT1 collision. Lost: ~ 353.8 K (17814,86 USDC, 1,4085 WBTC, 119,87 WETH)",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Storage SLOT1 collision. Lost: ~ 353.8 K (17814,86 USDC, 1,4085 WBTC, 119,87 WETH)"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The SIR Vault uses EIP-1153 transient storage and writes an attacker-influenced value into transient SLOT 1 during mint (effectively tstore(1, amount)), where that slot is later read and interpreted as the address authorized to invoke the uniswapV3SwapCallback (the Uniswap V3 swap callback caller). The attacker first manipulated SLOT 1 so its value equaled a specific address (95759995883742311247042417521410689 == 0x00000000001271551295307acc16ba1e7e0d4281), then used the immutable CREATE2 factory to deploy an arbitrary-call contract at exactly that address. Because the vault trusted the value in the colliding transient slot as the legitimate callback caller, the attacker-controlled contract could call uniswapV3SwapCallback and have the vault transfer out all its USDC, then WBTC, then WETH (~$353.8K). The fake debt/collateral tokens (AttackerC_A/B) and the ordering loop were needed to drive the vault's pool initialization and pass its checks. Vulnerable code snippet: Attack Tx: https://etherscan.io/tx/0xa05f047ddfdad9126624c4496b5d4a59f961ee7c091e7b4e38cee86f1335736f Analysis: PoC author rotcivegaf on X/Twitter"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xa05f047ddfdad9126624c4496b5d4a59f961ee7c091e7b4e38cee86f1335736f"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-03/LeverageSIR_exp.sol",
+  "sources": [
+    "defihacklabs",
+    "blocksec"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-03/LeverageSIR_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/TenArmorAlert/status/1906268185046745262"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xa05f047ddfdad9126624c4496b5d4a59f961ee7c091e7b4e38cee86f1335736f"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/rotcivegaf"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xa05f047ddfdad9126624c4496b5d4a59f961ee7c091e7b4e38cee86f1335736f"
+    },
+    {
+      "source": "blocksec",
+      "label": "x.com",
+      "url": "https://x.com/DecurityHQ/status/1906270316935942350"
+    }
+  ]
+}

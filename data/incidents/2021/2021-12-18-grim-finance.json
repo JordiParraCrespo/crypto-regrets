@@ -1,0 +1,137 @@
+{
+  "id": "2021-12-18-grim-finance",
+  "name": "Grim Finance",
+  "date": "2021-12-18",
+  "year": 2021,
+  "amountUsd": 30000000,
+  "returnedUsd": null,
+  "chains": [
+    "Fantom"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "reentrancy",
+  "technique": "Reentrancy",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "reentrancy",
+    "confidence": 0.55,
+    "top": [
+      {
+        "category": "reentrancy",
+        "p": 0.58
+      },
+      {
+        "category": "input-validation",
+        "p": 0.41
+      },
+      {
+        "category": "access-control",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.94
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Flashloan & Reentrancy. Lost: $30 million",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Flashloan & Reentrancy. Lost: $30 million"
+    },
+    {
+      "source": "REKT",
+      "text": "Don’t fear the reaper. Grim Finance is rekt. $30M gone, position 18 on the leaderboard."
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Insufficient validation & Reentrancy Vulnerable code snippet: https://ftmscan.com/address/0x660184ce8af80e0b1e5a1172a16168b15f4136bf#code#L1115 Due to token is controllable, the attacker can send fake tokens to the GrimBoostVault through the fake contract created by attacker. Then successful to mint protocol token."
+    },
+    {
+      "source": "SlowMist",
+      "text": "According to official sources, GrimFinance, a compound income platform on the Fantom chain, suffered a lightning loan attack, and the current loss has exceeded 30 million U.S. dollars. The attacker uses the function named \"beforeDeposit()\" in GrimFinance's vault strategy to attack and enter the malicious Token contract."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On December 19, 2021, Grim Finance on Fantom was exploited for approximately $30 million after an attacker abused a reentrancy vulnerability in the depositFor function, inflating vault shares and withdrawing excessive assets. The depositFor function in the Grim Finance vault contract executed an external token transfer before updating user share balances. This allowed a malicious token's transfer callback to reenter depositFor, causing multiple share minting for a single deposit and enabling the attacker to drain assets."
+    }
+  ],
+  "audit": "Solidity Finance",
+  "txHashes": [
+    "0x19315e5b150d0a83e797203bb9c957ec1fa8a6f404f4f761d970cb29a74a5dd6"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2021-12/Grim_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2021-12/Grim_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "cointelegraph.com",
+      "url": "https://cointelegraph.com/news/defi-protocol-grim-finance-lost-30m-in-5x-reentrancy-hack"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "rekt.news",
+      "url": "https://rekt.news/grim-finance-rekt/"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "ftmscan.com",
+      "url": "https://ftmscan.com/tx/0x19315e5b150d0a83e797203bb9c957ec1fa8a6f404f4f761d970cb29a74a5dd6"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Grim Finance - REKT",
+      "url": "https://rekt.news/grim-finance-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "ftmscan.com",
+      "url": "https://ftmscan.com/address/0x660184ce8af80e0b1e5a1172a16168b15f4136bf#code#L1115"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/financegrim/status/1472357770846519312"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/grim-finance-2021-12-19"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "quadrigainitiative.com",
+      "url": "https://www.quadrigainitiative.com/casestudy/grimfinancereentrancyattack.php"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/past/2021/README.md#L133"
+    }
+  ]
+}

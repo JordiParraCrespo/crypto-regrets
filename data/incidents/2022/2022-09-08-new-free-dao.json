@@ -1,0 +1,125 @@
+{
+  "id": "2022-09-08-new-free-dao",
+  "name": "New Free DAO",
+  "date": "2022-09-08",
+  "year": 2022,
+  "amountUsd": 1250000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Reward Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.96,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.96
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.03
+      },
+      {
+        "category": "access-control",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.84
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Flashloans Attack. Lost: 1M US$",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Flashloans Attack. Lost: 1M US$"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Incorrect reward calculation Vulnerable code snippet: need to decompile https://bscscan.com/address/0x8b068e22e9a4a9bca3c321e0ec428abf32691d1e Reward calcuates by the caller's NFD token balance and transfers the reward to caller."
+    },
+    {
+      "source": "SlowMist",
+      "text": "The New Free Dao project on the BSC chain suffered a flash loan attack. According to SlowMist analysis, the main reason for this attack is that the way of calculating rewards in the contract is too simple, and it only depends on the balance of the caller, which leads to arbitrage by flash loans."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On September 8, 2022, New Free DAO on BNB Chain suffered a flash loan exploit that took advantage of flawed reward calculation logic in its unverified contract. The attacker drained ~4,481 WBNB worth over $1.25 million by amplifying rewards using flash-loaned NFD tokens. The reward contract failed to restrict reward claims based on flash-loaned balances. The rewards logic used a combination of token holdings and deposit time but did not implement protections against artificially inflating claims through instant, large borrowings within a single block."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x1fea385acf7ff046d928d4041db017e1d7ead66727ce7aacb3296b9d485d4a26",
+    "0xb6f9b5ef1feeadb379a2de8f79bb04dd6920bfb214136d057eed4ce23a0003f8",
+    "0x8b77d75efa185295b09bdf2edcb509541fdde40ed5484212331ceac41b2f4ac0",
+    "0xec2cc6bcf82880501a26d64e2efc0a2e7fe4ad4df38563d4769bf740c650730e"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-09/NewFreeDAO_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-09/NewFreeDAO_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/SlowMist_Team/status/1567854876633309186"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x1fea385acf7ff046d928d4041db017e1d7ead66727ce7aacb3296b9d485d4a26"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0x8b068e22e9a4a9bca3c321e0ec428abf32691d1e"
+    },
+    {
+      "source": "slowmist",
+      "label": "mobile.twitter.com",
+      "url": "https://mobile.twitter.com/SlowMist_Team/status/1567854876633309186"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/new-free-dao-2022-09-08"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "halborn.com",
+      "url": "https://www.halborn.com/blog/post/explained-the-new-free-dao-hack-september-2022"
+    },
+    {
+      "source": "revertiq",
+      "label": "certik.com",
+      "url": "https://www.certik.com/blog/new-free-dao-incident-analysis"
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "id": "2022-02-18-rigoblock",
+  "name": "Rigoblock",
+  "date": "2022-02-18",
+  "year": 2022,
+  "amountUsd": 464000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.36
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "RigoBlock has been hacked. All tokens in Dragos except ETH and USDT are at risk due to protocol vulnerabilities being exploited. The hacker, Whitehat, has returned funds to the affected RigoBlock pool, leaving only 10% of the bug bounty reward.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "RigoBlock has been hacked. All tokens in Dragos except ETH and USDT are at risk due to protocol vulnerabilities being exploited. The hacker, Whitehat, has returned funds to the affected RigoBlock pool, leaving only 10% of the bug bounty reward."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On February 17, 2022, an improper access control flaw in Rigoblock's Dragos contracts on Ethereum allowed attackers to manipulate token allowances, resulting in losses of approximately $464,000. Most funds were returned by a white-hat after the attack. The setMultipleAllowances() function in Rigoblock Dragos contracts lacked a proper onlyOwner restriction, allowing unauthorized users to modify token allowances and move pooled assets."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x5a6c108d5a729be2011cd47590583a04444d4e7c85cd0427071b968edc3bfc1f"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/RigoBlock/status/1494351180713050116"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/rigoblock-2022-02-18"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/rigoblock-hack-2022"
+    },
+    {
+      "source": "revertiq",
+      "label": "quadrigainitiative.com",
+      "url": "https://quadrigainitiative.com/casestudy/rigoblockmissingaccesscontrols.php"
+    }
+  ]
+}

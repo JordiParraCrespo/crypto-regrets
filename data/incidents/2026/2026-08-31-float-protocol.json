@@ -1,0 +1,98 @@
+{
+  "id": "2026-08-31-float-protocol",
+  "name": "Float Protocol",
+  "date": "2026-08-31",
+  "year": 2026,
+  "amountUsd": 28000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.97,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.97
+      },
+      {
+        "category": "market-manipulation",
+        "p": 0.02
+      },
+      {
+        "category": "logic-error",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.11,
+    "stateActor": 0.02,
+    "hasRootCause": 0.78
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Uniswap V3 spot price manipulation of Hypervisor LP shares. Lost: ~$28,000 (10.71 ETH)",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Uniswap V3 spot price manipulation of Hypervisor LP shares. Lost: ~$28,000 (10.71 ETH)"
+    },
+    {
+      "source": "SlowMist",
+      "text": "An attacker used a flash loan to execute large swaps on a Uniswap V3 pool and manipulate the spot price (slot0). This caused Float Protocol’s Hypervisor contracts to misprice LP shares. Because critical functions lacked TWAP/oracle validation and slippage protection, the attacker repeatedly deposited and withdrew at inflated share values, extracting about $28,000 (10.71 ETH)."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Float Protocol was exploited on Ethereum mainnet on 31 August 2026. An attacker manipulated the Uniswap V3 pool's spot price to distort LP share values in Hypervisor contracts, enabling extraction of approximately 10.71 ETH (~$28,000). The attack relied on flash loans and lacked price validation safeguards. Float Protocol Hypervisor contracts priced LP shares using immediate Uniswap V3 spot (slot0) price without TWAP or oracle validation. Large flash-loan-enabled swaps manipulated this spot price, resulting in inflated LP share calculations and repeated value extraction."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x3d7549db65344da2a41067e17791b17fac16ec6b8e5132e82e243f6541de5cff"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-08/FloatProtocol_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-08/FloatProtocol_exp.sol"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/2094373942291026287"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/float-protocol-2026-08-31"
+    },
+    {
+      "source": "revertiq",
+      "label": "crypto.news",
+      "url": "https://crypto.news/float-protocol-hit-by-28k-flash-loan-attack-through-uniswap-v3-manipulation/"
+    },
+    {
+      "source": "revertiq",
+      "label": "coinalertnews.com",
+      "url": "https://coinalertnews.com/news/2026/08/31/balancer-floatprotocol-defi-exploits"
+    }
+  ]
+}

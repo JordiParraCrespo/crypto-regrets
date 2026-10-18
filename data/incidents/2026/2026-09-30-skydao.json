@@ -1,0 +1,62 @@
+{
+  "id": "2026-09-30-skydao",
+  "name": "SKYDAO",
+  "date": "2026-09-30",
+  "year": 2026,
+  "amountUsd": 183482.88,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Swap Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.99
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "sell-path controller burns the pair's SKYDAO and syncs before the net sell is credited, latching a near-zero reserve that a direct pair.swap drains for the pair's entire USDT. Lost: 59,914.12 USDT net to the attacker (exactly reproduced) on BNB Chain; the SKYDAO/USDT PancakeSwap V2 pair lost its entire 183,482.88 USDT reserve, drained by a direct pair.swap against the reserve the sell-path burn+sync latched to ~0",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "sell-path controller burns the pair's SKYDAO and syncs before the net sell is credited, latching a near-zero reserve that a direct pair.swap drains for the pair's entire USDT. Lost: 59,914.12 USDT net to the attacker (exactly reproduced) on BNB Chain; the SKYDAO/USDT PancakeSwap V2 pair lost its entire 183,482.88 USDT reserve, drained by a direct pair.swap against the reserve the sell-path burn+sync latched to ~0"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-09/SKYDAO_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-09/SKYDAO_exp.sol"
+    }
+  ]
+}

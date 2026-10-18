@@ -1,0 +1,98 @@
+{
+  "id": "2022-09-28-bxh",
+  "name": "BXH",
+  "date": "2022-09-28",
+  "year": 2022,
+  "amountUsd": 40305,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Flashloan & Price Oracle Manipulation",
+  "classificationNote": "Classified by keyword rules from the DeFiHackLabs root-cause title.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.47,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.5
+      },
+      {
+        "category": "logic-error",
+        "p": 0.47
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.03
+      }
+    ],
+    "flashLoan": 0.55,
+    "stateActor": 0.02,
+    "hasRootCause": 0.88
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Flashloan & Price Oracle Manipulation. Lost: $40,305",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Flashloan & Price Oracle Manipulation. Lost: $40,305"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Incorrect Reward calculation Vulnerable code snippet: https://bscscan.com/address/0x27539b1dee647b38e1b987c41c5336b1a8dce663#code#L1606 Incorrect use of getReserves() to get amount of balance in the pool to calculate bonus via getAmountOut()"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The TokenStakingPoolDelegate contract updated by BXH after the last attack suffered another flash loan attack. The contract lost 40,085 USDT, and the attacker made a profit of 31,794 USDT after paying off the flash loan fee. After analysis, this attack is caused by the use of getReserves() in the contract's getITokenBonusAmount function to obtain the instantaneous quotation, so that the attacker can make a profit by manipulating the quotation."
+    },
+    {
+      "source": "SlowMist",
+      "text": "According to the SlowMist security team, according to the BXH Stupid Kids team’s announcement on September 23, a total of $2.5 million worth of assets and 38 million BXH tokens were stolen the night before yesterday (September 21). According to the analysis and evaluation of SlowMist MistTrack, the private key of the original owner of the BXH VaultPool contract is suspected to be stolen, and the inCaseTokensGetStuck function is called to transfer the funds in the contract to the hacker's address. The hacker's address is 0x158f...e345. Up to now, the hacker has exchanged the stolen funds to the ETH chain across the chain, and further transferred all the…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-09/BXH_exp.sol",
+  "sources": [
+    "defihacklabs",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-09/BXH_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "www.jinse.com",
+      "url": "https://www.jinse.com/lives/319392.html"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0xa13c8c7a0c97093dba3096c88044273c29cebeee109e23622cd412dcca8f50f4"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0x27539b1dee647b38e1b987c41c5336b1a8dce663#code#L1606"
+    },
+    {
+      "source": "slowmist",
+      "label": "odaily.news",
+      "url": "https://www.odaily.news/newsflash/300625"
+    },
+    {
+      "source": "slowmist",
+      "label": "news.cnyes.com",
+      "url": "https://news.cnyes.com/news/id/4962622"
+    }
+  ]
+}

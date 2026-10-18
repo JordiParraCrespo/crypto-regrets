@@ -1,0 +1,111 @@
+{
+  "id": "2021-02-05-yearn-finance",
+  "name": "Yearn Finance",
+  "date": "2021-02-05",
+  "year": 2021,
+  "amountUsd": 11000000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.78,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.79
+      },
+      {
+        "category": "market-manipulation",
+        "p": 0.12
+      },
+      {
+        "category": "logic-error",
+        "p": 0.09
+      }
+    ],
+    "flashLoan": 0.1,
+    "stateActor": 0.02,
+    "hasRootCause": 0.74
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Slippage proection absent. Lost: 11 Million $",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Slippage proection absent. Lost: 11 Million $"
+    },
+    {
+      "source": "REKT",
+      "text": "No protocol is too big to fail. The extreme power of flash loans makes blue chips fade to black. Even the mighty Yearn falls victim to the arbitrageur. Will Yearn be bailed out by CeFi?"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On February 4, 2021, Yearn Finance’s v1 yDAI vault on Ethereum lost $11 million after an attacker repeatedly manipulated Curve 3pool’s stablecoin balances, exploiting loose slippage limits and permissionless strategy calls to drain vault funds through a flash-loan-powered cycle. The v1 yDAI vault’s Curve strategy accounted for deposits and withdrawals using spot exchange rates from Curve 3pool, which were manipulable within a single transaction. Loose slippage checks (1%), disabled withdrawal fees (0%), and permissionless access to push deposits enabled the attacker to profitably cycle pool imbalances, draining value from the vault. The system assumed…"
+    }
+  ],
+  "audit": "Unaudited",
+  "txHashes": [
+    "0x59faab5a1911618064f1ffa1e4649d85c99cfd9f0d64dcebbc1af7d7630da98b",
+    "0xf6022012b73770e7e2177129e648980a82aab555f9ac88b8a9cda3ec44b30779",
+    "0x9875bec8588fe18facdb44bfa17a1fc396cd2f095f1426b8813e8cbc84302f72",
+    "0x8035321e1cfceefea464121fe8ed41ee79fef2616f866ef9acc911b4584714d0"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2021-02/Yearn_ydai_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2021-02/Yearn_ydai_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "github.com",
+      "url": "https://github.com/yearn/yearn-security/blob/master/disclosures/2021-02-04.md"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x59faab5a1911618064f1ffa1e4649d85c99cfd9f0d64dcebbc1af7d7630da98b"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Yearn - REKT",
+      "url": "https://rekt.news/yearn-rekt"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/yearn-finance-2021-02-04"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/yearn-finance-exploit-explained-a10b07c280c8"
+    }
+  ]
+}

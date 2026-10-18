@@ -1,0 +1,104 @@
+{
+  "id": "2020-08-04-opyn",
+  "name": "Opyn",
+  "date": "2020-08-04",
+  "year": 2020,
+  "amountUsd": 371000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Withdrawal Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.99
+      },
+      {
+        "category": "input-validation",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.08,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "msgValue in loop",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "msgValue in loop"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Opyn, an on-chain options platform, disclosed that its Ethereum put options were maliciously exploited by external participants. Opyn pointed out that all other Opyn contracts except Ethereum put options are not affected by this vulnerability. The attacker doubled the use of oToken and stole the mortgage assets of the put option seller. According to Opyn statistics, a total of 371,260 USDC has been stolen so far. Because the exercise function exercise() in the Opyn ETH Put smart contract does not perform real-time verification of the trader's ETH. According to the business logic of the Opyn platform, the buyer of the put option transfers the correspond…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On August 4, 2020, an exploit in Opyn's ETH put option contracts on Ethereum allowed an attacker to drain roughly $371,000 in USDC by abusing the exercise logic to double-spend oTokens in a single transaction. The protocol fully reimbursed affected put sellers and secured remaining funds via coordinated white-hat recovery. The Opyn ETH put option contract allowed the exercise function to use the same msg.value for multiple internal exercise calls within a single transaction, enabling double spending of ETH put oTokens and USDC collateral when exercising against multiple vaults simultaneously."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x56de6c4bd906ee0c067a332e64966db8b1e866c7965c044163a503de6ee6552a"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2020-08/Opyn_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2020-08/Opyn_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "medium.com",
+      "url": "https://medium.com/opyn/opyn-eth-put-exploit-post-mortem-1a009e3347a8"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x56de6c4bd906ee0c067a332e64966db8b1e866c7965c044163a503de6ee6552a"
+    },
+    {
+      "source": "slowmist",
+      "label": "medium.com",
+      "url": "https://medium.com/opyn/opyn-eth-put-exploit-c5565c528ad2"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/opyn-2020-08-04"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptobriefing.com",
+      "url": "https://cryptobriefing.com/defi-options-protocol-opyn-hacked-371000-lost/"
+    }
+  ]
+}

@@ -1,0 +1,129 @@
+{
+  "id": "2026-04-12-hyperbridge",
+  "name": "Hyperbridge",
+  "date": "2026-04-12",
+  "year": 2026,
+  "amountUsd": 2500000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum",
+    "Base",
+    "BSC",
+    "Arbitrum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "bridge-crosschain",
+  "technique": "Forged Proof",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "bridge-crosschain",
+    "confidence": 0.96,
+    "top": [
+      {
+        "category": "bridge-crosschain",
+        "p": 0.96
+      },
+      {
+        "category": "signature-crypto",
+        "p": 0.04
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": true,
+  "language": "Solidity",
+  "rootCause": "On April 13, 2026, a missing bounds check in Hyperbridge's MMR proof verifier allowed forged proofs to pass. 1 billion DOT minted. Two attacks, combined with opportunistic withdrawals from drained pools, leading to $2.5 million in losses according to Hyperbridge.",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "On April 13, 2026, a missing bounds check in Hyperbridge's MMR proof verifier allowed forged proofs to pass. 1 billion DOT minted. Two attacks, combined with opportunistic withdrawals from drained pools, leading to $2.5 million in losses according to Hyperbridge."
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The Hyperbridge cross-chain bridge (Polkadot) was exploited via a forged proof attack on its Ethereum TokenGateway contract. The root cause was a missing bounds check in the VerifyProof() function inside the HandlerV1.handlePostRequests handler — code written over two years before the attack. The attacker constructed a Merkle Mountain Range (MMR) proof that was not cryptographically bound to any specific cross-chain request, enabling it to be replayed against arbitrary targets. A zero-second challenge period provided no time-based defense, allowing the forged proof to execute immediately upon submission. The exploit gave the attacker unauthorized control to mint approximately 1 billion bridged DOT tokens on Ethereum, which were swapped into available DEX liquidity, extracting ~$242K from the TokenGateway in the initial Ethereum-side phase. Hyperbridge later revised its total multi-chain loss estimate upward to approximately $2.5M after accounting for additional impact on Arbitrum, Base, and BNB Chain across its incentive pools. Attack Tx: 0xb93aab835e4002f7d46b63e37a156c78abd1d9256df094d63321deeb514a0634 Analysis: Hyperbridge Responds to $237K Exploit, Pauses Bridge Activity — CryptoTimes Phalcon_xyz on X"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Based on monitoring by CertiK Alert, the Hyperbridge gateway contract fell victim to an exploit. The attacker utilized forged messages to manipulate administrative permissions of the Polkadot token contract on the Ethereum network. By unauthorized minting and liquidating 1 billion tokens, the attacker realized a profit of roughly $237,000. On April 16, it was reported that according to an official announcement from Hyperbridge, its token gateway was attacked on April 13. The estimated losses have been revised from approximately $237,000 to about $2.5 million, mainly affecting incentive liquidity pools on Ethereum, Base, BNB Chain, and Arbitrum."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On April 13, 2026, Hyperbridge’s cross-chain bridge contracts on Ethereum, Base, BNB Chain, and Arbitrum were exploited. An attacker bypassed a Merkle Mountain Range proof verification, forged a state proof, gained admin control, and minted nearly 1 billion unbacked bridged tokens, draining ~$2.5 million in liquidity across chains. A missing bounds check in the MMR proof verifier (HandlerV1 contract) allowed forged proofs to pass and messages to execute. The flawed verification did not bind proofs to requests or check that all leaves were consumed, enabling replay and forgery attacks that granted admin and mint roles to the attacker."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xb93aab835e4002f7d46b63e37a156c78abd1d9256df094d63321deeb514a0634",
+    "0x6f1efcde4a52db999c8cd233364d889292ae5ba357d9f2ead3dd3774010a0808",
+    "0x743f4bdb67df7e6db57346e557f94ded8d7f85e854040963b7f345545e227125",
+    "0xb80c7d4cde034689eb9aa42f0d28aa01d12e233e3805a7c8888ed871b7443c3a",
+    "0xb28ab9526e1538bdb7a26ec8485d055f9e417620c72a2f4de0f42234b5f8ac09",
+    "0x240aeb9a8b2aabf64ed8e1e480d3e7be140cf530dc1e5606cb16671029401109",
+    "0xfa23fb22cc8ff10518e561817dea838d3232f7573fd90bd81fd7a30a9161b6f6"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Hyperbridge - Rekt",
+      "url": "https://rekt.news/hyperbridge-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.phalcon.blocksec.com",
+      "url": "https://app.phalcon.blocksec.com/explorer/tx/eth/0xb93aab835e4002f7d46b63e37a156c78abd1d9256df094d63321deeb514a0634"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "cryptotimes.io",
+      "url": "https://www.cryptotimes.io/2026/04/13/hyperbridge-responds-to-237k-exploit-pauses-bridge-activity/"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/Phalcon_xyz/status/2043567998662053982"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xb93aab835e4002f7d46b63e37a156c78abd1d9256df094d63321deeb514a0634"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/CertiKAlert/status/2043557571609731268"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/hyperbridge-2026-04-12"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.hyperbridge.network",
+      "url": "https://blog.hyperbridge.network/april-13-post-mortem/"
+    },
+    {
+      "source": "revertiq",
+      "label": "range.org",
+      "url": "https://range.org/blog/1-billion-tokens-minted-inside-the-hyperbridge-gateway-exploit"
+    }
+  ]
+}

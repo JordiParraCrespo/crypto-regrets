@@ -1,0 +1,88 @@
+{
+  "id": "2021-10-29-anubisdao",
+  "name": "AnubisDAO",
+  "date": "2021-10-29",
+  "year": 2021,
+  "amountUsd": 60000000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "rugpull",
+  "technique": "Admin Drain",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "rugpull",
+    "confidence": 0.98,
+    "top": [
+      {
+        "category": "rugpull",
+        "p": 0.98
+      },
+      {
+        "category": "access-control",
+        "p": 0.01
+      },
+      {
+        "category": "key-compromise",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.55
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "According to Etherscan data, the OHM imitation project AnubisDAO, which was launched at Copper Launch, withdrew its liquidity pool one day after it went online. It is suspected that the volume of money went off the road. A total of more than 13,556 ETH were transferred to the address @0x9fc, worth about 58.3 million U.S. dollars. Jayson, the founding partner of PFR Capital, pointed out that AnubisDAO is just a Twitter account that was only registered a few days ago. There is no website, white paper, medium, and no products.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "According to Etherscan data, the OHM imitation project AnubisDAO, which was launched at Copper Launch, withdrew its liquidity pool one day after it went online. It is suspected that the volume of money went off the road. A total of more than 13,556 ETH were transferred to the address @0x9fc, worth about 58.3 million U.S. dollars. Jayson, the founding partner of PFR Capital, pointed out that AnubisDAO is just a Twitter account that was only registered a few days ago. There is no website, white paper, medium, and no products."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "AnubisDAO suffered a loss of over 13,500 ETH (approximately $60 million) within 20 hours of its launch in October 2021, when control over the launch liquidity pool was used to drain funds to an external address. The lack of multisig or timelock controls allowed a single actor or compromised key to remove all user deposits. The critical permissions for the AnubisDAO liquidity bootstrapping pool were held by a single externally owned address, enabling immediate unilateral withdrawal of all funds. No multisig, timelock, or contract-enforced constraints were in place."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x551890a877c57cf19ddcb312c0a9962029225373daf2815f3720b723bd79b7b0"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "decrypt.co",
+      "url": "https://decrypt.co/84924/anubisdao-investors-lose-60-million-in-alleged-rug-pull"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/anubisdao-2021-10-29"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptobriefing.com",
+      "url": "https://cryptobriefing.com/60m-stolen-from-anubisdao-crypto-fundraise/"
+    },
+    {
+      "source": "revertiq",
+      "label": "quadrigainitiative.com",
+      "url": "https://www.quadrigainitiative.com/casestudy/anubisdaoliquiditypulled.php"
+    }
+  ]
+}

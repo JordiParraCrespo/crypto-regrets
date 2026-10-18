@@ -1,0 +1,103 @@
+{
+  "id": "2026-06-17-dip",
+  "name": "DIP",
+  "date": "2026-06-17",
+  "year": 2026,
+  "amountUsd": 111000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "Token",
+  "category": "logic-error",
+  "technique": "Swap Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.66,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.68
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.32
+      }
+    ],
+    "flashLoan": 0.79,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Fee-on-Transfer Reserve Manipulation. Lost: 111,097.59 USDC",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Fee-on-Transfer Reserve Manipulation. Lost: 111,097.59 USDC"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "DIP is a fee-on-transfer token whose buggy transfer pipeline lets an attacker desynchronize the DIP/AIC Pancake pair's reserves. After flash-swapping AIC and buying DIP, the attacker transfers a large amount of DIP directly into the pair (the 6% sell fee leaves slightly less than the pair's full DIP balance in the contract) and then calls skim to push the excess DIP out to the router rather than back to itself, followed by sync to lock in the shrunken DIP reserve. Because DIP's transfer accounting and the router's fee-supporting swap both mishandle the double router-transfer, the pair's DIP reserve is collapsed while its AIC reserve stays intact, making the AMM price wildly favorable. The attacker then swaps the remaining DIP for nearly all of the pair's AIC, repays the flash swap, and converts the residual AIC to ~111K USDC profit. Vulnerable code snippet: Attack Tx: https://bscscan.com/tx/0x1c09395848a87069c9d6ddbe5adc6249510aba7a2a83479a74b4280cafb5fb29 Analysis: TenArmorAlert"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The DIP token contract (Etherisc ecosystem) was exploited due to a missing return statement in the _transfer() function for PancakeSwap-routed trades, causing double transfers. The attacker used skim(router) and sync() to manipulate the pool and drain ~$111K USDC."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "DIP Protocol was exploited on BNB Chain on June 16, 2026, by an attacker who abused a flawed token transfer logic in the DIP contract. The bug allowed double count withdrawal from the DIP-AIC pair, resulting in a loss of approximately 111,098 USDC. The DIP token's internal _transfer function executed router-involved transfers twice instead of once, leading to a reserve-accounting mismatch that allowed the attacker to drain nearly all DIP liquidity from the pool."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x1c09395848a87069c9d6ddbe5adc6249510aba7a2a83479a74b4280cafb5fb29"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-06/DIP_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-06/DIP_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/TenArmorAlert/status/2067059314519417163"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x1c09395848a87069c9d6ddbe5adc6249510aba7a2a83479a74b4280cafb5fb29"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/2067078816514908286"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/dip-2026-06-17"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/DarkNavySecurity/web3-exploit-analysis/blob/main/reports/dip-double-transfer-exploit/report.md"
+    }
+  ]
+}

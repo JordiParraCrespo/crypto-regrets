@@ -1,0 +1,107 @@
+{
+  "id": "2025-10-15-typus-perp",
+  "name": "Typus Perp",
+  "date": "2025-10-15",
+  "year": 2025,
+  "amountUsd": 3440000,
+  "returnedUsd": null,
+  "chains": [
+    "Sui"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Oracle Misconfiguration",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.89,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.9
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.1
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Move",
+  "rootCause": "Typus Finance's TLP liquidity pool contract on the Sui blockchain relied on a custom-built oracle module deployed in November 2024, which was explicitly excluded from the project's May 2025 MoveBit security audit. The update_v2 function in this oracle module was missing a critical assert statement that should have enforced authorization — without it, any address could freely update on-chain asset prices without restriction. The attacker discovered this missing access control, manipulated prices for SUI, USDC, xBTC, and suiETH to arbitrary values, and performed swaps at those incorrect rates to drain approximately $3.44 million from the TLP pool. Liquidity providers in the TLP pool bore the full loss; funds in the SAFU and DeFi Options Vaults were unaffected because they used a separate validated oracle path. After detection at 13:24 UTC, the team paused all smart contracts within 15 minutes. Stolen assets were bridged to Ethereum and swapped to DAI, with the attacker's wallet initially funded via Tornado Cash. Attack Tx: 8stTi5mYWFtwoKNW1YiHRnhkXe48qPjgZHTHgXUzm9ZV Analysis: Typus Finance TLP Oracle Exploit Post-Mortem Report – Medium Explained: The Typus Finance Hack (October 2025) – Halborn",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Typus Finance's TLP liquidity pool contract on the Sui blockchain relied on a custom-built oracle module deployed in November 2024, which was explicitly excluded from the project's May 2025 MoveBit security audit. The update_v2 function in this oracle module was missing a critical assert statement that should have enforced authorization — without it, any address could freely update on-chain asset prices without restriction. The attacker discovered this missing access control, manipulated prices for SUI, USDC, xBTC, and suiETH to arbitrary values, and performed swaps at those incorrect rates to drain approximately $3.44 million from the TLP pool. Liquidity providers in the TLP pool bore the full loss; funds in the SAFU and DeFi Options Vaults were unaffected because they used a separate validated oracle path. After detection at 13:24 UTC, the team paused all smart contracts within 15 minutes. Stolen assets were bridged to Ethereum and swapped to DAI, with the attacker's wallet initially funded via Tornado Cash. Attack Tx: 8stTi5mYWFtwoKNW1YiHRnhkXe48qPjgZHTHgXUzm9ZV Analysis: Typus Finance TLP Oracle Exploit Post-Mortem Report – Medium Explained: The Typus Finance Hack (October 2025) – Halborn"
+    },
+    {
+      "source": "SlowMist",
+      "text": "According to Typus Finance’s post-incident analysis report, on October 15, 2025, an attacker exploited a critical vulnerability in the project’s oracle module to drain funds from the TLP contract. The stolen assets include 588,357.9 SUI, 1,604,034.7 USDC, 0.6 xBTC, and 32.227 suiETH, with an estimated total value of approximately USD 3.44 million."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Typus Perp's TLP contract on Sui was exploited on October 15, 2025, when the protocol's custom oracle allowed unauthorized price updates through a missing assertion. This flaw enabled attacker-driven price manipulation and drained approximately $3.44 million in SUI, USDC, xBTC, and suiETH. The Typus Perp oracle update function performed an authority check but discarded the result, failing to enforce authorization. Any account could update prices, enabling manipulation and loss."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "8stTi5mYWFtwoKNW1YiHRnhkXe48qPjgZHTHgXUzm9ZV",
+    "6KJvWtmrZDi5MxUPkJfDNZTLf2DFGKhQA2WuVAdSRUgH",
+    "0xaf44818c67a878b9eba0c63186b00e80d9fc3d1e2ae02f00fa3993b0e683bff3"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "suiscan.xyz",
+      "url": "https://suiscan.xyz/mainnet/tx/8stTi5mYWFtwoKNW1YiHRnhkXe48qPjgZHTHgXUzm9ZV"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "medium.com",
+      "url": "https://medium.com/@TypusFinance/typus-finance-tlp-oracle-exploit-post-mortem-report-response-plan-ce2d0800808b"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "halborn.com",
+      "url": "https://www.halborn.com/blog/post/explained-the-typus-finance-hack-october-2025"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=8stTi5mYWFtwoKNW1YiHRnhkXe48qPjgZHTHgXUzm9ZV"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/typus-perp-2025-10-15"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.ueex.com",
+      "url": "https://blog.ueex.com/crypto-hacks/typus-finance-hack/"
+    },
+    {
+      "source": "revertiq",
+      "label": "bitgetapp.com",
+      "url": "https://www.bitgetapp.com/news/detail/12560605019266"
+    }
+  ]
+}

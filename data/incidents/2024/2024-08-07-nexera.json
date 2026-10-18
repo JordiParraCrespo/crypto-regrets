@@ -1,0 +1,89 @@
+{
+  "id": "2024-08-07-nexera",
+  "name": "Nexera",
+  "date": "2024-08-07",
+  "year": 2024,
+  "amountUsd": 449000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "social-engineering",
+  "technique": "Malware",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "key-compromise",
+    "confidence": 0.96,
+    "top": [
+      {
+        "category": "key-compromise",
+        "p": 0.96
+      },
+      {
+        "category": "social-engineering",
+        "p": 0.04
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.93
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "An external attacker gained access to credentials for managing Nexera Fundrs platform's smart contracts. Using these credentials, the attacker transferred NXRA tokens from Fundrs' staking contracts on Ethereum. Out of the 47.24 million NXRA tokens stolen, the attacker was only able to sell 14.75 million tokens (approximately $449,000). Nexera successfully removed the remaining 32.5 million NXRA balance from the attacker's wallet, preventing further loss.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "An external attacker gained access to credentials for managing Nexera Fundrs platform's smart contracts. Using these credentials, the attacker transferred NXRA tokens from Fundrs' staking contracts on Ethereum. Out of the 47.24 million NXRA tokens stolen, the attacker was only able to sell 14.75 million tokens (approximately $449,000). Nexera successfully removed the remaining 32.5 million NXRA balance from the attacker's wallet, preventing further loss."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On August 7, 2024, Nexera's admin private key was compromised through targeted malware, allowing an attacker to seize control of Ethereum and Avalanche contracts. The attacker extracted 47.24 million NXRA tokens, selling a portion for approximately $449,000. The team responded by pausing contracts, freezing, and burning the unrecovered tokens. A Nexera administrative private key controlling proxy contract upgrades and withdrawals was compromised via malware on an employee's machine. This enabled an attacker to assume contract ownership, block legitimate recovery, and withdraw NXRA tokens."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xbb89f990344d0d0bd7dea0676ddd58089c2d4ebd398bde1965f14057eb3b5154"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/Nexera_Official/status/1821079381831512315"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/nexera-449-000-2024-08-07"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/defi-rekt-report-over-306m-lost-in-august-2024"
+    },
+    {
+      "source": "revertiq",
+      "label": "itokenly.com",
+      "url": "https://itokenly.com/hacks/nexera"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/tayvano/lazarus-bluenoroff-research/blob/main/hacks-and-thefts/nexera.md"
+    }
+  ]
+}

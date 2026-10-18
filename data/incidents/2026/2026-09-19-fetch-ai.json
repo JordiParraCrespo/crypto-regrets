@@ -1,0 +1,58 @@
+{
+  "id": "2026-09-19-fetch-ai",
+  "name": "Fetch.ai",
+  "date": "2026-09-19",
+  "year": 2026,
+  "amountUsd": 1530000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "key-compromise",
+  "technique": "Private Key Compromised",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "key-compromise",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "key-compromise",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.03,
+    "hasRootCause": 0.96
+  },
+  "bridge": true,
+  "language": "Solidity",
+  "rootCause": "An attacker used a leaked conversion-authorizer / bridge backend signing key to call conversionIn() on Fetch.ai’s Ethereum token-conversion contract and drain about 8,721,530 FET (~$1.53 million). The same wallet cluster then minted about 408.5 million unauthorized NTX via a NuNet deployer key and later expanded the attack to related ASI Alliance bridge/converter infrastructure.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "An attacker used a leaked conversion-authorizer / bridge backend signing key to call conversionIn() on Fetch.ai’s Ethereum token-conversion contract and drain about 8,721,530 FET (~$1.53 million). The same wallet cluster then minted about 408.5 million unauthorized NTX via a NuNet deployer key and later expanded the attack to related ASI Alliance bridge/converter infrastructure."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/PeckShieldAlert/status/2101457227379044822"
+    }
+  ]
+}

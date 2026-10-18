@@ -1,0 +1,82 @@
+{
+  "id": "2020-07-01-vether",
+  "name": "Vether",
+  "date": "2020-07-01",
+  "year": 2020,
+  "amountUsd": 450000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.99
+      },
+      {
+        "category": "arbitrary-call",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Coingecko researcher Daryllautk tweeted that VETH suffered a hacker attack on the decentralized exchange Uniswap. The hacker stole 919,299 VETH (worth $900,000) using only 0.9ETH. After the attack, VETH officially stated that the contract was used by the UX improvement it placed in transferForm(), which was their fault. They will redeploy vether4 and will compensate all affected Uniswap pledgers. This attack mainly uses the visibility of the changeExcluded function in the contract to be external and there is no permission restriction. The user can directly make external calls to create the necessary conditions for the attack.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Coingecko researcher Daryllautk tweeted that VETH suffered a hacker attack on the decentralized exchange Uniswap. The hacker stole 919,299 VETH (worth $900,000) using only 0.9ETH. After the attack, VETH officially stated that the contract was used by the UX improvement it placed in transferForm(), which was their fault. They will redeploy vether4 and will compensate all affected Uniswap pledgers. This attack mainly uses the visibility of the changeExcluded function in the contract to be external and there is no permission restriction. The user can directly make external calls to create the necessary conditions for the attack."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Vether V3 suffered a major access control exploit on Ethereum Mainnet in late June 2020, when an attacker drained nearly all tokens from its contract, causing approximately $450,000 in losses and making the asset essentially worthless overnight. The protocol relaunched as Vether V4 and reimbursed affected holders. The Vether V3 contract allowed an address exclusion from transfer fees but failed to properly restrict who could claim all tokens. The upgrade path bypassed standard ERC-20 permission checks, letting an attacker use the exclusion feature to seize nearly the entire supply. This improper access control exposed the funds."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "tuoniaox.com",
+      "url": "https://www.tuoniaox.com/newsflash/p-447988.html"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/vether-2020-07-01"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/vether-hack-2020"
+    },
+    {
+      "source": "revertiq",
+      "label": "quadrigainitiative.com",
+      "url": "https://www.quadrigainitiative.com/hackfraudscam/vetherv3exploited.php"
+    }
+  ]
+}

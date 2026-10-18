@@ -1,0 +1,104 @@
+{
+  "id": "2024-12-03-byc-token",
+  "name": "BYC Token",
+  "date": "2024-12-03",
+  "year": 2024,
+  "amountUsd": 100000,
+  "returnedUsd": null,
+  "chains": [
+    "Binance"
+  ],
+  "targetType": "Token",
+  "category": "accounting-math",
+  "technique": "Incorrect Fee Accounting",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "input-validation",
+    "confidence": 0.77,
+    "top": [
+      {
+        "category": "input-validation",
+        "p": 0.78
+      },
+      {
+        "category": "logic-error",
+        "p": 0.19
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.01,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "The BYC token contract on BSC contained a flawed autoBurnLiquidity function whose burn threshold was controlled by a lpBurnFrequency parameter that could be externally inflated. The attacker purchased a large amount of USDT-worth of BYC and transferred all BYC tokens directly to the PancakeSwap pair, inflating lpBurnFrequency beyond its trigger threshold. This caused autoBurnLiquidity to execute and transfer almost all BYC tokens from the liquidity pool to the dead (zero) address, reducing the BYC reserve in the pool to just 1 token. With the pool holding essentially zero BYC against its full USDT balance, the price imbalance let the attacker drain all remaining USDT from the pool, resulting in approximately $100K in losses. The root flaw was the absence of any input validation or rate-limiting on the lpBurnFrequency variable, allowing any actor to weaponize the built-in burn mechanism against the protocol's own liquidity. Attack Tx: 0x177b87bd009e3b3aebb11cf2b88efc217d14fc1554a4675ee749eeb527d201ff Analysis: What Went Wrong in BYC Token's $100K Hack? – QuillAudits Phalcon Alert",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The BYC token contract on BSC contained a flawed autoBurnLiquidity function whose burn threshold was controlled by a lpBurnFrequency parameter that could be externally inflated. The attacker purchased a large amount of USDT-worth of BYC and transferred all BYC tokens directly to the PancakeSwap pair, inflating lpBurnFrequency beyond its trigger threshold. This caused autoBurnLiquidity to execute and transfer almost all BYC tokens from the liquidity pool to the dead (zero) address, reducing the BYC reserve in the pool to just 1 token. With the pool holding essentially zero BYC against its full USDT balance, the price imbalance let the attacker drain all remaining USDT from the pool, resulting in approximately $100K in losses. The root flaw was the absence of any input validation or rate-limiting on the lpBurnFrequency variable, allowing any actor to weaponize the built-in burn mechanism against the protocol's own liquidity. Attack Tx: 0x177b87bd009e3b3aebb11cf2b88efc217d14fc1554a4675ee749eeb527d201ff Analysis: What Went Wrong in BYC Token's $100K Hack? – QuillAudits Phalcon Alert"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "The BYC token exploit on BNB Chain in December 2024 allowed an attacker to manipulate the autoBurnLiquidity function, collapsing liquidity pool reserves and extracting approximately $100,000 through price distortion and sandwich attacks. The BYC token's autoBurnLiquidity function lacked sufficient access controls and validation, allowing external actors to artificially inflate a burn-related parameter via direct token transfers to the liquidity pool. This created a severe reserve imbalance, enabling large-scale price manipulation and USDT extraction."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x177b87bd009e3b3aebb11cf2b88efc217d14fc1554a4675ee749eeb527d201ff"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x177b87bd009e3b3aebb11cf2b88efc217d14fc1554a4675ee749eeb527d201ff"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "quillaudits.com",
+      "url": "https://www.quillaudits.com/blog/hack-analysis/byc-token-100k-hack-analysis"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/Phalcon_xyz/status/1863785172753154117"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x177b87bd009e3b3aebb11cf2b88efc217d14fc1554a4675ee749eeb527d201ff"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/what-went-wrong-in-byc-token-s-100k-2024-12-24"
+    },
+    {
+      "source": "revertiq",
+      "label": "olympix.security",
+      "url": "https://olympix.security/biweekly-exploits/vestras-500k-yield-reuse-flaw-moscas-incomplete-state-reset-bycs-burn-based-price-play"
+    },
+    {
+      "source": "revertiq",
+      "label": "nominis.io",
+      "url": "https://www.nominis.io/insights/crypto-security-incidents-december-2024"
+    }
+  ]
+}

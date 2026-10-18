@@ -1,0 +1,86 @@
+{
+  "id": "2026-02-23-dgld",
+  "name": "DGLD",
+  "date": "2026-02-23",
+  "year": 2026,
+  "amountUsd": 250000,
+  "returnedUsd": null,
+  "chains": [
+    "Base"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Infinite Mint",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.7,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.72
+      },
+      {
+        "category": "logic-error",
+        "p": 0.1
+      },
+      {
+        "category": "bridge-crosschain",
+        "p": 0.06
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": true,
+  "language": "Solidity",
+  "rootCause": "DGLD (Swiss physical gold-backed tokenized asset) was exploited due to a legacy edge case in the Ethereum contract’s transferFrom behavior. Attackers minted large amounts of unbacked fake DGLD on Base and dumped them on DEXes. The team promptly paused contracts, froze illicit tokens, and contained the incident. Physical gold was never at risk, all pre-exploit holders retained their backed tokens, with ~$250k economic impact mostly borne by the project.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "DGLD (Swiss physical gold-backed tokenized asset) was exploited due to a legacy edge case in the Ethereum contract’s transferFrom behavior. Attackers minted large amounts of unbacked fake DGLD on Base and dumped them on DEXes. The team promptly paused contracts, froze illicit tokens, and contained the incident. Physical gold was never at risk, all pre-exploit holders retained their backed tokens, with ~$250k economic impact mostly borne by the project."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 23 February 2026, DGLD's cross-chain bridge on Base was exploited due to an unchecked legacy transferFrom implementation, allowing unauthorized minting of 100 million unbacked DGLD tokens and draining ~$250,000 from Base liquidity pools. Rapid incident response contained the exploit, blocked further bridging, and launched a phased recovery with contract upgrades and audit-led relaunch. The Ethereum ↔ Base bridge relied on a legacy ERC-20 transferFrom implementation on Ethereum that could return success without moving tokens. This allowed a phantom deposit and infinite, unbacked minting of DGLD on Base. The vulnerable code path was inherited, undocumented, and not flagged in prior audits."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xda44d78001c3ad8337a3d265125dfa893f9448d46c54e2e24b38bb3868f2f42b",
+    "0xb1f9d2a59ca7fd152fe7bf871544f2072b7edf8b8aa3b5baf9ebbac73de8b2a3",
+    "0x146a852696f3d3b0ff7839412db2541203480493095958780db089b8cb662298",
+    "0x3369cc33db2de36cd4434146ebfe7714c1c24f892da95b5d6416b2c960f5c794"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "dgld.ch",
+      "url": "https://dgld.ch/news/post-incident-report-february-2026-exploit"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/dgld-2026-02-23"
+    },
+    {
+      "source": "revertiq",
+      "label": "dgld.ch",
+      "url": "https://dgld.ch/legal/smart-contract-audits"
+    }
+  ]
+}

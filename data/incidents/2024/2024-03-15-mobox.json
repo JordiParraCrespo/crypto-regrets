@@ -1,0 +1,80 @@
+{
+  "id": "2024-03-15-mobox",
+  "name": "MOBOX",
+  "date": "2024-03-15",
+  "year": 2024,
+  "amountUsd": 750000,
+  "returnedUsd": null,
+  "chains": [
+    "Optimism"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Borrow Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.08,
+    "stateActor": 0.02,
+    "hasRootCause": 0.85
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "The DeFi protocol MOBOX was attacked due to a vulnerability in the borrow function, resulting in a loss of approximately $750,000.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The DeFi protocol MOBOX was attacked due to a vulnerability in the borrow function, resulting in a loss of approximately $750,000."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "MOBOX's Optimism-based lending protocol was exploited on 14 March 2024 for approximately $750,000. The exploit targeted a flaw in the contract's borrow logic and referral reward mechanism, allowing the attacker to repeatedly borrow, inflate token prices, and stack referral rewards to drain funds. The borrow() function compounded referral rewards and burned tokens in a way that allowed the attacker to inflate MO token prices and repeatedly borrow more USDT with minimal MO tokens. Referral rewards sent to attacker-controlled addresses were looped back, compounding value and bypassing controls."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x4ec3061724ca9f0b8d400866dd83b92647ad8c943a1c0ae9ae6c9bd1ef789417"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "optimistic.etherscan.io",
+      "url": "https://optimistic.etherscan.io/tx/0x4ec3061724ca9f0b8d400866dd83b92647ad8c943a1c0ae9ae6c9bd1ef789417"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/mobox-2024-03-15"
+    },
+    {
+      "source": "revertiq",
+      "label": "techflowpost.com",
+      "url": "https://www.techflowpost.com/en-US/article/16917"
+    },
+    {
+      "source": "revertiq",
+      "label": "chaincatcher.com",
+      "url": "https://www.chaincatcher.com/en/article/2117891"
+    }
+  ]
+}

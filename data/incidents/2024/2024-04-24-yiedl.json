@@ -1,0 +1,135 @@
+{
+  "id": "2024-04-24-yiedl",
+  "name": "YIEDL",
+  "date": "2024-04-24",
+  "year": 2024,
+  "amountUsd": 150000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "input-validation",
+  "technique": "Missing Input Validation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "input-validation",
+    "confidence": 0.98,
+    "top": [
+      {
+        "category": "input-validation",
+        "p": 0.98
+      },
+      {
+        "category": "arbitrary-call",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.06,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Input Validation. Lost: 150k USD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Input Validation. Lost: 150k USD"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "insufficient parameter validation Vulnerable code snippet: https://bscscan.com/address/0x4edda16ab4f4cc46b160abc42763ba63885862a4#code Attack tx: https://app.blocksec.com/explorer/tx/bsc/0x49ca5e188c538b4f2efb45552f13309cc0dd1f3592eee54decfc9da54620c2ec Analysis: https://medium.com/neptune-mutual/taking-a-closer-look-at-the-yiedl-exploit-e31f04cea592 redeem function that allows users to exchange a specific number of shares they hold in an asset pool for a certain asset. The dataList parameter is used to make external calls to control asset exchange with information relating to transactions or other routing details. Due to a lack of validation in this parameter, the attacker was able to inject payloads that led to unintentioned interactions with the router contracts, leading to unauthorized asset transfers."
+    },
+    {
+      "source": "SlowMist",
+      "text": "According to intelligence from the SlowMist Security Team, the YIEDL project on the BSC chain was attacked, with the attacker stealing approximately $300,000. In this incident, the reason lies in the contract’s failure to adequately validate the external parameter(dataList) provided by the user during the processing of the redeem function call. This parameter is critical data for controlling asset exchanges, typically containing specific transaction instructions or routing information. The attacker maliciously constructed this external parameter, enabling unauthorized asset transfers."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "YIEDL’s SpotVault contract on BNB Chain was exploited in April 2024 for approximately $150,000,$160,000. The attacker drained company-held assets by abusing the redeem() function without owning shares, leveraging unchecked external calldata to swap vault tokens directly to their address. The SpotVault redeem() function failed to validate sharesToRedeem > 0 and trusted user-supplied dataList calldata for asset swaps. This flaw allowed arbitrary withdrawals and bypassed accounting checks, draining assets meant for share redemption."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x49ca5e188c538b4f2efb45552f13309cc0dd1f3592eee54decfc9da54620c2ec",
+    "0x8ef3765665cd849cdf9132ab37caf6aa0f891e1f7d9f418f86a6ab6ea38b6f5b",
+    "0x8710034dadecfc8c26f651c612f613fffdece6e2f9957b9ec8ab843218168c1d",
+    "0x5e468cba495e5f6165418fb9d87d824309c54261055425f33f588dd3b3abbcea",
+    "0x0a89b8670c40b4067b9522a5933c3bf8c44c968103aa642b04c65d49ad9e6457",
+    "0x3629ad588ac120163792e92b6c43bd4bdc5bf35cac66eb7f3a0267df93abc849",
+    "0x0f0d41cb8af42babb043d1ede58ee1f3ab8f87c2c50d5a08c3a12d89cb330299"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-04/YIEDL_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-04/YIEDL_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0x4edda16ab4f4cc46b160abc42763ba63885862a4#code"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/bsc/0x49ca5e188c538b4f2efb45552f13309cc0dd1f3592eee54decfc9da54620c2ec"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "medium.com",
+      "url": "https://medium.com/neptune-mutual/taking-a-closer-look-at-the-yiedl-exploit-e31f04cea592"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x8ef3765665cd849cdf9132ab37caf6aa0f891e1f7d9f418f86a6ab6ea38b6f5b"
+    },
+    {
+      "source": "blocksec",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Phalcon_xyz/status/1782966561726156945"
+    },
+    {
+      "source": "blocksec",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs?tab=readme-ov-file#20240424-yield---input-validation"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/SlowMist_Team/status/1782962346039898473"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/yiedl-2024-04-24"
+    },
+    {
+      "source": "revertiq",
+      "label": "crypto.training",
+      "url": "https://crypto.training/hacks/2024-04-yiedl/"
+    },
+    {
+      "source": "revertiq",
+      "label": "olympix.security",
+      "url": "https://olympix.security/biweekly-exploits/6m-stolen-alexlab-ngfs-xbridge-and-yiedl-compromised-by-key-theft-and-broken-access-controls"
+    }
+  ]
+}

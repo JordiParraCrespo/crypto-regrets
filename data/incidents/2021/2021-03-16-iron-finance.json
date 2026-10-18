@@ -1,0 +1,91 @@
+{
+  "id": "2021-03-16-iron-finance",
+  "name": "Iron Finance",
+  "date": "2021-03-16",
+  "year": 2021,
+  "amountUsd": 170000,
+  "returnedUsd": null,
+  "chains": [
+    "Polygon"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Incorrect Share Accounting",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.88,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.89
+      },
+      {
+        "category": "logic-error",
+        "p": 0.06
+      },
+      {
+        "category": "frontend-infra",
+        "p": 0.05
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.72
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Recently, Iron Finance, a stablecoin mortgage platform based on Binance Chain, was attacked. Two vFarm liquidity pools (50% IRON—50% SIL pool; 50% IRON—50% BUSD pool) lost a total of 170,000 US dollars. Later, the official publication of the incident stated that: 1. The cause of the attack was due to the upgrade of the cloud service (FaaS) and the change in the reward rate integer, but the official team was not aware of the problem. Later, an attacker made a profit of 170,000 U.S. dollars by selling all the local token SIL rewards. 2. The Iron Finance smart contract has no loopholes. 3. vFarms will be restarted on March 18th, and SIL tokens will be restarted to sIRON. 4.…",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Recently, Iron Finance, a stablecoin mortgage platform based on Binance Chain, was attacked. Two vFarm liquidity pools (50% IRON—50% SIL pool; 50% IRON—50% BUSD pool) lost a total of 170,000 US dollars. Later, the official publication of the incident stated that: 1. The cause of the attack was due to the upgrade of the cloud service (FaaS) and the change in the reward rate integer, but the official team was not aware of the problem. Later, an attacker made a profit of 170,000 U.S. dollars by selling all the local token SIL rewards. 2. The Iron Finance smart contract has no loopholes. 3. vFarms will be restarted on March 18th, and SIL tokens will be restarted to sIRON. 4.…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On March 16, 2021, Iron Finance's vFarm pools on Polygon suffered an exploit due to incorrect share accounting, enabling an attacker or users to drain $170,000 in deposits. No attacker transactions or exploiter addresses are public, and compensation was promised to SIL token and LP holders. Incorrect share accounting in the vFarm pool contracts allowed withdrawals exceeding the legitimate share value, violating the intended asset-share invariant. This created an opportunity to drain deposited funds from affected pools."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "ironfinance.medium.com",
+      "url": "https://ironfinance.medium.com/iron-finance-vfarms-incident-post-mortem-16-march-2021-114e58d1eaac"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/iron-finance-2021-03-16"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "monitoringroom.com",
+      "url": "https://monitoringroom.com/situation/crypto-hack/iron-finance"
+    },
+    {
+      "source": "revertiq",
+      "label": "beincrypto.com",
+      "url": "https://beincrypto.com/iron-finance-defi-exploit-explained-post-mortem/"
+    }
+  ]
+}

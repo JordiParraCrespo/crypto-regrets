@@ -1,0 +1,80 @@
+{
+  "id": "2022-09-01-kyberswap-classic",
+  "name": "KyberSwap Classic",
+  "date": "2022-09-01",
+  "year": 2022,
+  "amountUsd": 265000,
+  "returnedUsd": null,
+  "chains": [
+    "Polygon"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "frontend-infra",
+  "technique": "CDN Compromise",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "frontend-infra",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "frontend-infra",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.03,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "Decentralized liquidity protocol Kyber Network disclosed on Twitter that its users lost $265,000 in funds due to a front-end exploit. The vulnerability stems from malicious Google Tag Manager code in the KyberSwap website, where attackers target whale wallets and gain permission to transfer user funds by inserting fake approvals.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Decentralized liquidity protocol Kyber Network disclosed on Twitter that its users lost $265,000 in funds due to a front-end exploit. The vulnerability stems from malicious Google Tag Manager code in the KyberSwap website, where attackers target whale wallets and gain permission to transfer user funds by inserting fake approvals."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 1 September 2022, KyberSwap's frontend was compromised through its Cloudflare CDN, allowing injected malicious scripts to prompt false token approvals. Targeted users lost approximately $265,000 on Polygon before the exploit was neutralized. Smart contracts were unaffected and victims were reimbursed. A compromised Cloudflare account enabled an attacker to inject malicious JavaScript into KyberSwap's frontend via Cloudflare Workers, leading users to grant token approvals to an attacker's address and facilitating the unauthorized transfer of funds."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xc42a8e5994f43a65cf8272bc7afeabf54088abf2620ea1fbb75376257b509abb"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "cointelegraph.com",
+      "url": "https://cointelegraph.com/news/kyber-network-offers-bounty-following-265k-hack-of-decentralized-exchange"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/kyberswap-classic-2022-09-01"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.kyberswap.com",
+      "url": "https://blog.kyberswap.com/notice-of-exploit-of-kyberswap-frontend-all-funds-will-be-reimbursed/"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.kyberswap.com",
+      "url": "https://blog.kyberswap.com/post-mortem-past-kyberswap-frontend-exploit-sept-2022/"
+    }
+  ]
+}

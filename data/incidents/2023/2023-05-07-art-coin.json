@@ -1,0 +1,78 @@
+{
+  "id": "2023-05-07-art-coin",
+  "name": "Art Coin",
+  "date": "2023-05-07",
+  "year": 2023,
+  "amountUsd": 331000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Deposit Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.01,
+    "hasRootCause": 0.89
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "The encrypted art platform Art Coin deployed a liquidity pool (LP pool) on Uniswap V3 on May 7. After a user discovered a loophole in the pre-sale process of Art Coin’s ART token Uniswap V3, he immediately sold the ART he bought at 0.01 ETH during the pre-sale period, and obtained 181 ETH in the liquidity, worth about 331,000 US dollars. Some have questioned the legitimacy of the user's actions, saying the user performed a Rug Pull. The Art Coin founder has since released a statement saying the bug was due to miscommunication: “Two developers will help us understand LP and set it up. Due to miscommunication, we set up LP before distributing tokens. The…",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The encrypted art platform Art Coin deployed a liquidity pool (LP pool) on Uniswap V3 on May 7. After a user discovered a loophole in the pre-sale process of Art Coin’s ART token Uniswap V3, he immediately sold the ART he bought at 0.01 ETH during the pre-sale period, and obtained 181 ETH in the liquidity, worth about 331,000 US dollars. Some have questioned the legitimacy of the user's actions, saying the user performed a Rug Pull. The Art Coin founder has since released a statement saying the bug was due to miscommunication: “Two developers will help us understand LP and set it up. Due to miscommunication, we set up LP before distributing tokens. The…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Art Coin lost approximately $331,000 (181 ETH) on May 7, 2023, due to a misconfigured Uniswap V3 liquidity pool. The pool was deployed and seeded with ETH before presale tokens were broadly distributed, enabling an early participant or bot to sell their tokens for ETH and drain most of the liquidity in moments. The root cause was an operational error: Art Coin's Uniswap V3 liquidity pool was deployed and funded before distributing ART tokens to presale participants. This allowed early recipients to immediately sell their allocations into the pool, extracting a disproportionate share of ETH before market price stabilization."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "bitcoinist.com",
+      "url": "https://bitcoinist.com/project-losses-over-331000-setup-flaw-on-uniswap-v3/"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/art-coin-2023-05-07"
+    },
+    {
+      "source": "revertiq",
+      "label": "olympix.security",
+      "url": "https://olympix.security/biweekly-exploits/art-coin-snook-land-nft-incentive-loops-permission-slips-and-liquidity-misfires"
+    },
+    {
+      "source": "revertiq",
+      "label": "insidebitcoins.com",
+      "url": "https://insidebitcoins.com/news/fault-in-lp-setup-results-in-331000-profit-for-art-coin"
+    }
+  ]
+}

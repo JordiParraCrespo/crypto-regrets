@@ -1,0 +1,90 @@
+{
+  "id": "2026-03-12-am",
+  "name": "AM",
+  "date": "2026-03-12",
+  "year": 2026,
+  "amountUsd": 131572,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Incorrect Share Accounting",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.98,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.98
+      },
+      {
+        "category": "logic-error",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "The AM Token contract on BSC contained a flawed delayed-burn mechanism, analogous to other deflationary token exploits reported by BlockSec Phalcon in the same weekly period (March 9–15, 2026). The token's burn logic deferred burning and settled it against the liquidity pool's token reserves rather than deducting from the transacting user's balance, allowing an attacker to manipulate the burn destination and amount to compress the LP's token supply and distort the pool price. By exploiting this accounting mismatch the attacker drained approximately $131,000 from the AM Token liquidity pool on BSC. Attack Tx: 0xd0d131...9f859 Analysis: BlockSec Phalcon Alert",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The AM Token contract on BSC contained a flawed delayed-burn mechanism, analogous to other deflationary token exploits reported by BlockSec Phalcon in the same weekly period (March 9–15, 2026). The token's burn logic deferred burning and settled it against the liquidity pool's token reserves rather than deducting from the transacting user's balance, allowing an attacker to manipulate the burn destination and amount to compress the LP's token supply and distort the pool price. By exploiting this accounting mismatch the attacker drained approximately $131,000 from the AM Token liquidity pool on BSC. Attack Tx: 0xd0d131...9f859 Analysis: BlockSec Phalcon Alert"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "AM Token on BNB Chain was exploited on March 12, 2026, for approximately $131,572 due to flawed deflationary burn and share accounting logic. The delayed burn mechanism allowed pool reserve manipulation, leading to price distortion and profit extraction during token sells. The AM Token contract delayed burning tokens after a sell, recording the amount to burn for execution during the next sell. This window allowed attackers to manipulate pool reserves before the burn, causing price distortion and enabling withdrawal of inflated value. Incorrect share accounting amplified the exploit."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xd0d13179645985eae599c029574e866d79b286fbea395b66504f87f31629f859"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0xd0d13179645985eae599c029574e866d79b286fbea395b66504f87f31629f859"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/Phalcon_xyz/status/2031957703451688970"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xd0d13179645985eae599c029574e866d79b286fbea395b66504f87f31629f859"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/am-2026-03-12"
+    },
+    {
+      "source": "revertiq",
+      "label": "blocksec.com",
+      "url": "https://blocksec.com/blog/weekly-web3-security-incident-roundup-mar-9-mar-15-2026"
+    }
+  ]
+}

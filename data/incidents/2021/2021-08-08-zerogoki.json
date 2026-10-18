@@ -1,0 +1,81 @@
+{
+  "id": "2021-08-08-zerogoki",
+  "name": "Zerogoki",
+  "date": "2021-08-08",
+  "year": 2021,
+  "amountUsd": 670000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Oracle Misconfiguration",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.72
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "BachOnChain, a core member of Duet Protocol, a multi-chain synthetic asset protocol, tweeted that the Duet Protocol pioneer network Zerogoki experienced an oracle attack a few hours ago, and the wrong price led to unrecognized transactions. BachOnChain said that the oracle has been suspended, zUSD has experienced certain fluctuations, and it is expected that the price will resume in market trading and arbitrage after a period of time.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "BachOnChain, a core member of Duet Protocol, a multi-chain synthetic asset protocol, tweeted that the Duet Protocol pioneer network Zerogoki experienced an oracle attack a few hours ago, and the wrong price led to unrecognized transactions. BachOnChain said that the oracle has been suspended, zUSD has experienced certain fluctuations, and it is expected that the price will resume in market trading and arbitrage after a period of time."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 8 August 2021, Zerogoki was exploited on Ethereum when an attacker used signatures from legitimate oracle signers to forge a swap, exchanging 300 REI for over 700,000 zUSD. The compromised oracle mechanism led to a $670,000 loss and prompted a halt to mint/redeem functions. Zerogoki's oracle relied on three externally signed messages to authorize swaps. An attacker obtained valid signatures for a crafted swap message with an inflated amount, allowing them to mint a large amount of zUSD against a small REI input. The mechanism failed because the contract trusted externally provided signatures for the swap amount without effective sanity checks or controls on private key security.…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x81e5f7158b7ef59f45864e34375bd52bb8227f51ef970fe07ec2abf1d421acf8",
+    "0xe98f92fef4f4d37419f2e11f5477975f94b22f73798848c4cd369ee8aac0b94b"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/bachonchain/status/1424263990402715648"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/zerogoki-2021-08-08"
+    },
+    {
+      "source": "revertiq",
+      "label": "blocksec.com",
+      "url": "https://blocksec.com/blog/the-analysis-of-the-zerogoki-attack"
+    },
+    {
+      "source": "revertiq",
+      "label": "quadrigainitiative.com",
+      "url": "https://www.quadrigainitiative.com/casestudy/zerogokipriceoraclecompromised.php"
+    }
+  ]
+}

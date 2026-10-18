@@ -1,0 +1,145 @@
+{
+  "id": "2024-03-05-woofi-swap",
+  "name": "WOOFi Swap",
+  "date": "2024-03-05",
+  "year": 2024,
+  "amountUsd": 8750000,
+  "returnedUsd": null,
+  "chains": [
+    "Arbitrum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.93,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.93
+      },
+      {
+        "category": "logic-error",
+        "p": 0.06
+      },
+      {
+        "category": "market-manipulation",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.12,
+    "stateActor": 0.02,
+    "hasRootCause": 0.74
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Price Manipulation. Lost: ~8M",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Price Manipulation. Lost: ~8M"
+    },
+    {
+      "source": "REKT",
+      "text": "WooFi  got taken for a $8.5 Million ride on March 5th, after a flash loan attack on Arbitrum."
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Price of WOO can be manipulated in WooPPV2 Vulnerable code snippet: Attack tx: https://arbiscan.io/tx/0x57e555328b7def90e1fc2a0f7aa6df8d601a8f15803800a5aaf0a20382f21fbd Analysis: https://twitter.com/spreekaway/status/1765046559832764886"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The sPMM algorithm controlling the pricing of WOOFi trades on DEX WOOFi was exploited on Arbitrum. The exploit consisted of a sequence of flash loans that took advantage of low liquidity to manipulate the price of WOO in order to repay the flash loans at a cheaper price. The exploiter repeated this attack 3 times within a very short period of time, which netted about $8.75m in profits after returning the flash loans."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On March 5, 2024, WOOFi Swap on Arbitrum was exploited via a flash-loan-driven price manipulation. The attacker targeted WooPPV2’s sPMM algorithm to artificially deflate WOO token prices and extracted approximately $8.75 million before contracts were paused. The WooPPV2 contract's sPMM price-adjustment algorithm was vulnerable to flash-loan manipulation due to the ability to override oracle prices during swaps involving large notional trades and insufficient fallback checks. This enabled the attacker to crash WOO prices within the pool and extract value."
+    }
+  ],
+  "audit": "Certik",
+  "txHashes": [
+    "0x57e555328b7def90e1fc2a0f7aa6df8d601a8f15803800a5aaf0a20382f21fbd",
+    "0xe80a16678b5008d5be1484ec6e9e77dc6307632030553405863ffb38c1f94266",
+    "0x40e1b8c78083fc666cb7598efcecd0ae0af313fc41441386e4db716c2808ce07"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-03/Woofi_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-03/Woofi_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/spreekaway/status/1765046559832764886"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/PeckShieldAlert/status/1765054155478175943"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Woofi - Rekt",
+      "url": "https://rekt.news/woo-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "arbiscan.io",
+      "url": "https://arbiscan.io/tx/0x57e555328b7def90e1fc2a0f7aa6df8d601a8f15803800a5aaf0a20382f21fbd"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xe80a16678b5008d5be1484ec6e9e77dc6307632030553405863ffb38c1f94266"
+    },
+    {
+      "source": "blocksec",
+      "label": "woo.org",
+      "url": "https://woo.org/blog/en/woofi-spmm-exploit-post-mortem"
+    },
+    {
+      "source": "blocksec",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs?tab=readme-ov-file#20240305-woofi---price-manipulation"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/explained-the-woofi-2024-03-07t16-24-34-078000-00-00"
+    },
+    {
+      "source": "revertiq",
+      "label": "halborn.com",
+      "url": "https://www.halborn.com/blog/post/explained-the-woofi-hack-march-2024"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/de-fi-rekt-report-a-quarter-in-review-almost-415-million-lost-in-q1-2024"
+    },
+    {
+      "source": "revertiq",
+      "label": "woox.io",
+      "url": "https://woox.io/blog/woofi-spmm-exploit-post-mortem"
+    }
+  ]
+}

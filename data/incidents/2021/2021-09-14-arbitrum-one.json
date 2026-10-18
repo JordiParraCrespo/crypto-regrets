@@ -1,0 +1,60 @@
+{
+  "id": "2021-09-14-arbitrum-one",
+  "name": "Arbitrum One",
+  "date": "2021-09-14",
+  "year": 2021,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": null,
+  "category": "logic-error",
+  "technique": "Security Vulnerability",
+  "classificationNote": "Classified by keyword rules from the SlowMist label and description.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "client-bug",
+    "confidence": 0.93,
+    "top": [
+      {
+        "category": "client-bug",
+        "p": 0.93
+      },
+      {
+        "category": "logic-error",
+        "p": 0.04
+      },
+      {
+        "category": "input-validation",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.01,
+    "stateActor": 0.01,
+    "hasRootCause": 0.31
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "The expansion of the Ethereum network, Arbitrum One, released a report on network failures. Beginning at 10:14 on September 14th, EST, Arbitrum One was out of service for 45 minutes, during which time the Arbitrum Sequencer was offline, and funds were never at risk. The root cause of the downtime was a bug that caused the Sequencer to get stuck when receiving a large number of transactions in a short period of time. The Arbitrum team has located the problem and deployed a fix. The team also stated that even if the Sequencer fails, it will not affect the continuous operation of the network. Users can bypass the Sequencer and submit transactions directly to Ethereum.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The expansion of the Ethereum network, Arbitrum One, released a report on network failures. Beginning at 10:14 on September 14th, EST, Arbitrum One was out of service for 45 minutes, during which time the Arbitrum Sequencer was offline, and funds were never at risk. The root cause of the downtime was a bug that caused the Sequencer to get stuck when receiving a large number of transactions in a short period of time. The Arbitrum team has located the problem and deployed a fix. The team also stated that even if the Sequencer fails, it will not affect the continuous operation of the network. Users can bypass the Sequencer and submit transactions directly to Ethereum."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "slowmist",
+      "label": "medium.com",
+      "url": "https://medium.com/offchainlabs/arbitrum-one-outage-report-d365b24d49c"
+    }
+  ]
+}

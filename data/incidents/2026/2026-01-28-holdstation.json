@@ -1,0 +1,78 @@
+{
+  "id": "2026-01-28-holdstation",
+  "name": "Holdstation",
+  "date": "2026-01-28",
+  "year": 2026,
+  "amountUsd": 100000,
+  "returnedUsd": null,
+  "chains": [
+    "80094"
+  ],
+  "targetType": null,
+  "category": "key-compromise",
+  "technique": "Compromised Private Key",
+  "classificationNote": "Classified by keyword rules from the DeFiHackLabs explorer label and description.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "frontend-infra",
+    "confidence": 0.57,
+    "top": [
+      {
+        "category": "frontend-infra",
+        "p": 0.6
+      },
+      {
+        "category": "key-compromise",
+        "p": 0.38
+      },
+      {
+        "category": "access-control",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "The Holdstation DeFAI smart wallet platform on Berachain (chain ID 80094) suffered a $100K loss in a supply chain attack that BlockSec classified under compromised private key. An attacker stole a developer's session token, used it to bypass two-factor authentication, and injected malicious code into an application update. This gave the attacker unauthorized access to user wallet credentials through Holdstation's account abstraction infrastructure, enabling direct draining of user funds. The attack vector — credential theft leading to code injection in an update pipeline — mirrors patterns seen in broader software supply chain compromises and highlights that private key-equivalent access can be obtained through developer tooling rather than cryptographic attacks. Holdstation suspended services immediately after detection and pledged full compensation to affected users. Attack Tx: 0x63194cfda1daddb8c4e9b838f4a3736ebd7222a650fdff156bc77c2739bb2f7b Analysis: Phalcon — Holdstation Security Alert",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The Holdstation DeFAI smart wallet platform on Berachain (chain ID 80094) suffered a $100K loss in a supply chain attack that BlockSec classified under compromised private key. An attacker stole a developer's session token, used it to bypass two-factor authentication, and injected malicious code into an application update. This gave the attacker unauthorized access to user wallet credentials through Holdstation's account abstraction infrastructure, enabling direct draining of user funds. The attack vector — credential theft leading to code injection in an update pipeline — mirrors patterns seen in broader software supply chain compromises and highlights that private key-equivalent access can be obtained through developer tooling rather than cryptographic attacks. Holdstation suspended services immediately after detection and pledged full compensation to affected users. Attack Tx: 0x63194cfda1daddb8c4e9b838f4a3736ebd7222a650fdff156bc77c2739bb2f7b Analysis: Phalcon — Holdstation Security Alert"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x63194cfda1daddb8c4e9b838f4a3736ebd7222a650fdff156bc77c2739bb2f7b",
+    "0x33f34ee33dc249ab19a410b6c70450ad86bb7c8ca1b9930ef56b153a4a9841ee",
+    "0x27204b10329d861adc167ffe7fbc75dc713c09766b540db4f8e91a19ddbe51c7",
+    "0xfb471e774a997f61e3a73363fa0dbf28524a84d4c1a9e893bdfd74fd8911e0a1",
+    "0x1901376e85469184a3c1a95ab73d1ab6a702213e8f7aec164a3088080ea749d1",
+    "0x5e2e02c849356e7837d9bfcd279ebba55a16984c9e17e33123efe625e8777d9b"
+  ],
+  "poc": null,
+  "sources": [
+    "defihacklabs",
+    "blocksec"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "berascan.com",
+      "url": "https://berascan.com/tx/0x63194cfda1daddb8c4e9b838f4a3736ebd7222a650fdff156bc77c2739bb2f7b"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/Phalcon_xyz/status/2016823122373296583"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x63194cfda1daddb8c4e9b838f4a3736ebd7222a650fdff156bc77c2739bb2f7b"
+    }
+  ]
+}

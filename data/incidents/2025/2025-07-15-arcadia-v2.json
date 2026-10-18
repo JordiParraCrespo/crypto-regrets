@@ -1,0 +1,113 @@
+{
+  "id": "2025-07-15-arcadia-v2",
+  "name": "Arcadia V2",
+  "date": "2025-07-15",
+  "year": 2025,
+  "amountUsd": 2500000,
+  "returnedUsd": null,
+  "chains": [
+    "Base"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "reentrancy",
+  "technique": "Reentrancy",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "reentrancy",
+    "confidence": 0.78,
+    "top": [
+      {
+        "category": "reentrancy",
+        "p": 0.79
+      },
+      {
+        "category": "access-control",
+        "p": 0.16
+      },
+      {
+        "category": "key-compromise",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.86
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "An attacker used crafted swapData to trigger arbitrary calls through a trusted rebalancer contract, draining $3.6 million from user vaults. The exploit hit during a pause cool down, leaving ArcadiaFi unable to intervene before the funds were bridged out.",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "An attacker used crafted swapData to trigger arbitrary calls through a trusted rebalancer contract, draining $3.6 million from user vaults. The exploit hit during a pause cool down, leaving ArcadiaFi unable to intervene before the funds were bridged out."
+    },
+    {
+      "source": "SlowMist",
+      "text": "According to the incident analysis report released by Arcadia Finance, at 04:05 AM UTC on July 15, 2025, an active exploit targeting a series of peripheral contracts occurred. The attacker abused the delegated powers of Arcadia account owners on the rebalancer and compounder asset manager contracts, resulting in a loss of approximately $3.6 million. This exploit was limited to the asset manager contracts; lending and token contracts were not affected."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Arcadia Finance lost about $3.5M on July 15, 2025, after an attacker exploited its Base deployment by injecting malicious swapData into a rebalance flow, allowing unauthorized withdrawals of LP and token positions. The root cause was unchecked router address and action target validation in critical contract functions. The rebalance() and swap logic accepted arbitrary swapData, without validating the router address or action target. This let attackers submit a contract as router and action target, then issue privileged calls in a trusted context, enabling unauthorized withdrawals from victim accounts."
+    }
+  ],
+  "audit": "Pashov Audit Group",
+  "txHashes": [
+    "0x0b9bed09d241cef8078e6708909f98574c33ee06abcc2f80bc41731cd462d60b",
+    "0x06ce76eae6c12073df4aaf0b4231f951e4153a67f3abc1c1a547eb57d1218150",
+    "0x723989a674074eab665dc93cef3b123f0f5cea764dbfbeb6c8a8c80278d0bc09",
+    "0xf5300504d25e930bd0e11e968d2d77a3c8effe1c56e583150226be084375ee3c",
+    "0xb1025d7313de0283b1a9cae514e207541d4f45bbc1cf2800f6e3aba0a35b878b"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: ArcadiaFi - Rekt",
+      "url": "https://rekt.news/arcadiafi-rekt"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x0b9bed09d241cef8078e6708909f98574c33ee06abcc2f80bc41731cd462d60b"
+    },
+    {
+      "source": "slowmist",
+      "label": "arcadiafinance.notion.site",
+      "url": "https://arcadiafinance.notion.site/Arcadia-Post-Mortem-14-07-2025-23104482afa780fdb291cd3f41b7fc99"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/arcadia-finance-2025-07-17"
+    },
+    {
+      "source": "revertiq",
+      "label": "quillaudits.com",
+      "url": "https://www.quillaudits.com/blog/hack-analysis/arcadia-finance-hack-analysis"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.solidityscan.com",
+      "url": "https://blog.solidityscan.com/arcadia-finance-hack-analysis-a03a722e554d/"
+    },
+    {
+      "source": "revertiq",
+      "label": "guardrail.ai",
+      "url": "https://www.guardrail.ai/blog/arcadia-finance-hack-july-2025"
+    }
+  ]
+}

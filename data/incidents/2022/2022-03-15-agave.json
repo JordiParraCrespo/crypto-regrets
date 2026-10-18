@@ -1,0 +1,109 @@
+{
+  "id": "2022-03-15-agave",
+  "name": "Agave",
+  "date": "2022-03-15",
+  "year": 2022,
+  "amountUsd": 5500000,
+  "returnedUsd": null,
+  "chains": [
+    "Gnosis Chain"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "reentrancy",
+  "technique": "Reentrancy",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "reentrancy",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "reentrancy",
+        "p": 0.99
+      },
+      {
+        "category": "logic-error",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.09,
+    "stateActor": 0.02,
+    "hasRootCause": 0.94
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "ERC667 Reentrancy. Lost: $1.5 million",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "ERC667 Reentrancy. Lost: $1.5 million"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "vars.userCollateralBalance was set on entry to this function; it calculated vars once at the beginning, to save gas. If it has changed somehow during this function, our *check* will generate incorrect results. if this user has deposited a bunch of this collateral during this function execution, but at the beginning of this function it was liquidating all of their collateral, then it will still turn off the collateral usage. Vulnerable code snippet: Attack tx: https://gnosisscan.io/tx/0xa262141abcf7c127b88b4042aee8bf601f4f3372c9471dbd75cb54e76524f18e Analysis: https://medium.com/agavefinance/agave-exploit-reentrancy-in-liquidation-call-51ae407bc56"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The Agave contract on Gnosis Chain was attacked due to an untrusted external call. The attacker calls the liquidateCall function to liquidate himself without any debt. During the liquidation process, the liquidation contract called the attacker contract. During the process, the attack contract deposited 2728 WETH obtained through the flash loan and minted 2728 aWETH. And use this as collateral to lend out all available assets in the Agave project. After the external call ends, the liquidateCall function directly liquidates the 2728 aWETH previously deposited by the attacker and transfers it to the liquidator."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Agave's March 15, 2022 exploit on Gnosis Chain abused a reentrant callback during liquidationCall. The callback let the attacker deposit more bridged WETH, borrow other reserves, and then withdraw that new WETH after Agave disabled its collateral flag using stale state. Public loss estimates usually place Agave's share near $5.5 million. Agave's liquidation logic in LendingPoolCollateralManager decided whether to disable a user's collateral flag from a balance snapshot taken before an external token-transfer path completed. On Gnosis Chain, bridged WETH could call the receiver during that transfer path, so an attacker-controlled contract reentered mid-…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xa262141abcf7c127b88b4042aee8bf601f4f3372c9471dbd75cb54e76524f18e",
+    "0x45b2d71f5bbb17fa67341fdf30468f1de032db71760be0cf4df9bac316cda7cc"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-03/Agave_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-03/Agave_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "medium.com",
+      "url": "https://medium.com/agavefinance/agave-exploit-reentrancy-in-liquidation-call-51ae407bc56"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "gnosisscan.io",
+      "url": "https://gnosisscan.io/tx/0xa262141abcf7c127b88b4042aee8bf601f4f3372c9471dbd75cb54e76524f18e"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "collateralreserve.id",
+      "url": "http://collateralreserve.id/"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Agave_lending/status/1503725275917565954"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/agave-2022-03-15"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/Agave-DAO/protocol-v2/commit/31922797ba110ddb3e908936b940b40221b7e190#diff-d237d9f48e3d6657a5f94c89b903c5003cba6f9a286e26eff509cb44a3f4ee8f"
+    }
+  ]
+}

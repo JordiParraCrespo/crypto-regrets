@@ -1,0 +1,110 @@
+{
+  "id": "2024-05-31-tln-protocol",
+  "name": "TLN Protocol",
+  "date": "2024-05-31",
+  "year": 2024,
+  "amountUsd": 280000,
+  "returnedUsd": null,
+  "chains": [
+    "BNB"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.98,
+    "stateActor": 0.01,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "TLN Protocol on BSC computed users' borrowing capacity as 48% of the value of their staked VOW/v$ PancakeSwap LP tokens. The protocol derived this LP token price from the pool's spot reserves without using a time-weighted or manipulation-resistant oracle. An attacker exploited this dependency by using a flash loan to skew the VOW/v$ pool reserves within a single transaction, artificially inflating the reported LP token price. With the inflated collateral valuation, the attacker was able to borrow far more than legitimate collateral would allow, draining approximately $163K from the protocol before repaying the flash loan. The attack was reported on May 31, 2024, and flagged by SlowMist and Phalcon (BlockSec). Attack Tx: 0x1350cc72865420ba5d3c27234fd4665ad25c021b0a75ba03bc8340a1b1f98a45 Analysis: Phalcon_xyz alert — TLN Protocol",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "TLN Protocol on BSC computed users' borrowing capacity as 48% of the value of their staked VOW/v$ PancakeSwap LP tokens. The protocol derived this LP token price from the pool's spot reserves without using a time-weighted or manipulation-resistant oracle. An attacker exploited this dependency by using a flash loan to skew the VOW/v$ pool reserves within a single transaction, artificially inflating the reported LP token price. With the inflated collateral valuation, the attacker was able to borrow far more than legitimate collateral would allow, draining approximately $163K from the protocol before repaying the flash loan. The attack was reported on May 31, 2024, and flagged by SlowMist and Phalcon (BlockSec). Attack Tx: 0x1350cc72865420ba5d3c27234fd4665ad25c021b0a75ba03bc8340a1b1f98a45 Analysis: Phalcon_xyz alert — TLN Protocol"
+    },
+    {
+      "source": "SlowMist",
+      "text": "According to monitoring by the SlowMist security team, the TLN Protocol on BNBChain has been attacked again. On May 31, TLN Protocol suffered a loss of approximately $280,000 due to a contract vulnerability exploited by hackers."
+    },
+    {
+      "source": "SlowMist",
+      "text": "According to monitoring by the SlowMist security team, the TLN Protocol on BNBChain was attacked, resulting in a loss of approximately $280,000."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On May 31, 2024, TLN Protocol on BNB Chain suffered a smart contract exploit resulting in losses estimated at approximately $280,000. Available chain data links a key exploit transaction to the main protocol contract, but the precise vulnerability and technical steps remain publicly undocumented. The exact contract logic flaw exploited in the attack is not established in public evidence. Reports confirm a protocol logic-related vulnerability but do not detail the critical function or sequence attacked."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x1350cc72865420ba5d3c27234fd4665ad25c021b0a75ba03bc8340a1b1f98a45"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x1350cc72865420ba5d3c27234fd4665ad25c021b0a75ba03bc8340a1b1f98a45"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/Phalcon_xyz/status/1796481848387743959"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x1350cc72865420ba5d3c27234fd4665ad25c021b0a75ba03bc8340a1b1f98a45"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/1799028399085949133"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/1796475220372709776"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/tln-protocol-2024-05-31"
+    },
+    {
+      "source": "revertiq",
+      "label": "quadrigainitiative.com",
+      "url": "https://quadrigainitiative.com/casestudy/tlnprotocolcontractvulnerability.php"
+    },
+    {
+      "source": "revertiq",
+      "label": "blockchainreporter.net",
+      "url": "https://blockchainreporter.net/8-8m-lost-in-crypto-security-breaches-this-week-report/"
+    }
+  ]
+}

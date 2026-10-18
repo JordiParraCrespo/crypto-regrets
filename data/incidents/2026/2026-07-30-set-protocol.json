@@ -1,0 +1,88 @@
+{
+  "id": "2026-07-30-set-protocol",
+  "name": "Set Protocol",
+  "date": "2026-07-30",
+  "year": 2026,
+  "amountUsd": 9600,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "reentrancy",
+  "technique": "Reentrancy",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "reentrancy",
+    "confidence": 0.85,
+    "top": [
+      {
+        "category": "reentrancy",
+        "p": 0.86
+      },
+      {
+        "category": "logic-error",
+        "p": 0.1
+      },
+      {
+        "category": "access-control",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "The DeFi protocol Set Protocol (involving Index Coop’s ExchangeIssuance contract) was exploited due to insufficient state locking in the smart contract. The attacker used a malicious manager pre-issue hook to artificially inflate asset valuations (e.g., positionMultiplier), causing the contract to transfer excess assets based on falsified data, resulting in a loss of approximately $9,600.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The DeFi protocol Set Protocol (involving Index Coop’s ExchangeIssuance contract) was exploited due to insufficient state locking in the smart contract. The attacker used a malicious manager pre-issue hook to artificially inflate asset valuations (e.g., positionMultiplier), causing the contract to transfer excess assets based on falsified data, resulting in a loss of approximately $9,600."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On July 30, 2026, Set Protocol was exploited on Ethereum Mainnet through a time-of-check/time-of-use (TOCTOU) vulnerability in the ExchangeIssuance contract. The attacker used a manager-controlled hook to inflate valuation data after asset quoting but before transfer, draining over $9,600 in multi-asset value, including LINK, UNI, AAVE, MKR, WBTC, and USDC. The ExchangeIssuance contract calculated required asset values for issuance, then called an external manager hook that could mutate those parameters before final asset transfer. This TOCTOU gap allowed malicious manager contracts to alter key values, causing excess assets to be issued."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x7f45428df558fba1d19ab115effef8ecd1e6e05b491f02202b0815e47b8d658b"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/2082767887245410320"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/set-protocol-2026-07-30"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/BackwardLabs/Q1-2026/blob/main/test/2026-07/setprotocol/README.md"
+    },
+    {
+      "source": "revertiq",
+      "label": "coinfomania.com",
+      "url": "https://coinfomania.com/setprotocol-faces-9-6k-loss-due-to-exploit-in-smart-contract/"
+    }
+  ]
+}

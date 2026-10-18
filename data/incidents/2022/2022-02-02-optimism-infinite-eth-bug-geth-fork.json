@@ -1,0 +1,60 @@
+{
+  "id": "2022-02-02-optimism-infinite-eth-bug-geth-fork",
+  "name": "Optimism infinite ETH bug (Geth fork)",
+  "date": "2022-02-02",
+  "year": 2022,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [
+    "Optimism"
+  ],
+  "targetType": "Chain",
+  "category": "client-bug",
+  "technique": "SELFDESTRUCT not clearing OVM balance",
+  "classificationNote": null,
+  "classifiedBy": "curated",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.37,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.41
+      },
+      {
+        "category": "logic-error",
+        "p": 0.35
+      },
+      {
+        "category": "client-bug",
+        "p": 0.2
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.01,
+    "hasRootCause": 0.86
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "Optimism's l2geth stored ETH balances as an ERC20 and failed to zero them on SELFDESTRUCT, letting a contract duplicate its balance repeatedly. Reported by saurik (Jay Freeman) for a $2M bounty and patched before exploitation.",
+  "descriptions": [
+    {
+      "source": "Curated post-mortem",
+      "text": "Optimism's l2geth stored ETH balances as an ERC20 and failed to zero them on SELFDESTRUCT, letting a contract duplicate its balance repeatedly. Reported by saurik (Jay Freeman) for a $2M bounty and patched before exploitation."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "curated"
+  ],
+  "references": [
+    {
+      "source": "curated",
+      "label": "saurik write-up",
+      "url": "https://www.saurik.com/optimism.html"
+    }
+  ]
+}

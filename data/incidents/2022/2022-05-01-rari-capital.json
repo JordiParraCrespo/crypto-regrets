@@ -1,0 +1,142 @@
+{
+  "id": "2022-05-01-rari-capital",
+  "name": "Rari Capital",
+  "date": "2022-05-01",
+  "year": 2022,
+  "amountUsd": 80000000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum",
+    "Arbitrum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "reentrancy",
+  "technique": "Reentrancy",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "reentrancy",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "reentrancy",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Flashloan Attack + Reentrancy. Lost: $80 million",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Flashloan Attack + Reentrancy. Lost: $80 million"
+    },
+    {
+      "source": "REKT",
+      "text": "Fei Rari - rekt. Seven of Rari’s Fuse pools were drained for a total of ~$80M. This isn’t the first time that Rari's got rekt - lets hope the hackers don’t go for a hat trick."
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Not follow check-effect-interaction pattern. Vulnerable code snippet: https://etherscan.io/address/0xe16db319d9da7ce40b666dd2e365a4b8b3c18217#code#F13#L812 Do not follow check-effect-interaction pattern in function borrowFresh. https://etherscan.io/address/0xe16db319d9da7ce40b666dd2e365a4b8b3c18217#code#F6#L136 doTransferOut() function transfers ETH to the receiver via a low-level call, attacker can make a reentrant call in the fallback() function to “exitMarket()."
+    },
+    {
+      "source": "SlowMist",
+      "text": "Fei Protocol officially tweeted that it has noticed multiple exploits of Rari Capital’s Fuse pool, has identified the root cause and suspended all lending to mitigate further losses. And shout that hackers, if they can return user funds, will get a bounty of 10 million US dollars. According to previous news, Fei Protocol was attacked, and the loss exceeded 28,380 ETH, about 80.34 million US dollars. The attacker's address was 0x6162759eDAd730152F0dF8115c698a42E666157F. The Rari Capital pool was attacked due to a classic reentrancy vulnerability. Its function exitMaket has no reentrancy protection."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Rari Capital's Fuse pools suffered a reentrancy exploit that drained about $80 million in assets on April 30, 2022. The attacker abused insufficient reentrancy protection in the borrow logic, allowing repeated withdrawals before debt records were updated. The vulnerable Fuse pool contracts transferred assets via doTransferOut before updating borrow records. This enabled reentrancy: an attacker triggered exitMarket in a callback, letting them withdraw collateral before borrow state was finalized."
+    }
+  ],
+  "audit": "Unaudited",
+  "txHashes": [
+    "0xab486012f21be741c9e674ffda227e30518e8a1e37a5f1d58d0b0d41f6e76530",
+    "0xd9ee4fc5ee0b8815e6aae20e8bc5697ee49b8a1c76619a008bf534a4084197dc",
+    "0x3212d091792f81f18a31aab753de6b3128d79dcb5e8392167249595f813203ef",
+    "0xa733e844d28d4281f1334f8e2982217d0ff010576417067c4aa07ee66177db20",
+    "0x8ad7ca6b28b4a2b588af3d321c919f1406396886f337b014fdac3fb4857b2cbe",
+    "0x0d712d2a510b2cbddb0c0a085e21f144b3bbd086f0af2f775cc2d4a4453cbadc",
+    "0xa5cc515a7db6545eea2ff1e7dfb93f026be3548aacd18ab6bf1d9800f19263a3",
+    "0xd5628112fbb9ad458ccd5c73838332804e6432d74a1bc1d3342aa94dd42d669b"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-04/Rari_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-04/Rari_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "certik.medium.com",
+      "url": "https://certik.medium.com/fei-protocol-incident-analysis-8527440696cc"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/peckshield/status/1520369315698016256"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xab486012f21be741c9e674ffda227e30518e8a1e37a5f1d58d0b0d41f6e76530"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Fei Rari - REKT 2",
+      "url": "https://rekt.news/fei-rari-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/address/0xe16db319d9da7ce40b666dd2e365a4b8b3c18217#code#F13#L812"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/address/0xe16db319d9da7ce40b666dd2e365a4b8b3c18217#code#F6#L136"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/feiprotocol/status/1520344430242254849"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/rari-capital-fei-protocol-2022-05-01"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "securityaffairs.com",
+      "url": "https://securityaffairs.com/130768/hacking/80m-hack-defi-rari-capital-fei-protocol.html"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.solidityscan.com",
+      "url": "https://blog.solidityscan.com/rari-capital-re-entrancy-vulnerability-analysis-25df2bbfc803/"
+    }
+  ]
+}

@@ -1,0 +1,122 @@
+{
+  "id": "2023-07-30-vyper",
+  "name": "Vyper",
+  "date": "2023-07-30",
+  "year": 2023,
+  "amountUsd": 52000000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": null,
+  "category": "reentrancy",
+  "technique": "Compiler Bug",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 1.00).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "reentrancy",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "reentrancy",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.9
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "On August 6, the Ethereum compiler Vyper released an analysis report on last week's vulnerability incidents: Prior to July 30, due to potential vulnerabilities in the Vyper compiler, multiple Curve liquidity pools were exploited. While the bug was identified and patched, the impact on protocols using the vulnerable compiler was not recognized at the time, nor were they explicitly notified. The vulnerability itself is an improperly implemented reentrancy prevention, and the affected Vype versions are v0.2.15, v0.2.16, v0.3.0. Vulnerability fixed and tested in v0.3.1, v0.3.1 and later are safe.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "On August 6, the Ethereum compiler Vyper released an analysis report on last week's vulnerability incidents: Prior to July 30, due to potential vulnerabilities in the Vyper compiler, multiple Curve liquidity pools were exploited. While the bug was identified and patched, the impact on protocols using the vulnerable compiler was not recognized at the time, nor were they explicitly notified. The vulnerability itself is an improperly implemented reentrancy prevention, and the affected Vype versions are v0.2.15, v0.2.16, v0.3.0. Vulnerability fixed and tested in v0.3.1, v0.3.1 and later are safe."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Curve pools and several DeFi protocols lost over $52 million due to a Vyper compiler bug. Vulnerable versions failed to coordinate reentrancy locks across functions, allowing attackers to re-enter during liquidity operations and bypass safeguards. Vyper compiler versions 0.2.15, 0.2.16, and 0.3.0 incorrectly assigned unique storage slots to each @nonreentrant decorator, ignoring the specified key. This enabled reentrancy between functions using the same guard, so attackers could re-enter through paired operations and circumvent intended protections."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "A faulty Vyper compiler version disabled reentrancy protection for several Curve pools, allowing attackers to drain over $50 million on July 30, 2023. The compiler bug affected pools built with versions 0.2.15, 0.2.16, and 0.3.0, making reentrancy guards ineffective. Vyper compiler versions 0.2.15, 0.2.16, and 0.3.0 incorrectly allocated storage for @nonreentrant locks, leaving Curve pool functions vulnerable to classic reentrancy even when the guard was present in source."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "A reentrancy-guard bug in Vyper compiler versions 0.2.15, 0.2.16, and 0.3.0 enabled attackers to drain multiple Ethereum DeFi liquidity pools on July 30, 2023, including Curve, Metronome, and Alchemix. The affected contracts' reentrancy locks failed to prevent cross-function reentry, resulting in approximately $52 million in realized losses after partial whitehat recovery. A bug in certain Vyper compiler versions misallocated storage for reentrancy locks, allowing add_liquidity and remove_liquidity functions to be reentered from each other and defeating the intended protection."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xa84aa065ce61dbb1eb50ab6ae67fc31a9da50dd2c74eefd561661bfce2f1620c",
+    "0xb5d91f1e0afc96a52f8c6c28eae405eda7fcc5d34d6d03bdd8b16bd58089e939",
+    "0xcd99fadd7e28a42a063e07d9d86f67c88e10a7afe5921bd28cd1124924ae2052",
+    "0xc93eb238ff42632525e990119d3edc7775299a70b56e54d83ec4f53736400964",
+    "0xb676d789bb8b66a08105c844a49c2bcffb400e5c1cfabd4bc30cca4bff3c9801",
+    "0x2e7dc8b2fb7e25fd00ed9565dcc0ad4546363171d5e00f196d48103983ae477c"
+  ],
+  "poc": null,
+  "sources": [
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "slowmist",
+      "label": "hackmd.io",
+      "url": "https://hackmd.io/@vyperlang/HJUgNMhs2"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/vyper-2023-12-27t14-34-09-00-00"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/de-fi-rekt-report-crypto-losses-reach-1-95b-in-2023"
+    },
+    {
+      "source": "revertiq",
+      "label": "hackmd.io",
+      "url": "https://hackmd.io/%40vyperlang/HJUgNMhs2"
+    },
+    {
+      "source": "revertiq",
+      "label": "certik.com",
+      "url": "https://www.certik.com/blog/vyper-incident-anaylsis"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/vyper-50-5m-2023-10-03t17-14-01-00-00"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/de-fi-rekt-report-over-758m-lost-in-q3-2023"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainscorelabs.com",
+      "url": "https://chainscorelabs.com/protocol/ethereum/incidents-and-security-advisories/curve-vyper-reentrancy-vulnerability-2023"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/vyper-compiler-50-5m-2023-07-31"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/de-fi-rekt-report-486m-funds-lost-in-july-2023-top-defi-scams-and-exploits"
+    },
+    {
+      "source": "revertiq",
+      "label": "blockchain.news",
+      "url": "https://blockchain.news/news/curve-finance-and-the-vyper-vulnerability-a-technical-post-mortem-report"
+    }
+  ]
+}

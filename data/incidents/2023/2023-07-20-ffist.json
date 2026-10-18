@@ -1,0 +1,123 @@
+{
+  "id": "2023-07-20-ffist",
+  "name": "FFIST",
+  "date": "2023-07-20",
+  "year": 2023,
+  "amountUsd": 110000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "Token",
+  "category": "logic-error",
+  "technique": "Reward Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.95,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.95
+      },
+      {
+        "category": "signature-crypto",
+        "p": 0.03
+      },
+      {
+        "category": "access-control",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.08,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Business Logic Flaw. Lost: ~$110k",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Business Logic Flaw. Lost: ~$110k"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The root cause is in _airdrop() function, the airdrop address can be calculated and it could overwrite any balance of an address to a specific number. Attacker can overwrote the balance of the swap, causing the K change thus a big gain on the swap. The random seed is not randomized which is easy to construct 'to' and 'tAmount' here to get an arbitrary airdropAddress address and that address will be used for balance overwritten. Code Snippet： Attack TX: https://app.blocksec.com/explorer/tx/bsc/0x199c4b88cab6b4b495b9d91af98e746811dd8f82f43117c48205e6332db9f0e0?line=45&debugLine=45 Analysis: https://x.com/Phalcon_xyz/status/1681869807698984961"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 20 July 2023, FFIST on BNB Chain was exploited for approximately $110,000 due to a manipulable reward airdrop mechanism. The attacker could control airdrop parameters and drain pool value via a predictable random address calculation, resulting in disproportionate token value extraction. The FFIST smart contract's airdrop feature used a predictable mechanism for selecting airdrop recipient addresses, allowing an attacker to manipulate pool balances by always ensuring the airdrop targeted the DEX pair and set its balance to 1, enabling arbitrage and draining funds."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x199c4b88cab6b4b495b9d91af98e746811dd8f82f43117c48205e6332db9f0e0"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-07/FFIST_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-07/FFIST_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Phalcon_xyz/status/1681869807698984961"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/AnciliaInc/status/1681901107940065280"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/bsc/0x199c4b88cab6b4b495b9d91af98e746811dd8f82f43117c48205e6332db9f0e0?line=45&debugLine=45"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/Phalcon_xyz/status/1681869807698984961"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x199c4b88cab6b4b495b9d91af98e746811dd8f82f43117c48205e6332db9f0e0"
+    },
+    {
+      "source": "blocksec",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs?tab=readme-ov-file#20230720-ffist---business-logic-flaw"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/ffist-2023-07-20"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.solidityscan.com",
+      "url": "https://blog.solidityscan.com/ffist-hack-analysis-9cb695c0fad9/"
+    },
+    {
+      "source": "revertiq",
+      "label": "raw.githubusercontent.com",
+      "url": "https://raw.githubusercontent.com/SunWeb3Sec/DeFiHackLabs/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/src/test/2023-07/FFIST_exp.sol"
+    }
+  ]
+}

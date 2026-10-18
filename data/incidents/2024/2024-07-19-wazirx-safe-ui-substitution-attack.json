@@ -1,0 +1,80 @@
+{
+  "id": "2024-07-19-wazirx-safe-ui-substitution-attack",
+  "name": "WazirX Safe UI Substitution Attack",
+  "date": "2024-07-19",
+  "year": 2024,
+  "amountUsd": 235000000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": null,
+  "category": "frontend-infra",
+  "technique": "UI transaction substitution; Access control (signer compromise)",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.98). Replaced keyword guess \"key-compromise\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "frontend-infra",
+    "confidence": 0.98,
+    "top": [
+      {
+        "category": "frontend-infra",
+        "p": 0.98
+      },
+      {
+        "category": "access-control",
+        "p": 0.01
+      },
+      {
+        "category": "social-engineering",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.03,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "On July 18,19, 2024, WazirX lost approximately $235 million from a Gnosis Safe multisig wallet when attackers compromised the signing interface. They substituted a malicious contract upgrade payload that drained most assets. The breach was attributed to a UI transaction substitution attack, not a direct contract vulnerability. The attacker exploited a mismatch between the multisig wallet signing interface and actual transaction calldata. Signers approved a malicious contract upgrade shown as benign on the UI, allowing the attacker to drain assets. This was supported by compromised keys and phishing, but the decisive vector was UI transaction spoofing.",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "On July 18,19, 2024, WazirX lost approximately $235 million from a Gnosis Safe multisig wallet when attackers compromised the signing interface. They substituted a malicious contract upgrade payload that drained most assets. The breach was attributed to a UI transaction substitution attack, not a direct contract vulnerability. The attacker exploited a mismatch between the multisig wallet signing interface and actual transaction calldata. Signers approved a malicious contract upgrade shown as benign on the UI, allowing the attacker to drain assets. This was supported by compromised keys and phishing, but the decisive vector was UI transaction spoofing."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xe3b4cf64e0fc25fafb10d226984b18addc038879ed77f730abbed4737db6a5fc",
+    "0x1e523051a8a481c5a57fe8261cced4cb3e775ce9315168b041fd34fc25d563ac",
+    "0x8b99ae634e1e7180b3fcc66e8fe5d076351477077051a7bbf5ec626a9d0588ef",
+    "0x87c01ca1f56ef3663651b05cd8ebcf133281c5fdd0ef1016f83a16a862c4a235"
+  ],
+  "poc": null,
+  "sources": [
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/wazirx-access-control-2024-07-19"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/de-fi-rekt-report-over-671-million-lost-in-q3-2024"
+    },
+    {
+      "source": "revertiq",
+      "label": "wazirx.com",
+      "url": "https://wazirx.com/blog/preliminary-report-cyber-attack-on-wazirx-multisig-wallet/"
+    },
+    {
+      "source": "revertiq",
+      "label": "quillaudits.com",
+      "url": "https://www.quillaudits.com/blog/hack-analysis/wazirx-235m-hack"
+    }
+  ]
+}

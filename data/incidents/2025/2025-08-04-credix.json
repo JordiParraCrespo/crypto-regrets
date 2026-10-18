@@ -1,0 +1,103 @@
+{
+  "id": "2025-08-04-credix",
+  "name": "CrediX",
+  "date": "2025-08-04",
+  "year": 2025,
+  "amountUsd": 4500000,
+  "returnedUsd": null,
+  "chains": [
+    "Sonic"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "key-compromise",
+  "technique": "Private Key Compromised",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "key-compromise",
+    "confidence": 0.89,
+    "top": [
+      {
+        "category": "key-compromise",
+        "p": 0.9
+      },
+      {
+        "category": "rugpull",
+        "p": 0.09
+      },
+      {
+        "category": "access-control",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.92
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Six days of setup, minutes of execution. A compromised Credix admin account minted worthless acUSDC tokens, borrowed $4.5 million against phantom collateral, then shipped everything to Ethereum. Someone with the right access decided payday had arrived.",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "Six days of setup, minutes of execution. A compromised Credix admin account minted worthless acUSDC tokens, borrowed $4.5 million against phantom collateral, then shipped everything to Ethereum. Someone with the right access decided payday had arrived."
+    },
+    {
+      "source": "SlowMist",
+      "text": "The decentralized lending protocol Credix suffered an exploit, losing approximately $4.5 million. The attacker gained control of an admin wallet, minted tokens, and drained liquidity pools. After the incident, Credix claimed it had reached a settlement with the attacker, who agreed to return the funds on the condition that “a certain amount would be fully paid by the Credix treasury.” However, Credix did not disclose how much was actually paid. Shortly after this announcement, Credix deleted its social media accounts and the team disappeared, sparking speculation that the so-called “hack” may in fact have been a rug pull orchestrated by insiders. To da…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "CrediX Finance, a Sonic lending protocol, was drained of $4.5M in August 2025 after an attacker gained core admin privileges. The exploiter minted unbacked collateral, borrowed from pools, and bridged assets to Ethereum. The team later vanished, raising strong exit scam suspicions. The attack was enabled by governance failure: a single address was assigned multiple high-impact admin roles (including minting and bridge privileges) via the protocol's ACLManager, with no effective multisig or timelock protections. This allowed unbacked collateral to be minted and used to drain liquidity pools. There is no evidence of a direct smart contract bug; the failure was in unchecked admin controls."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x0cc3520951a2b41281dcc9a0d37ef3f7f139b75675d83ae72e3b8e903334f35e"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Credix - Rekt",
+      "url": "https://rekt.news/credix-rekt"
+    },
+    {
+      "source": "slowmist",
+      "label": "web3isgoinggreat.com",
+      "url": "https://www.web3isgoinggreat.com/?id=credix-exploit"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/credix-finance-faces-4-5m-2025-08-11"
+    },
+    {
+      "source": "revertiq",
+      "label": "quillaudits.com",
+      "url": "https://www.quillaudits.com/blog/hack-analysis/credix-finance-4.5m-exploit"
+    },
+    {
+      "source": "revertiq",
+      "label": "vaultlinegroup.com",
+      "url": "https://www.vaultlinegroup.com/blog/credix-finance-hack-2025"
+    },
+    {
+      "source": "revertiq",
+      "label": "zugtimes.com",
+      "url": "https://zugtimes.com/credix-finance-hit-by-4-5m-defi-hack-funds-drained-via-multisig-exploit/"
+    }
+  ]
+}

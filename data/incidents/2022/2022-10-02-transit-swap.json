@@ -1,0 +1,135 @@
+{
+  "id": "2022-10-02-transit-swap",
+  "name": "Transit Swap",
+  "date": "2022-10-02",
+  "year": 2022,
+  "amountUsd": 28900000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum",
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "input-validation",
+  "technique": "Missing Input Validation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.69,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.71
+      },
+      {
+        "category": "input-validation",
+        "p": 0.19
+      },
+      {
+        "category": "arbitrary-call",
+        "p": 0.1
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Incorrect owner address validation. Lost: over $21 Million",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Incorrect owner address validation. Lost: over $21 Million"
+    },
+    {
+      "source": "REKT",
+      "text": "Transit Swap has lost $21M to a vulnerability in its swap contracts. The cooperation between multiple security teams led to 70% of funds being returned. But a protocol using live, unverified contracts is never a good look in DeFi."
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Incorrect owner address validation Vulnerable code snippet: 1.You can input any innocent user who granted approvals to \"0xed1afc8c4604958c2f38a3408fa63b32e737c428\" before. 2.Contract \"0xed1afc8c4604958c2f38a3408fa63b32e737c428\" will perform transferFrom to transfer amount of innocent user to attacker. 3. \"function\": \"claimTokens(address token,address from,address to,uint256 amount)\", \"params\": [ \"0x55d398326f99059fF775485246999027B3197955\",\"0x1aAe0303f795b6FCb185ea9526Aa0549963319Fc\", 0x75F2abA6a44580D7be2C4e42885D4a1917bFFD46\", \"6312858905558909501615\"] 4. No owner address validation Decompiled contract 0xed1afc8c4604958c2f38a3408fa63b32e737c428"
+    },
+    {
+      "source": "SlowMist",
+      "text": "According to official news, Transit Swap, a cross-chain trading platform aggregator supported by TokenPocket, was hacked. According to the analysis of SlowMist MistTrack, the stolen assets exceeded 28.9 million US dollars. The hacker's account address is 0x75f2aba6a44580d7be2c4e42885d4a1917bffd46. The largest attacker had returned 6,500 BNB (about $1.95 million) on October 10, and on October 13, the attackers returned 3,485 BNB (about $950,000)."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Transit Swap suffered an approval-drain exploit on October 1, 2022, allowing attackers to sweep ~$21M from user wallets on multiple chains. The swap contract forwarded arbitrary calldata, enabling crafted transferFrom calls against victim-approved tokens. Partial recovery followed on-chain communication and pressure. The vulnerable swap router contract forwarded user-supplied calldata and an arbitrary destination address with no validation. Attackers crafted calldata invoking transferFrom (with victim, attacker, amount) against ERC-20 tokens, using router-held user approvals to transfer assets directly to their accounts."
+    }
+  ],
+  "audit": "Out of scope",
+  "txHashes": [
+    "0x181a7882aac0eab1036eedba25bc95a16e10f61b5df2e99d240a16c334b9b189",
+    "0x743e4ee2c478300ac768fdba415eb4a23ae66981c076f9bff946c0bf530be0c7",
+    "0xb314ddb55a14f1515a3a2ea46a5cac035197a321d9e09d730bf6443c932857d1"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-10/TransitSwap_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-10/TransitSwap_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/TransitFinance/status/1576463550557483008"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/1nf0s3cpt/status/1576511552592543745"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x181a7882aac0eab1036eedba25bc95a16e10f61b5df2e99d240a16c334b9b189"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Transit Swap - REKT",
+      "url": "https://rekt.news/transit-swap-rekt"
+    },
+    {
+      "source": "slowmist",
+      "label": "slowmist.medium.com",
+      "url": "https://slowmist.medium.com/cross-chain-dex-aggregator-transit-swap-hacked-analysis-74ba39c22020"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/transit-swap-2022-10-02"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "halborn.com",
+      "url": "https://www.halborn.com/blog/post/explained-the-transit-swap-hack-october-2022"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractaudit.com",
+      "url": "https://www.smartcontractaudit.com/guides/transit-finance-2022-approval-drain-exploit"
+    }
+  ]
+}

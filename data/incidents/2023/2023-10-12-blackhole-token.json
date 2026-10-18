@@ -1,0 +1,88 @@
+{
+  "id": "2023-10-12-blackhole-token",
+  "name": "BlackHole Token",
+  "date": "2023-10-12",
+  "year": 2023,
+  "amountUsd": 1275000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "Token",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.95,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.95
+      },
+      {
+        "category": "market-manipulation",
+        "p": 0.04
+      },
+      {
+        "category": "access-control",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.06,
+    "stateActor": 0.02,
+    "hasRootCause": 0.43
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "BH Token (BlackHole token) suffered an attack. The exploiter (0xFDb) gained 1.2 M USDT. Funds are being swapped for BNB and deposited into Tornado Cash. Contract Address: 0xCC61CC9F2632314c9d452acA79104DDf680952b5. Exploiter Address: 0xFDbfcEEa1de360364084a6F37C9cdb7AaeA63464.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "BH Token (BlackHole token) suffered an attack. The exploiter (0xFDb) gained 1.2 M USDT. Funds are being swapped for BNB and deposited into Tornado Cash. Contract Address: 0xCC61CC9F2632314c9d452acA79104DDf680952b5. Exploiter Address: 0xFDbfcEEa1de360364084a6F37C9cdb7AaeA63464."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 11 October 2023, BlackHole Token (BH) was exploited on BNB Chain through flashloan-driven price manipulation of the BH/USDT PancakeSwap pool. The attacker extracted approximately $1.27 million by distorting pool reserves and exploiting manipulated liquidity removal ratios. No on-chain recovery or confirmed patch appears in any available records. The BlackHole Token contracts and liquidity pool pricing relied directly on the manipulable spot reserve ratio of the BH/USDT pair. The attacker used a flashloan to artificially alter the pool's reserve balance, accelerating slippage and enabling abnormal liquidity withdrawal at inflated ratios, ultimately extracting outsized profit.…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xc11e4020c0830bcf84bfa197696d7bfad9ff503166337cb92ea3fade04007662"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0xCC61CC9F2632314c9d452acA79104DDf680952b5"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/blackhole-token-2023-10-12"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.solidityscan.com",
+      "url": "https://blog.solidityscan.com/bh-token-hack-analysis-97dc68690c36/"
+    },
+    {
+      "source": "revertiq",
+      "label": "olympix.security",
+      "url": "https://olympix.security/biweekly-exploits/fantom-blackhole-uniclynft-keys-burns-and-reentrancy-all-over-again"
+    }
+  ]
+}

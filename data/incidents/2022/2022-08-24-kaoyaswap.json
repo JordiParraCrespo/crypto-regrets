@@ -1,0 +1,89 @@
+{
+  "id": "2022-08-24-kaoyaswap",
+  "name": "KaoyaSwap",
+  "date": "2022-08-24",
+  "year": 2022,
+  "amountUsd": 118000,
+  "returnedUsd": null,
+  "chains": [
+    "Binance Smart Chain"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Swap Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.9
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Kaoyaswap on BSC appears to have been attacked, with hackers making 37,294 BUSD and 271.2 WBNB, caused by faulty logic in the Swap function.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Kaoyaswap on BSC appears to have been attacked, with hackers making 37,294 BUSD and 271.2 WBNB, caused by faulty logic in the Swap function."
+    },
+    {
+      "source": "SlowMist",
+      "text": "BSC DEX protocol Kaoyaswap was attacked, losing 37,294 BUSD and 271.2 WBNB. The reason for this attack is the Swap value flaw."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "KaoyaSwap was exploited on BNB Chain on 24 August 2022, resulting in losses of approximately $118,000. The attack used a swap logic flaw involving repeated pairs in the swap path, allowing the attacker to drain the protocol via flash loan preparation and mispriced swap payouts. A flaw in the swapExactTokensForETHSupportingFeeOnTransferTokens function miscalculated output values when the same pair appeared multiple times in the swap path, allowing repeated withdrawal of value for a single input."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xc8db3b620656408a5004844703aa92d895eb3527da057153f0b09f0b58208d74"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BlockSecTeam/status/1562286943957708800"
+    },
+    {
+      "source": "slowmist",
+      "label": "mp.weixin.qq.com",
+      "url": "https://mp.weixin.qq.com/s/dWZexhFIxZKJRu1W-8nv5g"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/kaoyaswap-2022-08-24"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/kaoya-swap-hack-2022"
+    },
+    {
+      "source": "revertiq",
+      "label": "medium.com",
+      "url": "https://medium.com/quillhash/kaoyaswap-logic-exploit-analysis-quillaudits-7c6c1575926a"
+    }
+  ]
+}

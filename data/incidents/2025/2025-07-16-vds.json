@@ -1,0 +1,81 @@
+{
+  "id": "2025-07-16-vds",
+  "name": "VDS",
+  "date": "2025-07-16",
+  "year": 2025,
+  "amountUsd": 13000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Logic Flaw",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.94).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.94,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.94
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.03
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.03
+      }
+    ],
+    "flashLoan": 0.97,
+    "stateActor": 0.01,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Logic Flaw. Lost: 13k USD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Logic Flaw. Lost: 13k USD"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The VDS token contract (0x6ce6...9D5A) acts as a wrapper that lets users deposit AVD to mint VDS. The flaw is in its burn/redemption logic: simply transferring VDS tokens to the VDS contract address itself triggers a callback that returns the underlying AVD at a 1:1 ratio, regardless of the VDS amount's true backing value and without any proper accounting. The attacker flash-loaned 20K BSC-USD from Moolah, swapped it to AVD on PancakeSwap, deposited AVD to obtain VDS, then transferred a hand-picked VDS amount (168205391822) directly to the VDS contract, which paid back AVD 1:1 — yielding more AVD than was deposited. The extra AVD was swapped back to BSC-USD to repay the flash loan and pocket ~$13K profit. The root cause is a flawed self-transfer / burn handler that redeems underlying at a fixed 1:1 rate. Vulnerable code snippet: Attack Tx: https://bscscan.com/tx/0x0e01fd8798f970fd689014cb215e622aca8b7c8c243176c5b504e0043402e31f Analysis: SlowMist_Team"
+    },
+    {
+      "source": "SlowMist",
+      "text": "According to monitoring by SlowMist's MistEye security system, VDS on the BSC appears to have been attacked, with an estimated loss of around $13,000."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x0e01fd8798f970fd689014cb215e622aca8b7c8c243176c5b504e0043402e31f"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-07/VDS_exp.sol",
+  "sources": [
+    "defihacklabs",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-07/VDS_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/1945672192471302645"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x0e01fd8798f970fd689014cb215e622aca8b7c8c243176c5b504e0043402e31f"
+    }
+  ]
+}

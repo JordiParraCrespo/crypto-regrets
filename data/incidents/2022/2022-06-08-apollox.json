@@ -1,0 +1,87 @@
+{
+  "id": "2022-06-08-apollox",
+  "name": "ApolloX",
+  "date": "2022-06-08",
+  "year": 2022,
+  "amountUsd": 2150000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "signature-crypto",
+  "technique": "Signature Verification Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "signature-crypto",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "signature-crypto",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "The ApolloX project was attacked due to a flaw in the ApolloX signature system. The attacker used the signature system flaw to generate 255 signatures, with a total of 53,946,802 $APX extracted from the contract, worth about $1.6 million.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The ApolloX project was attacked due to a flaw in the ApolloX signature system. The attacker used the signature system flaw to generate 255 signatures, with a total of 53,946,802 $APX extracted from the contract, worth about $1.6 million."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On June 8, 2022, ApolloX’s trading rewards withdrawal contract on BNB Chain was exploited, allowing an attacker to withdraw about 53 million APX tokens. The flaw was in signature verification, and the tokens were swapped for ~$2.15 million in BUSD. ApolloX's withdrawal contract failed to properly constrain or authenticate signatures for APX token reward claims. The attacker amassed 255 signatures and used them to repeatedly call the vulnerable claim function, allowing the unauthorized withdrawal of 53 million APX tokens."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x21e5e6ee42906a840c07eb39fb788553a3fbb5794562825c2a1d37bfc910e5f7",
+    "0x67a90c1af85c626460b928ccfde66432dd828b838038ef15400c577ee5386926",
+    "0xccc9e8ebf0472272b83e328a11e5aa5eb712c831dcd5bae32622dc238005aee0",
+    "0x34b29a393b68ae0f2e417485fb57ea7510a253c1b01431d04a66ca61e4fbbc8c",
+    "0xc2607de512e31737659b78e8b6f6cc4a82b10f3da953e901e95a0c7beea440de",
+    "0xe944b576b46402c830bf79062ba22728c55c87c73062f944f01d71d7fb707f53",
+    "0x55c45952611cdd1b1d1c168c1b0bd6198ff64c71abb67aecda8ffa4057758cc6",
+    "0x57030b6e64f81b854601abc5953837d4d7b3f2534593a1f48485fffd37630b94"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/ApolloX_com/status/1534810576198979586"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/apollox-2022-06-08"
+    },
+    {
+      "source": "revertiq",
+      "label": "certik.com",
+      "url": "https://www.certik.com/blog/apollo-x-exploit-analysis"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptonews.net",
+      "url": "https://cryptonews.net/news/security/7968959/"
+    }
+  ]
+}

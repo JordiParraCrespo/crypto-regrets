@@ -1,0 +1,73 @@
+{
+  "id": "2025-02-07-adacash",
+  "name": "ADACash",
+  "date": "2025-02-07",
+  "year": 2025,
+  "amountUsd": 107900,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": null,
+  "category": "oracle-manipulation",
+  "technique": "Lack of Slippage Protection",
+  "classificationNote": "Classified by keyword rules from the DeFiHackLabs explorer label and description.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "market-manipulation",
+    "confidence": 0.52,
+    "top": [
+      {
+        "category": "market-manipulation",
+        "p": 0.55
+      },
+      {
+        "category": "logic-error",
+        "p": 0.4
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.91,
+    "stateActor": 0.01,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "The ADACash protocol on BSC was exploited for approximately $107,900 through a multi-layer sandwich attack targeting an unprotected swap in its depositBNB function. The function swapped WBNB for ADAcash tokens without enforcing any slippage protection, making it vulnerable to price manipulation. ADACash is also a fee-on-transfer token with a 15% transfer fee on each buy and sell transaction. The attacker exploited this combination: by sandwiching the unprotected depositBNB swap, they inflated the ADAcash price before the swap executed, causing the protocol to receive far fewer tokens than expected. The 15% fee on each sell also triggered the contract's internal fee-swap logic, which the attacker turned into a second sandwich opportunity. By splitting sell actions across multiple transactions and repeatedly forcing large unprotected swaps from the fee pool, the attacker accumulated ADA tokens and profit, repaid any flash loans, and exited with approximately $107,900. Attack Tx: 0x8501a9d34fc28bee21fd08505b3e4b1b0a4aec3a5496b508a290531d8eb25281 Analysis: Phalcon Alert on ADACash",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The ADACash protocol on BSC was exploited for approximately $107,900 through a multi-layer sandwich attack targeting an unprotected swap in its depositBNB function. The function swapped WBNB for ADAcash tokens without enforcing any slippage protection, making it vulnerable to price manipulation. ADACash is also a fee-on-transfer token with a 15% transfer fee on each buy and sell transaction. The attacker exploited this combination: by sandwiching the unprotected depositBNB swap, they inflated the ADAcash price before the swap executed, causing the protocol to receive far fewer tokens than expected. The 15% fee on each sell also triggered the contract's internal fee-swap logic, which the attacker turned into a second sandwich opportunity. By splitting sell actions across multiple transactions and repeatedly forcing large unprotected swaps from the fee pool, the attacker accumulated ADA tokens and profit, repaid any flash loans, and exited with approximately $107,900. Attack Tx: 0x8501a9d34fc28bee21fd08505b3e4b1b0a4aec3a5496b508a290531d8eb25281 Analysis: Phalcon Alert on ADACash"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x8501a9d34fc28bee21fd08505b3e4b1b0a4aec3a5496b508a290531d8eb25281"
+  ],
+  "poc": null,
+  "sources": [
+    "defihacklabs",
+    "blocksec"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x8501a9d34fc28bee21fd08505b3e4b1b0a4aec3a5496b508a290531d8eb25281"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/Phalcon_xyz/status/1888143950990778773"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x8501a9d34fc28bee21fd08505b3e4b1b0a4aec3a5496b508a290531d8eb25281"
+    }
+  ]
+}

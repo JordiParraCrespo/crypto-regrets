@@ -1,0 +1,86 @@
+{
+  "id": "2023-09-09-bfctoken",
+  "name": "BFCToken",
+  "date": "2023-09-09",
+  "year": 2023,
+  "amountUsd": 38000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Business Logic Flaw",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.88).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.88,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.89
+      },
+      {
+        "category": "market-manipulation",
+        "p": 0.06
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.04
+      }
+    ],
+    "flashLoan": 0.07,
+    "stateActor": 0.03,
+    "hasRootCause": 0.9
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Business Logic Flaw. Lost: ~$38K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Business Logic Flaw. Lost: ~$38K"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "by reducing of total supply of BFC token the attacker burned tokens, skimmed the pair to artificially inflate the token price Vulnerable Code Snippet: Attack Transaction: https://bscscan.com/tx/0x8ee76291c1b46d267431d2a528fa7f3ea7035629500bba4f87a69b88fcaf6e23 Analysis: https://twitter.com/CertiKAlert/status/1700621314246017133"
+    },
+    {
+      "source": "SlowMist",
+      "text": "BFCToken suffered from a flash loan attack, resulting in losses of ~$38k. BSC: 0x595eac4a0ce9b7175a99094680fbe55a774b5464. The attacker was able to burn BFCTokens from the pool at no expense by exploiting the \"_transfer\" function."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x8ee76291c1b46d267431d2a528fa7f3ea7035629500bba4f87a69b88fcaf6e23"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-09/BFCToken_exp.sol",
+  "sources": [
+    "defihacklabs",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-09/BFCToken_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/CertiKAlert/status/1700621314246017133"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x8ee76291c1b46d267431d2a528fa7f3ea7035629500bba4f87a69b88fcaf6e23"
+    },
+    {
+      "source": "slowmist",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0x595eac4a0ce9b7175a99094680fbe55a774b5464"
+    }
+  ]
+}

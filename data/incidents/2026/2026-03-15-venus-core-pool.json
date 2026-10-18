@@ -1,0 +1,154 @@
+{
+  "id": "2026-03-15-venus-core-pool",
+  "name": "Venus Core Pool",
+  "date": "2026-03-15",
+  "year": 2026,
+  "amountUsd": 3700000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Donation Attack",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.5,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.53
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.33
+      },
+      {
+        "category": "logic-error",
+        "p": 0.09
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.01,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "BorrowBehalf + Donation Attack. Lost: 913,858.263360521396654198 CAKE + 1,972.530910582753621682 WBNB",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "BorrowBehalf + Donation Attack. Lost: 913,858.263360521396654198 CAKE + 1,972.530910582753621682 WBNB"
+    },
+    {
+      "source": "REKT",
+      "text": "An attacker spent 9 months building a position, bypassed Venus Protocol's supply cap via a known donation exploit, and extracted $3.7 million, leaving $2.15 million in bad debt on a protocol that has now been rekt four times in five years."
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The Venus vTHE market combined two flaws. First, six EOAs (including the victim) had pre-approved the future attack-contract address to spend their THE; the attacker used those standing allowances to pull ~36M THE and donate it directly into the vTHE contract. A direct token donation into a Compound-fork money market is not booked through mint, so it silently inflates the market's cash / exchange rate and therefore the value of the victim's vTHE collateral. Second, Venus's borrowBehalf(borrower, amount) lets a third party open debt on another account's behalf without that account's authorization. With the victim's collateral artificially over-valued by the donation, the attacker called borrowBehalf(VICTIM, ...) to borrow USDC, CAKE and WBNB against the victim while receiving the cash itself, then minted vUSDC and re-borrowed/re-donated THE to keep the collateral inflated. The result: debt piled onto the victim, real assets (CAKE + WBNB) extracted to the attacker. Vulnerable code snippet: Attack Tx: https://bscscan.com/tx/0x4f477e941c12bbf32a58dc12db7bb0cb4d31d41ff25b2457e6af3c15d7f5663f Analysis: https://bscscan.com/address/0x86e06EAfa6A1eA631Eab51DE500E3D474933739f"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Venus Protocol’s Core Pool THE (Thena) market was exploited. The attacker accumulated THE tokens over 9 months, used a donation attack (direct transfer bypassing supply cap and mint) to inflate the vTHE exchange rate, combined with price manipulation borrow loops, extracted ~$3.7M in assets and left ~$2.15M in bad debt for the protocol."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Venus Protocol's Thena (THE) market on BNB Chain was exploited for over $3.7 million in March 2026 by bypassing the supply cap through direct token transfers, inflating the vTHE exchange rate and collateral value. The incident left ~$2.15 million in bad debt after liquidation. The supply cap was enforced only through the mint() function, not on all balance increases. Direct ERC-20 token transfers to the vTHE contract bypassed supply cap checks and inflated the pool's balance, which the exchange rate formula used directly. This enabled attackers to artificially inflate collateral value and extract assets far exceeding the legitimate protocol limits."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 15 March 2026, the Venus Protocol’s Core Pool on BNB Chain suffered a major donation attack against its THE (Thena) market. The attacker exploited a flaw in the exchange rate accounting, bypassed supply caps, and borrowed assets worth $3.7 million. The protocol was left with $2.15 million in bad debt and the attacker suffered a net on-chain loss. The vTHE market's getCashPrior() function relied on the token contract's balance, not internal accounting, allowing direct token donations to artificially inflate collateral value. This bypassed the market’s supply cap and enabled outsized, undercollateralized borrowing against the THE token."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x4f477e941c12bbf32a58dc12db7bb0cb4d31d41ff25b2457e6af3c15d7f5663f",
+    "0xfd64d0607c9ea08231ff27a7bf97715487e25597a2eaa1a9efdd0e8e28154808",
+    "0xce6e3eb2a28ced1ef1c2212f36736e89f647365b0dfad6c9addc4c8b31f5fb0e"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-03/Venus_THE_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-03/Venus_THE_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x4f477e941c12bbf32a58dc12db7bb0cb4d31d41ff25b2457e6af3c15d7f5663f"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Venus Protocol - Rekt IV",
+      "url": "https://rekt.news/venus-protocol-rekt4"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0x86e06EAfa6A1eA631Eab51DE500E3D474933739f"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x4f477e941c12bbf32a58dc12db7bb0cb4d31d41ff25b2457e6af3c15d7f5663f"
+    },
+    {
+      "source": "blocksec",
+      "label": "community.venus.io",
+      "url": "https://community.venus.io/t/the-market-incident-post-mortem/5712"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/VenusProtocol/status/2033241018704044377"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/venus-protocol-5m-2026-03-17"
+    },
+    {
+      "source": "revertiq",
+      "label": "quillaudits.com",
+      "url": "https://www.quillaudits.com/blog/hack-analysis/venus-5m-exploit"
+    },
+    {
+      "source": "revertiq",
+      "label": "coin360.com",
+      "url": "https://coin360.com/news/venus-protocol-exploit-the-token-price-manipulation-bnb-chain"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptotimes.io",
+      "url": "https://www.cryptotimes.io/2026/03/19/donation-attack-on-venus-protocol-leaves-2-15-million-in-bad-debt/"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/venus-core-pool-2026-03-15"
+    },
+    {
+      "source": "revertiq",
+      "label": "blocksec.com",
+      "url": "https://blocksec.com/blog/venus-thena-donation-attack"
+    }
+  ]
+}

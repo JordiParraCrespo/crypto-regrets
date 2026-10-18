@@ -1,0 +1,106 @@
+{
+  "id": "2021-07-11-chainswap-bridge",
+  "name": "ChainSwap Bridge",
+  "date": "2021-07-11",
+  "year": 2021,
+  "amountUsd": 4400000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum",
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "bridge-crosschain",
+  "technique": "Bridge Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.81,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.82
+      },
+      {
+        "category": "bridge-crosschain",
+        "p": 0.14
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.03
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.88
+  },
+  "bridge": true,
+  "language": "Solidity",
+  "rootCause": "Bridge, logic flaw. Lost: $4.4 million",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Bridge, logic flaw. Lost: $4.4 million"
+    },
+    {
+      "source": "REKT",
+      "text": "As the demand for DeFi increases across chains, the bridges that join them turn into targets themselves. A chain is only as strong as its weakest link… Who will break next?"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The cross-chain bridge Chainswap announced the details of the stolen incident on its official blog. A total of 20 project assets were stolen, with a total value of approximately US$4 million. At present, the ChainSwap team has reached a consensus with the affected projects and initially formulated and implemented a compensation plan. According to the project investigation, due to the error in the token cross-chain quota code, the on-chain swap bridge quota is automatically increased by the signature node, the purpose of which is to be more decentralized without manual control. However, due to a logical flaw in the code, this led to a vulnerability that…"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The cross-chain bridge project Multichain issued an announcement stating that the newly launched V3 cross-chain liquidity pool was hacked in the early hours of yesterday, with a total loss of 2.39 million USDC and 5.5 million MIM. According to Etherscan, the hacker has sold all MIMs and obtained 548 Million DAI, which means that Multichain's total loss is more than 7.87 million U.S. dollars. According to the explanation of the reason for the theft in the Multichain announcement, two v3 router transactions were detected under the V3 router MPC account on the BSC. These two transactions have the same R value signature, and the hacker reversed the private key of this MPC account.…"
+    }
+  ],
+  "audit": "Unaudited",
+  "txHashes": [],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2021-07/Chainswap_exp2.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2021-07/Chainswap_exp2.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/real_n3o/status/1414071223940571139"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "rekt.news",
+      "url": "https://rekt.news/chainswap-rekt/"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "chain-swap.medium.com",
+      "url": "https://chain-swap.medium.com/chainswap-exploit-11-july-2021-post-mortem-6e4e346e5a32"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: ChainSwap - REKT",
+      "url": "https://rekt.news/chainswap-rekt"
+    },
+    {
+      "source": "slowmist",
+      "label": "medium.com",
+      "url": "https://medium.com/multichainorg/anyswap-multichain-router-v3-exploit-statement-6833f1b7e6fb"
+    }
+  ]
+}

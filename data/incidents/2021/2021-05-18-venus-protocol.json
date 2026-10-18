@@ -1,0 +1,87 @@
+{
+  "id": "2021-05-18-venus-protocol",
+  "name": "Venus Protocol",
+  "date": "2021-05-18",
+  "year": 2021,
+  "amountUsd": 100000000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.5,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.53
+      },
+      {
+        "category": "market-manipulation",
+        "p": 0.47
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.03,
+    "hasRootCause": 0.92
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "On the evening of May 18, the BSC-based DeFi lending platform Venus token XVS was doubled by the giant whale. After that, XVS was used as collateral to borrow and transfer BTC and ETH worth hundreds of millions of dollars. Since then, the price of collateral XVS is large. It fell and faced liquidation, but due to insufficient liquidity in the XVS market, the system failed to liquidate in time, resulting in a huge shortfall of hundreds of millions of dollars in Venus. On the 30th, Venus officially released an article that disclosed the process and results of the incident. The survey showed that the liquidator made a profit of about 20 million U.S. dolla…",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "On the evening of May 18, the BSC-based DeFi lending platform Venus token XVS was doubled by the giant whale. After that, XVS was used as collateral to borrow and transfer BTC and ETH worth hundreds of millions of dollars. Since then, the price of collateral XVS is large. It fell and faced liquidation, but due to insufficient liquidity in the XVS market, the system failed to liquidate in time, resulting in a huge shortfall of hundreds of millions of dollars in Venus. On the 30th, Venus officially released an article that disclosed the process and results of the incident. The survey showed that the liquidator made a profit of about 20 million U.S. dolla…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On May 18,19, 2021, Venus Protocol on BNB Chain accumulated more than $100 million in protocol bad debt after XVS token price was manipulated on Binance. Manipulators used inflated XVS collateral to borrow substantial BTC and ETH, and the system's liquidation process could not recover these assets after XVS crashed. Venus Protocol's price oracle sourced XVS value exclusively from Binance's illiquid spot market, allowing an actor to pump XVS price, borrow heavily against inflated collateral, and leave unrecoverable bad debt when the price collapsed. No aggregation, TWAP, or circuit-breaker prevented the exploit."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "quillhashteam.medium.com",
+      "url": "https://quillhashteam.medium.com/200-m-venus-protocol-hack-analysis-b044af76a1ae"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/venus-protocol-2021-05-19"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "theblock.co",
+      "url": "https://www.theblock.co/news/defi/2021-05-19-bsc-venus-protocol-liquidations-xvs-token-possible-price-manipulation-105301"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptodaily.co.uk",
+      "url": "https://cryptodaily.co.uk/2021/05/venus-protocol-liquidation-incident-analysis"
+    }
+  ]
+}

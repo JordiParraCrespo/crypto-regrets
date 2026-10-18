@@ -1,0 +1,145 @@
+{
+  "id": "2024-03-08-unizen",
+  "name": "Unizen",
+  "date": "2024-03-08",
+  "year": 2024,
+  "amountUsd": 2100000,
+  "returnedUsd": 2100000,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "arbitrary-call",
+  "technique": "Arbitrary External Call",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "arbitrary-call",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "arbitrary-call",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "unverified external call. Lost: ~2M",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "unverified external call. Lost: ~2M"
+    },
+    {
+      "source": "REKT",
+      "text": "March 8th, $2.1M was stolen in multiple attacks on the ETH-based DEX shortly after a contract upgrade to their DEX aggregation contract."
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Beacuse of the Arbitrary call, the attacker were able to access and drain value from the accounts of users who had created approvals for the contract. Attack Tx: https://app.blocksec.com/explorer/tx/eth/0x923d1d63a1165ebd3521516f6d22d015f2e1b4b22d5dc954152b6c089c765fcd Analysis: https://twitter.com/SlowMist_Team/status/1766311510362734824"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The Unizen defi platform lost around $2.1 million in the Tether stablecoin in an attack that took advantage of a vulnerability an external call from the project smart contract. On March 12th, Unizen's CTO Martin Granström tweeted that they had recovered $185,000 worth of stolen funds from four hackers."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Unizen's DEX aggregator proxy contract on Ethereum Mainnet was exploited on 8 March 2024 due to an unsafe external call vulnerability introduced in a contract upgrade, resulting in losses of about $2.1 million. The attacker drained user-approved USDT, quickly swapping to DAI and ETH. Most affected users (those with losses under $750,000) were reimbursed shortly after the incident. The exploit arose from an unsafe external call vulnerability introduced during a smart contract upgrade to Unizen's DEX aggregation proxy, allowing attackers to invoke arbitrary contract methods and withdraw funds from users who had previously granted token approvals."
+    }
+  ],
+  "audit": "Halborn, Verichains",
+  "txHashes": [
+    "0x923d1d63a1165ebd3521516f6d22d015f2e1b4b22d5dc954152b6c089c765fcd",
+    "0x3eb2002b46de3e4adee9ed9e093e79582f08fed912194d6e869e6cbbf97eb6e9",
+    "0x30fef86a72ea7e1109ffeae572439995c78561ffeb968dcbd61c609efc60fdd9",
+    "0x57b736acc7a71a5d7d28f0abcf2d0b6553623ad480464ec347ebb30ab05aae33",
+    "0x398a7ea42fab5228200835141bb732843b33943a8cf63bf16104568ccdfded62",
+    "0xfcba2c38617edab9abf146bf4381edd2674873cc7bae9c6ba505a45e03a7228b",
+    "0xbe79c19ab998540e35a514b24ce65c1857c5604e6c0f8f2b485a53002cf02739",
+    "0x71369909c1473635961d7618484705b6a83faf55e0e6b6f885ad0c9ed0d97d56",
+    "0x68c900fb23f766ee989b73c9845cc1d98ceadbd36f586e2db47d5acfe60857e2",
+    "0x610c0f7b64567fa173c701ec106acb192f6ccda5492e2c1d2e39c8a43493f954",
+    "0x45534e2b0d807a4b427498b973e6e02bab0ca6857b29e7c0888e9f3e03fcc0e5",
+    "0xdd6e9625a9f9d7d91b00aad8d4bbfdc1fef4553a0b21b6f26a4a29cdfcbb4889",
+    "0xbe86b5b967a67365e7430ddd1bdf24556c64d1f6ab1e0898c67cf18c62ee584b",
+    "0x871cbbf381295e1c1f9014e036d2a6e860ad7571fdee03a10a40be6a905fc499",
+    "0xc12a4155c2c90707138e4aef8883c8f724371145823e2f661f19b93e5b3a9d6e",
+    "0xdd0636e2598f4d7b74f364fedb38f334365fd956747a04a6dd597444af0bc1c0"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-03/UnizenIO_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-03/UnizenIO_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Phalcon_xyz/status/1766274000534004187"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/AnciliaInc/status/1766261463025684707"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Unizen - Rekt",
+      "url": "https://rekt.news/unizen-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/eth/0x923d1d63a1165ebd3521516f6d22d015f2e1b4b22d5dc954152b6c089c765fcd"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/SlowMist_Team/status/1766311510362734824"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x3eb2002b46de3e4adee9ed9e093e79582f08fed912194d6e869e6cbbf97eb6e9"
+    },
+    {
+      "source": "blocksec",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs?tab=readme-ov-file#20240309-unizenio---unverified-external-call"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/unizen-2024-03-08"
+    },
+    {
+      "source": "revertiq",
+      "label": "halborn.com",
+      "url": "https://www.halborn.com/blog/post/explained-the-unizen-hack-march-2024"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/NanoJS10/Unizen-Protocol-Exploit-/blob/main/README.md"
+    }
+  ]
+}

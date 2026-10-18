@@ -1,0 +1,58 @@
+{
+  "id": "2021-11-06-synapse-protocol",
+  "name": "Synapse Protocol",
+  "date": "2021-11-06",
+  "year": 2021,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [],
+  "targetType": null,
+  "category": "oracle-manipulation",
+  "technique": "Price Manipulation",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.90).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.9,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.91
+      },
+      {
+        "category": "market-manipulation",
+        "p": 0.04
+      },
+      {
+        "category": "logic-error",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.06,
+    "stateActor": 0.02,
+    "hasRootCause": 0.81
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "The asset cross-chain bridge launched by the cross-chain protocol Synapse Protocol is suspected to have loopholes, and the attacker manipulated the virtual price of nUSD Metapool, reducing it by about 12.5%. Ultimately, although the funds were withdrawn from the metapool itself, the funds were not lost. When the validator is offline, the address that took the funds from the LP tries to move the funds through the bridge, so the transaction has not yet been processed. However, the validators unanimously decided not to process this transaction because it was malicious to the LP and the entire network: as a result, ~$8.2 million in nUSD was not minted to t…",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The asset cross-chain bridge launched by the cross-chain protocol Synapse Protocol is suspected to have loopholes, and the attacker manipulated the virtual price of nUSD Metapool, reducing it by about 12.5%. Ultimately, although the funds were withdrawn from the metapool itself, the funds were not lost. When the validator is offline, the address that took the funds from the LP tries to move the funds through the bridge, so the transaction has not yet been processed. However, the validators unanimously decided not to process this transaction because it was malicious to the LP and the entire network: as a result, ~$8.2 million in nUSD was not minted to t…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "slowmist",
+      "label": "synapseprotocol.medium.com",
+      "url": "https://synapseprotocol.medium.com/11-06-2021-post-mortem-of-synapse-metapool-exploit-3003b4df4ef4"
+    }
+  ]
+}

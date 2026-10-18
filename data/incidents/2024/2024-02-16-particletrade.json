@@ -1,0 +1,125 @@
+{
+  "id": "2024-02-16-particletrade",
+  "name": "ParticleTrade",
+  "date": "2024-02-16",
+  "year": 2024,
+  "amountUsd": 140000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "input-validation",
+  "technique": "Missing Input Validation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "reentrancy",
+    "confidence": 0.64,
+    "top": [
+      {
+        "category": "reentrancy",
+        "p": 0.66
+      },
+      {
+        "category": "input-validation",
+        "p": 0.33
+      },
+      {
+        "category": "logic-error",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.92
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "lack of validation data. Lost: ~50k",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "lack of validation data. Lost: ~50k"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Attacker use onERC721Received override the value of lien.tokenId , and then call accountBalance again. At last use withdrawAccountBalance to withdraw $ETH as same as accoundBalance. Attack tx: https://etherscan.io/tx/0xd9b3e229acc755881890394cc76fde0d7b83b1abd4d046b0f69c1fd9fd495ff6 Analysis: https://twitter.com/Phalcon_xyz/status/1758028270770250134"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The onERC721Received callback in the ParticleExchange contract processed loan settlements and ETH credit updates based solely on the caller-supplied data parameter, with no check that the function was actually triggered by a legitimate ERC-721 contract during a real NFT transfer. An attacker deployed a mock NFT contract whose ownerOf returned the ParticleExchange address and whose safeTransferFrom was a no-op; they placed a zero-cost bid via offerBid, then directly called onERC721Received twice with crafted Lien structs containing zero prices and zero collateral amounts. Each call caused the protocol to record an ETH credit for the attacker without any actual NFT or ETH changing hands. The accumulated balance was then withdrawn via withdrawAccountBalance. Vulnerable code snippet: Attack Tx: 0xd9b3e229acc755881890394cc76fde0d7b83b1abd4d046b0f69c1fd9fd495ff6 Analysis: Particle Trade Exploit"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "ParticleTrade was exploited on Ethereum Mainnet on 15 February 2024, resulting in the loss of approximately 50.1 ETH (~$139,000). The root cause was improper input validation in the NFT collateral flow, allowing an attacker to spoof NFT transfers and manipulate account balances. The vulnerable contract failed to validate the sender and context of the onERC721Received callback and trusted arbitrary external contract addresses (via ownerOf). This allowed direct calls from attacker-controlled contracts, leading to balance manipulation without actual NFT collateral."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xd9b3e229acc755881890394cc76fde0d7b83b1abd4d046b0f69c1fd9fd495ff6",
+    "0x2cc3c3cfbdf04441f3349e49768c909ac252ace6f78b24a25d4700a47883514a",
+    "0x4bb78bbf3305ab38464fd6a210e64cb3d5f6b672eeb10ed5953ec07db447bcc4",
+    "0x32fe57bd3bf9554d1e4d93c09207027c84886179884c6668b05883c0f5220894"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-02/ParticleTrade_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-02/ParticleTrade_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Phalcon_xyz/status/1758028270770250134"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xd9b3e229acc755881890394cc76fde0d7b83b1abd4d046b0f69c1fd9fd495ff6"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/PeiQI99440310/status/1758681695208034604"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x2cc3c3cfbdf04441f3349e49768c909ac252ace6f78b24a25d4700a47883514a"
+    },
+    {
+      "source": "blocksec",
+      "label": "phalcon.blocksec.com",
+      "url": "https://phalcon.blocksec.com/explorer/tx/eth/0x2cc3c3cfbdf04441f3349e49768c909ac252ace6f78b24a25d4700a47883514a"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/particletrade-2024-02-16"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/particletrade-hack-2024"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/kismp123/DeFi-Security-Incident/blob/main/2024/2024-02-15_ParticleTrade_UnverifiedInput_ETH.md"
+    }
+  ]
+}

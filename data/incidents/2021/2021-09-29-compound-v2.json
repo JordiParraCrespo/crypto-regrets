@@ -1,0 +1,110 @@
+{
+  "id": "2021-09-29-compound-v2",
+  "name": "Compound V2",
+  "date": "2021-09-29",
+  "year": 2021,
+  "amountUsd": 147000000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Arithmetic Error",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.71,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.73
+      },
+      {
+        "category": "logic-error",
+        "p": 0.23
+      },
+      {
+        "category": "access-control",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.06,
+    "stateActor": 0.02,
+    "hasRootCause": 0.86
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "It’s worse than we thought. Last week ~$80M in excess COMP was wrongly distributed. Now another ~$68.8M has been sent to the vulnerable vault, and even more COMP is being given away.",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "It’s worse than we thought. Last week ~$80M in excess COMP was wrongly distributed. Now another ~$68.8M has been sent to the vulnerable vault, and even more COMP is being given away."
+    },
+    {
+      "source": "SlowMist",
+      "text": "While the decentralized lending agreement Compound tried to fix the loopholes in the liquidity mining token distribution contract through the No. 63 or No. 64 community proposal, another COMP token worth US$68.8 million (a total of 202,472 COMP) was due to The call of the drip() function was entered into the liquidity mining token distribution contract that has existing loopholes."
+    },
+    {
+      "source": "SlowMist",
+      "text": "Compound, a decentralized lending protocol, confirmed through Twitter that after the implementation of Proposal 062, the liquidity mining of the protocol has an abnormal distribution of COMP tokens. Compound Labs and community members are investigating. Compound said that deposits and borrowed funds have not been found to be at risk. Compound founder Robert Leshner stated that the problem appeared to be an error in the initial setting of the distribution rate of COMP tokens based on Proposal 062, resulting in too much COMP tokens being distributed; however, modification of the corresponding code must go through governance , It takes at least 7 days."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Compound Finance's September 2021 governance upgrade (Proposal 62) introduced a critical bug in the COMP distribution logic, causing users to claim excessive COMP rewards worth up to $147M. Despite voluntary returns, approximately $62M in COMP tokens remained unrecovered. Proposal 62 updated the Comptroller contract with faulty rewards accounting logic. This allowed repeated or stale claim sequences where users could accrue and claim far more COMP than intended. The system's reliance on non-upgradeable contracts and delayed governance patching prolonged the vulnerability."
+    }
+  ],
+  "audit": "Unaudited",
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Compound - REKT",
+      "url": "https://rekt.news/compound-rekt"
+    },
+    {
+      "source": "slowmist",
+      "label": "rekt.news",
+      "url": "https://rekt.news/compound-rekt/"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/compoundfinance/status/1441097386449719301"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/compound-finance-2021-09-30"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "blockchainbreaches.com",
+      "url": "https://www.blockchainbreaches.com/en/breaches/compound-2021"
+    },
+    {
+      "source": "revertiq",
+      "label": "ambcrypto.com",
+      "url": "https://ambcrypto.com/bug-induced-discrepancies-found-in-compound-finance-token-distribution-update/"
+    }
+  ]
+}

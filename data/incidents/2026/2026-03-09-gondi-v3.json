@@ -1,0 +1,84 @@
+{
+  "id": "2026-03-09-gondi-v3",
+  "name": "Gondi V3",
+  "date": "2026-03-09",
+  "year": 2026,
+  "amountUsd": 230000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "NFTfi",
+  "category": "arbitrary-call",
+  "technique": "Token Approval Abuse",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.98,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.98
+      },
+      {
+        "category": "arbitrary-call",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Gondi V3 NFT lending protocol’s “Sell & Repay” contract (Purchase Bundler feature) was exploited. The attacker bypassed ownership checks due to an access control flaw and stole escrowed NFTs (approximately 78 NFTs) worth ~$230,000. The team disabled the vulnerable contract and committed to compensating affected users; other platform functions remained unaffected.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Gondi V3 NFT lending protocol’s “Sell & Repay” contract (Purchase Bundler feature) was exploited. The attacker bypassed ownership checks due to an access control flaw and stole escrowed NFTs (approximately 78 NFTs) worth ~$230,000. The team disabled the vulnerable contract and committed to compensating affected users; other platform functions remained unaffected."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Gondi V3's Ethereum NFT lending platform was exploited on 9 March 2026, resulting in the theft of approximately 78 idle NFTs worth ~$230,000. The attacker abused lingering user approvals in a newly deployed Sell & Repay contract's Purchase Bundler function, which lacked proper caller verification. The Purchase Bundler function in the Sell & Repay contract omitted caller verification, allowing anyone with a wallet to trigger NFT transfers using lingering user approvals. This access-control flaw led to unauthorized batch withdrawals of idle NFTs from users who had previously approved the contract."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x83bac5d4b222b97f9734637c072589da648941b8a884ce1a61324dc0449e6a06"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "theblock.co",
+      "url": "https://www.theblock.co/post/392909/nft-platform-gondi-moves-users-whole-230000-contract-exploit"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/gondi-v3-2026-03-09"
+    },
+    {
+      "source": "revertiq",
+      "label": "dev.to",
+      "url": "https://dev.to/cryip/gondi-nft-lending-platform-hack-a-detailed-report-489c"
+    },
+    {
+      "source": "revertiq",
+      "label": "coinalertnews.com",
+      "url": "https://www.coinalertnews.com/news/2026/03/10/gondi-nft-platform-exploit-230k"
+    }
+  ]
+}

@@ -1,0 +1,127 @@
+{
+  "id": "2025-03-25-abracadabra-spell",
+  "name": "Abracadabra Spell",
+  "date": "2025-03-25",
+  "year": 2025,
+  "amountUsd": 13000000,
+  "returnedUsd": null,
+  "chains": [
+    "Arbitrum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Liquidation Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.96,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.96
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.03
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.96,
+    "stateActor": 0.02,
+    "hasRootCause": 0.92
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "$13M vanished from Abracadabra’s cauldrons after hackers exploited a liquidation loophole. The phantom collateral bug let attackers borrow against already-liquidated positions while the team desperately offers a 20% bounty to ghosts that had already disappeared.",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "$13M vanished from Abracadabra’s cauldrons after hackers exploited a liquidation loophole. The phantom collateral bug let attackers borrow against already-liquidated positions while the team desperately offers a 20% bounty to ghosts that had already disappeared."
+    },
+    {
+      "source": "SlowMist",
+      "text": "An attacker using a flash loan attack stole $13 million in the Magic Internet Money token from the Abracadabra Money project. The attack was enabled by a bug in the platform's smart contracts, and the hacker ultimately made off with around 6,262 ETH."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On March 25, 2025, Abracadabra Money’s GMX-integrated cauldrons on Arbitrum were exploited for $13.4M in Magic Internet Money (MIM). An attack on collateral accounting allowed repeated borrowing against non-existent GMX positions, draining protocol funds without affecting user collateral. The GmxV2CauldronV4 contract failed to reset or nullify the order’s reported collateral value after GMX position liquidation or failed deposit. This allowed attackers to repeatedly borrow against phantom collateral credited by cauldron logic, as solvency checks used outdated values from the integration contracts."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Abracadabra Money's GMX V2 cauldrons on Arbitrum One were exploited on 25 March 2025 through a callback reentrancy and collateral state tracking flaw. Attackers minted $13M,$13.4M worth of MIM, bridging ~6,260 ETH to Ethereum. No user collateral was lost, and partial recovery was achieved. A critical flaw in the GmxV2CauldronV4 contract: liquidation logic failed to close or exclude failed GMX deposit orders from collateral accounting, enabling repeated borrowing against non-existent collateral during GMX callback reentrancy."
+    }
+  ],
+  "audit": "Guardian Audits",
+  "txHashes": [
+    "0xef64da328604bca1aee4b86504dbd2f81cc0f5d7d1b80bdca7011e470c076e0e",
+    "0xcdfce7234225e445f764399407f1256c52f8b75db3baf77493bb4c88c8aacfd1",
+    "0x5416a5f23af22bd1c6c92dbbdb382da681884ed2be07f5c0903ab2241759953c",
+    "0x5ba185916d49ab44c115a8b07e1267af7ff81abfe1dd029d4fa0e79c93c2f56f",
+    "0xb0e8e4abec0b7591756062f2057ff0fa49fcebb98d5ec3bf9916e88f9c1f1432",
+    "0x2437e1421db658a36f991978f19c2e5d3dfafd8a214562828d08ce515424ae34"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Abracadabra - Rekt II",
+      "url": "https://rekt.news/abracadabra-rekt2"
+    },
+    {
+      "source": "slowmist",
+      "label": "web3isgoinggreat.com",
+      "url": "https://www.web3isgoinggreat.com/?id=abracadabra-exploit-2"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/explained-the-abracadabra-money-2025-03-31t14-18-14-124000-00-00"
+    },
+    {
+      "source": "revertiq",
+      "label": "halborn.com",
+      "url": "https://www.halborn.com/blog/post/explained-the-abracadabra-money-hack-march-2025"
+    },
+    {
+      "source": "revertiq",
+      "label": "paragraph.com",
+      "url": "https://paragraph.com/@abracadabra-money/post-mortem-attack-on-gm-cauldrons-25-03-25"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractaudit.com",
+      "url": "https://www.smartcontractaudit.com/guides/abracadabra-money-2025-cauldron-exploit"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/abracadabra-spell-2025-03-25"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/business/2025/03/25/abracadabra-drained-of-usd13m-in-exploit-targeting-cauldrons-tied-to-gmx-liquidity-tokens"
+    }
+  ]
+}

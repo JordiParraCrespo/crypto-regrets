@@ -1,0 +1,130 @@
+{
+  "id": "2022-03-09-fantasm-finance",
+  "name": "Fantasm Finance",
+  "date": "2022-03-09",
+  "year": 2022,
+  "amountUsd": 2622097,
+  "returnedUsd": null,
+  "chains": [
+    "Fantom"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "input-validation",
+  "technique": "Missing Input Validation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.97,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.97
+      },
+      {
+        "category": "input-validation",
+        "p": 0.02
+      },
+      {
+        "category": "logic-error",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.01,
+    "hasRootCause": 0.87
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Business logic in mint(). Lost: $2.6 million",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Business logic in mint(). Lost: $2.6 million"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Incorrect calculation due to wrong decimal Vulnerable code snippet: https://ftmscan.com/address/0x880672AB1d46D987E5d663Fc7476CD8df3C9f937#code#F11#L256 Due to the decimal PRECISION error, the _xftmOut is bigger than it is supposed to be. --- fixed https://ftmscan.com/address/0xa3B99CdFdDe2216AfB1D58D6108cC93fea413A76#code"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Fantom’s on-chain synthetic asset protocol, Fantasm Finance, posted on social media that its FTM collateral reserves had been exploited, and called on users to exchange their XFTM immediately. After exploiting the vulnerability, the hacker exchanged all the profits for ETH, and used Tornado.cash to mix coins across the chain to the Ethereum main network. According to statistics, the hacker made a profit of 1,007 ETH (about 2.73 million US dollars)."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On March 9, 2022, Fantasm Finance was exploited for approximately $2.62 million on Fantom. A contract logic flaw allowed the attacker to mint synthetic XFTM tokens using only protocol FSM tokens, bypassing the required FTM collateral. The attacker repeatedly executed this undercollateralized mint cycle, drained the pool, and bridged the FTM proceeds to Ethereum, where the assets were laundered via Tornado Cash. The vulnerable mint logic in Fantasm Finance's Pool contract failed to check for the required minimum amount of FTM collateral. This omission allowed synthetic assets (XFTM) to be minted using only FSM tokens, permitting extraction of pool collateral."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x11407dd11dd028cfefdb24c9bde9163b4d10e3338e62c74ae2f5f3c2ec863133",
+    "0xeffe3e64b2df1e80d5282a55bd12a7e89cd088616d85274bb1589b3b96526f28",
+    "0xe47bd66738fd6721817ebc68cfdfde19d860330cc8b84bdf6761a3f1957ef188",
+    "0x2b5f61778881958d98935cdfcbcb97a7de8405b1d059c931f02461776ad9e007"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-03/Fantasm_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-03/Fantasm_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/fantasm_finance/status/1501569232881995785"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "medium.com",
+      "url": "https://medium.com/quillhash/fantom-based-protocol-fantasm-suffers-2-6m-exploit-32de8191ccd4"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "www.certik.com",
+      "url": "https://www.certik.com/resources/blog/5p92144WQ44Ytm1AL4Jt9X-fantasm-finance"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "ftmscan.com",
+      "url": "https://ftmscan.com/address/0x880672AB1d46D987E5d663Fc7476CD8df3C9f937#code#F11#L256"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "ftmscan.com",
+      "url": "https://ftmscan.com/address/0xa3B99CdFdDe2216AfB1D58D6108cC93fea413A76#code"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/fantasm-2022-03-09"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "certik.com",
+      "url": "https://www.certik.com/blog/fantasm-finance"
+    },
+    {
+      "source": "revertiq",
+      "label": "itokenly.com",
+      "url": "https://itokenly.com/hacks/fantasm-finance"
+    }
+  ]
+}

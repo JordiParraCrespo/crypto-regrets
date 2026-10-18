@@ -1,0 +1,90 @@
+{
+  "id": "2026-09-17-nostra-money-market",
+  "name": "Nostra Money Market",
+  "date": "2026-09-17",
+  "year": 2026,
+  "amountUsd": 3500000,
+  "returnedUsd": null,
+  "chains": [
+    "Starknet"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Cairo",
+  "rootCause": "A rigged pool fed Nostra's oracle a fake NSTR price, 8,306x real value, unlocking a $3.5 million borrow on Starknet. Pragma says it warned Nostra the feed was high-risk beforehand. Money market is still paused, and still no post-mortem.",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "A rigged pool fed Nostra's oracle a fake NSTR price, 8,306x real value, unlocking a $3.5 million borrow on Starknet. Pragma says it warned Nostra the feed was high-risk beforehand. Money market is still paused, and still no post-mortem."
+    },
+    {
+      "source": "SlowMist",
+      "text": "Nostra, a DeFi lending protocol on Starknet, suffered an exploit after the NSTR oracle price was manipulated. An attacker used inflated NSTR as collateral to borrow about $3.5 million in ETH, STRK, USDC, USDT, WBTC and DAI from the money market. The market has been paused while the team traces funds; about $1.92 million has already been bridged to Ethereum, and the final loss and recoveries are not yet confirmed."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Nostra Finance paused its Starknet money market on 2026-09-17 after a manipulated NSTR price feed let one account borrow roughly $3.5 million in ETH, STRK, USDC, USDT, WBTC, and DAI against inflated collateral. Public reporting indicates part of the proceeds was bridged to Ethereum, but primary transaction records and a full postmortem were not publicly available during this review. Public reporting and Nostra’s initial disclosure indicate that the attacker manipulated the oracle price used to value NSTR collateral inside Nostra’s Starknet money market. The available evidence suggests the protocol accepted an inflated spot-derived NSTR valuation, allow…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x06d48ef7ab62c26e3ef1987c322096cd508e9034c82048783a6b438fc1344bc3"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Nostra - Rekt",
+      "url": "https://rekt.news/nostra-rekt"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/nostrafinance/status/2100577538053493076?s=46&t=DLwbX9Nw4QECiyZQ0av-fg"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/nostra-money-market-2026-09-17"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptotimes.io",
+      "url": "https://www.cryptotimes.io/2026/09/18/nostra-halts-starknet-money-market-after-3-5m-nstr-oracle-exploit/"
+    },
+    {
+      "source": "revertiq",
+      "label": "en.cryptonomist.ch",
+      "url": "https://en.cryptonomist.ch/2026/09/18/nostra-finance-exploit/"
+    }
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "id": "2026-08-25-cometdex",
+  "name": "CometDEX",
+  "date": "2026-08-25",
+  "year": 2026,
+  "amountUsd": 717000,
+  "returnedUsd": null,
+  "chains": [
+    "Stellar"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Incorrect Share Accounting",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.98,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.98
+      },
+      {
+        "category": "logic-error",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.94,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Rust",
+  "rootCause": "The BLND-USDC liquidity pool of CometDEX (Comet AMM) on the Stellar network was exploited due to an accounting bug that allowed same-asset swaps (USDC→USDC), corrupting reserve calculations. The attacker used flash loans from a Blend pool and repeated the process about 36 times to extract excess funds, resulting in a loss of approximately $717,518.92 USDC. Funds were subsequently moved.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The BLND-USDC liquidity pool of CometDEX (Comet AMM) on the Stellar network was exploited due to an accounting bug that allowed same-asset swaps (USDC→USDC), corrupting reserve calculations. The attacker used flash loans from a Blend pool and repeated the process about 36 times to extract excess funds, resulting in a loss of approximately $717,518.92 USDC. Funds were subsequently moved."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "CometDEX suffered a $717K exploit on Stellar on 25 August 2026, when attackers drained pooled assets by repeatedly looping flash loans through a same-asset swap flaw in the AMM's share accounting logic. Broken share accounting in the Blend AMM contract allowed repeated same-asset swaps (USDC→USDC), corrupting reserve values and enabling attackers to systematically extract funds using flash loan loops. The contract failed to enforce exchange invariants or restrict swaps to different assets."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/blend_capital/status/2092288347766984713"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/cometdex-2026-08-25"
+    },
+    {
+      "source": "revertiq",
+      "label": "hacked.slowmist.io",
+      "url": "https://hacked.slowmist.io/?c=EOS+DApp"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/Galmanus/tm03-comet-blend"
+    }
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "id": "2022-05-17-feg-token",
+  "name": "FEG Token",
+  "date": "2022-05-17",
+  "year": 2022,
+  "amountUsd": 1900000,
+  "returnedUsd": null,
+  "chains": [
+    "Binance Smart Chain",
+    "Ethereum"
+  ],
+  "targetType": "Token",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "input-validation",
+    "confidence": 0.73,
+    "top": [
+      {
+        "category": "input-validation",
+        "p": 0.75
+      },
+      {
+        "category": "access-control",
+        "p": 0.15
+      },
+      {
+        "category": "arbitrary-call",
+        "p": 0.1
+      }
+    ],
+    "flashLoan": 0.95,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "The multi-chain DeFi protocol FEG was attacked again, and the flash loan attack suffered on the BNB chain lost about $1.3 million in assets. The subsequent flash loan attack on Ethereum caused a loss of about $590,000, with a total loss of about $1.9 million in assets. This attack is similar to yesterday's attack and is caused by a vulnerability in the \"swapToSwap()\" function. This function directly uses the \"path\" entered by the user as a trusted party without screening and validating the incoming parameters. Additionally, the function will allow an unverified \"path\" parameter (address) to use the current contract's assets. Therefore, by calling \"depo…",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The multi-chain DeFi protocol FEG was attacked again, and the flash loan attack suffered on the BNB chain lost about $1.3 million in assets. The subsequent flash loan attack on Ethereum caused a loss of about $590,000, with a total loss of about $1.9 million in assets. This attack is similar to yesterday's attack and is caused by a vulnerability in the \"swapToSwap()\" function. This function directly uses the \"path\" entered by the user as a trusted party without screening and validating the incoming parameters. Additionally, the function will allow an unverified \"path\" parameter (address) to use the current contract's assets. Therefore, by calling \"depo…"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The multi-chain DeFi protocol FEG was suspected of being attacked, and a total of 143 Ethereum and 32,747 BNB were lost, about $1.3 million."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On May 15,17, 2022, FEG Token's swap contracts on BNB Chain and Ethereum Mainnet were exploited for roughly $1.9M via a flashloan-based attack. The vulnerable swapToSwap function allowed attackers to gain approvals and drain assets by abusing unchecked user-input contract addresses. The FEGexPRO contract's swapToSwap function accepted a user-provided 'path' address as a trusted parameter without validation. The function approved asset transfers to attacker-controlled contracts and enabled repeated draining by manipulating deposit accounting."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x77cf448ceaf8f66e06d1537ef83218725670d3a509583ea0d161533fda56c063",
+    "0x0ff1b86c9e8618a088f8818db7d09830eaec42b82974986c855b207d1771fdbe",
+    "0x5bbf7793f30d568c40aa86802d63154f837e781d0b0965386ed9ac69a16eb6ab"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/CertiKAlert/status/1526357878503768070"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/FEGtoken/status/1525965942517268480"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/feg-token-2022-05-17"
+    },
+    {
+      "source": "revertiq",
+      "label": "certik.com",
+      "url": "https://www.certik.com/blog/feg-token-flashloan-exploit-analysis"
+    },
+    {
+      "source": "revertiq",
+      "label": "official.beosin.com",
+      "url": "https://official.beosin.com/resources/beosins-detailed-analysis-of-fegtoken-flashloan-attack"
+    }
+  ]
+}

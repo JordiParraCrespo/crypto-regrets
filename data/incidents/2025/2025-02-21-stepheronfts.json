@@ -1,0 +1,85 @@
+{
+  "id": "2025-02-21-stepheronfts",
+  "name": "StepHeroNFTs",
+  "date": "2025-02-21",
+  "year": 2025,
+  "amountUsd": 90000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "reentrancy",
+  "technique": "Reentrancy",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "reentrancy",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "reentrancy",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.79
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "Reentrancy On Sell NFT. Lost: : 137.9 BNB",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Reentrancy On Sell NFT. Lost: : 137.9 BNB"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "StepHeroNFTs on BNB Chain was exploited on February 21, 2025, through a reentrancy vulnerability in referral-reward logic. The attacker drained approximately 137.9 BNB (about $90,000) by repeatedly claiming referral rewards via recursive calls in a single flash-loan-initiated transaction. The StepHeroNFTs contract failed to update referral state before making external value transfers, allowing reentrancy in buyAsset and claimReferral functions. The absence of a reentrancy guard enabled attackers to claim rewards multiple times within the same transaction."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xef386a69ca6a147c374258a1bf40221b0b6bd9bc449a7016dbe5240644581877"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-02/StepHeroNFTs_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-02/StepHeroNFTs_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/1892822286715277344"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/stepheronfts-2025-02-21"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/yusufroqib/cohorts-v-postmortem/blob/main/StepHero.md"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.solidityscan.com",
+      "url": "https://blog.solidityscan.com/stepheronfts-hack-analysis-d151ae008597/"
+    }
+  ]
+}

@@ -1,0 +1,96 @@
+{
+  "id": "2026-08-30-tectonic",
+  "name": "Tectonic",
+  "date": "2026-08-30",
+  "year": 2026,
+  "amountUsd": 124470000,
+  "returnedUsd": null,
+  "chains": [
+    "Cronos"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Donation Attack",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.93,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.93
+      },
+      {
+        "category": "market-manipulation",
+        "p": 0.04
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.18,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "An attacker pumped Tectonic's TONIC token roughly 300x and borrowed $120.4 million against the inflated collateral. Cronos rolled back 10,961 blocks to recover $111.2 million; $9.19 million had already left the chain and remains unrecovered.",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "An attacker pumped Tectonic's TONIC token roughly 300x and borrowed $120.4 million against the inflated collateral. Cronos rolled back 10,961 blocks to recover $111.2 million; $9.19 million had already left the chain and remains unrecovered."
+    },
+    {
+      "source": "SlowMist",
+      "text": "On August 30, 2026, an attacker looped borrowing and re-supplying Tectonic’s governance token TONIC as collateral while manipulating its price by ~195x, then borrowed about $120.4 million from multiple Tectonic lending markets in one transaction. Cronos halted and rolled back the chain, restoring on-chain assets to the pre-exploit state; approximately $9.19 million that left Cronos before the halt remains unrecovered. Supply and borrow remain paused."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Tectonic on Cronos was hit by a TONIC price-manipulation exploit on 2026-08-30. Public reporting puts the affected value around $75 million, with about $6 million bridged to Ethereum before Cronos halted block production. Tectonic accepted TONIC as collateral while the token’s spot price could be moved sharply because liquidity was thin. Once the manipulated price fed into borrowing power, the attacker could borrow liquid assets against inflated collateral. The exact incident-time oracle path and code revision were not independently verified here."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Tectonic - Rekt",
+      "url": "https://rekt.news/tectonic-rekt"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/TectonicFi/status/2097128151495373291"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/tectonic-2026-08-30"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptotimes.io",
+      "url": "https://www.cryptotimes.io/2026/08/31/cronos-halts-entire-blockchain-after-75m-tectonic-exploit-only-6m-escapes/"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/tectonic-protocol-hack-2026"
+    }
+  ]
+}

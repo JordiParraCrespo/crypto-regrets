@@ -1,0 +1,81 @@
+{
+  "id": "2021-11-03-vesper-finance",
+  "name": "Vesper Finance",
+  "date": "2021-11-03",
+  "year": 2021,
+  "amountUsd": 3370000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.06,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "According to official sources, the No. 23 loan pool VesperLendbeta on the DeFi protocol RariFuse was attacked. The attacker consumed a large amount of VUSD liquidity in Uniswapv3, and created a VUSD/USDC liquidity pool to manipulate the oracle VUSD price feed function and raise the VUSD price. After lending a large amount of assets on VesperLend, the final profit was 3 million US dollars. At present, Vesper has officially suspended the borrowing of the functions of VUSD and vVSP on the RariFuse platform, and is working closely with Rari, Year and Uniswap to investigate the full impact of the attack. The investigation results and response measures will be updated in the future.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "According to official sources, the No. 23 loan pool VesperLendbeta on the DeFi protocol RariFuse was attacked. The attacker consumed a large amount of VUSD liquidity in Uniswapv3, and created a VUSD/USDC liquidity pool to manipulate the oracle VUSD price feed function and raise the VUSD price. After lending a large amount of assets on VesperLend, the final profit was 3 million US dollars. At present, Vesper has officially suspended the borrowing of the functions of VUSD and vVSP on the RariFuse platform, and is working closely with Rari, Year and Uniswap to investigate the full impact of the attack. The investigation results and response measures will be updated in the future."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On November 2,3, 2021, Vesper Finance's lending product (Rari Fuse Pool #23) was exploited for approximately $3.37 million. An attacker manipulated the Uniswap v3 price oracle for VUSD, inflating its value and using this to borrow all assets from the pool. Controls to prevent extreme price manipulation or set sanity bounds for collateral were absent. Rari Fuse Pool #23 (Vesper Lend beta) relied on a manipulable Uniswap v3 TWAP spot price for VUSD collateral valuation. The attacker was able to drain liquidity, push the pool to the extreme price tick, and after waiting for TWAP to update, supply inflated VUSD as collateral. The pool lacked circuit breakers or price sanity checks."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x89d0ae4dc1743598a540c4e33917efdce24338723b0fabf34813b79cb0ecf4c5",
+    "0x8527fea51233974a431c92c4d3c58dee118b05a3140a04e0f95147df9faf8092"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "medium.com",
+      "url": "https://medium.com/vesperfinance/on-the-vesper-lend-beta-rari-fuse-pool-23-exploit-9043ccd40ac9"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/vesper-finance-2021-11-03"
+    },
+    {
+      "source": "revertiq",
+      "label": "coincodecap.com",
+      "url": "https://coincodecap.com/oracle-manipulation-of-fuse-pool"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/vesper-finance-hack-2021"
+    }
+  ]
+}

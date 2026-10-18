@@ -1,0 +1,115 @@
+{
+  "id": "2017-11-09-parity-multisig",
+  "name": "Parity Multisig",
+  "date": "2017-11-09",
+  "year": 2017,
+  "amountUsd": 150000000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Unprotected initWallet on shared library; selfdestruct",
+  "classificationNote": null,
+  "classifiedBy": "curated",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Multisig wallets delegatecalled into a shared library contract that was never initialized. A user called initWallet() on the library itself, became its owner, and called kill(), self-destructing the library and permanently freezing 513k ETH in every dependent wallet.",
+  "descriptions": [
+    {
+      "source": "Curated post-mortem",
+      "text": "Multisig wallets delegatecalled into a shared library contract that was never initialized. A user called initWallet() on the library itself, became its owner, and called kill(), self-destructing the library and permanently freezing 513k ETH in every dependent wallet."
+    },
+    {
+      "source": "DeFiHackLabs",
+      "text": "'Accidentally Killed It'. Lost: 514k ETH"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Incorrect access control Vulnerable code snippet: https://etherscan.io/address/0x863df6bfa4469f3ead0be8f9f2aae51c91a907b4#code#L223"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "In November 2017, a critical bug in Parity's multisig wallet design allowed an external user to gain ownership of a shared library contract and self-destruct it. This destroyed essential logic for all dependent wallets, permanently freezing over 513,000 ETH on Ethereum mainnet. The shared WalletLibrary contract was deployed without restricting direct initialization. Any external caller could invoke its public initWallet function to claim ownership and call kill, executing selfdestruct. Proxy-based multisigs relying on this library lost access when the code was erased."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x05f71e1b2cb4f03e547739db15d080fd30c989eda04d37ce6264c5686e0722c9",
+    "0x47f7cff7a5e671884629c93b368cb18f58a993f4b19c2a53a8662e3f1482f690"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2017-11/Parity_kill_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq",
+    "curated"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2017-11/Parity_kill_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "elementus.io",
+      "url": "https://elementus.io/blog/which-icos-are-affected-by-the-parity-wallet-bug/"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x05f71e1b2cb4f03e547739db15d080fd30c989eda04d37ce6264c5686e0722c9"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x47f7cff7a5e671884629c93b368cb18f58a993f4b19c2a53a8662e3f1482f690"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/address/0x863df6bfa4469f3ead0be8f9f2aae51c91a907b4#code#L223"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/parity-multisig-2017-11-09"
+    },
+    {
+      "source": "revertiq",
+      "label": "openzeppelin.com",
+      "url": "https://www.openzeppelin.com/news/on-the-parity-wallet-multisig-hack-405a8c12e8f7"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/parity-multisig-hack-2017"
+    },
+    {
+      "source": "curated",
+      "label": "Parity post-mortem",
+      "url": "https://www.parity.io/blog/a-postmortem-on-the-parity-multi-sig-library-self-destruct/"
+    }
+  ]
+}

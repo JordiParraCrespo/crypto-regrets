@@ -1,0 +1,78 @@
+{
+  "id": "2020-04-08-bisq",
+  "name": "Bisq",
+  "date": "2020-04-08",
+  "year": 2020,
+  "amountUsd": 248000,
+  "returnedUsd": null,
+  "chains": [
+    "Bitcoin"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Withdrawal Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.73
+  },
+  "bridge": false,
+  "language": "Java",
+  "rootCause": "Hacker Exploits Flaw in Decentralized Bitcoin Exchange Bisq to Steal $250K.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Hacker Exploits Flaw in Decentralized Bitcoin Exchange Bisq to Steal $250K."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Bisq’s v1.2 protocol flaw allowed attackers to hijack fallback payouts during trade timeouts, resulting in thefts totaling approximately 3 BTC and 4,000 XMR (~$250,000) from seven users in April 2020. Trading was suspended and the flaw was promptly patched. Bisq v1.2 did not verify that the fallback payout address matched the DAO-set donation address when resolving deadlocked trades. Attackers could set this address, redirecting funds from timeouts directly to their own wallet."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/hacker-exploits-flaw-in-decentralized-exchange-bisq-to-steal-250k"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/bisq-2020-04-08"
+    },
+    {
+      "source": "revertiq",
+      "label": "bisq.network",
+      "url": "https://bisq.network/statement-security-vulnerability-april-2020"
+    },
+    {
+      "source": "revertiq",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/tech/2020/04/08/hacker-exploits-flaw-in-decentralized-bitcoin-exchange-bisq-to-steal-250k"
+    }
+  ]
+}

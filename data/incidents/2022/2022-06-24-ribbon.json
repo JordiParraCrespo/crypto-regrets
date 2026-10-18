@@ -1,0 +1,84 @@
+{
+  "id": "2022-06-24-ribbon",
+  "name": "Ribbon",
+  "date": "2022-06-24",
+  "year": 2022,
+  "amountUsd": 12000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "frontend-infra",
+  "technique": "DNS Hijack",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "frontend-infra",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "frontend-infra",
+        "p": 0.99
+      },
+      {
+        "category": "social-engineering",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.03,
+    "hasRootCause": 0.88
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "Ribbon Finance said in a tweet that the homepage of the URL suffered a DNS attack, causing 2 users to approve a malicious contract for vault deposits. At present, the team has solved the problem, and the funds in all contracts are in a safe state. After analyzing the data on the chain, SlowMist believes that it is the same attacker as Convex. At the same time, it is found that a user of Ribbon Finance lost 16.5 WBTC in the attack.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Ribbon Finance said in a tweet that the homepage of the URL suffered a DNS attack, causing 2 users to approve a malicious contract for vault deposits. At present, the team has solved the problem, and the funds in all contracts are in a safe state. After analyzing the data on the chain, SlowMist believes that it is the same attacker as Convex. At the same time, it is found that a user of Ribbon Finance lost 16.5 WBTC in the attack."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On June 24, 2022, Ribbon Finance’s frontend was compromised by a DNS hijack at Namecheap, redirecting users to a phishing site. At least 16.5 wBTC was confirmed stolen by the attacker, with additional claims of rETH and stETH losses based on forum estimates. No protocol contract was exploited. A compromised customer support agent account at Namecheap enabled an attacker to alter ribbon.finance's DNS records, diverting users to a phishing site and capturing approvals and deposits. No vulnerability existed in Ribbon's smart contracts."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xd09057f1fdb3fa97d0ed7e8ebd8fd31dd9a0b5b61a29a22b46985d6217510850"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "m.jinse.com",
+      "url": "https://m.jinse.com/writings/1754332.html"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/ribbon-2022-06-24"
+    },
+    {
+      "source": "revertiq",
+      "label": "gov.ribbon.finance",
+      "url": "https://gov.ribbon.finance/t/rgp-21-reimbursement-for-namecheap-dns-attack/618"
+    },
+    {
+      "source": "revertiq",
+      "label": "quadrigainitiative.com",
+      "url": "https://www.quadrigainitiative.com/casestudy/ribbonfinancemaliciousdnshijack.php"
+    }
+  ]
+}

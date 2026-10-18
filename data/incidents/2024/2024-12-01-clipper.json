@@ -1,0 +1,83 @@
+{
+  "id": "2024-12-01-clipper",
+  "name": "Clipper",
+  "date": "2024-12-01",
+  "year": 2024,
+  "amountUsd": 450000,
+  "returnedUsd": null,
+  "chains": [
+    "Optimism",
+    "Base"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Deposit Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.99
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "According to Clipper's post-mortem, on December 1, 2024, an attacker exploited a vulnerability in a smart contract used by Clipper, manipulating the single-asset deposit and withdrawal feature. This manipulation affected the liquidity pools on the Optimism and Base networks, causing an imbalance that allowed the attacker to withdraw more assets than they had deposited. The attack resulted in a loss of approximately $457,878.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "According to Clipper's post-mortem, on December 1, 2024, an attacker exploited a vulnerability in a smart contract used by Clipper, manipulating the single-asset deposit and withdrawal feature. This manipulation affected the liquidity pools on the Optimism and Base networks, causing an imbalance that allowed the attacker to withdraw more assets than they had deposited. The attack resulted in a loss of approximately $457,878."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Clipper lost $450,000 on Optimism and Base on December 1, 2024, when an exploit targeted a deposit and withdrawal logic flaw in its liquidity pools. The vulnerability was in the single-token withdrawal process, not a key compromise. A logic flaw in Clipper's single-token deposit/withdrawal process allowed attackers to manipulate pool balances between actions after obtaining a valid server signature, breaking the accounting assumptions and enabling unauthorized withdrawals."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "blog.clipper.exchange",
+      "url": "https://blog.clipper.exchange/clipper-dec-24-exploit-post-mortem/"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/clipper-2024-12-01"
+    },
+    {
+      "source": "revertiq",
+      "label": "crypto.news",
+      "url": "https://crypto.news/clipper-dex-liquidity-pools-exploited-for-450000/"
+    },
+    {
+      "source": "revertiq",
+      "label": "bitdegree.org",
+      "url": "https://www.bitdegree.org/crypto/news/not-a-private-key-leak-clipper-reveals-the-truth-behind-the-450000-exploit"
+    }
+  ]
+}

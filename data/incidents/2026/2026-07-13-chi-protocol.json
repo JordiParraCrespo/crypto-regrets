@@ -1,0 +1,99 @@
+{
+  "id": "2026-07-13-chi-protocol",
+  "name": "Chi Protocol",
+  "date": "2026-07-13",
+  "year": 2026,
+  "amountUsd": 8500,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Redeem Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.98,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.98
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.97,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "ArbitrageV5.burn() redeems reserve collateral valuing USC at hardcoded $1 with no peg check (unlike mint which enforces peg). Attacker flash-loaned 5 WETH from Balancer, bought depegged USC cheaply from thin Uniswap V2 pool, burned it 1:1 at par against ReserveHolder to redeem full-value weETH/stETH/WETH collateral, netting ~4.66 WETH. Attack Tx: https://etherscan.io/tx/0x4a665f8eeada74552bd2dc466e5549731951f2f6180bbe865fa1d7b4be8ae96f Source: https://twitter.com/DefimonAlerts/status/2076887008773829119",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "ArbitrageV5.burn() redeems reserve collateral valuing USC at hardcoded $1 with no peg check (unlike mint which enforces peg). Attacker flash-loaned 5 WETH from Balancer, bought depegged USC cheaply from thin Uniswap V2 pool, burned it 1:1 at par against ReserveHolder to redeem full-value weETH/stETH/WETH collateral, netting ~4.66 WETH. Attack Tx: https://etherscan.io/tx/0x4a665f8eeada74552bd2dc466e5549731951f2f6180bbe865fa1d7b4be8ae96f Source: https://twitter.com/DefimonAlerts/status/2076887008773829119"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Chi Protocol (a DeFi stablecoin protocol issuing $USC backed by LSTs/LRTs on Ethereum) was exploited due to a logic error in the ArbitrageV5 contract’s burn() function. The attacker used a flash loan to buy heavily depegged $USC cheaply on a thin Uniswap V2 pool and burned it to redeem full-value collateral (weETH/stETH/WETH) at the hardcoded $1 peg, without the burn function checking the actual peg (unlike the mint function). This resulted in approximately $8,500 loss, nearly draining the protocol’s reserves."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On July 13, 2026, Chi Protocol on Ethereum Mainnet lost approximately $8,500 due to a logic flaw in its redemption mechanism. The attacker bought depegged USC tokens cheaply, then redeemed them for full-value collateral using a burn() logic error. The ArbitrageV5 contract's burn() function allowed users to redeem USC stablecoins for collateral at a fixed $1 rate without checking if the token was still pegged at $1, letting an attacker profit by redeeming depegged tokens for more collateral than they were worth."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x4a665f8eeada74552bd2dc466e5549731951f2f6180bbe865fa1d7b4be8ae96f"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x4a665f8eeada74552bd2dc466e5549731951f2f6180bbe865fa1d7b4be8ae96f"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/DefimonAlerts/status/2076887008773829119"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/DefimonAlerts/status/2076887008773829119"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/chi-protocol-2026-07-13"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/chi-protocol-hack-2026/"
+    },
+    {
+      "source": "revertiq",
+      "label": "publicaml.org",
+      "url": "https://publicaml.org/news/2026-07-13-chi-protocol/"
+    }
+  ]
+}

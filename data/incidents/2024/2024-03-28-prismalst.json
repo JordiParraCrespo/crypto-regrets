@@ -1,0 +1,159 @@
+{
+  "id": "2024-03-28-prismalst",
+  "name": "PrismaLST",
+  "date": "2024-03-28",
+  "year": 2024,
+  "amountUsd": 11600000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "input-validation",
+  "technique": "Missing Input Validation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "input-validation",
+    "confidence": 0.94,
+    "top": [
+      {
+        "category": "input-validation",
+        "p": 0.94
+      },
+      {
+        "category": "logic-error",
+        "p": 0.03
+      },
+      {
+        "category": "access-control",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.94,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Insufficient Validation. Lost: $~11M",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Insufficient Validation. Lost: $~11M"
+    },
+    {
+      "source": "REKT",
+      "text": "PrismaFi fell victim to a flash loan attack, resulting in a loss of 3258 wstETH tokens, valued at approximately $11.6 million."
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "A vulnerability in both versions of the MigrateTroveZap (mkUSD and ULTRA) contracts of Prisma Finance led to an exploit. In response, Prisma Finance's emergency multi-sig paused the protocol's operations. The special-purpose contract, designed to migrate user positions between trove managers, was exploited due to a lack of input validation in the onFlashloan function. By directly calling the flashloan() function, the exploiter could manipulate other trove managers' positions, taking advantage of the mismatch between the collateral in the initial and new positions. This allowed the exploiter to take the difference in collateral. A thorough investigation is underway to identify the root cause and implement fixes. Trove owners should verify they have revoked any active approvals for the MigrateTroveZap. By directly calling the flashloan() function, the exploiter could manipulate other Trove Managers' positions. The contract allowed for a mismatch between the collateral in the initial position and the collateral in the new position, with the difference being susceptible to being taken. Vulnerable code snippet: Attack tx: Analysis: ExVul on Twitter / X Prisma Finance on Twitter / X"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Decentralized lending protocol Prisma Finance was hacked, with a loss of approximately 3,257.7 ETH (equivalent to around $11.6 million USD). The protocol has currently been suspended for investigation. Officials remind vault owners to disable authorization for related LST and LRT contract delegations."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On March 28, 2024, PrismaLST was exploited on Ethereum via unvalidated user input in the MigrateTroveZap migration helper contract. Attackers used forged migration callback data combined with flash loans to drain collateral from victim troves, resulting in losses of approximately $11.6 million. The MigrateTroveZap migration helper contract failed to validate flash-loan callback data. This omission allowed attackers to close and reopen delegator troves with mismatched collateral and debt, extracting excess collateral."
+    }
+  ],
+  "audit": "PrismaFi",
+  "txHashes": [
+    "0x00c503b595946bccaea3d58025b5f9b3726177bbdc9674e634244135282116c7",
+    "0xdc5c56869862f7da6527ec68da9d8e1e04ccc3ca16a6b3ebe8f714432d505245",
+    "0x0e38dd693ddbc2f62282932f36a4b8de75f8ea1da530532af26698b4eda9a110",
+    "0x3b6c97c76446650e65959723c20489ac792fe9101d57e7349df2ebe9e05d63aa",
+    "0xbad3925d76bcde46021b67bf59599f9655d4529682fb21e0ee1a9d27a388e460",
+    "0x0c91723ebf69efc84d87ae393af51410491368fe9e9edc29cef38d5479aed140",
+    "0x12641ade277ba56215bffe6608fb078beb93bf3bb46a37fba91144790895d580",
+    "0xce3cdc7c29eb7dfc565f5d99034789e80c1cd3278adafa26af6f3d21c8412c59",
+    "0xcd15358ed1cf3014bb4e88cb1229056cd9a0e81b7d29ede43a4e689e9a97b7a7",
+    "0x51ba177ae85e58133c5910e7c3a5d027d2edfa67d10e5e3874c323b88ecc377a",
+    "0x395d17328d331d7cdf83097963c3fd8d424d82257d8d6f64618fcc6e1e0065a6",
+    "0xfddfb8cbcffb27f9f4564a3a5b0a8adb35bea104afc15d6af49fc004dd7441b0",
+    "0xe419162da24761275b7b7e9766f3136ddfd9bdb3c4bff13be685197eed11a3ba",
+    "0x4d3831d7dc2496fbcd644a4c4e38efc0bb8d0f09e6daf2118b94262c573ea708",
+    "0x5b00512a78bab3a6055d43207ea514f044b25b06c6e4e54b48befceff2c3ac93",
+    "0xe15fa959627871845f2f5bbfbd7529e6d2aff20ab14ece743f11641700bd7188",
+    "0x0d4b5a415fa9a1452a09f8788c85a4acd2e0866519e73bdc37f5591e027b36ac"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-03/Prisma_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-03/Prisma_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/EXVULSEC/status/1773371049951797485"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: PrismaFi - REKT",
+      "url": "https://rekt.news/prismafi-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x00c503b595946bccaea3d58025b5f9b3726177bbdc9674e634244135282116c7"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/PrismaFi/status/1773371030129524957"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xdc5c56869862f7da6527ec68da9d8e1e04ccc3ca16a6b3ebe8f714432d505245"
+    },
+    {
+      "source": "blocksec",
+      "label": "hackmd.io",
+      "url": "https://hackmd.io/@PrismaRisk/PostMortem0328"
+    },
+    {
+      "source": "blocksec",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs?tab=readme-ov-file#20240329-prismafi---insufficient-validation"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/PrismaFi/status/1773316945430852058"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/prismalst-2024-03-28"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/prismalst-hack-2024"
+    },
+    {
+      "source": "revertiq",
+      "label": "avoid.net",
+      "url": "https://avoid.net/prismalst"
+    }
+  ]
+}

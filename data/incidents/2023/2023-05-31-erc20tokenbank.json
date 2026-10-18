@@ -1,0 +1,93 @@
+{
+  "id": "2023-05-31-erc20tokenbank",
+  "name": "ERC20TokenBank",
+  "date": "2023-05-31",
+  "year": 2023,
+  "amountUsd": 111000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Price Manipulation",
+  "classificationNote": "Classified by keyword rules from the DeFiHackLabs root-cause title.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.89,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.9
+      },
+      {
+        "category": "market-manipulation",
+        "p": 0.08
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.96,
+    "stateActor": 0.02,
+    "hasRootCause": 0.42
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Price Manipulation. Lost: ~$111k",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Price Manipulation. Lost: ~$111k"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "An unknown attacker attempted to exploit the ERC20TokenBank contract in the Ethereum chain via flash loan. However, their attempt was thwarted by an MEV bot that anticipated and front-run their transaction. As part of this process, the MEV bot paid 1 $ETH as a bribe to gain priority on transaction ordering and earn roughly 60 $ETH profit. Vulnerable code snippet: Attack tx: https://etherscan.io/tx/0xcd8fe2efb197bc80b8d42eec21a4b1dbaf3b83ba51f62b36cd3d6b5de0f301e1 https://etherscan.io/tx/0x578a195e05f04b19fd8af6358dc6407aa1add87c3167f053beb990d6b4735f26 Analysis: https://twitter.com/BlockSecTeam/status/1663810037788311561"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xcd8fe2efb197bc80b8d42eec21a4b1dbaf3b83ba51f62b36cd3d6b5de0f301e1",
+    "0x578a195e05f04b19fd8af6358dc6407aa1add87c3167f053beb990d6b4735f26"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-05/ERC20TokenBank_exp.sol",
+  "sources": [
+    "defihacklabs",
+    "blocksec"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-05/ERC20TokenBank_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BlockSecTeam/status/1663810037788311561"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xcd8fe2efb197bc80b8d42eec21a4b1dbaf3b83ba51f62b36cd3d6b5de0f301e1"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x578a195e05f04b19fd8af6358dc6407aa1add87c3167f053beb990d6b4735f26"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x578a195e05f04b19fd8af6358dc6407aa1add87c3167f053beb990d6b4735f26"
+    },
+    {
+      "source": "blocksec",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs?tab=readme-ov-file#20230531-erc20tokenbank---price-manipulation"
+    }
+  ]
+}

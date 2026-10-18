@@ -1,0 +1,130 @@
+{
+  "id": "2022-04-28-deus-finance",
+  "name": "DEUS Finance",
+  "date": "2022-04-28",
+  "year": 2022,
+  "amountUsd": 13400000,
+  "returnedUsd": null,
+  "chains": [
+    "Fantom"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.47,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.5
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.35000000000000003
+      },
+      {
+        "category": "logic-error",
+        "p": 0.15
+      }
+    ],
+    "flashLoan": 0.12,
+    "stateActor": 0.03,
+    "hasRootCause": 0.8
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Flashloan & Price Oracle Manipulation. Lost: $13 million",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Flashloan & Price Oracle Manipulation. Lost: $13 million"
+    },
+    {
+      "source": "REKT",
+      "text": "Deus DAO double damage. In an unfortunate sequel to last month’s incident, the protocol has now lost a further $13.4M. How did the attacker bypass the new oracle?"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Incorrect price calculation via balanceOf. Vulnerable code snippet:"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Fantom-based decentralized derivatives protocol DEUS Finance was attacked, and the hackers made about $13.4 million in profit. The hack utilized a flash loan-assisted manipulation of price oracles read from the StableV1 AMM-USDC/DEI pair, and then used the manipulated collateral DEI price to borrow and drain the pool."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On April 28, 2022, Deus Finance on Fantom suffered a $13.4 million exploit. The attacker used flash loans to manipulate a price oracle that valued DEI stablecoin collateral. This allowed them to borrow large amounts of DEI against inflated collateral, draining protocol reserves. The attacker bridged proceeds to Ethereum and laundered them via Tornado Cash. Deus Finance's lending protocol relied on an on-chain DEI/USDC liquidity pool as its price oracle. This oracle could be manipulated by flash-loan-funded swaps, inflating collateral value. The protocol did not use manipulation-resistant or multi-source price feeds."
+    }
+  ],
+  "audit": "Armor Labs",
+  "txHashes": [
+    "0x39825ff84b44d9c9983b4cff464d4746d1ae5432977b9a65a92ab47edac9c9b5",
+    "0x8589e136e6ad927096d07baa16852d16f11456c0446efb8f1ecd467ce0d4cb10",
+    "0x96a06ee8ffc205f33ec6a2645bf240d1b577cd8085e1504525c108997e833fb8",
+    "0xf4b19a90df1eed9faf8672876996f56ed57fc3702d98d3efa2262a598b102428"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-04/deus_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-04/deus_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/peckshield/status/1519531866109317121"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "ftmscan.com",
+      "url": "https://ftmscan.com/tx/0xe374495036fac18aa5b1a497a17e70f256c4d3d416dd1408c026f3f5c70a3a9c"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Deus DAO - REKT 2",
+      "url": "https://rekt.news/deus-dao-rekt-2"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/peckshield/status/1519530463337250817"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/deus-finance-2022-04-28"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "crypto.news",
+      "url": "https://crypto.news/deus-finance-new-flashloan-attack-13m/"
+    },
+    {
+      "source": "revertiq",
+      "label": "blockchainbreaches.com",
+      "url": "https://www.blockchainbreaches.com/en/breaches/deus-dao-2022"
+    }
+  ]
+}

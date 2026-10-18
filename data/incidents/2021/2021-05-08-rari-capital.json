@@ -1,0 +1,119 @@
+{
+  "id": "2021-05-08-rari-capital",
+  "name": "Rari Capital",
+  "date": "2021-05-08",
+  "year": 2021,
+  "amountUsd": 10000000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "arbitrary-call",
+  "technique": "Arbitrary External Call",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "arbitrary-call",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "arbitrary-call",
+        "p": 0.99
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.06,
+    "stateActor": 0.02,
+    "hasRootCause": 0.63
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Cross Contract Reentrancy",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Cross Contract Reentrancy"
+    },
+    {
+      "source": "REKT",
+      "text": "Young blood & new money. Rari Capital has fallen victim to a serial attacker, who came from across chains to drain the Rari Capital pool, removing $10 million worth of ETH."
+    },
+    {
+      "source": "SlowMist",
+      "text": "DeFi robo-advisor agreement Rari Capital stated on Twitter that its ETH fund pool had a vulnerability caused by the integration of the Alpha Finance Lab protocol, which was attacked. The rebalancer has now removed all funds from Alpha. The team stated that it is still investigating and evaluating, and a full report will be released in the future. Data shows that about 14 million U.S. dollars of funds were transferred by the attackers. The Alpha Finance team stated that the funds on Alpha Homora are safe. In this attack, the address of Rari Capital had previously attacked Value DeFi on the Binance Smart Chain."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On May 8, 2021, Rari Capital’s ETH Pool was exploited through a reentrancy pathway introduced by its Alpha Finance ibETH integration. The attacker used manipulated external calls via ibETH’s work function to repeatedly re-enter withdrawal logic, draining about 2,600 ETH (then ~$10.6M, roughly 60% of the pool). No ETH was recovered; compensation was offered in governance tokens. Rari Capital's ETH Pool integrated with Alpha Finance’s ibETH, failing to anticipate that ibETH’s work function permitted arbitrary external calls. Without a reentrancy guard or safe accounting sequence, this enabled the attacker to re-enter ETH Pool withdrawal logic before state was finalized, inflating withdrawals.…"
+    }
+  ],
+  "audit": "Quantstamp",
+  "txHashes": [
+    "0x171072422efb5cd461546bfe986017d9b5aa427ff1c07ebe8acc064b13a7b7be"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2021-05/RariCapital_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2021-05/RariCapital_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "rekt.news",
+      "url": "https://rekt.news/rari-capital-rekt/"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.com",
+      "url": "https://etherscan.com/tx/0x171072422efb5cd461546bfe986017d9b5aa427ff1c07ebe8acc064b13a7b7be"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Rari Capital - REKT",
+      "url": "https://rekt.news/rari-capital-rekt"
+    },
+    {
+      "source": "slowmist",
+      "label": "medium.com",
+      "url": "https://medium.com/rari-capital/5-8-2021-rari-ethereum-pool-post-mortem-60aab6a6f8f9"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/rari-capital-2021-05-08"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/markets/2021/05/08/rari-capital-reports-exploit-in-eth-pool-15m-taken"
+    },
+    {
+      "source": "revertiq",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/markets/2021/05/10/rari-capital-plans-to-refund-stolen-106m-in-ethereum-from-dev-fund"
+    }
+  ]
+}

@@ -1,0 +1,142 @@
+{
+  "id": "2026-05-07-trustedvolumes",
+  "name": "TrustedVolumes",
+  "date": "2026-05-07",
+  "year": 2026,
+  "amountUsd": 6700000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "Other",
+  "category": "access-control",
+  "technique": "Caller Impersonation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.46,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.49
+      },
+      {
+        "category": "access-control",
+        "p": 0.45
+      },
+      {
+        "category": "signature-crypto",
+        "p": 0.06
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Signature Replay. Lost: ~$5.87M",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Signature Replay. Lost: ~$5.87M"
+    },
+    {
+      "source": "REKT",
+      "text": "$5.87 million gone in one transaction. A permissionless signer function, a broken authorization check, and unlimited approvals did the rest. TrustedVolumes' contract was never open-sourced. The team hadn't posted in over a year. The bug bounty line is open."
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The TrustedVolumes RFQ settlement proxy suffered a two-bug exploit chain. The first flaw is that registerAllowedOrderSigner(address signer, bool allowed) has zero access control, allowing any address to register any EOA as a trusted signer under their own key (_allowedOrderSigner[msg.sender][signer] = allowed). The second and more critical flaw is that the order fill function validates the recovered ECDSA signer against the taker's registry entry (_allowedOrderSigner[order.taker][recoveredSigner]) instead of the maker's, even though it then transfers makerAsset from the maker using the maker's pre-existing ERC-20 approval — authorization and fund source are decoupled. The attacker deployed a contract (the taker) that called registerAllowedOrderSigner(attackerEOA, true), then submitted four signed orders listing the victim resolver (which had granted unlimited approvals to the proxy) as maker, paying only 1 wei USDC dust per order. Because the authorization check used the attacker-controlled taker address as the lookup key, all four orders passed and the proxy drained 1,291 WETH, 206,282 USDT, 16.939 WBTC, and 1,268,771 USDC (~$5.87M) from the victim. Vulnerable code snippet: Attack Tx: 0xc5c61b3ac39d854773b9dc34bd0cdbc8b5bbf75f18551802a0b5881fcb990513 Analysis: Phalcon Alert"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The TrustedVolumes RFQ settlement proxy had a two-bug authorization chain. Bug #1: registerAllowedOrderSigner(address signer, bool allowed) (selector 0xea7faa61) had zero access control and wrote _allowedOrderSigner[msg.sender][signer] = allowed, letting anyone register an arbitrary EOA as a valid signer for their own address. Bug #2: the fill function (selector 0x4112e1c2) recovered the order signer with ecrecover and then checked authorization against _allowedOrderSigner[order.taker][recoveredSigner] — keyed on the attacker-controlled taker field instead of order.maker, the party whose funds actually move out via its standing unlimited approval to the proxy. The attacker deployed a contract (the taker), registered its own EOA as an allowed signer for that taker, then submitted four attacker-signed orders where maker was the victim resolver (which had granted unlimited approval). Authorization passed against the taker key, so the maker's approved balances (1,291 WETH, 206K USDT, 16.9 WBTC, 1.27M USDC ≈ $5.87M) were drained while the attacker paid only 1 wei dust per order. Vulnerable code snippet: Attack Tx: https://etherscan.io/tx/0xc5c61b3ac39d854773b9dc34bd0cdbc8b5bbf75f18551802a0b5881fcb990513 Analysis: https://rekt.news/trustedvolumes-rekt"
+    },
+    {
+      "source": "SlowMist",
+      "text": "TrustedVolumes, a key liquidity provider and resolver (market maker) for 1inch Fusion and other DeFi protocols, was exploited via a vulnerability in its custom RFQ swap proxy contract, resulting in approximately $6.7 million stolen. The project confirmed the incident on X, published the three Ethereum addresses holding the stolen funds (approx. $3M, $3M, and $700K), and stated openness to constructive communication for a bug bounty and mutually acceptable resolution. 1inch confirmed its protocol, infrastructure, and user funds are unaffected.In July 2026, the attacker returned ~1,122 ETH (~$2M) while keeping a similar amount as bounty."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On May 7, 2026, the TrustedVolumes market maker lost about $5.87 million after an attacker exploited a custom RFQ proxy contract on Ethereum. The attacker combined flaws in signer authorization, access control, and replay protection to drain four major tokens from TrustedVolumes’ inventory wallet using their own contract as the exploit vector. The RFQ proxy implemented an authorization boundary failure: it allowed any address to register arbitrary signers for itself, authorized signers relative to the taker (not the token source), and permitted token transfers from attacker-supplied addresses. The proxy also used broken replay protection, making the sa…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xc5c61b3ac39d854773b9dc34bd0cdbc8b5bbf75f18551802a0b5881fcb990513"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-05/TrustedVolumes_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-05/TrustedVolumes_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "rekt.news",
+      "url": "https://rekt.news/trustedvolumes-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "www.darknavy.org",
+      "url": "https://www.darknavy.org/web3/exploits/trustedvolumes-rfq-proxy-drain/"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "blog.verichains.io",
+      "url": "https://blog.verichains.io/p/trustedvolumes-exploit-analysis"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xc5c61b3ac39d854773b9dc34bd0cdbc8b5bbf75f18551802a0b5881fcb990513"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/Phalcon_xyz/status/2052234473794916392"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xc5c61b3ac39d854773b9dc34bd0cdbc8b5bbf75f18551802a0b5881fcb990513"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/trustedvolumes/status/2052235435292910005"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/trustedvolumes-2026-05-07"
+    },
+    {
+      "source": "revertiq",
+      "label": "quillaudits.com",
+      "url": "https://www.quillaudits.com/blog/hack-analysis/trustedvolumes-rfq-hack"
+    },
+    {
+      "source": "revertiq",
+      "label": "blocksec.com",
+      "url": "https://blocksec.com/blog/weekly-web3-security-roundup-2026-05-10"
+    }
+  ]
+}

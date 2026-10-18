@@ -1,0 +1,81 @@
+{
+  "id": "2023-04-19-olife",
+  "name": "OLIFE",
+  "date": "2023-04-19",
+  "year": 2023,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Reflection token",
+  "classificationNote": "Upstream label missing; classified by keyword rules from the root-cause text.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.54,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.57
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.41
+      },
+      {
+        "category": "access-control",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Reflection token. Lost: ~32 WBNB",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Reflection token. Lost: ~32 WBNB"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The attacker called the transfer() and deliver() functions to reduce the number of rSupply and tSupply. The value of rate is thus calculated less, increasing the number of reflected tokens in the pair, Finally directly call swap to withdraw $WBNB from the pair. Vulnerable code snippet: https://bscscan.com/address/0xb5a0Ce3Acd6eC557d39aFDcbC93B07a1e1a9e3fa#code Attack tx: https://bscscan.com/tx/0xa21692ffb561767a74a4cbd1b78ad48151d710efab723b1efa5f1e0147caab0a Analysis: https://twitter.com/BeosinAlert/status/1648520494516420608"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xa21692ffb561767a74a4cbd1b78ad48151d710efab723b1efa5f1e0147caab0a"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-04/OLIFE_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-04/OLIFE_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BeosinAlert/status/1648520494516420608"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0xb5a0Ce3Acd6eC557d39aFDcbC93B07a1e1a9e3fa#code"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0xa21692ffb561767a74a4cbd1b78ad48151d710efab723b1efa5f1e0147caab0a"
+    }
+  ]
+}

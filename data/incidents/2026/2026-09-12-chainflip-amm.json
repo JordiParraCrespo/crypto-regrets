@@ -1,0 +1,86 @@
+{
+  "id": "2026-09-12-chainflip-amm",
+  "name": "Chainflip AMM",
+  "date": "2026-09-12",
+  "year": 2026,
+  "amountUsd": 736442.17,
+  "returnedUsd": null,
+  "chains": [
+    "Tron"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "bridge-crosschain",
+  "technique": "Bridge Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.48,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.51
+      },
+      {
+        "category": "bridge-crosschain",
+        "p": 0.46
+      },
+      {
+        "category": "input-validation",
+        "p": 0.03
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": true,
+  "language": "Rust",
+  "rootCause": "Cross-chain protocol Chainflip was exploited on its TRON USDT integration. The attacker abused TRON memo handling by attaching a custom memo to a transaction already signed by validators, causing the system to treat the same deposit as a separate failed swap and issue a duplicate refund. The attack was repeated eight times over about 90 minutes, producing six unauthorized payouts totaling 736,442.17 USDT. A pending user swap of 115,654.41 USDT remains safely in the vault. The network is paused, a fix is ready, restart is expected as early as Monday, and affected users will be made whole.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Cross-chain protocol Chainflip was exploited on its TRON USDT integration. The attacker abused TRON memo handling by attaching a custom memo to a transaction already signed by validators, causing the system to treat the same deposit as a separate failed swap and issue a duplicate refund. The attack was repeated eight times over about 90 minutes, producing six unauthorized payouts totaling 736,442.17 USDT. A pending user swap of 115,654.41 USDT remains safely in the vault. The network is paused, a fix is ready, restart is expected as early as Monday, and affected users will be made whole."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 2026-09-12, Chainflip paused its cross-chain swap network after attackers exploited memo-handling logic in the protocol’s Tron USDT settlement path. Public incident disclosures state that malformed memos attached to validator-signed Tron transactions triggered duplicate refunds and drained 736,442.17 USDT across six unauthorized payouts. Chainflip’s Tron integration accepted swap instructions from transaction memos on transfers that had already been signed by validators, including wrapped contract calls. Attackers attached new or malformed memos to validator-signed transactions, causing the witnessing and refund logic to interpret the same underlyin…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/Chainflip/status/2099080597281145040"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/chainflip-amm-2026-09-12"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptotimes.io",
+      "url": "https://www.cryptotimes.io/2026/09/13/chainflip-halts-network-after-736k-tron-usdt-exploit-users-to-be-made-whole/"
+    },
+    {
+      "source": "revertiq",
+      "label": "bitzo.com",
+      "url": "https://bitzo.com/2026/09/chainflip-tron-usdt-memo-flaw-duplicate-payouts"
+    }
+  ]
+}

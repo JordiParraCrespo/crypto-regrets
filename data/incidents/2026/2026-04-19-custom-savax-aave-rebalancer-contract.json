@@ -1,0 +1,56 @@
+{
+  "id": "2026-04-19-custom-savax-aave-rebalancer-contract",
+  "name": "Custom sAVAX Aave Rebalancer contract",
+  "date": "2026-04-19",
+  "year": 2026,
+  "amountUsd": 64000,
+  "returnedUsd": null,
+  "chains": [
+    "Avalanche"
+  ],
+  "targetType": null,
+  "category": "arbitrary-call",
+  "technique": "Smart Contract Vulnerability",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.98). Replaced keyword guess \"access-control\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "arbitrary-call",
+    "confidence": 0.98,
+    "top": [
+      {
+        "category": "arbitrary-call",
+        "p": 0.98
+      },
+      {
+        "category": "access-control",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.92
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "A custom sAVAX Aave Rebalancer contract on Avalanche was exploited. The public function b2a13230() allowed the caller to pass arbitrary target and data, executing target.call(data) while the contract still held the user’s Aave V3 Credit Delegation (borrowing permission). The attacker used this to call Aave’s borrow() on behalf of the victim and drain WAVAX. A whitehat bot frontran the transaction and recovered all funds before any withdrawal, resulting in zero net loss to the user.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "A custom sAVAX Aave Rebalancer contract on Avalanche was exploited. The public function b2a13230() allowed the caller to pass arbitrary target and data, executing target.call(data) while the contract still held the user’s Aave V3 Credit Delegation (borrowing permission). The attacker used this to call Aave’s borrow() on behalf of the victim and drain WAVAX. A whitehat bot frontran the transaction and recovered all funds before any withdrawal, resulting in zero net loss to the user."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "slowmist",
+      "label": "telemetr.io",
+      "url": "https://telemetr.io/uz/channels/2360854548-defimon_alerts"
+    }
+  ]
+}

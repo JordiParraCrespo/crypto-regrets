@@ -1,0 +1,88 @@
+{
+  "id": "2024-12-01-spectral-labs",
+  "name": "Spectral Labs",
+  "date": "2024-12-01",
+  "year": 2024,
+  "amountUsd": 250000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "arbitrary-call",
+  "technique": "Token Approval Abuse",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "arbitrary-call",
+    "confidence": 0.93,
+    "top": [
+      {
+        "category": "arbitrary-call",
+        "p": 0.93
+      },
+      {
+        "category": "access-control",
+        "p": 0.04
+      },
+      {
+        "category": "logic-error",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.63
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "Spectral tweeted that they received an alert about a vulnerability affecting certain tokens on the bonding curve contracts on Syntax, which was used to remove approximately $200K in liquidity.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Spectral tweeted that they received an alert about a vulnerability affecting certain tokens on the bonding curve contracts on Syntax, which was used to remove approximately $200K in liquidity."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 1 December 2024, Spectral Labs' Syntax platform on Ethereum suffered a $250,000 exploit caused by an infinite token approval bug in the AgentToken contract. The attacker manipulated bonding curve logic to drain SPEC tokens. A logic error in the AgentToken.sol contract led to unintended infinite token approvals for the AgentBalances contract. This enabled an attacker to siphon funds from the bonding curve by manipulating token balances and pricing."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xa3535c70c633e34dbcae6827063c655d60176cc01cf4eb18494077789eb75d62"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/Spectral_Labs/status/1863757146543763866"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/spectral-labs-2024-12-01"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/spectral-labs-hack-2024"
+    },
+    {
+      "source": "revertiq",
+      "label": "quillaudits.com",
+      "url": "https://www.quillaudits.com/blog/hack-analysis/spectral-bonding-contract-250k-exploit-analysis"
+    }
+  ]
+}

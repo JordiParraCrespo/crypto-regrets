@@ -1,0 +1,90 @@
+{
+  "id": "2024-09-11-omnipus",
+  "name": "Omnipus",
+  "date": "2024-09-11",
+  "year": 2024,
+  "amountUsd": 30000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "input-validation",
+  "technique": "Missing Input Validation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "input-validation",
+    "confidence": 0.69,
+    "top": [
+      {
+        "category": "input-validation",
+        "p": 0.71
+      },
+      {
+        "category": "logic-error",
+        "p": 0.27
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Omnipus contracts were drained of approximately $30,000 during the OPUS token presale. The attack exploited a vulnerability in which the contracts mistakenly believed the attackers had sent too much ETH and refunded them.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Omnipus contracts were drained of approximately $30,000 during the OPUS token presale. The attack exploited a vulnerability in which the contracts mistakenly believed the attackers had sent too much ETH and refunded them."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Omnipus suffered a ~$30,000 loss on 11 September 2024. Attackers exploited the OPUS token presale contract by manipulating a missing input validation, resulting in excessive fee refunds to their addresses across Ethereum Mainnet, Base, and Arbitrum. A required input validation in the payNative() function of OAppSender.sol was removed. This allowed attackers to specify arbitrary refund addresses and inflated fees, leading the contract to transfer presale funds to attackers without confirming valid payment."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xd72c36dedb6cdc3ec0ed0dbf41005126957c91bb1a2ef005253ba4db52cb34c5",
+    "0x89aef9cbdf71ea39bf751b86fc4ee9e6e0640c61a4b67847ad6b8530214ed486",
+    "0xef3fc934bc7dcdc5d68c66ab1cba7ac572411a1671a0a7c88d1cbaa114ac3b70"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/Omnipus_X/status/1833840674602446993"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/omnipus-2024-09-11"
+    },
+    {
+      "source": "revertiq",
+      "label": "certik.com",
+      "url": "https://www.certik.com/blog/omnipus-incident-analysis"
+    },
+    {
+      "source": "revertiq",
+      "label": "quadrigainitiative.com",
+      "url": "https://quadrigainitiative.com/casestudy/omnipuspresalecontractvulnerabilityrefund.php"
+    }
+  ]
+}

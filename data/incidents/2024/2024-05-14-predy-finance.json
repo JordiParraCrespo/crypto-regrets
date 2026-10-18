@@ -1,0 +1,137 @@
+{
+  "id": "2024-05-14-predy-finance",
+  "name": "Predy Finance",
+  "date": "2024-05-14",
+  "year": 2024,
+  "amountUsd": 464000,
+  "returnedUsd": null,
+  "chains": [
+    "Arbitrum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.95,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.95
+      },
+      {
+        "category": "logic-error",
+        "p": 0.03
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Reentrancy. Lost: $464K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Reentrancy. Lost: $464K"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Predy Finance's registerPair() was permissionless, allowing anyone to create a trading pair with themselves as poolOwner. Calling trade() on that pair established the caller as the active \"locker\", granting unrestricted access to take() (token extraction) and supply() (LP deposit) within the trade callback. The attacker registered a custom pair pointing to a real Uniswap pool (USDC/WETH 0.05%), called trade() to become the locker, and inside predyTradeAfterCallback() called take() to drain all WETH and all USDC from the global PredyPool into their own address. They immediately followed each take() with a supply() call, re-depositing those same tokens as LP shares under their own pairId. Because finalizeLock() only verified that the net outflow was non-negative — and the supply() re-deposit balanced the take() extraction — the balance check passed silently. After the callback returned, the attacker called withdraw() twice (once for WETH, once for USDC) to redeem their newly registered LP shares, permanently draining all liquidity from other users' positions and netting ~$464K. Vulnerable code snippet: Attack Tx: 0xbe163f651d23f0c9e4d4a443c0cc163134a31a1c2761b60188adcfd33178f50f Analysis: Predy Finance official post"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Reentrancy Vulnerable code snippet: https://arbiscan.io/address/0x7b8b944ab2f24c829504a7a6d70fce5298f2147c#code Attack tx: https://arbiscan.io/tx/0xbe163f651d23f0c9e4d4a443c0cc163134a31a1c2761b60188adcfd33178f50f Analysis: https://predyfinance.medium.com/postmortem-report-on-the-details-of-the-events-of-may-14-2024-8690508c820b"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The decentralized exchange Predy Finance on the Arbitrum chain was attacked, resulting in the loss of $464k worth of crypto assets from its lending pool."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On May 14, 2024, Predy Finance's Arbitrum deployment lost approximately $464,000 after a contract-level exploit allowed an attacker to drain both USDC and WETH. The exploit levered unintended callback permissions to steal liquidity by creating a new trading pair and manipulating contract execution order. The attacker exploited an improper permission model in PredyPool. By registering a new trading pair and abusing the callback mechanism in trade execution, the attacker was able to issue privileged take() and withdraw() calls, withdrawing protocol liquidity intended for existing users. Lack of access control in the relevant callback and trading function…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xbe163f651d23f0c9e4d4a443c0cc163134a31a1c2761b60188adcfd33178f50f"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-05/PredyFinance_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-05/PredyFinance_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Phalcon_xyz/status/1790307019590680851"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "arbiscan.io",
+      "url": "https://arbiscan.io/tx/0xbe163f651d23f0c9e4d4a443c0cc163134a31a1c2761b60188adcfd33178f50f"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/predyfinance/status/1791109477049000336"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "arbiscan.io",
+      "url": "https://arbiscan.io/address/0x7b8b944ab2f24c829504a7a6d70fce5298f2147c#code"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "predyfinance.medium.com",
+      "url": "https://predyfinance.medium.com/postmortem-report-on-the-details-of-the-events-of-may-14-2024-8690508c820b"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xbe163f651d23f0c9e4d4a443c0cc163134a31a1c2761b60188adcfd33178f50f"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/SlowMist_Team/status/1790326798469001379"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/predy-finance-2024-05-14"
+    },
+    {
+      "source": "revertiq",
+      "label": "olympix.security",
+      "url": "https://olympix.security/biweekly-exploits/305m-vanishes-dmm-predy-tsuru-and-osn-wrecked-by-wallet-compromise-and-access-control-failures"
+    },
+    {
+      "source": "revertiq",
+      "label": "quadrigainitiative.com",
+      "url": "https://www.quadrigainitiative.com/casestudy/predyfinancecontractcallbackvulnerability.php"
+    }
+  ]
+}

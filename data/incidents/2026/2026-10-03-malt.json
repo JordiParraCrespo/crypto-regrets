@@ -1,0 +1,66 @@
+{
+  "id": "2026-10-03-malt",
+  "name": "MALT",
+  "date": "2026-10-03",
+  "year": 2026,
+  "amountUsd": 72000,
+  "returnedUsd": null,
+  "chains": [
+    "Polygon"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Smart Contract Vulnerability",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.86).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.86,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.87
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.13
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "the MALT/DAI sLP runs its below-peg price recovery inside swap() before sending the output, pulling DAI from the Capital Source treasury into the pool, then checks its constant-product invariant against the final balances without separating the injected treasury DAI from the caller's own input, so a negligible 1 DAI swap is credited with thousands of injected DAI and releases a disproportionate MALT output. Lost: 13,440.581562307921517594 DAI net profit to the attacker (exactly reproduced) on Polygon; the Capital Source treasury was drained of 12,744.644506590589136718 DAI across two below-peg rebalance injections, the attacker paying just 1 DAI per exploit swap and arbitraging the extracted MALT out on QuickSwap - the ~$72K figure in the original alert does not match the on-chain reconstruction",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "the MALT/DAI sLP runs its below-peg price recovery inside swap() before sending the output, pulling DAI from the Capital Source treasury into the pool, then checks its constant-product invariant against the final balances without separating the injected treasury DAI from the caller's own input, so a negligible 1 DAI swap is credited with thousands of injected DAI and releases a disproportionate MALT output. Lost: 13,440.581562307921517594 DAI net profit to the attacker (exactly reproduced) on Polygon; the Capital Source treasury was drained of 12,744.644506590589136718 DAI across two below-peg rebalance injections, the attacker paying just 1 DAI per exploit swap and arbitraging the extracted MALT out on QuickSwap - the ~$72K figure in the original alert does not match the on-chain reconstruction"
+    },
+    {
+      "source": "SlowMist",
+      "text": "An attacker exploited a logic flaw in MALT’s swap function. With negligible input they triggered an external rebalanceHook that pulled DAI from the protocol’s Capital Source into the same pool. The swap then checked its invariant against the post-hook balances and treated the treasury-funded DAI as caller-supplied funds, allowing a disproportionate MALT withdrawal and a loss of about $ 72,000."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-10/MALT_exp.sol",
+  "sources": [
+    "defihacklabs",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-10/MALT_exp.sol"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/2106418632041668784"
+    }
+  ]
+}

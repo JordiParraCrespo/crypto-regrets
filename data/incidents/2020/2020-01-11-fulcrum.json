@@ -1,0 +1,78 @@
+{
+  "id": "2020-01-11-fulcrum",
+  "name": "Fulcrum",
+  "date": "2020-01-11",
+  "year": 2020,
+  "amountUsd": 2500000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum Mainnet"
+  ],
+  "targetType": null,
+  "category": "logic-error",
+  "technique": "Flash Loan",
+  "classificationNote": "Classified by keyword rules from the RevertIQ label and description.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.48,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.51
+      },
+      {
+        "category": "logic-error",
+        "p": 0.26
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.23
+      }
+    ],
+    "flashLoan": 0.91,
+    "stateActor": 0.01,
+    "hasRootCause": 0.88
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "On January 11, 2020, Fulcrum released a flash loan feature on Ethereum Mainnet that exposed user funds to exploit risk through an atomic transaction vulnerability. The flaw enabled potential theft of $2.5 million from three pools. A white-hat intervention by 1inch demonstrated the risk before a malicious exploit occurred. The vulnerability originated from the Fulcrum flash loan feature, which failed to account for atomic flash loan manipulation. The system made state-changing decisions on spot balances within a single transaction, allowing the possibility for an attacker to drain pool funds by exploiting flash loans without external price references or delay.",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "On January 11, 2020, Fulcrum released a flash loan feature on Ethereum Mainnet that exposed user funds to exploit risk through an atomic transaction vulnerability. The flaw enabled potential theft of $2.5 million from three pools. A white-hat intervention by 1inch demonstrated the risk before a malicious exploit occurred. The vulnerability originated from the Fulcrum flash loan feature, which failed to account for atomic flash loan manipulation. The system made state-changing decisions on spot balances within a single transaction, allowing the possibility for an attacker to drain pool funds by exploiting flash loans without external price references or delay."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xa5611cdc8f0c9e90b89399eb81016cd6346206155d751ea318c6bb4ab129cdc3",
+    "0xc2e02ef9d45bd5ca645ad0c7a85425d1f75418de23cea1f996bd65c249194c3e"
+  ],
+  "poc": null,
+  "sources": [
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/fulcrum-2020-01-11"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.1inch.io",
+      "url": "https://blog.1inch.io/yes-we-hacked-bzx-fulcrum-but-one-month-ago-3f7e5c437ee3"
+    },
+    {
+      "source": "revertiq",
+      "label": "1inch.com",
+      "url": "https://1inch.com/blog/post/yes-we-hacked-bzx-fulcrum-but-one-month-ago"
+    }
+  ]
+}

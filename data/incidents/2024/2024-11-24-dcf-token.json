@@ -1,0 +1,108 @@
+{
+  "id": "2024-11-24-dcf-token",
+  "name": "DCF token",
+  "date": "2024-11-24",
+  "year": 2024,
+  "amountUsd": 442000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": null,
+  "category": "logic-error",
+  "technique": "Lack of Slippage Protection",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.89). Replaced keyword guess \"oracle-manipulation\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.89,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.9
+      },
+      {
+        "category": "access-control",
+        "p": 0.06
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.96,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "The DCF token contract on BSC contained faulty transfer logic that automatically converted 5% of transferred tokens into USDT and added them to the USDT-DCF liquidity pool. Critically, the transfer function also permitted anyone to burn tokens directly from the PancakeSwap pair's balance. The attacker flash-loaned a large amount of BUSD, purchased DCF tokens from a freshly-deployed V3 pool (bypassing V2 buy restrictions), and then transferred DCF to the pair, triggering the auto-burn. Because deadcfg was set to 2, approximately half of the transferred DCF was incinerated from the pair's reserves and the pool was synced, causing DCF's price to spike by roughly 10 trillion times (from ~171 BUSD per DCF to over 1.7 quadrillion BUSD). With no slippage guard or price-impact circuit breaker to detect this anomaly, the attacker swapped their remaining DCF and DCT positions back into BUSD at the manipulated rate, extracting over $442K. Attack Tx: 0xb375932951c271606360b6bf4287d080c5601f4f59452b0484ea6c856defd6fd Analysis: How Wrong Transfer Logic Led to DCF Token Hack – QuillAudits DCF Hack Analysis – LunaRay (Medium) Phalcon Alert",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The DCF token contract on BSC contained faulty transfer logic that automatically converted 5% of transferred tokens into USDT and added them to the USDT-DCF liquidity pool. Critically, the transfer function also permitted anyone to burn tokens directly from the PancakeSwap pair's balance. The attacker flash-loaned a large amount of BUSD, purchased DCF tokens from a freshly-deployed V3 pool (bypassing V2 buy restrictions), and then transferred DCF to the pair, triggering the auto-burn. Because deadcfg was set to 2, approximately half of the transferred DCF was incinerated from the pair's reserves and the pool was synced, causing DCF's price to spike by roughly 10 trillion times (from ~171 BUSD per DCF to over 1.7 quadrillion BUSD). With no slippage guard or price-impact circuit breaker to detect this anomaly, the attacker swapped their remaining DCF and DCT positions back into BUSD at the manipulated rate, extracting over $442K. Attack Tx: 0xb375932951c271606360b6bf4287d080c5601f4f59452b0484ea6c856defd6fd Analysis: How Wrong Transfer Logic Led to DCF Token Hack – QuillAudits DCF Hack Analysis – LunaRay (Medium) Phalcon Alert"
+    },
+    {
+      "source": "SlowMist",
+      "text": "On November 25, DCF on the BNB Chain was attacked, resulting in a loss of approximately $440,000. The root cause of the vulnerability was an error in the logic implemented by the project team in the transfer function of DCF."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On November 24, 2024, a flawed transfer logic in the DCF token on BNB Chain enabled an attacker to drain approximately $442,000 from protocol liquidity pools by exploiting a direct burn-and-sync vulnerability tied to liquidity pool token balances. The attacker artificially inflated the token price, swapped tokens at manipulated rates, and stole protocol-held stablecoins, with the exploit traceable to a custom transfer and burn mechanism in the token contract. The DCF token contract's _transfer function directly burned tokens from the AMM pair address during transfers to the liquidity pool, then called sync(), artificially reducing pool token reserves and causing the spot price to spike.…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xb375932951c271606360b6bf4287d080c5601f4f59452b0484ea6c856defd6fd"
+  ],
+  "poc": null,
+  "sources": [
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0xb375932951c271606360b6bf4287d080c5601f4f59452b0484ea6c856defd6fd"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "quillaudits.com",
+      "url": "https://www.quillaudits.com/blog/hack-analysis/dcf-token-hack-transfer-logic-flaw"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "lunaray.medium.com",
+      "url": "https://lunaray.medium.com/dcf-hack-analysis-dbcd3589c6fc"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xb375932951c271606360b6bf4287d080c5601f4f59452b0484ea6c856defd6fd"
+    },
+    {
+      "source": "blocksec",
+      "label": "x.com",
+      "url": "https://x.com/Phalcon_xyz/status/1860890801909190664"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/how-wrong-transfer-logic-led-to-dcf-token-2024-12-24"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/kismp123/DeFi-Security-Incident/blob/main/2024/2024-11-24_DCFToken_SlippageProtection_BSC.md"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.solidityscan.com",
+      "url": "https://blog.solidityscan.com/dcf-token-hack-analysis-0c381c57fdc5/"
+    }
+  ]
+}

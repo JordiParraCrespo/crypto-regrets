@@ -1,0 +1,89 @@
+{
+  "id": "2023-02-04-sperax-usd",
+  "name": "Sperax USD",
+  "date": "2023-02-04",
+  "year": 2023,
+  "amountUsd": 250000,
+  "returnedUsd": null,
+  "chains": [
+    "Arbitrum"
+  ],
+  "targetType": "Token",
+  "category": "accounting-math",
+  "technique": "Unbacked Mint",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.59,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.61
+      },
+      {
+        "category": "logic-error",
+        "p": 0.23
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.11
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.92
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "SperaxUSD, the Arbitrum ecological stablecoin protocol, tweeted that an attacker increased the token balance of his address to 9.7 billion without providing the corresponding collateral, and before the Sperax team and Arbitrum ecosystem partners jointly stopped, Approximately $300,000 was liquidated.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "SperaxUSD, the Arbitrum ecological stablecoin protocol, tweeted that an attacker increased the token balance of his address to 9.7 billion without providing the corresponding collateral, and before the Sperax team and Arbitrum ecosystem partners jointly stopped, Approximately $300,000 was liquidated."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Sperax USDs on Arbitrum was exploited on 2023-02-03 through flawed rebasing migration logic that relied on Address.isContract() for account classification. Public analyses describe attackers using a precomputed contract address to inflate USDs balances without matching collateral, then swapping the inflated tokens into stablecoins before the protocol paused the system. The USDs rebasing migration mechanism relied on Address.isContract() to distinguish rebasing and non-rebasing accounts. Public exploit reproductions describe attackers sending USDs to an address before contract deployment, then deploying code at that same address and triggering _ensureRebasingMigration().…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xe74641b4b7e9c9eb7ab46082f322efbc510b8d39af609d934f41c41d7057fe49",
+    "0xfaf84cabc3e1b0cf1ff1738dace1b2810f42d98baeea17b146ae032f0bdf82d5"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/SperaxUSD/status/1622003045776195587"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/sperax-usd-2023-02-04"
+    },
+    {
+      "source": "revertiq",
+      "label": "certik.com",
+      "url": "https://www.certik.com/blog/inflated-books-the-usd250k-attack-on-sperax-usd"
+    },
+    {
+      "source": "revertiq",
+      "label": "coinspect.com",
+      "url": "https://www.coinspect.com/learn-evm-attacks/cases/sperax-usd-%28usds%29/"
+    }
+  ]
+}

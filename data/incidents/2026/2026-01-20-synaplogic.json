@@ -1,0 +1,133 @@
+{
+  "id": "2026-01-20-synaplogic",
+  "name": "SynapLogic",
+  "date": "2026-01-20",
+  "year": 2026,
+  "amountUsd": 144000,
+  "returnedUsd": null,
+  "chains": [
+    "Base"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Business Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.85,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.86
+      },
+      {
+        "category": "access-control",
+        "p": 0.09
+      },
+      {
+        "category": "input-validation",
+        "p": 0.04
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.01,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Business Logic Flaw. Lost: 27.6 ETH & 3450 USDC",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Business Logic Flaw. Lost: 27.6 ETH & 3450 USDC"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "SynapLogic's token-sale proxy exposes a buy(recipients, rates, refundFlags) (selector 0x670a3267) and a swap(amount, recipients, rates, refundFlags) (selector 0x7f7f92f5) that loop over caller-supplied arrays and issue refunds at a caller-controlled rate per iteration with no authorization or sanity checks. By supplying many array entries all pointing at the attacker with refundFlag = true and rate = 10 (10%), the attacker forces the contract to pay out a refund of (rate * iters)% of the deposited value, i.e. an arbitrary multiple of what was sent. With enough iterations the cumulative refund vastly exceeds the deposit, draining the sale contract's ETH (BNB-side) and its USDC balance. NOTE: the repo flags this contract as effectively a cheat/backdoor/rug-style contract; the logic lets any caller mint themselves unbounded refunds. Vulnerable code snippet: Attack Tx: https://skylens.certik.com/tx/base/0xc54c00046364b6e889db18c73beee9b81df6b5ca822b6d262b3d30cdf376c4b1 Analysis: https://github.com/anon-cBE4/anon-cBE4/blob/main/writeups/SynapLogic_attack_analyze.md"
+    },
+    {
+      "source": "SlowMist",
+      "text": "According to a BlockSec alert, the SynapLogic contract lacked critical parameter validation in the swapExactTokensForETHSupportingFeeOnTransferTokens function, allowing attackers to manipulate the whitelist logic and designate arbitrary recipient addresses. In addition, the contract failed to verify whether the total amount of native tokens distributed exceeded the actual payment made, enabling attackers to withdraw excess native tokens while simultaneously receiving newly minted SYP, resulting in losses of approximately $186,000."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "SynapLogic's token sale contract on Base was exploited on January 20, 2026, via a business logic flaw allowing attackers to drain both ETH and USDC by repeatedly abusing the refund mechanism. The loss is confirmed as at least 27.6 ETH and 3,450 USDC, with additional SYP token issuance and subsequent pool rug pulls observed. The contract refunded a fixed percentage of its balance to each of multiple recipients, without ensuring the total refund did not exceed the value received. Attackers could submit arrays that triggered multiple refunds in one purchase, draining the balance in ETH, USDC, and enabling the abuse of mint functionality."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xc54c00046364b6e889db18c73beee9b81df6b5ca822b6d262b3d30cdf376c4b1",
+    "0xdc0f9149ace1a2fe0445fe1c096b098e0dbf06edec675a1f2f2a5c8b72bd5f10",
+    "0x60b2b0bf428b284af4827df6650c8a1779179d678196cd1ebf610ee4130ebf46",
+    "0x7a2d64bb7a52fa424a1ce6c2e3269c54362e86bbf5798b6c21e11272baf9476b",
+    "0x08f6a793c55166dfbae2103a96484130b6401a434303a20c3e429f6a67c7d7cf",
+    "0x470d9da0752f51d56a6575a5f4df597fe35bfd4298fce200e838261ace01c166",
+    "0xafd7523c49f7c1a2b0ec135da54d155e4f75be1790151ed186cc0c0af56f7580"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-01/SynapLogic_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-01/SynapLogic_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/TenArmorAlert/status/2013432861366292520?s=20"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/hklst4r/status/2013440353844461979?s=20"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/CertiKAlert/status/2013440963851755610?s=20"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "skylens.certik.com",
+      "url": "https://skylens.certik.com/tx/base/0xc54c00046364b6e889db18c73beee9b81df6b5ca822b6d262b3d30cdf376c4b1"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "github.com",
+      "url": "https://github.com/anon-cBE4/anon-cBE4/blob/main/writeups/SynapLogic_attack_analyze.md"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/Phalcon_xyz/status/2013439544595562898"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/synaplogic-2026-01-20"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/synaplogic-hack-2026"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/kismp123/DeFi-Security-Incident/blob/main/2026/2026-01-20_SynapLogic_BusinessLogicFlaw.md"
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "id": "2025-09-18-ngp",
+  "name": "NGP",
+  "date": "2025-09-18",
+  "year": 2025,
+  "amountUsd": 2000000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Price Manipulation",
+  "classificationNote": "Classified by keyword rules from the DeFiHackLabs root-cause title.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.47,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.5
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.35
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.1
+      }
+    ],
+    "flashLoan": 0.96,
+    "stateActor": 0.04,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Price Manipulation. Lost: 2M USD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Price Manipulation. Lost: 2M USD"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The NGP token (a fee-on-transfer / reflection style token) contained logic in its _update()/transfer hook that calls the PancakePair's sync() whenever the pair's NGP balance dropped below a threshold. An attacker used a flash-loaned ~211M USDT to buy a large amount of NGP and burn it to the dead address, drastically lowering the pair's real NGP balance. A second swap of NGP back to USDT triggered the internal sync() inside the token's transfer logic, forcing the pair's reserves to re-sync to the artificially depleted balance and thereby mispricing NGP. With the reserves manipulated, the attacker's remaining NGP could be drained for far more USDT than fair value, netting ~2M USDT. Vulnerable code snippet: Attack Tx: https://bscscan.com/tx/0xc2066e0dff1a8a042057387d7356ad7ced76ab90904baa1e0b5ecbc2434df8e1 Analysis: https://blog.solidityscan.com/ngp-token-hack-analysis-414b6ca16d96"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xc2066e0dff1a8a042057387d7356ad7ced76ab90904baa1e0b5ecbc2434df8e1"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-09/NGP_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-09/NGP_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "blog.solidityscan.com",
+      "url": "https://blog.solidityscan.com/ngp-token-hack-analysis-414b6ca16d96"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0xc2066e0dff1a8a042057387d7356ad7ced76ab90904baa1e0b5ecbc2434df8e1"
+    }
+  ]
+}

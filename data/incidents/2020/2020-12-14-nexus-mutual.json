@@ -1,0 +1,89 @@
+{
+  "id": "2020-12-14-nexus-mutual",
+  "name": "Nexus Mutual",
+  "date": "2020-12-14",
+  "year": 2020,
+  "amountUsd": 8000000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "key-compromise",
+  "technique": "Key Leaked via Infrastructure",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "key-compromise",
+    "confidence": 0.43,
+    "top": [
+      {
+        "category": "social-engineering",
+        "p": 0.46
+      },
+      {
+        "category": "key-compromise",
+        "p": 0.45
+      },
+      {
+        "category": "frontend-infra",
+        "p": 0.09
+      }
+    ],
+    "flashLoan": 0.01,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "DeFi insurance agreement Nexus Mutual stated on Twitter that the personal address of its founder Hugh Karp was attacked by a platform user, stolen 370,000 NXM and lost more than 8 million US dollars. The official said that this is a targeted attack, only the official name, Karp used a hardware wallet, the attacker obtained remote access to his computer, and modified the wallet plug-in MetaMask, deceived him to sign the transaction, the attacker Completed KYC 11 days ago, and then changed to a new address on December 3. , To transfer funds to the attacker’s own address.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "DeFi insurance agreement Nexus Mutual stated on Twitter that the personal address of its founder Hugh Karp was attacked by a platform user, stolen 370,000 NXM and lost more than 8 million US dollars. The official said that this is a targeted attack, only the official name, Karp used a hardware wallet, the attacker obtained remote access to his computer, and modified the wallet plug-in MetaMask, deceived him to sign the transaction, the attacker Completed KYC 11 days ago, and then changed to a new address on December 3. , To transfer funds to the attacker’s own address."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Nexus Mutual founder Hugh Karp’s Ethereum wallet was compromised on December 14, 2020, via targeted infrastructure and frontend manipulation. The attacker tricked Karp into signing a transaction, draining approximately $8 million in NXM tokens, which were quickly laundered through token wrapping, swaps, and cross-chain moves. Remote access allowed an attacker to modify the browser's Metamask extension on the victim's machine, causing spoofed transactions to be signed with the victim's hardware wallet. The wallet signature was solicited for a transfer to the attacker’s address, exploiting both frontend control and personal infrastructure compromise."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x4ddcc21c6de13b3cf472c8d4cdafd80593e0fc286c67ea144a76dbeddb7f3629",
+    "0xfe2910c24e7bab5c96015fb1090aa52b4c0f80c5b5c685e4da1b85c5f648558a"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/NexusMutual/status/1338441875326427137"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/nexus-mutual-2020-12-14"
+    },
+    {
+      "source": "revertiq",
+      "label": "certik.com",
+      "url": "https://www.certik.com/blog/nexus-mutual-attack-8-million-lost"
+    },
+    {
+      "source": "revertiq",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/markets/2020/12/14/ceo-of-defi-insurer-nexus-mutual-hacked-for-8m-in-nxm-tokens"
+    }
+  ]
+}

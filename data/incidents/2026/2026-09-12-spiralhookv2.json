@@ -1,0 +1,66 @@
+{
+  "id": "2026-09-12-spiralhookv2",
+  "name": "SpiralHookV2",
+  "date": "2026-09-12",
+  "year": 2026,
+  "amountUsd": 26800,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Price Manipulation",
+  "classificationNote": "Classified by keyword rules from the DeFiHackLabs root-cause title.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.67,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.6900000000000001
+      },
+      {
+        "category": "access-control",
+        "p": 0.31
+      }
+    ],
+    "flashLoan": 0.51,
+    "stateActor": 0.02,
+    "hasRootCause": 0.91
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Uniswap V4 spot-price borrow plus tx.origin-keyed same-block guard bypass. Lost: ~10.70728 ETH (reproduced exact to the wei)",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Uniswap V4 spot-price borrow plus tx.origin-keyed same-block guard bypass. Lost: ~10.70728 ETH (reproduced exact to the wei)"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The attacker manipulated the Uniswap V4 pool spot price. SpiralHookV2.borrow() valued collateral using poolManager.getSlot0() without TWAP or price-change limits. The noSameBlockSwap guard (keyed by tx.origin) was bypassed via 6 different EOAs, allowing borrowing against inflated collateral in the same block as the pump, resulting in a loss of ~10.7 ETH."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-09/SpiralHookV2_exp.sol",
+  "sources": [
+    "defihacklabs",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-09/SpiralHookV2_exp.sol"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/2099410818244968850"
+    }
+  ]
+}

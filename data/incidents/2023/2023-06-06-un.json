@@ -1,0 +1,81 @@
+{
+  "id": "2023-06-06-un",
+  "name": "UN",
+  "date": "2023-06-06",
+  "year": 2023,
+  "amountUsd": 26000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Price Manipulation",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.95).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.95,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.95
+      },
+      {
+        "category": "logic-error",
+        "p": 0.03
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.87,
+    "stateActor": 0.03,
+    "hasRootCause": 0.78
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Price Manipulation. Lost: ~$26k",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Price Manipulation. Lost: ~$26k"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The vulnerable provided a gateway for the attacker to manipulate the token's value Vulnerable code snippet: Attack tx: https://bscscan.com/tx/0xff5515268d53df41d407036f547b206e288b226989da496fda367bfeb31c5b8b Analysis: https://metatrust.io/blogs/post/unraveling-the-un-attack-a-flash-loan-exploits-flaw-in-token-contract"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xff5515268d53df41d407036f547b206e288b226989da496fda367bfeb31c5b8b"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-06/UN_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-06/UN_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/MetaTrustAlert/status/1667041877428932608"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0xff5515268d53df41d407036f547b206e288b226989da496fda367bfeb31c5b8b"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "metatrust.io",
+      "url": "https://metatrust.io/blogs/post/unraveling-the-un-attack-a-flash-loan-exploits-flaw-in-token-contract"
+    }
+  ]
+}

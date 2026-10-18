@@ -1,0 +1,91 @@
+{
+  "id": "2023-10-05-depayrouter",
+  "name": "DePayRouter",
+  "date": "2023-10-05",
+  "year": 2023,
+  "amountUsd": 827,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Business Logic Flaw",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.87).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.87,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.88
+      },
+      {
+        "category": "arbitrary-call",
+        "p": 0.08
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.03
+      }
+    ],
+    "flashLoan": 0.95,
+    "stateActor": 0.02,
+    "hasRootCause": 0.81
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Business Logic Flaw. Lost: ~$ 827 USDC",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Business Logic Flaw. Lost: ~$ 827 USDC"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "A flash loan attack on the DePay platform resulted in the theft of 827 USDC. The exploiter took advantage of a security issue in the DePay router to execute the theft. Vulnerable code snippet: Attack tx: 0x9a036058afb58169bf | Phalcon Explorer Analysis: CertiK Alert on Twitter / X"
+    },
+    {
+      "source": "SlowMist",
+      "text": "There is a flashloan attack on the DePay platform that resulted in the theft of 827 USDC. The exploiter used a security issue with DePay router to steal the USDC."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x9a036058afb58169bfa91a826f5fcf4c0a376e650960669361d61bef99205f35"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-10/DePayRouter_exp.sol",
+  "sources": [
+    "defihacklabs",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-10/DePayRouter_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/CertiKAlert/status/1709764146324009268"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/eth/0x9a036058afb58169bfa91a826f5fcf4c0a376e650960669361d61bef99205f35?line=41"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/CertiKAlert/status/1709764146324009268"
+    },
+    {
+      "source": "slowmist",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/address/0xae60ac8e69414c2dc362d0e6a03af643d1d85b92"
+    }
+  ]
+}

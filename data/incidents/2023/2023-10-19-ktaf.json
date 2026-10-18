@@ -1,0 +1,86 @@
+{
+  "id": "2023-10-19-ktaf",
+  "name": "kTAF",
+  "date": "2023-10-19",
+  "year": 2023,
+  "amountUsd": 8000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "CompoundV2 Inflation Attack",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.98).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.98,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.98
+      },
+      {
+        "category": "logic-error",
+        "p": 0.01
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.1,
+    "stateActor": 0.02,
+    "hasRootCause": 0.92
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "CompoundV2 Inflation Attack. Lost: ~$8K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "CompoundV2 Inflation Attack. Lost: ~$8K"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "kTAF is a Compound fork project and was exploited due to the empty market issue in Compound v2. This rounding issue leads to the inflation of the exchange rate. Similar problems can be found in the following projects: GitHub - YAcademy-Residents/defi-fork-bugs: Bugs in commonly forked DeFi protocols Vulnerable code snippet: Attack tx: Analysis: Attack Transaction: 0x325999373f1aae98db2d89662ff1afbe0c842736f7564d16a7b52bf5c777d3a4 on mainnet"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x325999373f1aae98db2d89662ff1afbe0c842736f7564d16a7b52bf5c777d3a4"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-10/kTAF_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-10/kTAF_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "defimon.xyz",
+      "url": "https://defimon.xyz/attack/mainnet/0x325999373f1aae98db2d89662ff1afbe0c842736f7564d16a7b52bf5c777d3a4"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "github.com",
+      "url": "https://github.com/YAcademy-Residents/defi-fork-bugs?tab=readme-ov-file"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/address/0xf5140fc35c6f94d02d7466f793feb0216082d7e5"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x325999373f1aae98db2d89662ff1afbe0c842736f7564d16a7b52bf5c777d3a4"
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "id": "2026-01-30-gyro-finance",
+  "name": "Gyro.finance",
+  "date": "2026-01-30",
+  "year": 2026,
+  "amountUsd": 700000,
+  "returnedUsd": null,
+  "chains": [
+    "Arbitrum"
+  ],
+  "targetType": null,
+  "category": "arbitrary-call",
+  "technique": "Arbitrary Call",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.99). Replaced keyword guess \"bridge-crosschain\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "arbitrary-call",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "arbitrary-call",
+        "p": 0.99
+      },
+      {
+        "category": "input-validation",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "The Gyroscope GYD L1 CCIP Escrow contract on Ethereum was exploited for approximately $700K due to an arbitrary call vulnerability in the _ccipReceive() handler. The function executed an incoming cross-chain message's recipient and data fields via a low-level functionCall() with no validation on the target address or calldata contents. An attacker sent a CCIP message from Arbitrum carrying only 1 wei of GYD, but with the recipient field set to the GYD token contract address and data encoding an approve(attacker, 2^256-1) call. Because the escrow blindly forwarded this call to the GYD token contract in its own context, the attacker obtained an unlimited token allowance over the escrow's entire GYD balance (~6.1 million GYD). A second transaction then called GYD.transferFrom(escrow, attacker, totalBalance) to drain all funds. Restricting the recipient field to exclude the GYD token contract itself would have prevented the exploit. Attack Tx: 0x51c22898a9b9f519a10b0a0be89b9d51c0248adb80cc0f89e57437e15e6c60c7 Analysis: DARKNAVY — Gyro Finance CCIP Escrow Exploit",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The Gyroscope GYD L1 CCIP Escrow contract on Ethereum was exploited for approximately $700K due to an arbitrary call vulnerability in the _ccipReceive() handler. The function executed an incoming cross-chain message's recipient and data fields via a low-level functionCall() with no validation on the target address or calldata contents. An attacker sent a CCIP message from Arbitrum carrying only 1 wei of GYD, but with the recipient field set to the GYD token contract address and data encoding an approve(attacker, 2^256-1) call. Because the escrow blindly forwarded this call to the GYD token contract in its own context, the attacker obtained an unlimited token allowance over the escrow's entire GYD balance (~6.1 million GYD). A second transaction then called GYD.transferFrom(escrow, attacker, totalBalance) to drain all funds. Restricting the recipient field to exclude the GYD token contract itself would have prevented the exploit. Attack Tx: 0x51c22898a9b9f519a10b0a0be89b9d51c0248adb80cc0f89e57437e15e6c60c7 Analysis: DARKNAVY — Gyro Finance CCIP Escrow Exploit"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x51c22898a9b9f519a10b0a0be89b9d51c0248adb80cc0f89e57437e15e6c60c7",
+    "0x45739a92c2d99f172a74d8028736a2fd1b507ac6fc134680cd1dccd3c572c600"
+  ],
+  "poc": null,
+  "sources": [
+    "defihacklabs",
+    "blocksec"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "arbiscan.io",
+      "url": "https://arbiscan.io/tx/0x51c22898a9b9f519a10b0a0be89b9d51c0248adb80cc0f89e57437e15e6c60c7"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "darknavy.org",
+      "url": "https://www.darknavy.org/web3/exploits/gyro-finance-ccip-escrow/"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x51c22898a9b9f519a10b0a0be89b9d51c0248adb80cc0f89e57437e15e6c60c7"
+    },
+    {
+      "source": "blocksec",
+      "label": "x.com",
+      "url": "https://x.com/DefimonAlerts/status/2018600445900390567"
+    }
+  ]
+}

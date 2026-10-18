@@ -1,0 +1,91 @@
+{
+  "id": "2025-09-08-nemo-yield-trading",
+  "name": "Nemo Yield Trading",
+  "date": "2025-09-08",
+  "year": 2025,
+  "amountUsd": 2590000,
+  "returnedUsd": null,
+  "chains": [
+    "Sui"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.06,
+    "stateActor": 0.02,
+    "hasRootCause": 0.09
+  },
+  "bridge": false,
+  "language": "Move",
+  "rootCause": "Nemo Protocol, a DeFi protocol on Sui, was attacked, resulting in a loss of approximately $2.4 million.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Nemo Protocol, a DeFi protocol on Sui, was attacked, resulting in a loss of approximately $2.4 million."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Nemo Yield Trading on Sui was exploited around 2025-09-07 to 2025-09-08, draining roughly $2.4 million to $2.59 million from the protocol’s Market pool. Project-reported postmortem details state that unaudited code introduced two exploitable flaws: a publicly callable flash-loan function and a query function that could unexpectedly mutate protocol state, allowing manipulation of internal pricing and minting logic before the attacker drained the SY/PT pool. According to Nemo’s reported postmortem, unaudited code deployed after the protocol’s earlier audit introduced two linked flaws. A flash-loan function that was intended for internal use remained publ…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "HMMicxQWn43rnNswi4gNHanUaeiWW5ijqM5bHLca67D9"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=HMMicxQWn43rnNswi4gNHanUaeiWW5ijqM5bHLca67D9"
+    },
+    {
+      "source": "blocksec",
+      "label": "olivine-hydrofoil-637.notion.site",
+      "url": "https://olivine-hydrofoil-637.notion.site/Nemo-Security-Incident-Cause-Process-and-Fund-Tracing-Report-V1-1-26a6b8723d8a80e29cb8cb48fe1390f2"
+    },
+    {
+      "source": "slowmist",
+      "label": "suiscan.xyz",
+      "url": "https://suiscan.xyz/mainnet/account/0x01229b3cc8469779d42d59cfc18141e4b13566b581787bf16eb5d61058c1c724/activity"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/nemo-yield-trading-2025-09-08"
+    },
+    {
+      "source": "revertiq",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/markets/2025/09/08/sui-based-yield-protocol-nemo-exploited-for-usd2-4m-in-usdc"
+    },
+    {
+      "source": "revertiq",
+      "label": "crypto.news",
+      "url": "https://crypto.news/sui-based-nemo-protocol-exploited-for-2-4m/"
+    }
+  ]
+}

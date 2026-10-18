@@ -1,0 +1,76 @@
+{
+  "id": "2023-11-17-token8633-9419",
+  "name": "Token8633_9419",
+  "date": "2023-11-17",
+  "year": 2023,
+  "amountUsd": 52000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Price Manipulation",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.83).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.83,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.84
+      },
+      {
+        "category": "logic-error",
+        "p": 0.1
+      },
+      {
+        "category": "market-manipulation",
+        "p": 0.03
+      }
+    ],
+    "flashLoan": 0.97,
+    "stateActor": 0.02,
+    "hasRootCause": 0.91
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Price Manipulation. Lost: ~$52K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Price Manipulation. Lost: ~$52K"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The attacker first borrows tokens through a flash loan and deposits them through autoAddLp() 130 times. After several swap operations, the attacker triggers autoSwapAndAddToMarketing() 900 times, swaps the tokens back, and returns the flash loan. Vulnerable code snippet: Attack tx: 0xf6ec3c22b718c3da17 | Phalcon Explorer Analysis: None"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xf6ec3c22b718c3da17746416992bac7b65a4ef42ccf5b43cf0716c82bffc2844"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-11/Token8633_9419_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-11/Token8633_9419_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0x11cd2168fc420ae1375626655ab8f355f0075bd6#code"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "explorer.phalcon.xyz",
+      "url": "https://explorer.phalcon.xyz/tx/bsc/0xf6ec3c22b718c3da17746416992bac7b65a4ef42ccf5b43cf0716c82bffc2844"
+    }
+  ]
+}

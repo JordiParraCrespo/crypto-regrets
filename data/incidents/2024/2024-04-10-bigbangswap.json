@@ -1,0 +1,83 @@
+{
+  "id": "2024-04-10-bigbangswap",
+  "name": "BigBangSwap",
+  "date": "2024-04-10",
+  "year": 2024,
+  "amountUsd": 5000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "precission loss",
+  "classificationNote": "Upstream label missing; classified by keyword rules from the root-cause text.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.64,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.66
+      },
+      {
+        "category": "access-control",
+        "p": 0.23
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.09
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.94
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "precission loss. Lost: $~5K $BUSD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "precission loss. Lost: $~5K $BUSD"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "In the unverified contract at 0x6ef6…32cf, the sellRewardToken function (selector 0xba531b6d) allows users to trigger liquidity removal, sell reward tokens, and extract value without sufficient access control or safeguards. This leads to unbounded token extraction, and potentially MEV or griefing vectors Vulnerable code snippet: Unverified(https://app.dedaub.com/binance/address/0x6ef66fd568903c072a9654e2c8db9520686932cf/decompiled) Attack tx: https://app.blocksec.com/explorer/tx/bsc/0x05aca126a6a6588e33f4236ab017f10ca87a47a7a2631393c48bf71b1e6a4055?line=50 Analysis: In the attack, the attacker make use of the logic flaw in the TransparentUpgradeableProxy(should be the staking pool). The stakingPool mistakenly regard BGG as the LP. Thus the malicious attacker could deliberately burn BGG and earn profits due to BUSD+BGG value is greater than BGG."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe0",
+    "0xb16b756e2d0d2d2ae73c74db67d418b3d9ba62fb2e0b251d3b71049b4553b10f",
+    "0x05aca126a6a6588e33f4236ab017f10ca87a47a7a2631393c48bf71b1e6a4055"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-04/BigBangSwap_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-04/BigBangSwap_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/ChainAegis/status/1778254222288621912"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.dedaub.com",
+      "url": "https://app.dedaub.com/binance/address/0x6ef66fd568903c072a9654e2c8db9520686932cf/decompiled"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/bsc/0x05aca126a6a6588e33f4236ab017f10ca87a47a7a2631393c48bf71b1e6a4055?line=50"
+    }
+  ]
+}

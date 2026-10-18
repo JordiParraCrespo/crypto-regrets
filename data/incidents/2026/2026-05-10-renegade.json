@@ -1,0 +1,109 @@
+{
+  "id": "2026-05-10-renegade",
+  "name": "Renegade",
+  "date": "2026-05-10",
+  "year": 2026,
+  "amountUsd": 209000,
+  "returnedUsd": 209000,
+  "chains": [
+    "Arbitrum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Uninitialized Proxy",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Uninitialized Proxy. Lost: ~$209K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Uninitialized Proxy. Lost: ~$209K"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Renegade's Dark Pool proxy (an Arbitrum Stylus contract) left its initialize function callable by anyone — it had never been locked after deployment. The attacker called initialize(...) with attacker-controlled parameters, setting itself as owner and injecting an attacker-controlled logic address into proxy storage. The attacker then called updateWallet(...), which delegatecalls the injected logic from the proxy's storage context. Because the proxy executed attacker code under its own context, the attacker's drainTokens routine swept every token the proxy held (26 different assets including 104,383 USDC, ~$209K total) to the attacker. Root cause: an unprotected/uninitialized initializer on an upgradeable proxy that lets an attacker set the implementation logic and execute it via delegatecall. Vulnerable code snippet: Attack Tx: https://arbiscan.io/tx/0x0e494685ace16d372066c5b4db959b58ebac6d88166c2d9d618e0e421dc0c77e Analysis: https://x.com/renegade_fi/status/2053531772634427599"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Renegade’s legacy V1 deployment on Arbitrum was exploited. The attacker took advantage of an unprotected initializer in the Dark Pool proxy contract (combined with a faulty migration from April 2025 that left the version counter out of sync), injected malicious logic, and used delegatecall to drain approximately $209,000 worth of 27 different ERC-20 tokens from the proxy contract’s storage. The exploiter, acting as a whitehat, negotiated on-chain with the team. Renegade offered a 90/10 split (return 90%, keep 10% as a whitehat bounty, no legal action). The whitehat returned ~$190,000 within 45 minutes. The team confirmed the issue was isolated to the V…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Renegade's legacy V1 Arbitrum dark pool was exploited on May 10, 2026, due to an unprotected initializer in its proxy contract. An attacker drained about $209,000 across 26 ERC-20 tokens by injecting and executing malicious logic. Following on-chain negotiation, over 90% of the stolen funds (about $190,000) were returned to Renegade, leaving a net loss of around $19,000. User funds held in the affected proxy were impacted, but the protocol committed to full compensation. A legacy proxy contract on Arbitrum was left with an unprotected initialize() function due to missing owner assignment and faulty migration. This allowed arbitrary external calls to in…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x0e494685ace16d372066c5b4db959b58ebac6d88166c2d9d618e0e421dc0c77e"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-05/Renegade_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-05/Renegade_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "arbiscan.io",
+      "url": "https://arbiscan.io/tx/0x0e494685ace16d372066c5b4db959b58ebac6d88166c2d9d618e0e421dc0c77e"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/renegade_fi/status/2053531772634427599"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/DefimonAlerts/status/2053538325969977801"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/renegade_fi/status/2053531772634427599?s=46"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/renegade-2026-05-10"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptoadventure.com",
+      "url": "https://cryptoadventure.com/renegade-recovers-over-90-of-funds-after-arbitrum-dark-pool-exploit/"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.autosec.dev",
+      "url": "https://blog.autosec.dev/security-events/Renegade-V1-Arbitrum-dark-pool-exploit/"
+    }
+  ]
+}

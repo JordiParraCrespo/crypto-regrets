@@ -1,0 +1,72 @@
+{
+  "id": "2026-08-05-strongblock",
+  "name": "StrongBlock",
+  "date": "2026-08-05",
+  "year": 2026,
+  "amountUsd": 72000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "governance",
+  "technique": "governance takeover of an abandoned Governor",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.99).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "governance",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "governance",
+        "p": 0.99
+      },
+      {
+        "category": "access-control",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "governance takeover of an abandoned Governor. Lost: 32,695.761681 STRONG + 383,447.167299 STRNGR (~$72K)",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "governance takeover of an abandoned Governor. Lost: 32,695.761681 STRONG + 383,447.167299 STRNGR (~$72K)"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Attacker exploited abandoned on-chain Governor contract. Holding majority STRONG vote tokens, attacker executed governance proposal calling setPendingAdmin(attacker), then upgraded proxy to malicious unverified implementation with arbitrary-call backdoor. Drained 32,695 STRONG + 383,447 STRNGR tokens ($72K). Attacker: 0xacbca357981870f30130b145762d671891ca810c. Victim: 0xBDDC7Ef8BaCeacE16DCE005102639a4bB86CB8C1. Attack Tx: https://etherscan.io/tx/0x92be5e374e260192f8fdb5ffdc33504c768ecad091cc7dbc37282e5ca8ea94c6 Source: https://twitter.com/DefimonAlerts/status/2085246380231004319"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x92be5e374e260192f8fdb5ffdc33504c768ecad091cc7dbc37282e5ca8ea94c6"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-08/StrongBlock_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-08/StrongBlock_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x92be5e374e260192f8fdb5ffdc33504c768ecad091cc7dbc37282e5ca8ea94c6"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/DefimonAlerts/status/2085246380231004319"
+    }
+  ]
+}

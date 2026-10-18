@@ -1,0 +1,95 @@
+{
+  "id": "2022-05-30-mirror",
+  "name": "Mirror",
+  "date": "2022-05-30",
+  "year": 2022,
+  "amountUsd": 2000000,
+  "returnedUsd": null,
+  "chains": [
+    "Terra"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.96,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.96
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.03
+      },
+      {
+        "category": "logic-error",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.06,
+    "stateActor": 0.02,
+    "hasRootCause": 0.22
+  },
+  "bridge": false,
+  "language": "Rust",
+  "rootCause": "Mirror Protocol, a synthetic asset protocol built on Terra, has been attacked again, was attacked again, with more than $2 million in capital losses. The capital pools of Bitcoin, Ethereum and Polkadot have been exhausted, and the remaining capital pools are linked to stocks. If the vulnerability is not fixed before the market opens at 4:00 EST (16:00 GMT), all of its token asset pools will be at risk.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Mirror Protocol, a synthetic asset protocol built on Terra, has been attacked again, was attacked again, with more than $2 million in capital losses. The capital pools of Bitcoin, Ethereum and Polkadot have been exhausted, and the remaining capital pools are linked to stocks. If the vulnerability is not fixed before the market opens at 4:00 EST (16:00 GMT), all of its token asset pools will be at risk."
+    },
+    {
+      "source": "SlowMist",
+      "text": "Terra research forum member FatMan tweeted that the Mirror Protocol, a synthetic asset protocol developed by Terraform Labs, has a longstanding vulnerability. Since October 2021, attackers have exploited this vulnerability for multiple attacks within a period of 7 months, and the highest single profit exceeded $4 million ($4.3 million using $10,000), none of which was recovered by Terraform Labs Or the Mirror team found out. By the time the bug was fixed, the attacker's total profit from exploiting the bug could have exceeded $30 million. FatMan said the bug was discovered and questioned by Mirror forum members 11 days ago and has since been fixed, but…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Mirror Protocol was exploited on Terra Classic on May 30, 2022, losing over $2 million due to oracle mispricing caused by outdated validator software after the Terra chain fork. Attackers borrowed large amounts with worthless collateral before pools were halted. Outdated oracle validator software on Terra Classic reported the price of LUNA ($10) instead of devalued LUNC ($0.0001), enabling attackers to borrow synthetic assets with minimal actual collateral."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "theblockcrypto.com",
+      "url": "https://www.theblockcrypto.com/post/149361/mirror-protocol-suffers-new-exploit-and-could-be-drained-in-hours"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/FatManTerra/status/1529978941062139906"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/mirror-2022-05-30"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptoadventure.com",
+      "url": "https://cryptoadventure.com/over-2-million-drained-from-terras-mirror-protocol-in-new-exploit/"
+    },
+    {
+      "source": "revertiq",
+      "label": "certik.com",
+      "url": "https://www.certik.com/blog/mirror-protocol-exploited-due-to-incorrect-oracle-price"
+    }
+  ]
+}

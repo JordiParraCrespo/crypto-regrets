@@ -1,0 +1,115 @@
+{
+  "id": "2025-07-28-superrare",
+  "name": "SuperRare",
+  "date": "2025-07-28",
+  "year": 2025,
+  "amountUsd": 730000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Merkle Proof Forgery",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Access Control. Lost: 730K USD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Access Control. Lost: 730K USD"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The SuperRare staking contract (an ERC1967 upgradeable proxy at 0x3f4D749675B3e48bCCd932033808a7079328Eb48) distributes RARE token rewards via a Merkle-tree airdrop where eligible amounts are proven against an on-chain merkleRoot. The updateMerkleRoot function that sets this root was left without any access control (no onlyOwner/onlyAdmin modifier), so any account could overwrite it. The attacker simply called updateMerkleRoot with a self-crafted root whose leaf encoded the attacker's address and the staking contract's entire RARE balance, then called claim with the matching proof, draining all ~11.9M RARE (~730K USD) held by the contract. Vulnerable code snippet: Attack Tx: https://app.blocksec.com/explorer/tx/eth/0xd813751bfb98a51912b8394b5856ae4515be6a9c6e5583e06b41d9255ba6e3c1 Analysis: SuperRare Hack Analysis - SolidityScan"
+    },
+    {
+      "source": "SlowMist",
+      "text": "According to monitoring by SlowMist's MistEye security system, the NFT platform SuperRare was exploited. The root cause of the vulnerability was an incorrect permission check in the updateMerkleRoot function, which allowed anyone to modify the Merkle Root and claim tokens."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On July 28, 2025, the SuperRare RareStakingV1 contract on Ethereum lost 11.9 million RARE tokens (~$730,000) due to a critical logic error in the updateMerkleRoot access control, allowing an attacker to set a fraudulent Merkle root and drain all staking rewards in one transaction. A misconfigured require statement in the access control for updateMerkleRoot let any address submit a new Merkle root, making staking claim proofs trivial for attackers."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xd813751bfb98a51912b8394b5856ae4515be6a9c6e5583e06b41d9255ba6e3c1"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-07/SuperRare_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-07/SuperRare_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/1949770231733530682"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/eth/0xd813751bfb98a51912b8394b5856ae4515be6a9c6e5583e06b41d9255ba6e3c1"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "blog.solidityscan.com",
+      "url": "https://blog.solidityscan.com/superrare-hack-analysis-488d544d89e0"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xd813751bfb98a51912b8394b5856ae4515be6a9c6e5583e06b41d9255ba6e3c1"
+    },
+    {
+      "source": "blocksec",
+      "label": "x.com",
+      "url": "https://x.com/Phalcon_xyz/status/1949780457786351991"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/superrare-2025-07-28"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.solidityscan.com",
+      "url": "https://blog.solidityscan.com/superrare-hack-analysis-488d544d89e0/"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/src/test/2025-07/SuperRare_exp.sol"
+    }
+  ]
+}

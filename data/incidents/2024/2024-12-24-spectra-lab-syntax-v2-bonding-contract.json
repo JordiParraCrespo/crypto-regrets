@@ -1,0 +1,77 @@
+{
+  "id": "2024-12-24-spectra-lab-syntax-v2-bonding-contract",
+  "name": "Spectra Lab Syntax V2 Bonding Contract",
+  "date": "2024-12-24",
+  "year": 2024,
+  "amountUsd": 250000,
+  "returnedUsd": null,
+  "chains": [
+    "Base"
+  ],
+  "targetType": null,
+  "category": "oracle-manipulation",
+  "technique": "Infinite Approval Vulnerability; Bonding Curve Manipulation",
+  "classificationNote": "Classified by keyword rules from the RevertIQ label and description.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.44,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.47000000000000003
+      },
+      {
+        "category": "arbitrary-call",
+        "p": 0.43
+      },
+      {
+        "category": "logic-error",
+        "p": 0.08
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.01,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "On December 1, 2024, Spectra Lab’s Syntax V2 bonding contract on Base was exploited for approximately $250,000. An infinite approval in AgentToken.sol allowed an attacker to drain liquidity by manipulating token balances, which led to the bonding curve mispricing and excessive SPEC token withdrawals. The AgentToken contract granted infinite approval to AgentBalances.sol during tax calculation. This oversight gave a contract unrestricted access to transfer tokens, which the attacker exploited by artificially manipulating balances and draining the bonding curve pool.",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "On December 1, 2024, Spectra Lab’s Syntax V2 bonding contract on Base was exploited for approximately $250,000. An infinite approval in AgentToken.sol allowed an attacker to drain liquidity by manipulating token balances, which led to the bonding curve mispricing and excessive SPEC token withdrawals. The AgentToken contract granted infinite approval to AgentBalances.sol during tax calculation. This oversight gave a contract unrestricted access to transfer tokens, which the attacker exploited by artificially manipulating balances and draining the bonding curve pool."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xa3535c70c633e34dbcae6827063c655d60176cc01cf4eb18494077789eb75d62"
+  ],
+  "poc": null,
+  "sources": [
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/decoding-spectra-lab-s-bonding-contract-250k-2024-12-24"
+    },
+    {
+      "source": "revertiq",
+      "label": "quillaudits.com",
+      "url": "https://www.quillaudits.com/blog/hack-analysis/spectral-bonding-contract-250k-exploit-analysis"
+    },
+    {
+      "source": "revertiq",
+      "label": "medium.com",
+      "url": "https://medium.com/coinmonks/decoding-spectra-labs-bonding-contract-250k-exploit-b88d249c3218"
+    },
+    {
+      "source": "revertiq",
+      "label": "cointime.ai",
+      "url": "https://www.cointime.ai/news/spectral-labs-identifies-syntax-vulnerability-79665"
+    }
+  ]
+}

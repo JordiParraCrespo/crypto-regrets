@@ -1,0 +1,94 @@
+{
+  "id": "2022-06-08-optimism",
+  "name": "Optimism",
+  "date": "2022-06-08",
+  "year": 2022,
+  "amountUsd": 20000000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "signature-crypto",
+  "technique": "Wintermute",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.89).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "signature-crypto",
+    "confidence": 0.89,
+    "top": [
+      {
+        "category": "signature-crypto",
+        "p": 0.9
+      },
+      {
+        "category": "bridge-crosschain",
+        "p": 0.08
+      },
+      {
+        "category": "access-control",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.88
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Wintermute. Lost: 20 million Optimism (OP) tokens returned 17 million of them",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Wintermute. Lost: 20 million Optimism (OP) tokens returned 17 million of them"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "contract does not use eip155 to prevent replay attacks Vulnerable code snippet: https://etherscan.io/address/0x76e2cfc1f5fa8f6a5b3fc4c8f4788f0116861f9b#code#L71 To create a contract address on Optimism that is the same as the one on Ethereum, we just need to make sure that the two parameters, sender’s address and the nonce, are the same as the ones used in generating the valid address on Ethereum."
+    },
+    {
+      "source": "SlowMist",
+      "text": "Optimism and Wintermute both released announcements, disclosing to the community a loss of 20 million OP tokens. At the time of the release of OP tokens, Optimism entrusted Wintermute to provide liquidity services for OP in the secondary market. As part of the agreement, Optimism will provide Wintermute with 20 million OP tokens. To receive the tokens, Wintermute gave Optimism a multi-signature address, to which Optimism transferred 20 million OPs after Optimism test sent two transactions and Wintermute confirmed it was correct. After Optimism transferred the coins, Wintermute found that they had no way to control these coins, because the multi-signatu…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-06/Optimism_exp.sol",
+  "sources": [
+    "defihacklabs",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-06/Optimism_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "inspexco.medium.com",
+      "url": "https://inspexco.medium.com/how-20-million-op-was-stolen-from-the-multisig-wallet-not-yet-owned-by-wintermute-3f6c75db740a"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "optimistic.etherscan.io",
+      "url": "https://optimistic.etherscan.io/tx/0x75a42f240d229518979199f56cd7c82e4fc1f1a20ad9a4864c635354b4a34261"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "optimistic.etherscan.io",
+      "url": "https://optimistic.etherscan.io/tx/0x00a3da68f0f6a69cb067f09c3f7e741a01636cbc27a84c603b468f65271d415b"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/address/0x76e2cfc1f5fa8f6a5b3fc4c8f4788f0116861f9b#code#L71"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/optimismPBC/status/1534631766576836608"
+    }
+  ]
+}

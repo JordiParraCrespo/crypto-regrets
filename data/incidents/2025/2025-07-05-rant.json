@@ -1,0 +1,109 @@
+{
+  "id": "2025-07-05-rant",
+  "name": "RANT",
+  "date": "2025-07-05",
+  "year": 2025,
+  "amountUsd": 204000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "Token",
+  "category": "accounting-math",
+  "technique": "Incorrect Fee Accounting",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.66,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.68
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.3
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.98,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Logic Flaw. Lost: ~ $204K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Logic Flaw. Lost: ~ $204K"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The attacker used a flash loan from a PancakeSwap V3 pool to obtain a large amount of WBNB, then used it to perform a swap on the RANT/WBNB Cake-LP pair and to interact with the RANT token contract. The RANT token contract (0xc321...2dd0) contained flawed internal logic tied to its liquidity pair: transferring RANT directly to the RANT contract address triggered a buy-back / reserve mechanism that mispriced the token, allowing the attacker to extract far more WBNB from the pool than the value deposited. By combining the flash loan, the LP swap, and a large direct transfer of RANT to its own contract (IERC20(RANT).transfer(RANT, ...)), the attacker drained the pool's WBNB, repaid the flash loan plus fee, and walked away with ~311.4 BNB. The root cause is faulty token-side transfer/burn logic that lets an attacker manipulate the pool reserves and the effective token price. Vulnerable code snippet: Attack Tx: https://bscscan.com/tx/0x2d9c1a00cf3d2fda268d0d11794ad2956774b156355e16441d6edb9a448e5a99 Analysis: Phalcon_xyz"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "RANT was exploited on BNB Chain on July 5, 2025, due to a flaw in its burn logic. The vulnerable contract let attackers manipulate the burn mechanism, allowing them to drain $204,000 by distorting the token's liquidity pool and price. The RANT contract's burn calculation used the transferred user amount instead of the liquidity pool's balance, allowing attackers to conduct small transfers that led to disproportionate token burns from the pool, inflating token price and enabling value extraction."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x2d9c1a00cf3d2fda268d0d11794ad2956774b156355e16441d6edb9a448e5a99",
+    "0xc13be0a13ce6a51a575512d1fb6ee0ff87d6987965e728b4c31e2c3a6009fb15"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-07/RANTToken_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-07/RANTToken_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x2d9c1a00cf3d2fda268d0d11794ad2956774b156355e16441d6edb9a448e5a99"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/Phalcon_xyz/status/1941788315549946225"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x2d9c1a00cf3d2fda268d0d11794ad2956774b156355e16441d6edb9a448e5a99"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/rant-2025-07-05"
+    },
+    {
+      "source": "revertiq",
+      "label": "nominis.io",
+      "url": "https://www.nominis.io/insights/july-2025-crypto-attacks-monthly-report"
+    },
+    {
+      "source": "revertiq",
+      "label": "quadrigainitiative.com",
+      "url": "https://quadrigainitiative.com/casestudy/ranttokenflawedtokenburnlogic.php"
+    }
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "id": "2026-01-05-usdgambit-and-tlp",
+  "name": "USDGambit and TLP",
+  "date": "2026-01-05",
+  "year": 2026,
+  "amountUsd": 1500000,
+  "returnedUsd": null,
+  "chains": [
+    "Arbitrum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "key-compromise",
+  "technique": "Deployer Key Compromised",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "key-compromise",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "key-compromise",
+        "p": 0.99
+      },
+      {
+        "category": "access-control",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Multiple suspicious transactions involving proxy contracts were detected on Arbitrum (ARB), with estimated losses of approximately $1.5 million. Preliminary analysis indicates that the sole deployer of the USDGambit and TLP projects may have lost access to their account. Subsequently, the attacker deployed a new contract and updated the ProxyAdmin permissions to seize control. The stolen funds were then bridged to the Ethereum network and deposited into Tornado Cash.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Multiple suspicious transactions involving proxy contracts were detected on Arbitrum (ARB), with estimated losses of approximately $1.5 million. Preliminary analysis indicates that the sole deployer of the USDGambit and TLP projects may have lost access to their account. Subsequently, the attacker deployed a new contract and updated the ProxyAdmin permissions to seize control. The stolen funds were then bridged to the Ethereum network and deposited into Tornado Cash."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 5 January 2026, USDGambit and TLP on Arbitrum One lost approximately $1.5 million after an attacker compromised the deployer account, gained ProxyAdmin privileges, and drained funds. No chain transaction or code evidence is available. The exploit occurred because the deployer account controlling the ProxyAdmin for USDGambit and TLP was compromised. The attacker used this privileged access to upgrade permissions, deploy malicious contract logic, and withdraw funds. All evidence links to deployer key loss and privileged admin escalation; no underlying contract logic bug is reported."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/CyversAlerts/status/2008100710483685488?s=20"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/usdgambit-and-tlp-2026-01-05"
+    },
+    {
+      "source": "revertiq",
+      "label": "tradersunion.com",
+      "url": "https://tradersunion.com/news/cryptocurrency-news/show/1208865-usdgambit-and-tlp-hit"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/usdgambit-and-tlp-hack-2026"
+    }
+  ]
+}

@@ -1,0 +1,122 @@
+{
+  "id": "2023-10-31-unibot",
+  "name": "Unibot",
+  "date": "2023-10-31",
+  "year": 2023,
+  "amountUsd": 640000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "arbitrary-call",
+  "technique": "Token Approval Abuse",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "arbitrary-call",
+    "confidence": 0.97,
+    "top": [
+      {
+        "category": "arbitrary-call",
+        "p": 0.97
+      },
+      {
+        "category": "input-validation",
+        "p": 0.02
+      },
+      {
+        "category": "access-control",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Arbitrary External Call. Lost: ~$83,944 USD$",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Arbitrary External Call. Lost: ~$83,944 USD$"
+    },
+    {
+      "source": "REKT",
+      "text": "Unibot's brand new router was exploited to drain at least $640k from users who had approved the contract. Sacrificing security for convenience can lead to costly lessons on trust. Will we ever learn?"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The function 0xb2bd16ab in the UniBot does not properly check input parameters. Thus anyone can use this function to arbitrarily call the external token contract and execute the transferFrom() method. Thus anyone who approves the UniBot contract may suffer from the attack. Vulnerable code snippet: (from odaily.news) Attack tx: https://etherscan.io/tx/0xcbe521aea28911fe9983030748028e12541e347b8b6b974d026fa5065c22f0cf Analysis: https://twitter.com/PeckShieldAlert/status/1719251390319796477"
+    },
+    {
+      "source": "SlowMist",
+      "text": "According to SlowMist security alert, Unibot has been exploited, and due to the lack of necessary parameter checks, the exploiter can transfer tokens for which users have approved the Unibot contract. Please revoke approval of 0x126c9FbaB3A2FCA24eDfd17322E71a5e36E91865."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Unibot’s new router contract was exploited on Ethereum Mainnet on October 31, 2023, exposing user wallets via inadequate transfer-path checks. The attacker drained approximately $640,000 in tokens from 364 victim wallets and laundered proceeds through Tornado.Cash. Unibot deployed a new router and reimbursed affected users. The newly deployed Unibot router contract allowed arbitrary external calls via a function lacking proper validation. Attackers transferred funds from any wallet with token approval for the router, without restricting the source or caller."
+    }
+  ],
+  "audit": "Unaudited",
+  "txHashes": [
+    "0xcbe521aea28911fe9983030748028e12541e347b8b6b974d026fa5065c22f0cf"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-10/UniBot_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-10/UniBot_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/PeckShieldAlert/status/1719251390319796477"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Unibot - REKT",
+      "url": "https://rekt.news/unibot-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xcbe521aea28911fe9983030748028e12541e347b8b6b974d026fa5065c22f0cf"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/SlowMist_Team/status/1719242913769803788"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/unibot-2023-10-31"
+    },
+    {
+      "source": "revertiq",
+      "label": "odaily.news",
+      "url": "https://www.odaily.news/en/post/5190691"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.solidityscan.com",
+      "url": "https://blog.solidityscan.com/unibot-hack-analysis-b8a57a78796a/"
+    }
+  ]
+}

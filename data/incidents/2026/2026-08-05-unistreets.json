@@ -1,0 +1,95 @@
+{
+  "id": "2026-08-05-unistreets",
+  "name": "Unistreets",
+  "date": "2026-08-05",
+  "year": 2026,
+  "amountUsd": 17750,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "arbitrary-call",
+  "technique": "Arbitrary External Call",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "arbitrary-call",
+    "confidence": 0.98,
+    "top": [
+      {
+        "category": "arbitrary-call",
+        "p": 0.98
+      },
+      {
+        "category": "input-validation",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.92
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "arbitrary call injection via unvalidated launch forwarding. Lost: ~17,743.91 USDC + ~0.0072 WETH (~$17.75K)",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "arbitrary call injection via unvalidated launch forwarding. Lost: ~17,743.91 USDC + ~0.0072 WETH (~$17.75K)"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Unistreets LaunchpadFactoryAuto contract on Ethereum was exploited via arbitrary calldata injection. The factory custodied all launched tokens’ Uniswap V4 LP NFTs; the attacker injected setApprovalForAll approval and burned multiple LP positions, draining liquidity for a loss of approximately $17,750."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Unistreets' LaunchpadFactoryAuto contract was exploited on Ethereum on 5 August 2026, resulting in the loss of 17,743 USDC, a small amount of WETH, and launched memecoin LP assets. Attackers abused arbitrary calldata injection to gain operator rights over all factory-held Uniswap v4 LP positions and drain liquidity in two coordinated transactions. The LaunchpadFactoryAuto contract allowed user-supplied calldata blobs to be forwarded unchecked to PositionManager.multicall(), enabling attackers to inject setApprovalForAll calls that gave exploit contracts operator authority over every factory-owned liquidity position. This let them burn and drain these positions directly."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x9583e95d5c88c7966e269197f4b09022f26b7a27ad2c13660dda6774e3136d14",
+    "0x962eb313a1290f9e1de336782d2e3fd0c6dc7b7816834bbef50278d28dbefb0b"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-08/UnistreetLaunchpad_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-08/UnistreetLaunchpad_exp.sol"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/unistreetapp/status/2085225140690751793"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/unistreets-2026-08-05"
+    },
+    {
+      "source": "revertiq",
+      "label": "crypto.training",
+      "url": "https://crypto.training/hacks/2026-08-unistreetslaunchpadfactory/"
+    },
+    {
+      "source": "revertiq",
+      "label": "publicaml.org",
+      "url": "https://publicaml.org/news/2026-08-06-unistreets/"
+    }
+  ]
+}

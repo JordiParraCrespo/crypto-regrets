@@ -1,0 +1,86 @@
+{
+  "id": "2024-10-26-compoundfork",
+  "name": "CompoundFork",
+  "date": "2024-10-26",
+  "year": 2024,
+  "amountUsd": 1000000,
+  "returnedUsd": null,
+  "chains": [
+    "Base"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Flashloan attack",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.70).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.7,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.72
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.27
+      },
+      {
+        "category": "input-validation",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.33,
+    "stateActor": 0.02,
+    "hasRootCause": 0.94
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Flashloan attack. Lost: $1M",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Flashloan attack. Lost: $1M"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The core issue lay in the mismanagement of reward calculations, particularly with the tokenTotalSupplyByPeriod and veWithdrawnTokenAmountByPeriod values. By exploiting the ability to use different token IDs, the hacker managed to drain rewards across multiple pools. Vulnerable code snippet: Attack tx: https://basescan.org/tx/0x6ab5b7b51f780e8c6c5ddaf65e9badb868811a95c1fd64e86435283074d3149e Analysis: https://blog.verichains.io/p/ramses-exchange-hack-analysis"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x6ab5b7b51f780e8c6c5ddaf65e9badb868811a95c1fd64e86435283074d3149e"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-10/CompoundFork_exploit.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-10/CompoundFork_exploit.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/Phalcon_xyz/status/1849636437349527725"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/base/0x6ab5b7b51f780e8c6c5ddaf65e9badb868811a95c1fd64e86435283074d3149e"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "basescan.org",
+      "url": "https://basescan.org/tx/0x6ab5b7b51f780e8c6c5ddaf65e9badb868811a95c1fd64e86435283074d3149e"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "blog.verichains.io",
+      "url": "https://blog.verichains.io/p/ramses-exchange-hack-analysis"
+    }
+  ]
+}

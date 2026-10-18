@@ -1,0 +1,94 @@
+{
+  "id": "2025-02-22-unverified-35bc",
+  "name": "Unverified_35bc",
+  "date": "2025-02-22",
+  "year": 2025,
+  "amountUsd": 6700,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "reentrancy",
+  "technique": "Reentrancy",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "reentrancy",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "reentrancy",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "Reentrancy. Lost: : $6.7K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Reentrancy. Lost: : $6.7K"
+    },
+    {
+      "source": "DeFiHackLabs",
+      "text": "access-control. Lost: ~15.2k"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On February 22, 2025, an unverified contract (Unverified_35bc) on BNB Chain was exploited via a reentrancy vulnerability in its slot release/unlock logic. The attacker drained funds through repeated reentrant calls, resulting in an estimated loss of $6,700, as supported by aggregator and reproduction analysis. The slot-related function failed to protect against reentrant calls, allowing funds to be withdrawn multiple times before internal state was properly updated. No verified historical contract source exists to confirm the exact function name or code."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xd7a61b07ca4dc5966d00b3cc99b03c6ab2cee688fa13b30bea08f5142023777d"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-02/unverified_35bc_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-02/unverified_35bc_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/TenArmorAlert/status/1893333680417890648"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-02/unverified_d4f1_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/TenArmorAlert/status/1890776122918309932"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/unverified-35bc-2025-02-22"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/unverified-35bc-hack-2025"
+    }
+  ]
+}

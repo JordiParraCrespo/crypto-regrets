@@ -1,0 +1,65 @@
+{
+  "id": "2026-04-28-rwavault",
+  "name": "RWAVault",
+  "date": "2026-04-28",
+  "year": 2026,
+  "amountUsd": 398655.47,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Missing ERC4626 allowance check",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.79). Replaced keyword guess \"arbitrary-call\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.79,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.8
+      },
+      {
+        "category": "logic-error",
+        "p": 0.12
+      },
+      {
+        "category": "arbitrary-call",
+        "p": 0.05
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.81
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Missing ERC4626 allowance check. Lost: 398,655.47 USDC",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Missing ERC4626 allowance check. Lost: 398,655.47 USDC"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-04/RWAVault_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-04/RWAVault_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "t.me",
+      "url": "https://t.me/defimon_alerts/2958"
+    }
+  ]
+}

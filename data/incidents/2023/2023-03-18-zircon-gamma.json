@@ -1,0 +1,73 @@
+{
+  "id": "2023-03-18-zircon-gamma",
+  "name": "Zircon Gamma",
+  "date": "2023-03-18",
+  "year": 2023,
+  "amountUsd": 350000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC",
+    "Moonriver"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Incorrect Share Accounting",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.98,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.98
+      },
+      {
+        "category": "logic-error",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "Zircon Gamma, an AMM protocol operating on BNB Chain and Moonriver, was exploited on March 18, 2023 due to a vulnerability in its modified Uniswap V2 core. The incident drained approximately $350,000 from user funds by manipulating share accounting via the burnOneSide function. A share accounting vulnerability in the burnOneSide function allowed an attacker to drain all pools on both chains. The function failed to correctly account for single-sided burns, enabling the attacker to manipulate shares and withdraw excess funds.",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "Zircon Gamma, an AMM protocol operating on BNB Chain and Moonriver, was exploited on March 18, 2023 due to a vulnerability in its modified Uniswap V2 core. The incident drained approximately $350,000 from user funds by manipulating share accounting via the burnOneSide function. A share accounting vulnerability in the burnOneSide function allowed an attacker to drain all pools on both chains. The function failed to correctly account for single-sided burns, enabling the attacker to manipulate shares and withdraw excess funds."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/zircon-gamma-2023-03-18"
+    },
+    {
+      "source": "revertiq",
+      "label": "defillama.com",
+      "url": "https://defillama.com/protocol/zircon-gamma"
+    },
+    {
+      "source": "revertiq",
+      "label": "monitoringroom.com",
+      "url": "https://monitoringroom.com/situation/crypto-hack/zircon-gamma"
+    }
+  ]
+}

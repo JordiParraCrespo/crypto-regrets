@@ -1,0 +1,90 @@
+{
+  "id": "2024-11-17-mft",
+  "name": "MFT",
+  "date": "2024-11-17",
+  "year": 2024,
+  "amountUsd": 33700,
+  "returnedUsd": null,
+  "chains": [
+    "BNB Chain"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Logic Error",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.98,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.98
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Logic Flaw. Lost: 33.7k USD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Logic Flaw. Lost: 33.7k USD"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "MFT on BNB Chain lost about $33.7k on 2024-11-17 after flawed sell-path transfer logic burned tokens from the liquidity pair and let the attacker drain value through a helper contract. The token's transfer() logic burned balance from the liquidity pair when the sell path was triggered, which let the attacker shrink the pair's reserves and drain value after a sequence of transfers and swaps."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xe24ee2af7ceee6d6fad1cacda26004adfe0f44d397a17d2aca56c9a01d759142",
+    "0xeff6335a5918bcc5d03b747c24e6eacc9f76805167aa9f8ba6faf27fbf70b4c7"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-11/MFT_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-11/MFT_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/TenArmorAlert/status/1858351609371406617"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/mft-2024-11-17"
+    },
+    {
+      "source": "revertiq",
+      "label": "api.llama.fi",
+      "url": "https://api.llama.fi/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "quadrigainitiative.com",
+      "url": "https://www.quadrigainitiative.com/casestudy/mfttokencontractflawedtransferlogic.php"
+    }
+  ]
+}

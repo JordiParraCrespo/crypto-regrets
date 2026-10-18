@@ -1,0 +1,94 @@
+{
+  "id": "2026-07-25-projekt",
+  "name": "Projekt",
+  "date": "2026-07-25",
+  "year": 2026,
+  "amountUsd": 560000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "input-validation",
+  "technique": "Missing Input Validation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "input-validation",
+    "confidence": 0.82,
+    "top": [
+      {
+        "category": "input-validation",
+        "p": 0.83
+      },
+      {
+        "category": "logic-error",
+        "p": 0.17
+      }
+    ],
+    "flashLoan": 0.99,
+    "stateActor": 0.01,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "A permissionless 'buy-to-earn' reward vault (0x574f...42cb) was exploited via a flash loan attack. The attacker flash-loaned ~14K WETH from Morpho, used it to manipulate token balances across multiple Uniswap V2 memecoin pairs (Kirby Inu, ROTTSCHILD, etc.), and registered huge fake 'purchase' allocations via the unverified trackPurchase() function. The function read the buyer's token balance delta without verifying actual ETH was spent, allowing the attacker to drain ~301.7 ETH (~$560K) from the vault's reward pool via massWithdraw(). The flash loan was repaid in the same transaction. Attack Tx: https://etherscan.io/tx/0x90f40d3c3b60370f7287d51d972ef54596c46e98f21af91b03a4e84c5e410f64 Source: https://twitter.com/DefimonAlerts/status/2081781283584106959",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "A permissionless 'buy-to-earn' reward vault (0x574f...42cb) was exploited via a flash loan attack. The attacker flash-loaned ~14K WETH from Morpho, used it to manipulate token balances across multiple Uniswap V2 memecoin pairs (Kirby Inu, ROTTSCHILD, etc.), and registered huge fake 'purchase' allocations via the unverified trackPurchase() function. The function read the buyer's token balance delta without verifying actual ETH was spent, allowing the attacker to drain ~301.7 ETH (~$560K) from the vault's reward pool via massWithdraw(). The flash loan was repaid in the same transaction. Attack Tx: https://etherscan.io/tx/0x90f40d3c3b60370f7287d51d972ef54596c46e98f21af91b03a4e84c5e410f64 Source: https://twitter.com/DefimonAlerts/status/2081781283584106959"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The Projekt (GREEN/GOLD) reward vault on Ethereum was exploited. The attacker flash-loaned ~14K WETH from Morpho, pushed it into multiple Uniswap V2 memecoin pairs and used skim() to create fake “purchase” records. Exploiting the permissionless trackPurchase function (which only reads token balance deltas to size rewards without verifying actual ETH spent), they inflated reward allocations and drained ~301.7 ETH (~$560K) from the vault’s reward pool via massWithdraw."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "The Projekt GREEN/GOLD reward vault on Ethereum Mainnet was exploited on July 25, 2026, for approximately $560,000 (301.7 ETH). The root cause was insufficient input validation in the rewards purchase tracking logic, allowing an attacker to inflate vault balances using flash liquidity and Uniswap operations. Missing input validation in the reward allocation logic allowed balance inflations via flash liquidity and Uniswap V2 operations, leading to unauthorized reward withdrawals."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x90f40d3c3b60370f7287d51d972ef54596c46e98f21af91b03a4e84c5e410f64"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x90f40d3c3b60370f7287d51d972ef54596c46e98f21af91b03a4e84c5e410f64"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/DefimonAlerts/status/2081781283584106959"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/DefimonAlerts/status/2081781283584106959"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/projekt-2026-07-25"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/projekt-green-gold-hack-2026"
+    }
+  ]
+}

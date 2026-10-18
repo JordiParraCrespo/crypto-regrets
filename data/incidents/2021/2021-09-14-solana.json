@@ -1,0 +1,55 @@
+{
+  "id": "2021-09-14-solana",
+  "name": "Solana",
+  "date": "2021-09-14",
+  "year": 2021,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [],
+  "targetType": null,
+  "category": "client-bug",
+  "technique": "Transaction flood exhausts validator memory",
+  "classificationNote": "Curated: reclassified from \"logic-error\" based on the published post-mortem.",
+  "classifiedBy": "curated",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "client-bug",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "client-bug",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.94
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "Bots spammed ~400k TPS of transactions at the Grape Protocol IDO. Validators exhausted memory, forked and failed to reach consensus; the network halted ~17 hours and required a coordinated restart. Led to QUIC, stake-weighted QoS and fee markets.",
+  "descriptions": [
+    {
+      "source": "Curated post-mortem",
+      "text": "Bots spammed ~400k TPS of transactions at the Grape Protocol IDO. Validators exhausted memory, forked and failed to reach consensus; the network halted ~17 hours and required a coordinated restart. Led to QUIC, stake-weighted QoS and fee markets."
+    },
+    {
+      "source": "SlowMist",
+      "text": "The beta version of the mainnet of the public chain Solana has been unstable since 19:52 Beijing time last night, and it has been 12 hours since the Solana chain application has not been able to operate normally. According to information released by Solana Status, the Solana validator community chose to restart the network cooperatively, and the snapshot height is slot 96542804. Solana Status recommends that the verification node be updated to Mainnet-Beta 1.6.24 version. On September 21, Solana officially released a preliminary overview of the network outage on September 14. It is reported that on September 14, Solana’s network was offline for 17 hours.…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "slowmist",
+    "curated"
+  ],
+  "references": [
+    {
+      "source": "slowmist",
+      "label": "solana.com",
+      "url": "https://solana.com/news/9-14-network-outage-initial-overview"
+    }
+  ]
+}

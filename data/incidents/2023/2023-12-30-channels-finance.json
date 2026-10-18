@@ -1,0 +1,138 @@
+{
+  "id": "2023-12-30-channels-finance",
+  "name": "Channels Finance",
+  "date": "2023-12-30",
+  "year": 2023,
+  "amountUsd": 320000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Infinite Mint",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.59,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.61
+      },
+      {
+        "category": "logic-error",
+        "p": 0.24
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.14
+      }
+    ],
+    "flashLoan": 0.07,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Price Manipulation. Lost: ~$4.4K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Price Manipulation. Lost: ~$4.4K"
+    },
+    {
+      "source": "DeFiHackLabs",
+      "text": "CompoundV2 Inflation Attack. Lost: ~320K"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The root cause is the ExchangeRate manipulation. Once the exchangeRate been controlled, hacker could borrow more than their collateral. The contract uses a old Compund V2 protocols which has a known vulenrability. You can find more info from this link: Vulnerable code snippet: https://bscscan.com/address/0x93790c641d029d1cbd779d87b88f67704b6a8f4c Attack tx: // First Attack Tx : https://app.blocksec.com/explorer/tx/bsc/0x711cc4ceb9701d317fe9aa47187425e16dae7d5a0113f1430e891018262f8fb5 // Second Attack Tx : https://app.blocksec.com/explorer/tx/bsc/0x93372ce9c86a25f1477b0c3068e745b5b829d5b58025bb1ab234230d3473b776 Analysis: Root cause: Vulnerable code snippet: Attack tx: Analysis: https://x.com/AnciliaInc/status/1741353303542501455 REF https://www.comp.xyz/t/hundred-finance-exploit-and-compound-v2/4266"
+    },
+    {
+      "source": "SlowMist",
+      "text": "ChannelsFinance on BSC was attacked, resulting in losses of over $320K. The contract uses an old Compound v2 protocol which has a known vulnerability."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Channels Finance was exploited on BNB Chain on December 30, 2023, through a share accounting flaw enabling 'Infinite Mint.' Attackers manipulated cToken shares to borrow unbacked assets, draining ~$320,000. The exploit abused improper supply checks; no official remediation or recovery is confirmed. The share accounting in Channels Finance's lending markets allowed attackers to mint shares without matching asset deposits ('Infinite Mint'), inflating borrowing power and draining pool assets. The root flaw was the lack of strict mapping between minted shares and collateral, compounded by rounding errors in the redemption function."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x711cc4ceb9701d317fe9aa47187425e16dae7d5a0113f1430e891018262f8fb5",
+    "0x93372ce9c86a25f1477b0c3068e745b5b829d5b58025bb1ab234230d3473b776",
+    "0x0237855c63eb85c5f437fba5267cc869a08c58a49501e3e5ebec9990bdd97565"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-12/Channels_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-12/Channels_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/bsc/0xcf729a9392b0960cd315d7d49f53640f000ca6b8a0bd91866af5821fdf36afc5"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-12/ChannelsFinance_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/AnciliaInc/status/1741353303542501455"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0x93790c641d029d1cbd779d87b88f67704b6a8f4c"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/bsc/0x711cc4ceb9701d317fe9aa47187425e16dae7d5a0113f1430e891018262f8fb5"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/bsc/0x93372ce9c86a25f1477b0c3068e745b5b829d5b58025bb1ab234230d3473b776"
+    },
+    {
+      "source": "slowmist",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x93372ce9c86a25f1477b0c3068e745b5b829d5b58025bb1ab234230d3473b776"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/channels-finance-2023-12-30"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/past/2023/README.md#L452"
+    },
+    {
+      "source": "revertiq",
+      "label": "raw.githubusercontent.com",
+      "url": "https://raw.githubusercontent.com/SunWeb3Sec/DeFiHackLabs/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/src/test/2023-12/ChannelsFinance_exp.sol"
+    }
+  ]
+}

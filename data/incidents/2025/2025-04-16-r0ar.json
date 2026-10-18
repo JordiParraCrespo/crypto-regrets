@@ -1,0 +1,94 @@
+{
+  "id": "2025-04-16-r0ar",
+  "name": "R0AR",
+  "date": "2025-04-16",
+  "year": 2025,
+  "amountUsd": 780000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "rugpull",
+    "confidence": 0.55,
+    "top": [
+      {
+        "category": "rugpull",
+        "p": 0.58
+      },
+      {
+        "category": "access-control",
+        "p": 0.41
+      },
+      {
+        "category": "logic-error",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "R0AR has been exploited, with total losses amounting to approximately $780K. According to analysis by the SlowMist security team, the root cause of the exploit was the presence of a backdoor in the contract. During deployment, the R0ARStaking contract altered the balance (user.amount) of a specified address by directly modifying storage slots. Subsequently, the attacker extracted all funds from the contract through an emergency withdrawal function. R0AR stated in a tweet: “At this stage, we do not believe this to be an external exploit. One nefarious developer, external to the R0AR core team, is seemingly behind the drain. They have been removed from the project with all accesses revoked.”",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "R0AR has been exploited, with total losses amounting to approximately $780K. According to analysis by the SlowMist security team, the root cause of the exploit was the presence of a backdoor in the contract. During deployment, the R0ARStaking contract altered the balance (user.amount) of a specified address by directly modifying storage slots. Subsequently, the attacker extracted all funds from the contract through an emergency withdrawal function. R0AR stated in a tweet: “At this stage, we do not believe this to be an external exploit. One nefarious developer, external to the R0AR core team, is seemingly behind the drain. They have been removed from the project with all accesses revoked.”"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "R0AR’s Ethereum staking contract was exploited on 2025-04-16 after a malicious balance appears to have been embedded during deployment. An attacker-controlled address withdrew approximately 100 million $1R0R tokens through emergencyWithdraw() and rapidly liquidated at least 73 million tokens for ETH across decentralized exchange routes. Available reporting and linked on-chain activity indicate that the staking contract contained a deployment-time backdoor that pre-populated a large staking balance for an attacker-controlled address. The contract’s withdrawal logic trusted the stored staking balance and allowed emergencyWithdraw() to release tokens with…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xf89715ae8b17443eb76d45a6e6640f251cc109057360648848f2c782d8c1a70c",
+    "0xcd8fb45932cfda6ec572f308f0da664af9a8d1a28c0e46eee6020824c80a8f01"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/1912417097269014825"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/r0ar-token-2025-04-16"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/de-fi-rekt-report-april-2025-5-9-billion-lost-across-10-incidents-2-8-million-recovered"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainwire.org",
+      "url": "https://chainwire.org/2025/04/21/1r0r-contract-exploited-by-external-developer-r0ar-responds-with-buyback-program/"
+    },
+    {
+      "source": "revertiq",
+      "label": "blockchainreporter.net",
+      "url": "https://blockchainreporter.net/rogue-developer-steals-785k-in-roar-staking-contract-exploit/"
+    }
+  ]
+}

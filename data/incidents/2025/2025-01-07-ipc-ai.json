@@ -1,0 +1,71 @@
+{
+  "id": "2025-01-07-ipc-ai",
+  "name": "IPC AI",
+  "date": "2025-01-07",
+  "year": 2025,
+  "amountUsd": 590000,
+  "returnedUsd": null,
+  "chains": [
+    "Binance"
+  ],
+  "targetType": "Token",
+  "category": "logic-error",
+  "technique": "Swap Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.17,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "On 7 January 2025, the IPC AI token contract on BNB Chain was exploited for over $590,000 due to a flaw in its transfer and swap logic. The attacker bypassed flashloan protections and the token’s deflationary burn through direct low-level swaps, allowing repeated draining of the liquidity pool without being flagged by protective mechanisms. A faulty interaction between the IPC token's transfer logic and swap detection in its associated liquidity pool allowed direct swaps to bypass buy/sell classification, flashloan protection, and the token burn mechanism, enabling an attacker to repeatedly drain the pool.",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "On 7 January 2025, the IPC AI token contract on BNB Chain was exploited for over $590,000 due to a flaw in its transfer and swap logic. The attacker bypassed flashloan protections and the token’s deflationary burn through direct low-level swaps, allowing repeated draining of the liquidity pool without being flagged by protective mechanisms. A faulty interaction between the IPC token's transfer logic and swap detection in its associated liquidity pool allowed direct swaps to bypass buy/sell classification, flashloan protection, and the token burn mechanism, enabling an attacker to repeatedly drain the pool."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x5894b4e70f6323951e8b81c63f5440e4855777e267f1b0bc7f9e1b7353d6a129",
+    "0x5ef1edb9749af6cec511741225e6d47103e0b647d1e41e08649caaff66942a91"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/ipc-ai-2025-01-07"
+    },
+    {
+      "source": "revertiq",
+      "label": "quadrigainitiative.com",
+      "url": "https://quadrigainitiative.com/casestudy/ipctokentransfertimeswapcontractvulnerability.php"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/ipc-ai-hack-2025"
+    }
+  ]
+}

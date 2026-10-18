@@ -1,0 +1,108 @@
+{
+  "id": "2026-06-30-edel",
+  "name": "Edel",
+  "date": "2026-06-30",
+  "year": 2026,
+  "amountUsd": 403000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.97,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.97
+      },
+      {
+        "category": "market-manipulation",
+        "p": 0.03
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Price Oracle Manipulation. Lost: 204,215.57 USDC",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Price Oracle Manipulation. Lost: 204,215.57 USDC"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Attacker manipulated the wGOOGLx collateral price, which is derived from its underlying GOOGLx balance, allowing them to borrow against the inflated collateral and drain approximately $353K. Stolen assets were swapped for 224 ETH and deposited into Tornado Cash. Source: https://twitter.com/CyversAlerts/status/2072259516435939780"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Edel Finance lending protocol was exploited via wGOOGLx wrapped token exchange rate manipulation. The attacker used flash loans in repeated deposit/borrow loops to inflate wGOOGLx collateral value ~78x, then borrowed assets, creating ~$403K bad debt."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Edel Finance suffered a $403,000 loss on Ethereum after an attacker manipulated the wGOOGLx wrapper exchange rate, inflating collateral value by about 78× using flash loans. The lending protocol was left with bad debt, and funds were moved to Tornado Cash. Edel Finance relied on an internal wrapper exchange rate (wGOOGLx/GOOGLx) that was manipulable by flash-loan cycles. The protocol did not constrain rapid exchange-rate changes or validate the backing behind collateral valuation. Chainlink price feeds remained correct, but the ERC-4626 vault's assets-per-share ratio was vulnerable."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xe2320086b2815d21b0927839bd0e306466c29a68d38d5361e99dd21ec5472612"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-07/edel-xstock_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-07/edel-xstock_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/TenArmorAlert/status/2072130807356129726"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/CyversAlerts/status/2072259516435939780"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/edeldotfinance/status/2072154468058022033"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/edel-2026-06-30"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/edel-finance-hack-2026"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptotimes.io",
+      "url": "https://www.cryptotimes.io/2026/07/01/edel-finance-hacked-403k-stolen-as-attacker-moves-funds-to-tornado-cash/"
+    }
+  ]
+}

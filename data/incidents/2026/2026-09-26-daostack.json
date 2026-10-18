@@ -1,0 +1,58 @@
+{
+  "id": "2026-09-26-daostack",
+  "name": "DAOstack",
+  "date": "2026-09-26",
+  "year": 2026,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [],
+  "targetType": "DeFi Protocol",
+  "category": "governance",
+  "technique": null,
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.76). Replaced keyword guess \"access-control\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "governance",
+    "confidence": 0.76,
+    "top": [
+      {
+        "category": "governance",
+        "p": 0.77
+      },
+      {
+        "category": "access-control",
+        "p": 0.22
+      },
+      {
+        "category": "logic-error",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "permissionless newOrganization lets an attacker hijack an existing Reputation contract and drain the Avatar. Lost: 4.025 ETH (full Genesis Alpha treasury); attacker minted 20,000 REP against the victim's real Reputation contract (supply 9,738.6 to 29,738.6, ~67% majority after a 200 REP GenesisProtocol vote-cost burn) and used it to self-install as a full-permission scheme",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "permissionless newOrganization lets an attacker hijack an existing Reputation contract and drain the Avatar. Lost: 4.025 ETH (full Genesis Alpha treasury); attacker minted 20,000 REP against the victim's real Reputation contract (supply 9,738.6 to 29,738.6, ~67% majority after a 200 REP GenesisProtocol vote-cost burn) and used it to self-install as a full-permission scheme"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-09/DAOstack_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-09/DAOstack_exp.sol"
+    }
+  ]
+}

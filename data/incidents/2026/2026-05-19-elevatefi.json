@@ -1,0 +1,89 @@
+{
+  "id": "2026-05-19-elevatefi",
+  "name": "ElevateFi",
+  "date": "2026-05-19",
+  "year": 2026,
+  "amountUsd": 16000,
+  "returnedUsd": null,
+  "chains": [
+    "Polygon"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.99
+      },
+      {
+        "category": "market-manipulation",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.08,
+    "stateActor": 0.02,
+    "hasRootCause": 0.65
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Reserve Price Manipulation. Lost: ~16,000 USD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Reserve Price Manipulation. Lost: ~16,000 USD"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "ElevateFi’s Polygon staking vault was exploited on May 19, 2026 via a single-block spot price manipulation, enabling an attacker to inflate $2.5 million in staking principal with only 713 EFI and to claim 6,256 EFI as rewards, resulting in a confirmed loss of approximately $16,000,$25,000. The ElevateFi staking vault relied on the instantaneous spot price read from an on-chain Uniswap V2 EFI/DAI pair via getPriceUSD(), which allowed the attacker to manipulate the reserves and set the price in the very transaction used for staking. No TWAP, external oracle, or manipulation resistance was used, so a flash-loan attacker could transiently set prices and pe…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x2bd7213a764dd93d18dedeca7f4e0cf5c3cdce1739d79b53e41b72ec9efed87e"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-05/ElevateFi_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-05/ElevateFi_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "t.me",
+      "url": "https://t.me/defimon_alerts/3040"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/elevatefi-2026-05-19"
+    },
+    {
+      "source": "revertiq",
+      "label": "darknavy.org",
+      "url": "https://www.darknavy.org/web3/exploits/elevatefi-staking-vault-spot-price-oracle-manipulation/"
+    },
+    {
+      "source": "revertiq",
+      "label": "kucoin.com",
+      "url": "https://www.kucoin.com/news/insight/MATIC/6a10410a9ec3bf00071eb93a"
+    }
+  ]
+}

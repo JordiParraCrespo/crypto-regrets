@@ -1,0 +1,111 @@
+{
+  "id": "2026-05-30-alephium-bridge",
+  "name": "Alephium Bridge",
+  "date": "2026-05-30",
+  "year": 2026,
+  "amountUsd": 815000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "bridge-crosschain",
+  "technique": "Forged Proof",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "bridge-crosschain",
+    "confidence": 0.93,
+    "top": [
+      {
+        "category": "bridge-crosschain",
+        "p": 0.93
+      },
+      {
+        "category": "frontend-infra",
+        "p": 0.06
+      },
+      {
+        "category": "input-validation",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": true,
+  "language": "Solidity",
+  "rootCause": "The Alephium TokenBridge, a private fork of the Wormhole protocol using only four guardians (requiring a quorum of three signatures), contained an off-chain vulnerability in the backend software layer that processes on-chain events before submitting them to guardian signers for approval. Nearly three hours before the drain, the attacker deployed a fake-event contract on-chain whose sole purpose was to emit fabricated LOG7 events containing forged Verified Action Approval (VAA) payloads. The attacker then disrupted bridge node connectivity, forcing the backend onto a fallback validation path where events from this fake contract were ingested and forwarded to legitimate guardians. The guardians, having no way to distinguish fraudulent events from real ones at the signing layer, provided valid signatures on the forged VAAs. These signed VAAs were submitted on-chain, unlocking 200,967 USDT, 17,594 USDC, 5.18 WETH, and 0.335 WBTC on Ethereum, plus additional USDT and WBNB on BNB Chain, while simultaneously minting 13.76M unbacked wrapped ALPH tokens. Bridge guardians subsequently burned 96.4% of the unbacked wALPH through a governance recovery procedure. This was not a smart contract bug or a guardian key compromise — the flaw resided entirely in the off-chain event-processing layer. Attack Tx: 0x04128aee33a43ad4062720908c114a1416885abc9ece31eab9cc56beac4bb38b",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The Alephium TokenBridge, a private fork of the Wormhole protocol using only four guardians (requiring a quorum of three signatures), contained an off-chain vulnerability in the backend software layer that processes on-chain events before submitting them to guardian signers for approval. Nearly three hours before the drain, the attacker deployed a fake-event contract on-chain whose sole purpose was to emit fabricated LOG7 events containing forged Verified Action Approval (VAA) payloads. The attacker then disrupted bridge node connectivity, forcing the backend onto a fallback validation path where events from this fake contract were ingested and forwarded to legitimate guardians. The guardians, having no way to distinguish fraudulent events from real ones at the signing layer, provided valid signatures on the forged VAAs. These signed VAAs were submitted on-chain, unlocking 200,967 USDT, 17,594 USDC, 5.18 WETH, and 0.335 WBTC on Ethereum, plus additional USDT and WBNB on BNB Chain, while simultaneously minting 13.76M unbacked wrapped ALPH tokens. Bridge guardians subsequently burned 96.4% of the unbacked wALPH through a governance recovery procedure. This was not a smart contract bug or a guardian key compromise — the flaw resided entirely in the off-chain event-processing layer. Attack Tx: 0x04128aee33a43ad4062720908c114a1416885abc9ece31eab9cc56beac4bb38b"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Alephium TokenBridge was exploited. The attacker used a backend vulnerability in the bridge to forge messages, draining approximately $815K assets from Ethereum and BNB Chain within about 7 minutes, while minting a large amount of unbacked wrapped ALPH. The team quickly shut down the bridge, pledged to compensate users, and advised users to withdraw ALPH liquidity."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 30 May 2026, the Alephium Bridge on Ethereum and BNB Chain was exploited via forged guardian-signed messages, resulting in a loss of approximately $815,000 in custody assets and 13.76 million unbacked wALPH minted. Most unbacked wALPH was burned on-chain shortly after, but the backed custody assets were not recovered. The bridge's off-chain re-observation path failed to validate fabricated events to the same standard as the primary observation path. An attacker exploited this weakness by orchestrating node disruptions and crafting a fake Alephium contract event, causing legitimate guardians to sign cryptographically valid but unauthorized VAAs, which were then redeemed for real assets."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x04128aee33a43ad4062720908c114a1416885abc9ece31eab9cc56beac4bb38b",
+    "0x8b9d96ccac41f6bd866e91a8d0ea956a967ad6f31b405fb9a8791e8babf426d7",
+    "0x928e369e6e857c93f237356b201c97ddac31ba777e2a942928272f962c02bc40",
+    "0x293c3062a133b089bc31eba910daeb6b2d508ad26e045e439b1339793f51237e",
+    "0x8a719311d4304ea3d1c1235eece0cf9591c2a43864ce8aa70e9ea9443aff6c37",
+    "0xb5b3f089a745394d736615e9a11ea40a1ad020678e466a6f95b3a9f4d321a98f",
+    "0x06cc0f36159d7094359d88fe1d43cda601e8644282ba305c5ffbd013b524c6b4",
+    "0xade2846a20169aa23d53203e1c3c509474694710a9f4674307c220528d27a4b1"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x04128aee33a43ad4062720908c114a1416885abc9ece31eab9cc56beac4bb38b"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x04128aee33a43ad4062720908c114a1416885abc9ece31eab9cc56beac4bb38b"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/alephium/status/2060768639100268782"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/alephium-bridge-2026-05-30"
+    },
+    {
+      "source": "revertiq",
+      "label": "alephium.org",
+      "url": "https://alephium.org/news/post/alephium-bridge-exploit-postmortem/"
+    },
+    {
+      "source": "revertiq",
+      "label": "alephium.org",
+      "url": "https://alephium.org/news/post/the-alephium-bridge-exploit-on-chain-report/"
+    }
+  ]
+}

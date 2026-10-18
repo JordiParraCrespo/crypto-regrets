@@ -1,0 +1,70 @@
+{
+  "id": "2025-07-09-gmx-v1-evm",
+  "name": "GMX V1 EVM",
+  "date": "2025-07-09",
+  "year": 2025,
+  "amountUsd": 42000000,
+  "returnedUsd": 40000000,
+  "chains": [
+    "Arbitrum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "reentrancy",
+  "technique": "Reentrancy",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "reentrancy",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "reentrancy",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "On July 9, 2025, GMX V1 on Arbitrum suffered a $42 million loss from a reentrancy exploit in the GLP vault. The attacker used a smart contract as a position account in executeDecreaseOrder(), triggering a callback after an ETH refund. During the reentrant callback, the attacker manipulated open short positions to inflate protocol AUM, enabling GLP token redemption at an artificially high rate. All stolen funds were returned except for a $5 million bounty. The GLP vault could be exploited through a reentrancy vector in PositionManager.executeDecreaseOrder(), which refunded ETH to a smart contract account with no gas limit. The attacker manipulated proto…",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "On July 9, 2025, GMX V1 on Arbitrum suffered a $42 million loss from a reentrancy exploit in the GLP vault. The attacker used a smart contract as a position account in executeDecreaseOrder(), triggering a callback after an ETH refund. During the reentrant callback, the attacker manipulated open short positions to inflate protocol AUM, enabling GLP token redemption at an artificially high rate. All stolen funds were returned except for a $5 million bounty. The GLP vault could be exploited through a reentrancy vector in PositionManager.executeDecreaseOrder(), which refunded ETH to a smart contract account with no gas limit. The attacker manipulated proto…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x03182d3f0956a91c4e4c8f225bbc7975f9434fab042228c7acdc5ec9a32626ef"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/gmx-v1-2025-07-11"
+    },
+    {
+      "source": "revertiq",
+      "label": "quillaudits.com",
+      "url": "https://www.quillaudits.com/blog/hack-analysis/how-gmx-lost-42m"
+    },
+    {
+      "source": "revertiq",
+      "label": "xn--defiintel-y79d.com",
+      "url": "https://defi‑intel.com/incidents/gmx‑exploit‑2025/"
+    }
+  ]
+}

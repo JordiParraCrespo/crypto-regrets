@@ -1,0 +1,87 @@
+{
+  "id": "2026-08-09-coreum-bridge",
+  "name": "Coreum Bridge",
+  "date": "2026-08-09",
+  "year": 2026,
+  "amountUsd": 200000,
+  "returnedUsd": null,
+  "chains": [
+    "XRPL",
+    "Coreum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "bridge-crosschain",
+  "technique": "Bridge Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "bridge-crosschain",
+    "confidence": 0.93,
+    "top": [
+      {
+        "category": "bridge-crosschain",
+        "p": 0.93
+      },
+      {
+        "category": "logic-error",
+        "p": 0.06
+      },
+      {
+        "category": "input-validation",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": true,
+  "language": null,
+  "rootCause": "On August 9, 2026, the cross-chain bridge connecting the XRP Ledger and Coreum (now tx) was exploited. The attacker abused a flaw in the deposit-verification/relayer logic by creating fake deposits (self-transfers of the bridge’s own wrapped tokens with valid memos), tricking the relayers into authorizing real XRP withdrawals from the bridge’s reserve. Nearly 200,000 XRP (~$200,000) was drained in 94 multisig transactions over 97 minutes.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "On August 9, 2026, the cross-chain bridge connecting the XRP Ledger and Coreum (now tx) was exploited. The attacker abused a flaw in the deposit-verification/relayer logic by creating fake deposits (self-transfers of the bridge’s own wrapped tokens with valid memos), tricking the relayers into authorizing real XRP withdrawals from the bridge’s reserve. Nearly 200,000 XRP (~$200,000) was drained in 94 multisig transactions over 97 minutes."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 9 August 2026, the Coreum Bridge connecting XRPL and the tx blockchain (formerly Coreum) was exploited, resulting in a loss of about 200,000 XRP. The attacker exploited a flaw in the bridge's relayer deposit verification logic, allowing fake deposits to trigger legitimate XRP withdrawals. The bridge's relayer verification software accepted deposit memos without confirming actual XRP transfers to the bridge reserve address, enabling unauthorized withdrawals."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/txEcosystem/status/2087269579190046895"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/coreum-bridge-2026-08-09"
+    },
+    {
+      "source": "revertiq",
+      "label": "shattered.io",
+      "url": "https://shattered.io/coreum-bridge-hack-200k-xrp-2026/"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptobriefing.com",
+      "url": "https://cryptobriefing.com/coreum-bridge-exploit-xrp-drained/"
+    }
+  ]
+}

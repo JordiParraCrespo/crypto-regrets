@@ -1,0 +1,112 @@
+{
+  "id": "2022-11-29-seaman",
+  "name": "SEAMAN",
+  "date": "2022-11-29",
+  "year": 2022,
+  "amountUsd": 7000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "Token",
+  "category": "logic-error",
+  "technique": "Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.85,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.86
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.1
+      },
+      {
+        "category": "market-manipulation",
+        "p": 0.04
+      }
+    ],
+    "flashLoan": 0.9,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Business Logic Flaw. Lost: $7k",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Business Logic Flaw. Lost: $7k"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Business Logic Flaw In the SEAMAN project, the hacker exploited a vulnerability in the distribution mechanism of GVC tokens in the LP deposits. By calling the transfer function with the minimum unit of $SEAMAN, the attacker triggered a series of swaps. First, $SEAMAN was swapped for $BUSD in the BUSD-SEAMAN pair. Then, $BUSD was further swapped for $GVC in the BUSD-GVC pair. This caused a depletion of GVC tokens in the BUSD-GVC pair and resulted in an increase in the price of $GVC. As a result of this flash loan attack, the attacker was able to make a profit of approximately $7,800. Vulnerable code snippet: Attack tx: https://explorer.phalcon.xyz/tx/bsc/0x6f1af27d08b10caa7e96ec3d580bf39e29fd5ece00abda7d8955715403bf34a8 Analysis: https://twitter.com/CertiKAlert/status/1597513374841044993 https://twitter.com/BeosinAlert/status/1597535796621631489"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "SEAMAN was exploited on BNB Chain on November 29, 2022, via a market-forcing tax swap mechanism that attackers manipulated for a net profit of about $7,782 USDT. The vulnerability allowed anyone to trigger protocol purchases of GVC in a thin pool, making the price manipulable at attacker discretion. SEAMAN’s contract allowed any transfer to the SEAMAN/USDT pair,regardless of size or sender,to trigger forced swaps of accumulated SEAMAN for GVC along a manipulable path. With no minimum amount, permission, or slippage check, this tax swap mechanism could be exploited repeatedly, letting an attacker corner and move the price in a related pool for profit."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x6f1af27d08b10caa7e96ec3d580bf39e29fd5ece00abda7d8955715403bf34a8"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-11/SEAMAN_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-11/SEAMAN_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/peckshield/status/1597493955939405825"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/CertiKAlert/status/1597513374841044993"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BeosinAlert/status/1597535796621631489"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "explorer.phalcon.xyz",
+      "url": "https://explorer.phalcon.xyz/tx/bsc/0x6f1af27d08b10caa7e96ec3d580bf39e29fd5ece00abda7d8955715403bf34a8"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/seaman-2022-11-29"
+    },
+    {
+      "source": "revertiq",
+      "label": "crypto.training",
+      "url": "https://crypto.training/hacks/2022-11-seaman/"
+    },
+    {
+      "source": "revertiq",
+      "label": "coinspect.com",
+      "url": "https://www.coinspect.com/learn-evm-attacks/cases/seaman/"
+    }
+  ]
+}

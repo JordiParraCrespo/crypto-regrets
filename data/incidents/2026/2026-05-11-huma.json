@@ -1,0 +1,99 @@
+{
+  "id": "2026-05-11-huma",
+  "name": "Huma",
+  "date": "2026-05-11",
+  "year": 2026,
+  "amountUsd": 101400,
+  "returnedUsd": null,
+  "chains": [
+    "Polygon"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.95,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.95
+      },
+      {
+        "category": "logic-error",
+        "p": 0.05
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.87
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Credit Approval Bypass. Lost: ~$101K (82,315 USDC + 19,074 USDC.e)",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Credit Approval Bypass. Lost: ~$101K (82,315 USDC + 19,074 USDC.e)"
+    },
+    {
+      "source": "SlowMist",
+      "text": "A logic flaw in Huma Finance’s deprecated V1 BaseCreditPool contracts on Polygon was exploited, draining approximately 101,400 USDC and USDC.e from accumulated protocol fees and pool owner fees. No user funds were at risk, PST token unaffected. The team had already been sunsetting V1 pools and immediately paused all V1 contracts. Huma’s V2 on Solana is a complete rewrite and remains secure."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On May 11, 2026, Huma Finance's deprecated V1 BaseCreditPool contracts on Polygon Mainnet were exploited via a logic flaw in access control, enabling an attacker to bypass credit approval and drain about $101,400 in USDC and USDC.e from three pools. The exploit was executed in a single orchestrated transaction, and the project’s V2 Solana contracts remained unaffected. The refreshAccount() function in Huma Finance V1 BaseCreditPool allowed any caller to unconditionally promote a credit line to 'GoodStanding', bypassing the required Evaluation Agent approval check. This improper access control made unauthorized drawdowns possible."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x7b8d641d76affcc029fd0e0f06ab81ad675b1da21ef79b82e1343016040ba359"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-05/HumaCreditApprovalBypass_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-05/HumaCreditApprovalBypass_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "www.cryptotimes.io",
+      "url": "https://www.cryptotimes.io/2026/05/11/huma-finance-v1-exploit-on-polygon-drains-101k-in-usdc/"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/humafinance/status/2053858499378258198"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/huma-finance-v2-2026-05-11"
+    },
+    {
+      "source": "revertiq",
+      "label": "investx.fr",
+      "url": "https://investx.fr/en/crypto-news/huma-finance-polygon-hack/"
+    },
+    {
+      "source": "revertiq",
+      "label": "coinalertnews.com",
+      "url": "https://coinalertnews.com/news/2026/05/12/huma-finance-v1-exploit-polygon"
+    }
+  ]
+}

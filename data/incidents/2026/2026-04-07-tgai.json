@@ -1,0 +1,60 @@
+{
+  "id": "2026-04-07-tgai",
+  "name": "TGAI",
+  "date": "2026-04-07",
+  "year": 2026,
+  "amountUsd": 11940,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": null,
+  "category": "oracle-manipulation",
+  "technique": "Reserve Manipulation Attack",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.78).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.78,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.79
+      },
+      {
+        "category": "logic-error",
+        "p": 0.11
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.05
+      }
+    ],
+    "flashLoan": 0.95,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "Computility-associated TGAI project on BSC suffered a reserve manipulation attack on PancakeSwap V2 liquidity pool. The hacker used a ~$2.4M USDT flash loan, deployed multiple helper contracts to buy TGAI, manipulated reserves via sync() function with ~17.5K USDT injection, then swapped to extract profits, resulting in approximately $11.94K loss.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Computility-associated TGAI project on BSC suffered a reserve manipulation attack on PancakeSwap V2 liquidity pool. The hacker used a ~$2.4M USDT flash loan, deployed multiple helper contracts to buy TGAI, manipulated reserves via sync() function with ~17.5K USDT injection, then swapped to extract profits, resulting in approximately $11.94K loss."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/exvulsec/status/2041447720016396698"
+    }
+  ]
+}

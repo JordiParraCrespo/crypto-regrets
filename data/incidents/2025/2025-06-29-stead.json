@@ -1,0 +1,68 @@
+{
+  "id": "2025-06-29-stead",
+  "name": "Stead",
+  "date": "2025-06-29",
+  "year": 2025,
+  "amountUsd": 14500,
+  "returnedUsd": null,
+  "chains": [
+    "Arbitrum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Access Control",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 1.00).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.01,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Access Control. Lost: 14.5k USD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Access Control. Lost: 14.5k USD"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The victim contract (0xf9FF933f51bA180a474634440a406c95DfB27596) on Arbitrum exposed a function (selector 0x16fb27ce) that transfers/withdraws STEAD tokens but performs no caller authorization check. Any address can invoke it to drain the STEAD tokens held by the contract. The PoC exploits it with a single unprivileged call passing trivial arguments (1, 1, 1), draining ~14.5k USD worth of STEAD. Root cause is missing access control (no owner/role gate) on a state-changing, asset-moving function. Vulnerable code snippet: Attack Tx: https://arbiscan.io/tx/0x32dbfce2253002498cd41a2d79e249250f92673bc3de652f3919591ee26e8001 Analysis: TenArmorAlert"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x32dbfce2253002498cd41a2d79e249250f92673bc3de652f3919591ee26e8001"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-06/Stead_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-06/Stead_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/TenArmorAlert/status/1939508301596672036"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "arbiscan.io",
+      "url": "https://arbiscan.io/tx/0x32dbfce2253002498cd41a2d79e249250f92673bc3de652f3919591ee26e8001"
+    }
+  ]
+}

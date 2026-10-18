@@ -1,0 +1,103 @@
+{
+  "id": "2026-07-26-chainconnect",
+  "name": "ChainConnect",
+  "date": "2026-07-26",
+  "year": 2026,
+  "amountUsd": 650000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum",
+    "BSC",
+    "Avalanche",
+    "Polygon"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.97,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.97
+      },
+      {
+        "category": "bridge-crosschain",
+        "p": 0.03
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.25
+  },
+  "bridge": true,
+  "language": "Solidity",
+  "rootCause": "ChainConnect bridge exploited on July 26. Attacker held ~329 ETH for ransom; whitehat agreement reached: attacker returned 280 ETH (85% of total stolen) to 0x840B3De19e3FAB72fa9A168bD8Dd71B678c57989 and retained ~49 ETH (15%) as bounty. Recovery confirmed July 31, 2026. Attack Tx: https://etherscan.io/tx/0xa6df21e27c5228af87e35122b506751c642fe012b2f61c84e046625718d0c85b Source: https://twitter.com/DefimonAlerts/status/2083213179333534148",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "ChainConnect bridge exploited on July 26. Attacker held ~329 ETH for ransom; whitehat agreement reached: attacker returned 280 ETH (85% of total stolen) to 0x840B3De19e3FAB72fa9A168bD8Dd71B678c57989 and retained ~49 ETH (15%) as bounty. Recovery confirmed July 31, 2026. Attack Tx: https://etherscan.io/tx/0xa6df21e27c5228af87e35122b506751c642fe012b2f61c84e046625718d0c85b Source: https://twitter.com/DefimonAlerts/status/2083213179333534148"
+    },
+    {
+      "source": "SlowMist",
+      "text": "ChainConnect’s EVM integration was compromised through unauthorized access. Approximately $650,000 in tokens was drained from the bridge contracts across Ethereum, BNB Chain, Avalanche C-Chain and Polygon in 23 transactions; bridge operations were paused immediately."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "ChainConnect suffered an exploit on July 26, 2026, due to a missing sender-verification check in its Alien Proxy callback, enabling an unauthorized attacker to mint unbacked tokens and bridge them to EVM chains. About $650,000 was drained, but ~82.9% (~$615,000) was returned, with the remainder kept as a whitehat bounty. Missing sender-verification in the ProxyMultiVaultAlien_V10.onCheckAccumulatedFee callback allowed unauthorized minting and bridging of unbacked Alien TIP-3 tokens."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xa6df21e27c5228af87e35122b506751c642fe012b2f61c84e046625718d0c85b",
+    "0xe78bfae09b6b8fab1057f472f605044dea8d066b73e5012837050a5bc6d6eb00"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xa6df21e27c5228af87e35122b506751c642fe012b2f61c84e046625718d0c85b"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/DefimonAlerts/status/2083213179333534148"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/VenomFoundation/status/2082101022928040063"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/chainconnect-2026-07-26"
+    },
+    {
+      "source": "revertiq",
+      "label": "bir.badjoke-lab.com",
+      "url": "https://bir.badjoke-lab.com/incident/chainconnect-2026-alien-proxy-callback-exploit/"
+    },
+    {
+      "source": "revertiq",
+      "label": "communityone.io",
+      "url": "https://communityone.io/en/servers/988830809056239616/venom-foundation-500k-grant-program-live/news/chainconnect-post-mortem-alien-proxy-exploit-2026-08-01/"
+    }
+  ]
+}

@@ -1,0 +1,88 @@
+{
+  "id": "2022-10-15-earning-farm",
+  "name": "Earning.Farm",
+  "date": "2022-10-15",
+  "year": 2022,
+  "amountUsd": 1200000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Withdrawal Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.51,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.54
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.39
+      },
+      {
+        "category": "logic-error",
+        "p": 0.07
+      }
+    ],
+    "flashLoan": 0.95,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "The EFLeverVault contract of Earning.Farm was attacked twice by flash loans. The first attack was intercepted by MEV bot, causing the contract to lose 480 ETH; the second hacker completed the attack, and the hacker made a profit of 268 ETH. After analysis, the vulnerability is caused by the contract’s flash loan callback function not verifying the flash loan initiator. The attacker can trigger the contract’s flash loan callback logic by itself: repay the Aave stETH debt in the contract and withdraw cash, and then exchange stETH for ETH. Then the attacker can call the withdraw function to withdraw the ETH balance in all contracts.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The EFLeverVault contract of Earning.Farm was attacked twice by flash loans. The first attack was intercepted by MEV bot, causing the contract to lose 480 ETH; the second hacker completed the attack, and the hacker made a profit of 268 ETH. After analysis, the vulnerability is caused by the contract’s flash loan callback function not verifying the flash loan initiator. The attacker can trigger the contract’s flash loan callback logic by itself: repay the Aave stETH debt in the contract and withdraw cash, and then exchange stETH for ETH. Then the attacker can call the withdraw function to withdraw the ETH balance in all contracts."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Earning.Farm's EFLeverVault contract on Ethereum was exploited on 14 October 2022 due to missing checks on flash loan initiator, allowing unauthorized withdrawal of 748 ETH (around $971,000 at the time), with a MEV bot capturing the majority of funds through frontrunning. The EFLeverVault contract did not verify that flash loan withdrawal calls originated from authorized protocol sources, allowing external actors to initiate withdrawals and drain funds."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x160c5950a01b88953648ba90ec0a29b0c5383e055d35a7835d905c53a3dda01e"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/SupremacyHQ/status/1581012823701786624"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/earning-farm-2022-10-15"
+    },
+    {
+      "source": "revertiq",
+      "label": "u.today",
+      "url": "https://u.today/earningfarm-yield-platform-under-attack-details"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/earning-farm-hack-2022"
+    }
+  ]
+}

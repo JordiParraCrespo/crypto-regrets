@@ -1,0 +1,96 @@
+{
+  "id": "2023-09-26-xsdwethpool",
+  "name": "XSDWETHpool",
+  "date": "2023-09-26",
+  "year": 2023,
+  "amountUsd": 56,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "reentrancy",
+  "technique": "Reentrancy",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.92).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "reentrancy",
+    "confidence": 0.92,
+    "top": [
+      {
+        "category": "reentrancy",
+        "p": 0.92
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.07
+      },
+      {
+        "category": "logic-error",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.96,
+    "stateActor": 0.02,
+    "hasRootCause": 0.7
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Reentrancy. Lost: ~$56.9BNB",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Reentrancy. Lost: ~$56.9BNB"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The attacker executed a flash loan, borrowing a large amount of WETH. They swapped WETH to XSD and then swapped XSD back to WETH, transferring the required WETH back to the flash loan provider. Vulnerable code snippet: Attack tx: 0xbdf76f22c41fe212f0 | Phalcon Explorer Analysis: CertiK Alert on Twitter / X"
+    },
+    {
+      "source": "SlowMist",
+      "text": "On September 26th, XSDWETHpool On BSC was exploited for ~$12.1k in a flash loan attack. The attacker created a malicious contract to interact with the pool contract and gained 56.96 WBNB. Pool Contract: 0xbfBcB8BDE20cc6886877DD551b337833F3e0d96d."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xbdf76f22c41fe212f07e24ca7266d436ef4517dc1395077fabf8125ebe304442"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-09/XSDWETHpool_exp.sol",
+  "sources": [
+    "defihacklabs",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-09/XSDWETHpool_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/CertiKAlert/status/1706765042916450781"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0xfadda925e10d07430f5d7461689fd90d3d81bb48"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/bsc/0xbdf76f22c41fe212f07e24ca7266d436ef4517dc1395077fabf8125ebe304442"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/CertiKAlert/status/1706765042916450781"
+    },
+    {
+      "source": "slowmist",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0xbfbcb8bde20cc6886877dd551b337833f3e0d96d"
+    }
+  ]
+}

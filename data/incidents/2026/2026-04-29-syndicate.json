@@ -1,0 +1,90 @@
+{
+  "id": "2026-04-29-syndicate",
+  "name": "Syndicate",
+  "date": "2026-04-29",
+  "year": 2026,
+  "amountUsd": 380000,
+  "returnedUsd": 380000,
+  "chains": [
+    "Base"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "bridge-crosschain",
+  "technique": "Bridge Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "key-compromise",
+    "confidence": 0.96,
+    "top": [
+      {
+        "category": "key-compromise",
+        "p": 0.96
+      },
+      {
+        "category": "access-control",
+        "p": 0.02
+      },
+      {
+        "category": "logic-error",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": true,
+  "language": "Solidity",
+  "rootCause": "Syndicate Labs’ Commons cross-chain bridge was compromised due to a private key leak. The attacker used the leaked upgrade key to maliciously upgrade the bridge contracts, draining approximately 18.5 million SYND tokens (worth ~$330,000) and ~$50,000 in user assets, for a total loss of $380,000. The incident was limited to specific chains, and the project pledged full compensation to affected users.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Syndicate Labs’ Commons cross-chain bridge was compromised due to a private key leak. The attacker used the leaked upgrade key to maliciously upgrade the bridge contracts, draining approximately 18.5 million SYND tokens (worth ~$330,000) and ~$50,000 in user assets, for a total loss of $380,000. The incident was limited to specific chains, and the project pledged full compensation to affected users."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 29 April 2026, the Syndicate Commons bridge on Base suffered a targeted protocol governance attack. The attacker seized upgrade admin rights, deployed malicious code to the bridge proxy, and drained 18.45 million SYND tokens (approx. $330,000,$380,000). Syndicate made all users whole using treasury reserves. Excessive privilege of the UpgradeExecutor contract allowed an authorized executor to seize ProxyAdmin ownership, enabling a malicious bridge upgrade and draining of all funds. The exploit was enabled by weak upgrade key controls (single signer, no hardware/MFA, inadequate operational security)."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xd92ba704c491ff0a085558d965fc078b66dbaf9ad1c8ce3588b4a8c5e37e0b1a",
+    "0x48b36cd9d50348e2fb0082e9af6abebf1c4c9ef1d268923ce5ef79c4dc613178",
+    "0xb4aca0c74ec2526631771c9f2d1936e8ba12264d41b2ed188f145c52bcd475dc"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "crypto.news",
+      "url": "https://crypto.news/syndicate-labs-suffers-380k-synd-bridge-exploit-pledges-full-user-compensation/"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/syndicate-2026-04-29"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "theblock.co",
+      "url": "https://www.theblock.co/amp/post/399318/syndicate-exploit"
+    }
+  ]
+}

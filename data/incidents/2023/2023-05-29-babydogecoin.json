@@ -1,0 +1,92 @@
+{
+  "id": "2023-05-29-babydogecoin",
+  "name": "BabyDogeCoin",
+  "date": "2023-05-29",
+  "year": 2023,
+  "amountUsd": 135000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "unknown",
+  "technique": "Lack Slippage Protection",
+  "classificationNote": null,
+  "classifiedBy": "none",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.62,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.64
+      },
+      {
+        "category": "logic-error",
+        "p": 0.29
+      },
+      {
+        "category": "input-validation",
+        "p": 0.03
+      }
+    ],
+    "flashLoan": 0.07,
+    "stateActor": 0.02,
+    "hasRootCause": 0.93
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Lack Slippage Protection. Lost: ~$135k",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Lack Slippage Protection. Lost: ~$135k"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "smhkptking: FarmZAP contract enjoys 0 tax of babydoge buy/sell, attacker manipulated pancake pair price. Vulnerable code snippet: https://bscscan.com/address/0x451583b6da479eaa04366443262848e27706f762#code#F1#L184 Attack tx: https://bscscan.com/tx/0x098e7394a1733320e0887f0de22b18f5c71ee18d48a0f6d30c76890fb5c85375 Analysis: https://twitter.com/Phalcon_xyz/status/1662744426475831298"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x098e7394a1733320e0887f0de22b18f5c71ee18d48a0f6d30c76890fb5c85375"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-05/BabyDogeCoin_exp.sol",
+  "sources": [
+    "defihacklabs",
+    "blocksec"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-05/BabyDogeCoin_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Phalcon_xyz/status/1662744426475831298"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0x451583b6da479eaa04366443262848e27706f762#code#F1#L184"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x098e7394a1733320e0887f0de22b18f5c71ee18d48a0f6d30c76890fb5c85375"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x098e7394a1733320e0887f0de22b18f5c71ee18d48a0f6d30c76890fb5c85375"
+    },
+    {
+      "source": "blocksec",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs?tab=readme-ov-file#20230529-babydogecoin---lack-slippage-protection"
+    }
+  ]
+}

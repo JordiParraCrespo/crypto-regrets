@@ -1,0 +1,50 @@
+{
+  "id": "2026-09-30-positionmanager",
+  "name": "PositionManager",
+  "date": "2026-09-30",
+  "year": 2026,
+  "amountUsd": 32080.604282,
+  "returnedUsd": null,
+  "chains": [],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": null,
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 1.00).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.15,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "deposit values the vault's existing USDT at the manipulable PancakeSwap V3 spot price, so crashing the spot before depositing mints inflated shares that withdraw redeems in the same transaction. Lost: 32,080.604282 USDT (exactly reproduced) on BNB Chain; one atomic tx crashed the USDT/BTCB spot with an 8,000,000 USDT swap, then ran 24 deposit(1,000,000 USDT)/withdraw cycles to drain the vault's own PancakeSwap V3 position, the pool losing 32,096.098596 USDT",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "deposit values the vault's existing USDT at the manipulable PancakeSwap V3 spot price, so crashing the spot before depositing mints inflated shares that withdraw redeems in the same transaction. Lost: 32,080.604282 USDT (exactly reproduced) on BNB Chain; one atomic tx crashed the USDT/BTCB spot with an 8,000,000 USDT swap, then ran 24 deposit(1,000,000 USDT)/withdraw cycles to drain the vault's own PancakeSwap V3 position, the pool losing 32,096.098596 USDT"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-09/PositionManager_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-09/PositionManager_exp.sol"
+    }
+  ]
+}

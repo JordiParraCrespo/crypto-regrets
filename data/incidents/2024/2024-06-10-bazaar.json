@@ -1,0 +1,73 @@
+{
+  "id": "2024-06-10-bazaar",
+  "name": "Bazaar",
+  "date": "2024-06-10",
+  "year": 2024,
+  "amountUsd": 1400000,
+  "returnedUsd": null,
+  "chains": [
+    "Blast"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Insufficient Permission Check",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 1.00). Replaced keyword guess \"social-engineering\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Insufficient Permission Check. Lost: 1.4M",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Insufficient Permission Check. Lost: 1.4M"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The root cause is no permission check in the exitPool function, allowing anyone to impersonate liquidity providers and drain the pool Vulnerable code snippet: https://blastscan.io/address/0xefb4e3Cc438eF2854727A7Df0d0baf844484EdaB Attack tx: https://blastscan.io/tx/0x7fdd140f7631f62d62f7256ee4a38af51a4723ad5d66adc9b9685bf78f750f2d update: refunded 90% Analysis: https://x.com/shoucccc/status/1800353122159833195"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x7fdd140f7631f62d62f7256ee4a38af51a4723ad5d66adc9b9685bf78f750f2d"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-06/Bazaar_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-06/Bazaar_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/shoucccc/status/1800353122159833195"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "blastscan.io",
+      "url": "https://blastscan.io/address/0xefb4e3Cc438eF2854727A7Df0d0baf844484EdaB"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "blastscan.io",
+      "url": "https://blastscan.io/tx/0x7fdd140f7631f62d62f7256ee4a38af51a4723ad5d66adc9b9685bf78f750f2d"
+    }
+  ]
+}

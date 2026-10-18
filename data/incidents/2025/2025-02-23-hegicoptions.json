@@ -1,0 +1,75 @@
+{
+  "id": "2025-02-23-hegicoptions",
+  "name": "HegicOptions",
+  "date": "2025-02-23",
+  "year": 2025,
+  "amountUsd": 104000000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Business Logic Flaw",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 1.00).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Business Logic Flaw. Lost: ~104M",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Business Logic Flaw. Lost: ~104M"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The exploit was due to a vulnerability in the withdrawWithoutHedge function of a deprecated contract. The _withdraw function, called by withdrawWithoutHedge, calculated the withdrawal amount based on the t.share of the current \"tranche.\" However, the crucial flaw was that t.share was not updated after a withdrawal. Additionally, a state check (require(t.state == TrancheState.Open)) that should have restricted withdrawals to open tranches was commented out. This combination allowed the attacker to repeatedly call withdrawWithoutHedge within a loop, each time withdrawing funds based on the original t.share value, effectively draining the contract. Vulnerable code snippet: Attack tx: https://etherscan.io/tx/0x260d5eb9151c565efda80466de2e7eee9c6bd4973d54ff68c8e045a26f62ea73 https://etherscan.io/tx/0x444854ee7e7570f146b64aa8a557ede82f326232e793873f0bbd04275fa7e54c Analysis: https://blog.verichains.io/p/hegic-options-protocol-how-a-deprecated"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x260d5eb9151c565efda80466de2e7eee9c6bd4973d54ff68c8e045a26f62ea73",
+    "0x444854ee7e7570f146b64aa8a557ede82f326232e793873f0bbd04275fa7e54c"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-02/HegicOptions_exp.sol",
+  "sources": [
+    "defihacklabs",
+    "blocksec"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-02/HegicOptions_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x260d5eb9151c565efda80466de2e7eee9c6bd4973d54ff68c8e045a26f62ea73"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x444854ee7e7570f146b64aa8a557ede82f326232e793873f0bbd04275fa7e54c"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x444854ee7e7570f146b64aa8a557ede82f326232e793873f0bbd04275fa7e54c"
+    }
+  ]
+}

@@ -1,0 +1,136 @@
+{
+  "id": "2023-05-14-selltoken03",
+  "name": "SellToken03",
+  "date": "2023-05-14",
+  "year": 2023,
+  "amountUsd": 197000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "input-validation",
+  "technique": "Unchecked User Input",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 1.00).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "input-validation",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "input-validation",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Unchecked User Input. Lost: Unclear",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Unchecked User Input. Lost: Unclear"
+    },
+    {
+      "source": "DeFiHackLabs",
+      "text": "Price Manipulation. Lost: ~$197k"
+    },
+    {
+      "source": "DeFiHackLabs",
+      "text": "Business Logic Flaw. Lost: ~$95k"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "StakingRewards contract's Claim() function did not properly validate the input parameters, allowing the attacker to pass a fake token to obtain more rewards. Vulnerable code snippet: Attack tx: https://explorer.phalcon.xyz/tx/bsc/0xfe80df5d689137810df01e83b4bb51409f13c865e37b23059ecc6b3d32347136 Analysis: https://twitter.com/BlockSecTeam/status/1657715018908180480"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The flaw in the token price calculation allowed malicious actors to manipulate the price of the token, leading to significant losses for users and potentially creating an opportunity for the attackers to profit unfairly. KALOS: This type of vulnerability occurs through the ShortStart() function of SellToken.Router, specifically due to an issue with the getToken2Price() function used internally. This function retrieves the token price from PancakeSwap’s Router and utilizes it. The attacker leveraged a flash loan to borrow a significant amount of funds and executed an Inflation Attack using this method. Vulnerable code snippet: https://bscscan.com/address/0x57db19127617b77c8abd9420b5a35502b59870d6#code Attack tx: https://explorer.phalcon.xyz/tx/bsc/0x7d04e953dad4c880ad72b655a9f56bc5638bf4908213ee9e74360e56fa8d7c6a Analysis: https://twitter.com/BlockSecTeam/status/1657324561577435136 https://twitter.com/kalos_security/status/1668092971483561985"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Ancilia: In the StakingRewards contract, the listToken[] can be set in the addLiquidity() function. However, this operation *should* be restricted to 'OwnerOnly'. By exploiting this vulnerability, a hacker can add their self-created token to listToken and subsequently call the sell function. Attack tx: https://bscscan.com/address/0x274b3e185c9c8f4ddef79cb9a8dc0d94f73a7675#code Vulnerable code snippet: Analysis: https://twitter.com/AnciliaInc/status/1656341587054702598"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xfe80df5d689137810df01e83b4bb51409f13c865e37b23059ecc6b3d32347136",
+    "0x7d04e953dad4c880ad72b655a9f56bc5638bf4908213ee9e74360e56fa8d7c6a"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-05/SELLC02_exp.sol",
+  "sources": [
+    "defihacklabs",
+    "blocksec"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-05/SELLC02_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BlockSecTeam/status/1657715018908180480"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-05/SellToken_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BlockSecTeam/status/1657324561577435136"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-05/SELLC_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/AnciliaInc/status/1656337400329834496"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/AnciliaInc/status/1656341587054702598"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "explorer.phalcon.xyz",
+      "url": "https://explorer.phalcon.xyz/tx/bsc/0xfe80df5d689137810df01e83b4bb51409f13c865e37b23059ecc6b3d32347136"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0x57db19127617b77c8abd9420b5a35502b59870d6#code"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "explorer.phalcon.xyz",
+      "url": "https://explorer.phalcon.xyz/tx/bsc/0x7d04e953dad4c880ad72b655a9f56bc5638bf4908213ee9e74360e56fa8d7c6a"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0x274b3e185c9c8f4ddef79cb9a8dc0d94f73a7675#code"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x7d04e953dad4c880ad72b655a9f56bc5638bf4908213ee9e74360e56fa8d7c6a"
+    },
+    {
+      "source": "blocksec",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs?tab=readme-ov-file#20230513-selltoken02---price-manipulation"
+    }
+  ]
+}

@@ -1,0 +1,102 @@
+{
+  "id": "2023-07-31-gym-network",
+  "name": "GYM Network",
+  "date": "2023-07-31",
+  "year": 2023,
+  "amountUsd": 1193,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.7,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.72
+      },
+      {
+        "category": "logic-error",
+        "p": 0.25
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.03
+      }
+    ],
+    "flashLoan": 0.08,
+    "stateActor": 0.02,
+    "hasRootCause": 0.89
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Insufficient validation. Lost: Unclear",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Insufficient validation. Lost: Unclear"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The root Cause is the wrong implement of swapExactTokensForTokensSupportingFeeOnTransferTokens() The from should be msg.sender Vulnerable code snippet: Attack tx: https://bscscan.com/tx/0x7fe96c00880b329aa0fcb00f0ef3a0766c54e13965becf9cc5e0df6fbd0deca6 Analysis: https://twitter.com/AnciliaInc/status/1686605510655811584"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "GYM Network on BNB Chain was exploited on 2023-07-31 through a router validation and authorization failure that allowed swaps from previously approved user wallets into an attacker-controlled fakeUSDT market. The attacker used a flash loan to create liquidity, triggered swaps affecting multiple wallets, repaid the loan, and exited with a net GYMNET profit visible on-chain. Available evidence indicates that the GYM router permitted swaps through attacker-controlled token paths using pre-existing user approvals without sufficient restrictions on who could initiate the swap flow or which destination assets were valid. The exact deployed router implementat…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x7fe96c00880b329aa0fcb00f0ef3a0766c54e13965becf9cc5e0df6fbd0deca6"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-07/GYMNET_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-07/GYMNET_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/AnciliaInc/status/1686605510655811584"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x7fe96c00880b329aa0fcb00f0ef3a0766c54e13965becf9cc5e0df6fbd0deca6"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/gym-network-2023-07-31"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/past/2023/README.md#L2361"
+    },
+    {
+      "source": "revertiq",
+      "label": "raw.githubusercontent.com",
+      "url": "https://raw.githubusercontent.com/SunWeb3Sec/DeFiHackLabs/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/src/test/2023-07/GYMNET_exp.sol"
+    }
+  ]
+}

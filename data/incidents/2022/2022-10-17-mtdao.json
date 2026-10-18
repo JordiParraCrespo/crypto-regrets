@@ -1,0 +1,86 @@
+{
+  "id": "2022-10-17-mtdao",
+  "name": "MTDAO",
+  "date": "2022-10-17",
+  "year": 2022,
+  "amountUsd": 702000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Deposit Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.5,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.53
+      },
+      {
+        "category": "logic-error",
+        "p": 0.32
+      },
+      {
+        "category": "rugpull",
+        "p": 0.11
+      }
+    ],
+    "flashLoan": 0.94,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "The unopened contract 0xFaC064847aB0Bb7ac9F30a1397BebcEdD4879841 of the MTDAO project party was attacked by a flash loan, and the affected tokens were MT and ULM, with a total profit of 487,042.615 BUSD. The attacker used the functions 0xd672c6ce and 0x70d68294 in the unopened contract to call the sendtransfer function in the MT and ULM token contracts to profit (because they are both deployed by the project party, the unopened contract 0xFaC06484 has minter permission).",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The unopened contract 0xFaC064847aB0Bb7ac9F30a1397BebcEdD4879841 of the MTDAO project party was attacked by a flash loan, and the affected tokens were MT and ULM, with a total profit of 487,042.615 BUSD. The attacker used the functions 0xd672c6ce and 0x70d68294 in the unopened contract to call the sendtransfer function in the MT and ULM token contracts to profit (because they are both deployed by the project party, the unopened contract 0xFaC06484 has minter permission)."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "MTDAO suffered an exploit on BNB Chain in October 2022 that caused the MT token to collapse by more than 90%. Public reporting agrees that attackers extracted several hundred thousand dollars, but the exact loss amount, exploit transaction set, and vulnerable contract logic were not publicly documented. The precise root cause was not publicly disclosed. Public incident trackers classified the event as a protocol logic or deposit logic flaw, while contemporaneous reporting described a flash-loan-assisted manipulation that caused severe MT token slippage. No verified vulnerable contract code or primary postmortem was located."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "panewslab.com",
+      "url": "https://www.panewslab.com/zh/sqarticledetails/spqk6wao.html"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/mtdao-2022-10-17"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/mtdao-hack-2022"
+    },
+    {
+      "source": "revertiq",
+      "label": "chaincatcher.com",
+      "url": "https://www.chaincatcher.com/en/article/2081151"
+    }
+  ]
+}

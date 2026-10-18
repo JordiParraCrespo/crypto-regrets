@@ -1,0 +1,86 @@
+{
+  "id": "2022-03-09-pirate-x",
+  "name": "Pirate X",
+  "date": "2022-03-09",
+  "year": 2022,
+  "amountUsd": 78000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.92,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.92
+      },
+      {
+        "category": "key-compromise",
+        "p": 0.04
+      },
+      {
+        "category": "logic-error",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.84
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "The pledge contract (0x6912B19401913F1bd5020b3f59EE986c5792DA54) of the NFT adventure game Pirate X was attacked. When users deposit their PXP tokens into this contract, their tokens will be transferred to an EOA account (0x3b74a9cb5f1399b4a5a02559e67da37d450067b7). When the user withdraws the tokens, the contract will call \"Transferfrom\" to transfer these funds back. The attackers put these tokens on the market and made a profit of about 212 BNB.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The pledge contract (0x6912B19401913F1bd5020b3f59EE986c5792DA54) of the NFT adventure game Pirate X was attacked. When users deposit their PXP tokens into this contract, their tokens will be transferred to an EOA account (0x3b74a9cb5f1399b4a5a02559e67da37d450067b7). When the user withdraws the tokens, the contract will call \"Transferfrom\" to transfer these funds back. The attackers put these tokens on the market and made a profit of about 212 BNB."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Pirate X Pirate suffered a BNB Chain exploit on 2022-03-09 after deploying a vulnerable token conversion feature tied to its PXP ecosystem. Public statements from the project attributed the incident to inadequate review before launch. Reports from the time state that the attacker sold more than 9.6 million PXP tokens for roughly 212 BNB, valued near $78,000. Pirate X Pirate stated after the incident that the exploit resulted from launching a vulnerable conversion feature without adequate security review before deployment. DefiLlama separately classified the incident as an improper access control issue. No verified vulnerable contract source code or exp…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BlockSecTeam/status/1501474721384497157"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/pirate-x-2022-03-09"
+    },
+    {
+      "source": "revertiq",
+      "label": "api.llama.fi",
+      "url": "https://api.llama.fi/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "web3isgoinggreat.com",
+      "url": "https://www.web3isgoinggreat.com/single/pirate-x-pirate-blockchain-gaming-platform-exploited"
+    }
+  ]
+}

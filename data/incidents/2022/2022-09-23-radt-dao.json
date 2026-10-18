@@ -1,0 +1,74 @@
+{
+  "id": "2022-09-23-radt-dao",
+  "name": "RADT-DAO",
+  "date": "2022-09-23",
+  "year": 2022,
+  "amountUsd": 94304,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "pair manipulate",
+  "classificationNote": "Upstream label missing; classified by keyword rules from the root-cause text.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "market-manipulation",
+    "confidence": 0.28,
+    "top": [
+      {
+        "category": "market-manipulation",
+        "p": 0.32
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.31
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.26
+      }
+    ],
+    "flashLoan": 0.98,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "pair manipulate. Lost: 94,304 USDT",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "pair manipulate. Lost: 94,304 USDT"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "front running REF: https://twitter.com/BlockSecTeam/status/1573252869322846209 1. Borrow USDT via flashloan 2. Partially swap USDT for RADT-DAO token in the Pancake pool 3. Trigger the fallback function of the RADT-DAO contract to transfer the remaining RADT-DAO in the Pancake pool 4. Swap RADT-DAO (from Step 2) for USDT 5. Return the flashloan"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-09/RADT_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-09/RADT_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BlockSecTeam/status/1573252869322846209"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0xd692f71de2768017390395db815d34033013136c378177c05d0d46ef3b6f0897"
+    }
+  ]
+}

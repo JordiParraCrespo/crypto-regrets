@@ -1,0 +1,117 @@
+{
+  "id": "2023-10-29-astrid-finance",
+  "name": "Astrid Finance",
+  "date": "2023-10-29",
+  "year": 2023,
+  "amountUsd": 228000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "input-validation",
+  "technique": "Missing Input Validation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "input-validation",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "input-validation",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "Business Logic Flaw. Lost: ~$127ETH",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Business Logic Flaw. Lost: ~$127ETH"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "- The exploit is due to a vulnerability in the withdrawfunction which doesn’t have enough check on the input token address and input amount. As a result, attackers can manipulate the arguments for the withdraw function with counterfeit tokens. Vulnerable code snippet: Attack tx: https://etherscan.io/tx/0x8af9b5fb3e2e3df8659ffb2e0f0c1f4c90d5a80f4f6fccef143b823ce673fb60 Analysis: https://twitter.com/Phalcon_xyz/status/1718454835966775325"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The Ethereum liquidity restaking pool Astrid was attacked due to a vulnerability in the withdrawal function, resulting in a loss of approximately $228,000. The parameters of the `withdraw()` function, specifically the token address and token amount, were exploitable. On October 29, the hackers returned 80% of the stolen funds (102 ETH)."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Astrid Finance was exploited on October 28, 2023 on Ethereum due to missing input validation in its withdraw function. The attacker created fake tokens and withdrew legitimate staked assets, resulting in approximately $228,000 in losses, mostly in stETH, rETH, and cbETH. Most funds were subsequently returned. The vulnerable withdraw function accepted arbitrary token addresses and amounts without verifying the supplied token contracts or balance claims. The attacker created custom ERC20 tokens, supplied them to withdraw(), and received protocol reserves for staked tokens."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x8af9b5fb3e2e3df8659ffb2e0f0c1f4c90d5a80f4f6fccef143b823ce673fb60",
+    "0xa56fdb1fc7c192b23cda44901d2871289cf28831cb94ccc731d089d4fb593793",
+    "0x27cbd5f2f12067bcc9be3bafa9140b849ee1ee68ae5329c2a4ba789685111ad7"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-10/Astrid_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-10/Astrid_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Phalcon_xyz/status/1718454835966775325"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x8af9b5fb3e2e3df8659ffb2e0f0c1f4c90d5a80f4f6fccef143b823ce673fb60"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x8af9b5fb3e2e3df8659ffb2e0f0c1f4c90d5a80f4f6fccef143b823ce673fb60"
+    },
+    {
+      "source": "blocksec",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs?tab=readme-ov-file#20231028-astridprotocol---business-logic-flaw"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/AstridFinance/status/1718254655288066501"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/astrid-finance-2023-10-29"
+    },
+    {
+      "source": "revertiq",
+      "label": "dn.institute",
+      "url": "https://dn.institute/research/cyberattacks/incidents/2023-10-28-astrid-finance/"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.solidityscan.com",
+      "url": "https://blog.solidityscan.com/astrid-finance-hack-analysis-863fd8554a4b/"
+    }
+  ]
+}

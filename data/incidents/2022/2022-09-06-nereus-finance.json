@@ -1,0 +1,85 @@
+{
+  "id": "2022-09-06-nereus-finance",
+  "name": "Nereus Finance",
+  "date": "2022-09-06",
+  "year": 2022,
+  "amountUsd": 371000,
+  "returnedUsd": null,
+  "chains": [
+    "Avalanche"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.98,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "The project Nereus Finance on AVAX was attacked. The attacker made a profit of about 371,000 USDC by using the classic flash loan attack mode, namely \"flash loan -> skew reserve -> fake LP token pricing -> repay the flash loan\".",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The project Nereus Finance on AVAX was attacked. The attacker made a profit of about 371,000 USDC by using the classic flash loan attack mode, namely \"flash loan -> skew reserve -> fake LP token pricing -> repay the flash loan\"."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On September 6, 2022, Nereus Finance on Avalanche lost approximately $371,000 in a flash loan-based oracle manipulation. The attacker exploited flawed on-chain price calculations for collateral, enabling inflated borrowing of NXUSD stablecoin and securing a profit in USDC. Nereus repaid users from treasury and improved oracle protections. The collateral price oracle directly used current reserves from a Trader Joe USDC-WAVAX liquidity pool without time-weighted averaging or manipulation checks. This allowed an attacker to manipulate the reserves within one transaction via flash loans, inflating perceived collateral value and borrowing NXUSD far in excess of true backing."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x0ab12913f9232b27b0664cd2d50e482ad6aa896aeb811b53081712f42d54c026"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "medium.com",
+      "url": "https://medium.com/nereus-protocol/post-mortem-flash-loan-exploit-in-single-nxusd-market-343fa32f0c6"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/nereus-finance-2022-09-06"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "crypto.news",
+      "url": "https://crypto.news/avalanche-avax-based-nereus-finance-suffers-371k-flash-loan-attack/"
+    },
+    {
+      "source": "revertiq",
+      "label": "faraz.faith",
+      "url": "https://faraz.faith/2022-11-19-nereus-finance-flashloan-attack-analysis/"
+    }
+  ]
+}

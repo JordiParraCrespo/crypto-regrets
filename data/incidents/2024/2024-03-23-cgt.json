@@ -1,0 +1,82 @@
+{
+  "id": "2024-03-23-cgt",
+  "name": "CGT",
+  "date": "2024-03-23",
+  "year": 2024,
+  "amountUsd": 2000000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Incorrect Access Control",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.81).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.81,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.82
+      },
+      {
+        "category": "governance",
+        "p": 0.18
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Incorrect Access Control. Lost: 996B (CGT token)",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Incorrect Access Control. Lost: 996B (CGT token)"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The primary vulnerability in Curio DAO was due to improper access control over voting power. The attacker was able to exploit this by acquiring a small number of CGT tokens, which were sufficient to grant them elevated governance privileges. Attack tx: https://app.blocksec.com/explorer/tx/eth/0x4ff4028b03c3df468197358b99f5160e5709e7fce3884cc8ce818856d058e106 Analysis: With minimal CGT holdings, the attacker was able to bypass intended governance restrictions and escalate their voting rights within the protocol’s contract. This allowed the attacker to execute the plot function, which set a malicious contract as the new exec library. Since the system relies on delegatecall to the exec contract, this effectively handed the attacker arbitrary execution rights within the context of the Curio DAO contract, enabling a wide range of malicious actions. The source code of the contract is not publicly available. For more details, refer to the official postmortem https://investcurio.medium.com/curiodaos-recovery-plan-1255427f35de."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x4ff4028b03c3df468197358b99f5160e5709e7fce3884cc8ce818856d058e106"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-03/CGT_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-03/CGT_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/AnciliaInc/status/1771598968448745536"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/eee4be5897a1cd9b752653f68dd8b9529f21f05b/src/test/2024-03/CGT_exp.sol#L4"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/eth/0x4ff4028b03c3df468197358b99f5160e5709e7fce3884cc8ce818856d058e106"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "investcurio.medium.com",
+      "url": "https://investcurio.medium.com/curiodaos-recovery-plan-1255427f35de"
+    }
+  ]
+}

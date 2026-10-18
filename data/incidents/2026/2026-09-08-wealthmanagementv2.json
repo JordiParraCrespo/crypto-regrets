@@ -1,0 +1,86 @@
+{
+  "id": "2026-09-08-wealthmanagementv2",
+  "name": "WealthManagementV2",
+  "date": "2026-09-08",
+  "year": 2026,
+  "amountUsd": 26414,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "key-compromise",
+  "technique": "Private Key Compromised",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "key-compromise",
+    "confidence": 0.87,
+    "top": [
+      {
+        "category": "key-compromise",
+        "p": 0.88
+      },
+      {
+        "category": "access-control",
+        "p": 0.07
+      },
+      {
+        "category": "logic-error",
+        "p": 0.05
+      }
+    ],
+    "flashLoan": 0.06,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "The WealthManagementV2 contract lost funds after owner privileges were suspected of being illegally transferred (possibly due to a leaked private key). The attacker-controlled owner instantly set extreme plan parameters (period=0, interestMultiplier/unlockMultiplier=528,300,000) via updatePlanConfig with no timelock or bounds, minted inflated interest by investing and redeeming in the same transaction, then unlocked and withdrew the funds via a second investment, resulting in a loss of 26,414 USDT.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The WealthManagementV2 contract lost funds after owner privileges were suspected of being illegally transferred (possibly due to a leaked private key). The attacker-controlled owner instantly set extreme plan parameters (period=0, interestMultiplier/unlockMultiplier=528,300,000) via updatePlanConfig with no timelock or bounds, minted inflated interest by investing and redeeming in the same transaction, then unlocked and withdrew the funds via a second investment, resulting in a loss of 26,414 USDT."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "WealthManagementV2 on BNB Chain lost 26,414 USDT on 2026-09-08 after a suspected owner-key compromise let an attacker rewrite plan parameters and mint inflated interest. The reported cause was a suspected owner-key compromise combined with an unrestricted updatePlanConfig path. Once the attacker controlled ownership, the contract accepted a zero period and extreme multipliers, which inflated interest accounting and enabled withdrawal of 26,414 USDT."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/2097222515009724817"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/wealthmanagementv2-2026-09-08"
+    },
+    {
+      "source": "revertiq",
+      "label": "hacked.slowmist.io",
+      "url": "https://hacked.slowmist.io/?c=BSC&page=1"
+    },
+    {
+      "source": "revertiq",
+      "label": "kucoin.com",
+      "url": "https://www.kucoin.com/news/insight/USDT/6aa00c744ca39f00075ec994"
+    }
+  ]
+}

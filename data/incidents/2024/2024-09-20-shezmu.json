@@ -1,0 +1,128 @@
+{
+  "id": "2024-09-20-shezmu",
+  "name": "Shezmu",
+  "date": "2024-09-20",
+  "year": 2024,
+  "amountUsd": 4900000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Access Control",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 1.00).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Access Control. Lost: 4.9M USD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Access Control. Lost: 4.9M USD"
+    },
+    {
+      "source": "REKT",
+      "text": "Shezmu's vault became the latest battleground where $4.9 million vanished faster than a mirage in the desert. But in a twist worthy of a crypto thriller, the saga unfolded not with a bang, but with a negotiation."
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The ShezmuCollateralToken contract's mint() function had no access control whatsoever — no onlyOwner, no role check, no minter whitelist. Any external account could call it to mint an unlimited number of collateral tokens to any address. The attacker called mint(address(this), type(uint128).max - 1) to self-mint ~340 quadrillion collateral tokens at zero cost, then approved and deposited them into the ShezmuVault as collateral via addCollateral(). Because the vault accepted the minted tokens at face value with no on-chain supply cap or oracle-enforced price validation at deposit time, the attacker's position appeared massively over-collateralised and they were able to borrow() ~100M ShezUSD from the protocol's reserves, draining approximately $1.49M in real value. Vulnerable code snippet: Attack Tx: 0x39328ea4377a8887d3f6ce91b2f4c6b19a851e2fc5163e2f83bbc2fc136d0c71 Analysis: Decoding Shezmu's exploit (post-mortem)"
+    },
+    {
+      "source": "SlowMist",
+      "text": "A crypto yield platform called Shezmu suffered a loss of around $4.9 million in $ShezUSD after an attacker exploited a flaw that allowed anyone to mint collateral, which they could then use to borrow ShezUSD. These tokens were relatively illiquid, however, so the total amount the attacker could have obtained was likely considerably less. Shortly after the attack, Shezmu offered a 10% \"bounty\" for the return of the funds. The attacker responded that they would only consider a 20% bounty. Shezmu agreed to the terms, and announced to their followers that they had achieved a recovery from the \"white hat\" hacker."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Shezmu's Ethereum-based vault was exploited on September 20, 2024 after it accepted a freely mintable collateral token. An attacker minted large amounts of the token, deposited it as 'collateral,' and borrowed nearly $4.9M in ShezUSD. Most funds were returned after negotiation, minus a 20% bounty. The vault contract accepted a collateral token (0x641249db01d5c9a04d1a223765ffd15f95167924) whose mint function lacked access controls. Anyone could mint unlimited collateral and borrow ShezUSD against it. No validation existed for the collateral's minting restrictions."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x39328ea4377a8887d3f6ce91b2f4c6b19a851e2fc5163e2f83bbc2fc136d0c71",
+    "0x48e69dd7ff3e0c728e818bf26d031f4989d3c3018ec464a18757825634cf7e3c",
+    "0x871ce0518bef66595ad5885a07d5699cbc71bffa7f8be732fc2565d087cb78ad",
+    "0xbe91cdf5fd9c60d886014105229278ad4bf46a1ff6e3f458ca37dcdc58f0d43e",
+    "0xec97799ad013afefbb0db3cf152c7a1eb7e468825b2b1f3991170253bf84389b"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-09/Shezmu_exp.sol",
+  "sources": [
+    "defihacklabs",
+    "rekt",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-09/Shezmu_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/shoucccc/status/1837228053862437244"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Shezmu - Rekt",
+      "url": "https://rekt.news/shezmu-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x39328ea4377a8887d3f6ce91b2f4c6b19a851e2fc5163e2f83bbc2fc136d0c71"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "medium.com",
+      "url": "https://medium.com/coinmonks/decoding-shezmus-4-9-million-exploit-10dc0266b25b"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x48e69dd7ff3e0c728e818bf26d031f4989d3c3018ec464a18757825634cf7e3c"
+    },
+    {
+      "source": "slowmist",
+      "label": "web3isgoinggreat.com",
+      "url": "https://www.web3isgoinggreat.com/?id=shezmu-hack"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/decoding-shezmu-s-4-9-million-2024-10-15"
+    },
+    {
+      "source": "revertiq",
+      "label": "quillaudits.com",
+      "url": "https://www.quillaudits.com/blog/hack-analysis/shezmu-exploit"
+    },
+    {
+      "source": "revertiq",
+      "label": "blockapex.io",
+      "url": "https://blockapex.io/shezmu-hack-analysis/"
+    },
+    {
+      "source": "revertiq",
+      "label": "defirisk.co",
+      "url": "https://defirisk.co/learn/exploits/shezmu-rekt/"
+    }
+  ]
+}

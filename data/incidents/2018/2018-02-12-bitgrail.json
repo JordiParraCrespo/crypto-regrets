@@ -1,0 +1,86 @@
+{
+  "id": "2018-02-12-bitgrail",
+  "name": "BitGrail",
+  "date": "2018-02-12",
+  "year": 2018,
+  "amountUsd": 170000000,
+  "returnedUsd": null,
+  "chains": [
+    "Nano"
+  ],
+  "targetType": "CEX",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.68,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.7
+      },
+      {
+        "category": "key-compromise",
+        "p": 0.29
+      },
+      {
+        "category": "rugpull",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.04,
+    "hasRootCause": 0.1
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "BitGrail claims that $195 million of customers have stolen cryptocurrencies in Nano (XRB).",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "BitGrail claims that $195 million of customers have stolen cryptocurrencies in Nano (XRB)."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "BitGrail, an Italian cryptocurrency exchange, lost approximately 17 million Nano (XRB) valued around $170 million in a prolonged multi-stage exploit culminating in February 2018. Attackers abused a withdrawal system flaw that permitted multiple Nano withdrawals on the same balance, draining the exchange's hot wallet. BitGrail's withdrawal system failed to implement idempotency and double-spend prevention, allowing attackers to submit repeated withdrawal requests for the same Nano deposit. The system credited and executed these withdrawals multiple times, draining funds beyond customer balances."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "coinmarketcap.com",
+      "url": "https://coinmarketcap.com/alexandria/article/bitgrail-hack-one-of-the-largest-crypto-hacks-in-history"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/bitgrail-2018-02-12"
+    },
+    {
+      "source": "revertiq",
+      "label": "quadrigainitiative.com",
+      "url": "https://www.quadrigainitiative.com/casestudy/bitgrailnanohack.php"
+    },
+    {
+      "source": "revertiq",
+      "label": "techcrunch.com",
+      "url": "https://techcrunch.com/2018/02/12/bitgrail-hack-nano/"
+    }
+  ]
+}

@@ -10,6 +10,7 @@ import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { dirname } from 'node:path';
 import { z } from 'zod';
 import { incidentSchema } from '../src/lib/types';
+import type { CategoryId } from '../src/lib/taxonomy';
 import { systemOne } from './typesafe';
 import { QUESTIONS, aiState, stateHash, CACHE_FILE, type CachedClassification } from './classify-spec';
 
@@ -22,7 +23,7 @@ const arg = (name: string) => {
 const limit = Number(arg('--limit') ?? Infinity);
 const concurrency = Number(arg('--concurrency') ?? 8);
 
-const incidents = z.array(incidentSchema).parse(JSON.parse(readFileSync('src/data/incidents.json', 'utf8')));
+const incidents = z.array(incidentSchema).parse(JSON.parse(readFileSync('data/incidents.json', 'utf8')));
 const cache: Record<string, CachedClassification> = existsSync(CACHE_FILE) ? JSON.parse(readFileSync(CACHE_FILE, 'utf8')) : {};
 const stale = incidents.filter((i) => cache[i.id]?.hash !== stateHash(i));
 const todo = stale.slice(0, limit);
@@ -49,7 +50,10 @@ await Promise.all(
           model: r.model,
           category: c.choice,
           confidence: c.confidence,
-          probabilities: Object.fromEntries(Object.entries(c.probabilities).filter(([, p]) => p >= 0.01)),
+          probabilities: Object.fromEntries(
+            (Object.entries(c.probabilities) as [CategoryId, number][]).filter(([, p]) => p >= 0.01).sort((x, y) => y[1] - x[1]),
+          ),
+          hasRootCause: r.answers.has_root_cause.noul,
           flashLoan: r.answers.flash_loan.noul,
           stateActor: r.answers.state_actor.noul,
         };

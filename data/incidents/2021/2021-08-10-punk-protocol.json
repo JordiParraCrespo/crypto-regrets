@@ -1,0 +1,106 @@
+{
+  "id": "2021-08-10-punk-protocol",
+  "name": "Punk Protocol",
+  "date": "2021-08-10",
+  "year": 2021,
+  "amountUsd": 8950000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Delegatecall Hijack",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "arbitrary-call",
+    "confidence": 0.38,
+    "top": [
+      {
+        "category": "arbitrary-call",
+        "p": 0.42
+      },
+      {
+        "category": "access-control",
+        "p": 0.28
+      },
+      {
+        "category": "logic-error",
+        "p": 0.25
+      }
+    ],
+    "flashLoan": 0.06,
+    "stateActor": 0.02,
+    "hasRootCause": 0.87
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Punk is dead. On Aug 10th, Punk Protocol was hacked for $8.95M, ~$5M of which was later returned.",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "Punk is dead. On Aug 10th, Punk Protocol was hacked for $8.95M, ~$5M of which was later returned."
+    },
+    {
+      "source": "SlowMist",
+      "text": "Punk Protocol, the decentralized annuity protocol, stated that it encountered an attack during the fair launch process, causing a loss of 8.9 million US dollars. Later, the team recovered another 4.95 million US dollars and transferred it to a secure wallet. The Punk Protocol team stated that the attacker found a critical loophole in the investment strategy and extracted more than 8.9 million U.S. dollars of three stable currency assets (USDC, USDT, DAI) from the Forge-CompoundModel module, but a white hat hacker noticed The attacker's intent was reached, so a transaction was executed, which was able to recover $4.95 million. The lost funds have been t…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Punk Protocol was exploited on August 10, 2021 due to an unprotected initializer in its CompoundModel contract, enabling an attacker to gain admin control and drain approximately $8.95M in stablecoins. A whitehat front-ran and recovered over $5M, returning most after negotiating a $1M bounty. The CompoundModel contract lacked an initializer guard on its initialize function. This allowed anyone to reinitialize the contract via delegatecall, overwrite the privileged forgeAddress, and use forge-only withdrawal functions to drain protocol reserves."
+    }
+  ],
+  "audit": "Unaudited",
+  "txHashes": [
+    "0x7604c7dd6e9bcdba8bac277f1f8e7c1e4c6bb57afd4ddf6a16f629e8495a0281",
+    "0x597d11c05563611cb4ad4ed4c57ca53bbe3b7d3fefc37d1ef0724ad58904742b",
+    "0x008dd92f8bcfcee400aed26d13495fbfc8351f9b21289792fc2bb9e771668147",
+    "0xa85ce7d9d0882b858bf3dbc8f64b72ff05f5399ec3d78d32cea82e6795ccc7ce"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Punk Protocol - REKT",
+      "url": "https://rekt.news/punkprotocol-rekt"
+    },
+    {
+      "source": "slowmist",
+      "label": "medium.com",
+      "url": "https://medium.com/punkprotocol/punk-finance-fair-launch-incident-report-984d9e340eb"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/punk-protocol-2021-08-10"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "quadrigainitiative.com",
+      "url": "https://www.quadrigainitiative.com/casestudy/punkprotocolreinitialized.php"
+    },
+    {
+      "source": "revertiq",
+      "label": "defirisk.co",
+      "url": "https://defirisk.co/learn/exploits/punkprotocol-rekt/"
+    }
+  ]
+}

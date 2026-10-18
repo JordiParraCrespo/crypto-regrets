@@ -1,0 +1,115 @@
+{
+  "id": "2026-07-21-42dao",
+  "name": "42DAO",
+  "date": "2026-07-21",
+  "year": 2026,
+  "amountUsd": 912000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.67,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.69
+      },
+      {
+        "category": "key-compromise",
+        "p": 0.23
+      },
+      {
+        "category": "access-control",
+        "p": 0.07
+      }
+    ],
+    "flashLoan": 0.06,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Single-signer oracle vulnerability (bar=1 threshold). Attacker used authorized signer key to push BTCB price to 10^20 via Spotter.poke(). Price propagated through Dog liquidation module without validation, enabling liquidation of BTCB vaults at inflated collateral value. Attacker withdrew 10.737 BTCB with only 0.006284 BTCB collateral backing, borrowed 4.5M BLC tokens, and swapped for ~761,696 USDT. Follow-up attack pushed price down and liquidated additional positions for ~$122K profit. Attack Tx: https://bscscan.com/tx/0xe54b7123fb6f5bb8c259febcce5b9e312a8c0d100e2fe82c3cb44488c626cbaf Source: https://twitter.com/SlowMist_Team/status/2079759793192132810",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Single-signer oracle vulnerability (bar=1 threshold). Attacker used authorized signer key to push BTCB price to 10^20 via Spotter.poke(). Price propagated through Dog liquidation module without validation, enabling liquidation of BTCB vaults at inflated collateral value. Attacker withdrew 10.737 BTCB with only 0.006284 BTCB collateral backing, borrowed 4.5M BLC tokens, and swapped for ~761,696 USDT. Follow-up attack pushed price down and liquidated additional positions for ~$122K profit. Attack Tx: https://bscscan.com/tx/0xe54b7123fb6f5bb8c259febcce5b9e312a8c0d100e2fe82c3cb44488c626cbaf Source: https://twitter.com/SlowMist_Team/status/2079759793192132810"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The 42DAO protocol was exploited. The attacker manipulated the Median Oracle with an abnormally low BTCB price, triggering forced liquidations of multiple BTCB vaults and profiting approximately $915,000. This caused its algorithmic stablecoin Balance Coin (BLC) to crash over 99% from near $1 to about $0.001."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "42DAO's Balance Coin (BLC) on BNB Chain was reported exploited on 2026-07-21 after a manipulated BTCB spot price entered the protocol's liquidation path, with public loss estimates around $912,000 to $915,000 and a brief depeg to near $0.0013. Public analyses indicate that 42DAO's liquidation path accepted an abnormally low BTCB spot price without deviation checks, minimum price protections, or liquidation delay, so a manipulated price could drive liquidations or other accounting actions at a false valuation."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xe54b7123fb6f5bb8c259febcce5b9e312a8c0d100e2fe82c3cb44488c626cbaf",
+    "0xe7abe6416e386332b41d63cf5f16903251dc178942cd79bf080fe61058587628"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0xe54b7123fb6f5bb8c259febcce5b9e312a8c0d100e2fe82c3cb44488c626cbaf"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/SlowMist_Team/status/2079759793192132810"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xe7abe6416e386332b41d63cf5f16903251dc178942cd79bf080fe61058587628"
+    },
+    {
+      "source": "blocksec",
+      "label": "x.com",
+      "url": "https://x.com/42dao_official/status/2080294596773642671"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/2079759793192132810"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/42dao-2026-07-21"
+    },
+    {
+      "source": "revertiq",
+      "label": "api.llama.fi",
+      "url": "https://api.llama.fi/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptotimes.io",
+      "url": "https://www.cryptotimes.io/2026/07/22/42daos-blc-stablecoin-depegs-to-near-zero-after-912k-oracle-exploit/"
+    }
+  ]
+}

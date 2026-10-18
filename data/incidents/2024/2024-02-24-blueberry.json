@@ -1,0 +1,143 @@
+{
+  "id": "2024-02-24-blueberry",
+  "name": "BlueBerry",
+  "date": "2024-02-24",
+  "year": 2024,
+  "amountUsd": 1340000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.37,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.41000000000000003
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.31
+      },
+      {
+        "category": "logic-error",
+        "p": 0.28
+      }
+    ],
+    "flashLoan": 0.09,
+    "stateActor": 0.02,
+    "hasRootCause": 0.92
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "logic flaw. Lost: ~1,400,000 USD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "logic flaw. Lost: ~1,400,000 USD"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Prices were being pulled from the PriceOracleProxy which passes calls through to the CoreOracle that is used on the Blueberry Strategies side. This, however, is an incorrect use of the system because the CoreOracle always returns prices scaled to 18 decimals, thus causing assets that have less than 18 decimals to be undervalued significantly when being borrowed. Vulnerable code snippet: Attack tx: https://etherscan.io/tx/0xf0464b01d962f714eee9d4392b2494524d0e10ce3eb3723873afd1346b8b06e4 Analysis: https://twitter.com/blueberryFDN/status/1760865357236211964"
+    },
+    {
+      "source": "SlowMist",
+      "text": "DeFi leverage project Blueberry Protocol was exploited for approximately $1.35 million. However, the attack was intercepted by a white hat, c0ffeebabe.eth. 366 ETH has already been returned to Blueberry. The vulnerability stemmed from the incorrect handling of decimals by the lending contract. This attack occurred due to a faulty oracle deployment."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On February 23, 2024, Blueberry Protocol was exploited for $1.3M due to a price oracle misconfiguration that failed to account for differing token decimals. The attacker flash-loaned WETH, deposited it as collateral, and borrowed OHM, USDC, and WBTC at inflated values. A MEV whitehat front-ran the attack, returning most funds, leaving a net loss of 91 ETH to validators. The CoreOracle returned prices scaled to 18 decimals for all assets, causing tokens with fewer decimals (such as USDC and BTC) to be massively overvalued as collateral, enabling over-borrowing and draining protocol liquidity."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xf0464b01d962f714eee9d4392b2494524d0e10ce3eb3723873afd1346b8b06e4"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-02/BlueberryProtocol_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-02/BlueberryProtocol_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/blueberryFDN/status/1760865357236211964"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "github.com",
+      "url": "https://github.com/Blueberryfi/blueberry-core/blob/main/contracts/money-market/PriceOracle/PriceOracleProxy.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "github.com",
+      "url": "https://github.com/Blueberryfi/blueberry-core/blob/main/contracts/oracle/CoreOracle.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xf0464b01d962f714eee9d4392b2494524d0e10ce3eb3723873afd1346b8b06e4"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xf0464b01d962f714eee9d4392b2494524d0e10ce3eb3723873afd1346b8b06e4"
+    },
+    {
+      "source": "blocksec",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BlockSecTeam/status/1760876339903558114"
+    },
+    {
+      "source": "blocksec",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs?tab=readme-ov-file#20240223-blueberryprotocol---logic-flaw"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/web3isgreat/status/1761101904795271657"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/blueberry-protocol-2024-02-23"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/defi-rekt-report-over-148-million-lost-in-february-2024"
+    },
+    {
+      "source": "revertiq",
+      "label": "itokenly.com",
+      "url": "https://itokenly.com/hacks/blueberry-protocol"
+    },
+    {
+      "source": "revertiq",
+      "label": "olympix.security",
+      "url": "https://olympix.security/biweekly-exploits/4m-drained-mozaic-insider-attack-blueberry-oracle-fail-xpet-and-miner-exploits"
+    }
+  ]
+}

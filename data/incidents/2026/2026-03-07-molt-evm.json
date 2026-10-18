@@ -1,0 +1,92 @@
+{
+  "id": "2026-03-07-molt-evm",
+  "name": "Molt EVM",
+  "date": "2026-03-07",
+  "year": 2026,
+  "amountUsd": 127000,
+  "returnedUsd": null,
+  "chains": [
+    "Base"
+  ],
+  "targetType": "Other",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Molt EVM, an experimental self-replicating ERC-20 token protocol on Base, was exploited due to a weak access control flaw. The attacker deployed a malicious contract to bypass the onlySpawnerToken modifier, minted large amounts of tokens via mintFromSpawner(), and dumped them through liquidity pools for profit.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Molt EVM, an experimental self-replicating ERC-20 token protocol on Base, was exploited due to a weak access control flaw. The attacker deployed a malicious contract to bypass the onlySpawnerToken modifier, minted large amounts of tokens via mintFromSpawner(), and dumped them through liquidity pools for profit."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 7 March 2026, Molt EVM on Base was exploited due to a flawed access control on the mintFromSpawner function, enabling an attacker to mint 100 million mEVM tokens and drain liquidity pools of ~50 WETH. Total losses were around $127,000. The onlySpawnerToken modifier failed to properly restrict mintFromSpawner: it allowed any contract whose initialized() function returns true to mint unlimited tokens, with no whitelist, role, or address check."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xca64f5dc107afb6eb71d612bb7156aa218aaab07b961e0cb83892727e941630a",
+    "0x10b7ec56e852351de4951ab2a91fca4099fc4f385dd2171951476c3d497fe03d"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xca64f5dc107afb6eb71d612bb7156aa218aaab07b961e0cb83892727e941630a"
+    },
+    {
+      "source": "blocksec",
+      "label": "x.com",
+      "url": "https://x.com/DefimonAlerts/status/2030273132871741800"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/MeiMighty1/status/2031160110714679490"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/molt-evm-2026-03-07"
+    },
+    {
+      "source": "revertiq",
+      "label": "darknavy.org",
+      "url": "https://www.darknavy.org/web3/exploits/molt-evm-weak-spawner-access-control/"
+    },
+    {
+      "source": "revertiq",
+      "label": "hacked.slowmist.io",
+      "url": "https://hacked.slowmist.io/?c=Base"
+    }
+  ]
+}

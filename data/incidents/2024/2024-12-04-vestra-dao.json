@@ -1,0 +1,112 @@
+{
+  "id": "2024-12-04-vestra-dao",
+  "name": "Vestra DAO",
+  "date": "2024-12-04",
+  "year": 2024,
+  "amountUsd": 500000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Staking Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "VestraDAO was exploited for approximately $480,000–$500,000 due to a business logic flaw in its locked staking contract's unStake() function. The function failed to verify whether a staking position was still active before processing yield disbursements, meaning a position that had already been unstaked could continue to receive rewards on each subsequent call. The attacker prepared for the attack 30 days in advance by staking VSTR tokens to satisfy the maturity lock condition, then after the lock period expired, repeatedly called unStake() in an automated series of transactions, receiving 20,000 VSTR in yield on each iteration without maintaining a valid locked position. Approximately 125 ETH worth of VSTR was drained and laundered through Tornado Cash. The exploit halved the protocol's token value and occurred less than a month after launch. Attack Tx: 0x213991ca681019f599f8f52a25ab6a5e39e690eac2ad206faf24f0c549e844c7 Analysis: Decoding Vestra DAO's $500K Exploit",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "VestraDAO was exploited for approximately $480,000–$500,000 due to a business logic flaw in its locked staking contract's unStake() function. The function failed to verify whether a staking position was still active before processing yield disbursements, meaning a position that had already been unstaked could continue to receive rewards on each subsequent call. The attacker prepared for the attack 30 days in advance by staking VSTR tokens to satisfy the maturity lock condition, then after the lock period expired, repeatedly called unStake() in an automated series of transactions, receiving 20,000 VSTR in yield on each iteration without maintaining a valid locked position. Approximately 125 ETH worth of VSTR was drained and laundered through Tornado Cash. The exploit halved the protocol's token value and occurred less than a month after launch. Attack Tx: 0x213991ca681019f599f8f52a25ab6a5e39e690eac2ad206faf24f0c549e844c7 Analysis: Decoding Vestra DAO's $500K Exploit"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Vestra DAO tweeted that a hacker exploited a vulnerability in the locked staking contract, manipulating the reward mechanism to claim rewards exceeding their entitlement. As a result, a total of 73,720,000 VSTR tokens were stolen. The stolen tokens were gradually sold on Uniswap, causing approximately $500,000 in ETH liquidity losses."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On December 4, 2024, Vestra DAO's Ethereum staking contract was exploited for over $400,000 due to a missing 'isActive' validation in its unstake logic. The attacker repeatedly withdrew rewards by calling unStake on an already closed position, draining the pool. The staking contract failed to check if a staking position was active before processing withdrawals. This omission allowed repeated unstake calls on the same matured position, extracting new yield each time."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x213991ca681019f599f8f52a25ab6a5e39e690eac2ad206faf24f0c549e844c7",
+    "0xa0dcf9b177702c58c5d0353aff2caeab12589bce204fb2d0e62ccbf5717f1798"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x213991ca681019f599f8f52a25ab6a5e39e690eac2ad206faf24f0c549e844c7"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "medium.com",
+      "url": "https://medium.com/coinmonks/overview-c1a710e0ea9f"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x213991ca681019f599f8f52a25ab6a5e39e690eac2ad206faf24f0c549e844c7"
+    },
+    {
+      "source": "blocksec",
+      "label": "x.com",
+      "url": "https://x.com/i/web/status/1864330703619436690"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/Vestra_DAO/status/1864677381459390781"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/decoding-vestra-dao-s-500k-2024-12-13"
+    },
+    {
+      "source": "revertiq",
+      "label": "quillaudits.com",
+      "url": "https://www.quillaudits.com/blog/hack-analysis/vestra-dao-500k-exploit-analysis"
+    },
+    {
+      "source": "revertiq",
+      "label": "adarshswaminath.github.io",
+      "url": "https://adarshswaminath.github.io/blog/vestra-dao-exploit-explanation"
+    },
+    {
+      "source": "revertiq",
+      "label": "olympix.security",
+      "url": "https://olympix.security/biweekly-exploits/vestras-500k-yield-reuse-flaw-moscas-incomplete-state-reset-bycs-burn-based-price-play"
+    }
+  ]
+}

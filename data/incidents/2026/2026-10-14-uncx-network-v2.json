@@ -1,0 +1,75 @@
+{
+  "id": "2026-10-14-uncx-network-v2",
+  "name": "UNCX Network V2",
+  "date": "2026-10-14",
+  "year": 2026,
+  "amountUsd": 86000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum",
+    "Base",
+    "BSC",
+    "Robinhood Chain"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Incorrect Share Accounting",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.89,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.9
+      },
+      {
+        "category": "logic-error",
+        "p": 0.1
+      }
+    ],
+    "flashLoan": 0.98,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "VestingManager pools every deposit of a given token in one contract and release() pays a slice of the full contract balance over a global share count, release() debits that global count but leaves the position's deposited shares in place and cancel() then debits the same shares a second time, so the attacker flash-borrows each token, creates self-owned vestings whose tranches are already elapsed and so instantly releasable, releases and cancels soft helper vestings to shrink the share denominator while donating token straight into the pool to raise the balance, then releases a payout vesting against the corrupted denominator and inflated balance to over-withdraw the other vesters backing tokens across five ERC-20s. Lost: ~88-89K USD across five ERC-20s on Ethereum, retained after the per-token flash loans are repaid and each reproduced to the wei against the tx transfer logs (EDGEN 55,601,598.708417972560603048, ZC 9,055,847.637887682268154756, pepecoin 40,155.284285661160205717, LO0P 65,372.217059159993437512, PAAL 113,657.766933968), the working capital flash-borrowed per token from Uniswap V3 (EDGEN), Uniswap V2 (pepecoin, PAAL) and Uniswap V4 (ZC, LO0P) and repaid in the same leg",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "VestingManager pools every deposit of a given token in one contract and release() pays a slice of the full contract balance over a global share count, release() debits that global count but leaves the position's deposited shares in place and cancel() then debits the same shares a second time, so the attacker flash-borrows each token, creates self-owned vestings whose tranches are already elapsed and so instantly releasable, releases and cancels soft helper vestings to shrink the share denominator while donating token straight into the pool to raise the balance, then releases a payout vesting against the corrupted denominator and inflated balance to over-withdraw the other vesters backing tokens across five ERC-20s. Lost: ~88-89K USD across five ERC-20s on Ethereum, retained after the per-token flash loans are repaid and each reproduced to the wei against the tx transfer logs (EDGEN 55,601,598.708417972560603048, ZC 9,055,847.637887682268154756, pepecoin 40,155.284285661160205717, LO0P 65,372.217059159993437512, PAAL 113,657.766933968), the working capital flash-borrowed per token from Uniswap V3 (EDGEN), Uniswap V2 (pepecoin, PAAL) and Uniswap V4 (ZC, LO0P) and repaid in the same leg"
+    },
+    {
+      "source": "SlowMist",
+      "text": "UNCX Network’s Vesting V2 contracts had a share-accounting logic vulnerability (VestingManager.cancel failed to ensure retained shares covered already-released amounts). The attacker transferred tokens directly to lower the shares-per-token rate, released and canceled schedules, and drained excess tokens from the shared vesting pool. Initial loss on Ethereum was ~$86k, later escalating to ~$1.49M across multiple chains."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-10/UNCXSmartTokenVesting_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-10/UNCXSmartTokenVesting_exp.sol"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/blockaid_/status/2110616419939566029"
+    }
+  ]
+}

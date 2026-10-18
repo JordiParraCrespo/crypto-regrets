@@ -1,0 +1,86 @@
+{
+  "id": "2026-04-04-bsc-tmm-usdt",
+  "name": "BSC TMM/USDT",
+  "date": "2026-04-04",
+  "year": 2026,
+  "amountUsd": 1665000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.38,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.42
+      },
+      {
+        "category": "access-control",
+        "p": 0.34
+      },
+      {
+        "category": "logic-error",
+        "p": 0.14
+      }
+    ],
+    "flashLoan": 0.97,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "According to ExVul monitoring, a TMM/USDT reserve manipulation attack occurred on the BSC (BNB Chain), resulting in a loss of approximately 1.665 million USDT. The attacker utilized flash loans from Lista DAO Moolah, Venus, Aave V3, PancakeSwap Vault, and Uniswap PoolManager to manipulate the TMM/USDT trading pair. By burning TMM to a dead address, the attacker reduced the pair's reserve to just 1 TMM, subsequently swapping 850 million TMM for approximately 272 million USDT. After repaying all flash loans, the attacker transferred a net profit of roughly 1.665 million USDT to associated addresses.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "According to ExVul monitoring, a TMM/USDT reserve manipulation attack occurred on the BSC (BNB Chain), resulting in a loss of approximately 1.665 million USDT. The attacker utilized flash loans from Lista DAO Moolah, Venus, Aave V3, PancakeSwap Vault, and Uniswap PoolManager to manipulate the TMM/USDT trading pair. By burning TMM to a dead address, the attacker reduced the pair's reserve to just 1 TMM, subsequently swapping 850 million TMM for approximately 272 million USDT. After repaying all flash loans, the attacker transferred a net profit of roughly 1.665 million USDT to associated addresses."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 4 April 2026, the BSC TMM/USDT liquidity pool on BNB Chain was exploited via flash loan-driven reserve manipulation. The attacker burned TMM tokens to a dead address, desynchronized pool reserves, and extracted $1.665M USDT at a skewed price. The pool contract failed to synchronize reserve balances after TMM tokens were burned, allowing attackers to manipulate spot pricing and drain USDT through a flash loan and swap sequence."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/exvulsec/status/2040649377803546859"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/bsc-tmm-usdt-2026-04-04"
+    },
+    {
+      "source": "revertiq",
+      "label": "avoid.net",
+      "url": "https://avoid.net/bsc-tmmusdt"
+    },
+    {
+      "source": "revertiq",
+      "label": "sigintzero.com",
+      "url": "https://sigintzero.com/blog/reserve-manipulation-isnt-dead"
+    }
+  ]
+}

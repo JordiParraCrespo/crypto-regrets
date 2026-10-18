@@ -1,0 +1,76 @@
+{
+  "id": "2026-09-21-doingud",
+  "name": "DoinGud",
+  "date": "2026-09-21",
+  "year": 2026,
+  "amountUsd": 35486,
+  "returnedUsd": null,
+  "chains": [
+    "Polygon"
+  ],
+  "targetType": "NFTfi",
+  "category": "logic-error",
+  "technique": "Swap Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.84,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.85
+      },
+      {
+        "category": "input-validation",
+        "p": 0.12
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.81,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "acceptOffer replay via missing offer cleanup on the amount=0 path. Lost: 35,380.154566 USDC net (two byte-identical acceptOffer calls each paid out 35,486.935717 USDC from escrow; funded via a UniV2 flash swap, repaid 35,593.716868 USDC)",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "acceptOffer replay via missing offer cleanup on the amount=0 path. Lost: 35,380.154566 USDC net (two byte-identical acceptOffer calls each paid out 35,486.935717 USDC from escrow; funded via a UniV2 flash swap, repaid 35,593.716868 USDC)"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The dormant NFT platform DoinGud was exploited on Polygon via a bug in its Diamond bidding contract: acceptBid paid out but never cleared the bid record, so the same bid could be reused. An attacker flash-loaned USDC equal to the contract balance, bid on themselves, accepted the bid twice, and drained about $35,486 USDC.e on September 21, 2026."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-09/DoinGud_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-09/DoinGud_exp.sol"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/teddyctf/status/2102235278970933264"
+    }
+  ]
+}

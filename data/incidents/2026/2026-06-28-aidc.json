@@ -1,0 +1,108 @@
+{
+  "id": "2026-06-28-aidc",
+  "name": "AIDC",
+  "date": "2026-06-28",
+  "year": 2026,
+  "amountUsd": 121000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "Token",
+  "category": "accounting-math",
+  "technique": "Arithmetic Error",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.5,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.53
+      },
+      {
+        "category": "logic-error",
+        "p": 0.47
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Business Logic Flaw. Lost: 220.13 WBNB",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Business Logic Flaw. Lost: 220.13 WBNB"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "AIDCToken's _sellTransfer() accumulates a 30% burn amount without deducting it from the seller. Any non-Pair transfer triggers _executeAccumulatedBurn(), which incorrectly burns tokens from the uniswapPair balance instead of the seller. After burning, sync() is called, artificially deflating the AIDC reserve in the AMM, enabling repeated reserve manipulation and a final swap that drained WBNB from the Pancake V2 AIDC/WBNB Pair. Attacker: 0x89eb2c99e970d831525c7a52badc290afa116b63, Vulnerable Contract: 0x5021d71859f81b4c905b573591db8f9cc4a0c6fe (AIDCToken) Source: https://twitter.com/SlowMist_Team/status/2071437371590238249"
+    },
+    {
+      "source": "SlowMist",
+      "text": "AIDC token on BSC was exploited due to a flaw in _sellTransfer()/burn logic. The attacker manipulated the PancakeSwap LP pool, causing burn fees to accumulate without properly deducting from sender balance, draining ~$121K WBNB."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "AIDC token was exploited on BNB Chain on June 28, 2026, via a logic flaw in its sell/burn accounting, allowing an attacker to drain approximately 220 WBNB (~$121,000) from its PancakeSwap liquidity pool. The burn logic erroneously destroyed tokens from the pool rather than the seller, breaking AMM invariants. AIDC's _sellTransfer() and _executeAccumulatedBurn() functions deferred burn accounting and mistakenly burned tokens from the AMM liquidity pool balance, allowing reserves to be artificially compressed while WBNB backing remained, facilitating extraction of greatly inflated WBNB."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x66960f7febf399fa8bd94904398f535c500f4f575dbf025de7b9ab450342645e"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-06/AIDC_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-06/AIDC_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/TenArmorAlert/status/2071415914948685892"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/SlowMist_Team/status/2071437371590238249"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/2071437371590238249"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/aidc-2026-06-28"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptotimes.io",
+      "url": "https://www.cryptotimes.io/2026/06/29/aidc-token-burn-bug-exploit-drains-121k-from-pancakeswap/"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/Cry-StalL/DeFi-Attack-Report/blob/main/state/2026-06-28-aidc-burn-bug.json"
+    }
+  ]
+}

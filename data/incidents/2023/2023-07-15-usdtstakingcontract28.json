@@ -1,0 +1,73 @@
+{
+  "id": "2023-07-15-usdtstakingcontract28",
+  "name": "USDTStakingContract28",
+  "date": "2023-07-15",
+  "year": 2023,
+  "amountUsd": 20999,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Lack of access control",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 1.00).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.01,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Lack of access control. Lost: ~20999 USD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Lack of access control. Lost: ~20999 USD"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The USDTStakingContract28 contract exposed a public tokenAllowAll(address asset, address allowee) function with no access control (no owner/admin check). Any external caller could invoke it to make the staking contract grant an unlimited ERC20 allowance for any asset to an arbitrary allowee. The attacker simply called Stake.tokenAllowAll(USDT, attackerContract) to authorize itself, then used transferFrom to pull the entire USDT balance of the staking contract to the attacker. There is no exploit of price, math, or reentrancy here — it is a pure privileged-function-exposed-publicly bug. Vulnerable code snippet: Attack Tx: https://app.blocksec.com/explorer/tx/eth/0xfc872bf5ca8f04b18b82041ec563e4abf2e31e1fc27d1ea5dee39bc8a79d2d06 Analysis: DecurityHQ on X"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xfc872bf5ca8f04b18b82041ec563e4abf2e31e1fc27d1ea5dee39bc8a79d2d06"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-07/USDTStakingContract28_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-07/USDTStakingContract28_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/DecurityHQ/status/1680117291013267456"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/4b55dffe3e9fd35099c95af728b4af58b75c6b2b/src/test/2023-07/USDTStakingContract28_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/eth/0xfc872bf5ca8f04b18b82041ec563e4abf2e31e1fc27d1ea5dee39bc8a79d2d06"
+    }
+  ]
+}

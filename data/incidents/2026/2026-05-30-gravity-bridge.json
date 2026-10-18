@@ -1,0 +1,116 @@
+{
+  "id": "2026-05-30-gravity-bridge",
+  "name": "Gravity Bridge",
+  "date": "2026-05-30",
+  "year": 2026,
+  "amountUsd": 5400000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "key-compromise",
+  "technique": "Validator Key Compromised",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "key-compromise",
+    "confidence": 0.95,
+    "top": [
+      {
+        "category": "key-compromise",
+        "p": 0.95
+      },
+      {
+        "category": "bridge-crosschain",
+        "p": 0.03
+      },
+      {
+        "category": "access-control",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.86
+  },
+  "bridge": true,
+  "language": "Solidity",
+  "rootCause": "$5.4 million gone from Gravity Bridge after an attacker minted worthless tokens on Osmosis, poisoned the token registry with a fabricated denom string, and walked out with real assets. The attacker didn't break the code. They just found where it stopped asking questions.",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "$5.4 million gone from Gravity Bridge after an attacker minted worthless tokens on Osmosis, poisoned the token registry with a fabricated denom string, and walked out with real assets. The attacker didn't break the code. They just found where it stopped asking questions."
+    },
+    {
+      "source": "SlowMist",
+      "text": "Gravity Bridge, a cross-chain bridge connecting Ethereum and the Cosmos ecosystem, was exploited likely due to a compromised contract key or signing authorization. The attacker drained approximately $5.4M in assets (primarily USDC, ETH, and USDT). The exploiter has begun laundering funds via exchanges and mixers, with a significant portion (~2,102 ETH) still under their control."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Gravity Bridge lost roughly $5.4M on May 30, 2026 due to cross-chain registry poisoning. An attacker exploited weak validation in the bridge’s token-denomination mapping process, allowing withdrawal of real Ethereum assets in exchange for worthless tokens minted for free on Osmosis. The cross-chain registry update process accepted a maliciously crafted Cosmos 'denom' string without validation. The attacker embedded the real addresses of Ethereum custody tokens in fabricated denoms, and the validator attestation process wrote these as trusted mappings, allowing the attacker to withdraw real assets without depositing real value."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x68b293793c8f551b1e60345e59fb54de9d2e439a8b461d8fae5dea7d273f6c5c",
+    "0x4d864ec4550cb735b1a155aafc6293b8cdd1b0e6fb2524ff6a5c0d5c48787baa",
+    "0xafb1ee5593e6f083aa7cd9a1fe42bea82b552c7654564eff058985ffb354302f",
+    "0x59e52302c53e862fcf833b61eb851ff66e098e3d29db19fd66e5a04734eeb84b",
+    "0x4ae66025236aa0c05e78beb46bde7d6d75b188822f3cb5d338e2493a35bc83c4",
+    "0xfce883a8f9a4f3479cce1368b99287973ab40451ac092f5a41e1e09eecab5044",
+    "0x469274f4edd45ec3284bf60de8eb30086222745f8f8c8b6a955137feed41281d",
+    "0xd3cdfa10be4f0cde6b3f294856a8bdd840983dcef29a5dc24c70c36e2d7f9ef0"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Gravity Bridge - Rekt",
+      "url": "https://rekt.news/gravity-bridge-rekt"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x68b293793c8f551b1e60345e59fb54de9d2e439a8b461d8fae5dea7d273f6c5c"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/PeckShieldAlert/status/2060636956984594521"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/gravity-bridge-2026-05-30"
+    },
+    {
+      "source": "revertiq",
+      "label": "quillaudits.com",
+      "url": "https://www.quillaudits.com/blog/hack-analysis/gravity-bridge-demon-mapping-poisoning"
+    },
+    {
+      "source": "revertiq",
+      "label": "blocksec.com",
+      "url": "https://blocksec.com/blog/web3-security-dxsale-squidrouter-more"
+    },
+    {
+      "source": "revertiq",
+      "label": "security4web3.com",
+      "url": "https://security4web3.com/blogposts/post22-gravity-bridge-exploit"
+    }
+  ]
+}

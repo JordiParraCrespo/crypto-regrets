@@ -1,0 +1,107 @@
+{
+  "id": "2022-12-09-novatoken",
+  "name": "NOVAToken",
+  "date": "2022-12-09",
+  "year": 2022,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "Token",
+  "category": "rugpull",
+  "technique": "Admin Drain",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.59,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.61
+      },
+      {
+        "category": "rugpull",
+        "p": 0.32
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.04
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.03,
+    "hasRootCause": 0.9
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Malicious Unlimted Minting (Rugged). Lost: 330 $BNB",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Malicious Unlimted Minting (Rugged). Lost: 330 $BNB"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Malicious Unlimted Minting (Rugged) Vulnerable code snippet: https://bscscan.com/address/0xb5b27564d05db32cf4f25813d35b6e6de9210941#code#L418 Attack tx: https://explorer.phalcon.xyz/tx/bsc/0xf743dba906255cf6f75f8243ef8192f2a211aacf03df99322584686b5c445c23 Analysis: https://twitter.com/BeosinAlert/status/1601168659585454081"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "NOVAToken on BNB Chain was exploited on 2022-12-09 when the attacker address 0xcbf184b8156e1271449cfb42a7d0556a8dcfef72 called rewardHolders on the token contract, a path public notes describe as malicious unlimited minting. The exact net loss is not reconciled in the available record. A caller-controlled rewardHolders(uint256) path functioned as an unlimited mint or reward creation mechanism. The attacker supplied an enormous amount value, the transaction succeeded, and public incident notes describe the result as a mint followed by a swap into BNB. The retrieved evidence does not include the historical contract source, so the exact missing guard or modifier remains unverified."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xf743dba906255cf6f75f8243ef8192f2a211aacf03df99322584686b5c445c23"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-12/NovaExchange_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-12/NovaExchange_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BeosinAlert/status/1601168659585454081"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0xb5b27564d05db32cf4f25813d35b6e6de9210941#code#L418"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "explorer.phalcon.xyz",
+      "url": "https://explorer.phalcon.xyz/tx/bsc/0xf743dba906255cf6f75f8243ef8192f2a211aacf03df99322584686b5c445c23"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/novatoken-2022-12-09"
+    },
+    {
+      "source": "revertiq",
+      "label": "monitoringroom.com",
+      "url": "https://monitoringroom.com/situation/crypto-hack/novatoken"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/novatoken-hack-2022"
+    }
+  ]
+}

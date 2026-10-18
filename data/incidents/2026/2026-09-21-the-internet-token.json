@@ -1,0 +1,76 @@
+{
+  "id": "2026-09-21-the-internet-token",
+  "name": "The Internet Token",
+  "date": "2026-09-21",
+  "year": 2026,
+  "amountUsd": 16380,
+  "returnedUsd": null,
+  "chains": [
+    "Base"
+  ],
+  "targetType": "Token",
+  "category": "arbitrary-call",
+  "technique": "Arbitrary External Call",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "arbitrary-call",
+    "confidence": 0.71,
+    "top": [
+      {
+        "category": "arbitrary-call",
+        "p": 0.73
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.15
+      },
+      {
+        "category": "input-validation",
+        "p": 0.05
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "permissionless swapV3 with caller-supplied pool lets a fake callback mint INT arbitrarily. Lost: 764,145,702 INT + 5.846988 WETH (attacker minted 925.41M INT total, dumped 161.27M into the real INT/WETH pool for the WETH, reproduced to the wei)",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "permissionless swapV3 with caller-supplied pool lets a fake callback mint INT arbitrarily. Lost: 764,145,702 INT + 5.846988 WETH (attacker minted 925.41M INT total, dumped 161.27M into the real INT/WETH pool for the WETH, reproduced to the wei)"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Internet Token DAO’s LiquidityUnifier on Base was exploited after it trusted a caller-supplied Uniswap V3 pool address. A fake pool callback minted about 925 million INT out of thin air. The attacker drained 5.847 WETH (about $16,033.55) from the official INT/WETH pool and kept about 764 million INT. The mint role was not revoked in time, copycat exploits inflated supply to about 156 billion, and the attacker submitted a governance proposal aiming to move treasury funds."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-09/InternetToken_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-09/InternetToken_exp.sol"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/DefimonAlerts/status/2101969009461567690"
+    }
+  ]
+}

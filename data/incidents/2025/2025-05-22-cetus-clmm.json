@@ -1,0 +1,142 @@
+{
+  "id": "2025-05-22-cetus-clmm",
+  "name": "Cetus CLMM",
+  "date": "2025-05-22",
+  "year": 2025,
+  "amountUsd": 223000000,
+  "returnedUsd": null,
+  "chains": [
+    "Sui"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Arithmetic Error",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Move",
+  "rootCause": "$223 million from Cetus through broken math. Sui validators froze $162 million mid-heist. Over $60 million walked across Wormhole and never looked back. Was it an exploit - or just the math working as written?",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "$223 million from Cetus through broken math. Sui validators froze $162 million mid-heist. Over $60 million walked across Wormhole and never looked back. Was it an exploit - or just the math working as written?"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Cetus Protocol's concentrated liquidity math library integer_mate contained a flawed checked_shlw overflow-detection function. The function was meant to abort if a value would overflow when shifted left by 64 bits, but compared values against 0xFFFFFFFFFFFFFFFF rather than >= comparison. This allowed certain large values that would produce an arithmetic overflow during the 64-bit left shift to pass the guard unchecked. An attacker supplied a carefully crafted liquidity value that passed this broken overflow check but triggered an overflow during the actual liquidity calculation, causing the protocol to record an astronomically large liquidity position assigned to the attacker in exchange for just 1 token. The attacker then withdrew genuine pool reserves against this fabricated position, replicating the attack across multiple pools to drain approximately $223 million in under 15 minutes. Sui validators froze roughly $162 million of the stolen funds before they could be bridged out; the attacker bridged approximately $62 million in USDC to Ethereum via Wormhole before the freeze. Attack Tx: 6hAcrsQpT83mz2hVpkf87EYdTSL8bwy5dVUNZiVBDrtt Analysis: Inside The $223M Cetus Exploit: Root Cause And Impact Analysis"
+    },
+    {
+      "source": "SlowMist",
+      "text": "On May 22, according to community reports, the SUI ecosystem’s liquidity provider Cetus Protocol was reportedly attacked. Liquidity pool depth dropped sharply, and multiple token pairs on Cetus experienced significant price declines. The estimated losses exceed $230 million. The project announced shortly after that $162 million of the funds had been frozen."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On May 22, 2025, Cetus Protocol on the Sui blockchain suffered a $223 million loss after an attacker exploited an undetected integer overflow in its concentrated liquidity market maker's math library. The exploit allowed minimal token deposits to mint excessive liquidity positions, draining pools. While $62 million was bridged to Ethereum and lost, Sui validators intervened on-chain to freeze and later recover $162 million. An incorrect overflow guard in the checked_shlw function of Cetus Protocol’s math library on Sui allowed liquidity computations to wrap silently when shifting large arithmetic values left, enabling attackers to mint vastly inflated LP positions from negligible deposits.…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On May 22, 2025, Cetus Protocol on Sui was exploited through an overflow bug in CLMM liquidity math, draining about $223 million, freezing roughly $162 million on Sui, and leaving the remainder bridged off chain. An incorrect overflow predicate in the CLMM left-shift helper checked_shlw() accepted values that should have been rejected before a 64-bit shift. The shift truncated a large intermediate used in liquidity math, so the contract credited inflated liquidity against too little input and later allowed real pool reserves to be withdrawn."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "6hAcrsQpT83mz2hVpkf87EYdTSL8bwy5dVUNZiVBDrtt",
+    "0xcf5500862c1bf696e5a7acc29559e2a549497846280b8d8a5349a74941bc921a",
+    "0xe28b50cef1d633ea43d3296a3f6b67ff0312a5f1a99f0af753c85b8b5de8ff06"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Cetus - Rekt",
+      "url": "https://rekt.news/cetus-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "suivision.xyz",
+      "url": "https://suivision.xyz/txblock/6hAcrsQpT83mz2hVpkf87EYdTSL8bwy5dVUNZiVBDrtt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "cyfrin.io",
+      "url": "https://www.cyfrin.io/blog/inside-the-223m-cetus-exploit-root-cause-and-impact-analysis"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=6hAcrsQpT83mz2hVpkf87EYdTSL8bwy5dVUNZiVBDrtt"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/CetusProtocol/status/1925515662346404024"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/cetus-protocol-2025-05-26"
+    },
+    {
+      "source": "revertiq",
+      "label": "quillaudits.com",
+      "url": "https://www.quillaudits.com/blog/hack-analysis/cetus-protocol-hack-analysis"
+    },
+    {
+      "source": "revertiq",
+      "label": "halborn.com",
+      "url": "https://www.halborn.com/blog/post/explained-the-cetus-hack-may-2025"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractaudit.com",
+      "url": "https://www.smartcontractaudit.com/guides/cetus-protocol-2025-sui-clmm-overflow-exploit"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/cetus-dex-2025-05-22"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/de-fi-rekt-report-may-2025-275-9-million-lost-across-8-incidents-zero-recovered"
+    },
+    {
+      "source": "revertiq",
+      "label": "blocksec.com",
+      "url": "https://blocksec.com/blog/cetus-incident-one-unchecked-shift-drains-223m-largest"
+    },
+    {
+      "source": "revertiq",
+      "label": "research.blockscope.co",
+      "url": "https://research.blockscope.co/cetus-protocol-exploit-analysis"
+    }
+  ]
+}

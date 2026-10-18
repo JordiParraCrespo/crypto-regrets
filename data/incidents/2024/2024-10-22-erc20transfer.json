@@ -1,0 +1,93 @@
+{
+  "id": "2024-10-22-erc20transfer",
+  "name": "Erc20transfer",
+  "date": "2024-10-22",
+  "year": 2024,
+  "amountUsd": 14800,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "Token",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.97,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.97
+      },
+      {
+        "category": "input-validation",
+        "p": 0.02
+      },
+      {
+        "category": "arbitrary-call",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Access Control. Lost: $14,773.35",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Access Control. Lost: $14,773.35"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Erc20transfer was exploited on Ethereum Mainnet on 22 October 2024 due to missing input validation in the erc20TransferFrom function, allowing attackers to steal $14,773 USDC by specifying arbitrary victim addresses. The vulnerable function permitted unauthorized token transfers from addresses with approved allowances, resulting in direct loss. The core vulnerability lay in the erc20TransferFrom function, which allowed any caller to specify both the token address and victim (from) address without checking whether the caller was authorized. There was no requirement that msg.sender was equal to from or that the sender held sufficient allowance to drain the victim’s balance.…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x7f2540af4a1f7b0172a46f5539ebf943dd5418422e4faa8150d3ae5337e92172"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-10/Erc20transfer_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-10/Erc20transfer_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/d23e_AG/status/1849064161017225645"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/erc20transfer-2024-10-22"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/kismp123/DeFi-Security-Incident/blob/main/2024/2024-10-22_Erc20transfer_ArbitraryTransferFrom.md"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/past/2024/README.md#L407"
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "id": "2025-04-24-zora-token",
+  "name": "Zora token",
+  "date": "2025-04-24",
+  "year": 2025,
+  "amountUsd": 128000,
+  "returnedUsd": null,
+  "chains": [
+    "Base"
+  ],
+  "targetType": null,
+  "category": "access-control",
+  "technique": "Business Logic Flaw",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.78). Replaced keyword guess \"bridge-crosschain\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.78,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.79
+      },
+      {
+        "category": "logic-error",
+        "p": 0.18
+      },
+      {
+        "category": "arbitrary-call",
+        "p": 0.03
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.01,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "The Zora airdrop claim contract on Base allowed any caller to specify an arbitrary _claimTo destination address when redeeming tokens — it did not enforce that msg.sender must match the eligible recipient. The 0x Settler contract, a fully permissionless and public executor of arbitrary calldata, was included as an eligible recipient in the Zora airdrop snapshot. An attacker exploited this composability: they constructed calldata instructing the Settler to invoke Zora's claim function with the attacker's own address as the _claimTo argument. Because the Settler held the eligible claim and no msg.sender check was enforced, the claim succeeded and 5,500,777 ZORA tokens were redirected to the attacker, who immediately swapped them for ETH and bridged the proceeds off Base via Across Protocol for a total gain of approximately $128K. Neither contract was individually vulnerable; the exploit arose entirely from their unanticipated on-chain composability. Attack Tx: 0xf71a96fe83f4c182da0c3011a0541713e966a186a5157fd37ec825a9a99deda6 Analysis: Zora Airdrop Exploit Explained: Claim Logic Flaw Enabled Token Theft Composability Attack Deep Dive - Blockaid",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The Zora airdrop claim contract on Base allowed any caller to specify an arbitrary _claimTo destination address when redeeming tokens — it did not enforce that msg.sender must match the eligible recipient. The 0x Settler contract, a fully permissionless and public executor of arbitrary calldata, was included as an eligible recipient in the Zora airdrop snapshot. An attacker exploited this composability: they constructed calldata instructing the Settler to invoke Zora's claim function with the attacker's own address as the _claimTo argument. Because the Settler held the eligible claim and no msg.sender check was enforced, the claim succeeded and 5,500,777 ZORA tokens were redirected to the attacker, who immediately swapped them for ETH and bridged the proceeds off Base via Across Protocol for a total gain of approximately $128K. Neither contract was individually vulnerable; the exploit arose entirely from their unanticipated on-chain composability. Attack Tx: 0xf71a96fe83f4c182da0c3011a0541713e966a186a5157fd37ec825a9a99deda6 Analysis: Zora Airdrop Exploit Explained: Claim Logic Flaw Enabled Token Theft Composability Attack Deep Dive - Blockaid"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xf71a96fe83f4c182da0c3011a0541713e966a186a5157fd37ec825a9a99deda6"
+  ],
+  "poc": null,
+  "sources": [
+    "defihacklabs",
+    "blocksec"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "basescan.org",
+      "url": "https://basescan.org/tx/0xf71a96fe83f4c182da0c3011a0541713e966a186a5157fd37ec825a9a99deda6"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "threesigma.xyz",
+      "url": "https://threesigma.xyz/blog/exploit/zora-airdrop-exploit-analysis"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "blockaid.io",
+      "url": "https://www.blockaid.io/blog/composability-attack-deep-dive-how-an-attacker-stole-128k-without-an-exploit"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xf71a96fe83f4c182da0c3011a0541713e966a186a5157fd37ec825a9a99deda6"
+    }
+  ]
+}

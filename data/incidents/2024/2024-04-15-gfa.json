@@ -1,0 +1,71 @@
+{
+  "id": "2024-04-15-gfa",
+  "name": "GFA",
+  "date": "2024-04-15",
+  "year": 2024,
+  "amountUsd": 14000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "business-logic-flaw",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.98). Replaced keyword guess \"logic-error\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.98,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.98
+      },
+      {
+        "category": "logic-error",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "business-logic-flaw. Lost: ~14K USD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "business-logic-flaw. Lost: ~14K USD"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The GFA token was exploited on the BNB chain, which resulted in a loss of assets worth approximately $15,000. The root cause of the exploit is a lack of access control. The vulnerable contracts had functions for calculating rewards, for which anyone could invoke a call to them. The hacker was able to manually calculate and generate the rewards and drain the tokens. The exploiter has already laundered the stolen assets into Tornado Cash."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-04/GFA_exp.sol",
+  "sources": [
+    "defihacklabs",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-04/GFA_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/ChainAegis/status/1779809931962827055"
+    },
+    {
+      "source": "slowmist",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0xe15d6f7fa891c2626819209edf2d5ded6948310eaada067b400062aa022ce718"
+    }
+  ]
+}

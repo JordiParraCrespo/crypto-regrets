@@ -1,0 +1,141 @@
+{
+  "id": "2025-06-25-resupply",
+  "name": "Resupply",
+  "date": "2025-06-25",
+  "year": 2025,
+  "amountUsd": 9600000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Donation Attack",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.82,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.83
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.17
+      }
+    ],
+    "flashLoan": 0.96,
+    "stateActor": 0.01,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Share price manipulation. Lost: 9.6M USD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Share price manipulation. Lost: 9.6M USD"
+    },
+    {
+      "source": "REKT",
+      "text": "$9.8M lost in just 2 hours after ResupplyFi deployed a new market when someone donated pocket change to manipulate their fresh vault's exchange rate to zero. Attacker then drained the entire market using 1 wei of worthless shares as collateral."
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Resupply's lending market derives its collateral exchange rate / oracle from an ERC4626 sCrvUSD-style vault's convertToAssets (shares-to-assets) value, with no protection against an empty or near-empty vault whose share price can be inflated by donation. The attacker flash-loaned 4,000 USDC (Morpho), swapped it for crvUSD, and donated crvUSD directly to a freshly-deployed sCrvUSD vault (0x0114...9e1D) while minting only 1 wei of shares. This made one share worth an enormous amount of underlying, so when the share was added as collateral via addCollateralVault() the resupply vault read a massively inflated collateral value and let the attacker borrow() 10,000,000 reUSD against essentially nothing. The borrowed reUSD was swapped out via Curve, the inflated shares redeemed, and the position unwound for ~9.6M USD profit. Root cause: a manipulable ERC4626 share-price oracle with no minimum-supply / rounding-direction / donation guard (a share-price inflation attack). Vulnerable code snippet: Attack Tx: https://etherscan.io/tx/0xffbbd492e0605a8bb6d490c3cd879e87ff60862b0684160d08fd5711e7a872d3 Analysis: Resupply post-mortem"
+    },
+    {
+      "source": "SlowMist",
+      "text": "According to monitoring by the MistEye system, decentralized stablecoin protocol Resupply appears to have suffered an exploit, with estimated losses of around $9.5 million. The attacker manipulated the cvcrvUSD exchange rate by making donation transactions to the cvcrvUSD Controller contract, ultimately stealing a large amount of reUSD tokens."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On June 26, 2025, an attacker exploited a newly deployed, low-liquidity Resupply Protocol market on Ethereum, using a donation attack to manipulate share pricing in an ERC-4626 vault and bypass collateralization checks. Over $9.5 million in reUSD stablecoins was drained before the market was paused. The protocol used an unprotected share price calculation for ERC-4626 vault collateral. With zero initial vault liquidity, a donation of crvUSD and a minimal deposit enabled one minted share to account for the entire vault, causing a manipulated exchange rate that bypassed the loan-to-value solvency check and enabled borrowing the full limit."
+    }
+  ],
+  "audit": "ChainSecurity, Electi",
+  "txHashes": [
+    "0xffbbd492e0605a8bb6d490c3cd879e87ff60862b0684160d08fd5711e7a872d3",
+    "0x852eca15a9fd352817346915f7bc8817d46de349bd7a8fc6ee73c7b66ec9ab41",
+    "0x7225c1e2793368234c6f133924906e9bea336dabbc363c7513f886eaa812c55c"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-06/ResupplyFi_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-06/ResupplyFi_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/ResupplyFi/status/1938927974272938420"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: ResupplyFi - Rekt",
+      "url": "https://rekt.news/resupplyfi-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xffbbd492e0605a8bb6d490c3cd879e87ff60862b0684160d08fd5711e7a872d3"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "mirror.xyz",
+      "url": "https://mirror.xyz/0x521CB9b35514E9c8a8a929C890bf1489F63B2C84/ygJ1kh6satW9l_NDBM47V87CfaQbn2q0tWy_rtp76OI"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xffbbd492e0605a8bb6d490c3cd879e87ff60862b0684160d08fd5711e7a872d3"
+    },
+    {
+      "source": "blocksec",
+      "label": "x.com",
+      "url": "https://x.com/Phalcon_xyz/status/1938073001087652021"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/1938073225503908072"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/resupply-2025-06-27"
+    },
+    {
+      "source": "revertiq",
+      "label": "quillaudits.com",
+      "url": "https://www.quillaudits.com/blog/hack-analysis/resupply-hack-analysis"
+    },
+    {
+      "source": "revertiq",
+      "label": "halborn.com",
+      "url": "https://www.halborn.com/blog/post/explained-the-resupply-hack-june-2025"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/de-fi-rekt-report-june-2025-114-8-million-lost-across-11-exploits"
+    }
+  ]
+}

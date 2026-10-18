@@ -1,0 +1,86 @@
+{
+  "id": "2026-05-01-bisq",
+  "name": "Bisq",
+  "date": "2026-05-01",
+  "year": 2026,
+  "amountUsd": 550000,
+  "returnedUsd": null,
+  "chains": [
+    "Bitcoin"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "input-validation",
+  "technique": "Missing Input Validation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "input-validation",
+    "confidence": 0.97,
+    "top": [
+      {
+        "category": "input-validation",
+        "p": 0.97
+      },
+      {
+        "category": "client-bug",
+        "p": 0.02
+      },
+      {
+        "category": "access-control",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.03,
+    "hasRootCause": 0.92
+  },
+  "bridge": false,
+  "language": "C++",
+  "rootCause": "A vulnerability in Bisq v1 trade protocol allowed attackers (possibly using modified clients) to bypass verification and drain Bitcoin from open offers. Primarily affected altcoin trades. User wallets holding BTC were not directly impacted. The team activated emergency measures to disable trading and is preparing a DAO vote for full reimbursement.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "A vulnerability in Bisq v1 trade protocol allowed attackers (possibly using modified clients) to bypass verification and drain Bitcoin from open offers. Primarily affected altcoin trades. User wallets holding BTC were not directly impacted. The team activated emergency measures to disable trading and is preparing a DAO vote for full reimbursement."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On May 1, 2026, Bisq v1 was exploited on Bitcoin, resulting in a loss of 11.59 BTC (roughly $550,000). The attacker used a modified client to supply a negative miner fee value, bypassing input validation and draining altcoin trade offers. Affected users were reimbursed through Bisq's DAO after emergency measures halted trading. Bisq v1's trade protocol failed to validate taker-provided miner fee inputs. This allowed an attacker to pass a negative value, causing improper Bitcoin distribution in the multisig escrow output and redirecting excess funds to the attacker's change address."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/bisq_network/status/2050917431699460231"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/bisq-2026-05-01"
+    },
+    {
+      "source": "revertiq",
+      "label": "bisq.community",
+      "url": "https://bisq.community/t/bisq-v1-security-incident-post-mortem/13747"
+    },
+    {
+      "source": "revertiq",
+      "label": "bisq.network",
+      "url": "https://bisq.network/blog/security-incident-post-mortem/"
+    }
+  ]
+}

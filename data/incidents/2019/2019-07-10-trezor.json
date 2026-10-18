@@ -1,0 +1,58 @@
+{
+  "id": "2019-07-10-trezor",
+  "name": "Trezor",
+  "date": "2019-07-10",
+  "year": 2019,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [],
+  "targetType": null,
+  "category": "key-compromise",
+  "technique": "Wallet Vulnerability",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.98).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "key-compromise",
+    "confidence": 0.98,
+    "top": [
+      {
+        "category": "key-compromise",
+        "p": 0.98
+      },
+      {
+        "category": "signature-crypto",
+        "p": 0.01
+      },
+      {
+        "category": "frontend-infra",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.01,
+    "stateActor": 0.02,
+    "hasRootCause": 0.94
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "An attacker with a stolen device can extract the seed from the device. It takes less than 5 minutes and the necessary materials cost around 100$. This vulnerability affects Trezor One, Trezor T, Keepkey and all other Trezor clones. Unfortunately, this vulnerability cannot be patched.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "An attacker with a stolen device can extract the seed from the device. It takes less than 5 minutes and the necessary materials cost around 100$. This vulnerability affects Trezor One, Trezor T, Keepkey and all other Trezor clones. Unfortunately, this vulnerability cannot be patched."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "slowmist",
+      "label": "ledger-donjon.github.io",
+      "url": "https://ledger-donjon.github.io/Unfixable-Key-Extraction-Attack-on-Trezor/"
+    }
+  ]
+}

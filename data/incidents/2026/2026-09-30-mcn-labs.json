@@ -1,0 +1,60 @@
+{
+  "id": "2026-09-30-mcn-labs",
+  "name": "MCN Labs",
+  "date": "2026-09-30",
+  "year": 2026,
+  "amountUsd": 92600,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": null,
+  "category": "logic-error",
+  "technique": "Smart Contract Vulnerability",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.85). Replaced keyword guess \"accounting-math\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.85,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.86
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.13
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "The MCN Labs–related LPBonus contract used inconsistent MSN reserve values in reward accounting. Accrual updated the reward index with the reserve at that moment, while withdrawal applied a user weight based on the reserve at claim time. The attacker first lowered the reserve to ~89.33 MSN during accrual, then raised it to ~491.11 MSN before calling UserRemoveLp, allowing a newly registered LP to claim ~1,442,165.71 FIST against only ~940,041.61 FIST of intervening reward funding—about $92,600 in losses.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The MCN Labs–related LPBonus contract used inconsistent MSN reserve values in reward accounting. Accrual updated the reward index with the reserve at that moment, while withdrawal applied a user weight based on the reserve at claim time. The attacker first lowered the reserve to ~89.33 MSN during accrual, then raised it to ~491.11 MSN before calling UserRemoveLp, allowing a newly registered LP to claim ~1,442,165.71 FIST against only ~940,041.61 FIST of intervening reward funding—about $92,600 in losses."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/2105145534126358819"
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "id": "2022-09-08-yyds",
+  "name": "YYDS",
+  "date": "2022-09-08",
+  "year": 2022,
+  "amountUsd": 742286.27,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "pair manipulate",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.76). Replaced keyword guess \"oracle-manipulation\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.76,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.77
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.16
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.05
+      }
+    ],
+    "flashLoan": 0.06,
+    "stateActor": 0.02,
+    "hasRootCause": 0.85
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "pair manipulate. Lost: 742,286.27 BUSD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "pair manipulate. Lost: 742,286.27 BUSD"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Calculation of reward being too simple and only depends on the pool reserve by balanceOf. Vulnerable contract (unverified): 0xe70cdd37667cddf52cabf3edabe377c58fae99e9"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-09/Yyds_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-09/Yyds_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BlockSecTeam/status/1567928377432051713"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x04a1f0d1694242515ecb14faa71053901f11a1286cd21c27fe5542f9eeb62356"
+    }
+  ]
+}

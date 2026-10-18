@@ -1,0 +1,99 @@
+{
+  "id": "2024-01-30-mimspell",
+  "name": "MIMSpell",
+  "date": "2024-01-30",
+  "year": 2024,
+  "amountUsd": 65000000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Precission Loss",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.99).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.99
+      },
+      {
+        "category": "logic-error",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.09,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Precission Loss. Lost: ~6,5M",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Precission Loss. Lost: ~6,5M"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The attack exploited an accuracy issue in calculating loan variables, allowing manipulation of key variables elastic and base. This imbalance led to errors in collateral and loan amount calculations, resulting in excessive lending of MIM tokens. Vulnerable code snippet: Attack transaction: https://phalcon.blocksec.com/explorer/tx/eth/0x26a83db7e28838dd9fee6fb7314ae58dcc6aee9a20bf224c386ff5e80f7e4cf2 Analysis: https://twitter.com/kankodu/status/1752581744803680680"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x26a83db7e28838dd9fee6fb7314ae58dcc6aee9a20bf224c386ff5e80f7e4cf2",
+    "0xdb4616b89ad82062787a4e924d520639791302476484b9a6eca5126f79b6d877"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-01/MIMSpell2_exp.sol",
+  "sources": [
+    "defihacklabs",
+    "blocksec"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-01/MIMSpell2_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/kankodu/status/1752581744803680680"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Phalcon_xyz/status/1752278614551216494"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/peckshield/status/1752279373779194011"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "phalcon.blocksec.com",
+      "url": "https://phalcon.blocksec.com/explorer/tx/eth/0x26a83db7e28838dd9fee6fb7314ae58dcc6aee9a20bf224c386ff5e80f7e4cf2"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xdb4616b89ad82062787a4e924d520639791302476484b9a6eca5126f79b6d877"
+    },
+    {
+      "source": "blocksec",
+      "label": "twitter.com",
+      "url": "https://twitter.com/MageIntern/status/1752319261908017632"
+    },
+    {
+      "source": "blocksec",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs?tab=readme-ov-file#20240130-mimspell---precission-loss"
+    }
+  ]
+}

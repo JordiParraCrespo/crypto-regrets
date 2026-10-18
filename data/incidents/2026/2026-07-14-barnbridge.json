@@ -1,0 +1,101 @@
+{
+  "id": "2026-07-14-barnbridge",
+  "name": "BarnBridge",
+  "date": "2026-07-14",
+  "year": 2026,
+  "amountUsd": 776000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "governance",
+  "technique": "Malicious Proposal",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "governance",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "governance",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Attacker gained DAO governance authority and upgraded SmartYield/controller proxy to malicious implementation. Invoked CompoundProvider._takeUnderlying() using pre-existing USDC approvals from 50 user accounts, forwarding aggregated funds to attacker via transferFees. Attack Tx: https://app.blocksec.com/phalcon/explorer/tx/eth/0xd191fead1b9a2244f2837560f35d4fc865404914d229bfcb0172d1a7a9895afb Source: https://twitter.com/Phalcon_xyz/status/2077243530280587721",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Attacker gained DAO governance authority and upgraded SmartYield/controller proxy to malicious implementation. Invoked CompoundProvider._takeUnderlying() using pre-existing USDC approvals from 50 user accounts, forwarding aggregated funds to attacker via transferFees. Attack Tx: https://app.blocksec.com/phalcon/explorer/tx/eth/0xd191fead1b9a2244f2837560f35d4fc865404914d229bfcb0172d1a7a9895afb Source: https://twitter.com/Phalcon_xyz/status/2077243530280587721"
+    },
+    {
+      "source": "SlowMist",
+      "text": "DeFi protocol BarnBridge suffered a governance attack on July 15, 2026. The attacker gained control of the DAO via a malicious governance proposal, upgraded the proxy contract to a malicious implementation, and drained approximately $776,000 USDC by exploiting pre-existing approvals from around 50 user addresses."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On July 15, 2026, an attacker captured governance control of the deprecated BarnBridge protocol on Ethereum, passing proposals and replacing a controller contract. This enabled them to drain about $776K in USDC from roughly 50 user wallets via lingering approvals. Abandoned but still-powerful governance: BarnBridge’s governance contract retained admin control of lending-integration contracts after protocol deprecation. As total staked governance tokens declined, a hostile attacker cheaply gained enough voting power to pass and execute proposals that swapped the controller for a malicious proxy. This proxy contract then used lingering user USDC approvals to drain their funds."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xd191fead1b9a2244f2837560f35d4fc865404914d229bfcb0172d1a7a9895afb",
+    "0x7d722637a58a7117dbca0182ec26d74e2be0c1052ac319f0150bc056e528d238"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/phalcon/explorer/tx/eth/0xd191fead1b9a2244f2837560f35d4fc865404914d229bfcb0172d1a7a9895afb"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Phalcon_xyz/status/2077243530280587721"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/FortaNetwork/status/2077364671275769860"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/barnbridge-2026-07-15"
+    },
+    {
+      "source": "revertiq",
+      "label": "blocksec.com",
+      "url": "https://blocksec.com/blog/web3-security-barnbridge-defituna-exploits"
+    },
+    {
+      "source": "revertiq",
+      "label": "crypto.training",
+      "url": "https://crypto.training/hacks/2026-07-compoundprovider/"
+    },
+    {
+      "source": "revertiq",
+      "label": "publicaml.org",
+      "url": "https://publicaml.org/news/2026-07-15-barnbridge/"
+    }
+  ]
+}

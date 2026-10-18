@@ -1,0 +1,91 @@
+{
+  "id": "2021-06-24-sharedstake",
+  "name": "SharedStake",
+  "date": "2021-06-24",
+  "year": 2021,
+  "amountUsd": 500000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.64,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.66
+      },
+      {
+        "category": "rugpull",
+        "p": 0.28
+      },
+      {
+        "category": "logic-error",
+        "p": 0.05
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.94
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "The Ethereum 2.0 staking solution SharedStake released an attacked report, stating that the reason the SharedStake token was minted before the official launch was due to the use of vulnerabilities in time-locked contracts (that is, smart contracts that perform certain operations at a fixed time) by internal personnel. The vulnerability was submitted to the team by the white hat Lucash-dev on April 26. Because a team member had permission to view the vulnerability, he used the vulnerability to cast a value of about 50 on the main network four times on June 19 and 23. Ten thousand USD tokens were sold and mortgaged after the official launch. Although the…",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The Ethereum 2.0 staking solution SharedStake released an attacked report, stating that the reason the SharedStake token was minted before the official launch was due to the use of vulnerabilities in time-locked contracts (that is, smart contracts that perform certain operations at a fixed time) by internal personnel. The vulnerability was submitted to the team by the white hat Lucash-dev on April 26. Because a team member had permission to view the vulnerability, he used the vulnerability to cast a value of about 50 on the main network four times on June 19 and 23. Ten thousand USD tokens were sold and mortgaged after the official launch. Although the…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "SharedStake suffered an insider exploit in June 2021 due to a critical flaw in its timelock vesting contracts. The SmartTimelock contract allowed the beneficiary to execute arbitrary calls, permitting immediate withdrawal of locked funds. The attacker drained approximately $500,000 in tokens, collapsing confidence in the protocol. The SmartTimelock contract exposed a call() method that allowed the owner (beneficiary) to execute arbitrary contract calls on behalf of the timelock, without restricting the function selector or target. This enabled the withdrawal of locked assets before their scheduled release."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x9400daa8711b4326e7b3bb7a4874099e5c7fe801c8b1488ff91bd6e5de332c9f",
+    "0x68dcf70e021684c414ec7512fd58b84098a020d62459b23f690f76a6ca6f38c5",
+    "0x466bca01f2648ea855a018edce701d8bb9ca1b53853b076dfe15da7ea379cf39",
+    "0x2dff7aa6b1f1f128b60504a5f195589597590765baf8d7607540fe3712328313"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "medium.com",
+      "url": "https://medium.com/immunefi/sharedstake-insider-exploit-postmortem-17fa93d5c90e"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/sharedstake-2021-06-24"
+    },
+    {
+      "source": "revertiq",
+      "label": "immunefi.com",
+      "url": "https://immunefi.com/blog/bug-fix-reviews/sharedstake-insider-exploit-postmortem/"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptonews.net",
+      "url": "https://cryptonews.net/news/defi/863889/"
+    }
+  ]
+}

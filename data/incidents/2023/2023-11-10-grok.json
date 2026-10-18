@@ -1,0 +1,76 @@
+{
+  "id": "2023-11-10-grok",
+  "name": "grok",
+  "date": "2023-11-10",
+  "year": 2023,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Lack of slippage protection",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.89).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.89,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.9
+      },
+      {
+        "category": "input-validation",
+        "p": 0.04
+      },
+      {
+        "category": "access-control",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.93
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Lack of slippage protection. Lost: ~26 ETH",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Lack of slippage protection. Lost: ~26 ETH"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The protocol lost 26 ETH due to insufficient slippage control. The attacker exploited the _transfer function in the GROK contract to trigger swapTokensForEth when the balance surpassed _taxSwapThreshold, allowing them to harvest and convert extra GROK tokens into ETH. As shown in the Vulnerable Code Snippet section, there is no slippage check in the interaction with the Uniswap V2 router. Vulnerable code snippet: Attack tx: 0x3e9bcee951cdad8480 | Phalcon Explorer Analysis: Root cause: Vulnerable code snippet: Attack tx: Analysis: BlockSec Phalcon on Twitter / X"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x3e9bcee951cdad84805e0c82d2a1e982e71f2ec301a1cbd344c832e0acaee813"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-11/grok_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-11/grok_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Phalcon_xyz/status/1722841076120130020"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "explorer.phalcon.xyz",
+      "url": "https://explorer.phalcon.xyz/tx/eth/0x3e9bcee951cdad84805e0c82d2a1e982e71f2ec301a1cbd344c832e0acaee813?line=136"
+    }
+  ]
+}

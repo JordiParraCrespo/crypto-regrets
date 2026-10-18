@@ -1,0 +1,129 @@
+{
+  "id": "2023-07-24-palmswap",
+  "name": "Palmswap",
+  "date": "2023-07-24",
+  "year": 2023,
+  "amountUsd": 900000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Incorrect Share Accounting",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.74,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.76
+      },
+      {
+        "category": "logic-error",
+        "p": 0.13
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.1
+      }
+    ],
+    "flashLoan": 0.07,
+    "stateActor": 0.02,
+    "hasRootCause": 0.93
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Business Logic Flaw. Lost: ~$900K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Business Logic Flaw. Lost: ~$900K"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The root cause is that the price of $PLP is determined by the number of $USDT in the Vault contract and the $USDP supply. The attacker was able to manipulate the amount of $USDT in the Vault by calling the buyUSDPfunction. Code Snippet: Attack TX: https://app.blocksec.com/explorer/tx/bsc/0x62dba55054fa628845fecded658ff5b1ec1c5823f1a5e0118601aa455a30eac9 Analysis: https://twitter.com/BlockSecTeam/status/1683680026766737408"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The Palmswap project on the BSC chain was attacked, and the attacker made a profit of more than 900,000 US dollars. According to the analysis of SlowMist, this attack was due to the fact that the authority control function of the core function was not enabled, and the price calculation model of the liquidity token was designed too simply, depending only on the number of USDT tokens in the treasury and the total supply, resulting in the attacker can use flash loans to maliciously manipulate prices to obtain unexpected profits. On July 28, Palmswap tweeted that 80% of the stolen funds had been returned, and the remaining 20% was used as a bug bounty for hackers."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On July 24, 2023, Palmswap on BNB Chain was exploited for $901,000. The attacker used flash loans and took advantage of a mispriced PLP token redemption rate, inflating their returns by manipulating the PoolAmount via buyUSDP(), then redeeming PLP at nearly double the original rate. The PlpManager contract incorrectly increased the PoolAmount on buyUSDP(), inflating the PLP exchange rate used for redemption. This allowed the attacker to mint PLP at a 1:1 rate, then redeem them at an inflated 1:1.9 rate after PoolAmount was manipulated, extracting excess funds."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x62dba55054fa628845fecded658ff5b1ec1c5823f1a5e0118601aa455a30eac9",
+    "0x3b2565e364546e8d2695dd3b0306267e101ab90ad60a712b3d56e63f25c8ad33"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-07/Palmswap_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-07/Palmswap_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BlockSecTeam/status/1683680026766737408"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/bsc/0x62dba55054fa628845fecded658ff5b1ec1c5823f1a5e0118601aa455a30eac9"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x62dba55054fa628845fecded658ff5b1ec1c5823f1a5e0118601aa455a30eac9"
+    },
+    {
+      "source": "blocksec",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs?tab=readme-ov-file#20230724-palmswap---business-logic-flaw"
+    },
+    {
+      "source": "slowmist",
+      "label": "mp.weixin.qq.com",
+      "url": "https://mp.weixin.qq.com/s/qoZaQbPZMx4nuP-I8EgCEA"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/decoding-palmswap-s-900k-2024-06-01"
+    },
+    {
+      "source": "revertiq",
+      "label": "quillaudits.com",
+      "url": "https://www.quillaudits.com/blog/hack-analysis/palmswap-900k-exploit"
+    },
+    {
+      "source": "revertiq",
+      "label": "olympix.security",
+      "url": "https://olympix.security/biweekly-exploits/palmswap-biswap-libertivault-when-price-curves-permissions-and-reentrancy-all-break"
+    },
+    {
+      "source": "revertiq",
+      "label": "certik.com",
+      "url": "https://www.certik.com/blog/palmswap-incident-analysis"
+    }
+  ]
+}

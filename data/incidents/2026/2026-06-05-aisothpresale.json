@@ -1,0 +1,72 @@
+{
+  "id": "2026-06-05-aisothpresale",
+  "name": "AISOTHPresale",
+  "date": "2026-06-05",
+  "year": 2026,
+  "amountUsd": 30314.76,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Fixed-price presale arbitrage",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.98).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.98,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.98
+      },
+      {
+        "category": "market-manipulation",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.94,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Fixed-price presale arbitrage. Lost: 30,314.76 USDT",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Fixed-price presale arbitrage. Lost: 30,314.76 USDT"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The AISOTH presale contract sells AIS tokens at a fixed price() regardless of the prevailing market price on the AIS/USDT PancakeSwap pair. Because the presale price was lower than the AMM market price, the attacker could risklessly arbitrage the gap: flash-swap USDT from the USDT/WBNB pair, buy() the entire claimable AIS inventory from the presale at the fixed price, immediately claim() it, then dump the AIS into the AIS/USDT pair via swapExactTokensForTokensSupportingFeeOnTransferTokens for more USDT than was spent, repay the flash swap, and keep ~30,314 USDT profit. The presale lacked any per-buyer cap, vesting/lockup, or price-vs-market check. Vulnerable code snippet: Attack Tx: https://bscscan.com/tx/0x11462984d7f5663db9cf95c07c6cd9ff91f5b2d6616268e8dd6a3013e190248c Analysis: https://x.com/audit_911/status/2063565495073415618"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x11462984d7f5663db9cf95c07c6cd9ff91f5b2d6616268e8dd6a3013e190248c"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-06/AISOTHPresale_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-06/AISOTHPresale_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/audit_911/status/2063565495073415618"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x11462984d7f5663db9cf95c07c6cd9ff91f5b2d6616268e8dd6a3013e190248c"
+    }
+  ]
+}

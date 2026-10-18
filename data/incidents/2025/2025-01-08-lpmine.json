@@ -1,0 +1,72 @@
+{
+  "id": "2025-01-08-lpmine",
+  "name": "LPMine",
+  "date": "2025-01-08",
+  "year": 2025,
+  "amountUsd": 24000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Incorrect reward calculation",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.99).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.99
+      },
+      {
+        "category": "consensus-attack",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Incorrect reward calculation. Lost: ~24k USDT",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Incorrect reward calculation. Lost: ~24k USDT"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The exploit resulted from a logical vulnerability within the ILPMine contract's reward distribution system. The contract calculated rewards based on the LP token pair's balance. However, it did not accurately track or enforce the time elapsed between reward claims. By manipulating the blockchain's timestamp and repeatedly calling the extractReward function, the attacker bypassed the intended cooldown or time-based restrictions. This allowed them to claim rewards multiple times in quick succession after initially providing liquidity, effectively draining the reward pool beyond their legitimate entitlement. The core flaw was the inadequate management of the last reward claim timestamp, leading to exploitable repeated reward withdrawals. Vulnerable code snippet: Attack tx: https://app.blocksec.com/explorer/tx/bsc/0x00c5a772a58b117f142b2cbc8721b80d145ef7a910043ad08439863d0e78e300?line=15333 Analysis: https://x.com/TenArmorAlert/status/1877030261067571234"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x00c5a772a58b117f142b2cbc8721b80d145ef7a910043ad08439863d0e78e300"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-01/LPMine_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-01/LPMine_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/TenArmorAlert/status/1877030261067571234"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/bsc/0x00c5a772a58b117f142b2cbc8721b80d145ef7a910043ad08439863d0e78e300?line=15333"
+    }
+  ]
+}

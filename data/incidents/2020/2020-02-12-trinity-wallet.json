@@ -1,0 +1,72 @@
+{
+  "id": "2020-02-12-trinity-wallet",
+  "name": "Trinity Wallet",
+  "date": "2020-02-12",
+  "year": 2020,
+  "amountUsd": 2000000,
+  "returnedUsd": null,
+  "chains": [
+    "Iota"
+  ],
+  "targetType": "Wallet",
+  "category": "frontend-infra",
+  "technique": "CDN Compromise",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "frontend-infra",
+    "confidence": 0.89,
+    "top": [
+      {
+        "category": "frontend-infra",
+        "p": 0.9
+      },
+      {
+        "category": "key-compromise",
+        "p": 0.1
+      }
+    ],
+    "flashLoan": 0.01,
+    "stateActor": 0.03,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "On February 12, 2020, attackers exploited a third-party CDN dependency in the Trinity Wallet for IOTA, leading to the theft of approximately 8.55 Ti in IOTA tokens (valued near $2 million at the time). The compromised dependency enabled exfiltration of users’ seeds when the wallet was unlocked, allowing the attacker to transfer funds from affected wallets. The incident forced IOTA to halt its Coordinator and develop a seed migration plan. The Trinity Wallet integrated MoonPay’s SDK via a CDN, without thoroughly mitigating the security risks of remote code loading. Attackers compromised MoonPay’s CDN, served malicious code to Trinity users, and exfiltra…",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "On February 12, 2020, attackers exploited a third-party CDN dependency in the Trinity Wallet for IOTA, leading to the theft of approximately 8.55 Ti in IOTA tokens (valued near $2 million at the time). The compromised dependency enabled exfiltration of users’ seeds when the wallet was unlocked, allowing the attacker to transfer funds from affected wallets. The incident forced IOTA to halt its Coordinator and develop a seed migration plan. The Trinity Wallet integrated MoonPay’s SDK via a CDN, without thoroughly mitigating the security risks of remote code loading. Attackers compromised MoonPay’s CDN, served malicious code to Trinity users, and exfiltra…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/trinity-wallet-2020-02-12"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.iota.org",
+      "url": "https://blog.iota.org/trinity-attack-incident-part-1-summary-and-next-steps-8c7ccc4d81e8/"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.iota.org",
+      "url": "https://blog.iota.org/trinity-attack-incident-part-3-key-learnings-takeaways-c933de22fd0a/"
+    }
+  ]
+}

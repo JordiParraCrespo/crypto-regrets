@@ -1,0 +1,86 @@
+{
+  "id": "2018-12-19-eos-max",
+  "name": "EOS Max",
+  "date": "2018-12-19",
+  "year": 2018,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [
+    "EOS"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Roll back attack",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "client-bug",
+    "confidence": 0.79,
+    "top": [
+      {
+        "category": "client-bug",
+        "p": 0.8
+      },
+      {
+        "category": "logic-error",
+        "p": 0.11
+      },
+      {
+        "category": "consensus-attack",
+        "p": 0.07
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.3
+  },
+  "bridge": false,
+  "language": "C++",
+  "rootCause": "The attacker (eykkxszdrnnc) launched an attack on the EOS MAX game contract (eosmaxiodice), an EOS quiz game, earning a total of 55,526.05 EOS. The game party has suspended the game operation at 6:40 am on the 19th, and issued an announcement saying that it was caused by a loophole in EOS Node, not a loophole in the game contract.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The attacker (eykkxszdrnnc) launched an attack on the EOS MAX game contract (eosmaxiodice), an EOS quiz game, earning a total of 55,526.05 EOS. The game party has suspended the game operation at 6:40 am on the 19th, and issued an announcement saying that it was caused by a loophole in EOS Node, not a loophole in the game contract."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "EOS Max, an EOS gambling dapp, was reportedly exploited on 2018-12-18 through an EOS node synchronization and speculative execution issue that let attackers selectively submit winning bets. Public reporting attributed roughly 55,526 EOS in losses to EOS Max, but no primary transaction record or official postmortem was located. Available reporting attributed the EOS Max incident to EOS node synchronization and speculative execution behavior between API nodes and block producer nodes. Attackers reportedly executed bets against locally observed outcomes and only finalized favorable transactions on block producer nodes before block irreversibility. No veri…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "jinse.com",
+      "url": "https://www.jinse.com/lives/71741.htm"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/eos-max-2018-12-19"
+    },
+    {
+      "source": "revertiq",
+      "label": "captainaltcoin.com",
+      "url": "https://captainaltcoin.com/nano-boulton-upgrade-is-impressive-eos-dapps-are-paradise-for-hackers-while-dash-and-venezuela-love-is-still-strong/"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptonews.net",
+      "url": "https://cryptonews.net/news/altcoins/70425/"
+    }
+  ]
+}

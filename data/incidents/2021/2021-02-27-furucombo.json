@@ -1,0 +1,104 @@
+{
+  "id": "2021-02-27-furucombo",
+  "name": "Furucombo",
+  "date": "2021-02-27",
+  "year": 2021,
+  "amountUsd": 14000000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Delegatecall Hijack",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "arbitrary-call",
+    "confidence": 0.59,
+    "top": [
+      {
+        "category": "arbitrary-call",
+        "p": 0.61
+      },
+      {
+        "category": "access-control",
+        "p": 0.28
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.1
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.09
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Better to wait than to swing and miss. rekt gets in the ring with Limzero and Kurt Barry to investigate the $14m furucombo knockout. \"Infinite approval\" is never safe.",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "Better to wait than to swing and miss. rekt gets in the ring with Limzero and Kurt Barry to investigate the $14m furucombo knockout. \"Infinite approval\" is never safe."
+    },
+    {
+      "source": "SlowMist",
+      "text": "The agent of the DeFi platform Furucombo was attacked and the amount stolen amounted to more than 15 million U.S. dollars. The DeFi aggregation platform Furucombo officially released a tweet, saying: \"The root cause has been found and the vulnerability has been patched. The funds are now safe. We are investigating the stolen funds and organizing follow-up actions. The follow-up will continue to be updated.\"Later, Furucombo stated that it would issue 5 million iouCOMBO tokens to affected users"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On February 27, 2021, an attacker exploited the Furucombo DeFi protocol by leveraging an uninitialized Aave v2 implementation contract and the absence of a handler allowlist in Furucombo's proxy. This allowed malicious delegatecall execution and enabled the attacker to drain ~$14M in ERC-20 tokens from users who had previously approved the proxy. Furucombo's proxy contract accepted any user-supplied handler address for delegatecall with no on-chain allowlist. This enabled exploitation via an attacker-controlled, uninitialized Aave v2 implementation contract, allowing the attacker to execute arbitrary code and drain tokens from all users who had previously authorized the proxy."
+    }
+  ],
+  "audit": "Unaudited",
+  "txHashes": [
+    "0x6a14869266a1dcf3f51b102f44b7af7d0a56f1766e5b1908ac80a6a23dbaf449",
+    "0x8bf64bd802d039d03c63bf3614afc042f345e158ea0814c74be4b5b14436afb9"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Furucombo - REKT",
+      "url": "https://rekt.news/furucombo-rekt"
+    },
+    {
+      "source": "slowmist",
+      "label": "cointelegraph.com",
+      "url": "https://cointelegraph.com/news/transaction-batching-protocol-furucombo-suffers-14-million-evil-contract-hack"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/furucombo-2020-02-28"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractaudit.com",
+      "url": "https://www.smartcontractaudit.com/guides/furucombo-2021-delegatecall-exploit"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/OriginProtocol/security/blob/master/incidents/2021-02-27-Furucombo.md"
+    }
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "id": "2024-11-07-chisale",
+  "name": "ChiSale",
+  "date": "2024-11-07",
+  "year": 2024,
+  "amountUsd": 16300,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Protocol Logic",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.72,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.74
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.14
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.12
+      }
+    ],
+    "flashLoan": 0.98,
+    "stateActor": 0.02,
+    "hasRootCause": 0.9
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Logic Flaw. Lost: $16.3 K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Logic Flaw. Lost: $16.3 K"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "ChiSale on Ethereum Mainnet was exploited on 2024-11-07 in a 25,000 WETH Balancer flash-loan transaction that routed through a separate receiver contract and left about 5.780779999999999987 ETH as residual profit after repayment. ChiSale’s historical buy() logic used caller-controlled msg.value for token and referral accounting, so an atomic flash-loan funded purchase path could recycle borrowed value through the sale contract and retain a surplus after repayment. The exact receiver-side substep that produced the profit is not fully reconstructed from the available trace."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x586a2a4368a1a45489a8a9b4273509b524b672c33e6c544d2682771b44f05e87"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-11/ChiSale_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-11/ChiSale_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/TenArmorAlert/status/1854357930382156107"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/chisale-2024-11-07"
+    },
+    {
+      "source": "revertiq",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/phalcon/explorer/tx/eth/0x586a2a4368a1a45489a8a9b4273509b524b672c33e6c544d2682771b44f05e87"
+    },
+    {
+      "source": "revertiq",
+      "label": "raw.githubusercontent.com",
+      "url": "https://raw.githubusercontent.com/tintinweb/smart-contract-sanctuary-ethereum/master/contracts/mainnet/05/050163597d9905ba66400f7b3ca8f1730c64190ec0e9328de89f26012468c67cc8b173526f60bd1db08e4c8bf6010f5_ChiSale.sol"
+    }
+  ]
+}

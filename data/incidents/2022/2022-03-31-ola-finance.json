@@ -1,0 +1,78 @@
+{
+  "id": "2022-03-31-ola-finance",
+  "name": "Ola Finance",
+  "date": "2022-03-31",
+  "year": 2022,
+  "amountUsd": 4670000,
+  "returnedUsd": null,
+  "chains": [
+    "Fuse"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "reentrancy",
+  "technique": "Reentrancy",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "reentrancy",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "reentrancy",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.01,
+    "hasRootCause": 0.93
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Ola Finance on the Fuse chain published a blog post on the hacking incident, stating that the attack lost approximately $4.67 million, including 216,964.18 USDC, 507,216.68 BUSD, 200,000 fUSD, 550.45 WETH, 26.25 WBTC, and 1,240,000.00 FUSE. The attack uses a reentrancy vulnerability in the ERC677 token standard.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Ola Finance on the Fuse chain published a blog post on the hacking incident, stating that the attack lost approximately $4.67 million, including 216,964.18 USDC, 507,216.68 BUSD, 200,000 fUSD, 550.45 WETH, 26.25 WBTC, and 1,240,000.00 FUSE. The attack uses a reentrancy vulnerability in the ERC677 token standard."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On March 31, 2022, Ola Finance's Fuse chain lending protocol was exploited via an ERC-677 reentrancy vulnerability, enabling repeated asset withdrawals within a single transaction. The attacker drained approximately $4.67 million in stablecoins, wrapped tokens, and FUSE by looping through pools before debts were properly recorded. The lending pool contracts permitted ERC-677 token transfers to invoke callbacks that reentered withdrawal logic before borrower debt and pool balances were updated. The contracts did not implement reentrancy guards or checks-effects-interactions ordering, exposing them to repeated withdrawals in a single transaction."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "ola-finance.medium.com",
+      "url": "https://ola-finance.medium.com/ola-and-voltage-lending-exploit-on-fuse-post-mortem-214c13d88443"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/ola-finance-2022-03-31"
+    },
+    {
+      "source": "revertiq",
+      "label": "defirisk.co",
+      "url": "https://defirisk.co/learn/exploits/voltage-finance-rekt/"
+    },
+    {
+      "source": "revertiq",
+      "label": "cybersecuritycasestudies.com",
+      "url": "https://www.cybersecuritycasestudies.com/library/4-67-million-in-cryptocurrency-stolen-after-hack"
+    }
+  ]
+}

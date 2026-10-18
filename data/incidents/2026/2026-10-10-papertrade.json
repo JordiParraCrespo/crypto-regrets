@@ -1,0 +1,66 @@
+{
+  "id": "2026-10-10-papertrade",
+  "name": "Papertrade",
+  "date": "2026-10-10",
+  "year": 2026,
+  "amountUsd": 1280000,
+  "returnedUsd": null,
+  "chains": [
+    "Hyperliquid L1"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "market-manipulation",
+    "confidence": 0.84,
+    "top": [
+      {
+        "category": "market-manipulation",
+        "p": 0.85
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.09
+      },
+      {
+        "category": "logic-error",
+        "p": 0.06
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Papertrade, a synthetic perpetuals platform with up to 1000x leverage built on Hyperliquid’s HyperEVM, suffered a ~$1.28 million loss about 8 hours after its Oct. 10, 2026 launch. A wallet moved ETH prices on Hyperliquid (via large buys/sells) while holding highly leveraged positions on Papertrade that settled against the manipulated BBO midpoint, extracting profits from the platform’s shared USDC liquidity pool. Papertrade attributed it to overly permissive open-interest limits at launch and tightened them.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Papertrade, a synthetic perpetuals platform with up to 1000x leverage built on Hyperliquid’s HyperEVM, suffered a ~$1.28 million loss about 8 hours after its Oct. 10, 2026 launch. A wallet moved ETH prices on Hyperliquid (via large buys/sells) while holding highly leveraged positions on Papertrade that settled against the manipulated BBO midpoint, extracting profits from the platform’s shared USDC liquidity pool. Papertrade attributed it to overly permissive open-interest limits at launch and tightened them."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/papertrade_xyz/status/2109308773231911359"
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "id": "2026-09-02-gebproxyactions",
+  "name": "GebProxyActions",
+  "date": "2026-09-02",
+  "year": 2026,
+  "amountUsd": 14000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": null,
+  "category": "access-control",
+  "technique": "Smart Contract Vulnerability",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 1.00).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "The GebProxyActions contract was exploited due to missing caller access control in the quitSystem function. Victims had previously called it directly instead of via DSProxy delegatecall, setting ownsSAFE[safe] to the GebProxyActions contract. The attacker called GebProxyActions.quitSystem(manager, safe, dst) directly, bypassing GebSafeManager’s safeAllowed check and transferring collateral to themselves.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The GebProxyActions contract was exploited due to missing caller access control in the quitSystem function. Victims had previously called it directly instead of via DSProxy delegatecall, setting ownsSAFE[safe] to the GebProxyActions contract. The attacker called GebProxyActions.quitSystem(manager, safe, dst) directly, bypassing GebSafeManager’s safeAllowed check and transferring collateral to themselves."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/2094986310683705835"
+    }
+  ]
+}

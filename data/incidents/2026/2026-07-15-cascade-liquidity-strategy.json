@@ -1,0 +1,82 @@
+{
+  "id": "2026-07-15-cascade-liquidity-strategy",
+  "name": "Cascade Liquidity Strategy",
+  "date": "2026-07-15",
+  "year": 2026,
+  "amountUsd": 1340000,
+  "returnedUsd": null,
+  "chains": [
+    "Arbitrum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "market-manipulation",
+    "confidence": 0.77,
+    "top": [
+      {
+        "category": "market-manipulation",
+        "p": 0.78
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.22
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Cascade, a perpetual contract platform backed by institutions including Polychain, was attacked on Arbitrum through its pre-launch locked CLS vault (First Wave invite-only deposits). The attacker accumulated long positions in a low-liquidity market to hedge against CLS short positions, artificially manipulated the mark price upward, triggering large-scale liquidations of CLS short positions. After profiting from the attack, the attacker immediately withdrew approximately $1.34 million USDC. The project team paused trading and withdrawals, and the funds were largely recovered afterward, with full compensation arranged for affected users.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Cascade, a perpetual contract platform backed by institutions including Polychain, was attacked on Arbitrum through its pre-launch locked CLS vault (First Wave invite-only deposits). The attacker accumulated long positions in a low-liquidity market to hedge against CLS short positions, artificially manipulated the mark price upward, triggering large-scale liquidations of CLS short positions. After profiting from the attack, the attacker immediately withdrew approximately $1.34 million USDC. The project team paused trading and withdrawals, and the funds were largely recovered afterward, with full compensation arranged for affected users."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Cascade’s CLS vault on Arbitrum was exploited on 15 July 2026. Attackers manipulated mark prices in a thin-liquidity perpetuals market to force liquidation of vault short positions, resulting in losses of around $1.34 million. The stolen USDC was bridged to Solana, swapped to DAI, and deposited on Ethereum to evade freezing. The CLS vault's mark price logic allowed attacker-controlled positions in thin markets to artificially inflate prices, forcing liquidation of vault short positions at manipulated levels. No manipulation-resistant oracle or price-sanity checks were built into the contract, leaving it vulnerable to targeted price moves by attackers."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/cascade_xyz/status/2077747846011306123"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/cascade-liquidity-strategy-2026-07-15"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/cascade-hack-2026"
+    },
+    {
+      "source": "revertiq",
+      "label": "finance.biggo.com",
+      "url": "https://finance.biggo.com/news/2ae5ba8d-907d-4854-a3fe-1aea44773761"
+    }
+  ]
+}

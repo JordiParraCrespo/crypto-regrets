@@ -1,0 +1,70 @@
+{
+  "id": "2022-10-18-hpay",
+  "name": "HPAY",
+  "date": "2022-10-18",
+  "year": 2022,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Access Control",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.88).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.88,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.89
+      },
+      {
+        "category": "input-validation",
+        "p": 0.11
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Access Control. Lost: 115 BNB",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Access Control. Lost: 115 BNB"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Incorrect access control Vulnerable code snippet: https://www.bscscan.com/address/0xe9bc03ef08e991a99f1bd095a8590499931dcc30#code#F1#L174 Due _addre is controllable. Attacker can call setToken() to set fake token created by self. 1.setToken to faketoken 2.Deposit faketoken 3.setToken to HPAY 3.withdraw. over"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-10/HPAY_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-10/HPAY_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Supremacy_CA/status/1582345448190140417"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://www.bscscan.com/address/0xe9bc03ef08e991a99f1bd095a8590499931dcc30#code#F1#L174"
+    }
+  ]
+}

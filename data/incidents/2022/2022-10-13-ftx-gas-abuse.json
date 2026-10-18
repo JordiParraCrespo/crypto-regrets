@@ -1,0 +1,75 @@
+{
+  "id": "2022-10-13-ftx-gas-abuse",
+  "name": "FTX gas abuse",
+  "date": "2022-10-13",
+  "year": 2022,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum Mainnet"
+  ],
+  "targetType": null,
+  "category": "logic-error",
+  "technique": "Gas abuse via withdrawal callback; Excessive gas forwarded to a contract recipient",
+  "classificationNote": "Classified by keyword rules from the RevertIQ label and description.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "reentrancy",
+    "confidence": 0.66,
+    "top": [
+      {
+        "category": "reentrancy",
+        "p": 0.68
+      },
+      {
+        "category": "logic-error",
+        "p": 0.28
+      },
+      {
+        "category": "arbitrary-call",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "FTX's Ethereum withdrawal flow was abused on or around 2022-10-13 when a contract recipient executed fallback code during a gas-heavy payout and used the exchange's gas budget to mint XEN. Public sources disagree on the loss figure, so the exact dollar impact remains unsettled. FTX forwarded enough gas during an Ethereum withdrawal to let the recipient contract execute fallback code, and that execution window was used to run repeated XEN minting and related helper-contract logic at FTX's expense.",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "FTX's Ethereum withdrawal flow was abused on or around 2022-10-13 when a contract recipient executed fallback code during a gas-heavy payout and used the exchange's gas budget to mint XEN. Public sources disagree on the loss figure, so the exact dollar impact remains unsettled. FTX forwarded enough gas during an Ethereum withdrawal to let the recipient contract execute fallback code, and that execution window was used to run repeated XEN minting and related helper-contract logic at FTX's expense."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/ftx-2022-10-13"
+    },
+    {
+      "source": "revertiq",
+      "label": "defillama.com",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "api.llama.fi",
+      "url": "https://api.llama.fi/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "raw.githubusercontent.com",
+      "url": "https://raw.githubusercontent.com/jeanbemeo/ethereum-exploits/main/README.md"
+    }
+  ]
+}

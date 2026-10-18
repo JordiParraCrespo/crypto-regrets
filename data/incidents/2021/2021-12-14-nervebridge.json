@@ -1,0 +1,67 @@
+{
+  "id": "2021-12-14-nervebridge",
+  "name": "NerveBridge",
+  "date": "2021-12-14",
+  "year": 2021,
+  "amountUsd": 537000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Swap Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.98,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.98
+      },
+      {
+        "category": "bridge-crosschain",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.11,
+    "stateActor": 0.03,
+    "hasRootCause": 0.09
+  },
+  "bridge": true,
+  "language": "Solidity",
+  "rootCause": "Swap Metapool Attack. Lost: 900 BNB",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Swap Metapool Attack. Lost: 900 BNB"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2021-12/NerveBridge_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2021-12/NerveBridge_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "blocksecteam.medium.com",
+      "url": "https://blocksecteam.medium.com/the-analysis-of-nerve-bridge-security-incident-ead361a21025"
+    }
+  ]
+}

@@ -1,0 +1,99 @@
+{
+  "id": "2025-12-01-yeth",
+  "name": "yETH",
+  "date": "2025-12-01",
+  "year": 2025,
+  "amountUsd": 9000000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Unsafe Math",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 1.00).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Unsafe Math. Lost: 9M USD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Unsafe Math. Lost: 9M USD"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Yearn's yETH stable pool tracks the running invariant via cached aggregates vb_prod and vb_sum (virtual-balance product and sum) that are updated incrementally on add/remove liquidity and rate updates. Due to unsafe math in how these cached values are maintained (rounding/precision and the way update_rates and rebases recompute them), an attacker could drive the cached invariant out of sync with the true pooled balances. The exploit performed a long, precisely tuned sequence of add_liquidity/remove_liquidity cycles, update_rates calls, and an OETH rebase() to progressively distort vb_prod/vb_sum, inflating the yETH minted per deposit and the assets returned per LP burned. A final remove_liquidity(pool.supply()) drained the pool of ~9M USD. The root cause is unsafe/imprecise invariant accounting that does not stay consistent with actual asset balances after rate updates and rebases. Vulnerable code snippet: Attack Tx: https://etherscan.io/tx/0x53fe7ef190c34d810c50fb66f0fc65a1ceedc10309cf4b4013d64042a0331156 Analysis: https://github.com/banteg/yeth-exploit/blob/main/report.pdf"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On November 30, 2025, Yearn's yETH weighted stableswap pool on Ethereum was exploited due to a cache-clearing bug and arithmetic flaws, enabling the attacker to mint an astronomical amount of yETH tokens from a 16 wei deposit and drain ~$9M in liquid staking assets. The lost funds were partially recovered, but the bug highlighted how missynchronized state and unchecked math in legacy DeFi systems can compound into catastrophic loss. The pool failed to clear virtual balance cache (packed_vbs[]) when supply dropped to zero, allowing a subsequent minimal deposit to trigger the initialization branch and price token minting against stale, inflated values. T…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x53fe7ef190c34d810c50fb66f0fc65a1ceedc10309cf4b4013d64042a0331156",
+    "0x0e83bb95bb9d05fb81213b2fad11c01ea671796752e8770b09935f7052691c35"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-12/yETH_exp.sol",
+  "sources": [
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-12/yETH_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/Togbe0x/status/1995241372354539621"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x53fe7ef190c34d810c50fb66f0fc65a1ceedc10309cf4b4013d64042a0331156"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "github.com",
+      "url": "https://github.com/banteg/yeth-exploit/blob/main/report.pdf"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/yearn-ether-2025-11-30"
+    },
+    {
+      "source": "revertiq",
+      "label": "defillama.com",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "research.checkpoint.com",
+      "url": "https://research.checkpoint.com/2025/16-wei/"
+    },
+    {
+      "source": "revertiq",
+      "label": "qed-audit.github.io",
+      "url": "https://qed-audit.github.io/2025/12/05/yeth-exploit-analysis.html"
+    }
+  ]
+}

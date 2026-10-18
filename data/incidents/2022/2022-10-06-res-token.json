@@ -1,0 +1,108 @@
+{
+  "id": "2022-10-06-res-token",
+  "name": "RES Token",
+  "date": "2022-10-06",
+  "year": 2022,
+  "amountUsd": 290000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.53,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.56
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.37
+      },
+      {
+        "category": "market-manipulation",
+        "p": 0.06
+      }
+    ],
+    "flashLoan": 0.06,
+    "stateActor": 0.02,
+    "hasRootCause": 0.91
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "pair manipulate",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "pair manipulate"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "thisAToB(), burn RES token to increase exchange ratio. Vulnerable code snippet: https://www.bscscan.com/address/0xecCD8B08Ac3B587B7175D40Fb9C60a20990F8D21#code#L683 Attacker did multiple swaps to get rewards ALL token and burn RES token to increase exchange ratio."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "RES Token was exploited on BNB Chain on 6 October 2022 for approximately $290,000 by breaking the AMM pool invariant through a flawed public conversion routine. The attack drained USDT from the USDT/RES pair by burning and syncing reserves inside a permissionless function. The vulnerable thisAToB() function, accessible to anyone, burned RES directly out of the USDT/RES liquidity pool after swapping, then called sync(). This destroyed USDT reserves with no compensating outflow, breaking the constant-product invariant and allowing the attacker to drain USDT."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xe59fa48212c4ee716c03e648e04f0ca390f4a4fc921a890fded0e01afa4ba96d",
+    "0xef19a4dfd69874d5efda3e38b5a19cae4e0b0bdc95769760bd85ede4d15609ac"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-10/RES_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-10/RES_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/AnciliaInc/status/1578119778446680064"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0xe59fa48212c4ee716c03e648e04f0ca390f4a4fc921a890fded0e01afa4ba96d"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://www.bscscan.com/address/0xecCD8B08Ac3B587B7175D40Fb9C60a20990F8D21#code#L683"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/res-token-2022-10-06"
+    },
+    {
+      "source": "revertiq",
+      "label": "crypto.training",
+      "url": "https://crypto.training/hacks/2022-10-res_exp2/"
+    },
+    {
+      "source": "revertiq",
+      "label": "quillaudits.medium.com",
+      "url": "https://quillaudits.medium.com/res-token-290k-flash-loan-exploit-quillaudits-9300657fff7b"
+    }
+  ]
+}

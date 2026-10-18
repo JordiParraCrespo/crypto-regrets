@@ -1,0 +1,95 @@
+{
+  "id": "2022-03-15-deus-finance",
+  "name": "DEUS Finance",
+  "date": "2022-03-15",
+  "year": 2022,
+  "amountUsd": 3000000,
+  "returnedUsd": null,
+  "chains": [
+    "Fantom"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.97,
+    "stateActor": 0.02,
+    "hasRootCause": 0.93
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "DeFi protocol Deus Finance was attacked by a flash loan, and hackers manipulated the price of the oracle machine and stole about $3 million, including 200,000 DAI and 1101.8 ETH through Tornado mixing.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "DeFi protocol Deus Finance was attacked by a flash loan, and hackers manipulated the price of the oracle machine and stole about $3 million, including 200,000 DAI and 1101.8 ETH through Tornado mixing."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "DEUS Finance’s Fantom deployment was hit on 2022-03-15 by a flash-loan oracle manipulation that distorted a USDC/DEI price path, forced liquidations, and produced about $3 million in visible proceeds. The DEI lending path trusted a manipulable USDC/DEI spot price for liquidation decisions. A flash loan changed the pool reserve ratio inside one transaction, and that transient valuation was accepted as if it were durable market price."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 2022-03-15, DEUS Finance’s Fantom lending market was exploited after a flash-loan-sized trade moved the USDC/DEI price used in solvency checks, letting the attacker trigger liquidations and extract about $3 million. DEUS let solvency and liquidation logic depend on a USDC/DEI AMM spot price that the same transaction could move. That coupled valuation to a manipulable pool state, so a temporary flash-loan-funded swap could distort the oracle input long enough to change liquidation outcomes."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xe374495036fac18aa5b1a497a17e70f256c4d3d416dd1408c026f3f5c70a3a9c",
+    "0x09dc3a1afd1dae211c31d7ad4b5cd6f68c9350727fa5d4c7c63efb9d287e3210"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/peckshield/status/1503632734299701250"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/deus-finance-2021-03-15"
+    },
+    {
+      "source": "revertiq",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/tech/2022/03/15/derivatives-platform-deus-finance-exploited-for-3m-on-fantom-network"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptobriefing.com",
+      "url": "https://cryptobriefing.com/deus-finance-suffers-3m-oracle-exploit/"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/deus-finance-2022-03-15"
+    },
+    {
+      "source": "revertiq",
+      "label": "medium.com",
+      "url": "https://medium.com/%40Knownsec_Blockchain_Lab/knownsec-blockchain-lab-deus-finance-prophecy-machine-attack-event-analysis-32aa48383659"
+    }
+  ]
+}

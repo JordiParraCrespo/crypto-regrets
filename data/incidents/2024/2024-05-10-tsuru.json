@@ -1,0 +1,125 @@
+{
+  "id": "2024-05-10-tsuru",
+  "name": "Tsuru",
+  "date": "2024-05-10",
+  "year": 2024,
+  "amountUsd": 410000,
+  "returnedUsd": null,
+  "chains": [
+    "Base"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.92
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Insufficient Validation. Lost: 140K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Insufficient Validation. Lost: 140K"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Everyone can call this function to get free tokens. No access control Vulnerable code snippet: https://basescan.org/address/0x75Ac62EA5D058A7F88f0C3a5F8f73195277c93dA#code Attack tx: https://basescan.org/tx/0xe63a8df8759f41937432cd34c590d85af61b3343cf438796c6ed2c8f5b906f62 https://app.blocksec.com/explorer/tx/base/0xe63a8df8759f41937432cd34c590d85af61b3343cf438796c6ed2c8f5b906f62 Analysis: https://x.com/shoucccc/status/1788941548929110416"
+    },
+    {
+      "source": "SlowMist",
+      "text": "According to the SlowMist Security Alert system, potential suspicious activities related to Tsuru have resulted in a loss of 138.78 ETH."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Tsuru was exploited on the Base chain on 10 May 2024 via a minting access control flaw in the TSURUWrapper contract. The attacker minted 167.2 million TSURU tokens and exchanged them for about 137.78 ETH (~$410,000), draining protocol liquidity. The onERC1155Received function of the TSURUWrapper contract lacked proper access control, allowing any caller to mint TSURU tokens with a valid token ID. This let the attacker mint unbacked tokens and extract protocol liquidity."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xe63a8df8759f41937432cd34c590d85af61b3343cf438796c6ed2c8f5b906f62"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-05/TSURU_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-05/TSURU_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "base.tsuru.wtf",
+      "url": "https://base.tsuru.wtf/usdtsuru-exploit-incident-report"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "basescan.org",
+      "url": "https://basescan.org/address/0x75Ac62EA5D058A7F88f0C3a5F8f73195277c93dA#code"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "basescan.org",
+      "url": "https://basescan.org/tx/0xe63a8df8759f41937432cd34c590d85af61b3343cf438796c6ed2c8f5b906f62"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/base/0xe63a8df8759f41937432cd34c590d85af61b3343cf438796c6ed2c8f5b906f62"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xe63a8df8759f41937432cd34c590d85af61b3343cf438796c6ed2c8f5b906f62"
+    },
+    {
+      "source": "blocksec",
+      "label": "twitter.com",
+      "url": "https://twitter.com/TsuruBase/status/1789000570235420847"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/SlowMist_Team/status/1788936928634834958"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/tsuru-2024-05-10"
+    },
+    {
+      "source": "revertiq",
+      "label": "bitcoinsnews.com",
+      "url": "https://bitcoinsnews.com/tsuru-token-drained-for-410000-in-base-chain-smart-contract-exploit-74754"
+    },
+    {
+      "source": "revertiq",
+      "label": "olympix.security",
+      "url": "https://olympix.security/biweekly-exploits/305m-vanishes-dmm-predy-tsuru-and-osn-wrecked-by-wallet-compromise-and-access-control-failures"
+    }
+  ]
+}

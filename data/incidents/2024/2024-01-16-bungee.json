@@ -1,0 +1,76 @@
+{
+  "id": "2024-01-16-bungee",
+  "name": "Bungee",
+  "date": "2024-01-16",
+  "year": 2024,
+  "amountUsd": 3300000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "input-validation",
+  "technique": "Missing Input Validation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "input-validation",
+    "confidence": 0.63,
+    "top": [
+      {
+        "category": "input-validation",
+        "p": 0.65
+      },
+      {
+        "category": "arbitrary-call",
+        "p": 0.34
+      },
+      {
+        "category": "access-control",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": true,
+  "language": "Solidity",
+  "rootCause": "Bungee, operated by Socket, was exploited on Ethereum Mainnet on 16 January 2024. A newly added bridge route without input validation allowed attackers to drain tokens from wallets with unlimited approvals, resulting in an estimated $3.3M loss. Socket paused operations, deployed a fix, and partially recovered funds. A newly deployed bridge route lacked input validation, enabling attackers to pass arbitrary data which allowed unauthorized transferFrom calls using user-approved tokens.",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "Bungee, operated by Socket, was exploited on Ethereum Mainnet on 16 January 2024. A newly added bridge route without input validation allowed attackers to drain tokens from wallets with unlimited approvals, resulting in an estimated $3.3M loss. Socket paused operations, deployed a fix, and partially recovered funds. A newly deployed bridge route lacked input validation, enabling attackers to pass arbitrary data which allowed unauthorized transferFrom calls using user-approved tokens."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/bungee-2024-01-16"
+    },
+    {
+      "source": "revertiq",
+      "label": "defirisk.co",
+      "url": "https://defirisk.co/learn/exploits/socket-rekt/"
+    },
+    {
+      "source": "revertiq",
+      "label": "theblock.co",
+      "url": "https://www.theblock.co/news/ecosystems/2024-01-16-socket-says-bungee-protocol-exploited-272986"
+    }
+  ]
+}

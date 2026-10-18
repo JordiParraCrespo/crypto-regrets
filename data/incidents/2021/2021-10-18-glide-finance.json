@@ -1,0 +1,86 @@
+{
+  "id": "2021-10-18-glide-finance",
+  "name": "Glide Finance",
+  "date": "2021-10-18",
+  "year": 2021,
+  "amountUsd": 300000,
+  "returnedUsd": null,
+  "chains": [
+    "Elastos"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "input-validation",
+  "technique": "Missing Input Validation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.77,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.78
+      },
+      {
+        "category": "input-validation",
+        "p": 0.16
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.05
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Glide Finance, a DeFi protocol built on the Elastos ecosystem, tweeted that a contract loophole was exploited to siphon money out of the matching contract for a loss of approximately $300,000 because the team changed the fee parameters after an audit but did not update the number on the contract from 1,000 to 10,000. The team is now contacting the exchange to block the transfer of funds and reminding users who have money in Glide's liquidity pool to withdraw funds.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Glide Finance, a DeFi protocol built on the Elastos ecosystem, tweeted that a contract loophole was exploited to siphon money out of the matching contract for a loss of approximately $300,000 because the team changed the fee parameters after an audit but did not update the number on the contract from 1,000 to 10,000. The team is now contacting the exchange to block the transfer of funds and reminding users who have money in Glide's liquidity pool to withdraw funds."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Glide Finance, a DEX on Elastos, was exploited on October 17, 2021 after a manual update to a fee denominator parameter was not consistently applied across AMM contract logic. Around $300,000 was drained from liquidity pools. Users with losses under $1,000 were fully reimbursed; larger holders received GLIDE-BOND tokens for ongoing repayments. The protocol later redeployed with additional audits and fixed parameter logic. A manual change to the AMM contract fee denominator after audit (from 1000 to 10000) was not correctly propagated across all contract logic, leading to inconsistent fee calculations and exploitation of swapped funds."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/GlideFinance/status/1449775133992755206"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/glide-finance-2021-10-18"
+    },
+    {
+      "source": "revertiq",
+      "label": "quadrigainitiative.com",
+      "url": "https://quadrigainitiative.com/casestudy/glidefinancecontracttypo.php"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/glide-finance-hack-2021"
+    }
+  ]
+}

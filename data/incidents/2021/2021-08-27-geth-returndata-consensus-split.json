@@ -1,0 +1,52 @@
+{
+  "id": "2021-08-27-geth-returndata-consensus-split",
+  "name": "Geth RETURNDATA consensus split",
+  "date": "2021-08-27",
+  "year": 2021,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "Chain",
+  "category": "client-bug",
+  "technique": "Memory corruption in precompile datacopy",
+  "classificationNote": null,
+  "classifiedBy": "curated",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "client-bug",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "client-bug",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.93
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "A crafted transaction exploited CVE-2021-39137, where Geth could corrupt RETURNDATA after a datacopy precompile call. Unpatched Geth nodes forked away from patched nodes and other clients; client diversity limited the damage.",
+  "descriptions": [
+    {
+      "source": "Curated post-mortem",
+      "text": "A crafted transaction exploited CVE-2021-39137, where Geth could corrupt RETURNDATA after a datacopy precompile call. Unpatched Geth nodes forked away from patched nodes and other clients; client diversity limited the damage."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "curated"
+  ],
+  "references": [
+    {
+      "source": "curated",
+      "label": "Geth vulnerability disclosure",
+      "url": "https://github.com/ethereum/go-ethereum/security/advisories/GHSA-9856-9gg9-qcmq"
+    }
+  ]
+}

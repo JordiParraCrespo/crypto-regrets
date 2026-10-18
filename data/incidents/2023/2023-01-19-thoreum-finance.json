@@ -1,0 +1,117 @@
+{
+  "id": "2023-01-19-thoreum-finance",
+  "name": "Thoreum Finance",
+  "date": "2023-01-19",
+  "year": 2023,
+  "amountUsd": 65540,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Swap Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.7,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.72
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.25
+      },
+      {
+        "category": "access-control",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.93
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "business logic flaw. Lost: ~2000 BNB",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "business logic flaw. Lost: ~2000 BNB"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Ancilia: when 0x7d1e1901226e0ba389bfb1281ede859e6e48cc3d calls transfer to itself, its balance will increase. By repeating doing this, it ends with 500k+ $THOREUM tokens Vulnerable code snippet: https://bscscan.com/token/0xce1b3e5087e8215876af976032382dd338cf8401#code Attack tx: https://bscscan.com/tx/0x3fe3a1883f0ae263a260f7d3e9b462468f4f83c2c88bb89d1dee5d7d24262b51 Analysis: https://twitter.com/AnciliaInc/status/1615944396134043648"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Thoreum Finance was hacked. According to analysis, because the transfer function of the non-open source contract 0x79fe created by the Thoreum Finance project party is suspected to have a loophole, when the from and to addresses of the transfer function are the same, due to the use of temporary variables to store the balance, the balance will double when you transfer to yourself , the attacker repeated the operation many times, and finally made a profit of 2,000 BNB, involving an amount of about 580,000 US dollars."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On January 19, 2023, Thoreum Finance's new v4 token contract on BNB Chain was exploited via a flawed transfer logic. An attacker inflated their THOREUM token balance by repeatedly transferring tokens to themselves, ultimately converting the proceeds to WBNB and draining liquidity pools. Approximately 2,260 WBNB were lost, valued around $65,540. The unverified v4 THOREUM token contract accepted transfers where sender and recipient were the same address. Instead of leaving the balance unchanged, the flawed logic credited the sender with the transferred amount,enabling unlimited inflation through repeated self-transfers."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x3fe3a1883f0ae263a260f7d3e9b462468f4f83c2c88bb89d1dee5d7d24262b51"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-01/ThoreumFinance_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-01/ThoreumFinance_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x3fe3a1883f0ae263a260f7d3e9b462468f4f83c2c88bb89d1dee5d7d24262b51"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/AnciliaInc/status/1615944396134043648"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/token/0xce1b3e5087e8215876af976032382dd338cf8401#code"
+    },
+    {
+      "source": "slowmist",
+      "label": "panewslab.com",
+      "url": "https://www.panewslab.com/zh/sqarticledetails/chr92pfw.html"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/thoreum-finance-2023-01-19"
+    },
+    {
+      "source": "revertiq",
+      "label": "certik.com",
+      "url": "https://www.certik.com/blog/post-mortem-thoreum-finance"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/thoreum-finance-hack-2023"
+    }
+  ]
+}

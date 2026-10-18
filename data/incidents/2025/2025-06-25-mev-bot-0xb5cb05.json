@@ -1,0 +1,77 @@
+{
+  "id": "2025-06-25-mev-bot-0xb5cb05",
+  "name": "MEV Bot 0xB5CB05",
+  "date": "2025-06-25",
+  "year": 2025,
+  "amountUsd": 2000000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": null,
+  "category": "access-control",
+  "technique": "Access Control",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 1.00).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "The \"printMoney\" MEV bot deployed on BSC lacked proper access controls on its critical arbitrage execution functions. No caller restrictions or authentication checks were implemented on the bot's internal trading logic, meaning any external address could invoke it without authorization. An attacker called the unprotected function to force the bot into executing unfavorable swaps or directly extracting its holdings, draining approximately $2 million from the bot. The incident was flagged by Phalcon and PeckShield on June 25, 2025. Attack Tx: 0x8c026c3939f7e2d0376d13e30859fa918a5a567348ca1329836df88bef30c73e Analysis: Phalcon Alert — June 25, 2025",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The \"printMoney\" MEV bot deployed on BSC lacked proper access controls on its critical arbitrage execution functions. No caller restrictions or authentication checks were implemented on the bot's internal trading logic, meaning any external address could invoke it without authorization. An attacker called the unprotected function to force the bot into executing unfavorable swaps or directly extracting its holdings, draining approximately $2 million from the bot. The incident was flagged by Phalcon and PeckShield on June 25, 2025. Attack Tx: 0x8c026c3939f7e2d0376d13e30859fa918a5a567348ca1329836df88bef30c73e Analysis: Phalcon Alert — June 25, 2025"
+    },
+    {
+      "source": "SlowMist",
+      "text": "A suspicious attack involving MEV bot 0xb5cb occurred on BSC, resulting in losses of approximately $2 million."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x8c026c3939f7e2d0376d13e30859fa918a5a567348ca1329836df88bef30c73e",
+    "0xf9025e317ce71bc8c055a511fccf0eb4eafd0b8c613da4d5a8e05e139966d6ff",
+    "0x7708aaedf3d408c47b04d62dac6edd2496637be9cb48852000662d22d2131f44"
+  ],
+  "poc": null,
+  "sources": [
+    "defihacklabs",
+    "blocksec",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x8c026c3939f7e2d0376d13e30859fa918a5a567348ca1329836df88bef30c73e"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/Phalcon_xyz/status/1937753560391004641"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x8c026c3939f7e2d0376d13e30859fa918a5a567348ca1329836df88bef30c73e"
+    },
+    {
+      "source": "slowmist",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x7708aaedf3d408c47b04d62dac6edd2496637be9cb48852000662d22d2131f44"
+    }
+  ]
+}

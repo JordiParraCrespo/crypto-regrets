@@ -1,0 +1,80 @@
+{
+  "id": "2022-06-22-pandorachaindao",
+  "name": "pandorachainDAO",
+  "date": "2022-06-22",
+  "year": 2022,
+  "amountUsd": 128000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.94,
+    "stateActor": 0.02,
+    "hasRootCause": 0.51
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "The pandorachainDAO project suffered a flash loan attack, resulting in a loss of assets worth about $128,000.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The pandorachainDAO project suffered a flash loan attack, resulting in a loss of assets worth about $128,000."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "PandorachainDAO suffered a $128,000 loss on BNB Chain on June 22, 2022, when attackers manipulated the PCD/USDT token price using flash loans, enabling them to acquire large amounts of PCD at an artificially low price, then converting it back to USDT. The PCD token protocol relied on a spot price from an AMM pool, which could be manipulated within a transaction using flash loans. This enabled the attacker to set an extremely low token price at the moment of purchase, acquiring large quantities of PCD for a minimal USDT outlay."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x1fff2189ef23e3c6dd3d643cbb91ee7ae20686fb6584e6d987f7fc55d98923be"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "gostake.io",
+      "url": "https://gostake.io/resource/news/7a9960908de49041e5e863fbb0b20463.html"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/pandorachaindao-2022-06-22"
+    },
+    {
+      "source": "revertiq",
+      "label": "quadrigainitiative.com",
+      "url": "https://www.quadrigainitiative.com/hackfraudscam/pandoradaopricemanipulation.php"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/pandorachaindao-hack-2022"
+    }
+  ]
+}

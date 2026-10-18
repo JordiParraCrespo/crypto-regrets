@@ -1,0 +1,52 @@
+{
+  "id": "2021-06-05-burgerswap",
+  "name": "BurgerSwap",
+  "date": "2021-06-05",
+  "year": 2021,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": null,
+  "category": "reentrancy",
+  "technique": "Flash loan attack",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 1.00).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "reentrancy",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "reentrancy",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.83,
+    "stateActor": 0.02,
+    "hasRootCause": 0.93
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "BurgerSwap, an automated market maker on the Binance Smart Chain, was once again attacked by lightning loans. The attacker took advantage of the re-entry vulnerability in the contract, repeated the swap operation many times, controlled the price through re-entry and counterfeit currency, and finally realized the purpose of attack arbitrage.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "BurgerSwap, an automated market maker on the Binance Smart Chain, was once again attacked by lightning loans. The attacker took advantage of the re-entry vulnerability in the contract, repeated the swap operation many times, controlled the price through re-entry and counterfeit currency, and finally realized the purpose of attack arbitrage."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "slowmist",
+      "label": "panewslab.com",
+      "url": "https://www.panewslab.com/zh/articledetails/P771680.html"
+    }
+  ]
+}

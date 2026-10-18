@@ -1,0 +1,79 @@
+{
+  "id": "2023-01-18-qtntoken",
+  "name": "QTNToken",
+  "date": "2023-01-18",
+  "year": 2023,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "business logic flaw",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 1.00).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "business logic flaw. Lost: ~2ETH",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "business logic flaw. Lost: ~2ETH"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Blocksec: QTN token has an inflation mechanism: all QTN holders' balanceOf will increase for each QTN's sale in Uniswap. However, the QTN's developer uses “from == UniswapPair” to judge if there is a QTN's sale. The incorrect condition is the root cause of this attack. Uniswap pair has a function named skim that can cheat QTN, so the attack contract increases his QTN's balance via 3 steps: 1) transfer x QTN to Uniswap pair; 2）invoke the skim function to a created contract; 3) transfer y QTN back to the attack contract (y > x). Vulnerable code snippet: https://etherscan.io/address/0xc9fa8f4cfd11559b50c5c7f6672b9eea2757e1bd#code#L287 Attack tx: https://etherscan.io/tx/0x37cb8626e45f0749296ef080acb218e5ccc7efb2ae4d39c952566dc378ca1c4c https://etherscan.io/tx/0xfde10ad92566f369b23ed5135289630b7a6453887c77088794552c2a3d1ce8b7 Analysis: https://twitter.com/BlockSecTeam/status/1615625901739511809"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x37cb8626e45f0749296ef080acb218e5ccc7efb2ae4d39c952566dc378ca1c4c",
+    "0xfde10ad92566f369b23ed5135289630b7a6453887c77088794552c2a3d1ce8b7"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-01/QTN_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-01/QTN_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BlockSecTeam/status/1615625901739511809"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/address/0xc9fa8f4cfd11559b50c5c7f6672b9eea2757e1bd#code#L287"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x37cb8626e45f0749296ef080acb218e5ccc7efb2ae4d39c952566dc378ca1c4c"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xfde10ad92566f369b23ed5135289630b7a6453887c77088794552c2a3d1ce8b7"
+    }
+  ]
+}

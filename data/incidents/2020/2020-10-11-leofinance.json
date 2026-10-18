@@ -1,0 +1,74 @@
+{
+  "id": "2020-10-11-leofinance",
+  "name": "LeoFinance",
+  "date": "2020-10-11",
+  "year": 2020,
+  "amountUsd": 42000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum Mainnet"
+  ],
+  "targetType": null,
+  "category": "key-compromise",
+  "technique": "Private key compromise; Unrestricted contract minting",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.92). Replaced keyword guess \"signature-crypto\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "key-compromise",
+    "confidence": 0.92,
+    "top": [
+      {
+        "category": "key-compromise",
+        "p": 0.92
+      },
+      {
+        "category": "access-control",
+        "p": 0.08
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "On October 11, 2020, an attacker used a compromised WLEO contract minting key to create unlimited tokens, draining $42,000 in ETH from the Uniswap liquidity pool. The breach stemmed from the use of a hot wallet private key with no minting limits or multisig. Rapid community action recovered some funds and prompted a refactor of WLEO architecture to remove arbitrary minting and strengthen key security. The WLEO mint contract's private key, stored in a hot wallet with single-signer control, was compromised, granting the attacker unlimited mint authority. The design lacked minting limits, multi-signature protection, or supply controls, allowing arbitrary…",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "On October 11, 2020, an attacker used a compromised WLEO contract minting key to create unlimited tokens, draining $42,000 in ETH from the Uniswap liquidity pool. The breach stemmed from the use of a hot wallet private key with no minting limits or multisig. Rapid community action recovered some funds and prompted a refactor of WLEO architecture to remove arbitrary minting and strengthen key security. The WLEO mint contract's private key, stored in a hot wallet with single-signer control, was compromised, granting the attacker unlimited mint authority. The design lacked minting limits, multi-signature protection, or supply controls, allowing arbitrary…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x9c0abb76e5924623def3f000c3df6da9b100c90be279f63b24b22c842444f66e",
+    "0x0e8621db8bd6c42d559e24274c02c837964041890dcc357031b495160d5c05c8"
+  ],
+  "poc": null,
+  "sources": [
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/leo-finance-2020-10-11"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "quadrigainitiative.com",
+      "url": "https://www.quadrigainitiative.com/casestudy/wleocontracthack.php"
+    },
+    {
+      "source": "revertiq",
+      "label": "forklog.com",
+      "url": "https://forklog.com/en/wleo-token-plunges-to-near-zero-after-hack-enables-unlimited-minting/"
+    }
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "id": "2025-07-08-peapods-finance",
+  "name": "Peapods Finance",
+  "date": "2025-07-08",
+  "year": 2025,
+  "amountUsd": 207000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Oracle Misconfiguration",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.99
+      },
+      {
+        "category": "input-validation",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.06,
+    "stateActor": 0.01,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Peapods Finance suffered a price oracle manipulation attack on Ethereum Mainnet on July 8, 2025, resulting in the theft of approximately 78.5 ETH (~$207,000). The attacker exploited low-liquidity Uniswap V3 pools used as oracles for user-created Pods, inflating collateral price and borrowing against overvalued assets. Permissionless user-created Pods allowed choice of low-liquidity Uniswap V3 pools as TWAP oracles without validation. Attacker manipulated pool price, resulting in inflated collateral valuation and unbacked borrowing.",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "Peapods Finance suffered a price oracle manipulation attack on Ethereum Mainnet on July 8, 2025, resulting in the theft of approximately 78.5 ETH (~$207,000). The attacker exploited low-liquidity Uniswap V3 pools used as oracles for user-created Pods, inflating collateral price and borrowing against overvalued assets. Permissionless user-created Pods allowed choice of low-liquidity Uniswap V3 pools as TWAP oracles without validation. Attacker manipulated pool price, resulting in inflated collateral valuation and unbacked borrowing."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xff8e9226091d513fc936ecc670030eba03f34dbe60cd012122bd18be44248d32",
+    "0xeff836fa1ce60f04b94544fa424764101323f1f7c8ab8265b4bd34e9fa84f8db",
+    "0xf0f090982c624e934f0d255913fb94eab9f04c4c4a97dc59c0bba2f69ba2c9a3"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "blocksec",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xff8e9226091d513fc936ecc670030eba03f34dbe60cd012122bd18be44248d32"
+    },
+    {
+      "source": "blocksec",
+      "label": "x.com",
+      "url": "https://x.com/Phalcon_xyz/status/1942594222353260893"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/peapods-finance-2025-07-08"
+    },
+    {
+      "source": "revertiq",
+      "label": "quadrigainitiative.com",
+      "url": "https://www.quadrigainitiative.com/hackfraudscam/peapodsfinanceasplongsusdepricemanipulationattack.php"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/kismp123/DeFi-Security-Incident/blob/main/2025/2025-07-08_PeapodsFinance_PriceDependency_ETH.md"
+    }
+  ]
+}

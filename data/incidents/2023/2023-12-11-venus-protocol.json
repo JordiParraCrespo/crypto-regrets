@@ -1,0 +1,82 @@
+{
+  "id": "2023-12-11-venus-protocol",
+  "name": "Venus Protocol",
+  "date": "2023-12-11",
+  "year": 2023,
+  "amountUsd": 274000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Oracle Misconfiguration",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.07,
+    "stateActor": 0.02,
+    "hasRootCause": 0.83
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "According to on-chain data, a user deposited 0.5 BNB into Venus and borrowed a series of assets, including stkBNB, ankrBNB, etc. The user then exchanged them for 116.45 ETH assets and transferred them to another account. In response to the attack on Venus, official personnel from the Venus Protocol addressed the issue on Telegram, stating, \"The core pool and XVS are not affected. The attack occurred due to a price malfunction in Binance's oracle, involving the BNB price in a small independent pool. The snBNB team is currently addressing this issue. The cause has been identified, and it has been reported to the Binance oracle team.\"",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "According to on-chain data, a user deposited 0.5 BNB into Venus and borrowed a series of assets, including stkBNB, ankrBNB, etc. The user then exchanged them for 116.45 ETH assets and transferred them to another account. In response to the attack on Venus, official personnel from the Venus Protocol addressed the issue on Telegram, stating, \"The core pool and XVS are not affected. The attack occurred due to a price malfunction in Binance's oracle, involving the BNB price in a small independent pool. The snBNB team is currently addressing this issue. The cause has been identified, and it has been reported to the Binance oracle team.\""
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On December 10, 2023, Venus Protocol's snBNB isolated lending pool on BNB Chain suffered an oracle-driven exploit. A manipulated price feed let an attacker borrow roughly $274,000 worth of assets with minimal collateral. The incident was caused by a misconfigured price oracle for snBNB, which used an extremely thin UniswapV3 pool as the sole reference. A swap drained liquidity and set the snBNB price to an absurd value, letting the exploiter borrow the pool's entire asset supply."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x3028e8532cc720182ef8414f9d91907aa646de20900cfb39e3d6357463cbc07c",
+    "0xcc47c081822b0602af6aaed670ba6ab8e697a541cfe76b56c4065486bba68a3c",
+    "0x61a95939a8f5f0c41d2792221265a586256fdfd63bf00694767f80c6e199f5ba",
+    "0x5e9a7f61663e1286158c88984adb189a1e33de2974e8880efb676a9a850ca740",
+    "0x6ff4ea128a48e06e46a90719f08bbc2146364240b5999460d6d821905f8a6ae7",
+    "0x081a0a46f2ae1c55c6cf56b5aeea9691004f3b02eea2c86d45186b60d1980c7e",
+    "0x186f4c668a86e430400381b1a4d93d601d762cf3a5ca7282ba148cf34872e7b0",
+    "0x7dbe479a8224954a504bfd6db3f985512ec5bd5ec5ed7291b74d76ca58a52b15"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/VenusProtocol/status/1733934890658263517"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/venus-protocol-2023-12-11"
+    },
+    {
+      "source": "revertiq",
+      "label": "chaoslabs.xyz",
+      "url": "https://chaoslabs.xyz/posts/sbnb-oracle-exploit-post-mortem"
+    }
+  ]
+}

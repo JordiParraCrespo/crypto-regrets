@@ -1,0 +1,133 @@
+{
+  "id": "2022-02-02-portal",
+  "name": "Portal",
+  "date": "2022-02-02",
+  "year": 2022,
+  "amountUsd": 326000000,
+  "returnedUsd": 326000000,
+  "chains": [
+    "Solana"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "bridge-crosschain",
+  "technique": "Spoofed sysvar account bypassed signature verification",
+  "classificationNote": "Curated: reclassified from \"signature-crypto\" based on the published post-mortem.",
+  "classifiedBy": "curated",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "bridge-crosschain",
+    "confidence": 0.72,
+    "top": [
+      {
+        "category": "bridge-crosschain",
+        "p": 0.74
+      },
+      {
+        "category": "access-control",
+        "p": 0.1
+      },
+      {
+        "category": "signature-crypto",
+        "p": 0.09
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.03,
+    "hasRootCause": 0.97
+  },
+  "bridge": true,
+  "language": "Rust",
+  "rootCause": "Wormhole's Solana program used the deprecated load_instruction_at, which did not verify that the passed \"instructions sysvar\" account was the real one. The attacker passed a fake sysvar, so guardian signature verification was skipped, and minted 120k wETH on Solana with no backing.",
+  "descriptions": [
+    {
+      "source": "Curated post-mortem",
+      "text": "Wormhole's Solana program used the deprecated load_instruction_at, which did not verify that the passed \"instructions sysvar\" account was the real one. The attacker passed a fake sysvar, so guardian signature verification was skipped, and minted 120k wETH on Solana with no backing."
+    },
+    {
+      "source": "REKT",
+      "text": "Wormhole had a loophole... A hacker distorted the fabric of Solana's space-time, netting $326M in the process. How did Wormhole return so much ETH so fast?"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Attackers exploited a signature verification vulnerability in the Wormhole network to mint 120k Ether on Solana, worth over $326 million. The hack was made possible by a series of signature verification authorizations, where the developers used a deprecated function to enable unverified forged signature passes."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On February 2,3, 2022, an attacker exploited a signature-verification bug in the Wormhole Solana-side bridge contract, allowing unauthorized minting of 120,000 wETH (~$325M). Most of the unbacked assets were bridged to Ethereum and sold. Jump Crypto replenished the missing ETH, restoring Wormhole's 1:1 asset backing and containing broader systemic risk. The Solana-side Wormhole contract used a deprecated sysvar API for signature verification that failed to validate the instructions sysvar account provenance. The attacker supplied a forged account, bypassed guardian consensus, and minted wETH without ETH collateral. The fix was committed but not yet deployed."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Portal (Wormhole bridge) was exploited on Solana on February 2, 2022, through a Solana-side signature verification flaw that allowed the attacker to mint 120,000 unbacked wETH (~$325M). Jump Crypto replenished the loss, preserving asset backing. The Wormhole Solana contract failed to properly validate the canonical Instructions sysvar account during signature verification. This allowed attacker-controlled serialized instruction data to be accepted as guardian-signed verification, enabling unauthorized minting."
+    }
+  ],
+  "audit": "Neodyme",
+  "txHashes": [
+    "0x4d5201dd4a377f20e61fb8f42e6f929ec16bcec918f0584e39241d15b254a80f",
+    "0xacd309b02e4b533484d148de9ab0adf367ed4e70ed751d1ff036152dc3bc0479"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "slowmist",
+    "revertiq",
+    "curated"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Wormhole - REKT",
+      "url": "https://rekt.news/wormhole-rekt"
+    },
+    {
+      "source": "slowmist",
+      "label": "wormholecrypto.medium.com",
+      "url": "https://wormholecrypto.medium.com/wormhole-incident-report-02-02-22-ad9b8f21eec6"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/wormhole-2022-02-03"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/wormhole-exploit-the-second-largest-defi-hack-ever-237ed5c81670"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainscorelabs.com",
+      "url": "https://chainscorelabs.com/protocol/wormhole/incidents-and-security-advisories/2022-wormhole-bridge-exploit"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/portal-2022-02-02"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/portal-hack-2022"
+    },
+    {
+      "source": "revertiq",
+      "label": "blockclarityhub.com",
+      "url": "https://blockclarityhub.com/case-studies/wormhole-exploit"
+    },
+    {
+      "source": "curated",
+      "label": "Kudelski: Wormhole exploit analysis",
+      "url": "https://kudelskisecurity.com/modern-ciso-blog/the-wormhole-hack-how-a-missing-account-check-led-to-a-325m-exploit/"
+    }
+  ]
+}

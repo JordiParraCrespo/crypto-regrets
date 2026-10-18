@@ -1,0 +1,88 @@
+{
+  "id": "2026-08-28-ajna-v2",
+  "name": "Ajna V2",
+  "date": "2026-08-28",
+  "year": 2026,
+  "amountUsd": 775400,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Liquidation Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.98,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.98
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.01
+      },
+      {
+        "category": "market-manipulation",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.09,
+    "stateActor": 0.02,
+    "hasRootCause": 0.93
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "liquidation accounting manipulation via self-controlled auction. Lost: ~$124.8K for this cbETH pool (1 of 7 pools hit by the same bug the same day, ~$775K aggregate)",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "liquidation accounting manipulation via self-controlled auction. Lost: ~$124.8K for this cbETH pool (1 of 7 pools hit by the same bug the same day, ~$775K aggregate)"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Ajna V2 suffered a reported $775,400 loss on Ethereum on 2026-08-28 after attackers exploited its liquidation accounting across multiple pools. One checked cbETH transaction shows 3.474032198249838476 WETH sent into the reported pool path and 48.127374524782420835 cbETH leaving before the 4 WETH funding leg was repaid. Available evidence supports a flaw in Ajna V2's internal liquidation lifecycle. Public reconstructions place the exploitable sequence in the interaction of bucketTake, collateral removal, take, and settlement, allowing collateral to leave a pool without matching quote repayment. The exact defective line and the incident-time deployed rev…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x12dfde527ef62882bfabb64362c9ae0e6bfb628363bd298d0d0956c9a114e4f5"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-08/AjnaFinance_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-08/AjnaFinance_exp.sol"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/ajna-v2-2026-08-28"
+    },
+    {
+      "source": "revertiq",
+      "label": "api.llama.fi",
+      "url": "https://api.llama.fi/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "defillama.com",
+      "url": "https://defillama.com/protocol/ajna-v2"
+    }
+  ]
+}

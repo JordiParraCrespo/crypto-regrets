@@ -1,0 +1,73 @@
+{
+  "id": "2023-07-18-apedao",
+  "name": "APEDAO",
+  "date": "2023-07-18",
+  "year": 2023,
+  "amountUsd": 7000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Business Logic Flaw",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 1.00).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.91
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Business Logic Flaw. Lost: ~$7K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Business Logic Flaw. Lost: ~$7K"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "$APEDAO contract mistook the attacker's behavior transfer as a sell operation and gradually added up a value called \"amountToDead\".Then the attacker repeatedly transfer in $APEDAO .Eventually, the attacker calls godead function to burn the $APEDAO held in the pair contract, causing the token price to rise. Code Snippet: Attack TX: https://bscscan.com/tx/0x8d35dfd9968ce61fb969ffe8dcc29eeeae864e466d2cb0b7d26ce63644691994 Analysis: https://twitter.com/BeosinAlert/status/1681316257034035201"
+    },
+    {
+      "source": "SlowMist",
+      "text": "APEDAO on the BNB chain was attacked and the loss was approximately $7,000. The attacker transferred APEDAO to the pair contract. The APEDAO contract mistook the attacker's behavior as a selling operation and gradually accumulated a value named \"amountToDead\". The attacker repeatedly transferred APEDAO and then used the skim function to withdraw excess tokens. Eventually, the attacker calls the godead function to destroy APEDAO held in the pairing contract, causing the token price to rise."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x8d35dfd9968ce61fb969ffe8dcc29eeeae864e466d2cb0b7d26ce63644691994"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-07/ApeDAO_exp.sol",
+  "sources": [
+    "defihacklabs",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-07/ApeDAO_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BeosinAlert/status/1681316257034035201"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x8d35dfd9968ce61fb969ffe8dcc29eeeae864e466d2cb0b7d26ce63644691994"
+    }
+  ]
+}

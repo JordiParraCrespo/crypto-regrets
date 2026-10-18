@@ -1,0 +1,125 @@
+{
+  "id": "2021-09-04-dao-maker-vesting",
+  "name": "DAO Maker Vesting",
+  "date": "2021-09-04",
+  "year": 2021,
+  "amountUsd": 4000000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.34
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Bad Access Controal. Lost: $4 million",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Bad Access Controal. Lost: $4 million"
+    },
+    {
+      "source": "REKT",
+      "text": "DAO Maker meet their maker. Again. $4M lost, less than a month after losing $7M. If you get rekt on repeat then we have to say something..."
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "incorrect access control Vulnerable code snippet: Need to decompile: https://etherscan.io/address/0xf17ca0e0f24a5fa27944275fa0cedec24fbf8ee2#code"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The Vesting contract of DAO Maker was attacked by hackers. DeRace Token (DERC), Coinspaid (CPD), Capsule Coin (CAPS), Showcase Token (SHO) all use Dao Maker's distribution system, and the DAO Maker contract is attacked when the holder is issued (SHO) in DAO Maker , That is, there is a loophole in the distribution system of SHO participants: init is not initialized protection, the attacker initializes the key parameters of init, and changes the owner at the same time, and then steals the target token through emergencyExit and exchanges it into DAI, attacking The final profit of nearly 4 million U.S. dollars."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "DAO Maker's Ethereum vesting contracts suffered a $4M loss on September 3, 2021, when an attacker exploited an unprotected init() function to seize contract ownership and drain pool funds via emergencyExit. The vesting contracts allowed unrestricted calls to the init() initialization function after deployment. This enabled a malicious actor to reassign ownership and invoke privileged emergencyExit withdrawals. No 'only once' initialization guard or robust access control was present."
+    }
+  ],
+  "audit": "TBC",
+  "txHashes": [
+    "0xd5e2edd6089dcf5dca78c0ccbdf659acedab173a8ab3cb65720e35b640c0af7c",
+    "0x96bf6bd14a81cf19939c0b966389daed778c3a9528a6c5dd7a4d980dec966388"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2021-09/DaoMaker_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2021-09/DaoMaker_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Mudit__Gupta/status/1434059922774237185"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xd5e2edd6089dcf5dca78c0ccbdf659acedab173a8ab3cb65720e35b640c0af7c"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: DAO Maker - REKT",
+      "url": "https://rekt.news/daomaker-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/address/0xf17ca0e0f24a5fa27944275fa0cedec24fbf8ee2#code"
+    },
+    {
+      "source": "slowmist",
+      "label": "coinfirm.com",
+      "url": "https://www.coinfirm.com/blog/dao-maker-hack/"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/dao-maker-2021-09-04"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "blockchainbreaches.com",
+      "url": "https://www.blockchainbreaches.com/en/breaches/dao-maker-2021"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/coinspect/learn-evm-attacks/blob/master/test/Access_Control/DAOMaker/README.md"
+    }
+  ]
+}

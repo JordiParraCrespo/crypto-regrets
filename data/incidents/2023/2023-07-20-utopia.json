@@ -1,0 +1,108 @@
+{
+  "id": "2023-07-20-utopia",
+  "name": "Utopia",
+  "date": "2023-07-20",
+  "year": 2023,
+  "amountUsd": 119300,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "Token",
+  "category": "logic-error",
+  "technique": "Swap Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.83,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.84
+      },
+      {
+        "category": "access-control",
+        "p": 0.14
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.06,
+    "stateActor": 0.02,
+    "hasRootCause": 0.94
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Business Logic Flaw. Lost: ~$119k",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Business Logic Flaw. Lost: ~$119k"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The root Cause is that the balance of the address can be set in the _airdrop() function, but the airdropAddress is not random, and the attacker can set the balance of the pair to 1 by calculating the receiver's address. Vulnerable Code Snippet: Attack TX: https://bscscan.com/tx/0xeb4eb487f58d39c05778fed30cd001b986d3c52279e44f46b2de2773e7ee1d5e Analysis: https://twitter.com/DeDotFiSecurity/status/1681923729645871104"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Utopia on BNB Chain was exploited on July 20, 2023 by means of a business logic flaw in its token-pair airdrop and liquidity logic, resulting in a loss of approximately $119,300 (492 BNB). The attacker manipulated the airdrop mechanism to reset the liquidity pair’s token balance and drained the paired asset. The root cause was a flaw in Utopia’s airdrop logic, which allowed the attacker to set the liquidity pair’s Utopia token balance to 1 by predicting or controlling the airdrop recipient. This enabled reserves manipulation and extraction of assets via swaps."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xeb4eb487f58d39c05778fed30cd001b986d3c52279e44f46b2de2773e7ee1d5e",
+    "0x43aeadbd1137d483de981022fcc333608b73963ba3a09d28bcd4bcca29eb2f02"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-07/Utopia_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-07/Utopia_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/DeDotFiSecurity/status/1681923729645871104"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/bulu4477/status/1682380542564769793"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0xeb4eb487f58d39c05778fed30cd001b986d3c52279e44f46b2de2773e7ee1d5e"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/utopia-2023-07-20"
+    },
+    {
+      "source": "revertiq",
+      "label": "defillama.com",
+      "url": "https://defillama.com/protocol/utopia"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/utopia-hack-2023"
+    }
+  ]
+}

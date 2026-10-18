@@ -1,0 +1,73 @@
+{
+  "id": "2024-02-02-adc",
+  "name": "ADC",
+  "date": "2024-02-02",
+  "year": 2024,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "incorrect-access-control",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 1.00). Replaced keyword guess \"logic-error\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "incorrect-access-control. Lost: ~20 eth",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "incorrect-access-control. Lost: ~20 eth"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The ADC MainPool game contract exposed calcStepIncome(uint256 pid_, uint256 value_, uint8 dividendAccount_) as a public/external function with no access control or caller validation. This function is meant to be invoked internally by the game's own accounting flow, but anyone could call it directly to arbitrarily inflate a player's payable balance. The attacker bought a ticket and joined the game with a modest amount, then directly called calcStepIncome(529, 36099999999999999900, 100) to credit themselves a huge stepIncome, and finally called withdraw() to drain pool funds far in excess of their deposit. Vulnerable code snippet: Attack Tx: https://app.blocksec.com/explorer/tx/eth/0xcf834aff4de9992f5da9c443600dad9c6277a8a00de5007842fece51564992db Analysis: EXVULSEC on X"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xcf834aff4de9992f5da9c443600dad9c6277a8a00de5007842fece51564992db"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-02/ADC_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-02/ADC_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/EXVULSEC/status/1753294675971313790"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/2baf1a43c44d6cb3ce17a678701784fbe7edabad/src/test/2024-02/ADC_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/eth/0xcf834aff4de9992f5da9c443600dad9c6277a8a00de5007842fece51564992db"
+    }
+  ]
+}

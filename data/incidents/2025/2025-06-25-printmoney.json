@@ -1,0 +1,77 @@
+{
+  "id": "2025-06-25-printmoney",
+  "name": "PrintMoney",
+  "date": "2025-06-25",
+  "year": 2025,
+  "amountUsd": 2000000,
+  "returnedUsd": null,
+  "chains": [
+    "BNB Chain"
+  ],
+  "targetType": null,
+  "category": "arbitrary-call",
+  "technique": "Access control; Logic error; Confused deputy",
+  "classificationNote": "Classified by keyword rules from the RevertIQ label and description.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "arbitrary-call",
+    "confidence": 0.48,
+    "top": [
+      {
+        "category": "arbitrary-call",
+        "p": 0.51
+      },
+      {
+        "category": "access-control",
+        "p": 0.47
+      },
+      {
+        "category": "logic-error",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "A BNB Chain arbitrage bot called PrintMoney lost about $2 million across repeated drains after a permissionless forwarder let any caller reach a treasury that trusted that forwarder for privileged token transfers. The treasury privileged a forwarder address, but the forwarder's selector dispatcher fell through unknown selectors into a generic batch executor that anyone could call. That created a confused-deputy path: a public caller could route arbitrary calldata through the trusted forwarder and make the treasury transfer its balances. The historical Solidity source was not verified, so this conclusion comes from bytecode and transaction-trace reconstruction.",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "A BNB Chain arbitrage bot called PrintMoney lost about $2 million across repeated drains after a permissionless forwarder let any caller reach a treasury that trusted that forwarder for privileged token transfers. The treasury privileged a forwarder address, but the forwarder's selector dispatcher fell through unknown selectors into a generic batch executor that anyone could call. That created a confused-deputy path: a public caller could route arbitrary calldata through the trusted forwarder and make the treasury transfer its balances. The historical Solidity source was not verified, so this conclusion comes from bytecode and transaction-trace reconstruction."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x8c026c3939f7e2d0376d13e30859fa918a5a567348ca1329836df88bef30c73e"
+  ],
+  "poc": null,
+  "sources": [
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/mev-bot-2025-06-25"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/de-fi-rekt-report-june-2025-114-8-million-lost-across-11-exploits"
+    },
+    {
+      "source": "revertiq",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/bsc/0x8c026c3939f7e2d0376d13e30859fa918a5a567348ca1329836df88bef30c73e"
+    },
+    {
+      "source": "revertiq",
+      "label": "crypto.training",
+      "url": "https://crypto.training/hacks/2025-06-unverified_b5cb/"
+    }
+  ]
+}

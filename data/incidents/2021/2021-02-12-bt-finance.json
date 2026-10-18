@@ -1,0 +1,93 @@
+{
+  "id": "2021-02-12-bt-finance",
+  "name": "BT Finance",
+  "date": "2021-02-12",
+  "year": 2021,
+  "amountUsd": 1500000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.96,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.96
+      },
+      {
+        "category": "key-compromise",
+        "p": 0.02
+      },
+      {
+        "category": "access-control",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.11
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "DeFi revenue aggregator BT.Finance tweeted, \"It was hacked. The attacked strategies include ETH, USDC and USDT. Other strategies are not affected. BT.Finance withdrawal fee protection has reduced the loss of this attack by nearly 140,000 US dollars.\" BT.Finance expressed the hope that hackers can return the funds and will use BT tokens to thank its bug test. According to ICO Analytics, the affected funds are approximately US$1.5 million.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "DeFi revenue aggregator BT.Finance tweeted, \"It was hacked. The attacked strategies include ETH, USDC and USDT. Other strategies are not affected. BT.Finance withdrawal fee protection has reduced the loss of this attack by nearly 140,000 US dollars.\" BT.Finance expressed the hope that hackers can return the funds and will use BT tokens to thank its bug test. According to ICO Analytics, the affected funds are approximately US$1.5 million."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "BT Finance suffered a flash-loan-driven price manipulation exploit on February 8, 2021, with losses of about $1.5 million. The attacker manipulated Curve pool reserves, allowing profitable vault deposits and withdrawals in a single transaction. Protocol response included pausing affected pools and issuing compensation IOU tokens. BT Finance vaults valued deposits and withdrawals based on spot Curve pool conditions, which could be distorted by flash-loan trades within one transaction. No manipulation-resistant price source was used, enabling attackers to profit from rapid reserve changes."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x82f95242963ac274d63e78234cb71c156f3135c32037e7e5b4424a6043da2a9a"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/btdotfinance/status/1358989066814033920"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/bt-finance-2021-02-12"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/bt-finance-hack-2021-4086"
+    },
+    {
+      "source": "revertiq",
+      "label": "quadrigainitiative.com",
+      "url": "https://www.quadrigainitiative.com/casestudy/btfinancehack.php"
+    }
+  ]
+}

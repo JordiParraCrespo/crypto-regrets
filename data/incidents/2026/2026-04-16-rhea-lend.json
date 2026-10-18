@@ -1,0 +1,101 @@
+{
+  "id": "2026-04-16-rhea-lend",
+  "name": "Rhea Lend",
+  "date": "2026-04-16",
+  "year": 2026,
+  "amountUsd": 18400000,
+  "returnedUsd": null,
+  "chains": [
+    "Near"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.98,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.98
+      },
+      {
+        "category": "input-validation",
+        "p": 0.01
+      },
+      {
+        "category": "logic-error",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.93
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "NEAR Protocol's Rhea Finance lost $18.4 million after an attacker exploited a margin parser that counted fake swap route minimums as real collateral. $9 million frozen or recovered. $4 million in ZEC routed into Zcash's shielded pool, cryptographically unrecoverable.",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "NEAR Protocol's Rhea Finance lost $18.4 million after an attacker exploited a margin parser that counted fake swap route minimums as real collateral. $9 million frozen or recovered. $4 million in ZEC routed into Zcash's shielded pool, cryptographically unrecoverable."
+    },
+    {
+      "source": "SlowMist",
+      "text": "According to CertiK, a security incident occurred in the NEAR ecosystem DeFi protocol Rhea Finance. The attacker created multiple fake token contracts and added liquidity to newly created pools, allegedly misleading the protocol’s oracle and validation layers, thereby extracting at least approximately $7.6 million in assets from the related pools. On April 18, Rhea Finance released an update regarding its security incident, stating that its lending market suffered an unauthorized attack on April 16, specifically targeting its leveraged trading functionality. The attacker exploited a potential vulnerability in the slippage protection mechanism, stealing…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On April 16, 2026, Rhea Finance's margin trading on NEAR suffered an $18.4M protocol loss after an attacker manipulated slippage checks in swap routing. The attacker used fake pools to inflate the minimum output in leveraged trades, forcing undercollateralized positions that drained protocol reserves before being liquidated. Roughly $18M was later voluntarily returned or frozen; Rhea committed to covering the remaining shortfall. The protocol's slippage check for margin position swaps summed min_amount_out values across all swap steps, counting amounts even when the output of one step was fully consumed in the input of the next. This allowed routes inv…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Rhea Finance - Rekt",
+      "url": "https://rekt.news/rhea-finance-rekt"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/rhea_finance/status/2045203607856042118"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/rhea-finance-2026-04-16"
+    },
+    {
+      "source": "revertiq",
+      "label": "quillaudits.com",
+      "url": "https://www.quillaudits.com/blog/hack-analysis/rhea-finance-hack"
+    },
+    {
+      "source": "revertiq",
+      "label": "blocksec.com",
+      "url": "https://blocksec.com/blog/weekly-web3-security-incident-roundup-apr-13-apr-19-2026"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/DarkNavySecurity/web3-exploit-analysis/blob/main/articles/rhea_margin_incident_analysis.md"
+    }
+  ]
+}

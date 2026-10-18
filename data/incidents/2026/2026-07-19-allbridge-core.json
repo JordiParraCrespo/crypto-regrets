@@ -1,0 +1,99 @@
+{
+  "id": "2026-07-19-allbridge-core",
+  "name": "Allbridge Core",
+  "date": "2026-07-19",
+  "year": 2026,
+  "amountUsd": 1650000,
+  "returnedUsd": null,
+  "chains": [
+    "Solana"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Withdrawal Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.53,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.56
+      },
+      {
+        "category": "logic-error",
+        "p": 0.42
+      },
+      {
+        "category": "market-manipulation",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.94,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": true,
+  "language": "Rust",
+  "rootCause": "Cross-chain bridge protocol Allbridge Core was exploited on July 19-20, 2026. The attacker used a ~$1.12M USDC flash loan from Kamino to rapidly swap in the Solana USDC/USDT liquidity pools, manipulating ratios and draining approximately $1.65 million. The team paused the protocol, urged affected LPs to withdraw funds immediately, and asked arbitrage profiteers to return funds for LP compensation.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Cross-chain bridge protocol Allbridge Core was exploited on July 19-20, 2026. The attacker used a ~$1.12M USDC flash loan from Kamino to rapidly swap in the Solana USDC/USDT liquidity pools, manipulating ratios and draining approximately $1.65 million. The team paused the protocol, urged affected LPs to withdraw funds immediately, and asked arbitrage profiteers to return funds for LP compensation."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On July 19, 2026, Allbridge Core's Solana stablecoin bridge was exploited for $1.65M. The attacker abused a missing check that allowed the same pool account to be passed as both sender and receiver in a swap, corrupting the protocol's internal accounting and enabling outsized withdrawals. The Solana program for Allbridge Core failed to validate that the send and receive pool account addresses in the swap instruction were distinct. When the same account was used in both roles, Solana instantiated two local mutable objects from the same on-chain state. Only the second object (receive leg) was ultimately written back, so the send leg's critical accounting changes were silently discarded.…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "3LNLaGi36bqoSBFBqcQ3ZvDbnGCxrxu4rqahZrnfHZjKSYxfR1mqiCXtBXjjeBmoRQDeSiKxZ7c1nFb8pBgTY39Q"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=3LNLaGi36bqoSBFBqcQ3ZvDbnGCxrxu4rqahZrnfHZjKSYxfR1mqiCXtBXjjeBmoRQDeSiKxZ7c1nFb8pBgTY39Q"
+    },
+    {
+      "source": "blocksec",
+      "label": "x.com",
+      "url": "https://x.com/Allbridge_io/status/2079234835936391617"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/Allbridge_io/status/2078932561036722319"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/allbridge-core-2026-07-19"
+    },
+    {
+      "source": "revertiq",
+      "label": "blocksec.com",
+      "url": "https://blocksec.com/blog/web3-security-allbridge-wanchain-exploits"
+    },
+    {
+      "source": "revertiq",
+      "label": "bir.badjoke-lab.com",
+      "url": "https://bir.badjoke-lab.com/incident/allbridge-core-2026-solana-pool-exploit/"
+    }
+  ]
+}

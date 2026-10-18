@@ -1,0 +1,114 @@
+{
+  "id": "2026-04-05-denaria-vamm",
+  "name": "Denaria vAMM",
+  "date": "2026-04-05",
+  "year": 2026,
+  "amountUsd": 165618,
+  "returnedUsd": null,
+  "chains": [
+    "Linea"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.93,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.93
+      },
+      {
+        "category": "logic-error",
+        "p": 0.06
+      },
+      {
+        "category": "input-validation",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.96,
+    "stateActor": 0.01,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "The Denaria Finance perpetual exchange on Linea suffered from two interacting vulnerabilities in its PerpPair contract. First, a rounding asymmetry in trade execution (perpTrade.sol) where additions use floor division but subtractions use divCeil, causing the liquidity matrix element actualM[1][0] to erode by ~1 wei per trade and become -1 after approximately 8 trades. Second, an unsafe int256 → uint256 cast in internalPerpLogic.sol (lines 53–54) with no negativity check, so when the dot-product result reached -1 it silently wrapped to type(uint256).max. The attacker used an AAVE flash loan, deployed helper contracts as LPs (one-sided liquidity in vUSD only) and traders, accumulated the rounding error across trades until the matrix element turned negative, then triggered the unsafe cast to obtain an astronomically large position value, draining approximately $165,600 USDC from the vault. Attack Tx: 0xcb0744...606447 Analysis: Denaria Finance Exploit: When divCeil Meets an Unsafe Cast – Verichains Denaria Finance Statement",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The Denaria Finance perpetual exchange on Linea suffered from two interacting vulnerabilities in its PerpPair contract. First, a rounding asymmetry in trade execution (perpTrade.sol) where additions use floor division but subtractions use divCeil, causing the liquidity matrix element actualM[1][0] to erode by ~1 wei per trade and become -1 after approximately 8 trades. Second, an unsafe int256 → uint256 cast in internalPerpLogic.sol (lines 53–54) with no negativity check, so when the dot-product result reached -1 it silently wrapped to type(uint256).max. The attacker used an AAVE flash loan, deployed helper contracts as LPs (one-sided liquidity in vUSD only) and traders, accumulated the rounding error across trades until the matrix element turned negative, then triggered the unsafe cast to obtain an astronomically large position value, draining approximately $165,600 USDC from the vault. Attack Tx: 0xcb0744...606447 Analysis: Denaria Finance Exploit: When divCeil Meets an Unsafe Cast – Verichains Denaria Finance Statement"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Decentralized perpetual futures trading platform Denaria announced on X that it suffered a smart contract attack yesterday, resulting in a loss of approximately $165,000. The team is currently working with Linea and auditing partners to investigate the incident and will release a full post-mortem report as soon as possible."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Denaria Finance was exploited on Linea on 2026-04-05, with public records putting the drain at about $165,618. Denaria later reported refunds totaling 6,319.062770 USDC to 60 addresses tied to Vault collateral and open positions, so the final unrecovered loss is not fully public. The published technical record points to a liquidity-accounting flaw in the LP settlement path, where rounding asymmetry and an unchecked signed to unsigned conversion turned corrupted balance state into withdrawable USDC. Denaria's LP settlement path let a reconstructed balance component drift slightly below zero because of asymmetric rounding, then converted that signed valu…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xcb0744a0d453e5556f162608fae8275dabd14292bffbfcd8394af4610c606447"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "lineascan.build",
+      "url": "https://lineascan.build/tx/0xcb0744a0d453e5556f162608fae8275dabd14292bffbfcd8394af4610c606447"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "blog.verichains.io",
+      "url": "https://blog.verichains.io/p/denaria-finance-exploit-when-divceil"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/DenariaFinance/status/2042589690415427933"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xcb0744a0d453e5556f162608fae8275dabd14292bffbfcd8394af4610c606447"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/DenariaFinance/status/2041056361186771054"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/denaria-2026-04-05"
+    },
+    {
+      "source": "revertiq",
+      "label": "gov.denaria.finance",
+      "url": "https://gov.denaria.finance/t/denaria-exploit-official-update-on-current-status/21"
+    },
+    {
+      "source": "revertiq",
+      "label": "paragraph.com",
+      "url": "https://paragraph.com/%40denariafinance/denaria-security-randd-and-improvements"
+    }
+  ]
+}

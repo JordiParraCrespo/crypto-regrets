@@ -1,0 +1,113 @@
+{
+  "id": "2025-09-23-seedify",
+  "name": "Seedify",
+  "date": "2025-09-23",
+  "year": 2025,
+  "amountUsd": 1200000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC",
+    "Avalanche"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "key-compromise",
+  "technique": "Private Key Compromised",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "key-compromise",
+    "confidence": 0.97,
+    "top": [
+      {
+        "category": "key-compromise",
+        "p": 0.97
+      },
+      {
+        "category": "bridge-crosschain",
+        "p": 0.02
+      },
+      {
+        "category": "access-control",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.92,
+    "hasRootCause": 0.97
+  },
+  "bridge": true,
+  "language": "Solidity",
+  "rootCause": "The Seedify ($SFUND) cross-chain bridge was exploited after a developer's private key was compromised by DPRK-linked threat actors, who gained unauthorized ownership of the SFUND_OFTv1 LayerZero bridge contracts on destination chains such as Base. The attacker called setTrustedRemoteAddress on the now-owned destination contracts to register a malicious source contract, enabling fraudulent cross-chain messages originating from Polygon to trigger unauthorized SFUND minting on destination chains without any real token movement or collateral. Approximately 8.8 million SFUND tokens were minted on Base, bridged to BNB Chain, and sold in batches (300 BNB, 250 BNB, 200 BNB) on PancakeSwap, netting ~$1.8M and causing SFUND's price to collapse by nearly 60%. Binance co-founder CZ confirmed some funds were frozen on HTX; ZachXBT and ZeroShadow attributed the attack to North Korean state-backed actors using tactics consistent with prior DPRK DeFi exploits. Attack Tx: 0x674ed58c2093cad2b044dc892eab171e34a627e2343044c29de2c5f23badcc9e Analysis: BlockSec Phalcon — Seedify multi-chain private key compromise",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The Seedify ($SFUND) cross-chain bridge was exploited after a developer's private key was compromised by DPRK-linked threat actors, who gained unauthorized ownership of the SFUND_OFTv1 LayerZero bridge contracts on destination chains such as Base. The attacker called setTrustedRemoteAddress on the now-owned destination contracts to register a malicious source contract, enabling fraudulent cross-chain messages originating from Polygon to trigger unauthorized SFUND minting on destination chains without any real token movement or collateral. Approximately 8.8 million SFUND tokens were minted on Base, bridged to BNB Chain, and sold in batches (300 BNB, 250 BNB, 200 BNB) on PancakeSwap, netting ~$1.8M and causing SFUND's price to collapse by nearly 60%. Binance co-founder CZ confirmed some funds were frozen on HTX; ZachXBT and ZeroShadow attributed the attack to North Korean state-backed actors using tactics consistent with prior DPRK DeFi exploits. Attack Tx: 0x674ed58c2093cad2b044dc892eab171e34a627e2343044c29de2c5f23badcc9e Analysis: BlockSec Phalcon — Seedify multi-chain private key compromise"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Meta Alchemist, founder of the Web3 incubator and launchpad platform Seedify, announced on X that one of its SFUND bridges was recently hacked. According to Seedify’s official account, a DPRK-affiliated group known for multiple Web3 exploits gained access to a developer’s private key. Using this access, the attackers were able to mint a large number of SFUND tokens through a bridge contract that had previously passed audit.As a result, the OFT contract was compromised, allowing the attackers to alter its settings and mint unauthorized tokens on Avalanche.Subsequently, the hacker transferred the minted tokens across multiple chains, including BNB, where they sold most of the SFUND tokens.…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On September 23, 2025, Seedify's LayerZero OFT cross-chain bridge on Avalanche was compromised due to the theft of a developer's private key. The attacker minted approximately 8.79 million unbacked SFUND tokens, bridged them to multiple blockchains, and sold them into liquidity pools, causing over $1.2 million in reported losses and a severe price drop. A Seedify developer's private key controlling the LayerZero OFT bridge contract on Avalanche was compromised, allowing the attacker to assume owner rights and mint unbacked SFUND tokens."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x674ed58c2093cad2b044dc892eab171e34a627e2343044c29de2c5f23badcc9e",
+    "0xd8a68d6d540ea670cbceff0e3d0d53cb2714bf1e94aed4db7d27c5ab056659a2",
+    "0xb3329675fa02861da3ea4bb7a92934dbfc8578d5fbd80a1c57d3c18465508085",
+    "0x1dd7c101c18cd1adc80c4c68ce480862245a7223f8e5182136aed316eae54ac9"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "polygonscan.com",
+      "url": "https://polygonscan.com/tx/0x674ed58c2093cad2b044dc892eab171e34a627e2343044c29de2c5f23badcc9e"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/Phalcon_xyz/status/1970510108506591289"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x674ed58c2093cad2b044dc892eab171e34a627e2343044c29de2c5f23badcc9e"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/SeedifyFund/status/1970537553515417918"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/seedify-2025-09-23"
+    },
+    {
+      "source": "revertiq",
+      "label": "itokenly.com",
+      "url": "https://itokenly.com/hacks/seedify"
+    },
+    {
+      "source": "revertiq",
+      "label": "ourcryptotalk.com",
+      "url": "https://ourcryptotalk.com/news/seedify-bridge-hacked-for-1-million"
+    }
+  ]
+}

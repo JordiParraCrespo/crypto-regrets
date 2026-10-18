@@ -1,0 +1,76 @@
+{
+  "id": "2026-09-07-cozy-v2",
+  "name": "Cozy V2",
+  "date": "2026-09-07",
+  "year": 2026,
+  "amountUsd": 163326,
+  "returnedUsd": null,
+  "chains": [
+    "Optimism"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Smart Contract Vulnerability",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.61,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.63
+      },
+      {
+        "category": "logic-error",
+        "p": 0.31
+      },
+      {
+        "category": "access-control",
+        "p": 0.05
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.94
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "unverified UMA Optimistic Oracle trigger enables unbacked protection-token redemption. Lost: ~160,776 USDC.e (~$160K)",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "unverified UMA Optimistic Oracle trigger enables unbacked protection-token redemption. Lost: ~160,776 USDC.e (~$160K)"
+    },
+    {
+      "source": "SlowMist",
+      "text": "DeFi protection protocol Cozy Finance on Optimism was exploited for about $160,000. The attacker first bought PTokens in the Aave v2 and Curve protection markets, then submitted undisputed YES answers to the UMA Optimistic Oracle. The trigger did not independently verify a real Aave/Curve hack, and PToken payout eligibility was not tied to a pre-proposal holder snapshot. After the markets moved to TRIGGERED, the attacker burned PTokens and claimed USDC."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-09/CozyFinance_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-09/CozyFinance_exp.sol"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/2096881310237426062"
+    }
+  ]
+}

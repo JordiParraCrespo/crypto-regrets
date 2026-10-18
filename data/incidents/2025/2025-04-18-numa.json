@@ -1,0 +1,88 @@
+{
+  "id": "2025-04-18-numa",
+  "name": "Numa",
+  "date": "2025-04-18",
+  "year": 2025,
+  "amountUsd": 506000,
+  "returnedUsd": null,
+  "chains": [
+    "Arbitrum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.9,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.91
+      },
+      {
+        "category": "access-control",
+        "p": 0.03
+      },
+      {
+        "category": "market-manipulation",
+        "p": 0.03
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.56
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "NUMA was attacked on the Arbitrum chain, resulting in a loss of approximately $530,000. The attacker swapped all assets to ETH, bridged them to Ethereum mainnet, and deposited the funds into Tornado Cash.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "NUMA was attacked on the Arbitrum chain, resulting in a loss of approximately $530,000. The attacker swapped all assets to ETH, bridged them to Ethereum mainnet, and deposited the funds into Tornado Cash."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "The Numa protocol was exploited on Arbitrum One on April 18, 2025, after an attacker manipulated NUMA token prices using flash loans and protocol functions, extracting collateral and causing losses estimated at $506,000. The incident originated from vulnerable price calculation and insufficient real-time validation. NumaVault's sell() function allowed manipulated spot prices to overwrite the price reference variable (last_lsttokenvalueWei) without external validation or slippage protection, which propagated through NumaPriceOracleNew. This enabled the attacker to borrow collateral against artificially altered NUMA prices."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x74a19463e3cc1d131a92599f2ff28effe13064d7c7480c851e7249708de40e3c"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/officer_cia/status/1913979776953356722"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/numa-2025-04-18"
+    },
+    {
+      "source": "revertiq",
+      "label": "hypernative.io",
+      "url": "https://www.hypernative.io/insights/blog/hypernative-detection-506k-exploit-of-numa-money-on-arbitrum"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.solidityscan.com",
+      "url": "https://blog.solidityscan.com/numamoney-hack-analysis-c3657dfd9df2/"
+    }
+  ]
+}

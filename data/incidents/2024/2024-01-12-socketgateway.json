@@ -1,0 +1,145 @@
+{
+  "id": "2024-01-12-socketgateway",
+  "name": "SocketGateway",
+  "date": "2024-01-12",
+  "year": 2024,
+  "amountUsd": 3300000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "arbitrary-call",
+  "technique": "Lack of calldata validation",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.87). Replaced keyword guess \"bridge-crosschain\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "arbitrary-call",
+    "confidence": 0.87,
+    "top": [
+      {
+        "category": "arbitrary-call",
+        "p": 0.88
+      },
+      {
+        "category": "input-validation",
+        "p": 0.1
+      },
+      {
+        "category": "access-control",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Lack of calldata validation. Lost: ~3.3Million $",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Lack of calldata validation. Lost: ~3.3Million $"
+    },
+    {
+      "source": "REKT",
+      "text": "Infinite approvals… the ultimate leap of faith. Socket’s Bungee bridge lost $3.3M yesterday. Have you checked your approvals lately?"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The exploit originated from wallets with unlimited approvals to Socket contracts, allowing the attacker to exploit vulnerabilities in the protocol’s performAction function. This flaw enabled a call injection attack by allowing the insertion of malicious code into the call() function, compromising the contract’s state and enabling unauthorized fund withdrawals. Vulnerable code snippet: Attack transaction: https://etherscan.io/tx/0xc6c3331fa8c2d30e1ef208424c08c039a89e510df2fb6ae31e5aa40722e28fd6 Analysis: https://twitter.com/BeosinAlert/status/1747450173675196674"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The interoperability protocol Socket tweeted that the protocol experienced a security incident. An attacker exploited a vulnerability on a newly added module under the Socket Aggregator system. The module was responsible for swapping tokens on behalf of users. The vulnerability in said module allowed the attacker to steal funds from users who had given infinite approval of tokens to the Socket Gateway contract. The attack was carried out through 2 malicious transactions on Ethereum. The total exploited value is estimated to be around $3.3m. On January 23rd, Socket announced the successful recovery of 1032 ETH from the funds involved in the incident. A…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On January 16, 2024, Socket Protocol was exploited for about $3.3 million after a newly added route contract to its SocketGateway allowed arbitrary external calls. The attacker drained tokens from user wallets that had previously approved unlimited allowances to the vulnerable contract, until the route was paused a few hours later. The team recovered a majority of funds through rapid response and coordination. A newly deployed route contract in the SocketGateway enabled user-supplied (target, calldata) to be forwarded by .call() with no destination or selector validation. This omission let attackers craft transferFrom calls targeting ERC-20 token contr…"
+    }
+  ],
+  "audit": "Out of scope",
+  "txHashes": [
+    "0xc6c3331fa8c2d30e1ef208424c08c039a89e510df2fb6ae31e5aa40722e28fd6",
+    "0x591d054a9db63f0976e533f447df482bed5f24d7429646570b2108a67e24ce54",
+    "0x1df44e224c7a715da25fa33dcad2ca3a930d1a4dafd263e61c07b52673d505f4",
+    "0xac75adcc1cb3fef158c4f200c48fcbcbb9b6ce3250bdf3751d6231d41a9e604b"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-01/SocketGateway_exp.sol",
+  "sources": [
+    "defihacklabs",
+    "rekt",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-01/SocketGateway_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BeosinAlert/status/1747450173675196674"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/peckshield/status/1747353782004900274"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Socket - REKT",
+      "url": "https://rekt.news/socket-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xc6c3331fa8c2d30e1ef208424c08c039a89e510df2fb6ae31e5aa40722e28fd6"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x591d054a9db63f0976e533f447df482bed5f24d7429646570b2108a67e24ce54"
+    },
+    {
+      "source": "blocksec",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Phalcon_xyz/status/1747349099702059072"
+    },
+    {
+      "source": "blocksec",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/SocketGateway_exp.sol"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/socketdottech/status/1747349422730813525?s=46&t=VOX9GON9LkityHRA95UVTQ"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/explained-the-socket-protocol-2024-01-19t10-31-23-954000-00-00"
+    },
+    {
+      "source": "revertiq",
+      "label": "halborn.com",
+      "url": "https://www.halborn.com/blog/post/explained-the-socket-protocol-hack-january-2024"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/de-fi-rekt-report-over-38-8m-lost-in-january-2024"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractaudit.com",
+      "url": "https://www.smartcontractaudit.com/guides/socket-protocol-2024-approval-drain-exploit"
+    }
+  ]
+}

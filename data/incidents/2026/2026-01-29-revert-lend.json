@@ -1,0 +1,85 @@
+{
+  "id": "2026-01-29-revert-lend",
+  "name": "Revert Lend",
+  "date": "2026-01-29",
+  "year": 2026,
+  "amountUsd": 50000,
+  "returnedUsd": null,
+  "chains": [
+    "Base"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Staking Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.98,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.98
+      },
+      {
+        "category": "access-control",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.9,
+    "stateActor": 0.01,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Revert Finance’s newly launched Aerodrome Lend vault on Base was exploited for $50,101. The attacker used a flash loan from Morpho to mint an Aerodrome concentrated liquidity NFT, deposited it as collateral, borrowed USDC, and then exploited a missing safety check in the GaugeManager contract. This allowed unstaking and withdrawing all liquidity from the debt-backed position, leaving the vault with a worthless NFT shell. A second attacker replicated it shortly after. User funds were safe; losses were mostly from Revert’s own seeded USDC. The team disabled deposits and published a post-mortem.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Revert Finance’s newly launched Aerodrome Lend vault on Base was exploited for $50,101. The attacker used a flash loan from Morpho to mint an Aerodrome concentrated liquidity NFT, deposited it as collateral, borrowed USDC, and then exploited a missing safety check in the GaugeManager contract. This allowed unstaking and withdrawing all liquidity from the debt-backed position, leaving the vault with a worthless NFT shell. A second attacker replicated it shortly after. User funds were safe; losses were mostly from Revert’s own seeded USDC. The team disabled deposits and published a post-mortem."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Revert Lend's Aerodrome Lend vault was exploited on Base on 29,30 January 2026, resulting in a loss of 50,101.744193 USDC of protocol funds. Attackers manipulated collateral value by removing liquidity from NFT-backed positions, enabling borrowing of USDC without adequate backing. A missing safety constraint in the staking/management layer allowed attackers to withdraw all liquidity from NFT collateral backing an active loan, breaking the vault's lending invariant. The vault did not block modifications to collateral with outstanding debt."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x10429eaeb479f9149854e4aeb978a35ac02d9688f6e22371712b3878c63a64ab",
+    "0xe7f8405d3f10d431ce1958942dcf877cf1dcbea4f2a2a918fa8499d778295ee3"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/revertfinance/status/2017087480772600157"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/revert-lend-2026-01-29"
+    },
+    {
+      "source": "revertiq",
+      "label": "paragraph.com",
+      "url": "https://paragraph.com/%40revertfinance/post%E2%80%91mortem-aerodrome-lend-vault-incident-on-base"
+    },
+    {
+      "source": "revertiq",
+      "label": "paragraph.com",
+      "url": "https://paragraph.com/%40revertfinance/aerodrome-lend-relaunches-on-base"
+    }
+  ]
+}

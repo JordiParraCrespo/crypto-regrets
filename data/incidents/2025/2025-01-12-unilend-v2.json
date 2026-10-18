@@ -1,0 +1,101 @@
+{
+  "id": "2025-01-12-unilend-v2",
+  "name": "Unilend V2",
+  "date": "2025-01-12",
+  "year": 2025,
+  "amountUsd": 197600,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Redeem Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.09,
+    "stateActor": 0.02,
+    "hasRootCause": 0.09
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Logic Flaw. Lost: 60 stETH",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Logic Flaw. Lost: 60 stETH"
+    },
+    {
+      "source": "SlowMist",
+      "text": "On January 13, 2025, the SlowMist MistEye security monitoring system detected an attack on UniLend, resulting in a loss of ~$197K."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On January 13, 2025, UniLend V2 on Ethereum was exploited for approximately 61 stETH (worth about $197,000). The attacker manipulated the protocol’s redemption logic to bypass proper collateral checks, using outdated pool balances, and withdrew assets that exceeded legitimate collateral value. The redeemUnderlying function calculated the user's health factor using outdated pool balances after burning LP tokens but before updating balances, allowing an attacker to redeem assets beyond safe limits."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x44037ffc0993327176975e08789b71c1058318f48ddeff25890a577d6555b6ba"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-01/Unilend_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-01/Unilend_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "slowmist.medium.com",
+      "url": "https://slowmist.medium.com/analysis-of-the-unilend-hack-90022fa35a54"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x44037ffc0993327176975e08789b71c1058318f48ddeff25890a577d6555b6ba"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/1878651772375572573"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/unilend-2025-01-13"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/de-fi-rekt-report-january-2025-62-5-million-lost-across-11-incidents-zero-recovered"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.solidityscan.com",
+      "url": "https://blog.solidityscan.com/unilend-finance-hack-analysis-5ac7bb71850d/"
+    }
+  ]
+}

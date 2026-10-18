@@ -1,0 +1,113 @@
+{
+  "id": "2021-06-03-hunny-finance",
+  "name": "Hunny Finance",
+  "date": "2021-06-03",
+  "year": 2021,
+  "amountUsd": 100000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Incorrect Share Accounting",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.98,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.98
+      },
+      {
+        "category": "logic-error",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.07,
+    "stateActor": 0.02,
+    "hasRootCause": 0.84
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Incorrect calculation",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Incorrect calculation"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Incorrect profit calculation via balanceOf Very similar PancakeBunny. Vulnerable code snippet: https://bscscan.com/address/0x109Ea28dbDea5E6ec126FbC8c33845DFe812a300#code#L4638"
+    },
+    {
+      "source": "SlowMist",
+      "text": "According to official sources, PancakeHunny on BSC was attacked by hackers, and the hackers made 43 ETH (a total of more than 100,000 US dollars). PancakeHunny forked from PancakeBunny, and the attack suffered this time was similar to PancakeBunny. Hackers obtained a large amount of HUNNY tokens and threw them to the market, causing the price of HUNNY tokens to plummet."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 3 June 2021, Hunny Finance (PancakeHunny) on BNB Chain suffered an exploit via flawed share-accounting in the Hunny Minter contract, enabling excess HUNNY token minting and market dumping. The attacker used a custom contract, executing the exploit 91,100 times, inflating HUNNY supply and severely impacting its price. The immediate fix was to halt minting, with the loss estimated near $100,000 but unreconciled. The Hunny Minter smart contract incorrectly minted HUNNY tokens based on total wallet balance, not net profits, allowing an attacker to inflate token supply and drain value."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x765de8357994a206bb90af57dcf427f48a2021f2f28ca81f2c00bc3b9842be8e"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2021-06/PancakeHunny_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2021-06/PancakeHunny_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "medium.com",
+      "url": "https://medium.com/hunnyfinance/pancakehunny-post-mortem-analysis-de78967401d8"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x765de8357994a206bb90af57dcf427f48a2021f2f28ca81f2c00bc3b9842be8e"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0x109Ea28dbDea5E6ec126FbC8c33845DFe812a300#code#L4638"
+    },
+    {
+      "source": "slowmist",
+      "label": "watchpug.medium.com",
+      "url": "https://watchpug.medium.com/pancakehunny-performance-fee-minting-attack-analysis-e347d12bfdde"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/hunny-finance-2021-06-03"
+    },
+    {
+      "source": "revertiq",
+      "label": "medium.com",
+      "url": "https://medium.com/hunnyfinance/pancakehunny-preliminary-incident-report-6da18bc3c0e6"
+    },
+    {
+      "source": "revertiq",
+      "label": "ambcrypto.com",
+      "url": "https://ambcrypto.com/binance-smart-chains-pancakehunny-latest-to-suffer-smart-contract-exploit/"
+    }
+  ]
+}

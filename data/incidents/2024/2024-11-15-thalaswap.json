@@ -1,0 +1,125 @@
+{
+  "id": "2024-11-15-thalaswap",
+  "name": "ThalaSwap",
+  "date": "2024-11-15",
+  "year": 2024,
+  "amountUsd": 25500000,
+  "returnedUsd": null,
+  "chains": [
+    "Aptos"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "input-validation",
+  "technique": "Missing Input Validation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "input-validation",
+    "confidence": 0.98,
+    "top": [
+      {
+        "category": "input-validation",
+        "p": 0.98
+      },
+      {
+        "category": "logic-error",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.92
+  },
+  "bridge": false,
+  "language": "Move",
+  "rootCause": "The Aptos-based DeFi project Thala suffered a security breach as a result of an isolated vulnerability in the latest update to v1 farming contracts, allowing the exploiter to withdraw liquidity pool tokens totaling $25.5m. Thala has since paused all related contracts and frozen Thala token assets ($9m MOD and $2.5m THL). With the assistance of other organizations, the team identified the exploiter and negotiated a $300k bounty for a full recovery of user assets.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The Aptos-based DeFi project Thala suffered a security breach as a result of an isolated vulnerability in the latest update to v1 farming contracts, allowing the exploiter to withdraw liquidity pool tokens totaling $25.5m. Thala has since paused all related contracts and frozen Thala token assets ($9m MOD and $2.5m THL). With the assistance of other organizations, the team identified the exploiter and negotiated a $300k bounty for a full recovery of user assets."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Thala’s Aptos v1 farming contracts were exploited on 2024-11-15 after an unstake path accepted withdrawal amounts above the caller’s recorded stake, letting the attacker over-withdraw LP tokens. Public reporting places the gross value affected at about $25.5 million and says the protocol paused the affected contracts, froze part of the proceeds on chain, and later recovered funds after a $300,000 bounty negotiation. A recent update to Thala’s v1 farming unstake logic trusted a caller supplied withdrawal amount and failed to enforce that it stayed within the account’s recorded stake. That broke the farming accounting invariant and let the attacker withd…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On November 15,16, 2024, Thala Labs on the Aptos blockchain suffered a $25.5M exploit via a farming contract logic error that let an attacker withdraw more liquidity tokens than they had staked. The vulnerability was fixed rapidly, contracts paused, assets frozen, and all funds recovered after negotiation with the attacker for a $300K bounty. The root cause was a missing bounds check in Thala Labs' v1 farming contract's new unstake function. It failed to verify that the withdrawal amount requested was no greater than the user's actual staked balance, enabling arbitrary LP token extraction."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "ThalaSwap’s v1 farming contract on Aptos was exploited on 15 November 2024 due to a missing input validation in its unstake logic, allowing an attacker to withdraw $25.5 million in LP tokens. The protocol recovered all assets within hours after pausing contracts and negotiating a bounty. A patch to the v1 farming contract introduced an unstake function that failed to check whether the requested withdrawal amount exceeded the user's staked balance, enabling unauthorized withdrawals."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/thalalabs/status/1857703541089120541?s=46&t=bcMyidYO0QkS5ajIW9CBdg"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/breaking-down-the-thala-defi-2024-12-13"
+    },
+    {
+      "source": "revertiq",
+      "label": "quillaudits.com",
+      "url": "https://www.quillaudits.com/blog/hack-analysis/thala-defi-hack-analysis"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/thala-labs-hack-2024"
+    },
+    {
+      "source": "revertiq",
+      "label": "quadrigainitiative.com",
+      "url": "https://www.quadrigainitiative.com/casestudy/thalalabsv1farmingcontractvulnerability.php"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/thala-labs-2024-11-16"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/de-fi-rekt-report-november-2024-over-69-million-lost-in-crypto-exploits"
+    },
+    {
+      "source": "revertiq",
+      "label": "cybernews.com",
+      "url": "https://cybernews.com/crypto/hacked-crypto-project-thala-paid-to-recover-millions/"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/thalaswap-2024-11-15"
+    },
+    {
+      "source": "revertiq",
+      "label": "avoid.net",
+      "url": "https://avoid.net/thalaswap"
+    },
+    {
+      "source": "revertiq",
+      "label": "itokenly.com",
+      "url": "https://itokenly.com/hacks/thala"
+    }
+  ]
+}

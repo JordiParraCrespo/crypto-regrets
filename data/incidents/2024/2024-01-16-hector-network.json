@@ -1,0 +1,81 @@
+{
+  "id": "2024-01-16-hector-network",
+  "name": "Hector Network",
+  "date": "2024-01-16",
+  "year": 2024,
+  "amountUsd": 2700000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.87
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Another $2.7 million is gone after an apparent thief was able to exploit a smart contract that was intended to distribute payouts to Hector's token holders. They then swapped the tokens from the USDC stablecoin to ETH. Investors in the project are furious, especially because various parties had warned Hector Network about apparently insecure practices. Hector Network's team, meanwhile, have not acknowledged the theft, although a law firm involved in the project liquidation promised a statement would be forthcoming.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Another $2.7 million is gone after an apparent thief was able to exploit a smart contract that was intended to distribute payouts to Hector's token holders. They then swapped the tokens from the USDC stablecoin to ETH. Investors in the project are furious, especially because various parties had warned Hector Network about apparently insecure practices. Hector Network's team, meanwhile, have not acknowledged the theft, although a law firm involved in the project liquidation promised a statement would be forthcoming."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On January 15, 2024, Hector Network on Ethereum Mainnet suffered a $2.7 million USDC loss when a moderator-controlled access function allowed an attacker-controlled address to be added as eligible for a treasury redemption. The attacker withdrew assets via privileged flow. A centralized moderator role could assign arbitrary addresses as 'eligible' for treasury redemption without sufficient independent checks. This enabled the attacker to withdraw funds by authorizing their own address and invoking privileged withdrawal logic."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x1b813d90bc73b5f166a668a3e158a13d30a010db8cd810792b69e30d3e8be741",
+    "0xd1b342caa91e8ea6e11f65a2c75e6b17e6d4977e571f4b31cf2f1c57f05eb0a3"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "web3isgoinggreat.com",
+      "url": "https://www.web3isgoinggreat.com/?id=hector-network-compensation-fund-theft"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/hector-network-2024-01-16"
+    },
+    {
+      "source": "revertiq",
+      "label": "certik.com",
+      "url": "https://www.certik.com/blog/post-mortem-hector-network"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/hector-network-hack-2024"
+    }
+  ]
+}

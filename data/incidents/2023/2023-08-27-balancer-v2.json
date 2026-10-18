@@ -1,0 +1,138 @@
+{
+  "id": "2023-08-27-balancer-v2",
+  "name": "Balancer V2",
+  "date": "2023-08-27",
+  "year": 2023,
+  "amountUsd": 800000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.97,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.97
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.02
+      },
+      {
+        "category": "logic-error",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.07,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Rounding Error && Business Logic Flaw. Lost: ~$2M",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Rounding Error && Business Logic Flaw. Lost: ~$2M"
+    },
+    {
+      "source": "REKT",
+      "text": "Balancer has had a bit of a wobble. First came a warning. Then, last Sunday, the AMM (along with ‘official partner’ Beethoven X) lost $2.1M from v2 Boosted pools."
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The attack exploited a rounding down issue in the linear pools, letting the attacker manipulate the token exchange rate in the composable pool. By reducing BPT supply to zero and then performing a reverse swap, they achieved a nearly 1:1 exchange rate, which was lower than the linear pool’s rate Vulnerable Code Snippet: Attack Transaction: https://etherscan.io/tx/0x2a027c8b915c3737942f512fc5d26fd15752d0332353b3059de771a35a606c2d Analysis: https://slowmist.medium.com/review-and-recommendations-of-balancer-incident-d2b31b5bd863 https://medium.com/balancer-protocol/rate-manipulation-in-balancer-boosted-pools-technical-postmortem-53db4b642492 https://blocksecteam.medium.com/yet-another-risk-posed-by-precision-loss-an-in-depth-analysis-of-the-recent-balancer-incident-fad93a3c75d4"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Balancer says it has received reports of a critical vulnerability affecting multiple V2 pools. Emergency mitigation procedures have been implemented to secure the majority of TVL, but some funds remain at risk. Users are advised to immediately withdraw affected LPs. According to news on August 28, Balancer’s losses have exceeded $2.1 million, and multiple fund pools on Ethereum, Fantom, and Optimism have been affected."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Balancer V2 boosted pools were exploited on Ethereum on 2023-08-27 after attackers manipulated Linear Pool BPT rates through rounding errors and virtual supply resets. The attack targeted remaining at-risk liquidity after Balancer had already warned users to withdraw, and the mainnet loss was reported at roughly $980,000. Balancer Linear Pools allowed extreme BPT rate manipulation through rounding-down behavior in swap scaling logic combined with a virtual-supply reset path that returned the rate to 1 when circulating supply reached zero. Attackers used crafted batch swaps in nested boosted pools to inflate cached token rates, exchange overpriced BPT f…"
+    }
+  ],
+  "audit": "Out of scope",
+  "txHashes": [
+    "0x2a027c8b915c3737942f512fc5d26fd15752d0332353b3059de771a35a606c2d"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-08/Balancer_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-08/Balancer_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "medium.com",
+      "url": "https://medium.com/balancer-protocol/rate-manipulation-in-balancer-boosted-pools-technical-postmortem-53db4b642492"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "blocksecteam.medium.com",
+      "url": "https://blocksecteam.medium.com/yet-another-risk-posed-by-precision-loss-an-in-depth-analysis-of-the-recent-balancer-incident-fad93a3c75d4"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Balancer - REKT",
+      "url": "https://rekt.news/balancer-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x2a027c8b915c3737942f512fc5d26fd15752d0332353b3059de771a35a606c2d"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "slowmist.medium.com",
+      "url": "https://slowmist.medium.com/review-and-recommendations-of-balancer-incident-d2b31b5bd863"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x2a027c8b915c3737942f512fc5d26fd15752d0332353b3059de771a35a606c2d"
+    },
+    {
+      "source": "blocksec",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs?tab=readme-ov-file#20230827-balancer---rounding-error--business-logic-flaw"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/balancer/status/1694014645378724280"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/balancer-v2-2023-08-27"
+    },
+    {
+      "source": "revertiq",
+      "label": "forum.balancer.fi",
+      "url": "https://forum.balancer.fi/t/vulnerability-found-in-some-pools/5102"
+    }
+  ]
+}

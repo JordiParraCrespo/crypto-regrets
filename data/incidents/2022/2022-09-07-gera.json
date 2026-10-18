@@ -1,0 +1,78 @@
+{
+  "id": "2022-09-07-gera",
+  "name": "GERA",
+  "date": "2022-09-07",
+  "year": 2022,
+  "amountUsd": 1480000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "key-compromise",
+  "technique": "Deployer Key Compromised",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "key-compromise",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "key-compromise",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.93
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "The security of the GERA token was compromised due to private key leakage. Hackers transferred the ownership of the smart contract deployer of GERA tokens to another address 0x510E4d61663bE6a24D600AaF90F892dd8c8C61dC.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The security of the GERA token was compromised due to private key leakage. Hackers transferred the ownership of the smart contract deployer of GERA tokens to another address 0x510E4d61663bE6a24D600AaF90F892dd8c8C61dC."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 7 September 2022, GERA's deployer key was compromised on Ethereum, allowing attackers to mint and transfer large volumes of tokens. This led to a reported loss of approximately $1.48 million and a 96+% collapse in token value. Some compensation and contract swap actions were initiated by the MEXC exchange, but no technical recovery was made on-chain. GERA's deployer private key was compromised, giving attackers unrestricted administrative permissions including minting and transfer. This destroyed protocol security boundaries and enabled extraction of value through unauthorized token operations."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/GeraCoin/status/1567538962410995713"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/gera-2022-09-07"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/gera-hack-2022"
+    },
+    {
+      "source": "revertiq",
+      "label": "immunefi.com",
+      "url": "https://immunefi.com/blog/research/hacks-and-token-prices-report-2022"
+    }
+  ]
+}

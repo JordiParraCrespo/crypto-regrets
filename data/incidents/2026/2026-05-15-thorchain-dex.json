@@ -1,0 +1,104 @@
+{
+  "id": "2026-05-15-thorchain-dex",
+  "name": "THORChain DEX",
+  "date": "2026-05-15",
+  "year": 2026,
+  "amountUsd": 10700000,
+  "returnedUsd": null,
+  "chains": [
+    "Bitcoin",
+    "Ethereum",
+    "Base",
+    "BSC"
+  ],
+  "targetType": "Chain",
+  "category": "bridge-crosschain",
+  "technique": "Bridge Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "signature-crypto",
+    "confidence": 0.53,
+    "top": [
+      {
+        "category": "signature-crypto",
+        "p": 0.56
+      },
+      {
+        "category": "key-compromise",
+        "p": 0.38
+      },
+      {
+        "category": "logic-error",
+        "p": 0.03
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.03,
+    "hasRootCause": 0.93
+  },
+  "bridge": true,
+  "language": null,
+  "rootCause": "A malicious node is believed to have exploited THORChain’s GG20 TSS signing stack to leak vault key material, reconstructed the private key offline, and drained $10.7 million across multiple chains. The network halted itself. The attacker was already gone.",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "A malicious node is believed to have exploited THORChain’s GG20 TSS signing stack to leak vault key material, reconstructed the private key offline, and drained $10.7 million across multiple chains. The network halted itself. The attacker was already gone."
+    },
+    {
+      "source": "SlowMist",
+      "text": "One of THORChain’s Asgard vaults was compromised, with the attacker draining funds simultaneously across multiple supported chains (at least nine), resulting in losses of approximately $10-11 million+ (including ~36.75 BTC worth ~$3M and ~$7M+ in EVM tokens). The protocol halted trading and signing after automatic detection of abnormal behavior. User funds and LP positions were safe; only protocol-owned funds were affected. The attack is linked to vault churn address poisoning or a vulnerability in the GG20 TSS (threshold signature scheme) implementation, allowing key material leakage and private key reconstruction over time. THORChain confirmed the in…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "THORChain disclosed that a newly churned validator drained approximately $10.7 million from a single Asgard vault on May 15, 2026 after exploiting a vulnerability in the network's GG20 threshold-signature infrastructure. Public technical analysis attributed the incident to missing Paillier proof validation that allegedly allowed gradual leakage of signing-share material during repeated ceremonies until the vault key could be reconstructed offline. THORChain publicly confirmed that the incident involved a vulnerability in its GG20 Threshold Signature Scheme implementation, but stated that the investigation remained ongoing and withheld detailed technical specifics.…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: THORChain - Rekt III",
+      "url": "https://rekt.news/thorchain-rekt3"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/THORChain/status/2055300162331742233"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/thorchain-2026-05-17"
+    },
+    {
+      "source": "revertiq",
+      "label": "quillaudits.com",
+      "url": "https://www.quillaudits.com/blog/hack-analysis/thorchain-gg20-hack"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.thorchain.org",
+      "url": "https://blog.thorchain.org/thorchain-exploit-report-1"
+    },
+    {
+      "source": "revertiq",
+      "label": "gitlab.com",
+      "url": "https://gitlab.com/-/snippets/5992927"
+    }
+  ]
+}

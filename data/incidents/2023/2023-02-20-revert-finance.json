@@ -1,0 +1,113 @@
+{
+  "id": "2023-02-20-revert-finance",
+  "name": "Revert Finance",
+  "date": "2023-02-20",
+  "year": 2023,
+  "amountUsd": 29000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "arbitrary-call",
+  "technique": "Arbitrary External Call",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "arbitrary-call",
+    "confidence": 0.98,
+    "top": [
+      {
+        "category": "arbitrary-call",
+        "p": 0.98
+      },
+      {
+        "category": "input-validation",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Arbitrary External Call Vulnerability. Lost: ~$30k",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Arbitrary External Call Vulnerability. Lost: ~$30k"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The V3Utils contract had insufficient input validation, allowing arbitrary external calls, resulting in the theft of funds from approved users. Vulnerable code snippet: https://etherscan.io/address/0x531110418d8591c92e9cbbfc722db8ffb604fafd#code#F1#L225 The contract relied on an external aggregator called Ox for executing swaps. The frontend called the Ox API, which returned two dynamic keys, \"to\" and \"allowanceTarget,\" specifying which contracts to call and approve tokens to. These dynamic values were forwarded to the V3Utils contract instead of being whitelisted. This allowed the attacker to send a token contract (e.g., USDC) as the swap router, granting them the ability to execute arbitrary code on it, such as the \"transferFrom\" function, which led to the attacker stealing funds from other addresses that have approved to the V3Utils contract. Attack tx: https://etherscan.io/tx/0xdaccbc437cb07427394704fbcc8366589ffccf974ec6524f3483844b043f31d5 Analysis: https://mirror.xyz/revertfinance.eth/3sdpQ3v9vEKiOjaHXUi3TdEfhleAXXlAEWeODrRHJtU https://twitter.com/revertfinance/status/1627490043026890752"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The AMM liquidity management protocol Revert Finance disclosed on Twitter that its v3utils contract was attacked, and 90% of the funds were stolen from a single account. The stolen assets included: 22983.235188 USDC, 4106.316699 USDT, 485.5786287699002 OP, 0.18217977664322793 WETH, 36.59093198260223 DAI, 211.21463945524238 WMATIC and 22 Premia. At current prices, that's about $29,000."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On February 18, 2023, Revert Finance's V3Utils contract was exploited on Ethereum, allowing attackers to drain user-approved tokens by submitting unvalidated swap requests. Nearly $30,000 was stolen from multiple victims, but the protocol fully refunded all affected users shortly after the incident. The V3Utils contract permitted arbitrary external calls by accepting unvalidated router addresses and calldata from an aggregator. Attackers supplied a token contract as the router and malicious swapData, enabling direct draining of user allowances."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xdaccbc437cb07427394704fbcc8366589ffccf974ec6524f3483844b043f31d5"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-02/RevertFinance_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-02/RevertFinance_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "mirror.xyz",
+      "url": "https://mirror.xyz/revertfinance.eth/3sdpQ3v9vEKiOjaHXUi3TdEfhleAXXlAEWeODrRHJtU"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/address/0x531110418d8591c92e9cbbfc722db8ffb604fafd#code#F1#L225"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xdaccbc437cb07427394704fbcc8366589ffccf974ec6524f3483844b043f31d5"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/revertfinance/status/1627490043026890752"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/revert-finance-2023-02-20"
+    },
+    {
+      "source": "revertiq",
+      "label": "paragraph.com",
+      "url": "https://paragraph.com/%40revertfinance/an-attack-on-v3utils"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/kismp123/DeFi-Security-Incident/blob/main/2023/2023-02-27_RevertFinance_ArbitrarySwap.md"
+    }
+  ]
+}

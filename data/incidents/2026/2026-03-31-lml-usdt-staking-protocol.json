@@ -1,0 +1,84 @@
+{
+  "id": "2026-03-31-lml-usdt-staking-protocol",
+  "name": "LML/USDT staking protocol",
+  "date": "2026-03-31",
+  "year": 2026,
+  "amountUsd": 950000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.63,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.65
+      },
+      {
+        "category": "logic-error",
+        "p": 0.35
+      }
+    ],
+    "flashLoan": 0.96,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "LML/USDT staking protocol on BNB Chain suffered a price manipulation attack. The hacker used flash loans to massively inflate the LML/USDT pool spot price, exploited a logic flaw in the staking contract’s reward calculation (which relied on a stale stored price with a 3600-second cooldown instead of live AMM price), batch-claimed oversized LML rewards from pre-staked addresses via EIP-7702, and sold them in the distorted pool for approximately $950,000 profit, causing the LML token price to crash 99.6%.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "LML/USDT staking protocol on BNB Chain suffered a price manipulation attack. The hacker used flash loans to massively inflate the LML/USDT pool spot price, exploited a logic flaw in the staking contract’s reward calculation (which relied on a stale stored price with a 3600-second cooldown instead of live AMM price), batch-claimed oversized LML rewards from pre-staked addresses via EIP-7702, and sold them in the distorted pool for approximately $950,000 profit, causing the LML token price to crash 99.6%."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On March 31, 2026, the LML/USDT staking protocol on BNB Chain was exploited for approximately $950,000. The attacker manipulated the LML/USDT price via flash-loan-driven trading, then immediately claimed and dumped inflated staking rewards. The exploit stemmed from a reward-claim path that settled using a same-block, attacker-controlled spot price. The APower reward-claim entrypoint allowed rewards to be calculated and settled using a manipulable spot price fetched directly from the LML/USDT AMM. The attacker distorted the price in the same transaction as the reward claim, enabling over-withdrawal."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x805d273a63d905d7827d43f6dc051eafdcd0cb69a07c7eb74358c6a5c6255b47"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/Phalcon_xyz/status/2039211832947408928"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/lml-usdt-staking-protocol-2026-03-31"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptotimes.io",
+      "url": "https://www.cryptotimes.io/2026/04/01/lml-staking-protocol-exploited-for-950k-on-bsc-token-crashes-99-6/"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/DarkNavySecurity/web3-exploit-analysis/blob/main/reports/lml-spot-price-manipulation/report.md"
+    }
+  ]
+}

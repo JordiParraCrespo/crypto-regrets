@@ -1,0 +1,76 @@
+{
+  "id": "2015-01-27-796",
+  "name": "796",
+  "date": "2015-01-27",
+  "year": 2015,
+  "amountUsd": 270000,
+  "returnedUsd": null,
+  "chains": [
+    "Bitcoin"
+  ],
+  "targetType": "CEX",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.82,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.83
+      },
+      {
+        "category": "logic-error",
+        "p": 0.07
+      },
+      {
+        "category": "input-validation",
+        "p": 0.04
+      }
+    ],
+    "flashLoan": 0.01,
+    "stateActor": 0.02,
+    "hasRootCause": 0.9
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "796 Exchange reported that a lookalike address replaced a customer's withdrawal destination. The associated Bitcoin transaction paid 999.9999 BTC to that address. Two later payments totaling 1,000 BTC reached the reported intended destination. A reported flaw in an updated withdrawal submodule allowed destination substitution. Phone and email checks did not distinguish the lookalike address from the intended payee. The precise intrusion and timing of the substitution remain unknown.",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "796 Exchange reported that a lookalike address replaced a customer's withdrawal destination. The associated Bitcoin transaction paid 999.9999 BTC to that address. Two later payments totaling 1,000 BTC reached the reported intended destination. A reported flaw in an updated withdrawal submodule allowed destination substitution. Phone and email checks did not distinguish the lookalike address from the intended payee. The precise intrusion and timing of the substitution remain unknown."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/796-2015-01-27"
+    },
+    {
+      "source": "revertiq",
+      "label": "bitcointalk.org",
+      "url": "https://bitcointalk.org/index.php?topic=938765.0"
+    },
+    {
+      "source": "revertiq",
+      "label": "bitcointalk.org",
+      "url": "https://bitcointalk.org/index.php?topic=938765.20"
+    }
+  ]
+}

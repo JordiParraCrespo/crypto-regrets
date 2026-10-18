@@ -1,0 +1,77 @@
+{
+  "id": "2025-01-18-paribus",
+  "name": "Paribus",
+  "date": "2025-01-18",
+  "year": 2025,
+  "amountUsd": 100000,
+  "returnedUsd": null,
+  "chains": [
+    "Arbitrum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Bad oracle",
+  "classificationNote": "Classified by keyword rules from the DeFiHackLabs root-cause title.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.53,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.56
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.44
+      }
+    ],
+    "flashLoan": 0.1,
+    "stateActor": 0.01,
+    "hasRootCause": 0.7
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Bad oracle. Lost: ~86k",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Bad oracle. Lost: ~86k"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The Paribus Protocol exploit likely stemmed from a logical vulnerability in how the protocol handled its pTokens (interest-bearing tokens) and their interaction with the underlying lending/borrowing mechanisms, potentially in conjunction with the handling of NFT positions representing collateral. Vulnerable code snippet: https://arbiscan.io/address/0xaffd437801434643b734d0b2853654876f66f7d7 Attack tx: https://arbiscan.io/tx/0xf5e753d3da60db214f2261343c1e1bc46e674d2fa4b7a953eaf3c52123aeebd2 Analysis: https://bitfinding.com/blog/paribus-hack-interception https://x.com/paribus_io/status/1881423579625271472"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xf5e753d3da60db214f2261343c1e1bc46e674d2fa4b7a953eaf3c52123aeebd2"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-01/Paribus_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-01/Paribus_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/arbitrum/0xf5e753d3da60db214f2261343c1e1bc46e674d2fa4b7a953eaf3c52123aeebd2?line=415"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "arbiscan.io",
+      "url": "https://arbiscan.io/address/0xaffd437801434643b734d0b2853654876f66f7d7"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "arbiscan.io",
+      "url": "https://arbiscan.io/tx/0xf5e753d3da60db214f2261343c1e1bc46e674d2fa4b7a953eaf3c52123aeebd2"
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "id": "2026-09-05-rocket-perp",
+  "name": "Rocket Perp",
+  "date": "2026-09-05",
+  "year": 2026,
+  "amountUsd": 287666,
+  "returnedUsd": 287665.98,
+  "chains": [
+    "Rocket"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "market-manipulation",
+  "technique": "Risk Parameter Abuse",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "market-manipulation",
+    "confidence": 0.76,
+    "top": [
+      {
+        "category": "market-manipulation",
+        "p": 0.77
+      },
+      {
+        "category": "logic-error",
+        "p": 0.17
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.06
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "An attacker exploited a dormant, illiquid perpetual market on Rocket. Using a burner account, they posted orders at artificially inflated prices and traded against themselves to generate fake profits on one account while bankrupting the burner. The profitable account then withdrew approximately $287K in positive PnL from the Bridge, with the loss socialized across the platform. Deposits, withdrawals and trading were paused.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "An attacker exploited a dormant, illiquid perpetual market on Rocket. Using a burner account, they posted orders at artificially inflated prices and traded against themselves to generate fake profits on one account while bankrupting the burner. The profitable account then withdrew approximately $287K in positive PnL from the Bridge, with the loss socialized across the platform. Deposits, withdrawals and trading were paused."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/rcktfoundation/status/2096594778863669498"
+    }
+  ]
+}

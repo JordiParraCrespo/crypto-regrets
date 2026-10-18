@@ -1,0 +1,86 @@
+{
+  "id": "2022-01-25-opensea",
+  "name": "OpenSea",
+  "date": "2022-01-25",
+  "year": 2022,
+  "amountUsd": 1000000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "NFTfi",
+  "category": "logic-error",
+  "technique": "Withdrawal Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.98,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.98
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.01
+      },
+      {
+        "category": "market-manipulation",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.88
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "An OpenSea user exploited a vulnerability in the non-fungible token (NFT) market to steal hundreds of ether (ETH) from the owners of well-known collectibles such as the Bored Ape Yacht Club (BAYC) and Cyber​​ Kongs of several items. The vulnerability appears to be related to the listing mechanism exploited by the platform and allows users to earn around 347 ETH by purchasing some NFTs at the previous listing price on different markets.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "An OpenSea user exploited a vulnerability in the non-fungible token (NFT) market to steal hundreds of ether (ETH) from the owners of well-known collectibles such as the Bored Ape Yacht Club (BAYC) and Cyber​​ Kongs of several items. The vulnerability appears to be related to the listing mechanism exploited by the platform and allows users to earn around 347 ETH by purchasing some NFTs at the previous listing price on different markets."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "OpenSea's January 2022 exploit allowed attackers to purchase NFTs at obsolete, deeply discounted prices due to a listing cancellation flaw. Over $1 million in NFT value was lost, and OpenSea reimbursed victims with about 750 ETH. The issue stemmed from a mismatch between frontend actions and blockchain-listed sale conditions. OpenSea failed to automatically cancel old NFT listings when users transferred tokens out of their wallet. The on-chain sale orders remained valid, letting attackers purchase high-value NFTs at outdated low prices and quickly resell them."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/PeckShieldAlert/status/1485547426467364864"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/opensea-2022-01-25"
+    },
+    {
+      "source": "revertiq",
+      "label": "opensea.io",
+      "url": "https://opensea.io/blog/articles/important-updates-for-listing-and-delisting-your-nfts"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptotimes.io",
+      "url": "https://www.cryptotimes.io/2022/01/29/opensea-provides-1-8-million-compensation-to-victims-due-to-listing-error/"
+    }
+  ]
+}

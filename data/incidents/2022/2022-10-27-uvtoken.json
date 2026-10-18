@@ -1,0 +1,88 @@
+{
+  "id": "2022-10-27-uvtoken",
+  "name": "UvToken",
+  "date": "2022-10-27",
+  "year": 2022,
+  "amountUsd": 1500000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "input-validation",
+    "confidence": 0.72,
+    "top": [
+      {
+        "category": "input-validation",
+        "p": 0.74
+      },
+      {
+        "category": "access-control",
+        "p": 0.18
+      },
+      {
+        "category": "arbitrary-call",
+        "p": 0.07
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.03,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "The UvTokenWallet Eco Staking mining pool contract was hacked. The key reason for the vulnerability is that the mining pool contract withdrawal function does not strictly judge the user input, so that the attacker can directly pass in the malicious contract address and use the malicious contract to empty the relevant funds. SlowMist MistTrack conducted a traceability analysis of the funds: so far, hackers have transferred a total of 5,011 BNB of profit to Tornado Cash. In addition, the source of the attack fee is also Tornado Cash.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The UvTokenWallet Eco Staking mining pool contract was hacked. The key reason for the vulnerability is that the mining pool contract withdrawal function does not strictly judge the user input, so that the attacker can directly pass in the malicious contract address and use the malicious contract to empty the relevant funds. SlowMist MistTrack conducted a traceability analysis of the funds: so far, hackers have transferred a total of 5,011 BNB of profit to Tornado Cash. In addition, the source of the attack fee is also Tornado Cash."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 27 October 2022, UvToken's BNB Chain mining-pool contracts were exploited through improper access control. The attacker drained 1,078 BNB and 1,161,991 BUSD (approx. $1.5M), routing proceeds to Tornado Cash. Vulnerable withdrawal functions allowed attacker-controlled parameters, bypassing permission checks. UvToken's mining-pool reward withdrawal and permission contracts failed to validate privileged contract parameters and trusted externally controlled return values. The attacker exploited these flaws by supplying malicious contract addresses and manipulating withdrawal amounts, thus bypassing intended access controls."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x54121ed538f27ffee2dbb232f9d9be33e39fdaf34adf993e5e019c00f6afd499"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "odaily.news",
+      "url": "https://www.odaily.news/newsflash/303069"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/uvtoken-2022-10-27"
+    },
+    {
+      "source": "revertiq",
+      "label": "medium.com",
+      "url": "https://medium.com/@numencyberlabs/loss-1-5-m-technical-analysis-for-uvtoken-attacked-83ae7c35f10e"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/uvtoken-hack-2022"
+    }
+  ]
+}

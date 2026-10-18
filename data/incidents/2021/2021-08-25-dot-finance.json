@@ -1,0 +1,84 @@
+{
+  "id": "2021-08-25-dot-finance",
+  "name": "Dot.Finance",
+  "date": "2021-08-25",
+  "year": 2021,
+  "amountUsd": 429724,
+  "returnedUsd": null,
+  "chains": [
+    "Binance Smart Chain"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.99
+      },
+      {
+        "category": "market-manipulation",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.69,
+    "stateActor": 0.02,
+    "hasRootCause": 0.43
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Polkadot Eco DeFi revenue aggregator Dot.Finance suffered a lightning loan attack. Dot.Finance's token PINK plummeted 35% in a short time, from 0.77 USD to approximately 0.5 USD. The attacker made a profit of 900.89 BNB (approximately $429,724 in total).",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Polkadot Eco DeFi revenue aggregator Dot.Finance suffered a lightning loan attack. Dot.Finance's token PINK plummeted 35% in a short time, from 0.77 USD to approximately 0.5 USD. The attacker made a profit of 900.89 BNB (approximately $429,724 in total)."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Dot.Finance suffered a flash-loan exploit on BNB Chain on 25 August 2021. The attacker manipulated the contract's minting logic to generate excessive rewards, extracting approximately $429,000 by influencing spot price and performance fee calculations. The contract's minting logic relied on spot asset balances and performance fee calculations vulnerable to manipulation. An attacker used flash loans to inflate asset values and performance fees, causing the protocol to mint an excessive amount of reward tokens."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x68170a309ab2e944e178ccf9bf6f19e25a3f356031ce53539bb9669fc77172f2"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "medium.com",
+      "url": "https://medium.com/@Knownsec_Blockchain_Lab/knowsec-blockchain-lab-dot-finance-flash-loan-security-incident-analysis-98f7b5707a15"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/dot-finance-2021-08-25"
+    },
+    {
+      "source": "revertiq",
+      "label": "quadrigainitiative.com",
+      "url": "https://www.quadrigainitiative.com/casestudy/dotfinancemintingvulnerability.php"
+    },
+    {
+      "source": "revertiq",
+      "label": "inspexco.medium.com",
+      "url": "https://inspexco.medium.com/collection-of-insecure-ways-for-mint-amount-calculation-dot-finance-incident-analysis-15b901af4475"
+    }
+  ]
+}

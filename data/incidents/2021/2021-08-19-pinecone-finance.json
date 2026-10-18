@@ -1,0 +1,89 @@
+{
+  "id": "2021-08-19-pinecone-finance",
+  "name": "Pinecone Finance",
+  "date": "2021-08-19",
+  "year": 2021,
+  "amountUsd": 200000,
+  "returnedUsd": null,
+  "chains": [
+    "Binance Smart Chain"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Incorrect Share Accounting",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.82,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.83
+      },
+      {
+        "category": "logic-error",
+        "p": 0.07
+      },
+      {
+        "category": "access-control",
+        "p": 0.05
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Pinecone launched the pledge pool of protocol token PCT at 09:00 UTC on August 18, 2021, and was attacked at 11:41:19 AM UTC. When the Pinecone PCT pledge pool went online, the front-end was processed to limit illegal operations, but the hacker bypassed the front-end page during the attack and directly called the smart contract through the ordinary account, depositing PCT tokens greater than the amount of the account balance, and the PCT pool was wrong. Records the number of user deposits. When withdrawing, you can extract more PCT tokens. After discovering that the currency price had plunged, the project party immediately terminated the call of the smart contract.…",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Pinecone launched the pledge pool of protocol token PCT at 09:00 UTC on August 18, 2021, and was attacked at 11:41:19 AM UTC. When the Pinecone PCT pledge pool went online, the front-end was processed to limit illegal operations, but the hacker bypassed the front-end page during the attack and directly called the smart contract through the ordinary account, depositing PCT tokens greater than the amount of the account balance, and the PCT pool was wrong. Records the number of user deposits. When withdrawing, you can extract more PCT tokens. After discovering that the currency price had plunged, the project party immediately terminated the call of the smart contract.…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Pinecone Finance's PCT staking pool on BNB Chain was exploited on August 18, 2021, allowing attackers to deposit more tokens than their account balance due to a deposit accounting bug. The exploit resulted in the extraction of about 3.5 million PCT, converted to roughly 517 BNB (estimated at $200,000). The attacker returned the funds after negotiations, and the protocol compensated users. The deposit function in the PCT staking pool contract failed to validate token balances, crediting users with staked shares even when no tokens were transferred. This allowed attackers to claim and subsequently withdraw more PCT than they actually deposited."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xe23ffa079edd975b5bd48503757040b7aa60e63d66972419fd56f4404c6d4da1",
+    "0x10236426cbe9a6380b7990150013125a623784ed1002fe3e34d07ff89ffa2619"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "medium.com",
+      "url": "https://medium.com/@PineconeFinance/pinecone-pct%E8%B4%A8%E6%8A%BC%E6%B1%A0%E6%94%BB%E5%87%BB%E4%BA%8B%E4%BB%B6-dfa2b03c8bfc"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/pinecone-finance-2021-08-19"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/pinecone-finance-hack-2021"
+    },
+    {
+      "source": "revertiq",
+      "label": "medium.com",
+      "url": "https://medium.com/@PineconeFinance/pinecone-pct-staking-pool-attack-after-story-c4681398f8c0"
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "id": "2023-01-11-google-chrome",
+  "name": "Google Chrome",
+  "date": "2023-01-11",
+  "year": 2023,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [],
+  "targetType": null,
+  "category": "social-engineering",
+  "technique": "Browser Vulnerability",
+  "classificationNote": "Classified by keyword rules from the SlowMist label and description.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "input-validation",
+    "confidence": 0.39,
+    "top": [
+      {
+        "category": "input-validation",
+        "p": 0.43
+      },
+      {
+        "category": "access-control",
+        "p": 0.18
+      },
+      {
+        "category": "frontend-infra",
+        "p": 0.17
+      }
+    ],
+    "flashLoan": 0.01,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "A vulnerability known as CVE-2022-3656 affects more than 2.5 billion users of Google Chrome and Chromium-engine-based browsers. This vulnerability allows the theft of sensitive files such as encrypted wallets and cloud provider files. The vulnerability was discovered by examining how the browser interacts with the file system. Specifically, the browser did not properly check whether a symlink pointed to an inaccessible location, allowing sensitive files to be stolen. This problem is often referred to as symbolic link following. Attackers may use encrypted phishing sites to strategically gain access to users' sensitive files.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "A vulnerability known as CVE-2022-3656 affects more than 2.5 billion users of Google Chrome and Chromium-engine-based browsers. This vulnerability allows the theft of sensitive files such as encrypted wallets and cloud provider files. The vulnerability was discovered by examining how the browser interacts with the file system. Specifically, the browser did not properly check whether a symlink pointed to an inaccessible location, allowing sensitive files to be stolen. This problem is often referred to as symbolic link following. Attackers may use encrypted phishing sites to strategically gain access to users' sensitive files."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "slowmist",
+      "label": "imperva.com",
+      "url": "https://www.imperva.com/blog/google-chrome-symstealer-vulnerability/"
+    }
+  ]
+}

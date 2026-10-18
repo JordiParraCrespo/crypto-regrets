@@ -1,0 +1,150 @@
+{
+  "id": "2023-04-13-yearn-finance",
+  "name": "Yearn Finance",
+  "date": "2023-04-13",
+  "year": 2023,
+  "amountUsd": 11539000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Oracle Misconfiguration",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.54,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.5700000000000001
+      },
+      {
+        "category": "logic-error",
+        "p": 0.4
+      },
+      {
+        "category": "input-validation",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.11,
+    "stateActor": 0.02,
+    "hasRootCause": 0.84
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Misconfiguration. Lost: $11.6M",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Misconfiguration. Lost: $11.6M"
+    },
+    {
+      "source": "REKT",
+      "text": "rekt in prod… eventually. Over two years since its first leaderboard entry, Yearn has lost over $10M from an original iearn finance contract. As we wrote last time, no protocol is too big to fail. Who will be next?"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Set bZxUSDC address instead of bZxUSDT Sam: It seems like the iearn USDT token (yUSDT) has been broken since deploy, which was *checks notes* over 1000 days ago. It was misconfigured to use the Fulcrum iUSDC token instead of the Fulcrum iUSDT token. Vulnerable code snippet: Attack tx: https://etherscan.io/tx/0x055cec4fa4614836e54ea2e5cd3d14247ff3d61b85aa2a41f8cc876d131e0328 https://etherscan.io/tx/0xd55e43c1602b28d4fd4667ee445d570c8f298f5401cf04e62ec329759ecda95d Analysis: https://twitter.com/cmichelio/status/1646422861219807233 https://twitter.com/BeosinAlert/status/1646481687445114881"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The decentralized revenue aggregation platform Yearn Finance was attacked, and the hackers made more than $10 million in profits. According to the analysis of SlowMist, the reason for this attack is that the attacker used the yUSDT contract to set the fulcrum address by mistake, thereby manipulating the stablecoin reserve balance in the yUSDT contract, and depositing USDT in yUSDT to obtain a large amount of unexpected yUSDT Tokens for profit."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On April 13, 2023, Yearn Finance's legacy yUSDT vault on Ethereum was exploited due to a misconfigured Fulcrum integration, allowing attackers to mint excessive yUSDT shares with minimal USDT deposits. The attacker manipulated the vault price via flashloans and extracted approximately $11.5M in various stablecoins. The yUSDT contract was misconfigured to use the Fulcrum iUSDC token instead of iUSDT, leading to incorrect share pricing and allowing attackers to mint disproportionately large amounts of yUSDT with small USDT deposits."
+    }
+  ],
+  "audit": "Unaudited",
+  "txHashes": [
+    "0x055cec4fa4614836e54ea2e5cd3d14247ff3d61b85aa2a41f8cc876d131e0328",
+    "0xd55e43c1602b28d4fd4667ee445d570c8f298f5401cf04e62ec329759ecda95d",
+    "0x8db0ef33024c47200d47d8e97b0fcfc4b51de1820dfb4e911f0e3fb0a4053138"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-04/YearnFinance_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-04/YearnFinance_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/cmichelio/status/1646422861219807233"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BeosinAlert/status/1646481687445114881"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Yearn - REKT 2",
+      "url": "https://rekt.news/yearn2-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x055cec4fa4614836e54ea2e5cd3d14247ff3d61b85aa2a41f8cc876d131e0328"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xd55e43c1602b28d4fd4667ee445d570c8f298f5401cf04e62ec329759ecda95d"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x8db0ef33024c47200d47d8e97b0fcfc4b51de1820dfb4e911f0e3fb0a4053138"
+    },
+    {
+      "source": "blocksec",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs?tab=readme-ov-file#20230413-yearnfinance---misconfiguration"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/yearnfi/status/1646436798086672385"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/yearn-2023-04-13"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "halborn.com",
+      "url": "https://www.halborn.com/blog/post/explained-the-yearn-finance-hack-april-2023"
+    },
+    {
+      "source": "revertiq",
+      "label": "certik.com",
+      "url": "https://www.certik.com/blog/earnings-misconfigured-yearn-finance-exploit-explained"
+    }
+  ]
+}

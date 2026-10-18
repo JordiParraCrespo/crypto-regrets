@@ -1,0 +1,68 @@
+{
+  "id": "2025-01-04-98token",
+  "name": "98Token",
+  "date": "2025-01-04",
+  "year": 2025,
+  "amountUsd": 28000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Unprotected public function",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 1.00).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Unprotected public function. Lost: 28K USDT",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Unprotected public function. Lost: 28K USDT"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The vulnerability was an unprotected public function, swapTokensForTokens(address[],uint256,uint256,address). This function allowed any external caller to initiate a token swap using parameters they controlled. The attacker exploited this by calling this public function, specifying a path to swap the contract's entire balance of the token and directing the output to their own address . The absence of any access control modifiers on this critical function allowed for unauthorized use and the subsequent draining of of tokens. Vulnerable code snippet: Attack tx: https://app.blocksec.com/explorer/tx/bsc/0x61da5b502a62d7e9038d73e31ceb3935050430a7f9b7e29b9b3200db3095f91d Analysis:"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x61da5b502a62d7e9038d73e31ceb3935050430a7f9b7e29b9b3200db3095f91d"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-01/98Token_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-01/98Token_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/TenArmorAlert/status/1875462686353363435"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/bsc/0x61da5b502a62d7e9038d73e31ceb3935050430a7f9b7e29b9b3200db3095f91d"
+    }
+  ]
+}

@@ -1,0 +1,136 @@
+{
+  "id": "2026-07-15-ostium",
+  "name": "Ostium",
+  "date": "2026-07-15",
+  "year": 2026,
+  "amountUsd": 23750000,
+  "returnedUsd": null,
+  "chains": [
+    "Arbitrum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "key-compromise",
+  "technique": "Private Key Compromised",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "key-compromise",
+    "confidence": 0.87,
+    "top": [
+      {
+        "category": "key-compromise",
+        "p": 0.88
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.11
+      },
+      {
+        "category": "access-control",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "An attacker used a trusted price forwarder to feed the vault a fake $60K Bitcoin quote to drain $23.75 million from Ostium on Arbitrum, then collected the payout on trades that were never real.",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "An attacker used a trusted price forwarder to feed the vault a fake $60K Bitcoin quote to drain $23.75 million from Ostium on Arbitrum, then collected the payout on trades that were never real."
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Compromised oracle signer key used to submit malicious price reports through registered forwarder. Attacker executed 20x leveraged trade loops with artificially favorable prices via delegatedAction → openTrade + performUpkeep(closeTradeMarket), draining ~11.86M USDC from OstiumVault (oLP), representing ~32% of $34.3M TVL. Attack Tx: https://arbiscan.io/tx/0x359f8c05b86a4409d60cfba02084334313fd94b19f74a294fb7fc4ea7d4870e0 Source: https://twitter.com/DefimonAlerts/status/2077409855166394697"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Ostium, an RWA-focused perpetuals DEX on Arbitrum, suffered an oracle manipulation exploit. The attacker used a compromised oracle signer key to submit fraudulent future-dated price reports, generating artificial trading profits and draining approximately $18 million USDC from the liquidity vault. The protocol has halted trading and is investigating."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On July 15, 2026, attackers drained Ostium's liquidity vault for $23.75M by exploiting compromised off-chain credentials controlling price feeds. They submitted validly signed, fabricated price reports, enabling rapid open-close leverage trades, and extracted profits the protocol could not detect. The attacker obtained the private key for an authorized off-chain price report signer and a registered keeper. The on-chain contracts accepted any validly signed price report from authorized figures, but performed no secondary checks for price plausibility or origin. No anomaly detection or circuit breaker stopped the rapid draining loop."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x359f8c05b86a4409d60cfba02084334313fd94b19f74a294fb7fc4ea7d4870e0",
+    "0xfaf6d3d4d7f1a75bfc11fb4d36d0525791546267fda1cdd371703ce03ae8ba8c",
+    "0x6c254483fa47a14622662e792bc3728ab3c408a33d3cbb5712434ba96f5ecdc2",
+    "0x3b04639ab9b40760b2138e7bfa7eccc9657f3a767a5c414dbb1b3632ed71f3bf",
+    "0xd9f91cc3eaec695f45bffad3a068fa52e1625ed44bfcc47d6ac3938f78d9061d",
+    "0x397daa6c23c87670f949a970961b1014e966cc40301a99b55c3c1908dd61418e",
+    "0x56e4139a2f51e99933479becee21812dd2ec656128f6f3593a7fa225e2f24adc",
+    "0x4b7ff5de823dd7af29cf1a6602a84d7b6eee354edcbaf0427fd5e691d3d80951"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Ostium - Rekt",
+      "url": "https://rekt.news/ostium-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "arbiscan.io",
+      "url": "https://arbiscan.io/tx/0x359f8c05b86a4409d60cfba02084334313fd94b19f74a294fb7fc4ea7d4870e0"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/DefimonAlerts/status/2077409855166394697"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xfaf6d3d4d7f1a75bfc11fb4d36d0525791546267fda1cdd371703ce03ae8ba8c"
+    },
+    {
+      "source": "blocksec",
+      "label": "x.com",
+      "url": "https://x.com/Ostium/status/2082540358219747422"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/kaledora/status/2077525044733837736"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/ostium-2026-07-15"
+    },
+    {
+      "source": "revertiq",
+      "label": "quillaudits.com",
+      "url": "https://www.quillaudits.com/blog/hack-analysis/ostium-price-report-signer-compromise"
+    },
+    {
+      "source": "revertiq",
+      "label": "blocksec.com",
+      "url": "https://blocksec.com/blog/defi-security-incidents-afx-trade-ostium"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptotimes.io",
+      "url": "https://www.cryptotimes.io/2026/07/30/ostium-post-mortem-confirms-23-75m-vault-loss-blames-off-chain-signer/"
+    }
+  ]
+}

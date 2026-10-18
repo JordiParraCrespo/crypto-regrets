@@ -1,0 +1,77 @@
+{
+  "id": "2014-07-29-cryptsy",
+  "name": "Cryptsy",
+  "date": "2014-07-29",
+  "year": 2014,
+  "amountUsd": 9580000,
+  "returnedUsd": null,
+  "chains": [
+    "Bitcoin",
+    "Litecoin"
+  ],
+  "targetType": "CEX",
+  "category": "key-compromise",
+  "technique": "Private Key Compromised",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "frontend-infra",
+    "confidence": 0.87,
+    "top": [
+      {
+        "category": "frontend-infra",
+        "p": 0.88
+      },
+      {
+        "category": "key-compromise",
+        "p": 0.08
+      },
+      {
+        "category": "access-control",
+        "p": 0.04
+      }
+    ],
+    "flashLoan": 0.01,
+    "stateActor": 0.02,
+    "hasRootCause": 0.9
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "Cryptsy reported a July 29, 2014 wallet compromise tied to a Lucky7Coin IRC backdoor that let a trusted wallet process run unauthorized commands on exchange infrastructure. Public records support the backdoor mechanism and a later class recovery, but the on-chain theft path and exact unreconciled loss total remain incomplete. Cryptsy trusted third-party Lucky7Coin wallet code that contained an IRC command path capable of arbitrary host commands. That turned a maintenance channel into an unauthorized control plane over wallet infrastructure. The record does not establish exposure of Cryptsy private keys.",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "Cryptsy reported a July 29, 2014 wallet compromise tied to a Lucky7Coin IRC backdoor that let a trusted wallet process run unauthorized commands on exchange infrastructure. Public records support the backdoor mechanism and a later class recovery, but the on-chain theft path and exact unreconciled loss total remain incomplete. Cryptsy trusted third-party Lucky7Coin wallet code that contained an IRC command path capable of arbitrary host commands. That turned a maintenance channel into an unauthorized control plane over wallet infrastructure. The record does not establish exposure of Cryptsy private keys."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/cryptsy-2014-07-29"
+    },
+    {
+      "source": "revertiq",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/markets/2016/01/15/cryptsy-threatens-bankruptcy-claims-millions-lost-in-bitcoin-heist"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/alerj78/lucky7coin/issues/1"
+    }
+  ]
+}

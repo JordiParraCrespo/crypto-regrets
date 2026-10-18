@@ -1,0 +1,161 @@
+{
+  "id": "2024-01-02-radiant-v2",
+  "name": "Radiant V2",
+  "date": "2024-01-02",
+  "year": 2024,
+  "amountUsd": 4500000,
+  "returnedUsd": null,
+  "chains": [
+    "Arbitrum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Rounding Error",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Loss of Precision. Lost: ~4,5M",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Loss of Precision. Lost: ~4,5M"
+    },
+    {
+      "source": "REKT",
+      "text": "2024 is off to a bright start... Lending protool Radiant Capital lost $4.5M, to a known bug. Keeping up with the security landscape is key, especially when dealing with forked code."
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The attacker exploited a vulnerability in the project’s token quantity calculation, leveraging precision expansion and rounding. Through precise control over these factors, the attacker widened profit margins and systematically drained all USDC from the pool by repeatedly executing deposit() and withdraw() operations. Vulnerable code snippet: Attack tx: https://arbiscan.io/tx/0x1ce7e9a9e3b6dd3293c9067221ac3260858ce119ecb7ca860eac28b2474c7c9b Analysis: https://twitter.com/beosinalert/status/1742389285926678784?s=61&t=PNVNUmeNmnbzLZBf7IEtjA"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The multi-chain lending protocol Radiant Capital is suspected to have been targeted in a hacker attack, with total losses on Arbitrum ~4.5 million USD."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Radiant Capital’s Arbitrum lending market suffered a $4.5M loss in January 2024 after an attacker exploited a rounding flaw in the liquidity index calculation during the initialization of a new USDC market. The attacker drained the pool by cycling flash-loan deposits and withdrawals, leveraging the protocol’s precision expansion and rounding formula to withdraw more than their deposits. A rounding and precision expansion flaw in the liquidity index calculation (rayDiv division) during new USDC market initialization let the attacker withdraw excess funds through repeated flash loan cycles, exploiting the mismatch between intended and computed token quantities."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 2 January 2024, Radiant V2 on Arbitrum was exploited via a rounding error in a new USDC market, allowing an attacker to inflate pool indexes and withdraw excess funds, resulting in losses of around $4.5M (1902 ETH). A mathematical rounding error in share accounting within the new USDC market allowed the attacker to exploit mint/burn logic by precisely choosing deposit and withdrawal values after inflating the pool index using flash loans."
+    }
+  ],
+  "audit": "Out of scope",
+  "txHashes": [
+    "0x1ce7e9a9e3b6dd3293c9067221ac3260858ce119ecb7ca860eac28b2474c7c9b",
+    "0xc5c4bbddec70edb58efba60c1f27bce6515a45ffcab4236026a5eeb3e877fc6d",
+    "0x2af556386c023f7ebe7c662fd5d1c6cc5ed7fba4723cbd75e00faaa98cd14243"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-01/RadiantCapital_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-01/RadiantCapital_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "neptunemutual.com",
+      "url": "https://neptunemutual.com/blog/how-was-radiant-capital-exploited/"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BeosinAlert/status/1742389285926678784"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Radiant Capital - REKT",
+      "url": "https://rekt.news/radiant-capital-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "arbiscan.io",
+      "url": "https://arbiscan.io/tx/0x1ce7e9a9e3b6dd3293c9067221ac3260858ce119ecb7ca860eac28b2474c7c9b"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/beosinalert/status/1742389285926678784?s=61&t=PNVNUmeNmnbzLZBf7IEtjA"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xc5c4bbddec70edb58efba60c1f27bce6515a45ffcab4236026a5eeb3e877fc6d"
+    },
+    {
+      "source": "blocksec",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs?tab=readme-ov-file#20240102-radiantcapital---loss-of-precision"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/RDNTCapital/status/1742338729925112272"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/radiant-capital-flash-loan-2024-01-31t20-31-55-00-00"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/de-fi-rekt-report-over-38-8m-lost-in-january-2024"
+    },
+    {
+      "source": "revertiq",
+      "label": "quillaudits.com",
+      "url": "https://www.quillaudits.com/blog/hack-analysis/radiant-capital-hack"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.solidityscan.com",
+      "url": "https://blog.solidityscan.com/radiant-capital-hack-analysis-b300ebdeee29/"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/radiant-v2-2024-01-02"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "dn.institute",
+      "url": "https://dn.institute/research/cyberattacks/incidents/2024-01-03-radiant-capital/"
+    }
+  ]
+}

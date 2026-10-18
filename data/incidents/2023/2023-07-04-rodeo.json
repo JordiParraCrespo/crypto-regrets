@@ -1,0 +1,131 @@
+{
+  "id": "2023-07-04-rodeo",
+  "name": "Rodeo",
+  "date": "2023-07-04",
+  "year": 2023,
+  "amountUsd": 90000,
+  "returnedUsd": null,
+  "chains": [
+    "Arbitrum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.98,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.98
+      },
+      {
+        "category": "market-manipulation",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "TWAP Oracle Manipulation. Lost: ~$888k",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "TWAP Oracle Manipulation. Lost: ~$888k"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Rodeo Finance relied on a Camelot V2 TWAP oracle to price the ETH-unshETH LP pool, but the oracle averaged only the last 4 price updates (each ~45 minutes apart), making it feasible to skew the average via a multi-block sandwich attack. Over several preparatory transactions the attacker bought large amounts of unshETH on the illiquid Camelot pool, inflating successive TWAP snapshots. With the oracle now reporting a grossly elevated unshETH price, the attacker called Investor.earn() on strategy 41, borrowing 400,000 USDC from the protocol's USDC pool and routing the proceeds through Camelot to purchase unshETH at the manipulated price. The position's health factor check passed because collateral was valued at the fake oracle price. The attacker then immediately swapped the obtained unshETH back to WETH and USDC at true market rates on Camelot and UniswapV3, pocketing the spread for a total profit of ~472 ETH (~$888K). Vulnerable code snippet: Attack Tx: 0xb1be5dee3852c818af742f5dd44def285b497ffc5c2eda0d893af542a09fb25a Analysis: Phalcon_xyz Twitter thread"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The root cause is the Protocol utilized the faulty price oracle for LP pricing, so the attacker can use Sandwich attack to manipulate the price. And the Investor.earn() routine has a flaw that can be forced to swap $USDC → $WETH → $unshETH, so attacker can bypass slippage control. Attack TX: https://arbiscan.io/tx/0xb1be5dee3852c818af742f5dd44def285b497ffc5c2eda0d893af542a09fb25a Analysis: https://twitter.com/Phalcon_xyz/status/1678765773396008967 https://twitter.com/peckshield/status/1678700465587130368 https://medium.com/@Rodeo_Finance/rodeo-post-mortem-overview-f35635c14101"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The Arbitrum ecological leverage income agreement Rodeo Finance caused hackers to steal about $1.7 million due to price oracle manipulation, and currently about $816,000 has been recovered in the form of unshETH."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Rodeo Finance on Arbitrum lost approximately 472 ETH (~$888K) on July 11, 2023, after an attacker manipulated a short-window TWAP oracle to inflate collateral value, bypassing position health checks. The attacker borrowed USDC against artificially high collateral and drained protocol funds. The protocol relied on a TWAP oracle averaging only four 45-minute price instances from a manipulable Camelot ETH/unshETH pool. This allowed the attacker to distort collateral prices via multi-block sandwich attacks, bypassing health factor validation, and borrow more USDC than warranted."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xb1be5dee3852c818af742f5dd44def285b497ffc5c2eda0d893af542a09fb25a",
+    "0x5f16637460021994d40430dadc020fffdb96937cfaf2b8cb6cbc03c91980ac7c",
+    "0x9a462209e573962f2654cac9bfe1277abe443cf5d1322ffd645925281fe65a2e",
+    "0x3045cd1d7314400ba5eac173a1f7348cebe5bdc6145a212524a85df6d6fd59ed"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-07/RodeoFinance_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-07/RodeoFinance_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Phalcon_xyz/status/1678765773396008967"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/peckshield/status/1678700465587130368"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "medium.com",
+      "url": "https://medium.com/@Rodeo_Finance/rodeo-post-mortem-overview-f35635c14101"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "arbiscan.io",
+      "url": "https://arbiscan.io/tx/0xb1be5dee3852c818af742f5dd44def285b497ffc5c2eda0d893af542a09fb25a"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xb1be5dee3852c818af742f5dd44def285b497ffc5c2eda0d893af542a09fb25a"
+    },
+    {
+      "source": "blocksec",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs?tab=readme-ov-file#20230711-rodeofinance---twap-oracle-manipulation"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/decoding-rodeo-finance-2024-05-21"
+    },
+    {
+      "source": "revertiq",
+      "label": "quillaudits.com",
+      "url": "https://www.quillaudits.com/blog/hack-analysis/rodeo-finance-hack"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/kismp123/DeFi-Security-Incident/blob/main/2023/2023-07-11_RodeoFinance_TWAPOracleManipulation_ARB.md"
+    }
+  ]
+}

@@ -1,0 +1,96 @@
+{
+  "id": "2023-08-15-rocketswap-base",
+  "name": "RocketSwap Base",
+  "date": "2023-08-15",
+  "year": 2023,
+  "amountUsd": 865000,
+  "returnedUsd": null,
+  "chains": [
+    "Base"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "key-compromise",
+  "technique": "Key Leaked via Infrastructure",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "key-compromise",
+    "confidence": 0.9,
+    "top": [
+      {
+        "category": "key-compromise",
+        "p": 0.91
+      },
+      {
+        "category": "access-control",
+        "p": 0.05
+      },
+      {
+        "category": "frontend-infra",
+        "p": 0.04
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.94
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "RocketSwap has lost $869k to compromised private keys, allegedly stolen in a bruteforce attack on the project’s server. We are very sorry for your loss.",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "RocketSwap has lost $869k to compromised private keys, allegedly stolen in a bruteforce attack on the project’s server. We are very sorry for your loss."
+    },
+    {
+      "source": "SlowMist",
+      "text": "The Base ecological project RocketSwap was attacked. The attacker cross-chained the stolen assets to Ethereum, resulting in a loss of 471 ETH (approximately $868,000). RocketSwap said: \"The team needs to use offline signatures and put the private key on the server when deploying Launchpad. It is currently detected that the server has been brute-forced, and because the farm contract uses a proxy contract, there are multiple high-risk permissions that lead to the transfer of farm assets.\""
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 14 August 2023, RocketSwap, a Base-chain decentralized exchange, suffered a $869,000 loss after attackers obtained a server-side private key and drained its yield farm contract. The breach resulted from co-locating both encrypted keys and decryption logic on a compromised automation server. The project's automation server stored the encrypted private keys and their decryption logic side-by-side, so a server breach allowed the attacker to decrypt and use the keys to transfer funds. Encryption alone failed to provide effective protection."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: RocketSwap - REKT",
+      "url": "https://rekt.news/rocketswap-rekt"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/RocketSwap_Labs/status/1691229656593371136"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/rocketswap-base-2023-08-15"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/rocketswap-base-hack-2023"
+    },
+    {
+      "source": "revertiq",
+      "label": "blockchainbreaches.com",
+      "url": "https://www.blockchainbreaches.com/en/breaches/rocketswap-2023"
+    }
+  ]
+}

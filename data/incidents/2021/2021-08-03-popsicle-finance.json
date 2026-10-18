@@ -1,0 +1,105 @@
+{
+  "id": "2021-08-03-popsicle-finance",
+  "name": "Popsicle Finance",
+  "date": "2021-08-03",
+  "year": 2021,
+  "amountUsd": 20700000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Reward Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.06,
+    "stateActor": 0.02,
+    "hasRootCause": 0.86
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Repeated Reward Claim - Logic Flaw. Lost: 20M USD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Repeated Reward Claim - Logic Flaw. Lost: 20M USD"
+    },
+    {
+      "source": "REKT",
+      "text": "Protocol meltdown. ~$20 million gone. A complex hack of a simple bug leaves Popsicle Finance in a sticky situation."
+    },
+    {
+      "source": "SlowMist",
+      "text": "Popsicle Finance, a multi-chain revenue optimization platform, was attacked. The core of this vulnerability is that the same PLP certificate can bring benefits to multiple holders at the same time node due to the defect in the reward update record."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On August 3, 2021, Popsicle Finance’s Sorbetto Fragola vaults on Ethereum were exploited for approximately $20.7 million. The attacker repeatedly transferred LP tokens between controlled contracts to claim the same accumulated rewards multiple times, draining fee reserves in eight Uniswap V3-managed vaults via a single flash-loan sequence. The Sorbetto Fragola vaults failed to update the recipient's reward accounting when LP tokens were transferred. Without updating variables like token0PerSharePaid and token1PerSharePaid on each transfer, any new holder could claim all previously unclaimed rewards again, enabling repeated extraction of accumulated fee…"
+    }
+  ],
+  "audit": "Peckshield",
+  "txHashes": [
+    "0xcd7dae143a4c0223349c16237ce4cd7696b1638d116a72755231ede872ab70fc"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2021-08/Popsicle_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2021-08/Popsicle_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "blocksecteam.medium.com",
+      "url": "https://blocksecteam.medium.com/the-analysis-of-the-popsicle-finance-security-incident-9d9d5a3045c1"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Popsicle Finance - REKT",
+      "url": "https://rekt.news/popsicle-rekt"
+    },
+    {
+      "source": "slowmist",
+      "label": "popsiclefinance.medium.com",
+      "url": "https://popsiclefinance.medium.com/popsicle-finance-post-mortem-after-fragola-hack-f45b302362e0"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/popsicle-finance-2021-08-03"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "defirisk.co",
+      "url": "https://defirisk.co/learn/exploits/popsicle-rekt/"
+    }
+  ]
+}

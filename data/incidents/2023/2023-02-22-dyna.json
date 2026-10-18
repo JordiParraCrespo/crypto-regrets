@@ -1,0 +1,84 @@
+{
+  "id": "2023-02-22-dyna",
+  "name": "DYNA",
+  "date": "2023-02-22",
+  "year": 2023,
+  "amountUsd": 21000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Business Logic Flaw",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 1.00).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.06,
+    "stateActor": 0.02,
+    "hasRootCause": 0.94
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Business Logic Flaw. Lost: ~$21k",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Business Logic Flaw. Lost: ~$21k"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "StakingDYNA contract does not handle the deposit time correctly. Vulnerable code snippet: https://bscscan.com/address/0xa7b5eabc3ee82c585f5f4ccc26b81c3bd62ff3a9#code#F1#L79 In the Contract, Users can deposit $DYNA to claim rewards, the interest is calculated based on the deposit duration. However, a vulnerability exists in the contract, as it fails to update the \"lastProcessAt\" parameter for any deposit. Consequently, the staking duration is miscalculated. Attack tx: https://bscscan.com/tx/0x06bbe093d9b84783b8ca92abab5eb8590cb2321285660f9b2a529d665d3f18e4 https://bscscan.com/tx/0xc09678fec49c643a30fc8e4dec36d0507dae7e9123c270e1f073d335deab6cf0 Analysis: https://twitter.com/BeosinAlert/status/1628301635834486784 https://twitter.com/BlockSecTeam/status/1628319536117153794"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x06bbe093d9b84783b8ca92abab5eb8590cb2321285660f9b2a529d665d3f18e4",
+    "0xc09678fec49c643a30fc8e4dec36d0507dae7e9123c270e1f073d335deab6cf0"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-02/DYNA_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-02/DYNA_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BlockSecTeam/status/1628319536117153794"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BeosinAlert/status/1628301635834486784"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0xa7b5eabc3ee82c585f5f4ccc26b81c3bd62ff3a9#code#F1#L79"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/search?q=%24DYNA&src=cashtag_click"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x06bbe093d9b84783b8ca92abab5eb8590cb2321285660f9b2a529d665d3f18e4"
+    }
+  ]
+}

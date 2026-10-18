@@ -1,0 +1,80 @@
+{
+  "id": "2025-05-30-malda",
+  "name": "Malda",
+  "date": "2025-05-30",
+  "year": 2025,
+  "amountUsd": 273000,
+  "returnedUsd": null,
+  "chains": [
+    "59144"
+  ],
+  "targetType": null,
+  "category": "input-validation",
+  "technique": "Access Control",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.81). Replaced keyword guess \"access-control\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "input-validation",
+    "confidence": 0.81,
+    "top": [
+      {
+        "category": "input-validation",
+        "p": 0.82
+      },
+      {
+        "category": "access-control",
+        "p": 0.18
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "Malda's Migrator.sol contract, intended to let Mendi Finance users migrate positions to Malda, accepted a dynamically user-supplied Mendi Comptroller address without validating it against any whitelist of legitimate Comptroller contracts. An attacker deployed a malicious fake Comptroller that returned arbitrary position data. When the migrator called getAssetsIn() on this fake Comptroller and iterated over the returned fabricated positions, it called mintMigration() and borrowMigration() on real Malda markets — minting credit and transferring underlying tokens to the attacker without any genuine collateral being posted — resulting in approximately $273,000 in losses. Core Malda lending contracts were unaffected and all contracts were paused immediately post-exploit. Attack Tx: 0x9f12f7b982ffbd90ac5944b3ab8520f7fb5a9882a0a9acf20d63f6922950e59a Analysis: Malda Hack: No Validation And Full Access",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Malda's Migrator.sol contract, intended to let Mendi Finance users migrate positions to Malda, accepted a dynamically user-supplied Mendi Comptroller address without validating it against any whitelist of legitimate Comptroller contracts. An attacker deployed a malicious fake Comptroller that returned arbitrary position data. When the migrator called getAssetsIn() on this fake Comptroller and iterated over the returned fabricated positions, it called mintMigration() and borrowMigration() on real Malda markets — minting credit and transferring underlying tokens to the attacker without any genuine collateral being posted — resulting in approximately $273,000 in losses. Core Malda lending contracts were unaffected and all contracts were paused immediately post-exploit. Attack Tx: 0x9f12f7b982ffbd90ac5944b3ab8520f7fb5a9882a0a9acf20d63f6922950e59a Analysis: Malda Hack: No Validation And Full Access"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The vulnerability originated in the Migrator.sol contract. The contract allowed the Mendi Comptroller address to be passed dynamically, rather than being hardcoded. This enabled the attacker to supply their own malicious Comptroller, mint a synthetic position on Malda, and withdraw approximately $285,000."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x9f12f7b982ffbd90ac5944b3ab8520f7fb5a9882a0a9acf20d63f6922950e59a",
+    "0x7ffb4569827ed3acd595270c755195da5c630a1ad999afe6eb9b884ff09d6e5d"
+  ],
+  "poc": null,
+  "sources": [
+    "defihacklabs",
+    "blocksec",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "lineascan.build",
+      "url": "https://lineascan.build/tx/0x9f12f7b982ffbd90ac5944b3ab8520f7fb5a9882a0a9acf20d63f6922950e59a"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "coinsbench.com",
+      "url": "https://coinsbench.com/malda-hack-no-validation-and-full-access-75ac787aae28"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x9f12f7b982ffbd90ac5944b3ab8520f7fb5a9882a0a9acf20d63f6922950e59a"
+    },
+    {
+      "source": "slowmist",
+      "label": "mirror.xyz",
+      "url": "https://mirror.xyz/0x4Da818DD3aAfb9D042a76B5037cdBa61533C7692/yhFSyxCImJ23OD00vb2GQ0JmbcBkX2CO4V2t_29ykIA"
+    }
+  ]
+}

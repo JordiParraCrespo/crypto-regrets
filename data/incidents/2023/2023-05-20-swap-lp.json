@@ -1,0 +1,81 @@
+{
+  "id": "2023-05-20-swap-lp",
+  "name": "Swap-LP",
+  "date": "2023-05-20",
+  "year": 2023,
+  "amountUsd": 1100000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Swap Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.82,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.83
+      },
+      {
+        "category": "arbitrary-call",
+        "p": 0.11
+      },
+      {
+        "category": "access-control",
+        "p": 0.05
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "The Swap-LP contract on BNB Chain (0xe0c352c56af65772ac7c9ab45b858cb43d22f28f) has been attacked with a loss of approximately $1.1 million. The attacker (0xdead) transferred the stolen funds to Tornado Cash. specifically, the attacker manipulated a low-level call in the Swap-LP factory address to trigger the 0x33604058 function of the SwapLP pair. This causes all WDZD tokens in the pair to be transferred to the factory address. As a result, the attacker is able to use fewer WDZDs to obtain more SWAP LPs from the unverified address 0x3c4e06d17e243e2cb2e4568249b6f7213c43c743 and subsequently destroy the LPs for profit.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The Swap-LP contract on BNB Chain (0xe0c352c56af65772ac7c9ab45b858cb43d22f28f) has been attacked with a loss of approximately $1.1 million. The attacker (0xdead) transferred the stolen funds to Tornado Cash. specifically, the attacker manipulated a low-level call in the Swap-LP factory address to trigger the 0x33604058 function of the SwapLP pair. This causes all WDZD tokens in the pair to be transferred to the factory address. As a result, the attacker is able to use fewer WDZDs to obtain more SWAP LPs from the unverified address 0x3c4e06d17e243e2cb2e4568249b6f7213c43c743 and subsequently destroy the LPs for profit."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Swap-LP is cataloged as a 2023-05-20 BNB Chain protocol-logic incident with about $1.1 million reported lost, but the available evidence does not recover a verified exploit transaction or the historical vulnerable code. The supported cause is a swap logic flaw within a protocol-logic incident on BNB Chain. The exact vulnerable function, contract address, and execution sequence are unknown from the evidence available here."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0xdEAd40082286F7e57a56D6e5EFE242b9AC83B137"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/swap-lp-2023-05-20"
+    },
+    {
+      "source": "revertiq",
+      "label": "api.llama.fi",
+      "url": "https://api.llama.fi/hacks"
+    }
+  ]
+}

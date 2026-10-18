@@ -1,0 +1,83 @@
+{
+  "id": "2024-03-16-wilder-world",
+  "name": "Wilder World",
+  "date": "2024-03-16",
+  "year": 2024,
+  "amountUsd": 1800000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum Mainnet"
+  ],
+  "targetType": null,
+  "category": "key-compromise",
+  "technique": "Private Key Leakage",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.99).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "key-compromise",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "key-compromise",
+        "p": 0.99
+      },
+      {
+        "category": "access-control",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.03,
+    "hasRootCause": 0.86
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "The deployer wallet of the NFT marketplace Wilder World was attacked, and ownership was transferred to the attacker. Following a malicious upgrade, the attacker withdrew WILD and MEOW tokens and converted them into approximately $1.8 million.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The deployer wallet of the NFT marketplace Wilder World was attacked, and ownership was transferred to the attacker. Following a malicious upgrade, the attacker withdrew WILD and MEOW tokens and converted them into approximately $1.8 million."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Wilder World disclosed a March 16, 2024 compromise that allowed an attacker to take control of legacy vault contracts and drain WILD and MEOW tokens worth roughly 515 ETH. Available evidence points to a compromised private key and unauthorized ownership transfer of legacy contracts rather than a smart contract logic flaw. Available evidence indicates the incident resulted from compromise of a privileged private key that controlled legacy Wilder World vault contracts. The attacker used that access to transfer ownership or upgrade authority over legacy vault infrastructure and withdraw WILD and MEOW tokens. No public postmortem or verified vulnerable contract code has been published."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x291ae90f56e3dc3559dfa670871b2b1e222acdea83fe21272ccf9430c7ae5574"
+  ],
+  "poc": null,
+  "sources": [
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "slowmist",
+      "label": "web3isgoinggreat.com",
+      "url": "https://www.web3isgoinggreat.com/?id=wilder-world-theft"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/wilder-2024-04-30t21-06-46-00-00"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/de-fi-rekt-report-over-12-4m-lost-in-april-2024"
+    },
+    {
+      "source": "revertiq",
+      "label": "olympix.security",
+      "url": "https://olympix.security/biweekly-exploits/17m-lost-woofi-wilder-world-remilia-and-lava-lending-attacked-across-arbitrum-and-ethereum"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/wilder-hack-2024"
+    }
+  ]
+}

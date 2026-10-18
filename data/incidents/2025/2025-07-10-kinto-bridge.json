@@ -1,0 +1,82 @@
+{
+  "id": "2025-07-10-kinto-bridge",
+  "name": "Kinto Bridge",
+  "date": "2025-07-10",
+  "year": 2025,
+  "amountUsd": 1550000,
+  "returnedUsd": null,
+  "chains": [
+    "Arbitrum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Uninitialized Proxy",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.91
+  },
+  "bridge": true,
+  "language": "Solidity",
+  "rootCause": "Ramon Recuero, co-founder of Kinto, a modular exchange platform in the Arbitrum ecosystem, tweeted about the recent attack, stating that the hacker exploited a vulnerability on Arbitrum that allowed unlimited minting of K tokens. The attacker minted 110,000 K and launched an attack targeting the Morpho Vault and a Uniswap v4 pool. The incident resulted in approximately $1.55 million in losses (ETH and USDC) and caused significant volatility in the price of the K token.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Ramon Recuero, co-founder of Kinto, a modular exchange platform in the Arbitrum ecosystem, tweeted about the recent attack, stating that the hacker exploited a vulnerability on Arbitrum that allowed unlimited minting of K tokens. The attacker minted 110,000 K and launched an attack targeting the Morpho Vault and a Uniswap v4 pool. The incident resulted in approximately $1.55 million in losses (ETH and USDC) and caused significant volatility in the price of the K token."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Kinto Bridge on Arbitrum One lost $1.55 million on 10 July 2025 after an attacker exploited an uninitialized ERC1967 proxy, installing a backdoor and minting tokens to drain liquidity pools. The ERC1967 token proxy was deployed without initialization in the same transaction, letting an attacker front-run initialization and install a malicious implementation contract. The backdoor survived subsequent upgrades and remained accessible for months."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x07f516f46e02ea773ce4fd7d83c48f8e22e1a2d660ec60cd707a7aaa6c5e9cc7",
+    "0x4635f03dae7dc06e11b6535f67a9614fb1eeba839a1df4a69f91f25fffd11406",
+    "0x552fd2c6b364209d8a85f7e8a8de910a08c9e6105cf4c671f11ca89671025ee5"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/ramonrecuero/status/1943426114468352006"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/kinto-bridge-2025-07-10"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/kinto-bridge-hack-2025"
+    },
+    {
+      "source": "revertiq",
+      "label": "blockthreat.com",
+      "url": "https://blockthreat.com/blockthreat-week-28-2025/"
+    }
+  ]
+}

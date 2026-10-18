@@ -1,0 +1,86 @@
+{
+  "id": "2024-06-09-loopring",
+  "name": "Loopring",
+  "date": "2024-06-09",
+  "year": 2024,
+  "amountUsd": 5000000,
+  "returnedUsd": null,
+  "chains": [
+    "Loopring"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "key-compromise",
+  "technique": "API Key Compromised",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "key-compromise",
+    "confidence": 0.62,
+    "top": [
+      {
+        "category": "key-compromise",
+        "p": 0.64
+      },
+      {
+        "category": "social-engineering",
+        "p": 0.22
+      },
+      {
+        "category": "access-control",
+        "p": 0.06
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "Ethereum Layer 2 protocol Loopring posted on Twitter that the some Loopring Smart Wallets were targeted in a security breach. The attack exploited wallets with only one Guardian, specifically the Loopring Official Guardian. The hacker initiated a Recovery process, falsely posing as the wallet owner to reset ownership and withdraw assets. The attack succeeded by compromising Loopring's 2FA service, allowing the hacker to impersonate the wallet owner and gain approval for the Recovery from the Official Guardian. Subsequently, the attacker transferred assets out of the affected wallets.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Ethereum Layer 2 protocol Loopring posted on Twitter that the some Loopring Smart Wallets were targeted in a security breach. The attack exploited wallets with only one Guardian, specifically the Loopring Official Guardian. The hacker initiated a Recovery process, falsely posing as the wallet owner to reset ownership and withdraw assets. The attack succeeded by compromising Loopring's 2FA service, allowing the hacker to impersonate the wallet owner and gain approval for the Recovery from the Official Guardian. Subsequently, the attacker transferred assets out of the affected wallets."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 9 June 2024, Loopring's smart wallet 'Guardian' recovery service was exploited after its centralized two-factor authentication (2FA) server was compromised, enabling attackers to take control of user wallets and steal approximately $5 million. Only wallets relying solely on Loopring's Official Guardian for recovery were affected. The core failure was a compromise of Loopring's AWS-hosted 2FA server, which allowed attackers to take control of the Official Guardian account and approve malicious wallet recovery requests, bypassing owner consent and all other controls."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/loopringorg/status/1799791898296451515"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/loopring-2024-06-09"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "cointelegraph.com",
+      "url": "https://cointelegraph.com/news/loopring-smart-wallet-hack-5-million"
+    }
+  ]
+}

@@ -1,0 +1,110 @@
+{
+  "id": "2022-03-05-bacon-protocol",
+  "name": "Bacon Protocol",
+  "date": "2022-03-05",
+  "year": 2022,
+  "amountUsd": 1000000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "reentrancy",
+  "technique": "Reentrancy",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "reentrancy",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "reentrancy",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.93
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Reentrancy. Lost: $1 million",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Reentrancy. Lost: $1 million"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "reentrancy in lend() Vulnerable code snippet: unverified contract https://etherscan.io/address/0x781ad73f140815763d9a4d4752daf9203361d07d#code use tokensReceived hook to reenter lend() --- Issue fixed https://etherscan.io/address/0xb827b209b388856f23845a56d8b34cf26fda171f#code#F1#L205"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Bacon Protocol was exploited on Ethereum on 2022-03-05 through a reentrancy flaw in the lend() flow. An attacker used a 6.36 million USDC flash loan, recursively re-entered the lending path through a callback hook, redeemed inflated bHOME balances, and exited with roughly 957,209 USDC after repaying the loan. Bacon Protocol’s lend() flow exposed externally callable callback execution before all internal accounting for bHOME issuance had finalized. The attacker repeatedly re-entered lend() during the same transaction and obtained more bHOME than the deposited USDC should have allowed. The historical implementation contract was unverified, so the exact v…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x7d2296bcb936aa5e2397ddf8ccba59f54a178c3901666b49291d880369dbcf31",
+    "0xacfcaa8e1c482148f9f2d592c78ca7a27934c7333dab31978ed0aef333a28ab6"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-03/Bacon_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-03/Bacon_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/peckshield/status/1500105933128495108"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xacfcaa8e1c482148f9f2d592c78ca7a27934c7333dab31978ed0aef333a28ab6"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x7d2296bcb936aa5e2397ddf8ccba59f54a178c3901666b49291d880369dbcf31"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/address/0x781ad73f140815763d9a4d4752daf9203361d07d#code"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/address/0xb827b209b388856f23845a56d8b34cf26fda171f#code#F1#L205"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/bacon-protocol-2022-03-05"
+    },
+    {
+      "source": "revertiq",
+      "label": "certik.com",
+      "url": "https://www.certik.com/blog/bacon-protocol-incident-anaylsis"
+    },
+    {
+      "source": "revertiq",
+      "label": "raw.githubusercontent.com",
+      "url": "https://raw.githubusercontent.com/SunWeb3Sec/DeFiHackLabs/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/src/test/2022-03/Bacon_exp.sol"
+    }
+  ]
+}

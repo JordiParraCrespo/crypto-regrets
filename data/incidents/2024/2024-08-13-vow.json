@@ -1,0 +1,93 @@
+{
+  "id": "2024-08-13-vow",
+  "name": "VOW",
+  "date": "2024-08-13",
+  "year": 2024,
+  "amountUsd": 1000000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "input-validation",
+  "technique": "Misconfiguration",
+  "classificationNote": "Upstream label missing; classified by keyword rules from the root-cause text.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "input-validation",
+    "confidence": 0.47,
+    "top": [
+      {
+        "category": "input-validation",
+        "p": 0.5
+      },
+      {
+        "category": "access-control",
+        "p": 0.36
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.09
+      }
+    ],
+    "flashLoan": 0.08,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Misconfiguration. Lost: ~ 1M USD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Misconfiguration. Lost: ~ 1M USD"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The lack of validation in the setUSDRate function in the smart contract which allows the attacker to rapidly change the rate without restrictions. Vulnerable code snippet: Attack tx: https://etherscan.io/tx/0x758efef41e60c0f218682e2fa027c54d8b67029d193dd7277d6a881a24b9a561 Analysis: https://www.quillaudits.com/blog/hack-analysis/vowcurrency-hack"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Vow suffers an attack due to a contract vulnerability, resulting in a loss of approximately $1.2 million."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x758efef41e60c0f218682e2fa027c54d8b67029d193dd7277d6a881a24b9a561",
+    "0xb569340f147cb6d5722490221ba65950a870aaa4db6ab835b8aa128c5dee36b3"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-08/VOW_exp.sol",
+  "sources": [
+    "defihacklabs",
+    "blocksec",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-08/VOW_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/Vowcurrency/status/1823407231658025300"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x758efef41e60c0f218682e2fa027c54d8b67029d193dd7277d6a881a24b9a561"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "quillaudits.com",
+      "url": "https://www.quillaudits.com/blog/hack-analysis/vowcurrency-hack"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xb569340f147cb6d5722490221ba65950a870aaa4db6ab835b8aa128c5dee36b3"
+    }
+  ]
+}

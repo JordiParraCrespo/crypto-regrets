@@ -1,0 +1,86 @@
+{
+  "id": "2026-06-05-dtxt",
+  "name": "DTXT",
+  "date": "2026-06-05",
+  "year": 2026,
+  "amountUsd": 35041.11,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Liquidity Misclassification Fee Bypass",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.92).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.92,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.92
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.07
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.98,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Liquidity Misclassification Fee Bypass. Lost: 35,041.11 USDT",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Liquidity Misclassification Fee Bypass. Lost: 35,041.11 USDT"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "DTXT is a fee-on-transfer token whose _transfer logic decides whether a transfer to the PancakeSwap pair is a sell (and thus subject to sell tax) or a liquidity addition by inspecting the pair's token balances/reserve state. The classification can be flipped: after a Moolah USDT flash loan, the attacker uses a pre-funded DTXT helper to add then remove DTXT/USDT liquidity, then transfers exactly 1 wei of USDT into the pair to skew the token0 balance relative to the stored reserves. This 1-wei nudge causes DTXT to misclassify a large subsequent DTXT transfer into the pair as a liquidity-add (fee-exempt) instead of a taxed sell, so the full untaxed DTXT lands in the pair. The attacker then directly calls pair.swap() against the stale reserves to extract USDT, repays the flash loan, and pockets ~35,041 USDT. Vulnerable code snippet: Attack Tx: https://bscscan.com/tx/0x07ba2ccf2b5c1aaca4c017af4fe87762a73ef7177f6ea8bb569367e908a0671d Analysis: https://x.com/audit_911/status/2063793931138347015"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The DTXT/USDT liquidity pair on BSC was exploited. The attacker exploited a forgeable liquidity-addition detection logic in the DTXT contract (by sending a small amount of USDT directly to the pair address, tricking the contract into classifying large sells as liquidity additions). This bypassed sell fees and drained the pool, resulting in a loss of approximately $35,041 USDT."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x07ba2ccf2b5c1aaca4c017af4fe87762a73ef7177f6ea8bb569367e908a0671d"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-06/DTXT_exp.sol",
+  "sources": [
+    "defihacklabs",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-06/DTXT_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/audit_911/status/2063793931138347015"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x07ba2ccf2b5c1aaca4c017af4fe87762a73ef7177f6ea8bb569367e908a0671d"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/2062876917045608594"
+    }
+  ]
+}

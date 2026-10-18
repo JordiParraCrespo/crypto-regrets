@@ -1,0 +1,82 @@
+{
+  "id": "2022-09-01-kyberswap-kyber-network",
+  "name": "KyberSwap (Kyber Network)",
+  "date": "2022-09-01",
+  "year": 2022,
+  "amountUsd": 314000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum Mainnet",
+    "Polygon"
+  ],
+  "targetType": null,
+  "category": "frontend-infra",
+  "technique": "Frontend supply chain; Privileged account compromise; Phishing",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.92). Replaced keyword guess \"social-engineering\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "frontend-infra",
+    "confidence": 0.92,
+    "top": [
+      {
+        "category": "frontend-infra",
+        "p": 0.92
+      },
+      {
+        "category": "social-engineering",
+        "p": 0.06
+      },
+      {
+        "category": "key-compromise",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "KyberSwap's frontend was compromised via a malicious script injected through a stolen Cloudflare API key, causing targeted token approvals and theft of over $265,000 from one user's wallet on September 1, 2022. All affected funds were reimbursed. A compromised Cloudflare Global API key, due to successful phishing of a privileged ex-employee account, allowed an attacker to inject malicious JavaScript into KyberSwap's website. This script manipulated token approval flows and redirected permissions to attacker-controlled addresses.",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "KyberSwap's frontend was compromised via a malicious script injected through a stolen Cloudflare API key, causing targeted token approvals and theft of over $265,000 from one user's wallet on September 1, 2022. All affected funds were reimbursed. A compromised Cloudflare Global API key, due to successful phishing of a privileged ex-employee account, allowed an attacker to inject malicious JavaScript into KyberSwap's website. This script manipulated token approval flows and redirected permissions to attacker-controlled addresses."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xc42a8e5994f43a65cf8272bc7afeabf54088abf2620ea1fbb75376257b509abb",
+    "0xf9b887b773ac2970591bcc40c1dec5e60c0e2ae47deb83c3125d8e10c5fe15cf",
+    "0xc921340e31e72806f4bd0ba8ed35189229da002331bdefe370bbc07d8228fc4c",
+    "0x6e904564f29e312e2a5fc225ab754f6e8942501039187398c30aaa0656512941",
+    "0x8a5330a7f50d79b4c691cdb33d73ec99a532e62172eec13a50ad011fc2440b4d"
+  ],
+  "poc": null,
+  "sources": [
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/kyber-network-2022-09-01"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "halborn.com",
+      "url": "https://www.halborn.com/blog/post/explained-the-kyber-network-hack-september-2022"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.kyberswap.com",
+      "url": "https://blog.kyberswap.com/notice-of-exploit-of-kyberswap-frontend-all-funds-will-be-reimbursed/"
+    }
+  ]
+}

@@ -1,0 +1,94 @@
+{
+  "id": "2024-08-13-vowcurrency",
+  "name": "Vowcurrency",
+  "date": "2024-08-13",
+  "year": 2024,
+  "amountUsd": 1200000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "On August 13, 2024, an attacker exploited a flawed access control in the rate setter function of Vowcurrency to inflate the vUSD minting rate. By raising the exchange rate, they minted a vastly excessive amount of vUSD, swapped and drained multiple pools, and extracted approximately $1.2 million across ETH, USDT, and VOW tokens. The setUSDRate function on the Vowcurrency smart contract lacked proper access control and validation. The attacker gained control of the usdRateSetter address and changed the conversion rate between VOW and vUSD from 1 to 100, allowing the minting of vUSD at 100x the intended rate.",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "On August 13, 2024, an attacker exploited a flawed access control in the rate setter function of Vowcurrency to inflate the vUSD minting rate. By raising the exchange rate, they minted a vastly excessive amount of vUSD, swapped and drained multiple pools, and extracted approximately $1.2 million across ETH, USDT, and VOW tokens. The setUSDRate function on the Vowcurrency smart contract lacked proper access control and validation. The attacker gained control of the usdRateSetter address and changed the conversion rate between VOW and vUSD from 1 to 100, allowing the minting of vUSD at 100x the intended rate."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 2024-08-13, Vowcurrency’s VOW and vUSD system on Ethereum was exploited after the protocol’s usdRate parameter was temporarily changed from 1 to 100. The altered conversion ratio allowed an attacker to mint inflated amounts of vUSD from borrowed VOW, drain VOW liquidity pools, and extract roughly 175 ETH, 595,970 USDT, and millions of VOW tokens. Public reporting valued the proceeds at approximately $1.2 million. The exploit path depended on a privileged usdRate change that immediately altered production mint economics from 1:1 to 100:1. The VSCTokenManager mint flow accepted the modified rate without delay, bounds checks, liquidity isolation, or emergency throttling.…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xda2a8568a5a210fdfb51880f4e8c91165ea122ada9977a4b11598d56782d49a5",
+    "0x758efef41e60c0f218682e2fa027c54d8b67029d193dd7277d6a881a24b9a561",
+    "0xb569340f147cb6d5722490221ba65950a870aaa4db6ab835b8aa128c5dee36b3",
+    "0xd35a10b7e7497169bb348eae3793f4a36dad6dd9863939ac910d66ab182d125b",
+    "0x6acda6ac1d7fb2a6c0c79707b0353855955ee550be8112c49490ccf6d77cc814",
+    "0x4b439b82c8878644cd809cfafa6e5c056518a54ea4df098eb1fed9d1cce5ca5f"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/vow-token-1-200-000-2024-08-13"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/defi-rekt-report-over-306m-lost-in-august-2024"
+    },
+    {
+      "source": "revertiq",
+      "label": "certik.com",
+      "url": "https://www.certik.com/blog/vow-incident-analysis"
+    },
+    {
+      "source": "revertiq",
+      "label": "quillaudits.com",
+      "url": "https://www.quillaudits.com/blog/hack-analysis/vowcurrency-hack"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/decoding-vowcurrency-s-1-2-million-2024-08-16"
+    },
+    {
+      "source": "revertiq",
+      "label": "crypto.news",
+      "url": "https://crypto.news/certik-vow-suffered-1-2m-exploit-token-plunged-80/"
+    }
+  ]
+}

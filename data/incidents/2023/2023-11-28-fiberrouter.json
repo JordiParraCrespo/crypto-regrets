@@ -1,0 +1,77 @@
+{
+  "id": "2023-11-28-fiberrouter",
+  "name": "FiberRouter",
+  "date": "2023-11-28",
+  "year": 2023,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "arbitrary-call",
+  "technique": "input validation",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.97). Replaced keyword guess \"input-validation\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "arbitrary-call",
+    "confidence": 0.97,
+    "top": [
+      {
+        "category": "arbitrary-call",
+        "p": 0.97
+      },
+      {
+        "category": "input-validation",
+        "p": 0.03
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "input validation. Lost: 18 eth",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "input validation. Lost: 18 eth"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "FiberRouter's swapAndCrossOneInch accepts a caller-controlled swapRouter (the target address used for the swap) together with caller-controlled _calldata, and forwards them as a low-level call without validating either the router or the payload. Because the FiberRouter contract held outstanding token approvals from its users, an attacker could pass USDC itself as the swapRouter and craft _calldata equal to transferFrom(victim, attacker, victim_balance), causing the router to execute an arbitrary transferFrom on the victim's behalf and drain any user who had approved FiberRouter. This is a classic arbitrary-call / missing input-validation bug. Vulnerable code snippet: Attack Tx: https://app.blocksec.com/explorer/tx/bsc/0x7260ad0e4769ae68f0a680356c63140353c18d7be1b86a8c4e99a0fc3b6842c1 Analysis: https://x.com/MetaSec_xyz/status/1729323254610002277"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x7260ad0e4769ae68f0a680356c63140353c18d7be1b86a8c4e99a0fc3b6842c1"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-11/FiberRouter_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-11/FiberRouter_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/MetaSec_xyz/status/1729323254610002277"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/97df63d8a33c18e3e8c926879b1d05dc4de8286d/src/test/2023-11/FiberRouter_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/bsc/0x7260ad0e4769ae68f0a680356c63140353c18d7be1b86a8c4e99a0fc3b6842c1"
+    }
+  ]
+}

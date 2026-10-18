@@ -1,0 +1,72 @@
+{
+  "id": "2026-07-11-bluemove-dex",
+  "name": "BlueMove DEX",
+  "date": "2026-07-11",
+  "year": 2026,
+  "amountUsd": 529000,
+  "returnedUsd": null,
+  "chains": [
+    "Sui"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Incorrect Share Accounting",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Move",
+  "rootCause": "BlueMove DEX was exploited on Sui on 11 July 2026 through an LP token accounting vulnerability, draining approximately $525,000 worth of assets across nearly 400 liquidity pools. Funds were converted and moved out of Sui before pools were frozen, enabling continued token drainage from broken pools. A liquidity-provider share accounting bug in BlueMove's legacy AMM implementation allowed an attacker to inflate LP token balances and withdraw more assets than they should have held. Cross-version desynchronization further exposed nearly 400 pools, which were left unfrozen after the main exploit.",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "BlueMove DEX was exploited on Sui on 11 July 2026 through an LP token accounting vulnerability, draining approximately $525,000 worth of assets across nearly 400 liquidity pools. Funds were converted and moved out of Sui before pools were frozen, enabling continued token drainage from broken pools. A liquidity-provider share accounting bug in BlueMove's legacy AMM implementation allowed an attacker to inflate LP token balances and withdraw more assets than they should have held. Cross-version desynchronization further exposed nearly 400 pools, which were left unfrozen after the main exploit."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xb29e79198742e84ddf6a5a952238990f7d80565826ff3d97dc92d7056b097335",
+    "0xa74ee820821d52994785eb9160b3a114a6338de1b3d9e188c00f09ba4f75065e",
+    "0x98391d8f43736152b61caaa38b615621095d7595f34ae6de18d507996da8748e"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/bluemove-dex-2026-07-11"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptomischief.github.io",
+      "url": "https://cryptomischief.github.io/bluemove-exploit-report/"
+    },
+    {
+      "source": "revertiq",
+      "label": "suitrump.com",
+      "url": "https://suitrump.com/reports/bluemove.html"
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "id": "2026-04-09-aethir",
+  "name": "Aethir",
+  "date": "2026-04-09",
+  "year": 2026,
+  "amountUsd": 400000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.03,
+    "hasRootCause": 0.84
+  },
+  "bridge": true,
+  "language": "Solidity",
+  "rootCause": "Aethir's cross-chain bridge contracts (primarily AethirOFTAdapter and Ethereum-related bridging contracts) were targeted in an exploit. The attacker attempted to drain funds by exploiting access control or ownership transfer vulnerabilities (e.g., transferOwnership issues), involving chains like BNB Chain. The Aethir team quickly detected the anomaly, promptly disconnected the compromised contracts, and collaborated with major exchanges (Binance, Upbit, Bithumb, etc.) to blacklist attacker wallets, effectively containing further damage. The main ATH token supply on Ethereum remained intact, and other bridges like ETH-ARB on Squid were unaffected. Initi…",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Aethir's cross-chain bridge contracts (primarily AethirOFTAdapter and Ethereum-related bridging contracts) were targeted in an exploit. The attacker attempted to drain funds by exploiting access control or ownership transfer vulnerabilities (e.g., transferOwnership issues), involving chains like BNB Chain. The Aethir team quickly detected the anomaly, promptly disconnected the compromised contracts, and collaborated with major exchanges (Binance, Upbit, Bithumb, etc.) to blacklist attacker wallets, effectively containing further damage. The main ATH token supply on Ethereum remained intact, and other bridges like ETH-ARB on Squid were unaffected. Initi…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Aethir's cross-chain bridge adapter contract on BNB Chain was exploited on 9 April 2026. An attacker took contract ownership by calling an unprotected transferOwnership function, then drained approximately 423,000 ATH tokens (~$400,000). Funds were bridged to TRON, but prompt response limited user losses to under $90,000 with full compensation promised. The AethirOFTAdapter contract's transferOwnership function lacked proper access control (such as an onlyOwner check), allowing any user to seize ownership and withdraw ATH tokens."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "crypto.news",
+      "url": "https://crypto.news/aethir-contains-bridge-hack-while-losses-stay-below-90k/"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/aethir-2026-04-09"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "cointelegraph.com",
+      "url": "https://cointelegraph.com/news/aethir-bridge-exploit-halt-user-compensation-90k-loss"
+    }
+  ]
+}

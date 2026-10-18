@@ -1,0 +1,88 @@
+{
+  "id": "2024-06-17-dyson-money",
+  "name": "Dyson_money",
+  "date": "2024-06-17",
+  "year": 2024,
+  "amountUsd": 31000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "business logic flaw",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.98).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.98,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.98
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.92
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "business logic flaw. Lost: 52 BNB",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "business logic flaw. Lost: 52 BNB"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The harvest function will add liquidity to the pair contract, and deposit the LP token into the vault. Thus the user could get more LP tokens when they withdraw form the vault. By withdrawing tokens from the Pair contract, attacker could make profits. Vulnerable code snippet: Attack tx: https://bscscan.com/tx/0xbfb9b3b8a0d3c589a02f06c516b5c7b7569739edd00f9836645080f2148aefc7 Analysis: The harvest function will add liquidity to the pair contract, and deposit the LP token into the vault. When user call withdrawAll, they can get more LP tokens."
+    },
+    {
+      "source": "SlowMist",
+      "text": "According to monitoring by the SlowMist security team, Dyson on BNBChain was attacked, resulting in a loss of approximately $31,000."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xbfb9b3b8a0d3c589a02f06c516b5c7b7569739edd00f9836645080f2148aefc7",
+    "0xbac614f4d103939a9611ca35f4ec9451e1e98512d573c822fbff70fafdbbb5a0"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-06/Dyson_money_exp.sol",
+  "sources": [
+    "defihacklabs",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-06/Dyson_money_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/7ec35bee3c086d667f34d87ff850004812905c4d/src/test/2024-06/Dyson_money_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0xbfb9b3b8a0d3c589a02f06c516b5c7b7569739edd00f9836645080f2148aefc7"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/bsc/0xbac614f4d103939a9611ca35f4ec9451e1e98512d573c822fbff70fafdbbb5a0"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/1802606892428177440"
+    }
+  ]
+}

@@ -1,0 +1,115 @@
+{
+  "id": "2025-12-02-goldfinch",
+  "name": "Goldfinch",
+  "date": "2025-12-02",
+  "year": 2025,
+  "amountUsd": 330000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "arbitrary-call",
+  "technique": "Token Approval Abuse",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.61,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.63
+      },
+      {
+        "category": "arbitrary-call",
+        "p": 0.35000000000000003
+      },
+      {
+        "category": "logic-error",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.01,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "An attacker exploited a vulnerability in an older Goldfinch Finance smart contract on Ethereum. A flaw in the contract's collectInterestRepayment() function permitted transfers from any previously approved address without adequate authorization checks, enabling the attacker to move funds out of a targeted user's wallet. The attacker deposited a small amount of USDC (approximately 1,000 USDC) to manipulate the contract's perceived share price upward, then repeatedly withdrew inflated amounts, ultimately draining approximately 118 ETH (~$350,000) from user deltatiger.eth via contract 0x0689aa2234d06Ac0d04cdac874331d287aFA4B43. PeckShield identified the breach and urged all Goldfinch users to immediately revoke approvals on the affected contract. The stolen ETH was subsequently laundered through Tornado Cash. Attack Tx: 0xd462ce892166e041f303af47340ae50d22b3cadc55be65cecbfcab8f5d48e149 Analysis: Phalcon Alert (Phalcon_xyz) Goldfinch Finance User Reports $330K ETH Loss – MEXC News",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "An attacker exploited a vulnerability in an older Goldfinch Finance smart contract on Ethereum. A flaw in the contract's collectInterestRepayment() function permitted transfers from any previously approved address without adequate authorization checks, enabling the attacker to move funds out of a targeted user's wallet. The attacker deposited a small amount of USDC (approximately 1,000 USDC) to manipulate the contract's perceived share price upward, then repeatedly withdrew inflated amounts, ultimately draining approximately 118 ETH (~$350,000) from user deltatiger.eth via contract 0x0689aa2234d06Ac0d04cdac874331d287aFA4B43. PeckShield identified the breach and urged all Goldfinch users to immediately revoke approvals on the affected contract. The stolen ETH was subsequently laundered through Tornado Cash. Attack Tx: 0xd462ce892166e041f303af47340ae50d22b3cadc55be65cecbfcab8f5d48e149 Analysis: Phalcon Alert (Phalcon_xyz) Goldfinch Finance User Reports $330K ETH Loss – MEXC News"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The on-chain private fund Goldfinch’s old contract on Ethereum (0x0689) contained a vulnerability. Because the user deltatiger.eth did not revoke the authorization in time, they were exploited and lost approximately USD 330,000. The attacker has already sent 118 ETH (around USD 329,000) into the privacy mixer Tornado Cash."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "A legacy Goldfinch test contract on Ethereum Mainnet was exploited on 2 December 2025 when an attacker used a false loan repayment mechanism and abused USDC token approvals to drain approximately $330,000 from a user's wallet. The incident was confined to a deprecated test contract, not affecting the main protocol pools, but exposed a critical gap in token approval management and contract deprecation. A test contract deployed before Goldfinch's public launch retained a critical vulnerability that allowed attackers to initiate false loan repayments using the victim's address. Because affected users had set a high USDC allowance on the contract, the atta…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xd462ce892166e041f303af47340ae50d22b3cadc55be65cecbfcab8f5d48e149",
+    "0x3a8bde0a17e04f6a119ae2f28e6b56ac736feb70761e2fa97cac25f816f751c2"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xd462ce892166e041f303af47340ae50d22b3cadc55be65cecbfcab8f5d48e149"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/Phalcon_xyz/status/1995777031221780657"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "mexc.fm",
+      "url": "https://www.mexc.fm/news/216975"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xd462ce892166e041f303af47340ae50d22b3cadc55be65cecbfcab8f5d48e149"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/GoPlusZH/status/1995842787078475801"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/goldfinch-2025-12-02"
+    },
+    {
+      "source": "revertiq",
+      "label": "gov.goldfinch.finance",
+      "url": "https://gov.goldfinch.finance/t/gip-85-goldfinch-hack-response/2183"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/goldfinch-finance-hack-2025"
+    }
+  ]
+}

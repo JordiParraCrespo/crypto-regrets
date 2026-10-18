@@ -1,0 +1,85 @@
+{
+  "id": "2023-12-27-thunder-terminal",
+  "name": "Thunder Terminal",
+  "date": "2023-12-27",
+  "year": 2023,
+  "amountUsd": 240000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum",
+    "Solana"
+  ],
+  "targetType": "CEX",
+  "category": "key-compromise",
+  "technique": "Key Leaked via Infrastructure",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "frontend-infra",
+    "confidence": 0.6,
+    "top": [
+      {
+        "category": "frontend-infra",
+        "p": 0.62
+      },
+      {
+        "category": "key-compromise",
+        "p": 0.38
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.03,
+    "hasRootCause": 0.45
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "Multi-chain trading platform Thunder suffered an attack. Thunder responded by stating that a third-party service it uses appears to have been targeted. No one's private keys are compromised. Only 114 wallets out of over 14,000 were affected.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Multi-chain trading platform Thunder suffered an attack. Thunder responded by stating that a third-party service it uses appears to have been targeted. No one's private keys are compromised. Only 114 wallets out of over 14,000 were affected."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Thunder Terminal's infrastructure was compromised on December 27, 2023, allowing an attacker to extract session tokens from the backend and siphon approximately $240,000 in ETH and SOL from 114 user wallets through unauthorized withdrawals executed in less than nine minutes. The attack resulted from leaked MongoDB credentials, which enabled unauthorized backend access and session token extraction. These session tokens could be used to initiate withdrawals on behalf of users without compromising their private keys directly."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x6aae3869ef165c46a7611769644c029ded78cd2c050bbca85a5b17850cf7f10d"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/ThunderTerminal/status/1739813779976982946"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/thunder-terminal-2023-12-27"
+    },
+    {
+      "source": "revertiq",
+      "label": "avoid.net",
+      "url": "https://avoid.net/thunder-terminal"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptotimes.io",
+      "url": "https://www.cryptotimes.io/2023/12/27/thunder-terminal-loses-240k-in-exploit-more-funds-on-risk/"
+    }
+  ]
+}

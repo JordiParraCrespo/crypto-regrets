@@ -1,0 +1,81 @@
+{
+  "id": "2026-03-10-alkemiearn",
+  "name": "AlkemiEarn",
+  "date": "2026-03-10",
+  "year": 2026,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Business Logic",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.97).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.97,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.97
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.02
+      },
+      {
+        "category": "access-control",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.98,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Business Logic. Lost: 43.45 ETH",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Business Logic. Lost: 43.45 ETH"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "AlkemiEarn's lending logic allowed a borrower to liquidate their own position, and liquidateBorrow mis-accounts the collateral/borrow balances so the liquidator (the attacker) ends up able to withdraw more collateral than they supplied. Using a Balancer flashloan of 51 WETH, the attacker supplied 50 ETH as aWETH collateral, borrowed 39.5 ETH, then called liquidateBorrow(self, aweth, aweth, amount) repaying their own borrow with the same asset used as collateral. Because the contract credits the liquidator with seized collateral while the self-repayment effectively returns the borrowed funds, the attacker can then withdraw(aweth, type(uint256).max) and pull out more than was deposited, profiting ~43.45 ETH after repaying the flashloan. Root cause: no guard against self-liquidation combined with faulty balance accounting where borrow asset equals collateral asset. Vulnerable code snippet: Attack Tx: https://skylens.certik.com/tx/eth/0xa17001eb39f867b8bed850de9107018a2d2503f95f15e4dceb7d68fff5ef6d9d Analysis: https://x.com/blockaid_/status/2031351883470676048"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xa17001eb39f867b8bed850de9107018a2d2503f95f15e4dceb7d68fff5ef6d9d"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-03/AlkemiEarn_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-03/AlkemiEarn_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/blockaid_/status/2031351881029546194"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "skylens.certik.com",
+      "url": "https://skylens.certik.com/tx/eth/0xa17001eb39f867b8bed850de9107018a2d2503f95f15e4dceb7d68fff5ef6d9d"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/blockaid_/status/2031351883470676048"
+    }
+  ]
+}

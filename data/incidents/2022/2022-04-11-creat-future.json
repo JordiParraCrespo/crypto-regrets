@@ -1,0 +1,86 @@
+{
+  "id": "2022-04-11-creat-future",
+  "name": "Creat Future",
+  "date": "2022-04-11",
+  "year": 2022,
+  "amountUsd": 1900000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Overflow",
+  "classificationNote": "Classified by keyword rules from the DeFiHackLabs root-cause title.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.44,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.47000000000000003
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.31
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.22
+      }
+    ],
+    "flashLoan": 0.96,
+    "stateActor": 0.02,
+    "hasRootCause": 0.94
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Overflow. Lost: $1.9 million",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Overflow. Lost: $1.9 million"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The method of calculating the reward token EGD depends on the ratio of the balance in the pair of USDT and EGD, so the attacker can manipulate the amount of the reward by flashloan. Vulnerable code snippet Attack tx: https://bscscan.com/tx/0x50da0b1b6e34bce59769157df769eb45fa11efc7d0e292900d6b0a86ae66a2b3 Analysis: https://x.com/BlockSecTeam/status/1556497016016228358"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x50da0b1b6e34bce59769157df769eb45fa11efc7d0e292900d6b0a86ae66a2b3"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-04/cftoken_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-04/cftoken_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BlockSecTeam/status/1556497016016228358"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0xc7647406542f8f2473a06fea142d223022370aa5722c044c2b7ea030b8965dd0"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x50da0b1b6e34bce59769157df769eb45fa11efc7d0e292900d6b0a86ae66a2b3"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/BlockSecTeam/status/1556497016016228358"
+    }
+  ]
+}

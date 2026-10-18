@@ -1,0 +1,78 @@
+{
+  "id": "2024-07-26-karastar",
+  "name": "Karastar",
+  "date": "2024-07-26",
+  "year": 2024,
+  "amountUsd": 69000,
+  "returnedUsd": null,
+  "chains": [
+    "BNB Chain"
+  ],
+  "targetType": null,
+  "category": "access-control",
+  "technique": "Access Control",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.97). Replaced keyword guess \"rugpull\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.97,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.97
+      },
+      {
+        "category": "key-compromise",
+        "p": 0.01
+      },
+      {
+        "category": "governance",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "Karastar’s BNB Chain GameFi contracts were exploited on 2024-07-26 after an attacker gained privileged control over upgradeable contracts. Public reporting states that malicious implementations with a backdoor transfer function were deployed before approximately 114 BNB was drained on-chain, with total losses reported at about $69,000. Available evidence indicates that the incident involved unauthorized control over privileged upgrade permissions for Karastar contracts on BNB Chain. Public incident reporting alleges that the attacker upgraded implementations to versions containing a backdoor-style transfer(address token, address fromUser, uint256 value) function.…",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "Karastar’s BNB Chain GameFi contracts were exploited on 2024-07-26 after an attacker gained privileged control over upgradeable contracts. Public reporting states that malicious implementations with a backdoor transfer function were deployed before approximately 114 BNB was drained on-chain, with total losses reported at about $69,000. Available evidence indicates that the incident involved unauthorized control over privileged upgrade permissions for Karastar contracts on BNB Chain. Public incident reporting alleges that the attacker upgraded implementations to versions containing a backdoor-style transfer(address token, address fromUser, uint256 value) function.…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x289a3107e3a5213d265bcec5919764d1802d19137395f73d9ec866e73c909b61",
+    "0x50cc6e73d7e7f215dd2c6e9947e15f7ffbb2f033bbe6555d3fc73e3cca922373"
+  ],
+  "poc": null,
+  "sources": [
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/karastar-69-000-2024-07-26"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/defi-rekt-report-over-250m-lost-in-july-2024"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/karastar-hack-2024"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/karastar"
+    }
+  ]
+}

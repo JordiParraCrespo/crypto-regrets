@@ -1,0 +1,133 @@
+{
+  "id": "2022-04-17-beanstalk",
+  "name": "Beanstalk",
+  "date": "2022-04-17",
+  "year": 2022,
+  "amountUsd": 181000000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "governance",
+  "technique": "Flashloan Governance Attack",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "governance",
+    "confidence": 0.96,
+    "top": [
+      {
+        "category": "governance",
+        "p": 0.96
+      },
+      {
+        "category": "input-validation",
+        "p": 0.03
+      },
+      {
+        "category": "logic-error",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.95,
+    "stateActor": 0.02,
+    "hasRootCause": 0.93
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "DAO + Flashloan. Lost: $182 million",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "DAO + Flashloan. Lost: $182 million"
+    },
+    {
+      "source": "REKT",
+      "text": "$181M jacked from Beanstalk, but the attacker only kept $76M. A malicious governance proposal was pushed through by a flash loan, and the attacker then voted to transfer all the assets to themself, but not before donating $250K to the Ukraine war fund."
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "insufficient validation Vulnerable code snippet: As the BIP18 proposal was created one day ago, validation one will be bypassed. By flashloan, the BIP18 proposal gained more than 78% of the vote, which is more than 67%. So proposal executed."
+    },
+    {
+      "source": "SlowMist",
+      "text": "The protocol loss caused by the flash loan attack of Ethereum-based algorithm stablecoin project Beanstalk Farms is about 182 million US dollars. The specific assets include 79238241 BEAN3CRV-f, 1637956 BEANLUSD-f, 36084584 BEAN and 0.54 UNI-V2_WETH_BEAN . The attackers made over $80 million, including about 24,830 ETH and 36 million BEAN. The main reason for this attack is that there is no time interval between the voting and execution of the proposal, so that the attacker can directly execute malicious proposals without community review after completing the voting."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On April 17, 2022, Beanstalk Farms on Ethereum was exploited for approximately $182 million. An attacker used a flash loan to gain supermajority voting power in Beanstalk’s live-balance governance system, submitted and executed a malicious proposal in a single block, and drained protocol assets. Beanstalk’s governance system used live-balance voting and allowed immediate execution of proposals with a supermajority via emergencyCommit(), with no timelock. This let a flash loan attacker acquire voting power and execute a malicious proposal atomically, draining protocol funds."
+    }
+  ],
+  "audit": "Unaudited",
+  "txHashes": [
+    "0xcd314668aaa9bbfebaf1a0bd2b6553d01dd58899c508d4729fa7311dc5d33ad7",
+    "0x68cdec0ac76454c3b0f7af0b8a3895db00adf6daaf3b50a99716858c4fa54c6f"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-04/Beanstalk_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-04/Beanstalk_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "rekt.news",
+      "url": "https://rekt.news/beanstalk-rekt/"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "medium.com",
+      "url": "https://medium.com/uno-re/beanstalk-farms-hacked-total-damage-is-182-million-b699dd3e5c8"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/peckshield/status/1515680335769456640"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Beanstalk - REKT",
+      "url": "https://rekt.news/beanstalk-rekt"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BlockSecTeam/status/1515683983836979201"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/beanstalk-farms-2022-04-18"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "bean.money",
+      "url": "https://bean.money/blog/beanstalk-governance-exploit"
+    },
+    {
+      "source": "revertiq",
+      "label": "certik.com",
+      "url": "https://www.certik.com/blog/revisiting-beanstalk-farms-exploit"
+    }
+  ]
+}

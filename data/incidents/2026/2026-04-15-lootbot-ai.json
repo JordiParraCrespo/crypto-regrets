@@ -1,0 +1,54 @@
+{
+  "id": "2026-04-15-lootbot-ai",
+  "name": "LootBot AI",
+  "date": "2026-04-15",
+  "year": 2026,
+  "amountUsd": 9600,
+  "returnedUsd": null,
+  "chains": [],
+  "targetType": null,
+  "category": "input-validation",
+  "technique": "Smart Contract Vulnerability",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.70).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "input-validation",
+    "confidence": 0.7,
+    "top": [
+      {
+        "category": "input-validation",
+        "p": 0.72
+      },
+      {
+        "category": "logic-error",
+        "p": 0.28
+      }
+    ],
+    "flashLoan": 0.97,
+    "stateActor": 0.01,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "LootBot AI’s xLoot NFT Staking contract was exploited via a Logic Error (Duplicate NFT ID in Redemption). The redeem() function did not validate duplicate token IDs in the input array. The _redeemable() logic accumulated ETH rewards per epoch for each ID without checking for duplicates, and the nextRedeem mapping was only updated after payout. The attacker flash-loaned 2.1 ETH, triggered a new epoch, called redeem() with 7 NFT IDs each duplicated 155 times, draining ~6.21 ETH. After repaying the flash loan, net profit was ~4.1 ETH ($9,600). The project appears largely abandoned (last official X activity in 2025).",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "LootBot AI’s xLoot NFT Staking contract was exploited via a Logic Error (Duplicate NFT ID in Redemption). The redeem() function did not validate duplicate token IDs in the input array. The _redeemable() logic accumulated ETH rewards per epoch for each ID without checking for duplicates, and the nextRedeem mapping was only updated after payout. The attacker flash-loaned 2.1 ETH, triggered a new epoch, called redeem() with 7 NFT IDs each duplicated 155 times, draining ~6.21 ETH. After repaying the flash loan, net profit was ~4.1 ETH ($9,600). The project appears largely abandoned (last official X activity in 2025)."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/DefimonAlerts/status/2044709964091187660"
+    }
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "id": "2023-11-16-weco",
+  "name": "WECO",
+  "date": "2023-11-16",
+  "year": 2023,
+  "amountUsd": 18000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Business Logic Flaw",
+  "classificationNote": "Classified by keyword rules from the DeFiHackLabs root-cause title.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.61,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.63
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.37
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Business Logic Flaw. Lost: ~$18K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Business Logic Flaw. Lost: ~$18K"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The WECO staking contract's deposit(amount, weeksLocked) function mis-handled its internal token accounting. The attacker deposited a large amount, then made many small repeated deposits which credited stake/reward bookkeeping in a way that did not properly reconcile against the tokens actually transferred in, effectively letting the depositor reclaim more WECOIN than they put in. The PoC seeds the attacker with WECOIN, deposits the full balance, then loops calling deposit(1 ether, 0) until the staking contract's WECOIN balance is drained. There is no guard ensuring credited balances stay consistent with the contract's real token holdings. Vulnerable code snippet: Attack Tx: https://app.blocksec.com/explorer/tx/bsc/0x2040a481c933b50ee31aba257c2041c48bb7a0b4bf4b4fad1ac165f19c4269e8 Analysis: MetaSec_xyz on X"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x2040a481c933b50ee31aba257c2041c48bb7a0b4bf4b4fad1ac165f19c4269e8"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-11/WECO_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-11/WECO_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/MetaSec_xyz/status/1725311048625041887"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/97df63d8a33c18e3e8c926879b1d05dc4de8286d/src/test/2023-11/WECO_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/bsc/0x2040a481c933b50ee31aba257c2041c48bb7a0b4bf4b4fad1ac165f19c4269e8"
+    }
+  ]
+}

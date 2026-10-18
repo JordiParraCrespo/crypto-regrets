@@ -1,0 +1,110 @@
+{
+  "id": "2023-09-05-floor-dao",
+  "name": "Floor Dao",
+  "date": "2023-09-05",
+  "year": 2023,
+  "amountUsd": 64200,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Reward Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.63,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.65
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.28
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.07
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Rebasing logic issue. Lost: ~$40ETH",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Rebasing logic issue. Lost: ~$40ETH"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The problem originated from the stake() function in the FloorDAO contract. This function sends funds to the caller before triggering a rebase. As a result, instead of distributing an amount of sFLOOR equal to the newly minted FLOOR in the next rebase, it includes the user's stake. This causes a mismatch between the contract's FLOOR balance and the circulating sFLOOR. The attacker exploited this by repeatedly calling the stake() and unstake() functions within the same transaction Vulnerable Code Snippet: Attack Transaction: https://explorer.phalcon.xyz/tx/eth/0x1274b32d4dfacd2703ad032e8bd669a83f012dde9d27ed92e4e7da0387adafe4 Analysis: https://twitter.com/PeckShieldAlert/status/169896210505836132 https://medium.com/floordao/floor-post-mortem-incident-summary-september-5-2023-e054a2d5afa4"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "FloorDAO lost approximately 40 ETH (~$65,000) from its treasury on Ethereum Mainnet in September 2023. The attacker exploited a vulnerable rebasing logic in its staking contract, manipulating the distribution of rebase rewards via repeated flash-loan funded stake/unstake cycles. The staking contract allowed rebases to be triggered with manipulated circulating supply by stake/unstake cycles within the same block, compounded by the use of a flash loan. Rebase calculations were based on circulatingSupply, which could be artificially inflated by temporarily staking large amounts of FLOOR tokens."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x1274b32d4dfacd2703ad032e8bd669a83f012dde9d27ed92e4e7da0387adafe4",
+    "0x4ea03abdc381bd324b8b69548e14489a4996176caa0e8a95eed25915a1c7e1c0",
+    "0x3c79c57181026395ed10f15715c6d04e71650a70ec285c3eb73bd0aaa5974451",
+    "0xcd976ac20998783f6c03a195821fbe83a988d5c94c8bcb8c2314f9c75991fa76"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-09/FloorDAO_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-09/FloorDAO_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/PeckShieldAlert/status/1698962105058361392"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "medium.com",
+      "url": "https://medium.com/floordao/floor-post-mortem-incident-summary-september-5-2023-e054a2d5afa4"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "explorer.phalcon.xyz",
+      "url": "https://explorer.phalcon.xyz/tx/eth/0x1274b32d4dfacd2703ad032e8bd669a83f012dde9d27ed92e4e7da0387adafe4"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/PeckShieldAlert/status/169896210505836132"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/floor-dao-2023-09-05"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/floordao-hack-2023"
+    }
+  ]
+}

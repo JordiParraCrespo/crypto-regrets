@@ -1,0 +1,61 @@
+{
+  "id": "2010-08-15-bitcoin-value-overflow-incident",
+  "name": "Bitcoin value overflow incident",
+  "date": "2010-08-15",
+  "year": 2010,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [
+    "Bitcoin"
+  ],
+  "targetType": "Chain",
+  "category": "client-bug",
+  "technique": "Integer overflow in output value check",
+  "classificationNote": null,
+  "classifiedBy": "curated",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "client-bug",
+    "confidence": 0.7,
+    "top": [
+      {
+        "category": "client-bug",
+        "p": 0.72
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.28
+      }
+    ],
+    "flashLoan": 0.01,
+    "stateActor": 0.01,
+    "hasRootCause": 0.77
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "Block 74638 contained a transaction creating 184,467,440,737 BTC. The output-sum check overflowed a 64-bit integer, so the client accepted it as valid. A patched client (0.3.10) and a soft fork orphaned the chain within ~5 hours. (CVE-2010-5139)",
+  "descriptions": [
+    {
+      "source": "Curated post-mortem",
+      "text": "Block 74638 contained a transaction creating 184,467,440,737 BTC. The output-sum check overflowed a 64-bit integer, so the client accepted it as valid. A patched client (0.3.10) and a soft fork orphaned the chain within ~5 hours. (CVE-2010-5139)"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "curated"
+  ],
+  "references": [
+    {
+      "source": "curated",
+      "label": "Bitcoin Wiki: Value overflow incident",
+      "url": "https://en.bitcoin.it/wiki/Value_overflow_incident"
+    },
+    {
+      "source": "curated",
+      "label": "NVD CVE-2010-5139",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2010-5139"
+    }
+  ]
+}

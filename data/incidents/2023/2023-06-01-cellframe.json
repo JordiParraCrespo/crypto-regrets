@@ -1,0 +1,100 @@
+{
+  "id": "2023-06-01-cellframe",
+  "name": "Cellframe",
+  "date": "2023-06-01",
+  "year": 2023,
+  "amountUsd": 76112,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Swap Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.94,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.94
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.06
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.74
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Calculation issues during liquidity migration. Lost: ~$76k",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Calculation issues during liquidity migration. Lost: ~$76k"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The Cellframe Network, a blockchain network based on sharding architecture, is suspected of being attacked by a flash loan. The attacker made a profit of 245 BNB (approximately 74,000 US dollars), and the token CELL has fallen by more than 65%. According to MistTrack analysis, the attacker's address (0x252...079) on Ethereum had withdrawn 1.37 ETH from Binance."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Cellframe's BNB Chain LP migration helper was exploited on June 1, 2023, suffering losses of about $76,000. The vulnerable contract sized new LP positions using spot reserves that could be flash-loan manipulated, enabling repeated extraction of pool assets. The migration contract sized new LP deposits using the instantaneous spot reserve ratio of the target pool, which attackers could manipulate with flash loans inside a single transaction. This allowed over-minting of LP tokens and draining the pool's assets."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x943c2a5f89bc0c17f3fe1520ec6215ed8c6b897ce7f22f1b207fea3f79ae09a6",
+    "0xe2d496ccc3c5fd65a55048391662b8d40ddb5952dc26c715c702ba3929158cb9"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-06/Cellframe_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-06/Cellframe_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/numencyber/status/1664132985883615235?cxt=HHwWhoDTqceImJguAAAA"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/MistTrack_io/status/1664182095730872320"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/cellframe-2023-06-01"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/cellframe-network-hack-2023"
+    },
+    {
+      "source": "revertiq",
+      "label": "crypto.training",
+      "url": "https://crypto.training/hacks/2023-06-cellframe/"
+    }
+  ]
+}

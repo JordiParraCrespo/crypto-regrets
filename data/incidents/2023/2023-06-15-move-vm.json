@@ -1,0 +1,50 @@
+{
+  "id": "2023-06-15-move-vm",
+  "name": "Move VM",
+  "date": "2023-06-15",
+  "year": 2023,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [],
+  "targetType": null,
+  "category": "client-bug",
+  "technique": "Overflow Vulnerability",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 1.00). Replaced keyword guess \"accounting-math\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "client-bug",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "client-bug",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.92
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "Recently, a security firm discovered a stack overflow vulnerability in the Move VM that does not limit the depth of recursive calls, which can cause a total network shutdown, prevent new validator nodes from joining the network, and potentially even cause a hard fork. mainnet_v1.2.1, Aptos mainnet_v1.4.3 and earlier are all affected by this vulnerability. Suimainnet_v1.2.1, Aptosmainnet_v1.4.3, and Move-language versions after June 10, 2023 fix this vulnerability.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Recently, a security firm discovered a stack overflow vulnerability in the Move VM that does not limit the depth of recursive calls, which can cause a total network shutdown, prevent new validator nodes from joining the network, and potentially even cause a hard fork. mainnet_v1.2.1, Aptos mainnet_v1.4.3 and earlier are all affected by this vulnerability. Suimainnet_v1.2.1, Aptosmainnet_v1.4.3, and Move-language versions after June 10, 2023 fix this vulnerability."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "slowmist",
+      "label": "panewslab.com",
+      "url": "https://www.panewslab.com/zh/sqarticledetails/b678w3tm.html"
+    }
+  ]
+}

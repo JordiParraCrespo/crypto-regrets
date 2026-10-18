@@ -1,0 +1,144 @@
+{
+  "id": "2023-07-10-arcadia-v1",
+  "name": "Arcadia V1",
+  "date": "2023-07-10",
+  "year": 2023,
+  "amountUsd": 455000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum",
+    "Optimism"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "reentrancy",
+    "confidence": 0.44,
+    "top": [
+      {
+        "category": "reentrancy",
+        "p": 0.47
+      },
+      {
+        "category": "arbitrary-call",
+        "p": 0.35
+      },
+      {
+        "category": "access-control",
+        "p": 0.17
+      }
+    ],
+    "flashLoan": 0.84,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "Reentrancy. Lost: ~$400k",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Reentrancy. Lost: ~$400k"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Arcadia Finance's vaultManagementAction() function delegated execution to an arbitrary actionHandler address (the ActionMultiCall contract) without a reentrancy guard and before any post-action solvency check. The attacker flash-loaned WETH and USDC from Aave V3, created two protocol vaults, opened trusted margin accounts, deposited the flash-loaned funds as collateral, and called doActionWithLeverage() to borrow nearly all assets from the WETH and USDC lending pools. The borrowed funds were routed through ActionMultiCall, which re-approved the vault and left tokens temporarily sitting in ActionMultiCall. The attacker then called vaultManagementAction() with crafted calldata instructing ActionMultiCall to approve a malicious helper contract and invoke helper.rekt(). Inside rekt(), the helper first drained the tokens held by ActionMultiCall, and then re-entered darcWETH.liquidateVault() against the now-empty (undercollateralized) vault — all before the outer health-factor check could execute — liquidating the vault and keeping the stolen assets. Vulnerable code snippet: Attack Tx: 0xca7c1a0fde444e1a68a8c2b8ae3fb76ec384d1f7ae9a50d26f8bfdd37c7a0afe Analysis: Phalcon_xyz Twitter thread"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "In the function vaultManagementAction(), an attacker can first transfer all assets to a contract he controls, and then re-enter the function liquidateVault()to liquidate the vault. In this case, the global variable \"isTrustedCreditorSet\" will be set to false and the collateral check can be bypassed. Vulnerable Code Snippet: Attack Tx: https://optimistic.etherscan.io/tx/0xca7c1a0fde444e1a68a8c2b8ae3fb76ec384d1f7ae9a50d26f8bfdd37c7a0afe https://etherscan.io/tx/0xefc4ac015069fdf9946997be0459db44c0491221159220be782454c32ec2d651 Analysis: https://arcadiafinance.medium.com/post-mortem-72e9d24a79b0"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Arcadia Finance has been attacked on Ethereum and Optimism, with total profits of $400K. The root cause is that in function vaultManagementAction, the attacker can first transfer all the asset to his own controlled contract and re-entry the function liquidateVault to liquidiate the vault. In this case, the global variable \"isTrustedCreditorSet\" will be set as false and the Collateral check can be bypassed."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On July 10, 2023, Arcadia Finance's V1 protocol was exploited on both Ethereum Mainnet and Optimism, resulting in losses of approximately $455,000. The attacker leveraged a reentrancy flaw in the vault liquidation process, bypassing collateral health checks and enabling unauthorized asset extraction from user vaults. Reentrancy vulnerability in the liquidation process allowed collateral checks to be bypassed during vault liquidation, enabling repeated unauthorized withdrawals without adequate reentrancy protection."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xca7c1a0fde444e1a68a8c2b8ae3fb76ec384d1f7ae9a50d26f8bfdd37c7a0afe",
+    "0xefc4ac015069fdf9946997be0459db44c0491221159220be782454c32ec2d651"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-07/ArcadiaFi_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-07/ArcadiaFi_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Phalcon_xyz/status/1678250590709899264"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/peckshield/status/1678265212770693121"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "optimistic.etherscan.io",
+      "url": "https://optimistic.etherscan.io/tx/0xca7c1a0fde444e1a68a8c2b8ae3fb76ec384d1f7ae9a50d26f8bfdd37c7a0afe"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xefc4ac015069fdf9946997be0459db44c0491221159220be782454c32ec2d651"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "arcadiafinance.medium.com",
+      "url": "https://arcadiafinance.medium.com/post-mortem-72e9d24a79b0"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xefc4ac015069fdf9946997be0459db44c0491221159220be782454c32ec2d651"
+    },
+    {
+      "source": "blocksec",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs?tab=readme-ov-file#20230710-arcadiafi---reentrancy"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Phalcon_xyz/status/1678270672911605760"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/arcadia-v1-2023-07-10"
+    },
+    {
+      "source": "revertiq",
+      "label": "dn.institute",
+      "url": "https://dn.institute/research/cyberattacks/incidents/2023-07-10-arcadia-finance/"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.solidityscan.com",
+      "url": "https://blog.solidityscan.com/arcadiafi-hack-analysis-79fd2325fee1/"
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "id": "2023-04-02-low-carb-crusader",
+  "name": "Low-Carb-Crusader",
+  "date": "2023-04-02",
+  "year": 2023,
+  "amountUsd": 25000000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": null,
+  "category": "logic-error",
+  "technique": "Business Logic Flaw",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 1.00).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "The attacker known as \"Low-Carb-Crusader\" exploited a critical business logic flaw in the open-source Flashbots mev-boost-relay implementation. The relay's security guarantee required it to never reveal block contents to a proposer unless that block was committed to the network — but a flaw allowed a malicious validator to obtain the full transaction list of a yet-to-be-finalized block. The attacker became an Ethereum validator (staking 32 ETH), then submitted a deliberately invalid signed block (with the parent root and state root set to zero) to the relay. The relay, upon receiving this getPayload call too early, responded with the full block contents before rejecting the invalid block — leaking all pending sandwich-bot transactions. Armed with foreknowledge of those transactions, the attacker performed a counter-sandwich attack against five MEV bots over an 18-day operation involving honeypot lures, ultimately stealing approximately $25M in a single exploit transaction. The flaw was not in a smart contract but in the off-chain relay software's failure to enforce its own invariant before disclosing private block contents. Attack Tx: 0xef7f6864a93f8d10dd8fafbe75b041db8c282159fe43632c26a29f176894678e Analysis: Harvesting MEV Bots by Exploiting Vulnerabilities in Flashbots Relay (BlockSec)",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The attacker known as \"Low-Carb-Crusader\" exploited a critical business logic flaw in the open-source Flashbots mev-boost-relay implementation. The relay's security guarantee required it to never reveal block contents to a proposer unless that block was committed to the network — but a flaw allowed a malicious validator to obtain the full transaction list of a yet-to-be-finalized block. The attacker became an Ethereum validator (staking 32 ETH), then submitted a deliberately invalid signed block (with the parent root and state root set to zero) to the relay. The relay, upon receiving this getPayload call too early, responded with the full block contents before rejecting the invalid block — leaking all pending sandwich-bot transactions. Armed with foreknowledge of those transactions, the attacker performed a counter-sandwich attack against five MEV bots over an 18-day operation involving honeypot lures, ultimately stealing approximately $25M in a single exploit transaction. The flaw was not in a smart contract but in the off-chain relay software's failure to enforce its own invariant before disclosing private block contents. Attack Tx: 0xef7f6864a93f8d10dd8fafbe75b041db8c282159fe43632c26a29f176894678e Analysis: Harvesting MEV Bots by Exploiting Vulnerabilities in Flashbots Relay (BlockSec)"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xef7f6864a93f8d10dd8fafbe75b041db8c282159fe43632c26a29f176894678e",
+    "0x8222caee8d1e1188f7a99af8315486a828aaf3432b6528a8e45b9f1bb73653e3",
+    "0x787980ae064cba2430213ffe14bff6fd71193983055725dcf185341bab68811e",
+    "0x454c858e7f7b11706335225c72b1eaee13a215e8657a4ae699669d6f1cd18550",
+    "0x2bb955b94aa5e2cc0854e23b58268d89aab93e17cb8b11c61996d875f1cc64f9",
+    "0x6957ccca95ad6a7f2d698a2362f4881591ff18f18cbc5edb149ce490521639a6",
+    "0xa34d79cbe9aef1bf07692885b353d85912523dfc4662611d33dd09ff6c319c85",
+    "0x4b2a2d03b3dc136ef94ebe2f3bc36231b104172bcb598104730898f7d81a55db"
+  ],
+  "poc": null,
+  "sources": [
+    "defihacklabs",
+    "blocksec"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xef7f6864a93f8d10dd8fafbe75b041db8c282159fe43632c26a29f176894678e"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "blocksec.com",
+      "url": "https://blocksec.com/blog/harvesting-mev-bots-by-exploiting-vulnerabilities-in-flashbots-relay"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xef7f6864a93f8d10dd8fafbe75b041db8c282159fe43632c26a29f176894678e"
+    }
+  ]
+}

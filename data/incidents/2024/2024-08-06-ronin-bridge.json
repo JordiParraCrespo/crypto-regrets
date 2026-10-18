@@ -1,0 +1,134 @@
+{
+  "id": "2024-08-06-ronin-bridge",
+  "name": "Ronin Bridge",
+  "date": "2024-08-06",
+  "year": 2024,
+  "amountUsd": 12000000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Uninitialized Proxy",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.99
+      },
+      {
+        "category": "logic-error",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": true,
+  "language": "Solidity",
+  "rootCause": "The Ronin Network bridge was exploited for roughly $12 million, due to a critical oversight in a contract upgrade. For the Axie Infinity community and Ronin Network users, the words \"bridge exploit\" likely trigger PTSD.",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "The Ronin Network bridge was exploited for roughly $12 million, due to a critical oversight in a contract upgrade. For the Axie Infinity community and Ronin Network users, the words \"bridge exploit\" likely trigger PTSD."
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "During the deployment of the Ronin Bridge V2 contract upgrade, the team called initializeV4 but omitted a call to initializeV3, leaving the _totalOperatorWeight storage variable at its default value of zero. Ronin's bridge requires 70% of operator weight to approve a withdrawal; with _totalOperatorWeight equal to zero, minimumVoteWeight evaluated to zero as well, meaning any transaction—regardless of actual signatures—satisfied the threshold. MEV bots detected the misconfiguration and extracted 3,996 ETH (~$9.8M) and ~$2M USDC before the Ronin team paused the bridge 38 minutes after the first exploit transaction. The extracting bots turned out to be white-hat operators who later returned the funds in exchange for a $500K bounty. A daily withdrawal limit on the contract prevented an additional ~$72M from being stolen. The root cause was the absence of post-upgrade deployment validation and the failure to audit the upgrade transaction before it went live on mainnet. Attack Tx: 0xbce5b8548db486c561948e8a177c8ccaa72810f972cee3909ea50af015a60ad8 Analysis: Explained: The Ronin Network Hack (August 2024) – Halborn Ronin's $12M Exploit Wasn't a Hack. It Was a Misconfiguration – Olympix (Medium) Ronin Bridge Attack: $12M Exploit Analysis – Three Sigma Phalcon Alert"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The Ronin Bridge project experienced unusual cross-chain asset withdrawals, suggesting a potential attack. According to the SlowMist security team, the vulnerability was caused by the modification of weight to an unexpected value, allowing funds to be withdrawn without passing any multi-signature threshold checks. The attacker extracted approximately 4,000 ETH and 2 million USDC from the bridge, amounting to a value of around $12 million. As of August 7th, white hats have returned $12 million worth of assets and received a $500,000 bug bounty."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On August 6, 2024, a Ronin Bridge upgrade left a new operator-weight variable uninitialized in the Ethereum gateway implementation. The resulting zero withdrawal threshold allowed unauthorized withdrawals of about 3,996 ETH and 1.99 million USDC before the bridge was paused. Ronin later stated that the assets were returned by whitehat and MEV participants. A Ronin Bridge proxy upgrade introduced the _totalOperatorWeight storage variable into MainchainGatewayV3, but the upgrade process executed initializeV4() without executing the required initializeV3() initializer. _totalOperatorWeight therefore remained zero, causing the computed withdrawal approval…"
+    }
+  ],
+  "audit": "Unaudited",
+  "txHashes": [
+    "0xbce5b8548db486c561948e8a177c8ccaa72810f972cee3909ea50af015a60ad8",
+    "0x77bb83dd9b25a0af12c0092993ddf1a2f54b77fbcd1dbf1bf33a965ec707268b",
+    "0x2619570088683e6cc3a38d93c3d98899e5783864e15525d5f5810c11189ba6cb",
+    "0x855dd3b1194e3b889f4667b6a0996220e350e034d35d3eab29b4f23bc205767e",
+    "0xf8f097982bc0f9a8f4279d4132dc91cfe17ab2d4fc70e7f740bc3ed752165601"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Ronin Network - Rekt II",
+      "url": "https://rekt.news/roninnetwork-rektII"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xbce5b8548db486c561948e8a177c8ccaa72810f972cee3909ea50af015a60ad8"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "halborn.com",
+      "url": "https://www.halborn.com/blog/post/explained-the-ronin-network-hack-august-2024"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "olympixai.medium.com",
+      "url": "https://olympixai.medium.com/ronins-12m-exploit-wasn-t-a-hack-it-was-a-misconfiguration-ca5cd3547448"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xbce5b8548db486c561948e8a177c8ccaa72810f972cee3909ea50af015a60ad8"
+    },
+    {
+      "source": "blocksec",
+      "label": "x.com",
+      "url": "https://x.com/Phalcon_xyz/status/1820779222924705956"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/1820783952145355247"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/ronin-bridge-12-000-000-2024-08-06"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/defi-rekt-report-over-306m-lost-in-august-2024"
+    },
+    {
+      "source": "revertiq",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/tech/2024/08/06/ronin-bridge-paused-after-9m-drained-in-apparent-whitehat-hack"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.solidityscan.com",
+      "url": "https://blog.solidityscan.com/ronin-bridge-hack-analysis-d8f64b8fe683/"
+    }
+  ]
+}

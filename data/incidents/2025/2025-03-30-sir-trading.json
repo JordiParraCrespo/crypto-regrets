@@ -1,0 +1,97 @@
+{
+  "id": "2025-03-30-sir-trading",
+  "name": "SIR Trading",
+  "date": "2025-03-30",
+  "year": 2025,
+  "amountUsd": 355000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": null,
+  "category": "access-control",
+  "technique": "Contract Vulnerability",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.74). Replaced keyword guess \"signature-crypto\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.74,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.76
+      },
+      {
+        "category": "logic-error",
+        "p": 0.21000000000000002
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.03
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "An attacker exploited a transient storage collision to drain $355K from SIR Trading in a flawless mathematical heist. A single audit couldn't prevent the hack, where a vanity address bypassed security checks and wiped out four years of development in one swift transaction.",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "An attacker exploited a transient storage collision to drain $355K from SIR Trading in a flawless mathematical heist. A single audit couldn't prevent the hack, where a vanity address bypassed security checks and wiped out four years of development in one swift transaction."
+    },
+    {
+      "source": "SlowMist",
+      "text": "According to the SlowMist MistEye security monitoring system, the leveraged trading project SIR.trading (@leveragesir) on the Ethereum chain has been attacked, resulting in a loss of over $300,000 in assets. The root cause of this hack is that the transiently stored value set using tstore in the function was not cleared after the function call ended. This allowed the attacker to exploit this characteristic by constructing specific malicious addresses to bypass permission checks and transfer tokens."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "SIR Trading was exploited on Ethereum Mainnet on March 30, 2025, losing over $355,000. The attacker abused transient storage (EIP-1153) in the Vault contract to bypass pool verification, draining collateral through a crafted callback logic flaw. Transient storage slot reused for different purposes in the Vault contract allowed a crafted contract address to bypass Uniswap pool verification. The callback logic did not clear or re-validate the transient storage between operations, enabling the attacker to impersonate the legitimate pool."
+    }
+  ],
+  "audit": "Egis Security",
+  "txHashes": [
+    "0xa05f047ddfdad9126624c4496b5d4a59f961ee7c091e7b4e38cee86f1335736f"
+  ],
+  "poc": null,
+  "sources": [
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "rekt",
+      "label": "REKT: SIR Trading - Rekt",
+      "url": "https://rekt.news/sirtrading-rekt"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/1906722264059674893"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/sir-2025-03-30"
+    },
+    {
+      "source": "revertiq",
+      "label": "defillama.com",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "research.blockscope.co",
+      "url": "https://research.blockscope.co/sir-protocol-exploit"
+    },
+    {
+      "source": "revertiq",
+      "label": "docs.sir.trading",
+      "url": "https://docs.sir.trading/protocol-overview/user-risks/exploit-and-relaunch"
+    }
+  ]
+}

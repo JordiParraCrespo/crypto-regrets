@@ -1,0 +1,89 @@
+{
+  "id": "2022-06-07-equalizer-exchange",
+  "name": "Equalizer Exchange",
+  "date": "2022-06-07",
+  "year": 2022,
+  "amountUsd": 50000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum",
+    "BSC",
+    "Polygon",
+    "Optimism"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Withdrawal Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.82,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.83
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.16
+      },
+      {
+        "category": "access-control",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.95,
+    "stateActor": 0.01,
+    "hasRootCause": 0.9
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Equalizer Finance suffered flash loan attacks on four chains: Ethereum, BSC, Polygon and Optimism. The main reason for this attack is that the FlashLoanProvider contract of the Equalizer Finance protocol is not compatible with the Vault contract. According to officials, funds on Ethereum and BSC have been recovered, but funds on Optimism and Polygon remain unaccounted for.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Equalizer Finance suffered flash loan attacks on four chains: Ethereum, BSC, Polygon and Optimism. The main reason for this attack is that the FlashLoanProvider contract of the Equalizer Finance protocol is not compatible with the Vault contract. According to officials, funds on Ethereum and BSC have been recovered, but funds on Optimism and Polygon remain unaccounted for."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On June 7, 2022, Equalizer Finance (sometimes labeled Equalizer Exchange) was exploited across Ethereum, BNB Chain, Polygon, and Optimism. Attackers abused vault accounting logic via flash loans and faulty LP token ratio calculations, resulting in losses estimated between $50,000 and $72,000. The protocol's vaults allowed the withdrawal of more stablecoins than backed by the deposited collateral due to an arithmetic flaw. The getRatioForOneEToken() function performed an incorrect calculation of the vault stablecoin-to-LP token ratio. After a sequence involving flash loan, borrow, liquidity add and removal, the attacker was able to withdraw more stablec…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "equalizer-finance.medium.com",
+      "url": "https://equalizer-finance.medium.com/exploit-report-78bfd6b36689"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/equalizer-exchange-2022-06-07"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/rekt-database/Equalizer%20Finance"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/equalizer-finance-hack-2022"
+    }
+  ]
+}

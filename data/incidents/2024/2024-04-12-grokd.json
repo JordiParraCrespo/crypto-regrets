@@ -1,0 +1,79 @@
+{
+  "id": "2024-04-12-grokd",
+  "name": "GROKD",
+  "date": "2024-04-12",
+  "year": 2024,
+  "amountUsd": 150,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "lack of access control",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 1.00).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.73
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "lack of access control. Lost: $~150 BNB",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "lack of access control. Lost: $~150 BNB"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "There is access control issue in 0xd2beb00a function that leads to the exploit. Vulnerable code snippet: Access control in the function 0xd2beb00a Attack tx: 0x383dbb44a91687b2b9 | Phalcon Explorer 0x8293946b5c88c4a212 | Phalcon Explorer Analysis: Root cause: Vulnerable code snippet: Attack tx: Analysis: ChainDuck on Twitter / X"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x383dbb44a91687b2b9bbd8b6779957a198d114f24af662776f384569b84fc549",
+    "0x8293946b5c88c4a21250ca6dc93c6d1a695fb5d067bb2d4aed0a11bd5af1fb32"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-04/GROKD_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-04/GROKD_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/hipalex921/status/1778482890705416323?t=KvvG83s7SXr9I55aftOc6w&s=05"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0xec61196d3e2ae276eecf070110075118abd1f63e#code"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/bsc/0x383dbb44a91687b2b9bbd8b6779957a198d114f24af662776f384569b84fc549"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/bsc/0x8293946b5c88c4a21250ca6dc93c6d1a695fb5d067bb2d4aed0a11bd5af1fb32"
+    }
+  ]
+}

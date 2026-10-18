@@ -1,0 +1,81 @@
+{
+  "id": "2025-04-16-yvtoken",
+  "name": "YVToken",
+  "date": "2025-04-16",
+  "year": 2025,
+  "amountUsd": 15261.68240413122,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Not Slippage Protection",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.83). Replaced keyword guess \"logic-error\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.83,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.84
+      },
+      {
+        "category": "logic-error",
+        "p": 0.15
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.97,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Not Slippage Protection. Lost: 15261.68240413121964707 BUSD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Not Slippage Protection. Lost: 15261.68240413121964707 BUSD"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The YB token has fee/burn behavior on its YB/BUSD PancakeSwap V2 pair that desyncs the pair's reserves on transfer, and the swaps performed against it carry no slippage protection (amountOutMin = 0-style logic). Using a PancakeSwap V3 BUSD flash loan, the attacker ran 66 iterative micro-swaps: each iteration transferred a fixed slice of BUSD into the LP and called the pair's low-level swap with an output amount computed by getAmount0ToReachK to extract the maximum YB while keeping the constant-product invariant satisfied. Because YB's on-transfer burn shrinks the pool's YB balance without updating cached reserves, repeating this lets the attacker accumulate YB cheaply, then reverse the process (getAmount1ToReachK) to swap YB back into BUSD at an inflated rate, repaying the flash loan and netting ~15,261 BUSD profit. Vulnerable code snippet: Attack Tx: https://bscscan.com/tx/0xe1e7fa81c3761e2698aa83e084f7dd4a1ff907bcfc4a612d54d92175d4e8a28b Analysis: PoC author rotcivegaf on X/Twitter"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xe1e7fa81c3761e2698aa83e084f7dd4a1ff907bcfc4a612d54d92175d4e8a28b"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-04/YBToken_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-04/YBToken_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/TenArmorAlert/status/1912684902664782087"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0xe1e7fa81c3761e2698aa83e084f7dd4a1ff907bcfc4a612d54d92175d4e8a28b"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/rotcivegaf"
+    }
+  ]
+}

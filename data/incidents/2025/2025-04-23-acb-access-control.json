@@ -1,0 +1,75 @@
+{
+  "id": "2025-04-23-acb-access-control",
+  "name": "ACB Access Control",
+  "date": "2025-04-23",
+  "year": 2025,
+  "amountUsd": 60000,
+  "returnedUsd": null,
+  "chains": [
+    "BNB Chain"
+  ],
+  "targetType": null,
+  "category": "logic-error",
+  "technique": "Access Control; Logic Error",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.87). Replaced keyword guess \"bridge-crosschain\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.87,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.88
+      },
+      {
+        "category": "access-control",
+        "p": 0.12
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "On April 23, 2025, the ACB token on BNB Chain was exploited for approximately $60,000 due to flawed airdrop reward logic. The contract allowed repeated reward claims by failing to track which addresses had already claimed, enabling an attacker to drain the reward pool, with proceeds routed through Tornado Cash. The ACB reward contract did not implement per-address claim tracking or eligibility limits, allowing repeated reward extraction and draining the pool. No mapping, Merkle proof, or timing controls were present.",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "On April 23, 2025, the ACB token on BNB Chain was exploited for approximately $60,000 due to flawed airdrop reward logic. The contract allowed repeated reward claims by failing to track which addresses had already claimed, enabling an attacker to drain the reward pool, with proceeds routed through Tornado Cash. The ACB reward contract did not implement per-address claim tracking or eligibility limits, allowing repeated reward extraction and draining the pool. No mapping, Merkle proof, or timing controls were present."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x58ed2c2ab8faaa3846dbb713bde59c34c087e0f8b769f7582c9c6f240dbbecc1",
+    "0xaa7b1037d633fbe8384fbfa46b1316b99acf2c326ea68012c4a1ab94b51c7c76",
+    "0x144ff5661f5ce3391ba5b1c5e53366b61b8079d95d9fe8ca19ad87c6bbffc84f"
+  ],
+  "poc": null,
+  "sources": [
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/acb-access-control-2025-04-23"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/de-fi-rekt-report-april-2025-5-9-billion-lost-across-10-incidents-2-8-million-recovered"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/acb-hack-2025"
+    },
+    {
+      "source": "revertiq",
+      "label": "quadrigainitiative.com",
+      "url": "https://quadrigainitiative.com/casestudy/acbstakingrewardmanipulationspotpriceoracleexploit.php"
+    }
+  ]
+}

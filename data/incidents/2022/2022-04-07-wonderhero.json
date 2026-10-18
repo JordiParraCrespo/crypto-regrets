@@ -1,0 +1,80 @@
+{
+  "id": "2022-04-07-wonderhero",
+  "name": "WonderHero",
+  "date": "2022-04-07",
+  "year": 2022,
+  "amountUsd": 320000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "Gaming",
+  "category": "key-compromise",
+  "technique": "Hot Wallet Key Compromised",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "key-compromise",
+    "confidence": 0.95,
+    "top": [
+      {
+        "category": "key-compromise",
+        "p": 0.95
+      },
+      {
+        "category": "access-control",
+        "p": 0.05
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "On April 7, 2022, WonderHero's cross-chain bridge smart contract on BNB Chain was exploited after an attacker obtained the necessary signing authority. This allowed the attacker to mint 80 million WND tokens without a legitimate deposit, then swap them for about 744 BNB (worth ~$320,000 at the time). Services were suspended and the token price collapsed over 90%. The cross-chain bridge withdrawal contract's hot wallet signing key was compromised, enabling unauthorized assignment of minting roles and uncontrolled token creation. The exploit path was possible because privileged minting operations depended on a single key, without additional authorization…",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "On April 7, 2022, WonderHero's cross-chain bridge smart contract on BNB Chain was exploited after an attacker obtained the necessary signing authority. This allowed the attacker to mint 80 million WND tokens without a legitimate deposit, then swap them for about 744 BNB (worth ~$320,000 at the time). Services were suspended and the token price collapsed over 90%. The cross-chain bridge withdrawal contract's hot wallet signing key was compromised, enabling unauthorized assignment of minting roles and uncontrolled token creation. The exploit path was possible because privileged minting operations depended on a single key, without additional authorization…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x20dabda59dd46d45a7b6b5b324830159fb108cd2119232d7f0056d8085de17e1",
+    "0x776fd6f2b265be782c862d05ecf225ace6fa2268b9028ca3df3c65aeed2677a1"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/wonderhero-2022-04-07"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "therecord.media",
+      "url": "https://therecord.media/wonderhero-game-disabled-after-hackers-steal-320000-in-cryptocurrency"
+    },
+    {
+      "source": "revertiq",
+      "label": "coincodecap.com",
+      "url": "https://coincodecap.com/wonderhero-hacked-around-320000-usd-stolen"
+    }
+  ]
+}

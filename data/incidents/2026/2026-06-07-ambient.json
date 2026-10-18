@@ -1,0 +1,103 @@
+{
+  "id": "2026-06-07-ambient",
+  "name": "Ambient",
+  "date": "2026-06-07",
+  "year": 2026,
+  "amountUsd": 110600,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Deposit Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.61,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.63
+      },
+      {
+        "category": "logic-error",
+        "p": 0.37
+      }
+    ],
+    "flashLoan": 0.97,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Native surplus accounting flaw. Lost: 67.85 ETH",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Native surplus accounting flaw. Lost: 67.85 ETH"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Ambient's CrocSwapDex mishandles native-ETH surplus collateral accounting. The attacker flash-loans WETH from Balancer, unwraps it, and deposits the ETH as native surplus via ColdPath command 73. Then, exploiting the flaw in how native surplus is credited/debited across swaps and concentrated-liquidity (warmRange) operations, the attacker walks the ETH/USDC pool's price up grid-step by grid-step, mints a narrow range position, nudges the tick into range and harvests it, then swaps back to the start. Because the native surplus accounting over-credits the user's surplus collateral, the attacker disburses (ColdPath command 74) more native ETH surplus than was legitimately owed, re-wraps it, repays Balancer and keeps ~67.85 ETH worth of WETH/USDC profit. Vulnerable code snippet: Attack Tx: https://etherscan.io/tx/0xb2fc668c42623261074de6fc30d583efede2b0e20d7aded42b7b634f9322ff52 Analysis: https://x.com/TenArmorAlert/status/2063816231023427861"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Ambient Finance (formerly CrocSwap) was exploited via an accounting logic flaw in surplus collateral handling. The attacker used a flash loan and rapid cycling through HotProxy/WarmPath/ColdPath operations to drain ~83.72 ETH (~$110.6K) from the protocol’s monolithic smart contract."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Ambient Finance's DEX contract on Ethereum Mainnet was exploited on June 7, 2026. An attacker manipulated native surplus accounting in its single-contract design, draining over 83 ETH (valued at ~$110,600) via a deposit logic flaw. The attack involved flash-loaned WETH, complex pools, and multi-protocol fund routing. Ambient's monolithic smart contract design failed to correctly account for native asset surplus during deposit and pool operations. The vulnerability allowed an attacker to harvest more ETH than deposited by exploiting flawed deposit logic and grid-stepped pool interactions."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xb2fc668c42623261074de6fc30d583efede2b0e20d7aded42b7b634f9322ff52"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-06/AmbientCrocSwapDex_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-06/AmbientCrocSwapDex_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/TenArmorAlert/status/2063816231023427861"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xb2fc668c42623261074de6fc30d583efede2b0e20d7aded42b7b634f9322ff52"
+    },
+    {
+      "source": "slowmist",
+      "label": "cryptotimes.io",
+      "url": "https://www.cryptotimes.io/2026/06/08/ethereum-defi-protocol-ambient-finance-suffers-110k-drain/"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/ambient-2026-06-07"
+    },
+    {
+      "source": "revertiq",
+      "label": "monitoringroom.com",
+      "url": "https://monitoringroom.com/situation/crypto-hack/ambient-2026"
+    }
+  ]
+}

@@ -1,0 +1,139 @@
+{
+  "id": "2024-12-17-gempad",
+  "name": "GemPad",
+  "date": "2024-12-17",
+  "year": 2024,
+  "amountUsd": 1900000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum",
+    "Base",
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "reentrancy",
+  "technique": "Reentrancy",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "reentrancy",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "reentrancy",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "The perfect digital heist - missing reentrancy guards on Gem Pad let an attacker snatch roughly $1.9 million in locked tokens across three chains. Several protocols left wondering if their lock box provider should have checked their own locks first.",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "The perfect digital heist - missing reentrancy guards on Gem Pad let an attacker snatch roughly $1.9 million in locked tokens across three chains. Several protocols left wondering if their lock box provider should have checked their own locks first."
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "GemPad, a no-code smart contract deployment platform, was exploited for approximately $1.9–2.2 million across Ethereum, BNB Chain, and Base due to a reentrancy vulnerability in the collectFees function of its GempadLock liquidity locker contract. The collectFees function collected fees before updating internal state, and critically lacked a reentrancy guard. An attacker deployed a malicious token whose transfer callback re-entered the collectFees function mid-execution: each reentrant call triggered another fee collection cycle while the balance checks still reflected the pre-drain state, causing them to report more tokens as locked than actually were. This allowed the attacker to drain several multiples of the value they originally locked. Because the same vulnerable contract template was deployed across three chains, the exploit was replicated on all of them, affecting at least 27 projects whose liquidity was locked in GemPad's locker. Funds were subsequently routed through Tornado Cash. Attack Tx: 0x2bb6d2ca3b52a01ff9ec01c931f68762ded9a05693ea65d911a20602eea02763 Analysis: Explained: The GemPad Hack (December 2024)"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The lock contract of the DeFi platform GemPad was exploited on the BSC, ETH, Base, and Polygon networks, resulting in a loss of approximately $2 million."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "GemPad's multichain token launchpad was exploited on 17 December 2024 due to a reentrancy flaw in its lock contract. At least 27 projects lost a combined $1.9M,$2.2M across Ethereum, BNB Chain, and Base. The attacker repeatedly withdrew locked liquidity by exploiting collectFees(), bypassing lock mechanics. GemPadLock's collectFees() lacked a reentrancy guard and updated contract state after making an external call. An attacker could deploy a malicious token, trigger reentrant callbacks during fee collection, and withdraw assets multiple times from the same lock before state was updated."
+    }
+  ],
+  "audit": "ContractWolf",
+  "txHashes": [
+    "0x2bb6d2ca3b52a01ff9ec01c931f68762ded9a05693ea65d911a20602eea02763",
+    "0x31851d894249339d2d9319141e37219b3e03a99f8b483d47758c1e5ea143cca4",
+    "0x085c0170a156a7f354f56eb6817db667dd07464df56dbf377f188cb2488cb3d8",
+    "0x9ceb4698eb09e93d232e10557c3932e1e74b5d8e78170b5034512aa0a8135970",
+    "0x9c6469cac5f365528b9ae104c448651039f398fd5b9c3cfd5672cd3bb3ad1ed5",
+    "0x8b263b9f2576640ddd91e0fa1627ced8b3e1e5b26eab08a6c63fe95a2541b21f",
+    "0x4a669edc261091ab46cb430dba1c958be8894902dc08d6febb36f509182adc1d",
+    "0x5c21611ae260cf795c304cf9fcf777450acf29916d162964b7ec61c37632a07e",
+    "0xb5b026dfdd3060af40f571844f51cd8a7daac8bcc2c269e6652734057c92a5fe",
+    "0xdeb264d2c147af28d8c9467c0ccd6a3b33645485647fb08253370268a3150b50",
+    "0xa6dc11803f400f0c509d818ee867ba0d5631fa59049c2829d81cc4f57b82df91",
+    "0xf3d47d0fba7a7b44a2ae648a1ca5c0ff49a5a1ccb2a3e3ac11abc20749aabbb8",
+    "0xd739d8fd8ed8b95791d13a895a32e42dde783019dafa62098f4d2c50312b6997",
+    "0x42f4f5efe1934005047930dad289c4d86f185fceb74879036693fcf00ff162b6",
+    "0xcc65593daa8d3dea73b6122436d9898d2788359d83322037d64e9df4aac27bd2",
+    "0x841d9cdc18c536002e24e0a851bc4ab872c9756ee46a306f371a9ab48ba148c3",
+    "0x4e2d13e37a8ac76ed44f0388b4efce308ff16c5c19ce1808ad42806bdfc82c19",
+    "0xb89225e96fef08cd12fe7a7e6d9ced37a9f2c839360ceea26b31f8c238404ef5",
+    "0xd7a96ad965652911ead94d55c8495cfad24c0915d7888c6297f00b8b41121e79",
+    "0x2220e8e8e78a7872dfb39545def34642e924f4ebc1841ff52e0483464f4ae2ea",
+    "0x04ad86e15a1487fc0b1376c6385a063752ffde6a4298d5c9730ff75d9183c094",
+    "0xf1cdc6430a3b6fa0c64c552d47b2b87ee2eac1b80b586f933aa679e76653e526",
+    "0x638a34cf0d0dc4da94c057f51e2a930f45eabb3535634b893815bfe547ee9d45",
+    "0x7b67e39cd253724372d67da78221a38eca98d2a6b69027a89010bca2101dd02a",
+    "0x5a8747637d05a166662938967505f4c7974b1cc339b0f8559168db0b339df157",
+    "0x11b0fbc294197cab27c323dcdd7608ed459c7194a0e93c2804ab97b81c58a4dc",
+    "0x3c284792ce2873926c54232d400e8709c9a09b15073fcb4dd386aff411990dc9"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: GemPad - Rekt",
+      "url": "https://rekt.news/gempad-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x2bb6d2ca3b52a01ff9ec01c931f68762ded9a05693ea65d911a20602eea02763"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "halborn.com",
+      "url": "https://www.halborn.com/blog/post/explained-the-gempad-hack-december-2024"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x2bb6d2ca3b52a01ff9ec01c931f68762ded9a05693ea65d911a20602eea02763"
+    },
+    {
+      "source": "slowmist",
+      "label": "medium.com",
+      "url": "https://medium.com/@thegempad/gempad-lockv2-exploit-20eb75930eb8"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/gempad-2024-12-17"
+    },
+    {
+      "source": "revertiq",
+      "label": "audita.io",
+      "url": "https://audita.io/blog-articles/gempad-reentrancy-exploit-dec-17th-2024"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/Cerify-Systems/smart-contract-vulnerabilities/tree/master/2024-12-GemPad"
+    }
+  ]
+}

@@ -1,0 +1,122 @@
+{
+  "id": "2024-03-29-lava",
+  "name": "Lava",
+  "date": "2024-03-29",
+  "year": 2024,
+  "amountUsd": 340000,
+  "returnedUsd": null,
+  "chains": [
+    "Arbitrum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Liquidation Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.69,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.71
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.18
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.1
+      }
+    ],
+    "flashLoan": 0.1,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Business Logic Flaw. Lost: ~340K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Business Logic Flaw. Lost: ~340K"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "1. Create an account with LPT tokens as collateral. 2. Generate one-sided trading fees for the LPT. 3. Use a different account to borrow and unwind the LPT tokens. 4. The wrapper mistakenly includes the fees as assets, causing a significant increase in the LPT token price due to low actual liquidity. 5. This boost in token price increases the first account's borrowing power, allowing it to borrow all the assets in the lending market. Donating assets via trading fees was identified as an attack vector. The wrapper attempts to prevent this by limiting trading fees to a maximum APR value, but this check was not triggered because only token0 fees exceeded the limit while token1 fees did not. Vulnerable code snippet: WrapperOracle | Address 0x7746872c6892bcfb4254390283719f2bd2d4da76 | Arbitrum One Attack tx: 0xcb1a2f5eeb1a767ea5 | Phalcon Explorer Analysis: BlockSec Phalcon on Twitter / X Lava Post-Mortem: March 28, 2024 - HackMD"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Lava suffered a flash loan attack, resulting in approximately $340,000 in losses. All lending markets are reportedly paused as the investigation is ongoing."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Lava Lending was exploited on Arbitrum on March 28,29, 2024, through a flash-loan driven liquidity pool token (LPT) price manipulation, resulting in a loss of approximately $340,000. The exploit used flash loans from multiple protocols, drained liquidity and inflated token prices, then profited through manipulated lending positions. The protocol paused markets, listed addresses as malicious, and enacted an insurance compensation plan. Lava Lending's liquidation logic failed to account for manipulated LPT token prices. The protocol allowed liquidations based on artificially inflated collateral value after liquidity was drained and prices spiked via flas…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xcb1a2f5eeb1a767ea5ccbc3665351fadc1af135d12a38c504f8f6eb997e9e603"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-03/LavaLending_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-03/LavaLending_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Phalcon_xyz/status/1773546399713345965"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "hackmd.io",
+      "url": "https://hackmd.io/@LavaSecurity/03282024"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "arbiscan.io",
+      "url": "https://arbiscan.io/address/0x7746872c6892bcfb4254390283719f2bd2d4da76#code"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "phalcon.blocksec.com",
+      "url": "https://phalcon.blocksec.com/explorer/tx/arbitrum/0xcb1a2f5eeb1a767ea5ccbc3665351fadc1af135d12a38c504f8f6eb997e9e603"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/LavaLending/status/1773571491587637329"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/lava-2024-03-29"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "olympix.security",
+      "url": "https://olympix.security/biweekly-exploits/17m-lost-woofi-wilder-world-remilia-and-lava-lending-attacked-across-arbitrum-and-ethereum"
+    }
+  ]
+}

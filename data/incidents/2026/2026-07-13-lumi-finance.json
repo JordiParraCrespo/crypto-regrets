@@ -1,0 +1,103 @@
+{
+  "id": "2026-07-13-lumi-finance",
+  "name": "Lumi Finance",
+  "date": "2026-07-13",
+  "year": 2026,
+  "amountUsd": 270000,
+  "returnedUsd": null,
+  "chains": [
+    "Arbitrum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "signature-crypto",
+  "technique": "Signature Verification Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "signature-crypto",
+    "confidence": 0.65,
+    "top": [
+      {
+        "category": "signature-crypto",
+        "p": 0.67
+      },
+      {
+        "category": "logic-error",
+        "p": 0.14
+      },
+      {
+        "category": "access-control",
+        "p": 0.13
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Vulnerability in Lumi smart account UserOperation validation logic allowed attacker-controlled paymaster to trigger token approvals during validation phase without explicit user consent. Attacker (0xce1a3bb0b98d0d90c7dd0620ab86c9a771888d88) obtained ERC20 allowances from multiple smart accounts via validation-time side effects using malicious contract (0x56362412ae17cac443aafbab4289946ad958e8a1). Batch drained approved tokens, swapped to ETH, and transferred proceeds. Attack Tx: https://arbiscan.io/tx/0x630654fb1c8914405cf81bb02f091b049f19403a152f624f7b8a00c7724c6604 Source: https://twitter.com/SlowMist_Team/status/2076669154036527314",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Vulnerability in Lumi smart account UserOperation validation logic allowed attacker-controlled paymaster to trigger token approvals during validation phase without explicit user consent. Attacker (0xce1a3bb0b98d0d90c7dd0620ab86c9a771888d88) obtained ERC20 allowances from multiple smart accounts via validation-time side effects using malicious contract (0x56362412ae17cac443aafbab4289946ad958e8a1). Batch drained approved tokens, swapped to ETH, and transferred proceeds. Attack Tx: https://arbiscan.io/tx/0x630654fb1c8914405cf81bb02f091b049f19403a152f624f7b8a00c7724c6604 Source: https://twitter.com/SlowMist_Team/status/2076669154036527314"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The DeFi protocol Lumi Finance on Arbitrum suffered an exploit where attackers leveraged Sodium smart accounts that performed token approvals as a side effect during UserOp validation. This allowed a malicious Paymaster to gain allowances from multiple accounts and drain funds, resulting in approximately $270,000 in losses."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Lumi Finance on Arbitrum One was exploited on July 13, 2026, resulting in the loss of approximately $270,000 from individual user smart accounts. The breach was caused by a flaw in validation logic allowing ERC-20 token approvals during the ERC-4337 account abstraction validation phase, granting attackers mass token allowances and enabling rapid theft. The Sodium smart account contract failed to enforce that validation phase code was strictly side-effect free. As a result, attacker-controlled paymasters induced ERC-20 token approvals during UserOperation validation, granting token allowances without user signatures or intent. This broke a key ERC-4337 invariant and enabled mass theft."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x630654fb1c8914405cf81bb02f091b049f19403a152f624f7b8a00c7724c6604"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "arbiscan.io",
+      "url": "https://arbiscan.io/tx/0x630654fb1c8914405cf81bb02f091b049f19403a152f624f7b8a00c7724c6604"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/SlowMist_Team/status/2076669154036527314"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/2076669154036527314"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/lumi-finance-2026-07-13"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptotimes.io",
+      "url": "https://www.cryptotimes.io/2026/07/14/lumi-finance-drained-of-270k-on-arbitrum-via-smart-account-exploit/"
+    },
+    {
+      "source": "revertiq",
+      "label": "kucoin.com",
+      "url": "https://www.kucoin.com/news/flash/lumi-finance-on-arbitrum-suffers-270-000-attack-due-to-smart-contract-vulnerability"
+    }
+  ]
+}

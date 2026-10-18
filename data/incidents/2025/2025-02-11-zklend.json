@@ -1,0 +1,118 @@
+{
+  "id": "2025-02-11-zklend",
+  "name": "zkLend",
+  "date": "2025-02-11",
+  "year": 2025,
+  "amountUsd": 9550000,
+  "returnedUsd": null,
+  "chains": [
+    "Starknet"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "First Depositor Attack",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.97,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Cairo",
+  "rootCause": "A rounding error exploit bled $9.57M from zkLend vaults on Starknet. After Railgun showed them the door, the attacker ignored their Valentine's Day bounty deadline, letting the stolen funds sit idle. Same operator behind EraLend's 2023 hack? On-chain evidence suggests yes.",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "A rounding error exploit bled $9.57M from zkLend vaults on Starknet. After Railgun showed them the door, the attacker ignored their Valentine's Day bounty deadline, letting the stolen funds sit idle. Same operator behind EraLend's 2023 hack? On-chain evidence suggests yes."
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "zkLend, a Starknet-based lending protocol, was drained of $9.57 million due to a rounding/precision vulnerability in its zToken mint logic. The attacker exploited an empty market by using flash loans to artificially inflate the lending_accumulator to an extreme value (~4.069). Because the protocol's integer division performed floor-rounding (rounding down), the attacker could repeatedly deposit a dust amount of wstETH (e.g., 4.069... wstETH yielding 2 wei in zTokens) and then withdraw a larger amount (e.g., 6.103... wstETH) by spending only 1 wei each cycle. The combination of an empty market that accepted donations, the inflated accumulator, and the rounding behaviour in the mint() and withdraw() functions allowed the attacker to extract far more collateral than was deposited. A custom attack contract orchestrated the exploit through repeated flash loan transactions. The vulnerability had survived two Nethermind audits (2022 and 2023). Attack Tx: 0x0160a5841b3e99679691294d1f18904c557b28f7d5fe61577e75c8931f34a16f Analysis: Explained: The zkLend Hack (February 2025)"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The leading lending platform on the Starknet chain, zkLend, has suffered an attack. The core reason for this breach lies in the fact that the value of the accumulator in an empty market can be manipulated and amplified using a unique mechanism in flash loans. Additionally, the market contract's use of the SafeMath library performs division using direct division, allowing the attacker to exploit the amplified accumulator to trigger a rounding-down vulnerability for profit."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On February 12, 2025, zkLend, a lending protocol on Starknet, was exploited for approximately $9.55M. The attacker inflated the lending_accumulator in the wstETH lending market by leveraging flash-loan donations and rounding errors in withdrawal operations, extracting more collateral than their deposits. The stolen funds were bridged to Ethereum and most were later lost to a phishing attack during laundering attempts. The exploit was made possible by three compounding issues: empty-market deposit tolerance allowing accumulator manipulation, flash-loan donation paths directly inflating the lending_accumulator, and floor-division (downward rounding) in w…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x0160a5841b3e99679691294d1f18904c557b28f7d5fe61577e75c8931f34a16f",
+    "0xe04a7954d440906344f3f5b4c65b358625af2d393bc88942d6f46636e4080067",
+    "0x04d7191dc8eac499bac710dd368706e3ce76c9945da52535de770d06ce7d3b26"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: zkLend - Rekt",
+      "url": "https://rekt.news/zklend-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "starkscan.co",
+      "url": "https://starkscan.co/tx/0x0160a5841b3e99679691294d1f18904c557b28f7d5fe61577e75c8931f34a16f"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "halborn.com",
+      "url": "https://www.halborn.com/blog/post/explained-the-zklend-hack-february-2025"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x0160a5841b3e99679691294d1f18904c557b28f7d5fe61577e75c8931f34a16f"
+    },
+    {
+      "source": "blocksec",
+      "label": "x.com",
+      "url": "https://x.com/zklend/status/1890389052492509362?s=46\\u0026t=R6MROYi3JRoFOF3ATUQiXQ"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/1890351732313714882"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/explained-the-zklend-2025-02-18t10-46-45-069000-00-00"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/de-fi-rekt-report-february-2025-over-1-76-billion-lost-in-crypto-exploits"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.solidityscan.com",
+      "url": "https://blog.solidityscan.com/zklend-hack-analysis-e494cb794f71/"
+    }
+  ]
+}

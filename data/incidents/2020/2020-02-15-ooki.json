@@ -1,0 +1,74 @@
+{
+  "id": "2020-02-15-ooki",
+  "name": "Ooki",
+  "date": "2020-02-15",
+  "year": 2020,
+  "amountUsd": 350000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.96,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.96
+      },
+      {
+        "category": "logic-error",
+        "p": 0.04
+      }
+    ],
+    "flashLoan": 0.97,
+    "stateActor": 0.01,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "On February 15, 2020, Ooki (then bZx) was exploited on Ethereum mainnet. The attacker manipulated oracle price inputs via AMM swaps and multi-protocol flash loans, bypassing critical checks, which resulted in losses of approximately $650,000. Ooki's price oracle accepted spot prices directly from multiple on-chain DEXes (Kyber/Uniswap), with no aggregation or deviation bounds. A logic flaw let an attacker bypass slippage checks for overcollateralized loans, enabling profit from manipulated collateral values.",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "On February 15, 2020, Ooki (then bZx) was exploited on Ethereum mainnet. The attacker manipulated oracle price inputs via AMM swaps and multi-protocol flash loans, bypassing critical checks, which resulted in losses of approximately $650,000. Ooki's price oracle accepted spot prices directly from multiple on-chain DEXes (Kyber/Uniswap), with no aggregation or deviation bounds. A logic flaw let an attacker bypass slippage checks for overcollateralized loans, enabling profit from manipulated collateral values."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xb5c8bd9430b6cc87a0e2fe110ece6bf527fa4f170a4bc8cd032f768fc5219838"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/ooki-2020-02-15"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/ooki-hack-2020"
+    },
+    {
+      "source": "revertiq",
+      "label": "yieldo.me",
+      "url": "https://yieldo.me/security/ooki-2020-2"
+    }
+  ]
+}

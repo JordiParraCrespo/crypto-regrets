@@ -1,0 +1,84 @@
+{
+  "id": "2026-05-28-ontr",
+  "name": "ONTR",
+  "date": "2026-05-28",
+  "year": 2026,
+  "amountUsd": 98200,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "Token",
+  "category": "access-control",
+  "technique": "Ownership Takeover",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.99
+      },
+      {
+        "category": "logic-error",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "The ONTR token project was drained due to a flawed onlyOwner check in the contract (accepts owner == address(0)). This allowed re-owning a renounced token. The attacker used hidden balance-grant logic to fake massive ONTR balances (no totalSupply/mint logs), dumped into the ONTR/WETH LP, and swapped out WETH for profit.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The ONTR token project was drained due to a flawed onlyOwner check in the contract (accepts owner == address(0)). This allowed re-owning a renounced token. The attacker used hidden balance-grant logic to fake massive ONTR balances (no totalSupply/mint logs), dumped into the ONTR/WETH LP, and swapped out WETH for profit."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "ONTR token on Ethereum Mainnet was exploited on May 28, 2026, due to a flawed onlyOwner modifier and hidden balance-inflation functions. The attacker was able to seize ownership, inflate token balances, and drain 49.48 WETH (approximately $98,300) from the ONTR/WETH liquidity pool. A custom onlyOwner modifier treated a renounced owner (owner = address(0)) as a pass-all condition, enabling any address to assume ownership and call privileged functions. Obfuscated functions allowed direct balance inflation without adjusting totalSupply or emitting events."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x98f80eff0ce609606bb73cef3edfbb4c1d415ffc7676fec16f4d980c54903621"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/TenArmorAlert/status/2060190914547449936"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/ontr-2026-05-28"
+    },
+    {
+      "source": "revertiq",
+      "label": "olympix.security",
+      "url": "https://olympix.security/blog/ontr-tokens-98-3k-loss-and-how-olympix-would-have-prevented-it"
+    },
+    {
+      "source": "revertiq",
+      "label": "olympix.security",
+      "url": "https://olympix.security/biweekly-exploits/gravity-bridge-top-atm-and-ontr-6-2m-across-four-exploits"
+    }
+  ]
+}

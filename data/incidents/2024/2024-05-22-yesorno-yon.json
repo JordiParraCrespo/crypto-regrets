@@ -1,0 +1,65 @@
+{
+  "id": "2024-05-22-yesorno-yon",
+  "name": "YESorNO (YON)",
+  "date": "2024-05-22",
+  "year": 2024,
+  "amountUsd": 118000,
+  "returnedUsd": null,
+  "chains": [
+    "BNB Chain"
+  ],
+  "targetType": null,
+  "category": "access-control",
+  "technique": "Improper Access Control; Vulnerability in transferFrom",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 1.00). Replaced keyword guess \"arbitrary-call\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.01,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "YON (YESorNO) was exploited on BNB Chain on 22 May 2024, resulting in a loss of 190 BNB (approximately $118,000). The attacker leveraged a vulnerability in the YON contract’s transferFrom function, enabling unauthorized transfers to the liquidity pool contract. The YON contract on BNB Chain contained an access control flaw in its transferFrom function, allowing an attacker to bypass permission checks and directly transfer YON tokens to the liquidity pool contract. This enabled unauthorized movement of assets, resulting in substantial loss.",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "YON (YESorNO) was exploited on BNB Chain on 22 May 2024, resulting in a loss of 190 BNB (approximately $118,000). The attacker leveraged a vulnerability in the YON contract’s transferFrom function, enabling unauthorized transfers to the liquidity pool contract. The YON contract on BNB Chain contained an access control flaw in its transferFrom function, allowing an attacker to bypass permission checks and directly transfer YON tokens to the liquidity pool contract. This enabled unauthorized movement of assets, resulting in substantial loss."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xe427f47191d1078e14f0aa68c00ce47ed490ac3f49c16a515df05fe406303449",
+    "0x5b3ffec387b5e77b3fc1c6423ea2cbc47b2a8dacd74eb9f20bdfd852f5c28215"
+  ],
+  "poc": null,
+  "sources": [
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/yon-2024-05-22"
+    },
+    {
+      "source": "revertiq",
+      "label": "defillama.com",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "quadrigainitiative.com",
+      "url": "https://www.quadrigainitiative.com/casestudy/yesornobnbchaincontractvulnerability.php"
+    }
+  ]
+}

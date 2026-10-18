@@ -1,0 +1,86 @@
+{
+  "id": "2020-03-12-makerdao",
+  "name": "MakerDAO",
+  "date": "2020-03-12",
+  "year": 2020,
+  "amountUsd": 8320000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Stale Oracle Price",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.85,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.86
+      },
+      {
+        "category": "logic-error",
+        "p": 0.1
+      },
+      {
+        "category": "market-manipulation",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.06,
+    "stateActor": 0.02,
+    "hasRootCause": 0.87
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Due to the congestion of Ethereum, the gas soared, and the liquidated ETH was sold at a price of 0 US dollars using the MakerDao auction loophole.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Due to the congestion of Ethereum, the gas soared, and the liquidated ETH was sold at a price of 0 US dollars using the MakerDao auction loophole."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "During the March 12, 2020 Black Thursday market crash, MakerDAO liquidations on Ethereum executed under extreme network congestion. Keeper bots failed to submit competitive bids in collateral auctions, allowing zero-DAI bids to win large amounts of ETH collateral and leaving the protocol with millions in bad debt. MakerDAO's liquidation design assumed that competing keeper bots would remain able to participate in collateral auctions during periods of market stress. On March 12, 2020, extreme Ethereum congestion and rapidly rising gas prices prevented many keepers from submitting or replacing bids in time. Auctions with minimal or no competition settled…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "coingape.com",
+      "url": "https://coingape.com/was-makerdao-mkr-free-fall-because-of-a-system-exploit-that-saw-8-million-of-eth-stolen/"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/makerdao-2020-03-12"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainscorelabs.com",
+      "url": "https://chainscorelabs.com/protocol/makerdao-and-sky/incidents-and-security-advisories/black-thursday-market-crash-and-auction-exploit"
+    },
+    {
+      "source": "revertiq",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/tech/2020/07/22/mempool-manipulation-enabled-theft-of-8m-in-makerdao-collateral-on-black-thursday-report"
+    }
+  ]
+}

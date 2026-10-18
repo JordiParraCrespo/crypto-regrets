@@ -1,0 +1,153 @@
+{
+  "id": "2023-08-18-exactly",
+  "name": "Exactly",
+  "date": "2023-08-18",
+  "year": 2023,
+  "amountUsd": 7600000,
+  "returnedUsd": null,
+  "chains": [
+    "Optimism"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.9,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.91
+      },
+      {
+        "category": "input-validation",
+        "p": 0.08
+      },
+      {
+        "category": "arbitrary-call",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.08,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "insufficient validation. Lost: ~$7M",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "insufficient validation. Lost: ~$7M"
+    },
+    {
+      "source": "REKT",
+      "text": "L2s have been going through something of a rekt-naissance lately. Exactly Protocol got hit for $7.2M by an exploit which drained users' collateral. Will Exactly ever financially recover from this?"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The DebtManager.leverage function accepted an arbitrary market address parameter without verifying it was a legitimate, whitelisted Exactly market. The function also accepted a Permit struct naming a victim account, then set an internal _msgSender context to that victim before calling market.deposit(). The attacker deployed a FakeMarket contract impersonating a real market: its deposit function computed the victim's maximum collateral, added Uniswap V3 liquidity for a worthless fake token, then called DebtManager.crossDeleverage while the DebtManager's internal context still identified the victim — swapping the victim's real USDC collateral for the fake token and collecting the USDC via LP removal. After draining collateral for eight victims, the attacker additionally manipulated the exaUSDC share-to-asset conversion ratio downward through repeated borrow/repay cycles, making victim positions under-collateralized and liquidatable for further profit. Vulnerable code snippet: Attack Tx: 0xe8999fb57684856d637504f1f0082b69a3f7b34dd4e7597bea376c9466813585 Analysis: BlockSecTeam on X"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The root cause was the public leverage() function in the DebtManager contract of Exactly Protocol. This function was missing proper input validation. The attacker exploited this vulnerability by passing in an invalid market address when using the leverage() function and created a UniswapV3 liquidity position with WETH and a fake token. Due to the lack of input validation, the attacker could manipulate the _msgSender parameter to target victim addresses and drain their funds. Vulnerable Code Snippet: Attack Transaction: https://optimistic.etherscan.io/tx/0x3d6367de5c191204b44b8a5cf975f257472087a9aadc59b5d744ffdef33a520e Analysis: https://medium.com/@exactly_protocol/exactly-protocol-incident-post-mortem-b4293d97e3ed https://twitter.com/BlockSecTeam/status/1692533280971936059"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The DeFi lending protocol Exactly Protocol was attacked and lost more than 7,160 ETH (approximately $12.04 million). The two contract attackers attack by calling the function kick() multiple times and use the developer contract on Ethereum to transfer deposits to Optimism and eventually transfer the stolen funds back to Ethereum. The root cause of the Exactly Protocol attack is #insufficient_check, the attacker bypasses the permission check in the leverage function of the DebtManager contract by directly passing an unverified fake market address and changing _msgSender to the victim address. Then, in an untrusted external call, the attacker re-enters t…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On August 18, 2023, Exactly Protocol on Optimism suffered a $7.6m loss after attackers exploited inadequate validation in the DebtManager contract, allowing them to inject a malicious market contract and forged permit, drain collateral using reentrancy, and repeatedly liquidate user positions. The DebtManager contract's leverage() function trusted both a user-supplied permit and a market address, but validated only the permit, allowing attackers to pass a malicious market contract and forged permit, reenter withdrawal logic, and drain user collateral."
+    }
+  ],
+  "audit": "Out of scope",
+  "txHashes": [
+    "0xe8999fb57684856d637504f1f0082b69a3f7b34dd4e7597bea376c9466813585",
+    "0x3d6367de5c191204b44b8a5cf975f257472087a9aadc59b5d744ffdef33a520e",
+    "0x1526acfb7062090bd5fed1b3821d1691c87f6c4fb294f56b5b921f0edf0cfad6",
+    "0x50ea2ea398151327ee1914e7d35a2d0e1625359a693da3a212933dac10ae112c",
+    "0xeb330e1d745b4e3af3012f080a262704a3461b1620c809212d56da696c5baa22",
+    "0x3cc452c70c81c1300c65169d261f5c4ad037b48da2139bf0743429d6e100de96",
+    "0x7aaef51ba9695127abb156297734ef66a36f1aa6fbaca641141d03cbb9707b8f"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-08/Exactly_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-08/Exactly_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BlockSecTeam/status/1692533280971936059"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "medium.com",
+      "url": "https://medium.com/@exactly_protocol/exactly-protocol-incident-post-mortem-b4293d97e3ed"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Exactly Protocol - REKT",
+      "url": "https://rekt.news/exactly-protocol-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "optimistic.etherscan.io",
+      "url": "https://optimistic.etherscan.io/tx/0xe8999fb57684856d637504f1f0082b69a3f7b34dd4e7597bea376c9466813585"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "optimistic.etherscan.io",
+      "url": "https://optimistic.etherscan.io/tx/0x3d6367de5c191204b44b8a5cf975f257472087a9aadc59b5d744ffdef33a520e"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xe8999fb57684856d637504f1f0082b69a3f7b34dd4e7597bea376c9466813585"
+    },
+    {
+      "source": "blocksec",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs?tab=readme-ov-file#20230818-exactlyprotocol---insufficient-validation"
+    },
+    {
+      "source": "slowmist",
+      "label": "wu-talk.com",
+      "url": "https://www.wu-talk.com/index.php?m=content&c=index&a=show&catid=46&id=17283"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/exactly-protocol-7-2m-2023-08-18"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/de-fi-rekt-report-29m-funds-lost-in-august-2023-top-defi-scams-and-exploits"
+    },
+    {
+      "source": "revertiq",
+      "label": "olympix.security",
+      "url": "https://olympix.security/blog/exactly-protocol-lost-7-3m-the-code-worked-the-assumptions-didnt"
+    }
+  ]
+}

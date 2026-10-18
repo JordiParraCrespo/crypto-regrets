@@ -1,0 +1,73 @@
+{
+  "id": "2022-07-06-flippazone-nft",
+  "name": "FlippazOne NFT",
+  "date": "2022-07-06",
+  "year": 2022,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Accesscontrol",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 1.00).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.01,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Accesscontrol",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Accesscontrol"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "ownerWithdrawAllTo() is a function that sends all the ETH in the contract to an address the caller can specify. The author forgot to a check to ensure only the owner of the contract can call this, which exists on other functions. They also forgot to check the auction had ended. Vulnerable code snippet: Attack tx: https://etherscan.io/tx/0x8bded20c1db5a1d5f595b15e682a95ce11d3c895d6031147fa49c4ffa5729a30 Analysis: ownerWithdrawAllTo() is a function that sends all the ETH in the contract to an address the caller can specify. The author forgot to a check to ensure only the owner of the contract can call this, which exists on other functions. https://x.com/bertcmiller/status/1544496577338826752"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x8bded20c1db5a1d5f595b15e682a95ce11d3c895d6031147fa49c4ffa5729a30"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-07/FlippazOne_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-07/FlippazOne_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/bertcmiller/status/1544496577338826752"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x8bded20c1db5a1d5f595b15e682a95ce11d3c895d6031147fa49c4ffa5729a30"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/bertcmiller/status/1544496577338826752"
+    }
+  ]
+}

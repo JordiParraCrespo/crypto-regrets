@@ -1,0 +1,131 @@
+{
+  "id": "2021-12-21-visor-finance",
+  "name": "Visor Finance",
+  "date": "2021-12-21",
+  "year": 2021,
+  "amountUsd": 8199999.999999999,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "reentrancy",
+  "technique": "Reentrancy",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.93).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "reentrancy",
+    "confidence": 0.93,
+    "top": [
+      {
+        "category": "reentrancy",
+        "p": 0.93
+      },
+      {
+        "category": "access-control",
+        "p": 0.06
+      },
+      {
+        "category": "input-validation",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Reentrancy. Lost: $8.2 million",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Reentrancy. Lost: $8.2 million"
+    },
+    {
+      "source": "REKT",
+      "text": "It is the season of giving, and Visor Finance is going all in. Visor allowed an anonymous actor to mint $8.2M in VISR."
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Insufficient validation & Reentrancy Vulnerable code snippet: https://etherscan.io/address/0xc9f27a50f82571c1c8423a42970613b8dbda14ef#code#F1#L41 Due to from is controllable, attacker can create a custom contract to return specific owner() to pass the check. Then reenter the deposit function via delegatedTransferERC20 function."
+    },
+    {
+      "source": "SlowMist",
+      "text": "Uniswap V3 liquidity management protocol Visor Finance was hacked again. Hackers took advantage of the loopholes to withdraw more than 8.8 million VISRs and sold them on Uniswap, causing the VISR tokens to plummet by nearly 95% and profit over 120 ETH through Tornado Cash. Money laundering. According to SlowMist analysis, this attack is due to a flaw in the RewardsHypervisor contract when checking the permissions of the user's recharge, causing the attacker to construct a malicious contract to arbitrarily cast mortgage credentials. Prior to this June, Visor Finance was also hacked and lost more than US$500,000."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On December 21, 2021, Visor Finance’s vVISR staking contract was exploited via reentrancy, resulting in a loss of 8.8 million VISR tokens (~$8.2 million). The attacker used a malicious contract to re-enter the deposit logic, inflate share balances, and drain the staking contract, rapidly laundering the proceeds through Uniswap and Tornado Cash. The staking contract delegated token transfers to an external user-supplied delegateTransferERC20 implementation, invoking this external call before updating internal balances. This sequence permitted reentrancy whereby a malicious contract re-entered the deposit or withdrawal logic and inflated its vVISR share…"
+    }
+  ],
+  "audit": "Unaudited",
+  "txHashes": [
+    "0x69272d8c84d67d1da2f6425b339192fa472898dce936f24818fda415c1c1ff3f"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2021-12/Visor_exp.sol",
+  "sources": [
+    "defihacklabs",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2021-12/Visor_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "beosin.medium.com",
+      "url": "https://beosin.medium.com/two-vulnerabilities-in-one-function-the-analysis-of-visor-finance-exploit-a15735e2492"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/GammaStrategies/status/1473306777131405314"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x69272d8c84d67d1da2f6425b339192fa472898dce936f24818fda415c1c1ff3f"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Visor Finance - REKT",
+      "url": "https://rekt.news/visor-finance-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/address/0xc9f27a50f82571c1c8423a42970613b8dbda14ef#code#F1#L41"
+    },
+    {
+      "source": "slowmist",
+      "label": "medium.com",
+      "url": "https://medium.com/visorfinance/post-mortem-for-vvisr-staking-contract-exploit-and-upcoming-migration-7920e1dee55a"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/visor-finance-2021-12-22"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "blockchainbreaches.com",
+      "url": "https://www.blockchainbreaches.com/en/breaches/visor-finance-2021"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/NanoJS10/Visor-finance-exploit-"
+    }
+  ]
+}

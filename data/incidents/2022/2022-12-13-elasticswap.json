@@ -1,0 +1,100 @@
+{
+  "id": "2022-12-13-elasticswap",
+  "name": "ElasticSwap",
+  "date": "2022-12-13",
+  "year": 2022,
+  "amountUsd": 850000,
+  "returnedUsd": 520650,
+  "chains": [
+    "Avalanche",
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.65,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.67
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.25
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.07
+      }
+    ],
+    "flashLoan": 0.18,
+    "stateActor": 0.02,
+    "hasRootCause": 0.71
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "Business Logic Flaw. Lost: $845k",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Business Logic Flaw. Lost: $845k"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Business Logic Flaw. ElasticSwap is an AMM focused on elastic supply tokens. An elastic supply (or rebase) token works in a way that the circulating supply expands or contracts due to changes in token price. ElasticSwap adapts to the elastic supply changes without the need for someone to call a function on the pool itself after a change (rebase) happens. Vulnerable code snippet: Attack tx: https://explorer.phalcon.xyz/tx/eth/0xb36486f032a450782d5d2fac118ea90a6d3b08cac3409d949c59b43bcd6dbb8f Analysis: https://quillaudits.medium.com/decoding-elastic-swaps-850k-exploit-quillaudits-9ceb7fcd8d1a"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "ElasticSwap suffered price manipulation attacks on Avalanche and Ethereum on 13 December 2022, resulting in a combined loss of around $850,000. The exploit leveraged mismatched accounting in the protocol's liquidity functions, letting attackers unbalance pools and drain assets. Partial funds were recovered following the incident. ElasticSwap's AMM pools used two incompatible accounting systems for addLiquidity and removeLiquidity, allowing attackers to manipulate pool reserves by transferring tokens directly, then draining liquidity and exploiting price calculations."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xb36486f032a450782d5d2fac118ea90a6d3b08cac3409d949c59b43bcd6dbb8f",
+    "0x782b2410fcc9449ead554a81f78184b6f9cca89f07ea346bc50cf11887cd9b18",
+    "0xd019a8956750ec1850b09605a8b5b6c512636df3de69c62c650010b37e21e8e9"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-12/ElasticSwap_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-12/ElasticSwap_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "quillaudits.medium.com",
+      "url": "https://quillaudits.medium.com/decoding-elastic-swaps-850k-exploit-quillaudits-9ceb7fcd8d1a"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "explorer.phalcon.xyz",
+      "url": "https://explorer.phalcon.xyz/tx/eth/0xb36486f032a450782d5d2fac118ea90a6d3b08cac3409d949c59b43bcd6dbb8f"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/elasticswap-2022-12-13"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/elasticswap-hack-2022"
+    }
+  ]
+}

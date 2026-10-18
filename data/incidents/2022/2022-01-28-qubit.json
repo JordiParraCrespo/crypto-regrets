@@ -1,0 +1,140 @@
+{
+  "id": "2022-01-28-qubit",
+  "name": "Qubit",
+  "date": "2022-01-28",
+  "year": 2022,
+  "amountUsd": 80000000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "input-validation",
+  "technique": "Missing Input Validation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "input-validation",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "input-validation",
+        "p": 0.99
+      },
+      {
+        "category": "bridge-crosschain",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.9
+  },
+  "bridge": true,
+  "language": "Solidity",
+  "rootCause": "Bridge address(0).safeTransferFrom() does not revert. Lost: $80 million",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Bridge address(0).safeTransferFrom() does not revert. Lost: $80 million"
+    },
+    {
+      "source": "REKT",
+      "text": "In other news... Qubit Finance, a protocol by the team behind repeat offender PancakeBunny, has fallen victim to an $80M exploit. But will anyone remember this next week?"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Insufficient validation Vulnerable code snippet: QBridge https://etherscan.io/address/0x99309d2e7265528dc7c3067004cc4a90d37b7cc3#code#F1#L200 QBridgeHandler https://etherscan.io/address/0x80d1486ef600cc56d4df9ed33baf53c60d5a629b#code#F1#L122 safeTransferFrom() in SafeToken.sol does not revert when the token EOA. tokenAddress can be address(0) to pass all check to mint xETH. BTW: SafeERC20 supports target address is checked to verify it contains contract code. ex: https://github.com/polynetwork/eth-contracts/blob/master/contracts/libs/token/ERC20/SafeERC20.sol // A Solidity high level call has three parts: // 1. The target address is checked to verify it contains contract code // 2. The call itself is made, and success asserted // 3. The return value is decoded, which in turn checks the size of the returned data. // solhint-disable-next-line max-line-length"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Qubit, the lending product of QBridge, a BSC ecological decentralized lending project, is suspected to have been hacked. The hackers minted a large amount of xETH collateral and consumed about $80 million in assets in the capital pool. According to SlowMist's analysis, the main reason for this attack is that when the recharge of ordinary tokens and native tokens are implemented separately, when transferring the tokens in the whitelist, it is not checked again whether they are 0 addresses, resulting in The operation that should be recharged through the native recharge function can successfully go through the recharge logic of ordinary tokens."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On January 27, 2022, Qubit Finance's QBridge allowed an attacker to deposit zero ETH on Ethereum, mint unbacked qXETH on BNB Chain, and drain $80 million of assets by borrowing against this fake collateral. The exploit relied on a flawed deposit logic that did not check that funds were actually sent. The Ethereum-side QBridgeHandler's deposit() function accepted calldata-encoded ETH deposit claims but did not verify msg.value matched the claimed amount. SafeTransferFrom on the zero address (an EOA) silently succeeded, permitting phantom deposits that triggered qXETH minting on BNB Chain."
+    }
+  ],
+  "audit": "Unaudited",
+  "txHashes": [
+    "0xac7292e7d0ec8ebe1c94203d190874b2aab30592327b6cc875d00f18de6f3133",
+    "0x8c5877d1b618f29f6a3622cb610ace08ca96e04d8218f587072a3f91e8545bdc",
+    "0x50946e3e4ccb7d39f3512b7ecb75df66e6868b9af0eee8a7e4b61ef8a459518e"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-01/Qubit_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-01/Qubit_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "rekt.news",
+      "url": "https://rekt.news/qubit-rekt/"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "medium.com",
+      "url": "https://medium.com/@QubitFin/protocol-exploit-report-305c34540fa3"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/address/0xd01ae1a708614948b2b5e0b7ab5be6afa01325c7"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Qubit Finance - REKT",
+      "url": "https://rekt.news/qubit-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/address/0x99309d2e7265528dc7c3067004cc4a90d37b7cc3#code#F1#L200"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/address/0x80d1486ef600cc56d4df9ed33baf53c60d5a629b#code#F1#L122"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "github.com",
+      "url": "https://github.com/polynetwork/eth-contracts/blob/master/contracts/libs/token/ERC20/SafeERC20.sol"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/qubit-2022-01-28"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractaudit.com",
+      "url": "https://www.smartcontractaudit.com/guides/qubit-finance-2022-bridge-exploit"
+    },
+    {
+      "source": "revertiq",
+      "label": "qbt.wiki",
+      "url": "https://qbt.wiki/en/incident/technical-analysis/"
+    }
+  ]
+}

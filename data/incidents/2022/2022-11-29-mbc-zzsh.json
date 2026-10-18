@@ -1,0 +1,112 @@
+{
+  "id": "2022-11-29-mbc-zzsh",
+  "name": "MBC & ZZSH",
+  "date": "2022-11-29",
+  "year": 2022,
+  "amountUsd": 5900,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "Token",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.51,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.54
+      },
+      {
+        "category": "access-control",
+        "p": 0.45
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Business Logic Flaw & Access Control. Lost: $5.9k",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Business Logic Flaw & Access Control. Lost: $5.9k"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Business Logic Flaw & Access Control The root cause of the issue is a flaw in the MBC contract's implementation. The contract incorrectly uses the addLiquidity() function and mistakenly exposes swapAndLiquifyStepv1() function, which uses the balance of the contract's address as the desired reserve amount for maintaining reserves. So attacker can call swapAndLiquifyStepV1, which will add a certain amount of MBC and BUSD to the pool to manipulate MBC price. Vulnerable code snippet: https://bscscan.com/address/0x4e87880a72f6896e7e0a635a5838ffc89b13bd17#code#L1263 Attack tx: https://phalcon.blocksec.com/tx/bsc/0xdc53a6b5bf8e2962cf0e0eada6451f10956f4c0845a3ce134ddb050365f15c86 Analysis: https://twitter.com/AnciliaInc/status/1597742575623888896 https://twitter.com/CertiKAlert/status/1597639717096460288"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "MBC and ZZSH on BNB Chain were reported to lose about $5,900 on 2022-11-29 after a flashloan-assisted reserve skew exploited their swap-and-liquify flow. Public references classify the incident as access control and business-logic flaw, but the on-chain trace and historical code were not independently checked here. The available evidence supports a business-logic flaw in the tokens' swap-and-liquify path, classified publicly together with an access-control issue. The exploit path let a flashloan borrower distort the pair reserves, call swapAndLiquifyStepv1() against the manipulated state, and trade back through the skewed price. The exact historical au…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xdc53a6b5bf8e2962cf0e0eada6451f10956f4c0845a3ce134ddb050365f15c86"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-11/MBC_ZZSH_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-11/MBC_ZZSH_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/AnciliaInc/status/1597742575623888896"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/CertiKAlert/status/1597639717096460288"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0x4e87880a72f6896e7e0a635a5838ffc89b13bd17#code#L1263"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "phalcon.blocksec.com",
+      "url": "https://phalcon.blocksec.com/tx/bsc/0xdc53a6b5bf8e2962cf0e0eada6451f10956f4c0845a3ce134ddb050365f15c86"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/mbc-zzsh-2022-11-29"
+    },
+    {
+      "source": "revertiq",
+      "label": "api.llama.fi",
+      "url": "https://api.llama.fi/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/past/2022/README.md#L633"
+    }
+  ]
+}

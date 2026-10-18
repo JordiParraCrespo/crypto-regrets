@@ -1,0 +1,104 @@
+{
+  "id": "2023-01-17-omniestate",
+  "name": "OmniEstate",
+  "date": "2023-01-17",
+  "year": 2023,
+  "amountUsd": 70705,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "input-validation",
+  "technique": "Missing Input Validation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "input-validation",
+    "confidence": 0.85,
+    "top": [
+      {
+        "category": "input-validation",
+        "p": 0.86
+      },
+      {
+        "category": "logic-error",
+        "p": 0.14
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.94
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "No Input Parameter Check. Lost: $70k(236 BNB)",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "No Input Parameter Check. Lost: $70k(236 BNB)"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "When end_date is not 3, 6, 12, or 24, the value of duration[msg.sender] is set to the default value, which is 0; In the function _Check_reward, when the parameter durations is 0, the system will directly return total_percent, bypassing the system logic. Vulnerable code snippet: Attack tx: invest https://bscscan.com/tx/0x49bed801b9a9432728b1939951acaa8f2e874453d39c7d881a62c2c157aa7613 withdraw https://bscscan.com/tx/0xa916674fb8203fac6d78f5f9afc604be468a514aa61ea36c6d6ef26ecfbd0e97 Analysis: https://twitter.com/BlockSecTeam/status/1615232012834705408"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On January 17, 2023, OmniEstate's staking contract on BNB Chain was exploited due to missing input validation for the lock period, resulting in a loss of approximately $70,000. The attacker used a zero-duration stake to bypass lock constraints and withdraw rewards instantly. The staking contract failed to validate the end_date parameter. Passing end_date=0 allowed users to stake and immediately withdraw both principal and rewards, bypassing the intended lock period."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x49bed801b9a9432728b1939951acaa8f2e874453d39c7d881a62c2c157aa7613",
+    "0xa916674fb8203fac6d78f5f9afc604be468a514aa61ea36c6d6ef26ecfbd0e97"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-01/OmniEstate_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-01/OmniEstate_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BlockSecTeam/status/1615232012834705408"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x49bed801b9a9432728b1939951acaa8f2e874453d39c7d881a62c2c157aa7613"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0xa916674fb8203fac6d78f5f9afc604be468a514aa61ea36c6d6ef26ecfbd0e97"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/omniestate-2023-01-17"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.solidityscan.com",
+      "url": "https://blog.solidityscan.com/omni-estate-group-hack-analysis-missing-zero-duration-validation-285c1c54498/"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/kismp123/DeFi-Security-Incident/blob/main/2023/2023-01-18_OmniEstate_StakingLogicFlaw.md"
+    }
+  ]
+}

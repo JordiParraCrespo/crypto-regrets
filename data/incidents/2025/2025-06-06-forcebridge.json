@@ -1,0 +1,105 @@
+{
+  "id": "2025-06-06-forcebridge",
+  "name": "ForceBridge",
+  "date": "2025-06-06",
+  "year": 2025,
+  "amountUsd": 3900000,
+  "returnedUsd": null,
+  "chains": [
+    "Nervos"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "frontend-infra",
+    "confidence": 0.65,
+    "top": [
+      {
+        "category": "frontend-infra",
+        "p": 0.67
+      },
+      {
+        "category": "access-control",
+        "p": 0.3
+      },
+      {
+        "category": "key-compromise",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.03,
+    "hasRootCause": 0.88
+  },
+  "bridge": true,
+  "language": "Rust",
+  "rootCause": "Force Bridge on Nervos Network dies the day after announcing its own funeral. $3.76M gone in an attack that didn’t exploit a bug - it exploited control. Someone had the keys and someone knew the timing.",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "Force Bridge on Nervos Network dies the day after announcing its own funeral. $3.76M gone in an attack that didn’t exploit a bug - it exploited control. Someone had the keys and someone knew the timing."
+    },
+    {
+      "source": "SlowMist",
+      "text": "The Force Bridge, a cross-chain bridge on the Nervos Network, is suspected to have been compromised, with approximately $3.7 million in assets stolen. The Nervos team has urgently suspended all contracts and is actively investigating the incident. According to the incident investigation report, malicious code was discovered in one of the Docker images. The code had been injected into Ethereum-related modules and was not part of the public source code — instead, it was embedded through a locally built Docker image."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "ForceBridge suffered a $3.9 million exploit on Nervos in June 2025 after a supply chain compromise led to validator key exfiltration, allowing unauthorized bridge unlocks and fund transfers. A malicious Docker image deployed during a validator system upgrade exfiltrated validator private keys, enabling the attacker to sign unauthorized transactions and unlock bridge funds."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "A reported June 2025 incident involving Nervos Network's ForceBridge could not be independently verified from the available evidence. No surviving primary records, exploit transactions, official disclosures, or technical analyses were available to confirm the reported loss amount, affected chains, or attack mechanism. The available evidence does not establish a verified root cause. No official disclosure, exploit transaction set, vulnerable contract analysis, or independently preserved reporting describing the reported ForceBridge incident was available for review."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Force Bridge - Rekt",
+      "url": "https://rekt.news/force-bridge-rekt"
+    },
+    {
+      "source": "slowmist",
+      "label": "talk.nervos.org",
+      "url": "https://talk.nervos.org/t/force-bridge-incident-root-cause-analysis-user-commitment/8801"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/forcebridge-2025-06-06"
+    },
+    {
+      "source": "revertiq",
+      "label": "crypto.news",
+      "url": "https://crypto.news/nervos-network-suffers-major-exploit-as-3-9m-in-crypto-is-stolen-from-force-bridge/"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/nervos-network-2025-06-02"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/de-fi-rekt-report-june-2025-114-8-million-lost-across-11-exploits"
+    }
+  ]
+}

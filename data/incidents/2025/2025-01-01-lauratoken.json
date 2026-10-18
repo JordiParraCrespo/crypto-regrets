@@ -1,0 +1,106 @@
+{
+  "id": "2025-01-01-lauratoken",
+  "name": "LAURAToken",
+  "date": "2025-01-01",
+  "year": 2025,
+  "amountUsd": 41200,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Pair Balance Manipulation",
+  "classificationNote": "Upstream label missing; classified by keyword rules from the root-cause text.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.48,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.51
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.45
+      },
+      {
+        "category": "market-manipulation",
+        "p": 0.03
+      }
+    ],
+    "flashLoan": 0.97,
+    "stateActor": 0.01,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Pair Balance Manipulation. Lost: 12.34 ETH (~$41.2K USD)",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Pair Balance Manipulation. Lost: 12.34 ETH (~$41.2K USD)"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The exploit was caused by a design flaw in the removeLiquidityWhenKIncreases function within the LAURAToken contract. This function relied solely on the K value (constant product) of the LAURA/WETH Uniswap V2 liquidity pool as a trigger for its logic. The vulnerability was that the contract did not validate the source of the increase in the K value. An attacker could manipulate the K value by injecting a large amount of WETH via a flash loan, artificially inflating the price of LAURA. This manipulated increase in K then triggered the removeLiquidityWhenKIncreases function, allowing the attacker to remove liquidity at a skewed price and extract more LAURA tokens than they should have, which they subsequently swapped for WETH for profit. Vulnerable code snippet: Attack tx: https://etherscan.io/tx/0xef34f4fdf03e403e3c94e96539354fb4fe0b79a5ec927eacc63bc04108dbf420 Analysis: https://learnblockchain.cn/article/12139"
+    },
+    {
+      "source": "SlowMist",
+      "text": "LAURA was suspected to have been attacked on ETH, resulting in an approximate loss of $48.2K."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On January 1, 2025, the LAURA token contract on Ethereum was exploited via the removeLiquidityWhenKIncreases function, which allowed an attacker to drain over 12.34 ETH (~$41,200 USD) from the Uniswap pool. The vulnerability resulted from insufficient access controls and validation, enabling arbitrary liquidity removal after pool manipulation. The removeLiquidityWhenKIncreases function lacked proper access control and condition validation, permitting unauthorized users to trigger liquidity removal from the Uniswap pool and drain assets by manipulating reserves."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xef34f4fdf03e403e3c94e96539354fb4fe0b79a5ec927eacc63bc04108dbf420"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-01/LAURAToken_exp.sol",
+  "sources": [
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-01/LAURAToken_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/TenArmorAlert/status/1874455664187023752"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xef34f4fdf03e403e3c94e96539354fb4fe0b79a5ec927eacc63bc04108dbf420"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "learnblockchain.cn",
+      "url": "https://learnblockchain.cn/article/12139"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/laura-token-2025-01-08"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/de-fi-rekt-report-january-2025-62-5-million-lost-across-11-incidents-zero-recovered"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/past/2025/README.md#L2634"
+    }
+  ]
+}

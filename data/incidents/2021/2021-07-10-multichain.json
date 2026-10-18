@@ -1,0 +1,104 @@
+{
+  "id": "2021-07-10-multichain",
+  "name": "Multichain",
+  "date": "2021-07-10",
+  "year": 2021,
+  "amountUsd": 7900000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum",
+    "BSC",
+    "Fantom"
+  ],
+  "targetType": "CEX",
+  "category": "signature-crypto",
+  "technique": "Weak Key Generation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.44,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.47
+      },
+      {
+        "category": "logic-error",
+        "p": 0.47
+      },
+      {
+        "category": "bridge-crosschain",
+        "p": 0.05
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": true,
+  "language": "Solidity",
+  "rootCause": "On July 10, 2021, ChainSwap’s Ethereum-BSC bridge was exploited for $4.4 million. A logic flaw in quota assignment allowed unlimited token minting by unauthorized addresses on BSC, impacting over 20 projects. Most tokens crashed and required migration. The ChainSwap bridge pointed to an unverified implementation contract on BSC, where the function that checked mint quotas (authQuotaOf) granted any address an extremely high quota instead of zero. Signature verification remained intact, but quota enforcement was bypassed, enabling unauthorized token minting.",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "On July 10, 2021, ChainSwap’s Ethereum-BSC bridge was exploited for $4.4 million. A logic flaw in quota assignment allowed unlimited token minting by unauthorized addresses on BSC, impacting over 20 projects. Most tokens crashed and required migration. The ChainSwap bridge pointed to an unverified implementation contract on BSC, where the function that checked mint quotas (authQuotaOf) granted any address an extremely high quota instead of zero. Signature verification remained intact, but quota enforcement was bypassed, enabling unauthorized token minting."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On July 10, 2021, Multichain's (formerly Anyswap) Router V3 suffered an exploit due to a critical flaw in ECDSA signature generation, allowing an attacker to compromise the key to the bridge's funds on Ethereum, BSC, and Fantom. Around $7.9 million was drained from its cross-chain pools. The Multichain Router V3 bridge MPC account reused the same ECDSA R value in two separate signatures, enabling the attacker to derive its private key and withdraw assets."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x83b4adaf73ad34c5c53aa9b805579ed74bc1391c5297201e6457cde709dff723"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/chainswap-2021-07-10"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "blockchainbreaches.com",
+      "url": "https://www.blockchainbreaches.com/en/breaches/chainswap-2021"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/Auditware/AuditVault/blob/main/hacks/rekt-2021-07-11-chainswap.md"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/multichain-2021-07-10"
+    },
+    {
+      "source": "revertiq",
+      "label": "monitoringroom.com",
+      "url": "https://monitoringroom.com/situation/crypto-hack/multichain"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/multichain-hack-2021"
+    }
+  ]
+}

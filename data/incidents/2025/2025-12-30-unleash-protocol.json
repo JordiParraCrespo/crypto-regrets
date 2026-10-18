@@ -1,0 +1,86 @@
+{
+  "id": "2025-12-30-unleash-protocol",
+  "name": "Unleash Protocol",
+  "date": "2025-12-30",
+  "year": 2025,
+  "amountUsd": 3900000,
+  "returnedUsd": null,
+  "chains": [
+    "Story"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "key-compromise",
+  "technique": "Private Key Compromised",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "key-compromise",
+    "confidence": 0.77,
+    "top": [
+      {
+        "category": "key-compromise",
+        "p": 0.78
+      },
+      {
+        "category": "governance",
+        "p": 0.2
+      },
+      {
+        "category": "access-control",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "The Unleash Protocol project deployed on Story Protocol suffered an unauthorized contract upgrade, followed by the malicious transfer of user assets. The attacker manipulated the project’s multisig governance privileges to perform the upgrade, resulting in the theft and cross-chain transfer of assets including WIP, USDC, WETH, stIP, and vIP to external addresses. The currently confirmed loss is approximately USD 3.9 million. Unleash has suspended all operations and initiated a full investigation and audit process, urging users to refrain from interacting with its contracts. Story Protocol itself remains unaffected.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The Unleash Protocol project deployed on Story Protocol suffered an unauthorized contract upgrade, followed by the malicious transfer of user assets. The attacker manipulated the project’s multisig governance privileges to perform the upgrade, resulting in the theft and cross-chain transfer of assets including WIP, USDC, WETH, stIP, and vIP to external addresses. The currently confirmed loss is approximately USD 3.9 million. Unleash has suspended all operations and initiated a full investigation and audit process, urging users to refrain from interacting with its contracts. Story Protocol itself remains unaffected."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Unleash Protocol was exploited via a governance takeover on Story chain on December 30, 2025, resulting in a loss of approximately $3.9 million. The attacker gained administrative rights through the protocol's multisig, performed unauthorized contract upgrades, withdrew assets, and bridged funds to Ethereum, then obscured proceeds using Tornado Cash. The protocol's multisig governance system was compromised, allowing an externally owned address to gain administrative control and execute contract upgrades enabling unauthorized withdrawals."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/UnleashProtocol/status/2005907998691229933"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/unleash-protocol-2025-12-30"
+    },
+    {
+      "source": "revertiq",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/business/2025/12/30/unleash-protocol-hit-by-usd3-9-million-exploit-with-funds-routed-through-tornado-cash"
+    },
+    {
+      "source": "revertiq",
+      "label": "altcoindesk.com",
+      "url": "https://altcoindesk.com/news/unleash-protocol-hit-by-3-9m-exploit-in-latest-2025-crypto-attack/article-19061/"
+    }
+  ]
+}

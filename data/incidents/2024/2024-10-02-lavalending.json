@@ -1,0 +1,94 @@
+{
+  "id": "2024-10-02-lavalending",
+  "name": "LavaLending",
+  "date": "2024-10-02",
+  "year": 2024,
+  "amountUsd": 130000,
+  "returnedUsd": null,
+  "chains": [
+    "Arbitrum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Price Manipulation",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 1.00).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.94,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Price Manipulation. Lost: 1 USDC, 125795.6 cUSDC, 0,0067 WBTC, 2.25 WETH (~$130K USD)",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Price Manipulation. Lost: 1 USDC, 125795.6 cUSDC, 0,0067 WBTC, 2.25 WETH (~$130K USD)"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The WETH-USDC LP lending pool relied on a Uniswap V3 pool (UniswapV3Pool) for price calculations, which was vulnerable to manipulation. The attacker used multiple flash loans (from AlgebraPool, Aave V3, SwapFlashLoan, and Balancer Vault) to acquire USDC and WETH, depositing them into the WETHUSDC_LP contract to mint LP tokens. Initially, the LP token price was low , allowing the attacker to deposit LP tokens as collateral and borrow assets (cUSDC, WBTC, WETH, USDC) from the LendingPool. The attacker then manipulated the Uniswap V3 pool price by executing swaps, increasing the LP token price. Vulnerable code snippet: The vulnerable contract is not verified on Arbiscan. https://arbiscan.io/address/0x6700b021a8bcfae25a2493d16d7078c928c13151 Attack tx: https://arbiscan.io/tx/0xb5cfa4ae4d6e459ba285fec7f31caf8885e2285a0b4ff62f66b43e280c947216 Analysis:"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "A second Lava incident was reported on Arbitrum on 2024-10-04 with estimated losses of about $130,000. Public evidence for the October event remains limited, and no exploit transaction, vulnerable contract revision, or official postmortem has been independently verified. The precise root cause of the 2024-10-04 Lava incident has not been publicly established in the available evidence. Retrieved public catalogues classify the event as a protocol-logic incident and separately tag it as a flash-loan exploit, while older metadata associated with this record labeled it as access-control related. No primary exploit transaction, vulnerable code, or official t…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xb5cfa4ae4d6e459ba285fec7f31caf8885e2285a0b4ff62f66b43e280c947216",
+    "0xcb1a2f5eeb1a767ea5ccbc3665351fadc1af135d12a38c504f8f6eb997e9e603"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-10/LavaLending_exp.sol",
+  "sources": [
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-10/LavaLending_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "arbiscan.io",
+      "url": "https://arbiscan.io/address/0x6700b021a8bcfae25a2493d16d7078c928c13151"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "arbiscan.io",
+      "url": "https://arbiscan.io/tx/0xb5cfa4ae4d6e459ba285fec7f31caf8885e2285a0b4ff62f66b43e280c947216"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/lava-2024-10-04"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "defillama.com",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/lava-hack-2024"
+    }
+  ]
+}

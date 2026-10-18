@@ -1,0 +1,85 @@
+{
+  "id": "2022-10-11-qanplatform",
+  "name": "QANplatform",
+  "date": "2022-10-11",
+  "year": 2022,
+  "amountUsd": 2000000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "signature-crypto",
+  "technique": "Weak Key Generation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "signature-crypto",
+    "confidence": 0.55,
+    "top": [
+      {
+        "category": "signature-crypto",
+        "p": 0.58
+      },
+      {
+        "category": "key-compromise",
+        "p": 0.42
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.85
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Layer1 blockchain QANplatform (QANX), which is resistant to quantum computing attacks, tweeted that its smart contract cross-chain bridge was attacked, and the attacker managed to extract tokens, reminding users not to perform any transactions related to QANX tokens. According to the findings, the hackers obtained the private keys to the bridge wallet and withdrew more than 1.4 billion QANX tokens worth more than $1 million in two transactions.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Layer1 blockchain QANplatform (QANX), which is resistant to quantum computing attacks, tweeted that its smart contract cross-chain bridge was attacked, and the attacker managed to extract tokens, reminding users not to perform any transactions related to QANX tokens. According to the findings, the hackers obtained the private keys to the bridge wallet and withdrew more than 1.4 billion QANX tokens worth more than $1 million in two transactions."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On October 11, 2022, QANplatform's bridge deployer private key was compromised due to weak key generation, allowing an attacker to drain over 1.46 billion QANX tokens from the Ethereum bridge contract and leading to losses of approximately $2 million. The attacker exchanged the stolen tokens for ETH, causing the QANX price to collapse and severely impacting the platform. The incident was caused by the use of weak key generation,specifically, a vanity address tool related to the Profanity vulnerability,which enabled private key recovery and complete administrative compromise of the bridge contract."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x048a1a71fd41102c72427cc1d251f4ecbf70558562564306e919f66fd451fe82",
+    "0x39ec0a6bbe9c973a0eaa3f14c11952bd6ab3f9bc1bd1059a5614121c8f74080f"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "medium.com",
+      "url": "https://medium.com/qanplatform/qanx-bridge-wallet-disclosure-analysis-continuously-updated-724121bbbf9a"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/qanplatform-2022-10-11"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/qanplatform-hack-2022"
+    },
+    {
+      "source": "revertiq",
+      "label": "web3isgoinggreat.com",
+      "url": "https://web3isgoinggreat.com/?id=qanx-bridge-suffers-1-16-million-loss-caused-by-the-profanity-vanity-address-vulnerability"
+    }
+  ]
+}

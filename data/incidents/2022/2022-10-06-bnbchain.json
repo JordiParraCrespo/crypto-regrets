@@ -1,0 +1,91 @@
+{
+  "id": "2022-10-06-bnbchain",
+  "name": "BNBChain",
+  "date": "2022-10-06",
+  "year": 2022,
+  "amountUsd": 100000000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": null,
+  "category": "bridge-crosschain",
+  "technique": "Pseudo-authentication",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.97).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "bridge-crosschain",
+    "confidence": 0.97,
+    "top": [
+      {
+        "category": "bridge-crosschain",
+        "p": 0.97
+      },
+      {
+        "category": "signature-crypto",
+        "p": 0.02
+      },
+      {
+        "category": "access-control",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.06,
+    "stateActor": 0.03,
+    "hasRootCause": 0.92
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "BNBChain was attacked and lost more than 500 million US dollars. According to SlowMist, the hacker’s initial source of funds was ChangeNOW, and the hacker’s address has interacted with multiple DApps, including Multichain, Venus Protocol, Alpaca Finance, Stargate, Curve, Uniswap, Trader Joe, PancakeSwap, SushiSwap, etc. Analyst @samczsun posted a post explaining how hackers used Binance Bridge to steal BNB. The attackers stole 1 million BNB twice, but both used the height of 110217401, which is much lower than the normal height. Furthermore, the proof submitted by the attacker is shorter than the legitimate proof, showing that the attacker forged the proof for that particular block.…",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "BNBChain was attacked and lost more than 500 million US dollars. According to SlowMist, the hacker’s initial source of funds was ChangeNOW, and the hacker’s address has interacted with multiple DApps, including Multichain, Venus Protocol, Alpaca Finance, Stargate, Curve, Uniswap, Trader Joe, PancakeSwap, SushiSwap, etc. Analyst @samczsun posted a post explaining how hackers used Binance Bridge to steal BNB. The attackers stole 1 million BNB twice, but both used the height of 110217401, which is much lower than the normal height. Furthermore, the proof submitted by the attacker is shorter than the legitimate proof, showing that the attacker forged the proof for that particular block.…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "The BNB Chain bridge was exploited on October 6, 2022 when an attacker forged Merkle proofs to mint 2 million BNB. A critical verification flaw allowed proofs for non-existent deposits to be accepted, leading to inflationary theft. Coordinated validator response limited losses to approximately $100,110 million bridged out before the chain was halted. The BSC Token Hub bridge relied on Merkle proof verification for cross-chain deposits, but failed to check that the proof's root hash matched the trusted commitment root stored in the light client. This allowed the attacker to create forged proofs and mint BNB without actual deposits, resulting in the unauthorized creation of tokens."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xa84f85e1afc3e1b8ed5111ba16e11325f8fc5d6081cb6958becd6a333f6d0d1d",
+    "0xaa6ce682daef66aa2bfc2741e5ec30ce93958fd86d2d4d256c416a58e2bc3ae4",
+    "0xe1fe5fef26e93e6389910545099303e4fee774427d9e628d2aab80f1b53396d6",
+    "0xebf83628ba893d35b496121fb8201666b8e09f3cbadf0e269162baa72efe3b8b",
+    "0xb64a99866ba0c727482919ceee149b761005c4d40c11dc1676ad02cad9cb5d57"
+  ],
+  "poc": null,
+  "sources": [
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/SlowMist_Team/status/1578220472373649408"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/bnb-chain-bridge-2022-10-06"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "coinbase.com",
+      "url": "https://www.coinbase.com/en-in/blog/bsc-token-hub-compromise-investigation-and-analysis-8"
+    },
+    {
+      "source": "revertiq",
+      "label": "quadrigainitiative.com",
+      "url": "https://www.quadrigainitiative.com/casestudy/binancebridgeforgedproofexploit.php"
+    }
+  ]
+}

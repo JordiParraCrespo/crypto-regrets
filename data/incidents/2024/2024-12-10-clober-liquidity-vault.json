@@ -1,0 +1,125 @@
+{
+  "id": "2024-12-10-clober-liquidity-vault",
+  "name": "Clober Liquidity Vault",
+  "date": "2024-12-10",
+  "year": 2024,
+  "amountUsd": 500000,
+  "returnedUsd": null,
+  "chains": [
+    "Base"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "reentrancy",
+  "technique": "Reentrancy",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "reentrancy",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "reentrancy",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.01,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "Reentrancy. Lost: ~501K US$ (133.7 WETH)",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Reentrancy. Lost: ~501K US$ (133.7 WETH)"
+    },
+    {
+      "source": "REKT",
+      "text": "$500k vanished from Clober DEX when code changes met one of DeFi's oldest vulnerabilities. The twist? The exploit code wasn't there during the audits. Some security lessons write themselves."
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The exploit was a reentrancy vulnerability within the LP token burning process. The burn function in the Rebalancer contract called the burnHook function on the strategy contract *before* updating the internal state of the pool (specifically, reducing the LP token supply and transferring the underlying assets). The attacker exploited this by creating a trading pool with a malicious strategy contract. This malicious burnHook function (burnHook in the CloberDex test contract) re-entered the burn function *before* the initial burn operation's state changes were applied, allowing the attacker to withdraw the underlying WETH multiple times for the same initial LP token burn. Vulnerable code snippet: Attack tx: https://basescan.org/tx/0x8fcdfcded45100437ff94801090355f2f689941dca75de9a702e01670f361c04 Analysis: https://lunaray.medium.com/cloberdex-hack-analysis-04bc7cd3cbc4"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Clober DEX liquidity vault on Base Network was exploited resulting in a loss of 133.7 ETH (~$501k). The root cause of the attack was a reentrancy vulnerability in the _burn() function of the Rebalancer contract."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On December 10, 2024, the Clober Liquidity Vault on Base was exploited via a reentrancy vulnerability in the Rebalancer contract, resulting in the loss of 133.7 ETH (approx. $501,000). The attacker exploited flawed ordering in a burn function, draining assets before reserve balances were updated. The Rebalancer contract’s _burn function made external token transfers before updating internal reserve balances. This allowed a malicious strategy contract to re-enter the _burn function and drain funds due to stale reserves, exploiting a missing reentrancy guard and a violated checks-effects-interactions pattern."
+    }
+  ],
+  "audit": "Kupia Security",
+  "txHashes": [
+    "0x8fcdfcded45100437ff94801090355f2f689941dca75de9a702e01670f361c04"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-12/CloberDEX_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-12/CloberDEX_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/peckshield/status/1866443215186088048"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Clober Dex - Rekt",
+      "url": "https://rekt.news/cloberdex-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "basescan.org",
+      "url": "https://basescan.org/tx/0x8fcdfcded45100437ff94801090355f2f689941dca75de9a702e01670f361c04"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "lunaray.medium.com",
+      "url": "https://lunaray.medium.com/cloberdex-hack-analysis-04bc7cd3cbc4"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x8fcdfcded45100437ff94801090355f2f689941dca75de9a702e01670f361c04"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/CloberDEX/status/1866426442294469033"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/clober-liquidity-vault-2024-12-10"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.solidityscan.com",
+      "url": "https://blog.solidityscan.com/cloberdex-liquidity-vault-hack-analysis-f22eb960aa6f/"
+    },
+    {
+      "source": "revertiq",
+      "label": "certik.com",
+      "url": "https://www.certik.com/blog/clober-dex-incident-analysis"
+    }
+  ]
+}

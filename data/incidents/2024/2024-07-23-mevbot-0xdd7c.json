@@ -1,0 +1,76 @@
+{
+  "id": "2024-07-23-mevbot-0xdd7c",
+  "name": "MEVbot_0xdd7c",
+  "date": "2024-07-23",
+  "year": 2024,
+  "amountUsd": 18000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Incorrect input validation",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.98). Replaced keyword guess \"input-validation\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.98,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.98
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.01
+      },
+      {
+        "category": "input-validation",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Incorrect input validation. Lost: ~18k USD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Incorrect input validation. Lost: ~18k USD"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "vulnerability in a MEV bot contract , specifically in the uniswapV3SwapCallback function, which lacked proper access control, allowing unauthorized token transfers. The MEV bot contract lacks proper access control in itsuniswapV3SwapCallback function. This function is intended to be called by Uniswap V3 after a swap operation, but it was not restricted to only being callable by Uniswap. As a result, an attacker was able to call this function directly and manipulate the MEV bot's logic, leading to a loss of funds. Vulnerable code snippet: The contract is not verified on Etherscan. Attack tx: https://app.blocksec.com/explorer/tx/eth/0x53334c36502bd022bd332f2aa493862fd8f722138d1989132a46efddcc6b04d4 Analysis: https://x.com/SlowMist_Team/status/1815656653100077532"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x53334c36502bd022bd332f2aa493862fd8f722138d1989132a46efddcc6b04d4"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-07/MEVbot_0xdd7c_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-07/MEVbot_0xdd7c_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/1815656653100077532"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/eth/0x53334c36502bd022bd332f2aa493862fd8f722138d1989132a46efddcc6b04d4"
+    }
+  ]
+}

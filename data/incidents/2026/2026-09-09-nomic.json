@@ -1,0 +1,62 @@
+{
+  "id": "2026-09-09-nomic",
+  "name": "Nomic",
+  "date": "2026-09-09",
+  "year": 2026,
+  "amountUsd": 3150000,
+  "returnedUsd": null,
+  "chains": [
+    "Nomic"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "bridge-crosschain",
+  "technique": "Unbacked Cross-Chain Mint",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "bridge-crosschain",
+    "confidence": 0.95,
+    "top": [
+      {
+        "category": "bridge-crosschain",
+        "p": 0.95
+      },
+      {
+        "category": "logic-error",
+        "p": 0.05
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": true,
+  "language": "Rust",
+  "rootCause": "An attacker exploited a bug in Nomic’s custom forwarding mechanism to double-spend nBTC and send unbacked vouchers to Osmosis. Osmosis and IBC themselves were not compromised. 39.84 nBTC of the minted supply sat in Alloyed BTC (~36% of its backing). Osmosis froze Nomic and Alloyed BTC flows, upgraded with validators, and froze 22.65 BTC in the attacker’s address. Governance will be asked to seize those funds and cover the rest from the community pool.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "An attacker exploited a bug in Nomic’s custom forwarding mechanism to double-spend nBTC and send unbacked vouchers to Osmosis. Osmosis and IBC themselves were not compromised. 39.84 nBTC of the minted supply sat in Alloyed BTC (~36% of its backing). Osmosis froze Nomic and Alloyed BTC flows, upgraded with validators, and froze 22.65 BTC in the attacker’s address. Governance will be asked to seize those funds and cover the rest from the community pool."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/osmosis/status/2097623097696251926"
+    }
+  ]
+}

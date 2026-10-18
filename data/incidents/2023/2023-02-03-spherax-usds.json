@@ -1,0 +1,77 @@
+{
+  "id": "2023-02-03-spherax-usds",
+  "name": "Spherax USDs",
+  "date": "2023-02-03",
+  "year": 2023,
+  "amountUsd": 309000,
+  "returnedUsd": null,
+  "chains": [
+    "Arbitrum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Balance Recalculation Bug",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.82). Replaced keyword guess \"logic-error\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.82,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.83
+      },
+      {
+        "category": "logic-error",
+        "p": 0.17
+      }
+    ],
+    "flashLoan": 0.09,
+    "stateActor": 0.01,
+    "hasRootCause": 0.93
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Balance Recalculation Bug. Lost: ~309k USDs (Stablecoin)",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Balance Recalculation Bug. Lost: ~309k USDs (Stablecoin)"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Flawed internal accounting systems USDS has three different accounting systems, two separate auto-migration systems, and all share the same variables, just interpret their meaning differently. Thus, all account variables have to be updated together in order to accurately calculate a user's balance. However, due to improper implementation, these critical updates were not performed accurately, leading to the attack. Vulnerable code snippet: danielvf: Attack tx: https://arbiscan.io/tx/0xfaf84cabc3e1b0cf1ff1738dace1b2810f42d98baeea17b146ae032f0bdf82d5 Analysis: https://medium.com/sperax/usds-feb-3-exploit-report-from-engineering-team-9f0fd3cef00c https://twitter.com/danielvf/status/1621965412832350208"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xfaf84cabc3e1b0cf1ff1738dace1b2810f42d98baeea17b146ae032f0bdf82d5"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-02/USDs_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-02/USDs_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/danielvf/status/1621965412832350208"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "medium.com",
+      "url": "https://medium.com/sperax/usds-feb-3-exploit-report-from-engineering-team-9f0fd3cef00c"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "arbiscan.io",
+      "url": "https://arbiscan.io/tx/0xfaf84cabc3e1b0cf1ff1738dace1b2810f42d98baeea17b146ae032f0bdf82d5"
+    }
+  ]
+}

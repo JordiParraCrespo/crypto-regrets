@@ -1,0 +1,87 @@
+{
+  "id": "2024-02-09-playdapp",
+  "name": "PlayDapp",
+  "date": "2024-02-09",
+  "year": 2024,
+  "amountUsd": 290000000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "key-compromise",
+  "technique": "Hot Wallet Key Compromised",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "key-compromise",
+    "confidence": 0.93,
+    "top": [
+      {
+        "category": "key-compromise",
+        "p": 0.93
+      },
+      {
+        "category": "access-control",
+        "p": 0.07
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.03,
+    "hasRootCause": 0.84
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "The blockchain gaming platform PlayDapp was hacked, with the attacker's address being added as a minter, minting 200 million PLA tokens (valued at $36.5 million). Shortly after the incident, PlayDapp sent a message to the attacker through on-chain transactions, requesting the return of the stolen funds and offering a $1 million bug bounty reward, but negotiations ultimately failed. On February 12, the hacker minted an additional 1.59 billion PLA tokens, valued at $253.9 million, and began transferring them through cryptocurrency trading platforms. On February 13, PlayDapp announced on Twitter that the PLA smart contract had been paused, while also advi…",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The blockchain gaming platform PlayDapp was hacked, with the attacker's address being added as a minter, minting 200 million PLA tokens (valued at $36.5 million). Shortly after the incident, PlayDapp sent a message to the attacker through on-chain transactions, requesting the return of the stolen funds and offering a $1 million bug bounty reward, but negotiations ultimately failed. On February 12, the hacker minted an additional 1.59 billion PLA tokens, valued at $253.9 million, and began transferring them through cryptocurrency trading platforms. On February 13, PlayDapp announced on Twitter that the PLA smart contract had been paused, while also advi…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "PlayDapp's PLA token on Ethereum was compromised in February 2024 after an attacker obtained a privileged admin key, added themselves as a minter, and minted 1.79 billion PLA. Only about $32 million was converted; the rest was rendered worthless as exchanges froze tokens and migration excluded attacker-minted PLA. A privileged token contract admin key was compromised, allowing an unauthorized address to gain mint privileges and inflate the token supply without restriction, due to lack of multi-signature or timelock protection."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "playdapp.medium.com",
+      "url": "https://playdapp.medium.com/important-notice-pla-mitigation-plan-a52f15ad0d42"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/explained-the-playdapp-2024-02-14t12-05-04-719000-00-00"
+    },
+    {
+      "source": "revertiq",
+      "label": "halborn.com",
+      "url": "https://www.halborn.com/blog/post/explained-the-playdapp-hack-february-2024"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/defi-rekt-report-over-148-million-lost-in-february-2024"
+    },
+    {
+      "source": "revertiq",
+      "label": "blockchainbreaches.com",
+      "url": "https://www.blockchainbreaches.com/en/breaches/playdapp-2024"
+    }
+  ]
+}

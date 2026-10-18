@@ -1,0 +1,112 @@
+{
+  "id": "2026-05-23-mure",
+  "name": "Mure",
+  "date": "2026-05-23",
+  "year": 2026,
+  "amountUsd": 11700,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "signature-crypto",
+  "technique": "Signature Verification Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "signature-crypto",
+    "confidence": 0.8,
+    "top": [
+      {
+        "category": "signature-crypto",
+        "p": 0.81
+      },
+      {
+        "category": "access-control",
+        "p": 0.15
+      },
+      {
+        "category": "input-validation",
+        "p": 0.03
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.01,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Signature Verification Bypass. Lost: ~5.45 ETH",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Signature Verification Bypass. Lost: ~5.45 ETH"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The Mure Distribution contract's distribute function moves tokens from a victim to an arbitrary recipient based on a Distribution struct plus a signer/signature, but it let the caller supply the signer address and validated the signature via ERC-1271 against that caller-controlled signer. The attacker deployed a malicious contract that (a) implements isValidSignature to always return the ERC-1271 magic value, (b) implements supportsInterface/poolState to masquerade as a legitimate Mure pool/source, and passed itself as both source and signer. With validation thus self-satisfied, the attacker called distribute to pull 4,848,683,803,036 QUEST from the victim (who had granted allowance to the distributor) into the attacker contract, then routed QUEST -> USDC -> WETH via Uniswap V3 and unwrapped to ~5.45 ETH. The root cause is that signature/pool verification trusted attacker-supplied contracts instead of binding to a fixed trusted signer. Vulnerable code snippet: Attack Tx: https://etherscan.io/tx/0xb83040361a0ec72fa2d06ad69493226518a5f8b5d96c19b400626248f9c5b798 Analysis: https://x.com/DefimonAlerts/status/2058211424761942226"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Mure’s MureDistribution proxy contract on Ethereum was exploited due to an access control vulnerability in signature validation. The attacker supplied a malicious contract as the “signer source,” causing SignatureChecker to return true and bypass verification. This allowed draining 4.85M QUEST tokens (pre-approved to the proxy) via transferFrom, which were then swapped for ~5.45 ETH (~$11,700) on Uniswap. No user funds or main payment infrastructure were affected; it was a targeted logic flaw in one distribution contract."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "The MureDistribution contract on Ethereum Mainnet was exploited on 21 May 2026, allowing an attacker to drain approximately 4.85 million QUEST tokens, worth about $11,700, from an externally approved wallet. The attacker circumvented signature verification by supplying an attacker-controlled contract as both the source and the verifier, exploiting the contract's reliance on user-supplied data for authorization. The contract based signature verification and the authoritative signer identity on a user-supplied contract. This contract was only checked for a self-declared interface (via ERC-165) and not authenticated against any trusted registry. As a resu…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xb83040361a0ec72fa2d06ad69493226518a5f8b5d96c19b400626248f9c5b798"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-05/MureDistribution_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-05/MureDistribution_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xb83040361a0ec72fa2d06ad69493226518a5f8b5d96c19b400626248f9c5b798"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/DefimonAlerts/status/2058211424761942226"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/clarahacks/status/2058341669603307880"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/mure-2026-05-23"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/mure-hack-2026"
+    },
+    {
+      "source": "revertiq",
+      "label": "monitoringroom.com",
+      "url": "https://monitoringroom.com/situation/crypto-hack/mure"
+    }
+  ]
+}

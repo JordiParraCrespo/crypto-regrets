@@ -1,0 +1,133 @@
+{
+  "id": "2024-06-10-uwu-lend",
+  "name": "UwU Lend",
+  "date": "2024-06-10",
+  "year": 2024,
+  "amountUsd": 20000000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.97,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Price Manipulation. Lost: 19.3M",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Price Manipulation. Lost: 19.3M"
+    },
+    {
+      "source": "REKT",
+      "text": "The velo in Velocore proved too fast and furious, as the L2 DEX lost over $6.8 million in a devastating exploit on June 2nd across its pools on Linea and zkSync."
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "UwU Lend's price oracle for sUSDE derived spot prices from Curve pool reserve balances, making it trivially manipulable within a single transaction using large flash loans. The attacker assembled layered flash loans totalling hundreds of millions of dollars across Aave, Spark, Morpho Blue, a Uniswap V3 pair, Balancer, and MakerDAO. They first sold enormous volumes of USDE into five Curve pools to crash the sUSDE oracle price by a measurable ratio. At the artificially depressed sUSDE price, a helper contract deposited WETH collateral and borrowed sUSDE to the maximum LTV, then withdrew just enough WETH to push the position to the liquidation threshold. The attacker then reversed all five Curve swaps to restore the sUSDE price to normal. Now the helper's sUSDE debt was revalued at the original price while its WETH collateral was insufficient — creating a self-manufactured bad-debt position. The attacker liquidated this position, receiving WETH at the liquidation bonus discount. The attacker then used the stolen sUSDE as fresh collateral in a BorrowHelper contract to drain every remaining DAI, USDT, WETH, and WBTC from the UwU Lend protocol reserves, netting approximately $19.3M. Vulnerable code snippet: Attack Tx: 0x242a0fb4fde9de0dc2fd42e8db743cbc197ffa2bf6a036ba0bba303df296408b Analysis: Phalcon_xyz thread"
+    },
+    {
+      "source": "SlowMist",
+      "text": "On June 10, 2024, according to the security monitoring system MistEye by SlowMist, the digital asset lending platform UwU Lend on the EVM chain was attacked, resulting in a loss of approximately $19.3 million. The attacker manipulated the price oracle by making large exchanges in the CurveFinance pool, affecting the price of the sUSDE token, and used the manipulated price to arbitrage other assets from the pool."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "UwU Lend on Ethereum lost about $23.1 million across attacks on 2024-06-10 and 2024-06-13 after an attacker manipulated the sUSDe oracle that the pool used for collateral and liquidation checks. UwU Lend priced sUSDe from a median of 11 sources, including five Curve pool spot feeds that could be moved inside one atomic transaction. The lending pool trusted that manipulated price for borrow capacity and liquidation checks, so the attacker could shift account health before the oracle recovered."
+    }
+  ],
+  "audit": "Peckshield",
+  "txHashes": [
+    "0x242a0fb4fde9de0dc2fd42e8db743cbc197ffa2bf6a036ba0bba303df296408b",
+    "0x9235e0662e230bdfa94f56f4932fd09a95fea17e4b9b44a4f40a59449e216110",
+    "0xca1bbf3b320662c89232006f1ec6624b56242850f07e0f1dadbe4f69ba0d6ac3",
+    "0xb3f067618ce54bc26a960b660cfc28f9ea0315e2e9a1a855ede1508eb4017376"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-06/UwuLend_First_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-06/UwuLend_First_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/peckshield/status/1800176089316163831"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Uwulend - Rekt",
+      "url": "https://rekt.news/uwulend-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/eth/0x242a0fb4fde9de0dc2fd42e8db743cbc197ffa2bf6a036ba0bba303df296408b"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Phalcon_xyz/status/1800454428870275359"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x9235e0662e230bdfa94f56f4932fd09a95fea17e4b9b44a4f40a59449e216110"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/1800181916857155761"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/decoding-uwu-lend-s-19-4-million-2024-06-11"
+    },
+    {
+      "source": "revertiq",
+      "label": "quillaudits.com",
+      "url": "https://www.quillaudits.com/blog/hack-analysis/uwu-lend-hack"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/past/2024/README.md#L1454"
+    },
+    {
+      "source": "revertiq",
+      "label": "raw.githubusercontent.com",
+      "url": "https://raw.githubusercontent.com/SunWeb3Sec/DeFiHackLabs/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/src/test/2024-06/UwuLend_First_exp.sol"
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "id": "2024-10-25-aark-aark-digital",
+  "name": "AARK (Aark Digital)",
+  "date": "2024-10-25",
+  "year": 2024,
+  "amountUsd": 1900000,
+  "returnedUsd": null,
+  "chains": [
+    "Arbitrum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Decimal Miscalculation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.95,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.95
+      },
+      {
+        "category": "logic-error",
+        "p": 0.03
+      },
+      {
+        "category": "access-control",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.81
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "During a routine GM token burn, Aark Digital encountered a callback error due to a third-party contract modification. To resolve this, Aark Digital initiated a contract upgrade and GM delisting to adjust affected user balances. Users holding GM were required to convert GM to USDC. Aark Digital ran a script to process these conversions, receiving inputs like target user, amount, token address, and decimals from event data. While executing, a single user’s USD Value shifted erroneously from 0.498942 to 498,942 * (10 ^ 12), due to an incorrect balance update (not from a deployed contract error). Exploiting this security vulnerability, the attacker caused…",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "During a routine GM token burn, Aark Digital encountered a callback error due to a third-party contract modification. To resolve this, Aark Digital initiated a contract upgrade and GM delisting to adjust affected user balances. Users holding GM were required to convert GM to USDC. Aark Digital ran a script to process these conversions, receiving inputs like target user, amount, token address, and decimals from event data. While executing, a single user’s USD Value shifted erroneously from 0.498942 to 498,942 * (10 ^ 12), due to an incorrect balance update (not from a deployed contract error). Exploiting this security vulnerability, the attacker caused…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Aark Digital reported that a 2024-10-25 exploit on Arbitrum stemmed from an incorrect balance adjustment during a GM-to-USDC conversion process, not from a publicly identified on-chain contract bug. Public evidence supports the date, approximate $1.9 million impact, Aark's initial and revised loss figures, and its bounty offer, but not the exploit transactions or vulnerable historical code. According to Aark Digital's post-incident explanation as reproduced in public incident archives, the loss came from an incorrect off-chain balance update during GM-to-USDC conversion after a GM delisting. A script that processed event-derived inputs, including decim…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "aarkdigital.medium.com",
+      "url": "https://aarkdigital.medium.com/incident-of-october-25th-d074f32d6535"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/aark-2024-10-25"
+    },
+    {
+      "source": "revertiq",
+      "label": "crowdfundinsider.com",
+      "url": "https://www.crowdfundinsider.com/2024/10/231673-security-breach-prompts-aark-digital-to-issue-225k-bounty/"
+    },
+    {
+      "source": "revertiq",
+      "label": "quadrigainitiative.com",
+      "url": "https://quadrigainitiative.com/casestudy/aarkdigitalincorrectbalanceupdateexploit.php"
+    }
+  ]
+}

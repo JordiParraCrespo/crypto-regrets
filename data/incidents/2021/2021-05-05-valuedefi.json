@@ -1,0 +1,68 @@
+{
+  "id": "2021-05-05-valuedefi",
+  "name": "ValueDefi",
+  "date": "2021-05-05",
+  "year": 2021,
+  "amountUsd": 10000000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "2 for 1, that’s Value DeFi - The first protocol to feature twice on the rekt leaderboard. First seven million, and now ten million dollars taken, as Value DeFi gets rekt cross-chains.",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "2 for 1, that’s Value DeFi - The first protocol to feature twice on the rekt leaderboard. First seven million, and now ten million dollars taken, as Value DeFi gets rekt cross-chains."
+    },
+    {
+      "source": "SlowMist",
+      "text": "Value DeFi stated that at 11:22 on May 5th, the attacker reinitialized the fund pool and set the operator role to himself, and _stakeToken was set to HACKEDMONEY. The attacker controlled the pool and called governmentRecoverUnsupported (), which was exhausted. The original pledge token (vBWAP/BUSD LP). Then, the attacker removes 10839.16 vBWAP/BUSD LP and liquidity, and obtains 7342.75 vBSWAP and 205659.22 BUSD. Subsequently, the attacker sells all 7342.75 vBSWAP at 1inch to obtain 8790.77 BNB, and buys BNB and BUSD renBTC through renBridge. Converted to BTC. The attacker made a total of 205,659.22 BUSD and 8,790.77 BNB. The 2802.75 vBSWAP currently in…"
+    }
+  ],
+  "audit": "Unaudited",
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Value DeFi - REKT 2",
+      "url": "https://rekt.news/value-rekt2"
+    },
+    {
+      "source": "slowmist",
+      "label": "medium.com",
+      "url": "https://medium.com/valuedefi/vstake-pool-incident-post-mortem-4550407c9714"
+    }
+  ]
+}

@@ -1,0 +1,102 @@
+{
+  "id": "2024-10-22-vista-finance",
+  "name": "Vista Finance",
+  "date": "2024-10-22",
+  "year": 2024,
+  "amountUsd": 28000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Incorrect Share Accounting",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.79,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.8
+      },
+      {
+        "category": "access-control",
+        "p": 0.09
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.09
+      }
+    ],
+    "flashLoan": 0.91,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "flashmint receive error. Lost: $28,000",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "flashmint receive error. Lost: $28,000"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The VISTA token contract contained a critical flaw in its flashLoan implementation where it allowed users to borrow tokens that were supposed to be frozen. When handling flash loans, the contract burned the borrowed tokens but failed to verify if those tokens were in a frozen state. This enabled the attacker to effectively \"unfreeze\" tokens by borrowing them through the flash loan functionality, then accessing the freed balance and selling it through the sale contract. The combination of token freezing mechanics with the flashLoan implementation created a bypass for the token's intended transfer restrictions Vulnerable code snippet: Attack tx: https://app.blocksec.com/explorer/tx/bsc/0x84c385aab658d86b64e132e8db0c092756d5a9331a1131bf05f8214d08efba56 Analysis: https://x.com/TenArmorAlert/status/1848403791881900130"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Vista Finance on BNB Chain was exploited on October 21, 2024, for approximately $29,000. The attacker leveraged a staking logic flaw allowing flash-minted tokens to bypass staking restrictions and be sold for immediate profit. The staking logic failed to enforce restrictions during flash-loan minting and burning. The _burn function adjusted user balances directly, not considering staked tokens tracked by getFreeBalance, allowing the attacker to sell tokens that should have been locked."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x84c385aab658d86b64e132e8db0c092756d5a9331a1131bf05f8214d08efba56"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-10/VISTA_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-10/VISTA_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/TenArmorAlert/status/1848403791881900130"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/bsc/0x84c385aab658d86b64e132e8db0c092756d5a9331a1131bf05f8214d08efba56"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/vista-finance-2024-10-22"
+    },
+    {
+      "source": "revertiq",
+      "label": "olympix.security",
+      "url": "https://olympix.security/biweekly-exploits/m2-exchange-dcf-and-vista-finance-hit-by-access-control-flaws-price-games-and-staking-logic-gaps"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/vista-finance-hack-2024"
+    }
+  ]
+}

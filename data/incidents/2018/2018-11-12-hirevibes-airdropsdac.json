@@ -1,0 +1,82 @@
+{
+  "id": "2018-11-12-hirevibes-airdropsdac",
+  "name": "HireVibes AirDropsDAC",
+  "date": "2018-11-12",
+  "year": 2018,
+  "amountUsd": 13600,
+  "returnedUsd": null,
+  "chains": [
+    "EOS"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "key-compromise",
+  "technique": "Private Key Compromised",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "key-compromise",
+    "confidence": 0.97,
+    "top": [
+      {
+        "category": "key-compromise",
+        "p": 0.97
+      },
+      {
+        "category": "access-control",
+        "p": 0.03
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.03,
+    "hasRootCause": 0.57
+  },
+  "bridge": false,
+  "language": "C++",
+  "rootCause": "A large number of HVTs in the AirDropsDAC contract account were transferred to the sym111111add account under abnormal operation, the account was then exchanged for 2,514 EOS at Newdex, which was subsequently transferred to the gizdkmjvhege account.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "A large number of HVTs in the AirDropsDAC contract account were transferred to the sym111111add account under abnormal operation, the account was then exchanged for 2,514 EOS at Newdex, which was subsequently transferred to the gizdkmjvhege account."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "The HireVibes AirDropsDAC EOS airdrop service was exploited on November 12, 2018, when a developer test account’s private key was inadvertently published to a public Github repository. Attackers used the compromised key to siphon HVT and ZKS tokens, selling at least 2,514 EOS (~$13,600) via Newdex and consolidating proceeds in attacker addresses. A developer's test account private key was publicly exposed on Github as part of a testnet script repository. The attacker obtained the compromised key and used it to transfer airdrop tokens from AirDropsDAC, liquidate them, and move the proceeds off-platform."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "mp.weixin.qq.com",
+      "url": "https://mp.weixin.qq.com/s/DnhtzdWeRziK030FSolDbA"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/hirevibes-airdropsdac-2018-11-12"
+    },
+    {
+      "source": "revertiq",
+      "label": "medium.com",
+      "url": "https://medium.com/@eosiosg/announcement-regarding-recent-exploit-event-efe8a1ad5d90"
+    },
+    {
+      "source": "revertiq",
+      "label": "bitnewsbot.com",
+      "url": "https://bitnewsbot.com/airdropsdac-investigates-hack/"
+    }
+  ]
+}

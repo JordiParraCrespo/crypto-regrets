@@ -1,0 +1,75 @@
+{
+  "id": "2024-07-16-li-fi-8-000-000",
+  "name": "LI.FI – $8,000,000",
+  "date": "2024-07-16",
+  "year": 2024,
+  "amountUsd": 11600000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum",
+    "Arbitrum"
+  ],
+  "targetType": null,
+  "category": "arbitrary-call",
+  "technique": "Arbitrary Call; Calldata Injection; Infinite Token Approval",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.99). Replaced keyword guess \"bridge-crosschain\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "arbitrary-call",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "arbitrary-call",
+        "p": 0.99
+      },
+      {
+        "category": "access-control",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "On July 16, 2024, the LI.FI cross-chain protocol was exploited via a vulnerability in its GasZipFacet contract, allowing attackers to drain ~$11.6M from users who had granted infinite token approvals across Ethereum and Arbitrum. The attacker leveraged arbitrary calldata injection to drain funds, predominantly from USDT, USDC, and DAI holdings. The GasZipFacet's depositToGasZipERC20 function accepted attacker-controlled calldata for low-level arbitrary calls via LibSwap, bypassing a required whitelist check. Because the proxy held infinite token approvals from users, the attacker could invoke transferFrom() on victim assets by manipulating input data.",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "On July 16, 2024, the LI.FI cross-chain protocol was exploited via a vulnerability in its GasZipFacet contract, allowing attackers to drain ~$11.6M from users who had granted infinite token approvals across Ethereum and Arbitrum. The attacker leveraged arbitrary calldata injection to drain funds, predominantly from USDT, USDC, and DAI holdings. The GasZipFacet's depositToGasZipERC20 function accepted attacker-controlled calldata for low-level arbitrary calls via LibSwap, bypassing a required whitelist check. Because the proxy held infinite token approvals from users, the attacker could invoke transferFrom() on victim assets by manipulating input data."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xd82fe84e63b1aa52e1ce540582ee0895ba4a71ec5e7a632a3faa1aff3e763873",
+    "0x65a92b189e4ae0b8a8a02cd59c5e9f6832586bd5167d41a24eb4f4d2ac692755"
+  ],
+  "poc": null,
+  "sources": [
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/li-fi-8-000-000-2024-07-16"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/defi-rekt-report-over-250m-lost-in-july-2024"
+    },
+    {
+      "source": "revertiq",
+      "label": "li.fi",
+      "url": "https://li.fi/knowledge-hub/incident-report-16th-july"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptonews.com",
+      "url": "https://cryptonews.com/news/lifi-protocol-releases-post-mortem-report-on-recent-11-6-million-hack/"
+    }
+  ]
+}

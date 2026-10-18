@@ -1,0 +1,80 @@
+{
+  "id": "2022-05-18-feminist-metaverse",
+  "name": "Feminist Metaverse",
+  "date": "2022-05-18",
+  "year": 2022,
+  "amountUsd": 540000,
+  "returnedUsd": null,
+  "chains": [
+    "Binance Smart Chain"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.11
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "The Feminist Metaverse project on BNB Chain was attacked. The attackers have transferred 1838 BNB to Tornado.cash, about $540,000.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The Feminist Metaverse project on BNB Chain was attacked. The attackers have transferred 1838 BNB to Tornado.cash, about $540,000."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Feminist Metaverse was exploited on BNB Chain on 18 May 2022, losing 1,838 BNB (~$540,000) when an attacker extracted unaccounted FM_Token from a liquidity pool using improper reserve accounting and the skim() function. The stolen funds were swapped for BNB and moved to Tornado.cash. The victim's FM_Token contract allowed direct token transfers to the SakeSwapPair contract without updating the pair's internal reserves. This imbalance enabled the attacker to repeatedly extract excess tokens via the skim() function."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xfdc90e060004dd902204673831dce466dcf7e8519a79ccf76b90cd6c1c8b320d"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/FM_Token/status/1526945914061049856"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/feminist-metaverse-2022-05-18"
+    },
+    {
+      "source": "revertiq",
+      "label": "medium.com",
+      "url": "https://medium.com/coinmonks/analysis-of-attack-on-feminist-metaverse-77e3e25d5963/"
+    },
+    {
+      "source": "revertiq",
+      "label": "official.beosin.com",
+      "url": "https://official.beosin.com/resources/analysis-of-attack-on-feminist-metaverse"
+    }
+  ]
+}

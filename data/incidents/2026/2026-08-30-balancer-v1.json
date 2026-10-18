@@ -1,0 +1,92 @@
+{
+  "id": "2026-08-30-balancer-v1",
+  "name": "Balancer V1",
+  "date": "2026-08-30",
+  "year": 2026,
+  "amountUsd": 234000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Rounding Error",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.99
+      },
+      {
+        "category": "logic-error",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.09,
+    "stateActor": 0.02,
+    "hasRootCause": 0.81
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "joinswapPoolAmountOut rounding drain across 5 pools. Lost: ~$110,839 for this DPI/USDC/WETH/WBTC pool (~$234K aggregate across all 5 vulnerable pools)",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "joinswapPoolAmountOut rounding drain across 5 pools. Lost: ~$110,839 for this DPI/USDC/WETH/WBTC pool (~$234K aggregate across all 5 vulnerable pools)"
+    },
+    {
+      "source": "SlowMist",
+      "text": "An attacker exploited a rounding/precision vulnerability in legacy Balancer V1 contracts. Using flash loans to compress WBTC reserves to near-zero, they minted a large amount of BPT with only 1 satoshi of WBTC and then proportionally exited to drain DPI, USDC, WETH and WBTC from the pool."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On August 30, 2026, an attacker exploited a rounding error in Balancer V1's join logic on Ethereum Mainnet, draining approximately $234,000 from five legacy pools by compressing WBTC reserves to near-zero and minting pool tokens for negligible input. The bug resulted from single-asset join math that incorrectly rounded in the user's favor when pool balances became very small. Balancer V1's joinswapPoolAmountOut function allowed a user to specify pool-token output, and calculated the required token input using fixed-point math. When the pool's WBTC balance was reduced to near zero, the calculation rounded down, letting the attacker mint large amounts of BPT with a one-satoshi input.…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-08/BalancerV1BPool_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-08/BalancerV1BPool_exp.sol"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/2094272540193722744"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/balancer-v1-2026-08-30"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptotimes.io",
+      "url": "https://www.cryptotimes.io/2026/08/31/balancer-v1-exploit-hits-unmaintained-code-as-forks-remain-exposed/"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/src/test/2026-08/BalancerV1BPool_exp.sol"
+    }
+  ]
+}

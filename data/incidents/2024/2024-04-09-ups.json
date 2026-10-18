@@ -1,0 +1,86 @@
+{
+  "id": "2024-04-09-ups",
+  "name": "UPS",
+  "date": "2024-04-09",
+  "year": 2024,
+  "amountUsd": 28000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "business logic flaw",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.98).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.98,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.98
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.01
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.93
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "business logic flaw. Lost: $~28K USD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "business logic flaw. Lost: $~28K USD"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The UPS token was exploited due to a flawed transfer implementation. When tokens are transferred to the Pancake pair, they are burned at the pair and the \"skim\" function is called. This caused the UPS reserve to shrink significantly, allowing the hacker to drain BUSD from the pair using just a few UPS tokens. Vulnerable code snippet: Attack tx: 0xd03702e17171a32464 | Phalcon Explorer Analysis: Root cause: Vulnerable code snippet: Attack tx: Analysis:"
+    },
+    {
+      "source": "SlowMist",
+      "text": "UPS on BNBChain was attacked and lost ~$30K."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xd03702e17171a32464ce748b8797008d59e2dbcecd3b3847d5138414566c886d"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-04/UPS_exp.sol",
+  "sources": [
+    "defihacklabs",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-04/UPS_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0x3da4828640ad831f3301a4597821cc3461b06678"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/bsc/0xd03702e17171a32464ce748b8797008d59e2dbcecd3b3847d5138414566c886d"
+    },
+    {
+      "source": "slowmist",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0xafea61edb932f816550ef7241e62355d4d50be1bdb7727d69a7a9fb4d510482e"
+    }
+  ]
+}

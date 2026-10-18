@@ -1,0 +1,97 @@
+{
+  "id": "2026-07-08-bfb",
+  "name": "BFB",
+  "date": "2026-07-08",
+  "year": 2026,
+  "amountUsd": 197800,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "Token",
+  "category": "accounting-math",
+  "technique": "Incorrect Share Accounting",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.33,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.37
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.35000000000000003
+      },
+      {
+        "category": "access-control",
+        "p": 0.24
+      }
+    ],
+    "flashLoan": 0.85,
+    "stateActor": 0.01,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Flash loan exploit targeting deflationary reserve-burn logic in _priceDeflPool() (Contract.sol:448). Function burns 5% of LP pair's BFB and calls sync() when price drops >5% below fallLastPrice. Guard only required EOA checks, allowing attacker to trigger repeatedly with zero-value self-transfers across 151 rounds. Collapsed BFB/WBNB pair reserve toward zero, enabling dust BFB swaps for entire WBNB reserve (~350.6 WBNB). Attack Tx: https://bscscan.com/tx/0xabcf5c5c846595b2d0849f2579b67465ed8d06f3b469cee5e3a57c1f7aed3520 Source: https://twitter.com/DefimonAlerts/status/2075080496573284853",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Flash loan exploit targeting deflationary reserve-burn logic in _priceDeflPool() (Contract.sol:448). Function burns 5% of LP pair's BFB and calls sync() when price drops >5% below fallLastPrice. Guard only required EOA checks, allowing attacker to trigger repeatedly with zero-value self-transfers across 151 rounds. Collapsed BFB/WBNB pair reserve toward zero, enabling dust BFB swaps for entire WBNB reserve (~350.6 WBNB). Attack Tx: https://bscscan.com/tx/0xabcf5c5c846595b2d0849f2579b67465ed8d06f3b469cee5e3a57c1f7aed3520 Source: https://twitter.com/DefimonAlerts/status/2075080496573284853"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "BFB Token was exploited on BNB Chain on July 8, 2026, due to zero-value transfer abuse in its price-defense logic. The attacker drained approximately 350.62 WBNB (~$197,800) by repeatedly triggering reserve burns in the PancakeSwap pool without expending tokens. The BFBToken contract failed to check transfer amount before executing price-defense side effects. This enabled repeated zero-value transferFrom() calls,each triggering reserve burns,allowing pool depletion by an attacker without genuine token movement or value input."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xabcf5c5c846595b2d0849f2579b67465ed8d06f3b469cee5e3a57c1f7aed3520",
+    "0x488ceac9d75de47e09ced2761512206a630f36fec7f3140517495bba42ffb31c",
+    "0x8bfe8550ef90f5039b8d0dce81363ecd25ae3e5d17aab2725b6a54b41031d1cf",
+    "0xfc5af78cc551e366b83257193c6ad11127aac79adaeea6e48432b6b45e9825f3",
+    "0x1bae4063394ca3826cb08f6cf9b31f1587c552cd7aa92ce6ab4a5d36d60082ae"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0xabcf5c5c846595b2d0849f2579b67465ed8d06f3b469cee5e3a57c1f7aed3520"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/DefimonAlerts/status/2075080496573284853"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/bfb-2026-07-08"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainaffairs.com",
+      "url": "https://chainaffairs.com/226k-bfb-token-exploit-explained-how-one-smart-contract-flaw-drained-a-liquidity-pool/"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptonews.net",
+      "url": "https://cryptonews.net/news/security/33129366/"
+    }
+  ]
+}

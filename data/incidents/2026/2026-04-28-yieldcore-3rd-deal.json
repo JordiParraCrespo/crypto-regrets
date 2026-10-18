@@ -1,0 +1,80 @@
+{
+  "id": "2026-04-28-yieldcore-3rd-deal",
+  "name": "YieldCore-3rd-deal",
+  "date": "2026-04-28",
+  "year": 2026,
+  "amountUsd": 398764,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "The YieldCore-3rd-deal vault under Trading Protocol was exploited. The attacker took advantage of a missing caller authorization check in the contract, bypassing the permission mechanism and draining all funds from the vault in one go. The vault was permissionlessly listed (not a core part of the protocol itself). The entire vault was emptied.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The YieldCore-3rd-deal vault under Trading Protocol was exploited. The attacker took advantage of a missing caller authorization check in the contract, bypassing the permission mechanism and draining all funds from the vault in one go. The vault was permissionlessly listed (not a core part of the protocol itself). The entire vault was emptied."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "YieldCore's RWAVault on Ethereum was exploited on April 28, 2026, due to missing authorization checks in its ERC4626 withdraw and redeem functions. This allowed an attacker to withdraw matured principal from other users, draining approximately 392,764 USDC and causing a total vault outflow of 398,655 USDC. YieldCore's RWAVault contract overrode ERC4626 withdraw and redeem, omitting ownership and allowance checks. Any caller could withdraw matured assets from any owner, bypassing the normal ERC4626 requirement that msg.sender be the owner or a valid operator."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x6b04344d5627df59d3bc645e7454f4605a90272852a91e435e370376643353b3"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/DefimonAlerts/status/2049365873069097237"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/yieldcore-2026-04-28"
+    },
+    {
+      "source": "revertiq",
+      "label": "anomly.rs",
+      "url": "https://anomly.rs/yieldcore-rwavault-auth-bypass"
+    },
+    {
+      "source": "revertiq",
+      "label": "darknavy.org",
+      "url": "https://www.darknavy.org/web3/exploits/yieldcore-rwavault-unauthorized-withdrawal/"
+    }
+  ]
+}

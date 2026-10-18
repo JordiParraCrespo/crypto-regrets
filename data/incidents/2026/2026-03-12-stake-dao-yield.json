@@ -1,0 +1,107 @@
+{
+  "id": "2026-03-12-stake-dao-yield",
+  "name": "Stake DAO Yield",
+  "date": "2026-03-12",
+  "year": 2026,
+  "amountUsd": 176000,
+  "returnedUsd": null,
+  "chains": [
+    "Arbitrum",
+    "Base"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Caller Impersonation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.9,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.91
+      },
+      {
+        "category": "social-engineering",
+        "p": 0.04
+      },
+      {
+        "category": "signature-crypto",
+        "p": 0.03
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.8
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Owner-privileged JAKE burn reserve drain. Lost: 0.28 ETH",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Owner-privileged JAKE burn reserve drain. Lost: 0.28 ETH"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Stake DAO’s Votemarket module was exploited. The attacker used a vulnerability in the L1BlockOracleUpdater peripheral contract to inject fabricated L1 block data via the LaPoste cross-chain bridge, poisoning the oracle and forging vote proofs to drain ~$176,000 in campaign incentive rewards across 54 campaigns. The incident was later resolved as a white-hat event with most funds recovered."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On March 12, 2026, Stake DAO's Votemarket peripheral oracle mechanism was exploited via the L1BlockOracleUpdater contract on Arbitrum and Base. The attacker injected fabricated L1 block data, poisoned the Oracle, forged storage proofs, and drained roughly $175,000 in campaign rewards. Core protocol contracts and user deposits were unaffected. Both vulnerable updater contracts were revoked and a treasury-funded community reimbursement was proposed. A flawed sender validation in the L1BlockOracleUpdater.receiveMessage() function allowed any sender from Ethereum mainnet through LaPoste to bypass authorization checks, enabling injection of fabricated block data and subsequent oracle poisoning."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xedf2afc77964d1f64eb3d010b29a1d1500041597ffe88d82b1440a93b74ac548",
+    "0x380e536e1539acf7832e6fe0cc1cc90a4cd8f55045f786981fed48f132179221",
+    "0xeab3c9790e9eedc437d7209f185dc901d8ebddbaeefeeb2a4aa0ec70791365b8",
+    "0xeaf1ef1b0b19eca8c9f3d92e0535c6cc30ed9c0a648ddb7b4301111cfca04237"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-03/unverified_237d_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-03/unverified_237d_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/DefimonAlerts/status/2034532549905580417"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/StakeDAOHQ/status/2036029009054642461"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/stake-dao-2026-03-12"
+    },
+    {
+      "source": "revertiq",
+      "label": "stakedao.org",
+      "url": "https://www.stakedao.org/blog/incident-disclosure-12-03-2026"
+    },
+    {
+      "source": "revertiq",
+      "label": "gov.stakedao.org",
+      "url": "https://gov.stakedao.org/t/sdgp-65-allow-the-refund-of-affected-users-from-the-march-12-2026-incident-from-the-treasury/1117"
+    }
+  ]
+}

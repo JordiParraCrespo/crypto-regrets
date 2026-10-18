@@ -1,0 +1,81 @@
+{
+  "id": "2023-12-28-ccv",
+  "name": "CCV",
+  "date": "2023-12-28",
+  "year": 2023,
+  "amountUsd": 3200,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Precision loss",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.98).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.98,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.98
+      },
+      {
+        "category": "access-control",
+        "p": 0.01
+      },
+      {
+        "category": "logic-error",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.98,
+    "stateActor": 0.01,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Precision loss. Lost: ~3.2K $BUSD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Precision loss. Lost: ~3.2K $BUSD"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "CCV is a deflationary / fee-on-transfer token whose price on the PancakeSwap pair can be manipulated by burning tokens directly out of pool-related addresses. The attacker flash-loaned 100,000 BUSD from a DODO DPP pool and, inside DPPFlashLoanCall, invoked two unprotected functions on the project proxy contracts (0x369baafe and 0xb7da6a49) that operate on the proxies' CCV/BUSD balances. Sandwiched between a BUSD->CCV and CCV->BUSD swap (using swapExactTokensForTokensSupportingFeeOnTransferTokens), these burn/transfer calls reduced the effective CCV reserve and skewed the constant-product price so the round-trip swap returned more BUSD than it cost. The root cause is the token's flawed deflationary accounting combined with precision loss in the fee-on-transfer reserve math. Attack Tx: https://bscscan.com/tx/0x6ba4152db9da45f5751f2c083bf77d4b3385373d5660c51fe2e4382718afd9b4"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x6ba4152db9da45f5751f2c083bf77d4b3385373d5660c51fe2e4382718afd9b4"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-12/CCV_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-12/CCV_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/bsc/0x6ba4152db9da45f5751f2c083bf77d4b3385373d5660c51fe2e4382718afd9b4"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/4b55dffe3e9fd35099c95af728b4af58b75c6b2b/src/test/2023-12/CCV_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x6ba4152db9da45f5751f2c083bf77d4b3385373d5660c51fe2e4382718afd9b4"
+    }
+  ]
+}

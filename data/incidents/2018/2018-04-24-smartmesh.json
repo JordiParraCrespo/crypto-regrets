@@ -1,0 +1,103 @@
+{
+  "id": "2018-04-24-smartmesh",
+  "name": "SmartMesh",
+  "date": "2018-04-24",
+  "year": 2018,
+  "amountUsd": 140000000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "Token",
+  "category": "accounting-math",
+  "technique": "Infinite Mint",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.86,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.87
+      },
+      {
+        "category": "access-control",
+        "p": 0.09999999999999999
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.04,
+    "hasRootCause": 0.19
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Overflow. Lost: 140M",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Overflow. Lost: 140M"
+    },
+    {
+      "source": "SlowMist",
+      "text": "SmartMesh has a significant security like BEC."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On April 24, 2018, SmartMesh's ERC-20 token contract on Ethereum Mainnet was exploited via an unchecked integer overflow in its transferProxy function. The vulnerability enabled attackers to generate vast amounts of counterfeit tokens. Nearly all fake SMT were frozen and destroyed by exchanges, limiting the impact to a small fraction traded before response. Unchecked arithmetic in the transferProxy function allowed integer overflow when summing value and fee parameters, enabling minting of arbitrarily large token amounts outside intended supply controls."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x1abab4c8db9a30e703114528e31dee129a3a758f7f8abc3b6494aad3d304e43f"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2018-04/SmartMesh_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2018-04/SmartMesh_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "cryptojobslist.com",
+      "url": "https://cryptojobslist.com/blog/two-vulnerable-erc20-contracts-deep-dive-beautychain-smartmesh"
+    },
+    {
+      "source": "slowmist",
+      "label": "blockvalue.com",
+      "url": "https://www.blockvalue.com/p/381584.html"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/smartmesh-2018-04-24"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartmesh.io",
+      "url": "https://smartmesh.io/2018/04/26/smt-security-update/"
+    },
+    {
+      "source": "revertiq",
+      "label": "monitoringroom.com",
+      "url": "https://monitoringroom.com/situation/crypto-hack/smartmesh"
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "id": "2018-11-11-eos-win",
+  "name": "EOS.WIN",
+  "date": "2018-11-11",
+  "year": 2018,
+  "amountUsd": 9180,
+  "returnedUsd": null,
+  "chains": [
+    "EOS"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Random number attack",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.48,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.51
+      },
+      {
+        "category": "signature-crypto",
+        "p": 0.34
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.14
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.14
+  },
+  "bridge": false,
+  "language": "C++",
+  "rootCause": "The game contract was attacked by the attacker lockonthecha.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The game contract was attacked by the attacker lockonthecha."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "EOS.WIN, an EOS gambling DApp, was exploited on November 11,12, 2018, allowing attackers to manipulate the random number generation process and gain profits of roughly 9,180 EOS. The attack used multiple coordinated accounts to predict lottery outcomes, exploiting game state and inline transaction rollback. The random number generator used in the EOS.WIN game contract included attacker-controllable variables, specifically the bet_id (lottery serial number), which allowed coordinated accounts to manipulate the outcome by sending simultaneous transactions and predicting the generated random number. Inline call failure and state rollback further enabled attackers to optimize their chances."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "jinse.com",
+      "url": "https://www.jinse.com/lives/63433.htm"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/eos-win-2018-11-11"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/eos-win-hack-2018"
+    },
+    {
+      "source": "revertiq",
+      "label": "odaily.news",
+      "url": "https://www.odaily.news/en/post/5134732"
+    }
+  ]
+}

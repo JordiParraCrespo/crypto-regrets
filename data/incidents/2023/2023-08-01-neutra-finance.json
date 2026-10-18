@@ -1,0 +1,107 @@
+{
+  "id": "2023-08-01-neutra-finance",
+  "name": "Neutra Finance",
+  "date": "2023-08-01",
+  "year": 2023,
+  "amountUsd": 36450,
+  "returnedUsd": null,
+  "chains": [
+    "Arbitrum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.92,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.92
+      },
+      {
+        "category": "input-validation",
+        "p": 0.04
+      },
+      {
+        "category": "logic-error",
+        "p": 0.04
+      }
+    ],
+    "flashLoan": 0.08,
+    "stateActor": 0.02,
+    "hasRootCause": 0.9
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Price Manipulation. Lost: ~$23ETH",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Price Manipulation. Lost: ~$23ETH"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The root cause of the attack lay in the spot price utilized within the conversion function. This stemmed from the existence of two pools sharing the same LP token name (CMLT-LP), allowing conversion between them—specifically, from one pool (CMLT-LP-65eb) to another (CMLT-LP-2ea3) via the conversion function. Vulnerable Code Snippet: Attack Transaction: https://explorer.phalcon.xyz/tx/arbitrum/0x6301d4c9f7ac1c96a65e83be6ea2fff5000f0b1939ad24955e40890bd9fe6122 Analysis: https://twitter.com/phalcon_xyz/status/1686654241111429120?s=46&t=Oc_WAGUoXqc9c0LidD-zww"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 1 August 2023, Neutra Finance’s Arbitrum Convert contract suffered a spot price manipulation exploit. An attacker used a flash loan to inflate an LP token pool's WETH reserve, causing the migration contract to overvalue these tokens and drain nearly all new-LP treasury assets. The attacker netted about 23.57 WETH, leaving Neutra’s migration treasury depleted. The Convert contract valued old LP tokens using the live spot reserve from an AMM pool, with no manipulation resistance. This reserve could be inflated within a single transaction, allowing an attacker to create artificially high redemption value and drain the migration treasury."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x6301d4c9f7ac1c96a65e83be6ea2fff5000f0b1939ad24955e40890bd9fe6122"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-08/NeutraFinance_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-08/NeutraFinance_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/phalcon_xyz/status/1686654241111429120"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "explorer.phalcon.xyz",
+      "url": "https://explorer.phalcon.xyz/tx/arbitrum/0x6301d4c9f7ac1c96a65e83be6ea2fff5000f0b1939ad24955e40890bd9fe6122"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/phalcon_xyz/status/1686654241111429120?s=46&t=Oc_WAGUoXqc9c0LidD-zww"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/neutra-finance-2023-08-01"
+    },
+    {
+      "source": "revertiq",
+      "label": "crypto.training",
+      "url": "https://crypto.training/hacks/2023-08-neutrafinance/"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/past/2023/README.md#L2319"
+    }
+  ]
+}

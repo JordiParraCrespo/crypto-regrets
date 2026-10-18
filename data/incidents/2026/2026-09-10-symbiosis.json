@@ -1,0 +1,89 @@
+{
+  "id": "2026-09-10-symbiosis",
+  "name": "Symbiosis",
+  "date": "2026-09-10",
+  "year": 2026,
+  "amountUsd": 336000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC",
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "bridge-crosschain",
+  "technique": "Unbacked Cross-Chain Mint",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "bridge-crosschain",
+    "confidence": 0.64,
+    "top": [
+      {
+        "category": "bridge-crosschain",
+        "p": 0.66
+      },
+      {
+        "category": "input-validation",
+        "p": 0.28
+      },
+      {
+        "category": "logic-error",
+        "p": 0.03
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": true,
+  "language": "Solidity",
+  "rootCause": "An attacker exploited a vulnerability in Symbiosis’ Bitcoin Bridge (BridgeV2) by abusing incorrect parsing of Bitcoin transaction data and negative fee settings, minting approximately 2622^{62}2^{62} unbacked syBTC (notional face value ~46.1 billion) across BSC, Ethereum and Rootstock within about four minutes, then sold ~4.39 WBTC on Ethereum’s Uniswap V4 for ~$336,000. The team immediately paused native BTC routes, isolated the affected component, evacuated ~15.2 BTC of portal funds to reserve addresses, and offered a 20% white-hat bounty. The post-mortem confirmed total losses for LPs and affected users at 9.97 BTC. Other routes (EVM, TRON, TON, etc.) remained unaffected.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "An attacker exploited a vulnerability in Symbiosis’ Bitcoin Bridge (BridgeV2) by abusing incorrect parsing of Bitcoin transaction data and negative fee settings, minting approximately 2622^{62}2^{62} unbacked syBTC (notional face value ~46.1 billion) across BSC, Ethereum and Rootstock within about four minutes, then sold ~4.39 WBTC on Ethereum’s Uniswap V4 for ~$336,000. The team immediately paused native BTC routes, isolated the affected component, evacuated ~15.2 BTC of portal funds to reserve addresses, and offered a 20% white-hat bounty. The post-mortem confirmed total losses for LPs and affected users at 9.97 BTC. Other routes (EVM, TRON, TON, etc.) remained unaffected."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On September 11, 2026, Symbiosis paused its native Bitcoin bridge after attackers exploited BridgeV2 flaws that allowed unbacked syBTC minting. An observed Ethereum liquidation converted part of the counterfeit supply into about 4.39 WBTC before the bridge was isolated. Symbiosis later attributed the incident to two chained BridgeV2 logic flaws. The Bitcoin deposit decoder identified the sender from attacker-controlled transaction data, allowing the attacker to appear as both an approved depositor and bridge administrator. A second accounting flaw mishandled negative fees by subtracting a negative value, increasing the credited mint amount instead of reducing it.…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x907a0b0dd5b4b0bbec1130341b81b531635ab89903576399d0a0945ba4962bc6"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/symbiosis_fi/status/2098384161673285716"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/symbiosis-2026-09-10"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptotimes.io",
+      "url": "https://www.cryptotimes.io/2026/09/11/symbiosis-bridge-exploit-hacker-mints-368-9-billion-synthetic-bitcoin/"
+    },
+    {
+      "source": "revertiq",
+      "label": "crowdfundinsider.com",
+      "url": "https://www.crowdfundinsider.com/2026/09/310114-symbiosis-bitcoin-bridge-hit-team-reports-15-btc-recovered-and-20-bounty-offer/"
+    }
+  ]
+}

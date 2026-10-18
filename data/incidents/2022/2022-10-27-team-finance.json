@@ -1,0 +1,139 @@
+{
+  "id": "2022-10-27-team-finance",
+  "name": "Team Finance",
+  "date": "2022-10-27",
+  "year": 2022,
+  "amountUsd": 15800000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "input-validation",
+  "technique": "Missing Input Validation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "input-validation",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "input-validation",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.09,
+    "stateActor": 0.02,
+    "hasRootCause": 0.82
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Liquidity Migration Exploit. Lost: Multiple Tokens ~$15.8M US$",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Liquidity Migration Exploit. Lost: Multiple Tokens ~$15.8M US$"
+    },
+    {
+      "source": "REKT",
+      "text": "There’s no $ in Team. Four projects got rugged through their shared anti-rug mechanism. $15.8M lost, and number 46 on the leaderboard. Go Team."
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "In migrate function, the validation on MigrateParams is the function's input value. Vulnerable code snippet: https://etherscan.io/address/0x48d118c9185e4dbafe7f3813f8f29ec8a6248359#code Attack tx: https://etherscan.io/tx/0xb2e3ea72d353da43a2ac9a8f1670fd16463ab370e563b9b5b26119b2601277ce - Pre-work1: lockToken() https://etherscan.io/tx/0xe8f17ee00906cd0cfb61671937f11bd3d26cdc47c1534fedc43163a7e89edc6f - Pre-work2: extendLockDuration() id 15324: https://etherscan.io/tx/0x2972f75d5926f8f948ab6a0cabc517a05f0da5b53e20f670591afbaa501aa436 id 15325: https://etherscan.io/tx/0xec75bb553f50af37f8dd8f4b1e2bfe4703b27f586187741b91db770ad9b230cb id 15326: https://etherscan.io/tx/0x79ec728612867b3d82c0e7401e6ee1c533b240720c749b3968dea1464e59b2c4 id 15327: https://etherscan.io/tx/0x51185fb580892706500d3b6eebb8698c27d900618021fb9b1797f4a774fffb04 Analysis: Team Finance Official : https://twitter.com/TeamFinance_/status/1585770918873542656 PeckShield : https://twitter.com/peckshield/status/1585587858978623491 Solid Group : https://twitter.com/solid_group_1/status/1585643249305518083 Beiosin Alert : https://twitter.com/BeosinAlert/status/1585578499125178369"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Team Finance tweeted that the protocol’s management funds were hacked during the migration from Uniswap v2 to v3, with an identified loss of approximately $14.5 million worth of tokens. On October 31, the Team Finance white hat hacker address has returned $13.4 million in digital assets, including 548.7 ETH ($860,000) to FEG, 765,000 DAI and 11.8 million TSUKA ($626,000) to Tsuka, about 5 million DAI and 74.6 trillion CAW (~$5.5 million) to CAW, 209 ETH ($328,000) to KNDX, smithbot.eth has returned 263 billion KNDX ($292,000) to KNDX."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Team Finance was exploited on Ethereum on 2022-10-27 due to a lack of input validation in its Uniswap V2-to-V3 migration function, resulting in losses of approximately $13,15.8 million in various tokens. The attacker manipulated key migration parameters and constructed their own NFTs to bypass owner and lock checks, allowing them to drain and refund large pools. Some of the funds were later returned. The LockToken contract's migrate function failed to validate that the specified migration parameters and locked LP tokens matched valid pre-existing state. This allowed attacker-controlled NFTs and manipulated migration parameters, including pool price and…"
+    }
+  ],
+  "audit": "Zokyo Security",
+  "txHashes": [
+    "0xb2e3ea72d353da43a2ac9a8f1670fd16463ab370e563b9b5b26119b2601277ce",
+    "0xe8f17ee00906cd0cfb61671937f11bd3d26cdc47c1534fedc43163a7e89edc6f",
+    "0x2972f75d5926f8f948ab6a0cabc517a05f0da5b53e20f670591afbaa501aa436",
+    "0xec75bb553f50af37f8dd8f4b1e2bfe4703b27f586187741b91db770ad9b230cb",
+    "0x79ec728612867b3d82c0e7401e6ee1c533b240720c749b3968dea1464e59b2c4",
+    "0x51185fb580892706500d3b6eebb8698c27d900618021fb9b1797f4a774fffb04"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-10/TeamFinance_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-10/TeamFinance_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/TeamFinance_/status/1585770918873542656"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/peckshield/status/1585587858978623491"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/solid_group_1/status/1585643249305518083"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Team Finance - REKT",
+      "url": "https://rekt.news/teamfinance-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/address/0x48d118c9185e4dbafe7f3813f8f29ec8a6248359#code"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/address/0x48d118c9185e4dbafe7f3813f8f29ec8a6248359#code%23L1535"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xb2e3ea72d353da43a2ac9a8f1670fd16463ab370e563b9b5b26119b2601277ce"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/TeamFinance_/status/1585562380591063043"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/team-finance-2022-10-27"
+    },
+    {
+      "source": "revertiq",
+      "label": "beosin.com",
+      "url": "https://beosin.com/resources/beosin%E2%80%99s-analysis-of-team-finance%E2%80%99s-13m-exploit"
+    },
+    {
+      "source": "revertiq",
+      "label": "hacken.io",
+      "url": "https://hacken.io/insights/why-team-finance-was-exploited-for-14-5-million-despite-its-audit/"
+    }
+  ]
+}

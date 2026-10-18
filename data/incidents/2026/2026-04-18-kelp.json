@@ -1,0 +1,154 @@
+{
+  "id": "2026-04-18-kelp",
+  "name": "Kelp",
+  "date": "2026-04-18",
+  "year": 2026,
+  "amountUsd": 293000000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum",
+    "Arbitrum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "bridge-crosschain",
+  "technique": "Cross-Chain Message Spoofing",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "bridge-crosschain",
+    "confidence": 0.85,
+    "top": [
+      {
+        "category": "bridge-crosschain",
+        "p": 0.86
+      },
+      {
+        "category": "social-engineering",
+        "p": 0.09
+      },
+      {
+        "category": "frontend-infra",
+        "p": 0.04
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.96,
+    "hasRootCause": 0.98
+  },
+  "bridge": true,
+  "language": "Solidity",
+  "rootCause": "DPRK breached LayerZero's infrastructure, forged a bridge message, and walked $290 million out of KelpDAO in one transaction. Aave is holding hundreds of millions in bad debt. The dominoes are still falling. DeFi United is scrambling to catch them.",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "DPRK breached LayerZero's infrastructure, forged a bridge message, and walked $290 million out of KelpDAO in one transaction. Aave is holding hundreds of millions in bad debt. The dominoes are still falling. DeFi United is scrambling to catch them."
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The KelpDAO exploit, attributed to North Korea's Lazarus Group (DPRK TraderTraitor / UNC4899), was an infrastructure-level attack rather than a smart-contract bug. The attackers social-engineered a LayerZero Labs developer to harvest internal session credentials, pivoted into LayerZero's cloud RPC environment, and poisoned two internal RPC nodes to return attacker-controlled chain state. A simultaneous DDoS against the external RPC nodes forced the sole LayerZero DVN — KelpDAO had deployed a critically fragile 1-of-1 DVN configuration with LayerZero Labs as the only required verifier — to fail over exclusively to the poisoned nodes. The compromised nodes fabricated rsETH burn events on the Unichain source chain that never occurred; the DVN attested to these phantom messages, and the Ethereum-side bridge contract duly released 116,500 rsETH (~$292M) to attacker-controlled addresses without any corresponding collateral destruction. The stolen rsETH was deposited into Aave V3, Compound V3, and Euler as collateral to borrow ~$228M in WETH and wstETH. KelpDAO's emergency pause, executed 46 minutes after the drain began, blocked follow-up transactions that would have released an additional ~$200M. LayerZero subsequently banned all 1-of-1 DVN configurations. Attack Tx: 0x1ae232da212c45f35c1525f851e4c41d529bf18af862d9ce9fd40bf709db4222 Analysis: Explained: The Kelp DAO Hack (April 2026) — Halborn Inside the KelpDAO Bridge Exploit — Chainalysis Phalcon_xyz on X"
+    },
+    {
+      "source": "SlowMist",
+      "text": "LayerZero issued a statement saying that on April 18, Kelp DAO suffered an attack resulting in approximately $290 million in losses. The incident is initially assessed to have been carried out by a highly sophisticated nation-state actor, suspected to be the TraderTraitor subgroup of North Korea’s Lazarus Group. The attack was completely isolated to Kelp DAO’s rsETH configuration and was caused by its use of a single DVN (Decentralized Verifier Network) setup. The LayerZero protocol itself was not exploited, and no other cross-chain assets or applications were affected. The core of the attack involved the hacker compromising downstream RPC infrastructure used by LayerZero’s DVN.…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Kelp DAO's rsETH bridge lost 116,500 rsETH, about $292 million, after a forged LayerZero packet passed a single-DVN path; Arbitrum later froze 30,766 ETH linked to the exploit. A forged LayerZero packet cleared Kelp's Unichain to Ethereum route because the bridge trusted a single required DVN, and LayerZero's verification pipeline had been compromised upstream. Public reporting still disagrees on whether the 1-of-1 setup was Kelp's deployment choice or LayerZero's default configuration."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On April 18, 2026, KelpDAO's rsETH bridge lost approximately $292M after an attacker compromised off-chain RPC infrastructure supporting its LayerZero single-verifier configuration. The forged message led to a release of real rsETH on Ethereum, triggering cross-chain market freezes and partial recovery actions. The exploit occurred because KelpDAO's rsETH LayerZero bridge was configured with only one Decentralized Verifier Network (DVN) , LayerZero Labs as sole verifier. The attacker compromised the DVN's downstream RPC nodes, forcing it to attest to a fabricated cross-chain message and release 116,500 rsETH without a corresponding event on the source chain."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x1ae232da212c45f35c1525f851e4c41d529bf18af862d9ce9fd40bf709db4222"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: KelpDao - Rekt",
+      "url": "https://rekt.news/kelpdao-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.phalcon.blocksec.com",
+      "url": "https://app.phalcon.blocksec.com/explorer/tx/eth/0x1ae232da212c45f35c1525f851e4c41d529bf18af862d9ce9fd40bf709db4222"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "halborn.com",
+      "url": "https://www.halborn.com/blog/post/explained-the-kelp-dao-hack-april-2026"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "chainalysis.com",
+      "url": "https://www.chainalysis.com/blog/kelpdao-bridge-exploit-april-2026/"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x1ae232da212c45f35c1525f851e4c41d529bf18af862d9ce9fd40bf709db4222"
+    },
+    {
+      "source": "blocksec",
+      "label": "x.com",
+      "url": "https://x.com/Phalcon_xyz/status/2045728892489757098"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/LayerZero_Core/status/2046081551574983137"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/kelp-2026-04-17"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "theblock.co",
+      "url": "https://www.theblock.co/post/397988/kelp-daos-rseth-bridge-apparently-exploited-for-roughly-292-million-in-layerzero-based-attack"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/kelpdao-2026-04-18"
+    },
+    {
+      "source": "revertiq",
+      "label": "quillaudits.com",
+      "url": "https://www.quillaudits.com/blog/hack-analysis/kelp-dao-hack"
+    },
+    {
+      "source": "revertiq",
+      "label": "blocksec.com",
+      "url": "https://blocksec.com/blog/weekly-web3-security-incident-roundup-apr-13-apr-19-2026"
+    },
+    {
+      "source": "revertiq",
+      "label": "layerzero.network",
+      "url": "https://layerzero.network/blog/kelpdao-incident-statement"
+    }
+  ]
+}

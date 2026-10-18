@@ -1,0 +1,82 @@
+{
+  "id": "2022-11-02-rubic",
+  "name": "Rubic",
+  "date": "2022-11-02",
+  "year": 2022,
+  "amountUsd": 1200000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "key-compromise",
+  "technique": "Private Key Compromised",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "key-compromise",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "key-compromise",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.88
+  },
+  "bridge": true,
+  "language": null,
+  "rootCause": "The multi-chain exchange protocol Rubic tweeted that an administrator’s wallet address, which manages the RBC/BRBC cross-chain bridge and staking rewards, was stolen, and the team suspected that malware stole the private key. The attacker sold about 34 million RBC/BRBC on Uniswap and PancakeSwap, the user's staking funds are safe and the smart contract is not exploited.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The multi-chain exchange protocol Rubic tweeted that an administrator’s wallet address, which manages the RBC/BRBC cross-chain bridge and staking rewards, was stolen, and the team suspected that malware stole the private key. The attacker sold about 34 million RBC/BRBC on Uniswap and PancakeSwap, the user's staking funds are safe and the smart contract is not exploited."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On December 25, 2022, Rubic's Ethereum RubicProxy contract suffered a critical smart contract access control flaw, allowing attackers to drain at least $1.4 million in user-approved USDC by abusing a misconfigured router whitelist. The attacker swapped the stolen funds for ETH and laundered them through Tornado Cash. Rubic suspended affected contracts and replaced them after the exploit, but the final user reimbursement status is not fully verified. The RubicProxy contract mistakenly whitelisted the USDC token address as a router, allowing the attacker to call USDC's transferFrom function through routerCallNative(). This enabled unauthorized USDC trans…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x30679e7b6b410fb78368f5fb6e4c203e44d81c66ae9014c797e40856be1bbe66",
+    "0x9a97d85642f956ad7a6b852cf7bed6f9669e2c2815f3279855acf7f1328e7d46",
+    "0x6551b933b984342fd353d4b522aee7db500900e208dc1337b0c1f17647e36e56"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/CryptoRubic/status/1587704890800889858"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/rubic-2022-11-02"
+    },
+    {
+      "source": "revertiq",
+      "label": "bir.badjoke-lab.com",
+      "url": "https://bir.badjoke-lab.com/bridge/rubic/"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.solidityscan.com",
+      "url": "https://blog.solidityscan.com/rubic-exchange-hack-analysis-whitelisting-does-not-always-work-effectively-d3aeb0816af4/"
+    }
+  ]
+}

@@ -1,0 +1,95 @@
+{
+  "id": "2026-04-20-thetanuts-finance",
+  "name": "Thetanuts Finance",
+  "date": "2026-04-20",
+  "year": 2026,
+  "amountUsd": 50000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "First Depositor Attack",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.08,
+    "stateActor": 0.02,
+    "hasRootCause": 0.83
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Vault Share Rounding Manipulation. Lost: 0.15 WBTC",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Vault Share Rounding Manipulation. Lost: 0.15 WBTC"
+    },
+    {
+      "source": "SlowMist",
+      "text": "A newly deployed vault contract of Thetanuts Finance was exploited via a First Depositor Attack. The attacker took advantage of the vault’s share calculation logic when totalAssets and totalSupply were both 0 at initialization: they deposited a minimal amount (e.g., 1 wei) to mint 1 share, then directly transferred a large amount of assets (e.g., ETH) to the contract, manipulating the asset-to-share ratio. When subsequent users deposited, they received almost no shares, allowing the attacker to redeem their single share for nearly all the vault’s assets. The loss was approximately $50,000. The protocol focuses on on-chain options and yield vaults; this incident affected a specific new vault."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On April 20, 2026, Thetanuts Finance's BTC/USD vault on Ethereum Mainnet was drained via a share rounding vulnerability, resulting in approximately 0.15 WBTC loss (~$50,000). The exploit exploited faulty zero-supply share minting, allowing the attacker to withdraw pre-existing vault collateral. The vault's share-minting logic failed to handle deposits when total supply was zero. This allowed the first depositor to set an overly favorable share rate, enabling later withdrawals to drain the vault's pre-existing collateral."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x1bc83899060c27106b6fb4257b208925085794e83b21c444854442fd3554862c"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-04/ThetanutsVaultShareRounding_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-04/ThetanutsVaultShareRounding_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "t.me",
+      "url": "https://t.me/defimon_alerts/2933"
+    },
+    {
+      "source": "slowmist",
+      "label": "academy.teleswap.xyz",
+      "url": "https://academy.teleswap.xyz/defi-protocol-hacks-april-2026-exploits-analyzed/"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/thetanuts-finance-2026-04-20"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "x.com",
+      "url": "https://x.com/DefimonAlerts/status/2046326465206063194"
+    }
+  ]
+}

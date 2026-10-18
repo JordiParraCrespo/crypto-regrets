@@ -1,0 +1,120 @@
+{
+  "id": "2023-04-04-sentiment",
+  "name": "Sentiment",
+  "date": "2023-04-04",
+  "year": 2023,
+  "amountUsd": 1000000,
+  "returnedUsd": 900000,
+  "chains": [
+    "Arbitrum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "reentrancy",
+  "technique": "Reentrancy",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "reentrancy",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "reentrancy",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.06,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Read-Only-Reentrancy. Lost: $1M",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Read-Only-Reentrancy. Lost: $1M"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Attacker re enter Balancer Vaults execute malicious code before pool balances were updated and steal money using overpriced collateral. the _joinOrExit function is called whenever the joinPool or exitPool is called by an external protocol user. Vulnerable code snippet: Attack tx: https://arbiscan.io/tx/0xa9ff2b587e2741575daf893864710a5cbb44bb64ccdc487a100fa20741e0f74d Analysis: https://twitter.com/peckshield/status/1643417467879059456 https://twitter.com/spreekaway/status/1643313471180644360 https://medium.com/coinmonks/theoretical-practical-balancer-and-read-only-reentrancy-part-1-d6a21792066c https://forum.balancer.fi/t/reentrancy-vulnerability-scope-expanded/4345"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The DeFi lending agreement Sentiment stated that the team discovered abnormal lending activities. This malicious use led to the theft of about $966,000 from Sentiment on the Arbitrum network. The root cause is the read-only reentrancy of Balancer. On April 7, Sentiment announced that it had successfully recovered more than $900,000 of the stolen funds, leaving the remaining $95,000 as a reward for the attackers."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 4 April 2023, Sentiment on Arbitrum One suffered a $1.1 million loss in a reentrancy exploit targeting its Balancer LP token oracle integration. The attacker manipulated the collateral price through read-only reentrancy and borrowed against inflated collateral, draining the protocol. Most funds were later recovered after negotiation and insurance payouts. The exploit was enabled by a read-only reentrancy vulnerability in Balancer’s join/exit logic. A view call to Balancer’s pool pricing function reentered before pool balances were finalized, allowing the attacker to manipulate oracle-dependent collateral prices and borrow more than the actual value."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xa9ff2b587e2741575daf893864710a5cbb44bb64ccdc487a100fa20741e0f74d"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-04/Sentiment_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-04/Sentiment_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/peckshield/status/1643417467879059456"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/spreekaway/status/1643313471180644360"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "medium.com",
+      "url": "https://medium.com/coinmonks/theoretical-practical-balancer-and-read-only-reentrancy-part-1-d6a21792066c"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "arbiscan.io",
+      "url": "https://arbiscan.io/tx/0xa9ff2b587e2741575daf893864710a5cbb44bb64ccdc487a100fa20741e0f74d"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xa9ff2b587e2741575daf893864710a5cbb44bb64ccdc487a100fa20741e0f74d"
+    },
+    {
+      "source": "blocksec",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs?tab=readme-ov-file#20230405-sentiment---read-only-reentrancy"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/sentimentxyz/status/1643485652573405185"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/sentiment-2023-04-04"
+    },
+    {
+      "source": "revertiq",
+      "label": "hackmd.io",
+      "url": "https://hackmd.io/@sentimentxyz/Bk8XxMRbh"
+    }
+  ]
+}

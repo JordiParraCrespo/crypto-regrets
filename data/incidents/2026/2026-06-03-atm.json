@@ -1,0 +1,103 @@
+{
+  "id": "2026-06-03-atm",
+  "name": "ATM",
+  "date": "2026-06-03",
+  "year": 2026,
+  "amountUsd": 243000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "Token",
+  "category": "logic-error",
+  "technique": "Swap Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.8,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.81
+      },
+      {
+        "category": "arbitrary-call",
+        "p": 0.16
+      },
+      {
+        "category": "access-control",
+        "p": 0.03
+      }
+    ],
+    "flashLoan": 0.08,
+    "stateActor": 0.03,
+    "hasRootCause": 0.89
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Hidden transferFrom Auto-Swap Drain. Lost: ~$243,543 USDT",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Hidden transferFrom Auto-Swap Drain. Lost: ~$243,543 USDT"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The ATM token on BSC was exploited due to a flaw in its custom transferFrom() function logic (which automatically swapped ~20% of transferred amounts to BSC-USD). The attacker repeatedly triggered the mechanism to drain approximately $243,500 from the protocol."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 3 June 2026, ATM Token on BNB Chain was exploited via a flawed transfer mechanism. The attacker repeatedly triggered a swap of 20% of transferred ATM tokens during each sell, draining approximately $243,500 from the liquidity pool. The vulnerable auto-swap logic, combined with weak anti-whale controls, allowed the attacker to farm and drain ATM/USDT LP funds. ATM Token’s custom _transfer function contained an auto-swap feature that sold 20% of every transfer via PancakeSwap. This logic could be repeatedly triggered during sell transactions, leaking contract-held tokens and fee proceeds. Weak per-address anti-whale and anti-bot controls failed to pre…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x37b90a337075cd2feea93b12780abe9f953dad476e1c1418a02447aaa6dcfd86"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-06/ATM_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-06/ATM_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "hacked.slowmist.io",
+      "url": "https://hacked.slowmist.io"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/TenArmorAlert/status/2062351507056460166"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/atm-2026-06-03"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptotimes.io",
+      "url": "https://www.cryptotimes.io/2026/06/04/atm-token-exploit-drains-243k-through-hidden-swap-loophole/"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptonews.net",
+      "url": "https://cryptonews.net/news/security/32970198/"
+    }
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "id": "2022-11-02-save",
+  "name": "Save",
+  "date": "2022-11-02",
+  "year": 2022,
+  "amountUsd": 1260000,
+  "returnedUsd": null,
+  "chains": [
+    "Solana"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Rust",
+  "rootCause": "Save (formerly Solend) was exploited on Solana on 2 November 2022 when an attacker manipulated the USDH/USDC spot price, causing $1.26 million in unrecoverable bad debt in three isolated lending pools. The protocol response reimbursed affected users. The root cause was reliance on a Switchboard oracle feed that referenced only the USDH/USDC Saber pool. This allowed an attacker to artificially inflate USDH's price and deposit overvalued collateral for excessive borrowing. The oracle update mechanism did not filter out manipulated spot prices or enforce source diversity.",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "Save (formerly Solend) was exploited on Solana on 2 November 2022 when an attacker manipulated the USDH/USDC spot price, causing $1.26 million in unrecoverable bad debt in three isolated lending pools. The protocol response reimbursed affected users. The root cause was reliance on a Switchboard oracle feed that referenced only the USDH/USDC Saber pool. This allowed an attacker to artificially inflate USDH's price and deposit overvalued collateral for excessive borrowing. The oracle update mechanism did not filter out manipulated spot prices or enforce source diversity."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On November 2, 2022, Solend (now Save) on Solana suffered a $1.26 million loss when an attacker manipulated the USDH stablecoin's price oracle via Saber DEX, allowing outsized borrowing in three isolated pools. The USDH price oracle relied solely on a low-liquidity Saber DEX pool, lacked manipulation resistance, and allowed collateral valuation from a single easily-inflated source. Solend did not aggregate price feeds or enforce conservative collateral limits for USDH."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/save-2022-11-01"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/save-hack-2022"
+    },
+    {
+      "source": "revertiq",
+      "label": "itokenly.com",
+      "url": "https://itokenly.com/hacks/solend"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/solend-2022-11-01"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.save.finance",
+      "url": "https://blog.save.finance/usdh-price-manipulation-impact-on-isolated-pools-4f79ff6af2ba"
+    }
+  ]
+}

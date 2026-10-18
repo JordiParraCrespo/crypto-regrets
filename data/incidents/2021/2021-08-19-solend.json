@@ -1,0 +1,78 @@
+{
+  "id": "2021-08-19-solend",
+  "name": "Solend",
+  "date": "2021-08-19",
+  "year": 2021,
+  "amountUsd": 16000,
+  "returnedUsd": null,
+  "chains": [
+    "Solana"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.01,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Rust",
+  "rootCause": "Solana Ecological Lending Agreement Solend tweeted that the agreement was hacked at 20:40 on August 19th, Beijing time. The attacker cracked the insecure identity check in the UpdateReserveConfig function, allowing it to liquidate all accounts. In addition, the hacker also set the APY of borrowed funds to 250%. During this period, the funds of 5 users were mistakenly liquidated, and the liquidator is currently refunding the losses of these 5 users totaling USD 16,000. Solend said that this attack did not result in the theft of funds, and that the scale of the bug bounty will be increased and a better monitoring and alarm system will be established.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Solana Ecological Lending Agreement Solend tweeted that the agreement was hacked at 20:40 on August 19th, Beijing time. The attacker cracked the insecure identity check in the UpdateReserveConfig function, allowing it to liquidate all accounts. In addition, the hacker also set the APY of borrowed funds to 250%. During this period, the funds of 5 users were mistakenly liquidated, and the liquidator is currently refunding the losses of these 5 users totaling USD 16,000. Solend said that this attack did not result in the theft of funds, and that the scale of the bug bounty will be increased and a better monitoring and alarm system will be established."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 19 August 2021, Solend on Solana suffered an access control exploit that exposed reserve configurations to unauthorized modification. An attacker leveraged a weak authentication check in the UpdateReserveConfig function to make user accounts forcibly liquidatable at inflated bonuses. Five accounts lost a combined $16,000 through wrongful liquidations. All affected users were fully reimbursed by Solend. The UpdateReserveConfig function in Solend accepted any lending market as the authority by only checking for transaction signature, not verifying that the market was recognized by the protocol. This allowed an attacker to create a malicious market, ga…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/solendprotocol/status/1428611597941891082"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/solend-2021-08-19"
+    },
+    {
+      "source": "revertiq",
+      "label": "quadrigainitiative.com",
+      "url": "https://www.quadrigainitiative.com/casestudy/solendinsecureauthenticationcheck.php"
+    },
+    {
+      "source": "revertiq",
+      "label": "helius.dev",
+      "url": "https://www.helius.dev/blog/solana-hacks"
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "id": "2022-06-30-mad",
+  "name": "MAD",
+  "date": "2022-06-30",
+  "year": 2022,
+  "amountUsd": 115681,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": null,
+  "category": "access-control",
+  "technique": "Contract Vulnerability",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 1.00).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.01,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "$MAD was hacked, and the hacker transferred all $MAD in the contract by directly calling the transfer function of the contract holding the token, and finally made a profit of $556 BNB (worth about $115,681), which was then transferred to Tornado.Cash. The reason is that the sensitive function was not checked in the contract that holding tokens, resulting in anyone can directly call the 0x9763a894 function to transfer out the tokens held in the contract.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "$MAD was hacked, and the hacker transferred all $MAD in the contract by directly calling the transfer function of the contract holding the token, and finally made a profit of $556 BNB (worth about $115,681), which was then transferred to Tornado.Cash. The reason is that the sensitive function was not checked in the contract that holding tokens, resulting in anyone can directly call the 0x9763a894 function to transfer out the tokens held in the contract."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BeosinAlert/status/1542517440252624896"
+    }
+  ]
+}

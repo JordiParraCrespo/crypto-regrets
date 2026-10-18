@@ -1,0 +1,83 @@
+{
+  "id": "2018-11-07-gate",
+  "name": "Gate",
+  "date": "2018-11-07",
+  "year": 2018,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [
+    "Bitcoin",
+    "Ethereum"
+  ],
+  "targetType": "CEX",
+  "category": "frontend-infra",
+  "technique": "Supply Chain Attack",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "frontend-infra",
+    "confidence": 0.98,
+    "top": [
+      {
+        "category": "frontend-infra",
+        "p": 0.98
+      },
+      {
+        "category": "key-compromise",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.05,
+    "hasRootCause": 0.94
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "Hackers successfully sandwiched crypto-stealing code into the middle of a popular web traffic-measuring plugin from StatCounter, which is now used on more than two million websites, including government sites. They have determined, however, that the rather wide swath of infections may have been designed to eventually infect cryptocurrency trading sites, and that the scheme did, in fact, infect popular crypto-trading site Gate.io. By situating the code in the middle of StatCounter’s downloadable javascript web traffic analysis tool, hackers made it harder to detect.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Hackers successfully sandwiched crypto-stealing code into the middle of a popular web traffic-measuring plugin from StatCounter, which is now used on more than two million websites, including government sites. They have determined, however, that the rather wide swath of infections may have been designed to eventually infect cryptocurrency trading sites, and that the scheme did, in fact, infect popular crypto-trading site Gate.io. By situating the code in the middle of StatCounter’s downloadable javascript web traffic analysis tool, hackers made it harder to detect."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On November 7, 2018, Gate.io was compromised through a supply-chain attack on its third-party analytics provider StatCounter. Malicious code injected into StatCounter's JavaScript targeted Gate.io's Bitcoin withdrawal page, replacing user-specified addresses with attacker-controlled Bitcoin addresses. The extent of user loss remains unknown, as the attack generated new recipient addresses for each withdrawal and no public on-chain transactions have been confirmed. Attackers injected malicious JavaScript into StatCounter's analytics script, which Gate.io loaded on its withdrawal page. The code checked for the withdrawal URI, loaded a second-stage script…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "jinse.com",
+      "url": "https://www.jinse.com/lives/62664.htm"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/gate-2018-11-07"
+    },
+    {
+      "source": "revertiq",
+      "label": "welivesecurity.com",
+      "url": "https://www.welivesecurity.com/2018/11/06/supply-chain-attack-cryptocurrency-exchange-gate-io/"
+    },
+    {
+      "source": "revertiq",
+      "label": "cyberscoop.com",
+      "url": "https://cyberscoop.com/statcounter-javascript-hack-eset-gate-io/"
+    }
+  ]
+}

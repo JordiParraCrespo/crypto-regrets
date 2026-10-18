@@ -1,0 +1,72 @@
+{
+  "id": "2026-10-01-flashloopadapter",
+  "name": "FlashLoopAdapter",
+  "date": "2026-10-01",
+  "year": 2026,
+  "amountUsd": 305000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.88,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.89
+      },
+      {
+        "category": "arbitrary-call",
+        "p": 0.11
+      }
+    ],
+    "flashLoan": 0.28,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "a Safe module authenticates its caller by asking that caller whether the module is enabled (self-attestation) and then makes an unconstrained call to a caller-supplied router, letting a fake Safe drive the adapter into draining real Safes that enabled it. Lost: 114.096151 WETH (~$305k, exactly reproduced) on Ethereum; two Safes that enabled the module as a victim were emptied - Safe #1 lost 1306.48 weETH of Aave collateral once its 1335.26 WETH debt was repaid, Safe #2 lost 6.426 weETH, all swapped to WETH via ODOS for the attacker's net",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "a Safe module authenticates its caller by asking that caller whether the module is enabled (self-attestation) and then makes an unconstrained call to a caller-supplied router, letting a fake Safe drive the adapter into draining real Safes that enabled it. Lost: 114.096151 WETH (~$305k, exactly reproduced) on Ethereum; two Safes that enabled the module as a victim were emptied - Safe #1 lost 1306.48 weETH of Aave collateral once its 1335.26 WETH debt was repaid, Safe #2 lost 6.426 weETH, all swapped to WETH via ODOS for the attacker's net"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The attacker exploited an access-control vulnerability in FlashLoopAdapter by spoofing Safe authentication and bypassing the module authorization check. By controlling the swapRouter and swapCalldata, the attacker targeted the victim Safes with execTransactionFromModule() and executed unauthorized transactions. The attacker also used a Morpho WETH flash loan to repay the affected Safe’s Aave V3 debt and unlock its collateral, ultimately draining weETH from two Safes and retaining approximately 114.09 ETH, worth about $305,000."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-10/FlashLoopAdapter_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-10/FlashLoopAdapter_exp.sol"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/2105855276536725599"
+    }
+  ]
+}

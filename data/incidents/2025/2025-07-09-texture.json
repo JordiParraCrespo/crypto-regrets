@@ -1,0 +1,79 @@
+{
+  "id": "2025-07-09-texture",
+  "name": "Texture",
+  "date": "2025-07-09",
+  "year": 2025,
+  "amountUsd": 2200000,
+  "returnedUsd": null,
+  "chains": [
+    "Solana"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.5
+  },
+  "bridge": false,
+  "language": "Rust",
+  "rootCause": "An attacker exploited a vulnerability in the Solana-based lending protocol Texture, stealing approximately $2.2 million in user funds from one of the project’s vaults. Shortly after the incident, Texture offered the attacker a 10% bounty. The attacker returned $1.98 million and kept $220,000.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "An attacker exploited a vulnerability in the Solana-based lending protocol Texture, stealing approximately $2.2 million in user funds from one of the project’s vaults. Shortly after the incident, Texture offered the attacker a 10% bounty. The attacker returned $1.98 million and kept $220,000."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Texture Finance suffered a $2.2 million USDC loss on Solana on July 9, 2025, when an attacker exploited a missing account ownership check in the Vaults contract's rebalance function. The team quickly negotiated the return of 90 percent of stolen funds for a 10 percent bounty. Only the USDC vault was affected. The Vaults contract did not check ownership of destination SPL token accounts during rebalance, allowing an attacker to supply their own account to receive LP tokens and then redeem for USDC."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "blocksec",
+      "label": "certora.com",
+      "url": "https://www.certora.com/blog/rapid-response-full-recovery-certora-and-texture-a"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/texture_fi/status/1942972150631002245"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/texture-2025-07-09"
+    },
+    {
+      "source": "revertiq",
+      "label": "quadrigainitiative.com",
+      "url": "https://quadrigainitiative.com/casestudy/texturefinancevaultrebalancemissingownershipchecktheft.php"
+    }
+  ]
+}

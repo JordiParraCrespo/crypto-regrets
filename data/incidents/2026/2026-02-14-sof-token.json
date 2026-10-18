@@ -1,0 +1,69 @@
+{
+  "id": "2026-02-14-sof-token",
+  "name": "SOF Token",
+  "date": "2026-02-14",
+  "year": 2026,
+  "amountUsd": 225000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": null,
+  "category": "logic-error",
+  "technique": "Business Logic Flaw",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.97). Replaced keyword guess \"oracle-manipulation\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.97,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.97
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.03
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.01,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "The SOF token on BNB Smart Chain was exploited for approximately $225K due to a business logic flaw in its custom _update() function. During sell operations, the contract incorrectly transferred tokens directly from the Uniswap V2-compatible (PancakeSwap) liquidity pair to a burn address and immediately called sync() to update pool reserves. This sequence artificially deflated the pool's token balance without a corresponding USDT reduction, inflating the apparent SOF price within the same transaction. An attacker crafted a swap transaction that triggered this erroneous sell-side burn logic, causing the pool to burn its own liquidity and update reserves in a way that allowed the attacker to extract the pool's USDT holdings at the manipulated price. This attack pattern — abusing fee-on-transfer or burn mechanics that directly manipulate AMM balances via sync() — was a recurring vulnerability among deflationary BEP-20 tokens on BSC during early 2026. Attack Tx: 0xcb5b22d86819b84ef176aee2d6b89f687e74d829560de1bcc63d53fcb2ac68f8 Analysis: Phalcon Alert — SOF Token BSC Exploit",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The SOF token on BNB Smart Chain was exploited for approximately $225K due to a business logic flaw in its custom _update() function. During sell operations, the contract incorrectly transferred tokens directly from the Uniswap V2-compatible (PancakeSwap) liquidity pair to a burn address and immediately called sync() to update pool reserves. This sequence artificially deflated the pool's token balance without a corresponding USDT reduction, inflating the apparent SOF price within the same transaction. An attacker crafted a swap transaction that triggered this erroneous sell-side burn logic, causing the pool to burn its own liquidity and update reserves in a way that allowed the attacker to extract the pool's USDT holdings at the manipulated price. This attack pattern — abusing fee-on-transfer or burn mechanics that directly manipulate AMM balances via sync() — was a recurring vulnerability among deflationary BEP-20 tokens on BSC during early 2026. Attack Tx: 0xcb5b22d86819b84ef176aee2d6b89f687e74d829560de1bcc63d53fcb2ac68f8 Analysis: Phalcon Alert — SOF Token BSC Exploit"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xcb5b22d86819b84ef176aee2d6b89f687e74d829560de1bcc63d53fcb2ac68f8"
+  ],
+  "poc": null,
+  "sources": [
+    "defihacklabs",
+    "blocksec"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0xcb5b22d86819b84ef176aee2d6b89f687e74d829560de1bcc63d53fcb2ac68f8"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/Phalcon_xyz/status/2022617941569867926"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xcb5b22d86819b84ef176aee2d6b89f687e74d829560de1bcc63d53fcb2ac68f8"
+    }
+  ]
+}

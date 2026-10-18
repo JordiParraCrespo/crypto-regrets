@@ -1,0 +1,76 @@
+{
+  "id": "2025-08-11-wxc",
+  "name": "WXC",
+  "date": "2025-08-11",
+  "year": 2025,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Incorrect token burn mechanism",
+  "classificationNote": "Classified by keyword rules from the DeFiHackLabs root-cause title.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.65,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.67
+      },
+      {
+        "category": "logic-error",
+        "p": 0.31
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.98,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Incorrect token burn mechanism. Lost: 37.5 WBNB",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Incorrect token burn mechanism. Lost: 37.5 WBNB"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The WXC token (0x8087...643E) implements a custom transfer/burn mechanism tied to its PancakeSwap liquidity pool. The attacker took a flashloan of ~49 WBNB (from the Moolah proxy lender), used it to manipulate the WXC/WBNB pair, and abused WXC's incorrect token burn logic during the swap callback: by routing an oversized WXC amount (~74.96M tokens) through Cake_LP.swap and then selling via swapExactTokensForTokensSupportingFeeOnTransferTokens, the token's flawed burn-on-transfer accounting let the attacker extract more WBNB from the pool than was paid in. The proceeds repaid the flashloan, netting ~37.5 WBNB profit. Attack Tx: https://bscscan.com/tx/0x1397bc7f0d284f8e2e30d0a9edd0db1f3eb0dd284c75e30d226b02bf09ad068f Analysis: TenArmorAlert on X"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x1397bc7f0d284f8e2e30d0a9edd0db1f3eb0dd284c75e30d226b02bf09ad068f"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-08/WXC_Token_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-08/WXC_Token_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/TenArmorAlert/status/1954774967481962832"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x1397bc7f0d284f8e2e30d0a9edd0db1f3eb0dd284c75e30d226b02bf09ad068f"
+    }
+  ]
+}

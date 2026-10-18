@@ -4,9 +4,13 @@
  *   npm run ingest            # parse snapshots in data/raw
  *   npm run ingest -- --fetch # refresh snapshots from the network first
  *
- * Output: src/data/incidents.json, src/data/advisories.json (both schema-validated).
+ * Output (all schema-validated), under data/:
+ *   incidents.json            every incident, one per line
+ *   incidents.csv             flat export for spreadsheets
+ *   incidents/<year>/<id>.json one file per incident
+ *   advisories.json           client & consensus advisories
  */
-import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, existsSync, rmSync } from 'node:fs';
 import { join } from 'node:path';
 import { z } from 'zod';
 import { type CategoryId } from '../src/lib/taxonomy';
@@ -19,10 +23,11 @@ import {
   type SourceId,
 } from '../src/lib/types';
 import { CURATED } from './curated';
+import { classifyText } from './keywords';
 import { CACHE_FILE, stateHash, type CachedClassification } from './classify-spec';
 
 const RAW = 'data/raw';
-const OUT = 'src/data';
+const OUT = 'data';
 
 const DHL_YEARS = [2021, 2022, 2023, 2024, 2025];
 const DHL_RAW = 'https://raw.githubusercontent.com/SunWeb3Sec/DeFiHackLabs/main';
@@ -60,6 +65,8 @@ const STOP = /\b(finance|protocol|network|exchange|bridge|token|swap|dao|labs?|v
 /** Loose name key used to join records across sources. */
 function nameKey(name: string): string {
   return name
+    .replace(/([a-z0-9])([A-Z])/g, '$1 $2') // CamelCase → words ("SetProtocol" → "Set Protocol")
+    .replace(/([A-Z])([A-Z][a-z])/g, '$1 $2') // "FHToken" → "FH Token"
     .toLowerCase()
     .replace(/[-_.]/g, ' ')
     .replace(/\s+-\s+rekt.*$/i, '')
@@ -134,6 +141,13 @@ const LLAMA_TECHNIQUE: Record<string, CategoryId> = {
   'Signature Verification Flaw': 'signature-crypto',
   'Signature Replay': 'signature-crypto',
   'Weak Key Generation': 'signature-crypto',
+  'Key Brute Forced': 'signature-crypto',
+  // DefiLlama files these under "Frontend & Infrastructure", but the asset taken was a key:
+  // our taxonomy classifies by what the attacker obtained, so they are key compromises.
+  'Key Leaked via Infrastructure': 'key-compromise',
+  'API Key Compromised': 'key-compromise',
+  'Key Stored Publicly': 'key-compromise',
+  'Session Key Compromised': 'key-compromise',
 };
 
 interface LlamaHack {
@@ -173,28 +187,6 @@ function classifyLlama(h: LlamaHack): { category: CategoryId; note: string | nul
   return { category: (h.classification && LLAMA_CLASS[h.classification]) || 'unknown', note: null };
 }
 
-/** Keyword classifier for free-text root-cause titles (DeFiHackLabs, REKT). Order matters. */
-const KEYWORD_RULES: [RegExp, CategoryId][] = [
-  [/reentr|re-entr|erc777|callback re-?enter/i, 'reentrancy'],
-  [/oracle|price manipulation|spot price|twap|price feed|manipulat\w* (the )?(price|reserve|rate|nav)|reserve manipulation|self-trade|nav inflation|getprice|pricing/i, 'oracle-manipulation'],
-  [/signature|ecrecover|replay|permit\b|weak (private )?key|profanity|vanity/i, 'signature-crypto'],
-  [/private key|key (leak|compromis)|hot wallet|multisig (compromis|signer)|stolen key|compromised (wallet|key|account)/i, 'key-compromise'],
-  [/phishing|social engineering|malware|impersonat|lazarus/i, 'social-engineering'],
-  [/\bdns\b|frontend|front-end|supply chain|\bnpm\b|\bcdn\b/i, 'frontend-infra'],
-  [/bridge|cross-chain|crosschain|merkle|proof/i, 'bridge-crosschain'],
-  [/governance|proposal|voting/i, 'governance'],
-  [/\brug|backdoor|exit scam|insider/i, 'rugpull'],
-  [/arbitrary (external )?call|arbitrary.*calldata|approv|transferfrom|allowance|unverified (user )?input.*call|multicall/i, 'arbitrary-call'],
-  [/access control|unprotected|permissionless|lack of (permission|auth)|missing (auth|modifier|access|caller|owner|permission)|caller check|onlyowner|initiali[sz]|uninitiali|ungated|no (access|auth)|anyone can|authori[sz]ation bypass|unauthori[sz]ed|unguarded|unrestricted|public (mint|burn|function)/i, 'access-control'],
-  [/overflow|underflow|rounding|precision|share (price|accounting|calculation)|inflation|donat|divceil|division|arithmetic|decimal|infinite mint|fee-on-transfer|deflationary|skim|\bsync\b|truncat|accounting|erc-?404|balance (check|update)/i, 'accounting-math'],
-  [/input validation|unchecked|insufficient validation|fake (token|pool|market|contract)|lack of validation|missing (check|validation)|not (check|validat)|unverified|arbitrary (token|pool|address)|user-supplied/i, 'input-validation'],
-  [/logic|flaw|incorrect|calculation|reward|business|liquidat|withdraw|deposit|claim|swap|mint|burn|stak|duplicate|double|presale|arbitrage|funding|fee|bypass|misclassif|update|redemption|redeem|borrow|lock/i, 'logic-error'],
-];
-
-function classifyText(text: string): CategoryId {
-  for (const [re, cat] of KEYWORD_RULES) if (re.test(text)) return cat;
-  return 'unknown';
-}
 
 function keywordCategory(text: string, from: string): Pick<Draft, 'category' | 'classificationNote' | 'classifiedBy'> {
   const category = classifyText(text);
@@ -203,6 +195,12 @@ function keywordCategory(text: string, from: string): Pick<Draft, 'category' | '
     classifiedBy: category === 'unknown' ? 'none' : 'keywords',
     classificationNote: category === 'unknown' ? null : `Classified by keyword rules from the ${from}.`,
   };
+}
+
+function addDescription(d: Draft, source: string, text: string | null | undefined) {
+  const t = text?.trim();
+  if (!t || d.descriptions.some((x) => x.text === t)) return;
+  d.descriptions.push({ source, text: t });
 }
 
 function setKeywordCategory(d: Draft, category: CategoryId) {
@@ -215,7 +213,8 @@ function setKeywordCategory(d: Draft, category: CategoryId) {
 // TypeSafe answers (see scripts/classify.ts). Only replace categories nobody has vouched for:
 // keyword guesses and unclassified incidents. Human labels (DefiLlama, curated) are kept and the
 // model's disagreement is surfaced on the incident page instead.
-const TYPESAFE_MIN_CONFIDENCE = 0.5;
+// Measured on the eval set: at >= 0.7 the model beats our keyword rules; below, it does not.
+const TYPESAFE_MIN_CONFIDENCE = 0.7;
 const typesafeCache: Record<string, CachedClassification> = existsSync(CACHE_FILE) ? JSON.parse(readFileSync(CACHE_FILE, 'utf8')) : {};
 
 function applyTypeSafe(i: Incident): Incident {
@@ -225,9 +224,12 @@ function applyTypeSafe(i: Incident): Incident {
     .sort((a, b) => b[1] - a[1])
     .slice(0, 3)
     .map(([category, p]) => ({ category, p }));
-  const ai = { model: c.model, category: c.category, confidence: c.confidence, top, flashLoan: c.flashLoan, stateActor: c.stateActor };
+  const ai = { model: c.model, category: c.category, confidence: c.confidence, top, flashLoan: c.flashLoan, stateActor: c.stateActor, hasRootCause: c.hasRootCause };
   const adopt =
-    (i.classifiedBy === 'keywords' || i.classifiedBy === 'none') && c.category !== 'unknown' && c.confidence >= TYPESAFE_MIN_CONFIDENCE;
+    (i.classifiedBy === 'keywords' || i.classifiedBy === 'none') &&
+    c.category !== 'unknown' &&
+    c.hasRootCause >= 0.5 &&
+    c.confidence >= TYPESAFE_MIN_CONFIDENCE;
   if (!adopt) return { ...i, ai };
   const replaced = i.classifiedBy === 'keywords' && i.category !== c.category ? ` Replaced keyword guess "${i.category}".` : '';
   return {
@@ -262,8 +264,10 @@ function fromLlama(): Draft[] {
       bridge: h.bridgeHack,
       language: h.language,
       rootCause: null,
+      descriptions: [],
       audit: null,
       poc: null,
+      txHashes: [],
       sources: ['defillama'],
       references: [{ source: 'defillama', label: 'DefiLlama hacks', url: 'https://defillama.com/hacks' }],
     } satisfies Draft;
@@ -335,6 +339,46 @@ interface RektEntry {
   rekt: { amount: number; audit: string; date: string };
 }
 
+// ---------------------------------------------------------------- extra sources (scripts/fetch-extra.ts)
+
+const extraRecordSchema = z.object({
+  name: z.string(),
+  date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+  amountUsd: z.number().nullable(),
+  chains: z.array(z.string()),
+  label: z.string().nullable(),
+  rootCause: z.string().nullable(),
+  txHashes: z.array(z.string()),
+  url: z.string().nullable(),
+  references: z.array(z.string()),
+});
+
+/**
+ * Processed in this order, each matched against everything merged before it. DeFiHackLabs is
+ * Apache-2.0, so its text is kept whole; other sources are quoted briefly with a link back.
+ */
+const EXTRA_SOURCES: { id: SourceId; name: string; file: string; maxText: number }[] = [
+  { id: 'defihacklabs', name: 'DeFiHackLabs explorer', file: 'dhl_explorer.json', maxText: 2000 },
+  { id: 'blocksec', name: 'BlockSec', file: 'blocksec.json', maxText: 700 },
+  { id: 'slowmist', name: 'SlowMist', file: 'slowmist.json', maxText: 700 },
+  { id: 'revertiq', name: 'RevertIQ', file: 'revertiq.json', maxText: 700 },
+];
+
+function capText(t: string, max: number): string {
+  const s = t.replace(/\s+/g, ' ').trim();
+  if (s.length <= max) return s;
+  const cut = s.slice(0, max);
+  return `${cut.slice(0, Math.max(cut.lastIndexOf('. ') + 1, max - 40)).trim()}…`;
+}
+
+function hostOf(url: string): string {
+  try {
+    return new URL(url).hostname.replace(/^www\./, '');
+  } catch {
+    return 'link';
+  }
+}
+
 // ---------------------------------------------------------------- merge
 
 function attach(d: Draft, source: SourceId, ref: { label: string; url: string }) {
@@ -342,12 +386,20 @@ function attach(d: Draft, source: SourceId, ref: { label: string; url: string })
   if (!d.references.some((r) => r.url === ref.url)) d.references.push({ source, ...ref });
 }
 
+const rawKey = (n: string) => n.toLowerCase().replace(/[^a-z0-9]/g, '');
+
+/** Strict fallback: within 2 days, one raw name is a prefix of the other ("Rho Market" ~ "Rho Markets"). */
+function namesMatchStrict(a: string, b: string): boolean {
+  const [s, l] = [rawKey(a), rawKey(b)].sort((x, y) => x.length - y.length);
+  return s.length >= 4 && l.startsWith(s);
+}
+
 function findMatch(pool: Draft[], name: string, date: string, maxDays: number): Draft | undefined {
   let best: Draft | undefined;
   let bestDays = Infinity;
   for (const d of pool) {
     const days = daysApart(d.date, date);
-    if (days <= maxDays && days < bestDays && namesMatch(d.name, name)) {
+    if (days < bestDays && ((days <= maxDays && namesMatch(d.name, name)) || (days <= 2 && namesMatchStrict(d.name, name)))) {
       best = d;
       bestDays = days;
     }
@@ -357,7 +409,7 @@ function findMatch(pool: Draft[], name: string, date: string, maxDays: number): 
 
 function build(): { incidents: Incident[]; stats: Record<string, number> } {
   const drafts = fromLlama();
-  const stats = { defillama: drafts.length, dhl: 0, dhlMatched: 0, rekt: 0, rektMatched: 0, curated: 0, curatedMatched: 0 };
+  const stats: Record<string, number> = { defillama: drafts.length, dhl: 0, dhlMatched: 0, rekt: 0, rektMatched: 0, curated: 0, curatedMatched: 0 };
 
   for (const e of fromDhl()) {
     stats.dhl++;
@@ -367,6 +419,7 @@ function build(): { incidents: Incident[]; stats: Record<string, number> } {
     if (match) {
       stats.dhlMatched++;
       match.rootCause ??= rootCause;
+      addDescription(match, 'DeFiHackLabs', rootCause);
       match.poc ??= e.poc;
       if (match.category === 'unknown' && e.title) setKeywordCategory(match, classifyText(e.title));
       attach(match, 'defihacklabs', ref);
@@ -384,8 +437,10 @@ function build(): { incidents: Incident[]; stats: Record<string, number> } {
         bridge: /bridge/i.test(e.name),
         language: 'Solidity',
         rootCause,
+        descriptions: rootCause ? [{ source: 'DeFiHackLabs', text: rootCause }] : [],
         audit: null,
         poc: e.poc,
+        txHashes: [],
         sources: ['defihacklabs'],
         references: [{ source: 'defihacklabs', ...ref }],
       });
@@ -409,6 +464,7 @@ function build(): { incidents: Incident[]; stats: Record<string, number> } {
       stats.rektMatched++;
       match.audit ??= audit;
       match.rootCause ??= r.excerpt;
+      addDescription(match, 'REKT', r.excerpt);
       if (match.category === 'unknown') setKeywordCategory(match, classifyText(r.excerpt));
       attach(match, 'rekt', ref);
     } else {
@@ -425,12 +481,62 @@ function build(): { incidents: Incident[]; stats: Record<string, number> } {
         bridge: /bridge/i.test(r.title + r.excerpt),
         language: null,
         rootCause: r.excerpt,
+        descriptions: [{ source: 'REKT', text: r.excerpt }],
         audit,
         poc: null,
+        txHashes: [],
         sources: ['rekt'],
         references: [{ source: 'rekt', ...ref }],
       });
     }
+  }
+
+  for (const src of EXTRA_SOURCES) {
+    const all = z.array(extraRecordSchema).parse(JSON.parse(raw(src.file)));
+    // SlowMist also lists Ponzi schemes and frauds (BitConnect, OneCoin, Wirecard...). They are
+    // not security failures and would swamp the loss statistics, so the index leaves them out.
+    const recs = all.filter((r) => !(src.id === 'slowmist' && /^(scam|ponzi)$/i.test(r.label ?? '')));
+    stats[`${src.file}ExcludedFraud`] = all.length - recs.length;
+    let matched = 0;
+    for (const r of recs) {
+      const text = r.rootCause ? capText(r.rootCause, src.maxText) : null;
+      const refs = [...(r.url ? [{ label: src.name, url: r.url }] : []), ...r.references.slice(0, 3).map((url) => ({ label: hostOf(url), url }))];
+      const match = findMatch(drafts, r.name, r.date, 7);
+      if (match) {
+        matched++;
+        addDescription(match, src.name, text);
+        match.rootCause ??= text;
+        match.amountUsd ??= r.amountUsd;
+        if (match.chains.length === 0) match.chains = r.chains;
+        match.technique ??= r.label && !/^(unknown|others?)$/i.test(r.label) ? r.label : null;
+        for (const h of r.txHashes) if (!match.txHashes.includes(h)) match.txHashes.push(h);
+        if (match.category === 'unknown') setKeywordCategory(match, classifyText(`${r.label ?? ''} ${text ?? ''}`));
+        for (const ref of refs) attach(match, src.id, ref);
+      } else {
+        drafts.push({
+          name: r.name,
+          date: r.date,
+          amountUsd: r.amountUsd,
+          returnedUsd: null,
+          chains: r.chains,
+          targetType: null,
+          ...keywordCategory(`${r.label ?? ''} ${text ?? ''}`, `${src.name} label and description`),
+          technique: r.label && !/^(unknown|others?)$/i.test(r.label) ? r.label : null,
+          ai: null,
+          bridge: /bridge/i.test(`${r.name} ${r.label ?? ''}`),
+          language: null,
+          rootCause: text,
+          descriptions: text ? [{ source: src.name, text }] : [],
+          audit: null,
+          poc: null,
+          txHashes: r.txHashes,
+          sources: [src.id],
+          references: refs.map((x) => ({ source: src.id, ...x })),
+        });
+      }
+    }
+    (stats as Record<string, number>)[src.file] = recs.length;
+    (stats as Record<string, number>)[`${src.file}Matched`] = matched;
   }
 
   for (const c of CURATED) {
@@ -439,6 +545,7 @@ function build(): { incidents: Incident[]; stats: Record<string, number> } {
     if (match) {
       stats.curatedMatched++;
       match.rootCause = c.rootCause;
+      match.descriptions.unshift({ source: 'Curated post-mortem', text: c.rootCause });
       match.technique = c.technique;
       if (match.category !== c.category) {
         match.classificationNote = `Curated: reclassified from "${match.category}" based on the published post-mortem.`;
@@ -463,8 +570,10 @@ function build(): { incidents: Incident[]; stats: Record<string, number> } {
       bridge: false,
       language: null,
       rootCause: c.rootCause,
+      descriptions: [{ source: 'Curated post-mortem', text: c.rootCause }],
       audit: null,
       poc: null,
+      txHashes: [],
       sources: ['curated'],
       references: c.references.map((r) => ({ source: 'curated' as const, ...r })),
     });
@@ -553,14 +662,35 @@ function buildAdvisories(): Advisory[] {
   return out.map((a) => advisorySchema.parse(a));
 }
 
+function toCsv(xs: Incident[]): string {
+  const cols = ['id', 'date', 'name', 'amountUsd', 'chains', 'targetType', 'category', 'technique', 'classifiedBy', 'aiCategory', 'aiConfidence', 'bridge', 'audit', 'poc', 'sources', 'rootCause'] as const;
+  const cell = (v: unknown) => {
+    const s = v == null ? '' : Array.isArray(v) ? v.join('; ') : String(v);
+    return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
+  };
+  const row = (i: Incident) =>
+    cols
+      .map((c) => cell(c === 'aiCategory' ? i.ai?.category : c === 'aiConfidence' ? i.ai?.confidence.toFixed(2) : i[c]))
+      .join(',');
+  return `${cols.join(',')}\n${xs.map(row).join('\n')}\n`;
+}
+
 // ---------------------------------------------------------------- main
 
 if (process.argv.includes('--fetch')) await fetchAll();
 const { incidents, stats } = build();
 const advisories = buildAdvisories();
 mkdirSync(OUT, { recursive: true });
-writeFileSync(join(OUT, 'incidents.json'), JSON.stringify(incidents));
+// One record per line keeps git diffs readable when a single incident changes.
+writeFileSync(join(OUT, 'incidents.json'), `[\n${incidents.map((i) => JSON.stringify(i)).join(',\n')}\n]\n`);
 writeFileSync(join(OUT, 'advisories.json'), JSON.stringify(advisories, null, 1));
+rmSync(join(OUT, 'incidents'), { recursive: true, force: true });
+for (const i of incidents) {
+  const dir = join(OUT, 'incidents', String(i.year));
+  mkdirSync(dir, { recursive: true });
+  writeFileSync(join(dir, `${i.id}.json`), `${JSON.stringify(i, null, 2)}\n`);
+}
+writeFileSync(join(OUT, 'incidents.csv'), toCsv(incidents));
 console.log(stats);
 console.log(`incidents: ${incidents.length}, advisories: ${advisories.length}`);
 const byCat: Record<string, number> = {};

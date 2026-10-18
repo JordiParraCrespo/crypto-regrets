@@ -1,0 +1,142 @@
+{
+  "id": "2024-01-29-barley-finance",
+  "name": "Barley Finance",
+  "date": "2024-01-29",
+  "year": 2024,
+  "amountUsd": 130000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Infinite Mint",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "reentrancy",
+    "confidence": 0.97,
+    "top": [
+      {
+        "category": "reentrancy",
+        "p": 0.97
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.02
+      },
+      {
+        "category": "logic-error",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.9,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Reentrancy. Lost: ~130K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Reentrancy. Lost: ~130K"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The wBARL token's flash function transferred the borrowed BARL tokens and invoked an external callback on the recipient before verifying that the loan was repaid, and contained no reentrancy guard. During the callback the attacker called bond(BARL, balance) to deposit the borrowed BARL into wBARL and receive wBARL tokens — locking in the position before the flash loan settlement check. Because the bonded BARL refilled the contract's balance, the post-callback repayment check passed. The attacker iterated this pattern 20 times, accumulating wBARL on each round, then called debond to redeem all accumulated wBARL for BARL, obtaining far more BARL than was originally borrowed. The BARL was then swapped through Uniswap V3 to WETH. Vulnerable code snippet: Attack Tx: 0x995e880635f4a7462a420a58527023f946710167ea4c6c093d7d193062a33b01 Analysis: Barley Finance Exploit"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The lack of reentrancy protection allowed an attacker to exploit flash loans to manipulate the protocol. This vulnerability enabled the attacker to repeatedly mint and de-bond tokens, ultimately draining the liquidity pool and significantly depleting the protocol's assets. Vulnerable code snippet: Attack tx: https://phalcon.blocksec.com/explorer/tx/eth/0x995e880635f4a7462a420a58527023f946710167ea4c6c093d7d193062a33b01 Analysis: https://twitter.com/Phalcon_xyz/status/1751788389139992824"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Barley Finance tweeted that there has been a vulnerability attack on the wBARL pod. The team is working on resolving the issue. Details are as follows: 1. The exploiter took more than 10% of the total BARL supply in the pod, of which about 9% was the development team's collateral, used from Marketing and Dev allocations. Therefore, the damage to users is insignificant. 2. The solution is to change the wBARL pod contract to remove the functions that cause the exploit."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Barley Finance lost approximately $130,000 on Ethereum Mainnet on 29 January 2024 due to a vulnerability in the wBARL pod contract that enabled unauthorized minting and token theft. The attack exploited accounting flaws, resulting in the theft of about 10% of the pod's BARL token supply. The wBARL pod contract allowed an attacker to mint or withdraw BARL tokens without adequate backing or supply checks, due to flawed accounting and insufficient validation, leading to infinite minting and unauthorized token transfers."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x995e880635f4a7462a420a58527023f946710167ea4c6c093d7d193062a33b01",
+    "0xb95f56a93af1dbf477b2c527e186cc37aa4a973f8007717ff6c58ac62eb28a62",
+    "0x032c9e7fa7d1697fa64fd4a59f0d08278d27aa537525e9bd17f71f01d36b8b6a",
+    "0x2a50db3dac1b4468d226deb53cb34737669b5f93848ac04d4e296ade06f9876c",
+    "0xa685928b5102349a5cc50527fec2e03cb136c233505471bdd4363d0ab077a69a",
+    "0xaaa197c7478063eb1124c8d8b03016fe080e6ec4c4f4a4e6d7f09022084e3390"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-01/BarleyFinance_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-01/BarleyFinance_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/security-incidents"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "www.bitget.com",
+      "url": "https://www.bitget.com/news/detail/12560603890246"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Phalcon_xyz/status/1751788389139992824"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/eth/0x995e880635f4a7462a420a58527023f946710167ea4c6c093d7d193062a33b01"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "phalcon.blocksec.com",
+      "url": "https://phalcon.blocksec.com/explorer/tx/eth/0x995e880635f4a7462a420a58527023f946710167ea4c6c093d7d193062a33b01"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xb95f56a93af1dbf477b2c527e186cc37aa4a973f8007717ff6c58ac62eb28a62"
+    },
+    {
+      "source": "blocksec",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs?tab=readme-ov-file#20240128-barleyfinance---reentrancy"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Barley_Finance/status/1751693455179522139"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/barley-finance-2024-01-29"
+    },
+    {
+      "source": "revertiq",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/phalcon/explorer/tx/eth/0x995e880635f4a7462a420a58527023f946710167ea4c6c093d7d193062a33b01"
+    }
+  ]
+}

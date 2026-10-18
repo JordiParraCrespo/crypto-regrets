@@ -1,0 +1,112 @@
+{
+  "id": "2022-09-08-ragnarok-online-invasion",
+  "name": "Ragnarok Online Invasion",
+  "date": "2022-09-08",
+  "year": 2022,
+  "amountUsd": 44000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "Gaming",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.96,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.96
+      },
+      {
+        "category": "logic-error",
+        "p": 0.03
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.08,
+    "stateActor": 0.03,
+    "hasRootCause": 0.69
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Broken Access Control. Lost: 157.98 BNB (~44,000 US$)",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Broken Access Control. Lost: 157.98 BNB (~44,000 US$)"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Incorrect access control Vulnerable code snippet: https://bscscan.com/address/0xe48b75dc1b131fd3a8364b0580f76efd04cf6e9c#code#L185 --- *deflationary token pattern*"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On September 8, 2022, Ragnarok Online Invasion was exploited on BNB Chain due to unrestricted access to its ownership transfer function. The attacker assumed ownership of the ROI token contract, set fees to enable a liquidity extraction, and withdrew approximately 162.5 BNB, causing losses of about $44,000 and nearly total collapse of ROI’s token price. The ROI token’s transferOwnership function lacked access control, allowing any caller to assume contract ownership and execute privileged administrative actions."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x0e14cb7eabeeb2a819c52f313c986a877c1fa19824e899d1b91875c11ba053b0"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-09/ROI_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-09/ROI_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BlockSecTeam/status/1567746825616236544"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/CertiKAlert/status/1567754904663429123"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "www.panewslab.com",
+      "url": "https://www.panewslab.com/zh_hk/articledetails/mbzalpdi.html"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0xe48b75dc1b131fd3a8364b0580f76efd04cf6e9c#code#L185"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/ragnarok-online-invasion-2022-09-08"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/ragnarok-online-invasion-hack-2022"
+    },
+    {
+      "source": "revertiq",
+      "label": "medium.com",
+      "url": "https://medium.com/quillhash/decoding-ragnarok-online-invasion-44k-exploit-quillaudits-261b7e23b55"
+    }
+  ]
+}

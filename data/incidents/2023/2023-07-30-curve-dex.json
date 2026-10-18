@@ -1,0 +1,192 @@
+{
+  "id": "2023-07-30-curve-dex",
+  "name": "Curve DEX",
+  "date": "2023-07-30",
+  "year": 2023,
+  "amountUsd": 61700000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "reentrancy",
+  "technique": "Vyper Compiler Bug",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.44,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.47000000000000003
+      },
+      {
+        "category": "market-manipulation",
+        "p": 0.23
+      },
+      {
+        "category": "access-control",
+        "p": 0.16
+      }
+    ],
+    "flashLoan": 0.08,
+    "stateActor": 0.02,
+    "hasRootCause": 0.93
+  },
+  "bridge": false,
+  "language": "Vyper",
+  "rootCause": "Lack Slippage Protection. Lost: ~$36K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Lack Slippage Protection. Lost: ~$36K"
+    },
+    {
+      "source": "DeFiHackLabs",
+      "text": "Vyper Compiler Bug && Reentrancy. Lost: ~ $41M"
+    },
+    {
+      "source": "REKT",
+      "text": "Multiple protocols bit by the Vyper. Curve Finance returns to the leaderboard with a total of $69M drained from four pools. Some funds have been returned with hopefully more to come. Will this wake-up call be enough to trigger a change?"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "This attack was made possible by maliciously calling the execute()function of the UnderlyingBurner contract(which is slippage tolerant), the attacker uses the execute function to further imbalance the 3pool allowing the attacker to buy tokens (like DAI and USDC) low, and sell them at a high prices Vulnerable Code Snippet: Attack Transaction: https://etherscan.io/tx/0xd493c73397952049644c531309df3dd4134bf3db1e64eb6f0b68b016ee0bffde Analysis: https://medium.com/@Hypernative/exotic-culinary-hypernative-systems-caught-a-unique-sandwich-attack-against-curve-finance-6d58c32e436b"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The root cause is A bug within older versions of the Vyper compiler. it could cause a failure in a security feature used by a limited set of Curve pools Attack TX: https://etherscan.io/tx/0xa84aa065ce61dbb1eb50ab6ae67fc31a9da50dd2c74eefd561661bfce2f1620c Analysis: https://hackmd.io/@LlamaRisk/BJzSKHNjn"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Curve Finance tweeted that many stablecoin pools (alETH/msETH/pETH) using Vyper 0.2.15 were attacked due to a faulty recursive lock. crvUSD contracts and other fund pools are not affected. As of now, the Curve Finance stablecoin pool hack has caused a cumulative loss of $73.5 million to Alchemix, JPEG'd, MetronomeDAO, deBridge, Ellipsis, and CRV/ETH pools. On August 6, Alchemix tweeted that the Curve Finance hacker had returned all of Alchemix's funds in the Curve pool. On August 19, MetronomeDAO stated that a MEV bot named \"c0ffeebabe\" had recovered most of the stolen funds and returned them to Metronome."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On July 30, 2023, multiple Curve Finance pools on Ethereum were drained, resulting in over $60 million in losses after a Vyper compiler bug broke contract reentrancy guards. Malicious exploiters and white-hat actors exploited this flaw across alETH/ETH, pETH/ETH, msETH/ETH, and CRV/ETH pools; partial funds were returned. Vyper compiler versions 0.2.15,0.3.0 did not correctly implement the @nonreentrant reentrancy lock, causing vulnerable Curve pool functions to lack true protection against reentrant calls. This enabled attackers to re-enter liquidity functions and manipulate pool accounting."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On July 30, 2023, a reentrancy vulnerability introduced by Vyper compiler versions 0.2.15, 0.2.16, and 0.3.0 enabled attackers to drain multiple Curve Finance pools, resulting in a reported loss between $52M and $73M. The bug broke the @nonreentrant decorator, allowing classic reentrancy attacks despite contracts using explicit reentrancy guards. A code-generation bug in Vyper compiler versions 0.2.15, 0.2.16, and 0.3.0 rendered the @nonreentrant decorator non-functional. The compiler allocated reentrancy locks incorrectly, failing to protect contract functions from reentry and enabling attackers to exploit pool logic during ETH transfers."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xd493c73397952049644c531309df3dd4134bf3db1e64eb6f0b68b016ee0bffde",
+    "0xa84aa065ce61dbb1eb50ab6ae67fc31a9da50dd2c74eefd561661bfce2f1620c",
+    "0x006763dff653ecddfd3681181a29e7e6d6c2aaa7bafb27fe1376f3f7ce367c1e",
+    "0xe928d5de53bea42231d0dd140a3f761adb93081038a368591eb1166168297bdc",
+    "0xcd99fadd7e28a42a063e07d9d86f67c88e10a7afe5921bd28cd1124924ae2052",
+    "0x2e7dc8b2fb7e25fd00ed9565dcc0ad4546363171d5e00f196d48103983ae477c",
+    "0xb676d789bb8b66a08105c844a49c2bcffb400e5c1cfabd4bc30cca4bff3c9801",
+    "0xc93eb238ff42632525e990119d3edc7775299a70b56e54d83ec4f53736400964"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-08/CurveBurner_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-08/CurveBurner_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "medium.com",
+      "url": "https://medium.com/@Hypernative/exotic-culinary-hypernative-systems-caught-a-unique-sandwich-attack-against-curve-finance-6d58c32e436b"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-07/Curve_exp01.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "hackmd.io",
+      "url": "https://hackmd.io/@LlamaRisk/BJzSKHNjn"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Curve, Vyper - REKT",
+      "url": "https://rekt.news/curve-vyper-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xd493c73397952049644c531309df3dd4134bf3db1e64eb6f0b68b016ee0bffde"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xa84aa065ce61dbb1eb50ab6ae67fc31a9da50dd2c74eefd561661bfce2f1620c"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x006763dff653ecddfd3681181a29e7e6d6c2aaa7bafb27fe1376f3f7ce367c1e"
+    },
+    {
+      "source": "blocksec",
+      "label": "blocksec.com",
+      "url": "https://blocksec.com/blog/curve-incident-compiler-error-produces-faulty-bytecode-from-innocent-source-code"
+    },
+    {
+      "source": "blocksec",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs?tab=readme-ov-file#20230730-curve---vyper-compiler-bug--reentrancy"
+    },
+    {
+      "source": "slowmist",
+      "label": "panewslab.com",
+      "url": "https://www.panewslab.com/zh/sqarticledetails/wu339f1f.html"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/curve-dex-2023-07-30"
+    },
+    {
+      "source": "revertiq",
+      "label": "hackmd.io",
+      "url": "https://hackmd.io/%40LlamaRisk/BJzSKHNjn"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractaudit.com",
+      "url": "https://www.smartcontractaudit.com/guides/curve-finance-2023-vyper-reentrancy"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/vyper-reentrancy-vulnerability-2023-07-30"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/vyper-reentrancy-vulnerability-lessons-exploit"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptohawking.com",
+      "url": "https://www.cryptohawking.com/blog/curve-vyper-reentrancy-compiler-bug-postmortem"
+    },
+    {
+      "source": "revertiq",
+      "label": "hackmd.io",
+      "url": "https://hackmd.io/@vyperlang/HJUgNMhs2"
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "id": "2022-09-05-zoomprofinance",
+  "name": "ZoomproFinance",
+  "date": "2022-09-05",
+  "year": 2022,
+  "amountUsd": 61160,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "input-validation",
+  "technique": "Flashloans & Price Manipulation",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.83). Replaced keyword guess \"oracle-manipulation\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "input-validation",
+    "confidence": 0.83,
+    "top": [
+      {
+        "category": "input-validation",
+        "p": 0.84
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.16
+      }
+    ],
+    "flashLoan": 0.31,
+    "stateActor": 0.02,
+    "hasRootCause": 0.91
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Flashloans & Price Manipulation. Lost: 61,160 USDT",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Flashloans & Price Manipulation. Lost: 61,160 USDT"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Insufficient validation Attacker uss fake usdt in zoom pair to trick protocol. Vulnerable code snippet: unverified contract https://bscscan.com/address/0x47391071824569F29381DFEaf2f1b47A4004933B#code --- Image from blocksec:"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-09/ZoomproFinance_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-09/ZoomproFinance_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/blocksecteam/status/1567027459207606273"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0xe176bd9cfefd40dc03508e91d856bd1fe72ffc1e9260cd63502db68962b4de1a"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0x47391071824569F29381DFEaf2f1b47A4004933B#code"
+    }
+  ]
+}

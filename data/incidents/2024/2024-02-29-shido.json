@@ -1,0 +1,94 @@
+{
+  "id": "2024-02-29-shido",
+  "name": "Shido",
+  "date": "2024-02-29",
+  "year": 2024,
+  "amountUsd": 3300000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "Other",
+  "category": "key-compromise",
+  "technique": "Private Key Compromised",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "rugpull",
+    "confidence": 0.63,
+    "top": [
+      {
+        "category": "rugpull",
+        "p": 0.65
+      },
+      {
+        "category": "key-compromise",
+        "p": 0.31
+      },
+      {
+        "category": "access-control",
+        "p": 0.04
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.91
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "The decentralized cross-chain protocol Shido Network on the Ethereum blockchain appears to be a rug pull. The owner of the SHIDO token staking contract first upgraded the staking contract, then withdrew a large amount of SHIDO tokens, and finally dumped a significant amount of SHIDO tokens at a price of 692 ETH (worth $2.1 million).",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The decentralized cross-chain protocol Shido Network on the Ethereum blockchain appears to be a rug pull. The owner of the SHIDO token staking contract first upgraded the staking contract, then withdrew a large amount of SHIDO tokens, and finally dumped a significant amount of SHIDO tokens at a price of 692 ETH (worth $2.1 million)."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On February 29, 2024, Shido’s Ethereum staking proxy was upgraded to malicious logic after a reported ownership transfer involving the proxy admin. The attacker then withdrew more than 4.35 billion SHIDO tokens from the staking contract, triggering a rapid collapse in the token price as the tokens were sold on the market. An address with upgrade authority over Shido’s StakingV4Proxy gained the ability to deploy a malicious implementation containing a hidden token withdrawal function. Public reporting consistently described this as a sudden ownership transfer, but the available evidence does not independently establish whether the privileged access resu…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xed3000ddd8b4feb0902107f97a91815ecee8d7ccb57de9a9dbc50a4c07593cb3",
+    "0xaa76ea503fadddf775b1ef7f195676440fdc3ac46ab642798ab6fa7ae3aafcbe"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "odaily.news",
+      "url": "https://www.odaily.news/newsflash/356637"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/shido-2024-03-02t13-56-49-00-00"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/defi-rekt-report-over-148-million-lost-in-february-2024"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/shido-hack-2024"
+    },
+    {
+      "source": "revertiq",
+      "label": "crypto.news",
+      "url": "https://crypto.news/shido-token-dives-over-90-after-ethereum-staking-contract-exploit/"
+    }
+  ]
+}

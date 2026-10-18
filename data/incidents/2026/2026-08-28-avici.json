@@ -1,0 +1,86 @@
+{
+  "id": "2026-08-28-avici",
+  "name": "Avici",
+  "date": "2026-08-28",
+  "year": 2026,
+  "amountUsd": 500859,
+  "returnedUsd": null,
+  "chains": [
+    "Solana"
+  ],
+  "targetType": "Crypto Card",
+  "category": "logic-error",
+  "technique": "Withdrawal Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.82,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.83
+      },
+      {
+        "category": "logic-error",
+        "p": 0.09
+      },
+      {
+        "category": "signature-crypto",
+        "p": 0.08
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Rust",
+  "rootCause": "Attackers exploited a vulnerability in an outdated version of Rain’s Solana card contract used by Avici (and a few other programs). By submitting crafted signature bundles to gain unauthorized admin rights via AddCollateralAdmin and then withdrawing collateral, they drained $500,859.22 from 1,685 users’ card balances. Self-custodial wallets were unaffected. The contract was upgraded across all programs, and full refunds were promised.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Attackers exploited a vulnerability in an outdated version of Rain’s Solana card contract used by Avici (and a few other programs). By submitting crafted signature bundles to gain unauthorized admin rights via AddCollateralAdmin and then withdrawing collateral, they drained $500,859.22 from 1,685 users’ card balances. Self-custodial wallets were unaffected. The contract was upgraded across all programs, and full refunds were promised."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Avici’s Solana card contract was exploited on 2026-08-28, affecting 1,685 users and $500,859.22 in card balances. Public reports attribute the drain to an authorization flaw in an outdated Rain card contract that let the attacker register collateral-admin privileges and withdraw funds. Reported authorization and withdrawal-logic flaw in an outdated Rain Solana card contract used by Avici. Public reconstructions say the attacker reused a signature path to add collateral-admin authority and then withdraw card balances from affected accounts."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/avici/status/2093439613201482068?s=46&t=DLwbX9Nw4QECiyZQ0av-fg"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/avici-2026-08-28"
+    },
+    {
+      "source": "revertiq",
+      "label": "defillama.com",
+      "url": "https://defillama.com/protocol/avici"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptobriefing.com",
+      "url": "https://cryptobriefing.com/avici-solana-card-exploit-full-refunds/"
+    }
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "id": "2025-08-23-equilibriaependle",
+  "name": "EquilibriaEPendle",
+  "date": "2025-08-23",
+  "year": 2025,
+  "amountUsd": 62661.57,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Reward Accounting Flaw",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.94). Replaced keyword guess \"accounting-math\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.94,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.94
+      },
+      {
+        "category": "access-control",
+        "p": 0.06
+      }
+    ],
+    "flashLoan": 0.91,
+    "stateActor": 0.01,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Reward Accounting Flaw. Lost: 62,661.57 USD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Reward Accounting Flaw. Lost: 62,661.57 USD"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The Equilibria Finance ePENDLE auto-compounder on Ethereum was deployed with a business logic misconfiguration: the stk-ePENDLE staked token was not configured as non-transferable, contrary to the secure implementation already enforced on all other chains where the protocol operates. The design intent was that stk-ePENDLE positions would be locked post-stake to prevent reward gaming, but the Ethereum deployment omitted this critical constraint. The attacker exploited the gap using Balancer flash loans to acquire a large amount of ePENDLE, stake it to obtain stk-ePENDLE, and then rapidly transfer the staked tokens across multiple attacker-controlled addresses in rapid succession — each transfer triggered a reward claim, allowing the attacker to repeatedly harvest accumulated ETH rewards from the contract. Approximately 13.36 ETH (~$68K) in rewards were drained before the protocol identified and patched the issue. Equilibria updated the Ethereum stk-ePENDLE contract to match the non-transferable configuration of its other deployments and compensated affected users from the treasury. Attack Tx: 0x0a60d7fb1d459ebee1ddcd62d1a8fcb8faa9aa1ebbb3203f90bea7dd888af8aa Analysis: Equilibria Finance — Official Security Update"
+    },
+    {
+      "source": "SlowMist",
+      "text": "According to an announcement from Equilibria Finance, a vulnerability was discovered in the ePENDLE auto-compounder contract on Ethereum, resulting in a loss of approximately 13.36 ETH. The issue stemmed from the stk-ePENDLE contract on Ethereum mainnet not being configured as non-transferable. The attacker used flash loans via Balancer to acquire ePENDLE, staked it into stk-ePENDLE, and then repeatedly transferred stk-ePENDLE across multiple addresses. Each transfer triggered a reward claim, enabling the attacker to drain the unclaimed rewards from the contract."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x0a60d7fb1d459ebee1ddcd62d1a8fcb8faa9aa1ebbb3203f90bea7dd888af8aa",
+    "0x45047ffa6d8f380b9914053b3fbcc6333422b4ccd7bb6ac829a6c39637aa090f",
+    "0xc16984edf1ac3e50f1a10842310c7ab3983ab0d1f9f5eb6fb859a59e416048f8",
+    "0x185a16017fb4d9b2fefdf5935435253d53d4758238275426b507fe54eb4fe97a"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-08/EquilibriaEPendle_exp.sol",
+  "sources": [
+    "defihacklabs",
+    "blocksec",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-08/EquilibriaEPendle_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "t.me",
+      "url": "https://t.me/defimon_alerts/1712"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x0a60d7fb1d459ebee1ddcd62d1a8fcb8faa9aa1ebbb3203f90bea7dd888af8aa"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/Equilibriafi/status/1959296722930483668"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x0a60d7fb1d459ebee1ddcd62d1a8fcb8faa9aa1ebbb3203f90bea7dd888af8aa"
+    }
+  ]
+}

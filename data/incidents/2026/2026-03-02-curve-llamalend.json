@@ -1,0 +1,110 @@
+{
+  "id": "2026-03-02-curve-llamalend",
+  "name": "Curve LlamaLend",
+  "date": "2026-03-02",
+  "year": 2026,
+  "amountUsd": 240000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Donation Attack",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.98,
+    "stateActor": 0.01,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Share price manipulation. Lost: ~240,000 US$",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Share price manipulation. Lost: ~240,000 US$"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "A Curve LlamaLend market used sDOLA (an ERC4626 yield-bearing vault) as collateral, and its controller priced that collateral from the vault's live exchange rate (convertToAssets / share price) rather than a manipulation-resistant oracle. Using Morpho flashloans of USDC and WETH, the attacker routed funds through a long chain of Curve/Yearn/DOLA-savings pools to inflate the sDOLA share price (e.g. staking large DOLA amounts into DOLA_SAVINGS and minting sDOLA), then opened a create_loan against sDOLA collateral valued at the manipulated rate to borrow far more crvUSD/DOLA than the collateral was worth. A secondary contract liquidated the resulting underwater LlamaLend positions (users_to_liquidate / liquidate) to capture value, after which the share price was unwound and flashloans repaid, netting ~$240K. Root cause: LlamaLend valued the ERC4626 sDOLA collateral using a spot/instantaneous share price that the attacker could temporarily pump within a single transaction. Vulnerable code snippet: Attack Tx: https://etherscan.io/tx/0xb93506af8f1a39f6a31e2d34f5f6a262c2799fef6e338640f42ab8737ed3d8a4 Analysis: https://x.com/yieldsandmore/status/2028368378457362629"
+    },
+    {
+      "source": "SlowMist",
+      "text": "On March 2, 2026, Curve Finance’s LlamaLend sDOLA/crvUSD market suffered a flash-loan + donation attack. The attacker first used a massive LLAMMA exchange to push all positions into soft liquidation, then inflated the sDOLA oracle price by 13.79% (1.189 → 1.353) via DolaSavings.stake() donation. This hard-liquidated 27 borrowers (~$10.9M debt). Attacker profited ~$240K; borrowers lost ~$822K equity (Curve DAO later proposed full compensation). Lenders and core protocol unaffected."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Curve LlamaLend’s sDOLA/crvUSD lending market on Ethereum was exploited on 2 March 2026 for approximately $240,000. The attacker manipulated an oracle linked to the sDOLA ERC4626 vault by atomically altering the vault share price via redemptions and a 'donation' stake, allowing mass borrower liquidations. The sDOLA market’s price oracle relied directly on the ERC4626 vault’s convertToAssets() spot rate, which could be sharply manipulated in a single transaction through mass redemption and donation (stake) to sDOLA, causing accurate but misleading collateral repricing and enabling hard liquidations."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xb93506af8f1a39f6a31e2d34f5f6a262c2799fef6e338640f42ab8737ed3d8a4",
+    "0xb484224883464bdb1a998508009b95059ca22608962755bd9ebaf3f70286c7a9",
+    "0x2d8a2b4f77b13cf5c5a4fc911b3392f8f9b2a4ba031d28ed1a045df698d66aa3",
+    "0x5be6b952ea2d1102b686b4f5fafe914991dddda229c19292a374a02a3a58ac8f",
+    "0xa503aef9a9c11a55dc8a55a0b491bf889258073133487f3f855ecbbb708c4e0e",
+    "0x358330ec663d22d1c9051b0b0db21b37a82f852aa710f7a883adb4c0d82ae828",
+    "0xf55343b7d1df10fb9d6beda1dbc7c52d95d49973f6463bd51f5dd13e6a4fe113"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-03/Curve_LlamaLend_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-03/Curve_LlamaLend_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/yieldsandmore/status/2028368378457362629"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xb93506af8f1a39f6a31e2d34f5f6a262c2799fef6e338640f42ab8737ed3d8a4"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/CurveFinance/status/2032917563051553092"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/curve-llamalend-2026-03-02"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "blocksec.com",
+      "url": "https://blocksec.com/blog/weekly-web3-security-incident-roundup-mar-2-mar-8-2026"
+    }
+  ]
+}

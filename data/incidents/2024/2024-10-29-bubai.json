@@ -1,0 +1,94 @@
+{
+  "id": "2024-10-29-bubai",
+  "name": "BUBAI",
+  "date": "2024-10-29",
+  "year": 2024,
+  "amountUsd": 131000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "Token",
+  "category": "rugpull",
+  "technique": "Liquidity Rug",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.44,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.47
+      },
+      {
+        "category": "access-control",
+        "p": 0.38
+      },
+      {
+        "category": "rugpull",
+        "p": 0.14
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.01,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Rug pull. Lost: $131K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Rug pull. Lost: $131K"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 29 October 2024, liquidity in the BUBAI token pool on Ethereum Mainnet was abruptly removed, resulting in an estimated loss of $131,000. The event matches liquidity rugpull patterns, but the specific privilege and relationship of the withdrawing account to the BUBAI project remains unverified. The root cause is the lack of restrictions or locks on liquidity provider (LP) tokens in the BUBAI pool. This allowed a holder of LP tokens to withdraw all liquidity from the pool, making the token unsellable and collapsing its value. No evidence establishes admin/deployer privilege for the withdrawing account."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x1b4730e715286862042def956d5aaa6a53203ee02b97ea913de73fa462e48f90",
+    "0x872fcfcfd2e61ab5ec848f5e1a75b75f471bdb8c808c06388434e7179a9e40db"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-10/BUBAI_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-10/BUBAI_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/TenArmorAlert/status/1851445795918118927"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/bubai-2024-10-29"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/bubai-hack-2024"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/past/2024/README.md#L374"
+    }
+  ]
+}

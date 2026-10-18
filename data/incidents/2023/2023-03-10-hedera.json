@@ -1,0 +1,93 @@
+{
+  "id": "2023-03-10-hedera",
+  "name": "Hedera",
+  "date": "2023-03-10",
+  "year": 2023,
+  "amountUsd": 600000,
+  "returnedUsd": null,
+  "chains": [
+    "Hedera"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.03,
+    "hasRootCause": 0.9
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "A nebulous threat rattled the entire Hedera ecosystem, yesterday. Dapps from across the network were affected and Hedera remains down while investigations continue. DeFi users spook easily… and with good reason.",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "A nebulous threat rattled the entire Hedera ecosystem, yesterday. Dapps from across the network were affected and Hedera remains down while investigations continue. DeFi users spook easily… and with good reason."
+    },
+    {
+      "source": "SlowMist",
+      "text": "Hedera tweeted to disclose the details of the attack. The attacker attacked the smart contract service code of the Hedera main network and transferred the Hedera Token Service tokens held by some user accounts to their own accounts. The attackers targeted accounts used as liquidity pools on multiple DEXs migrated to use the Hedera Token Service using Uniswap V2-derived contract generations, including Pangolin Hedera, SaucerSwap, and HeliSwap. When attackers moved tokens obtained through the attack to a Hashport Network bridge, bridge operators detected the activity and acted quickly to disable it. To prevent attackers from stealing more tokens, Hedera…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On March 9, 2023, a network-level bug in the Hedera mainnet’s Smart Contract Service allowed an attacker to drain over $500,000 from multiple DEX liquidity pools by exploiting flawed EVM-to-HTS translation logic. The core protocol was impacted, not just a single dApp. A flaw in Hedera's Smart Contract Service EVM-compatibility translation logic permitted unauthorized transfers of Hedera Token Service (HTS) tokens. This bug allowed attacker-initiated contract calls to move tokens from DEX pool accounts without proper authorization checks."
+    }
+  ],
+  "audit": "FP Complete",
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Hedera - REKT",
+      "url": "https://rekt.news/hedera-rekt"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/hedera/status/1634055353435561986"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/hedera-2023-03-09"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/hedera-token-service-hack-2023"
+    },
+    {
+      "source": "revertiq",
+      "label": "blockchainbreaches.com",
+      "url": "https://www.blockchainbreaches.com/en/breaches/hedera-2023"
+    }
+  ]
+}

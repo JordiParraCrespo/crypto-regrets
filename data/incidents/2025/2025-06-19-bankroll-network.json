@@ -1,0 +1,137 @@
+{
+  "id": "2025-06-19-bankroll-network",
+  "name": "Bankroll Network",
+  "date": "2025-06-19",
+  "year": 2025,
+  "amountUsd": 65000,
+  "returnedUsd": null,
+  "chains": [
+    "Binance Smart Chain"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Arithmetic Error",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.95,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.95
+      },
+      {
+        "category": "logic-error",
+        "p": 0.05
+      }
+    ],
+    "flashLoan": 0.96,
+    "stateActor": 0.01,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Incorrect dividends calculation. Lost: 5k USD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Incorrect dividends calculation. Lost: 5k USD"
+    },
+    {
+      "source": "DeFiHackLabs",
+      "text": "Incorrect dividends calculation. Lost: 24.5 WBNB"
+    },
+    {
+      "source": "DeFiHackLabs",
+      "text": "Incorrect dividends calculation. Lost: 12,234.48 USD"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "BankrollNetworkStack uses the same flawed dividend-accounting model as the other Bankroll forks: a global profitPerShare accumulator distributes deposited funds (here WBNB) pro-rata across token holders. The attacker abused donatePool() to push WBNB into the dividend pool, then bought a small position with buy(); because the contract credits dividends based on the post-donation profitPerShare without properly excluding the attacker's own freshly-bought shares from the donated amount, the attacker's myDividends() jumped far beyond their contribution. The exploit was flash-funded: a 2,000 WBNB PancakeSwap V2 flash swap financed donatePool(1000 ether) + buy(240 ether), after which the attacker sell()s and withdraw()s the inflated dividends, repays the loan, and keeps ~24.5 WBNB profit. Attack Tx: https://bscscan.com/tx/0x7226b3947c7e8651982e5bd777bca52d03ea31d19b515dec123595a4435ae22c Analysis: Phalcon post-mortem"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "BankrollStack is a fork of the classic \"PoWH3D / Bankroll\" dividend-token design where each share's dividend entitlement is tracked via a global profitPerShare accumulator. The donatePool()/donate function and the buy/sell mechanics let a holder inflate the per-share dividend value immediately, while the contract fails to correctly separate already-credited dividends from newly added ones. Using a 28,300 BUSD PancakeV3 flash loan, the attacker bought a large amount of tokens, then sold them and called withdraw() to harvest dividends that were miscredited to them, walking away with a profit before repaying the flash loan in the same transaction. The bug is an arithmetic flaw in the dividends accounting: the share price and the payoutsTo correction term are not consistently updated, so a flash-funded buy/sell cycle extracts more BUSD than was contributed. Attack Tx: https://bscscan.com/tx/0x0706425beba4b3f28d5a8af8be26287aa412d076828ec73d8003445c087af5fd Analysis: Phalcon post-mortem"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 19 June 2025, Bankroll Network suffered a multi-chain exploit on BNB Chain and Ethereum due to an unchecked integer underflow in its sell() function. Attackers were able to drain approximately $65,000 in user assets from abandoned pools using inflated dividend payouts. The legacy sell() function in the BankrollNetworkStack contract performed unchecked signed integer arithmetic when updating user payouts. As compiled with Solidity 0.6.8, this allowed underflows to silently corrupt user accounting, enabling attackers to withdraw unearned dividends and drain funds."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x7226b3947c7e8651982e5bd777bca52d03ea31d19b515dec123595a4435ae22c",
+    "0x0706425beba4b3f28d5a8af8be26287aa412d076828ec73d8003445c087af5fd",
+    "0x8905a0aca5849626c0de026c2d2894ddfa8060a27725221f01aac9fb0b3d6629"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-06/BankrollStack_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-06/BankrollStack_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-06/BankrollNetwork_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/TenArmorAlert/status/1935618109802459464"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-06/BankrollStackPlus_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "t.me",
+      "url": "https://t.me/defimon_alerts/1301"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x7226b3947c7e8651982e5bd777bca52d03ea31d19b515dec123595a4435ae22c"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/Phalcon_xyz/status/1943518566831296566"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x0706425beba4b3f28d5a8af8be26287aa412d076828ec73d8003445c087af5fd"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/bankroll-network-2025-06-19"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.solidityscan.com",
+      "url": "https://blog.solidityscan.com/bankroll-network-hack-analysis-5d7cdec35075/"
+    },
+    {
+      "source": "revertiq",
+      "label": "revoke.cash",
+      "url": "https://www.revoke.cash/exploits/bankroll-network"
+    }
+  ]
+}

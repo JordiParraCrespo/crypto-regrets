@@ -1,0 +1,112 @@
+{
+  "id": "2025-12-25-trust-wallet-wallet",
+  "name": "Trust Wallet Wallet",
+  "date": "2025-12-25",
+  "year": 2025,
+  "amountUsd": 8500000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum",
+    "Bitcoin",
+    "Solana"
+  ],
+  "targetType": "Wallet",
+  "category": "frontend-infra",
+  "technique": "Supply Chain Attack",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "frontend-infra",
+    "confidence": 0.61,
+    "top": [
+      {
+        "category": "frontend-infra",
+        "p": 0.63
+      },
+      {
+        "category": "key-compromise",
+        "p": 0.37
+      }
+    ],
+    "flashLoan": 0.01,
+    "stateActor": 0.03,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "The Trust Wallet browser extension suffered a software supply chain attack when attackers — as part of a broader npm-level campaign dubbed Shai-Hulud — compromised Trust Wallet's Chrome Web Store API key weeks before the incident. Using that key, they bypassed the standard internal release process and published a malicious version 2.68 directly to the Chrome Web Store on December 24, 2025. The rogue extension contained a bundled JavaScript file (4482.js) that, upon wallet unlock, captured the user's mnemonic phrase or private key via the GET_SEED_PHRASE call and silently exfiltrated it to an attacker-controlled server at api.metrics-trustwallet[.]com. Approximately $8.5 million was drained from 2,520 wallet addresses in Bitcoin, Ethereum, and Solana before Trust Wallet pulled the extension and replaced it with a clean v2.69. Attack Tx: 0x7ed83315359deef0acd92bd96320b27dc7d36238bde8d904a67623c2eb43c682 Analysis: Trust Wallet Browser Extension v2.68 Incident – Community Update Christmas Heist – SlowMist Analysis Explained: The Trust Wallet Hack – Halborn",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The Trust Wallet browser extension suffered a software supply chain attack when attackers — as part of a broader npm-level campaign dubbed Shai-Hulud — compromised Trust Wallet's Chrome Web Store API key weeks before the incident. Using that key, they bypassed the standard internal release process and published a malicious version 2.68 directly to the Chrome Web Store on December 24, 2025. The rogue extension contained a bundled JavaScript file (4482.js) that, upon wallet unlock, captured the user's mnemonic phrase or private key via the GET_SEED_PHRASE call and silently exfiltrated it to an attacker-controlled server at api.metrics-trustwallet[.]com. Approximately $8.5 million was drained from 2,520 wallet addresses in Bitcoin, Ethereum, and Solana before Trust Wallet pulled the extension and replaced it with a clean v2.69. Attack Tx: 0x7ed83315359deef0acd92bd96320b27dc7d36238bde8d904a67623c2eb43c682 Analysis: Trust Wallet Browser Extension v2.68 Incident – Community Update Christmas Heist – SlowMist Analysis Explained: The Trust Wallet Hack – Halborn"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Trust Wallet has issued an official notice confirming that version 2.68 of its browser extension contains a security vulnerability, and advised all users running version 2.68 to immediately disable it and upgrade to version 2.69. According to SlowMist’s analysis, this backdoor incident originated from a malicious modification of Trust Wallet’s internal codebase (analytics service logic), rather than the introduction of a compromised third-party package (e.g., a malicious npm package). The attacker directly tampered with the application’s own code, using the legitimate PostHog library to redirect analytics data to a malicious server. As of December 31,…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Between December 24 and 26, 2025, a malicious update to the Trust Wallet browser extension enabled a supply chain compromise, letting an attacker steal user seeds and drain $8.5 million from wallets across Ethereum, Bitcoin, and Solana. Recovery and verification for reimbursement remain ongoing, with transaction-level details undisclosed. The attacker obtained Trust Wallet’s Chrome Web Store publishing API key and browser extension source after developer GitHub secrets were exposed in the Sha1-Hulud npm supply chain incident. This enabled the upload of a tampered extension (v2.68), containing malicious functionality, bypassing internal review. The inje…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x7ed83315359deef0acd92bd96320b27dc7d36238bde8d904a67623c2eb43c682"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x7ed83315359deef0acd92bd96320b27dc7d36238bde8d904a67623c2eb43c682"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "trustwallet.com",
+      "url": "https://trustwallet.com/blog/announcements/trust-wallet-browser-extension-v268-incident-community-update"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "slowmist.medium.com",
+      "url": "https://slowmist.medium.com/christmas-heist-analysis-of-trust-wallet-browser-extension-hack-bdb35c3cc6dd"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x7ed83315359deef0acd92bd96320b27dc7d36238bde8d904a67623c2eb43c682"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/TrustWallet/status/2006029258209005699"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/trust-wallet-wallet-2025-12-25"
+    },
+    {
+      "source": "revertiq",
+      "label": "trustwallet.com",
+      "url": "https://trustwallet.com/blog/company/trust-wallet-browser-extension-v268-incident-community-update"
+    },
+    {
+      "source": "revertiq",
+      "label": "cybernews.com",
+      "url": "https://cybernews.com/crypto/trust-wallet-says-browser-extension-compromise-related-to-sha1-hulud-incident-led-to-8-5m-theft/"
+    }
+  ]
+}

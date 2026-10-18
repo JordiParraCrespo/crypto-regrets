@@ -1,0 +1,72 @@
+{
+  "id": "2026-09-15-bonfire",
+  "name": "Bonfire",
+  "date": "2026-09-15",
+  "year": 2026,
+  "amountUsd": 47400,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.99
+      },
+      {
+        "category": "arbitrary-call",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "missing caller authorization lets anyone force-sell any approved holder's tokens. Lost: ~66 BNB (~$47-50K); 58.78 BNB reproduced from a 5-victim subset (~98.7% of tokens drained)",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "missing caller authorization lets anyone force-sell any approved holder's tokens. Lost: ~66 BNB (~$47-50K); 58.78 BNB reproduced from a 5-victim subset (~98.7% of tokens drained)"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The BonfireSwap router’s transfer lacked access control: it did not require msg.sender == from or check the caller’s allowance on from. An attacker set approved holders as from and themselves as to, drained TOKEN via existing victim→router allowances, then forwarded funds through a same-token pool swap. About 41 approved holders were hit; loss ~$50,000."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-09/BonfireSwap_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-09/BonfireSwap_exp.sol"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/2100064586980528458"
+    }
+  ]
+}

@@ -1,0 +1,95 @@
+{
+  "id": "2026-08-27-cashcowcoin",
+  "name": "CashCowCoin",
+  "date": "2026-08-27",
+  "year": 2026,
+  "amountUsd": 117400,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "privileged burn + premature sync() drains PancakeSwap pair",
+  "classificationNote": "Classified by keyword rules from the DeFiHackLabs root-cause title.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.35,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.39
+      },
+      {
+        "category": "logic-error",
+        "p": 0.33
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.16
+      }
+    ],
+    "flashLoan": 0.06,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "privileged burn + premature sync() drains PancakeSwap pair. Lost: ~165.47 WBNB (~$117.4K)",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "privileged burn + premature sync() drains PancakeSwap pair. Lost: ~165.47 WBNB (~$117.4K)"
+    },
+    {
+      "source": "SlowMist",
+      "text": "CashCowCoin’s unverified trading router implementation contract had a flawed sell() flow. After the PancakeSwap Router completed the CCC→WBNB swap, the proxy called a privileged token function to transfer post-tax CCC from the Pair to the dead address and invoked Pair.sync(). This burned the sell-side CCC while permanently retaining the reduced WBNB reserve, enabling repeated draining of the pool’s WBNB through about 80 iterative sell cycles."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "CCC, also referred to as CashCowCoin in secondary coverage, was reported exploited on BNB Chain for about $117,000 after a sell() path burned liquidity-pair tokens and skewed the AMM reserve ratio. The full transaction trace and trigger path were not public in the available record. A swap logic flaw in CCC's sell() path let the token contract alter the liquidity pair's CCC balance and then re-sync around the changed reserve state. The exact trigger path and access-control failure remain unknown from the available evidence."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-08/CashCowCoin_exp.sol",
+  "sources": [
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-08/CashCowCoin_exp.sol"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/2093219144896557483"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/ccc-2026-08-27"
+    },
+    {
+      "source": "revertiq",
+      "label": "defillama.com",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "crypto.news",
+      "url": "https://crypto.news/ccc-exploit-drains-117k-after-attacker-targets-bsc-liquidity-pool/"
+    },
+    {
+      "source": "revertiq",
+      "label": "kucoin.com",
+      "url": "https://www.kucoin.com/news/flash/ccc-token-on-bsc-hit-by-117k-sell-exploit"
+    }
+  ]
+}

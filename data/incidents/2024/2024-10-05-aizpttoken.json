@@ -1,0 +1,76 @@
+{
+  "id": "2024-10-05-aizpttoken",
+  "name": "AIZPTToken",
+  "date": "2024-10-05",
+  "year": 2024,
+  "amountUsd": 20000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Wrong Price Calculation",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.74).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.74,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.76
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.21
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.03
+      }
+    ],
+    "flashLoan": 0.96,
+    "stateActor": 0.01,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Wrong Price Calculation",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Wrong Price Calculation"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The AIZPT Token contract incorrectly implemented price calculations for token purchases, using the Uniswap V2 quote function, which is unsuitable for determining trade prices as it reflects reserve ratios rather than actual market prices. This allowed the attacker to buy tokens at a low price using a flash loan of 8,000 BNB and sell them at a higher price via the sell function, which used the getAmountOut formula, yielding profits despite a 50% fee. The lack of proper price validation and failure to audit the integration of Uniswap V2 formulas enabled the attacker to manipulate prices and extract 34.88 BNB. Vulnerable code snippet: Attack tx: https://bscscan.com/tx/0x5e694707337cca979d18f9e45f40e81d6ca341ed342f1377f563e779a746460d Analysis: https://blog.verichains.io/p/aizpt-token-hack-analysis"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x5e694707337cca979d18f9e45f40e81d6ca341ed342f1377f563e779a746460d"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-10/AIZPTToken_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-10/AIZPTToken_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x5e694707337cca979d18f9e45f40e81d6ca341ed342f1377f563e779a746460d"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "blog.verichains.io",
+      "url": "https://blog.verichains.io/p/aizpt-token-hack-analysis"
+    }
+  ]
+}

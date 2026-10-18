@@ -1,0 +1,108 @@
+{
+  "id": "2026-05-24-fractal-protocol",
+  "name": "Fractal Protocol",
+  "date": "2026-05-24",
+  "year": 2026,
+  "amountUsd": 13700,
+  "returnedUsd": null,
+  "chains": [
+    "Arbitrum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "reentrancy",
+  "technique": "Reentrancy",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.5,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.53
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.35000000000000003
+      },
+      {
+        "category": "logic-error",
+        "p": 0.09
+      }
+    ],
+    "flashLoan": 0.98,
+    "stateActor": 0.01,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Business Logic Flaw. Lost: ~$13.7K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Business Logic Flaw. Lost: ~$13.7K"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The Fractal vault prices its USDF share token (getTokenPrice/getMaxWithdrawalAmount) based on the vault's instantaneous USDC.e balance and epoch/period state, which the attacker manipulated within a single transaction. Using stacked flash loans (Aave + Balancer + six Uniswap V3/Algebra USDC.e pool flashes) the attacker temporarily inflated the vault's USDC.e balance, deposited 1,403,259 USDC.e to mint USDF at a favorable rate, forced period advancement via compute(), then performed a descending series of withdraw calls draining more USDC.e than was deposited. After repaying all flash loans the attacker netted ~$13.7K USDC.e profit. The root cause is that the vault's share price and max-withdrawal accounting rely on manipulable, flash-loan-inflatable balance/state read within one block, allowing a profitable deposit-then-withdraw round trip. Vulnerable code snippet: Attack Tx: https://arbiscan.io/tx/0x20db78913a51c3b3aece860ea142c240f3f8fa3b5bbf533a3d1d48eed857e10f Analysis: https://x.com/DefimonAlerts/status/2058619391776878967"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Fractal Protocol’s USDF vault on Arbitrum was exploited via a smart contract logic flaw. The attacker used an Aave V3 USDC.e flash loan, looped through Balancer V2 batchSwap callbacks, and recursively called the vault’s deposit (0xb6b55f25) and withdraw functions. This exploited the fixed daily-accrued tokenPrice (~1.27 USDC/USDF) and share-rounding accounting issues without proper invariant checks across re-entrant flows, allowing the extraction of approximately 13,700 USDC.e. The vault’s liquid USDC buffer dropped from around 14,778 USDC to near zero. Pre-hack TVL was approximately 97,270 USD."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Fractal Protocol's yield vault on Arbitrum was exploited in May 2026 when an attacker used flash loans and permissionless price advancement to drain $13.7K USDC, leveraging a stale token price and mispriced receipt token minting. The root cause was a permissionless price accrual mechanism in the vault's compute() function, which allowed any user to arbitrarily advance the token price without actual yield reserve funding. This enabled atomic minting at a low price and instant redemption at an inflated price within one transaction, draining the vault's withdrawal buffer."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x20db78913a51c3b3aece860ea142c240f3f8fa3b5bbf533a3d1d48eed857e10f",
+    "0x67aed9a941a709874596aed5a50cf03c287bf9eb142b2886d56fd8f329368fc1"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-05/FractalProtocol_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-05/FractalProtocol_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "arbiscan.io",
+      "url": "https://arbiscan.io/tx/0x20db78913a51c3b3aece860ea142c240f3f8fa3b5bbf533a3d1d48eed857e10f"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/DefimonAlerts/status/2058619391776878967"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/fractal-protocol-2026-05-24"
+    },
+    {
+      "source": "revertiq",
+      "label": "anomly.rs",
+      "url": "https://anomly.rs/fractal-protocol-vault-stale-price-exploit"
+    },
+    {
+      "source": "revertiq",
+      "label": "crypto.training",
+      "url": "https://crypto.training/hacks/2026-05-fractalprotocol/"
+    }
+  ]
+}

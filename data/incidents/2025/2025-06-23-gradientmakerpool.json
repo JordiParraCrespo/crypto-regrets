@@ -1,0 +1,73 @@
+{
+  "id": "2025-06-23-gradientmakerpool",
+  "name": "GradientMakerPool",
+  "date": "2025-06-23",
+  "year": 2025,
+  "amountUsd": 5000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Price Oracle Manipulation",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 1.00).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.98,
+    "stateActor": 0.01,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Price Oracle Manipulation. Lost: 5k USD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Price Oracle Manipulation. Lost: 5k USD"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The Gradient Market Maker Pool prices the GRAY token and computes LP shares using the spot price of a Uniswap V2 GRAY/WETH pool, with no TWAP or manipulation resistance. The attacker took a 3 WETH Morpho flash loan, swapped WETH for a large amount of GRAY on Uniswap (skewing the spot reserves), and then called provideLiquidity() with ETH and the cheaply-acquired GRAY. Because the pool valued the deposited GRAY using the just-manipulated spot price, the attacker was minted far more LP shares than the true value of their deposit; withdrawLiquidity() then returned more ETH/value than was put in. The funds were used to repay the flash loan with a profit. Root cause: liquidity valuation depends on a manipulable in-block AMM spot price. Attack Tx: https://etherscan.io/tx/0xb5cfa3f86ce9506e2364475dc43c44de444b079d4752edbffcdad7d1654b1f67 Analysis: DeFiMon alert"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xb5cfa3f86ce9506e2364475dc43c44de444b079d4752edbffcdad7d1654b1f67"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-06/GradientMakerPool_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-06/GradientMakerPool_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "t.me",
+      "url": "https://t.me/defimon_alerts/1339"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xb5cfa3f86ce9506e2364475dc43c44de444b079d4752edbffcdad7d1654b1f67"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "t.me",
+      "url": "https://t.me/defimon_alerts/1340"
+    }
+  ]
+}

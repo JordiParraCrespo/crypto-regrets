@@ -1,0 +1,99 @@
+{
+  "id": "2025-07-02-future-protocol",
+  "name": "Future Protocol",
+  "date": "2025-07-02",
+  "year": 2025,
+  "amountUsd": 4600000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Incorrect Share Accounting",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.66,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.68
+      },
+      {
+        "category": "logic-error",
+        "p": 0.31
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.98,
+    "stateActor": 0.01,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "The FPC token's burn-on-transfer mechanism was designed to burn tokens directly from the PancakeSwap liquidity pool's balance and immediately call sync(). This design violates the constant product invariant (x×y=k) that UniswapV2-style AMMs rely on for correct pricing, because the pool's reserve is reduced outside of the normal swap mechanism. An attacker borrowed 23,020,000 USDT via a flash loan and swapped it into the FPC-USDT pool, then exploited the broken invariant — triggered by the burn-then-sync pattern — to obtain a disproportionately large USDT output for a negligible FPC input, netting approximately $4.6 million after repaying the flash loan. Attack Tx: 0x3a9dd216fb6314c013fa8c4f85bfbbe0ed0a73209f54c57c1aab02ba989f5937 Analysis: Burned by Design: The Fatal Flaw Behind Future Protocol's $4.6M Exploit",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The FPC token's burn-on-transfer mechanism was designed to burn tokens directly from the PancakeSwap liquidity pool's balance and immediately call sync(). This design violates the constant product invariant (x×y=k) that UniswapV2-style AMMs rely on for correct pricing, because the pool's reserve is reduced outside of the normal swap mechanism. An attacker borrowed 23,020,000 USDT via a flash loan and swapped it into the FPC-USDT pool, then exploited the broken invariant — triggered by the burn-then-sync pattern — to obtain a disproportionately large USDT output for a negligible FPC input, netting approximately $4.6 million after repaying the flash loan. Attack Tx: 0x3a9dd216fb6314c013fa8c4f85bfbbe0ed0a73209f54c57c1aab02ba989f5937 Analysis: Burned by Design: The Fatal Flaw Behind Future Protocol's $4.6M Exploit"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Future Protocol was exploited on BNB Chain on 2 July 2025 for about $4.6 million. The attacker manipulated an FPC-USDT liquidity pool using a flash loan and a flawed burn mechanism, incorrectly inflating FPC token price and draining the pool. A flawed automatic token burn mechanism applied when FPC tokens were sent to the liquidity pool allowed the attacker to reduce pool token reserves disproportionately, breaking price calculation logic and enabling extraction of excess funds."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x3a9dd216fb6314c013fa8c4f85bfbbe0ed0a73209f54c57c1aab02ba989f5937"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x3a9dd216fb6314c013fa8c4f85bfbbe0ed0a73209f54c57c1aab02ba989f5937"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "blog.verichains.io",
+      "url": "https://blog.verichains.io/p/burned-by-design-the-fatal-flaw-behind"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x3a9dd216fb6314c013fa8c4f85bfbbe0ed0a73209f54c57c1aab02ba989f5937"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/future-protocol-2025-07-02"
+    },
+    {
+      "source": "revertiq",
+      "label": "olympix.security",
+      "url": "https://olympix.security/biweekly-exploits/credix-future-protocol-rant-9-3m-lost-to-phantom-collateral-burn-loops-and-abandoned-recovery"
+    },
+    {
+      "source": "revertiq",
+      "label": "nominis.io",
+      "url": "https://www.nominis.io/insights/july-2025-crypto-attacks-monthly-report"
+    }
+  ]
+}

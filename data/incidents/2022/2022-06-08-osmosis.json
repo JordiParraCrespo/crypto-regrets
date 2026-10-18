@@ -1,0 +1,91 @@
+{
+  "id": "2022-06-08-osmosis",
+  "name": "Osmosis",
+  "date": "2022-06-08",
+  "year": 2022,
+  "amountUsd": 5000000,
+  "returnedUsd": null,
+  "chains": [
+    "Osmosis"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Withdrawal Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.99
+      },
+      {
+        "category": "rugpull",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.72
+  },
+  "bridge": false,
+  "language": "Go",
+  "rootCause": "Osmosis, the decentralized exchange (DEX) built on the Cosmos network, was shut down just before 3 a.m. ET on Wednesday after attackers exploited a liquidity provider (LP) vulnerability to steal around 5 million Dollar. About an hour after Osmosis tweeted about the attack, 4 hackers accounted for 95% of the total, according to a tweet from Osmosis, Cosmos ecosystem validator FireStake admitted on Twitter, A \"momentary error of judgement\" led to two members of their team who exploited the vulnerability for roughly $2 million, and they decided to voluntarily return the funds and \"fix the problem.\"",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Osmosis, the decentralized exchange (DEX) built on the Cosmos network, was shut down just before 3 a.m. ET on Wednesday after attackers exploited a liquidity provider (LP) vulnerability to steal around 5 million Dollar. About an hour after Osmosis tweeted about the attack, 4 hackers accounted for 95% of the total, according to a tweet from Osmosis, Cosmos ecosystem validator FireStake admitted on Twitter, A \"momentary error of judgement\" led to two members of their team who exploited the vulnerability for roughly $2 million, and they decided to voluntarily return the funds and \"fix the problem.\""
+    },
+    {
+      "source": "SlowMist",
+      "text": "Cosmos ecosystem developer @TheJunonaut tweeted that a critical bug was discovered on Osmosis that could drain all liquidity pools. Anyone can add liquidity to any pool and get an additional 50% when removing it. Responding to community discussions about the attack, Osmosis tweeted that the liquidity pool was not \"completely drained\" and that developers were fixing bugs, determining the size of the loss (likely around $5 million), and working on recovery."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On June 8, 2022, Osmosis was exploited due to a flaw in its pool join logic, which allowed attackers to receive 1.5x more LP shares than warranted, draining approximately $5 million in assets. The bug was rapidly detected and the chain was halted, with partial fund recovery and losses covered by the protocol's strategic reserve. A miscalculation in the MaximalExactRatioJoin function used by Osmosis pools allowed users to mint excess LP shares by abusing remaining tokens. This enabled attackers to repeatedly drain pools by joining and exiting with inflated shares."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "cointelegraphcn.com",
+      "url": "https://cointelegraphcn.com/news/attackers-loot-5m-from-osmosis-in-lp-exploit-2m-returned-soon-after"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/osmosiszone/status/1534432704246292480"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/osmosis-2022-06-08"
+    },
+    {
+      "source": "revertiq",
+      "label": "certik.com",
+      "url": "https://www.certik.com/blog/osmosis-incident-analysis"
+    },
+    {
+      "source": "revertiq",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/business/2022/06/08/osmosis-chain-halted-amid-possible-5m-exploit"
+    }
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "id": "2024-12-18-slurpycoin",
+  "name": "SlurpyCoin",
+  "date": "2024-12-18",
+  "year": 2024,
+  "amountUsd": 3000,
+  "returnedUsd": null,
+  "chains": [
+    "Binance"
+  ],
+  "targetType": "Token",
+  "category": "logic-error",
+  "technique": "Swap Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.66,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.68
+      },
+      {
+        "category": "market-manipulation",
+        "p": 0.24
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.08
+      }
+    ],
+    "flashLoan": 0.96,
+    "stateActor": 0.02,
+    "hasRootCause": 0.94
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "Logic Flaw. Lost: 3k USD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Logic Flaw. Lost: 3k USD"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Slurpycoin on BSC suffered a flash loan attack. The attacker exploited the buyback mechanism to manipulate the token price and profited ~$3K from sandwich arbitrage."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "SlurpyCoin was exploited on BNB Chain (BSC) on 18 December 2024 when an attacker manipulated the token's price through a flawed buyback mechanism, profiting approximately $3,000. The exploit combined flash loans, swap logic flaws, and the contract's improper response to token transfers. The SlurpyCoin contract contained flawed buyback or swap logic, triggered via crafted token transfers and swap sequences, that allowed an attacker to manipulate the token price. Insufficient checks in the contract's swap or transfer hooks enabled price manipulation and sandwich-style arbitrage."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x6c729ee778332244de099ba0cb68808fcd7be4a667303fcdf2f54dd4b3d29051"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-12/SlurpyCoin_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-12/SlurpyCoin_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/CertiKAlert/status/1869580379675590731"
+    },
+    {
+      "source": "slowmist",
+      "label": "odaily.news",
+      "url": "https://www.odaily.news/newsflash/408377"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/slurpycoin-2024-12-18"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/slurpycoin-hack-2024"
+    }
+  ]
+}

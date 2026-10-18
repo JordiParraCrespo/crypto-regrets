@@ -1,0 +1,68 @@
+{
+  "id": "2024-04-04-wsm",
+  "name": "wsm",
+  "date": "2024-04-04",
+  "year": 2024,
+  "amountUsd": 18000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "manipulating price",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 1.00).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.95,
+    "stateActor": 0.02,
+    "hasRootCause": 0.92
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "manipulating price. Lost: $~18K USD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "manipulating price. Lost: $~18K USD"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Using a flash loan to create a price disparity in the BNB_WSM pool, the attacker then manipulated the price through the buyWithBNB() function in the presale contract. Vulnerable code snippet: Single Oracle: Attack tx: Analysis: None"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x5a475a73343519f899527fdb9850f68f8fc73168073c72a3cff8c0c7b8a1e520"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-04/WSM_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-04/WSM_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "hacked.slowmist.io",
+      "url": "https://hacked.slowmist.io/#:~:text=Hacked%20target%3A%20Wall%20Street%20Memes"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x5a475a73343519f899527fdb9850f68f8fc73168073c72a3cff8c0c7b8a1e520"
+    }
+  ]
+}

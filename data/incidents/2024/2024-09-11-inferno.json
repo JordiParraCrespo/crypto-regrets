@@ -1,0 +1,73 @@
+{
+  "id": "2024-09-11-inferno",
+  "name": "Inferno",
+  "date": "2024-09-11",
+  "year": 2024,
+  "amountUsd": 440000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": null,
+  "category": "oracle-manipulation",
+  "technique": "Lack of Slippage Protection",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.71).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.71,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.73
+      },
+      {
+        "category": "logic-error",
+        "p": 0.22
+      },
+      {
+        "category": "input-validation",
+        "p": 0.04
+      }
+    ],
+    "flashLoan": 0.98,
+    "stateActor": 0.01,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "The Inferno token contract on Ethereum was exploited due to a lack of slippage protection on its swap or liquidity interaction functions. The attacker leveraged flash loans to manipulate the token's spot price in the associated liquidity pool within a single transaction, then executed swaps or token purchases through the unprotected contract function at the artificially skewed price, extracting approximately $440K. Without a minimum-output check or price-impact limit, the contract had no defence against intra-block price manipulation, allowing the attacker to profit from the price delta before the liquidity pool rebalanced. This attack follows a recurring pattern on Ethereum where token contracts that interact with AMM pools without enforcing slippage guards are vulnerable to flash-loan-driven price manipulation. Attack Tx: 0x7f78389cdc19c59c402fa9dddabcdbe7b9e6630f124362a764c0826ac863903c Analysis: Phalcon Alert",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The Inferno token contract on Ethereum was exploited due to a lack of slippage protection on its swap or liquidity interaction functions. The attacker leveraged flash loans to manipulate the token's spot price in the associated liquidity pool within a single transaction, then executed swaps or token purchases through the unprotected contract function at the artificially skewed price, extracting approximately $440K. Without a minimum-output check or price-impact limit, the contract had no defence against intra-block price manipulation, allowing the attacker to profit from the price delta before the liquidity pool rebalanced. This attack follows a recurring pattern on Ethereum where token contracts that interact with AMM pools without enforcing slippage guards are vulnerable to flash-loan-driven price manipulation. Attack Tx: 0x7f78389cdc19c59c402fa9dddabcdbe7b9e6630f124362a764c0826ac863903c Analysis: Phalcon Alert"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x7f78389cdc19c59c402fa9dddabcdbe7b9e6630f124362a764c0826ac863903c"
+  ],
+  "poc": null,
+  "sources": [
+    "defihacklabs",
+    "blocksec"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x7f78389cdc19c59c402fa9dddabcdbe7b9e6630f124362a764c0826ac863903c"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/Phalcon_xyz/status/1838464742035218654"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x7f78389cdc19c59c402fa9dddabcdbe7b9e6630f124362a764c0826ac863903c"
+    }
+  ]
+}

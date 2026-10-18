@@ -1,0 +1,86 @@
+{
+  "id": "2026-05-04-smartcredit",
+  "name": "SmartCredit",
+  "date": "2026-05-04",
+  "year": 2026,
+  "amountUsd": 72000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Smart Contract Vulnerability",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.9,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.91
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.06
+      },
+      {
+        "category": "access-control",
+        "p": 0.03
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.2
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "SmartCredit’s Leveraged Lido module was exploited. The attacker drained funds from this leveraged staking feature. The team has paused the Leveraged Lido functionality, and the protocol’s Loss Provision Fund will fully cover the gap for affected stakers.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "SmartCredit’s Leveraged Lido module was exploited. The attacker drained funds from this leveraged staking feature. The team has paused the Leveraged Lido functionality, and the protocol’s Loss Provision Fund will fully cover the gap for affected stakers."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On May 4, 2026, SmartCredit's Leveraged Lido module was exploited on Ethereum Mainnet via a flash loan attack that drained approximately $72,000. The protocol paused the affected module and fully covered user losses using its Loss Provision Fund. No on-chain attack transaction or attacker address has been publicly disclosed. Lending and accounting logic in the Leveraged Lido module failed to correctly enforce value and collateralization invariants under flash loan-induced rapid state changes, allowing temporary capital manipulations to extract protocol funds. The precise mechanism has not been made public."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/smartcredit_io/status/2051361795789496337"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/smartcredit-2026-05-04"
+    },
+    {
+      "source": "revertiq",
+      "label": "0xposed.io",
+      "url": "https://0xposed.io/radar/smartcredit-leveraged-lido-module-flash-loan-exploit"
+    },
+    {
+      "source": "revertiq",
+      "label": "yieldo.me",
+      "url": "https://yieldo.me/security/smartcredit-2026"
+    }
+  ]
+}

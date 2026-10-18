@@ -1,0 +1,72 @@
+{
+  "id": "2025-05-24-rice",
+  "name": "RICE",
+  "date": "2025-05-24",
+  "year": 2025,
+  "amountUsd": 88100,
+  "returnedUsd": null,
+  "chains": [
+    "Base"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Lack of Access Control",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.98).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.98,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.98
+      },
+      {
+        "category": "signature-crypto",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Lack of Access Control. Lost: ~ $88.1K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Lack of Access Control. Lost: ~ $88.1K"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The vulnerable (unverified) contract at 0xcfE0...5563 behaves like a BentoBox/Kashi-style token vault that holds user-deposited RICE. Its access control was broken: anyone could call registerProtocol() and setMasterContractApproval() to set themselves (their own contract) as an approved \"master contract\" operator on behalf of an arbitrary user, without that user's signature (the call passed empty v/r/s and the contract accepted it). With that self-granted approval, the attacker called withdraw(RICE, user, attacker, balance, share) to pull the victim's entire ~22.19M RICE balance out of the vault, then swapped RICE -> USDT -> USDC -> WETH on Uniswap V3, netting ~34.5 WETH (~$88.1K). Vulnerable code snippet: Attack Tx: https://basescan.org/tx/0x8421c96c1cafa451e025c00706599ef82780bdc0db7d17b6263511a420e0cf20 Analysis: TenArmorAlert"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x8421c96c1cafa451e025c00706599ef82780bdc0db7d17b6263511a420e0cf20"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-05/RICE_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-05/RICE_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/TenArmorAlert/status/1926461662644633770"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "basescan.org",
+      "url": "https://basescan.org/tx/0x8421c96c1cafa451e025c00706599ef82780bdc0db7d17b6263511a420e0cf20"
+    }
+  ]
+}

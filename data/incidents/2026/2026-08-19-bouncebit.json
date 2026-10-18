@@ -1,0 +1,78 @@
+{
+  "id": "2026-08-19-bouncebit",
+  "name": "BounceBit",
+  "date": "2026-08-19",
+  "year": 2026,
+  "amountUsd": 3000000,
+  "returnedUsd": null,
+  "chains": [
+    "BounceBit"
+  ],
+  "targetType": "Chain",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Go",
+  "rootCause": "An attacker exploited a protocol-level authorization flaw in the Evmos stack, transferring approximately 286.5 million BB from nine mainnet accounts across 14 transactions without the owners’ authorization. No private keys were compromised, no signatures forged, and no wallets breached. BounceBit permanently sunset the L1 chain and reissued BB as a BEP-20 token on BNB Chain based on a pre-attack snapshot.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "An attacker exploited a protocol-level authorization flaw in the Evmos stack, transferring approximately 286.5 million BB from nine mainnet accounts across 14 transactions without the owners’ authorization. No private keys were compromised, no signatures forged, and no wallets breached. BounceBit permanently sunset the L1 chain and reissued BB as a BEP-20 token on BNB Chain based on a pre-attack snapshot."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "BounceBit Chain suffered a protocol-level authorization exploit on August 19,20, 2026, allowing an attacker to transfer 286.5 million BB tokens (~$3 million) from nine mainnet accounts. The exploit forced the permanent shutdown and planned migration of assets to BNB Chain. A flawed authorization check in BounceBit Chain's Evmos-based vesting/account lock module allowed unauthorized transfers. Attackers could select any source account for fund movement, bypassing intended access verification."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/bouncebit/article/2090785561800061430"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/bouncebit-2026-08-19"
+    },
+    {
+      "source": "revertiq",
+      "label": "htx.com",
+      "url": "https://www.htx.com/news/bouncebit-blockchain-ceases-operations-after-3-million-explo-31bbinXz/"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptotimes.io",
+      "url": "https://www.cryptotimes.io/2026/08/21/bouncebit-shuts-down-chain-after-286m-bb-exploit/"
+    }
+  ]
+}

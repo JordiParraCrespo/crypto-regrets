@@ -1,0 +1,122 @@
+{
+  "id": "2023-12-06-time",
+  "name": "TIME",
+  "date": "2023-12-06",
+  "year": 2023,
+  "amountUsd": 190000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "Token",
+  "category": "input-validation",
+  "technique": "Missing Input Validation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "arbitrary-call",
+    "confidence": 0.76,
+    "top": [
+      {
+        "category": "arbitrary-call",
+        "p": 0.77
+      },
+      {
+        "category": "input-validation",
+        "p": 0.2
+      },
+      {
+        "category": "access-control",
+        "p": 0.03
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Arbitrary Address Spoofing Attack. Lost: ~84.59 ETH",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Arbitrary Address Spoofing Attack. Lost: ~84.59 ETH"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The root cause of this incident was that the arbitrary external call function of the forwarder contract was maliciously used by the hacker. Execution using “execute()” and “call()”: The “execute()” function then called the “call()” function, packaging ‘req.data’ and ‘req.from’ as parameters for the “call()” function. The ‘req.to’ was specified as 0x4b0e9a7da8bab813efae92a6651019b8bd6c0a29 (TIME contract), and the selector of the multicall(bytes[]) function was 0xac9650d8. Vulnerable code snippet: https://www.oklink.com/es-la/eth/address/0xc82BbE41f2cF04e3a8efA18F7032BDD7f6d98a81/contract Attack tx: https://www.oklink.com/es-la/eth/tx/0xecdd111a60debfadc6533de30fb7f55dc5ceed01dfadd30e4a7ebdb416d2f6b6 https://explorer.phalcon.xyz/tx/eth/0xecdd111a60debfadc6533de30fb7f55dc5ceed01dfadd30e4a7ebdb416d2f6b6 Analysis: https://www.immunebytes.com/blog/time-token-hack-dec-7-2023-detailed-analysis-report/"
+    },
+    {
+      "source": "SlowMist",
+      "text": "On December 7, 2023, Time on the ETH were attacked due to a security vulnerability in the thirdweb pre-built smart contracts, which resulted in approximately $190,000 in profits for the attacker."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "The TIME token was exploited on Ethereum Mainnet on December 6, 2023, via a bug in the interaction between ERC-2771 meta-transactions and Multicall. The attacker was able to burn tokens from an arbitrary address and profit by distorting the token pool, resulting in a loss of approximately 89.5 ETH (about $188k). Improper integration of ERC-2771 meta-transaction forwarding and Multicall batching enabled arbitrary address spoofing. This allowed the attacker to make the contract treat an unverified address as the originator of a sensitive token-burning operation."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xecdd111a60debfadc6533de30fb7f55dc5ceed01dfadd30e4a7ebdb416d2f6b6"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-12/TIME_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-12/TIME_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "blog.openzeppelin.com",
+      "url": "https://blog.openzeppelin.com/arbitrary-address-spoofing-vulnerability-erc2771context-multicall-public-disclosure"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "oklink.com",
+      "url": "https://www.oklink.com/es-la/eth/address/0xc82BbE41f2cF04e3a8efA18F7032BDD7f6d98a81/contract"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "ethereum.stackexchange.com",
+      "url": "https://ethereum.stackexchange.com/a/83577"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "ronan.eth.link",
+      "url": "https://ronan.eth.link/blog/ethereum-gas-dangers/"
+    },
+    {
+      "source": "slowmist",
+      "label": "panewslab.com",
+      "url": "https://www.panewslab.com/zh/articledetails/4hkd7dcm.html"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/time-2023-12-06"
+    },
+    {
+      "source": "revertiq",
+      "label": "certik.com",
+      "url": "https://www.certik.com/blog/time"
+    },
+    {
+      "source": "revertiq",
+      "label": "openzeppelin.com",
+      "url": "https://www.openzeppelin.com/news/arbitrary-address-spoofing-vulnerability-erc2771context-multicall-public-disclosure"
+    }
+  ]
+}

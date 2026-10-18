@@ -1,0 +1,68 @@
+{
+  "id": "2024-01-29-peapodsfinance",
+  "name": "PeapodsFinance",
+  "date": "2024-01-29",
+  "year": 2024,
+  "amountUsd": 1000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "reentrancy",
+  "technique": "Reentrancy",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 1.00).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "reentrancy",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "reentrancy",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.81,
+    "stateActor": 0.01,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Reentrancy. Lost: ~1K $DAI",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Reentrancy. Lost: ~1K $DAI"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Peapods Finance's pod token (ppPP) exposes a flash() function that transfers out the pod's underlying Peas tokens and invokes a callback() on the recipient before settling, without protecting against reentrant state changes. During the flash callback, the attacker re-entered the pod by calling bond() to mint pod (ppPP) shares against the very Peas tokens that had been flash-lent, while the flash loan's own bookkeeping had not yet been reconciled. By repeating the flash+bond loop, the attacker minted ppPP shares far in excess of the value actually deposited. The attacker then called debond() to redeem those inflated shares back into Peas, swapped Peas -> DAI -> WETH (with amountOutMinimum = 0). The root cause is the missing reentrancy guard / state validation in the flash-loan path, which allowed bonding using in-flight (borrowed) tokens. Vulnerable code snippet: Attack Tx: https://app.blocksec.com/explorer/tx/eth/0x95c1604789c93f41940a7fd9eca11276975a9a65d250b89a247736287dbd2b7e"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x95c1604789c93f41940a7fd9eca11276975a9a65d250b89a247736287dbd2b7e"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-01/PeapodsFinance_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-01/PeapodsFinance_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/eth/0x95c1604789c93f41940a7fd9eca11276975a9a65d250b89a247736287dbd2b7e"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/2bed06c31b1d9d328a097484b47168c8ce1bb682/src/test/2024-01/PeapodsFinance_exp.sol"
+    }
+  ]
+}

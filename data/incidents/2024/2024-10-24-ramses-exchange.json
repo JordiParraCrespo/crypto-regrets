@@ -1,0 +1,104 @@
+{
+  "id": "2024-10-24-ramses-exchange",
+  "name": "Ramses Exchange",
+  "date": "2024-10-24",
+  "year": 2024,
+  "amountUsd": 93000,
+  "returnedUsd": null,
+  "chains": [
+    "Arbitrum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Reward Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.06,
+    "stateActor": 0.02,
+    "hasRootCause": 0.1
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "The contract of Ramses Exchange on Arbitrum was attacked, resulting in a loss of approximately $93,000.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The contract of Ramses Exchange on Arbitrum was attacked, resulting in a loss of approximately $93,000."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On October 24, 2024, Ramses DEX on Arbitrum suffered a $93,000 loss after a flaw in its FeeDistributor reward logic allowed repeated reward claims with new NFT token IDs. The vulnerable contract failed to reduce the total supply after each claim, so an attacker drained excess protocol rewards without affecting user liquidity or collateral. The FeeDistributor contract failed to decrement tokenTotalSupplyByPeriod after each reward claim. This oversight allowed attackers to repeatedly claim rewards via new or split NFT token IDs for the same period, draining protocol incentives beyond intended limits."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On October 24, 2024, Ramses Exchange on Arbitrum lost over $90,000 after an attacker exploited a logic flaw in its reward distribution contracts. The attacker repeatedly claimed rewards using different NFT token IDs and periods, draining pool incentives through manipulated accounting and insufficient validation. The FeeDistributor contract failed to decrement the recorded total supply after a reward claim, and did not properly track claims per NFT tokenId or restrict period values in reward claims. This let attackers claim rewards multiple times using new or reset NFTs and arbitrary periods, depleting the available pool rewards."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xb91c4e0debaf0feb1f20c979eebc1282c8024ae299ef5903591badcf1f4938bb"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "arbiscan.io",
+      "url": "https://arbiscan.io/tx/0xb91c4e0debaf0feb1f20c979eebc1282c8024ae299ef5903591badcf1f4938bb"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/ramses-dex-2024-10-24"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/de-fi-rekt-report-october-2024-over-94-million-lost-to-defi-exploits"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/ramses-exchange-hack-2024"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.solidityscan.com",
+      "url": "https://blog.solidityscan.com/ramses-exchange-hack-analysis-288ec1b806ff/"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/unraveling-the-90k-mystery-inside-ramses-exchange-s-reward-2024-10-28"
+    },
+    {
+      "source": "revertiq",
+      "label": "quillaudits.com",
+      "url": "https://www.quillaudits.com/blog/hack-analysis/ramses-exchange-exploit"
+    },
+    {
+      "source": "revertiq",
+      "label": "olympix.security",
+      "url": "https://olympix.security/biweekly-exploits/deltaprime-ramses-and-morpho-breached-via-unchecked-input-reward-logic-bugs-and-oracle-mispricing"
+    }
+  ]
+}

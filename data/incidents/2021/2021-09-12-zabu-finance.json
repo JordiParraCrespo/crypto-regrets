@@ -1,0 +1,115 @@
+{
+  "id": "2021-09-12-zabu-finance",
+  "name": "Zabu Finance",
+  "date": "2021-09-12",
+  "year": 2021,
+  "amountUsd": 3200000,
+  "returnedUsd": null,
+  "chains": [
+    "Avalanche"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Deposit Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.62,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.64
+      },
+      {
+        "category": "logic-error",
+        "p": 0.36
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.84
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Deflationary token uncompatible",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Deflationary token uncompatible"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Incorrect calculation Vulnerable code snippet: https://snowtrace.io/address/0x6e7f5c0b9f4432716bdd0a77a3601291b9d9e985#code#L575 https://github.com/zabufinance/YieldFarm/blob/main/ZABUFarm.sol#L769 Due to SPORE is a deflationary token 1.Deposit SPORE tokens to DefilyFarm to deduct SPORE token in DefilyFarm contract. 2.Until lp token balance in contract is 2. Then calculate a big reward value in updatePool function."
+    },
+    {
+      "source": "SlowMist",
+      "text": "The Zabu Finance project on the Avalanche chain suffered a flash loan attack. Officially, the attackers withdrew 4.5 billion ZABU tokens from the Zabu Farm Contract, bringing the supply to 5 billion and dumping all of it to ZABU’s Pangolin LPs and Trader Joe LPs. According to DeFi analytics provider DeFiprime, the total was estimated at $3.2 million in exploits."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On September 12, 2021, Zabu Finance suffered an exploit on Avalanche that drained its SPORE staking contract and collapsed the ZABU token price. The flaw in staking accounting allowed an attacker to repeatedly withdraw more tokens than supplied, realizing an estimated $3.2 million loss. The ZABUFarm contract recorded the user's declared staking amount rather than the actual tokens received after SPORE's transfer fee. This allowed attackers to withdraw more tokens than they deposited, and enabled manipulation of ZABU rewards once the pool balance was near zero."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x0d65ce5c7a0c072b14ec5da08488d07778f334a7ddb6b7a30df97f274f3e1eb3",
+    "0xf76b37ed46c218d4b791e9769b139c3e1f43d1888f37ff0a647c7a8bb58528fb",
+    "0x8b3042e55a63f39bb388240a089cf4d51e59abe7cb0bff303c6dbb19eaeb75ac"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2021-09/ZABU_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2021-09/ZABU_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "slowmist.medium.com",
+      "url": "https://slowmist.medium.com/brief-analysis-of-zabu-finance-being-hacked-44243919ea29"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "snowtrace.io",
+      "url": "https://snowtrace.io/address/0x6e7f5c0b9f4432716bdd0a77a3601291b9d9e985#code#L575"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "github.com",
+      "url": "https://github.com/zabufinance/YieldFarm/blob/main/ZABUFarm.sol#L769"
+    },
+    {
+      "source": "slowmist",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/tech/2021/09/13/avalanche-based-zabu-finance-exploited-in-32m-hack/"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/zabu-finance-2021-09-12"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "itokenly.com",
+      "url": "https://itokenly.com/hacks/zabu-finance"
+    }
+  ]
+}

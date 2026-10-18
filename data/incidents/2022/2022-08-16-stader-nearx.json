@@ -1,0 +1,67 @@
+{
+  "id": "2022-08-16-stader-nearx",
+  "name": "Stader NearX",
+  "date": "2022-08-16",
+  "year": 2022,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [
+    "NEAR"
+  ],
+  "targetType": null,
+  "category": "reentrancy",
+  "technique": "Reentrancy",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 1.00).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "reentrancy",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "reentrancy",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "Stader NearX on NEAR was exploited on 2022-08-16 after a reentrancy flaw in batch_transaction let gregoshes.near create an unbacked NearX balance and drain about 165,000 NEAR from NearX liquidity pools. A reentrancy flaw in NearX's batch_transaction path let repeated self-transfer and mint logic run before accounting settled, so the contract credited NearX without the matching NEAR stake.",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "Stader NearX on NEAR was exploited on 2022-08-16 after a reentrancy flaw in batch_transaction let gregoshes.near create an unbacked NearX balance and drain about 165,000 NEAR from NearX liquidity pools. A reentrancy flaw in NearX's batch_transaction path let repeated self-transfer and mint logic run before accounting settled, so the contract credited NearX without the matching NEAR stake."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/stader-labs-nearx-update-2022-08-19t15-05-31-00-00"
+    },
+    {
+      "source": "revertiq",
+      "label": "halborn.com",
+      "url": "https://www.halborn.com/blog/post/stader-labs-nearx-update"
+    },
+    {
+      "source": "revertiq",
+      "label": "staderlabs.com",
+      "url": "https://www.staderlabs.com/blogs/near/stader-near-incident-report-08-16-2022/"
+    },
+    {
+      "source": "revertiq",
+      "label": "staderlabs.com",
+      "url": "https://www.staderlabs.com/blogs/nearx-reimbursement-plan/"
+    }
+  ]
+}

@@ -1,0 +1,85 @@
+{
+  "id": "2025-06-15-fixedtokenbswap",
+  "name": "FixedTokenBSwap",
+  "date": "2025-06-15",
+  "year": 2025,
+  "amountUsd": 2200,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.07,
+    "stateActor": 0.02,
+    "hasRootCause": 0.76
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Price Oracle Manipulation. Lost: 2.2K USD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Price Oracle Manipulation. Lost: 2.2K USD"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 15 June 2025, FixedTokenBSwap on Ethereum Mainnet suffered a $2,200 loss due to oracle manipulation. The attacker deployed a fake token and pair, exploited a vulnerable swap contract’s reliance on spot price quotes from Uniswap V2, and drained RTV tokens by bypassing a one-swap-per-address restriction. The FixedTokenBSwap contract trusted user-supplied swap paths and Uniswap V2's spot price (getAmountsIn), without verifying token authenticity or using manipulation-resistant price oracles. This allowed an attacker to create a fake token and pair, inflate input prices, and drain RTV rewards with helper contracts."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x5db22f0edc1a9eda5343573da27dd2168c8a36a7f948401db76e22ba1fab71ea"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-06/FixedTokenBSwap_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-06/FixedTokenBSwap_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "t.me",
+      "url": "https://t.me/defimon_alerts/1280"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/fixedtokenbswap-2025-06-15"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/fixedtokenbswap-hack-2025"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/past/2025/README.md#L1244"
+    }
+  ]
+}

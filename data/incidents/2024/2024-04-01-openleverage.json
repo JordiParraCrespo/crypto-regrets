@@ -1,0 +1,125 @@
+{
+  "id": "2024-04-01-openleverage",
+  "name": "OpenLeverage",
+  "date": "2024-04-01",
+  "year": 2024,
+  "amountUsd": 236000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "business logic flaw. Lost: ~234K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "business logic flaw. Lost: ~234K"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The attacker exploited a logic flaw in the liquidation process. By creating a margin trade with a small borrow and collateral, they triggered liquidation via the liquidate function, which incorrectly included margin-borrowed amounts in its calculations. Using the repayBorrowEndByOpenLev function, the attacker was able to liquidate the position with minimal repayment, resulting in a zero borrow balance. In a second transaction, they used the payoffTrade function to withdraw tokens without repaying the borrowed amount, as the borrow balance was already cleared. This exploit required two transactions due to a block time check. Attack tx: - https://app.blocksec.com/explorer/tx/bsc/0xf78a85eb32a193e3ed2e708803b57ea8ea22a7f25792851e3de2d7945e6d02d5 - https://app.blocksec.com/explorer/tx/bsc/0x210071108f3e5cd24f49ef4b8bcdc11804984b0c0334e18a9a2cdb4cd5186067"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The DeFi protocol OpenLeverage has been attacked, resulting in a loss of approximately $260,000. In light of this, OpenLeverage has decided to discontinue the OpenLeverage trading and lending protocol. OpenLeverage is initiating processes for users to close trades/borrowings and withdraw funds safely. All protocol actions will remain paused until withdrawal processes begin early next week."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On April 1, 2024, OpenLeverage on BNB Chain was exploited via a sophisticated reentrancy and accounting inconsistency bug, enabling the attacker to extract approximately $236,000. The root vulnerability allowed a margin position and an independent borrow position to coexist for the same market through cross-contract reentrancy, which ultimately enabled the attacker to withdraw collateral without repaying outstanding debt. Cross-contract reentrancy allowed the attacker to simultaneously open a margin trade and an independent borrow position during a DEX aggregator callback, leading to inconsistent debt tracking. Subsequent liquidation and withdrawal fun…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xf78a85eb32a193e3ed2e708803b57ea8ea22a7f25792851e3de2d7945e6d02d5",
+    "0x210071108f3e5cd24f49ef4b8bcdc11804984b0c0334e18a9a2cdb4cd5186067",
+    "0x0434bf08a63d70b84fad033d38d8b645498016b3931af4d13f6c11e86848876b",
+    "0xf08b6d36dc6f650c030344b6307ae94528f77a01db11d1284ed966e7e44337d3",
+    "0xa6a1e1a55985ed1d10bee405da0fd32e0670a075e35fd4bd990f4c309fae2839",
+    "0x73e690d72f6d2cbdbdb23f448e10dacc056c5bf7a090c68979cdef3f3af2e9b0"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-04/OpenLeverage2_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-04/OpenLeverage2_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/bsc/0xf78a85eb32a193e3ed2e708803b57ea8ea22a7f25792851e3de2d7945e6d02d5"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/bsc/0x210071108f3e5cd24f49ef4b8bcdc11804984b0c0334e18a9a2cdb4cd5186067"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x0434bf08a63d70b84fad033d38d8b645498016b3931af4d13f6c11e86848876b"
+    },
+    {
+      "source": "blocksec",
+      "label": "twitter.com",
+      "url": "https://twitter.com/0xNickLFranklin/status/1774727539975672136"
+    },
+    {
+      "source": "blocksec",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs?tab=readme-ov-file#20240401-openleverage---reentrancy"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/OpenLeverage/status/1774734793990971462"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/openleverage-2024-04-01"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/kismp123/DeFi-Security-Incident/blob/main/2024/2024-04-01_OpenLeverage_Reentrancy_BSC.md"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.solidityscan.com",
+      "url": "https://blog.solidityscan.com/openleverage-hack-analysis-22c59c96d0a6/"
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "id": "2025-04-26-grafana",
+  "name": "Grafana",
+  "date": "2025-04-26",
+  "year": 2025,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [],
+  "targetType": null,
+  "category": "frontend-infra",
+  "technique": "Malicious Code Injection Attack",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.85). Replaced keyword guess \"key-compromise\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "frontend-infra",
+    "confidence": 0.85,
+    "top": [
+      {
+        "category": "frontend-infra",
+        "p": 0.86
+      },
+      {
+        "category": "key-compromise",
+        "p": 0.13
+      },
+      {
+        "category": "access-control",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.01,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "The open-source data visualization tool Grafana has responded to a recent attack, stating that the attacker forked a Grafana repository, executed a curl command to inject malicious code, and exported environment variables into a file encrypted with a private key, thereby stealing access tokens. The attacker then deleted the fork to conceal their activity. Using the compromised credentials, the attacker replicated the attack against four private repositories. This unauthorized access was limited to automation systems and did not affect production environments or release artifacts. Based on the attack behavior, the goal appeared to be token theft and stealthy persistence for future use.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The open-source data visualization tool Grafana has responded to a recent attack, stating that the attacker forked a Grafana repository, executed a curl command to inject malicious code, and exported environment variables into a file encrypted with a private key, thereby stealing access tokens. The attacker then deleted the fork to conceal their activity. Using the compromised credentials, the attacker replicated the attack against four private repositories. This unauthorized access was limited to automation systems and did not affect production environments or release artifacts. Based on the attack behavior, the goal appeared to be token theft and stealthy persistence for future use."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "slowmist",
+      "label": "grafana.com",
+      "url": "https://grafana.com/blog/2025/04/27/grafana-security-update-no-customer-impact-from-github-workflow-vulnerability/?mdm=social&src=x&camp=blog"
+    }
+  ]
+}

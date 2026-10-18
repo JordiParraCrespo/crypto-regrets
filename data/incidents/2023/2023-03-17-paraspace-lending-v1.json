@@ -1,0 +1,128 @@
+{
+  "id": "2023-03-17-paraspace-lending-v1",
+  "name": "ParaSpace Lending V1",
+  "date": "2023-03-17",
+  "year": 2023,
+  "amountUsd": 5000000,
+  "returnedUsd": 5000000,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "NFTfi",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.86,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.87
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.06
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.04
+      }
+    ],
+    "flashLoan": 0.06,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Flashloan + scaledBalanceOf Manipulation",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Flashloan + scaledBalanceOf Manipulation"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "There is a flawed logic in borrow() of the ParaProxy contract (0x638a98BBB92a7582d07C52ff407D49664DC8b3Ee ) of ParaSpace NFT . The attacker can borrow more tokens as his scaledBalance will be enlarged by depositing into the position of the proxy (0xC5c9fB6223A989208Df27dCEE33fC59ff5c26fFF), i.e., specifying the _recipient of depositApeCoin(). Vulnerable code snippet: Attack tx: https://etherscan.io/tx/0xe3f0d14cfb6076cabdc9057001c3fafe28767a192e88005bc37bd7d385a1116a Analysis: https://twitter.com/BlockSecTeam/status/1636650252844294144"
+    },
+    {
+      "source": "SlowMist",
+      "text": "ParaSpace is suspected to have been attacked and it appears that 2,900 WETH were transferred out, with many claiming inconsistent data on the number of loans, health factors and cAPE amounts. However, a security firm tweeted that it had stopped the attack on ParaSpace, saving 2900 ETH assets. ParaSpace tweeted that all user funds and assets on ParaSpace are currently safe, no NFTs were lost, and the financial loss of the protocol was minimal, between 50-150 ETH, due to hackers The slippage caused by the token exchange during the attack."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "ParaSpace Lending V1 on Ethereum Mainnet suffered an oracle manipulation attack on March 17, 2023. The incident exploited a vulnerability in the AutoCompoundApe contract, allowing an attacker to inflate collateral value by manipulating the spot price calculation, resulting in substantial temporary asset risk. Thanks to rapid intervention, most compromised funds were recovered. The collateral calculation relied on a manipulated spot price obtained from the ApeCoinStaking contract. The attacker used depositApeCoin() to artificially inflate the staked amount, which increased the _getTotalPooledApeBalance value and the rebasingIndex, thus inflating the col…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xe3f0d14cfb6076cabdc9057001c3fafe28767a192e88005bc37bd7d385a1116a"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-03/paraspace_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-03/paraspace_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BlockSecTeam/status/1636650252844294144"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xe3f0d14cfb6076cabdc9057001c3fafe28767a192e88005bc37bd7d385a1116a"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xe3f0d14cfb6076cabdc9057001c3fafe28767a192e88005bc37bd7d385a1116a"
+    },
+    {
+      "source": "blocksec",
+      "label": "blocksec.com",
+      "url": "https://blocksec.com/blog/paraspace-incident-a-race-against-time-to-thwart-the-industrys-most-critical-attack-yet"
+    },
+    {
+      "source": "blocksec",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs?tab=readme-ov-file#20230317---paraspace-nft---flashloan--scaledbalanceof-manipulation"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/ParaSpace_NFT/status/1636617953599946752"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/paraspace-lending-v1-2023-03-17"
+    },
+    {
+      "source": "revertiq",
+      "label": "certik.com",
+      "url": "https://certik.com/blog/aping-peril-the-price-manipulation-exploit-with-paraspace"
+    },
+    {
+      "source": "revertiq",
+      "label": "blocksec.com",
+      "url": "https://www.blocksec.com/blog/7-para-space-incident-a-race-against-time-to-thwart-the-industry-s-most-critical-attack-yet"
+    }
+  ]
+}

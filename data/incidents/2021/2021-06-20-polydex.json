@@ -1,0 +1,81 @@
+{
+  "id": "2021-06-20-polydex",
+  "name": "Polydex",
+  "date": "2021-06-20",
+  "year": 2021,
+  "amountUsd": 500000,
+  "returnedUsd": null,
+  "chains": [
+    "Polygon"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "reentrancy",
+  "technique": "Reentrancy",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "reentrancy",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "reentrancy",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "The Polygon ecological project PolyDEX had a hacking incident. The hackers carried out a reentry attack on the Token Locker smart contract and stole about $500,000 worth of funds from the project.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The Polygon ecological project PolyDEX had a hacking incident. The hackers carried out a reentry attack on the Token Locker smart contract and stole about $500,000 worth of funds from the project."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Polydex suffered a reentrancy exploit on Polygon on June 20, 2021, resulting in the theft of over 15.7 million PLX tokens (valued at roughly $500,000,$511,000). The attacker leveraged the interaction between the PLX ERC777 token and the token locker contract, using recursive callbacks to drain more tokens than initially locked. The PolyDEX token locker contract failed to anticipate the ERC777 tokenReceived() callback, which allowed a malicious contract to repeatedly call the unlock function during the transfer process (reentrancy), enabling the attacker to unlock and withdraw more tokens than legitimately owned."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x6b3f057683083d7f0a25e4d3898ca68308cfe2335878143466f84b3003ebe3a2",
+    "0xe02124b1a2fa3c4d7f0bad162f06c96688f5911951010063ac7f65ef4b6bd1ad"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "polydex.medium.com",
+      "url": "https://polydex.medium.com/plx-locker-smart-contract-incident-post-mortem-75342124a3e8"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/polydex-2021-06-20"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/polydex-hack-2021"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/pcaversaccio/reentrancy-attacks"
+    }
+  ]
+}

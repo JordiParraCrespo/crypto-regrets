@@ -1,0 +1,96 @@
+{
+  "id": "2022-09-20-wintermute",
+  "name": "Wintermute",
+  "date": "2022-09-20",
+  "year": 2022,
+  "amountUsd": 160000000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "Other",
+  "category": "social-engineering",
+  "technique": "Phishing",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.44,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.47000000000000003
+      },
+      {
+        "category": "social-engineering",
+        "p": 0.29
+      },
+      {
+        "category": "signature-crypto",
+        "p": 0.07
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.83
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "Wintermute have lost over $160M to their second incident this summer. Using a vanity address for \"gas savings\" has cost them dearly. Last time, funds were returned, will Wintermute get lucky again?",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "Wintermute have lost over $160M to their second incident this summer. Using a vanity address for \"gas savings\" has cost them dearly. Last time, funds were returned, will Wintermute get lucky again?"
+    },
+    {
+      "source": "SlowMist",
+      "text": "@EvgenyGaevoy, founder and CEO of crypto market maker Wintermute tweeted that Wintermute lost $160 million in DeFi hacking attacks. Wintermute used Profanity to create a wallet in order to optimize fees. Funds from old address were transferred, but due to internal (human) error, wrong function was called and attacked."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Wintermute lost approximately $160 million in assets on Ethereum after an attacker brute-forced a Profanity-generated vanity address private key. The attacker used legitimate admin privileges to drain multiple DeFi vaults, exploiting a cryptographic weakness rather than a contract bug. The incident was caused by the use of the Profanity vanity address generator, which relied on only 32 bits of entropy for key generation. This allowed attackers to recover the private key for an address with a recognizable pattern using affordable GPU brute-force, enabling unrestricted access to contracts where the compromised address retained admin privileges."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Wintermute - REKT 2",
+      "url": "https://rekt.news/wintermute-rekt-2"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/EvgenyGaevoy/status/1572329148411936770"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/wintermute-2022-09-20"
+    },
+    {
+      "source": "revertiq",
+      "label": "merklescience.com",
+      "url": "https://www.merklescience.com/blog/hack-track-analysis-of-wintermute-attack"
+    },
+    {
+      "source": "revertiq",
+      "label": "5cip.com",
+      "url": "https://5cip.com/topics/wintermute-vanity-address-hack-investigation"
+    }
+  ]
+}

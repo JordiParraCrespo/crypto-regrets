@@ -1,0 +1,142 @@
+{
+  "id": "2022-12-10-lodestar-v0",
+  "name": "Lodestar V0",
+  "date": "2022-12-10",
+  "year": 2022,
+  "amountUsd": 6900000,
+  "returnedUsd": null,
+  "chains": [
+    "Arbitrum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.74,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.76
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.15
+      },
+      {
+        "category": "logic-error",
+        "p": 0.09
+      }
+    ],
+    "flashLoan": 0.9,
+    "stateActor": 0.01,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "FlashLoan price manipulation. Lost: $4M",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "FlashLoan price manipulation. Lost: $4M"
+    },
+    {
+      "source": "REKT",
+      "text": "Lodestar Finance is the latest victim of the mass market manipulation that has affected both people and protocols across our industry. Lending pools drained for $6.5M put Lodestar at number 77 on the leaderboard."
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "FlashLoan price manipulation - Incorrect logic in GLPOracle. The root cause is attributed to the construction of the Lodestar GLPOracle and how it obtained the price of plvGLP tokens. The GLPOracle failed to consider the impact of a user calling the donate() function on the GlpDepositor contract. This action inflated the assets of the GlpDepositor contract, consequently affecting the oracle-delivered price of the plvGLP token. As a result, the price reported by the GLPOracle became inaccurate due to the improper handling of the donation mechanism, leading to the vulnerability exploited by malicious users. Vulnerable code snippet: https://arbiscan.io/address/0xba46f854a5b099fcea178c6e7ed047baffece5ac#code#F1#L65 https://arbiscan.io/address/0x13F0D29b5B83654A200E4540066713d50547606E#code#F1#L106 Attack tx: https://explorer.phalcon.xyz/tx/arbitrum/0xc523c6307b025ebd9aef155ba792d1ba18d5d83f97c7a846f267d3d9a3004e8c Analysis: https://twitter.com/SolidityFinance/status/1601684150456438784 https://blog.lodestarfinance.io/post-mortem-summary-13f5fe0bb336"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Arbitrum-based cryptocurrency lending platform Lodestar Finance was hacked and nearly $7 million in assets siphoned off, the attackers were able to manipulate the price of the plvGLP token, allowing them to use the inflated token to \"borrow\" the entirety of the Lodestar platform Liquidity available."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On December 10, 2022, Lodestar Finance on Arbitrum was exploited through an oracle manipulation attack targeting the plvGLP collateral. The attacker inflated the price of plvGLP, excessively borrowed platform assets, and exited with roughly $5.8M,$6.5M in value, leaving Lodestar with bad debt. The Lodestar GLPOracle contract allowed the price of plvGLP collateral to be manipulated via calls to a donate mechanism. This manipulation let the attacker artificially increase the value of their plvGLP holdings, enabling over-borrowing and platform drains in a single flash-loan-powered sequence."
+    }
+  ],
+  "audit": "Unaudited",
+  "txHashes": [
+    "0xc523c6307b025ebd9aef155ba792d1ba18d5d83f97c7a846f267d3d9a3004e8c"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-12/Lodestar_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-12/Lodestar_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/SolidityFinance/status/1601684150456438784"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "blog.lodestarfinance.io",
+      "url": "https://blog.lodestarfinance.io/post-mortem-summary-13f5fe0bb336"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Lodestar Finance - REKT",
+      "url": "https://rekt.news/lodestar-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "arbiscan.io",
+      "url": "https://arbiscan.io/address/0xba46f854a5b099fcea178c6e7ed047baffece5ac#code#F1#L65"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "arbiscan.io",
+      "url": "https://arbiscan.io/address/0x13F0D29b5B83654A200E4540066713d50547606E#code#F1#L106"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "explorer.phalcon.xyz",
+      "url": "https://explorer.phalcon.xyz/tx/arbitrum/0xc523c6307b025ebd9aef155ba792d1ba18d5d83f97c7a846f267d3d9a3004e8c"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/LodestarFinance/status/1601686921566375936"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/lodestar-finance-2022-12-11"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "halborn.com",
+      "url": "https://www.halborn.com/blog/post/explained-the-lodestar-finance-hack-november-2022"
+    },
+    {
+      "source": "revertiq",
+      "label": "certik.com",
+      "url": "https://www.certik.com/blog/lodestar-finance-incident-analysis"
+    }
+  ]
+}

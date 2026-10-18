@@ -1,0 +1,108 @@
+{
+  "id": "2024-04-08-squid",
+  "name": "SQUID",
+  "date": "2024-04-08",
+  "year": 2024,
+  "amountUsd": 87000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "Token",
+  "category": "logic-error",
+  "technique": "Swap Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.6,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.62
+      },
+      {
+        "category": "market-manipulation",
+        "p": 0.38
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.91
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "sandwich attack. Lost: $~87K USD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "sandwich attack. Lost: $~87K USD"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "In the victim contract, there are functions for swapping old tokens for new ones and vice versa. The \"sellSwappedTokens\" function performs the swap using PancakeSwap. The hacker exploited this by sandwiching the exchange, resulting in a gain of $87k. Vulnerable code snippet: Attack tx: 0x9fcf38d0af4dd08f4d | Phalcon Explorer Analysis: Root cause: Vulnerable code snippet: Attack tx: Analysis:"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Squid Game (SQUID) is a meme token on the BNB chain. On April 8, 2024, the SQUID Game was exploited on the BNB chain due to a smart contract vulnerability, which resulted in a loss of assets worth approximately $87,000. The root cause of the exploit is a faulty logic design within their swap contract."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "SQUID Game Coin on BNB Chain suffered an $87,000 exploit on 8 April 2024. The attacker manipulated swap logic using a flash loan, draining tokens via repeated calls to a vulnerable contract function. The swap contract on BNB Chain had flawed logic that allowed repeated exploitation of its token-selling functionality. The attacker used a flash loan to acquire a large batch of SQUID tokens, then repeatedly called the sell function to drain funds. Insufficient checks in the swap logic enabled these actions."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x9fcf38d0af4dd08f4d60f7658b623e35664e74bca0eaebdb0c3b9a6965d6257b"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-04/SQUID_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-04/SQUID_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/bbbb/status/1777228277415039304"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/bsc/0x9fcf38d0af4dd08f4d60f7658b623e35664e74bca0eaebdb0c3b9a6965d6257b"
+    },
+    {
+      "source": "slowmist",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x9fcf38d0af4dd08f4d60f7658b623e35664e74bca0eaebdb0c3b9a6965d6257b"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/squid-2024-04-08"
+    },
+    {
+      "source": "revertiq",
+      "label": "olympix.security",
+      "url": "https://olympix.security/biweekly-exploits/4m-drained-pike-grand-base-sumer-and-squid-game-coin-fall-to-wallet-leaks-and-broken-logic"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/past/2024/README.md#L2258"
+    }
+  ]
+}

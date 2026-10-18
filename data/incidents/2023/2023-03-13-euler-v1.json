@@ -1,0 +1,173 @@
+{
+  "id": "2023-03-13-euler-v1",
+  "name": "Euler V1",
+  "date": "2023-03-13",
+  "year": 2023,
+  "amountUsd": 197000000,
+  "returnedUsd": 240000000,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "donateToReserves without health check",
+  "classificationNote": "Curated: reclassified from \"accounting-math\" based on the published post-mortem.",
+  "classifiedBy": "curated",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.99
+      },
+      {
+        "category": "access-control",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.97,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "donateToReserves() let a user burn their own eTokens without checking account health. The attacker built a leveraged position with a flash loan, donated collateral to make it deeply insolvent, then self-liquidated at a discount to extract the surplus. The function was added after earlier audits. The funds were later returned.",
+  "descriptions": [
+    {
+      "source": "Curated post-mortem",
+      "text": "donateToReserves() let a user burn their own eTokens without checking account health. The attacker built a leveraged position with a flash loan, donated collateral to make it deeply insolvent, then self-liquidated at a discount to extract the surplus. The function was added after earlier audits. The funds were later returned."
+    },
+    {
+      "source": "DeFiHackLabs",
+      "text": "Business Logic Flaw. Lost: ~$200M"
+    },
+    {
+      "source": "REKT",
+      "text": "Against the backdrop of a banking meltdown and stablecoin crisis, Euler Finance was struck a $197M blow. Many other projects had funds tied up in Euler, is anywhere truly safe?"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Euler Finance's donateToReserves() function allowed a user to irreversibly transfer their eTokens (interest-bearing collateral) to the protocol's reserve sub-account without triggering any subsequent health-factor or solvency check. An attacker flash-loaned 30M DAI from Aave V2 and deployed two contracts: a violator and a liquidator. The violator deposited 20M DAI to receive eDAI, then called mint() twice (Euler's self-leverage function that simultaneously mints eDAI collateral and dDAI debt) to accumulate ~390M eDAI against ~400M dDAI debt, with a partial repay() of 10M DAI in between to slightly improve the position. The violator then called donateToReserves(0, 100M eDAI), gifting 100M eDAI to the reserves and leaving the account with far less collateral than debt — a deliberately engineered insolvency. Because no health check fired after the donation, the liquidator contract could immediately liquidate the violator at a significant discount, receiving ~310M eDAI while absorbing ~259M dDAI of debt. The liquidator then withdrew the underlying DAI from Euler (draining ~$200M across multiple tokens in real attacks) and repaid the flash loan. Vulnerable code snippet: Attack Tx: 0xc310a0affe2169d1f6feec1c63dbc7f7c62a887fa48795d327d4d2da2d6b111d Analysis: BlockSec Euler Finance Incident Analysis"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The primary problem here with Euler was its “donateToReserves” function. which allows the user to transfer tokens from their own balance to a protocol variable called “assetStorage.reserveBalance.”.This function allowed the attacker to donate their eDAI to Euler reserves, removing assets from their wallet without removing a corresponding amount of debt. Here borrower minted 195 million e-DAI and 200 million d-DAI tokens. A logical error in the donateToReserve() method resulted in the burning of e-DAI tokens but not d-DAI tokens, leading to unbacked “d-DAI” token debt that will never be repaid. Vulnerable code snippet: Summary: 1) Flash loan tokens from Balancer/Aave v2 => 30M DAI 2) Deploy two contracts: violator and liquidator 3) Deposit 2/3 of funds to Euler using deposit() => sent 20M DAI to Euler and received 19.5M eDAI from Euler 4) Borrow 10x of deposited amount using mint() => received 195.6M eDAI and 200M dDAI from Euler 5) Repay part of debt using the remaining 1/3 of funds using repay() => sent 10M DAI and burned 10M dDAI 6) Repeat 4th step => received 195.6M eDAI and 200M dDAI from Euler 7) Donate 10x of repaid funds using donateToReserves() => sent 100M eDAI to Euler 8) Liquidate a violator’s account using liquidate() because eDAI received 310M eDAI and 259M dDAI of debt from the violator 9) Withdraw all token amount from Euler using withdraw() => withdrew 38.9M DAI from Euler 10) Repay flash loans Attack tx: https://etherscan.io/tx/0xc310a0affe2169d1f6feec1c63dbc7f7c62a887fa48795d327d4d2da2d6b111d Analysis: https://twitter.com/FrankResearcher/status/1635241475989721089 https://twitter.com/nomorebear/status/1635230621856600064 https://twitter.com/peckshield/status/1635229594596036608 https://twitter.com/BlockSecTeam/status/1635262150624305153 https://twitter.com/SlowMist_Team/status/1635288963580825606 https://euler-xyz.github.io/euler-contracts-upgrade-diffs/eip14/EToken.html"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The DeFi lending protocol Euler Finance was attacked, and the attackers made a profit of about 197 million US dollars. The attacker used flashloans to deposit funds and then leveraged them twice to trigger the liquidation logic, donating the funds to the reserve address and conducting a self-liquidation to collect any remaining assets. Two key factors contributed to the success of the attack: 1. Funds were donated to the reserved address without being subjected to a liquidity check. This created a mechanism that could directly trigger soft liquidation. 2. When the soft liquidation logic was triggered by high leverage, the yield value increased, enablin…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Euler Finance lost approximately $197 million on March 13, 2023 when a reserve donation removed collateral without a solvency check. The attacker liquidated a controlled account at a discount and withdrew assets while leaving bad debt. Euler later reported recovering the stolen assets. Euler V1's donateToReserves() reduced an account's eToken collateral without a post-operation liquidity check. Combined with self-collateralized leverage and liquidation discounts, this let one controlled account incur unbacked debt while another acquired withdrawable collateral."
+    }
+  ],
+  "audit": "Sherlock",
+  "txHashes": [
+    "0xc310a0affe2169d1f6feec1c63dbc7f7c62a887fa48795d327d4d2da2d6b111d",
+    "0x3097830e9921e4063d334acb82f6a79374f76f0b1a8f857e89b89bc58df1f311",
+    "0x465a6780145f1efe3ab52f94c006065575712d2003d83d85481f3d110ed131d9",
+    "0x62bd3d31a7b75c098ccf28bc4d4af8c4a191b4b9e451fab4232258079e8b18c4",
+    "0x71a908be0bef6174bccc3d493becdfd28395d78898e355d451cb52f7bac38617",
+    "0x47ac3527d02e6b9631c77fad1cdee7bfa77a8a7bfd4880dccbda5146ace4088f"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-03/Euler_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "blocksec",
+    "slowmist",
+    "revertiq",
+    "curated"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-03/Euler_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/FrankResearcher/status/1635241475989721089"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/nomorebear/status/1635230621856600064"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/peckshield/status/1635229594596036608"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Euler Finance - REKT",
+      "url": "https://rekt.news/euler-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xc310a0affe2169d1f6feec1c63dbc7f7c62a887fa48795d327d4d2da2d6b111d"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "blocksec.com",
+      "url": "https://blocksec.com/blog/euler-finance-incident-the-largest-hack-of-2023"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "medium.com",
+      "url": "https://medium.com/@omniscia.io/euler-finance-incident-post-mortem-1ce077c28454"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x3097830e9921e4063d334acb82f6a79374f76f0b1a8f857e89b89bc58df1f311"
+    },
+    {
+      "source": "blocksec",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs?tab=readme-ov-file#20230313---eulerfinance---business-logic-flaw"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/SlowMist_Team/status/1635288963580825606"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/euler-finance-2023-03-13"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/de-fi-rekt-report-crypto-losses-reach-1-95b-in-2023"
+    },
+    {
+      "source": "revertiq",
+      "label": "euler.finance",
+      "url": "https://www.euler.finance/blog/war-peace-behind-the-scenes-of-eulers-240m-exploit-recovery"
+    },
+    {
+      "source": "curated",
+      "label": "Cyfrin: Euler hack explained",
+      "url": "https://www.cyfrin.io/blog/how-did-the-euler-finance-hack-happen-hack-analysis"
+    }
+  ]
+}

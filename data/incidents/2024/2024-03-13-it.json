@@ -1,0 +1,71 @@
+{
+  "id": "2024-03-13-it",
+  "name": "IT",
+  "date": "2024-03-13",
+  "year": 2024,
+  "amountUsd": 13000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "business logic flaw",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.97).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.97,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.97
+      },
+      {
+        "category": "access-control",
+        "p": 0.02
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.93
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "business logic flaw. Lost: ~13k USDT",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "business logic flaw. Lost: ~13k USDT"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "In the 'transfer' function, if sender is pair address (buy IT token), IT tokens are minted to pair in 'mintToPoolIfNeeded' function. Hacker exploited this. Also to make 'mintAmount' bigger, he transferred 2000 USDT into pair. Attack Tx: https://phalcon.blocksec.com/explorer/tx/bsc/0xb33057f57ce451aa8cbb65508d298fe3c627509cc64a394736dace2671b6dcfa Analysis:"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xb33057f57ce451aa8cbb65508d298fe3c627509cc64a394736dace2671b6dcfa"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-03/IT_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-03/IT_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "phalcon.blocksec.com",
+      "url": "https://phalcon.blocksec.com/explorer/tx/bsc/0xb33057f57ce451aa8cbb65508d298fe3c627509cc64a394736dace2671b6dcfa"
+    }
+  ]
+}

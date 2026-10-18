@@ -1,0 +1,92 @@
+{
+  "id": "2026-05-22-polymarket",
+  "name": "Polymarket",
+  "date": "2026-05-22",
+  "year": 2026,
+  "amountUsd": 700000,
+  "returnedUsd": null,
+  "chains": [
+    "Polygon"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "key-compromise",
+  "technique": "Private Key Compromised",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "key-compromise",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "key-compromise",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.79
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Polymarket suffered an internal private key compromise incident. A six-year-old operational wallet private key (used for the rewards payout system and market initializer) was compromised, resulting in the extraction of approximately $573,200 (in USDC and POL) from addresses on the Polygon chain. Polymarket officials quickly clarified that this was not due to any smart contract or UMA CTF Adapter vulnerability; user funds, market resolutions, and the platform’s core functions remain fully secure. The team immediately rotated the private key, revoked permissions, and collaborated to freeze approximately $164,000 in funds, resulting in a net loss of about $409,200.…",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Polymarket suffered an internal private key compromise incident. A six-year-old operational wallet private key (used for the rewards payout system and market initializer) was compromised, resulting in the extraction of approximately $573,200 (in USDC and POL) from addresses on the Polygon chain. Polymarket officials quickly clarified that this was not due to any smart contract or UMA CTF Adapter vulnerability; user funds, market resolutions, and the platform’s core functions remain fully secure. The team immediately rotated the private key, revoked permissions, and collaborated to freeze approximately $164,000 in funds, resulting in a net loss of about $409,200.…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On May 22, 2026, Polymarket lost approximately $700,000 on Polygon due to a compromise of an internal, six-year-old wallet's private key. The attack drained operational funds but did not affect user balances or core contracts. A stale internal Polymarket operational wallet's private key was compromised, enabling an attacker to withdraw POL and USDC.e in scripted batches. No core contract logic was exploited."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x9faf63d96cab3ca02680452a4c66bdf7ae8a2901307ec27a180da47d96ef2dc7",
+    "0x273f1e010184a94fb052c16cb9cfbdc30ccf88e87c11bb26302ca38f14359d02"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x9faf63d96cab3ca02680452a4c66bdf7ae8a2901307ec27a180da47d96ef2dc7"
+    },
+    {
+      "source": "blocksec",
+      "label": "x.com",
+      "url": "https://x.com/bubblemaps/status/2057759874730078450"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/devjoshstevens/status/2057768173915484505"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/polymarket-2026-05-22"
+    },
+    {
+      "source": "revertiq",
+      "label": "phemex.com",
+      "url": "https://phemex.com/blogs/polymarket-private-key-compromise"
+    },
+    {
+      "source": "revertiq",
+      "label": "finbold.com",
+      "url": "https://finbold.com/polymarket-confirms-6-year-old-private-key-hack-leads-to-a-700000-loss/"
+    }
+  ]
+}

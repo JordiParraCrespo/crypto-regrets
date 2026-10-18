@@ -1,0 +1,98 @@
+{
+  "id": "2025-10-27-402bridge",
+  "name": "402bridge",
+  "date": "2025-10-27",
+  "year": 2025,
+  "amountUsd": 17693,
+  "returnedUsd": null,
+  "chains": [
+    "Base"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "key-compromise",
+  "technique": "Key Stored Publicly",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "key-compromise",
+    "confidence": 0.6,
+    "top": [
+      {
+        "category": "key-compromise",
+        "p": 0.62
+      },
+      {
+        "category": "access-control",
+        "p": 0.19
+      },
+      {
+        "category": "arbitrary-call",
+        "p": 0.15
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.87
+  },
+  "bridge": true,
+  "language": "Solidity",
+  "rootCause": "402Bridge posted on X to alert users that a token theft incident had occurred. The technical team is investigating the entire process and advised all users to immediately revoke existing authorizations and transfer their assets out of their wallets. According to available information, the x402 cross-chain protocol 402Bridge was likely compromised after the contract ownership was transferred by the original creator to address 0x2b8F.... More than 200 users lost their remaining USDC due to excessive token approval amounts, with the attacker’s address (starting with 0x2b8F9) stealing a total of 17,693 USDC. The stolen funds were then swapped for ETH and b…",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "402Bridge posted on X to alert users that a token theft incident had occurred. The technical team is investigating the entire process and advised all users to immediately revoke existing authorizations and transfer their assets out of their wallets. According to available information, the x402 cross-chain protocol 402Bridge was likely compromised after the contract ownership was transferred by the original creator to address 0x2b8F.... More than 200 users lost their remaining USDC due to excessive token approval amounts, with the attacker’s address (starting with 0x2b8F9) stealing a total of 17,693 USDC. The stolen funds were then swapped for ETH and b…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "A reported privileged-key leak led to a 402bridge ownership takeover on Base. The initial 227 wallet withdrawals moved 17,693.285835 USDC through existing approvals. A checked 3.9 ETH bridge deposit subsequently settled on Ethereum. The contract combined an owner-controlled transfer path with users' standing USDC allowances. After a reported key compromise and a verified ownership change, the new owner exercised those allowances to redirect tokens without a new user signature."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x089a6336425c6ee6d8954923763cbaeef1173ce44b5c0ab853c85863726e46e2",
+    "0x3621424286265c8c6e5dafa64059ae8c3c29860005773f630be43d219153f165",
+    "0x90f15fbabf766e0c25115a0117bae2782c5ec0f467b934fd42646c9a2fb61350",
+    "0x49de165cae8c14bc7bfb7ed6647608fea6aa602080ab80e14ad6f04a37da052f",
+    "0x09ee612536fa54dd5168879198f26313af41674e245d6bca78222a1e7c8e2114",
+    "0x9b33892106e1858a0c8882c1b3d5cd8308d26b360b800a90cab9d2ea54622fbb",
+    "0xe106896669f2dc9a844679b51e95b0bb81a2bd4d2ad23888c8469e1b20a8558e",
+    "0x933f32ceea8131c2fa1554570c80d34f4d16785441fe73be3ced82576ae40e0c",
+    "0xc29d939d16c1c46bffd81d8ad15c2b5cf31a86584f4a7be5356b464ae5ba409f",
+    "0x35da87493842282d1be55ab4ea6886c883b0f239f1015b789e0af04a5a1dd286",
+    "0xb4aa770de21c857ab3fed280d57a5cf8823dffda2110974eec8bc6cd5eef8c8a"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/402bridge/status/1982859472629559796"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/402bridge-2025-10-27"
+    },
+    {
+      "source": "revertiq",
+      "label": "api.llama.fi",
+      "url": "https://api.llama.fi/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/402bridge-hack-2025"
+    }
+  ]
+}

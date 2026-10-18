@@ -1,0 +1,93 @@
+{
+  "id": "2026-07-22-verus-ethereum-bridge",
+  "name": "Verus-Ethereum Bridge",
+  "date": "2026-07-22",
+  "year": 2026,
+  "amountUsd": 7530000,
+  "returnedUsd": null,
+  "chains": [
+    "Verus"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "bridge-crosschain",
+  "technique": "Forged Proof",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "bridge-crosschain",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "bridge-crosschain",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.94
+  },
+  "bridge": true,
+  "language": "Solidity",
+  "rootCause": "The Verus Ethereum Bridge was exploited again. The attacker abused the bridge’s import path to trigger unbacked payouts on the Ethereum side, draining approximately $7.54 million in assets (ETH, tBTC, USDC, etc.) from the bridge reserves. This is the second exploit of the same flaw from May. The project has not issued a detailed official statement yet.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The Verus Ethereum Bridge was exploited again. The attacker abused the bridge’s import path to trigger unbacked payouts on the Ethereum side, draining approximately $7.54 million in assets (ETH, tBTC, USDC, etc.) from the bridge reserves. This is the second exploit of the same flaw from May. The project has not issued a detailed official statement yet."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On July 23, 2026, the Verus-Ethereum Bridge was exploited for approximately $7.54 million. The attacker forged import proofs using poisoned notarization data from Verus, causing the Ethereum bridge contract to release funds without proper backing on the source chain. Discrepant interpretation of notarization data between Verus and Ethereum allowed an attacker to inject a malicious state root. The Ethereum bridge contract subsequently relied on this forged checkpoint, failing to verify that payout amounts matched value exported from Verus."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xa1f1e65c1cea4dba4ae439cd4dcdba6cc2dbda0ed1228e61f29ae9c9324eb099",
+    "0x8f21bd8f0fce72ac959caa93a9923d85f902dfc6eddac2785ac5bc49c3b28d8f",
+    "0x51b1c8341da4092b7d1e0e4865f7b318de4e96245358b05b2bff2df50adaf0c9"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xa1f1e65c1cea4dba4ae439cd4dcdba6cc2dbda0ed1228e61f29ae9c9324eb099"
+    },
+    {
+      "source": "blocksec",
+      "label": "x.com",
+      "url": "https://x.com/Phalcon_xyz/status/2080341851517980811"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/blockaid_/status/2080143099561496896"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/verus-ethereum-bridge-2026-07-22"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptotimes.io",
+      "url": "https://www.cryptotimes.io/2026/07/23/verus-ethereum-bridge-exploited-again-for-7-54m-in-repeat-attack/"
+    },
+    {
+      "source": "revertiq",
+      "label": "certik.com",
+      "url": "https://www.certik.com/blog/verus-incident-analysis"
+    }
+  ]
+}

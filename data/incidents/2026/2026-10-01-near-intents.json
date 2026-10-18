@@ -1,0 +1,72 @@
+{
+  "id": "2026-10-01-near-intents",
+  "name": "NEAR Intents",
+  "date": "2026-10-01",
+  "year": 2026,
+  "amountUsd": 3800000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "bridge-crosschain",
+  "technique": "Bridge Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "bridge-crosschain",
+    "confidence": 0.66,
+    "top": [
+      {
+        "category": "bridge-crosschain",
+        "p": 0.68
+      },
+      {
+        "category": "logic-error",
+        "p": 0.32
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.81
+  },
+  "bridge": true,
+  "language": "Solidity",
+  "rootCause": "A wallet funded with 10 USDT drained $3.87M from a BNB Chain vault serving NEAR Intents using valid signed authorizations. After a 48-hour ultimatum, the team announced a full recovery and closed its investigation; the full story of the failure remains unclear.",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "A wallet funded with 10 USDT drained $3.87M from a BNB Chain vault serving NEAR Intents using valid signed authorizations. After a 48-hour ultimatum, the team announced a full recovery and closed its investigation; the full story of the failure remains unclear."
+    },
+    {
+      "source": "SlowMist",
+      "text": "NEAR Intents suffered a security incident caused by a bug in the Omni deposit and withdrawal infrastructure’s interaction with its smart contract, with a preliminary loss of approximately $3.8 million. The contract-side vulnerability has been patched, full compensation has been pledged, and the team has reported the incident to law enforcement while working to trace and recover the funds."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: NEAR Intents - Rekt",
+      "url": "https://rekt.news/near-intents-rekt"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/near_intents/status/2105642219357241796"
+    }
+  ]
+}

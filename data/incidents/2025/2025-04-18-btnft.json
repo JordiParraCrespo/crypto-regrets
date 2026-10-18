@@ -1,0 +1,77 @@
+{
+  "id": "2025-04-18-btnft",
+  "name": "BTNFT",
+  "date": "2025-04-18",
+  "year": 2025,
+  "amountUsd": 19025.919331278623,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Claim Rewards Without Protection",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.99). Replaced keyword guess \"logic-error\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.99
+      },
+      {
+        "category": "logic-error",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Claim Rewards Without Protection. Lost: 19025.9193312786235214 BUSD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Claim Rewards Without Protection. Lost: 19025.9193312786235214 BUSD"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The BTNFT contract treated transferring a BTNFT NFT to the contract itself (BTNFT address) as a reward-claim / burn event that minted BTT reward tokens to the caller, without verifying that the caller actually owned the NFT and without protecting against third parties processing other users' NFTs. The attacker enumerated every minted NFT (totalSupply()), and for each token called transferFrom(owner, BTNFT, id) to push all users' NFTs into the contract, harvesting the BTT rewards associated with every NFT. The attacker then dumped the accumulated BTT into the project pair via the router's swap in 50 chunks, realizing ~19,026 BUSD. The core flaw is missing access control / ownership validation on the reward-claim path tied to NFT transfers. Vulnerable code snippet: Attack Tx: https://bscscan.com/tx/0x1e90cbff665c43f91d66a56b4aa9ba647486a5311bb0b4381de4d653a9d8237d Analysis: PoC by rotcivegaf"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x1e90cbff665c43f91d66a56b4aa9ba647486a5311bb0b4381de4d653a9d8237d"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-04/BTNFT_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-04/BTNFT_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/TenArmorAlert/status/1913500336301502542"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x1e90cbff665c43f91d66a56b4aa9ba647486a5311bb0b4381de4d653a9d8237d"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/rotcivegaf"
+    }
+  ]
+}

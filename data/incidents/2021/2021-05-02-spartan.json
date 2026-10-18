@@ -1,0 +1,106 @@
+{
+  "id": "2021-05-02-spartan",
+  "name": "Spartan",
+  "date": "2021-05-02",
+  "year": 2021,
+  "amountUsd": 30500000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Incorrect Share Accounting",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.92
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Logic Flaw. Lost: $30.5M",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Logic Flaw. Lost: $30.5M"
+    },
+    {
+      "source": "REKT",
+      "text": "Sparta has fallen. A flaw in the code allowed an attacker to drain the SPARTA/WBNB liquidity pool, earning themselves $30 million and the 6th position on the rekt leaderboard as a result."
+    },
+    {
+      "source": "SlowMist",
+      "text": "According to the SlowMist Intelligence, the Binance smart chain project Spartan Protocol was hacked and the loss amounted to about 30 million U.S. dollars. The event was due to a flaw in the calculation of liquidity shares in the protocol."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On May 2, 2021, Spartan Protocol on BNB Chain lost approximately $30.5 million when an attacker exploited a fundamental flaw in its liquidity pool share calculation, allowing pool balances to be inflated and drained using flash loans. The protocol calculated LP share redemptions based on current ERC-20 token balances, not synchronized internal reserves. This let attackers artificially inflate pool balances and withdraw much more than their true share by combining flash loans and direct transfers."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x130859c0419f155d33a3b1cc4d8f5c3c815178717d56cdb685d8e9d45ebc78a0",
+    "0xf70a35bf0de33746503002a93714397de2fa4c01c922e9793b2e036e066fca8e"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2021-05/Spartan_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2021-05/Spartan_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "rekt.news",
+      "url": "https://rekt.news/spartan-rekt/"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Spartan Protocol - REKT",
+      "url": "https://rekt.news/spartan-rekt"
+    },
+    {
+      "source": "slowmist",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/markets/2021/05/02/binance-smart-chains-spartan-protocol-loses-30m-in-exploit/"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/spartan-protocol-2021-05-02"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "medium.com",
+      "url": "https://medium.com/amber-group/exploiting-spartan-protocols-lp-share-calculation-flaws-391437855e74"
+    }
+  ]
+}

@@ -1,0 +1,114 @@
+{
+  "id": "2021-05-07-valuedefi",
+  "name": "ValueDefi",
+  "date": "2021-05-07",
+  "year": 2021,
+  "amountUsd": 11000000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Arithmetic Error",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.98,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.98
+      },
+      {
+        "category": "logic-error",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.12
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Cross Contract Reentrancy",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Cross Contract Reentrancy"
+    },
+    {
+      "source": "REKT",
+      "text": "Twice in one week. Value DeFi is a trainwreck. Six months ago they lost $7M. Three days ago they lost $10M. Now they’ve lost another $11M. What went so wrong with Value DeFi?"
+    },
+    {
+      "source": "SlowMist",
+      "text": "DeFi protocol ValueDeFi is suspected of being hacked again after being hacked on the 5th. ValueDeFi reminds users in the community, \"All non-50/50 transaction pools of the project have been used. Please stop purchasing gvVALUE and vBSWAP until the project team provides a solution.\" It was subsequently confirmed that more than 3,000 ETH (approximately 10 million U.S. dollars) were lost."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On May 7, 2021, ValueDefi's vSwap AMM on BNB Chain was exploited through a critical arithmetic flaw in the weighted constant-product invariant calculation for non 50/50 pools. The incident allowed an attacker to drain approximately $11 million across nine liquidity pools by crafting swaps that intentionally violated the invariant's assumptions. Incorrect use of a power() exponentiation routine in the invariant enforcement logic for vSwap pools with non-50/50 asset weights. The power() helper was valid only when its numerator exceeded or equaled its denominator, but the swap function permitted crafted inputs that broke this assumption. This let the inva…"
+    }
+  ],
+  "audit": "Unaudited",
+  "txHashes": [
+    "0x2fd0aaf0bad8e81d28d0ee6e4f4b5cbba693d7d0d063d1662653cdd2a135c2de"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2021-05/ValueDefi_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2021-05/ValueDefi_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "rekt.news",
+      "url": "https://rekt.news/rari-capital-rekt/"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0xa00def91954ba9f1a1320ef582420d41ca886d417d996362bf3ac3fe2bfb9006"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Value DeFi - REKT 3",
+      "url": "https://rekt.news/value-rekt3"
+    },
+    {
+      "source": "slowmist",
+      "label": "togater.com",
+      "url": "http://www.togater.com/584.html"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/valuedefi-2021-05-05"
+    },
+    {
+      "source": "revertiq",
+      "label": "itokenly.com",
+      "url": "https://itokenly.com/hacks/value-defi-vswap"
+    },
+    {
+      "source": "revertiq",
+      "label": "medium.com",
+      "url": "https://medium.com/peckshield/valuedefi-incident-incorrect-weighted-constant-product-invariant-calculation-1bbaa220a02b"
+    }
+  ]
+}

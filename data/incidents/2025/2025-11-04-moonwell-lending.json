@@ -1,0 +1,127 @@
+{
+  "id": "2025-11-04-moonwell-lending",
+  "name": "Moonwell Lending",
+  "date": "2025-11-04",
+  "year": 2025,
+  "amountUsd": 1000000,
+  "returnedUsd": null,
+  "chains": [
+    "Base",
+    "Optimism"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.98,
+    "stateActor": 0.01,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Faulty Oracle. Lost: 1M USD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Faulty Oracle. Lost: 1M USD"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "A Moonwell market on Base used a faulty oracle that overvalued wrsETH collateral (the mwrsETH cToken). The attacker flash-loaned wrsETH from a Velodrome/Aerodrome CL pool, supplied it to mint mwrsETH, entered the market as collateral, and was then able to borrow far more wstETH (BORROW_AMOUNT) than the deposited collateral's true value should have allowed because the oracle reported an inflated price for the collateral. The borrowed wstETH was swapped to WETH, then WETH back to wrsETH to repay the flash loan, leaving ~1M USD profit. The root cause is the lending market's reliance on an oracle that did not reflect the real wrsETH/wstETH price, enabling an under-collateralized over-borrow. Vulnerable code snippet: Attack Tx: https://app.blocksec.com/explorer/tx/base/0x190a491c0ef095d5447d6d813dc8e2ec11a5710e189771c24527393a2beb05ac Analysis: https://www.halborn.com/blog/post/explained-the-moonwell-hack-november-2025"
+    },
+    {
+      "source": "SlowMist",
+      "text": "According to CertiK’s monitoring, the Moonwell lending contract suffered multiple attack transactions. The attacker exploited an incorrect oracle price for wrst (around USD 5.8 million). By using a flash loan of only about 0.02 wrstETH and depositing it, the attacker repeatedly borrowed over 20 wstETH, gaining 295 ETH (approximately USD 1 million) in profit."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On November 4, 2025, Moonwell Lending on Base and Optimism suffered a critical oracle malfunction. A price feed assigned an absurd value to wrsETH collateral, allowing an attacker to borrow assets worth roughly $1 million, leaving up to $3.7 million in bad debt. The attack rapidly drained markets before protocol controls could respond. Moonwell used a price oracle feed for wrsETH that malfunctioned, returning an inflated value (~1.6 million ETH per wrsETH). The protocol multiplied this by the ETH/USD price, producing a multi-billion-dollar valuation for wrsETH and allowing the attacker to borrow excessive value against minuscule collateral."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x190a491c0ef095d5447d6d813dc8e2ec11a5710e189771c24527393a2beb05ac",
+    "0x815715adbf5032d1b968d5fda6c3589d2f4d3ab0b7a12c42f7f6a3cddbf99ff9",
+    "0x26abab9dd1119f13ba4899cea1d5875e3c5286427732a4eb7143aa44485cf6e0",
+    "0xd74224baa38bb6872769d43469aea69f45683281ca475c658338f2c08e5f412d",
+    "0xff3075de35647efed753a918d20a92d9113e14a86a6dc98064b94249d14a54c1",
+    "0xa5f60967fc6ad8c0f5b82f1a12970371333c16d8dddee5cd3a4f8a95561769fd",
+    "0xc5daf8bfea0b7f6c5da8e4b08e19df2be58094a366aa2387e9b9443fb0e0c0d4",
+    "0x7855a861bb27ba93aac37ec60e2de3381c46f82070dc4d300aca70ee05cc69ec",
+    "0xecb1c96e15889dc11d2928f6e63e34abcb8b1114bd69f15a794fa4df07f647aa",
+    "0x229caeb87e0b6c31afad950150d2ba05a8d7fe823c9e5c05af63b4150b8f6cc6",
+    "0xd72b27738e1f4ddeac1ab43be4a75353d68927d96f185fdf459a7f2a42e93825",
+    "0x7419464638ac03cabb5f07ed48961c87ac64e192c3f9ae868bf9ca2408e559fc"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-11/Moonwell_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-11/Moonwell_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/CertiKAlert/status/1985620452992253973"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "www.halborn.com",
+      "url": "https://www.halborn.com/blog/post/explained-the-moonwell-hack-november-2025"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/base/0x190a491c0ef095d5447d6d813dc8e2ec11a5710e189771c24527393a2beb05ac"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x815715adbf5032d1b968d5fda6c3589d2f4d3ab0b7a12c42f7f6a3cddbf99ff9"
+    },
+    {
+      "source": "blocksec",
+      "label": "x.com",
+      "url": "https://x.com/Phalcon_xyz/status/1985617123700289790"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/moonwell-lending-2025-11-04"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptotimes.io",
+      "url": "https://www.cryptotimes.io/2025/11/04/moonwell-hit-by-1m-oracle-exploit-on-base-and-optimism/"
+    },
+    {
+      "source": "revertiq",
+      "label": "ambcrypto.com",
+      "url": "https://ambcrypto.com/chainlink-oracle-glitch-costs-moonwell-1m-as-defi-suffers-another-exploit/"
+    }
+  ]
+}

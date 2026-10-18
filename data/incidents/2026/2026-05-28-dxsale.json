@@ -1,0 +1,140 @@
+{
+  "id": "2026-05-28-dxsale",
+  "name": "DxSale",
+  "date": "2026-05-28",
+  "year": 2026,
+  "amountUsd": 7300000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "rugpull",
+  "technique": "Liquidity Rug",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.5,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.53
+      },
+      {
+        "category": "rugpull",
+        "p": 0.44
+      },
+      {
+        "category": "logic-error",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Ownership Override Attack. Lost: ~7.3M USD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Ownership Override Attack. Lost: ~7.3M USD"
+    },
+    {
+      "source": "REKT",
+      "text": "A 2021 DxSale locker, an unprotected admin key, $7.3 million gone. Decurity flagged the risk in 2023 for $500. Two compromised contracts holding $15.5 million remains untouched, for now."
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The DxSale legacy liquidity locker contains a privileged owner-only backdoor DXLOCKERLP(address,uint256) that lets the owner drain any user's locked LP position without honoring the per-lock timelock. The DxSale deployer secretly transferred locker ownership through ~89 wallets over 269 days; the final owner (attacker) then invoked DXLOCKERLP() to sweep all 1,400+ locked LP positions, bypassing every individual timelock. The batch drain was executed via an EIP-7702 type-4 delegation to a custom drainer contract, netting ~$7.3M in BNB/LP. Root cause is an undisclosed owner backdoor combined with the ability to silently migrate ownership, defeating the locker's entire trust premise. Vulnerable code snippet: Attack Tx: https://bscscan.com/tx/0xe211904a8a40f653acd64ffc33a42429ef571c1e2da16976d07ac0f9a0bcc9c1 Analysis: crypto.news post-mortem"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Legacy liquidity locker contracts of DxSale (a veteran DeFi launchpad on BNB Chain) were exploited, draining approximately $7.3 million from over 1,400 old LPs locked since 2021. The attacker used owner privileges via a custom drainer to set near-zero fees, backdate unlock times to 1970, and withdraw funds; on-chain links suggest possible team connections, with the platform remaining silent."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "DxSale’s legacy liquidity locker on BNB Chain was exploited on 28 May 2026, draining an estimated $7.3 million from more than 1,400 liquidity providers. The attacker gained contract ownership through a series of concealed transfers and then used privileged functions to bypass lock restrictions, enabling mass withdrawal of funds. DxSale’s locker contract allowed ownership to be transferred without public notice or resistance, eventually granting an attacker admin privileges. Using owner-level access, the attacker invoked privileged functions (such as backdoor and fee-setting operations) to manipulate lock periods and fees, bypassing user-level timelocks and draining the locked funds.…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xe211904a8a40f653acd64ffc33a42429ef571c1e2da16976d07ac0f9a0bcc9c1",
+    "0xac8f5ed6cac1e6c6d6e96bad34f5211c8ae23cf05866b2531f3f3e63bcd36df9",
+    "0x5dd61f4301101cb55a7f89eea3ce98a3bcc6f0f55878c26ab16665a01e4298aa",
+    "0x82f5418835642f6d8f29b0686f39b7ca73023748d3c2c7d1827418ce51a9fa73",
+    "0x437b26887ba03c08b7541a86e8eeda5e92a9059244fcf814c721dc13f2c1b303",
+    "0xf0a45b660eebc2d6dac7a5a3add28d7388e45fc413488e9e16eb5a8206cb1f20",
+    "0xb0d988a56f7e54197c800bf9a32a11e219f7b3d0c399005dc0fbbd3dbe691b31",
+    "0x23e331a81e496890c8f6147a672c6bc45cc2d2dd17547e72713b6ee070b38d41"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-05/DxSale_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-05/DxSale_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "crypto.news",
+      "url": "https://crypto.news/dxsale-exploit-drains-7-3m-in-bnb-through-hidden-contract-backdoor/"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/Tahax1/status/1928169316736651568"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/CoinsultAudits/status/1928203831996297670"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: DxSale - Rekt",
+      "url": "https://rekt.news/dxsale-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0xe211904a8a40f653acd64ffc33a42429ef571c1e2da16976d07ac0f9a0bcc9c1"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xac8f5ed6cac1e6c6d6e96bad34f5211c8ae23cf05866b2531f3f3e63bcd36df9"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/eyeonchains/status/2060083479631843408"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/dxsale-2026-05-28"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/README.md#L2466"
+    }
+  ]
+}

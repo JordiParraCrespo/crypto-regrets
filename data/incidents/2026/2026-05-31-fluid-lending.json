@@ -1,0 +1,84 @@
+{
+  "id": "2026-05-31-fluid-lending",
+  "name": "Fluid Lending",
+  "date": "2026-05-31",
+  "year": 2026,
+  "amountUsd": 215000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "key-compromise",
+  "technique": "Key Leaked via Infrastructure",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "key-compromise",
+    "confidence": 0.97,
+    "top": [
+      {
+        "category": "key-compromise",
+        "p": 0.97
+      },
+      {
+        "category": "frontend-infra",
+        "p": 0.03
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Fluid DeFi protocol’s off-chain Merkle rewards distribution infrastructure was compromised. The attacker used compromised proposer and approver operational keys to submit fake Merkle roots and claim rewards with empty proofs, resulting in approximately $215K loss. Core lending, DEX, and user funds were unaffected. The team revoked the compromised keys and paused claims for upgrades.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Fluid DeFi protocol’s off-chain Merkle rewards distribution infrastructure was compromised. The attacker used compromised proposer and approver operational keys to submit fake Merkle roots and claim rewards with empty proofs, resulting in approximately $215K loss. Core lending, DEX, and user funds were unaffected. The team revoked the compromised keys and paused claims for upgrades."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 31 May 2026, Fluid Lending's off-chain Merkle reward distribution system on Ethereum was compromised when an attacker gained control of both proposer and approver keys. This enabled unauthorized claims of over $215,000 in FLUID, GHO, and cbBTC, which were rapidly swapped and laundered via Tornado Cash. The attacker obtained both proposer and approver keys for Fluid's Merkle reward system, bypassing intended 2-key authorization and enabling fraudulent reward claims."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x5240aca9dd893f0ffbc9797cba23f9cf5eeacfd57350ffc86857f1695f5847e8"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/0xfluid/status/2061124908277538827"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/fluid-lending-2026-05-31"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptotimes.io",
+      "url": "https://www.cryptotimes.io/2026/05/31/fluid-protocol-loses-125k-fluid-51-9k-gho-in-key-compromise-attack/"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptonews.net",
+      "url": "https://cryptonews.net/news/security/32946037/"
+    }
+  ]
+}

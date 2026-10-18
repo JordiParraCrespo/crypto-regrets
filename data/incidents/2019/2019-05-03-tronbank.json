@@ -1,0 +1,86 @@
+{
+  "id": "2019-05-03-tronbank",
+  "name": "TronBank",
+  "date": "2019-05-03",
+  "year": 2019,
+  "amountUsd": 4270000,
+  "returnedUsd": null,
+  "chains": [
+    "Tron"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "rugpull",
+  "technique": "Backdoor Contract",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "rugpull",
+    "confidence": 0.39,
+    "top": [
+      {
+        "category": "rugpull",
+        "p": 0.43
+      },
+      {
+        "category": "access-control",
+        "p": 0.36
+      },
+      {
+        "category": "logic-error",
+        "p": 0.2
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.83
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "At 4:12 AM on May 3, Beijing time, a contract call transferred 26.73 million TRX (valued at RMB 4.27 million) from the TronBank contract, and the contract balance returned to zero. About two hours after the theft, wojak, the owner of THeRTT**, who transferred the 26.73 million TRX address, appeared. According to wojak, he wrote a script to analyze the bytecode of the TRON virtual machine, scan the contracts in batches and initiate transactions to see if there is any way to make money, but accidentally hit a bug in the Tronbank contract. At first he didn't even know that the money came from Tronbank. Some people in the community suggested that wojak ret…",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "At 4:12 AM on May 3, Beijing time, a contract call transferred 26.73 million TRX (valued at RMB 4.27 million) from the TronBank contract, and the contract balance returned to zero. About two hours after the theft, wojak, the owner of THeRTT**, who transferred the 26.73 million TRX address, appeared. According to wojak, he wrote a script to analyze the bytecode of the TRON virtual machine, scan the contracts in batches and initiate transactions to see if there is any way to make money, but accidentally hit a bug in the Tronbank contract. At first he didn't even know that the money came from Tronbank. Some people in the community suggested that wojak ret…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "TronBank's Tron contract drained 26.73 million TRX in early May 2019 after a withdrawal path accepted an exact 0.011911 TRX value and released the full balance. Public records disagree on whether the theft happened on 2019-04-29 or 2019-05-03, but they agree on roughly $4.27 million lost. A hidden withdrawal branch in the deployed TronBank contract released the entire balance when msg.value equaled 0x2E87, or 0.011911 TRX. The public record also says the verified TSC source did not match the mainnet logic, but it does not establish who introduced the mismatch."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "mp.weixin.qq.com",
+      "url": "https://mp.weixin.qq.com/s/aInEaYdS9X7HP7FbzWl6AQ"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/tronbank-2019-05-03"
+    },
+    {
+      "source": "revertiq",
+      "label": "medium.com",
+      "url": "https://medium.com/@tronbanknetwork/tbpro-issue-03052019-report-v0-1-69c09f58076e"
+    },
+    {
+      "source": "revertiq",
+      "label": "hacked.slowmist.io",
+      "url": "https://hacked.slowmist.io/?c=Tron"
+    }
+  ]
+}

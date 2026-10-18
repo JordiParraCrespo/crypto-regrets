@@ -1,0 +1,131 @@
+{
+  "id": "2022-11-07-moocakectx",
+  "name": "MooCAKECTX",
+  "date": "2022-11-07",
+  "year": 2022,
+  "amountUsd": 140000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Incorrect Share Accounting",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.55,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.58
+      },
+      {
+        "category": "logic-error",
+        "p": 0.37
+      },
+      {
+        "category": "access-control",
+        "p": 0.04
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.94
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "FlashLoan Attack. Lost: $140k",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "FlashLoan Attack. Lost: $140k"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The reward calculation on the victim contract is not time-related, and the attacker bypasses the isContract validation by performing an attack in the constructor. Vulnerable code snippet: https://bscscan.com/address/0x489afbaed0ea796712c9a6d366c16ca3876d8184#code https://bscscan.com/address/0xc2562dd7e4caee53df0f9cd7d4dddaa53bcd3d9b#code Attack tx: https://bscscan.com/tx/0x03d363462519029cf9a544d44046cad0c7e64c5fb1f2adf5dd5438a9a0d2ec8e Analysis: https://twitter.com/BeosinAlert/status/1589501207181393920 https://twitter.com/CertiKAlert/status/1589428153591615488"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The MooCakeCTX project suffered a flash loan attack, and the attackers made a profit of $143,921. According to Fairyproof’s analysis, the suspected reason is that the contract reinvested (the earn function was not called) before the user pledged (depositAll function) without settlement of the reward, that is, when the user pledged, the contract did not settle the previous reward and conduct new investment. This will cause users to get the previous pledge dividends immediately after the pledge. After the attacker borrows 50,000 cake tokens using a flash loan in the same block, he pledges it twice in a row, and then withdraws the pledged cake tokens and returns them to make a profit."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On November 6, 2022, a flash-loan attack on the Beefy Moo CAKE CTX vault on BNB Chain allowed an attacker to capture pending reward funds disproportionally by manipulating share price through a permissionless harvest. The exploit netted the attacker approximately $142,000 in CAKE tokens, draining rewards accrued by other depositors. The vault's share pricing relied on a harvestable rewards mechanism that could be triggered by anyone, and used a flawed isContract check to guard harvest(). This allowed a contract called from its constructor to conduct a deposit-harvest-withdraw sequence in a single transaction, capturing all pending rewards in the share…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x03d363462519029cf9a544d44046cad0c7e64c5fb1f2adf5dd5438a9a0d2ec8e",
+    "0x963d1ff2fbb277376fb8a878e0275b63d861c0479a83ed2a3cf57573439cad6a",
+    "0x602c2220e4fa84cae5db564e08569327eeeb5de46d51f8033d2315f62787ba45",
+    "0x44922e9682f461cc669e3e72e4b9ff6202a49016920566625af15519f39ec913",
+    "0x58096e41e89f795bb409eebf9c28a2ee8b7025b6f6823a448421bbab74cca119"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-11/MooCAKECTX_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-11/MooCAKECTX_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BeosinAlert/status/1589501207181393920"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/CertiKAlert/status/1589428153591615488"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0x489afbaed0ea796712c9a6d366c16ca3876d8184#code"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0xc2562dd7e4caee53df0f9cd7d4dddaa53bcd3d9b#code"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x03d363462519029cf9a544d44046cad0c7e64c5fb1f2adf5dd5438a9a0d2ec8e"
+    },
+    {
+      "source": "slowmist",
+      "label": "panewslab.com",
+      "url": "https://www.panewslab.com/zh/sqarticledetails/vb6aozpr.html"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/moocakectx-2022-11-07"
+    },
+    {
+      "source": "revertiq",
+      "label": "crypto.training",
+      "url": "https://crypto.training/hacks/2022-11-moocakectx/"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/moocakectx-hack-2022"
+    }
+  ]
+}

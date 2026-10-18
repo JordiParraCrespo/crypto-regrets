@@ -1,0 +1,124 @@
+{
+  "id": "2022-03-20-umbrella-network",
+  "name": "Umbrella Network",
+  "date": "2022-03-20",
+  "year": 2022,
+  "amountUsd": 700000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum",
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.8,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.81
+      },
+      {
+        "category": "access-control",
+        "p": 0.17
+      },
+      {
+        "category": "logic-error",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.06,
+    "stateActor": 0.02,
+    "hasRootCause": 0.71
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Underflow",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Underflow"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Arithmetic Overflow Vulnerable code snippet: https://etherscan.io/address/0xb3fb1d01b07a706736ca175f827e4f56021b85de#code#F1#L258"
+    },
+    {
+      "source": "SlowMist",
+      "text": "DeFi oracle Umbrella Network’s Ethereum and BNB Chain (formerly BSC) reward pools were hacked, resulting in the hackers earning around $700,000. The hacker was able to succeed because of an unchecked vulnerability in withdraw() , so anyone could withdraw any amount of funds without having any balance."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On March 20, 2022, Umbrella Network’s Polar Stream staking contracts on Ethereum and BNB Chain suffered an arithmetic underflow bug. Attackers withdrew more LP tokens than allowed, draining staked assets and extracting liquidity from both UMB-ETH Uniswap and UMB-BNB PancakeSwap pools. The estimated loss is about $700,000. The Polar Stream staking contracts contained a withdrawal logic that failed to check user balances adequately. This allowed arithmetic underflow during subtraction in the withdraw() function, crediting attackers with an erroneously large LP token balance and enabling them to drain nearly all staked assets."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x33479bcfbc792aa0f8103ab0d7a3784788b5b0e1467c81ffbed1b7682660b4fa",
+    "0x784b68dc7d06ee181f3127d5eb5331850b5e690cc63dd099cd7b8dc863204bf6"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-03/Umbrella_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-03/Umbrella_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "medium.com",
+      "url": "https://medium.com/uno-re/umbrella-network-hacked-700k-lost-97285b69e8c7"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x33479bcfbc792aa0f8103ab0d7a3784788b5b0e1467c81ffbed1b7682660b4fa"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/address/0xb3fb1d01b07a706736ca175f827e4f56021b85de#code#F1#L258"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/UmbNetwork/status/1505529412695076868"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/umbrella-network-2022-03-20"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "coincodecap.com",
+      "url": "https://coincodecap.com/umbrella-network-hacked-reportedly-700k-lost"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/past/2022/README.md#L2807"
+    }
+  ]
+}

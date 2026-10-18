@@ -1,0 +1,60 @@
+{
+  "id": "2026-09-07-unnamed-bsc-dex-router",
+  "name": "Unnamed BSC DEX Router",
+  "date": "2026-09-07",
+  "year": 2026,
+  "amountUsd": 46070,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": null,
+  "category": "arbitrary-call",
+  "technique": "Smart Contract Vulnerability",
+  "classificationNote": "Classified by keyword rules from the SlowMist label and description.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "input-validation",
+    "confidence": 0.61,
+    "top": [
+      {
+        "category": "input-validation",
+        "p": 0.63
+      },
+      {
+        "category": "arbitrary-call",
+        "p": 0.18000000000000002
+      },
+      {
+        "category": "access-control",
+        "p": 0.13
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "An unnamed DEX router on BNB Chain was exploited because uniswapV3SwapCallback did not authenticate a real V3 pool. The attacker used a fake pool, set victims as payer, and drained existing token allowances via transferFrom, stealing about 62.28 WBNB from 29 wallets in one transaction.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "An unnamed DEX router on BNB Chain was exploited because uniswapV3SwapCallback did not authenticate a real V3 pool. The attacker used a fake pool, set victims as payer, and drained existing token allowances via transferFrom, stealing about 62.28 WBNB from 29 wallets in one transaction."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/2097153762746159228"
+    }
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "id": "2026-07-22-veruscoin",
+  "name": "VerusCoin",
+  "date": "2026-07-22",
+  "year": 2026,
+  "amountUsd": 7540000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": null,
+  "category": "bridge-crosschain",
+  "technique": "Bridge Exploit (Notary Compromise)",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.73). Replaced keyword guess \"signature-crypto\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "bridge-crosschain",
+    "confidence": 0.73,
+    "top": [
+      {
+        "category": "bridge-crosschain",
+        "p": 0.75
+      },
+      {
+        "category": "key-compromise",
+        "p": 0.22
+      },
+      {
+        "category": "input-validation",
+        "p": 0.03
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": true,
+  "language": null,
+  "rootCause": "A second exploit drained VerusCoin's Ethereum Bridge for $7.54 million, following a similar $11.6 million hack in May - same bridge, a different gap in the same broken trust boundary. This time there was no statement, no bounty, just silence.",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "A second exploit drained VerusCoin's Ethereum Bridge for $7.54 million, following a similar $11.6 million hack in May - same bridge, a different gap in the same broken trust boundary. This time there was no statement, no bounty, just silence."
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Verus<>Ethereum bridge drained via 11-of-15 Notaries with compromised private keys used to authorize malicious state root; attacker submitted crafted cross-chain proofs with abnormally shallow Merkle paths (3 segments vs 17 legitimate) through submitImports() to release ~1.14K ETH, 71.5 tBTC, 59.4 MKR, USDC/USDT/DAI/EUROC/scrvUSD from bridge reserves; code lacked proof-depth validation and branchType enforcement. Attack Tx: https://etherscan.io/tx/0xa1f1e65c1cea4dba4ae439cd4dcdba6cc2dbda0ed1228e61f29ae9c9324eb099 Source: https://twitter.com/DefimonAlerts/status/2080271385713066152"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xa1f1e65c1cea4dba4ae439cd4dcdba6cc2dbda0ed1228e61f29ae9c9324eb099"
+  ],
+  "poc": null,
+  "sources": [
+    "rekt",
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "rekt",
+      "label": "REKT: VerusCoin - Rekt",
+      "url": "https://rekt.news/veruscoin-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xa1f1e65c1cea4dba4ae439cd4dcdba6cc2dbda0ed1228e61f29ae9c9324eb099"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/DefimonAlerts/status/2080271385713066152"
+    }
+  ]
+}

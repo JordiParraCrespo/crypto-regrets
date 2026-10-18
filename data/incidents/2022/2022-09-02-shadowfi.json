@@ -1,0 +1,99 @@
+{
+  "id": "2022-09-02-shadowfi",
+  "name": "ShadowFi",
+  "date": "2022-09-02",
+  "year": 2022,
+  "amountUsd": 301000,
+  "returnedUsd": null,
+  "chains": [
+    "Binance Smart Chain"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.03,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Access Control. Lost: 1,078 BNB",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Access Control. Lost: 1,078 BNB"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "incorrect access control. Vulnerable code snippet: Due to the public access of burn() method, an attacker burned 10.3M SDF in the pair and then sync'd the price. Then they swap 8.4 SDF for 1078 BNB (~$298.2K) and transfer to tornato"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Privacy project ShadowFi suffered a hack, and its official TokenSDF fell 98.5%. The attacker exploited the vulnerability of SDF to allow anyone to burn the Token, making a profit of about 1078 BNB (about $300,000), and the stolen funds have been transferred to TornadoCash."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 2 September 2022, ShadowFi on BNB Chain was exploited after its SDF token burn function was left accessible to anyone. The attacker burned nearly all SDF in the liquidity pool, inflating SDF price, and drained about 1,078 BNB (over $300,000) via swaps. The ShadowFi SDF token implementation did not restrict the burn function, allowing any user to call it on arbitrary addresses. The attacker burned almost all SDF from the liquidity pool, artificially raising the token price, then swapped a small amount of SDF for a large BNB payout."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xe30dc75253eecec3377e03c532aa41bae1c26909bc8618f21fb83d4330a01018"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-09/Shadowfi_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-09/Shadowfi_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/PeckShieldAlert/status/1565549688509861888"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0xe30dc75253eecec3377e03c532aa41bae1c26909bc8618f21fb83d4330a01018"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/shadowfi-2022-09-02"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/shadowfi-hack-2022"
+    },
+    {
+      "source": "revertiq",
+      "label": "doc.confluxnetwork.org",
+      "url": "https://doc.confluxnetwork.org/docs/general/build/smart-contracts/contract-security/access-control-exploit/"
+    }
+  ]
+}

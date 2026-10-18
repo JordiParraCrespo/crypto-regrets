@@ -1,0 +1,91 @@
+{
+  "id": "2021-04-04-force-dao",
+  "name": "Force DAO",
+  "date": "2021-04-04",
+  "year": 2021,
+  "amountUsd": 367000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Donation Attack",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.52,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.55
+      },
+      {
+        "category": "logic-error",
+        "p": 0.17
+      },
+      {
+        "category": "governance",
+        "p": 0.1
+      }
+    ],
+    "flashLoan": 0.06,
+    "stateActor": 0.02,
+    "hasRootCause": 0.09
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "The DeFi quantitative hedge fund Force DAO posted a blog stating that it was responsible for the previous attack and has implemented procedures to ensure that any such incidents are mitigated in the future. A total of 183 ETH (about 367,000 U.S. dollars) worth of FORCE tokens were exhausted and liquidated in this attack.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The DeFi quantitative hedge fund Force DAO posted a blog stating that it was responsible for the previous attack and has implemented procedures to ensure that any such incidents are mitigated in the future. A total of 183 ETH (about 367,000 U.S. dollars) worth of FORCE tokens were exhausted and liquidated in this attack."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Force DAO's launch-day exploit on April 4, 2021 allowed attackers to mint xFORCE staking tokens without depositing FORCE collateral, draining over $367,000 due to the vault contract's unsafe handling of transfer failures. The xFORCE vault contract failed to check the boolean return value of FORCE token's transferFrom operation. The FORCE token (Aragon MiniMe implementation) returned false instead of reverting on failed transfers. As a result, attackers received xFORCE shares for non-existent deposits."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "blog.forcedao.com",
+      "url": "https://blog.forcedao.com/xforce-exploit-post-mortem-7fa9dcba2ac3"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/force-dao-2021-04-04"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/markets/2021/04/04/defi-hedge-fund-force-dao-attacked-force-token-plunges"
+    },
+    {
+      "source": "revertiq",
+      "label": "quadrigainitiative.com",
+      "url": "https://www.quadrigainitiative.com/hackfraudscam/forcedaohack.php"
+    }
+  ]
+}

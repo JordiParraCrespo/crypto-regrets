@@ -1,0 +1,125 @@
+{
+  "id": "2023-02-27-launchzone",
+  "name": "LaunchZone",
+  "date": "2023-02-27",
+  "year": 2023,
+  "amountUsd": 700000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.96,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.96
+      },
+      {
+        "category": "arbitrary-call",
+        "p": 0.04
+      }
+    ],
+    "flashLoan": 0.12,
+    "stateActor": 0.03,
+    "hasRootCause": 0.72
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Access Control. Lost: ~$320,000",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Access Control. Lost: ~$320,000"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "determined that Contract X mentioned above is the implementation contract of SwapX Proxy (not yet verified and audited), the Proxy will allow users to pass data and call the implementation contract: https://bscscan.com/address/0x0ccee62efec983f3ec4bad3247153009fb483551 Vulnerable code snippet: Attack tx: https://bscscan.com/tx/0xaee8ef10ac816834cd7026ec34f35bdde568191fe2fa67724fcf2739e48c3cae Analysis: https://blog.verichains.io/p/analyzing-the-lz-token-hack https://twitter.com/immunefi/status/1630210901360951296"
+    },
+    {
+      "source": "SlowMist",
+      "text": "80% of the funds in the liquidity pool of the DeFi project LaunchZone were suddenly drained, the price of LZ tokens fell by more than 80% from the previous value of around US$0.15 to US$0.026, and the stolen funds were about US$700,000."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On February 27, 2023, LaunchZone's liquidity pools on BNB Chain were drained for approximately $700,000. The attacker exploited excessive approvals granted by LaunchZone's deployer to the SwapX router, enabling unauthorized swaps from protocol wallets and driving the native token's price down over 80%. LaunchZone's deployer address had previously approved large allowances of LZ and BUSD to an upgradeable SwapX router contract. The router implementation contained a function that could perform transferFrom operations from arbitrary addresses given the right calldata, allowing an attacker to use the approved funds without restriction. Lack of access contr…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xaee8ef10ac816834cd7026ec34f35bdde568191fe2fa67724fcf2739e48c3cae",
+    "0x3ab13a622105fdcf0293ed1a0a7918375e1a05123160efdc5e23ec121ac6d944",
+    "0x444edcefe7de6504ae70deb292c80211dbff0ddb13bf6689cb05d5a068307ca0"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-02/LaunchZone_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-02/LaunchZone_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/immunefi/status/1630210901360951296"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/launchzoneann/status/1631538253424918528"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0x0ccee62efec983f3ec4bad3247153009fb483551"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0xaee8ef10ac816834cd7026ec34f35bdde568191fe2fa67724fcf2739e48c3cae"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "blog.verichains.io",
+      "url": "https://blog.verichains.io/p/analyzing-the-lz-token-hack"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/launchzoneann/status/1630161294836768771"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/launchzone-2023-02-27"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "lancershield.github.io",
+      "url": "https://lancershield.github.io/docs/hacks-db/critical/LaunchZone.html"
+    }
+  ]
+}

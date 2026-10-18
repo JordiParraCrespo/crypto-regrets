@@ -1,0 +1,84 @@
+{
+  "id": "2026-01-27-pgnlz",
+  "name": "PGNLZ",
+  "date": "2026-01-27",
+  "year": 2026,
+  "amountUsd": 100000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Incorrect Share Accounting",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.7,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.72
+      },
+      {
+        "category": "logic-error",
+        "p": 0.28
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "According to BlockSec monitoring, an unknown contract on the BSC network was exploited. The attacker leveraged a design flaw in the “burn pair” mechanism to execute two reverse swaps, resulting in losses of approximately $100,000. The attacker first drained PGNLZ tokens, then triggered PGNLP burns and price manipulation, ultimately siphoning off most of the USDT from the liquidity pool.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "According to BlockSec monitoring, an unknown contract on the BSC network was exploited. The attacker leveraged a design flaw in the “burn pair” mechanism to execute two reverse swaps, resulting in losses of approximately $100,000. The attacker first drained PGNLZ tokens, then triggered PGNLP burns and price manipulation, ultimately siphoning off most of the USDT from the liquidity pool."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "The PGNLZ token exploit on BNB Chain (Jan 27, 2026) allowed an attacker to use a flawed pool-burn mechanism to drain nearly all stablecoins from a PancakeSwap USDT,PGNLZ pool, causing losses around $100,000. The burn function could directly remove tokens from the pool without properly updating LP shares, enabling reserve manipulation and profit through price distortion. A faulty burn mechanism in the PGNLZ token allowed tokens to be burned directly from the liquidity pool's balance. This let an attacker reduce the PGNLZ reserve to near-zero, causing a severe imbalance and manipulated price, which was then used to drain the USDT side of the pool."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xc7270212846136f3d103d1802a30cdaa6f8f280c4bce02240e99806101e08121"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/phalcon_xyz/status/2016154398817505595?s=46"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/pgnlz-2026-01-27"
+    },
+    {
+      "source": "revertiq",
+      "label": "htx.com",
+      "url": "https://www.htx.com/news/a-well-designed-self-detonation-analysis-of-the-pgnlz-attack-8mE3LKZR/"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/CertiKDev/incident-bench-2026q1/blob/main/incidents/2026-01-27-pgnlz-token/ground_truth.md"
+    }
+  ]
+}

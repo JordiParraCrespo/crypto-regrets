@@ -2,7 +2,7 @@
 
 A classified index of crypto hacks, exploits and base-layer failures from 2010 to today. It's built for learning security research: what keeps going wrong, how the patterns changed over time, and what developers should do about it.
 
-- **~1,800 incidents** merged from DefiLlama, DeFiHackLabs and REKT, deduplicated and cross-linked
+- **~3,100 incidents** merged from DefiLlama, DeFiHackLabs (README + explorer), REKT, SlowMist, BlockSec and RevertIQ, deduplicated and cross-linked
 - **17 failure patterns** in 6 layers (smart contract, economic, cross-chain, operational, infrastructure, trust abuse), each with attack anatomy, prevention checklist and OWASP SC Top 10 / SWC mapping
 - **860+ incidents linked to a runnable Foundry PoC** (DeFiHackLabs)
 - **56 client/consensus advisories** (Bitcoin Core, Geth, Cosmos) plus curated base-layer incidents
@@ -26,8 +26,9 @@ A classified index of crypto hacks, exploits and base-layer failures from 2010 t
 
 ```sh
 npm install
-npm run ingest            # rebuild src/data/*.json from snapshots in data/raw
-npm run ingest -- --fetch # refresh snapshots from the network first
+npm run ingest            # rebuild data/incidents* from snapshots in data/raw
+npm run ingest -- --fetch # refresh DefiLlama/DeFiHackLabs/REKT/advisory snapshots first
+npx tsx scripts/fetch-extra.ts  # refresh DeFiHackLabs explorer, BlockSec, SlowMist, RevertIQ snapshots
 npm run dev               # http://localhost:4321
 npm run build && npm run check
 ```
@@ -35,8 +36,11 @@ npm run build && npm run check
 ## How it works
 
 ```
+data/incidents.json   THE dataset: every incident, one per line (also incidents.csv)
+data/incidents/<year>/<id>.json   one file per incident
 data/raw/*            source snapshots (committed so builds are reproducible offline)
-scripts/ingest.ts     parse → match/merge across sources → classify → zod-validate → src/data/*.json
+scripts/fetch-extra.ts  scrapes DeFiHackLabs explorer, BlockSec, SlowMist, RevertIQ → data/raw
+scripts/ingest.ts     parse → match/merge across sources → classify → zod-validate → data/incidents*
 scripts/curated.ts    hand-written landmark + base-layer incidents (post-mortem root causes)
 src/lib/taxonomy.ts   layers, categories, eras ─ the classification is typed (CategoryId is a literal union)
 src/lib/types.ts      zod schemas: Incident, Advisory, SourceAudit (single source of truth for types)
@@ -51,24 +55,37 @@ src/pages/            Astro static pages
 
 ## Model classification with TypeSafe
 
-Every incident also gets a second opinion from [TypeSafe](https://docs.typesafe.ai)'s System One model (Jev): one request per incident, with three typed questions (`scripts/classify-spec.ts`):
+Every incident also gets a second opinion from [TypeSafe](https://docs.typesafe.ai)'s System One model (Jev). One request per incident (`scripts/classify-spec.ts`):
 
-- `category`: a **Choice** over all taxonomy categories, with each category's definition as the option description
-- `flash_loan` and `state_actor`: **Noul** (probability that a statement is true)
+- `category`: a **Choice** over the taxonomy (each option = name + definition)
+- `has_root_cause`, `flash_loan`, `state_actor`: **Noul** (probability a statement is true)
+
+The state is the incident's facts plus its **single** most technical description (curated > DeFiHackLabs > SlowMist > RevertIQ > REKT).
 
 ```sh
-export TYPESAFE_API_KEY=...   # never commit it; in CI use a repository secret
-npm run classify              # only incidents whose text changed since the last run
-npm run ingest                # applies the cached answers
+export TYPESAFE_API_KEY=...        # never commit it; in CI use a repository secret
+npm run classify                   # only incidents whose input changed since the last run
+npm run ingest                     # applies the cached answers
+npx tsx scripts/eval-variants.ts   # re-run the design comparison below
 ```
 
-Answers are cached in `data/typesafe/classifications.json` (keyed by incident id + a hash of the facts sent), so builds and CI never need the key. `scripts/typesafe.ts` is a small typed client: responses are zod-validated, and a Choice answer outside the option set is rejected.
+### How the design was chosen (measured, not guessed)
 
-**Adoption policy** (`applyTypeSafe` in `scripts/ingest.ts`): the model's category is used only where no human label exists (keyword guesses and unclassified incidents) and confidence ≥ 0.5. DefiLlama and curated labels are never overwritten; disagreements are shown on each incident page, listed on `/sources`, and filterable at `/hacks?by=dis`. First run: 84% agreement with DefiLlama's labels, 445 incidents classified by the model, unclassified incidents down from 79 to 26.
+`scripts/eval-variants.ts` asks several question designs **in the same request** (so they see identical input) for a fixed ~250-incident test set stratified by pattern, scored against human labels (DefiLlama + curated):
+
+| Finding | Evidence |
+|---|---|
+| One description beats all of them | Sending every source's account: **−7 points** (Jev degrades on large, overlapping state) |
+| Prompt wording barely matters | Plain definitions vs. "covers / not for / examples" rubrics vs. reversed option order: **78–80% exact, ~87% layer-level**, all within ±2.4 points. Kept the cheapest (rubrics cost 3× tokens) |
+| Confidence is the lever | ≥ 0.9 → **~91% correct**; 0.7–0.9 → 76%; below 0.7 our keyword rules do better |
+| Fix the taxonomy before the prompt | Several "errors" were our mapping contradicting our own definitions (keys stolen from servers filed as infrastructure). Fixing it: **+3 points** |
+
+**Adoption policy** (`applyTypeSafe` in `scripts/ingest.ts`): the model's category is used only where no human label exists (keyword guesses, unclassified), with confidence ≥ 0.7 and `has_root_cause` ≥ 0.5. DefiLlama and curated labels are never overwritten; disagreements are shown per incident, listed on `/sources`, and filterable at `/hacks?by=dis`. The rubrics weren't better for the model but are good for people, so they appear on each pattern page ("How to tell it apart", `src/lib/rubric.ts`).
 
 ## Data licensing & caveats
 
 - DeFiHackLabs: Apache-2.0. DefiLlama: public API, attribution. REKT: we store only titles, slugs, dates, amounts, audit status and short excerpts, and link to the articles.
 - Amounts are nominal USD at incident time as reported by sources; non-USD DeFiHackLabs losses (e.g. "12 ETH") are left blank rather than guessed.
-- Fuzzy matching can miss or wrongly merge a small number of records. Corrections welcome.
+- Fuzzy matching can miss or wrongly merge a small number of records (e.g. the same hack dated weeks apart by different sources). Corrections welcome: edit the incident's file under `data/incidents/` or the matching rules in `scripts/ingest.ts`.
+- SlowMist includes scams and exit scams as well as hacks; RevertIQ summaries appear to be machine-written. Both are quoted briefly and linked.
 - Educational use only.

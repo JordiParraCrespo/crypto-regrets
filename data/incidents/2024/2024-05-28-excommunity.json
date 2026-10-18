@@ -1,0 +1,113 @@
+{
+  "id": "2024-05-28-excommunity",
+  "name": "EXcommunity",
+  "date": "2024-05-28",
+  "year": 2024,
+  "amountUsd": 37000,
+  "returnedUsd": null,
+  "chains": [
+    "BNB"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.95,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.95
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.05
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Business Logic Flaw. Lost: 33BNB",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Business Logic Flaw. Lost: 33BNB"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The EXGIRL token’s _transfer function attempts to determine buy transactions by checking if from == pair && !isRemoveLiquidity(). It calculates the purchaseAmount using the difference between the current BUSD balance in the pair and the stored reserve0. However, this logic can be manipulated by donating BUSD to the pair contract, leading to artificial inflation of the purchasedAmount, which is then used in _distribute()to calculate rewards. Proof: https://bscscan.com/address/0x74f5FE81F67FA30A679d3547f7F9B97a2dd46BA5#readContract Vulnerable code snippet: Here, the purchaseAmount is determined by tokenBal - reserve0 which is actually the change of BUSD (the contract wants to record how much BUSD is used to buy the token) However, when people donate some BUSD to the pair(they could later get it back), this could get the same result. Thus the purchasedAmount could be manipulated via zero-amount transfer. The attacker could trigger a dummy transfer that runs _transfer(), which increments purchasedAmount. Later, the purchasedAmount is used to distribute rewards which could lead to excessive rewarding."
+    },
+    {
+      "source": "SlowMist",
+      "text": "According to monitoring by the SlowMist security team, EXcommunity on BNBChain is suspected of being attacked, resulting in a loss of approximately $37,000."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 28 May 2024, EXcommunity's BNB Chain smart contract was exploited, resulting in theft of approximately $37,000. The attack involved a business logic flaw. Public chain data links a large exploit transaction to the incident, and security teams identified suspicious activity, but the precise technical mechanism has not been officially disclosed. Business logic flaw in the EXcommunity smart contract that enabled value extraction, with the exact vulnerability mechanism remaining undisclosed from public records."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x5446bf2b57749abdab01813a50ce36246177f3437599f3a56bc1554f596b2c3a"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-05/EXcommunity_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-05/EXcommunity_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/1795648617530995130"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/7ec35bee3c086d667f34d87ff850004812905c4d/src/test/2024-05/EXcommunity_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0x74f5FE81F67FA30A679d3547f7F9B97a2dd46BA5#readContract"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/bsc/0x5446bf2b57749abdab01813a50ce36246177f3437599f3a56bc1554f596b2c3a"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/excommunity-2024-05-28"
+    },
+    {
+      "source": "revertiq",
+      "label": "quadrigainitiative.com",
+      "url": "https://quadrigainitiative.com/casestudy/excommunitysmartcontractvulnerability.php"
+    },
+    {
+      "source": "revertiq",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x5446bf2b57749abdab01813a50ce36246177f3437599f3a56bc1554f596b2c3a"
+    }
+  ]
+}

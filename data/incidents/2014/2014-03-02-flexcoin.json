@@ -1,0 +1,72 @@
+{
+  "id": "2014-03-02-flexcoin",
+  "name": "Flexcoin",
+  "date": "2014-03-02",
+  "year": 2014,
+  "amountUsd": 600000,
+  "returnedUsd": null,
+  "chains": [
+    "Bitcoin"
+  ],
+  "targetType": "CEX",
+  "category": "logic-error",
+  "technique": "Withdrawal Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.97,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.97
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.03
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "On March 2, 2014, Flexcoin lost 896 BTC (~$600,000) after attackers exploited a race condition in its internal transfer logic, allowing simultaneous overdraws from user accounts and draining the service's hot wallet. Cold storage balances were unaffected. Flexcoin was forced to shut down and could not recover the stolen bitcoins. A race condition in the code handling internal transfers between Flexcoin user accounts allowed attackers to send thousands of requests at once, overdrawing their balance before the system reconciled accounts. This enabled theft from the hot wallet.",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "On March 2, 2014, Flexcoin lost 896 BTC (~$600,000) after attackers exploited a race condition in its internal transfer logic, allowing simultaneous overdraws from user accounts and draining the service's hot wallet. Cold storage balances were unaffected. Flexcoin was forced to shut down and could not recover the stolen bitcoins. A race condition in the code handling internal transfers between Flexcoin user accounts allowed attackers to send thousands of requests at once, overdrawing their balance before the system reconciled accounts. This enabled theft from the hot wallet."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/flexcoin-2014-03-02"
+    },
+    {
+      "source": "revertiq",
+      "label": "quadrigainitiative.com",
+      "url": "https://www.quadrigainitiative.com/casestudy/flexcoinhotwallethack.php"
+    },
+    {
+      "source": "revertiq",
+      "label": "pcworld.com",
+      "url": "https://www.pcworld.com/article/444202/withdrawal-vulnerabilities-enabled-bitcoin-theft-from-flexcoin-and-poloniex.html"
+    }
+  ]
+}

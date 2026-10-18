@@ -1,0 +1,78 @@
+{
+  "id": "2023-11-11-mahalend",
+  "name": "MahaLend",
+  "date": "2023-11-11",
+  "year": 2023,
+  "amountUsd": 20000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Donate Inflation ExchangeRate & Rounding Error",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 1.00).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.1,
+    "stateActor": 0.02,
+    "hasRootCause": 0.92
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Donate Inflation ExchangeRate & Rounding Error. Lost: ~$20 K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Donate Inflation ExchangeRate & Rounding Error. Lost: ~$20 K"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "- This is a common vulnerability which also affects RDNT and other protocols, which involves precision expansion and rounding. - The rayDiv function is known to have rounding issues, and the attacker could try to manipulate the input b to to cause the rounded value to increase to a similar magnitude. In such case, during operations like withdrawing, the actual value would be much smaller than expected due to rounding issues. Vulnerable code snippet: Attack tx: https://app.blocksec.com/explorer/tx/eth/0x2881e839d4d562fad5356183e4f6a9d427ba6f475614ce8ef64dbfe557a4a2cc Analysis https://x.com/Phalcon_xyz/status/1723223766350832071 https://beosin.com/resources/how-radiant-capital-was-exploited-by-hackers-for-a-45-million heist?lang=zh-HK"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x2881e839d4d562fad5356183e4f6a9d427ba6f475614ce8ef64dbfe557a4a2cc"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-11/MahaLend_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-11/MahaLend_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Phalcon_xyz/status/1723223766350832071"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/eth/0x2881e839d4d562fad5356183e4f6a9d427ba6f475614ce8ef64dbfe557a4a2cc"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/Phalcon_xyz/status/1723223766350832071"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "beosin.com",
+      "url": "https://beosin.com/resources/how-radiant-capital-was-exploited-by-hackers-for-a-45-million"
+    }
+  ]
+}

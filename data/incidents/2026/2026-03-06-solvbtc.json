@@ -1,0 +1,122 @@
+{
+  "id": "2026-03-06-solvbtc",
+  "name": "SolvBTC",
+  "date": "2026-03-06",
+  "year": 2026,
+  "amountUsd": 2700000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Infinite Mint",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.97,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.97
+      },
+      {
+        "category": "logic-error",
+        "p": 0.03
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.12
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "$2.73 million drained from Solv's BRO vault, a callback fired before the books balanced, minting the same deposit twice across 22 loops and turning 135 BRO into 567 million, all inside a single transaction. An unaudited contract with no bug bounty coverage, losses covered by the team, attacker exited to Tornado Cash.",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "$2.73 million drained from Solv's BRO vault, a callback fired before the books balanced, minting the same deposit twice across 22 loops and turning 135 BRO into 567 million, all inside a single transaction. An unaudited contract with no bug bounty coverage, losses covered by the team, attacker exited to Tornado Cash."
+    },
+    {
+      "source": "SlowMist",
+      "text": "The Bitcoin staking protocol Solv Protocol stated on X that its BRO Vault experienced a limited exploit. Fewer than 10 users were affected, with a loss of 38.0474 SolvBTC (approximately $2.7 million). Other vaults and user funds were not impacted, and mitigation measures have already been implemented to prevent similar incidents. The team has committed to fully covering the losses of the affected users. They also told the attacker that a 10% white-hat bounty will be offered if the funds are returned promptly. The attacker can contact the team via direct message or by sending an on-chain message to a designated address."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 6 March 2026, Solv Protocol’s Bitcoin Reserve Offering (BRO) vault on Ethereum Mainnet was exploited through a double-minting reentrancy vulnerability. The attacker drained approximately 38 SolvBTC (~$2.7M), affecting fewer than 10 users. Solv pledged full compensation and offered a 10% bounty for fund recovery. A double-minting flaw in the BRO vault's ERC-3525 deposit logic allowed an attacker to reenter the contract via onERC721Received callbacks, repeatedly minting unbacked BRO shares and redeeming them for SolvBTC."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On March 5, 2026, Solv Protocol’s BitcoinReserveOffering contract was exploited via a callback logic flaw, allowing an attacker to mint BRO tokens twice per deposit by looping through mint and onERC721Received in a single transaction. Around $2.7M was drained by converting illicitly minted tokens into SolvBTC and then ETH. Both the mint() function and the onERC721Received callback issued BRO tokens for the same ERC-3525 position deposit. The callback lacked a reentrancy guard or context check, so a full-balance deposit triggered duplicate minting. The contract failed to enforce the intended single-mint invariant per deposit, allowing compounding inflation and draining vault assets."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x4ad60378dc9a550cd7953613fed8299a570d1ec7d622d60572618a4757db43f2",
+    "0x44e637c7d85190d376a52d89ca75f2d208089bb02b7c4708ad2aaae3a97a958d",
+    "0x1905824c6c83151bb4d627aedeb8f6b49e677d8124239f180a818cc966ca020b",
+    "0xe15cd6908ad15b3399b6fe5cf782621e0ed531d40287e7510b26a16d83cf8e2f",
+    "0x991128a016811f72febaa58afb7472ace55807fcf19c8163994bcfe32ad30bb5"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Solv - Rekt",
+      "url": "https://rekt.news/solv-rekt"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/SolvProtocol/status/2029612210490933697"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/solvbtc-2026-03-06"
+    },
+    {
+      "source": "revertiq",
+      "label": "invezz.com",
+      "url": "https://invezz.com/news/2026/03/06/solv-protocol-vault-exploit-drains-2-7m-worth-of-solvbtc/"
+    },
+    {
+      "source": "revertiq",
+      "label": "coincentral.com",
+      "url": "https://coincentral.com/solv-protocol-seeks-fund-return-after-2-7m-crypto-exploit/"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/solv-protocol-2-5m-2026-03-06"
+    },
+    {
+      "source": "revertiq",
+      "label": "quillaudits.com",
+      "url": "https://www.quillaudits.com/blog/hack-analysis/solv-protocol-exploit"
+    },
+    {
+      "source": "revertiq",
+      "label": "darknavy.org",
+      "url": "https://www.darknavy.org/web3/exploits/solv-bro-double-mint/"
+    },
+    {
+      "source": "revertiq",
+      "label": "vibraniumaudits.com",
+      "url": "https://www.vibraniumaudits.com/post/smart-contract-double-mint-exploit-drains-2-73m-from-solv-protocol"
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "id": "2026-06-17-lbp",
+  "name": "LBP",
+  "date": "2026-06-17",
+  "year": 2026,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "LBP balanceOf reward accounting",
+  "classificationNote": "Classified by keyword rules from the DeFiHackLabs root-cause title.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.69,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.71
+      },
+      {
+        "category": "logic-error",
+        "p": 0.28
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.92,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "LBP balanceOf reward accounting. Lost: 610.56 BNB",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "LBP balanceOf reward accounting. Lost: 610.56 BNB"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "LBP (Little Boy Plus) tracks an internal rawBalanceOf separate from the reward-inflated value returned by balanceOf. Its hashrate/reward accounting (LBPHashrate, PolVault) credits extra hLBP on certain transfer hooks, so an account's reported balanceOf can exceed its real rawBalanceOf holdings. Funded by a Moolah USDT flash loan and a Pancake Vault lock/take for transient USDT, the attacker stages LBP/USDT LP liquidity, calls polVault.flushPol() and hashrate.bindReferral, then forces the reward hooks via zero-value transfers (lbp.transfer(this,0), hashrate.transferFrom(LBP_PAIR, dead, 0)). This inflates the attacker's balanceOf(this) reward credit, which is then dumped: _sellAllVisibleLbpForUsdt reads the full inflated balanceOf, transfers it into the pair, and swaps the surplus (rawBalanceOf(pair) - reserveLbp) for USDT. The USDT is converted to WBNB, unwrapped to BNB, and forwarded as ~610 BNB profit after a 5 BNB builder payment. Vulnerable code snippet: Attack Tx: https://bscscan.com/tx/0x55856d9fda4c5be5193561c7d775e823c3d6e499da44aab9da963daf61c50b0c Analysis: DefimonAlerts"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x55856d9fda4c5be5193561c7d775e823c3d6e499da44aab9da963daf61c50b0c"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-06/LBP_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-06/LBP_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/DefimonAlerts/status/2067329401977532429"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x55856d9fda4c5be5193561c7d775e823c3d6e499da44aab9da963daf61c50b0c"
+    }
+  ]
+}

@@ -1,0 +1,146 @@
+{
+  "id": "2026-02-01-crosscurve",
+  "name": "CrossCurve",
+  "date": "2026-02-01",
+  "year": 2026,
+  "amountUsd": 3000000,
+  "returnedUsd": null,
+  "chains": [
+    "Blast",
+    "Arbitrum",
+    "Base",
+    "Celo",
+    "Fraxtal",
+    "Ethereum",
+    "Kava",
+    "Optimism",
+    "Mantle"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "bridge-crosschain",
+  "technique": "Cross-Chain Message Spoofing",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "bridge-crosschain",
+    "confidence": 0.98,
+    "top": [
+      {
+        "category": "bridge-crosschain",
+        "p": 0.98
+      },
+      {
+        "category": "access-control",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": true,
+  "language": null,
+  "rootCause": "The cross-chain liquidity protocol CrossCurve (formerly EYWA) has confirmed that its cross-chain bridge protocol is under attack, due to a vulnerability in its smart contract that was exploited, resulting in the theft of approximately USD 3 million across multiple networks. Blockchain security firm Defimon Alerts identified that the attack vector exploited a gateway verification bypass vulnerability in CrossCurve’s ReceiverAxelar contract. Analysis shows that anyone could use a forged cross-chain message to call the contract’s expressExecute function, thereby bypassing the intended gateway verification and triggering unauthorized token unlocks on the protocol’s PortalV2 contract.…",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The cross-chain liquidity protocol CrossCurve (formerly EYWA) has confirmed that its cross-chain bridge protocol is under attack, due to a vulnerability in its smart contract that was exploited, resulting in the theft of approximately USD 3 million across multiple networks. Blockchain security firm Defimon Alerts identified that the attack vector exploited a gateway verification bypass vulnerability in CrossCurve’s ReceiverAxelar contract. Analysis shows that anyone could use a forged cross-chain message to call the contract’s expressExecute function, thereby bypassing the intended gateway verification and triggering unauthorized token unlocks on the protocol’s PortalV2 contract.…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On February 1, 2026, CrossCurve suffered an exploit that abused the ReceiverAxelar’s expressExecute cross-chain message path, enabling an attacker to mint nearly one billion EYWA tokens (~$1.4M) to their own wallet. The root cause was a misconfigured confirmation threshold and inadequate authentication, allowing unverified messages to trigger token transfers on Ethereum and Arbitrum. The expressExecute function in ReceiverAxelar skipped gateway signature validation and only checked whether the provided commandId was new. Confirmation threshold was set to 1, disabling multi-guardian checks, so an attacker could supply a forged message and execute arbitr…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On February 1, 2026, CrossCurve suffered an exploit on Arbitrum and other chains when an attacker spoofed cross-chain Axelar messages to drain assets from the bridge vault. The vulnerable ReceiverAxelar contract allowed arbitrary message execution with minimal checks. Estimated losses range from $1.4M to $3M, mainly in EYWA tokens and stablecoins. The expressExecute function in CrossCurve's ReceiverAxelar contract was publicly callable and lacked validation of cross-chain message authenticity. It relied only on a commandId uniqueness check and a single-party confirmation, allowing anyone to execute arbitrary payloads by crafting spoofed messages."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xb962f53bb2d0074c5dd278b3fc4c17b8b92e2157d1b8e6972ea07308c4e3ca13",
+    "0x803e90bb19e3bbdda597c154a36a2146b63f7a3ee0d332297890921131c09a6b",
+    "0xaeee0cbece2dc524a7e6abb734f2db484f5f937236e752589a2c972385d6d51d",
+    "0xb07fcd0e6ccd747456b3c32d88ba39792d1d38cfc95eecc54c6b702fd8ebfafc",
+    "0xe20fef0fedfefd9ab32596c5ea5304025bea1beb1c7957e15281229c2b03d755",
+    "0x57aaf3229990530e292de2a4a590815cca96379b1f119b40e026e572393bcf81",
+    "0x32eb75c8063bb64c81175b3b19e4077dd00477aa49e7bf9ee7975f272f901fd4",
+    "0x364a67dcadf922036d0355a46ef3eb36d7366ca28a9eac7184437a1e68fc678b",
+    "0x066e98a77f89b029a1f8e4571624fb1955bc55cf4944a8f13630bc0547c53d87",
+    "0x138cfe15706235875cde832f33e31d18a50dbef50b8a333897dd3bcebaa3e38b",
+    "0xe143ad4470dcf20d644927784cfa59b2357986e69d32805b1a6a670bc1665d0f",
+    "0x00979aa521c77bdcbc06d3bb2ac3085fa9430429da193a070c88fd4ab0e37c50",
+    "0xd912b812446d69611f4adaa84852c2c320ffe268fb8b748af397c1bd435ec5a4",
+    "0x046a9fd0839e332cfe8b6cc51708a32cc903376389742a86ce8f5f590c884750",
+    "0x6b8a31171c081e079f24b1c72f97df3278c51fa05b8a390e26ba1da618b109a1",
+    "0x32972f9b6bd6d794d90b0b492b3e6f71f950245ab3949e2d313088829c4d4917",
+    "0x37d9b911ef710be851a2e08e1cfc61c2544db0f208faeade29ee98cc7506ccc2",
+    "0x456709264a4ef8e254b30681767b90be8e5e1af8d61a1790bc62165499b201cd",
+    "0x518d00292870cdcb2e4ae66347ef734ad22848bc95635e1765c8f9428a708ae3",
+    "0x53050b4bec3eb540741720e59f2b028d68179c36a56dabc005b2736f6152e7c6"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xb962f53bb2d0074c5dd278b3fc4c17b8b92e2157d1b8e6972ea07308c4e3ca13"
+    },
+    {
+      "source": "blocksec",
+      "label": "x.com",
+      "url": "https://x.com/Phalcon_xyz/status/2018167679300104449"
+    },
+    {
+      "source": "slowmist",
+      "label": "theblock.co",
+      "url": "https://www.theblock.co/post/387939/crosscurve-bridge-exploited-for-approximately-3-million-across-multiple-chains-via-spoofed-messages"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/cross-curve-2026-02-01"
+    },
+    {
+      "source": "revertiq",
+      "label": "quillaudits.com",
+      "url": "https://www.quillaudits.com/blog/hack-analysis/cross-curve-exploit"
+    },
+    {
+      "source": "revertiq",
+      "label": "imtr.net",
+      "url": "https://imtr.net/article/cross-curve-14m-implementation-bug-explained-7aac"
+    },
+    {
+      "source": "revertiq",
+      "label": "raw.githubusercontent.com",
+      "url": "https://raw.githubusercontent.com/CertiKDev/incident-bench-2026q1/main/incidents/2026-02-01-crosscurve/ground_truth.md"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/cross-curve-arb-2026-02-01"
+    },
+    {
+      "source": "revertiq",
+      "label": "yfarmx.com",
+      "url": "https://yfarmx.com/tools/exploit-tracker/exploit-0067/"
+    },
+    {
+      "source": "revertiq",
+      "label": "deficoverage.org",
+      "url": "https://deficoverage.org/2026/02/07/crosscurve-fi-cross-chain-exploit-1-44m-drain-via-spoofed-messages-and-defi-coverage-options"
+    }
+  ]
+}

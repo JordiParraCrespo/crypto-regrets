@@ -1,0 +1,76 @@
+{
+  "id": "2025-12-11-0g-labs",
+  "name": "0G Labs",
+  "date": "2025-12-11",
+  "year": 2025,
+  "amountUsd": 516000,
+  "returnedUsd": null,
+  "chains": [
+    "0G"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Withdrawal Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "key-compromise",
+    "confidence": 0.87,
+    "top": [
+      {
+        "category": "key-compromise",
+        "p": 0.88
+      },
+      {
+        "category": "logic-error",
+        "p": 0.07
+      },
+      {
+        "category": "access-control",
+        "p": 0.04
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.03,
+    "hasRootCause": 0.7
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "0G reported a rewards-contract drain on December 11, 2025 involving its emergency withdrawal capability. The project-attributed account describes a cloud compromise exposing a locally stored key and reports losses of 520,010 0G, 9.93 ETH, and 4,200 USDT. The project-attributed account describes exposure of privileged signing authority through compromised cloud infrastructure, followed by emergency withdrawal from a rewards contract. The contract's exact authorization implementation and the withdrawal transactions remain unresolved.",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "0G reported a rewards-contract drain on December 11, 2025 involving its emergency withdrawal capability. The project-attributed account describes a cloud compromise exposing a locally stored key and reports losses of 520,010 0G, 9.93 ETH, and 4,200 USDT. The project-attributed account describes exposure of privileged signing authority through compromised cloud infrastructure, followed by emergency withdrawal from a rewards contract. The contract's exact authorization implementation and the withdrawal transactions remain unresolved."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/0g-labs-2025-12-11"
+    },
+    {
+      "source": "revertiq",
+      "label": "x.com",
+      "url": "https://x.com/0G_Foundation/status/1999781517283737670"
+    },
+    {
+      "source": "revertiq",
+      "label": "odaily.news",
+      "url": "https://www.odaily.news/en/newsflash/460565"
+    }
+  ]
+}

@@ -1,0 +1,146 @@
+{
+  "id": "2024-02-28-seneca",
+  "name": "Seneca",
+  "date": "2024-02-28",
+  "year": 2024,
+  "amountUsd": 6400000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum",
+    "Arbitrum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "arbitrary-call",
+  "technique": "Token Approval Abuse",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "arbitrary-call",
+    "confidence": 0.97,
+    "top": [
+      {
+        "category": "arbitrary-call",
+        "p": 0.97
+      },
+      {
+        "category": "access-control",
+        "p": 0.02
+      },
+      {
+        "category": "input-validation",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.91
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Arbitrary External Call Vulnerability. Lost: ~6M",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Arbitrary External Call Vulnerability. Lost: ~6M"
+    },
+    {
+      "source": "REKT",
+      "text": "Over $6.4 million was stolen from users wallets on February 28, thanks to the bad tao of Seneca. Roughly 80% of the funds were returned within a day. Clearly Seneca knew there were issues, but chose the reckless route."
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The performoperations() in Seneca which uses the parameters passed in to choose to execute different function logic. When the user specifies action as 30, the function will choose to call the _call(). The attacker directly calls the performOperations function and constructs the following parameters. Actions is passed in the above 30, and the _call function is called. Vulnerable code snippet: Attack tx: https://phalcon.blocksec.com/explorer/tx/eth/0x23fcf9d4517f7cc39815b09b0a80c023ab2c8196c826c93b4100f2e26b701286 Analysis: https://twitter.com/Phalcon_xyz/status/1763045563040411876"
+    },
+    {
+      "source": "SlowMist",
+      "text": "On February 28th, a vulnerability was discovered in the contract of Seneca, an omnichain CDP protocol on the Ethereum network. Hackers exploited constructed calldata parameters to call transferfrom, transferring tokens authorized to the project contract to their address, ultimately exchanging them for ETH. Seneca was exploited by hackers for over 1900 ETH, valued at approximately $6.5 million. On February 29th, the hacker address of SenecaUSD returned 1537 ETH (approximately $5.3 million) to the deployer address of Seneca."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On February 28, 2024, Seneca Protocol suffered an exploit on Ethereum and Arbitrum. Attackers abused a Chamber contract's arbitrary external call capability, enabling unauthorized ERC20 transfers from user wallets and draining over $6.4M. Most funds were later returned following negotiations. The Chamber contract allowed arbitrary external calls via performOperations, letting attackers execute token transfers from any address the contract had approval for without verification."
+    }
+  ],
+  "audit": "Halborn",
+  "txHashes": [
+    "0x23fcf9d4517f7cc39815b09b0a80c023ab2c8196c826c93b4100f2e26b701286",
+    "0x9f3712672be7a120757d42fbe15ceefe9578914946bacbd0f3531e7fb7305576",
+    "0x5e9c14e30ff1d56da37c17d84378650881095bda2802f0a0bff90fd3a8b11e31",
+    "0x3fe4b1486f2a800aa39131b359c0fc4fda0f4aaf621710c6b6754b4107a00fd1",
+    "0x6e1baa7ade5bbbabd1cefeb807327aec6082b8b467b9ff74772959c27520c743",
+    "0xee02781eda4108f8fb3cca8355218961ad3a3e769b3de8a869acb8ed1654a67e",
+    "0x6da8f7cb19d6e56cd9b74298677986b3b55cb9db902175c2627b7d57a85e820d",
+    "0xb82239e256404e94edd650c68cea92e146c2f361a09eea11b02624eeaffbaae1"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-02/Seneca_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-02/Seneca_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Phalcon_xyz/status/1763045563040411876"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Seneca Protocol - REKT",
+      "url": "https://rekt.news/seneca-protocol-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "phalcon.blocksec.com",
+      "url": "https://phalcon.blocksec.com/explorer/tx/eth/0x23fcf9d4517f7cc39815b09b0a80c023ab2c8196c826c93b4100f2e26b701286"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x9f3712672be7a120757d42fbe15ceefe9578914946bacbd0f3531e7fb7305576"
+    },
+    {
+      "source": "blocksec",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs?tab=readme-ov-file#20240228-seneca---arbitrary-external-call-vulnerability"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/SlowMist_Team/status/1762865505042645010"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/seneca-2024-02-28"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/de-fi-rekt-report-a-quarter-in-review-almost-415-million-lost-in-q1-2024"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/defi-rekt-report-over-148-million-lost-in-february-2024"
+    },
+    {
+      "source": "revertiq",
+      "label": "cyfrin.io",
+      "url": "https://www.cyfrin.io/blog/seneca-attack-hack-analysis-proof-of-concept"
+    }
+  ]
+}

@@ -1,0 +1,109 @@
+{
+  "id": "2024-05-31-mixedswaprouter",
+  "name": "MixedSwapRouter",
+  "date": "2024-05-31",
+  "year": 2024,
+  "amountUsd": 16000,
+  "returnedUsd": null,
+  "chains": [
+    "Arbitrum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "arbitrary-call",
+  "technique": "Arbitrary External Call",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "arbitrary-call",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "arbitrary-call",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.09,
+    "stateActor": 0.02,
+    "hasRootCause": 0.72
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Arbitrary Call. Lost: >10700USD(WINR token)",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Arbitrary Call. Lost: >10700USD(WINR token)"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Arbitrary Call, controllable data.pool. Vulnerable code snippet: https://arbiscan.io/address/0x58637aaac44e2a2f190d9e1976e236d86d691542 Attack tx: https://arbiscan.io/tx/0xf57f041cb6d8a10e11edab50b84e49b59ff834c7d114d1e049cedd654c36194d https://app.blocksec.com/explorer/tx/arbitrum/0xf57f041cb6d8a10e11edab50b84e49b59ff834c7d114d1e049cedd654c36194d Analysis:"
+    },
+    {
+      "source": "SlowMist",
+      "text": "According to monitoring by the SlowMist security team, the MixedSwapRouter on Arbitrum was attacked, resulting in a loss of approximately 293,000 WINR, valued at around $16,000."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On May 31, 2024, the MixedSwapRouter contract on Arbitrum One was exploited via an arbitrary external call vulnerability. The attacker was able to drain approximately 293,000 WINR tokens (valued between $11,000 and $16,000), likely from victim users who had previously granted token allowances to the router contract. The root cause was an arbitrary external call vulnerability in the MixedSwapRouter contract, which allowed an attacker to invoke token transfer operations using the allowances of any user who had previously approved the contract. Insufficient restrictions on the external call context enabled unauthorized transfers of user funds."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xf57f041cb6d8a10e11edab50b84e49b59ff834c7d114d1e049cedd654c36194d"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-05/MixedSwapRouter_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-05/MixedSwapRouter_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/ChainAegis/status/1796484286738227579"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "arbiscan.io",
+      "url": "https://arbiscan.io/address/0x58637aaac44e2a2f190d9e1976e236d86d691542"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "arbiscan.io",
+      "url": "https://arbiscan.io/tx/0xf57f041cb6d8a10e11edab50b84e49b59ff834c7d114d1e049cedd654c36194d"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/arbitrum/0xf57f041cb6d8a10e11edab50b84e49b59ff834c7d114d1e049cedd654c36194d"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/1796469028858573023"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/mixedswaprouter-2024-05-31"
+    },
+    {
+      "source": "revertiq",
+      "label": "quadrigainitiative.com",
+      "url": "https://quadrigainitiative.com/casestudy/mixedswaproutertokentransfervulnerability.php"
+    }
+  ]
+}

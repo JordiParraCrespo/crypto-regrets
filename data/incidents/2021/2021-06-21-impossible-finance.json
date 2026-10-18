@@ -1,0 +1,93 @@
+{
+  "id": "2021-06-21-impossible-finance",
+  "name": "Impossible Finance",
+  "date": "2021-06-21",
+  "year": 2021,
+  "amountUsd": 500000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.73,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.75
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.22
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.82,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Impossible Finance, the DeFi protocol on the BSC chain, was attacked by a lightning loan, and the attacker made a profit of 1,510.75 WBNB (a total of US$497,000). On June 25, the attackers refunded approximately $252,000. The core of this attack is that the K value check is not performed in the cheapSwap function, which causes the attacker to obtain additional tokens by performing multiple exchange operations in one exchange process.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Impossible Finance, the DeFi protocol on the BSC chain, was attacked by a lightning loan, and the attacker made a profit of 1,510.75 WBNB (a total of US$497,000). On June 25, the attackers refunded approximately $252,000. The core of this attack is that the K value check is not performed in the cheapSwap function, which causes the attacker to obtain additional tokens by performing multiple exchange operations in one exchange process."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On June 21, 2021, Impossible Finance on BNB Chain was exploited via a flash loan and swap mechanism bug, allowing an attacker to drain LP funds by manipulating two router swap paths with a fake token. The attacker extracted over $500,000 across IF, BUSD, and WBNB pools within a single transaction before the router updated price and reserves. ImpossibleSwap's router logic failed to enforce reserve/K-value checks between consecutive swaps when a malicious token invoked a swap and a cheapSwap sequentially in the same transaction. This let price-impact calculations use stale reserves, enabling pooled asset drainage before the mechanism corrected the state."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x0220704a99ddfb982d26e65cc337f26b77dc057930b7aa1d848cc48ec77984a8"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "decrypt.co",
+      "url": "https://decrypt.co/74105/binance-smart-chain-defi-project-impossible-finance-hacked"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/impossible-finance-2021-06-21"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "blockcast.cc",
+      "url": "https://blockcast.cc/slow-mist-analyze-the-details-of-the-lightning-loan-attack-on-impossible-finance-the-bsc-defi-project/"
+    },
+    {
+      "source": "revertiq",
+      "label": "quadrigainitiative.com",
+      "url": "https://quadrigainitiative.com/casestudy/impossiblefinancefaketokendrain.php"
+    }
+  ]
+}

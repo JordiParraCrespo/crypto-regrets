@@ -1,0 +1,98 @@
+{
+  "id": "2026-08-23-arrakis-v1",
+  "name": "Arrakis V1",
+  "date": "2026-08-23",
+  "year": 2026,
+  "amountUsd": 7100,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.97,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.97
+      },
+      {
+        "category": "logic-error",
+        "p": 0.02
+      },
+      {
+        "category": "market-manipulation",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.1,
+    "stateActor": 0.03,
+    "hasRootCause": 0.83
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Uniswap V3 spot-price manipulation of vault mint/burn. Lost: ~2.9414 ETH net attacker surplus (Arrakis V1 / G-UNI ENS-WETH vault)",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Uniswap V3 spot-price manipulation of vault mint/burn. Lost: ~2.9414 ETH net attacker surplus (Arrakis V1 / G-UNI ENS-WETH vault)"
+    },
+    {
+      "source": "SlowMist",
+      "text": "On August 23, 2026, the Arrakis V1 / G-UNI ENS–WETH liquidity-manager vault (0x7c687f775a3b73bbab0e15832f24caab5d53bdde) was drained via Uniswap V3 spot-price manipulation. The attacker flash-loaned 1,800 WETH from Morpho Blue, skewed the pool’s instantaneous spot price, minted vault shares at the distorted valuation, restored the price, and burned the shares for a richer token mix, netting ≈2.94 WETH. Root cause: mint()/burn() valued the Uniswap V3 position off pool.slot0() with no TWAP or deviation guard (TWAP only protected rebalance())."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Arrakis V1's ENS,WETH Uniswap V3 vault on Ethereum was exploited on 23 August 2026 via a spot price manipulation, allowing an attacker to profit 2.94 WETH (~$7,100) in a single flash-loan-enabled transaction by distorting vault share pricing. The ArrakisVaultV1 contract's mint() and burn() functions valued deposits and withdrawals using the live Uniswap V3 slot0() spot price. No time-weighted average price (TWAP) or deviation checks protected these operations, enabling an attacker to move the pool price within one transaction and capture manipulated value."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x6ae3af4b2f25a56594de99cfb31369150dd9ac059c49efe04b9e3e0163dbc672"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-08/ArrakisGUNI_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-08/ArrakisGUNI_exp.sol"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/exvulsec/status/2091521539585999337"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/arrakis-v1-2026-08-23"
+    },
+    {
+      "source": "revertiq",
+      "label": "crypto.training",
+      "url": "https://crypto.training/hacks/2026-08-arrakisguni/"
+    },
+    {
+      "source": "revertiq",
+      "label": "publicaml.org",
+      "url": "https://publicaml.org/news/2026-08-23-arrakis-v1/"
+    }
+  ]
+}

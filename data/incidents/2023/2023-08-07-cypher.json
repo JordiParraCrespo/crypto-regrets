@@ -1,0 +1,86 @@
+{
+  "id": "2023-08-07-cypher",
+  "name": "Cypher",
+  "date": "2023-08-07",
+  "year": 2023,
+  "amountUsd": 1035000,
+  "returnedUsd": null,
+  "chains": [
+    "Solana"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.93,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.93
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.03
+      },
+      {
+        "category": "access-control",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.93
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "​On August 7, 2023, Cypher, a Solana-based decentralized exchange, tweeted that it had been attacked. The attacker exploited a bug related to the mechanism involving segregated margin sub-accounts to attack Cypher's main contract, causing it to eventually withdraw more funds than initially deposited, leading to a bad debt in the system. The attacker stole 15,452 SOL, 149,205 USDC, and other tokens for a loss of over $1 million. The attacker’s address is suspected to be HHm4wK91XvL3hhEC4hQHo544rtvkaKohQPc59TvZeC71. On August 18, Cypher stated that approximately $600,000 has been frozen on various centralized exchanges (CEXs), and the return of these fun…",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "​On August 7, 2023, Cypher, a Solana-based decentralized exchange, tweeted that it had been attacked. The attacker exploited a bug related to the mechanism involving segregated margin sub-accounts to attack Cypher's main contract, causing it to eventually withdraw more funds than initially deposited, leading to a bad debt in the system. The attacker stole 15,452 SOL, 149,205 USDC, and other tokens for a loss of over $1 million. The attacker’s address is suspected to be HHm4wK91XvL3hhEC4hQHo544rtvkaKohQPc59TvZeC71. On August 18, Cypher stated that approximately $600,000 has been frozen on various centralized exchanges (CEXs), and the return of these fun…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Cypher Protocol on Solana was exploited on 2023-08-07, with public loss estimates around $1.0m to $1.035m. The public technical explanation points to stale sub-account state in the borrow path, combined with borrow checks that accepted inactive oracle conditions. A stale primary-account cache after a sub-account switched to isolated mode, combined with borrow checks that still accepted inactive oracle conditions."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/cypher_protocol/status/1688641036476731393"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/cypher-2023-08-07"
+    },
+    {
+      "source": "revertiq",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/business/2023/08/07/solana-based-cypher-protocol-experiences-exploit-freezes-smart-contract"
+    },
+    {
+      "source": "revertiq",
+      "label": "crypto.news",
+      "url": "https://crypto.news/cypher-protocol-recovers-nearly-50-of-stolen-assets/"
+    }
+  ]
+}

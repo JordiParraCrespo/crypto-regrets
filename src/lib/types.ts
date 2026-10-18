@@ -2,7 +2,7 @@ import { z } from 'zod';
 import { CATEGORY_IDS, type CategoryId } from './taxonomy';
 
 /** Source datasets an incident record can be attributed to. */
-export const SOURCE_IDS = ['defillama', 'defihacklabs', 'rekt', 'curated'] as const;
+export const SOURCE_IDS = ['defillama', 'defihacklabs', 'rekt', 'slowmist', 'blocksec', 'revertiq', 'curated'] as const;
 export type SourceId = (typeof SOURCE_IDS)[number];
 
 export const CLASSIFIERS = ['defillama', 'keywords', 'typesafe', 'curated', 'none'] as const;
@@ -43,14 +43,20 @@ export const incidentSchema = z.object({
       flashLoan: z.number().min(0).max(1),
       /** P(attributed to a state-sponsored group, e.g. Lazarus). */
       stateActor: z.number().min(0).max(1),
+      /** P(the descriptions explain how the loss happened). Low = the model had too little to go on. */
+      hasRootCause: z.number().min(0).max(1),
     })
     .nullable(),
   bridge: z.boolean(),
   language: z.string().nullable(),
-  /** Technical root-cause narrative (DeFiHackLabs, REKT excerpt, or curated). */
+  /** Best single root-cause narrative (curated > DeFiHackLabs > other sources). */
   rootCause: z.string().nullable(),
+  /** Every source's account of the incident, side by side (what the classifier sees). */
+  descriptions: z.array(z.object({ source: z.string(), text: z.string() })),
   /** Audit status as reported by REKT ("Unaudited", "Peckshield", ...). */
   audit: z.string().nullable(),
+  /** Attack transaction hashes (DeFiHackLabs explorer, BlockSec). */
+  txHashes: z.array(z.string()),
   /** DeFiHackLabs Foundry proof-of-concept, when one exists. */
   poc: z.string().url().nullable(),
   sources: z.array(z.enum(SOURCE_IDS)),

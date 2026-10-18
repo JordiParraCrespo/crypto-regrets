@@ -1,0 +1,78 @@
+{
+  "id": "2022-05-12-venus-protocol",
+  "name": "Venus Protocol",
+  "date": "2022-05-12",
+  "year": 2022,
+  "amountUsd": 11200000,
+  "returnedUsd": null,
+  "chains": [
+    "Binance Smart Chain"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Stale Oracle Price",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.94
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Venus Protocol issued a statement saying that Chainlink’s suspension of LUNA price updates after extreme volatility in LUNA prices caused the price of LUNA on the Venus lending market to remain at $0.107, while the market price of LUNA had dropped to $0.01 at that time. After the price update was suspended, two addresses lent about $13.5 million in assets by staking 230 million LUNA (worth about $2.3 million at the time), resulting in a loss of about $11.2 million to the protocol. At present, the LUNA lending market has been suspended, and this loss will be made up by the risk fund.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Venus Protocol issued a statement saying that Chainlink’s suspension of LUNA price updates after extreme volatility in LUNA prices caused the price of LUNA on the Venus lending market to remain at $0.107, while the market price of LUNA had dropped to $0.01 at that time. After the price update was suspended, two addresses lent about $13.5 million in assets by staking 230 million LUNA (worth about $2.3 million at the time), resulting in a loss of about $11.2 million to the protocol. At present, the LUNA lending market has been suspended, and this loss will be made up by the risk fund."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On May 12, 2022, Venus Protocol on BNB Chain was exploited due to a paused Chainlink oracle for LUNA/USD. The protocol continued to accept LUNA collateral at a stale, inflated price, allowing attackers to borrow assets far above their actual collateral value, resulting in losses estimated at $11 million. Venus Protocol relied on a Chainlink oracle for LUNA, which paused updates amid extreme volatility. The protocol failed to halt deposits and borrowing against LUNA, continuing to value collateral at an artificially high, stale price. This lack of automated rejection or market suspension allowed attackers to deposit undervalued LUNA and borrow assets far in excess of its real market worth."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "blog.venus.io",
+      "url": "https://blog.venus.io/venus-protocol-official-statement-regarding-luna-6eb45c3cb058"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/venus-protocol-2022-05-12"
+    },
+    {
+      "source": "revertiq",
+      "label": "therecord.media",
+      "url": "https://www.therecord.media/collapse-of-luna-cryptocurrency-leads-to-11-million-exploit-on-venus-protocol"
+    },
+    {
+      "source": "revertiq",
+      "label": "beincrypto.com",
+      "url": "https://beincrypto.com/venus-protocol-loses-11m-chainlink-suspension-luna-price-oracle"
+    }
+  ]
+}

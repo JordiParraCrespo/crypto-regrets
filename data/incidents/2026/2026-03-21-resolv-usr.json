@@ -1,0 +1,140 @@
+{
+  "id": "2026-03-21-resolv-usr",
+  "name": "Resolv USR",
+  "date": "2026-03-21",
+  "year": 2026,
+  "amountUsd": 24500000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "key-compromise",
+  "technique": "Key Leaked via Infrastructure",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "key-compromise",
+    "confidence": 0.83,
+    "top": [
+      {
+        "category": "key-compromise",
+        "p": 0.84
+      },
+      {
+        "category": "access-control",
+        "p": 0.08
+      },
+      {
+        "category": "logic-error",
+        "p": 0.07
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "On March 22, Resolv Labs lost $25 million when a compromised private key handed an attacker unlimited USR minting power. No oracle check. No mint cap. 80 million tokens printed. Hardcoded oracles and automated liquidity kept feeding broken markets long after the damage was done.",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "On March 22, Resolv Labs lost $25 million when a compromised private key handed an attacker unlimited USR minting power. No oracle check. No mint cap. 80 million tokens printed. Hardcoded oracles and automated liquidity kept feeding broken markets long after the damage was done."
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The Resolv minting contract permitted a single externally owned account (SERVICE_ROLE) — rather than a multisig — to authorize swap completions via off-chain digital signatures, with no on-chain oracle price validation and no maximum mint limit per transaction. An attacker compromised Resolv's AWS Key Management Service (KMS) environment to obtain the privileged signing key. With this key in hand, the attacker deposited approximately $100,000–$200,000 USDC and called completeSwap with attacker-forged signatures, minting approximately 80 million USR stablecoins in two transactions (500× the expected ratio). The attacker converted the unbacked USR into wstUSR and then into ETH and other stablecoins, extracting roughly $25M in real value. The exploit caused USR to depeg to $0.0025 on Curve and triggered over $10M in bad debt at downstream lending protocols including Fluid/Instadapp. A subsequent contract upgrade on April 6, 2026 permanently burned 36.73M wstUSR/stUSR tokens held by the attacker, capping total losses to approximately $34M. Attack Tx: 0xfe37f2...33743 Analysis: Resolv Labs Statement Explained: The Resolv Hack (March 2026) – Halborn How a Compromised Key Minted $80M in USR – Blockaid"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Resolv protocol was attacked due to a compromised off-chain signing private key. The attacker used a small USDC deposit to authorize the minting of approximately 80 million unbacked USR stablecoins, then dumped them and extracted roughly $25 million in value. The team promptly paused all contracts, burned some malicious tokens, and initiated a 1:1 redemption plan for pre-incident USR holders while cooperating with law enforcement and on-chain analytics firms for accountability."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "The Resolv Labs $25M exploit on March 22, 2026, was triggered by a compromise of an off-chain SERVICE_ROLE signing key. This enabled an attacker to mint 80 million unbacked USR stablecoins from minimal deposits, extracting around $25M before the protocol was paused. A compromised off-chain SERVICE_ROLE private key enabled an attacker to call the Counter contract's completeSwap() function and mint arbitrary amounts of USR, unchecked by any on-chain mint cap, deposit validation, or multisig requirement."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Resolv USR suffered a major exploit on Ethereum Mainnet on 22 March 2026, when attackers gained signing authority over an off-chain key and minted nearly 80 million unbacked USR, extracting around $23.7M in ETH. The root cause was an infrastructure compromise, not an on-chain bug. Attackers gained control over the protocol's SERVICE_ROLE signing key via a multi-stage infrastructure compromise, allowing them to call the USR Counter contract's completeSwap() function and mint unbacked USR. No independent on-chain mint cap tied to deposit value enforced limits."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xfe37f25efd67d0a4da4afe48509b258df48757b97810b28ce4c649658dc33743",
+    "0x41b6b9376d174165cbd54ba576c8f6675ff966f17609a7b80d27d8652db1f18f",
+    "0x7f914328a67f7094eedb0efda7aef74aafdb7f862ad7bc78259564fd453a931d"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Resolv Labs - Rekt",
+      "url": "https://rekt.news/resolv-labs-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xfe37f25efd67d0a4da4afe48509b258df48757b97810b28ce4c649658dc33743"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/ResolvLabs/status/2035830314799599616"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "halborn.com",
+      "url": "https://www.halborn.com/blog/post/explained-the-resolv-hack-march-2026"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xfe37f25efd67d0a4da4afe48509b258df48757b97810b28ce4c649658dc33743"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/PeckShieldAlert/status/2035565047133401563"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/resolv-labs-25m-2026-03-23"
+    },
+    {
+      "source": "revertiq",
+      "label": "quillaudits.com",
+      "url": "https://www.quillaudits.com/blog/hack-analysis/resolv-labs-exploit-explained"
+    },
+    {
+      "source": "revertiq",
+      "label": "resolv.xyz",
+      "url": "https://resolv.xyz/blog/resolv-postmortem-march-22-2026-incident"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/SalixDev/resolv-usr-exploit-poc"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/resolv-usr-2026-03-21"
+    }
+  ]
+}

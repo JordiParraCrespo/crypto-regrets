@@ -1,0 +1,96 @@
+{
+  "id": "2024-12-27-bizness",
+  "name": "Bizness",
+  "date": "2024-12-27",
+  "year": 2024,
+  "amountUsd": 15700,
+  "returnedUsd": null,
+  "chains": [
+    "Base"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "reentrancy",
+  "technique": "Reentrancy",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "reentrancy",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "reentrancy",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.64
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "Reentrancy. Lost: 15.7k USD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Reentrancy. Lost: 15.7k USD"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Standing on Bizness (BIZNESS) appears to have been subjected to a reentrancy attack on Base, resulting in an estimated loss of $15,700."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Bizness was exploited on Base on 27 December 2024 due to a reentrancy flaw in the splitLock function of the Locker contract, resulting in approximately $15,700 in losses. The attack allowed the exploiter to withdraw more tokens than intended by re-entering the contract during the split process. The Locker contract's splitLock function lacked a reentrancy guard. It performed an external call (feeHandler) before updating the internal lock state, enabling an attacker to call withdrawLock in a reentrant manner and drain more tokens than allowed."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x9815bb4a4246d0f0651cfdfe7ef611021a4ec8ca65957d9906a6e9581749f6ea",
+    "0x984cb29cdb4e92e5899e9c94768f8a34047d0e1074f9c4109364e3682e488873"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-12/Bizness_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-12/Bizness_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/TenArmorAlert/status/1872857132363645205"
+    },
+    {
+      "source": "slowmist",
+      "label": "basescan.org",
+      "url": "https://basescan.org/tx/0x984cb29cdb4e92e5899e9c94768f8a34047d0e1074f9c4109364e3682e488873"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/bizness-2024-12-27"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/past/2024/README.md"
+    },
+    {
+      "source": "revertiq",
+      "label": "raw.githubusercontent.com",
+      "url": "https://raw.githubusercontent.com/SunWeb3Sec/DeFiHackLabs/main/src/test/2024-12/Bizness_exp.sol"
+    }
+  ]
+}

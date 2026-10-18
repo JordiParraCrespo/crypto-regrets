@@ -1,0 +1,92 @@
+{
+  "id": "2022-10-04-sovryn",
+  "name": "Sovryn",
+  "date": "2022-10-04",
+  "year": 2022,
+  "amountUsd": 1100000,
+  "returnedUsd": null,
+  "chains": [
+    "RSK"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "reentrancy",
+  "technique": "Reentrancy",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "reentrancy",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "reentrancy",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.51
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "More fuel for the maxis. ~$1.1M was stolen from Sovryn, a “DeFi” protocol on the controversial “Bitcoin smart contract network” RSK.",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "More fuel for the maxis. ~$1.1M was stolen from Sovryn, a “DeFi” protocol on the controversial “Bitcoin smart contract network” RSK."
+    },
+    {
+      "source": "SlowMist",
+      "text": "Bitcoin DeFi application Sovryn tweeted that it found a vulnerability affecting the lending pool and was attacked. The attacker used the abandoned lending protocol to withdraw 44.93 RBTC and 211,045 USDT. After the developer detected the attack, the system entered maintenance mode. Half of the funds will be recovered, and any additional losses will be fully compensated by the treasury. A plan to restore system functions and provide post-mortem analysis will also be formulated in the future."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On October 4, 2022, an attacker exploited a vulnerability in Sovryn’s lending pools on Rootstock, enabling the extraction of over $1.1 million by manipulating iToken pricing through cross-contract reentrancy. About half of the funds were recovered after the incident, and the remainder was covered by Sovryn’s treasury. The protocol's lending pool and core contracts could be manipulated by reentrant calls made possible via asset transfer callbacks (native RBTC or ERC777 rUSDT), which allowed the attacker to mint iTokens at a temporarily deflated price during a loan closing process. State updates were performed before underlying assets arrived, leading to an exploitably incorrect iToken price."
+    }
+  ],
+  "audit": "Unaudited",
+  "txHashes": [
+    "0xd706271d1f6138c7b3b89d4eae830e53fe285341b89c907ef70c52bfa40810b0",
+    "0x0ce023feb40b80bd60f55ed9a926c45ceb1faf4d764e6a928703b5127f917774",
+    "0xf29c4f71a87369a4d020b79ae37ac55d7e342ecb7a69f4776fe4faeab812f4de"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Sovryn - REKT",
+      "url": "https://rekt.news/sovryn-rekt"
+    },
+    {
+      "source": "slowmist",
+      "label": "sovryn.app",
+      "url": "https://www.sovryn.app/blog/interim-exploit-update"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/sovryn-2022-10-04"
+    },
+    {
+      "source": "revertiq",
+      "label": "sovryn.com",
+      "url": "https://sovryn.com/all-things-sovryn/interim-exploit-update"
+    },
+    {
+      "source": "revertiq",
+      "label": "sovryn.com",
+      "url": "https://sovryn.com/all-things-sovryn/october-2022-lending-pool-exploit-postmortem"
+    }
+  ]
+}

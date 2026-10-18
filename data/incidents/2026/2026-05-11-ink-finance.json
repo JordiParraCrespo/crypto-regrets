@@ -1,0 +1,98 @@
+{
+  "id": "2026-05-11-ink-finance",
+  "name": "INK Finance",
+  "date": "2026-05-11",
+  "year": 2026,
+  "amountUsd": 140000,
+  "returnedUsd": null,
+  "chains": [
+    "Polygon"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Caller Impersonation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.99
+      },
+      {
+        "category": "access-control",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.98,
+    "stateActor": 0.01,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Business Logic Flaw. Lost: ~$140K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Business Logic Flaw. Lost: ~$140K"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "INK Finance's Payroll contract computed an employee's claimable amount from the current USDT balance held by the treasury rather than from a fixed, pre-funded payroll entitlement. The attacker took a ~24,982 USDT Balancer flash loan, transferred the full borrowed amount into the treasury to artificially inflate its balance, then called claimPayroll(employeeId=3). Because the payout scaled with the inflated treasury balance, the contract paid out far more than the legitimate salary; the attacker then repaid the flash loan and swept the difference (~140,180 USDT, ~$140K) to itself. The claim also relied on an ERC165 supportsInterface callback hook (interface id 0xf3384444) on the receiver, which the attack contract implemented. Root cause: payroll entitlement derived from live, externally-manipulable treasury balance with no validation of the actual owed amount. Vulnerable code snippet: Attack Tx: https://polygonscan.com/tx/0xb469a24ec737be16fe41367a7b5b315c7f03b4e0ff3af50b3a2db03b3066b982 Analysis: https://www.cryptotimes.io/2026/05/11/ink-finance-exploited-on-polygon-140k-usdt-drained-in-flash-loan-attack/"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Ink Finance’s Workspace Treasury Proxy contract on Polygon was exploited due to a whitelist validation logic flaw. The attacker deployed a malicious contract matching a whitelisted claimer address, passed authentication checks via the claim() function, and drained approximately $140,000 USDT (amplified with a ~$25K Balancer V2 flash loan)."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "INK Finance’s Workspace Treasury on Polygon was exploited on 11 May 2026, draining around 140,180 USDT (approx. $140K) in a single transaction. The attacker bypassed identity checks by deploying a contract that passed a whitelist, enabling a treasury drain via a flashloan-funded claim. The claimPayroll function failed to bind claimId to a stable, pre-authorized claimant identity. The contract only verified the caller address against a whitelist but did not check that the recipient matched a non-spoofable or immutable identity, enabling a newly deployed contract to trigger a treasury payout."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xb469a24ec737be16fe41367a7b5b315c7f03b4e0ff3af50b3a2db03b3066b982"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-05/INKFinance_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-05/INKFinance_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "polygonscan.com",
+      "url": "https://polygonscan.com/tx/0xb469a24ec737be16fe41367a7b5b315c7f03b4e0ff3af50b3a2db03b3066b982"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "www.cryptotimes.io",
+      "url": "https://www.cryptotimes.io/2026/05/11/ink-finance-exploited-on-polygon-140k-usdt-drained-in-flash-loan-attack/"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/ink-finance-2026-05-11"
+    },
+    {
+      "source": "revertiq",
+      "label": "darknavy.org",
+      "url": "https://www.darknavy.org/web3/exploits/ink-finance-whitelisted-claimer/"
+    }
+  ]
+}

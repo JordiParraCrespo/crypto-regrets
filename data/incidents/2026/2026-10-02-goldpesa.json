@@ -1,0 +1,76 @@
+{
+  "id": "2026-10-02-goldpesa",
+  "name": "GoldPesa",
+  "date": "2026-10-02",
+  "year": 2026,
+  "amountUsd": 114900,
+  "returnedUsd": null,
+  "chains": [
+    "Base"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Incorrect Share Accounting",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.54,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.5700000000000001
+      },
+      {
+        "category": "logic-error",
+        "p": 0.3
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.13
+      }
+    ],
+    "flashLoan": 0.98,
+    "stateActor": 0.01,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "the GPX V4 hook rebalances protocol liquidity inside beforeSwap via a burn and TAKE_PAIR that run in the attacker's own open PoolManager unlock, and never checks the PositionManager deltas are settled first, so an unsettled mint debt parked in the same unlock nets against the hook's burn credit and the attacker walks the freed USDC out. Lost: 114,999.999186 USDC (exactly reproduced) on Base; the GPX/USDC V4 pool's protocol liquidity was burned by the hook's own hourly rebalance, and its 148,868.602188 USDC burn credit was split by the shared-unlock delta bug - 33,868.603002 USDC reached the hook while 114,999.999186 USDC paid off the attacker's unsettled mint debt and then exited to the attacker, funded by a 175,000 USDC Morpho flash loan repaid in the same tx",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "the GPX V4 hook rebalances protocol liquidity inside beforeSwap via a burn and TAKE_PAIR that run in the attacker's own open PoolManager unlock, and never checks the PositionManager deltas are settled first, so an unsettled mint debt parked in the same unlock nets against the hook's burn credit and the attacker walks the freed USDC out. Lost: 114,999.999186 USDC (exactly reproduced) on Base; the GPX/USDC V4 pool's protocol liquidity was burned by the hook's own hourly rebalance, and its 148,868.602188 USDC burn credit was split by the shared-unlock delta bug - 33,868.603002 USDC reached the hook while 114,999.999186 USDC paid off the attacker's unsettled mint debt and then exited to the attacker, funded by a 175,000 USDC Morpho flash loan repaid in the same tx"
+    },
+    {
+      "source": "SlowMist",
+      "text": "On Base, an attacker exploited GoldPesa’s GPXHooks. The hook rebalanced through a shared, flash-accounted PositionManager without checking that the GPX/USDC currency deltas were zero. The attacker opened an unlock, minted an unsettled WETH/USDC position (about 115,000 USDC of phantom debt), then swapped on the GPX pool to trigger the hourly reBalance. The hook’s burn credit was netted against that debt, and the attacker burned its own position and withdrew about 114,900 USDC from the PoolManager."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-10/GoldPesa_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-10/GoldPesa_exp.sol"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/2106415554492059872"
+    }
+  ]
+}

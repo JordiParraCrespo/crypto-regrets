@@ -1,0 +1,66 @@
+{
+  "id": "2026-09-19-nunet",
+  "name": "NuNet",
+  "date": "2026-09-19",
+  "year": 2026,
+  "amountUsd": 462730,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "Token",
+  "category": "key-compromise",
+  "technique": "Private Key Compromised",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "key-compromise",
+    "confidence": 0.88,
+    "top": [
+      {
+        "category": "key-compromise",
+        "p": 0.89
+      },
+      {
+        "category": "access-control",
+        "p": 0.08
+      },
+      {
+        "category": "logic-error",
+        "p": 0.03
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "An attacker gained control of NuNet’s Ethereum deployer/minting private key and called mint() on the NTX token contract, issuing 408,532,878.13 NTX to the attacker’s address. The mint function had no supply-cap check, so possession of the key was enough to create new tokens. PeckShield valued the unauthorized mint at approximately $462,730 at the time of the incident.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "An attacker gained control of NuNet’s Ethereum deployer/minting private key and called mint() on the NTX token contract, issuing 408,532,878.13 NTX to the attacker’s address. The mint function had no supply-cap check, so possession of the key was enough to create new tokens. PeckShield valued the unauthorized mint at approximately $462,730 at the time of the incident."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/PeckShieldAlert/status/2101457227379044822"
+    }
+  ]
+}

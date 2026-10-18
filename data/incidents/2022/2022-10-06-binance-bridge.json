@@ -1,0 +1,85 @@
+{
+  "id": "2022-10-06-binance-bridge",
+  "name": "Binance Bridge",
+  "date": "2022-10-06",
+  "year": 2022,
+  "amountUsd": 570000000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "bridge-crosschain",
+  "technique": "Proof Verifier Bug",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "bridge-crosschain",
+    "confidence": 0.98,
+    "top": [
+      {
+        "category": "bridge-crosschain",
+        "p": 0.98
+      },
+      {
+        "category": "signature-crypto",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.03,
+    "hasRootCause": 0.98
+  },
+  "bridge": true,
+  "language": null,
+  "rootCause": "Over half a billion stolen from the BNB bridge. If a chain can be stopped and started at a moment's notice, can it really be considered decentralised? Another bridge exploit, another entry on the leaderboard...",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "Over half a billion stolen from the BNB bridge. If a chain can be stopped and started at a moment's notice, can it really be considered decentralised? Another bridge exploit, another entry on the leaderboard..."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On October 6, 2022, an attacker exploited the BNB Chain bridge by forging IAVL Merkle proofs, enabling unauthorized minting of 2 million BNB. Vigilant chain pausing and address blacklisting preserved most funds; estimated net loss is near $100 million. A logic flaw in the IAVL Merkle proof verifier used by BSC Token Hub allowed the attacker to forge inclusion proofs. The bridge accepted these, minting BNB for unbacked, unauthorized payloads."
+    }
+  ],
+  "audit": "Unaudited",
+  "txHashes": [
+    "0xe1fe5fef26e93e6389910545099303e4fee774427d9e628d2aab80f1b53396d6",
+    "0x79575ff791606ef2c7d69f430d1fee1c25ef8d56275da94e6ac49c9c4cc5f433"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: BNB Bridge - REKT",
+      "url": "https://rekt.news/bnb-bridge-rekt"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/binance-bridge-2022-10-06"
+    },
+    {
+      "source": "revertiq",
+      "label": "immunefi.com",
+      "url": "https://immunefi.com/blog/bug-fix-reviews/hack-analysis-binance-bridge-october-2022/"
+    },
+    {
+      "source": "revertiq",
+      "label": "defi-intel.com",
+      "url": "https://defi-intel.com/incidents/bnb-chain-bridge-2022/"
+    }
+  ]
+}

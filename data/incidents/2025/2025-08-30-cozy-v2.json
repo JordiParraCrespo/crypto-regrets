@@ -1,0 +1,100 @@
+{
+  "id": "2025-08-30-cozy-v2",
+  "name": "Cozy V2",
+  "date": "2025-08-30",
+  "year": 2025,
+  "amountUsd": 427000,
+  "returnedUsd": null,
+  "chains": [
+    "Optimism"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "input-validation",
+  "technique": "Missing Input Validation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.99
+      },
+      {
+        "category": "input-validation",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.01,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "The Cozy Finance v2 protection market contracts on Optimism contained a business logic vulnerability rooted in insufficient sender verification. The protocol failed to properly validate the identity or authorization of the caller before allowing critical state-changing operations, enabling an unauthorized party to invoke protected contract functions without meeting the intended access requirements. The attacker exploited this weak or missing msg.sender check to manipulate the protection market state and drain approximately $472K from the protocol. The irony of an exploit-protection protocol being exploited via an access control flaw highlights the difficulty of securing complex DeFi insurance primitives; a Verichains post-mortem published October 2025 provides the full technical walkthrough of the insufficient sender verification path. Attack Tx: 0x71e72cae2149920bc89ae3287edf8c7e65d454d7fd5e24b590c1b4ea36c0a517 Analysis: Verichains — Cozy Protocol Incident Post-Mortem",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The Cozy Finance v2 protection market contracts on Optimism contained a business logic vulnerability rooted in insufficient sender verification. The protocol failed to properly validate the identity or authorization of the caller before allowing critical state-changing operations, enabling an unauthorized party to invoke protected contract functions without meeting the intended access requirements. The attacker exploited this weak or missing msg.sender check to manipulate the protection market state and drain approximately $472K from the protocol. The irony of an exploit-protection protocol being exploited via an access control flaw highlights the difficulty of securing complex DeFi insurance primitives; a Verichains post-mortem published October 2025 provides the full technical walkthrough of the insufficient sender verification path. Attack Tx: 0x71e72cae2149920bc89ae3287edf8c7e65d454d7fd5e24b590c1b4ea36c0a517 Analysis: Verichains — Cozy Protocol Incident Post-Mortem"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Cozy V2 on Optimism was exploited on August 29/30, 2025, due to missing sender authentication in its withdrawal logic. Approximately $427,000 in USDC was siphoned by allowing an attacker to complete another user's redemption, with direct chain evidence showing a $377,084 USDC outflow. The remaining funds were obfuscated off-chain after bridging. Cozy V2's withdrawal process allowed any address to finalize a pending redemption by supplying its ID, failing to verify that the caller was the authorized initiator. This missing input validation enabled unauthorized withdrawal and fund redirection."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x71e72cae2149920bc89ae3287edf8c7e65d454d7fd5e24b590c1b4ea36c0a517"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "optimistic.etherscan.io",
+      "url": "https://optimistic.etherscan.io/tx/0x71e72cae2149920bc89ae3287edf8c7e65d454d7fd5e24b590c1b4ea36c0a517"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "blog.verichains.io",
+      "url": "https://blog.verichains.io/p/cozy-protocol-incident"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x71e72cae2149920bc89ae3287edf8c7e65d454d7fd5e24b590c1b4ea36c0a517"
+    },
+    {
+      "source": "blocksec",
+      "label": "x.com",
+      "url": "https://x.com/decurityhq/status/1961810726164533602"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/cozy-v2-2025-08-30"
+    },
+    {
+      "source": "revertiq",
+      "label": "monitoringroom.com",
+      "url": "https://monitoringroom.com/situation/crypto-hack/cozy-v2"
+    },
+    {
+      "source": "revertiq",
+      "label": "avoid.net",
+      "url": "https://avoid.net/cozy-v2"
+    }
+  ]
+}

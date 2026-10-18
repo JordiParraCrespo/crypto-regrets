@@ -1,0 +1,117 @@
+{
+  "id": "2026-01-01-prxvt",
+  "name": "PRXVT",
+  "date": "2026-01-01",
+  "year": 2026,
+  "amountUsd": 97000,
+  "returnedUsd": null,
+  "chains": [
+    "Base"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Staking Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.94,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.94
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.05
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.01,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Bussiness Logic Flaw. Lost: 32.8 ETH",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Bussiness Logic Flaw. Lost: 32.8 ETH"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The stPRXVT staking contract distributes rewards based on a staker's stPRXVT balance, but claimReward() does not reset / checkpoint that balance against the reward accounting before transferring out the staked principal+rewards. The attacker exploited this by repeatedly recycling the same staked position through fresh CREATE2-deployed helper contracts: each helper receives the entire stPRXVT balance, calls claimReward() to harvest earned() rewards as if it were a brand-new staker, and forwards everything back. Because the reward bookkeeping is keyed per-address and is not invalidated when stPRXVT tokens are moved between addresses, transferring the staked balance to a new address resets the earned() accrual, letting the attacker claim rewards an unbounded number of times in a single transaction (looping until gas runs out) and minting/draining far more PRXVT than legitimately accrued. Vulnerable code snippet: Attack Tx: https://skylens.certik.com/tx/base/0xf42a8fe556d5e4ab59b0b7675ccbcd1425e7e2a6a8e0c9775fc6cd7c48ff55a1 Analysis: Vulnerable Contract: https://basescan.org/address/0xdac30a5e2612206e2756836ed6764ec5817e6fff"
+    },
+    {
+      "source": "SlowMist",
+      "text": "PRXVT staking contract was exploited on January 1, 2026, via a Sybil Attack using CREATE2 addresses. The attacker drained approximately $97K from the protocol."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 1 January 2026, PRXVT's staking protocol on Base was exploited for approximately $97,000. The attacker repeatedly transferred receipt tokens (stPRXVT) to freshly deployed helper contracts using CREATE2, allowing each to claim staking rewards multiple times for the same historical accrual period. The exploit drained the reward pool due to flawed reward accounting on token transfer. The protocol failed to settle reward entitlements and reset accrual checkpoints when stPRXVT tokens were transferred. This allowed both sender and recipient to claim historical rewards for the same stake, enabling reward duplication through helper contracts."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xf42a8fe556d5e4ab59b0b7675ccbcd1425e7e2a6a8e0c9775fc6cd7c48ff55a1"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-01/PRXVT_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-01/PRXVT_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/CertiKAlert/status/2006685174587605315"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "skylens.certik.com",
+      "url": "https://skylens.certik.com/tx/base/0xf42a8fe556d5e4ab59b0b7675ccbcd1425e7e2a6a8e0c9775fc6cd7c48ff55a1"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "basescan.org",
+      "url": "https://basescan.org/address/0xdac30a5e2612206e2756836ed6764ec5817e6fff"
+    },
+    {
+      "source": "slowmist",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/prxvt-hack-2026"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/prxvt-2026-01-01"
+    },
+    {
+      "source": "revertiq",
+      "label": "yieldo.me",
+      "url": "https://yieldo.me/security/prxvt-2026"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/kismp123/DeFi-Security-Incident/blob/main/2026/2026-01-01_PRXVT_StakingRewardFlaw.md"
+    }
+  ]
+}

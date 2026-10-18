@@ -1,0 +1,81 @@
+{
+  "id": "2024-04-02-hoppyfrogerc",
+  "name": "HoppyFrogERC",
+  "date": "2024-04-02",
+  "year": 2024,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "business logic flaw",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.88).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.88,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.89
+      },
+      {
+        "category": "market-manipulation",
+        "p": 0.1
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.96,
+    "stateActor": 0.01,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "business logic flaw. Lost: ~0.3 ETH",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "business logic flaw. Lost: ~0.3 ETH"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The vulnerability lies in the token contract’s _transfer logic, which automatically triggers swapTokensForEth during sell transactions under certain conditions. Because the contract holds a large token balance, this automatic swap can significantly impact market price, enabling arbitrage opportunities for an attacker. Vulnerable code snippet: Attack tx: https://app.blocksec.com/explorer/tx/eth/0x6fb7f8e9eb09d6ae17dbe82b2b42f46f64fb9c3197438b68ecf03e832d5fc791 Analysis: During token transfers, especially sells to the Uniswap pair, if the contract’s token balance exceeds _taxSwapThreshold, the contract will automatically perform a swapTokensForEth. Since the contract holds a significant number of tokens, this swap can cause substantial slippage and temporarily depress the token price. An attacker can exploit this by: 1. Using a flashloan to borrow assets. 2. Selling tokens to trigger the contract’s swapTokensForEth logic. 3. Taking advantage of the temporary price drop caused by the swap. 4. Buying back tokens at the manipulated lower price. 5. Repaying the flashloan and profiting from the price difference. This kind of manipulation effectively creates an arbitrage loop that drains value from other users and destabilizes the token economy."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x6fb7f8e9eb09d6ae17dbe82b2b42f46f64fb9c3197438b68ecf03e832d5fc791"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-04/HoppyFrogERC_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-04/HoppyFrogERC_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/ChainAegis/status/1775351437410918420"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/eee4be5897a1cd9b752653f68dd8b9529f21f05b/src/test/2024-04/HoppyFrogERC_exp.sol#L4"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/eth/0x6fb7f8e9eb09d6ae17dbe82b2b42f46f64fb9c3197438b68ecf03e832d5fc791"
+    }
+  ]
+}

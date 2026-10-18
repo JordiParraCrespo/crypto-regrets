@@ -1,0 +1,180 @@
+{
+  "id": "2024-05-15-sonne-finance",
+  "name": "Sonne Finance",
+  "date": "2024-05-15",
+  "year": 2024,
+  "amountUsd": 20000000,
+  "returnedUsd": null,
+  "chains": [
+    "Optimism"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Donation Attack",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.94,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.94
+      },
+      {
+        "category": "logic-error",
+        "p": 0.04
+      },
+      {
+        "category": "access-control",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.09,
+    "stateActor": 0.02,
+    "hasRootCause": 0.8
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Precision loss. Lost: $20M",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Precision loss. Lost: $20M"
+    },
+    {
+      "source": "REKT",
+      "text": "The alarm has been rung on Sonne Finance, as a $20 million flash loan attack reverberates across the crypto sphere, chiming a somber melody that warns of the perils lurking in the DeFi shadows."
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Compound v2 forks bug. first deposit Vulnerable code snippet: https://optimistic.etherscan.io/address/0xe3b81318b1b6776f0877c3770afddff97b9f5fe5 Attack tx: https://optimistic.etherscan.io/tx/0x45c0ccfd3ca1b4a937feebcb0f5a166c409c9e403070808835d41da40732db96 https://optimistic.etherscan.io/tx/0x9312ae377d7ebdf3c7c3a86f80514878deb5df51aad38b6191d55db53e42b7f0 Analysis: https://www.quillaudits.com/blog/hack-analysis/sonne-finance-hack https://www.quillaudits.com/blog/hack-analysis/sonne-finance-hack"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Sonne Finance is a Compound v2 fork on Optimism that was vulnerable to the classic first-depositor share-inflation attack, made possible by precision loss in integer arithmetic. The attacker first executed five previously-queued timelock governance proposals to list VELO as a new collateral market (soVELO) with a very small initial exchange rate. Using a flash loan of ~35.5M VELO from the Velodrome AMM, the attacker minted only 400,000,001 wei of soVELO (creating a near-zero total supply), then immediately donated ~35.5M VELO directly to the soVELO contract. This massively inflated the per-share exchange rate: exchangeRate = (totalCash + totalBorrows - totalReserves) / totalSupply. With totalSupply at 400,000,001 wei and totalCash inflated by 35M VELO, each soVELO share represented enormous underlying value. The attacker entered the market with soVELO as collateral and borrowed 768,947 USDC. Due to truncation (precision loss) in the redeemUnderlying calculation, the attacker was then able to redeem totalCash - 1 worth of VELO back from the contract, repaying the flash loan and netting both the borrowed USDC and a large share of the donated VELO. Vulnerable code snippet: Attack Tx: 0x45c0ccfd3ca1b4a937feebcb0f5a166c409c9e403070808835d41da40732db96 Analysis: SonneFinance official statement"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Based on Compound's Optimism native lending protocol, Sonne Finance has fallen victim to a lightning loan attack by hackers, resulting in losses exceeding $20 million USD."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Sonne Finance lost roughly $20 million on Optimism in May 2024 after an attacker exploited a newly activated VELO lending market. The attacker inflated the market’s exchange rate through direct token donations to an almost empty Compound V2 style market, then used rounding behavior in redeemUnderlying to borrow against overstated collateral and drain assets from other pools. A newly activated Compound V2 style market (soVELO) became exploitable during a permissionless governance execution window. The attacker inflated the market exchange rate by donating VELO directly to the cToken contract while total share supply remained near zero. The protocol then…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Sonne Finance suffered a $20 million exploit on Optimism in May 2024 after a new VELO market was enabled as collateral. The attacker manipulated the market's exchange rate by donating tokens to an empty pool, then exploited rounding errors in the protocol's Compound v2 fork code to drain collateral assets across multiple lending pools. Sonne Finance's governance added a VELO market with collateral enabled before seeding sufficient initial supply. The attacker, being the first supplier, donated a large amount of VELO directly to the soVELO contract, inflating the exchange rate. Integer-division rounding let them redeem far more assets than their actual…"
+    }
+  ],
+  "audit": "yAudit",
+  "txHashes": [
+    "0x45c0ccfd3ca1b4a937feebcb0f5a166c409c9e403070808835d41da40732db96",
+    "0x9312ae377d7ebdf3c7c3a86f80514878deb5df51aad38b6191d55db53e42b7f0",
+    "0xb43748ed668c1e44cf0a3e829ca0fe24eceaee7d33d06072bb11ca99afa7f448",
+    "0x67632758ce19a41648f28fba6d3d87c7248202238234137bb4741da097cfa029",
+    "0x100ff0317251b899fe50baea8d0a107dd2fa9dd3b85dcff66f9841f25dfd1a4d",
+    "0x5729810d3cc325597be4f9c1a1c5d03ebad02c55750b966732ed6ab628a8f722",
+    "0xfea20e78a94b3a34951031e3e6fc71f27c348eb7116dc24a777f46e6fe5a81f6",
+    "0x150a8ad61cdf9ba5a687b9cff95c90aa5eaa825ac1b07c016ccb905f97d511c3",
+    "0x18ebeb958b50579ce76528ed812025949dfcff8c2673eb0c8bc78b12ba6377b7",
+    "0x06a7561e4faa5150589f8a25153b97e73339b9e5fa5ad26dc04673283c55894c"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-05/Sonne_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-05/Sonne_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "neptunemutual.com",
+      "url": "https://neptunemutual.com/blog/taking-a-closer-look-at-sonne-finance-exploit/"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Sonne Finance - Rekt",
+      "url": "https://rekt.news/sonne-finance-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "optimistic.etherscan.io",
+      "url": "https://optimistic.etherscan.io/address/0xe3b81318b1b6776f0877c3770afddff97b9f5fe5"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "optimistic.etherscan.io",
+      "url": "https://optimistic.etherscan.io/tx/0x45c0ccfd3ca1b4a937feebcb0f5a166c409c9e403070808835d41da40732db96"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "optimistic.etherscan.io",
+      "url": "https://optimistic.etherscan.io/tx/0x9312ae377d7ebdf3c7c3a86f80514878deb5df51aad38b6191d55db53e42b7f0"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/SonneFinance/status/1790578458172563648"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xb43748ed668c1e44cf0a3e829ca0fe24eceaee7d33d06072bb11ca99afa7f448"
+    },
+    {
+      "source": "slowmist",
+      "label": "medium.com",
+      "url": "https://medium.com/@SonneFinance/post-mortem-sonne-finance-exploit-12f3daa82b06"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/decoding-sonne-finance-s-20-million-2024-05-21"
+    },
+    {
+      "source": "revertiq",
+      "label": "quillaudits.com",
+      "url": "https://www.quillaudits.com/blog/hack-analysis/sonne-finance-hack"
+    },
+    {
+      "source": "revertiq",
+      "label": "raw.githubusercontent.com",
+      "url": "https://raw.githubusercontent.com/SunWeb3Sec/DeFiHackLabs/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/src/test/2024-05/Sonne_exp.sol"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractaudit.com",
+      "url": "https://www.smartcontractaudit.com/guides/sonne-finance-2024-empty-market-exploit"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/sonne-lending-2024-05-14"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/cexs-are-under-threat-q2-2024-de-fi-hacks-a-report-analysis"
+    },
+    {
+      "source": "revertiq",
+      "label": "certik.com",
+      "url": "https://www.certik.com/blog/sonne-finance-incident-analysis"
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "id": "2026-04-29-sweat-foundation",
+  "name": "Sweat Foundation",
+  "date": "2026-04-29",
+  "year": 2026,
+  "amountUsd": 3500000,
+  "returnedUsd": null,
+  "chains": [
+    "Near"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Withdrawal Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.88,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.89
+      },
+      {
+        "category": "access-control",
+        "p": 0.09
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Rust",
+  "rootCause": "Sweat Foundation was exploited. An attacker drained approximately 13.71 billion SWEAT tokens (about 65% of total supply) from multiple foundation-controlled accounts within roughly 30 seconds, resulting in a loss of about $3.5 million. The attacker exploited a vulnerability in the SWEAT token contract using a custom drainer contract, then attempted to liquidate and bridge the funds via Ref Finance and Wormhole. The team quickly paused the contract, coordinated freezes with MEXC, and restored all external user balances.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Sweat Foundation was exploited. An attacker drained approximately 13.71 billion SWEAT tokens (about 65% of total supply) from multiple foundation-controlled accounts within roughly 30 seconds, resulting in a loss of about $3.5 million. The attacker exploited a vulnerability in the SWEAT token contract using a custom drainer contract, then attempted to liquidate and bridge the funds via Ref Finance and Wormhole. The team quickly paused the contract, coordinated freezes with MEXC, and restored all external user balances."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "SWEAT Foundation's NEAR token contract was reportedly exploited on 2026-04-29, draining about 13.71 billion SWEAT before the team paused the contract, froze liquidation channels, and restored external balances. Reported refund-callback access control failure in the NEAR SWEAT token contract. The refund path was reachable outside the token contract's intended transfer-resolution flow, letting an attacker force refunds from victim balances. The exact historical revision remains unverified in the fetched record."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/SweatEconomy/status/2049588862352060474"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/sweat-foundation-2026-04-29"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "theblock.co",
+      "url": "https://www.theblock.co/post/399498/sweat-protocol-thwarts-multi-million-dollar-exploit-restores-user-balances"
+    }
+  ]
+}

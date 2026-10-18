@@ -1,0 +1,98 @@
+{
+  "id": "2026-09-05-reddio-redsonic",
+  "name": "Reddio RedSonic",
+  "date": "2026-09-05",
+  "year": 2026,
+  "amountUsd": 22800,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Incorrect Share Accounting",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.87,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.88
+      },
+      {
+        "category": "access-control",
+        "p": 0.07
+      },
+      {
+        "category": "logic-error",
+        "p": 0.04
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.92
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "cross-share-class balance double-count via permissionless registerErc20. Lost: ~9.25 ETH",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "cross-share-class balance double-count via permissionless registerErc20. Lost: ~9.25 ETH"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Reddio’s RedSonic Vault on Ethereum was exploited for about 9.25 ETH (~$22,800). After permissionlessly registering an stETH vault, the same stETH was counted in both the ETH vault and the stETH vault. The attacker used a flash loan to inflate the rsvETH share price, redeemed excess ETH, then redeemed rsvstETH to recover the same stETH."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 2026-09-05, Reddio’s RedSonic Vault on Ethereum lost about 9.25 ETH after permissionless stETH registration let the same raw stETH balance count toward two share classes and inflate rsvETH pricing in a flash-loan-driven single transaction. The vault let anyone register a second ERC-20 share class while the ETH class priced itself from the vault’s raw stETH balance. That shared balance was counted in both classes, so depositing stETH through the newly registered class raised rsvETH NAV and enabled excess redemption."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xe3cba90e865c6cba950ebce36a52607f51f1fd33cd9fb920c78803f19b57791a"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-09/Reddio_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-09/Reddio_exp.sol"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/2096439593403089077"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/reddio-redsonic-2026-09-05"
+    },
+    {
+      "source": "revertiq",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xe3cba90e865c6cba950ebce36a52607f51f1fd33cd9fb920c78803f19b57791a"
+    },
+    {
+      "source": "revertiq",
+      "label": "raw.githubusercontent.com",
+      "url": "https://raw.githubusercontent.com/SunWeb3Sec/DeFiHackLabs/main/src/test/2026-09/Reddio_exp.sol"
+    }
+  ]
+}

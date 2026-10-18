@@ -1,0 +1,58 @@
+{
+  "id": "2023-07-02-aave-fork",
+  "name": "Aave fork",
+  "date": "2023-07-02",
+  "year": 2023,
+  "amountUsd": 930000,
+  "returnedUsd": null,
+  "chains": [],
+  "targetType": null,
+  "category": "governance",
+  "technique": "Governance Attack",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.93). Replaced keyword guess \"bridge-crosschain\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "governance",
+    "confidence": 0.93,
+    "top": [
+      {
+        "category": "governance",
+        "p": 0.93
+      },
+      {
+        "category": "arbitrary-call",
+        "p": 0.05
+      },
+      {
+        "category": "access-control",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "The Aave fork project on the Pulse chain suffered a governance attack. The hacker first purchased a large number of Aave tokens to obtain the governance authority of the Aave fork project, and then created multiple contracts. The hacker seemed to want to use the governance authority to modify the implementation of the proxy contract Address, using the user's authorization to the contract that has not been canceled, to transfer the user's funds away. Such as WBTC, YFI, BAL, AAVE, UNI and other tokens. Finally, the hacker converted the stolen funds into ETH through the cross-chain bridge protocol, and sent it to the 0xA30190b96FaEe0080144aA0B7645081Fcbf49E6F address of Ethereum.…",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The Aave fork project on the Pulse chain suffered a governance attack. The hacker first purchased a large number of Aave tokens to obtain the governance authority of the Aave fork project, and then created multiple contracts. The hacker seemed to want to use the governance authority to modify the implementation of the proxy contract Address, using the user's authorization to the contract that has not been canceled, to transfer the user's funds away. Such as WBTC, YFI, BAL, AAVE, UNI and other tokens. Finally, the hacker converted the stolen funds into ETH through the cross-chain bridge protocol, and sent it to the 0xA30190b96FaEe0080144aA0B7645081Fcbf49E6F address of Ethereum.…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "slowmist",
+      "label": "panewslab.com",
+      "url": "https://www.panewslab.com/zh/sqarticledetails/kaucoe3r.html"
+    }
+  ]
+}

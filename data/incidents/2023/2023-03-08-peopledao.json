@@ -1,0 +1,93 @@
+{
+  "id": "2023-03-08-peopledao",
+  "name": "PeopleDAO",
+  "date": "2023-03-08",
+  "year": 2023,
+  "amountUsd": 120000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DAO",
+  "category": "social-engineering",
+  "technique": "Signer Phishing",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "social-engineering",
+    "confidence": 0.96,
+    "top": [
+      {
+        "category": "social-engineering",
+        "p": 0.96
+      },
+      {
+        "category": "access-control",
+        "p": 0.02
+      },
+      {
+        "category": "key-compromise",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.01,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "When PeopleDAO’s community treasury multi-signature wallet on the digital asset management platform Safe (formerly Gnosis Safe) distributed monthly contributor rewards on March 6, 76 ETH (approximately $120,000) were stolen by hackers through social engineering attacks. This event has nothing to do with the PEOPLE token contract. PeopleDAO collects monthly contributor reward information through Google Form. The person in charge of accounting mistakenly shared a link with editing permissions in the Discord public channel. Payments to your own address and set them to be invisible. Due to the malicious concealment, the team leader did not find it during the review.…",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "When PeopleDAO’s community treasury multi-signature wallet on the digital asset management platform Safe (formerly Gnosis Safe) distributed monthly contributor rewards on March 6, 76 ETH (approximately $120,000) were stolen by hackers through social engineering attacks. This event has nothing to do with the PEOPLE token contract. PeopleDAO collects monthly contributor reward information through Google Form. The person in charge of accounting mistakenly shared a link with editing permissions in the Discord public channel. Payments to your own address and set them to be invisible. Due to the malicious concealment, the team leader did not find it during the review.…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On March 6, 2023, PeopleDAO lost 76.5 ETH (~$120,000) on Ethereum when a public accounting spreadsheet with edit access enabled allowed an attacker to insert a hidden payout row. This unreviewed row was executed by the multisig, draining the treasury. The incident was caused by mistakenly granting public edit access to the DAO's accounting Google Sheet during its monthly payout process. An attacker inserted a hidden payout row, which was not detected upon review, and the multisig signers executed the resulting mass transfer without verifying all recipients, enabling the unauthorized withdrawal."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x4bd2f6981b6b3005da8730bc14bfbbf36bd9faab6b5976012830c6235ea0afcf"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "panewslab.com",
+      "url": "https://www.panewslab.com/zh/sqarticledetails/bv6m85qy.html"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/peopledao-2023-03-06"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "forklog.com",
+      "url": "https://forklog.com/en/peopledao-loses-120000-in-ethereum-via-google-sheets-exploit/"
+    },
+    {
+      "source": "revertiq",
+      "label": "threadreaderapp.com",
+      "url": "https://threadreaderapp.com/thread/1634518915668668416.html"
+    }
+  ]
+}

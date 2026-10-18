@@ -1,0 +1,68 @@
+{
+  "id": "2026-09-09-omni404",
+  "name": "OMNI404",
+  "date": "2026-09-09",
+  "year": 2026,
+  "amountUsd": 5923,
+  "returnedUsd": null,
+  "chains": [],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Smart Contract Vulnerability",
+  "classificationNote": "Classified by keyword rules from the DeFiHackLabs root-cause title.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.64,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.66
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.29
+      },
+      {
+        "category": "input-validation",
+        "p": 0.03
+      }
+    ],
+    "flashLoan": 0.11,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "ERC-404 dual ID/amount transfer interpretation drains pool WETH. Lost: 2.427 WETH (run() leg reproduced here; ~3.02 ETH across the full 4-tx block)",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "ERC-404 dual ID/amount transfer interpretation drains pool WETH. Lost: 2.427 WETH (run() leg reproduced here; ~3.02 ETH across the full 4-tx block)"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Ethereum ERC-404 token OMNI404 (O404) derived NFT mint/burn counts from integer balanceOf/units diffs in _transfer(). Its transfer() treated values ≤50 as ERC-721 IDs but still moved a fixed 1e18 units. Using flash loans and Uniswap V3 exact-output swaps (transfer(recipient, 1/2/.../21)), the attacker received full-unit tokens while the pool booked wei-level amounts, draining about 2.4 WETH."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-09/OMNI404_exp.sol",
+  "sources": [
+    "defihacklabs",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-09/OMNI404_exp.sol"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/2098300936720695573"
+    }
+  ]
+}

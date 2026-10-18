@@ -1,0 +1,88 @@
+{
+  "id": "2020-11-30-sushiswap",
+  "name": "SushiSwap",
+  "date": "2020-11-30",
+  "year": 2020,
+  "amountUsd": 15000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.78,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.79
+      },
+      {
+        "category": "logic-error",
+        "p": 0.17
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.1,
+    "stateActor": 0.02,
+    "hasRootCause": 0.37
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "The liquidity mining project SushiSwap (SUSHI) community governor 0xMaki announced in the Discord group that the SushiSwap vulnerability has been fixed, and the lost funds (approximately US$10,000) will be compensated from the SUSHI asset library. Previously, SushiSwap was attacked by a liquidity provider. The attacker obtained between 10,000 and 15,000 US dollars in a transaction. However, after this operation was discovered by 0xMaki, 0xMaki sent a transaction to the attacker with a message saying \"I found you and we are working hard to fix it. Contact me on Discord to get bug bounty-0xMaki\". According to analysis, the attacker uses SLP and WETH to c…",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The liquidity mining project SushiSwap (SUSHI) community governor 0xMaki announced in the Discord group that the SushiSwap vulnerability has been fixed, and the lost funds (approximately US$10,000) will be compensated from the SUSHI asset library. Previously, SushiSwap was attacked by a liquidity provider. The attacker obtained between 10,000 and 15,000 US dollars in a transaction. However, after this operation was discovered by 0xMaki, 0xMaki sent a transaction to the attacker with a message saying \"I found you and we are working hard to fix it. Contact me on Discord to get bug bounty-0xMaki\". According to analysis, the attacker uses SLP and WETH to c…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On November 30, 2020, SushiSwap was exploited on Ethereum Mainnet due to improper access control around its Sushibar fee-reward logic. An attacker was able to withdraw protocol fees, resulting in approximately $15,000 in losses, which were later covered by the SushiSwap treasury. No user funds or pool liquidity were lost and the exploit was patched within hours. Lax access control in the Sushibar fee-rewards logic allowed an attacker to withdraw protocol fees by invoking reward-handling functions in an unintended sequence or manner not properly restricted to authorized actors."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x8389bafcd513ee198149f25c8aa8a0e79f03fa53bfe3d6aa21c74e66f0927126"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "btcfans.com",
+      "url": "https://www.btcfans.com/en-us/flash/id-43549"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/sushiswap-2020-11-30"
+    },
+    {
+      "source": "revertiq",
+      "label": "monitoringroom.com",
+      "url": "https://monitoringroom.com/situation/crypto-hack/sushiswap"
+    },
+    {
+      "source": "revertiq",
+      "label": "eng.ambcrypto.com",
+      "url": "https://eng.ambcrypto.com/sushiswap-exploit-mitigated-gm/"
+    }
+  ]
+}

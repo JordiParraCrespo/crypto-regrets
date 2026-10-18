@@ -1,0 +1,86 @@
+{
+  "id": "2019-03-29-troncrush",
+  "name": "TronCrush",
+  "date": "2019-03-29",
+  "year": 2019,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [
+    "Tron"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Infinite Mint",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.48,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.51
+      },
+      {
+        "category": "logic-error",
+        "p": 0.2
+      },
+      {
+        "category": "access-control",
+        "p": 0.17
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.91
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "The transfer does not determine that to and from cannot be the same address, resulting in an attack that can create more than 15w TCC tokens without foundation.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The transfer does not determine that to and from cannot be the same address, resulting in an attack that can create more than 15w TCC tokens without foundation."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "TronCrush on Tron was exploited on March 29, 2019, due to a transfer logic flaw that allowed attackers to mint over 150,000 TCC tokens without foundation by sending transfers to their own address. The specific economic impact is unknown, as no USD loss or withdrawal records have been reported. The contract's transfer function did not check that the sender and recipient were different, allowing attackers to trigger transfers to themselves and mint new tokens without legitimate backing."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "blocking.net",
+      "url": "https://blocking.net/1638/dapp-trend-list-all-vulnerability-wave-fields-on-eos-may-be-reproduced/"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/troncrush-2019-03-29"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/troncrush-hack-2019"
+    },
+    {
+      "source": "revertiq",
+      "label": "hacked.slowmist.io",
+      "url": "https://hacked.slowmist.io/?c=Tron&page=2"
+    }
+  ]
+}

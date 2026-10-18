@@ -1,0 +1,169 @@
+{
+  "id": "2023-11-22-kyberswap-elastic",
+  "name": "KyberSwap Elastic",
+  "date": "2023-11-22",
+  "year": 2023,
+  "amountUsd": 48000000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum",
+    "Base",
+    "Polygon",
+    "Optimism",
+    "Arbitrum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Rounding Error",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.08,
+    "stateActor": 0.02,
+    "hasRootCause": 0.93
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "precision loss. Lost: ~$48M",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "precision loss. Lost: ~$48M"
+    },
+    {
+      "source": "REKT",
+      "text": "OG decentralised exchange KyberSwap got rekt across six chains, for a total loss of over $48M. Perhaps there’s some good news in store for KyberSwap and LPs, or is the attacker just toying with us?"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "- In the first swap, when calculating Ticks, there is *incorrect rounding direction during the reinvestment process*. Thus the tick could be manipulated, and _updateLiquidityAndCrossTick 0could be bypassed. - In the second swap, the _updateLiquidityAndCrossTick is being triggered to increase liquidity. However, since there is precision loss in the first swap, the liquidity is then double counted. Vulnerable code snippet: By blocksec team: Attack tx: 💡 https://phalcon.blocksec.com/explorer/tx/eth/0x485e08dc2b6a4b3aeadcb89c3d18a37666dc7d9424961a2091d6b3696792f0f3 Analysis 💡 https://blocksec.com/blog/yet-another-tragedy-of-precision-loss-an-in-depth-analysis-of-the-kyber-swap-incident-1"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Kyber Network tweeted that KyberSwap Elastic has experienced a security incident. According to the analysis of the SlowMist security team, the root cause of this attack is that in calculating the number of tokens needed for the exchange from the current price to the boundary scale price, the liquidity will be added to the portion of the fee compounding because of KyberSwap Elastic's reinvestment curve, thus causing its calculation result to be larger than expected, which can cover the user's need for exchange, but the actual price has already crossed the boundary scale, which makes the protocol think that the liquidity within the current scale has alre…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On November 22,23, 2023, KyberSwap Elastic pools were exploited across multiple chains due to a tick-crossing rounding error in concentrated liquidity arithmetic. Attackers manipulated swap amounts and pool state to double-count liquidity, draining approximately $48.8M before KyberSwap paused contracts and recovered part of the loss via negotiation. A tick-boundary rounding flaw in KyberSwap Elastic's concentrated liquidity math allowed swaps to cross the same tick in both directions, resulting in double-counted 'ghost' liquidity. This flawed code path evaded prior audit and permitted draining of pool funds."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "KyberSwap Elastic was exploited on 2023-11-22 when swap math let the computed post-swap price move past a tick boundary without applying the matching liquidity update. Kyber later reported about $56.2M in affected assets, including about $55.23M extracted from pools, as the primary exploiter and copycats repeated the same double-counting path across multiple chains. KyberSwap Elastic's historical swap logic could take the branch for a swap that supposedly stopped short of the next initialized tick, yet still compute a nextSqrtP beyond that tick's targetSqrtP. Kyber's postmortem described this as a discrepancy between cross-tick estimation and final price calculation, worsened by rounding.…"
+    }
+  ],
+  "audit": "ChainSecurity, Sherlock",
+  "txHashes": [
+    "0x485e08dc2b6a4b3aeadcb89c3d18a37666dc7d9424961a2091d6b3696792f0f3",
+    "0xef2c710b4dab33844b6affb1b05bdb943a1f89d4c22fdd6ddd5b07ea12d92360",
+    "0x8464ee4eab7e10c9c07aee4637644708cd0ce43a7265f481eac2dfb0dbab942c",
+    "0x34e5c79d5c11426286313db5069b8ecd07f5e32ac5afa4b08cbe181d33627ad7",
+    "0xb58c81460ef0167f492fb4900e9da60cc6fa1117bd5b67b2100bb5b5e5df8b0c",
+    "0x396a83df7361519416a6dc960d394e689dd0f158095cbc6a6c387640716f5475",
+    "0x09a3a12d58b0bb80e33e3fb8e282728551dc430c65d1e520fe0009ec519d75e8",
+    "0x0106c7549ac4e0de16aefce2b8fe339127ee8003b236f623d05edc41429de779",
+    "0x96d90b23678b34e9ff324bdef7a18bf190289afff848a26882a1fe3110bf9714",
+    "0x547aea57ae199779afe1f04473cd9a33aba6330df2c80e4d9d033ad3fb4f6e8d",
+    "0x567f0ba7741d097b6b1aaba68e8b75b9930f3cf946681cf9ad068aa34eb11c5b",
+    "0x94d9d5e0e57d2c0df400a8e3ad417678ef69f0272a5fcfe0d9ce788063c992bd",
+    "0x339a65bb935f69e584ea979aa39282414371767576d4f1186a047768ef0a57c5",
+    "0x7f325cf1201422cf7ab6dd06d66136c55b399144f21b70f09a0c799782c5c874",
+    "0xdaa80d75d872bf2513c09c76d81db54d9ddcfd06d4230e65e3bf8d87d2758db2",
+    "0xcea8599b8b82d5c17739fda9fe69a3e19a1613405929b3e191118681b702fc6a",
+    "0x0a2957e7a2b45db525143d419137de854a741e7d2f61468b1dc3f83c9c27f9f7",
+    "0x4e74cb6c73422f015bef62de2ad58ee59978da452b7c908ab7b70a16474316fe",
+    "0x8a0880f1662e39fa838e89fa751669e4a1eee5c15586dc447453274f7b8ce746",
+    "0xed42e9b9f44b080c0b4a8b895a08fca3be3e47866d97b263cbdf85c46dfa5e8a",
+    "0xe113177dc8a9943c2c920d042b024eea18589da9c710e795d26a811d1c2a29a5",
+    "0xb17e03e2467167b020f4fbe2b6f4c0f1dada09e82105f283ad3c4003a9d43469"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-11/KyberSwap_exp.eth.1.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-11/KyberSwap_exp.eth.1.sol"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: KyberSwap - REKT",
+      "url": "https://rekt.news/kyberswap-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "phalcon.blocksec.com",
+      "url": "https://phalcon.blocksec.com/explorer/tx/eth/0x485e08dc2b6a4b3aeadcb89c3d18a37666dc7d9424961a2091d6b3696792f0f3"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "blocksec.com",
+      "url": "https://blocksec.com/blog/yet-another-tragedy-of-precision-loss-an-in-depth-analysis-of-the-kyber-swap-incident-1"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xef2c710b4dab33844b6affb1b05bdb943a1f89d4c22fdd6ddd5b07ea12d92360"
+    },
+    {
+      "source": "blocksec",
+      "label": "blocksec.com",
+      "url": "https://blocksec.com/blog/kyberswap-incident-masterful-exploitation-of-rounding-errors-with-exceedingly-subtle-calculations"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/KyberNetwork/status/1727475235342217682"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/explained-the-kyberswap-2023-12-11t13-40-40-859000-00-00"
+    },
+    {
+      "source": "revertiq",
+      "label": "halborn.com",
+      "url": "https://www.halborn.com/blog/post/explained-the-kyberswap-hack-november-2023"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/de-fi-rekt-report-crypto-losses-reach-1-95b-in-2023"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.kyberswap.com",
+      "url": "https://blog.kyberswap.com/post-mortem-kyberswap-elastic-exploit/"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/3-2023-11-23"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/de-fi-rekt-report-over-331m-lost-in-november-2023"
+    }
+  ]
+}

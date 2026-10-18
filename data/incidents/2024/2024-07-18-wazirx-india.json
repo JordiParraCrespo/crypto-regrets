@@ -1,0 +1,105 @@
+{
+  "id": "2024-07-18-wazirx-india",
+  "name": "WazirX: India",
+  "date": "2024-07-18",
+  "year": 2024,
+  "amountUsd": 234900000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "CEX",
+  "category": "social-engineering",
+  "technique": "Signer Phishing",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "social-engineering",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "social-engineering",
+        "p": 0.99
+      },
+      {
+        "category": "frontend-infra",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.96,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "India's leading crypto exchange, WazirX took a massive $235 million hit when it's Safe multisig wallet crumbled under a devastating breach. How many times do we need to be reminded of not your keys, not your crypto?",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "India's leading crypto exchange, WazirX took a massive $235 million hit when it's Safe multisig wallet crumbled under a devastating breach. How many times do we need to be reminded of not your keys, not your crypto?"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "WazirX operated a Safe (Gnosis Safe) multi-signature wallet requiring 4-of-6 signatures—five keys held by WazirX personnel on hardware wallets and one HSM key held by Liminal Custody. Attackers, later attributed to North Korea's Lazarus Group, prepared for eight days by funding operations through Tornado Cash. They then exploited a discrepancy between what Liminal's custody interface displayed to signers and the actual transaction payload being signed: WazirX signers approved what they believed to be routine transactions, but were actually signing approval for the multisig wallet's implementation contract to be upgraded to a malicious contract the attacker had pre-deployed. Once the upgrade was applied with the required three WazirX signatures plus Liminal's co-signature, the attacker gained unilateral control over the wallet and drained approximately $234.9M in assets—including $102M in SHIB and $52.6M in ETH—without requiring any further approvals. Stolen funds were rapidly converted to ETH and laundered via Tornado Cash. The root cause was a combination of insufficient transaction-payload verification by human signers, UI-level deception by the attacker, and the absence of an independent payload-verification step separate from the custody platform's interface. Attack Tx: 0x48164d3adbab78c2cb9876f6e17f88e321097fcd14cadd57556866e4ef3e185d Analysis: Explained: The WazirX Hack (July 2024) – Halborn 2024 WazirX hack – Wikipedia WazirX Hacking Incident Analysis – Cobo Security Team WazirX Twitter Statement"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The cryptocurrency exchange WazirX posted preliminary investigation results of the cyber attack on Twitter, stating that one of its multisig wallets was compromised, resulting in a loss of over $230 million."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x48164d3adbab78c2cb9876f6e17f88e321097fcd14cadd57556866e4ef3e185d"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "defihacklabs",
+    "blocksec",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: WazirX - Rekt",
+      "url": "https://rekt.news/wazirx-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x48164d3adbab78c2cb9876f6e17f88e321097fcd14cadd57556866e4ef3e185d"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "halborn.com",
+      "url": "https://www.halborn.com/blog/post/explained-the-wazirx-hack-july-2024"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "en.wikipedia.org",
+      "url": "https://en.wikipedia.org/wiki/2024_WazirX_hack"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x48164d3adbab78c2cb9876f6e17f88e321097fcd14cadd57556866e4ef3e185d"
+    },
+    {
+      "source": "blocksec",
+      "label": "x.com",
+      "url": "https://x.com/WazirXIndia/status/1813981143437611440"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/1813848794360139808"
+    }
+  ]
+}

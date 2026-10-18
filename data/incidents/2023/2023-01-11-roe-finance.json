@@ -1,0 +1,105 @@
+{
+  "id": "2023-01-11-roe-finance",
+  "name": "Roe Finance",
+  "date": "2023-01-11",
+  "year": 2023,
+  "amountUsd": 80000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum",
+    "Polygon"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.12,
+    "stateActor": 0.02,
+    "hasRootCause": 0.91
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "FlashLoan price manipulation. Lost: $80k",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "FlashLoan price manipulation. Lost: $80k"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The limited liquidity of the pool, which resulted in the manipulation of the price oracle. Vulnerable code snippet: Attack tx: https://phalcon.blocksec.com/tx/eth/0x927b784148b60d5233e57287671cdf67d38e3e69e5b6d0ecacc7c1aeaa98985b… Analysis: https://x.com/BlockSecTeam/status/1613267000913960976"
+    },
+    {
+      "source": "SlowMist",
+      "text": "RoeFinance was attacked. The victim pool (0x574f) has just been emptied, with a total loss of about $80000. This is a typical price manipulation attack."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On January 11, 2023, Roe Finance was exploited on Ethereum due to price manipulation of an LP-token oracle. An attacker used a flash loan to inflate the value of collateral and extracted approximately $80,000 before repaying the loan. The protocol relied on a manipulable spot price oracle for LP-token collateral. An attacker was able to temporarily inflate the value of LP tokens by donating assets into the underlying pool and calling sync, which let them borrow more than was properly backed."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x927b784148b60d5233e57287671cdf67d38e3e69e5b6d0ecacc7c1aeaa98985b"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-01/RoeFinance_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-01/RoeFinance_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BlockSecTeam/status/1613267000913960976"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "phalcon.blocksec.com",
+      "url": "https://phalcon.blocksec.com/tx/eth/0x927b784148b60d5233e57287671cdf67d38e3e69e5b6d0ecacc7c1aeaa98985b…"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "t.co",
+      "url": "https://t.co/NdhSZmHp9r"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/roe-finance-2023-01-11"
+    },
+    {
+      "source": "revertiq",
+      "label": "time.graphics",
+      "url": "https://time.graphics/line/747250"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.solidityscan.com",
+      "url": "https://blog.solidityscan.com/roe-finance-hack-analysis-price-manipulation-6993fbea0d7c/"
+    }
+  ]
+}

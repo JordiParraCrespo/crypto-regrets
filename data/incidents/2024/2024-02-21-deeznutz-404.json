@@ -1,0 +1,122 @@
+{
+  "id": "2024-02-21-deeznutz-404",
+  "name": "DeezNutz 404",
+  "date": "2024-02-21",
+  "year": 2024,
+  "amountUsd": 170000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "Token",
+  "category": "accounting-math",
+  "technique": "Infinite Mint",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.63,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.65
+      },
+      {
+        "category": "access-control",
+        "p": 0.25
+      },
+      {
+        "category": "logic-error",
+        "p": 0.06
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.86
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "lack of validation. Lost: ~170k",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "lack of validation. Lost: ~170k"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Self transfer in _transfer() Vulnerable code snippet: Attack tx: https://etherscan.io/tx/0xbeefd8faba2aa82704afe821fd41b670319203dd9090f7af8affdf6bcfec2d61 Analysis: https://twitter.com/ImmuneBytes/status/1664239580210495489"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The DeezNutz ERC-404 implementation contained an accounting error in self-transfers. ERC-404 is a hybrid ERC-20/ERC-721 token that mints or burns NFT units whenever an address's balance crosses a whole-token threshold; in a self-transfer the same address is both sender and receiver. The contract credited the receiver balance without properly debiting the sender (or triggered an NFT mint for the receive leg without a corresponding burn for the send leg), effectively inflating the caller's balance on each self-transfer. The attacker flash-loaned 2,000 WETH, swapped into DeezNutz, performed five self-transfer iterations to multiply holdings, transferred a small portion to the pair to satisfy the Uniswap k-value check, then swapped the inflated balance back to WETH for profit. Vulnerable code snippet: Attack Tx: 0xbeefd8faba2aa82704afe821fd41b670319203dd9090f7af8affdf6bcfec2d61 Analysis: DeezNutz 404 Exploit"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "DeezNutz_404 was exploited on Ethereum on 2024-02-21 after an ERC-404 token implementation mishandled self transfers. The attacker repeatedly transferred DN tokens to the same address, inflated the balance through faulty accounting, then sold the unbacked tokens for about 58.65 ETH. The DeezNutz_404 ERC-404 token implementation failed to handle transfer() calls where the sender and recipient were the same address. Cached balance values were updated in the wrong order, so a self transfer increased the attacker's balance instead of leaving it unchanged. The attacker repeatedly self transferred tokens to mint unbacked supply and drained liquidity from the DN/WETH market."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xbeefd8faba2aa82704afe821fd41b670319203dd9090f7af8affdf6bcfec2d61"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-02/DeezNutz404_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-02/DeezNutz404_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xbeefd8faba2aa82704afe821fd41b670319203dd9090f7af8affdf6bcfec2d61"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/ImmuneBytes/status/1664239580210495489"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/0xNickLFranklin/status/1760481343161700523"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xbeefd8faba2aa82704afe821fd41b670319203dd9090f7af8affdf6bcfec2d61"
+    },
+    {
+      "source": "blocksec",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs?tab=readme-ov-file#20240221-deeznutz-404---lack-of-validation"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/deeznutz-404-2024-02-21"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/deeznutz-404-hack-2024"
+    },
+    {
+      "source": "revertiq",
+      "label": "raw.githubusercontent.com",
+      "url": "https://raw.githubusercontent.com/SunWeb3Sec/DeFiHackLabs/main/src/test/2024-02/DeezNutz404_exp.sol"
+    }
+  ]
+}

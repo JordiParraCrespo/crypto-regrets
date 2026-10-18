@@ -1,0 +1,95 @@
+{
+  "id": "2020-04-18-uniswap-v1",
+  "name": "Uniswap V1",
+  "date": "2020-04-18",
+  "year": 2020,
+  "amountUsd": 220000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "reentrancy",
+  "technique": "Reentrancy",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "reentrancy",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "reentrancy",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "ERC777 Reentrancy. Lost: $220,000",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "ERC777 Reentrancy. Lost: $220,000"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The attacker used a reentrancy attack to steal funds (containing approximately 1,278 ETH) from Uniswap's ETH-imBTC Uniswap liquidity pool."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On April 18, 2020, Uniswap V1's imBTC-ETH pool on Ethereum was drained of approximately $220,000 due to an ERC777 reentrancy vulnerability. The attacker exploited Uniswap's swap logic and imBTC's callback hooks to manipulate reserve pricing, enabling extraction of extra ETH with repeated token-to-ETH swaps. The Uniswap V1 contract priced ETH payouts based on the pool's current token balance, paid out ETH, and then only afterwards pulled tokens via transferFrom. Because ERC777 tokens (imBTC) allowed sender callbacks via tokensToSend before balances moved, the attacker could re-enter the swap function before the pool's reserves updated, letting both sell…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x32c83905db61047834f29385ff8ce8cb6f3d24f97e24e6101d8301619efee96e"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2020-04/uniswap-erc777.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2020-04/uniswap-erc777.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "blog.blockmagnates.com",
+      "url": "https://blog.blockmagnates.com/detailed-explanation-of-uniswaps-erc777-re-entry-risk-8fa5b3738e08"
+    },
+    {
+      "source": "slowmist",
+      "label": "securityaffairs.co",
+      "url": "https://securityaffairs.co/wordpress/101895/cyber-crime/uniswap-lendf-me-hacked.html"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/uniswap-v1-2020-04-18"
+    },
+    {
+      "source": "revertiq",
+      "label": "quadrigainitiative.com",
+      "url": "https://quadrigainitiative.com/cryptocurrencyhackscamfraudwiki/index.php?title=Uniswap_ERC777_Reentrancy_Attack"
+    },
+    {
+      "source": "revertiq",
+      "label": "securityaffairs.com",
+      "url": "https://securityaffairs.com/101895/cyber-crime/uniswap-lendf-me-hacked.html"
+    }
+  ]
+}

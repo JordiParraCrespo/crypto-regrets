@@ -1,0 +1,108 @@
+{
+  "id": "2024-12-10-labubu-token",
+  "name": "LABUBU Token",
+  "date": "2024-12-10",
+  "year": 2024,
+  "amountUsd": 12000,
+  "returnedUsd": null,
+  "chains": [
+    "Binance"
+  ],
+  "targetType": "Token",
+  "category": "accounting-math",
+  "technique": "Donation Attack",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.47,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.5
+      },
+      {
+        "category": "social-engineering",
+        "p": 0.25
+      },
+      {
+        "category": "logic-error",
+        "p": 0.1
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.03,
+    "hasRootCause": 0.09
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "Logic Flaw. Lost: 17.4 BNB (~ $12,048)",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Logic Flaw. Lost: 17.4 BNB (~ $12,048)"
+    },
+    {
+      "source": "SlowMist",
+      "text": "A suspicious attack involving LABUBU (LABUBU) occurred on the BSC chain, resulting in a loss of approximately $11,900."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On December 10, 2024, an attacker exploited a logic flaw in the LABUBU token on BNB Chain, using repeated self-transfers to inflate their balance. The attacker employed a flash loan to borrow LABUBU tokens, repeatedly transferred tokens to their own address to increase their balance, and ultimately swapped the inflated tokens for VOVO and then for about 17.4 BNB. The LABUBU token's transfer logic did not prevent self-transfers, causing a net balance increase when the sender and recipient were the same address. Every self-transfer increased the attacker's balance instead of having no effect."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xb06df371029456f2bf2d2edb732d1f3c8292d4271d362390961fdcc63a2382de"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-12/LABUBU_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-12/LABUBU_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/TenArmorAlert/status/1866481066610958431"
+    },
+    {
+      "source": "slowmist",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0xb06df371029456f2bf2d2edb732d1f3c8292d4271d362390961fdcc63a2382de"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/how-self-transfers-turned-into-a-labubu-token-2024-12-25"
+    },
+    {
+      "source": "revertiq",
+      "label": "quillaudits.com",
+      "url": "https://www.quillaudits.com/blog/hack-analysis/labubu-token-exploit-transfer-logic-flaw"
+    },
+    {
+      "source": "revertiq",
+      "label": "olympix.security",
+      "url": "https://olympix.security/biweekly-exploits/unilends-sequencing-bug-orange-finances-key-leak-and-labubus-transfer-logic-fail"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/past/2024/README.md#L93"
+    }
+  ]
+}

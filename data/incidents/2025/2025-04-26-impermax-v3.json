@@ -1,0 +1,136 @@
+{
+  "id": "2025-04-26-impermax-v3",
+  "name": "Impermax V3",
+  "date": "2025-04-26",
+  "year": 2025,
+  "amountUsd": 300000,
+  "returnedUsd": null,
+  "chains": [
+    "Base"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Incorrect Fee Accounting",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.96,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.96
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.04
+      }
+    ],
+    "flashLoan": 0.84,
+    "stateActor": 0.01,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "FlashLoan Price Oracle Manipulation. Lost: 62,628.66 USD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "FlashLoan Price Oracle Manipulation. Lost: 62,628.66 USD"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The Impermax V3 protocol on Base contained a business logic flaw: it assigned full collateral value to uncollected (pending) Uniswap V3 LP fees. The attacker flash-borrowed from Morpho, added liquidity to a low-liquidity WETH/USDC 1% pool on Uniswap V3, and performed circular swaps to rapidly inflate accrued fees on their LP position. They then borrowed WETH from Impermax against this artificially inflated fee-collateral. Next, they auto-compounded those fees into a new LP position at the wrong price range, sharply devaluing the position and pushing the protocol into bad debt. Finally, the attacker called the restructureBadDebt function to bypass normal liquidation procedures and retain the borrowed funds, causing approximately $300K in losses. Attack Tx: 0xaafafcbb0dcd86ed78e3a0facc4748c48a36ca5a74d107c383e807b0b89758e3 Analysis: Impermax V3 Exploit: Post Mortem Inside the Impermax V3 Hack - Verichains"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Impermax V3 lends against tokenized Uniswap V3 LP positions and values collateral using a price derived from the underlying Uniswap V3 pool. The attacker took Morpho flashloans of WETH and USDC, minted a tiny Uniswap V3 position, wrapped it as a TokenizedUniswapV3Position NFT and deposited it as collateral, then aggressively manipulated the V3 pool with a large initial swap and ~100 back-and-forth swaps. This skewed the pool's price/tick state that Impermax used to evaluate the LP position's value (getPositionData) and its bad-debt/borrow accounting, letting the attacker borrow far more than the collateral was worth and abuse restructureBadDebt and reinvest. After redeeming the inflated position the borrowed funds were never properly repaid, netting ~$300k. Root cause: collateral valuation relied on an instantaneously manipulable on-chain V3 price rather than a manipulation-resistant TWAP/oracle. Vulnerable code snippet: Attack Tx: https://basescan.org/tx/0xde903046b5cdf27a5391b771f41e645e9cc670b649f7b87b1524fc4076f45983 Analysis: How Impermax V3 lost $300k in a flashloan attack (QuillAudits)"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Impermax was attacked on the Base network. In a tweet, Impermax stated that someone launched a flash loan attack and drained its V3 liquidity pools. The team is currently investigating and advises users not to interact with any V3 pools."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On April 26, 2025, Impermax V3 on the Base chain was exploited via a flash loan attack that exploited a flaw in the protocol's LP fee reinvestment and collateral valuation logic, resulting in a loss of approximately $300,000. The attacker manipulated accrued Uniswap V3 pool fees, borrowed against the inflated collateral, triggered reinvestment into an invalid price range, and self-liquidated for full profit, leaving the protocol with unrecoverable bad debt. Impermax V3 over-valued uncollected Uniswap V3 LP fees as collateral and failed to validate the reinvestment price range, allowing an attacker to inflate LP fees, borrow against them, and then destr…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xaafafcbb0dcd86ed78e3a0facc4748c48a36ca5a74d107c383e807b0b89758e3",
+    "0xde903046b5cdf27a5391b771f41e645e9cc670b649f7b87b1524fc4076f45983",
+    "0xeac783b852250dd703dfa2f49649a41729dfb84b781ee400943112bcdaaa3436",
+    "0xad4fc3156666d5402f00dcfd5c183493d283f4166a6dd581dd8c0a895e826a56"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-04/ImpermaxV3_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-04/ImpermaxV3_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "medium.com",
+      "url": "https://medium.com/@quillaudits/how-impermax-v3-lost-300k-in-a-flashloan-attack-35b02d0cf152"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "basescan.org",
+      "url": "https://basescan.org/tx/0xaafafcbb0dcd86ed78e3a0facc4748c48a36ca5a74d107c383e807b0b89758e3"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "impermax.medium.com",
+      "url": "https://impermax.medium.com/impermax-v3-exploit-post-mortem-6b0818897b25"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "blog.verichains.io",
+      "url": "https://blog.verichains.io/p/inside-the-impermax-v3-hack"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "basescan.org",
+      "url": "https://basescan.org/tx/0xde903046b5cdf27a5391b771f41e645e9cc670b649f7b87b1524fc4076f45983"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xaafafcbb0dcd86ed78e3a0facc4748c48a36ca5a74d107c383e807b0b89758e3"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/impermax-v3-2025-04-29"
+    },
+    {
+      "source": "revertiq",
+      "label": "quillaudits.com",
+      "url": "https://www.quillaudits.com/blog/hack-analysis/how-impermax-v3-lost-300k-in-flashloan-attack"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/LitzyKlein/impermax-v3-flashloan-exploit-reproduction"
+    },
+    {
+      "source": "revertiq",
+      "label": "quadrigainitiative.com",
+      "url": "https://quadrigainitiative.com/casestudy/impermaxfinancev3flashloanfeevaluationflawexploited.php"
+    }
+  ]
+}

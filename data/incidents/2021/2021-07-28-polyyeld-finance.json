@@ -1,0 +1,88 @@
+{
+  "id": "2021-07-28-polyyeld-finance",
+  "name": "PolyYeld Finance",
+  "date": "2021-07-28",
+  "year": 2021,
+  "amountUsd": 250000,
+  "returnedUsd": null,
+  "chains": [
+    "Polygon"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Infinite Mint",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.8,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.81
+      },
+      {
+        "category": "access-control",
+        "p": 0.1
+      },
+      {
+        "category": "logic-error",
+        "p": 0.09
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.9
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "The profit farming agreement PolyYeld Finance was attacked. The project contract was used to mint 4.9 trillion YELD tokens and dump them in the secondary market.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The profit farming agreement PolyYeld Finance was attacked. The project contract was used to mint 4.9 trillion YELD tokens and dump them in the secondary market."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 28 July 2021, PolyYeld Finance on Polygon suffered an exploit that allowed an attacker to mint an unlimited amount of its YELD token by abusing the protocol's MasterChef contract's incompatibility with deflationary (transfer tax) tokens. Approximately $250,000 worth of assets were realized from swapped tokens as the market for YELD collapsed. The MasterChef reward contract was not equipped to handle deflationary (transfer-tax) tokens like xYELD. Manipulating the pool's xYELD balance to near zero through repeated taxed withdrawals allowed the attacker to claim an enormous amount of YELD rewards, leading to infinite mint."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x3c143d2a211f7448c4de6236e666792e90b2edc8f5035c3aa992fd7d7daca974"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "thoreum-finance.medium.com",
+      "url": "https://thoreum-finance.medium.com/what-exploit-happened-today-for-gocerberus-and-garuda-also-for-lokum-ybear-piggy-caramelswap-3943ee23a39f"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/polyyeld-finance-2021-07-28"
+    },
+    {
+      "source": "revertiq",
+      "label": "quadrigainitiative.com",
+      "url": "https://quadrigainitiative.com/casestudy/polyyeldfinancexyeldexploit.php"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptobriefing.com",
+      "url": "https://cryptobriefing.com/polygon-yield-farm-crashes-zero-after-exploit"
+    }
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "id": "2026-05-29-ysdao",
+  "name": "YSDAO",
+  "date": "2026-05-29",
+  "year": 2026,
+  "amountUsd": 19490,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Price Manipulation and Tax Bypass",
+  "classificationNote": "Classified by keyword rules from the DeFiHackLabs root-cause title.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.65,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.67
+      },
+      {
+        "category": "access-control",
+        "p": 0.18
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.12
+      }
+    ],
+    "flashLoan": 0.96,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Price Manipulation and Tax Bypass. Lost: ~19.49K USDT",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Price Manipulation and Tax Bypass. Lost: ~19.49K USDT"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "YSDAO's transfer-protection logic detects add/remove liquidity by reading the PancakeSwap V2 pair's current token balances against its reserves, which the attacker spoofs. Using a Pancake V3 USDT flash loan plus a V2 pair swap callback the attacker: (1) buys YSDAO while making the pair output 1 wei USDT so _isRemoveLiquidity() sees the pair USDT balance below reserve and skips buy-tax/cooldown accounting; (2) calls the YSDAO staking contract's sync() -- which has NO access control and donates all staking-held USDT into the YSDAO/USDT pair then resyncs reserves, inflating the apparent YSDAO price; (3) transfers 1 USDT into the pair before selling so _isAddLiquidity() treats the sale as a liquidity add and bypasses the harsher sell/profit-tax path. The combination lets the attacker sell the appreciated YSDAO tax-free, netting ~$19.5K USDT. Vulnerable code snippet: Attack Tx: https://bscscan.com/tx/0x91f26d96373bbec6a6a8517c7be995a739d65f20fed589d53bc47d8140f91907 Analysis: DeFiHackLabs PoC"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Computility-associated YSDAO project on BSC suffered a liquidity pool attack on PancakeSwap V2. The hacker manipulated reserves via contract calls and extracted funds, resulting in approximately $19.5K loss."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x91f26d96373bbec6a6a8517c7be995a739d65f20fed589d53bc47d8140f91907"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-05/YSDAO_exp.sol",
+  "sources": [
+    "defihacklabs",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-05/YSDAO_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x91f26d96373bbec6a6a8517c7be995a739d65f20fed589d53bc47d8140f91907"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/TenArmorAlert/status/2061278221497254013"
+    }
+  ]
+}

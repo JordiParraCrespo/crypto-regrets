@@ -1,0 +1,91 @@
+{
+  "id": "2018-05-22-verge",
+  "name": "Verge",
+  "date": "2018-05-22",
+  "year": 2018,
+  "amountUsd": 1750000,
+  "returnedUsd": null,
+  "chains": [
+    "Verge"
+  ],
+  "targetType": "Chain",
+  "category": "consensus-attack",
+  "technique": "Withdrawal Logic Flaw",
+  "classificationNote": "Verge 2018 was a timestamp-manipulation (time-warp) attack on block difficulty.",
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "consensus-attack",
+    "confidence": 0.81,
+    "top": [
+      {
+        "category": "consensus-attack",
+        "p": 0.8200000000000001
+      },
+      {
+        "category": "logic-error",
+        "p": 0.17
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.03,
+    "hasRootCause": 0.79
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "The last repair was bypassed, resulting in another 51% attack and a loss of approximately US$4.82 million.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The last repair was bypassed, resulting in another 51% attack and a loss of approximately US$4.82 million."
+    },
+    {
+      "source": "SlowMist",
+      "text": "The attacker discovers and manipulates errors in the Verge code, causing false timestamps to be set on the block and then dig out new blocks quickly. The protocol of Verge is uses five mining algorithms in turn, and the attacker increases control over two of them: scrypt and lyra2re. The attack should be between block 2155850 and block 2206272. Within a few hours of the attack, the 35 million XVGs, which cost about $1.75 million, were stolen at the prevailing exchange rate."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On May 22, 2018, Verge (XVG) suffered a major consensus exploit that enabled attackers to mine fraudulent blocks using timestamp spoofing and algorithm abuse, resulting in the theft of approximately $1.7 million worth of XVG. The incident was caused by a consensus vulnerability in Verge's multi-algorithm proof-of-work protocol. Attackers spoofed block timestamps to repeatedly mine blocks with the same algorithm, bypassing intended mining restrictions and enabling malicious chain reorganization and double-spending."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "cloud.tencent.com",
+      "url": "https://cloud.tencent.com/developer/article/1197040"
+    },
+    {
+      "source": "slowmist",
+      "label": "paper.seebug.org",
+      "url": "https://paper.seebug.org/609/"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/verge-2018-05-22"
+    },
+    {
+      "source": "revertiq",
+      "label": "thenextweb.com",
+      "url": "https://thenextweb.com/news/hackers-verge-blockchain-steal-1-7m"
+    },
+    {
+      "source": "revertiq",
+      "label": "coincentral.com",
+      "url": "https://coincentral.com/verge-suffers-51-attack-hard-forks-in-response/"
+    }
+  ]
+}

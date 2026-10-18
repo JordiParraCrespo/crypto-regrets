@@ -1,0 +1,78 @@
+{
+  "id": "2023-07-25-metalabz",
+  "name": "MetaLabz",
+  "date": "2023-07-25",
+  "year": 2023,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.09,
+    "stateActor": 0.02,
+    "hasRootCause": 0.9
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "MetaLabz tweeted: \"In order to ensure the supply we hold, we deployed an unaudited contract (token locker), but the contract has been exploited. The situation was then exacerbated by the liquidity attack, resulting in a total loss of slightly more than 400 BNB.\" According to analysis, the reason is that the authorization check was bypassed.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "MetaLabz tweeted: \"In order to ensure the supply we hold, we deployed an unaudited contract (token locker), but the contract has been exploited. The situation was then exacerbated by the liquidity attack, resulting in a total loss of slightly more than 400 BNB.\" According to analysis, the reason is that the authorization check was bypassed."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "MetaLabz was exploited on BNB Chain on 2023-07-25 after invalid authorization checks let an unauthorized caller reach a privileged token locker path. Third-party summaries place the loss at roughly 400 BNB, but the exact transaction hash and attacker wallet were not independently established here. Invalid authorization checks in an unaudited token locker contract on BNB Chain let a caller reach a privileged path that should have been restricted. The accessible evidence does not identify the exact function name, contract address, or historical source revision."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Meta_labz/status/1683576178039308288"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/metalabz-2023-07-25"
+    },
+    {
+      "source": "revertiq",
+      "label": "hacked.slowmist.io",
+      "url": "https://hacked.slowmist.io/zh/?page=58"
+    },
+    {
+      "source": "revertiq",
+      "label": "t.me",
+      "url": "https://t.me/soken_team/25"
+    }
+  ]
+}

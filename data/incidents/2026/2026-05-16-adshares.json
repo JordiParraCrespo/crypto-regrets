@@ -1,0 +1,111 @@
+{
+  "id": "2026-05-16-adshares",
+  "name": "Adshares",
+  "date": "2026-05-16",
+  "year": 2026,
+  "amountUsd": 628000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "Other",
+  "category": "bridge-crosschain",
+  "technique": "Forged Proof",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "bridge-crosschain",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "bridge-crosschain",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": true,
+  "language": "Solidity",
+  "rootCause": "Insufficient Validation. Lost: ~$628K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Insufficient Validation. Lost: ~$628K"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The Wrapped ADS (wADS) bridge token exposed a wrapTo(account, amount, from, txid) minting function callable by the bridge minter address, but the contract performed no on-chain validation that the supplied from/txid corresponded to a genuine, finalized native-chain lock/burn event. With the minter privilege (or via a compromised/abusable minter path), the attacker invoked wrapTo three times with fabricated native-chain from and txid values to mint ~120M wADS to themselves with no real backing deposit on the Adshares native chain. Because the minter's mint allowance was simply decremented without any cryptographic proof of the corresponding source-chain transaction, the bridge accepted forged mints, allowing ~$628K of value to be drained. Vulnerable code snippet: Attack Tx: https://etherscan.io/tx/0x8844b4ec371c4b13d7fac701b5d546a7c2fba12621a9596dd14b662b14408789 Analysis: https://x.com/DefimonAlerts/status/2055751467579936770"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Adshares Bridge was exploited on Ethereum around May 15, 2026. The attacker used the bridge-minter EOA to sign three wrapTo() calls with non-existent native-chain transaction IDs on the Adshares canonical chain. This allowed minting large amounts of fake wrapped ADS (wADS: 99,999.93 ×2 + 999,999.94). The fake tokens were then dumped via Uniswap V4 UniversalRouter, draining roughly $628K in ETH and USDC from liquidity pools. Security researchers flagged it quickly, and the project posted an on-chain whitehat message offering a 10% bounty for return of 90% of funds."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 15 May 2026, the Adshares bridge on Ethereum Mainnet was exploited via forged native-chain transaction IDs, resulting in unauthorized minting of Wrapped ADS tokens worth over $628,000. The attacker sold most of these tokens for ETH and USDC before partial funds were reportedly returned. The bridge contract failed to verify that submitted native-chain transaction IDs corresponded to legitimate deposits, allowing the attacker to mint unbacked tokens by fabricating transaction identifiers."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x8844b4ec371c4b13d7fac701b5d546a7c2fba12621a9596dd14b662b14408789",
+    "0xfba82bb34515d7aefbf0c89582b71d915ec8861c96babaafdc882743dbc23509",
+    "0xa3476575183204b4a662dd6ee56f6499d806e4f41ce83d98366752d31e9e9ca3"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-05/AdsharesBridge_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-05/AdsharesBridge_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x8844b4ec371c4b13d7fac701b5d546a7c2fba12621a9596dd14b662b14408789"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xfba82bb34515d7aefbf0c89582b71d915ec8861c96babaafdc882743dbc23509"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xa3476575183204b4a662dd6ee56f6499d806e4f41ce83d98366752d31e9e9ca3"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/DefimonAlerts/status/2055751467579936770"
+    },
+    {
+      "source": "slowmist",
+      "label": "cryptoadventure.com",
+      "url": "https://cryptoadventure.com/adshares-bridge-exploit-drains-about-628k-after-fake-wads-mint/"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/adshares-2026-05-16"
+    },
+    {
+      "source": "revertiq",
+      "label": "news.codegotech.com",
+      "url": "https://news.codegotech.com/adshares-bridge-loses-628k-cross-chain-exploit-fake-transaction-ids/"
+    }
+  ]
+}

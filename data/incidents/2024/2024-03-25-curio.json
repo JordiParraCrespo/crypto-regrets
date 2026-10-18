@@ -1,0 +1,114 @@
+{
+  "id": "2024-03-25-curio",
+  "name": "Curio",
+  "date": "2024-03-25",
+  "year": 2024,
+  "amountUsd": 16000000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Delegatecall Hijack",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "governance",
+    "confidence": 0.55,
+    "top": [
+      {
+        "category": "governance",
+        "p": 0.58
+      },
+      {
+        "category": "access-control",
+        "p": 0.41
+      },
+      {
+        "category": "logic-error",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Curio's MakerDAO-based smart contract on Ethereum was exploited for $16 million, due to a critical vulnerability involving voting power privileges.",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "Curio's MakerDAO-based smart contract on Ethereum was exploited for $16 million, due to a critical vulnerability involving voting power privileges."
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "CurioDAO's Ethereum-side smart contract was based on a MakerDAO governance fork. A vulnerability in the voting power privilege access control logic allowed an attacker who held only a small number of Curio Governance Tokens (CGT) to disproportionately inflate their voting weight. With this inflated voting power, the attacker invoked the plot function to register a malicious external contract as the protocol's executive library. Because the governance contract used delegatecall to execute library code, the malicious contract ran with the full identity and storage of CurioDAO's own contract. This allowed the attacker to mint approximately 1 billion CGT tokens, which were then laundered via token swaps and cross-chain transfers. The broader damage was estimated at $16M across the ecosystem; the $100K figure represents the portion directly traceable to the initial exploit transaction. Polkadot and Curio Chain contracts were not affected. Attack Tx: 0x4ff4028b03c3df468197358b99f5160e5709e7fce3884cc8ce818856d058e106 Analysis: Explained: The Curio Hack (March 2024)"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The RWA infrastructure of the Curio Ecosystem suffered an attack, involving smart contracts based on MakerDAO within its ecosystem. The attacker exploited a permission access logic vulnerability."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "CurioDAO on Ethereum suffered a privilege escalation exploit on March 23, 2024. A governance contract flaw enabled an attacker to mint billions of CGT tokens, escalating their voting power and executing arbitrary contract actions. The reported $16M loss remains mostly nominal due to illiquid CGT supply. A critical flaw in MakerDAO-derived voting power logic allowed a handful of CGT tokens to be locked and artificially grow voting power. This bypassed privilege checks, enabling delegatecall-based arbitrary contract actions, notably mass CGT minting, through functions like cook. Root cause is supported by incident reporting, not direct contract code."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x4ff4028b03c3df468197358b99f5160e5709e7fce3884cc8ce818856d058e106"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Curio - REKT",
+      "url": "https://rekt.news/curio-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x4ff4028b03c3df468197358b99f5160e5709e7fce3884cc8ce818856d058e106"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "halborn.com",
+      "url": "https://www.halborn.com/blog/post/explained-the-curio-hack-march-2024"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x4ff4028b03c3df468197358b99f5160e5709e7fce3884cc8ce818856d058e106"
+    },
+    {
+      "source": "blocksec",
+      "label": "twitter.com",
+      "url": "https://twitter.com/AnciliaInc/status/1771619444508459318"
+    },
+    {
+      "source": "slowmist",
+      "label": "theblockbeats.info",
+      "url": "https://www.theblockbeats.info/flash/240546"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/curio-2024-03-25"
+    }
+  ]
+}

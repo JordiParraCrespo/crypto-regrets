@@ -1,0 +1,93 @@
+{
+  "id": "2022-12-14-fpr",
+  "name": "FPR",
+  "date": "2022-12-14",
+  "year": 2022,
+  "amountUsd": 29000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Access Control. Lost: $29k",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Access Control. Lost: $29k"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "FPR was exploited on BNB Chain on 14 December 2022 through improper access control, resulting in reported losses around $29,000. Four vulnerable contracts allowed arbitrary admin assignment, enabling the attacker to drain FPR tokens and LP assets. The core failure was improper access control: several contracts exposed a public setAdmin() function without access restriction. The attacker reassigned admin rights, then withdrew FPR tokens and FPR/USDT LP tokens."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xec1b969e1435a1449dd5179404c54b5c60e49f15a1bf6bf8922e8d2978102f4a",
+    "0x1b66170220287bd90f72a97368f8dea2420a24c9585e9f39bf236af6d2a7dde6",
+    "0x43da4322052b045f442cdfc03bcccc797d3bba467beda501222c35d8fd0ebd81",
+    "0x1f8e814029a073c52a8668e6ff5bb3264445a8b29886cc9e3ca8ed5f89ccacd3"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-12/FPR_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-12/FPR_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/peckshield/status/1603226968706936832"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/chainlight_io/status/1603282848311480320"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/fpr-2022-12-14"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/fpr-hack-2022"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/src/test/2022-12/FPR_exp.sol"
+    }
+  ]
+}

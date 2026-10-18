@@ -1,0 +1,84 @@
+{
+  "id": "2022-10-10-carrot",
+  "name": "Carrot",
+  "date": "2022-10-10",
+  "year": 2022,
+  "amountUsd": 31318,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Public functionCall",
+  "classificationNote": "Classified by keyword rules from the DeFiHackLabs root-cause title.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.65,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.67
+      },
+      {
+        "category": "arbitrary-call",
+        "p": 0.31
+      },
+      {
+        "category": "key-compromise",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.03,
+    "hasRootCause": 0.89
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Public functionCall. Lost: 31,318 BUSDT",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Public functionCall. Lost: 31,318 BUSDT"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "public function call, call transferowner 0xbf699b4b. All wallets granted approvals are impacted. Step1, transReward to set owner. Step2, transferFrom. Vulnerable code snippet: https://bscscan.com/address/0xcFF086EaD392CcB39C49eCda8C974ad5238452aC#code#L1406 Pool contract: 0x6863b549bf730863157318df4496ed111adfa64f --- REF: https://twitter.com/1nf0s3cpt/status/1580116116151889920"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-10/Carrot_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-10/Carrot_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BlockSecTeam/status/1579908411235237888"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0xa624660c29ee97f3f4ebd36232d8199e7c97533c9db711fa4027994aa11e01b9"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0xcFF086EaD392CcB39C49eCda8C974ad5238452aC#code#L1406"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/1nf0s3cpt/status/1580116116151889920"
+    }
+  ]
+}

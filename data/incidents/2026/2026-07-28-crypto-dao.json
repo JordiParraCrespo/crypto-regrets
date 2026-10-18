@@ -1,0 +1,78 @@
+{
+  "id": "2026-07-28-crypto-dao",
+  "name": "Crypto DAO",
+  "date": "2026-07-28",
+  "year": 2026,
+  "amountUsd": 8200000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "The Pro token contract of Crypto DAO was exploited due to missing access control, with the attacker calling publicly accessible vault functions. According to GoPlus Security’s analysis, the attacker’s actual profit was approximately $52,000, while the contract lost around 167,200 Pro tokens. The related addresses monitored by Blockaid collectively held approximately $8.2 million worth of USDT (not the actual stolen amount).",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The Pro token contract of Crypto DAO was exploited due to missing access control, with the attacker calling publicly accessible vault functions. According to GoPlus Security’s analysis, the attacker’s actual profit was approximately $52,000, while the contract lost around 167,200 Pro tokens. The related addresses monitored by Blockaid collectively held approximately $8.2 million worth of USDT (not the actual stolen amount)."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Crypto DAO's Pro token contract on BNB Chain was exploited on July 28, 2026 due to a publicly accessible vault function with missing access controls. While headlines cited an $8.2 million loss, evidence-supported attacker profits were closer to $52,000. The incident reflects a recurring pattern of basic access-control failures on BNB Chain. A vault function in the Pro token contract lacked access checks, allowing any address to call the function and drain funds."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/GoPlusSecurity/status/2082353004980707444"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/crypto-dao-2026-07-28"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptotimes.io",
+      "url": "https://www.cryptotimes.io/2026/07/29/crypto-dao-drained-for-8-2m-on-bnb-chain-via-access-control-bug/"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/crypto-dao-hack-2026"
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "id": "2024-05-09-bloom",
+  "name": "Bloom",
+  "date": "2024-05-09",
+  "year": 2024,
+  "amountUsd": 540000,
+  "returnedUsd": null,
+  "chains": [
+    "Blast"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Contract Vulnerability",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.67,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.6900000000000001
+      },
+      {
+        "category": "access-control",
+        "p": 0.21000000000000002
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.08
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.01,
+    "hasRootCause": 0.08
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "The Blast ecosystem project Bloom was attacked, resulting in a loss of approximately $540,000. On May 10th, Bloom announced that they had successfully recovered most of the stolen funds. The Bloom team stated that after paying a 10% bug bounty, they had retrieved $486,000 of the stolen funds, which accounts for 90% of the total amount ($540,000). All recovered funds will be redistributed to liquidity providers.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The Blast ecosystem project Bloom was attacked, resulting in a loss of approximately $540,000. On May 10th, Bloom announced that they had successfully recovered most of the stolen funds. The Bloom team stated that after paying a 10% bug bounty, they had retrieved $486,000 of the stolen funds, which accounts for 90% of the total amount ($540,000). All recovered funds will be redistributed to liquidity providers."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 9 May 2024, Bloom on Blast was exploited for approximately $540,000 due to a logic error in margin update handling. The flaw allowed the attacker to repeatedly withdraw accrued yield on positions with a negative PnL, draining protocol funds. Most of the stolen assets were later recovered through a negotiation with the attacker. A logic error in the updateTrade function responsible for margin updates. The timestamp tracking accrued yield was not properly updated for positions with negative PnL during withdrawals, allowing repeated yield extraction."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BloomOnBlast/status/1788695722952421689"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/bloom-2024-05-09"
+    },
+    {
+      "source": "revertiq",
+      "label": "monitoringroom.com",
+      "url": "https://monitoringroom.com/situation/crypto-hack/bloom"
+    },
+    {
+      "source": "revertiq",
+      "label": "quadrigainitiative.com",
+      "url": "https://quadrigainitiative.com/casestudy/bloomonblastupdatemarginvulnerability.php"
+    }
+  ]
+}

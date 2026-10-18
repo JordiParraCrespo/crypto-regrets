@@ -1,0 +1,81 @@
+{
+  "id": "2026-08-02-loopsdao",
+  "name": "LOOPSDAO",
+  "date": "2026-08-02",
+  "year": 2026,
+  "amountUsd": 693500,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "Liquidity Pool",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.97,
+    "stateActor": 0.01,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "LOOPSDAO’s LpdFi protocol on BSC was exploited. The attacker used a flash loan to manipulate the spot price of the thin PancakeSwap LPD/USDC pair (no TWAP or deviation guard), opened a massively inflated interest-bearing position with minimal LPD, and claimed interest right across the daily settlement boundary. This triggered the protocol to burn its own Cake-LP and pay out the inflated amount, draining approximately $690,000.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "LOOPSDAO’s LpdFi protocol on BSC was exploited. The attacker used a flash loan to manipulate the spot price of the thin PancakeSwap LPD/USDC pair (no TWAP or deviation guard), opened a massively inflated interest-bearing position with minimal LPD, and claimed interest right across the daily settlement boundary. This triggered the protocol to burn its own Cake-LP and pay out the inflated amount, draining approximately $690,000."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "LOOPSDAO’s LpdFi protocol on BNB Chain was exploited on August 2, 2026, through flash-loan powered spot price manipulation of its LPD/USDC pool. The attacker opened a massively inflated interest-bearing position and claimed disproportionate rewards, draining approximately $690,000. The protocol calculated LPD token prices based on the instantaneous reserves of a thin PancakeSwap pool, with no TWAP, liquidity threshold, or deviation bounds. Interest accrual used a discrete issue index, enabling a full period's yield to be credited after only a nominal delay."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xbb5b8573d7203e00f8fb9d4839dbeea46a8efd367eac8bed81e4ece2341c3588",
+    "0x70bbe0aa3c7ef149ecb6128a06025885deaa8fef3f393a505d447d28ab3315d6"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/DefimonAlerts/status/2084157533204197380"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/loopsdao-2026-08-02"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/loopsdao-hack-2026"
+    },
+    {
+      "source": "revertiq",
+      "label": "hacked.slowmist.io",
+      "url": "https://hacked.slowmist.io/?c=BSC"
+    }
+  ]
+}

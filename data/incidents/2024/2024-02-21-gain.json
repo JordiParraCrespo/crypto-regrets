@@ -1,0 +1,93 @@
+{
+  "id": "2024-02-21-gain",
+  "name": "Gain",
+  "date": "2024-02-21",
+  "year": 2024,
+  "amountUsd": 3010000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "Token",
+  "category": "accounting-math",
+  "technique": "Infinite Mint",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.99
+      },
+      {
+        "category": "logic-error",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.07,
+    "stateActor": 0.02,
+    "hasRootCause": 0.75
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "bad function implementation. Lost: ~6.4 ETH",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "bad function implementation. Lost: ~6.4 ETH"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The root cause is the implement of $GAIN, the balance in transfer() is calculated by dividing _gonsPerFragment for normal account. But different when account is special Vulnerable code snippet: Attack tx: https://etherscan.io/tx/0x7acc896b8d82874c67127ff3359d7437a15fdb4229ed83da00da1f4d8370764e Analysis:"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Gain was exploited on Ethereum Mainnet on 2024-02-21 through an infinite-mint style accounting flaw. The linked exploit transaction shows a flash-liquidity driven drain of the GAIN/WETH pair and 6.43293695095562743 ETH routed to the attacker contract, while the catalogue loss figure remains unreconciled. A bad function implementation in GAIN's token and share accounting created an infinite mint path that let the attacker desynchronize the GAIN/WETH pool and extract WETH with reserve-manipulation calls."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x7acc896b8d82874c67127ff3359d7437a15fdb4229ed83da00da1f4d8370764e"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-02/GAIN_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-02/GAIN_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x7acc896b8d82874c67127ff3359d7437a15fdb4229ed83da00da1f4d8370764e"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/gain-2024-02-21"
+    },
+    {
+      "source": "revertiq",
+      "label": "api.llama.fi",
+      "url": "https://api.llama.fi/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "raw.githubusercontent.com",
+      "url": "https://raw.githubusercontent.com/SunWeb3Sec/DeFiHackLabs/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/src/test/2024-02/GAIN_exp.sol"
+    }
+  ]
+}

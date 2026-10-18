@@ -1,0 +1,74 @@
+{
+  "id": "2024-10-31-1inch-swap",
+  "name": "1inch Swap",
+  "date": "2024-10-31",
+  "year": 2024,
+  "amountUsd": 723000,
+  "returnedUsd": null,
+  "chains": [
+    "Avalanche"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "frontend-infra",
+  "technique": "Supply Chain Attack",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "frontend-infra",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "frontend-infra",
+        "p": 0.99
+      },
+      {
+        "category": "social-engineering",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.03,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "Compromised Lottie Player releases reached the 1inch web dApp on October 30, 2024 and displayed fraudulent wallet prompts. A linked Avalanche transaction transferred 9.99984952 BTC.b from a wallet that had granted an unlimited allowance; the reported valuation was about $723,000. An upstream npm publishing credential was compromised, allowing malicious Lottie Player versions to execute in downstream web pages and seek wallet authorizations. The checked withdrawal used an existing unlimited BTC.b allowance; 1inch's protocol contracts were reported unaffected.",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "Compromised Lottie Player releases reached the 1inch web dApp on October 30, 2024 and displayed fraudulent wallet prompts. A linked Avalanche transaction transferred 9.99984952 BTC.b from a wallet that had granted an unlimited allowance; the reported valuation was about $723,000. An upstream npm publishing credential was compromised, allowing malicious Lottie Player versions to execute in downstream web pages and seek wallet authorizations. The checked withdrawal used an existing unlimited BTC.b allowance; 1inch's protocol contracts were reported unaffected."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xdd2e5cfb6de4ca4f23adb6d2d36d4b94b306cd91b00bc237f1812f3af6b8136a"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/1inch-swap-2024-10-31"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/LottieFiles/lottie-player/issues/254#issuecomment-2448993225"
+    },
+    {
+      "source": "revertiq",
+      "label": "x.com",
+      "url": "https://x.com/1inch/status/1851832307746742686"
+    }
+  ]
+}

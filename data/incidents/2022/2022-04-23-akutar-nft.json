@@ -1,0 +1,99 @@
+{
+  "id": "2022-04-23-akutar-nft",
+  "name": "Akutar NFT",
+  "date": "2022-04-23",
+  "year": 2022,
+  "amountUsd": 34000000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Denial of Service",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.72).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.72,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.74
+      },
+      {
+        "category": "input-validation",
+        "p": 0.14
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.09999999999999999
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.01,
+    "hasRootCause": 0.94
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Denial of Service. Lost: 34M USD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Denial of Service. Lost: 34M USD"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Incorrect validation and External calls can fail deliberately. Vulnerable code snippet: (1)DOS https://etherscan.io/address/0xf42c318dbfbaab0eee040279c6a2588fa01a961d#code#L585 Bidder can be a malicious contract to cause DOS. How to fix, follow favor pull over push for external calls. https://consensysdiligence.github.io/smart-contract-best-practices/development-recommendations/general/external-calls/#favor-pull-over-push-for-external-calls (2)Fund lock https://etherscan.io/address/0xf42c318dbfbaab0eee040279c6a2588fa01a961d#code#L618 It should compare with _bidIndex instead of totalBids. Due to this issue, the requirement will never be satisfied, and the Ether in the contract can be locked for ever"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The Akutars (@AkuDreams) project auction contract was permanently unable to withdraw 11,539.5 ETH due to multiple code flaws. According to SlowMist analysis, even if the problem of users' inability to refund is solved, due to the inconsistency between the number of bidders and the number of auctions and the defects of the project party's withdrawal function, Akutars funds will eventually be permanently locked."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-04/AkutarNFT_exp.sol",
+  "sources": [
+    "defihacklabs",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-04/AkutarNFT_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "blocksecteam.medium.com",
+      "url": "https://blocksecteam.medium.com/how-akutar-nft-loses-34m-usd-60d6cb053dff"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/address/0xf42c318dbfbaab0eee040279c6a2588fa01a961d#code"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/address/0xf42c318dbfbaab0eee040279c6a2588fa01a961d#code#L585"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "consensysdiligence.github.io",
+      "url": "https://consensysdiligence.github.io/smart-contract-best-practices/development-recommendations/general/external-calls/#favor-pull-over-push-for-external-calls"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/address/0xf42c318dbfbaab0eee040279c6a2588fa01a961d#code#L618"
+    },
+    {
+      "source": "slowmist",
+      "label": "ccvalue.cn",
+      "url": "https://www.ccvalue.cn/article/1396448.html"
+    }
+  ]
+}

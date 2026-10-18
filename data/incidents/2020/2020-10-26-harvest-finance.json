@@ -1,0 +1,127 @@
+{
+  "id": "2020-10-26-harvest-finance",
+  "name": "Harvest Finance",
+  "date": "2020-10-26",
+  "year": 2020,
+  "amountUsd": 24000000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.94,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.9400000000000001
+      },
+      {
+        "category": "market-manipulation",
+        "p": 0.02
+      },
+      {
+        "category": "access-control",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.29,
+    "stateActor": 0.03,
+    "hasRootCause": 0.17
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Flashloan Attack. Lost: $33.8 million",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Flashloan Attack. Lost: $33.8 million"
+    },
+    {
+      "source": "REKT",
+      "text": "The reaper does not listen to the harvest. A skilled farmer used flash loans to reap $24 million from the FARM_USDT and FARM_USDC pools."
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Economic issue check https://rekt.news/harvest-finance-rekt/ Vulnerable code snippet:"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Data on the chain shows that a large amount of funds in the Harvest Finance fund pool were transferred, and about 24 million US dollars （Specifically, approximately USD 34 million）were successfully cashed out through multiple contract transactions, most of which were cashed out through renBTC. The initial ETH source used by the hacker this time was the Ethereum anonymous transfer platform Tornado.cash. The Hash for this operation is: 0x35f8d2f572fceaac9288e5d462117850ef2694786992a8c3f6d02612277b0877. It can be seen from the Ethereum browser that the hacker transferred 20 WETH to the Harvest Finance contract (address: 0xc6028a9fa486f52efd2b95b949ac630d2…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Harvest Finance was exploited on October 26, 2020 for approximately $24 million through repeated flash-loan-fueled manipulation of Curve’s spot prices, allowing the attacker to mint inflated vault share balances and instantly withdraw more stablecoins than initially deposited. Harvest vaults calculated deposit and withdrawal amounts using manipulable Curve pool spot prices instead of a manipulation-resistant oracle. The contracts allowed attackers to inflate their fUSDC/fUSDT share allocations by temporarily depressing the underlying asset value, then withdraw at restored rates. Critical checks such as depositArbCheck() used overly permissive parameters and did not prevent the exploit."
+    }
+  ],
+  "audit": "Haechi, Peckshield",
+  "txHashes": [
+    "0x35f8d2f572fceaac9288e5d462117850ef2694786992a8c3f6d02612277b0877"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2020-10/HarvestFinance_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2020-10/HarvestFinance_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "rekt.news",
+      "url": "https://rekt.news/harvest-finance-rekt/"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x35f8d2f572fceaac9288e5d462117850ef2694786992a8c3f6d02612277b0877"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Harvest Finance - REKT",
+      "url": "https://rekt.news/harvest-finance-rekt"
+    },
+    {
+      "source": "slowmist",
+      "label": "zdnet.com",
+      "url": "https://www.zdnet.com/article/hacker-steals-24-million-from-cryptocurrency-service-harvest-finance/"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/harvest-finance-2020-10-26"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "docs.harvest.finance",
+      "url": "https://docs.harvest.finance/other/security/incidents/fusdc-fusdt-economic-attack-oct-26-2020"
+    },
+    {
+      "source": "revertiq",
+      "label": "aftermath.digital",
+      "url": "https://aftermath.digital/exploit/2021/05/06/Harvest-Finance-Economic-Flash-Loan-Attack-October-2020/"
+    }
+  ]
+}

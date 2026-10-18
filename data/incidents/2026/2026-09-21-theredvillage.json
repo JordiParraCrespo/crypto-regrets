@@ -1,0 +1,58 @@
+{
+  "id": "2026-09-21-theredvillage",
+  "name": "TheRedVillage",
+  "date": "2026-09-21",
+  "year": 2026,
+  "amountUsd": 80700,
+  "returnedUsd": null,
+  "chains": [],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": null,
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.85). Replaced keyword guess \"arbitrary-call\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.85,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.86
+      },
+      {
+        "category": "arbitrary-call",
+        "p": 0.13
+      },
+      {
+        "category": "governance",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "ungated PolygonTRVRouter forwardRequest relays an attacker-supplied upgradeTo through the router's _authorizeUpgrade role on the SeasonService UUPS proxy, installing a malicious implementation that uses the proxy's TRVZooKeeper roles to pull every player's approved WETH and sweep the vault. Lost: 31.426018474517367982 WETH (~$80.7K) swept from TRVZooKeeper on Polygon; 299 players with standing WETH approvals were pulled for 31.350379502001368 WETH and the vault's pre-existing 0.075638972516 WETH was swept with them, reproduced to the wei",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "ungated PolygonTRVRouter forwardRequest relays an attacker-supplied upgradeTo through the router's _authorizeUpgrade role on the SeasonService UUPS proxy, installing a malicious implementation that uses the proxy's TRVZooKeeper roles to pull every player's approved WETH and sweep the vault. Lost: 31.426018474517367982 WETH (~$80.7K) swept from TRVZooKeeper on Polygon; 299 players with standing WETH approvals were pulled for 31.350379502001368 WETH and the vault's pre-existing 0.075638972516 WETH was swept with them, reproduced to the wei"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-09/TheRedVillage_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-09/TheRedVillage_exp.sol"
+    }
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "id": "2024-12-29-fegex",
+  "name": "Fegex",
+  "date": "2024-12-29",
+  "year": 2024,
+  "amountUsd": 1070000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum",
+    "BSC",
+    "Base"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "bridge-crosschain",
+  "technique": "Cross-Chain Message Spoofing",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "bridge-crosschain",
+    "confidence": 0.95,
+    "top": [
+      {
+        "category": "bridge-crosschain",
+        "p": 0.95
+      },
+      {
+        "category": "access-control",
+        "p": 0.05
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": true,
+  "language": "Solidity",
+  "rootCause": "FEGex's SmartBridge was exploited across Ethereum, BNB Chain, and Base on Dec 29, 2024, allowing an attacker to withdraw tokens by spoofing admin authority via cross-chain messages. The attacker drained about $1.07M in assets, converting them to native tokens and funneling proceeds to Tornado Cash. The FEG bridge relayer accepted admin privileges from an untrusted message payload, enabling an attacker-controlled contract to be whitelisted and register unbacked withdrawals across chains. There was no independent verification of sender authority.",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "FEGex's SmartBridge was exploited across Ethereum, BNB Chain, and Base on Dec 29, 2024, allowing an attacker to withdraw tokens by spoofing admin authority via cross-chain messages. The attacker drained about $1.07M in assets, converting them to native tokens and funneling proceeds to Tornado Cash. The FEG bridge relayer accepted admin privileges from an untrusted message payload, enabling an attacker-controlled contract to be whitelisted and register unbacked withdrawals across chains. There was no independent verification of sender authority."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x08b06e5b5906308a6fa64e2bc965189ea4c6e3338d0037e1ba2b9b3db88dd6c0",
+    "0x7e448bbf1566c20b6973d2cbdb49092d5c6fca90ad7f1a1fc4b102e8095899d2",
+    "0xfe6403f83c524a336623492ee0c3b4c574c42fe8b2d7b7a854c33c286317f02e",
+    "0x8d57aacd101b585ed5e68f9f5f79bea2082ec03862456615d9175d6c967289e4",
+    "0x6c3cf48e9c8b22f60fc2b702b03f93926ee8624639b100fe851b757947e61759",
+    "0x60fd436dbd0e99c7585b775095048eced56bfc11e18331cfcb0cdad6f9fe7d87",
+    "0x3de4f3584203d7545b252df73a3b7e75db691a2c12467de42028552ca3bbf04f"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/fegex-2024-12-29"
+    },
+    {
+      "source": "revertiq",
+      "label": "certik.com",
+      "url": "https://www.certik.com/blog/feg-bridge-exploit-technical-analysis"
+    },
+    {
+      "source": "revertiq",
+      "label": "defillama.com",
+      "url": "https://defillama.com/protocol/fegex"
+    }
+  ]
+}

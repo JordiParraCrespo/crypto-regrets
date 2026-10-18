@@ -1,0 +1,78 @@
+{
+  "id": "2026-08-08-atomic-green",
+  "name": "Atomic Green",
+  "date": "2026-08-08",
+  "year": 2026,
+  "amountUsd": 29984,
+  "returnedUsd": null,
+  "chains": [
+    "Arbitrum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "signature-crypto",
+  "technique": "Signature Replay",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "signature-crypto",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "signature-crypto",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.96,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Atomic Green (a non-custodial leveraged trading protocol on Arbitrum) was exploited due to a signature replay vulnerability. The same manager signature could be replayed across 21 different Uniswap V3 LP positions, combined with flashloan-based price manipulation, allowing the attacker to trigger unauthorized full LP burns and resulting in a loss of approximately 29,984.27 USDC.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Atomic Green (a non-custodial leveraged trading protocol on Arbitrum) was exploited due to a signature replay vulnerability. The same manager signature could be replayed across 21 different Uniswap V3 LP positions, combined with flashloan-based price manipulation, allowing the attacker to trigger unauthorized full LP burns and resulting in a loss of approximately 29,984.27 USDC."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Atomic Green was exploited on Arbitrum One on August 8, 2026, resulting in a loss of approximately $29,984 in USDC. The exploit involved signature replay that allowed unauthorized burns of Uniswap V3 LP positions under manipulated pricing. The exploit was possible due to missing bindings in the signature digest, allowing a manager's signature to be replayed across multiple Uniswap V3 LP position IDs. The protocol failed to include position ID, nonce, deadline, chain ID, and other contextual information within the signed message, enabling unauthorized actions."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/2086042810265055619"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/atomic-green-2026-08-08"
+    },
+    {
+      "source": "revertiq",
+      "label": "thecryptocurrencypost.net",
+      "url": "https://thecryptocurrencypost.net/atomic-green-on-arbitrum-hit-by-signature-replay-exploit-roughly-30000-in-usdc-lost/"
+    },
+    {
+      "source": "revertiq",
+      "label": "hacked.slowmist.io",
+      "url": "https://hacked.slowmist.io/?c=Arbitrum"
+    }
+  ]
+}

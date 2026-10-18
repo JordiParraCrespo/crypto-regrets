@@ -1,0 +1,88 @@
+{
+  "id": "2016-06-17-the-dao",
+  "name": "The DAO",
+  "date": "2016-06-17",
+  "year": 2016,
+  "amountUsd": 60000000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "reentrancy",
+  "technique": "Recursive call in splitDAO before balance update",
+  "classificationNote": null,
+  "classifiedBy": "curated",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "reentrancy",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "reentrancy",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "splitDAO() sent ETH to the caller before zeroing their balance. The attacker's fallback re-entered splitDAO recursively, draining 3.6M ETH into a child DAO. Ethereum hard-forked to return the funds, splitting off Ethereum Classic. It made checks-effects-interactions a standard rule.",
+  "descriptions": [
+    {
+      "source": "Curated post-mortem",
+      "text": "splitDAO() sent ETH to the caller before zeroing their balance. The attacker's fallback re-entered splitDAO recursively, draining 3.6M ETH into a child DAO. Ethereum hard-forked to return the funds, splitting off Ethereum Classic. It made checks-effects-interactions a standard rule."
+    },
+    {
+      "source": "SlowMist",
+      "text": "The DAO smart contract running on the Ethereum suffered a reentrancy-attack-on-smart-contract."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On June 17, 2016, The DAO contract on Ethereum Mainnet was exploited via a reentrancy bug in its splitDAO function, allowing an attacker to recursively withdraw funds and drain approximately 3.6 million ETH (worth about $60 million at the time) into a child DAO. The community responded by executing a hard fork to recover most user funds, establishing critical lessons for smart contract security and governance. The splitDAO function transferred ether to the caller before zeroing their token balance, allowing a malicious contract to repeatedly re-enter the withdrawal process and extract funds multiple times. This violated the checks-effects-interactions…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq",
+    "curated"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "en.wikipedia.org",
+      "url": "https://en.wikipedia.org/wiki/The_DAO_(organization)"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/the-dao-2016-06-17"
+    },
+    {
+      "source": "revertiq",
+      "label": "defi-intel.com",
+      "url": "https://defi-intel.com/incidents/dao-hack-2016/"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/francesco-dom-saltarelli/reentrancy-evolution"
+    },
+    {
+      "source": "curated",
+      "label": "Phil Daian: Analysis of the DAO exploit",
+      "url": "https://hackingdistributed.com/2016/06/18/analysis-of-the-dao-exploit/"
+    }
+  ]
+}

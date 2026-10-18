@@ -1,0 +1,77 @@
+{
+  "id": "2023-12-30-locus-finance",
+  "name": "Locus Finance",
+  "date": "2023-12-30",
+  "year": 2023,
+  "amountUsd": 321000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum",
+    "Arbitrum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "key-compromise",
+  "technique": "Private Key Compromised",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "key-compromise",
+    "confidence": 0.96,
+    "top": [
+      {
+        "category": "key-compromise",
+        "p": 0.96
+      },
+      {
+        "category": "access-control",
+        "p": 0.04
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.01,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "On December 30, 2023, Locus Finance vaults on Ethereum and Arbitrum were compromised due to a leaked developer private key. The attacker used privileged access to upgrade vault contracts and drain $320,964. The team later secured remaining funds and implemented multisig controls. The incident was enabled by a temporary lack of multisig on the development wallet during a CTO transition. A developer's private key was compromised, allowing the attacker to upgrade vaults and withdraw assets.",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "On December 30, 2023, Locus Finance vaults on Ethereum and Arbitrum were compromised due to a leaked developer private key. The attacker used privileged access to upgrade vault contracts and drain $320,964. The team later secured remaining funds and implemented multisig controls. The incident was enabled by a temporary lack of multisig on the development wallet during a CTO transition. A developer's private key was compromised, allowing the attacker to upgrade vaults and withdraw assets."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x172022ba060d70ba825c1191b9cb7e1a3b31b39f3a00f9db7ac64d6751f6274a",
+    "0xc721c57ee86cfa30237a3601f76fdc4fc6252b0ef1a5b1c1dab117b3116f1ec0",
+    "0x7863cf2d40046ddac4190b3690a94bcfe57f6d396169b27cdf9368f6ad07847d"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/locus-finance-2023-12-30"
+    },
+    {
+      "source": "revertiq",
+      "label": "medium.com",
+      "url": "https://medium.com/@locus.finance/explaining-the-locus-hack-actions-taken-and-progress-on-fund-retribution-12761029db56"
+    },
+    {
+      "source": "revertiq",
+      "label": "monitoringroom.com",
+      "url": "https://monitoringroom.com/situation/crypto-hack/locus-finance"
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "id": "2021-06-10-evodefi",
+  "name": "EvoDefi",
+  "date": "2021-06-10",
+  "year": 2021,
+  "amountUsd": 1000000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Reward Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "EvoDefi, the project revenue farm on the BSC chain, was attacked, and the price of its token GEN dropped from US$2.1/piece to US$0.9/piece, a short-term drop of 57%. Loss of 455,576.85 GEN worth approximately USD 1 million. Due to the design flaws in the update logic of the function in the MasterChef contract, the part of the reward that needs to be deducted is not updated, which leads to arbitrage by the attacker.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "EvoDefi, the project revenue farm on the BSC chain, was attacked, and the price of its token GEN dropped from US$2.1/piece to US$0.9/piece, a short-term drop of 57%. Loss of 455,576.85 GEN worth approximately USD 1 million. Due to the design flaws in the update logic of the function in the MasterChef contract, the part of the reward that needs to be deducted is not updated, which leads to arbitrage by the attacker."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On June 10, 2021, EvoDefi’s yield farm on BNB Chain was exploited using a flash loan attack that took advantage of a reward accounting flaw in its MasterChef contract. Secondary sources and on-chain transaction evidence indicate the flaw centered on improper updates to accounting variables, enabling the extraction of excessive GEN tokens. The incident resulted in losses of approximately 455,576 GEN (around $1 million), with no documented recovery or authoritative patch disclosure. Based on independent incident analyses and loss tracing, the root cause was a flaw in EvoDefi’s MasterChef reward accounting logic. Secondary reports link the failure to impr…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x7c3b7f082a5c92b03a878ff5d7c7e645ce3bcd37901808b936b318c4f3cc3880"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "medium.com",
+      "url": "https://medium.com/@Knownsec_Blockchain_Lab/knownsec-blockchain-lab-evodefi-attack-event-analysis-e1cba8a789ce"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/evodefi-2021-06-10"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/evodefi-hack-2021"
+    },
+    {
+      "source": "revertiq",
+      "label": "quadrigainitiative.com",
+      "url": "https://www.quadrigainitiative.com/casestudy/evodefilightningloanbreach.php"
+    }
+  ]
+}

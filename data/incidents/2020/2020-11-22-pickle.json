@@ -1,0 +1,124 @@
+{
+  "id": "2020-11-22-pickle",
+  "name": "Pickle",
+  "date": "2020-11-22",
+  "year": 2020,
+  "amountUsd": 19700000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "input-validation",
+  "technique": "Missing Input Validation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "input-validation",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "input-validation",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.93
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Insufficient validation. Lost: $20 million",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Insufficient validation. Lost: $20 million"
+    },
+    {
+      "source": "REKT",
+      "text": "The fermentation of finance continues. Even pickles have a shelf life. Pickle Finance has become the latest victim of the hack epidemic. However, this time, something is different..."
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Insufficient validation Vulnerable code snippet: https://etherscan.io/address/0x6847259b2b3a4c17e7c43c54409810af48ba5210#code#F26#L249 it doesn’t check the validity of the Jars. Attacker can create fake token to withdraw all DAIs from StrategyCmpdDaiV2 to Jar."
+    },
+    {
+      "source": "SlowMist",
+      "text": "Ethereum DeFi project Pickle Finance was attacked, losing about 20 million DAI. According to SlowMist analysis, the attacker completes an attack by forging the contract addresses of _fromJar and _toJar when calling the swapExactJarForJar function in the Controller contract, and then transferring the fake currency in exchange for the real DAI in the contract. SlowMist indicates that the swapExactJarForJar function in Pickle Finance's Controller contract allows two arbitrary jar contract addresses to be passed in for token exchange. Among them, _fromJar, _toJar, _fromJarAmount, and _toJarMinAmount are all variables that users can control. Attackers use t…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On November 21, 2020, Pickle Finance was exploited for approximately $19.7M DAI due to missing Jar validation in its ControllerV4 contract. An attacker injected a fake Jar, bypassed checks in swapExactJarForJar, and withdrew assets from the cDAI Jar. ControllerV4's swapExactJarForJar function failed to restrict Jar inputs to registered or whitelisted contracts. The attacker created a malicious contract with the expected interface, allowing unauthorized transfer of assets from the real cDAI Jar."
+    }
+  ],
+  "audit": "Unaudited",
+  "txHashes": [
+    "0xe72d4e7ba9b5af0cf2a8cfb1e30fd9f388df0ab3da79790be842bfbed11087b0"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2020-11/Pickle_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2020-11/Pickle_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "github.com",
+      "url": "https://github.com/banteg/evil-jar"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xe72d4e7ba9b5af0cf2a8cfb1e30fd9f388df0ab3da79790be842bfbed11087b0"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Pickle Finance - REKT",
+      "url": "https://rekt.news/pickle-finance-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/address/0x6847259b2b3a4c17e7c43c54409810af48ba5210#code#F26#L249"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/picklefinance/status/1330242051468910596"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/explained-the-defi-protocol-pickle-finance-2020-12-10t14-10-12-00-00"
+    },
+    {
+      "source": "revertiq",
+      "label": "halborn.com",
+      "url": "https://www.halborn.com/blog/post/explained-the-defi-protocol-pickle-finance-hack-nov-2020"
+    },
+    {
+      "source": "revertiq",
+      "label": "defirisk.co",
+      "url": "https://defirisk.co/learn/exploits/pickle-finance-rekt/"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/banteg/evil-jar/blob/master/reference/samczsun.sol"
+    }
+  ]
+}

@@ -1,0 +1,108 @@
+{
+  "id": "2022-12-24-defrost",
+  "name": "Defrost",
+  "date": "2022-12-24",
+  "year": 2022,
+  "amountUsd": 12000000,
+  "returnedUsd": 6000000,
+  "chains": [
+    "Avalanche"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "key-compromise",
+  "technique": "Private Key Compromised",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "reentrancy",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "reentrancy",
+        "p": 0.99
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.93,
+    "stateActor": 0.02,
+    "hasRootCause": 0.94
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Reentrancy. Lost: $170k",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Reentrancy. Lost: $170k"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Reentrancy. Lack of reentrancy lock for the flashloan()/deposit() functions, which was used by the hacker to manipulate the share price of LSWUSDC Vulnerable code snippet: Attack tx: https://snowtrace.io/tx/0xc6fb8217e45870a93c25e2098f54f6e3b24674a3083c30664867de474bf0212d Analysis: https://twitter.com/PeckShieldAlert/status/1606276020276891650"
+    },
+    {
+      "source": "SlowMist",
+      "text": "On December 23, Defrost Finance V2, the Avalanche ecological native stablecoin project, was attacked by a flash loan, and the hackers made a profit of $173,000. On December 25th, Defrost Finance V1 went wrong again, hackers managed to steal the owner’s key, the protocol was added with fake collateral tokens, and a malicious price oracle was used to liquidate current users, with losses estimated at more than $12 million. On December 27, the hackers who carried out the attack on Defrost Finance V1 have returned the stolen funds."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Defrost Finance on Avalanche suffered a two-stage December 2022 incident. A verified V2 reentrancy exploit on 2022-12-23 extracted about $173,000, and later disclosures said an owner-key-controlled V1 path with fake collateral and a malicious oracle drained roughly $12 million before funds were reportedly returned. V2 allowed reentry through the flash-loan and deposit path, which let the attacker manipulate LSWUSDC share accounting. V1 exposed owner-level collateral and oracle control powerful enough to register a worthless asset and liquidate positions against a fabricated price. The exact way the owner key was obtained remains unknown."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xc6fb8217e45870a93c25e2098f54f6e3b24674a3083c30664867de474bf0212d"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-12/Defrost_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-12/Defrost_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/PeckShieldAlert/status/1606276020276891650"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "snowtrace.io",
+      "url": "https://snowtrace.io/tx/0xc6fb8217e45870a93c25e2098f54f6e3b24674a3083c30664867de474bf0212d"
+    },
+    {
+      "source": "slowmist",
+      "label": "foresightnews.pro",
+      "url": "https://foresightnews.pro/article/detail/22019"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/defrost-finance-2022-12-26"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "halborn.com",
+      "url": "https://www.halborn.com/blog/post/explained-the-defrost-hack-december-2022"
+    }
+  ]
+}

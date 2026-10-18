@@ -1,0 +1,76 @@
+{
+  "id": "2026-06-06-boss",
+  "name": "BOSS",
+  "date": "2026-06-06",
+  "year": 2026,
+  "amountUsd": 10207.54,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "BOSS helper mint/burn and transfer-tax pool skew",
+  "classificationNote": "Classified by keyword rules from the DeFiHackLabs root-cause title.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.66,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.68
+      },
+      {
+        "category": "logic-error",
+        "p": 0.28
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.91,
+    "stateActor": 0.03,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "BOSS helper mint/burn and transfer-tax pool skew. Lost: 10,207.54 USDT",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "BOSS helper mint/burn and transfer-tax pool skew. Lost: 10,207.54 USDT"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The BOSS token ships a privileged helper exposing permissionless userMint/userBurn that can mint and burn BOSS directly against the BOSS/USDT PancakeSwap pair's balance. With a Moolah USDT flash loan, the attacker uses userMint to seed liquidity, swaps the remaining USDT into BOSS (recipient = helper), then calls userBurn to collapse the pair's BOSS reserve down to 10 wei of dust while the pair's stored reserves and USDT side remain large. With the BOSS reserve artificially tiny, each loop transfers a fraction of BOSS into the pair and calls swap() to extract USDT at a wildly favorable rate. Repeating 155 times drains the pool of ~10,207 USDT. The root cause is the ability to externally mutate (burn) the pair's token reserve out-of-band from swaps, desynchronizing reserves from balances. Vulnerable code snippet: Attack Tx: https://bscscan.com/tx/0x96d1a0175eb4a82585db62a374518391f6b575a07c25c0e2874ca82400b830c7 Analysis: https://x.com/audit_911/status/2063819348305985748"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x96d1a0175eb4a82585db62a374518391f6b575a07c25c0e2874ca82400b830c7"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-06/BOSS_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-06/BOSS_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/audit_911/status/2063819348305985748"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x96d1a0175eb4a82585db62a374518391f6b575a07c25c0e2874ca82400b830c7"
+    }
+  ]
+}

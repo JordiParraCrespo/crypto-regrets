@@ -1,0 +1,88 @@
+{
+  "id": "2026-01-06-fusion-by-ipor",
+  "name": "Fusion by IPOR",
+  "date": "2026-01-06",
+  "year": 2026,
+  "amountUsd": 336000,
+  "returnedUsd": null,
+  "chains": [
+    "Arbitrum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "arbitrary-call",
+  "technique": "Arbitrary External Call",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "arbitrary-call",
+    "confidence": 0.98,
+    "top": [
+      {
+        "category": "arbitrary-call",
+        "p": 0.98
+      },
+      {
+        "category": "access-control",
+        "p": 0.01
+      },
+      {
+        "category": "key-compromise",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.93
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Fusion has released a security update stating that its IPOR USDC Fusion Optimizer contains a vulnerability in the Arbitrum Vault. The IPOR team was notified and confirmed on January 6 that the vulnerability had resulted in a loss of approximately $336,000 USDC. This exploit only affected a specific older version of the Fusion Vault, and due to its unique configuration, it was the only vault susceptible to this particular attack vector. According to further analysis by SlowMist, the root cause of the incident lies in the underlying contract delegated by the EOA account controlled via EIP‑7702, which contained a security flaw allowing arbitrary external calls.…",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Fusion has released a security update stating that its IPOR USDC Fusion Optimizer contains a vulnerability in the Arbitrum Vault. The IPOR team was notified and confirmed on January 6 that the vulnerability had resulted in a loss of approximately $336,000 USDC. This exploit only affected a specific older version of the Fusion Vault, and due to its unique configuration, it was the only vault susceptible to this particular attack vector. According to further analysis by SlowMist, the root cause of the incident lies in the underlying contract delegated by the EOA account controlled via EIP‑7702, which contained a security flaw allowing arbitrary external calls.…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Fusion by IPOR's legacy USDC Optimizer vault on Arbitrum was exploited on January 6, 2026, for approximately $336,000. The attacker used delegated admin privileges to inject a malicious fuse, exploiting a lack of validation in the instantWithdraw logic and an arbitrary external call capability. The legacy vault allowed privileged delegated execution without strict fuse validation. An attacker exploited an arbitrary-call-capable EIP-7702 delegate contract to inject a malicious fuse, enabling unauthorized withdrawal of assets."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x238b4e619158432ff5ceb279cfea38007d048af4f59901c7af2efcf32e9671b6"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/ipor_io/status/2008728627190321480"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/fusion-by-ipor-2026-01-06"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "techflowpost.com",
+      "url": "https://www.techflowpost.com/en-US/newsletter/110622"
+    }
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "id": "2024-04-24-saitachain",
+  "name": "SaitaChain",
+  "date": "2024-04-24",
+  "year": 2024,
+  "amountUsd": 1000000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": null,
+  "category": "access-control",
+  "technique": "Access Control Issue",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.99).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.99
+      },
+      {
+        "category": "input-validation",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "SaitaChain’s XBridge bridge contracts were exploited on 2024-04-24 after the listToken() function allowed arbitrary callers to register themselves as token owners. The attacker used the forged ownership entry to call withdrawTokens() and drain bridge-held assets on Ethereum and BNB Chain. Public loss estimates ranged from roughly $1.0 million to $1.8 million, with DefiLlama and several incident reports converging on about $1.44 million. The XBridge4 contract exposed an access control flaw in listToken(). When the function received identical base and corresponding token parameters, it assigned _tokenOwner[token] = msg.sender without validating that the…",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "SaitaChain’s XBridge bridge contracts were exploited on 2024-04-24 after the listToken() function allowed arbitrary callers to register themselves as token owners. The attacker used the forged ownership entry to call withdrawTokens() and drain bridge-held assets on Ethereum and BNB Chain. Public loss estimates ranged from roughly $1.0 million to $1.8 million, with DefiLlama and several incident reports converging on about $1.44 million. The XBridge4 contract exposed an access control flaw in listToken(). When the function received identical base and corresponding token parameters, it assigned _tokenOwner[token] = msg.sender without validating that the…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x903d88a92cbc0165a7f662305ac1bff97430dbcccaa0fe71e101e18aa9109c92",
+    "0xe09d350d8574ac1728ab5797e3aa46841f6c97239940db010943f23ad4acf7ae",
+    "0x33f19229b5382854e63b4d2d2d82164fcdc5b13a01505ea0d5d2df7e7574ab25",
+    "0x68e2ab07e09e79360dacda1a32a26b7eb2a9fad361330c103d8093c08c27c719"
+  ],
+  "poc": null,
+  "sources": [
+    "blocksec",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x903d88a92cbc0165a7f662305ac1bff97430dbcccaa0fe71e101e18aa9109c92"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/xbridge-2024-04-24"
+    },
+    {
+      "source": "revertiq",
+      "label": "defillama.com",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/kismp123/DeFi-Security-Incident/blob/main/2024/2024-04-24_SaitaChain_AccessControl_ETH.md"
+    },
+    {
+      "source": "revertiq",
+      "label": "raw.githubusercontent.com",
+      "url": "https://raw.githubusercontent.com/SunWeb3Sec/DeFiHackLabs/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/src/test/2024-04/XBridge_exp.sol"
+    }
+  ]
+}

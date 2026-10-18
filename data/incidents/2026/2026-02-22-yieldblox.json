@@ -1,0 +1,91 @@
+{
+  "id": "2026-02-22-yieldblox",
+  "name": "Yieldblox",
+  "date": "2026-02-22",
+  "year": 2026,
+  "amountUsd": 10970000,
+  "returnedUsd": null,
+  "chains": [
+    "-11"
+  ],
+  "targetType": null,
+  "category": "oracle-manipulation",
+  "technique": "Vulnerable Price Dependency",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 1.00).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.06,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "Oracle manipulation drained $10.97 million from Script3's YieldBlox pool on Blend V2. Attacker pumped illiquid collateral USTRY 100x on the Stellar DEX. The oracle reported the fake price as real.",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "Oracle manipulation drained $10.97 million from Script3's YieldBlox pool on Blend V2. Attacker pumped illiquid collateral USTRY 100x on the Stellar DEX. The oracle reported the fake price as real."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "YieldBlox suffered a $10M loss on February 22, 2026, after an attacker manipulated a thinly traded Stellar DEX oracle price for USTRY/USDC, inflating collateral value and draining USDC and XLM from a Blend V2 lending pool. The lending pool operator configured its oracle to source USTRY prices from a near-zero-volume SDEX market, enabling price manipulation by a single abnormal trade. There were no liquidity/deviation checks or circuit breakers at the protocol or oracle-adapter layer."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "3e81a3f7b6e17cc22d0a1f33e9dcf90e5664b125b9e61f108b8d2f082f2d4657",
+    "ae721cacee382bdecac8d2c47286ecd42cb4711f658bb2aec7cba60dc64a31ff"
+  ],
+  "poc": null,
+  "sources": [
+    "rekt",
+    "blocksec",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "rekt",
+      "label": "REKT: Yieldblox - Rekt",
+      "url": "https://rekt.news/yieldblox-rekt"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=3e81a3f7b6e17cc22d0a1f33e9dcf90e5664b125b9e61f108b8d2f082f2d4657"
+    },
+    {
+      "source": "blocksec",
+      "label": "x.com",
+      "url": "https://x.com/DefimonAlerts/status/2025689939979960539"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/yeildblox-10m-2026-02-24"
+    },
+    {
+      "source": "revertiq",
+      "label": "quillaudits.com",
+      "url": "https://www.quillaudits.com/blog/hack-analysis/yeildblox-10m-hack-explained"
+    },
+    {
+      "source": "revertiq",
+      "label": "blocksec.com",
+      "url": "https://blocksec.com/blog/yieldblox-dao-incident-on-stellar-oracle-misconfiguration-enabled-a-10m-drain"
+    },
+    {
+      "source": "revertiq",
+      "label": "olympix.security",
+      "url": "https://olympix.security/blog/the-yieldblox-exploit-how-olympix-could-have-prevented-the-10m-loss"
+    }
+  ]
+}

@@ -1,0 +1,123 @@
+{
+  "id": "2023-12-22-pine-protocol",
+  "name": "Pine Protocol",
+  "date": "2023-12-22",
+  "year": 2023,
+  "amountUsd": 95000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Swap Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.95,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.95
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.04
+      },
+      {
+        "category": "access-control",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.91,
+    "stateActor": 0.01,
+    "hasRootCause": 0.94
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Business Logic Flaw. Lost: ~90k",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Business Logic Flaw. Lost: ~90k"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Due to the shared pools between two different contracts This shared pool address between the old and new contract versions led to the execution of fund transfers originating from the same address but targeting different pools. The attacker initiated the process by using NFT tokens as collateral to borrow assets from the new version of the pool. Subsequently, they executed another flash loan from the old version of the pool, utilizing it to repay their initially borrowed assets. Vulnerable code snippet: https://etherscan.io/address/0x2405913d54fc46eeaf3fb092bfb099f46803872f old version: https://etherscan.io/address/0x2405913d54fc46eeaf3fb092bfb099f46803872f new version: https://etherscan.io/address/0xc3f4659588b13f23e09ec54783a3c407e39ad589 Attack tx: // NFT buy Tx: https://explorer.phalcon.xyz/tx/eth/0x2f328016764ecf1f57fda0f5490087a5ddba83706b51cf518bdbd7e65ae2383b // Borrow Tx: https://explorer.phalcon.xyz/tx/eth/0xf4f254c3c6b64ded778b5af292c6ab6ed886c1bdd8988510bdc0ca0cf7f9857e // Attack Tx : https://explorer.phalcon.xyz/tx/eth/0xec7523660f8b66d9e4a5931d97ad8b30acc679c973b20038ba4c15d4336b393d Analysis: https://medium.com/neptune-mutual/analysis-of-the-pine-protocol-exploit-e09dbcb80ca0 https://blog.solidityscan.com/pine-protocol-hack-analysis-7ce8621f444b"
+    },
+    {
+      "source": "SlowMist",
+      "text": "PineProtocol seems to have been exploited. According to SlowMist's analysis, the exploiter's IP is 116.*.*.112. The exploiter has withdrawn ETH from FixedFloat and ChangeNOW, and has transferred 20 ETH to TornadoCash. The exploiter appears to have received part of the bounty."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Pine Protocol was exploited on 21 December 2023 due to a business logic flaw involving shared pool addresses between old and new contract versions on Ethereum, enabling an attacker to drain about 40 ETH (≈$92,000,$95,000) using recursive borrow and flash loan operations. Some stolen funds were later transferred to Tornado Cash. Pine Protocol's old and new lending contracts shared pool addresses, allowing the attacker to repay a debt in the new contract using funds from a flash loan in the old contract. Both contracts recorded the same repayment, enabling extraction of lent assets multiple times."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x2f328016764ecf1f57fda0f5490087a5ddba83706b51cf518bdbd7e65ae2383b",
+    "0xf4f254c3c6b64ded778b5af292c6ab6ed886c1bdd8988510bdc0ca0cf7f9857e",
+    "0xec7523660f8b66d9e4a5931d97ad8b30acc679c973b20038ba4c15d4336b393d",
+    "0x88db033171344c7b89d50f48e1e50ef3a622371cf3ab997613469904838c83ad",
+    "0xa079826b4af4e5889a162684304f9921eec2e773bee3bdc8bacb4a9fa092ee61",
+    "0xb3ec9ecfc67ac8bc043e1283fde475c4240fe7ca2f4b5e3596fe44ceead21839",
+    "0x168aa3823c27e2ef1b07a123dddd2f5b97b1f6c37eecc2e0def37113d8a7d32e"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-12/PineProtocol_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-12/PineProtocol_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "medium.com",
+      "url": "https://medium.com/neptune-mutual/analysis-of-the-pine-protocol-exploit-e09dbcb80ca0"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/MistTrack_io/status/1738131780459430338"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/address/0x2405913d54fc46eeaf3fb092bfb099f46803872f"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/address/0xc3f4659588b13f23e09ec54783a3c407e39ad589"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "explorer.phalcon.xyz",
+      "url": "https://explorer.phalcon.xyz/tx/eth/0x2f328016764ecf1f57fda0f5490087a5ddba83706b51cf518bdbd7e65ae2383b"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/pine-protocol-2023-12-22"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.solidityscan.com",
+      "url": "https://blog.solidityscan.com/pine-protocol-hack-analysis-7ce8621f444b/"
+    }
+  ]
+}

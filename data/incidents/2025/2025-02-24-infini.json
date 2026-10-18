@@ -1,0 +1,133 @@
+{
+  "id": "2025-02-24-infini",
+  "name": "Infini",
+  "date": "2025-02-24",
+  "year": 2025,
+  "amountUsd": 49500000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "key-compromise",
+  "technique": "Private Key Compromised",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.65,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.67
+      },
+      {
+        "category": "key-compromise",
+        "p": 0.29
+      },
+      {
+        "category": "rugpull",
+        "p": 0.04
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "The Infini crypto neobank lost approximately $49.5 million due to a compromised private key held by a former developer who built the protocol's smart contracts. The developer retained admin-level privileges (role 0x8e0b) on the vault contract after completing their work — a backdoor that was never revoked. After a 114-day hibernation period, the rogue developer used this privileged key to drain funds from the Morpho MEVCapital USDC Vault across two transactions ($11.45M and $38.06M). The stolen USDC was immediately swapped to DAI (to avoid USDC blocklisting) and then converted to approximately 17,696 ETH before being routed through Tornado Cash. The root cause was a failure of access management: admin rights were never rotated or revoked after the developer's engagement ended, and no multi-signature controls protected the privileged withdrawal role. Attack Tx: 0xacf84c5944f662a4fcf783806993d713a150994932008e72e4e47a58d6665f7f Analysis: Explained: The Infini Hack (February 2025)",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The Infini crypto neobank lost approximately $49.5 million due to a compromised private key held by a former developer who built the protocol's smart contracts. The developer retained admin-level privileges (role 0x8e0b) on the vault contract after completing their work — a backdoor that was never revoked. After a 114-day hibernation period, the rogue developer used this privileged key to drain funds from the Morpho MEVCapital USDC Vault across two transactions ($11.45M and $38.06M). The stolen USDC was immediately swapped to DAI (to avoid USDC blocklisting) and then converted to approximately 17,696 ETH before being routed through Tornado Cash. The root cause was a failure of access management: admin rights were never rotated or revoked after the developer's engagement ended, and no multi-signature controls protected the privileged withdrawal role. Attack Tx: 0xacf84c5944f662a4fcf783806993d713a150994932008e72e4e47a58d6665f7f Analysis: Explained: The Infini Hack (February 2025)"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The crypto-focused stablecoin neobank Infini was attacked, with the attacker gaining access to a wallet with admin rights and stealing nearly $50 million from the company."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On February 24, 2025, Infini lost $49.5 million when a former developer retained and used administrative privileges on the main Ethereum contract to withdraw USDC. The stolen funds were laundered via DAI and converted to ETH, highlighting critical operational failures in permission revocation and admin key management. The exploit resulted from a failure to revoke administrative privileges from a former developer. The attacker used retained authority (not a hidden contract backdoor) to initiate privileged withdrawals, bypassing security controls that should have limited or removed their access after separation."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On February 24, 2025, Infini lost $49.5M from its Morpho MEVCapital USDC Vault on Ethereum when an attacker compromised a privileged account that had not been properly revoked after an authority transfer. The attacker used this access to withdraw all vault funds, convert them to DAI and then ETH, and moved them to a new wallet. Failure to revoke a privileged withdrawal role from a legacy admin account after contract authority was transferred. The attacker compromised this account's key and used its unrestricted access to drain vault assets."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xacf84c5944f662a4fcf783806993d713a150994932008e72e4e47a58d6665f7f",
+    "0xecb31ff694c0e6c5e5b225c261854c0749ecf5d53c698fcda61f2d8e3db8f9fc",
+    "0x03db8172ada9778e168fb1903d513782161d3e63a57004244d9437de89c68741",
+    "0xdb3a507855abc229610f443b06d0f0896e47e2654a76c6f3e37c6e265d1f42cd",
+    "0xb12b32f4543ff0df4a4024affc51b81b773fa9f6d0fd52f2b1f65d99f105bd86",
+    "0xf0f9e5c87fad93a1b3b1f4b3e9fd2da0007af7c5c234e26e17fdc32e9ce015ef"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xacf84c5944f662a4fcf783806993d713a150994932008e72e4e47a58d6665f7f"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "halborn.com",
+      "url": "https://www.halborn.com/blog/post/explained-the-infini-hack-february-2025"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xacf84c5944f662a4fcf783806993d713a150994932008e72e4e47a58d6665f7f"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/MistTrack_io/status/1893926049882239085"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/explained-the-infini-2025-03-03t14-16-27-480000-00-00"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/de-fi-rekt-report-february-2025-over-1-76-billion-lost-in-crypto-exploits"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptonews.net",
+      "url": "https://cryptonews.net/news/security/30572679/"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/how-a-single-access-control-flaw-cost-infini-49-5m-2025-02-25"
+    },
+    {
+      "source": "revertiq",
+      "label": "quillaudits.com",
+      "url": "https://www.quillaudits.com/blog/hack-analysis/how-infini-lost-49-million-in-a-defi-hack"
+    },
+    {
+      "source": "revertiq",
+      "label": "certik.com",
+      "url": "https://www.certik.com/blog/0xinfini-incident-analysis"
+    }
+  ]
+}

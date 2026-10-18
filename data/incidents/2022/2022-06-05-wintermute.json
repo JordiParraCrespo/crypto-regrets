@@ -1,0 +1,94 @@
+{
+  "id": "2022-06-05-wintermute",
+  "name": "Wintermute",
+  "date": "2022-06-05",
+  "year": 2022,
+  "amountUsd": 17600000,
+  "returnedUsd": null,
+  "chains": [
+    "Optimism"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.85,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.86
+      },
+      {
+        "category": "logic-error",
+        "p": 0.11
+      },
+      {
+        "category": "bridge-crosschain",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "The glass is half-empty for Wintermute who have lost 20M OP, worth ~$27.6M at the time of the incident. In an already struggling market, actions such as these make it hard to remain Optimistic.",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "The glass is half-empty for Wintermute who have lost 20M OP, worth ~$27.6M at the time of the incident. In an already struggling market, actions such as these make it hard to remain Optimistic."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "In June 2022, Wintermute lost 20M OP tokens on Optimism due to a cross-chain contract deployment error. The tokens were sent to an address matching Wintermute’s multisig on Ethereum before any contract was deployed at that address on L2. An attacker replayed the deployment sequence, initialized the Safe contract at the target address, and transferred out OP tokens. The technical flaw stemmed from misunderstanding contract existence and the replayable CREATE address logic. OP tokens were allocated to a contract address on Optimism matching Wintermute’s L1 multisig but with no contract code deployed. The attacker replayed the ProxyFactory deployment usin…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xf79ed3037b55fbfd305007da2f19fb7960d31b8410453c679313e37a6d8548f4",
+    "0x0c1d6166293924566ea0ca32d07379c7033a8b8f2558f667f917543e51dd474a",
+    "0x8e29eef359f6c18a06e229157d44467b5e873f6e5b996baa7124b38eb6dfb1db",
+    "0x06cbffe3dcbf9405f5b50aafbdec542cfaeecaeed580c3cc51a0604e423f91eb",
+    "0x00a3da68f0f6a69cb067f09c3f7e741a01636cbc27a84c603b468f65271d415b",
+    "0x230e17117986f0dc7259db824de1d00c6cf455c925c0c8c6b89bf0b6756a7b7e",
+    "0xe9491bfb9a1ad13a47f3c1f61197b097416cbed2e32e038dd3de97172ddee303"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Wintermute - REKT",
+      "url": "https://rekt.news/wintermute-rekt"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/wintermute-2022-06-05"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/Auditware/AuditVault/blob/main/hacks/rekt-2022-06-05-wintermute.md"
+    },
+    {
+      "source": "revertiq",
+      "label": "monitoringroom.com",
+      "url": "https://monitoringroom.com/situation/crypto-hack/wintermute"
+    }
+  ]
+}

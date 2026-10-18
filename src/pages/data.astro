@@ -1,0 +1,46 @@
+---
+import Base from '../layouts/Base.astro';
+import { incidents, advisories, href, YEARS } from '../lib/data';
+const REPO = 'https://github.com/JordiParraCrespo/crypto-regrets';
+const perYear = YEARS.map((y) => ({ y, n: incidents.filter((i) => i.year === y).length })).filter((x) => x.n > 0).reverse();
+const example = incidents.find((i) => i.poc && i.ai && i.descriptions.length > 1) ?? incidents[0];
+---
+<Base title="Data" description="Download every indexed crypto incident as JSON or CSV, or browse one file per incident.">
+  <h1>Data</h1>
+  <p class="lede">Every incident on this site is a plain file in the repository's <a href={`${REPO}/tree/main/data`}><code>data/</code></a> directory. Download it, diff it, or send a correction as a pull request.</p>
+
+  <h2>Downloads</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>File</th><th>Contents</th><th class="num">Records</th></tr></thead>
+      <tbody>
+        <tr><td><a href={href('/api/incidents.json')}><code>incidents.json</code></a></td><td>All incidents, full schema</td><td class="num">{incidents.length.toLocaleString('en')}</td></tr>
+        <tr><td><a href={href('/data/incidents.csv')}><code>incidents.csv</code></a></td><td>Flat export for spreadsheets (main fields + best root cause)</td><td class="num">{incidents.length.toLocaleString('en')}</td></tr>
+        <tr><td><a href={href('/api/advisories.json')}><code>advisories.json</code></a></td><td>Bitcoin Core, Geth and Cosmos client advisories</td><td class="num">{advisories.length}</td></tr>
+        <tr><td><a href={href('/api/taxonomy.json')}><code>taxonomy.json</code></a></td><td>Layers, patterns (with prevention guidance) and eras</td><td class="num">—</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Repository layout</h2>
+  <pre class="tree"><code>{`data/
+├── incidents.json              every incident, one per line
+├── incidents.csv               flat export
+├── incidents/<year>/<id>.json  one file per incident
+├── advisories.json             client & consensus advisories
+├── sources.json                audit of the 30 sources we evaluated
+├── typesafe/                   cached model classifications + evaluation
+└── raw/                        source snapshots the index is built from`}</code></pre>
+  <p class="small muted">Files per year: {perYear.map((x) => `${x.y}: ${x.n}`).join(' · ')}</p>
+
+  <h2>Example record</h2>
+  <p class="small"><a href={`${REPO}/blob/main/data/incidents/${example.year}/${example.id}.json`}><code>data/incidents/{example.year}/{example.id}.json</code></a></p>
+  <pre class="json"><code>{JSON.stringify(example, null, 2)}</code></pre>
+
+  <h2>Schema</h2>
+  <p>Defined once with zod in <a href={`${REPO}/blob/main/src/lib/types.ts`}><code>src/lib/types.ts</code></a> and validated on every build. <code>category</code> is always one of the ids in <a href={href('/api/taxonomy.json')}>taxonomy.json</a>; <code>classifiedBy</code> says who decided it (<code>defillama</code>, <code>curated</code>, <code>typesafe</code>, <code>keywords</code> or <code>none</code>), and <code>ai</code> holds the model's second opinion.</p>
+</Base>
+<style>
+  pre { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; overflow-x: auto; font-size: 0.82rem; line-height: 1.5; }
+  pre.json { max-height: 520px; }
+</style>

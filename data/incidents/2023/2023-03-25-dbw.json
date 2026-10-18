@@ -1,0 +1,73 @@
+{
+  "id": "2023-03-25-dbw",
+  "name": "DBW",
+  "date": "2023-03-25",
+  "year": 2023,
+  "amountUsd": 24000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Business Logic Flaw",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 1.00).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.06,
+    "stateActor": 0.02,
+    "hasRootCause": 0.93
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Business Logic Flaw. Lost: $24k",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Business Logic Flaw. Lost: $24k"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The root cause is that the dividend awards are based on the percentage of LP currently owned by the user, and does not take into account multiple dividends after the transfer of LP. Vulnerable code snippet: claim reward redeem LP Attack tx: https://bscscan.com/tx/0x3b472f87431a52082bae7d8524b4e0af3cf930a105646259e1249f2218525607 Analysis: https://twitter.com/BeosinAlert/status/1639655134232969216 https://twitter.com/AnciliaInc/status/1639289686937210880"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x3b472f87431a52082bae7d8524b4e0af3cf930a105646259e1249f2218525607"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-03/DBW_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-03/DBW_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BeosinAlert/status/1639655134232969216"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/AnciliaInc/status/1639289686937210880"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x3b472f87431a52082bae7d8524b4e0af3cf930a105646259e1249f2218525607"
+    }
+  ]
+}

@@ -1,0 +1,107 @@
+{
+  "id": "2026-02-22-laxo",
+  "name": "LAXO",
+  "date": "2026-02-22",
+  "year": 2026,
+  "amountUsd": 190000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Incorrect Share Accounting",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.95,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.95
+      },
+      {
+        "category": "logic-error",
+        "p": 0.05
+      }
+    ],
+    "flashLoan": 0.97,
+    "stateActor": 0.01,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Incorrect Burn Logic. Lost: ~137,000 US$",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Incorrect Burn Logic. Lost: ~137,000 US$"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The LAXO token implements an automatic burn / reflection mechanism that destroys tokens held in its liquidity pairs based on transfer activity rather than on the pair's true reserves. The attacker flash-loaned 350k BUSD, swapped it into LAXO, then manipulated liquidity (addLiquidityETH / removeLiquidity on the WBNB pair) to trigger the faulty burn logic against the BUSD pair. This let the attacker force the LAXO balance held by the BUSD pair to a precisely controlled value (the PoC asserts 52,057...e18 LAXO at the busd_pair) without a corresponding reserve sync. By then transferring LAXO into the BUSD pair and swapping against the now-distorted reserves, the attacker extracted ~487k BUSD, repaid the 350.175k BUSD flashloan, and netted ~137k BUSD profit. Root cause: burn logic that mutates pair token balances without reconciling reserves, allowing the AMM price to be manipulated. Vulnerable code snippet: Attack Tx: https://bscscan.com/tx/0xd58f3ef6414b59f95f55dae1acb3d5d6e626acf5333917c6d43fe422d98ac7d3 Analysis: https://x.com/CertiKAlert/status/2027317095420072317"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "LAXO on BNB Chain was exploited on 22 February 2026 due to a burn-from-pair logic flaw, enabling attackers to manipulate liquidity pool pricing via flash loans. The attackers drained approximately $190,000 by burning tokens from the pool, artificially inflating the price, and cashing out through rapid consecutive transactions. LAXO’s vulnerable burn logic burned tokens directly from the liquidity pool and called sync before the transfer, allowing attackers to manipulate pool reserves and receive inflated prices during swaps. This flaw affected every sell, draining value from liquidity providers and enabling amplified price manipulation via flash loan."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xd58f3ef6414b59f95f55dae1acb3d5d6e626acf5333917c6d43fe422d98ac7d3",
+    "0x4251977f909f4741ece8ba6682bda51cce82e0a6617d25e1d627f97f18b3aa34",
+    "0xc304f6322467de323416fb6395025353e988a8d82b24727209feb667a23d6555",
+    "0xddafcef1d88fb9e4740ca2fc96c30ef7d8135b8b0af3ce8613cf26e71c7d1f63"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-02/LAXO_Token_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-02/LAXO_Token_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/CertiKAlert/status/2027317095420072317"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0xd58f3ef6414b59f95f55dae1acb3d5d6e626acf5333917c6d43fe422d98ac7d3"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xd58f3ef6414b59f95f55dae1acb3d5d6e626acf5333917c6d43fe422d98ac7d3"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/laxo-2026-02-22"
+    },
+    {
+      "source": "revertiq",
+      "label": "olympix.security",
+      "url": "https://olympix.security/blog/the-190k-laxo-token-exploit-and-how-olympix-would-have-prevented-it"
+    },
+    {
+      "source": "revertiq",
+      "label": "certik.com",
+      "url": "https://www.certik.com/blog/sof-laxo-incident-analysis"
+    }
+  ]
+}

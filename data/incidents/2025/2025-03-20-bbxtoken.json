@@ -1,0 +1,94 @@
+{
+  "id": "2025-03-20-bbxtoken",
+  "name": "BBXToken",
+  "date": "2025-03-20",
+  "year": 2025,
+  "amountUsd": 12000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "Token",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.71,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.73
+      },
+      {
+        "category": "input-validation",
+        "p": 0.11
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.1
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Price Manipulation. Lost: 11902 BUSD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Price Manipulation. Lost: 11902 BUSD"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On March 20, 2025, BBXToken was exploited on BNB Chain through repeated liquidity pool manipulations, resulting in a loss of approximately $12,000. The attacker abused the token's transfer burn mechanism, repeatedly invoking transfers to artificially skew PancakeSwap reserves and then swapped against the manipulated price. BBXToken's _transfer() function burns tokens from the LP with every transfer,including zero-amount transfers,then forcibly syncs PancakeSwap reserves. This allowed attackers to repeatedly drain and skew the pool, manipulating the spot price and extracting value."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x0dd486368444598610239b934dd9e8c6474a06d11380d1cfec4d91568b5ac581",
+    "0xf7019e1232704c3ede4ecf00b79ccf647b2cb3718b9f6972e70dc7c5170e3f91"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-03/BBXToken_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-03/BBXToken_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/TenArmorAlert/status/1902651550733906379"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/bbxtoken-2025-03-20"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.solidityscan.com",
+      "url": "https://blog.solidityscan.com/bbx-token-hack-analysis-f2e962c00ee5/"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/bbx-token-hack-2025"
+    }
+  ]
+}

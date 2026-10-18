@@ -1,0 +1,78 @@
+{
+  "id": "2020-09-20-soda-protocol",
+  "name": "Soda Protocol",
+  "date": "2020-09-20",
+  "year": 2020,
+  "amountUsd": 160000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Withdrawal Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.06,
+    "stateActor": 0.01,
+    "hasRootCause": 0.63
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "The financial blogger \"Super Bitcoin\" stated on Weibo that Mr. Huai (weibo username \"crash X\") participated in the liquidity mining project Soda, and suddenly discovered a loophole in which 20,000 ETH can be directly liquidated Drop. But he chose to tell the development team, but the development team did not pay attention. He had no choice but to liquidate an ETH, and sent a Weibo warning to inform the developers of the existence of this bug. One hour later, the parties to the Soda agreement responded by prompting the borrower to repay and the mortgager to withdraw, and at the same time indicated that they would fix the loopholes and suspend the front-end borrowing function.…",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The financial blogger \"Super Bitcoin\" stated on Weibo that Mr. Huai (weibo username \"crash X\") participated in the liquidity mining project Soda, and suddenly discovered a loophole in which 20,000 ETH can be directly liquidated Drop. But he chose to tell the development team, but the development team did not pay attention. He had no choice but to liquidate an ETH, and sent a Weibo warning to inform the developers of the existence of this bug. One hour later, the parties to the Soda agreement responded by prompting the borrower to repay and the mortgager to withdraw, and at the same time indicated that they would fix the loopholes and suspend the front-end borrowing function.…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Soda Protocol suffered an exploit on Ethereum Mainnet on September 20, 2020, due to a smart contract logic flaw in the withdrawal or liquidation mechanism. Attackers were able to liquidate user collateral illicitly, resulting in losses estimated around $160,000. The protocol team later patched the bug and partially compensated affected users with protocol tokens. A critical flaw in the smart contract's liquidation or withdrawal logic allowed attackers to improperly liquidate over-collateralized loans, causing principal loss to user deposits."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "new.qq.com",
+      "url": "https://new.qq.com/omn/20200924/20200924A07M1U00.html"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/soda-protocol-2020-09-20"
+    },
+    {
+      "source": "revertiq",
+      "label": "defillama.com",
+      "url": "https://defillama.com/protocol/soda-protocol"
+    },
+    {
+      "source": "revertiq",
+      "label": "quadrigainitiative.com",
+      "url": "https://www.quadrigainitiative.com/hackfraudscam/sodafinanceloophole.php"
+    }
+  ]
+}

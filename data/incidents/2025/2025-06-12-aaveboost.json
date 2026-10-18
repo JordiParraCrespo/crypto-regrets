@@ -1,0 +1,76 @@
+{
+  "id": "2025-06-12-aaveboost",
+  "name": "AAVEBoost",
+  "date": "2025-06-12",
+  "year": 2025,
+  "amountUsd": 14800,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Logic Flaw",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.97).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.97,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.97
+      },
+      {
+        "category": "access-control",
+        "p": 0.02
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Logic Flaw. Lost: 14.8K USD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Logic Flaw. Lost: 14.8K USD"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The AaveBoost contract had a logic flaw in its proxyDeposit() function: it credited the caller (msg.sender / the supplied recipient) with deposit accounting / aToken positions backed by the underlying token already held in the AaveBoost contract, rather than requiring the caller to actually transfer in new funds. By repeatedly calling proxyDeposit(underlyingProxy, attacker, 0) in a loop (up to the contract's remaining balance / ~0.3e18 per call), the attacker accumulated deposit credit / aTokens against tokens that were never theirs. They then called AavePool.withdraw() to redeem that credit for the underlying token and transferred the proceeds out, draining the AaveBoost contract for ~$14.8K. Vulnerable code snippet: Attack Tx: https://app.blocksec.com/explorer/tx/eth/0xc4ef3b5e39d862ffcb8ff591fbb587f89d9d4ab56aec70cfb15831782239c0ce Analysis: CertiKAlert"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xc4ef3b5e39d862ffcb8ff591fbb587f89d9d4ab56aec70cfb15831782239c0ce"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-06/AAVEBoost_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-06/AAVEBoost_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/CertiKAlert/status/1933011428157563188"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/eth/0xc4ef3b5e39d862ffcb8ff591fbb587f89d9d4ab56aec70cfb15831782239c0ce"
+    }
+  ]
+}

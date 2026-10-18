@@ -1,0 +1,82 @@
+{
+  "id": "2025-07-17-wetc",
+  "name": "WETC",
+  "date": "2025-07-17",
+  "year": 2025,
+  "amountUsd": 101000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Incorrect Burn Logic",
+  "classificationNote": "Classified by keyword rules from the DeFiHackLabs root-cause title.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.67,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.6900000000000001
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.22
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.09
+      }
+    ],
+    "flashLoan": 0.98,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Incorrect Burn Logic. Lost: 101k USD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Incorrect Burn Logic. Lost: 101k USD"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The attacker flash-loaned 1,000,000 BUSD from a PancakeSwap V3 pool and used it to manipulate the BUSD/WETC PancakeSwap V2 pair. The exploit relies on the WETC token's flawed transfer logic combined with the AMM's skim/sync functions: the attacker repeatedly transferred large amounts of WETC directly to the pair contract and then called skim (sending the excess to a chosen address) followed by sync (which updates the pair's internal reserves to match the manipulated balances). This forced the pair's reserves out of sync with real balances and grossly distorted the WETC price. With the price manipulated, the attacker swapped the remaining position for a large amount of BUSD (351,495 BUSD out), repaid the flash loan plus fee, and kept ~$101K profit. The root cause is that the WETC token's fee/transfer behavior, combined with externally callable skim/sync, lets an attacker arbitrarily desynchronize and re-set the pool reserves to manipulate price. Vulnerable code snippet: Attack Tx: https://bscscan.com/tx/0x2b6b411adf6c452825e48b97857375ff82b9487064b2f3d5bc2ca7a5ed08d615 Analysis: evmhacks post-mortem"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x2b6b411adf6c452825e48b97857375ff82b9487064b2f3d5bc2ca7a5ed08d615"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-07/WETC_Token_exp.sol",
+  "sources": [
+    "defihacklabs",
+    "blocksec"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-07/WETC_Token_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "t.me",
+      "url": "https://t.me/evmhacks/78?single"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x2b6b411adf6c452825e48b97857375ff82b9487064b2f3d5bc2ca7a5ed08d615"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x2b6b411adf6c452825e48b97857375ff82b9487064b2f3d5bc2ca7a5ed08d615"
+    }
+  ]
+}

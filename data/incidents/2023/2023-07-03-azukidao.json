@@ -1,0 +1,118 @@
+{
+  "id": "2023-07-03-azukidao",
+  "name": "AzukiDAO",
+  "date": "2023-07-03",
+  "year": 2023,
+  "amountUsd": 68000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "signature-crypto",
+  "technique": "Signature Replay",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "signature-crypto",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "signature-crypto",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Invalid signature verification. Lost: ~$69k",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Invalid signature verification. Lost: ~$69k"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The contract recorded the extracted signature, but did not verify the signature. As long as the passed parameters remain unchanged, multiple extractions can be achieved before the signature time limit expires, causing the attacker to use one signature to perform multiple token extraction operations. Vulnerable code snippet: Attack tx: https://etherscan.io/tx/0x6233c9315dd3b6a6fcc7d653f4dca6c263e684a76b4ad3d93595e3b8e8714d34 Analysis: https://twitter.com/sharkteamorg/status/1676892088930271232"
+    },
+    {
+      "source": "SlowMist",
+      "text": "After spending nearly $40 million on a new set of Azuki NFTs, the Azuki community was outraged that they were \"diluting\" a near-replica of the original Azuki collection. To counter what Azuki’s creators called a “blatant scam,” holders who claim to have collectively spent millions of dollars on the Azuki project formed AzukiDAO. The DAO created a governance token, $BEAN, which is distributed to Azuki NFT owners. The DAO then began voting to hire lawyers to sue the creators of Azuki and demand a return of the 20,000 ETH (approximately $38 million) that the Elementals NFTs had spent in total. However, governance tokens were exploited shortly after the DAO was created.…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On June 30, 2023, the Azuki DAO governance token contract (BEAN) was exploited on Ethereum due to a signature replay vulnerability in its claim function. Two attacker addresses repeatedly used a single valid claim signature to mint approximately 1.79 million BEAN tokens, which they exchanged for about 35 ETH (worth $65,000 at the time). The BEAN token contract's claim function did not check whether a claim signature had already been used, allowing attackers to repeatedly submit the same valid signature and mint tokens multiple times."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "AzukiDAO’s BEAN airdrop contract on Ethereum was exploited on 2023-06-30 through a signature replay flaw in the claim() function. Attackers repeatedly reused the same valid signature to mint additional BEAN tokens, with reported proceeds of roughly 35 ETH, about $68,000 to $69,000 at the time. The BEAN token airdrop contract failed to enforce one-time use of signed claims. The contract recorded signatures in signatureClaimed[_signature] but did not reject already-used signatures during subsequent claim() calls, allowing attackers to replay the same authorization repeatedly."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x6233c9315dd3b6a6fcc7d653f4dca6c263e684a76b4ad3d93595e3b8e8714d34"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-07/AzukiDAO_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-07/AzukiDAO_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/sharkteamorg/status/1676892088930271232"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x6233c9315dd3b6a6fcc7d653f4dca6c263e684a76b4ad3d93595e3b8e8714d34"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/wublockchain12/status/1675804855414452225"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/decoding-azuki-dao-2024-05-21"
+    },
+    {
+      "source": "revertiq",
+      "label": "quillaudits.com",
+      "url": "https://www.quillaudits.com/blog/hack-analysis/azuki-dao-hack"
+    },
+    {
+      "source": "revertiq",
+      "label": "unchainedcrypto.com",
+      "url": "https://unchainedcrypto.com/azuki-dao-governance-token-contract-exploited-amid-vote-to-sue-founder/"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/azukidao-2023-07-03"
+    },
+    {
+      "source": "revertiq",
+      "label": "raw.githubusercontent.com",
+      "url": "https://raw.githubusercontent.com/SunWeb3Sec/DeFiHackLabs/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/src/test/2023-07/AzukiDAO_exp.sol"
+    }
+  ]
+}

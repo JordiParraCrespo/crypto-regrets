@@ -1,0 +1,143 @@
+{
+  "id": "2023-04-28-0vix",
+  "name": "0vix",
+  "date": "2023-04-28",
+  "year": 2023,
+  "amountUsd": 2000000,
+  "returnedUsd": null,
+  "chains": [
+    "Polygon"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.37,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.41000000000000003
+      },
+      {
+        "category": "logic-error",
+        "p": 0.38
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.17
+      }
+    ],
+    "flashLoan": 0.11,
+    "stateActor": 0.02,
+    "hasRootCause": 0.85
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "FlashLoan Price Manipulation. Lost: ~$2M",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "FlashLoan Price Manipulation. Lost: ~$2M"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Incorrect use balanceOf. Vulnerable code snippet: vGHSTOracle Attack tx: https://polygonscan.com/tx/0x10f2c28f5d6cd8d7b56210b4d5e0cece27e45a30808cd3d3443c05d4275bb008 Analysis: https://twitter.com/BlockSecTeam/status/1651932529874853888 https://twitter.com/peckshield/status/1651923235603361793 https://twitter.com/MuditGupta/status/1651958883634536448"
+    },
+    {
+      "source": "SlowMist",
+      "text": "DeFi protocol 0VIX on the Polygon chain was exploited for around $2 million. The attack was carried out by an attacker manipulating the oracle, who then performed a flash loan attack on the project. The agreement was suspended after the attack."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "0VIX lost about $2 million after an attacker increased vGHST's value with a GHST donation and liquidated a controlled borrower. The Polygon transaction records 24 liquidations and final transfers of about 1.454 million USDC, 584,445 USDT, and 9,566 GHST to its caller. The configured vGHST oracle multiplied the wrapper's immediately mutable GHST-per-share conversion by the GHST price. A direct donation repriced existing vGHST debt, enabling the attacker to liquidate a controlled borrower, seize USDC collateral, and leave other lending liabilities exposed."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x10f2c28f5d6cd8d7b56210b4d5e0cece27e45a30808cd3d3443c05d4275bb008"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-04/0vix_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-04/0vix_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BlockSecTeam/status/1651932529874853888"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/peckshield/status/1651923235603361793"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Mudit__Gupta/status/1651958883634536448"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "polygonscan.com",
+      "url": "https://polygonscan.com/tx/0x10f2c28f5d6cd8d7b56210b4d5e0cece27e45a30808cd3d3443c05d4275bb008"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x10f2c28f5d6cd8d7b56210b4d5e0cece27e45a30808cd3d3443c05d4275bb008"
+    },
+    {
+      "source": "blocksec",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BlockSecTeam/status/1651918708024156168"
+    },
+    {
+      "source": "blocksec",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs?tab=readme-ov-file#20230428-0vix---flashloan-price-manipulation"
+    },
+    {
+      "source": "slowmist",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/business/2023/04/28/defi-protocol-0vix-loses-nearly-2m-in-flash-loan-exploit/"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/0vix-2023-04-28"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "polygonscan.com",
+      "url": "https://polygonscan.com/address/0x738fe8a918d5e43b705fc5127450e2300f7b08ab#code"
+    },
+    {
+      "source": "revertiq",
+      "label": "polygonscan.com",
+      "url": "https://polygonscan.com/address/0x450ac5c7c2b180477940aa4de39b3513c42ab74f#code"
+    }
+  ]
+}

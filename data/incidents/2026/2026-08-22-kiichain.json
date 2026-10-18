@@ -1,0 +1,83 @@
+{
+  "id": "2026-08-22-kiichain",
+  "name": "KiiChain",
+  "date": "2026-08-22",
+  "year": 2026,
+  "amountUsd": 9700000,
+  "returnedUsd": null,
+  "chains": [
+    "KiiChain"
+  ],
+  "targetType": "Chain",
+  "category": "accounting-math",
+  "technique": "Arithmetic Error",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Go",
+  "rootCause": "An attacker drained 148.3 million KII, worth roughly $9.7 million at the pre-exploit price, from KiiChain through the Cosmos EVM exploit class that also hit MANTRA and TAC. A halt immobilized 54.4% on-chain, but the rest had already crossed to BNB Chain.",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "An attacker drained 148.3 million KII, worth roughly $9.7 million at the pre-exploit price, from KiiChain through the Cosmos EVM exploit class that also hit MANTRA and TAC. A halt immobilized 54.4% on-chain, but the rest had already crossed to BNB Chain."
+    },
+    {
+      "source": "SlowMist",
+      "text": "An attacker exploited vulnerabilities in the shared Cosmos EVM module (an arithmetic underflow in the staking precompile’s balance write-back after delegation, combined with vesting account handling and other undisclosed bugs). By creating a vesting account and deploying a contract to it, the attacker repeated the technique 18 times, draining approximately 148.3 million KII from various wallets. KiiChain halted the network at block 9355723 to stop further theft."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 2026-08-22, KiiChain halted block production after an attacker exploited chained balance-accounting flaws in the shared Cosmos EVM module. KiiChain later reported that 148,326,583.15 KII was drained across 18 exploit sequences, with part of the funds bridged to BNB Chain through Hyperlane before the halt. KiiChain stated that the exploit combined an arithmetic underflow in the Cosmos EVM staking precompile's post-delegation balance write-back with additional balance-accounting flaws in the shared Cosmos EVM module. Public descriptions diverged on whether the exploit effectively minted unauthorized KII or only redirected existing balances from victim accounts.…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Kiichain - Rekt",
+      "url": "https://rekt.news/kiichain-rekt"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/KiiChainio/article/2091721027583709214"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/kiichain-2026-08-22"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/KiiChain/kiichain/releases"
+    }
+  ]
+}

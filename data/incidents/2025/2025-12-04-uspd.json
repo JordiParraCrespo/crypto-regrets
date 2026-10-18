@@ -1,0 +1,91 @@
+{
+  "id": "2025-12-04-uspd",
+  "name": "USPD",
+  "date": "2025-12-04",
+  "year": 2025,
+  "amountUsd": 1000000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": null,
+  "category": "access-control",
+  "technique": "\"CPIMP\" (Clandestine Proxy In the Middle of Proxy) attack",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 1.00). Replaced keyword guess \"logic-error\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "An attacker front-ran USPD's proxy deployment in September using a CPIMP attack, installed a hidden middleman, waited 78 days, then minted 98 million unbacked tokens for $1 million. Security researchers had documented and patched this exact attack vector months earlier.",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "An attacker front-ran USPD's proxy deployment in September using a CPIMP attack, installed a hidden middleman, waited 78 days, then minted 98 million unbacked tokens for $1 million. Security researchers had documented and patched this exact attack vector months earlier."
+    },
+    {
+      "source": "SlowMist",
+      "text": "According to PeckShieldAlert, the stablecoin project USPD has suffered a major security breach, resulting in approximately $1 million in losses. The USPD team later confirmed that the protocol had been exploited, with the attacker minting tokens without authorization and draining liquidity. The official team has urgently advised users to revoke all token approvals granted to the USPD contract. According to the project’s confirmation, the incident was identified as a “CPIMP” attack. During the deployment phase, the attacker used Multicall3 to preemptively initialize the proxy and seize administrator privileges, while disguising the malicious implementation as an audited contract.…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "USPD suffered a loss of about $1 million when an attacker front-ran its proxy initialization, injecting a shadow proxy and seizing admin control. Over 98 million USPD were minted and 232 stETH drained, with exploits enabled by a known deployment-phase proxy vulnerability. The core failure was a deployment-phase proxy vulnerability: USPD’s initialization was not atomic. The attacker front-ran the deployment, injected a shadow proxy that forwarded calls to the legitimate code but gave themselves admin rights. This allowed minting unbacked stablecoins and draining reserves. The code was audited, but the live deployment process was not protected from frontrunning and malicious proxy injection."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xc0b7e490caac2b8cfa5e62d1b28a5e7dba7600e623c71352acbc9b23c2b65b7c",
+    "0xf9a493f061fbf17fe2cf7c26d6b03d85c6b43026500e61728933c2e218581079",
+    "0xa7cab072bf0453301a0ab1b06c49a9405d115824fc617fb42cba9b70f3b893c2"
+  ],
+  "poc": null,
+  "sources": [
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "rekt",
+      "label": "REKT: USPD - Rekt",
+      "url": "https://rekt.news/uspd-rekt"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/PeckShieldAlert/status/1996826080741937213"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/explained-the-uspd-2025-12-09t12-49-45-288000-00-00"
+    },
+    {
+      "source": "revertiq",
+      "label": "halborn.com",
+      "url": "https://www.halborn.com/blog/post/explained-the-uspd-hack-december-2025"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptonews.net",
+      "url": "https://cryptonews.net/news/security/32088894/"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptotimes.io",
+      "url": "https://www.cryptotimes.io/2025/12/10/uspd-exploiter-remained-silent-for-78-days-after-proxy-takeover/"
+    }
+  ]
+}

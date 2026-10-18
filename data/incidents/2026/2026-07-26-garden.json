@@ -1,0 +1,89 @@
+{
+  "id": "2026-07-26-garden",
+  "name": "Garden",
+  "date": "2026-07-26",
+  "year": 2026,
+  "amountUsd": 450000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum",
+    "Base",
+    "Arbitrum",
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "frontend-infra",
+  "technique": "Database Breach",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "frontend-infra",
+    "confidence": 0.93,
+    "top": [
+      {
+        "category": "frontend-infra",
+        "p": 0.93
+      },
+      {
+        "category": "bridge-crosschain",
+        "p": 0.03
+      },
+      {
+        "category": "logic-error",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": true,
+  "language": "Solidity",
+  "rootCause": "Security firm Blockaid detected an ongoing exploit targeting Garden Finance’s HTLC contracts, draining about $450,000 in USDT across Ethereum, Base, Arbitrum, and BNB Chain. The project stated that an independent solver’s off-chain database was compromised and fraudulent records were inserted, causing improper fund releases; the protocol and smart contracts themselves were not compromised, and the app has been temporarily taken offline.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Security firm Blockaid detected an ongoing exploit targeting Garden Finance’s HTLC contracts, draining about $450,000 in USDT across Ethereum, Base, Arbitrum, and BNB Chain. The project stated that an independent solver’s off-chain database was compromised and fraudulent records were inserted, causing improper fund releases; the protocol and smart contracts themselves were not compromised, and the app has been temporarily taken offline."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Garden Finance lost approximately $450,000 USDT on July 26, 2026, when an independent solver's off-chain database was breached. The attacker injected fraudulent swap entries, causing HTLC contracts across Ethereum, Base, Arbitrum One, and BNB Chain to release solver-held funds. No user deposits or protocol contracts were directly compromised. Compromise of an independent solver’s off-chain database allowed the attacker to inject fraudulent swap records. The solver’s automated reconciliation trusted these records, releasing funds from HTLC contracts without actual counterparties. Garden protocol contracts and user funds remained unaffected."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/blockaid_/status/2081409252489298100"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/garden-2026-07-26"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptotimes.io",
+      "url": "https://www.cryptotimes.io/2026/07/27/garden-finance-halts-app-after-450k-usdt-exploit-hits-four-blockchains/"
+    },
+    {
+      "source": "revertiq",
+      "label": "publicaml.org",
+      "url": "https://publicaml.org/news/2026-07-26-garden-finance/"
+    }
+  ]
+}

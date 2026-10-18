@@ -1,0 +1,138 @@
+{
+  "id": "2022-04-12-elephant-money",
+  "name": "Elephant Money",
+  "date": "2022-04-12",
+  "year": 2022,
+  "amountUsd": 22200000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.97,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Flashloan & Price Oracle Manipulation. Lost: $11.2 million (27,416.46 BNB)",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Flashloan & Price Oracle Manipulation. Lost: $11.2 million (27,416.46 BNB)"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The attacker used flash loans to manipulate the price of the ELEPHANT token during the minting process of the project’s stablecoin TRUNK. Vulnerable code snippet: Attack tx: https://bscscan.com/tx/0xec317deb2f3efdc1dbf7ed5d3902cdf2c33ae512151646383a8cf8cbcd3d4577 Analysis: https://medium.com/elephant-money/reserve-exploit-52fd36ccc7e8 https://twitter.com/BlockSecTeam/status/1513966074357698563"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Elephant Money was attacked, resulting in the loss of 27,416.46 BNB. The attacker first used WBNB to buy a large amount of ELEPHANT, and then used BUSD to mint the TRUNK stablecoin. During the minting process, the Elephant contract will convert BUSD to WBNB and then back to ELEPHANT to drive up the ELEPHANT price. The attacker then sells ELEPHANT at a profit."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On April 12, 2022, Elephant Money on BNB Chain was exploited for $11.2 million (direct reserves lost) via a flash loan attack that manipulated automated market maker (AMM) spot prices used as the oracle for minting and redeeming the TRUNK stablecoin. The protocol failed to use price protections such as TWAPs or multi-source oracles, enabling repeated reserve extraction within a single transaction. The reserve contract used a manipulable spot price from a single DEX pool as the price oracle for mint and redeem operations. This allowed attackers to use flash loans to inflate the ELEPHANT token price atomically, enabling infinite mint and redemption cycles at distorted valuations.…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On April 12, 2022, Elephant Money on BNB Chain was exploited via a flash loan and price manipulation, resulting in a loss of approximately $11.2 million. The attacker used a large WBNB flash loan to artificially inflate ELEPHANT token prices, minted TRUNK stablecoins at the manipulated rate, and redeemed TRUNK for BUSD, extracting real stablecoin value. The exploit was caused by reliance on a manipulable spot price oracle from PancakeSwap, lacking protections against flash loan-driven price distortion. The protocol's TRUNK mint function valued ELEPHANT collateral using the PancakeSwap spot reserve ratio, which was directly manipulable by an attacker using flash loan-driven AMM trades.…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xec317deb2f3efdc1dbf7ed5d3902cdf2c33ae512151646383a8cf8cbcd3d4577"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-04/Elephant_Money_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-04/Elephant_Money_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "medium.com",
+      "url": "https://medium.com/elephant-money/reserve-exploit-52fd36ccc7e8"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/peckshield/status/1514023036596330496"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BlockSecTeam/status/1513966074357698563"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0xec317deb2f3efdc1dbf7ed5d3902cdf2c33ae512151646383a8cf8cbcd3d4577"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BlockSecTeam/status/1512832398643265537"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/price-manipulation-2022-04-18t12-39-04-00-00"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/price-manipulation-attack-elephant-money-loses-22-2-million-aab84e469350"
+    },
+    {
+      "source": "revertiq",
+      "label": "itokenly.com",
+      "url": "https://itokenly.com/hacks/elephant-money"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/JIAMING-LI/ElephantMoneyExploit"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/elephant-money-2022-04-13"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "rekt.news",
+      "url": "https://rekt.news/elephant-money-rekt"
+    }
+  ]
+}

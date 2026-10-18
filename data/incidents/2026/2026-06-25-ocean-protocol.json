@@ -1,0 +1,87 @@
+{
+  "id": "2026-06-25-ocean-protocol",
+  "name": "Ocean Protocol",
+  "date": "2026-06-25",
+  "year": 2026,
+  "amountUsd": 127861,
+  "returnedUsd": null,
+  "chains": [
+    "Polygon"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Deposit Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "accounting-math",
+    "confidence": 0.61,
+    "top": [
+      {
+        "category": "accounting-math",
+        "p": 0.63
+      },
+      {
+        "category": "logic-error",
+        "p": 0.37
+      }
+    ],
+    "flashLoan": 0.08,
+    "stateActor": 0.02,
+    "hasRootCause": 0.85
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "BPool single-sided join/exit math with SideStaking gulp accounting. Lost: 127.86K mOCEAN",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "BPool single-sided join/exit math with SideStaking gulp accounting. Lost: 127.86K mOCEAN"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Ocean Protocol's BPool/SideStaking pools on Polygon were exploited on June 25, 2026, using a logic flaw in single-sided join/exit accounting. The attacker drained about 127,861 mOCEAN, valued at roughly $11.8K, by repeatedly minting and burning pool shares across multiple Ocean pools, extracting more mOCEAN than contributed. A broken accounting invariant in Ocean Protocol's BPool implementation allowed a single-sided join followed by a single-sided exit to mint and redeem pool shares at mismatched rates, amplified by SideStaking's automatic datatoken co-staking. The attacker could repeatedly increase their base-token balance through this sequence."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-06/OceanBPoolSideStaking_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-06/OceanBPoolSideStaking_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "http://x.com/defimonalerts/status/2070362661540286735"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/ocean-protocol-2026-06-25"
+    },
+    {
+      "source": "revertiq",
+      "label": "darknavy.org",
+      "url": "https://www.darknavy.org/web3/exploits/ocean-bpool-join-exit-math-drain/"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.autosec.dev",
+      "url": "https://blog.autosec.dev/security-events/ocean-protocol-bpool-sidestaking-join-exit-math-exploit/"
+    }
+  ]
+}

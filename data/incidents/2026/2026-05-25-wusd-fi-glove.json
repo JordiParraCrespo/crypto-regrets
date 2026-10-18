@@ -1,0 +1,103 @@
+{
+  "id": "2026-05-25-wusd-fi-glove",
+  "name": "WUSD.fi/Glove",
+  "date": "2026-05-25",
+  "year": 2026,
+  "amountUsd": 200000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "Liquidity Pool",
+  "category": "logic-error",
+  "technique": "Reward Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.99,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.99
+      },
+      {
+        "category": "access-control",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.91,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "_englove Sybil Incentive Abuse. Lost: ~$200K USD (GLOVE emissions + LP drain)",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "_englove Sybil Incentive Abuse. Lost: ~$200K USD (GLOVE emissions + LP drain)"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "WUSD pays a GLOVE reward inside wrap() via the internal _englove() routine, whose eligibility depends ONLY on msg.sender's current GLOVE balance (gloves = _MIN_GLOVABLE). There is no per-address claim ledger, no cooldown, and no identity binding, so any brand-new address holds 0 GLOVE and always qualifies for a fresh ~2 GLOVE mint when wrapping >= 100,000 WUSD. The minted GLOVE is creditless (soulbound) and vests into transferable GLOVE through unwrap() -> _deglove() proportional to global epochs elapsed; each 100,000 WUSD wrap both mints GLOVE and advances one epoch. The attacker used a Morpho USDT flash loan as working capital, deployed 80 fresh Sybil helper contracts per tx (each wrapping 100k to harvest ~2 GLOVE), pumped extra wrap/unwrap cycles to advance >=100 epochs for full vesting, then dumped each helper's credited GLOVE into the thin Uniswap V3 GLO/USDC and GLO/USDT pools, draining the stablecoin LPs (~11,702 USDC + 8,079 USDT per batch) for free protocol emissions. The only attacker cost was WUSD's 1% wrap fee. Vulnerable code snippet: Attack Tx: https://etherscan.io/tx/0x2051c1f8d43730c41cc353b5dffd8cc59f96cb1ca56fdce4b28fb127bdb37712 Analysis: ExVul"
+    },
+    {
+      "source": "SlowMist",
+      "text": "WUSD.fi / GLOVE on Ethereum suffered an incentive abuse exploit. The attacker exploited the lack of Sybil resistance in the WUSD._englove reward path. By using EIP-7702 helper contracts and a Morpho USDT flash loan to repeatedly wrap/unwrap at least 100 WUSD (with fresh addresses holding <2 GLOVE), they harvested nearly 2 GLOVE per cycle, dumped the GLOVE into Uniswap V3 pools, and drained ~$200K in USDC/USDT from the liquidity pools."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On May 25, 2026, the WUSD.fi protocol's GLOVE reward system on Ethereum Mainnet was exploited through a Sybil incentive abuse, enabling an attacker to repeatedly mint reward tokens and drain $200,000 in USDC and USDT from GLO liquidity pools. The reward eligibility logic in WUSD.fi's GLOVE contract only tracked the current token balance for each address without a persistent participation record, allowing unlimited reward minting by rotating through fresh accounts."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x2051c1f8d43730c41cc353b5dffd8cc59f96cb1ca56fdce4b28fb127bdb37712"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-05/WUSD_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-05/WUSD_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/exvulsec/status/2058803971947385330"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x2051c1f8d43730c41cc353b5dffd8cc59f96cb1ca56fdce4b28fb127bdb37712"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/wusd-fi-glove-2026-05-25"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/DarkNavySecurity/web3-exploit-analysis/blob/main/reports/wusd-glove-englove-sybil-abuse/report.md"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptoadventure.com",
+      "url": "https://cryptoadventure.com/wusd-glove-exploit-drains-207k-before-funds-move-into-railgun/"
+    }
+  ]
+}

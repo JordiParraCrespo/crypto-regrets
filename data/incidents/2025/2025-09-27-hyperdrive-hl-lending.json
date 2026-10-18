@@ -1,0 +1,78 @@
+{
+  "id": "2025-09-27-hyperdrive-hl-lending",
+  "name": "Hyperdrive HL Lending",
+  "date": "2025-09-27",
+  "year": 2025,
+  "amountUsd": 782000,
+  "returnedUsd": null,
+  "chains": [
+    "Hyperliquid L1"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "arbitrary-call",
+  "technique": "Arbitrary External Call",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "arbitrary-call",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "arbitrary-call",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "The DeFi protocol Hyperdrive, built on the Hyperliquid chain, was exploited. The attacker repeatedly abused an arbitrary call vulnerability in the router, resulting in a loss of approximately $782,000.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "The DeFi protocol Hyperdrive, built on the Hyperliquid chain, was exploited. The attacker repeatedly abused an arbitrary call vulnerability in the router, resulting in a loss of approximately $782,000."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 27 September 2025, Hyperdrive HL Lending on Hyperliquid L1 was exploited through a router contract vulnerability allowing arbitrary function calls, enabling the systematic drainage of about $782,000 in USDT0 and thBILL tokens. The attacker bridged the assets to BNB Chain and Ethereum before the protocol paused markets and issued a patch. No primary on-chain or contract evidence is published, and compensation details remain incomplete. The exploit was caused by a vulnerability in the Hyperdrive router contract that allowed arbitrary external calls without proper access controls, permitting attackers to withdraw assets from two lending markets irrespective of intended authorization checks."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/hyperdrivedefi/status/1972095669403111519"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/hyperdrive-hl-lending-2025-09-27"
+    },
+    {
+      "source": "revertiq",
+      "label": "thebitjournal.com",
+      "url": "https://thebitjournal.com/hyperdrive-hack-cross-chain-funds/"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptonews.com",
+      "url": "https://cryptonews.com/news/hyperliquids-hyperdrive-defi-loses-773k-in-account-compromise-funds-bridged-to-bnb-chain-and-ethereum/"
+    }
+  ]
+}

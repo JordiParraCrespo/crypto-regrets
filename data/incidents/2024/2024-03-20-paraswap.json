@@ -1,0 +1,131 @@
+{
+  "id": "2024-03-20-paraswap",
+  "name": "ParaSwap",
+  "date": "2024-03-20",
+  "year": 2024,
+  "amountUsd": 300000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.51,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.54
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.36
+      },
+      {
+        "category": "arbitrary-call",
+        "p": 0.1
+      }
+    ],
+    "flashLoan": 0.1,
+    "stateActor": 0.02,
+    "hasRootCause": 0.92
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Incorrect Access Control. Lost: ~24K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Incorrect Access Control. Lost: ~24K"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "When contract is handling of external callback functions, the contract allowed unauthorized redirection of funds. Attack Tx: https://phalcon.blocksec.com/explorer/tx/eth/0x35a73969f582872c25c96c48d8bb31c23eab8a49c19282c67509b96186734e60 Analysis: https://medium.com/neptune-mutual/analysis-of-the-paraswap-exploit-1f97c604b4fe"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Decentralized exchange (DEX) aggregator ParaSwap announced the discovery of a critical vulnerability affecting its approved aggregation smart contract Augustus V6. This vulnerability impacts users who have authorized the Augustus V6 contract. In response, ParaSwap has temporarily halted the V6 API and employed white-hat attack methods to ensure the safety of user funds. These funds have been securely transferred to a secure wallet starting with 0x66E90 and are slated to be returned to users promptly. Additionally, ParaSwap urges users to revoke authorization for the Augustus V6 contract to mitigate potential risks. Currently, it is known that 4 address…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "ParaSwap’s Augustus V6 contract was exploited through a critical access-control flaw in its Uniswap V3 callback handling, allowing attackers to drain user-approved tokens across multiple blockchains. While white-hat intervention rescued most at-risk funds, a final unrecovered loss of ~$300,000 led to DAO-funded refunds for victims. The Augustus V6 contract did not properly restrict access to its uniswapV3SwapCallback function. Attackers could deploy fake pools and invoke the callback with arbitrary victim addresses, using their token approvals to steal assets due to missing caller verification."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x35a73969f582872c25c96c48d8bb31c23eab8a49c19282c67509b96186734e60",
+    "0x7da5cc55e0b386d117b78cf63ccac0dd67e34718e8be72e8a07068639039bede",
+    "0x479cf357964bb3bc79e675f2f20b0850d2bc022edbfa596275477bfb57215dcb",
+    "0x1e73c4205822c28a5cb85fa354771bb4a72eb1778b68932e7ab7ba9559db09ec",
+    "0xb19f93865b3ec5c3c0beb4537e4ae49c211ab6480a66ea44e0fcfa57879317b5",
+    "0x5810fac8671043df0c2c63b6a0e34537ee68a2a9cb26bcdfcf8f7790caa25f16",
+    "0x018159bb9d694362b344036081f13c0977aabdf846dd3fd6026f47ca575340c4",
+    "0x197dd5574438d20582d0c7eb7ab8e39d11bbb01c5473031af284a257bac24b08",
+    "0xeba56e080a5d51dcb3a9b166d2a9932a01719e83912c5c6544f72c5477aaf782",
+    "0x3908a5f6bae95a7f19313634f9fcb5c99fa16248f4dce398d68e5f05b69ff30a",
+    "0x1b2660f11ed1fb953d89f795454e3c7b67a2ffed9821710796fb2ffe3eaa729c",
+    "0x86aa63617a9bf3f1c8cc0ad9d7dd32ed96478da443b0031a8234562b4f369c4e",
+    "0x28ee13ad202f842a8c7117fb038e99c34562bf7a2aa9ba54afcbce93fc306890",
+    "0xf6739b327caf27d8469085b84776478bd71848405c4880bddd9ff0b33dc957ee"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-03/Paraswap_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-03/Paraswap_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "medium.com",
+      "url": "https://medium.com/neptune-mutual/analysis-of-the-paraswap-exploit-1f97c604b4fe"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "phalcon.blocksec.com",
+      "url": "https://phalcon.blocksec.com/explorer/tx/eth/0x35a73969f582872c25c96c48d8bb31c23eab8a49c19282c67509b96186734e60"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x7da5cc55e0b386d117b78cf63ccac0dd67e34718e8be72e8a07068639039bede"
+    },
+    {
+      "source": "blocksec",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs?tab=readme-ov-file#20240320-paraswap---incorrect-access-control"
+    },
+    {
+      "source": "slowmist",
+      "label": "panewslab.com",
+      "url": "https://www.panewslab.com/zh/articledetails/bgv603ia.html"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/paraswap-2024-03-20"
+    },
+    {
+      "source": "revertiq",
+      "label": "veloradex.medium.com",
+      "url": "https://veloradex.medium.com/post-mortem-augustus-v6-vulnerability-of-march-20th-2024-5df663a4bf01"
+    }
+  ]
+}

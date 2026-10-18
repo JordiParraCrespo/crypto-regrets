@@ -1,0 +1,97 @@
+{
+  "id": "2025-05-11-mbutoken",
+  "name": "MBUToken",
+  "date": "2025-05-11",
+  "year": 2025,
+  "amountUsd": 2160000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Price Manipulation not confirmed",
+  "classificationNote": "Classified by keyword rules from the DeFiHackLabs root-cause title.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.61,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.63
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.37
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Price Manipulation not confirmed. Lost: ~2.16 M BUSD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Price Manipulation not confirmed. Lost: ~2.16 M BUSD"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The MBU Token protocol's ERC1967 proxy deposit(address token, uint256 amount) function issues MBU tokens at a wildly miscalibrated exchange rate: depositing 0.001 WBNB mints approximately 30,000,000 MBU tokens. This massively disproportionate minting ratio, combined with the existence of a liquid MBU/BUSD trading pair on PancakeSwap holding substantial BUSD reserves, allowed an attacker to instantly mint a supply many orders of magnitude larger than the deposited value and dump it against the pool. The attacker wrapped 0.001 BNB into WBNB, deposited it into the vulnerable contract to receive 30M MBU, then called PancakeSwap's swapExactTokensForTokensSupportingFeeOnTransferTokens to exchange all 30M MBU for approximately $2.16M in BUSD, completely draining the trading pool. The entire exploit required only 1 BNB of starting capital, with 0.999 BNB paid to BlockRazor for MEV-protected transaction submission. Vulnerable code snippet: Attack Tx: 0x2a65254b41b42f39331a0bcc9f893518d6b106e80d9a476b8ca3816325f4a150 Analysis: Blockaid Alert"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The MBU protocol's ERC1967 proxy deposit(token, amount) function minted MBU tokens to the depositor based on a flawed price/conversion calculation: depositing a trivial 0.001 WBNB minted an enormous amount of MBU (the attacker subsequently sold 30,000,000 MBU). The minted-amount formula did not correctly account for the value of the deposited asset versus MBU's market price, so a dust deposit yielded far more MBU than its worth. The attacker deposited 0.001 WBNB, received a massive MBU balance, and dumped it into the MBU/BUSD PancakeSwap pair via swapExactTokensForTokensSupportingFeeOnTransferTokens, draining ~2.16M BUSD of liquidity. Root cause: incorrect mint-amount/price arithmetic in deposit. Vulnerable code snippet: Attack Tx: https://bscscan.com/tx/0x2a65254b41b42f39331a0bcc9f893518d6b106e80d9a476b8ca3816325f4a150 Analysis: PoC by rotcivegaf"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x2a65254b41b42f39331a0bcc9f893518d6b106e80d9a476b8ca3816325f4a150"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-05/MBUToken_exp.sol",
+  "sources": [
+    "defihacklabs",
+    "blocksec"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-05/MBUToken_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/TenArmorAlert/status/1921474575965065701"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/CertiKAlert/status/1921483904483000457"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x2a65254b41b42f39331a0bcc9f893518d6b106e80d9a476b8ca3816325f4a150"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/blockaid_/status/1921491300588634451"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/rotcivegaf"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x2a65254b41b42f39331a0bcc9f893518d6b106e80d9a476b8ca3816325f4a150"
+    }
+  ]
+}

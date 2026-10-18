@@ -1,0 +1,86 @@
+{
+  "id": "2026-08-31-aquifer",
+  "name": "Aquifer",
+  "date": "2026-08-31",
+  "year": 2026,
+  "amountUsd": 2469729,
+  "returnedUsd": null,
+  "chains": [
+    "Solana"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "arbitrary-call",
+  "technique": "Arbitrary External Call",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "key-compromise",
+    "confidence": 0.88,
+    "top": [
+      {
+        "category": "key-compromise",
+        "p": 0.89
+      },
+      {
+        "category": "arbitrary-call",
+        "p": 0.09
+      },
+      {
+        "category": "access-control",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.37
+  },
+  "bridge": false,
+  "language": "Rust",
+  "rootCause": "Solana-based proprietary AMM Aquifer was exploited for about $2.5 million. Public reporting points to compromised protocol-linked wallets or admin credentials rather than a confirmed smart-contract bug. The attacker operated addresses on both Solana and Ethereum. The same day, Aquifer’s Solana upgrade authority posted an on-chain white-hat offer: return at least 80% of stolen assets by September 3, 2026, 14:00 UTC to designated recovery addresses, and keep up to 20% as a bounty, in exchange for no civil claims by the project.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Solana-based proprietary AMM Aquifer was exploited for about $2.5 million. Public reporting points to compromised protocol-linked wallets or admin credentials rather than a confirmed smart-contract bug. The attacker operated addresses on both Solana and Ethereum. The same day, Aquifer’s Solana upgrade authority posted an on-chain white-hat offer: return at least 80% of stolen assets by September 3, 2026, 14:00 UTC to designated recovery addresses, and keep up to 20% as a bounty, in exchange for no civil claims by the project."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Aquifer, a Solana-based automated market maker, was exploited on 31 August 2026 for approximately $2.47 million. The incident involved attacker-controlled wallets on both Solana and Ethereum. There is a split in reporting between a contract access-control flaw (supported via chain forensic analysis) and a wallet compromise (supported by official and news coverage), with no published technical post-mortem confirming the root cause. The precise cause is disputed. Chain forensics reconstruct a swap-path vulnerability in Aquifer's Solana program: failure to validate supplied token program and balance account, allowing an attacker to nominate a malicious pr…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/DefimonAlerts/status/2094467984030826622"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/aquifer-2026-08-31"
+    },
+    {
+      "source": "revertiq",
+      "label": "bitquery.io",
+      "url": "https://bitquery.io/investigations/aquifer-solana-hack-2-5-million"
+    },
+    {
+      "source": "revertiq",
+      "label": "shattered.io",
+      "url": "https://shattered.io/aquifer-solana-exploit-white-hat-bounty-2026/"
+    }
+  ]
+}

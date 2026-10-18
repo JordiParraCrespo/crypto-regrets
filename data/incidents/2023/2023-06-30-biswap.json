@@ -1,0 +1,118 @@
+{
+  "id": "2023-06-30-biswap",
+  "name": "Biswap",
+  "date": "2023-06-30",
+  "year": 2023,
+  "amountUsd": 72000,
+  "returnedUsd": null,
+  "chains": [
+    "BNB Chain"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.72,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.74
+      },
+      {
+        "category": "arbitrary-call",
+        "p": 0.16
+      },
+      {
+        "category": "input-validation",
+        "p": 0.1
+      }
+    ],
+    "flashLoan": 0.06,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "V3Migrator Exploit. Lost: ~$72k",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "V3Migrator Exploit. Lost: ~$72k"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Biswap's V3Migrator contract lacks parameter check, which allows the attacker to steal tokens from the users who approved LP tokens to the V3Migrator contract. Vulnerable code snippet: Attack tx: https://bscscan.com/tx/0xebe5248820241d8de80bcf66f4f1bfaaca62962824efaaa662db84bd27f5e47e, https://bscscan.com/address/0xa1e31b29f94296fc85fac8739511360f279b1976 Analysis: https://twitter.com/MetaTrustAlert/status/1674814217122349056?s=20"
+    },
+    {
+      "source": "SlowMist",
+      "text": "BiSwap, a BSC cross-chain trading platform, said: \"The team detected and resolved the Migrator contract vulnerability. The assets on the Biswap V2 and V3 AMM protocols are safe. The team prevents access to the migration process through the website, because the Migrator contract has been exploited, do not try to access directly This contract, if you have not already done so, please withdraw your approval of these contracts. The results of this vulnerability are being reviewed in more detail and a report will be issued later. User funds are safe and the above vulnerability has nothing to do with AMM V2 and V3 funds.” This time The attack has caused approximately $710,000 in damage."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On June 30, 2023, Biswap's V3Migrator contract on BNB Chain was exploited by an attacker using a fake token and pair attack, resulting in losses to liquidity providers. The vulnerability lay in improper input validation, allowing the attacker to manipulate migration parameters and drain LP tokens. Loss estimates range from $72,000 to $865,000. The Biswap team began user reimbursements and advised revoking approvals to the migrator contract. The Biswap V3Migrator contract failed to validate migration parameters, specifically not checking whether token addresses and pair inputs matched the actual tokens underlying users’ LP tokens. This lack of input val…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xebe5248820241d8de80bcf66f4f1bfaaca62962824efaaa662db84bd27f5e47e",
+    "0xa6cc4b18dea57fae6e1d63d493d2bfb4fd07e86a1ab7f545f9c7980d897d7a6c"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-06/Biswap_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-06/Biswap_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/MetaTrustAlert/status/1674814217122349056?s=20"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0xebe5248820241d8de80bcf66f4f1bfaaca62962824efaaa662db84bd27f5e47e"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0xa1e31b29f94296fc85fac8739511360f279b1976"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Biswap_Dex/status/1674871633461272578"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/biswap-2023-06-30"
+    },
+    {
+      "source": "revertiq",
+      "label": "certik.com",
+      "url": "https://www.certik.com/blog/post-mortem-biswap"
+    },
+    {
+      "source": "revertiq",
+      "label": "metatrust.io",
+      "url": "https://www.metatrust.io/blogs/post/how-a-fake-token-attack-drained-144000-from-biswap-users-on-bsc"
+    }
+  ]
+}

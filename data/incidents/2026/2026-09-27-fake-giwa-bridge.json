@@ -1,0 +1,66 @@
+{
+  "id": "2026-09-27-fake-giwa-bridge",
+  "name": "Fake GIWA Bridge",
+  "date": "2026-09-27",
+  "year": 2026,
+  "amountUsd": 2080000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "social-engineering",
+  "technique": "Impersonation Scam",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "social-engineering",
+    "confidence": 0.48,
+    "top": [
+      {
+        "category": "social-engineering",
+        "p": 0.51
+      },
+      {
+        "category": "bridge-crosschain",
+        "p": 0.41
+      },
+      {
+        "category": "frontend-infra",
+        "p": 0.05
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": true,
+  "language": "Solidity",
+  "rootCause": "Scammers deployed a fake GIWA L2 network using the legitimate Chain ID 9134, complete with a functional bridge and batcher. Approximately 1,335 addresses bridged ~767.65 ETH believing it was the official mainnet launch. The attackers drained ~766.25 ETH (~$2M). The real GIWA mainnet had not launched. DYORSWAP initially listed the fake network due to the matching Chain ID and later compensated affected users from its treasury.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Scammers deployed a fake GIWA L2 network using the legitimate Chain ID 9134, complete with a functional bridge and batcher. Approximately 1,335 addresses bridged ~767.65 ETH believing it was the official mainnet launch. The attackers drained ~766.25 ETH (~$2M). The real GIWA mainnet had not launched. DYORSWAP initially listed the fake network due to the matching Chain ID and later compensated affected users from its treasury."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "bitquery.io",
+      "url": "https://bitquery.io/investigations/fake-giwa-chain-bridge-drain"
+    }
+  ]
+}

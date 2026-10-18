@@ -1,0 +1,110 @@
+{
+  "id": "2022-04-30-saddle-finance",
+  "name": "Saddle Finance",
+  "date": "2022-04-30",
+  "year": 2022,
+  "amountUsd": 11000000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Swap Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.1,
+    "stateActor": 0.02,
+    "hasRootCause": 0.08
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Swap Metapool Attack. Lost: $10 million",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Swap Metapool Attack. Lost: $10 million"
+    },
+    {
+      "source": "SlowMist",
+      "text": "DeFi protocol Saddle Finance was attacked, causing the protocol to lose more than $10 million."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On April 30, 2022, Saddle Finance's sUSD MetaPool on Ethereum was exploited due to a virtual price calculation bug, resulting in a net loss of about $11.9 million. The attacker drained the pool by flash-loan-driven swaps, and a whitehat bot front-ran part of the exploit to recover a portion of the assets. The sUSD MetaPool was deployed with an outdated MetaSwapUtils library that failed to scale LP tokens by the base pool's virtual price during swaps. This pricing inconsistency allowed repeated profit extraction by attackers cycling between sUSD and the pool's LP token."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x2b023d65485c4bb68d781960c2196588d03b871dc9eb1c054f596b7ca6f7da56"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-04/Saddle_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-04/Saddle_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/peckshield/status/1520330006710616064"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "medium.com",
+      "url": "https://medium.com/immunefi/hack-analysis-saddle-finance-april-2022-f2bcb119f38"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "github.com",
+      "url": "https://github.com/Hephyrius/Immuni-Saddle-POC"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/saddlefinance/status/1520451021725741056"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/saddle-finance-2022-04-30"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "immunefi.com",
+      "url": "https://immunefi.com/blog/bug-fix-reviews/hack-analysis-saddle-finance-april-2022/"
+    },
+    {
+      "source": "revertiq",
+      "label": "blockchainbreaches.com",
+      "url": "https://www.blockchainbreaches.com/en/breaches/saddle-finance-2022"
+    }
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "id": "2022-11-08-mev-0ad8",
+  "name": "MEV_0ad8",
+  "date": "2022-11-08",
+  "year": 2022,
+  "amountUsd": 282000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "arbitrary-call",
+  "technique": "Arbitrary call",
+  "classificationNote": "Classified by keyword rules from the DeFiHackLabs root-cause title.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "arbitrary-call",
+    "confidence": 0.64,
+    "top": [
+      {
+        "category": "arbitrary-call",
+        "p": 0.66
+      },
+      {
+        "category": "access-control",
+        "p": 0.34
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.93
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Arbitrary call. Lost: $282k",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Arbitrary call. Lost: $282k"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The function 0x090f88ca in the victim contract can perform external calls but without access control. Vulnerable code snippet: https://etherscan.io/address/0x0ad8229d4bc84135786ae752b9a9d53392a8afd4#code https://library.dedaub.com/decompile?md5=cfe9b723db1cc321f10bca2e5ba911aa Attack tx: https://etherscan.io/tx/0x674f74b30a3d7bdf15fa60a7c29d96a402ea894a055f624164a8009df98386a0 Analysis: The attacker invokes function 0x090f88ca and arbitrary call data: https://twitter.com/Supremacy_CA/status/1590337718755954690"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x674f74b30a3d7bdf15fa60a7c29d96a402ea894a055f624164a8009df98386a0"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-11/MEV_0ad8_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-11/MEV_0ad8_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Supremacy_CA/status/1590337718755954690"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/address/0x0ad8229d4bc84135786ae752b9a9d53392a8afd4#code"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "library.dedaub.com",
+      "url": "https://library.dedaub.com/decompile?md5=cfe9b723db1cc321f10bca2e5ba911aa"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x674f74b30a3d7bdf15fa60a7c29d96a402ea894a055f624164a8009df98386a0"
+    }
+  ]
+}

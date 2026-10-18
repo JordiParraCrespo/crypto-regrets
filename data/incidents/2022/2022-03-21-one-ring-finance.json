@@ -1,0 +1,122 @@
+{
+  "id": "2022-03-21-one-ring-finance",
+  "name": "One Ring Finance",
+  "date": "2022-03-21",
+  "year": 2022,
+  "amountUsd": 1400000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.35,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.39
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.33
+      },
+      {
+        "category": "access-control",
+        "p": 0.19
+      }
+    ],
+    "flashLoan": 0.08,
+    "stateActor": 0.02,
+    "hasRootCause": 0.81
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Flashloan & Price Oracle Manipulation. Lost: $1.45 million",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Flashloan & Price Oracle Manipulation. Lost: $1.45 million"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Incorrect price calculation via reverse. Vulnerable code snippet: https://ftmscan.com/address/0x66a13cd7ea0ba9eb4c16d9951f410008f7be3a10#code#F1#L216 https://ftmscan.com/address/0xdbc07e219ba0cb5fddcd0fa0c5cc1eddfb77e082#code#F2#L378"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Fantom ecological Stablecoin revenue optimizer OneRing issued a document saying that hackers stole 1,454,672.244369 USDC through flash loan attacks, and the contract has been configured to self-destruct in a specific block, so it is almost impossible to track which specific functions in the contract are called to steal funds. ."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On March 21, 2022, OneRing Finance on Fantom was exploited via flashloan-enabled manipulation of LP reserves and OShare token pricing, resulting in the direct theft of $1,454,672.24 USDC and total economic loss near $2M. The protocol’s spot price calculation allowed extraction of excess vault shares in a single block. The vault relied on the live LP reserve balance to calculate OShare price, allowing flashloan-driven manipulation. Lack of time-weighted pricing or resistant oracle enabled attacker extraction of excess shares via artificially inflated spot price."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xca8dd33850e29cf138c8382e17a19e77d7331b57c7a8451648788bbb26a70145"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-03/OneRing_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-03/OneRing_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "medium.com",
+      "url": "https://medium.com/oneringfinance/onering-finance-exploit-post-mortem-after-oshare-hack-602a529db99b"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "ftmscan.com",
+      "url": "https://ftmscan.com/tx/0xca8dd33850e29cf138c8382e17a19e77d7331b57c7a8451648788bbb26a70145"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "ftmscan.com",
+      "url": "https://ftmscan.com/address/0x66a13cd7ea0ba9eb4c16d9951f410008f7be3a10#code#F1#L216"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "ftmscan.com",
+      "url": "https://ftmscan.com/address/0xdbc07e219ba0cb5fddcd0fa0c5cc1eddfb77e082#code#F2#L378"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/one-ring-finance-2022-03-21"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "blocktempo.com",
+      "url": "https://blocktempo.com/onering-finance-is-exploited/"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptonews.net",
+      "url": "https://cryptonews.net/news/security/4039151/"
+    }
+  ]
+}

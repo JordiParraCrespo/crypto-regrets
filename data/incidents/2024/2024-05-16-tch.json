@@ -1,0 +1,91 @@
+{
+  "id": "2024-05-16-tch",
+  "name": "TCH",
+  "date": "2024-05-16",
+  "year": 2024,
+  "amountUsd": 18000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "signature-crypto",
+  "technique": "Signature Malleability Vulnerability",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.98).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "signature-crypto",
+    "confidence": 0.98,
+    "top": [
+      {
+        "category": "signature-crypto",
+        "p": 0.98
+      },
+      {
+        "category": "logic-error",
+        "p": 0.01
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Signature Malleability Vulnerability. Lost: $18K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Signature Malleability Vulnerability. Lost: $18K"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Signature Malleability Vulnerability, 0, 1 instead of 27, 28 (previous sigs) to achieve malleability. As a result the attacker burned lots of TCH tokens owned by the PancakeSwap pair, which allowed him to manipulate the price in the pool and take the profit. Vulnerable code snippet: https://bscscan.com/address/0x5d78cfc8732fd328015c9b73699de9556ef06e8e Attack tx: https://app.blocksec.com/explorer/tx/bsc/0x316c35d483b72700e6f4984650d217304146b3732bb148e32fa7f8017843eb24 Analysis: https://x.com/DecurityHQ/status/1791180322882629713"
+    },
+    {
+      "source": "SlowMist",
+      "text": "According to the SlowMist security team's monitoring, the TCH token on the BNBChain has been continuously attacked due to a malleability issue, resulting in a loss of approximately $19,000."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x316c35d483b72700e6f4984650d217304146b3732bb148e32fa7f8017843eb24"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-05/TCH_exp.sol",
+  "sources": [
+    "defihacklabs",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-05/TCH_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/DecurityHQ/status/1791180322882629713"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0x5d78cfc8732fd328015c9b73699de9556ef06e8e"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/bsc/0x316c35d483b72700e6f4984650d217304146b3732bb148e32fa7f8017843eb24"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/1791358365194650094"
+    }
+  ]
+}

@@ -1,0 +1,85 @@
+{
+  "id": "2024-04-01-atm",
+  "name": "ATM",
+  "date": "2024-04-01",
+  "year": 2024,
+  "amountUsd": 182000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "business logic flaw",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.93).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.93,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.93
+      },
+      {
+        "category": "market-manipulation",
+        "p": 0.07
+      }
+    ],
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "business logic flaw. Lost: $~182K USD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "business logic flaw. Lost: $~182K USD"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "A flawed transfer implementation leads to the attack. The root cause was using a swap to convert BNB to BUSDT for dividend payments, allowing the attacker to perform a sandwich attack. The attacker repeatedly transferred ATM tokens to the PancakeSwap pool and called the skim function, exploiting the bad implementation. As you can see, there is no slippage check in the swap operation. Vulnerable code snippet: Attack tx: 0xee10553c26742bec9a | Phalcon Explorer Analysis:"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xee10553c26742bec9a4761fd717642d19012bab1704cbced048425070ee21a8a",
+    "0x458ea2d7e6c5953b0d927aabc1c6a144df276d6ffa55b236087763396ee57067",
+    "0x2c110663cbce4aef8bfbe2f729de5f18ca1ae50bada00bc35584ed354d2fde20"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-04/ATM_exp.sol",
+  "sources": [
+    "defihacklabs",
+    "blocksec"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-04/ATM_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "phalcon.blocksec.com",
+      "url": "https://phalcon.blocksec.com/explorer/tx/bsc/0xee10553c26742bec9a4761fd717642d19012bab1704cbced048425070ee21a8a?line=2"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x458ea2d7e6c5953b0d927aabc1c6a144df276d6ffa55b236087763396ee57067"
+    },
+    {
+      "source": "blocksec",
+      "label": "twitter.com",
+      "url": "https://twitter.com/0xNickLFranklin/status/1775008489569718508"
+    },
+    {
+      "source": "blocksec",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs?tab=readme-ov-file#20240401-atm---business-logic-flaw"
+    }
+  ]
+}

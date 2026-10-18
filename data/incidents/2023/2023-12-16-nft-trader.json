@@ -1,0 +1,144 @@
+{
+  "id": "2023-12-16-nft-trader",
+  "name": "NFT Trader",
+  "date": "2023-12-16",
+  "year": 2023,
+  "amountUsd": 3000000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "reentrancy",
+  "technique": "Reentrancy",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "reentrancy",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "reentrancy",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.03,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Reentrancy. Lost: ~$3M",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Reentrancy. Lost: ~$3M"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The NFT Trader closeSwapIntent function lacked reentrancy protection. When closing a swap it called safeTransferFrom to deliver an NFT to the recipient, which triggered the ERC-721 onERC721Received callback on the attacker's contract before the swap's state was finalized. Inside that callback the attacker called editCounterPart to substitute the victim as the swap's counterparty. Execution then returned to closeSwapIntent, which proceeded to pull valuable CloneX NFTs from the now-redirected victim address to complete the tampered swap, draining ~$3M in NFTs with a nearly worthless Uniswap V3 position as the offered collateral. Vulnerable code snippet: Attack Tx: 0xec7523660f8b66d9e4a5931d97ad8b30acc679c973b20038ba4c15d4336b393d Analysis: Phalcon / AnciliaInc analysis on X"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The \"editCounterPart\" function which allows changing swap counterparties can be called externally and lacked reentrancy protection. Exploiting via editCounterPart -- After initiating closeSwapIntent, the attacker makes a reentrant call to the \"editCounterPart\" function of the BatchSwap contract. -- Unlike closeSwapIntent, editCounterPart lacks reentrancy protection. -- The attacker changes the counterparty of the swap to another address they control (0x01de...). This is a critical state change and manipulates the intended flow of the swap. Vulnerable code snippet: https://www.oklink.com/es-la/eth/address/0xc310e760778ecbca4c65b6c559874757a4c4ece0/contract Attack tx: https://www.oklink.com/es-la/eth/tx/0xec7523660f8b66d9e4a5931d97ad8b30acc679c973b20038ba4c15d4336b393d Attacker : 0xb1EdF2a0BA8Bc789cBc3DFbe519737cAdA034D2D Analysis: https://x.com/SlowMist_Team/status/1736005523550646535 https://x.com/0xArhat/status/1736038250190651467"
+    },
+    {
+      "source": "SlowMist",
+      "text": "On December 16, the SlowMist security team issued an alert that @NftTrader appeared to have been exploited due to a reentrancy issue. On December 17, the NFT Trader hacker claimed in on-chain messages that the original attack had been perpetrated by someone else, but that they were one of the many copycat attackers, describing themselves as someone who had \"[come] here to pick up residual garbage\". They requested victims send additional ETH to get their NFTs back. \"If you want the monkey nft back, then you need to pay me a bouty, which is what I deserve\", they wrote, asking for NFT holders to send them 10% of the Ape floor price. On December 17, Boring…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "NFT Trader suffered a major exploit on December 16, 2023, resulting in the theft of high-value NFTs including CloneX collectibles with an estimated loss of $3 million. The attack exploited a reentrancy vulnerability during ERC721 transfers that allowed the attacker to change critical state at the wrong time in the trade settlement process. The NFT Trader BatchSwap contract allowed the swap counterparty address to be changed via a publicly accessible function (editCounterPart) during ERC721 token transfer callbacks. The contract failed to prevent reentrancy by not applying a reentrancy guard or properly restricting state mutations after closing a trade,…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xec7523660f8b66d9e4a5931d97ad8b30acc679c973b20038ba4c15d4336b393d"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-12/NFTTrader_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-12/NFTTrader_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/AnciliaInc/status/1736263884217139333"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/SlowMist_Team/status/1736005523550646535"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/0xArhat/status/1736038250190651467"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "explorer.phalcon.xyz",
+      "url": "https://explorer.phalcon.xyz/tx/eth/0xec7523660f8b66d9e4a5931d97ad8b30acc679c973b20038ba4c15d4336b393d"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Phalcon_xyz/status/1736026038675911126"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "oklink.com",
+      "url": "https://www.oklink.com/es-la/eth/address/0xc310e760778ecbca4c65b6c559874757a4c4ece0/contract"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "oklink.com",
+      "url": "https://www.oklink.com/es-la/eth/tx/0xec7523660f8b66d9e4a5931d97ad8b30acc679c973b20038ba4c15d4336b393d"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/1736005523550646535"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xec7523660f8b66d9e4a5931d97ad8b30acc679c973b20038ba4c15d4336b393d"
+    },
+    {
+      "source": "blocksec",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs#20231216-nfttrader---reentrancy"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/nft-trader-2023-12-16"
+    },
+    {
+      "source": "revertiq",
+      "label": "halborn.com",
+      "url": "https://www.halborn.com/blog/post/explained-the-nft-trader-hack-december-2023"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/kismp123/DeFi-Security-Incident/blob/main/2023/2023-12-16_NFTTrader_Reentrancy_ETH.md"
+    }
+  ]
+}

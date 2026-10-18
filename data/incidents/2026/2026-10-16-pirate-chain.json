@@ -1,0 +1,66 @@
+{
+  "id": "2026-10-16-pirate-chain",
+  "name": "Pirate Chain",
+  "date": "2026-10-16",
+  "year": 2026,
+  "amountUsd": 10746000,
+  "returnedUsd": null,
+  "chains": [
+    "Pirate Chain"
+  ],
+  "targetType": "Chain",
+  "category": "accounting-math",
+  "technique": "Unbacked Mint",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.39,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.43
+      },
+      {
+        "category": "client-bug",
+        "p": 0.35
+      },
+      {
+        "category": "access-control",
+        "p": 0.15
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "A transaction validation vulnerability in Pirate Chain source code allowed the unauthorized creation of approximately 39.8 million ARRR, increasing the total supply by about 20%. The newly minted funds were transferred into the Sapling shielded pool. NonKYC identified suspicious deposits, restricted the associated accounts, and blocked withdrawals. The exploit combined two validation failures: bypassing the issuance check and incorrect interpretation of the output scripts. dPoW operators suspended notarizations as a precaution, and exchanges/pools were asked to pause operations while a recovery plan is developed.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "A transaction validation vulnerability in Pirate Chain source code allowed the unauthorized creation of approximately 39.8 million ARRR, increasing the total supply by about 20%. The newly minted funds were transferred into the Sapling shielded pool. NonKYC identified suspicious deposits, restricted the associated accounts, and blocked withdrawals. The exploit combined two validation failures: bypassing the issuance check and incorrect interpretation of the output scripts. dPoW operators suspended notarizations as a precaution, and exchanges/pools were asked to pause operations while a recovery plan is developed."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/PirateChain/status/2110774266123767871"
+    }
+  ]
+}

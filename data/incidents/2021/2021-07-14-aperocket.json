@@ -1,0 +1,88 @@
+{
+  "id": "2021-07-14-aperocket",
+  "name": "ApeRocket",
+  "date": "2021-07-14",
+  "year": 2021,
+  "amountUsd": 1260000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Reward Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.93,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.93
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.05
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.82,
+    "stateActor": 0.02,
+    "hasRootCause": 0.54
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "ApeRocket, the DeFi revenue mining aggregator and optimizer, released the lightning loan attack details and compensation plan. ApeRocket's BSC version and Polygon version encountered lightning loan attacks at 4:30 AM and 8:00 AM (UTC), respectively, and lost 260,000 US dollars and 1,000,000.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "ApeRocket, the DeFi revenue mining aggregator and optimizer, released the lightning loan attack details and compensation plan. ApeRocket's BSC version and Polygon version encountered lightning loan attacks at 4:30 AM and 8:00 AM (UTC), respectively, and lost 260,000 US dollars and 1,000,000."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On July 14, 2021, ApeRocket vaults on BNB Chain and Polygon were exploited using flash-loan-enabled reward logic flaws. The attacker inflated vault rewards by injecting tokens, resulting in losses of around $1.26 million and a significant drop in SPACE token value. ApeRocket vault contracts counted any increase in token balance as profit, regardless of its source. This flaw let attackers inject tokens directly, causing the vault to mint excessive reward tokens based on artificial profit."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x701a308fba23f9b328d2cdb6c7b245f6c3063a510e0d5bc21d2477c9084f93e0"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "aperocket.medium.com",
+      "url": "https://aperocket.medium.com/moving-forward-24b9ae22c428"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/aperocket-2021-07-14"
+    },
+    {
+      "source": "revertiq",
+      "label": "itokenly.com",
+      "url": "https://itokenly.com/hacks/aperocket"
+    },
+    {
+      "source": "revertiq",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/tech/2021/07/15/defi-yield-farming-aggregator-aperocket-suffers-126m-flash-loan-attack"
+    }
+  ]
+}

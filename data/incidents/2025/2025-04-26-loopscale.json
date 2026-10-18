@@ -1,0 +1,111 @@
+{
+  "id": "2025-04-26-loopscale",
+  "name": "Loopscale",
+  "date": "2025-04-26",
+  "year": 2025,
+  "amountUsd": 5800000,
+  "returnedUsd": null,
+  "chains": [
+    "Solana"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.01,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Rust",
+  "rootCause": "Sixteen days after launch, Loopscale lost $5.8M to a basic oracle manipulation. Audits flagged the vulnerability, but they claimed all critical issues fixed. Users trusted them. All funds returned. Is this protocol built on solid code or just lucky negotiations?",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "Sixteen days after launch, Loopscale lost $5.8M to a basic oracle manipulation. Audits flagged the vulnerability, but they claimed all critical issues fixed. Users trusted them. All funds returned. Is this protocol built on solid code or just lucky negotiations?"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The Loopscale protocol on Solana relied on a flawed pricing mechanism for RateX Principal Token (PT) collateral. An attacker exploited the fact that Loopscale's oracle for RateX PT tokens could be manipulated to reflect an artificially inflated value. By deploying a malicious price feed and calling Loopscale's own create_loan function, the attacker caused the protocol to assess their RateX PT collateral as worth far more than its true value, enabling a series of undercollateralized loans that drained approximately $5.8M (5.7M USDC and 1,200 SOL) — roughly 12% of the protocol's TVL — just two weeks after launch. The funds were subsequently returned after the team negotiated a 10% whitehat bounty. Attack Tx: 2SkCkmX2Q8R7W7RDzgfc6ZFCmYgehmENw72sgTQLfNLHGupNdPDeNkW6S7qCNgYtintFcxhkBCsyf81XA9NSF2RJ Analysis: Loopscale - Rekt Explained: The Loopscale Hack (April 2025)"
+    },
+    {
+      "source": "SlowMist",
+      "text": "A modular DeFi lending market built on Solana, Loopscale, has suffered an attack. The root cause of the exploit has been identified as an isolated issue with Loopscale’s pricing of RateX-based collateral. The incident led to the theft of approximately 5.7 million USDC and 1,200 SOL, accounting for about 12% of the platform's total funds. According to an official update posted by Loopscale on April 29, following successful negotiations, all stolen assets — 5,726,725 USDC and 1,211 SOL — were fully returned on April 26. No user deposits were affected."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On April 26, 2025, Loopscale, a Solana lending protocol, was exploited via manipulation of its collateral pricing logic, resulting in the loss of ~$5.8M before the team negotiated recovery of most funds. The attacker used a business logic flaw in the token value calculation, leveraging a misconfigured oracle to inflate collateral, drain lending vaults, and transfer assets. All funds were reportedly recovered after the team engaged the attacker. The core cause was that Loopscale's token pricing function failed to verify that the supplied price oracle matched the actual token type. The attacker exploited this by introducing a manipulated oracle, causing…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "2SkCkmX2Q8R7W7RDzgfc6ZFCmYgehmENw72sgTQLfNLHGupNdPDeNkW6S7qCNgYtintFcxhkBCsyf81XA9NSF2RJ"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Loopscale - Rekt",
+      "url": "https://rekt.news/loopscale-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "solscan.io",
+      "url": "https://solscan.io/tx/2SkCkmX2Q8R7W7RDzgfc6ZFCmYgehmENw72sgTQLfNLHGupNdPDeNkW6S7qCNgYtintFcxhkBCsyf81XA9NSF2RJ"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "halborn.com",
+      "url": "https://www.halborn.com/blog/post/explained-the-loopscale-hack-april-2025"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=2SkCkmX2Q8R7W7RDzgfc6ZFCmYgehmENw72sgTQLfNLHGupNdPDeNkW6S7qCNgYtintFcxhkBCsyf81XA9NSF2RJ"
+    },
+    {
+      "source": "blocksec",
+      "label": "x.com",
+      "url": "https://x.com/LoopscaleLabs/status/1916230435291713786"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/explained-the-loopscale-2025-04-30t10-17-46-485000-00-00"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/de-fi-rekt-report-april-2025-5-9-billion-lost-across-10-incidents-2-8-million-recovered"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/alt-research2/SolanaGuard/blob/main/knowledge-base/exploits/loopscale.md"
+    }
+  ]
+}

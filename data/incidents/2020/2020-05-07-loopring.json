@@ -1,0 +1,60 @@
+{
+  "id": "2020-05-07-loopring",
+  "name": "Loopring",
+  "date": "2020-05-07",
+  "year": 2020,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": null,
+  "category": "signature-crypto",
+  "technique": "System design defect",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.87). Replaced keyword guess \"key-compromise\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "signature-crypto",
+    "confidence": 0.87,
+    "top": [
+      {
+        "category": "signature-crypto",
+        "p": 0.88
+      },
+      {
+        "category": "key-compromise",
+        "p": 0.09
+      },
+      {
+        "category": "logic-error",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.01,
+    "hasRootCause": 0.9
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "Loopring has appeared a serious front-end error, the private key material is set within a range of 32-bit integer, you can find all user private key pairs by brute force method, due to the user's EdDSA key pair is actually limited to a space of 32-bit integer, the hacker can find out the EdDSA key pair of all users by brute force method. Affected by this, Loopring Exchange shut down for half a day for maintenance and upgrade.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Loopring has appeared a serious front-end error, the private key material is set within a range of 32-bit integer, you can find all user private key pairs by brute force method, due to the user's EdDSA key pair is actually limited to a space of 32-bit integer, the hacker can find out the EdDSA key pair of all users by brute force method. Affected by this, Loopring Exchange shut down for half a day for maintenance and upgrade."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "slowmist",
+      "label": "medium.loopring.io",
+      "url": "https://medium.loopring.io/loopring-exchange-frontend-password-bug-postmortem-cf55ce7e0150"
+    }
+  ]
+}

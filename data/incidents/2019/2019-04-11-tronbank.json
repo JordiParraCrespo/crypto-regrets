@@ -1,0 +1,86 @@
+{
+  "id": "2019-04-11-tronbank",
+  "name": "TronBank",
+  "date": "2019-04-11",
+  "year": 2019,
+  "amountUsd": 123250,
+  "returnedUsd": null,
+  "chains": [
+    "Tron"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Infinite Mint",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "input-validation",
+    "confidence": 0.94,
+    "top": [
+      {
+        "category": "input-validation",
+        "p": 0.94
+      },
+      {
+        "category": "access-control",
+        "p": 0.03
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.03
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Tron Dapp TronBank was attacked by Fake token attack at 1 am, about 170 million BTT were stolen in 1 hour (worth about 850,000 yuan). Monitoring showed that the hacker created a fake token BTTx to initiate the \"invest\" function to the contract, and the contract did not determine whether the sender's token id was consistent with the BTT real token id1002000.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Tron Dapp TronBank was attacked by Fake token attack at 1 am, about 170 million BTT were stolen in 1 hour (worth about 850,000 yuan). Monitoring showed that the hacker created a fake token BTTx to initiate the \"invest\" function to the contract, and the contract did not determine whether the sender's token id was consistent with the BTT real token id1002000."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On April 11, 2019, TronBank on the Tron blockchain was exploited when attackers used a fake BTTx token to bypass token ID checks and drain approximately 170 million genuine BTT tokens from the rewards pool. No exploit or recovery transactions have been independently verified. The invest() function in the TronBank contract failed to enforce a tokenID check, allowing deposits of counterfeit tokens (BTTx) that triggered reward allocation and withdrawal of genuine BTT."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "coingape.com",
+      "url": "https://coingape.com/tronbank-dapp-attack-tron-dapp-vulnerabilities/"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/tronbank-2019-04-11"
+    },
+    {
+      "source": "revertiq",
+      "label": "blocktempo.com",
+      "url": "https://www.blocktempo.com/tron-dapp-tronbank-was-fishing-170mln-btt/"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/tronbank-hack-2019-4118"
+    }
+  ]
+}

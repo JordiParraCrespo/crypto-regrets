@@ -1,0 +1,123 @@
+{
+  "id": "2026-01-25-aperture-lm",
+  "name": "Aperture LM",
+  "date": "2026-01-25",
+  "year": 2026,
+  "amountUsd": 3670000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum",
+    "Base",
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "arbitrary-call",
+  "technique": "Token Approval Abuse",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "arbitrary-call",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "arbitrary-call",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.04,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Aperture Finance, a Uniswap V3/V4 liquidity management protocol, lost $3.67M on January 25, 2026 in the same coordinated attack wave as SwapNet. The vulnerable function (0x67b34120) executed a low-level call using a user-supplied tuple of (target, calldata, expectedOutput) without enforcing any constraints on the call target address or function selector. An attacker supplied a token contract as the target and encoded transferFrom(victim, attacker, amount) as the calldata, causing the victim contract to transfer tokens out of itself using prior ERC-20 approvals granted by users. The expectedOutput balance-delta check that was meant to validate swap results was rendered meaningless because the attacker controlled both the call and the expected result. Stolen funds, totalling approximately 1,242 ETH, were subsequently laundered through Tornado Cash. On-chain forensics linked the attacker to the same entity responsible for previous Li.Fi and Jumper Exchange exploits. Attack Tx: 0xa6fabda0bab72c210b176844e42a02c15056bca9422c6ac602e272ce1e00f689 Analysis: SolidityScan — Aperture Finance Hack Analysis",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Aperture Finance, a Uniswap V3/V4 liquidity management protocol, lost $3.67M on January 25, 2026 in the same coordinated attack wave as SwapNet. The vulnerable function (0x67b34120) executed a low-level call using a user-supplied tuple of (target, calldata, expectedOutput) without enforcing any constraints on the call target address or function selector. An attacker supplied a token contract as the target and encoded transferFrom(victim, attacker, amount) as the calldata, causing the victim contract to transfer tokens out of itself using prior ERC-20 approvals granted by users. The expectedOutput balance-delta check that was meant to validate swap results was rendered meaningless because the attacker controlled both the call and the expected result. Stolen funds, totalling approximately 1,242 ETH, were subsequently laundered through Tornado Cash. On-chain forensics linked the attacker to the same entity responsible for previous Li.Fi and Jumper Exchange exploits. Attack Tx: 0xa6fabda0bab72c210b176844e42a02c15056bca9422c6ac602e272ce1e00f689 Analysis: SolidityScan — Aperture Finance Hack Analysis"
+    },
+    {
+      "source": "SlowMist",
+      "text": "Aperture Finance (Aperture LM) was exploited for approximately $3.67 million across Ethereum, Base, Arbitrum, and BSC. The root cause was an arbitrary-call vulnerability in its closed-source V3/V4 contracts due to insufficient input validation on low-level calls. Attackers abused existing user token and Uniswap V3 LP NFT approvals to drain funds via transferFrom operations. The team paused affected features, urged users to revoke approvals, and published a security incident analysis."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 25 January 2026, Aperture Finance was exploited across Ethereum Mainnet, Base, and BNB Chain. Attackers abused an arbitrary-call flaw in V3/V4 contract logic, allowing them to drain ~$3.67M in assets via pre-existing token and NFT approvals, without user participation at the exploit moment. The affected contracts implemented a swap workflow that made arbitrary external calls with attacker-controlled target and calldata. Without strict validation, the attacker could invoke transferFrom(victim, attacker, amount) in token/NFT contracts, draining user-approved assets through previously granted allowances."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xa6fabda0bab72c210b176844e42a02c15056bca9422c6ac602e272ce1e00f689",
+    "0x50dd9248d5f638be3289e7a451aebdaddf0cde2ceddc9da0128bee41acf23ec8",
+    "0x11f7cc72d7fb442176e2bd90a2ab7f2c1b99e167bb6a7287d1e983eeec12293a",
+    "0x8c4aa97e250b1697e937d6ca170192ed47aed92bbea792388d7f7e8eccf61b87",
+    "0xa47dae0939eb4094a0334216bb0a07cb971d9bdcc1844622425429c60b16206b",
+    "0x4d18926c2668c507ebc5c063f46de6f1b5579a9c51747541338987bb456b1db8",
+    "0xa6b43ae0443f998ceb52fcb9c9619da452d806c8beab50fe3b368d6b1b1a851f",
+    "0x0ab356d5fc817d16c89c6660aeeecc00f1b1d39094527182885c1317226942e5",
+    "0x02d8a5c9a36e54cdcb0dea881075e03e58329ccb5910f3fc1c6debd8b72dc2a8",
+    "0x774e7e23ef41923c7b4c445eb11f47b9799d6cf1b73f7731e223bbbe701f080b",
+    "0x258c4e9a1099342172b1701b4210e8abc43fc2774ea814f17e9be39fe833b788",
+    "0x6cc0c2435eaa0d17166ec1d345899b6b56d71a463ad2f04e20e938f340456d0e",
+    "0x600319e5ec92e1505adcf0f5577810d22089fae1c7e9d06e7ef0eebf38406d86",
+    "0x60ec7bce55e9721c62360a5884a03f59a74209c46b0bef4296b87133985da87c",
+    "0x8cee6a63c423e0074041f579e0162953ff930e69db6cc1cdd28dfc6d073b05ad",
+    "0x8f28a7f604f1b3890c2275eec54cd7deb40935183a856074c0a06e4b5f72f25a"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xa6fabda0bab72c210b176844e42a02c15056bca9422c6ac602e272ce1e00f689"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "blog.solidityscan.com",
+      "url": "https://blog.solidityscan.com/aperture-finance-hack-analysis-22dca439ff33"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xa6fabda0bab72c210b176844e42a02c15056bca9422c6ac602e272ce1e00f689"
+    },
+    {
+      "source": "blocksec",
+      "label": "x.com",
+      "url": "https://x.com/Phalcon_xyz/status/2015614087443697738"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/ApertureFinance/status/2015938720453820752"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/aperture-lm-2026-01-25"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "blocksec.com",
+      "url": "https://blocksec.com/blog/weekly-web3-security-incident-roundup-jan-25-feb-1-2026"
+    }
+  ]
+}

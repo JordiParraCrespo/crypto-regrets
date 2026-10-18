@@ -1,0 +1,122 @@
+{
+  "id": "2025-08-26-betterbank",
+  "name": "BetterBank",
+  "date": "2025-08-26",
+  "year": 2025,
+  "amountUsd": 5000000,
+  "returnedUsd": null,
+  "chains": [
+    "PulseChain"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Reward Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.95,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.95
+      },
+      {
+        "category": "input-validation",
+        "p": 0.05
+      }
+    ],
+    "flashLoan": 0.91,
+    "stateActor": 0.01,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "3 weeks from launch to exploit - $5 million drained from BetterBank, leaving users lighter while the protocol’s own reward logic printed the cash. A simple incentive flaw triggered catastrophic losses, exposing how quickly DeFi math can turn on you.",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "3 weeks from launch to exploit - $5 million drained from BetterBank, leaving users lighter while the protocol’s own reward logic printed the cash. A simple incentive flaw triggered catastrophic losses, exposing how quickly DeFi math can turn on you."
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The BetterBank protocol on PulseChain contained a critical business logic flaw in the swapExactTokensForFavorAndTrackBonus function, which minted ESTEEM reward tokens whenever a swap output included FAVOR tokens but performed zero validation that the swap occurred within a whitelisted or legitimate liquidity pool. Because PulseX allows permissionless pool creation, the attacker deployed a worthless ERC20 token and created a fake FAVOR trading pair on PulseXFactory. By cycling approximately 20 iterations of PDAIF ↔ bogus-token swaps through the fake pool, the attacker fraudulently triggered ESTEEM minting at scale. The minted ESTEEM was then burned via burnFrom to receive PDAIF; combined with a flash loan of 50M DAI and 7.14B PLP tokens, the attacker used removeLiquidity on PulseXRouter02 to drain the real DAI–PDAIF pool, stealing ~891M DAI, 9.05B PLSX, and 7.40B WPLS (~$5M total). A July 2025 audit by Zokyo had explicitly identified the exact exploit vector but downgraded its severity to 'Informational' because the auditor's PoC used test ETH instead of worthless tokens, leading the BetterBank team to dismiss the risk as theoretical. The attacker subsequently returned ~$2.7M after on-chain negotiations, leaving a net loss of ~$1.4M. Attack Tx: 0x74534b1f86a63c6c722d5845f2b4c08867c2e66b922a6c95cd6b4290664c19bd Analysis: Halborn — Explained: The BetterBank Hack (August 2025)"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The PulseChain-based defi project BetterBank was exploited by an attacker who took advantage of a vulnerability that allowed them to mint arbitrary tokens, some of which they then swapped for ETH. The attacker later returned around $2.7 million of the stolen assets, having cashed out around $1.4 million."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "BetterBank on PulseChain lost $5M to an exploit in its reward-minting logic. The attacker created a fake liquidity pool, repeatedly triggered unauthorized ESTEEM bonus minting, and bypassed official pool checks and taxes. Some $2.7M was recovered through negotiation, leaving a net loss of $1.4M. The swapExactTokensForFavorAndTrackBonus and related bonus-tracking functions failed to validate whether swaps and bonus mints originated from legitimate, whitelisted liquidity pools. This allowed an attacker to create a fake pool, mint unearned rewards, and bypass fee logic."
+    }
+  ],
+  "audit": "Out of scope",
+  "txHashes": [
+    "0x74534b1f86a63c6c722d5845f2b4c08867c2e66b922a6c95cd6b4290664c19bd",
+    "0x9c7237a00fa276c5f10ca1c61d6821869a7fdcd1ade8059729cdc35c9ff7689a",
+    "0xc651656d2f94476374ee1de240f6bcf4572a5fe732db92d319573a1727409f82"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "rekt",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: BetterBank - Rekt",
+      "url": "https://rekt.news/betterbank-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "scan.pulsechain.com",
+      "url": "https://scan.pulsechain.com/tx/0x74534b1f86a63c6c722d5845f2b4c08867c2e66b922a6c95cd6b4290664c19bd"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "halborn.com",
+      "url": "https://www.halborn.com/blog/post/explained-the-betterbank-hack-august-2025"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x74534b1f86a63c6c722d5845f2b4c08867c2e66b922a6c95cd6b4290664c19bd"
+    },
+    {
+      "source": "blocksec",
+      "label": "x.com",
+      "url": "https://x.com/shoucccc/status/1960534610485633369"
+    },
+    {
+      "source": "slowmist",
+      "label": "web3isgoinggreat.com",
+      "url": "https://www.web3isgoinggreat.com/?id=betterbank-exploit"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/betterbank-2025-08-30"
+    },
+    {
+      "source": "revertiq",
+      "label": "quillaudits.com",
+      "url": "https://www.quillaudits.com/blog/hack-analysis/betterbank-exploit"
+    },
+    {
+      "source": "revertiq",
+      "label": "securelist.com",
+      "url": "https://securelist.com/betterbank-defi-protocol-esteem-token-bonus-minting/117822/"
+    }
+  ]
+}

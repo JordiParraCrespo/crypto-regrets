@@ -1,0 +1,102 @@
+{
+  "id": "2020-09-12-bzx",
+  "name": "bzx",
+  "date": "2020-09-12",
+  "year": 2020,
+  "amountUsd": 8100000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Incorrect transfer",
+  "classificationNote": "Classified by keyword rules from the DeFiHackLabs root-cause title.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.63,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.65
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.13
+      },
+      {
+        "category": "access-control",
+        "p": 0.08
+      }
+    ],
+    "flashLoan": 0.1,
+    "stateActor": 0.02,
+    "hasRootCause": 0.48
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Incorrect transfer. Lost: ```sh",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Incorrect transfer. Lost: ```sh"
+    },
+    {
+      "source": "SlowMist",
+      "text": "bZx officially tweeted that at 3:28 am Eastern time (15:30, September 13th, Beijing time), we began to study the decline in TVL of the agreement. By 6:18 AM EST (18:30, September 13th, Beijing time), we confirmed that several iTokens had repeated incidents. Lending is temporarily suspended. The duplicate method has been patched from the iToken contract code, and the agreement has resumed normal operation. According to the information of the founder of Compound, there are a total of US$2.6 million in LINK, US$1.6 million in ETH, and US$3.8 million in stablecoins, with a total of US$8 million in assets affected. 1inch co-founder Anton Bukov tweeted that…"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On September 13, 2020, the bZx protocol suffered a major exploit on Ethereum when an attacker used a token self-transfer bug to duplicate iToken balances, draining about $8.1M in LINK, ETH, and stablecoins. The vulnerable transfer logic allowed repeated self-transfers to inflate iToken balances, which could then be redeemed for underlying assets. The protocol halted activity, patched the bug, and the attacker returned stolen funds. The iToken contract's internal transfer logic failed to prevent self-transfers, which resulted in a net balance increase for the sender when tokens were transferred to the same account. This bug allowed attackers to repeated…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x85dc2a433fd9eaadaf56fd8156c956da23fc17e5ef83955c7e2c4c37efa20bb5"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2020-09/bzx_exp.sol",
+  "sources": [
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2020-09/bzx_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/0x000000000marc/status/1305354469354303488"
+    },
+    {
+      "source": "slowmist",
+      "label": "bzx.network",
+      "url": "https://bzx.network/blog/incident"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/bzx-2020-09-13"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/bzx-hack-2020"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptobriefing.com",
+      "url": "https://cryptobriefing.com/bzxs-third-exploit-2020-ends-with-8-million-lost"
+    }
+  ]
+}

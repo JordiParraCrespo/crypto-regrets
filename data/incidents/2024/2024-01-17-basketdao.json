@@ -1,0 +1,112 @@
+{
+  "id": "2024-01-17-basketdao",
+  "name": "BasketDAO",
+  "date": "2024-01-17",
+  "year": 2024,
+  "amountUsd": 1200000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "arbitrary-call",
+  "technique": "Arbitrary External Call",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "arbitrary-call",
+    "confidence": 0.96,
+    "top": [
+      {
+        "category": "arbitrary-call",
+        "p": 0.96
+      },
+      {
+        "category": "input-validation",
+        "p": 0.04
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "BasketDAO's smart contract on Ethereum contained a vulnerability where a privileged approval-related function performed an arbitrary low-level call without validating the calldata target or parameters. An attacker crafted malicious calldata to redirect the low-level call, causing the contract to execute a token transfer on behalf of users who had previously approved the vulnerable contract. This effectively allowed the attacker to drain approved funds from victim addresses without those users' consent. The attacker was funded via FixedFloat and subsequently deposited the stolen ~42.55 ETH ($107K) into Tornado Cash. The root cause was the absence of input validation on the calldata passed to the low-level call, violating the principle that external call targets and parameters must be strictly whitelisted or validated. Attack Tx: 0x97201900198d0054a2f7a914f5625591feb6a18e7fc6bb4f0c964b967a6c15f6 Analysis: Phalcon_xyz alert — BasketDAO",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "BasketDAO's smart contract on Ethereum contained a vulnerability where a privileged approval-related function performed an arbitrary low-level call without validating the calldata target or parameters. An attacker crafted malicious calldata to redirect the low-level call, causing the contract to execute a token transfer on behalf of users who had previously approved the vulnerable contract. This effectively allowed the attacker to drain approved funds from victim addresses without those users' consent. The attacker was funded via FixedFloat and subsequently deposited the stolen ~42.55 ETH ($107K) into Tornado Cash. The root cause was the absence of input validation on the calldata passed to the low-level call, violating the principle that external call targets and parameters must be strictly whitelisted or validated. Attack Tx: 0x97201900198d0054a2f7a914f5625591feb6a18e7fc6bb4f0c964b967a6c15f6 Analysis: Phalcon_xyz alert — BasketDAO"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The crypto index project BasketDAO was exploited on the Ethereum Mainnet due to a smart contract vulnerability, which resulted in a loss of assets worth approximately $107,000. The root cause of the exploit is an arbitrary low-level call in the approval process of their smart contracts."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "BasketDAO on Ethereum Mainnet was exploited on 17 January 2024 via a privileged contract permitting arbitrary external calls. The principal documented loss is 42.55 ETH (~$107,000), affecting a single user. Aggregator reports of $1.2 million are not supported by direct chain evidence. A privileged contract in BasketDAO allowed arbitrary external calls without proper access control, enabling unauthorized ETH transfers from user addresses."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x97201900198d0054a2f7a914f5625591feb6a18e7fc6bb4f0c964b967a6c15f6",
+    "0x1fb689f8481a842d9342cbb78d3395988015bd6b6ff5445c97a74ecf78033057",
+    "0xa95ee3552623fe64915c10b1d4b6f060cd153105ca79fb4c584a8d46b51f4a7d"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x97201900198d0054a2f7a914f5625591feb6a18e7fc6bb4f0c964b967a6c15f6"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Phalcon_xyz/status/1747813119856914615"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x97201900198d0054a2f7a914f5625591feb6a18e7fc6bb4f0c964b967a6c15f6"
+    },
+    {
+      "source": "blocksec",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs?tab=readme-ov-file#20240117-bmizapper---arbitrary-external-call-vulnerability"
+    },
+    {
+      "source": "slowmist",
+      "label": "foresightnews.pro",
+      "url": "https://foresightnews.pro/news/detail/37065"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/basketdao-2024-01-17"
+    },
+    {
+      "source": "revertiq",
+      "label": "diadata.org",
+      "url": "https://www.diadata.org/map/defi-vaults-lending/protocol/basketdao/"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/basketdao-hack-2024"
+    }
+  ]
+}

@@ -1,0 +1,103 @@
+{
+  "id": "2024-07-23-deltaprime",
+  "name": "DeltaPrime",
+  "date": "2024-07-23",
+  "year": 2024,
+  "amountUsd": 1000000,
+  "returnedUsd": null,
+  "chains": [
+    "Arbitrum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Ownership Takeover",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.97,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.97
+      },
+      {
+        "category": "logic-error",
+        "p": 0.02
+      },
+      {
+        "category": "key-compromise",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "On July 23, an attacker exploited a misconfiguration to gain access to $1 million from 13 different Prime accounts. This misconfiguration allowed the attacker to illegitimately transfer ownership of the Prime accounts to their own address, enabling them to repay loans and withdraw collateral. On July 24, the attacker returned $900,000.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "On July 23, an attacker exploited a misconfiguration to gain access to $1 million from 13 different Prime accounts. This misconfiguration allowed the attacker to illegitimately transfer ownership of the Prime accounts to their own address, enabling them to repay loans and withdraw collateral. On July 24, the attacker returned $900,000."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "DeltaPrime's Arbitrum Prime Accounts were taken over on 23 July 2024 after a live account could be reinitialized through the DiamondBeacon init path. The attacker used that ownership change to repay debt and withdraw collateral from 13 accounts, and DeltaPrime later reported about $1,000,000 in losses with most funds returned. The DiamondBeacon init path remained reachable through a live Prime Account and checked a different _initialized storage slot from the Prime Account's own owner state. That allowed a deployed account to be reinitialized, which overwrote ownership and let the attacker use normal repayment and withdrawal logic to extract collateral."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xc4350cf22cabfd88e4221d3496e84cd28841682d60ef89020622844e5879b99f",
+    "0x7d6220913cc4a1307f98c4c4b351264d8d02eb2f0e39b5fbf85d0e90594cfdf3",
+    "0xf09f71303f56d72b107c1d169b9a6fbe2633e4c02bd1c5e77470663fefdd2015",
+    "0x8d5bb42e0ac1496a2c326edc9c00758985246e6c2bb146d6c2f4a0d509e0960a",
+    "0xc8fcad8db84d3cc18b4c41d551ea0ee66dd599cde068d998e57d5e09332c131c"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xc4350cf22cabfd88e4221d3496e84cd28841682d60ef89020622844e5879b99f"
+    },
+    {
+      "source": "blocksec",
+      "label": "x.com",
+      "url": "https://x.com/DeltaPrimeDefi/status/1816902655223935323"
+    },
+    {
+      "source": "slowmist",
+      "label": "medium.com",
+      "url": "https://medium.com/@Delta_Prime/deltaprime-post-mortem-report-752bd60a25e6"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/deltaprime-2024-07-23"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "medium.com",
+      "url": "https://medium.com/@DeltaPrimeDefi/deltaprime-post-mortem-report-752bd60a25e6"
+    }
+  ]
+}

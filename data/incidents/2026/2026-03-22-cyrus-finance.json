@@ -1,0 +1,101 @@
+{
+  "id": "2026-03-22-cyrus-finance",
+  "name": "Cyrus Finance",
+  "date": "2026-03-22",
+  "year": 2026,
+  "amountUsd": 5000000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.98,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "The Cyrus Finance CyrusTreasury contract on BSC read the live PancakeSwap V3 pool slot0 spot price — with no TWAP or manipulation-resistant oracle — to determine how much liquidity to remove from its managed concentrated LP positions when exit() / withdrawUSDTFromAny() was called. An attacker flash-borrowed 1,798 ETH, then performed a large ETH→USDT swap that artificially inflated the ETH spot price by crossing 92 price ticks. When exit() executed under the manipulated price, the contract calculated near-zero USDT availability in the position and removed essentially all LP liquidity in the high-ETH-price direction, returning predominantly ETH. The slippage check only protected the USDT component, leaving the ETH value unprotected. After restoring the price via a reverse swap and repaying the flash loan, the attacker extracted approximately $512,000 in ETH and USDT at the expense of the protocol's LP. Attack Tx: 0x2b7efd...d69524 Analysis: PeckShield Alert Cyrus Price Manipulation – DARKNAVY",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The Cyrus Finance CyrusTreasury contract on BSC read the live PancakeSwap V3 pool slot0 spot price — with no TWAP or manipulation-resistant oracle — to determine how much liquidity to remove from its managed concentrated LP positions when exit() / withdrawUSDTFromAny() was called. An attacker flash-borrowed 1,798 ETH, then performed a large ETH→USDT swap that artificially inflated the ETH spot price by crossing 92 price ticks. When exit() executed under the manipulated price, the contract calculated near-zero USDT availability in the position and removed essentially all LP liquidity in the high-ETH-price direction, returning predominantly ETH. The slippage check only protected the USDT component, leaving the ETH value unprotected. After restoring the price via a reverse swap and repaying the flash loan, the attacker extracted approximately $512,000 in ETH and USDT at the expense of the protocol's LP. Attack Tx: 0x2b7efd...d69524 Analysis: PeckShield Alert Cyrus Price Manipulation – DARKNAVY"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The DeFi yield protocol Cyrus Finance (CyrusTreasury contract) on BNB Chain was exploited. The attacker used a flash loan to manipulate the PancakeSwap V3 ETH/USDT pool spot price, triggering a vulnerability in the withdrawUSDTFromAny function to over-extract liquidity from an LP position, profiting approximately $516,840 before laundering the funds via Tornado Cash in 9 batches."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Cyrus Finance was exploited on BNB Chain in a flash-loan-enabled price manipulation targeting its PancakeSwap V3 LP-management logic. Losses were approximately $520,000, with attacker proceeds withdrawn as ETH and USDT. The CyrusTreasury contract calculated withdrawal amounts by reading the current block's spot price from PancakeSwap V3's slot0, allowing a flash loan to manipulate the ETH/USDT pool price at withdrawal. Liquidity was removed disproportionately, favoring the attacker."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x2b7efdac5f052ee9a8f6de8f966b948027b76f7cc183e4868c98c7afc2d69524"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x2b7efdac5f052ee9a8f6de8f966b948027b76f7cc183e4868c98c7afc2d69524"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/peckshield/status/2035820631711744478"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "darknavy.org",
+      "url": "https://www.darknavy.org/web3/exploits/cyrus-price-manipulation/"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x2b7efdac5f052ee9a8f6de8f966b948027b76f7cc183e4868c98c7afc2d69524"
+    },
+    {
+      "source": "slowmist",
+      "label": "certik.medium.com",
+      "url": "https://certik.medium.com/cyrus-finance-incident-analysis-91f1754a058f"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/cyrus-finance-2026-03-22"
+    },
+    {
+      "source": "revertiq",
+      "label": "itokenly.com",
+      "url": "https://itokenly.com/hacks/cyrus-finance"
+    }
+  ]
+}

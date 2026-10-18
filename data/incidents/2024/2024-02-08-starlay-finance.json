@@ -1,0 +1,82 @@
+{
+  "id": "2024-02-08-starlay-finance",
+  "name": "Starlay Finance",
+  "date": "2024-02-08",
+  "year": 2024,
+  "amountUsd": 2100000,
+  "returnedUsd": null,
+  "chains": [
+    "Acala"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Redeem Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.62,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.64
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.36
+      }
+    ],
+    "flashLoan": 0.1,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "A critical security incident within the Starlay protocol’s USDC lending pool on the Acala EVM platform. An exploit was identified and executed due to abnormal behavior in the liquidity index calculation mechanism, which allowed an attacker to withdraw an amount far exceeding their original deposit after borrowing LDOT.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "A critical security incident within the Starlay protocol’s USDC lending pool on the Acala EVM platform. An exploit was identified and executed due to abnormal behavior in the liquidity index calculation mechanism, which allowed an attacker to withdraw an amount far exceeding their original deposit after borrowing LDOT."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 8 February 2024, Starlay Finance on Acala suffered an exploit that allowed attackers to steal approximately $2.1 million, reportedly via a redeem logic flaw linked to a miscalculated liquidity index for the USDC pool. Partial compensation was provided to users, but the full technical details and on-chain trace remain unpublished. A logic flaw in the USDC pool's redeem mechanism, reportedly caused by a miscalculation of the liquidity index, allowed unauthorized redemptions exceeding user balances."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/starlay_fi/status/1755920814497742957"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/starlay-finance-2024-02-08"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/starlay-finance-hack-2024"
+    },
+    {
+      "source": "revertiq",
+      "label": "odaily.news",
+      "url": "https://www.odaily.news/en/newsflash/359866"
+    }
+  ]
+}

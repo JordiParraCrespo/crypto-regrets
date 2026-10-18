@@ -1,0 +1,81 @@
+{
+  "id": "2024-06-11-yolo-games",
+  "name": "YOLO Games",
+  "date": "2024-06-11",
+  "year": 2024,
+  "amountUsd": 1500000,
+  "returnedUsd": null,
+  "chains": [
+    "Blast"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Caller Impersonation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.01,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "$1.5 million was stolen from the liquidity pool on the Blast network’s gaming platform YOLO Games. The root cause was the lack of permission checks in the \"exitPool\" function, allowing anyone to impersonate liquidity providers and drain the pool. The attack was carried out by a white hat hacker, who returned 353 ETH (90% of the stolen funds), approximately $1.27 million.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "$1.5 million was stolen from the liquidity pool on the Blast network’s gaming platform YOLO Games. The root cause was the lack of permission checks in the \"exitPool\" function, allowing anyone to impersonate liquidity providers and drain the pool. The attack was carried out by a white hat hacker, who returned 353 ETH (90% of the stolen funds), approximately $1.27 million."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "YOLO Games' Bazaar LBP contract on Blast was exploited on 11 June 2024 due to unchecked sender arguments in the exitPool function, enabling unauthorized withdrawal of ~$1.5 million. The exploit was conducted by a whitehat, who returned most funds. Unchecked sender arguments in the Bazaar LBP contract's exitPool() function enabled arbitrary withdrawal by impersonating privileged addresses."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xa99a60a7cfc316c80b3b6450bd2c10ba87a51bde7262fed4cd27c723b4d70e45",
+    "0x7fdd140f7631f62d62f7256ee4a38af51a4723ad5d66adc9b9685bf78f750f2d"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/shoucccc/status/1800353122159833195"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/yolo-games-2024-06-11"
+    },
+    {
+      "source": "revertiq",
+      "label": "monitoringroom.com",
+      "url": "https://monitoringroom.com/situation/crypto-hack/yolo-games"
+    },
+    {
+      "source": "revertiq",
+      "label": "certik.com",
+      "url": "https://www.certik.com/zh-CN/blog/yolo-games-bazaar-incident-analysis"
+    }
+  ]
+}

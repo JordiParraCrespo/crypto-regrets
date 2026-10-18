@@ -1,0 +1,81 @@
+{
+  "id": "2023-05-09-hodl",
+  "name": "HODL",
+  "date": "2023-05-09",
+  "year": 2023,
+  "amountUsd": 2.3,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "unknown",
+  "technique": "Reflection token",
+  "classificationNote": null,
+  "classifiedBy": "none",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.66,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.68
+      },
+      {
+        "category": "access-control",
+        "p": 0.1
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.09
+      }
+    ],
+    "flashLoan": 0.06,
+    "stateActor": 0.03,
+    "hasRootCause": 0.86
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Reflection token. Lost: ~$2.3 ETH",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Reflection token. Lost: ~$2.3 ETH"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "They manipulated the ratio in the pair pool by calling the deliver function in the contract. Vulnerable code snippet: Attack tx: https://etherscan.io/tx/0xedc214a62ff6fd764200ddaa8ceae54f842279eadab80900be5f29d0b75212df Analysis: https://explorer.phalcon.xyz/tx/eth/0xedc214a62ff6fd764200ddaa8ceae54f842279eadab80900be5f29d0b75212df"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xedc214a62ff6fd764200ddaa8ceae54f842279eadab80900be5f29d0b75212df"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-05/HODLCapital_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-05/HODLCapital_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "explorer.phalcon.xyz",
+      "url": "https://explorer.phalcon.xyz/tx/eth/0xedc214a62ff6fd764200ddaa8ceae54f842279eadab80900be5f29d0b75212df"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/numencyber/status/1655825767392247808"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xedc214a62ff6fd764200ddaa8ceae54f842279eadab80900be5f29d0b75212df"
+    }
+  ]
+}

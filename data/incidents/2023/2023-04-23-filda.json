@@ -1,0 +1,83 @@
+{
+  "id": "2023-04-23-filda",
+  "name": "FilDA",
+  "date": "2023-04-23",
+  "year": 2023,
+  "amountUsd": 700000,
+  "returnedUsd": null,
+  "chains": [
+    "Elastos",
+    "REI Network"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "bridge-crosschain",
+  "technique": "Bridge Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.59,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.61
+      },
+      {
+        "category": "bridge-crosschain",
+        "p": 0.39
+      }
+    ],
+    "flashLoan": 0.06,
+    "stateActor": 0.02,
+    "hasRootCause": 0.13
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Multi-chain lending protocol FilDA released a vulnerability exploit statement saying that it was attacked earlier today on the Elastos Smart Chain (ESC) and REI networks, causing losses of approximately $700,000. No other FilDA deployments were affected. Vulnerabilities identified and attack vectors isolated.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Multi-chain lending protocol FilDA released a vulnerability exploit statement saying that it was attacked earlier today on the Elastos Smart Chain (ESC) and REI networks, causing losses of approximately $700,000. No other FilDA deployments were affected. Vulnerabilities identified and attack vectors isolated."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "FilDA Finance lost about $700,000 on April 22-23, 2023, due to an exploit involving exchange rate manipulation of its lending market on Elastos Smart Chain and REI Network. The attacker inflated the lending pool's exchange rate, enabling excessive borrowing, and bridged stolen tokens to BNB Chain and Ethereum, obscuring them via Tornado Cash. Manipulation of the lending pool's exchange rate by donating a large quantity of collateral tokens (htHBTC), which increased the exchange rate and allowed the attacker to borrow far more than properly collateralized. The implementation failed to prevent donation-based rate inflation."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "fildafinance.medium.com",
+      "url": "https://fildafinance.medium.com/filda-exploit-statement-49ec69e34c53"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/filda-2023-04-23"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptonews.net",
+      "url": "https://cryptonews.net/news/security/20869749/"
+    },
+    {
+      "source": "revertiq",
+      "label": "certik.com",
+      "url": "https://www.certik.com/blog/lending-rate-manipulation-investigating-the-filda-finance-attack"
+    }
+  ]
+}

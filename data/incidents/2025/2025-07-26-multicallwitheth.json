@@ -1,0 +1,67 @@
+{
+  "id": "2025-07-26-multicallwitheth",
+  "name": "MulticallWithETH",
+  "date": "2025-07-26",
+  "year": 2025,
+  "amountUsd": 10000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "arbitrary-call",
+  "technique": "arbitrary-call",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.98).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "arbitrary-call",
+    "confidence": 0.98,
+    "top": [
+      {
+        "category": "arbitrary-call",
+        "p": 0.98
+      },
+      {
+        "category": "access-control",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.01,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "arbitrary-call. Lost: 10K USD",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "arbitrary-call. Lost: 10K USD"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The victim contract (0x3DA0...92046) exposed a public multicall-style function (selector 0xc9586258, taking an array of Call{target, callData, value, allowFailure}) that executes arbitrary low-level calls on behalf of the contract without any access control or sender validation. Because the multicall executes calls from the victim contract's own context (and the contract held approvals/allowances), an attacker could craft a Call invoking transferFrom (selector 0x23b872dd) to move USDC from an approving address (0xfb0D...A581) to the attacker. The attacker simply called the unprotected multicall with a transferFrom payload, draining ~10K USDT/USDC worth of funds. The root cause is an unrestricted arbitrary-call/multicall entrypoint that anyone can use to make the contract perform privileged token transfers. Vulnerable code snippet: Attack Tx: https://bscscan.com/tx/0x6da7be6edf3176c7c4b15064937ee7148031f92a4b72043ae80a2b3403ab6302 Analysis: Attack Tx (BscScan)"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x6da7be6edf3176c7c4b15064937ee7148031f92a4b72043ae80a2b3403ab6302"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-07/MulticallWithETH_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-07/MulticallWithETH_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x6da7be6edf3176c7c4b15064937ee7148031f92a4b72043ae80a2b3403ab6302"
+    }
+  ]
+}

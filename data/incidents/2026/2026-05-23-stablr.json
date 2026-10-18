@@ -1,0 +1,109 @@
+{
+  "id": "2026-05-23-stablr",
+  "name": "StablR",
+  "date": "2026-05-23",
+  "year": 2026,
+  "amountUsd": 2800000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "key-compromise",
+  "technique": "Private Key Compromised",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "key-compromise",
+    "confidence": 0.82,
+    "top": [
+      {
+        "category": "key-compromise",
+        "p": 0.83
+      },
+      {
+        "category": "access-control",
+        "p": 0.13
+      },
+      {
+        "category": "logic-error",
+        "p": 0.04
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "The StablR minting multisig wallet on Ethereum was configured with a dangerously low 1-of-3 signature threshold, meaning the compromise of a single signer private key was sufficient to authorize any minting or administrative transaction unilaterally. An attacker obtained one of the three signer keys, used it to elevate themselves to administrator, and then removed the legitimate operators from the multisig. The attacker proceeded to mint approximately 8.35M USDR (StablR's dollar-pegged stablecoin) and 4.5M EURR (the euro-backed stablecoin) — a combined face value of ~$12.85M — with no backing collateral whatsoever. The unbacked stablecoins were swapped on DEXs for approximately 1,115 ETH (~$2.8M actual proceeds), with thin DEX liquidity limiting extraction. The sudden creation of unbacked supply caused EURR to depeg by ~23% and USDR by ~30%. StablR subsequently froze both tokens, suspended minting and redemptions, and requested exchanges halt trading. How the private key was initially exfiltrated (phishing, insider threat, or poor key storage) was not publicly disclosed. Attack Tx: 0x15f5458679e8c8a8b73bba60b36fab6ae4b09b27f17f3c5d2d19dc9be3582019 Analysis: Blockaid on X",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The StablR minting multisig wallet on Ethereum was configured with a dangerously low 1-of-3 signature threshold, meaning the compromise of a single signer private key was sufficient to authorize any minting or administrative transaction unilaterally. An attacker obtained one of the three signer keys, used it to elevate themselves to administrator, and then removed the legitimate operators from the multisig. The attacker proceeded to mint approximately 8.35M USDR (StablR's dollar-pegged stablecoin) and 4.5M EURR (the euro-backed stablecoin) — a combined face value of ~$12.85M — with no backing collateral whatsoever. The unbacked stablecoins were swapped on DEXs for approximately 1,115 ETH (~$2.8M actual proceeds), with thin DEX liquidity limiting extraction. The sudden creation of unbacked supply caused EURR to depeg by ~23% and USDR by ~30%. StablR subsequently froze both tokens, suspended minting and redemptions, and requested exchanges halt trading. How the private key was initially exfiltrated (phishing, insider threat, or poor key storage) was not publicly disclosed. Attack Tx: 0x15f5458679e8c8a8b73bba60b36fab6ae4b09b27f17f3c5d2d19dc9be3582019 Analysis: Blockaid on X"
+    },
+    {
+      "source": "SlowMist",
+      "text": "According to on-chain investigator ZachXBT and security firm Blockaid, two contracts linked to European stablecoin issuer StablR (EURR and USDR on Ethereum) were suspected of being exploited. The attacker’s funds appear to have come via CCTP on Noble. ~$2.8M+ extracted so far, causing both stablecoins to depeg significantly."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 2026-05-24, StablR’s Ethereum minting authority was reportedly compromised through a weak 1-of-3 multisig configuration. The attacker allegedly seized administrative control, minted millions of unbacked USDR and EURR tokens, and sold part of the supply into thin on-chain liquidity, causing severe depegs and forcing StablR to suspend minting and redemption. Public reporting indicates that a single compromised signer in StablR’s 1-of-3 Ethereum minting multisig allowed the attacker to add a malicious owner, remove legitimate signers, and gain persistent control over stablecoin issuance. No smart contract arithmetic flaw has been publicly identified. S…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x15f5458679e8c8a8b73bba60b36fab6ae4b09b27f17f3c5d2d19dc9be3582019"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x15f5458679e8c8a8b73bba60b36fab6ae4b09b27f17f3c5d2d19dc9be3582019"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/blockaid_/status/2058372418557595890"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x15f5458679e8c8a8b73bba60b36fab6ae4b09b27f17f3c5d2d19dc9be3582019"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/stablr-2026-05-24"
+    },
+    {
+      "source": "revertiq",
+      "label": "blocksec.com",
+      "url": "https://blocksec.com/blog/defi-security-incidents-echo-protocol-stablr-more"
+    },
+    {
+      "source": "revertiq",
+      "label": "blocksec.com",
+      "url": "https://blocksec.com/blog/web3-security-verus-bridge-retoswap-more"
+    },
+    {
+      "source": "revertiq",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/markets/2026/05/26/stablr-freezes-usdr-and-eurr-after-attacker-mints-usd13-5-million-in-unbacked-tokens"
+    }
+  ]
+}

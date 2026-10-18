@@ -1,0 +1,105 @@
+{
+  "id": "2022-11-22-aur-protocol",
+  "name": "AUR Protocol",
+  "date": "2022-11-22",
+  "year": 2022,
+  "amountUsd": 13000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "Token",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.03,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Lack of Permission Check. Lost: $13k",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Lack of Permission Check. Lost: $13k"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Incorrect access control. Vulnerable code snippet: https://bscscan.com/address/0x70678291bDDfd95498d1214BE368e19e882f7614#code#L578 The changeRewardPerNode function lacks proper access control validation, which allows an attacker to call this function and set any value. The attacker first calls the changeRewardPerNode function to set the daily reward value to an extremely large number. Subsequently, the attacker calls the claimNodeReward function to extract the node reward, which is calculated based on the rewardPerDay value that the attacker has set. function changeRewardPerNode(uint256 _rewardPerDay) external { //vulnerable point - Incorrect access control rewardPerDay = _rewardPerDay; } Attack tx: https://phalcon.blocksec.com/tx/bsc/0xb3bc6ca257387eae1cea3b997eb489c1a9c208d09ec4d117198029277468e25d https://phalcon.blocksec.com/tx/bsc/0x7f031e8543e75bd5c85168558be89d2e08b7c02a32d07d76517cdbb10e279782 Analysis: https://twitter.com/AnciliaInc/status/1595142246570958848 https://quillaudits.medium.com/hackers-steal-42m-from-fenbushi-capital-founders-wallet-dcce2b0a4e5b"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "AUR Protocol on BNB Chain was exploited for approximately $13,000 on November 22, 2022, due to improper access control enabling unauthorized account actions. No primary contract code, transaction, or project response is available; evidence is limited to aggregator summaries and a reproduction script. Privileged contract functions controlling economic parameters lacked proper access control, reportedly allowing any account to execute sensitive operations."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xb3bc6ca257387eae1cea3b997eb489c1a9c208d09ec4d117198029277468e25d",
+    "0x7f031e8543e75bd5c85168558be89d2e08b7c02a32d07d76517cdbb10e279782"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-11/AUR_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-11/AUR_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/AnciliaInc/status/1595142246570958848"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0x70678291bDDfd95498d1214BE368e19e882f7614#code#L578"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "phalcon.blocksec.com",
+      "url": "https://phalcon.blocksec.com/tx/bsc/0xb3bc6ca257387eae1cea3b997eb489c1a9c208d09ec4d117198029277468e25d"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "phalcon.blocksec.com",
+      "url": "https://phalcon.blocksec.com/tx/bsc/0x7f031e8543e75bd5c85168558be89d2e08b7c02a32d07d76517cdbb10e279782"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/aur-protocol-2022-11-22"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/aur-protocol-hack-2022"
+    },
+    {
+      "source": "revertiq",
+      "label": "monitoringroom.com",
+      "url": "https://monitoringroom.com/situation/crypto-hack/aur-protocol"
+    }
+  ]
+}

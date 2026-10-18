@@ -1,0 +1,105 @@
+{
+  "id": "2024-07-31-terra-2-0",
+  "name": "Terra 2.0",
+  "date": "2024-07-31",
+  "year": 2024,
+  "amountUsd": 6400000,
+  "returnedUsd": null,
+  "chains": [
+    "Terra2"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "reentrancy",
+  "technique": "Reentrancy",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "reentrancy",
+    "confidence": 0.94,
+    "top": [
+      {
+        "category": "reentrancy",
+        "p": 0.94
+      },
+      {
+        "category": "bridge-crosschain",
+        "p": 0.03
+      },
+      {
+        "category": "client-bug",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.94
+  },
+  "bridge": false,
+  "language": "Go",
+  "rootCause": "Terra blockchain experienced a security breach that led to the theft of tokens. The attackers exploited a known vulnerability related to the third-party module IBC hooks, stealing the value of cross-chain assets, including USDC stablecoins and Astroport tokens. The Terra team has taken emergency measures to prevent further losses and coordinated with validators to apply a patch to fix the vulnerability. According to Zaki Manian, co-founder of Sommelier Finance, although the vulnerability was patched in the Cosmos ecosystem back in April, Terra did not include this patch in their June upgrade, resulting in the vulnerability being re-exposed and exploited.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Terra blockchain experienced a security breach that led to the theft of tokens. The attackers exploited a known vulnerability related to the third-party module IBC hooks, stealing the value of cross-chain assets, including USDC stablecoins and Astroport tokens. The Terra team has taken emergency measures to prevent further losses and coordinated with validators to apply a patch to fix the vulnerability. According to Zaki Manian, co-founder of Sommelier Finance, although the vulnerability was patched in the Cosmos ecosystem back in April, Terra did not include this patch in their June upgrade, resulting in the vulnerability being re-exposed and exploited."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On July 30,31, 2024, an attacker exploited a reentrancy vulnerability in Terra's IBC hooks module, draining approximately $6.4M in ASTRO, USDC, USDT, and BTC from Astroport and related contracts. The bug had been patched in April but was reintroduced in a June upgrade through an outdated fork of ibc-go, leaving the chain exposed. Terra halted for an emergency fix, and partial asset recovery actions followed. A previously patched reentrancy vulnerability in Terra's IBC hooks (OnTimeout callback) was reintroduced in a June 2024 upgrade by using an outdated ibc-go fork, allowing attackers to recursively trigger token withdrawals via crafted IBC timeout messages."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "No verified evidence exists for the reported $6.5M Terra IBC hooks exploit on July 31, 2024. The claimed incident lacks primary chain, technical, or credible secondary confirmation as of September 2026. No supported technical details or root cause for a Terra IBC hooks exploit on July 31, 2024. The event and claimed mechanism remain unsubstantiated."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "theblock.co",
+      "url": "https://www.theblock.co/post/308440/attacker-exploits-ibc-hooks-vulnerability-to-steal-tokens-on-terra-blockchain"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/terra-6-500-000-2024-07-31"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/defi-rekt-report-over-250m-lost-in-july-2024"
+    },
+    {
+      "source": "revertiq",
+      "label": "theblock.co",
+      "url": "https://www.theblock.co/news/ecosystems/2024-07-31-attacker-exploits-ibc-hooks-vulnerability-to-steal-tokens-on-terra-blockchain-308440"
+    },
+    {
+      "source": "revertiq",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/tech/2024/07/31/terra-blockchain-restarts-after-4m-exploit"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/terra-platform-2024-07-31"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/de-fi-rekt-report-over-671-million-lost-in-q3-2024"
+    }
+  ]
+}

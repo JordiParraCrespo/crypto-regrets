@@ -1,0 +1,58 @@
+{
+  "id": "2026-10-15-kolanhook",
+  "name": "KolanHook",
+  "date": "2026-10-15",
+  "year": 2026,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": null,
+  "classificationNote": "Classified by keyword rules from the DeFiHackLabs root-cause title.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.64,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.66
+      },
+      {
+        "category": "logic-error",
+        "p": 0.23
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.1
+      }
+    ],
+    "flashLoan": 0.98,
+    "stateActor": 0.01,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "KolanHook settles its escrowed ETH buy-windows at the same Uniswap v4 pool's instantaneous spot price with no TWAP or bound and accept() is ungated once a window has expired, so the attacker flash-borrows 6.7 WETH from Balancer, swaps it to move the KLN spot, then calls accept() on two expired windows it does not own so _closeWindow() mispositions their escrowed ETH as single-sided liquidity around the manipulated price and runs an unbounded buyback, and reverses the swap back through that freshly placed ETH liquidity before repaying the loan for a 1.279453 ETH net gain. Lost: 1.279453 ETH net to the attacker EOA on Ethereum (surplus 1.279914429958618589 ETH after the 6.7 WETH Balancer flash loan is repaid, minus ~0.00046 ETH gas), draining KolanHook's full 2.309861 ETH of escrowed window funds",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "KolanHook settles its escrowed ETH buy-windows at the same Uniswap v4 pool's instantaneous spot price with no TWAP or bound and accept() is ungated once a window has expired, so the attacker flash-borrows 6.7 WETH from Balancer, swaps it to move the KLN spot, then calls accept() on two expired windows it does not own so _closeWindow() mispositions their escrowed ETH as single-sided liquidity around the manipulated price and runs an unbounded buyback, and reverses the swap back through that freshly placed ETH liquidity before repaying the loan for a 1.279453 ETH net gain. Lost: 1.279453 ETH net to the attacker EOA on Ethereum (surplus 1.279914429958618589 ETH after the 6.7 WETH Balancer flash loan is repaid, minus ~0.00046 ETH gas), draining KolanHook's full 2.309861 ETH of escrowed window funds"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-10/KolanHook_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2026-10/KolanHook_exp.sol"
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "id": "2026-03-16-checkoutpool",
+  "name": "CheckoutPool",
+  "date": "2026-03-16",
+  "year": 2026,
+  "amountUsd": 85700,
+  "returnedUsd": null,
+  "chains": [
+    "Polygon"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "On 16 March 2026, the legacy CheckoutPool settlement contract on Polygon was exploited due to missing access control on its bridge() function. The attacker crafted a call that allowed funds held for settlement to be redirected to an attacker-owned smart account, resulting in a loss of approximately 85,730 USDC ($85,700). The legacy CheckoutPool contract failed to restrict access to its bridge() function and did not validate that externally-supplied call data matched the intended checkout recipient. This meant anyone could route settlement funds via a crafted bridge call, allowing redirection to arbitrary addresses.",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "On 16 March 2026, the legacy CheckoutPool settlement contract on Polygon was exploited due to missing access control on its bridge() function. The attacker crafted a call that allowed funds held for settlement to be redirected to an attacker-owned smart account, resulting in a loss of approximately 85,730 USDC ($85,700). The legacy CheckoutPool contract failed to restrict access to its bridge() function and did not validate that externally-supplied call data matched the intended checkout recipient. This meant anyone could route settlement funds via a crafted bridge call, allowing redirection to arbitrary addresses."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x957bcfa47657a198b683feb455f7957e8e6d912b5584a5af510f4ff8a41f4f5a"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/checkoutpool-2026-03-16"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/checkoutpool-hack-2026"
+    },
+    {
+      "source": "revertiq",
+      "label": "blocksec.com",
+      "url": "https://blocksec.com/blog/weekly-web3-security-incident-roundup-mar-16-mar-22-2026"
+    }
+  ]
+}

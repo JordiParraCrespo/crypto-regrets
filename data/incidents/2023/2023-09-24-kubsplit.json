@@ -1,0 +1,91 @@
+{
+  "id": "2023-09-24-kubsplit",
+  "name": "KubSplit",
+  "date": "2023-09-24",
+  "year": 2023,
+  "amountUsd": 78000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Pool manipulation",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.85).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "oracle-manipulation",
+    "confidence": 0.85,
+    "top": [
+      {
+        "category": "oracle-manipulation",
+        "p": 0.86
+      },
+      {
+        "category": "logic-error",
+        "p": 0.08
+      },
+      {
+        "category": "market-manipulation",
+        "p": 0.04
+      }
+    ],
+    "flashLoan": 0.95,
+    "stateActor": 0.02,
+    "hasRootCause": 0.78
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Pool manipulation. Lost: ~$78K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Pool manipulation. Lost: ~$78K"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Kub/Kub-split experienced a flash loan exploit, allowing the attacker to gain approximately $78.4k through pool manipulation. Vulnerable code snippet: Attack tx: Analysis: CertiK Alert on Twitter / X"
+    },
+    {
+      "source": "SlowMist",
+      "text": "There was a flash loan exploit on Kub/Kub-split. The attacker gained ~$78.4k via pool manipulation. Contract: 0xc98E183D2e975F0567115CB13AF893F0E3c0d0bD."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x2b0877b5495065e90d956e44ffde6aaee5e0fcf99dd3c86f5ff53e33774ea52d"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-09/Kub_Split_exp.sol",
+  "sources": [
+    "defihacklabs",
+    "slowmist"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-09/Kub_Split_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/CertiKAlert/status/1705966214319612092"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0xc98e183d2e975f0567115cb13af893f0e3c0d0bd#code"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x2b0877b5495065e90d956e44ffde6aaee5e0fcf99dd3c86f5ff53e33774ea52d"
+    },
+    {
+      "source": "slowmist",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0xc98e183d2e975f0567115cb13af893f0e3c0d0bd"
+    }
+  ]
+}

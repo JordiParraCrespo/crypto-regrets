@@ -1,0 +1,105 @@
+{
+  "id": "2021-05-17-bearnfi",
+  "name": "BearnFi",
+  "date": "2021-05-17",
+  "year": 2021,
+  "amountUsd": 18000000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Withdrawal Logic Flaw",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.11
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "Logic Flaw. Lost: 11M",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Logic Flaw. Lost: 11M"
+    },
+    {
+      "source": "REKT",
+      "text": "$18 million gone from bEarnFi. Has the hacker returned richer to their day job, or do they attack on weekends as they expect less attention? As we watch the rapid rise and fall of TVL on BSC, it becomes even more apparent that time is the most valuable audit of all."
+    },
+    {
+      "source": "SlowMist",
+      "text": "The DeFi protocol bEarnFi stated that on May 16, its bVaults BUSD-Alpaca strategy was attacked, and nearly 10.86 million BUSD in the pool was exhausted. However, the remaining bvault and other pools of the platform are not at risk. At the same time, bEarnFi released a rough compensation plan, which will create a compensation fund, which will consist of the remaining savings funds, development funds, DAO funds, and part of the expenses incurred by the agreement. After that, a snapshot of the balance will be taken to deploy compensation contracts. Affected users will receive an additional 5% of their deposit amount."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On May 16, 2021, bEarn Fi's BUSD vault on BNB Chain was exploited via a deposit/withdrawal logic flaw allowing an attacker to exchange less valuable tokens for more valuable ones, draining $11,18M. The bug stemmed from mismatched token denominations between vault and strategy contracts, enabling repeated extraction of value. The strategy contract incorrectly treated BUSD and ibBUSD tokens as equivalent during deposit and withdrawal operations. This mis-accounting allowed attackers to withdraw more value than deposited by exploiting a logic mismatch and ignoring exchange rates."
+    }
+  ],
+  "audit": "Unaudited",
+  "txHashes": [
+    "0x603b2bbe2a7d0877b22531735ff686a7caad866f6c0435c37b7b49e4bfd9a36c"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2021-05/bEarn_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2021-05/bEarn_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bearndao.medium.com",
+      "url": "https://bearndao.medium.com/bvaults-busd-alpaca-strategy-exploit-post-mortem-and-bearn-s-compensation-plan-b0b38c3b5540"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: bEarn - REKT",
+      "url": "https://rekt.news/bearn-rekt"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/bearn-fi-2021-05-16"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/OriginProtocol/security/blob/master/incidents/2021-05-16-BearnFi.md"
+    },
+    {
+      "source": "revertiq",
+      "label": "quadrigainitiative.com",
+      "url": "https://quadrigainitiative.com/cryptocurrencyhackscamfraudwiki/index.php?title=BEarnFi_BVaults_Exploited"
+    }
+  ]
+}

@@ -1,0 +1,122 @@
+{
+  "id": "2023-08-02-uwerx",
+  "name": "Uwerx",
+  "date": "2023-08-02",
+  "year": 2023,
+  "amountUsd": 327000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "Other",
+  "category": "oracle-manipulation",
+  "technique": "Spot Price Manipulation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "market-manipulation",
+    "confidence": 0.34,
+    "top": [
+      {
+        "category": "market-manipulation",
+        "p": 0.38
+      },
+      {
+        "category": "logic-error",
+        "p": 0.29000000000000004
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.18
+      }
+    ],
+    "flashLoan": 0.91,
+    "stateActor": 0.01,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "Fault logic. Lost: ~$176ETH",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Fault logic. Lost: ~$176ETH"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The attacker exploited the ability to burn UWERX tokens, decreasing the total supply and raising the token price artificially. They borrowed 20,000 ETH via flash loans, exchanged it for 5,053,637 UWERX tokens, and used the private _transfer() function to burn 1% of transferred tokens. This reduction in supply allowed them to sell UWERX tokens at a higher price, resulting in a profit. Vulnerable Code Snippet: Attack Transaction: https://etherscan.io/tx/0x3b19e152943f31fe0830b67315ddc89be9a066dc89174256e17bc8c2d35b5af8 https://explorer.phalcon.xyz/tx/eth/0x3b19e152943f31fe0830b67315ddc89be9a066dc89174256e17bc8c2d35b5af8 Analysis: https://twitter.com/deeberiroz/status/1686683788795846657"
+    },
+    {
+      "source": "SlowMist",
+      "text": "he Uwerx network was attacked and lost about 174.78 ETH. According to the analysis of SlowMist, the root cause is that when the receiving address is uniswapPoolAddress (0x01), it will burn off 1% more tokens of the transfer amount of the from address, so the attacker uses the skim function of the uniswapv2 pool to consume a large number of WERX tokens, and then calls the sync function to maliciously inflate the price of the token, and then reverses the swap to extract the ETH to gain profit."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On 2 August 2023, Uwerx's WERX token on Ethereum was exploited for approximately 175 ETH (~$324,000) through a manipulated pool burn and skim sequence. The attack abused a fee-on-transfer bug and Uniswap v2 pool mechanics, allowing the attacker to extract ETH by distorting the spot price. The Uwerx WERX token's transfer logic applied a 1% burn not only on ordinary transfers, but also specifically when the recipient matched a hardcoded pool address (0x01). By exploiting the Uniswap v2 skim() function and directing tokens to this address, the attacker artificially reduced pool reserves and manipulated the spot price. This loophole was not protected again…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x3b19e152943f31fe0830b67315ddc89be9a066dc89174256e17bc8c2d35b5af8"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-08/Uwerx_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-08/Uwerx_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/deeberiroz/status/1686683788795846657"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/CertiKAlert/status/1686667720920625152"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x3b19e152943f31fe0830b67315ddc89be9a066dc89174256e17bc8c2d35b5af8"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "explorer.phalcon.xyz",
+      "url": "https://explorer.phalcon.xyz/tx/eth/0x3b19e152943f31fe0830b67315ddc89be9a066dc89174256e17bc8c2d35b5af8"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/SlowMist_Team/status/1686674169189249024"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/uwerx-2023-08-02"
+    },
+    {
+      "source": "revertiq",
+      "label": "github.com",
+      "url": "https://github.com/kismp123/DeFi-Security-Incident/blob/main/2023/2023-08-30_Uwerx_TokenLogic.md"
+    },
+    {
+      "source": "revertiq",
+      "label": "raw.githubusercontent.com",
+      "url": "https://raw.githubusercontent.com/SunWeb3Sec/DeFiHackLabs/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/src/test/2023-08/Uwerx_exp.sol"
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "id": "2023-06-19-contract-0x7657",
+  "name": "Contract_0x7657",
+  "date": "2023-06-19",
+  "year": 2023,
+  "amountUsd": 20000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "logic-error",
+  "technique": "Business Logic",
+  "classificationNote": "Classified by keyword rules from the DeFiHackLabs root-cause title.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "arbitrary-call",
+    "confidence": 0.67,
+    "top": [
+      {
+        "category": "arbitrary-call",
+        "p": 0.6900000000000001
+      },
+      {
+        "category": "access-control",
+        "p": 0.16
+      },
+      {
+        "category": "logic-error",
+        "p": 0.15
+      }
+    ],
+    "flashLoan": 0.06,
+    "stateActor": 0.02,
+    "hasRootCause": 0.91
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Business Logic. Lost: ~$20k $USDT",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Business Logic. Lost: ~$20k $USDT"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The vulnerability basically allowed to transfer USDT from any account that gave approval to the contract. Vulnerable code snippet: Attack tx: https://etherscan.io/tx/0x74279a131dccd6479378b3454ea189a6ce350cce51de47d81a0ef23db1b134d5 Analysis: https://x.com/DecurityHQ/status/1670806260550184962"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x74279a131dccd6479378b3454ea189a6ce350cce51de47d81a0ef23db1b134d5"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-06/Contract_0x7657_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-06/Contract_0x7657_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/DecurityHQ/status/1670806260550184962"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x74279a131dccd6479378b3454ea189a6ce350cce51de47d81a0ef23db1b134d5"
+    }
+  ]
+}

@@ -1,0 +1,169 @@
+{
+  "id": "2023-11-12-mevbot-0x8c2d",
+  "name": "MEVBot_0x8c2d",
+  "date": "2023-11-12",
+  "year": 2023,
+  "amountUsd": 365000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Lack of Access Control",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 1.00).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.97,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Lack of Access Control. Lost: ~$365K",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Lack of Access Control. Lost: ~$365K"
+    },
+    {
+      "source": "DeFiHackLabs",
+      "text": "Incorrect Access Control. Lost: ~$150K"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The MEV bot contracts contained a publicly callable function (selector 0xf6ebebbb) with no access control that accepted arbitrary caller-supplied token addresses and a Curve pool address, then swapped the bot's entire balance of that token through the specified pool. Any external account could drain the bot's holdings simply by invoking this function with chosen parameters. The PoC (shared across multiple affected bots including 0x05f016 on Ethereum, which lost ~$2M) demonstrates the pattern: flash-loan funds, call the unprotected swap function repeatedly for each token the bot holds, then convert the extracted tokens back, repay the loan and pocket the profit. Vulnerable code snippet: Attack Tx: 0x3dcb26a1f49eb4d02ca29960b4833bfb2e83d7b5d9591aed1204168944c8c9b3 Analysis: Phalcon_xyz on X"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Same vulnerability class as the concurrent MEV bot attacks on 2023-11-12. The affected MEV bot contract exposed a public swap-dispatch function (selector 0xf6ebebbb) with no caller restriction, allowing any account to supply arbitrary token addresses and a Curve pool and drain the bot's entire balance of those tokens. The attacker flash-loaned to cover gas and slippage, then called the unprotected function multiple times — once per token the bot held — extracting all value and converting it back before repaying the loan. Vulnerable code snippet: Attack Tx: 0xdfbfb0387129541c65934e71deee404ea70de6629258ae49d9f24bcf6e866ea6 Analysis: Phalcon_xyz on X"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "- Due to the Lack of Access Control, anyone could designate himself with the privileged role of the MEV bot. Thus the privileged operation could be performed to harvest the assets. Attack Path: (from blocksec team) Attack tx: https://explorer.phalcon.xyz/tx/bsc/0x3dcb26a1f49eb4d02ca29960b4833bfb2e83d7b5d9591aed1204168944c8c9b3 Analysis https://twitter.com/Phalcon_xyz/status/1723897569661657553"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The attack on unverified contracts is created by 0x3904ef. The flaw was in function 0xe7d25975, which lacked access control and allowed the attacker to set _removeAdmin and withdraw tokens. For example, in contract 0xa24734, the attacker used this flaw to withdraw RAIL tokens and convert them to ETH. Vulnerable code snippet: By blocksec team Attack tx: - transaction 1 0x53eeab4447db331dbb | Phalcon Explorer - transaction 2 0x573199feba92ab6577 | Phalcon Explorer - transaction 3 0xb56e984a866afed36c | Phalcon Explorer - transaction 4 0xdfbfb0387129541c65 | Phalcon Explorer Analysis: BlockSec Phalcon on Twitter / X Root cause: Vulnerable code snippet: Attack tx: Analysis:"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The MEV bot at 0x05f016 exposed an unprotected public function (selector 0xf6ebebbb) that accepted caller-controlled token-in, token-out, and Curve pool parameters and executed a full-balance swap of those tokens from the bot's own reserves. With no onlyOwner guard or whitelist on this function, the attacker flash-borrowed 27,255 WETH from Aave, then made repeated calls draining the bot's USDC (via 3pool), USDT and WBTC (via Tricrypto), and finally its WETH, converting everything into WBTC and WETH which were kept as profit after repaying the loan. Vulnerable code snippet: Attack Tx: 0xbc08860cd0a08289c41033bdc84b2bb2b0c54a51ceae59620ed9904384287a38 Analysis: BlockSecTeam on X"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x3dcb26a1f49eb4d02ca29960b4833bfb2e83d7b5d9591aed1204168944c8c9b3",
+    "0xdfbfb0387129541c65934e71deee404ea70de6629258ae49d9f24bcf6e866ea6",
+    "0x53eeab4447db331dbb47f93fd58a95d6faa230d559acde0687f8b5f5829e7a45",
+    "0xbc08860cd0a08289c41033bdc84b2bb2b0c54a51ceae59620ed9904384287a38",
+    "0xb56e984a866afed36ccf28c2a659845f5529d7de3f609d67c16c20e337c106fc",
+    "0x573199feba92ab6577847f2baa634ec84845d96474af31ca81a6b82ab3a4178f"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-11/MEV_0x8c2d_exp.sol",
+  "sources": [
+    "defihacklabs",
+    "blocksec"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-11/MEV_0x8c2d_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Phalcon_xyz/status/1723897569661657553"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-11/MEV_0xa247_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Phalcon_xyz/status/1723591214262632562"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "explorer.phalcon.xyz",
+      "url": "https://explorer.phalcon.xyz/tx/eth/0x3dcb26a1f49eb4d02ca29960b4833bfb2e83d7b5d9591aed1204168944c8c9b3"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "explorer.phalcon.xyz",
+      "url": "https://explorer.phalcon.xyz/tx/eth/0xdfbfb0387129541c65934e71deee404ea70de6629258ae49d9f24bcf6e866ea6"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "explorer.phalcon.xyz",
+      "url": "https://explorer.phalcon.xyz/tx/bsc/0x3dcb26a1f49eb4d02ca29960b4833bfb2e83d7b5d9591aed1204168944c8c9b3"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/eth/0x53eeab4447db331dbb47f93fd58a95d6faa230d559acde0687f8b5f5829e7a45"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "t.co",
+      "url": "https://t.co/6KcL5OMqoJ"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "t.co",
+      "url": "https://t.co/2nnjKSbIOJ"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "explorer.phalcon.xyz",
+      "url": "https://explorer.phalcon.xyz/tx/eth/0xbc08860cd0a08289c41033bdc84b2bb2b0c54a51ceae59620ed9904384287a38"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BlockSecTeam/status/1722101942061601052"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x3dcb26a1f49eb4d02ca29960b4833bfb2e83d7b5d9591aed1204168944c8c9b3"
+    },
+    {
+      "source": "blocksec",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs?tab=readme-ov-file#20231112-mevbot_0x8c2d---lack-of-access-control"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xdfbfb0387129541c65934e71deee404ea70de6629258ae49d9f24bcf6e866ea6"
+    },
+    {
+      "source": "blocksec",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs?tab=readme-ov-file#20231112-mevbot_0xa247---incorrect-access-control"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xbc08860cd0a08289c41033bdc84b2bb2b0c54a51ceae59620ed9904384287a38"
+    },
+    {
+      "source": "blocksec",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs?tab=readme-ov-file#20231107-mevbot---lack-of-access-control"
+    }
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "id": "2021-04-12-pancakeswap",
+  "name": "PancakeSwap",
+  "date": "2021-04-12",
+  "year": 2021,
+  "amountUsd": 1800000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.48,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.51
+      },
+      {
+        "category": "key-compromise",
+        "p": 0.44
+      },
+      {
+        "category": "rugpull",
+        "p": 0.05
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.56
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "According to sources, since April 12, 2021, a person who has access to Binance Smart Chain account 0x35f16a46d3cf19010d28578a8b02dfa3cb4095a1 (PancakeSwap administrator account) has stolen 59,765 Cakes (approximately US$1,800,000) from the PancakeSwap lottery pool. After hackers exploited the vulnerability several times, PancakeSwap banned the account.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "According to sources, since April 12, 2021, a person who has access to Binance Smart Chain account 0x35f16a46d3cf19010d28578a8b02dfa3cb4095a1 (PancakeSwap administrator account) has stolen 59,765 Cakes (approximately US$1,800,000) from the PancakeSwap lottery pool. After hackers exploited the vulnerability several times, PancakeSwap banned the account."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "In April 2021, PancakeSwap's lottery pool on BNB Chain faced a critical admin-access vulnerability and a separate logic bug in ticket claims. The team preemptively withdrew and burned ~$1.8 million in CAKE to prevent user loss. No malicious external exploitation occurred. Subsequent bug bounties revealed further claim logic flaws, which were patched across forks. The lottery contract allowed privileged admin withdrawal of pool funds, and the claim validation logic failed to prevent duplicate claims on the same ticket in a single transaction. Weak access controls and insufficient input checks led to both risks."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xd386fb7f2a8dc6c4776917b62a3074c78b07e746fedf7b3042d9e3bfc7fbeddd",
+    "0xd2aff5884c3ce47c59931735e43c3e5f17aee18ebc6be0f6bf20f3fca08ccf61"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "cryptopwnage.medium.com",
+      "url": "https://cryptopwnage.medium.com/1-800-000-was-stolen-from-binance-smart-chain-pancakeswap-lottery-pool-ca2afb415f9"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/pancakeswap-2021-04-12"
+    },
+    {
+      "source": "revertiq",
+      "label": "quadrigainitiative.com",
+      "url": "https://www.quadrigainitiative.com/casestudy/pancakeswapcakeminted.php"
+    },
+    {
+      "source": "revertiq",
+      "label": "quadrigainitiative.com",
+      "url": "https://www.quadrigainitiative.com/casestudy/pancakeswaplotterybugfixed.php"
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "id": "2023-11-12-custom-lending-pool-approval",
+  "name": "Custom Lending Pool Approval",
+  "date": "2023-11-12",
+  "year": 2023,
+  "amountUsd": 366000,
+  "returnedUsd": null,
+  "chains": [
+    "BNB Chain",
+    "Ethereum Mainnet"
+  ],
+  "targetType": null,
+  "category": "bridge-crosschain",
+  "technique": "Approval exploit; Bridge asset movement; Draining of pooled funds",
+  "classificationNote": "Classified by keyword rules from the RevertIQ label and description.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "arbitrary-call",
+    "confidence": 0.48,
+    "top": [
+      {
+        "category": "arbitrary-call",
+        "p": 0.51
+      },
+      {
+        "category": "access-control",
+        "p": 0.29
+      },
+      {
+        "category": "logic-error",
+        "p": 0.2
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.94
+  },
+  "bridge": true,
+  "language": null,
+  "rootCause": "A custom lending pool on Binance Smart Chain was exploited on November 12, 2023, with the attacker draining 366,058 USDT through an approval issue and moving proceeds via bridges and Railgun privacy tools. The custom lending pool contract contained an approval issue that allowed the attacker to withdraw funds exceeding intended limits. Lack of detailed code or verification prevents precise identification of the bug, but evidence suggests the attacker was able to drain all approved funds from the victim contract.",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "A custom lending pool on Binance Smart Chain was exploited on November 12, 2023, with the attacker draining 366,058 USDT through an approval issue and moving proceeds via bridges and Railgun privacy tools. The custom lending pool contract contained an approval issue that allowed the attacker to withdraw funds exceeding intended limits. Lack of detailed code or verification prevents precise identification of the bug, but evidence suggests the attacker was able to drain all approved funds from the victim contract."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xd4d7f80fae5c486b40088769e0260becc33427dbbe1a760e39d4a49009124310",
+    "0xae1ad836d522f80e52b289f6e76f2e463e02c1c81c8be79d3498083777095b7f",
+    "0xc55b32850b3209b0acf5c00f87346474410830e10724baabda9a250d3c3e8322"
+  ],
+  "poc": null,
+  "sources": [
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/custom-lending-pool-approval-2023-11-12"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/de-fi-rekt-report-over-331m-lost-in-november-2023"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/custom-lending-pool-hack-2023"
+    }
+  ]
+}

@@ -1,0 +1,71 @@
+{
+  "id": "2020-04-19-dforce-lending",
+  "name": "dForce Lending",
+  "date": "2020-04-19",
+  "year": 2020,
+  "amountUsd": 25000000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "reentrancy",
+  "technique": "Reentrancy",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "reentrancy",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "reentrancy",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.01,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "On 19 April 2020, dForce Lendf.Me on Ethereum was drained of approximately $25 million across multiple assets due to a reentrancy vulnerability in its handling of the ERC-777 imBTC collateral. The attacker exploited the tokensReceived callback to inflate their collateral and borrow all pool assets. dForce identified the attacker via KYC, resulting in full fund recovery within two days. Lendf.Me's supply and withdraw functions violated the Checks-Effects-Interactions (CEI) pattern when interacting with ERC-777 tokens like imBTC. The protocol transferred tokens before updating internal accounting, allowing an attacker to exploit the ERC-777 tokensReceive…",
+  "descriptions": [
+    {
+      "source": "RevertIQ",
+      "text": "On 19 April 2020, dForce Lendf.Me on Ethereum was drained of approximately $25 million across multiple assets due to a reentrancy vulnerability in its handling of the ERC-777 imBTC collateral. The attacker exploited the tokensReceived callback to inflate their collateral and borrow all pool assets. dForce identified the attacker via KYC, resulting in full fund recovery within two days. Lendf.Me's supply and withdraw functions violated the Checks-Effects-Interactions (CEI) pattern when interacting with ERC-777 tokens like imBTC. The protocol transferred tokens before updating internal accounting, allowing an attacker to exploit the ERC-777 tokensReceive…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x9743677ccf9a95f0a0521558d1bf853226f3a87c077d40cf3df73199ba211102",
+    "0x481e8a7c1c39ad755fbae3f7cf030b4a10f94b875bff2829582244120a36ea9a"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/dforce-lending-2020-04-19"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "theblockcrypto.com",
+      "url": "https://www.theblockcrypto.com/amp/linked/62346/multicoin-capital-backed-defi-protocol-dforce-loses-25m-total-locked-value-in-an-exploit"
+    }
+  ]
+}

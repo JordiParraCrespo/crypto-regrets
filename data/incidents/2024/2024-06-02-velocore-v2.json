@@ -1,0 +1,133 @@
+{
+  "id": "2024-06-02-velocore-v2",
+  "name": "Velocore V2",
+  "date": "2024-06-02",
+  "year": 2024,
+  "amountUsd": 6800000,
+  "returnedUsd": null,
+  "chains": [
+    "Linea",
+    "zkSync Era"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "accounting-math",
+  "technique": "Incorrect Fee Accounting",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "lack-of-access-control. Lost: $6.88M",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "lack-of-access-control. Lost: $6.88M"
+    },
+    {
+      "source": "REKT",
+      "text": "The velo in Velocore proved too fast and furious, as the L2 DEX lost over $6.8 million in a devastating exploit on June 2nd across its pools on Linea and zkSync."
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "lacks permission verification (velocoreexecute) Vulnerable code snippet: https://lineascan.build/address/0xb7f6354b2cfd3018b3261fbc63248a56a24ae91a Attack tx: https://lineascan.build/tx/0xed11d5b013bf3296b1507da38b7bcb97845dd037d33d3d1b0c5e763889cdbed1 Analysis: The LP Pool lacks permission verification. The attacker directly invoke the velocoreexecute function (0xec378808) of the LP contract with a carefully constructed parameter to manipulate the feeMultiplier parameter of the contract. https://x.com/BeosinAlert/status/1797247874528645333 https://blog.solidityscan.com/velocore-hack-analysis-642a13630be0"
+    },
+    {
+      "source": "SlowMist",
+      "text": "DEX Velocore experienced a security breach on June 2nd, 2024, resulting in financial losses approximating $6.8 million in ETH. The primary cause of the incident was faulty logic within the velocore__execute() function of the ConstantProductPool. When a user makes a swap on Velocore, the Vault contract makes an external call to this function to calculate the result of the swap."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On June 2, 2024, Velocore's Balancer-style CPMM pools on zkSync Era and Linea suffered a $6.8 million loss due to a fee-multiplier overflow bug. The vulnerable velocoreexecute() function lacked access control and proper bounds checking, allowing an attacker to manipulate fee calculations and mint excessive LP tokens. The attacker bridged the proceeds to Ethereum and used Tornado Cash for obfuscation. The CPMM pool contract's velocoreexecute() function lacked access controls and upper bounds on the feeMultiplier parameter. This allowed an attacker to invoke the function directly, manipulate fee calculations via integer overflow, and mint LP tokens again…"
+    }
+  ],
+  "audit": "Zokyo, Hacken, Scalebit",
+  "txHashes": [
+    "0xed11d5b013bf3296b1507da38b7bcb97845dd037d33d3d1b0c5e763889cdbed1",
+    "0x4156d73cadc18419220f5bcf10deb4d97a3d3f7533d63ba90daeabc5fd11ba17",
+    "0x37434e674efc4e7cfeed7746095301ace5636028906fe548b786ead286e35eb0"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-06/Velocore_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "blocksec",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-06/Velocore_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/BeosinAlert/status/1797247874528645333"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Velocore - Rekt",
+      "url": "https://rekt.news/velocore-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "lineascan.build",
+      "url": "https://lineascan.build/address/0xb7f6354b2cfd3018b3261fbc63248a56a24ae91a"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "lineascan.build",
+      "url": "https://lineascan.build/tx/0xed11d5b013bf3296b1507da38b7bcb97845dd037d33d3d1b0c5e763889cdbed1"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x4156d73cadc18419220f5bcf10deb4d97a3d3f7533d63ba90daeabc5fd11ba17"
+    },
+    {
+      "source": "blocksec",
+      "label": "velocorexyz.medium.com",
+      "url": "https://velocorexyz.medium.com/velocore-incident-post-mortem-6197020ec3e9"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/velocore-2024-06-02"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/cexs-are-under-threat-q2-2024-de-fi-hacks-a-report-analysis"
+    },
+    {
+      "source": "revertiq",
+      "label": "blockchainbreaches.com",
+      "url": "https://www.blockchainbreaches.com/en/breaches/velocore-2024"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.solidityscan.com",
+      "url": "https://blog.solidityscan.com/velocore-hack-analysis-642a13630be0/"
+    }
+  ]
+}

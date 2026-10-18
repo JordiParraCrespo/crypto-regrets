@@ -1,0 +1,107 @@
+{
+  "id": "2025-12-12-ribbon",
+  "name": "Ribbon",
+  "date": "2025-12-12",
+  "year": 2025,
+  "amountUsd": 2700000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "access-control",
+  "technique": "Improper Access Control",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.98,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.98
+      },
+      {
+        "category": "oracle-manipulation",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Six days before the exploit, Ribbon Finance (operating as Aevo) deployed an oracle infrastructure update to its legacy DeFi Options Vaults (DOVs) on Ethereum. The update introduced two critical flaws: first, the oracle proxy permitted any address — not just authorized parties — to set expiry prices for newly created option series, effectively removing access control on a price-writing function; second, the update standardized oracle precision to 18 decimal places for newer tokens while older supported assets still used 8 decimal places, creating an exploitable arithmetic mismatch. The attacker created multiple minimal-collateral accounts, minted a large number of oTokens against them, then called the permissionless expiry-price setter to inject arbitrary prices at a shared expiration timestamp. With no maximum payout caps enforced per account or per option series, the attacker drained approximately $2.7 million from the legacy DOV vaults. Aevo subsequently proposed repaying active users with a 19% haircut using funds from dormant accounts. Attack Tx: 0x16eded2553e0793472a6283093738152de1dd0e2504836856fbcaf88cc4a2687 Analysis: Explained: The Aevo / Ribbon Finance Hack (December 2025) – Halborn What Happened in the Aevo and Ribbon DOV Vault Exploit – Bitrue",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Six days before the exploit, Ribbon Finance (operating as Aevo) deployed an oracle infrastructure update to its legacy DeFi Options Vaults (DOVs) on Ethereum. The update introduced two critical flaws: first, the oracle proxy permitted any address — not just authorized parties — to set expiry prices for newly created option series, effectively removing access control on a price-writing function; second, the update standardized oracle precision to 18 decimal places for newer tokens while older supported assets still used 8 decimal places, creating an exploitable arithmetic mismatch. The attacker created multiple minimal-collateral accounts, minted a large number of oTokens against them, then called the permissionless expiry-price setter to inject arbitrary prices at a shared expiration timestamp. With no maximum payout caps enforced per account or per option series, the attacker drained approximately $2.7 million from the legacy DOV vaults. Aevo subsequently proposed repaying active users with a 19% haircut using funds from dormant accounts. Attack Tx: 0x16eded2553e0793472a6283093738152de1dd0e2504836856fbcaf88cc4a2687 Analysis: Explained: The Aevo / Ribbon Finance Hack (December 2025) – Halborn What Happened in the Aevo and Ribbon DOV Vault Exploit – Bitrue"
+    },
+    {
+      "source": "RevertIQ",
+      "text": "In December 2025, the legacy Ribbon Finance (now Aevo) Ethereum options vaults were exploited for around $2.7 million following an oracle infrastructure upgrade that left expiry price-setting permissions unprotected. An attacker manipulated expiry prices of vault assets, draining reserves before the vaults were permanently decommissioned. Aevo's main derivatives exchange and non-vault user funds were not affected. A December 6, 2025 oracle proxy upgrade for legacy Ribbon vaults removed access control checks on the expiry price-setting function for new assets, allowing anyone to push arbitrary expiry prices. This enabled adversarial manipulation of expi…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x16eded2553e0793472a6283093738152de1dd0e2504836856fbcaf88cc4a2687",
+    "0xb73e45948f4aabd77ca888710d3685dd01f1c81d24361d4ea0e4b4899d490e1e",
+    "0x9b686c9d9532f224b84825d5b6c8a8c27811a33de4b0f20204aafd288304ab54"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "blocksec",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x16eded2553e0793472a6283093738152de1dd0e2504836856fbcaf88cc4a2687"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "halborn.com",
+      "url": "https://www.halborn.com/blog/post/explained-the-aevo-ribbon-finance-hack-december-2025"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bitrue.com",
+      "url": "https://www.bitrue.com/blog/aevo-ribbon-dov-vault-exploit-oracle-upgrade"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x16eded2553e0793472a6283093738152de1dd0e2504836856fbcaf88cc4a2687"
+    },
+    {
+      "source": "blocksec",
+      "label": "x.com",
+      "url": "https://x.com/specteranalyst/status/1999532982411854109?s=46"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/explained-the-aevo-ribbon-finance-2025-12-15t15-36-55-876000-00-00"
+    },
+    {
+      "source": "revertiq",
+      "label": "blockchainmagazine.com",
+      "url": "https://blockchainmagazine.com/finance/aevo-exchange-suffers-2-7-million-oracle-exploit-in-legacy-ribbon-vault-attack/"
+    },
+    {
+      "source": "revertiq",
+      "label": "catenaa.com",
+      "url": "https://catenaa.com/markets/cryptocurrencies/aevos-legacy-ribbon-vaults-lose-2-7m-in-oracle-exploit/"
+    }
+  ]
+}

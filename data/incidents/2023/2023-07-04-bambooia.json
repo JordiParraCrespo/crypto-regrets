@@ -1,0 +1,81 @@
+{
+  "id": "2023-07-04-bambooia",
+  "name": "BambooIA",
+  "date": "2023-07-04",
+  "year": 2023,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "oracle-manipulation",
+  "technique": "Price manipulation attack",
+  "classificationNote": "Classified by keyword rules from the DeFiHackLabs root-cause title.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.65,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.67
+      },
+      {
+        "category": "access-control",
+        "p": 0.14
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.08
+      }
+    ],
+    "flashLoan": 0.06,
+    "stateActor": 0.02,
+    "hasRootCause": 0.91
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "Price manipulation attack. Lost: ~200BNB",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Price manipulation attack. Lost: ~200BNB"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "when the private updatePool function is invoked in the _transfer function, the resulting token transfer will burn the balance of the $BAMBOO token in the pair, causing a rise in the token price. Vulnerable code snippet: Attack tx: https://explorer.phalcon.xyz/tx/bsc/0x88a6c2c3ce86d4e0b1356861b749175884293f4302dbfdbfb16a5e373ab58a10 Analysis: Post-mortem : https://twitter.com/Phalcon_xyz/status/1676220090142916611"
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x88a6c2c3ce86d4e0b1356861b749175884293f4302dbfdbfb16a5e373ab58a10"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-07/Bamboo_exp.sol",
+  "sources": [
+    "defihacklabs"
+  ],
+  "references": [
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-07/Bamboo_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Phalcon_xyz/status/1676220090142916611"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/eugenioclrc"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "explorer.phalcon.xyz",
+      "url": "https://explorer.phalcon.xyz/tx/bsc/0x88a6c2c3ce86d4e0b1356861b749175884293f4302dbfdbfb16a5e373ab58a10"
+    }
+  ]
+}

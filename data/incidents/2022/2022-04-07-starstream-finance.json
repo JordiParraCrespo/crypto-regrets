@@ -1,0 +1,93 @@
+{
+  "id": "2022-04-07-starstream-finance",
+  "name": "Starstream Finance",
+  "date": "2022-04-07",
+  "year": 2022,
+  "amountUsd": 4000000,
+  "returnedUsd": null,
+  "chains": [
+    "Ethereum"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "rugpull",
+  "technique": "Admin Drain",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "access-control",
+    "confidence": 0.73,
+    "top": [
+      {
+        "category": "access-control",
+        "p": 0.75
+      },
+      {
+        "category": "arbitrary-call",
+        "p": 0.24
+      },
+      {
+        "category": "rugpull",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.04,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "Starstream Finance and Agora DeFi projects under attack. Attackers exploited a vulnerability in Starstream to siphon tokens from the protocol, then used the tokens as collateral to obtain large loans from Agora. The Starstream hack was achieved through an unprotected execute function in its DistributorTreasury contract, which is marked as an external function and can be used to call external functions. In total, the attackers borrowed about $8.2 million worth of tokens from Agora.",
+  "descriptions": [
+    {
+      "source": "SlowMist",
+      "text": "Starstream Finance and Agora DeFi projects under attack. Attackers exploited a vulnerability in Starstream to siphon tokens from the protocol, then used the tokens as collateral to obtain large loans from Agora. The Starstream hack was achieved through an unprotected execute function in its DistributorTreasury contract, which is marked as an external function and can be used to call external functions. In total, the attackers borrowed about $8.2 million worth of tokens from Agora."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On April 7, 2022, Starstream Finance on Metis was exploited when an insecure external call in its treasury contract allowed an attacker to drain over 532 million STARS tokens, which were then used to manipulate the Agora lending protocol, resulting in over $8 million of bad debt and severe ecosystem disruption. The DistributorTreasury contract had an externally callable execute() function with a low-level call, allowing arbitrary function execution and unauthorized withdrawals from the StarstreamTreasury contract. Insufficient permission controls failed to restrict this operation to authorized actors."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0xb1795ca2e77954007af14d89814c83b2d4f05d1834948f304fd9d731db875435"
+  ],
+  "poc": null,
+  "sources": [
+    "defillama",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "slowmist",
+      "label": "mobile.twitter.com",
+      "url": "https://mobile.twitter.com/SlowMist_Team/status/1512482819326492676"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/starstream-finance-2022-04-07"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "certik.com",
+      "url": "https://www.certik.com/blog/starstream-agora-incident"
+    },
+    {
+      "source": "revertiq",
+      "label": "official.beosin.com",
+      "url": "https://official.beosin.com/resources/beosin-analysis-of-the-attack-on-starstream"
+    }
+  ]
+}

@@ -1,0 +1,123 @@
+{
+  "id": "2022-11-16-sheepfarm",
+  "name": "SheepFarm",
+  "date": "2022-11-16",
+  "year": 2022,
+  "amountUsd": 72000,
+  "returnedUsd": null,
+  "chains": [
+    "BSC"
+  ],
+  "targetType": "DeFi Protocol",
+  "category": "input-validation",
+  "technique": "Missing Input Validation",
+  "classificationNote": null,
+  "classifiedBy": "defillama",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "input-validation",
+    "confidence": 0.53,
+    "top": [
+      {
+        "category": "input-validation",
+        "p": 0.56
+      },
+      {
+        "category": "logic-error",
+        "p": 0.28
+      },
+      {
+        "category": "access-control",
+        "p": 0.15
+      }
+    ],
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": "Solidity",
+  "rootCause": "No input validation. Lost: ~1BNB",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "No input validation. Lost: ~1BNB"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The root cause of the attack is that the function register can be repeatedly invoked by the same account. Vulnerable code snippet: https://bscscan.com/address/0x4726010da871f4b57b5031e3ea48bde961f122aa#code Attack tx: https://bscscan.com/tx/0x5735026e5de6d1968ab5baef0cc436cc0a3f4de4ab735335c5b1bd31fa60c582 Analysis: 1. The attacker repeatedly invokes the register function to increase the GEM bonus 2. The attacker invokes addGems and upgradeVillage, to update GEM value and accumulate yield 1. The attacker invokes sellVillage to convert GEM to money 2. Then withdraw the money(BNB) via withdrawMoney https://twitter.com/AnciliaInc/status/1592658104394473472 https://twitter.com/BlockSecTeam/status/1592734292727455744"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The SheepFarm project on the BNB chain was attacked by a vulnerability. After analysis, it was found that because the register function of the SheepFarm contract could be called multiple times, the attacker 0x2131c67ed7b6aa01b7aa308c71991ef5baedd049 used the register function multiple times to increase his own gems, and then used the upgradeVillage function to accumulate yield while consuming gems properties, and finally call the sellVillage method to convert yield to money before withdrawing money. The attack caused the project to lose about 262 BNB, about $72,000."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "SheepFarm, a GameFi protocol on BNB Chain, was exploited on November 15, 2022, when an attacker repeatedly registered and inflated their in-game rewards due to a missing timestamp update in the register function, resulting in a loss between $72,000 and $91,000. The SheepFarm contract's register() function did not update the user's registration timestamp after first registration, allowing repeated calls that bypassed new-user checks and inflated rewards."
+    }
+  ],
+  "audit": null,
+  "txHashes": [
+    "0x5735026e5de6d1968ab5baef0cc436cc0a3f4de4ab735335c5b1bd31fa60c582",
+    "0x8b3e0e3ea04829f941ca24c85032c3b4aeb1f8b1b278262901c2c5847dc72f1c"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-11/SheepFarm_exp.sol",
+  "sources": [
+    "defillama",
+    "defihacklabs",
+    "slowmist",
+    "revertiq"
+  ],
+  "references": [
+    {
+      "source": "defillama",
+      "label": "DefiLlama hacks",
+      "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-11/SheepFarm_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/AnciliaInc/status/1592658104394473472"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BlockSecTeam/status/1592734292727455744"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/address/0x4726010da871f4b57b5031e3ea48bde961f122aa#code"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x5735026e5de6d1968ab5baef0cc436cc0a3f4de4ab735335c5b1bd31fa60c582"
+    },
+    {
+      "source": "slowmist",
+      "label": "panewslab.com",
+      "url": "https://www.panewslab.com/zh/sqarticledetails/nmuct2g5.html"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/sheepfarm-2022-11-16"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/sheepfarm-hack-2022"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.solidityscan.com",
+      "url": "https://blog.solidityscan.com/sheep-farm-hack-analysis-incorrect-registration-implementation-fd94bc3a4b02/"
+    }
+  ]
+}
