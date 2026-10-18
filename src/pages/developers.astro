@@ -1,0 +1,43 @@
+---
+import Base from '../layouts/Base.astro';
+import CategoryChip from '../components/CategoryChip.astro';
+import { allCategoryStats, fmtUsd, href, incidents } from '../lib/data';
+import { CATEGORIES } from '../lib/taxonomy';
+const ranked = allCategoryStats.filter((s) => s.id !== 'unknown' && CATEGORIES[s.id].prevention.length > 0);
+const total = incidents.length;
+const audited = incidents.filter((i) => i.audit && !/unaudited|out of scope/i.test(i.audit));
+const unaudited = incidents.filter((i) => i.audit && /unaudited/i.test(i.audit));
+const oos = incidents.filter((i) => i.audit && /out of scope/i.test(i.audit));
+---
+<Base title="For developers" description="A secure-development checklist derived from every crypto hack, ordered by money lost.">
+  <h1>Secure development checklist</h1>
+  <p class="lede">The prevention advice from every pattern, ordered by how much money that pattern has cost. If you only have time for the top of this list, start there.</p>
+
+  <div class="callout">
+    <p style="margin:0"><strong>Audits help, but they aren't enough.</strong> Of the incidents where REKT recorded audit status, {unaudited.length} were unaudited, {audited.length} had been audited, and {oos.length} were hacked in code that was <em>out of the audit's scope</em>. An audit covers a specific commit and scope. Upgrades, integrations and operational security fall outside it.</p>
+  </div>
+
+  {ranked.map((s, k) => (
+    <section class="item">
+      <h2><span class="rank mono">{k + 1}</span> {CATEGORIES[s.id].name}</h2>
+      <p class="small"><CategoryChip id={s.id} /> <span class="muted">{fmtUsd(s.usd)} lost across {s.count} incidents ({((s.count / total) * 100).toFixed(1)}% of all)</span></p>
+      <ul class="check">{CATEGORIES[s.id].prevention.map((p) => <li>{p}</li>)}</ul>
+      <p class="small"><a href={href(`/patterns/${s.id}`)}>Pattern guide and case studies →</a></p>
+    </section>
+  ))}
+
+  <h2>Learning path for security researchers</h2>
+  <ol>
+    <li>Read the <a href="https://scs.owasp.org/sctop10/">OWASP Smart Contract Top 10</a> to get the vocabulary.</li>
+    <li>For each pattern above, read three case studies on this site, then run their <a href="https://github.com/SunWeb3Sec/DeFiHackLabs">DeFiHackLabs</a> PoCs with <code>forge test -vvvv</code> and trace the calls.</li>
+    <li>Read real audit findings for the same pattern on <a href="https://solodit.cyfrin.io/">Solodit</a>. The same bugs show up there before they show up as hacks.</li>
+    <li>Practice on the <a href="https://github.com/immunefi-team/Web3-Security-Library">Immunefi Web3 Security Library</a> and CTFs (Ethernaut, Damn Vulnerable DeFi).</li>
+    <li>Follow new incidents on <a href="https://rekt.news/">REKT</a> and through <a href="https://github.com/security-alliance/seal-911">SEAL 911</a>.</li>
+  </ol>
+</Base>
+<style>
+  .item { border-top: 1px solid var(--border); margin-top: 24px; }
+  .rank { color: var(--accent); margin-right: 6px; }
+  .check { padding-left: 1.2em; }
+  .check li { margin: 4px 0; }
+</style>

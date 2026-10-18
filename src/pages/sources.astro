@@ -1,0 +1,52 @@
+---
+import Base from '../layouts/Base.astro';
+import { sourceAudit, incidents, href } from '../lib/data';
+const groups = [...new Set(sourceAudit.map((s) => s.category))];
+const NAMES: Record<string, string> = { 'exploit-database': 'Hack & exploit databases', 'vulnerability-dataset': 'Vulnerability datasets', 'protocol-advisories': 'Client, consensus & protocol advisories', 'taxonomy-research': 'Taxonomies & research' };
+const count = (s: string) => incidents.filter((i) => i.sources.includes(s as never)).length;
+---
+<Base title="Sources & method" description="The 30 blockchain-security sources we evaluated, what each provides, and how the index is built.">
+  <h1>Sources &amp; method</h1>
+  <p class="lede">How the index is built, and an audit of 30 public blockchain-security sources: what each covers, whether it is machine-readable, and how far to trust it.</p>
+
+  <h2>How the index is built</h2>
+  <ol>
+    <li><strong>Backbone: <a href="https://defillama.com/hacks">DefiLlama</a></strong> ({count('defillama')} incidents, 2011 to today). Gives the date, amount, chain, target type and a two-level classification.</li>
+    <li><strong>Root causes and PoCs: <a href="https://github.com/SunWeb3Sec/DeFiHackLabs">DeFiHackLabs</a></strong> ({count('defihacklabs')} incidents). Matched by name and date (±7 days), with technical root-cause text and a runnable Foundry exploit. Unmatched entries are added as new incidents.</li>
+    <li><strong>Narrative and audit status: <a href="https://rekt.news/">REKT</a></strong> ({count('rekt')} incidents). The leaderboard adds an article link, excerpt and audit status (±10 days).</li>
+    <li><strong>Infrastructure:</strong> Bitcoin Core, Geth and Cosmos advisories, plus {count('curated')} hand-curated records: base-layer failures (value overflow, chain splits, outages) and post-mortem root causes for landmark hacks (The DAO, Ronin, Wormhole, Bybit…).</li>
+    <li><strong>Classification:</strong> upstream labels are mapped onto our <a href={href('/patterns')}>taxonomy</a>, with documented overrides (e.g. 51% attacks that DefiLlama files as "Forged Proof"). Free-text sources go through ordered keyword rules. Every record is schema-validated (zod) at build time.</li>
+  </ol>
+  <p class="small muted">Amounts are nominal USD at the time of the incident, as reported by the source. Cross-source duplicates are merged with fuzzy name matching, so expect a small number of missed or incorrect merges. Corrections welcome.</p>
+
+  <h2>Source audit</h2>
+  {sourceAudit.length === 0 && <p class="muted">Source audit not available.</p>}
+  {groups.map((g) => (
+    <section>
+      <h3>{NAMES[g] ?? g}</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>#</th><th>Source</th><th>Status</th><th>Tracks</th><th>Machine-readable</th><th>Coverage</th><th>Concerns</th><th>Priority</th></tr></thead>
+          <tbody>
+            {sourceAudit.filter((s) => s.category === g).map((s) => (
+              <tr>
+                <td class="mono small">{s.id}</td>
+                <td><a href={s.url}>{s.name}</a><div class="small muted">{s.notes}</div></td>
+                <td><span class:list={['chip', s.status]}>{s.status}</span></td>
+                <td class="small">{s.tracks}</td>
+                <td class="small mono" style="overflow-wrap:anywhere;min-width:180px">{s.machineReadable}</td>
+                <td class="small">{s.coverage}<div class="muted">{s.chains}</div></td>
+                <td class="small">{s.concerns}<div class="muted">License: {s.license}</div></td>
+                <td class="num">{'★'.repeat(4 - s.priority)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  ))}
+</Base>
+<style>
+  .chip.offline { color: var(--accent); }
+  td { min-width: 110px; }
+</style>

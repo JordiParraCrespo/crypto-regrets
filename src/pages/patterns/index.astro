@@ -1,0 +1,27 @@
+---
+import Base from '../../layouts/Base.astro';
+import { allCategoryStats, fmtUsd, href, layerSlot, LAYER_ORDER } from '../../lib/data';
+import { CATEGORIES, LAYERS, categoriesInLayer } from '../../lib/taxonomy';
+const stat = Object.fromEntries(allCategoryStats.map((s) => [s.id, s]));
+---
+<Base title="Failure patterns" description="The taxonomy of crypto hacks: 17 failure patterns across 6 layers of the stack.">
+  <h1>Failure patterns</h1>
+  <p class="lede">Every incident is assigned one primary pattern. Patterns are grouped by the layer of the stack where the failure happened. Each pattern page explains how the attack works, how to prevent it, and how often it has happened over time.</p>
+  {LAYER_ORDER.map((l) => (
+    <section>
+      <h2><span class={`dot l${layerSlot(l)}`} /> {LAYERS[l].name}</h2>
+      <p class="muted">{LAYERS[l].blurb}</p>
+      <div class="grid grid-3">
+        {categoriesInLayer(l).filter((c) => c !== 'unknown').map((c) => (
+          <a class="card" href={href(`/patterns/${c}`)}>
+            <h3>{CATEGORIES[c].name}</h3>
+            <p class="small muted" style="margin:0 0 8px">{CATEGORIES[c].short}</p>
+            <p class="small" style="margin:0"><strong>{stat[c].count}</strong> incidents · <strong>{fmtUsd(stat[c].usd)}</strong></p>
+            {'owasp' in CATEGORIES[c] && <p class="small muted" style="margin:6px 0 0">{(CATEGORIES[c] as { owasp?: readonly string[] }).owasp?.join(' · ')}</p>}
+          </a>
+        ))}
+      </div>
+    </section>
+  ))}
+  <p class="small muted" style="margin-top:32px">{stat.unknown.count} incidents remain <a href={href('/patterns/unknown')}>unclassified</a> because public sources don't disclose a root cause.</p>
+</Base>

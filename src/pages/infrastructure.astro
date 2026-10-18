@@ -1,0 +1,40 @@
+---
+import Base from '../layouts/Base.astro';
+import IncidentTable from '../components/IncidentTable.astro';
+import { advisories, incidents, href } from '../lib/data';
+import { ADVISORY_IMPACTS } from '../lib/types';
+const infra = incidents.filter((i) => i.category === 'client-bug' || i.category === 'consensus-attack' || (i.targetType && ['Chain', 'Layer 1'].includes(i.targetType)));
+const sorted = [...advisories].sort((a, b) => (b.date ?? '0').localeCompare(a.date ?? '0'));
+const byImpact = ADVISORY_IMPACTS.map((im) => ({ im, n: advisories.filter((a) => a.impact === im).length })).filter((x) => x.n > 0);
+const LABEL: Record<string, string> = { 'consensus-split': 'Consensus split', inflation: 'Inflation', 'remote-crash': 'Remote crash', dos: 'Denial of service', 'chain-halt': 'Chain halt', rce: 'Remote code execution', censorship: 'Censorship', other: 'Other' };
+---
+<Base title="Infrastructure" description="Consensus failures, 51% attacks, node crashes and chain halts at the base layer.">
+  <h1>Chain &amp; client infrastructure</h1>
+  <p class="lede">Not every failure is a DeFi contract. Base layers break too: value-overflow bugs, chain splits between client versions, 51% attacks on small proof-of-work chains, and P2P messages that crash nodes. Most of these were caught and patched before they were exploited, which is why they rarely show up in hack databases.</p>
+
+  <h2>Base-layer incidents</h2>
+  <p class="small muted">Includes 51% attacks (which DefiLlama files as "Forged Proof"; we reclassify them) and curated client failures.</p>
+  <IncidentTable items={infra} />
+
+  <h2>Disclosed client vulnerabilities</h2>
+  <p class="tech">{byImpact.map((x) => <span class="chip">{LABEL[x.im]} <span class="muted">{x.n}</span></span>)}</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Disclosed</th><th>Project</th><th>ID</th><th>Title</th><th>Impact</th><th>Severity</th></tr></thead>
+      <tbody>
+        {sorted.map((a) => (
+          <tr>
+            <td class="mono small">{a.date ?? '—'}</td>
+            <td>{a.project}</td>
+            <td class="mono small">{a.cve ?? '—'}</td>
+            <td><a href={a.url}>{a.title}</a>{a.summary && <div class="small muted">{a.summary}</div>}</td>
+            <td class="small">{LABEL[a.impact]}</td>
+            <td class="small">{a.severity ?? '—'}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+  <p class="small muted">Sources: <a href="https://bitcoincore.org/en/security-advisories/">Bitcoin Core security advisories</a>, <a href="https://geth.ethereum.org/docs/developers/geth-developer/disclosures">Geth disclosures</a>, <a href="https://github.com/cosmos/security/blob/main/ADVISORIES.md">Cosmos ASA list</a>. Impact is our keyword classification of the title. <a href={href('/patterns/client-bug')}>Client bug pattern guide →</a></p>
+</Base>
+<style>.tech { display: flex; flex-wrap: wrap; gap: 6px; }</style>

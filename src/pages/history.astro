@@ -1,0 +1,43 @@
+---
+import Base from '../layouts/Base.astro';
+import StackedBars from '../components/StackedBars.astro';
+import CategoryChip from '../components/CategoryChip.astro';
+import { eraStats, fmtUsd, fmtDate, href, yearLayerMatrix } from '../lib/data';
+const eras = eraStats();
+---
+<Base title="History" description="How crypto security failures evolved from 2010 to today, era by era.">
+  <h1>A history of crypto failures</h1>
+  <p class="lede">Each era of crypto had its own way of losing money. Attackers follow the money, and the weakest link moved from exchange servers to contracts, then to economic design, bridges, and back to people and keys.</p>
+  {eras.map((e) => (
+    <section class="era" id={e.id}>
+      <div class="era-head">
+        <span class="years mono">{e.from === e.to ? e.from : `${e.from}–${e.to}`}</span>
+        <h2>{e.name}</h2>
+      </div>
+      <p>{e.summary}</p>
+      <div class="grid grid-2">
+        <div class="card">
+          <h3>By the numbers</h3>
+          <p class="small"><strong>{e.count}</strong> incidents · <strong>{fmtUsd(e.usd)}</strong> lost</p>
+          <p class="small muted" style="margin-bottom:4px">Costliest patterns</p>
+          <ul class="clean small">{e.topByUsd.map((c) => <li><CategoryChip id={c.id} /> <span class="muted">{fmtUsd(c.usd)} · {c.count}</span></li>)}</ul>
+          <p class="small muted" style="margin:10px 0 4px">Most frequent patterns</p>
+          <ul class="clean small">{e.topByCount.map((c) => <li><CategoryChip id={c.id} /> <span class="muted">{c.count} incidents</span></li>)}</ul>
+        </div>
+        <div class="card">
+          <h3>Defining incidents</h3>
+          <ul class="clean small">
+            {e.notable.map((i) => <li><a href={href(`/hacks/${i.id}`)}>{i.name}</a> <span class="muted">· {fmtDate(i.date)} · {fmtUsd(i.amountUsd)}</span><br /><CategoryChip id={i.category} /></li>)}
+          </ul>
+        </div>
+      </div>
+      {e.to - e.from >= 2 && <div style="margin-top:16px"><StackedBars data={yearLayerMatrix('count').filter((d) => d.year >= e.from && d.year <= e.to)} metric="count" title={`Incidents ${e.from}–${e.to}`} /></div>}
+    </section>
+  ))}
+</Base>
+<style>
+  .era { border-top: 1px solid var(--border); margin-top: 40px; padding-top: 8px; }
+  .era-head { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
+  .era-head h2 { margin: 0.6em 0 0.2em; }
+  .years { color: var(--accent); font-weight: 700; }
+</style>

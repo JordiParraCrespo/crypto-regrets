@@ -1,0 +1,95 @@
+---
+import Base from '../layouts/Base.astro';
+import StackedBars from '../components/StackedBars.astro';
+import IncidentTable from '../components/IncidentTable.astro';
+import CategoryChip from '../components/CategoryChip.astro';
+import { incidents, advisories, sum, fmtUsd, yearLayerMatrix, allCategoryStats, href, YEARS, layerOf, LAYER_ORDER, layerSlot } from '../lib/data';
+import { CATEGORIES, LAYERS } from '../lib/taxonomy';
+
+const total = sum(incidents);
+const withPoc = incidents.filter((i) => i.poc).length;
+const biggest = [...incidents].sort((a, b) => (b.amountUsd ?? 0) - (a.amountUsd ?? 0)).slice(0, 10);
+const latest = incidents.slice(0, 10);
+const top = allCategoryStats.filter((c) => c.id !== 'unknown');
+
+const layerTotals = LAYER_ORDER.map((l) => {
+  const xs = incidents.filter((i) => layerOf(i.category) === l);
+  return { l, count: xs.length, usd: sum(xs) };
+});
+const maxLayerUsd = Math.max(...layerTotals.map((x) => x.usd));
+// Simple then-vs-now: share of losses that were operational (keys, phishing, infra) before and after 2023.
+const share = (from: number, to: number, l: string) => {
+  const xs = incidents.filter((i) => i.year >= from && i.year <= to);
+  return sum(xs.filter((i) => layerOf(i.category) === l)) / Math.max(sum(xs), 1);
+};
+const opsThen = share(2020, 2022, 'operational');
+const opsNow = share(2023, YEARS[YEARS.length - 1], 'operational');
+const scThen = share(2020, 2022, 'smart-contract');
+const scNow = share(2023, YEARS[YEARS.length - 1], 'smart-contract');
+const pct = (x: number) => `${Math.round(x * 100)}%`;
+---
+<Base title="Crypto Regrets">
+  <h1>Every crypto hack, classified.</h1>
+  <p class="lede">
+    {incidents.length.toLocaleString('en')} incidents from {YEARS[0]} to {YEARS[YEARS.length - 1]}, {fmtUsd(total)} lost,
+    sorted into {Object.keys(CATEGORIES).length - 1} failure patterns. Built for security researchers and developers to see what keeps going wrong and what to do about it.
+  </p>
+
+  <div class="grid grid-4" style="margin-top:24px">
+    <div class="card stat"><div class="value">{incidents.length.toLocaleString('en')}</div><div class="label">incidents indexed</div></div>
+    <div class="card stat"><div class="value">{fmtUsd(total)}</div><div class="label">reported losses (nominal USD)</div></div>
+    <div class="card stat"><div class="value">{withPoc}</div><div class="label">with a runnable Foundry PoC</div></div>
+    <div class="card stat"><div class="value">{advisories.length}</div><div class="label">client &amp; consensus advisories</div></div>
+  </div>
+
+  <h2>How the failures changed</h2>
+  <div class="callout">
+    <p style="margin:0">
+      In 2020–2022, <strong>{pct(scThen)}</strong> of dollars lost came from smart-contract bugs and <strong>{pct(opsThen)}</strong> from keys, phishing and infrastructure.
+      Since 2023 that is <strong>{pct(scNow)}</strong> vs <strong>{pct(opsNow)}</strong>. By count, most hacks are still contract bugs in small protocols,
+      but the money is increasingly lost to operational failures. <a href={href('/history')}>Read the history →</a>
+    </p>
+  </div>
+  <div class="grid grid-2" style="margin-top:16px">
+    <StackedBars data={yearLayerMatrix('count')} metric="count" title="Incidents per year" caption="by failure layer" />
+    <StackedBars data={yearLayerMatrix('usd')} metric="usd" title="Losses per year" caption="by failure layer, nominal USD" />
+  </div>
+
+  <h2>Where in the stack it breaks</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Layer</th><th class="num">Incidents</th><th class="num">Lost</th><th style="width:40%">Share of losses</th></tr></thead>
+      <tbody>
+        {layerTotals.map((x) => (
+          <tr>
+            <td><span class={`dot l${layerSlot(x.l)}`} /> <strong>{LAYERS[x.l].name}</strong><div class="muted small">{LAYERS[x.l].blurb}</div></td>
+            <td class="num">{x.count}</td>
+            <td class="num">{fmtUsd(x.usd)}</td>
+            <td><div class={`bar l${layerSlot(x.l)}`} style={`width:${(x.usd / maxLayerUsd) * 100}%`} title={fmtUsd(x.usd)} /></td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Patterns ranked by money lost</h2>
+  <div class="grid grid-3">
+    {top.map((c) => (
+      <a class="card" href={href(`/patterns/${c.id}`)}>
+        <CategoryChip id={c.id} link={false} />
+        <div class="stat" style="margin-top:8px"><span class="value" style="font-size:1.5rem">{fmtUsd(c.usd)}</span> <span class="muted small">· {c.count} incidents</span></div>
+        <div class="small muted">{CATEGORIES[c.id].short}</div>
+      </a>
+    ))}
+  </div>
+
+  <h2>The ten largest</h2>
+  <IncidentTable items={biggest} />
+
+  <h2>Latest incidents</h2>
+  <IncidentTable items={latest} />
+  <p><a href={href('/hacks')}>Browse and filter all {incidents.length.toLocaleString('en')} →</a></p>
+</Base>
+<style>
+  .bar { height: 10px; border-radius: 0 4px 4px 0; background: var(--c); min-width: 2px; margin-top: 6px; }
+</style>

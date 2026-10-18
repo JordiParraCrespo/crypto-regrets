@@ -1,0 +1,66 @@
+---
+import Base from '../../layouts/Base.astro';
+import CategoryChip from '../../components/CategoryChip.astro';
+import IncidentTable from '../../components/IncidentTable.astro';
+import { incidents, fmtUsd, fmtDate, href } from '../../lib/data';
+import { CATEGORIES, LAYERS, ERAS, eraForYear } from '../../lib/taxonomy';
+import type { Incident } from '../../lib/types';
+
+export function getStaticPaths() {
+  return incidents.map((i) => ({ params: { id: i.id }, props: { i } }));
+}
+const { i } = Astro.props as { i: Incident };
+const c = CATEGORIES[i.category];
+const era = ERAS.find((e) => e.id === eraForYear(i.year))!;
+const similar = incidents.filter((x) => x.category === i.category && x.id !== i.id).sort((a, b) => Math.abs(a.year - i.year) - Math.abs(b.year - i.year) || (b.amountUsd ?? 0) - (a.amountUsd ?? 0)).slice(0, 6);
+const SOURCE_NAMES = { defillama: 'DefiLlama', defihacklabs: 'DeFiHackLabs', rekt: 'REKT', curated: 'Curated' } as const;
+---
+<Base title={i.name} description={`${i.name} (${i.date}): ${c.name}. ${i.rootCause ?? c.short}`}>
+  <p class="small"><a href={href('/hacks')}>← All hacks</a></p>
+  <h1>{i.name}</h1>
+  <p class="meta"><span class="mono">{fmtDate(i.date)}</span> · <strong>{fmtUsd(i.amountUsd)}</strong> lost{i.returnedUsd ? ` · ${fmtUsd(i.returnedUsd)} returned/recovered (per DefiLlama)` : ''} · <CategoryChip id={i.category} /></p>
+
+  <div class="grid grid-2">
+    <div class="card">
+      <h3>Root cause</h3>
+      {i.rootCause ? <p>{i.rootCause}</p> : <p class="muted">No technical write-up in our sources yet. Pattern summary: {c.short}</p>}
+      {i.technique && <p class="small"><strong>Technique:</strong> {i.technique}</p>}
+      {i.classificationNote && <p class="small muted"><strong>Classification note:</strong> {i.classificationNote}</p>}
+      {i.poc && <p><a class="btn" href={i.poc}>View Foundry PoC on DeFiHackLabs ↗</a></p>}
+    </div>
+    <div class="card">
+      <h3>Details</h3>
+      <dl>
+        <dt>Pattern</dt><dd><a href={href(`/patterns/${i.category}`)}>{c.name}</a></dd>
+        <dt>Layer</dt><dd>{LAYERS[c.layer].name}</dd>
+        <dt>Era</dt><dd><a href={href(`/history#${era.id}`)}>{era.name}</a></dd>
+        {i.chains.length > 0 && <><dt>Chains</dt><dd>{i.chains.join(', ')}</dd></>}
+        {i.targetType && <><dt>Target</dt><dd>{i.targetType}</dd></>}
+        {i.language && <><dt>Language</dt><dd>{i.language}</dd></>}
+        {i.audit && <><dt>Audit (per REKT)</dt><dd>{i.audit}</dd></>}
+        <dt>Bridge</dt><dd>{i.bridge ? 'Yes' : 'No'}</dd>
+        <dt>Sources</dt><dd>{i.sources.map((s) => SOURCE_NAMES[s]).join(', ')}</dd>
+      </dl>
+    </div>
+  </div>
+
+  {c.prevention.length > 0 && (
+    <section>
+      <h2>How to prevent this class of bug</h2>
+      <ul>{c.prevention.map((p) => <li>{p}</li>)}</ul>
+      <p class="small"><a href={href(`/patterns/${i.category}`)}>Full pattern guide: {c.name} →</a></p>
+    </section>
+  )}
+
+  <h2>References</h2>
+  <ul>{i.references.map((r) => <li><a href={r.url} rel="noopener nofollow">{r.label}</a> <span class="muted small">({SOURCE_NAMES[r.source]})</span></li>)}</ul>
+
+  {similar.length > 0 && <><h2>Similar incidents</h2><IncidentTable items={similar} /></>}
+</Base>
+<style>
+  .meta { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; color: var(--text-2); }
+  dl { display: grid; grid-template-columns: max-content 1fr; gap: 6px 16px; margin: 0; font-size: 0.92rem; }
+  dt { color: var(--muted); }
+  dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
+  .btn { display: inline-block; border: 1px solid var(--border); padding: 6px 12px; border-radius: 8px; background: var(--surface-2); }
+</style>
