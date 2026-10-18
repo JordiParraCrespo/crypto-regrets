@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "accounting-math",
+  "vulnClass": "share-inflation",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "share-inflation",
+    "confidence": 0.99
+  },
   "technique": "Donation Attack",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -66,6 +72,10 @@
     {
       "source": "RevertIQ",
       "text": "Sonne Finance suffered a $20 million exploit on Optimism in May 2024 after a new VELO market was enabled as collateral. The attacker manipulated the market's exchange rate by donating tokens to an empty pool, then exploited rounding errors in the protocol's Compound v2 fork code to drain collateral assets across multiple lending pools. Sonne Finance's governance added a VELO market with collateral enabled before seeding sufficient initial supply. The attacker, being the first supplier, donated a large amount of VELO directly to the soVELO contract, inflating the exchange rate. Integer-division rounding let them redeem far more assets than their actual…"
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The Sonne Finance lending protocol was exploited for at least $20 million as an attacker was able to exploit a vulnerability in some of their smart contracts . Sonne is a fork of the Compound Finance project, which has known vulnerabilities that are sometimes not properly addressed by people who reuse the code — as has happened with Radiant Capital and Rari . After being alerted to the theft by several security companies, Sonne announced they had paused the contract on the Optimism Ethereum layer-2 chain."
     }
   ],
   "audit": "yAudit",
@@ -88,7 +98,8 @@
     "rekt",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -175,6 +186,21 @@
       "source": "revertiq",
       "label": "certik.com",
       "url": "https://www.certik.com/blog/sonne-finance-incident-analysis"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=sonne-finance-hack"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/CyversAlerts/status/1790515178515136789"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/SonneFinance/status/1790535383005966554"
     }
   ]
 }

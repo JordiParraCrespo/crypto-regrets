@@ -11,6 +11,12 @@
   ],
   "targetType": null,
   "category": "social-engineering",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "address-poisoning-drainer",
+    "confidence": 0.88
+  },
   "technique": "Phishing; Token Approval Abuse",
   "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.96). Replaced keyword guess \"signature-crypto\".",
   "classifiedBy": "typesafe",
@@ -47,6 +53,10 @@
     {
       "source": "RevertIQ",
       "text": "On January 21, 2024, a single Ethereum user lost over $3.7 million in a phishing attack exploiting ERC-20 Permit signatures. The attacker received gasless off-chain permits and drained aEthWETH and aEthUNI tokens, dispersing funds to multiple addresses and obfuscating the flow. The victim was deceived into signing ERC-20 Permit (EIP-2612) messages on a phishing site. These signatures enabled the attacker to set unlimited token spending allowances, which were then exploited to drain the user's wallet. The attack used temporary addresses but the principal draining was mediated via EOAs and a malicious recipient contract, not strictly confirmed as CREATE2-deployed."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "After hackers gained access to various accounts on the MailerLite email marketing software via a social engineering attack on an employee, they were able to send malicious phishing emails that appeared as though they had been genuinely sent from companies including the CoinTelegraph crypto media outlet and the crypto firms Wallet Connect, Token Terminal, SocialFi, and De.Fi. The emails appeared to announce airdrops and exclusive offers from those companies, and recipients were invited to connect their wallets to claim tokens. Those wallets were then drained. The attackers stole a variety of cryptocurrencies, and some outlets have reported the theft has totalled more than $3.3 million.…"
     }
   ],
   "audit": null,
@@ -56,7 +66,8 @@
   ],
   "poc": null,
   "sources": [
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -93,6 +104,26 @@
       "source": "revertiq",
       "label": "smartcontractshacking.com",
       "url": "https://smartcontractshacking.com/hacks/unknown-user-hack-2024"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=mailerlite-hack"
+    },
+    {
+      "source": "w3igg",
+      "label": "cointelegraph.com",
+      "url": "https://cointelegraph.com/news/mailerlite-confirms-hack-crypto-phishing-email-3m-attacks"
+    },
+    {
+      "source": "w3igg",
+      "label": "cointelegraph.com",
+      "url": "https://cointelegraph.com/news/coordinated-crypto-investor-phishing-campaign-email-alert"
+    },
+    {
+      "source": "w3igg",
+      "label": "theblock.co",
+      "url": "https://www.theblock.co/post/274172/mailer-lite-hacker-impersonates-crypto-firms-draining-600000-with-phishing-emails"
     }
   ]
 }

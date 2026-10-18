@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "key-compromise",
+  "vulnClass": "admin-key-compromise",
+  "vulnClassBy": "typesafe",
+  "aiClass": {
+    "id": "admin-key-compromise",
+    "confidence": 1
+  },
   "technique": "Private Key Compromised",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -46,6 +52,10 @@
     {
       "source": "RevertIQ",
       "text": "On December 13, 2023, the OKX DEX aggregator on Ethereum was exploited after a deprecated proxy-admin private key was compromised. The attacker used this key to upgrade the proxy to a malicious contract, enabling unauthorized withdrawals from user wallets with standing approvals. Losses are estimated at up to $2.7 million, with partial user reimbursement reported. A deprecated proxy-admin private key for the OKX DEX aggregator contract remained active and was compromised. This allowed an attacker to upgrade the contract to malicious code, using outstanding token approvals to drain user wallets."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "OKX DEX is a service by OKX that aggregates decentralized exchanges (or DEXes) to help users access features and prices across multiple projects. On December 12, an attacker appeared to gain administrative control of the DEX's smart contract . They upgraded the contract such that they could transfer tokens to themselves, then proceeded to do exactly that until they had stolen around $2.7 million in various cryptocurrencies. It appears the attacker was able to gain access to the smart contract admin key , which gave them the ability to upgrade the contracts to enable malicious functionality. OKX announced that they would reimburse the losses, and pursue legal action against the exploiter."
     }
   ],
   "audit": null,
@@ -54,7 +64,8 @@
   "sources": [
     "defillama",
     "rekt",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -81,6 +92,21 @@
       "source": "revertiq",
       "label": "en.cryptonomist.ch",
       "url": "https://en.cryptonomist.ch/2023/12/13/okx-dex-falls-victim-to-a-hack-and-loses-2-7-million-after-a-proxy-contract-update/"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=okx-dex-hack"
+    },
+    {
+      "source": "w3igg",
+      "label": "cointelegraph.com",
+      "url": "https://cointelegraph.com/news/okx-dex-2-7-m-exploit-proxy-admin-contract-upgrade"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/SlowMist_Team/status/1734790816806449567"
     }
   ]
 }

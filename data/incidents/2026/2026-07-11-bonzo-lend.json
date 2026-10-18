@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "oracle-manipulation",
+  "vulnClass": "spot-price-oracle",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "spot-price-oracle",
+    "confidence": 1
+  },
   "technique": "Spot Price Manipulation",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -46,6 +52,10 @@
     {
       "source": "RevertIQ",
       "text": "On July 11, 2026, Bonzo Lend on Hedera suffered a $9.05M loss when Supra's oracle verifier allowed an attacker to publish a forged SAUCE price update with a zeroed signature, enabling massive undercollateralized borrowing. Supra's on-chain oracle verifier failed to reject zeroed BLS signature and public key inputs when given a committee ID outside the valid range. This let the Hedera pairing precompile accept a mathematically valid but non-authorized signature, allowing an attacker to submit a manipulated price update."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The Hedera-based decentralized lending platform Bozno Lend was exploited for just over $9 million after an attacker took advantage of a flaw in the project's oracle system. The attacker was able to deposit tokens worth only a few dollars, then manipulate the project's oracle to reflect a dramatically higher price. They then borrowed $6.63 million in USDC and 34.5 million wrapped HBAR (~$2.4 million). Bonzo has announced they will reimburse users affected by the exploit, with support from the Hedera Foundation."
     }
   ],
   "audit": null,
@@ -56,7 +66,8 @@
     "rekt",
     "defihacklabs",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -93,6 +104,21 @@
       "source": "revertiq",
       "label": "blocksec.com",
       "url": "https://blocksec.com/blog/web3-security-summerfi-bonzo-lend-exploits"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=bonzo-lend-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "theblock.co",
+      "url": "https://www.theblock.co/post/407960/hedera-lending-protocol-bonzo-lend-hit-for-9-million-after-supra-verifier-accepts-manipulated-price-update"
+    },
+    {
+      "source": "w3igg",
+      "label": "x.com",
+      "url": "https://x.com/bonzo_finance/status/2077774106733498436"
     }
   ]
 }

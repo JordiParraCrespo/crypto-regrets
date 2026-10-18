@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "governance",
+  "vulnClass": "malicious-proposal",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "malicious-proposal",
+    "confidence": 1
+  },
   "technique": "Malicious Proposal",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -54,6 +60,10 @@
     {
       "source": "RevertIQ",
       "text": "Audius's Ethereum governance was compromised on 2022-07-23 after repeated initialize() calls on upgradeable proxies let an attacker rewrite governance state, pass proposal 85, and move 18,564,497.819999999999735541 AUDIO before swapping it for 704.177543861243828018 ETH. Audius's proxy stored admin metadata in slot 0, which collided with OpenZeppelin Initializable state in the same slot. That overlap let repeated initialize() calls on the live Governance, Staking, and DelegateManagerV2 proxies bypass the intended one-time initializer guard and rewrite governance and delegation state."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "An attacker was able to create and pass a governance proposal to transfer out 18.5 million AUDIO tokens from the community treasury. They then successfully swapped these for 705 ETH (~$1.1 million). Audius halted the token and smart contracts while they patched the bug, and brought the network back online shortly afterward. The attacker had found and exploited a vulnerability in the way the contracts were written which allowed them to rewrite the governance voting rules and delegate 10 trillion AUDIO tokens to themselves for voting purposes. They then used those tokens to pass the malicious proposal. The contracts had been audited by OpenZeppelin and K…"
     }
   ],
   "audit": "Kudelski, OpenZeppelin",
@@ -73,7 +83,8 @@
     "defihacklabs",
     "rekt",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -135,6 +146,16 @@
       "source": "revertiq",
       "label": "docs.audius.co",
       "url": "https://docs.audius.co/reference/eth-contracts/"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=attacker-makes-off-with-1-1-million-after-successful-governance-attack-on-the-audius-web3-music-platform"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/CertiKAlert/status/1551020421532770305"
     }
   ]
 }

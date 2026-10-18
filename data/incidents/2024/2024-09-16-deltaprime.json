@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "key-compromise",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "admin-key-compromise",
+    "confidence": 0.72
+  },
   "technique": "Private Key Compromised",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -42,6 +48,10 @@
     {
       "source": "RevertIQ",
       "text": "DeltaPrime's Arbitrum deployment was drained on 2024-09-16 after an attacker obtained the proxy-admin key and upgraded live contracts to malicious logic. Public reports place the loss at roughly $5.98 million to $6 million. A single key still controlled upgrade authority for DeltaPrime's Arbitrum deployment. Once that key was compromised, the attacker could replace the trusted implementation behind the live proxies and drain the pools. The evidence does not establish how the key was stolen."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The DeltaPrime defi protocol suffered a $6 million loss after a private key was leaked. Access to the private key allowed the attacker to mint 1.1×10 69 DPUSDC, which are tokens that allow holders to redeem the USDC stablecoin at a 1:1 ratio. They repeated the mint with several other deposit receipt tokens for bitcoin, ether, and other cryptocurrencies. Altogether, they redeemed a small fraction of these enormous quantities of deposit receipts, amounting to around $6 million in assets. DeltaPrime acknowledged the attack on Twitter, and announced that \"the risk is contained\". They also stated that they were \"looking into other ways to reduce user losses…"
     }
   ],
   "audit": null,
@@ -51,7 +61,8 @@
     "defillama",
     "rekt",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -88,6 +99,16 @@
       "source": "revertiq",
       "label": "news.shib.io",
       "url": "https://news.shib.io/2024/09/16/deltaprime-exploited-on-arbitrum-chain-loses-6m/"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=delta-prime-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "cointelegraph.com",
+      "url": "https://cointelegraph.com/news/delta-prime-attack-6m-mint-tokens"
     }
   ]
 }

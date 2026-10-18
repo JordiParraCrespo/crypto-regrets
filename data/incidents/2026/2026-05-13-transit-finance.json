@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "access-control",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "missing-access-modifier",
+    "confidence": 0.84
+  },
   "technique": "Improper Access Control",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -38,6 +44,10 @@
     {
       "source": "RevertIQ",
       "text": "Transit Finance was exploited on Tron in May 2026, losing ~$1.88 million when a deprecated bridge contract allowed attacker-controlled calldata to drain user-approved stablecoin balances. The vulnerability persisted for years due to unresolved on-chain approvals. A deprecated TransitMixSwapBridge contract allowed arbitrary calldata execution, enabling attackers to drain funds from users with lingering unlimited approvals. The lack of pause, self-destruct, or explicit approval revocation meant the legacy contract remained callable, exposing a persistent attack surface."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Transit Finance was exploited for $1.88 million after an attacker exploited a \"legacy contract\" on the TRON blockchain that the project said was deprecated in 2022. \"Historical vulnerabilities within it\" were exploited, the project explained, allowing the attacker to steal $1.88 million. Transit was previously exploited in 2022 for $21 million, although around 70% of the stolen assets were later returned."
     }
   ],
   "audit": null,
@@ -46,7 +56,8 @@
   "sources": [
     "defillama",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -73,6 +84,16 @@
       "source": "revertiq",
       "label": "blocksec.com",
       "url": "https://blocksec.com/blog/weekly-web3-security-roundup-2026-05-17"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=transit-finance-hack"
+    },
+    {
+      "source": "w3igg",
+      "label": "x.com",
+      "url": "https://x.com/TransitFinance/status/2054559075384590681"
     }
   ]
 }

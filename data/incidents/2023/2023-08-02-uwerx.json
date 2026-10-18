@@ -10,6 +10,12 @@
   ],
   "targetType": "Other",
   "category": "oracle-manipulation",
+  "vulnClass": "spot-price-oracle",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "spot-price-oracle",
+    "confidence": 0.86
+  },
   "technique": "Spot Price Manipulation",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -54,6 +60,10 @@
     {
       "source": "RevertIQ",
       "text": "On 2 August 2023, Uwerx's WERX token on Ethereum was exploited for approximately 175 ETH (~$324,000) through a manipulated pool burn and skim sequence. The attack abused a fee-on-transfer bug and Uniswap v2 pool mechanics, allowing the attacker to extract ETH by distorting the spot price. The Uwerx WERX token's transfer logic applied a 1% burn not only on ordinary transfers, but also specifically when the recipient matched a hardcoded pool address (0x01). By exploiting the Uniswap v2 skim() function and directing tokens to this address, the attacker artificially reduced pool reserves and manipulated the spot price. This loophole was not protected again…"
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Uwerx is a nascent project intending to build a blockchain-based freelancer marketplace, because what better concepts to combine than blockchains and the gig economy? Sadly for them, just after completing their token presale, it was hit with a flash loan exploit that enabled an attacker to siphon 176 ETH (~$324,000) from the platform. The project was audited by SolidProof and InterFi. The project announced that they intended to relaunch the token, and asked the exploiter to consider returning 80% of the funds, keeping 20% as a \" bug bounty \"."
     }
   ],
   "audit": null,
@@ -65,7 +75,8 @@
     "defillama",
     "defihacklabs",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -117,6 +128,21 @@
       "source": "revertiq",
       "label": "raw.githubusercontent.com",
       "url": "https://raw.githubusercontent.com/SunWeb3Sec/DeFiHackLabs/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/src/test/2023-08/Uwerx_exp.sol"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=uwerx-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/PeckShieldAlert/status/1686661182550405120"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/uwerx_network/status/1686693242451206144"
     }
   ]
 }

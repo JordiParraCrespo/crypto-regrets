@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "key-compromise",
+  "vulnClass": "admin-key-compromise",
+  "vulnClassBy": "typesafe",
+  "aiClass": {
+    "id": "admin-key-compromise",
+    "confidence": 1
+  },
   "technique": "Private Key Compromised",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -42,6 +48,10 @@
     {
       "source": "RevertIQ",
       "text": "On January 8, 2025, Moby Trade's Arbitrum vaults were exploited via a compromised admin private key that enabled attacker-controlled contract upgrades and direct withdrawals. Over $2.5M in assets were stolen, but $1.47M USDC was rescued by a white hat counter-exploit before further laundering. A single admin private key controlling proxy upgrades was compromised, allowing the attacker to deploy unauthorized logic to vault contracts and execute unrestricted withdrawals, with no enforced multi-signature or secondary role checks."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The Moby Trade defi options protocol suffered a $1 million loss, narrowly avoiding the loss of another nearly $1.5 million. The project team stated that a hacker had \"identified and exploited a vulnerability in the key management system\" that was supposed to protect a private key used by the project. Using the private key, they were able to perform contract upgrades that then allowed them to drain about almost $1.1 million in w BTC, wETH, and USDC. Another $1.47 million in assets were vulnerable as a result, but the whitehat blockchain security firm Seal911 successfully drained those funds to later be returned to the protocol once it was secured."
     }
   ],
   "audit": null,
@@ -54,7 +64,8 @@
     "defillama",
     "rekt",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -91,6 +102,16 @@
       "source": "revertiq",
       "label": "merklescience.com",
       "url": "https://www.merklescience.com/blog/hack-track-moby-flow-of-funds-analysis"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=moby-trade-loses-over-1-million-to-private-key-leak"
+    },
+    {
+      "source": "w3igg",
+      "label": "rekt.news",
+      "url": "https://rekt.news/mobytrade-rekt/"
     }
   ]
 }

@@ -10,6 +10,12 @@
   ],
   "targetType": "CEX",
   "category": "access-control",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "access-misconfiguration",
+    "confidence": 0.85
+  },
   "technique": "Improper Access Control",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -42,6 +48,10 @@
     {
       "source": "RevertIQ",
       "text": "Gatecoin, a Hong Kong-based cryptocurrency exchange, suffered a breach of its hot wallets between May 9 and May 13, 2016. Attackers redirected Ethereum and Bitcoin deposits from multisignature cold storage to a compromised hot wallet, resulting in losses of about 185,000 ETH and 250 BTC (roughly $2 million at the time). Cold wallet reserves remained safe, while customer reimbursement required raising new funds. The root cause was the bypass of access controls meant to protect customer assets. Attackers altered the exchange’s system such that ETH and BTC deposit flows bypassed multisignature cold wallet protections and were credited directly to the hot wallet, exposing them to theft.…"
+    },
+    {
+      "source": "Blockchain Graveyard",
+      "text": "This breach is unique in that it attacked Cold Storage. It is just as important to protect the deposits into cold storage as much as the cold storage itself. If cold storage deposit is modified, it's as if you don't have cold storage at all. We have previously communicated the fact that most clients’ crypto-asset funds are stored in multi-signature cold wallets. However, the malicious external party involved in this breach, managed to alter our system so that ETH and BTC deposit transfers by-passed the multi-sig cold storage and went directly to the hot wallet during the breach period. This means that losses of ETH funds exceed the 5% limit that we imposed on our hot wallets."
     }
   ],
   "audit": null,
@@ -50,7 +60,8 @@
   "sources": [
     "defillama",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "graveyard"
   ],
   "references": [
     {
@@ -77,6 +88,11 @@
       "source": "revertiq",
       "label": "csidb.net",
       "url": "https://www.csidb.net/csidb/incidents/8673c914-86b4-47c8-b3fe-0e776431f512/"
+    },
+    {
+      "source": "graveyard",
+      "label": "Blockchain Graveyard",
+      "url": "http://archive.is/rcnG4"
     }
   ]
 }

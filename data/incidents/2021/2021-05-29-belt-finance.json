@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "accounting-math",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "balance-accounting-mismatch",
+    "confidence": 0.39
+  },
   "technique": "Incorrect Share Accounting",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -50,6 +56,10 @@
     {
       "source": "RevertIQ",
       "text": "On May 29, 2021, Belt Finance on BNB Chain was exploited through a flash loan share-price manipulation, resulting in a direct attacker profit of about $6.23 million and total user vault losses of up to $50 million due to fees and slippage. Belt Finance's vault share-price calculation credited in-flight deposits at spot balance, enabling same-block withdrawal at temporarily inflated prices. Flash loan size amplified extraction, as the share-value snapshot failed to exclude undeployed funds and relied on extrapolating from one strategy."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Belt Finance fell victim to a flash loan attack which netted an attacker $6.3 million. This was yet another exploit targeting a protocol built on the Binance Smart Chain protocol, following other attacks over the previous five months on C.R.E.A.M. Finance, bEarn, Bogged Finance, Uranium Finance, Meerkat Finance, SafeMoon, Spartan Protocol, BurgerSwap, and PancakeBunny."
     }
   ],
   "audit": "Haechi",
@@ -59,7 +69,8 @@
     "defillama",
     "rekt",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -96,6 +107,21 @@
       "source": "revertiq",
       "label": "itokenly.com",
       "url": "https://itokenly.com/hacks/belt-finance"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=hacker-nets-6-3-million-in-belt-finance-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "cointelegraph.com",
+      "url": "https://cointelegraph.com/news/belt-finance-loses-millions-in-latest-bsc-based-defi-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "rekt.news",
+      "url": "https://rekt.news/belt-rekt/"
     }
   ]
 }

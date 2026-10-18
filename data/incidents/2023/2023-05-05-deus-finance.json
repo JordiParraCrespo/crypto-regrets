@@ -12,6 +12,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "accounting-math",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "balance-accounting-mismatch",
+    "confidence": 0.86
+  },
   "technique": "Arithmetic Error",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -48,6 +54,10 @@
     {
       "source": "RevertIQ",
       "text": "DEUS Finance's DEI burnFrom bug on Arbitrum let an attacker contract reverse allowance checks, pull 4.6028M DEI from the DEI/USDC pool, and receive 5.047M USDC in one transaction. DEUS and DefiLlama place the broader 5 May 2023 incident across Arbitrum, BNB Chain, and Ethereum at about $6.5M. DEI's custom burnFrom implementation read allowances with owner and spender reversed. Because the attacker contract had already approved the pair, burnFrom(pair, 0) caused DEI to emit Approval(pair, attacker contract, MAX), which gave the attacker contract transferFrom rights over the pair's DEI."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Deus Finance suffered yet another hack as around $7 million was taken from the protocol. This was not the first time the platform had been targeted, suffering a $3 million exploit in March 2022 and a $13.4 million exploit in April 2022. Then, in May 2022, Deus Finance's algorithmic stablecoin lost its intended dollar peg in the wake of the Terra collapse and never recovered. In the most recent hack, around $7 million was stolen as attackers discovered a vulnerability in the contracts of the DEI token. Some of the attackers were apparent whitehats , who executed the exploit to safeguard the funds until they could be returned to a secure address. As of M…"
     }
   ],
   "audit": "Unaudited",
@@ -58,7 +68,8 @@
   "sources": [
     "defillama",
     "rekt",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -85,6 +96,16 @@
       "source": "revertiq",
       "label": "docs.deus.finance",
       "url": "https://docs.deus.finance/contracts/reimbursement-guide/reimbursement-process"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=deus-finance-suffers-third-hack"
+    },
+    {
+      "source": "w3igg",
+      "label": "cointelegraph.com",
+      "url": "https://cointelegraph.com/news/deus-finance-loses-6m-following-stablecoin-hack"
     }
   ]
 }

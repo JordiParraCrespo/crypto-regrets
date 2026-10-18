@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "logic-error",
+  "vulnClass": "business-logic-flaw",
+  "vulnClassBy": "typesafe",
+  "aiClass": {
+    "id": "business-logic-flaw",
+    "confidence": 0.99
+  },
   "technique": "Swap Logic Flaw",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -50,6 +56,10 @@
     {
       "source": "RevertIQ",
       "text": "Allbridge Core's BNB Chain pools were exploited on April 1, 2023. The attacker used flash loans to manipulate pool accounting, acting as both liquidity provider and swapper. The flaw in internal vUSD accounting allowed outsized payouts during withdrawals in imbalanced conditions, resulting in a loss of about $573,000. A partial asset return followed post-negotiation. Allbridge Core's pool withdrawal logic relied on a fixed vUSD-to-token exchange rate, failing to account for extreme pool imbalance. This allowed an attacker to manipulate pool accounts and withdraw more value than intended, combining liquidity provision, swaps, and withdrawals after flash loan funding."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The Allbridge cross-chain bridge project was exploited for around 283,000 BUSD and 291,000 USDT (~$574,000). The thief was able to manipulate a vulnerability in the project's smart contract that allowed them to manipulate the price of assets in the Allbridge liquidity pool. Allbridge announced that they were investigating the theft, and were working with law enforcement. Meanwhile, the project suspended operations and announced that they were preparing a user compensation plan."
     }
   ],
   "audit": null,
@@ -63,7 +73,8 @@
     "defihacklabs",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -125,6 +136,21 @@
       "source": "revertiq",
       "label": "dn.institute",
       "url": "https://dn.institute/research/cyberattacks/incidents/2023-04-02-allbridge/"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=allbridge-cross-chain-bridge-exploited-for-around-574000"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/peckshield/status/1642356701100916736?s=20"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Allbridge_io/status/1642581505355513858"
     }
   ]
 }

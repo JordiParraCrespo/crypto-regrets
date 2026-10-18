@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "access-control",
+  "vulnClass": "missing-access-modifier",
+  "vulnClassBy": "curated",
+  "aiClass": {
+    "id": "missing-access-modifier",
+    "confidence": 0.96
+  },
   "technique": "Missing balance check in MRC20 transfer-with-signature",
   "classificationNote": null,
   "classifiedBy": "curated",
@@ -50,6 +56,10 @@
     {
       "source": "RevertIQ",
       "text": "Polygon suffered a critical access control failure in December 2021. An attacker exploited a missing authorization check, stealing about 801,601 MATIC (~$2.04M) before a hard fork secured remaining funds. Detailed technical evidence and exploit transactions remain undisclosed. The affected Polygon Proof-of-Stake Genesis contract contained an improper access control vulnerability, specifically a missing authorization or balance check. This flaw allowed unauthorized transfers and exposed the protocol to significant risk before emergency patching."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Polygon lost a bit over $2 million after a hacker exploited a bug involving a lack of balance/allowance check in their MRC20 contract . Polygon had been in the process of releasing a patch for the vulnerability, which had been reported by a white-hat hacker, and released an emergency upgrade the following day. The silent, zero-warning hard fork raised some eyebrows, and Polygon didn't release details until several weeks later. Polygon ultimately paid about $3.5 million in bug bounties to two white-hat hackers who submitted reports, which was far less than the total value of Polygon's $MATIC tokens, all 9.2 billion of which (worth around $24 billion) co…"
     }
   ],
   "audit": null,
@@ -59,6 +69,7 @@
     "defillama",
     "slowmist",
     "revertiq",
+    "w3igg",
     "curated"
   ],
   "references": [
@@ -86,6 +97,16 @@
       "source": "revertiq",
       "label": "blockchain-council.org",
       "url": "https://www.blockchain-council.org/news/polygon-resolves-bug-that-risked-24b-of-matic-tokens/"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=polygon-loses-2-million"
+    },
+    {
+      "source": "w3igg",
+      "label": "theblockcrypto.com",
+      "url": "https://www.theblockcrypto.com/post/128784/polygon-critical-bug-24-billion-matic-tokens-at-risk-hard-fork"
     },
     {
       "source": "curated",

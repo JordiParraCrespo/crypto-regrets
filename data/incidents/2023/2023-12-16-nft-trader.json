@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "reentrancy",
+  "vulnClass": "token-hook-reentrancy",
+  "vulnClassBy": "typesafe",
+  "aiClass": {
+    "id": "token-hook-reentrancy",
+    "confidence": 1
+  },
   "technique": "Reentrancy",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -50,6 +56,10 @@
     {
       "source": "RevertIQ",
       "text": "NFT Trader suffered a major exploit on December 16, 2023, resulting in the theft of high-value NFTs including CloneX collectibles with an estimated loss of $3 million. The attack exploited a reentrancy vulnerability during ERC721 transfers that allowed the attacker to change critical state at the wrong time in the trade settlement process. The NFT Trader BatchSwap contract allowed the swap counterparty address to be changed via a publicly accessible function (editCounterPart) during ERC721 token transfer callbacks. The contract failed to prevent reentrancy by not applying a reentrancy guard or properly restricting state mutations after closing a trade,…"
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Attackers exploited old smart contracts from the NFT Trader peer-to-peer NFT trading application to steal pricey NFTs, including at least 37 Bored Apes, 13 Mutant Apes, and NFTs from the VeeFriends and World of Women collections. Some ETH and APE tokens were also stolen. Altogether, the stolen NFTs are priced at around $3 million, though the hacker may not be able to liquidate them for that ammount. One attacker claimed in on-chain messages that the original attack had been perpetrated by someone else, but that they were one of the many copycat attackers, describing themselves as someone who had \"[come] here to pick up residual garbage\". They requested…"
     }
   ],
   "audit": null,
@@ -62,7 +72,8 @@
     "defihacklabs",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -139,6 +150,26 @@
       "source": "revertiq",
       "label": "github.com",
       "url": "https://github.com/kismp123/DeFi-Security-Incident/blob/main/2023/2023-12-16_NFTTrader_Reentrancy_ETH.md"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=nft-trader-hack"
+    },
+    {
+      "source": "w3igg",
+      "label": "cointelegraph.com",
+      "url": "https://cointelegraph.com/news/nft-trader-hacked-millions-dollars-nft-stolen"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/dingalingts/status/1735994403422928972"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/0xfoobar/status/1736060236354498641"
     }
   ]
 }

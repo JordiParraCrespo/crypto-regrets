@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "input-validation",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "missing-bounds-check",
+    "confidence": 0.66
+  },
   "technique": "Missing Input Validation",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -50,6 +56,10 @@
     {
       "source": "RevertIQ",
       "text": "Team Finance was exploited on Ethereum on 2022-10-27 due to a lack of input validation in its Uniswap V2-to-V3 migration function, resulting in losses of approximately $13,15.8 million in various tokens. The attacker manipulated key migration parameters and constructed their own NFTs to bypass owner and lock checks, allowing them to drain and refund large pools. Some of the funds were later returned. The LockToken contract's migrate function failed to validate that the specified migration parameters and locked LP tokens matched valid pre-existing state. This allowed attacker-controlled NFTs and manipulated migration parameters, including pool price and…"
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Team Finance is a project that helps projects lock their tokens to be released after a certain period or on a schedule. A hacker exploited a vulnerability in a smart contract that enabled users of Team Finance to migrate from version two to version three of their project, despite that contract being audited . The attacker made off with $14.5 million thanks to the vulnerability, though 90% of the funds were later returned."
     }
   ],
   "audit": "Zokyo Security",
@@ -67,7 +77,8 @@
     "defihacklabs",
     "rekt",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -134,6 +145,11 @@
       "source": "revertiq",
       "label": "hacken.io",
       "url": "https://hacken.io/insights/why-team-finance-was-exploited-for-14-5-million-despite-its-audit/"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=14-5-million-stolen-from-team-finance"
     }
   ]
 }

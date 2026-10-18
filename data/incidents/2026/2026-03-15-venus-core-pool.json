@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "accounting-math",
+  "vulnClass": "share-inflation",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "share-inflation",
+    "confidence": 0.96
+  },
   "technique": "Donation Attack",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -62,6 +68,10 @@
     {
       "source": "RevertIQ",
       "text": "On 15 March 2026, the Venus Protocol’s Core Pool on BNB Chain suffered a major donation attack against its THE (Thena) market. The attacker exploited a flaw in the exchange rate accounting, bypassed supply caps, and borrowed assets worth $3.7 million. The protocol was left with $2.15 million in bad debt and the attacker suffered a net on-chain loss. The vTHE market's getCashPrior() function relied on the token contract's balance, not internal accounting, allowing direct token donations to artificially inflate collateral value. This bypassed the market’s supply cap and enabled outsized, undercollateralized borrowing against the THE token."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The BNB Chain's Venus Protocol lending protocol accumulated $2.15 million in bad debt after an exploiter manipulated the price of the Thena protocol's THE token. THE had very low liquidity, and the exploiter took advantage of it to manipulate the THE price oracle by borrowing against THE, using the borrowed funds to buy more THE, and repeating — causing the price oracle to reflect higher and higher prices. The attacker was able to avoid a supply cap on Venus by \"donating\" the funds rather than depositing them in the standard way. While the exploit left the Venus Protocol with over $2 million in bad debt, it's not clear if the attacker even made money from the exploit.…"
     }
   ],
   "audit": null,
@@ -77,7 +87,8 @@
     "rekt",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -149,6 +160,16 @@
       "source": "revertiq",
       "label": "blocksec.com",
       "url": "https://blocksec.com/blog/venus-thena-donation-attack"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=venus-protocol-bad-debt"
+    },
+    {
+      "source": "w3igg",
+      "label": "theblock.co",
+      "url": "https://www.theblock.co/post/393622/venus-protocol-left-with-roughly-2m-in-bad-debt-after-exploit-manipulates-thenas-the-token-price"
     }
   ]
 }

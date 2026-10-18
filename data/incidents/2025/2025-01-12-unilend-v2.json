@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "logic-error",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "business-logic-flaw",
+    "confidence": 0.4
+  },
   "technique": "Redeem Logic Flaw",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -42,6 +48,10 @@
     {
       "source": "RevertIQ",
       "text": "On January 13, 2025, UniLend V2 on Ethereum was exploited for approximately 61 stETH (worth about $197,000). The attacker manipulated the protocol’s redemption logic to bypass proper collateral checks, using outdated pool balances, and withdrew assets that exceeded legitimate collateral value. The redeemUnderlying function calculated the user's health factor using outdated pool balances after burning LP tokens but before updating balances, allowing an attacker to redeem assets beyond safe limits."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The UniLend project, which advertises itself as a \"unified platform for all things AI and defi \", was exploited for almost $200,000. An attacker was able to take advantage of a bug in a smart contract that handled token redemption. UniLend acknowledged the hack, downplaying it as affecting \"only\" 4% of the platform's $4.7 million TVL . They offered a bounty to the attacker."
     }
   ],
   "audit": null,
@@ -54,7 +64,8 @@
     "defihacklabs",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -96,6 +107,16 @@
       "source": "revertiq",
       "label": "blog.solidityscan.com",
       "url": "https://blog.solidityscan.com/unilend-finance-hack-analysis-5ac7bb71850d/"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=unilend-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "x.com",
+      "url": "https://x.com/UniLend_Finance/status/1878805205254340844"
     }
   ]
 }

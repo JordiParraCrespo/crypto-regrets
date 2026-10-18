@@ -11,6 +11,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "social-engineering",
+  "vulnClass": "blind-signing",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "blind-signing",
+    "confidence": 0.47
+  },
   "technique": "Blind Signing",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -59,6 +65,10 @@
     {
       "source": "RevertIQ",
       "text": "Radiant V2 suffered a $50 million exploit on October 16, 2024, affecting both Arbitrum and BNB Chain deployments after attackers compromised its multisig using malware. The intrusion enabled an attacker to upgrade lending pool contracts and drain funds from all supported markets. Malware compromised devices of three multisig signers, allowing the attacker to manipulate hardware wallet signing, alter transaction payloads for ownership and implementation upgrades, and drain protocol funds across chains."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The cryptocurrency lending project Radiant Capital was hacked for the second time in under a year, this time for more than $50 million in the USDC stablecoin , w BNB, ETH, and other tokens. An attacker successfully gained access to three of eleven private keys controlling a multisignature wallet, which enabled them to upgrade the project's smart contracts in such a way as to drain funds. This is the second Radiant Capital exploit this year, after a $4.5 million theft in January that was enabled by an unaddressed vulnerability in the underlying Compound Finance code. The US and South Korean governments later attributed this attack on Radiant to North Korean state-sponsored attackers."
     }
   ],
   "audit": null,
@@ -74,7 +84,9 @@
     "rekt",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "seal911",
+    "w3igg"
   ],
   "references": [
     {
@@ -156,6 +168,16 @@
       "source": "revertiq",
       "label": "cointelegraph.com",
       "url": "https://cointelegraph.com/news/radiant-capital-hacked-multi-sig-wallet-compromised"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=radiant-capital-hack-2"
+    },
+    {
+      "source": "w3igg",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/tech/2024/10/16/radiant-capital-loses-50m-to-blockchain-exploit/"
     }
   ]
 }

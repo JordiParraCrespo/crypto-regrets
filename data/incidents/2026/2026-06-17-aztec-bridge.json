@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "bridge-crosschain",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "message-verification-bypass",
+    "confidence": 0.52
+  },
   "technique": "Bridge Logic Flaw",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -58,6 +64,10 @@
     {
       "source": "RevertIQ",
       "text": "On June 17, 2026, an attacker drained about 1,158 ETH from Aztec's deprecated Private Rollup Bridge on Ethereum by abusing the legacy escapeHatch(bytes,bytes,bytes) withdrawal path. The immutable rollup deployment accepted a proof whose withdrawal outputs were not correctly bound to the ownership state the proof was supposed to authorize, allowing the attacker to redirect bridge funds to an attacker-controlled address. The legacy Aztec Private Rollup Bridge trusted escape-hatch proof data whose withdrawal outputs were not sufficiently constrained to the ownership state represented inside the proof system. Public technical analyses described a missing b…"
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Three days after Aztec Labs' deprecated Aztec Connect blockchain bridge was exploited for $2.1 million, the project has been hacked again for the same amount. Aztec Labs confirmed the second exploit, again trying to emphasize that the code was deprecated four years ago. The hacks are part of a spate of exploits targeting legacy smart contracts belonging to projects including Raydium and DxSale . Although some projects have developed techniques to circumvent the immutable nature of blockchains and allow smart contracts to be upgraded or retired, many legacy contracts cannot be changed or shut down, leaving them vulnerable to attack indefinitely."
     }
   ],
   "audit": null,
@@ -70,7 +80,8 @@
     "defihacklabs",
     "rekt",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -127,6 +138,16 @@
       "source": "revertiq",
       "label": "cryptotimes.io",
       "url": "https://www.cryptotimes.io/2026/06/18/aztec-networks-rollupprocessor-exploited-for-2-21-million/"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=aztec-hack-2"
+    },
+    {
+      "source": "w3igg",
+      "label": "x.com",
+      "url": "https://x.com/evilcos/status/2067488848788262957"
     }
   ]
 }

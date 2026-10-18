@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "access-control",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "missing-access-modifier",
+    "confidence": 0.49
+  },
   "technique": "Improper Access Control",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -54,6 +60,10 @@
     {
       "source": "RevertIQ",
       "text": "On March 21, 2022, OneRing Finance on Fantom was exploited via flashloan-enabled manipulation of LP reserves and OShare token pricing, resulting in the direct theft of $1,454,672.24 USDC and total economic loss near $2M. The protocol’s spot price calculation allowed extraction of excess vault shares in a single block. The vault relied on the live LP reserve balance to calculate OShare price, allowing flashloan-driven manipulation. Lack of time-weighted pricing or resistant oracle enabled attacker extraction of excess shares via artificially inflated spot price."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "A hacker was able to use a flash loan attack to exploit an issue with OneRing Finance. By manipulating the price of tokens in the project's liquidity pool , the hacker was able to draw out 1.45 million USDC, a stablecoin pegged to the US dollar. According to PeckShield, the loss to the protocol was larger than what the hacker actually was able to cash out. The hacker complicated things somewhat for OneRing by covering their tracks. They used a \"self-destruct\" mechanism — typically used by developers to destroy smart contracts that are found to have a bug — to destroy the contract they used to carry out the attack, making it more difficult for OneRing t…"
     }
   ],
   "audit": null,
@@ -65,7 +75,8 @@
     "defillama",
     "defihacklabs",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -117,6 +128,16 @@
       "source": "revertiq",
       "label": "cryptonews.net",
       "url": "https://cryptonews.net/news/security/4039151/"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=hacker-steals-1-45-million-from-onering-finance-using-code-that-self-destructs-after-the-attack"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/peckshield/status/1506090607059431427"
     }
   ]
 }

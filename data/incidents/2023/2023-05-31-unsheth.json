@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "key-compromise",
+  "vulnClass": "key-leak-infrastructure",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "admin-key-compromise",
+    "confidence": 0.72
+  },
   "technique": "Key Stored Publicly",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -38,6 +44,10 @@
     {
       "source": "RevertIQ",
       "text": "On May 31, 2023, unshETH suffered a loss of around $375,000 on Ethereum after a developer accidentally published a private key to a public GitHub repository. The attacker used the leaked key to drain rewards funds from auxiliary farm contracts, prompting emergency response from the team and no user deposit losses. A deployer private key with authority over unshETH's farm contracts was accidentally committed to a public GitHub repository, allowing an attacker to drain farm rewards."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "After a developer leaked private keys to GitHub, someone used them to drain $375,000 from the unshETH defi project. The project emergency paused withdrawals of unshETH ether to prevent further damage. The leaked key allowed the attacker to transfer ownership of project smart contracts to themselves, though they later returned ownership. unshETH posted a message to the hacker, demanding they return 90% of the stolen funds. They threatened: \"We want to be clear, and this is not a bluff: we know who you and some people connected to you (friends) are, and we will absolutely move forward with law enforcement if you have not returned the money by the deadline above.…"
     }
   ],
   "audit": null,
@@ -46,7 +56,8 @@
   "sources": [
     "defillama",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -73,6 +84,11 @@
       "source": "revertiq",
       "label": "certik.com",
       "url": "https://www.certik.com/blog/unsheth-private-key-slip-usd375-000-loss-from-a-github-post"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=unsheth-compromised-after-private-key-leaked-to-github"
     }
   ]
 }

@@ -13,6 +13,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "bridge-crosschain",
+  "vulnClass": "message-verification-bypass",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "message-verification-bypass",
+    "confidence": 1
+  },
   "technique": "Cross-Chain Message Spoofing",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -41,6 +47,10 @@
     {
       "source": "RevertIQ",
       "text": "On January 1, 2025, NoOnes suffered a cross-chain exploit targeting its hot wallets across Ethereum, BNB Chain, Solana, and Tron, resulting in losses of about $7.9 million. The breach involved a vulnerability in the Solana bridge, leading to rapid draining of funds via hundreds of small withdrawals and subsequent laundering through Tornado Cash. No detailed code-level analysis is available. The established basis is a vulnerability in the Solana bridge used by NoOnes, permitting unauthorized withdrawals from hot wallets across several chains. Exact technical specifics (such as the mechanism for message spoofing or bridge authentication failure) remain unreported in public sources."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "After crypto sleuth zachxbt noticed an apparent theft from the NoOnes peer-to-peer crypto trading platform on January 1, CEO Ray Youssef was forced to acknowledge the theft. He claimed that the project's Solana bridge had suffered a compromised, and explained that it had been taken offline for \"exhaustive pen testing\". Youssef emphasized that user funds were safe, which led to questioning from others on how that could be possible when nearly $8 million had been stolen. Youssef claimed he had reimbursed the stolen assets himself."
     }
   ],
   "audit": null,
@@ -49,7 +59,8 @@
   "sources": [
     "defillama",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -76,6 +87,16 @@
       "source": "revertiq",
       "label": "crowdfundinsider.com",
       "url": "https://www.crowdfundinsider.com/2025/01/235625-crypto-platform-noones-ceo-confirms-8m-hack-several-weeks-after-security-breach/"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=noones-hacked-for-almost-8-million"
+    },
+    {
+      "source": "w3igg",
+      "label": "t.me",
+      "url": "https://t.me/investigations/202"
     }
   ]
 }

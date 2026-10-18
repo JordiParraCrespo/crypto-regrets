@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "logic-error",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "business-logic-flaw",
+    "confidence": 0.97
+  },
   "technique": "Swap Logic Flaw",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -38,6 +44,10 @@
     {
       "source": "RevertIQ",
       "text": "WDZD Swap was exploited on BNB Chain on 2023-05-19. Public reporting attributes the loss to a flaw in an unverified Swap LP contract that allowed an attacker to manipulate LP token acquisition and drain roughly 609 Binance-Pegged ETH, valued at about $1.1 million at the time. Public reporting and CertiK statements describe a swap and LP accounting flaw in an unverified WDZD Swap LP/factory contract on BNB Chain. The attacker reportedly triggered an unverified low-level function call that transferred WDZD tokens from the pair to the factory address, allowing the attacker to obtain disproportionate LP tokens and redeem them for underlying ETH. The vulner…"
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "On May 19, an attacker successfully exploited the BNB Chain-based defi project WDZD Swap, making off with 609 Binance-Pegged ETH (~$1.1 million). The attack was apparently executed by a known exploiter, who had also previously exploited a project called Swap X."
     }
   ],
   "audit": null,
@@ -46,7 +56,8 @@
   "sources": [
     "defillama",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -73,6 +84,16 @@
       "source": "revertiq",
       "label": "tradingview.com",
       "url": "https://www.tradingview.com/news/cointelegraph%3Aecfebeb3e094b%3A0-defi-protocol-wdzd-swap-exploited-for-1-1m-certik/"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=wdzd-swap-exploited-for-1-1-million"
+    },
+    {
+      "source": "w3igg",
+      "label": "cointelegraph.com",
+      "url": "https://cointelegraph.com/news/defi-protocol-wdzd-swap-exploited-for-1-1m-certik"
     }
   ]
 }

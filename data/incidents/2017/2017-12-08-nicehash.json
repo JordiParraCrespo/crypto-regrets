@@ -10,6 +10,12 @@
   ],
   "targetType": "CEX",
   "category": "key-compromise",
+  "vulnClass": "key-leak-infrastructure",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "key-leak-infrastructure",
+    "confidence": 0.87
+  },
   "technique": "Key Leaked via Infrastructure",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -42,6 +48,10 @@
     {
       "source": "RevertIQ",
       "text": "NiceHash lost about 4,736 BTC, roughly $64 million at the time, after attackers used compromised employee credentials to drain the company’s Bitcoin wallet infrastructure in December 2017. Compromised employee credentials gave the attacker access to NiceHash’s payment and wallet systems. Public reporting points to phishing or a compromised company workstation as the initial foothold, but the exact entry path was never published in a technical postmortem."
+    },
+    {
+      "source": "Blockchain Graveyard",
+      "text": "Nicehash was a cryptocurrency mining service and marketplace, allowing users to buy and sell their own mining power. While not necessarily a mining pool of its own, it still maintained a wallet for customer funds. Nicehash appears to have shuttered their website with a notice saying \"a security breach involving NiceHash website\" and \"our payment system was compromised and the contents of the NiceHash Bitcoin wallet have been stolen\". A Facebook livestream has further notes on the issue. This is hard to archive so I will transcribe useful points. Overall, this was lateral movement from a remote IP address, gaining access to a VPN, possibly through an em…"
     }
   ],
   "audit": null,
@@ -50,7 +60,8 @@
   "sources": [
     "defillama",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "graveyard"
   ],
   "references": [
     {
@@ -77,6 +88,16 @@
       "source": "revertiq",
       "label": "reflare.com",
       "url": "https://www.reflare.com/research/nicehash-hack"
+    },
+    {
+      "source": "graveyard",
+      "label": "facebook.com",
+      "url": "https://www.facebook.com/NiceHash/videos/2013146182237851/"
+    },
+    {
+      "source": "graveyard",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/former-nicehash-cto-arrested-in-germany-over-us-hacking-charges"
     }
   ]
 }

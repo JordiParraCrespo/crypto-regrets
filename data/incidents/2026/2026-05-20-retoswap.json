@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "input-validation",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "unvalidated-address-input",
+    "confidence": 0.38
+  },
   "technique": "Missing Input Validation",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -46,6 +52,10 @@
     {
       "source": "RevertIQ",
       "text": "RetoSwap, a decentralized Monero exchange running a Haveno Protocol fork, was exploited for roughly 7,000 XMR (~$2.7 million) on 20 May 2026 when attackers used a forged arbitration message to gain control of multisig wallets and sweep victim funds. The protocol accepted forged arbitration messages without verifying the sender's signature or identity, enabling attackers to impersonate the arbitrator, update the node address, and obtain control during multisig wallet creation."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The RetoSwap decentralized exchange for trading the Monero privacycoin was exploited after an attacker exploited a vulnerability in the Haveno Monero exchange protocol used by the project. Users lost an estimated $2.7 million when their transactions were routed to the attacker's wallet. Because Monero is a privacycoin, a type of cryptocurrency that obscures transaction details including sender and receiver wallets, it is not feasible to trace the stolen assets."
     }
   ],
   "audit": null,
@@ -55,7 +65,8 @@
     "defillama",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -87,6 +98,16 @@
       "source": "revertiq",
       "label": "yfarmx.com",
       "url": "https://yfarmx.com/tools/exploit-tracker/exploit-0041/"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=retoswap-theft"
+    },
+    {
+      "source": "w3igg",
+      "label": "x.com",
+      "url": "https://x.com/PeckShieldAlert/status/2057279916165693841"
     }
   ]
 }

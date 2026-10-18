@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "oracle-manipulation",
+  "vulnClass": "spot-price-oracle",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "spot-price-oracle",
+    "confidence": 0.13
+  },
   "technique": "Spot Price Manipulation",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -62,6 +68,10 @@
     {
       "source": "RevertIQ",
       "text": "On January 4, 2024, Gamma Strategies was exploited on Arbitrum via flash loan-induced price manipulation. Misconfigured price-change thresholds in the deposit proxy allowed attackers to mint excessive LP tokens, causing a loss of approximately $6.2M. The deposit proxy contract's price-change threshold was set too broad, permitting up to 200% price deviation. This failed to restrict flash loan-driven pool manipulation, allowing deposits at manipulated prices to mint disproportionate LP tokens."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The Gamma Strategies defi protocol suffered an exploit when an attacker targeted their vaults on several projects across the Arbitrum layer-2 network. The attacker successfully stole almost $6.2 million from these vaults by manipulating the price of some of the assets involved. Gamma has contacted the hacker to try to negotiate a return of some of the assets, and also says they have engaged law enforcement. Although they have promised to try to repay some of the stolen assets, they are estimating between 25% and 40% recoveries for various categories of users."
     }
   ],
   "audit": "Out of scope",
@@ -90,7 +100,8 @@
     "rekt",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -172,6 +183,16 @@
       "source": "revertiq",
       "label": "olympix.security",
       "url": "https://olympix.security/biweekly-exploits/gamma-telcoin-pine-same-bugs-new-chains"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=gamma-strategies-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "theblock.co",
+      "url": "https://www.theblock.co/post/270338/defi-protocol-gamma-strategies-suffers-an-estimated-3-4-million-exploit"
     }
   ]
 }

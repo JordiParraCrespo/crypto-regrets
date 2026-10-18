@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "oracle-manipulation",
+  "vulnClass": "spot-price-oracle",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "spot-price-oracle",
+    "confidence": 0.94
+  },
   "technique": "Spot Price Manipulation",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -54,6 +60,10 @@
     {
       "source": "RevertIQ",
       "text": "Indexed Finance was exploited on Ethereum on 14 October 2021 due to a flaw in pool valuation logic. The attacker used flash loans to massively distort pool prices, minted inflated index tokens, and burned them to drain approximately $16 million in assets from index pools. The core flaw was in the way pools calculated the value of their assets. The contracts allowed an attacker to manipulate the oracle-based internal price using flash loans, resulting in a severe under-valuation and enabling cheap minting of index pool tokens."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "A hacker drained $16 million from Indexed Finance, a defi protocol built on the Ethereum blockchain. The stolen funds represented nearly half of the total value locked on the platform. The hacker was later revealed to allegedly be an 18-year-old Canadian named Andy Medjedovic, who continued to refuse to return the funds even when his identity was revealed. The hacker argues that he simply took advantage of an arbitrage opportunity, and swore to \"fight to the death\" in court over his right to keep the money. However, the hacker never showed up to a December court appearance, and a warrant was issued for his arrest."
     }
   ],
   "audit": "Unaudited",
@@ -67,7 +77,8 @@
     "defihacklabs",
     "rekt",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -129,6 +140,26 @@
       "source": "revertiq",
       "label": "cryptobriefing.com",
       "url": "https://cryptobriefing.com/inside-the-war-room-how-indexed-finance-traced-its-16m-hacker/"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=hacker-steals-16-million-from-indexed-finance"
+    },
+    {
+      "source": "w3igg",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/tech/2021/10/22/after-stealing-16m-this-teen-hacker-seems-intent-on-testing-code-is-law-in-the-courts/"
+    },
+    {
+      "source": "w3igg",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/policy/2021/12/22/teenage-suspect-in-16m-defi-hack-wanted-for-arrest-in-canada/"
+    },
+    {
+      "source": "w3igg",
+      "label": "bloomberg.com",
+      "url": "https://www.bloomberg.com/news/features/2022-05-19/crypto-platform-hack-rocks-blockchain-community"
     }
   ]
 }

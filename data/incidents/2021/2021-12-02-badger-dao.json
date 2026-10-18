@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "frontend-infra",
+  "vulnClass": "frontend-injection",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "frontend-injection",
+    "confidence": 1
+  },
   "technique": "CDN Compromise",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -54,6 +60,10 @@
     {
       "source": "RevertIQ",
       "text": "In December 2021, BadgerDAO lost approximately $120 million to a frontend supply-chain attack after an attacker used a compromised Cloudflare API key to inject malicious JavaScript. Hundreds of user wallets unknowingly approved unlimited spend allowances to the attacker's address; these allowances were later used to drain user assets. The root cause was a compromised Cloudflare API key, which allowed an attacker to inject malicious JavaScript into BadgerDAO's frontend. This script manipulated user wallet prompts to request unlimited ERC-20 token approvals for attacker-controlled addresses. The protocol contracts were not directly exploited."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "A hacker was able to use a compromised Cloudflare API key to inject malicious code into the BadgerDAO platform via Cloudflare Workers. They then siphoned currency of various kinds, equivalent to approximately $120 million, out of user accounts over approximately two weeks before being discovered."
     }
   ],
   "audit": "Unaudited",
@@ -65,7 +75,8 @@
     "defillama",
     "rekt",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -112,6 +123,21 @@
       "source": "revertiq",
       "label": "smartcontractaudit.com",
       "url": "https://smartcontractaudit.com/hacks/badger-2021"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=120-million-stolen-from-badgerdao"
+    },
+    {
+      "source": "w3igg",
+      "label": "vice.com",
+      "url": "https://www.vice.com/en/article/v7dv4a/hacked-cryptocurrency-platform-begs-hacker-to-please-return-dollar119-million"
+    },
+    {
+      "source": "w3igg",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/business/2021/12/02/badger-dao-protocol-suffers-10m-exploit/"
     }
   ]
 }

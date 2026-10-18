@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "logic-error",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "solvency-check-flaw",
+    "confidence": 0.65
+  },
   "technique": "Logic Flaw",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -50,6 +56,10 @@
     {
       "source": "RevertIQ",
       "text": "The Platypus Finance exploit involved a flawed emergency withdrawal function that released collateral before checking for outstanding debt, allowing a flash-loan attacker to borrow stablecoins backed by nothing and exit with $8.5M in profits. The MasterPlatypusV4 contract's emergencyWithdraw function transferred collateral before enforcing a solvency check, enabling users to remove collateral while debt was still outstanding and breaking the lending protocol's fundamental invariant."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Platypus USD, a stablecoin issued by the Platypus Finance defi protocol, was exploited only ten days after it first launched. The loss was estimated to be around $8.5 million, although crypto researcher zachxbt observed that Tether had blacklisted the attacker contract shortly after the theft. The exploit was a flash loan attack that allowed them to drain some protocol pools , also causing the stablecoin to lose its dollar peg and drop to around $0.48. A team member reported on the project's Discord that \"all operations are paused until we get more clarity\". The following day, the project reported they had recovered $2.4 million of the stolen funds, an…"
     }
   ],
   "audit": "Unaudited",
@@ -63,7 +73,8 @@
     "rekt",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -140,6 +151,21 @@
       "source": "revertiq",
       "label": "smartcontractaudit.com",
       "url": "https://www.smartcontractaudit.com/guides/platypus-finance-2023-flash-loan-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=platypus-finance-stablecoin-exploited"
+    },
+    {
+      "source": "w3igg",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/markets/2023/02/16/usp-stablecoin-loses-dollar-peg-as-defi-protocol-platypus-suffers-85m-attack/"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/zachxbt/status/1626335278972510208"
     }
   ]
 }

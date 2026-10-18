@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "reentrancy",
+  "vulnClass": "read-only-reentrancy",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "read-only-reentrancy",
+    "confidence": 0.92
+  },
   "technique": "Read-Only Reentrancy",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -50,6 +56,10 @@
     {
       "source": "RevertIQ",
       "text": "Sturdy Finance v1 on Ethereum Mainnet was exploited on June 12, 2023, via a read-only reentrancy flaw in its Balancer LP collateral logic. The attacker mispriced collateral by manipulating Balancer pool rates, extracting approximately $775,000 before the protocol was paused. The funds were ultimately returned after negotiation. The collateral toggle function setUserUseReserveAsCollateral did not enforce a reentrancy-locked oracle validation. This omission allowed the attacker to manipulate Balancer pool rates and borrow against inflated collateral value within a callback window."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The Sturdy Finance defi lending protocol was exploited, with hackers taking advantage of an oracle manipulation vulnerability to make off with 442 ETH (~$775,000). They subsequently transferred the funds into Tornado Cash. The total loss to the project was somewhat higher: 504 ETH (~$884,000). Roughly an hour after the attack, the project tweeted that they were aware of the attack, and had paused all markets. On June 19 the project sent a message to the attacker, pleading with them to return the funds and threatening: \"There are criminal organizations following the same evidence trails we are. This isn't going away until you return funds. We are your best option out of this.\""
     }
   ],
   "audit": "Out of scope",
@@ -63,7 +73,8 @@
     "rekt",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -125,6 +136,21 @@
       "source": "revertiq",
       "label": "blog.solidityscan.com",
       "url": "https://blog.solidityscan.com/sturdy-finance-hack-analysis-bd8605cd2956/"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=sturdy-finance-exploited-for-775000"
+    },
+    {
+      "source": "w3igg",
+      "label": "cointelegraph.com",
+      "url": "https://cointelegraph.com/news/attacker-drains-800k-from-defi-protocol-sturdy-finance"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/i/web/status/1670920700679569408"
     }
   ]
 }

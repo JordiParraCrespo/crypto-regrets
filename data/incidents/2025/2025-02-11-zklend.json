@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "accounting-math",
+  "vulnClass": "share-inflation",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "rounding-precision",
+    "confidence": 0.66
+  },
   "technique": "First Depositor Attack",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -46,6 +52,10 @@
     {
       "source": "RevertIQ",
       "text": "On February 12, 2025, zkLend, a lending protocol on Starknet, was exploited for approximately $9.55M. The attacker inflated the lending_accumulator in the wstETH lending market by leveraging flash-loan donations and rounding errors in withdrawal operations, extracting more collateral than their deposits. The stolen funds were bridged to Ethereum and most were later lost to a phishing attack during laundering attempts. The exploit was made possible by three compounding issues: empty-market deposit tolerance allowing accumulator manipulation, flash-loan donation paths directly inflating the lending_accumulator, and floor-division (downward rounding) in w…"
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The Starknet-based lending platform zkLend was exploited for around $9.5 million. zkLend paused the protocol after the attack was discovered, and began working with various crypto security groups to try to trace the stolen funds and identify the thief. zkLend also sent a message to the attacker, offering a 10% \" bounty \" and a \"release from any and all liability\" if they returned 90% of the funds. As of twelve hours after the hack, no reply had been made."
     }
   ],
   "audit": null,
@@ -61,7 +71,8 @@
     "defihacklabs",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -113,6 +124,21 @@
       "source": "revertiq",
       "label": "blog.solidityscan.com",
       "url": "https://blog.solidityscan.com/zklend-hack-analysis-e494cb794f71/"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=zklend-hack"
+    },
+    {
+      "source": "w3igg",
+      "label": "x.com",
+      "url": "https://x.com/CyversAlerts/status/1889582024861663421"
+    },
+    {
+      "source": "w3igg",
+      "label": "x.com",
+      "url": "https://x.com/zkLend/status/1889515118368829559"
     }
   ]
 }

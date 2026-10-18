@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "key-compromise",
+  "vulnClass": "key-leak-infrastructure",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "key-leak-infrastructure",
+    "confidence": 0.95
+  },
   "technique": "Key Leaked via Infrastructure",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -42,6 +48,10 @@
     {
       "source": "RevertIQ",
       "text": "GAMEE reported unauthorized GitLab access that exposed the Polygon GMEE deployer key on 2024-01-22. Public reporting says about 600 million GMEE left team reserves and were swapped through DEXs, with losses estimated at roughly $15 million to $16.4 million. A GitLab-exposed deployer private key gave the attacker control of the privileged Polygon GMEE contract authority. The available record does not establish a separate Solidity code defect."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "An attacker was able to gain access to the Gamee (GMEE) token's source code repository, then exploit a vulnerability in the code to transfer 600 million GMEE tokens to their own wallets. At the token's market price of $0.025 before the hack, these tokens were ostensibly priced at $15 million, though the token value plunged around 60% to below $0.01 following the theft as the attacker began selling the tokens. GMEE is the token belonging to the Gamee blockchain-based gaming platform, which was acquired by the Animoca Brands company in 2020. Animoca is mostly known for its crypto-metaverse project, The Sandbox."
     }
   ],
   "audit": null,
@@ -49,7 +59,8 @@
   "poc": null,
   "sources": [
     "defillama",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -96,6 +107,16 @@
       "source": "revertiq",
       "label": "twitter.com",
       "url": "https://twitter.com/GAMEEToken/status/1749652962849464727"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=animoca-brands-owned-gamee-tokens-stolen"
+    },
+    {
+      "source": "w3igg",
+      "label": "decrypt.co",
+      "url": "https://decrypt.co/213929/animoca-brands-gmee-token-plunges-60-percent-after-exploit"
     }
   ]
 }

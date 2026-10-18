@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "accounting-math",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "rounding-precision",
+    "confidence": 0.62
+  },
   "technique": "Arithmetic Error",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -54,6 +60,10 @@
     {
       "source": "RevertIQ",
       "text": "On April 28, 2021, Uranium Finance on BNB Chain was exploited for $57.2 million due to a math error in its Uniswap V2 fork's swap validation, allowing attackers to drain nearly all liquidity from pools using minimal inputs. A misplaced constant in the swap invariant check applied an incorrect scaling factor. Uranium's modified balance adjustment used 10,000 for fees, but the required post-swap check used 1,000,000, not 100,000,000, letting attackers bypass the swap's intended constraints."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "A bug in Uranium Finance, a DeFi exchange based on Binance Smart Chain, allowed an attacker to drain the liquidity pools for multiple token pairs. Uranium had just commissioned an audit which uncovered the bug, but the attack occured two hours before the patch went live. An apparent member of Uranium's development team wrote that they believed the attack had been the result of leaked information."
     }
   ],
   "audit": "Unaudited",
@@ -67,7 +77,8 @@
     "defihacklabs",
     "rekt",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -119,6 +130,21 @@
       "source": "revertiq",
       "label": "hjklvfr.github.io",
       "url": "https://hjklvfr.github.io/dn-institute/research/cyberattacks/incidents/2021-04-28-uranium-finance/"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=uranium-finance-exploited-50-million"
+    },
+    {
+      "source": "w3igg",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/markets/2021/04/28/binance-chain-defi-exchange-uranium-finance-loses-50m-in-exploit/"
+    },
+    {
+      "source": "w3igg",
+      "label": "cointelegraph.com",
+      "url": "https://cointelegraph.com/news/uranium-finance-developer-suspected-of-leaking-information-leading-to-50m-exploit"
     }
   ]
 }

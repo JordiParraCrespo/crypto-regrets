@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "access-control",
+  "vulnClass": "missing-access-modifier",
+  "vulnClassBy": "typesafe",
+  "aiClass": {
+    "id": "missing-access-modifier",
+    "confidence": 0.91
+  },
   "technique": "Improper Access Control",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -42,6 +48,10 @@
     {
       "source": "RevertIQ",
       "text": "In December 2025, the legacy Ribbon Finance (now Aevo) Ethereum options vaults were exploited for around $2.7 million following an oracle infrastructure upgrade that left expiry price-setting permissions unprotected. An attacker manipulated expiry prices of vault assets, draining reserves before the vaults were permanently decommissioned. Aevo's main derivatives exchange and non-vault user funds were not affected. A December 6, 2025 oracle proxy upgrade for legacy Ribbon vaults removed access control checks on the expiry price-setting function for new assets, allowing anyone to push arbitrary expiry prices. This enabled adversarial manipulation of expi…"
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Ribbon Finance, which has partially rebranded to Aevo, has lost $2.7 million after attackers exploited a vulnerability in the smart contract for legacy Ribbon vaults that enabled them to manipulate oracle prices and withdraw a large amount of ETH and USDC. Ribbon has announced it will cover $400,000 of the lost funds with its own assets. However, Ribbon is also offering users a lower-than-expected haircut on their assets by assuming that some of the largest affected accounts will not withdraw their assets, having been dormant for several years. While this plan may benefit active users, it seems like it could get very messy if those dormant users do wis…"
     }
   ],
   "audit": null,
@@ -55,7 +65,8 @@
     "defillama",
     "defihacklabs",
     "blocksec",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -102,6 +113,26 @@
       "source": "revertiq",
       "label": "catenaa.com",
       "url": "https://catenaa.com/markets/cryptocurrencies/aevos-legacy-ribbon-vaults-lose-2-7m-in-oracle-exploit/"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=ribbon-finance-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "x.com",
+      "url": "https://x.com/ribbonfinance/status/1999815546007584817"
+    },
+    {
+      "source": "w3igg",
+      "label": "x.com",
+      "url": "https://x.com/ribbonfinance/status/2000003294563905765?s=20"
+    },
+    {
+      "source": "w3igg",
+      "label": "x.com",
+      "url": "https://x.com/antonttc/status/1999696266973036848"
     }
   ]
 }

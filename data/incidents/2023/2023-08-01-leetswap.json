@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "access-control",
+  "vulnClass": "missing-access-modifier",
+  "vulnClassBy": "typesafe",
+  "aiClass": {
+    "id": "missing-access-modifier",
+    "confidence": 0.96
+  },
   "technique": "Improper Access Control",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -46,6 +52,10 @@
     {
       "source": "RevertIQ",
       "text": "LeetSwap lost over $630,000 on Base on 1 August 2023 after a missing access control allowed attackers to drain liquidity by manipulating a public fee-transfer function in the LeetSwapV2Pair contract. The attack exploited reserve misalignment, enabling outsized token withdrawals through AMM price manipulation. The LeetSwapV2Pair contract exposed the _transferFeesSupportingTaxTokens function as public, allowing anyone to move tokens from the liquidity pool. This function did not restrict callers or update internal reserves, breaking AMM invariants when combined with external sync() calls."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Although Coinbase's Base blockchain is at this stage intended for testing only, people have begun bridging substantial assets to the platform and using various services in anticipation of its official launch. One such service is LeetSwap, which describes itself as the \"The #1 DEX ecosystem for elite degens built on the leetest blockchains\", and which recently launched its service on Base. On August 1, LeetSwap was exploited after an attacker discovered a function that allowed them to manipulate token prices on the project for a profit of around 342 ETH (~$624,000). LeetSwap attempted to contact the hacker via social media, asking them to return all but…"
     }
   ],
   "audit": null,
@@ -59,7 +69,8 @@
     "defihacklabs",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -116,6 +127,21 @@
       "source": "revertiq",
       "label": "github.com",
       "url": "https://github.com/kismp123/DeFi-Security-Incident/blob/main/2023/2023-08-01_LeetSwap_AccessControl_Base.md"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=leetswap-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/SlowMist_Team/status/1686229798954418177"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/LeetSwap/status/1686367051814735872"
     }
   ]
 }

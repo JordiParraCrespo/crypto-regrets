@@ -1,151 +1,189 @@
 ---
+import '../styles/global.css';
 import { href } from '../lib/data';
 interface Props {
   title: string;
   description?: string;
 }
-const { title, description = 'A classified index of every crypto hack in history: the patterns, the root causes, and what developers can learn from them.' } = Astro.props;
+const {
+  title,
+  description = 'A classified index of every crypto hack in history: the vulnerability classes, the root causes, and how to fix them.',
+} = Astro.props;
 const path = Astro.url.pathname;
 const nav = [
-  ['/', 'Overview'],
+  ['/hacks', 'Index'],
+  ['/classes', 'Vulnerabilities'],
   ['/history', 'History'],
-  ['/hacks', 'All hacks'],
-  ['/patterns', 'Patterns'],
   ['/infrastructure', 'Infrastructure'],
-  ['/developers', 'For developers'],
-  ['/data', 'Data'],
-  ['/sources', 'Sources'],
+  ['/developers', 'Developers'],
+  ['/sources', 'Method'],
 ] as const;
-const isActive = (p: string) => (p === '/' ? path === href('/') || path === href('/') + '/' : path.startsWith(href(p)));
+const isActive = (p: string) => path.startsWith(href(p));
 ---
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title === 'Crypto Regrets' ? title : `${title} · Crypto Regrets`}</title>
+    <title>{title === 'Crypto Regrets' ? 'Crypto Regrets: every crypto hack, classified' : `${title} · Crypto Regrets`}</title>
     <meta name="description" content={description} />
+    <meta name="theme-color" content="#ffffff" />
     <link rel="icon" href={href('/favicon.svg')} type="image/svg+xml" />
-    <script is:inline>
-      try { const t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch {}
-    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;700&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
   </head>
   <body>
+    <a class="sr-only" href="#main">Skip to content</a>
     <header class="site-header">
-      <div class="wrap header-inner">
-        <a class="brand" href={href('/')}><span class="brand-mark" aria-hidden="true">✕</span> Crypto Regrets</a>
+      <div class="wrap bar">
+        <a class="brand" href={href('/')} aria-label="Crypto Regrets home">
+          <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><rect width="20" height="20" rx="10" fill="#0a0a0a"></rect><path d="M6.5 6.5l7 7M13.5 6.5l-7 7" stroke="#fff" stroke-width="1.8" stroke-linecap="round"></path></svg>
+          <span>Crypto Regrets</span>
+        </a>
         <nav aria-label="Main">
-          {nav.map(([p, label]) => <a href={href(p)} class:list={{ active: isActive(p) }}>{label}</a>)}
+          {nav.map(([p, label]) => <a href={href(p)} class:list={['nav-link', { active: isActive(p) }]} aria-current={isActive(p) ? 'page' : undefined}>{label}</a>)}
         </nav>
-        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle theme">◐</button>
+        <div class="actions">
+          <a class="btn btn-compact hide-sm" href={href('/data')}>Data</a>
+          <a class="btn btn-primary btn-sm" href={href('/hacks')}>Browse hacks</a>
+        </div>
       </div>
     </header>
-    <main class="wrap">
+    <main id="main">
       <slot />
     </main>
-    <footer class="site-footer wrap">
-      <p>
-        Data compiled from <a href="https://defillama.com/hacks">DefiLlama</a>, <a href="https://github.com/SunWeb3Sec/DeFiHackLabs">DeFiHackLabs</a> (Apache-2.0),
-        <a href="https://rekt.news/">REKT</a>, <a href="https://hacked.slowmist.io/en/">SlowMist</a>, <a href="https://blocksec.com/security-incident">BlockSec</a>, <a href="https://revertiq.ai/hacks">RevertIQ</a>, and the Bitcoin Core, Geth and Cosmos security advisories. Classification is ours; see <a href={href('/sources')}>sources &amp; method</a>.
-        Download everything on the <a href={href('/data')}>data page</a>. For education only.
-      </p>
+    <footer class="wrap site-footer">
+      <div class="grid cols-4 foot">
+        <div>
+          <p class="medium" style="margin:0 0 8px">Crypto Regrets</p>
+          <p class="caption fog" style="margin:0">A classified index of crypto security failures, for researchers and the developers who fix them. Educational use only.</p>
+        </div>
+        <div>
+          <p class="eyebrow">Explore</p>
+          <ul class="foot-links">
+            <li><a href={href('/hacks')}>Incident index</a></li>
+            <li><a href={href('/classes')}>Vulnerability classes</a></li>
+            <li><a href={href('/patterns')}>Failure patterns</a></li>
+            <li><a href={href('/history')}>History</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="eyebrow">Build</p>
+          <ul class="foot-links">
+            <li><a href={href('/developers')}>Secure-coding checklist</a></li>
+            <li><a href={href('/data')}>Datasets &amp; API</a></li>
+            <li><a href={href('/sources')}>Method &amp; sources</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="eyebrow">Sources</p>
+          <p class="caption fog" style="margin:0">DefiLlama, DeFiHackLabs (Apache-2.0), REKT, SlowMist, BlockSec, RevertIQ, and Bitcoin Core / Geth / Cosmos advisories. Classification by TypeSafe Jev and analyst labels.</p>
+        </div>
+      </div>
     </footer>
     <script is:inline>
-      document.querySelector('.theme-toggle')?.addEventListener('click', () => {
-        const root = document.documentElement;
-        const dark = root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
-        root.dataset.theme = dark ? 'light' : 'dark';
-        try { localStorage.setItem('theme', root.dataset.theme); } catch {}
-      });
+      const h = document.querySelector('.site-header');
+      const onScroll = () => h && h.classList.toggle('scrolled', window.scrollY > 8);
+      addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
     </script>
   </body>
 </html>
 
-<style is:global>
-  :root {
-    color-scheme: light;
-    --bg: #fcfcfb;
-    --surface: #ffffff;
-    --surface-2: #f3f2ef;
-    --border: #e2e0da;
-    --text: #0b0b0b;
-    --text-2: #52514e;
-    --muted: #7a7974;
-    --accent: #d03b3b;
-    --link: #1c5cab;
-    --grid: #e6e4de;
-    --s1: #2a78d6; --s2: #eb6834; --s3: #1baf7a; --s4: #eda100; --s5: #e87ba4; --s6: #008300; --s7: #6250d6; --s8: #e34948;
-    --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-    --sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: saturate(180%) blur(12px);
+    -webkit-backdrop-filter: saturate(180%) blur(12px);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s, box-shadow 0.2s;
   }
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme='light']) {
-      color-scheme: dark;
-      --bg: #121211; --surface: #1a1a19; --surface-2: #232321; --border: #33332f;
-      --text: #f0efec; --text-2: #c3c2b7; --muted: #8f8e86; --accent: #e66767; --link: #86b6ef; --grid: #2c2c29;
-      --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #c98500; --s5: #d55181; --s6: #008300; --s7: #9085e9; --s8: #e66767;
+  .site-header.scrolled {
+    border-bottom-color: var(--color-dove);
+  }
+  .bar {
+    height: 64px;
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 500;
+    font-size: 15px;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+  }
+  nav {
+    display: flex;
+    gap: 24px;
+    flex: 1;
+    min-width: 0;
+  }
+  .nav-link {
+    font: 500 14px/20px var(--font-sans);
+    color: var(--color-fog);
+    transition: color 0.15s;
+    white-space: nowrap;
+  }
+  .nav-link:hover,
+  .nav-link.active {
+    color: var(--color-jet-ink);
+  }
+  .actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+  .btn-sm {
+    padding: 8px 16px;
+  }
+  @media (max-width: 960px) {
+    .bar {
+      height: auto;
+      padding-top: 12px;
+      padding-bottom: 12px;
+      flex-wrap: wrap;
+      row-gap: 12px;
+    }
+    nav {
+      order: 3;
+      flex-basis: 100%;
+      overflow-x: auto;
+      gap: 20px;
+      scrollbar-width: none;
+    }
+    .actions {
+      margin-left: auto;
     }
   }
-  :root[data-theme='dark'] {
-    color-scheme: dark;
-    --bg: #121211; --surface: #1a1a19; --surface-2: #232321; --border: #33332f;
-    --text: #f0efec; --text-2: #c3c2b7; --muted: #8f8e86; --accent: #e66767; --link: #86b6ef; --grid: #2c2c29;
-    --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #c98500; --s5: #d55181; --s6: #008300; --s7: #9085e9; --s8: #e66767;
+  .site-footer {
+    margin-top: 144px;
+    padding-top: 48px;
+    padding-bottom: 64px;
+    border-top: 1px solid var(--color-dove);
   }
-  *, *::before, *::after { box-sizing: border-box; }
-  html { -webkit-text-size-adjust: 100%; }
-  body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.55 var(--sans); }
-  a { color: var(--link); text-decoration: none; }
-  a:hover { text-decoration: underline; }
-  h1, h2, h3 { line-height: 1.2; letter-spacing: -0.01em; }
-  h1 { font-size: clamp(1.8rem, 4vw, 2.6rem); margin: 0.6em 0 0.3em; }
-  h2 { font-size: 1.45rem; margin: 2em 0 0.6em; }
-  h3 { font-size: 1.1rem; margin: 1.4em 0 0.4em; }
-  code, .mono { font-family: var(--mono); font-size: 0.9em; }
-  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 16px; }
-  .lede { font-size: 1.15rem; color: var(--text-2); max-width: 70ch; }
-  .muted { color: var(--muted); }
-  .small { font-size: 0.875rem; }
-
-  .site-header { border-bottom: 1px solid var(--border); background: var(--surface); position: sticky; top: 0; z-index: 10; }
-  .header-inner { display: flex; align-items: center; gap: 20px; min-height: 56px; flex-wrap: wrap; }
-  .brand { font-weight: 700; color: var(--text); font-size: 1.05rem; white-space: nowrap; }
-  .brand-mark { color: var(--accent); }
-  nav { display: flex; gap: 4px; flex-wrap: wrap; flex: 1; }
-  nav a { white-space: nowrap; color: var(--text-2); padding: 6px 10px; border-radius: 6px; font-size: 0.92rem; }
-  nav a:hover { background: var(--surface-2); text-decoration: none; }
-  nav a.active { color: var(--text); background: var(--surface-2); font-weight: 600; }
-  .theme-toggle { margin-left: auto; background: none; border: 1px solid var(--border); color: var(--text-2); border-radius: 6px; padding: 4px 9px; cursor: pointer; font-size: 1rem; }
-  @media (max-width: 720px) { nav { order: 3; flex-basis: 100%; overflow-x: auto; flex-wrap: nowrap; padding-bottom: 6px; } }
-
-  .site-footer { border-top: 1px solid var(--border); margin-top: 64px; padding-top: 16px; padding-bottom: 40px; color: var(--muted); font-size: 0.85rem; }
-
-  .grid { display: grid; gap: 16px; }
-  .grid-4 { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
-  .grid-3 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
-  .grid-2 { grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); }
-  @media (max-width: 400px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
-  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; min-width: 0; }
-  .card h3 { margin-top: 0; }
-  .card p, .card li { overflow-wrap: anywhere; }
-  a.card { color: inherit; display: block; }
-  a.card:hover { border-color: var(--text-2); text-decoration: none; }
-  .stat .value { font-size: 2rem; font-weight: 700; letter-spacing: -0.02em; }
-  .stat .label { color: var(--text-2); font-size: 0.9rem; }
-
-  .chip { display: inline-flex; align-items: center; gap: 6px; font-size: 0.8rem; padding: 2px 8px; border-radius: 999px; background: var(--surface-2); color: var(--text-2); border: 1px solid var(--border); white-space: nowrap; }
-  .dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; flex: none; }
-  .l1 { --c: var(--s1); } .l2 { --c: var(--s2); } .l3 { --c: var(--s3); } .l4 { --c: var(--s4); } .l5 { --c: var(--s5); } .l6 { --c: var(--s6); }
-  .dot { background: var(--c, var(--muted)); }
-
-  .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 10px; background: var(--surface); }
-  table { border-collapse: collapse; width: 100%; font-size: 0.9rem; }
-  th, td { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
-  th { font-weight: 600; color: var(--text-2); background: var(--surface-2); position: sticky; top: 0; white-space: nowrap; }
-  tr:last-child td { border-bottom: 0; }
-  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
-  ul.clean { list-style: none; padding: 0; margin: 0; }
-  ul.clean li { padding: 6px 0; border-bottom: 1px solid var(--border); }
-  ul.clean li:last-child { border-bottom: 0; }
-  .callout { border-left: 3px solid var(--accent); background: var(--surface); padding: 12px 16px; border-radius: 0 8px 8px 0; }
+  .foot-links {
+    list-style: none;
+    padding: 0;
+    margin: 8px 0 0;
+    display: grid;
+    gap: 6px;
+    font-size: 14px;
+  }
+  .foot-links a {
+    color: var(--color-fog);
+  }
+  .foot-links a:hover {
+    color: var(--color-jet-ink);
+  }
+  .foot .eyebrow {
+    margin: 0;
+  }
 </style>

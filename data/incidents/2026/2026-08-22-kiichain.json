@@ -10,6 +10,12 @@
   ],
   "targetType": "Chain",
   "category": "accounting-math",
+  "vulnClass": "integer-overflow",
+  "vulnClassBy": "typesafe",
+  "aiClass": {
+    "id": "integer-overflow",
+    "confidence": 0.99
+  },
   "technique": "Arithmetic Error",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -42,6 +48,10 @@
     {
       "source": "RevertIQ",
       "text": "On 2026-08-22, KiiChain halted block production after an attacker exploited chained balance-accounting flaws in the shared Cosmos EVM module. KiiChain later reported that 148,326,583.15 KII was drained across 18 exploit sequences, with part of the funds bridged to BNB Chain through Hyperlane before the halt. KiiChain stated that the exploit combined an arithmetic underflow in the Cosmos EVM staking precompile's post-delegation balance write-back with additional balance-accounting flaws in the shared Cosmos EVM module. Public descriptions diverged on whether the exploit effectively minted unauthorized KII or only redirected existing balances from victim accounts.…"
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Multiple blockchains based on the Cosmos chain suffered exploits after Cosmos Labs publicly disclosed a vulnerability in the Cosmos EVM. Some have criticized Cosmos for \"negligence\" in their vulnerability management. KiiChain, one of the affected chains, wrote in their postmortem, \"This loss was avoidable. ... Publishing a security fix in the open, before the chains running that code have been told privately and given time to patch, hands the vulnerability to anyone reading the commit. Standard responsible disclosure exists precisely to prevent this. Cosmos Labs gave no advance notice to downstream chains, did not flag the release as security critical,…"
     }
   ],
   "audit": null,
@@ -51,7 +61,8 @@
     "defillama",
     "rekt",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -78,6 +89,26 @@
       "source": "revertiq",
       "label": "github.com",
       "url": "https://github.com/KiiChain/kiichain/releases"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=cosmos-based-blockchain-exploits"
+    },
+    {
+      "source": "w3igg",
+      "label": "protos.com",
+      "url": "https://protos.com/cosmos-labs-under-fire-over-disclosure-of-bug-affecting-four-blockchains/"
+    },
+    {
+      "source": "w3igg",
+      "label": "x.com",
+      "url": "https://x.com/KiiChainio/status/2091721027583709214"
+    },
+    {
+      "source": "w3igg",
+      "label": "x.com",
+      "url": "https://x.com/bubblemaps/status/2092613204396650888"
     }
   ]
 }

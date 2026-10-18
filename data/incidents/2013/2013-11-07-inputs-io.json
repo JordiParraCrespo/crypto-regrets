@@ -1,0 +1,88 @@
+{
+  "id": "2013-11-07-inputs-io",
+  "name": "inputs.io",
+  "date": "2013-11-07",
+  "year": 2013,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [],
+  "targetType": null,
+  "category": "key-compromise",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "key-leak-infrastructure",
+    "confidence": 0.53
+  },
+  "technique": "server hot wallet breach; cloud infrastructure breach",
+  "classificationNote": "Classified by keyword rules from the Blockchain Graveyard label and description.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "frontend-infra",
+    "confidence": 0.48,
+    "top": [
+      {
+        "category": "frontend-infra",
+        "p": 0.51
+      },
+      {
+        "category": "key-compromise",
+        "p": 0.37
+      },
+      {
+        "category": "social-engineering",
+        "p": 0.08
+      }
+    ],
+    "flashLoan": 0.01,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "Cloud infrastructure account takeover. Some kind of 2FA bypass exploit as well. Source code, wallets, and user data exfiltrated by attacker. Two hacks totalling about 4100 BTC have left Inputs.io unable to pay all user balances. The attacker compromised the hosting account through compromising email accounts (some very old, and without phone numbers attached, so it was easy to reset). The attacker was able to bypass 2FA due to a flaw on the server host side. Database access was also obtained, however passwords are securely stored and are hashed on the client. Bitcoin backend code were transferred to 10;15Hd@mastersearching.com:mercedes49@69.85.88.31 (most likely another compromised server).",
+  "descriptions": [
+    {
+      "source": "Blockchain Graveyard",
+      "text": "Cloud infrastructure account takeover. Some kind of 2FA bypass exploit as well. Source code, wallets, and user data exfiltrated by attacker. Two hacks totalling about 4100 BTC have left Inputs.io unable to pay all user balances. The attacker compromised the hosting account through compromising email accounts (some very old, and without phone numbers attached, so it was easy to reset). The attacker was able to bypass 2FA due to a flaw on the server host side. Database access was also obtained, however passwords are securely stored and are hashed on the client. Bitcoin backend code were transferred to 10;15Hd@mastersearching.com:mercedes49@69.85.88.31 (most likely another compromised server)."
+    },
+    {
+      "source": "Blockchain Graveyard",
+      "text": "This was a clear application vulnerability with a potentially fraudulent cover up and incident response. On July 28, 2013, hackers discovered an application condition that allowed them to credit accounts from a wallet supporting multiple organizations (Bitfunder and WeExchange). While the SEC found fraud, this seems to be more related to handling of the breach and operating an unregistered exchange. During the summer of 2013, one or more individuals (the “Hackers”) exploited a weakness in the BitFunder programming code to cause BitFunder to credit the Hackers with profits they did not, in fact, earn (the “Exploit”). As a result, the Hackers were able t…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "graveyard"
+  ],
+  "references": [
+    {
+      "source": "graveyard",
+      "label": "Blockchain Graveyard",
+      "url": "http://archive.is/1eyKg"
+    },
+    {
+      "source": "graveyard",
+      "label": "archive.is",
+      "url": "http://archive.is/1eyKg"
+    },
+    {
+      "source": "graveyard",
+      "label": "Blockchain Graveyard",
+      "url": "https://www.justice.gov/usao-sdny/press-release/file/1037116/download"
+    },
+    {
+      "source": "graveyard",
+      "label": "nakedsecurity.sophos.com",
+      "url": "https://nakedsecurity.sophos.com/2018/02/23/bitcoin-exchange-founder-charged-with-covering-up-hack/"
+    },
+    {
+      "source": "graveyard",
+      "label": "sec.gov",
+      "url": "https://www.sec.gov/news/press-release/2018-23"
+    }
+  ]
+}

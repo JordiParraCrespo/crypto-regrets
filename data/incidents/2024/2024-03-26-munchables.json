@@ -10,6 +10,12 @@
   ],
   "targetType": "Gaming",
   "category": "access-control",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "uninitialized-implementation",
+    "confidence": 0.26
+  },
   "technique": "Proxy Upgrade Hijack",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -54,6 +60,10 @@
     {
       "source": "RevertIQ",
       "text": "On March 26, 2024, a developer hired by the Munchables GameFi protocol on Blast upgraded the main contract to assign themselves a massive fake ETH balance, then withdrew 17,413 ETH (~$62.8 million). The attacker surrendered the keys and all funds were recovered after public negotiation. A developer with privileged access abused upgrade rights to the protocol's proxy contract, pushing an implementation that granted themselves a fictional ETH balance. Weak internal controls allowed a single actor to deploy and upgrade contracts, enabling insider fraud."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The \"Munchables\" crypto game explains: \"Schnibbles grow on every realm across the Munchable's world. Each realm has their own unique and distinctive schniblet, and the Munchables react differently based on their compatibility to the schniblets fed to them. When creating an account for the Munchables, you must choose the location of your snuggery.\" Right then. Things went awry in the land of the schnibbles and snuggeries when an attacker siphoned around 17,400 ETH ($62.5 million). Various descriptions of the attack circulated, with blockchain sleuth zachxbt attributing it to a recently hired developer, and crypto developer 0xQuit claiming the theft appe…"
     }
   ],
   "audit": "Entersof",
@@ -66,7 +76,8 @@
     "defillama",
     "rekt",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -123,6 +134,21 @@
       "source": "revertiq",
       "label": "cryptobriefing.com",
       "url": "https://cryptobriefing.com/munchables-exploiter-returns-drained-funds/"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=munchables-hack"
+    },
+    {
+      "source": "w3igg",
+      "label": "cointelegraph.com",
+      "url": "https://cointelegraph.com/news/nft-game-munchables-blast-exploited-62-million"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/0xQuit/status/1772764465555275877"
     }
   ]
 }

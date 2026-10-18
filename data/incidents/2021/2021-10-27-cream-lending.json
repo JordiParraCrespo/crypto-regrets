@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "oracle-manipulation",
+  "vulnClass": "spot-price-oracle",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "spot-price-oracle",
+    "confidence": 0.7
+  },
   "technique": "Spot Price Manipulation",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -54,6 +60,10 @@
     {
       "source": "RevertIQ",
       "text": "Cream Finance lost more than $130 million on October 27, 2021 to a flash-loan-driven oracle manipulation. The attacker used recursive collateral amplification and spot vault price manipulation to inflate yUSD collateral value, then borrowed nearly all of Cream's liquid assets in a single transaction. Cream Finance's oracle for yUSD collateral accepted the instantaneous pricePerShare value from a Yearn vault. This spot exchange rate was manipulable in a single block via flash loan injection of vault assets, enabling the attacker to inflate collateral value and drain lending pools."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Crypto lending service C.R.E.A.M. Finance lost $130 million in a flash loan attack. It was the third hack of the platform this year, following a $37.5 million hack in February and an $18.8 million attack in August."
     }
   ],
   "audit": "Unaudited",
@@ -66,7 +76,8 @@
     "defihacklabs",
     "rekt",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -108,6 +119,21 @@
       "source": "revertiq",
       "label": "smartcontractaudit.com",
       "url": "https://www.smartcontractaudit.com/guides/cream-finance-2021-v2-oracle-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=cream-hacked-for-third-time"
+    },
+    {
+      "source": "w3igg",
+      "label": "vice.com",
+      "url": "https://www.vice.com/en/article/m7vjjy/cryptocurrency-loan-platform-implodes-in-dollar130-million-hack"
+    },
+    {
+      "source": "w3igg",
+      "label": "theblockcrypto.com",
+      "url": "https://www.theblockcrypto.com/post/122241/ethereum-defi-protocol-cream-finance-hacked-for-115-million"
     }
   ]
 }

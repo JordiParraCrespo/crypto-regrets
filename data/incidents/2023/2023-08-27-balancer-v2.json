@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "oracle-manipulation",
+  "vulnClass": "spot-price-oracle",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "spot-price-oracle",
+    "confidence": 0.61
+  },
   "technique": "Spot Price Manipulation",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -58,6 +64,10 @@
     {
       "source": "RevertIQ",
       "text": "Balancer V2 boosted pools were exploited on Ethereum on 2023-08-27 after attackers manipulated Linear Pool BPT rates through rounding errors and virtual supply resets. The attack targeted remaining at-risk liquidity after Balancer had already warned users to withdraw, and the mainnet loss was reported at roughly $980,000. Balancer Linear Pools allowed extreme BPT rate manipulation through rounding-down behavior in swap scaling logic combined with a virtual-supply reset path that returned the rate to 1 when circulating supply reached zero. Attackers used crafted batch swaps in nested boosted pools to inflate cached token rates, exchange overpriced BPT f…"
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "After warning users several days prior that a critical vulnerability had been discovered in their protocol , the Balancer defi project has been drained of around more than $2.1 million in a series of exploits apparently taking advantage of the bug. Balancer acknowledged the hack, writing on Twitter that \"Balancer is aware of an exploit related to the vulnerability [disclosed on August 22]. Mitigation procedures have drastically reduced risks, but [we] are unable to pause affected pools .\" They reiterated that users needed to withdraw funds from affected liquidity pools to prevent further thefts. The blockchain researcher known on Twitter as MevRefund q…"
     }
   ],
   "audit": "Out of scope",
@@ -71,7 +81,8 @@
     "rekt",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -133,6 +144,21 @@
       "source": "revertiq",
       "label": "forum.balancer.fi",
       "url": "https://forum.balancer.fi/t/vulnerability-found-in-some-pools/5102"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=balancer-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Balancer/status/1695777503699435751"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/MevRefund/status/1695792040531960116"
     }
   ]
 }

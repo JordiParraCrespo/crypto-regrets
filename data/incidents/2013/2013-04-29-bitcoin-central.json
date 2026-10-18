@@ -1,0 +1,74 @@
+{
+  "id": "2013-04-29-bitcoin-central",
+  "name": "Bitcoin Central",
+  "date": "2013-04-29",
+  "year": 2013,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [],
+  "targetType": null,
+  "category": "key-compromise",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "key-leak-infrastructure",
+    "confidence": 0.39
+  },
+  "technique": "cloud provider breach; server hot wallet breach",
+  "classificationNote": "Classified by keyword rules from the Blockchain Graveyard label and description.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "key-compromise",
+    "confidence": 0.5,
+    "top": [
+      {
+        "category": "key-compromise",
+        "p": 0.53
+      },
+      {
+        "category": "frontend-infra",
+        "p": 0.43
+      },
+      {
+        "category": "access-control",
+        "p": 0.03
+      }
+    ],
+    "flashLoan": 0.01,
+    "stateActor": 0.02,
+    "hasRootCause": 0.97
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "This was an account takeover on the victim's cloud provider, allowing access to a server hosting a hot wallet. This was part of a larger breach. Someone managed to reset the password from our hosting provider web interface, this enabled the attacker to lock us out of the interface and request a reboot of the machine in 'rescue' mode. Using this, the attacker copied our hot wallet and sent away what was present. This very hosting provider (OVH) had been compromised a couple of days ago, in the exact same way, leading to loss of funds on mining.bitcoin.cz.",
+  "descriptions": [
+    {
+      "source": "Blockchain Graveyard",
+      "text": "This was an account takeover on the victim's cloud provider, allowing access to a server hosting a hot wallet. This was part of a larger breach. Someone managed to reset the password from our hosting provider web interface, this enabled the attacker to lock us out of the interface and request a reboot of the machine in 'rescue' mode. Using this, the attacker copied our hot wallet and sent away what was present. This very hosting provider (OVH) had been compromised a couple of days ago, in the exact same way, leading to loss of funds on mining.bitcoin.cz."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "graveyard"
+  ],
+  "references": [
+    {
+      "source": "graveyard",
+      "label": "Blockchain Graveyard",
+      "url": "https://gist.github.com/oleganza/5465922"
+    },
+    {
+      "source": "graveyard",
+      "label": "gist.github.com",
+      "url": "https://gist.github.com/oleganza/5465922"
+    },
+    {
+      "source": "graveyard",
+      "label": "theregister.co.uk",
+      "url": "http://www.theregister.co.uk/2013/07/23/top_server_host_ovh_warns_of_multistage_hacking_attack/"
+    }
+  ]
+}

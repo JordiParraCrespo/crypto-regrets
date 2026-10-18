@@ -10,6 +10,12 @@
   ],
   "targetType": "Gaming",
   "category": "access-control",
+  "vulnClass": "missing-access-modifier",
+  "vulnClassBy": "typesafe",
+  "aiClass": {
+    "id": "missing-access-modifier",
+    "confidence": 0.91
+  },
   "technique": "Improper Access Control",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -42,6 +48,10 @@
     {
       "source": "RevertIQ",
       "text": "Crypto Burgers on BNB Chain suffered a flash loan exploit on January 17, 2022, resulting in losses initially estimated at $770,000. The root cause was a smart contract flaw allowing arbitrary token burns, leading to unauthorized fund extraction. Approximately 58.5% of stolen funds were reportedly returned. The incident was enabled by a vulnerability in the token contract that allowed tokens to be burned from any account. This was an improper access control issue,there was no restriction preventing arbitrary external callers from burning and draining tokens from other users."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The value of the $BURG token associated with the CryptoBurgers game suddenly plummeted after being hacked shortly after launching earlier that day. The game allowed users to earn cryptocurrency by flipping burgers... yes, really. A bug in the smart contract allowed an attacker to use flash loan attacks to drain $BURG, netting them around $770,000 as of that evening. The CryptoBurgers team announced they would be contacting Binance to try to recover funds, and the team would be creating a new smart contract and token. Hope the next one goes better!"
     }
   ],
   "audit": null,
@@ -52,7 +62,8 @@
   "sources": [
     "defillama",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -79,6 +90,26 @@
       "source": "revertiq",
       "label": "coincodecap.com",
       "url": "https://coincodecap.com/crypto-burgers-hacked"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=cryptoburgers-hacked"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/peckshield/status/1482924760002482178"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/certikorg/status/1482930661547782148"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/CryptoBurgerNFT/status/1482963147967406081"
     }
   ]
 }

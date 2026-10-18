@@ -10,6 +10,12 @@
   ],
   "targetType": "Token",
   "category": "logic-error",
+  "vulnClass": "business-logic-flaw",
+  "vulnClassBy": "typesafe",
+  "aiClass": {
+    "id": "business-logic-flaw",
+    "confidence": 0.96
+  },
   "technique": "Logic Flaw",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -50,6 +56,10 @@
     {
       "source": "RevertIQ",
       "text": "On 26 May 2024, the NORMIE token contract on Base suffered a logic exploit that enabled an attacker to mint hundreds of millions of tokens, collapse the market cap by over 99%, and extract more than $880,000 in ETH. The attack exploited a flawed authorization condition on a privileged role (premarket_user) and a hidden minting pathway inside _transfer(). The NORMIE token contract assigned the powerful premarket_user role to any address that received a token transfer equal to the team wallet's balance. Once granted, this role unlocked a conditional minting branch in _transfer(), allowing the attacker to endlessly credit the contract's balance during mar…"
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "An attacker perpetrated a flash loan attack on the \"Normie\" memecoin on the Base layer-2 blockchain to drain millions of NORMIE tokens. The vulnerability was evidently discovered in March, but never patched. Although the token claimed to have a market cap of $42 million, the attacker was only able to cash out around 224 w ETH (~$882,000). However, the losses to some holders of the token were much more substantial. One individual had put around $1.16 million into $NORMIE, and those holdings are now priced at around $150. The attacker has been negotiating the possible return of funds to the project team, who has expressed interest in relaunching the token."
     }
   ],
   "audit": null,
@@ -62,7 +72,8 @@
     "defihacklabs",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -129,6 +140,21 @@
       "source": "revertiq",
       "label": "certik.com",
       "url": "https://www.certik.com/blog/normie-incident-analysis"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=normie-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "certik.com",
+      "url": "https://www.certik.com/resources/blog/normie-incident-analysis"
+    },
+    {
+      "source": "w3igg",
+      "label": "cointelegraph.com",
+      "url": "https://cointelegraph.com/news/normie-memecoin-team-mulls-hacker-demands-after-token-falls-99"
     }
   ]
 }

@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "logic-error",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "business-logic-flaw",
+    "confidence": 0.8
+  },
   "technique": "Liquidation Logic Flaw",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -58,6 +64,10 @@
     {
       "source": "RevertIQ",
       "text": "OnyxDAO, a Compound V2 fork, was exploited for over $3.8M after an attacker manipulated oETH exchange rates via precision loss and used flawed NFTLiquidation inputs to seize collateral with minimal repayment. The protocol's Compound V2-based contracts suffered from an exchange rate precision bug, particularly in low-liquidity markets. The NFTLiquidation contract failed to validate repayAmount and extraRepayAmount, enabling near-zero-cost self-liquidation by the attacker after exchange rate manipulation."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The Onyx protocol was hacked for a second time by attackers taking advantage of known bugs in forks of the Compound Finance project. Projects regularly fail to patch these bugs, despite many instances of multi-million dollar hacks affecting Compound forks in the past. Onyx apparently didn't learn their lesson the first time around, when they were exploited for $2 million in November 2023 by an attacker taking advantage of a known vulnerability affecting empty markets on the protocol. This same bug seems to have contributed to this exploit, although Onyx has claimed the hack was due to a separate vulnerability in an NFT liquidation contract ."
     }
   ],
   "audit": "CertiK",
@@ -75,7 +85,8 @@
     "rekt",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -152,6 +163,16 @@
       "source": "revertiq",
       "label": "github.com",
       "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/past/2024/README.md#L565"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=onyx-hack-2"
+    },
+    {
+      "source": "w3igg",
+      "label": "cointelegraph.com",
+      "url": "https://cointelegraph.com/news/onyx-protocol-exploited-second-time-3-8m-via-known-bug"
     }
   ]
 }

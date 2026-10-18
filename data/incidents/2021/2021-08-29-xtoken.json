@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "oracle-manipulation",
+  "vulnClass": "spot-price-oracle",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "spot-price-oracle",
+    "confidence": 0.95
+  },
   "technique": "Spot Price Manipulation",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -50,6 +56,10 @@
     {
       "source": "RevertIQ",
       "text": "xToken's xSNX product on Ethereum was exploited on August 29, 2021 via a flash loan and spot price manipulation, resulting in an estimated $4.5 million loss. The attacker exploited an access control flaw and manipulated SNX prices to extract profits from the protocol. A callback function in the xSNXAdmin contract intended to be callable only by dYdX's SoloMargin contract used the wrong access check, leaving it exposed to anyone. The attacker used this alongside aggressive SNX price manipulation to purchase underpriced SNX and drain value."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "A vulnerability in xToken's xSNX product allowed hackers to use flash loans to empty $4.5 million from xToken. This hack followed an even larger hack in May, where the platform was exploited for around $25 million."
     }
   ],
   "audit": "Unaudited",
@@ -59,7 +69,8 @@
     "defillama",
     "rekt",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -91,6 +102,16 @@
       "source": "revertiq",
       "label": "coingeek.com",
       "url": "https://coingeek.com/xtoken-defi-protocol-loses-7m-in-yet-another-exploit/"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=xtoken-second-hack"
+    },
+    {
+      "source": "w3igg",
+      "label": "cointelegraph.com",
+      "url": "https://cointelegraph.com/news/beleaguered-defi-project-xtoken-suffers-second-major-exploit-since-may"
     }
   ]
 }

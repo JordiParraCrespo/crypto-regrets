@@ -11,6 +11,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "key-compromise",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "admin-key-compromise",
+    "confidence": 0.24
+  },
   "technique": "Private Key Compromised",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -43,6 +49,10 @@
     {
       "source": "RevertIQ",
       "text": "A single phishing email to a Humanity Protocol director led to the theft of seven high-privilege keys, allowing attackers to bypass multisig protections, seize ProxyAdmin control on Ethereum and BNB Chain, drain locked H tokens, and mint billions of new H tokens. The attack inflicted over $36M in losses, with the Ethereum deployment later frozen and the BNB Chain permanently compromised. The root cause was operational key management failure: seven critical admin keys, including multiple Gnosis Safe signer keys for both chains, were stored on a single compromised device. Once attackers gained remote access via phishing, they collected the keys and execu…"
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Humanity Protocol, a decentralized identity project that uses palm scans to try to prove that users are human, has suffered a $36 million loss after attackers compromised a laptop belonging to an employee. After the laptop was infected with malware, the malicious code gained root access, then stole seven private keys that were reportedly accidentally stored in a backup. Several of the keys were sufficient to satisfy multisignature requirements, which are intended to prevent private key leaks from allowing attackers to gain control over sensitive infrastructure like bridges . With multisignature wallets, keys are supposed to be stored separately across…"
     }
   ],
   "audit": null,
@@ -61,7 +71,8 @@
     "defillama",
     "rekt",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -98,6 +109,21 @@
       "source": "revertiq",
       "label": "cryptotimes.io",
       "url": "https://www.cryptotimes.io/2026/06/13/humanity-protocol-36m-hack-phishing-email-dprk-links-revealed"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=humanity-protocol-theft"
+    },
+    {
+      "source": "w3igg",
+      "label": "halborn.com",
+      "url": "https://www.halborn.com/blog/post/explained-the-humanity-protocol-hack-june-2026"
+    },
+    {
+      "source": "w3igg",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/tech/2026/06/09/humanity-s-usd36-million-exploit-happened-because-a-multisig-wallet-lived-on-one-laptop"
     }
   ]
 }

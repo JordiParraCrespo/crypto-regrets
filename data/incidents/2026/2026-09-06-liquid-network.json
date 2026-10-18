@@ -10,6 +10,12 @@
   ],
   "targetType": "Chain",
   "category": "bridge-crosschain",
+  "vulnClass": "unbacked-crosschain-mint",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "unbacked-crosschain-mint",
+    "confidence": 0.43
+  },
   "technique": "Unbacked Cross-Chain Mint",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -50,6 +56,10 @@
     {
       "source": "RevertIQ",
       "text": "Liquid Network halted peg operations on 2026-09-06 after attackers reportedly exploited an Elements range-proof cache collision bug to mint unbacked L-BTC and redeem it for nearly 4,000 BTC from federation reserves. Public reporting states that about 3,400 BTC was later returned while roughly 598.5 BTC remained outstanding. Public reporting attributes the incident to a consensus validation bug in the Elements codebase used by Liquid Network. Reported analyses state that range-proof verification cache keys were constructed from variable-length fields without explicit length prefixes, allowing cache-key collisions that caused nodes to reuse a cached succ…"
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "An unauthorized withdrawal of 3,998.5 BTC (~$320 million) from the Liquid Network, a bitcoin sidechain , prompted a network halt. By disabling nodes that bridge between Liquid and the bitcoin mainchain, attackers are limited in their ability to cash out via bridge. Blockstream, the developers of Liquid Network, also said they had contacted exchanges to ask them to pause LBTC deposits and withdrawals, cutting off another avenue. The unauthorized transaction included a message reading \"we are whitehats . contact us on chain\", suggesting the possibility that the withdrawal was in fact well-intentioned security researchers aiming to \"rescue\" funds after di…"
     }
   ],
   "audit": null,
@@ -59,7 +69,8 @@
     "defillama",
     "rekt",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -91,6 +102,16 @@
       "source": "revertiq",
       "label": "coindesk.com",
       "url": "https://www.coindesk.com/markets/2026/09/07/bitcoin-network-used-by-exchanges-hit-by-usd320-million-exploit-hackers-claim-they-re-the-good-guys"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=liquid-network-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "x.com",
+      "url": "https://x.com/Liquid_BTC/status/2096696272447218108"
     }
   ]
 }

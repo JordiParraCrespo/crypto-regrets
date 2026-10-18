@@ -3,22 +3,30 @@
   "name": "OpenSea",
   "date": "2022-05-06",
   "year": 2022,
-  "amountUsd": null,
+  "amountUsd": 20000,
   "returnedUsd": null,
-  "chains": [],
+  "chains": [
+    "Ethereum"
+  ],
   "targetType": null,
   "category": "social-engineering",
+  "vulnClass": "phishing-credential-theft",
+  "vulnClassBy": "typesafe",
+  "aiClass": {
+    "id": "phishing-credential-theft",
+    "confidence": 1
+  },
   "technique": "Account Compromise",
-  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.88). Replaced keyword guess \"logic-error\".",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.89). Replaced keyword guess \"logic-error\".",
   "classifiedBy": "typesafe",
   "ai": {
     "model": "jev-1.13.0",
     "category": "social-engineering",
-    "confidence": 0.88,
+    "confidence": 0.89,
     "top": [
       {
         "category": "social-engineering",
-        "p": 0.89
+        "p": 0.9
       },
       {
         "category": "key-compromise",
@@ -26,12 +34,12 @@
       },
       {
         "category": "frontend-infra",
-        "p": 0.03
+        "p": 0.02
       }
     ],
     "flashLoan": 0.01,
     "stateActor": 0.02,
-    "hasRootCause": 0.86
+    "hasRootCause": 0.85
   },
   "bridge": false,
   "language": null,
@@ -40,19 +48,39 @@
     {
       "source": "SlowMist",
       "text": "Sentinel founder Serpent tweeted that OpenSea's official Discord was attacked. Hackers used bot accounts to post fake links in the channel, and said that \"OpenSea has reached a cooperation with YouTube. Click the link to participate in the mint pass NFT limited to 100 pieces.\" Users should be aware of the risks and do not click on links provided by hackers."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The OpenSea Discord server was compromised, allowing a scammer to post a seemingly-official announcement that OpenSea was partnering with YouTube on a line of NFTs. They urged people to act quickly to snag one of only 100 free NFTs that would offer \"insane utility\". Given OpenSea's prominence, it's surprising that the hacker managed to obtain relatively few NFTs of much value. The wallet appeared to have successfully stolen only 13 NFTs, none of which were from high-value collections, that are worth a collective $20,000 if resold at the collections' floor prices . OpenSea tweeted several messages acknowledging the hack and urging users not to click any links.…"
     }
   ],
   "audit": null,
   "txHashes": [],
   "poc": null,
   "sources": [
-    "slowmist"
+    "slowmist",
+    "w3igg"
   ],
   "references": [
     {
       "source": "slowmist",
       "label": "twitter.com",
       "url": "https://twitter.com/Serpent/status/1522494914550181888"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=opensea-discord-hacked"
+    },
+    {
+      "source": "w3igg",
+      "label": "vice.com",
+      "url": "https://www.vice.com/en/article/m7vz3y/opensea-discord-hacked-nfts-stolen-using-fake-youtube-site"
+    },
+    {
+      "source": "w3igg",
+      "label": "theverge.com",
+      "url": "https://www.theverge.com/2022/5/6/23059715/nft-discord-phishing-opensea-youtube"
     }
   ]
 }

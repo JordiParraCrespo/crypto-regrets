@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "reentrancy",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "token-hook-reentrancy",
+    "confidence": 0.32
+  },
   "technique": "Reentrancy",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -58,6 +64,10 @@
     {
       "source": "RevertIQ",
       "text": "On December 19, 2021, Grim Finance on Fantom was exploited for approximately $30 million after an attacker abused a reentrancy vulnerability in the depositFor function, inflating vault shares and withdrawing excessive assets. The depositFor function in the Grim Finance vault contract executed an external token transfer before updating user share balances. This allowed a malicious token's transfer callback to reenter depositFor, causing multiple share minting for a single deposit and enabling the attacker to drain assets."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Grim Finance, the \"compounding yield optimizer\" DeFi platform, was hacked. According to them, attackers exploited a bug in the platform to perform a reentrancy attack that netted them $30 million. Grim, indeed. A cryptocurrency watchdog group, RugDoc, opined that the exploit was possible because of very basic mistakes in implementation, and wrote, \"Hopefully all projects can draw lessons from this incident that there is much knowledge most experienced solidity devs have at hand. If you haven't acquired this yet, don't build multi-million dollar projects. Don't get audits from companies which everyone knows are useless.\" This was apparently a dig at Sol…"
     }
   ],
   "audit": "Solidity Finance",
@@ -70,7 +80,8 @@
     "defihacklabs",
     "rekt",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -132,6 +143,21 @@
       "source": "revertiq",
       "label": "github.com",
       "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/past/2021/README.md#L133"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=grim-finance-exploited-for-30-million"
+    },
+    {
+      "source": "w3igg",
+      "label": "decrypt.co",
+      "url": "https://decrypt.co/88727/grim-finance-hacked-30-million-fantom-tokens"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/RugDocIO/status/1472293712185151492"
     }
   ]
 }

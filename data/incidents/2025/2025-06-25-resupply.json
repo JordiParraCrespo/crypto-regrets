@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "accounting-math",
+  "vulnClass": "share-inflation",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "share-inflation",
+    "confidence": 1
+  },
   "technique": "Donation Attack",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -54,6 +60,10 @@
     {
       "source": "RevertIQ",
       "text": "On June 26, 2025, an attacker exploited a newly deployed, low-liquidity Resupply Protocol market on Ethereum, using a donation attack to manipulate share pricing in an ERC-4626 vault and bypass collateralization checks. Over $9.5 million in reUSD stablecoins was drained before the market was paused. The protocol used an unprotected share price calculation for ERC-4626 vault collateral. With zero initial vault liquidity, a donation of crvUSD and a minimal deposit enabled one minted share to account for the entire vault, causing a manipulated exchange rate that bypassed the loan-to-value solvency check and enabled borrowing the full limit."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "An attacker was able to exploit a vulnerability in a smart contract used by the Resupply stablecoin lender to extract about $9.3 million from the project. After depositing around $200,000, they were able to inflate the price of another token and borrow almost $10 million. Resupply announced the theft shortly afterwards, and stated that they had paused the vulnerable contract. Resupply is a fairly new project, having officially launched on March 20 — about three months before the exploit."
     }
   ],
   "audit": "ChainSecurity, Electi",
@@ -69,7 +79,8 @@
     "rekt",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -136,6 +147,21 @@
       "source": "revertiq",
       "label": "de.fi",
       "url": "https://de.fi/blog/de-fi-rekt-report-june-2025-114-8-million-lost-across-11-exploits"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=resupply-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "dlnews.com",
+      "url": "https://www.dlnews.com/articles/defi/defi-stablecoin-lending-protocol-resupply-hit-with-93m-exploit/"
+    },
+    {
+      "source": "w3igg",
+      "label": "x.com",
+      "url": "https://x.com/ResupplyFi/status/1938092252431036491"
     }
   ]
 }

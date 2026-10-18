@@ -11,6 +11,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "arbitrary-call",
+  "vulnClass": "approval-drain",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "arbitrary-external-call",
+    "confidence": 0.94
+  },
   "technique": "Token Approval Abuse",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -59,6 +65,10 @@
     {
       "source": "RevertIQ",
       "text": "On February 28, 2024, Seneca Protocol suffered an exploit on Ethereum and Arbitrum. Attackers abused a Chamber contract's arbitrary external call capability, enabling unauthorized ERC20 transfers from user wallets and draining over $6.4M. Most funds were later returned following negotiations. The Chamber contract allowed arbitrary external calls via performOperations, letting attackers execute token transfers from any address the contract had approval for without verification."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "A bug in Seneca Protocol's smart contract has allowed attackers to steal funds from users who had approved the contract. So far, around $3 million has been stolen across the Ethereum blockchain and Arbitrum layer-2 . Making things worse, although the project's smart contract inherits the Pausable module that should allow the Seneca team to halt the malfunctioning code, they never implemented the function, meaning there's no way for them to stop the thefts. Instead, individual users must each revoke access to the flawed contract."
     }
   ],
   "audit": "Halborn",
@@ -79,7 +89,8 @@
     "rekt",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -141,6 +152,21 @@
       "source": "revertiq",
       "label": "cyfrin.io",
       "url": "https://www.cyfrin.io/blog/seneca-attack-hack-analysis-proof-of-concept"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=seneca-protocol-bug"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/spreekaway/status/1762857769714012217"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/peckshield/status/1762870782495985750"
     }
   ]
 }

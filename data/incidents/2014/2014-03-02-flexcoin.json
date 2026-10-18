@@ -10,6 +10,12 @@
   ],
   "targetType": "CEX",
   "category": "logic-error",
+  "vulnClass": "state-update-flaw",
+  "vulnClassBy": "typesafe",
+  "aiClass": {
+    "id": "state-update-flaw",
+    "confidence": 1
+  },
   "technique": "Withdrawal Logic Flaw",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -38,6 +44,10 @@
     {
       "source": "RevertIQ",
       "text": "On March 2, 2014, Flexcoin lost 896 BTC (~$600,000) after attackers exploited a race condition in its internal transfer logic, allowing simultaneous overdraws from user accounts and draining the service's hot wallet. Cold storage balances were unaffected. Flexcoin was forced to shut down and could not recover the stolen bitcoins. A race condition in the code handling internal transfers between Flexcoin user accounts allowed attackers to send thousands of requests at once, overdrawing their balance before the system reconciled accounts. This enabled theft from the hot wallet."
+    },
+    {
+      "source": "Blockchain Graveyard",
+      "text": "\"Front End\" flaw implies an application vulnerability involving transactions between users of their application. It sounds like a race condition given the use of thousands of requests that were necessary to deplete the wallet before the off-chain ledger could update. During the investigation into stolen funds we have determined that the extent of the theft was enabled by a flaw within the front-end. The attacker logged into the flexcoin front end from IP address 207.12.89.117 under a newly created username and deposited to address 1DSD3B3uS2wGZjZAwa2dqQ7M9v7Ajw2iLy. The coins were then left to sit until they had reached 6 confirmations. The attacker th…"
     }
   ],
   "audit": null,
@@ -45,7 +55,8 @@
   "poc": null,
   "sources": [
     "defillama",
-    "revertiq"
+    "revertiq",
+    "graveyard"
   ],
   "references": [
     {
@@ -67,6 +78,11 @@
       "source": "revertiq",
       "label": "pcworld.com",
       "url": "https://www.pcworld.com/article/444202/withdrawal-vulnerabilities-enabled-bitcoin-theft-from-flexcoin-and-poloniex.html"
+    },
+    {
+      "source": "graveyard",
+      "label": "Blockchain Graveyard",
+      "url": "http://archive.is/s9dUP"
     }
   ]
 }

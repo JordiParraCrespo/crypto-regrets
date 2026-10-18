@@ -10,6 +10,12 @@
   ],
   "targetType": "NFTfi",
   "category": "logic-error",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "business-logic-flaw",
+    "confidence": 0.56
+  },
   "technique": "Withdrawal Logic Flaw",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -46,6 +52,10 @@
     {
       "source": "RevertIQ",
       "text": "OpenSea's January 2022 exploit allowed attackers to purchase NFTs at obsolete, deeply discounted prices due to a listing cancellation flaw. Over $1 million in NFT value was lost, and OpenSea reimbursed victims with about 750 ETH. The issue stemmed from a mismatch between frontend actions and blockchain-listed sale conditions. OpenSea failed to automatically cancel old NFT listings when users transferred tokens out of their wallet. The on-chain sale orders remained valid, letting attackers purchase high-value NFTs at outdated low prices and quickly resell them."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "A horrified (former) owner of a Bored Ape tweeted that his NFT had just unexpectedly sold for a measly 0.77 ETH (about $1,700) and that \"I cant financially afford that loss\". The purchaser netted a handsome profit by quickly reselling the NFT for 84.2 ETH ($190,000). It appears that the buyer took advantage of the fact that they could still purchase NFTs that had previously been listed for sale at a lower price, even once the owner thought they had removed the listing. In about 90 minutes, the person was able to exploit the issue by buying and selling several different NFTs for a total profit of about $880,000. A software engineer investigating the inc…"
     }
   ],
   "audit": null,
@@ -54,7 +64,8 @@
   "sources": [
     "defillama",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -81,6 +92,26 @@
       "source": "revertiq",
       "label": "cryptotimes.io",
       "url": "https://www.cryptotimes.io/2022/01/29/opensea-provides-1-8-million-compensation-to-victims-due-to-listing-error/"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=opensea-users-lose-collective-1-8-million"
+    },
+    {
+      "source": "w3igg",
+      "label": "therecord.media",
+      "url": "https://therecord.media/hacker-abuses-opensea-to-buy-nfts-at-older-cheaper-prices/"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/yakirrotem/status/1485559864948629512"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/T_BALLER6/status/1485523479097081857"
     }
   ]
 }

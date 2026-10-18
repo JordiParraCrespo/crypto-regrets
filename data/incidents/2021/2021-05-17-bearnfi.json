@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "logic-error",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "business-logic-flaw",
+    "confidence": 0.55
+  },
   "technique": "Withdrawal Logic Flaw",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -46,6 +52,10 @@
     {
       "source": "RevertIQ",
       "text": "On May 16, 2021, bEarn Fi's BUSD vault on BNB Chain was exploited via a deposit/withdrawal logic flaw allowing an attacker to exchange less valuable tokens for more valuable ones, draining $11,18M. The bug stemmed from mismatched token denominations between vault and strategy contracts, enabling repeated extraction of value. The strategy contract incorrectly treated BUSD and ibBUSD tokens as equivalent during deposit and withdrawal operations. This mis-accounting allowed attackers to withdraw more value than deposited by exploiting a logic mismatch and ignoring exchange rates."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "An attacker pulled $10.85 million in funds out of one of bEarn Fi's vaults by exploiting a bug that allowed them to withdraw more funds than they deposited. bEarn promised to compensate affected users with 105% of the amount they lost."
     }
   ],
   "audit": "Unaudited",
@@ -58,7 +68,8 @@
     "defihacklabs",
     "rekt",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -100,6 +111,16 @@
       "source": "revertiq",
       "label": "quadrigainitiative.com",
       "url": "https://quadrigainitiative.com/cryptocurrencyhackscamfraudwiki/index.php?title=BEarnFi_BVaults_Exploited"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=hacker-drains-10-85-million-from-bearn-fi"
+    },
+    {
+      "source": "w3igg",
+      "label": "cryptoslate.com",
+      "url": "https://cryptoslate.com/defi-platform-bearn-fi-promises-105-compensation-after-10-million-hack-but-is-it-the-right-thing/"
     }
   ]
 }

@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "accounting-math",
+  "vulnClass": "share-inflation",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "share-inflation",
+    "confidence": 0.84
+  },
   "technique": "Donation Attack",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -50,6 +56,10 @@
     {
       "source": "RevertIQ",
       "text": "Tectonic on Cronos was hit by a TONIC price-manipulation exploit on 2026-08-30. Public reporting puts the affected value around $75 million, with about $6 million bridged to Ethereum before Cronos halted block production. Tectonic accepted TONIC as collateral while the token’s spot price could be moved sharply because liquidity was thin. Once the manipulated price fed into borrowing power, the attacker could borrow liquid assets against inflated collateral. The exact incident-time oracle path and code revision were not independently verified here."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The ostensibly decentralized Cronos blockchain was halted after a price manipulation attack allowed an attacker to borrow around $120 million against nearly worthless collateral from the Tectonic lending platform. The attacker pumped the price of the thinly traded TONIC token, the native token of Tectonic, then borrowed against it. The attacker cashed out approximately $9.19 million by bridging it to Ethereum before the Cronos chain was halted, limiting their profits. The blockchain was offline for almost 24 hours, during which time it was rolled back to a block prior to the hack — essentially undoing all the transactions that occurred after that block.…"
     }
   ],
   "audit": null,
@@ -59,7 +69,8 @@
     "defillama",
     "rekt",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -91,6 +102,26 @@
       "source": "revertiq",
       "label": "smartcontractshacking.com",
       "url": "https://smartcontractshacking.com/hacks/tectonic-protocol-hack-2026"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=tectonic-theft"
+    },
+    {
+      "source": "w3igg",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/tech/2026/08/31/cronos-halts-blockchain-after-usd75-million-lending-exploit-hits-lending-app-tectonic"
+    },
+    {
+      "source": "w3igg",
+      "label": "x.com",
+      "url": "https://x.com/CronosNetwork/status/2094417832394301499"
+    },
+    {
+      "source": "w3igg",
+      "label": "decrypt.co",
+      "url": "https://decrypt.co/377686/cronos-erased-two-hours-transactions-defi-exploit"
     }
   ]
 }

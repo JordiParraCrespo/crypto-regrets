@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "access-control",
+  "vulnClass": "missing-access-modifier",
+  "vulnClassBy": "typesafe",
+  "aiClass": {
+    "id": "missing-access-modifier",
+    "confidence": 1
+  },
   "technique": "Improper Access Control",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -46,6 +52,10 @@
     {
       "source": "RevertIQ",
       "text": "On 2 September 2022, ShadowFi on BNB Chain was exploited after its SDF token burn function was left accessible to anyone. The attacker burned nearly all SDF in the liquidity pool, inflating SDF price, and drained about 1,078 BNB (over $300,000) via swaps. The ShadowFi SDF token implementation did not restrict the burn function, allowing any user to call it on arbitrary addresses. The attacker burned almost all SDF from the liquidity pool, artificially raising the token price, then swapped a small amount of SDF for a large BNB payout."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "An attacker discovered that anyone could call the burn function on the liquidity pool contract for the ShadowFi project. They were able to exploit this vulnerability by calling the burn function and then taking advantage of the price difference (based on the new circulating supply) to remove all 1078 BNB (~$298,000) in the project's liquidity pool. The project had only just launched that same day, after running a presale of their SDF tokens. The project promised to allow people to \"Take your spending away from the floodlights of surveillance capitalism\" and apparently involves sending people prepaid Visa cards to help them cash out their cryptocurrency…"
     }
   ],
   "audit": null,
@@ -57,7 +67,8 @@
     "defillama",
     "defihacklabs",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -94,6 +105,16 @@
       "source": "revertiq",
       "label": "doc.confluxnetwork.org",
       "url": "https://doc.confluxnetwork.org/docs/general/build/smart-contracts/contract-security/access-control-exploit/"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=attacker-exploits-bug-in-shadowfi-to-empty-300000-liquidity-pool"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/CertiKAlert/status/1565549825889914881"
     }
   ]
 }

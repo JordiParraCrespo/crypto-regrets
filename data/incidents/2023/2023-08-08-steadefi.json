@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "key-compromise",
+  "vulnClass": "admin-key-compromise",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "admin-key-compromise",
+    "confidence": 1
+  },
   "technique": "Deployer Key Compromised",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -46,6 +52,10 @@
     {
       "source": "RevertIQ",
       "text": "Steadefi's deployer admin key, which held sole owner privileges for all vault contracts across Arbitrum and Avalanche, was compromised via malware. The attacker drained $1.1M+ from lending vaults, swapped assets to ETH, bridged funds to Ethereum, and deposited proceeds into TornadoCash. Only partial funds were recovered. Compromise of the single deployer key (via malware/social engineering) enabled unrestricted owner actions across all vault contracts. No multisig or timelock blocked or delayed critical operations, making the system a single-point-of-failure admin structure."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "\"NOTICE: Steadefi has been exploited and all funds are currently at risk,\" wrote Steadefi on Twitter after an attacker was able to change the contract owner to their own address — likely indicating a private key leak. So far, 624 ETH (~$1.14 million) have been siphoned from the project."
     }
   ],
   "audit": null,
@@ -64,7 +74,8 @@
     "defillama",
     "rekt",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -116,6 +127,16 @@
       "source": "revertiq",
       "label": "itokenly.com",
       "url": "https://itokenly.com/hacks/steadefi"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=steadefi-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/spreekaway/status/1688628705776562176"
     }
   ]
 }

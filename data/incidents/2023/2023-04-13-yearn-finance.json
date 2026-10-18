@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "oracle-manipulation",
+  "vulnClass": "stale-misconfigured-feed",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "stale-misconfigured-feed",
+    "confidence": 1
+  },
   "technique": "Oracle Misconfiguration",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -58,6 +64,10 @@
     {
       "source": "RevertIQ",
       "text": "On April 13, 2023, Yearn Finance's legacy yUSDT vault on Ethereum was exploited due to a misconfigured Fulcrum integration, allowing attackers to mint excessive yUSDT shares with minimal USDT deposits. The attacker manipulated the vault price via flashloans and extracted approximately $11.5M in various stablecoins. The yUSDT contract was misconfigured to use the Fulcrum iUSDC token instead of iUSDT, leading to incorrect share pricing and allowing attackers to mint disproportionately large amounts of yUSDT with small USDT deposits."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "A bug in a token issued by the Yearn Finance defi protocol resulted in a loss that has been estimated at around $11.6 million. An attacker was able to use a 10,000 USDT deposit to mint more than 1.2 quadrillion yUSDT, a wrapped version of the Tether (USDT) stablecoin . Losses were limited somewhat by the fact that only older versions of the Yearn protocol were vulnerable to the bug, and the version had been \"frozen\" since December 2022. The attacker began swapping tokens out for other stablecoins shortly after the exploit, moving them into lending projects like Aave and laundering them through the Tornado Cash cryptocurrency mixer . There were early co…"
     }
   ],
   "audit": "Unaudited",
@@ -73,7 +83,8 @@
     "rekt",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -145,6 +156,21 @@
       "source": "revertiq",
       "label": "certik.com",
       "url": "https://www.certik.com/blog/earnings-misconfigured-yearn-finance-exploit-explained"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=yearn-finance-hack-2023"
+    },
+    {
+      "source": "w3igg",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/business/2023/04/13/defi-protocols-aave-yearn-finance-likely-impacted-in-exploit-peckshield/"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/peckshield/status/1646421063176450048"
     }
   ]
 }

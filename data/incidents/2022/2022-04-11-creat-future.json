@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "accounting-math",
+  "vulnClass": "integer-overflow",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "integer-overflow",
+    "confidence": 0.57
+  },
   "technique": "Overflow",
   "classificationNote": "Classified by keyword rules from the DeFiHackLabs root-cause title.",
   "classifiedBy": "keywords",
@@ -46,6 +52,10 @@
     {
       "source": "DeFiHackLabs explorer",
       "text": "The method of calculating the reward token EGD depends on the ratio of the balance in the pair of USDT and EGD, so the attacker can manipulate the amount of the reward by flashloan. Vulnerable code snippet Attack tx: https://bscscan.com/tx/0x50da0b1b6e34bce59769157df769eb45fa11efc7d0e292900d6b0a86ae66a2b3 Analysis: https://x.com/BlockSecTeam/status/1556497016016228358"
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "An attacker stole about $1.9 million after exploiting a bug in the smart contract for the Creat Future token. The contract's transfer function was defined as public, with no validation on the caller, allowing anyone to transfer tokens from any wallet. An attacker quickly exploited this flaw to drain millions of $CF tokens from various wallets, then exchange and tumble them to cover their tracks. The attacker made off with about $1.9 million, and the value of $CF crashed. $CF was an asset belonging to Creat Future, an early-stage defi project. Some have speculated that the hack was an inside job, and the vulnerable function was added intentionally."
     }
   ],
   "audit": null,
@@ -54,7 +64,8 @@
   ],
   "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-04/cftoken_exp.sol",
   "sources": [
-    "defihacklabs"
+    "defihacklabs",
+    "w3igg"
   ],
   "references": [
     {
@@ -81,6 +92,16 @@
       "source": "defihacklabs",
       "label": "x.com",
       "url": "https://x.com/BlockSecTeam/status/1556497016016228358"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=attacker-drains-creat-future-tokens-through-flaw-that-allows-anyone-to-transfer-the-contents-of-another-persons-wallet"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/peckshield/status/1513390068450308097"
     }
   ]
 }

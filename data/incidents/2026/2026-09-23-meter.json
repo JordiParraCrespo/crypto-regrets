@@ -12,6 +12,12 @@
   ],
   "targetType": "Chain",
   "category": "logic-error",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "solvency-check-flaw",
+    "confidence": 0.45
+  },
   "technique": "Smart Contract Vulnerability",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -44,6 +50,10 @@
     {
       "source": "SlowMist",
       "text": "Blockaid reported an ongoing exploit of Meter.io’s Meter Passport bridge on BNB Chain. An attacker minted a large amount of unbacked wrapped MTRG through the bridge and sold part of it on PancakeSwap. About $2,300,000 of unbacked wMTRG had been minted in roughly two transactions when the alert went out, and the attack was still ongoing."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "An exploiter was able to mint unbacked wrapped MTR and MTRG tokens, notionally priced at more than $2.3 million. They sold some of the tokens on a decentralized exchange, crashing the MTRG price by more than 88%. The price of the project's MTR token — which is supposed to maintain a stable price based on the cost to produce 10 kWh of electricity — also plummeted by approximately the same percentage. Meter has attributed the exploit to a \"block validation flaw\". Meter paused the blockchain and bridge, and has urged people not to trade the token. They have warned that \"Transactions after block 100731417 may not be honored\", suggesting they are considering a blockchain rollback.…"
     }
   ],
   "audit": null,
@@ -51,7 +61,8 @@
   "poc": null,
   "sources": [
     "defillama",
-    "slowmist"
+    "slowmist",
+    "w3igg"
   ],
   "references": [
     {
@@ -63,6 +74,16 @@
       "source": "slowmist",
       "label": "x.com",
       "url": "https://x.com/blockaid_/status/2103121249706877178"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=meter-unauthorized-mint"
+    },
+    {
+      "source": "w3igg",
+      "label": "x.com",
+      "url": "https://x.com/Meter_IO/status/2103165031278125517"
     }
   ]
 }

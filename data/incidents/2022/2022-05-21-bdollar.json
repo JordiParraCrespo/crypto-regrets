@@ -3,13 +3,19 @@
   "name": "bDollar",
   "date": "2022-05-21",
   "year": 2022,
-  "amountUsd": null,
+  "amountUsd": 730000,
   "returnedUsd": null,
   "chains": [
     "BSC"
   ],
   "targetType": null,
   "category": "oracle-manipulation",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "spot-price-oracle",
+    "confidence": 0.4
+  },
   "technique": "Price Manipulation",
   "classificationNote": "Classified by keyword rules from the SlowMist label and description.",
   "classifiedBy": "keywords",
@@ -42,19 +48,29 @@
     {
       "source": "SlowMist",
       "text": "The first algorithmic stablecoin project on Binance Smart Chain, bDollar, suffered a price manipulation attack, and the attacker made a profit of 2,381 WBNB (worth about $730,000). This attack mainly exploits the design loophole of the claimAndReinvestFromPancakePool function in the DAO fund proxy contract CommunityFund when adding liquidity. It does not fully consider that after the price is maliciously raised, the project party will passively use the funds in its own contract when adding liquidity. The situation of high-level connection."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "bDollar was the first algorithmic stablecoin on the BSC blockchain. An attacker was able to manipulate the price of underlying assets to pull 2,381 w BNB out of the protocol, worth around $730,000. The project had been audited by CertiK."
     }
   ],
   "audit": null,
   "txHashes": [],
   "poc": null,
   "sources": [
-    "slowmist"
+    "slowmist",
+    "w3igg"
   ],
   "references": [
     {
       "source": "slowmist",
       "label": "defidaonews.com",
       "url": "https://www.defidaonews.com/article/6752278"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=bdollar-stablecoin-suffers-730000-price-manipulation-attack"
     }
   ]
 }

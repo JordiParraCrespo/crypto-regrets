@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "access-control",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "missing-access-modifier",
+    "confidence": 0.85
+  },
   "technique": "Improper Access Control",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -42,6 +48,10 @@
     {
       "source": "RevertIQ",
       "text": "On March 9, 2023, a network-level bug in the Hedera mainnet’s Smart Contract Service allowed an attacker to drain over $500,000 from multiple DEX liquidity pools by exploiting flawed EVM-to-HTS translation logic. The core protocol was impacted, not just a single dApp. A flaw in Hedera's Smart Contract Service EVM-compatibility translation logic permitted unauthorized transfers of Hedera Token Service (HTS) tokens. This bug allowed attacker-initiated contract calls to move tokens from DEX pool accounts without proper authorization checks."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The Hedera network turned off access to the Hedera mainnet on March 9 after observing \"smart contract irregularities\". They subsequently confirmed that the Hedera smart contract service had been attacked by exploiters who were able to transfer individual users' tokens to their own accounts. Some individuals using cold wallets even claimed their tokens had been stolen. Hedera has not disclosed how much had been stolen. Total value locked (TVL) on the network dropped 33% from $36.1 million to $24.6 million. Some balked at Hedera's ability to simply turn off user access to the network, despite claiming to be a decentralized project."
     }
   ],
   "audit": "FP Complete",
@@ -51,7 +61,8 @@
     "defillama",
     "rekt",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -88,6 +99,21 @@
       "source": "revertiq",
       "label": "blockchainbreaches.com",
       "url": "https://www.blockchainbreaches.com/en/breaches/hedera-2023"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=hedera-network-halts-access-after-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/business/2023/03/09/hedera-turns-off-services-after-network-irregularities/"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/PeckShieldAlert/status/1634074245608390656"
     }
   ]
 }

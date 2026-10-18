@@ -10,6 +10,12 @@
   ],
   "targetType": "Gaming",
   "category": "accounting-math",
+  "vulnClass": "unbacked-mint",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "unbacked-mint",
+    "confidence": 1
+  },
   "technique": "Infinite Mint",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -54,6 +60,10 @@
     {
       "source": "RevertIQ",
       "text": "On March 21, 2024, the Super Sushi Samurai (SSS) token on Blast L2 was exploited for over $4.6 million. The contract's mint logic allowed attackers to multiply their balance with repeated self-transfers, collapsing liquidity and token price. The SSS token contract's mint or transfer logic failed to correctly update balances during self-transfer. When a user transferred tokens to their own address, the contract doubled their balance instead of leaving it unchanged, enabling unbounded minting and draining liquidity pools."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Super Sushi Samurai, a new blockchain game on the Blast layer-2 blockchain was exploited for $4.6 million when an attacker discovered a vulnerability in its smart contract . A bug in the mint functionality caused users who transferred their $SSS balance to themselves to receive twice as many tokens. An attacker took advantage of this to drain $4.6 million from the project, causing the $SSS token to plummet by 99%. The attacker contacted the project shortly after the theft, claiming to be a whitehat. They wrote, \"Hi team, this is a whitehat rescue hack. Let's work on reimbursing the users.\" Super Sushi Samurai later confirmed that the funds had been returned, minus a 5% \"bounty\".…"
     }
   ],
   "audit": "Verichains",
@@ -68,7 +78,8 @@
     "defillama",
     "rekt",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -120,6 +131,26 @@
       "source": "revertiq",
       "label": "coindesk.com",
       "url": "https://www.coindesk.com/business/2024/03/21/newly-issued-gaming-token-exploited-on-blast-with-46m-drained"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=super-sushi-samurai-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "blastscan.io",
+      "url": "https://blastscan.io/tx/0xda2ca81e2b89ce1ac5d1faeb331cd715af3902246d62195f7d9a95bd20e2abc1"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/coffeexcoin/status/1770834359601217886"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/SSS_HQ/status/1771168070054375596"
     }
   ]
 }

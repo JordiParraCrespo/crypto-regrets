@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "access-control",
+  "vulnClass": "unprotected-initializer",
+  "vulnClassBy": "typesafe",
+  "aiClass": {
+    "id": "unprotected-initializer",
+    "confidence": 0.94
+  },
   "technique": "delegatecall to unprotected initWallet",
   "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.99).",
   "classifiedBy": "typesafe",
@@ -46,6 +52,10 @@
     {
       "source": "RevertIQ",
       "text": "The Parity multisig wallet vulnerability on Ethereum Mainnet in July 2017 allowed an attacker to take ownership of high-profile wallets by calling an unprotected initialization function. The attacker drained over 153,000 ETH (~$30M at the time) from three major crowdsale wallets. A white-hat group later rescued additional funds using the same exploit. The Parity multisig proxy architecture exposed an unprotected initializer function via delegatecall, allowing anyone to reinitialize ownership after deployment and drain funds. No access control or one-time-use guard was enforced."
+    },
+    {
+      "source": "Blockchain Graveyard",
+      "text": "A \"critical\" vulnerability in Parity led to at least three accounts being compromised by a hacker for a total loss of $31,725,019 USD worth of ether. The vulnerability affected the contract used to create multi-signature ethereum wallets in Parity 1.5. The bug was in a pair of extremely sensitive functions designed to allow the set-up of \"multi-sig\" wallets in the Parity Wallet software. The functions should have been protected in order that they be usable only in one specific circumstance, as the contract was being created. However, they were entirely unguarded, which allowed the attacker to reset the ownership and usage parameters of existing wallets arbitrarily.…"
     }
   ],
   "audit": null,
@@ -60,7 +70,8 @@
   "sources": [
     "defihacklabs",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "graveyard"
   ],
   "references": [
     {
@@ -102,6 +113,16 @@
       "source": "revertiq",
       "label": "github.com",
       "url": "https://github.com/Cerify-Systems/smart-contract-vulnerabilities/tree/master/2017-07-Parity%20Multisig%20Wallet"
+    },
+    {
+      "source": "graveyard",
+      "label": "Blockchain Graveyard",
+      "url": "https://paritytech.io/the-multi-sig-hack-a-postmortem/"
+    },
+    {
+      "source": "graveyard",
+      "label": "cointelegraph.com",
+      "url": "https://cointelegraph.com/news/accidentally-killed-it-parity-grapples-with-280-mln-locked-eth"
     }
   ]
 }

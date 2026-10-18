@@ -13,6 +13,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "key-compromise",
+  "vulnClass": "key-leak-infrastructure",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "key-leak-infrastructure",
+    "confidence": 0.95
+  },
   "technique": "Key Leaked via Infrastructure",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -49,6 +55,10 @@
     {
       "source": "RevertIQ",
       "text": "On October 30, 2025, a private key leak from an independent solver's server led to the draining of approximately $11.4 million from Garden Finance solver balances across Ethereum Mainnet, Arbitrum, Base, and Solana. Protocol contracts and user funds were not compromised. The attacker gained unauthorized SSH access to the solver's server, extracted the hot-wallet private key from an environment variable, and used it to sweep the solver's assets across multiple blockchains. The vulnerability was limited to the solver's off-chain infrastructure."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The Garden bitcoin bridge suffered a roughly $11 million loss after one of its solvers was compromised. These solvers essentially act as market makers for the protocol. Some blockchain sleuths have questioned whether the affected solver, which Garden described as a separate entity, may actually be operated by the same team as Garden. There wasn't much sympathy to be had for Garden after this exploit. The protocol had recently announced hitting a milestone of bridging more than $2 billion in assets, but the celebration was criticized after zachxbt pointed out that a substantial portion of the bridged funds were proceeds of crimes being laundered to evade detection and recovery."
     }
   ],
   "audit": null,
@@ -70,7 +80,8 @@
     "defihacklabs",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -117,6 +128,16 @@
       "source": "revertiq",
       "label": "itokenly.com",
       "url": "https://itokenly.com/hacks/garden-finance"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=garden-hacked-for-11-million"
+    },
+    {
+      "source": "w3igg",
+      "label": "protos.com",
+      "url": "https://protos.com/defi-karma-garden-hacked-for-11m-after-bridging-lazarus-loot/"
     }
   ]
 }

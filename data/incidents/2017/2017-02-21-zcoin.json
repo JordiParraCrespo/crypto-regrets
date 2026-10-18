@@ -1,0 +1,74 @@
+{
+  "id": "2017-02-21-zcoin",
+  "name": "ZCoin",
+  "date": "2017-02-21",
+  "year": 2017,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [],
+  "targetType": null,
+  "category": "logic-error",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "state-update-flaw",
+    "confidence": 0.56
+  },
+  "technique": "protocol vulnerability",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.72). Replaced keyword guess \"bridge-crosschain\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.72,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.74
+      },
+      {
+        "category": "signature-crypto",
+        "p": 0.22
+      },
+      {
+        "category": "accounting-math",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.03,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "Due to a programming error in the implementation of Zerocoin, an attacker was able to exploit a single proof to generate multiple spends they could send to an exchange, in which the attackers then sold and withdrew funds. Significant documentation on the breach is available. From what we can see, the attacker (or attackers) is very sophisticated and from our investigations, he (or she) did many things to camouflage his tracks through the generation of lots of exchange accounts and carefully spread out deposits and withdrawals over several weeks. We estimate the attacker has created about 370,000 Zcoins which has been almost completely sold except for a…",
+  "descriptions": [
+    {
+      "source": "Blockchain Graveyard",
+      "text": "Due to a programming error in the implementation of Zerocoin, an attacker was able to exploit a single proof to generate multiple spends they could send to an exchange, in which the attackers then sold and withdrew funds. Significant documentation on the breach is available. From what we can see, the attacker (or attackers) is very sophisticated and from our investigations, he (or she) did many things to camouflage his tracks through the generation of lots of exchange accounts and carefully spread out deposits and withdrawals over several weeks. We estimate the attacker has created about 370,000 Zcoins which has been almost completely sold except for a…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "graveyard"
+  ],
+  "references": [
+    {
+      "source": "graveyard",
+      "label": "Blockchain Graveyard",
+      "url": "https://zcoin.io/language/en/zcoins-zerocoin-bug-explained-in-detail/"
+    },
+    {
+      "source": "graveyard",
+      "label": "zcoin.io",
+      "url": "https://zcoin.io/language/en/zcoins-zerocoin-bug-explained-in-detail/"
+    },
+    {
+      "source": "graveyard",
+      "label": "archive.is",
+      "url": "https://archive.is/HN3iV#selection-451.150-451.215"
+    }
+  ]
+}

@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "signature-crypto",
+  "vulnClass": "signature-verification-flaw",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "signature-verification-flaw",
+    "confidence": 0.81
+  },
   "technique": "Signature Verification Flaw",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -46,6 +52,10 @@
     {
       "source": "RevertIQ",
       "text": "Cardex suffered a $400,000 loss when an exposed private session signer key in its frontend allowed attackers to drain ETH from ~9,000 wallets on the Abstract L2. The incident stemmed from misuse of session keys and lack of user-specific signer controls. Cardex hardcoded a single session signer private key in their publicly accessible frontend. This allowed an attacker to impersonate all users who had granted session permissions, since the key was used across every session. The session keys lacked proper revocation and per-user isolation."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Around $400,000 in ETH was stolen from around 9,000 wallets on the Abstract layer-2 network, which is built by the same company that makes the Pudgy Penguins NFTs. It appears that the affected wallets had all been used to play Cardex, a fantasy trading card game that had launched only a week prior. Attackers compromised a private key belonging to the game's creators, which allowed them to drain wallets that still had an active session with the game."
     }
   ],
   "audit": null,
@@ -56,7 +66,9 @@
   "sources": [
     "defillama",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "seal911",
+    "w3igg"
   ],
   "references": [
     {
@@ -88,6 +100,11 @@
       "source": "revertiq",
       "label": "olympix.security",
       "url": "https://olympix.security/biweekly-exploits/sir-cardex-and-hegic-exploited-transient-storage-flaw-leaked-signer-and-tranche-abuse-cost-835k"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=abstract-cardex-hack"
     }
   ]
 }

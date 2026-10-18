@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "logic-error",
+  "vulnClass": "solvency-check-flaw",
+  "vulnClassBy": "curated",
+  "aiClass": {
+    "id": "solvency-check-flaw",
+    "confidence": 1
+  },
   "technique": "donateToReserves without health check",
   "classificationNote": "Curated: reclassified from \"accounting-math\" based on the published post-mortem.",
   "classifiedBy": "curated",
@@ -62,6 +68,14 @@
     {
       "source": "RevertIQ",
       "text": "Euler Finance lost approximately $197 million on March 13, 2023 when a reserve donation removed collateral without a solvency check. The attacker liquidated a controlled account at a discount and withdrew assets while leaving bad debt. Euler later reported recovering the stolen assets. Euler V1's donateToReserves() reduced an account's eToken collateral without a post-operation liquidity check. Combined with self-collateralized leverage and liquidation discounts, this let one controlled account incur unbacked debt while another acquired withdrawable collateral."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The decentralized lending platform Euler Finance suffered a flash loan attack in which an exploiter stole $197 million from the project. The attacker stole $8.7 million in the Dai stablecoin , $18.5 million in wrapped Bitcoin, $135.8 million in Lido staked Ethereum (stETH), and $33.8 million in the USDC stablecoin. Although Euler was well known for its many code audits , the project had later added a vulnerable function that had not been as heavily audited. Euler announced that they were aware of the exploit, and were \"working with security professionals and law enforcement\". On April 3, Euler Finance announced that they had completed successful negoti…"
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Contagion from the massive exploit of the Euler project has spread to around a dozen defi projects, including Balancer, Angle Protocol, Yearn Finance, InverseFinance, and others. Some are still evaluating if and how they may be affected, and how much they've lost. Around $11.9 million of tokens were sent from the Balancer defi liqiuidity project to Euler during the attack, prompting Balancer to pause the project. The Angle Protocol decentralized stablecoin project also disclosed that almost half of the total value locked in the project — around $17.6 million in the USDC stablecoin — were sent to Euler during the hack."
     }
   ],
   "audit": "Sherlock",
@@ -81,6 +95,7 @@
     "blocksec",
     "slowmist",
     "revertiq",
+    "w3igg",
     "curated"
   ],
   "references": [
@@ -163,6 +178,36 @@
       "source": "revertiq",
       "label": "euler.finance",
       "url": "https://www.euler.finance/blog/war-peace-behind-the-scenes-of-eulers-240m-exploit-recovery"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=euler-finance-exploited-for-almost-200-million"
+    },
+    {
+      "source": "w3igg",
+      "label": "techcrunch.com",
+      "url": "https://techcrunch.com/2023/03/13/hackers-steal-around-200-million-from-crypto-lender-euler-finance/"
+    },
+    {
+      "source": "w3igg",
+      "label": "decrypt.co",
+      "url": "https://decrypt.co/125373/euler-finance-exploiter-returns-recoverable-funds-200m-hack"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=over-35-million-lost-as-contagion-from-euler-hack-spreads-throughout-defi"
+    },
+    {
+      "source": "w3igg",
+      "label": "cointelegraph.com",
+      "url": "https://cointelegraph.com/news/euler-attack-causes-locked-tokens-losses-in-11-defi-protocols-including-balancer"
+    },
+    {
+      "source": "w3igg",
+      "label": "anglemoney.notion.site",
+      "url": "https://anglemoney.notion.site/Angle-Protocol-Q-A-Regarding-Euler-Exploit-03af18cbe5e84430b3341b145554492e"
     },
     {
       "source": "curated",

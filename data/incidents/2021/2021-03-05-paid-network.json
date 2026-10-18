@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "accounting-math",
+  "vulnClass": "unbacked-mint",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "unbacked-mint",
+    "confidence": 1
+  },
   "technique": "Infinite Mint",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -50,6 +56,14 @@
     {
       "source": "RevertIQ",
       "text": "On March 5, 2021, the PAID Network token contract on Ethereum was compromised after an attacker obtained the deployer's private key, enabling them to upgrade the proxy and mint nearly 59.5 million PAID tokens. The attacker sold over 2.5 million tokens for around 2,040 ETH before the team withdrew liquidity. The deployer private key controlling the PAID Network token proxy was compromised. This allowed the attacker to upgrade the implementation to one with a malicious mint function and freely mint new tokens. No multisig or timelock protected the upgrade path."
+    },
+    {
+      "source": "Blockchain Graveyard",
+      "text": "In progress. Will update. - PAID NETWORK on Twitter: \"We urge our community to not buy the dip as you will be exposed to the same negative impacts & we may likely have to reissue our smart contract, so we urge you to please wait for next the update. We also advise you pull all y - PAID NETWORK on Twitter: \"We are investigating the issue. We pulled liquidity, are creating a new smart contract, & will be restoring everyone's original balances to before the hack. Those with staked, Lpool & UniFarm $PAID will have their tokens"
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "A contract exploit allowed a hacker to mint almost 60 million PAID tokens (priced at around $160 million based on the value before the attack) on the PAID Network. The hacker then made off with about $3 million in Ethereum from their efforts. The attack caused the PAID token to crash about 88% in value over the course of a day, from around $2.86 to $0.32."
     }
   ],
   "audit": "Unaudited",
@@ -66,7 +80,9 @@
     "defillama",
     "defihacklabs",
     "rekt",
-    "revertiq"
+    "revertiq",
+    "graveyard",
+    "w3igg"
   ],
   "references": [
     {
@@ -108,6 +124,31 @@
       "source": "revertiq",
       "label": "certik.com",
       "url": "https://www.certik.com/blog/paid-network-post-mortem"
+    },
+    {
+      "source": "graveyard",
+      "label": "Blockchain Graveyard",
+      "url": "https://twitter.com/paid_network/status/1367920257202061318"
+    },
+    {
+      "source": "graveyard",
+      "label": "twitter.com",
+      "url": "https://twitter.com/paid_network/status/1367945136467046404"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=attacker-steals-3-million-from-paid-network"
+    },
+    {
+      "source": "w3igg",
+      "label": "theblockcrypto.com",
+      "url": "https://www.theblockcrypto.com/linked/97411/paid-network-token-minting-exploit-eth"
+    },
+    {
+      "source": "w3igg",
+      "label": "cointelegraph.com",
+      "url": "https://cointelegraph.com/news/paid-network-exploiter-nets-3-million-in-infinite-mint-attack"
     }
   ]
 }

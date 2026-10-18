@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "accounting-math",
+  "vulnClass": "rounding-precision",
+  "vulnClassBy": "typesafe",
+  "aiClass": {
+    "id": "rounding-precision",
+    "confidence": 1
+  },
   "technique": "Arithmetic Error",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -58,6 +64,10 @@
     {
       "source": "RevertIQ",
       "text": "On October 18, 2023, HopeLend protocol on Ethereum was exploited via a liquidity index inflation bug, caused by unchecked precision loss and rounding in its Aave-fork accounting. The attacker used flash loans and manipulated the reserve's total supply to extract funds far in excess of their actual collateral, draining $825,000 across all pools. The protocol allowed the liquidity index of a reserve to be inflated to extreme values if the total liquidity became tiny. By draining the WBTC hToken supply to 1 wei and repeatedly folding flash-loan premiums into that supply, the index was multiplied by over a billion. Combined with fixed-point ray division ro…"
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "A small defi protocol called Hope Lend was drained of nearly all its assets when attackers stole around 526 ETH (~$825,000). Hilariously, the project claims the hacker was frontrun by a watchful third party, who paid half of the stolen funds (~264 ETH, or around $414,000) to an ETH validator to allow them to frontrun the transaction. The original attacker who discovered the bug reportedly made no money at all. The stolen assets represented the entire TVL of the project."
     }
   ],
   "audit": null,
@@ -70,7 +80,8 @@
     "defihacklabs",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -147,6 +158,16 @@
       "source": "revertiq",
       "label": "crypto.training",
       "url": "https://crypto.training/hacks/2023-10-hopelend/"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=hope-lend-hack"
+    },
+    {
+      "source": "w3igg",
+      "label": "cointelegraph.com",
+      "url": "https://cointelegraph.com/news/ethereum-defi-protocol-hope-lend-drained-after-exploit"
     }
   ]
 }

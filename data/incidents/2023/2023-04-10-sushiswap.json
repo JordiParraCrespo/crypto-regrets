@@ -13,6 +13,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "input-validation",
+  "vulnClass": "unvalidated-address-input",
+  "vulnClassBy": "typesafe",
+  "aiClass": {
+    "id": "unvalidated-address-input",
+    "confidence": 0.98
+  },
   "technique": "Missing Input Validation",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -57,6 +63,10 @@
     {
       "source": "RevertIQ",
       "text": "On April 9, 2023, SushiSwap's RouteProcessor2 contract was exploited on Ethereum and several EVM chains for approximately $3.3 million. Attackers crafted route data that caused the contract to call transferFrom on token contracts, draining funds from users who had previously approved RouteProcessor2. White-hat rescues recovered a fraction of the funds by front-running the exploit. RouteProcessor2 accepted user-supplied external call targets and calldata without validating them against an allowlist. This allowed attackers to encode crafted routeData so the contract executed transferFrom on behalf of victim wallets, enabled by existing token approvals."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "0xSifu, also known as Michael Patryn, also known as Omar Dahani, is the once-pseudonymous chief developer of the Wonderland protocol. His identity was discovered by zachxbt in January 2022, when the crypto sleuth revealed that \"0xSifu\" was Patryn, a man with a history of financial crimes who was previously involved with QuadrigaCX, an exchange which lost over $150 million in customer funds in 2018. Today, Sifu himself was the victim of a theft as a bug in the SushiSwap decentralized exchange allowed a hacker to make off with around 1,800 ETH (more than $3.3 million) belonging to him. According to SushiSwap leader Jared Grey, around 300 ETH (~$557,000)…"
     }
   ],
   "audit": "Unaudited",
@@ -79,7 +89,8 @@
     "rekt",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -171,6 +182,21 @@
       "source": "revertiq",
       "label": "blocksec.com",
       "url": "https://www.blocksec.com/blog/8-sushi-swap-incident-a-clumsy-rescue-attempt-leads-to-a-series-of-copycat-attacks"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=0xsifu-loses-more-than-2-7-million-to-sushiswap-hack"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/jaredgrey/status/1644914375151550464"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/jaredgrey/status/1645065502748704769"
     }
   ]
 }

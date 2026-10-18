@@ -11,6 +11,12 @@
   ],
   "targetType": "CEX",
   "category": "access-control",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "access-misconfiguration",
+    "confidence": 0.87
+  },
   "technique": "Improper Access Control",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -47,6 +53,10 @@
     {
       "source": "RevertIQ",
       "text": "Attackers exploited a vulnerability in Bitrue exchange's internal risk review process on June 27, 2019, enabling unauthorized access to user funds. 9.3 million XRP and 2.5 million ADA were stolen, with a portion frozen and recovered. The incident resulted in net losses of approximately $3.15 million, and affected users' holdings were reimbursed by Bitrue. Attackers exploited insufficient access controls in Bitrue's risk review process, allowing unauthorized transfers from user accounts and the exchange's hot wallet."
+    },
+    {
+      "source": "Blockchain Graveyard",
+      "text": "9.3 million XRP and 2.5 million ADA stolen from 90 individuals. The root cause seems to be described here: At approximately 1am June 27 (GMT+8), a hacker exploited a vulnerability in our Risk Control team's 2nd review process to access the personal funds of about 90 Bitrue users. The hacker used what they learned from this breach to then access the Bitrue hot wallet and move 9.3 million XRP and 2.5 million ADA to different exchanges. This is described as an issue that depleted a hot wallet, but doesn't seem to have compromised the key material backing it. It describes malicious usage of a tool which can transfer funds from a hot wallet. It's not described how this tool was accessed.…"
     }
   ],
   "audit": null,
@@ -55,7 +65,8 @@
   "sources": [
     "defillama",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "graveyard"
   ],
   "references": [
     {
@@ -82,6 +93,21 @@
       "source": "revertiq",
       "label": "decrypt.co",
       "url": "https://decrypt.co/7656/singapore-exchange-bitrue-breached-in-a-4-7-million-heist"
+    },
+    {
+      "source": "graveyard",
+      "label": "Blockchain Graveyard",
+      "url": "https://twitter.com/BitrueOfficial/status/1144066874147131392"
+    },
+    {
+      "source": "graveyard",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BitrueOfficial/status/1144066877154447360"
+    },
+    {
+      "source": "graveyard",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BitrueOfficial/status/1144080308817448960"
     }
   ]
 }

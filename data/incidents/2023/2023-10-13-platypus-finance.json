@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "oracle-manipulation",
+  "vulnClass": "spot-price-oracle",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "spot-price-oracle",
+    "confidence": 0.41
+  },
   "technique": "Spot Price Manipulation",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -54,6 +60,10 @@
     {
       "source": "RevertIQ",
       "text": "On October 12,13, 2023, Platypus Finance was exploited on Avalanche through manipulated spot prices in its stableswap pools, resulting in losses of around $2.2 million. Partial asset recovery occurred after the attack. A business logic flaw in Platypus Finance's stableswap pool allowed attackers to manipulate cash and liabilities via flash loans, causing incorrect spot price calculation for AVAX and sAVAX. This flaw enabled them to withdraw inflated amounts from the pool."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "At this point, they should probably just have a form email ready to go. Platypus Finance has suffered a cumulative $2.23 million in losses thanks to several attacks on the platform over the course of several hours. This set of hacks followed a $8.5 million hack in February, and another hack of at least $150,000 in July. Platypus was quickly able to recover $575,000 from this latest hacker, thanks to a flaw in their attack. Later, they recovered all but $167,400 of the stolen funds after coming to an agreement with the attacker that they would not pursue legal action."
     }
   ],
   "audit": "Out of scope",
@@ -68,7 +78,8 @@
     "rekt",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -130,6 +141,21 @@
       "source": "revertiq",
       "label": "blockchainbreaches.com",
       "url": "https://www.blockchainbreaches.com/en/breaches/platypus-finance-october-2023"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=platypus-finance-hack-3"
+    },
+    {
+      "source": "w3igg",
+      "label": "cointelegraph.com",
+      "url": "https://cointelegraph.com/news/platypus-flash-loan-exploit-defi"
+    },
+    {
+      "source": "w3igg",
+      "label": "dlnews.com",
+      "url": "https://www.dlnews.com/articles/defi/avalanche-amm-platypus-finance-hit-by-third-hack-this-year/"
     }
   ]
 }

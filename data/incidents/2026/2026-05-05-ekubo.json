@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "arbitrary-call",
+  "vulnClass": "approval-drain",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "approval-drain",
+    "confidence": 0.95
+  },
   "technique": "Token Approval Abuse",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -54,6 +60,10 @@
     {
       "source": "RevertIQ",
       "text": "Ekubo’s EVM-based swap router contract was exploited on Ethereum Mainnet on May 5, 2026. Attackers drained about 17 WBTC (~$1.4M) by abusing access to ERC-20 token approvals, allowing repeated unauthorized withdrawals from users who had granted allowances. The impacted functionality failed to check whether the withdrawal initiator was the rightful owner, targeting only EVM deployments and leaving liquidity-provider and Starknet users unaffected. The Ekubo swap router’s payCallback and withdrawal logic lacked verification of the true payer or lock initiator. This allowed an attacker contract to repeatedly trigger token transfers from victim accounts wit…"
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The Ekubo automated market maker infrastructure project experienced a $1.4 million theft after attackers were able to take advantage of a smart contract that improperly verified permissions. They stole 17 w BTC ($1.4 million), which they swapped for ETH and laundered via Tornado Cash."
     }
   ],
   "audit": null,
@@ -66,7 +76,8 @@
     "defihacklabs",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -113,6 +124,16 @@
       "source": "revertiq",
       "label": "merklescience.com",
       "url": "https://www.merklescience.com/blog/hack-track-ekubo-approval-exploit-drains-1-4m"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=ekubo-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "theblock.co",
+      "url": "https://www.theblock.co/post/400189/attackers-drain-1-4m-in-wrapped-bitcoin-from-defi-protocol-ekubo-in-approval-based-exploit?utm_source=rss&utm_medium=rssf"
     }
   ]
 }

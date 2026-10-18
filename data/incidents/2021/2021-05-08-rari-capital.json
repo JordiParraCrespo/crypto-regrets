@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "arbitrary-call",
+  "vulnClass": "arbitrary-external-call",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "arbitrary-external-call",
+    "confidence": 0.97
+  },
   "technique": "Arbitrary External Call",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -50,6 +56,10 @@
     {
       "source": "RevertIQ",
       "text": "On May 8, 2021, Rari Capital’s ETH Pool was exploited through a reentrancy pathway introduced by its Alpha Finance ibETH integration. The attacker used manipulated external calls via ibETH’s work function to repeatedly re-enter withdrawal logic, draining about 2,600 ETH (then ~$10.6M, roughly 60% of the pool). No ETH was recovered; compensation was offered in governance tokens. Rari Capital's ETH Pool integrated with Alpha Finance’s ibETH, failing to anticipate that ibETH’s work function permitted arbitrary external calls. Without a reentrancy guard or safe accounting sequence, this enabled the attacker to re-enter ETH Pool withdrawal logic before state was finalized, inflating withdrawals.…"
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "An attacker exploited a Rari Capital ETH pool , stealing ETH worth around $15 million. The theft caused the price of Rari's governance token to plummet by around 50%."
     }
   ],
   "audit": "Quantstamp",
@@ -62,7 +72,8 @@
     "defihacklabs",
     "rekt",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -114,6 +125,16 @@
       "source": "revertiq",
       "label": "coindesk.com",
       "url": "https://www.coindesk.com/markets/2021/05/10/rari-capital-plans-to-refund-stolen-106m-in-ethereum-from-dev-fund"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=rari-capital-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/markets/2021/05/08/rari-capital-reports-exploit-in-eth-pool-15m-taken/"
     }
   ]
 }

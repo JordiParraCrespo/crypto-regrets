@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "access-control",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "missing-access-modifier",
+    "confidence": 0.82
+  },
   "technique": "Improper Access Control",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -38,6 +44,10 @@
     {
       "source": "RevertIQ",
       "text": "Feminist Metaverse was exploited on BNB Chain on 18 May 2022, losing 1,838 BNB (~$540,000) when an attacker extracted unaccounted FM_Token from a liquidity pool using improper reserve accounting and the skim() function. The stolen funds were swapped for BNB and moved to Tornado.cash. The victim's FM_Token contract allowed direct token transfers to the SakeSwapPair contract without updating the pair's internal reserves. This imbalance enabled the attacker to repeatedly extract excess tokens via the skim() function."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The \"Feminist Metaverse\" ($FM) token suddenly plunged in value by 99.7% after an attacker stole 1,838 BNB ($533,000). The hacker quickly transferred the stolen funds to the Tornado Cash tumbler to help hide their tracks. The project advertised on its website its plans to \"Create Feminist economics in the form of a DAO to balance the male-dominated world.\" The project's whitepaper explains how the metaverse will apparently \"greatly reduce the impacts on women's normal work and inequality in wages brought by their physiological differences and pregnancy. As a consequence, it helps eliminating a number of unresolved problems in the real world like gender…"
     }
   ],
   "audit": null,
@@ -48,7 +58,8 @@
   "sources": [
     "defillama",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -75,6 +86,21 @@
       "source": "revertiq",
       "label": "official.beosin.com",
       "url": "https://official.beosin.com/resources/analysis-of-attack-on-feminist-metaverse"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=feminist-metaverse-token-exploited-for-533000"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/PeckShieldAlert/status/1526935819302277122"
+    },
+    {
+      "source": "w3igg",
+      "label": "whitepaper.feministmetaverse.org",
+      "url": "http://whitepaper.feministmetaverse.org/"
     }
   ]
 }

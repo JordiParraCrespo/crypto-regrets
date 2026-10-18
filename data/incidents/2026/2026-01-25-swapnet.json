@@ -10,6 +10,12 @@
   ],
   "targetType": null,
   "category": "arbitrary-call",
+  "vulnClass": "arbitrary-external-call",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "arbitrary-external-call",
+    "confidence": 1
+  },
   "technique": "Arbitrary Call",
   "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 1.00).",
   "classifiedBy": "typesafe",
@@ -38,6 +44,10 @@
     {
       "source": "SlowMist",
       "text": "SwapNet’s closed-source aggregator contracts were exploited via an arbitrary-call vulnerability due to insufficient input validation on user-controlled parameters. This allowed attackers to abuse existing token approvals (especially from users who disabled Matcha Meta’s One-Time Approval) to execute unauthorized transferFrom calls, draining ~$13.43M across Base, Ethereum, Arbitrum, and BSC. The attacker swapped large amounts of USDC to ETH on Base and bridged funds. Matcha Meta and 0x core contracts were unaffected."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Some users of Matcha Meta, a decentralized exchange aggregator on the Base blockchain, suffered losses after a thief exploited a vulnerability in its SwapNet integration. SwapNet is another DEX aggregator that integrates with Matcha Meta, and Matcha blamed a vulnerability in their smart contracts that enabled a thief to steal assets transferred via the integration. Most of the lost funds came from a single user, who lost $13.34 million in assets. Other users lost a combined $90,000."
     }
   ],
   "audit": null,
@@ -51,7 +61,8 @@
   "sources": [
     "defihacklabs",
     "blocksec",
-    "slowmist"
+    "slowmist",
+    "w3igg"
   ],
   "references": [
     {
@@ -78,6 +89,16 @@
       "source": "slowmist",
       "label": "x.com",
       "url": "https://x.com/PeckShieldAlert/status/2015608261119217671"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=matcha-meta-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "meta.matcha.xyz",
+      "url": "https://meta.matcha.xyz/SwapNet-Incident-Post-Mortem"
     }
   ]
 }

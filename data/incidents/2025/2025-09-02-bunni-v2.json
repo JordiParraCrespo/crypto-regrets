@@ -11,6 +11,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "accounting-math",
+  "vulnClass": "rounding-precision",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "rounding-precision",
+    "confidence": 1
+  },
   "technique": "Rounding Error",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -51,6 +57,10 @@
     {
       "source": "RevertIQ",
       "text": "On September 2, 2025, Bunni DEX suffered a major exploit across Ethereum and Unichain, draining over $8.3 million. The attacker manipulated Bunni's custom liquidity curve using precision trades and exploited a rounding vulnerability in liquidity accounting, leading to systematic fund extraction from various pools. A rounding-direction vulnerability in BunniHubLogic::withdraw(), combined with miscalculation in Bunni's custom Liquidity Distribution Function, allowed systematic manipulation of liquidity-share accounting during precisely sized swaps and micro-withdrawals."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The Bunni decentralized exchange was exploited for approximately $8.4 million across the Unichain Ethereum layer 2 network and the Ethereum mainnet. Bunni acknowledged the theft and paused the protocol shortly after the attack."
     }
   ],
   "audit": null,
@@ -65,7 +75,8 @@
     "rekt",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -132,6 +143,16 @@
       "source": "revertiq",
       "label": "halborn.com",
       "url": "https://halborn.com/blog/post/explained-the-bunni-hack-september-2025"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=bunni-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "theblock.co",
+      "url": "https://www.theblock.co/post/368987/bunni-exploit"
     }
   ]
 }

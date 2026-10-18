@@ -10,6 +10,12 @@
   ],
   "targetType": "Gaming",
   "category": "key-compromise",
+  "vulnClass": "hot-wallet-compromise",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "admin-key-compromise",
+    "confidence": 0.77
+  },
   "technique": "Hot Wallet Key Compromised",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -38,6 +44,10 @@
     {
       "source": "RevertIQ",
       "text": "On April 7, 2022, WonderHero's cross-chain bridge smart contract on BNB Chain was exploited after an attacker obtained the necessary signing authority. This allowed the attacker to mint 80 million WND tokens without a legitimate deposit, then swap them for about 744 BNB (worth ~$320,000 at the time). Services were suspended and the token price collapsed over 90%. The cross-chain bridge withdrawal contract's hot wallet signing key was compromised, enabling unauthorized assignment of minting roles and uncontrolled token creation. The exploit path was possible because privileged minting operations depended on a single key, without additional authorization…"
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "WonderHero is a mobile play-to-earn turn-based strategy game. Attackers were able to mint 80 million $WND after successfully exploiting the bridge linking the WonderHero play-to-earn sidechain and the BNB chain. The attacker was able to swap their stolen $WND for 750 BNB ($325,000), tanking the price of $WND to near zero in the process."
     }
   ],
   "audit": null,
@@ -48,7 +58,8 @@
   "poc": null,
   "sources": [
     "defillama",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -75,6 +86,21 @@
       "source": "revertiq",
       "label": "coincodecap.com",
       "url": "https://coincodecap.com/wonderhero-hacked-around-320000-usd-stolen"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=blockchain-bridge-for-wonderhero-exploited"
+    },
+    {
+      "source": "w3igg",
+      "label": "wonderhero.medium.com",
+      "url": "https://wonderhero.medium.com/community-update-wonderhero-bnb-chain-bridging-withdrawal-compromised-84327a4fd79"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/PeckShieldAlert/status/1511976788653912071"
     }
   ]
 }

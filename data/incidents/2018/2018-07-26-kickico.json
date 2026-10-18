@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "key-compromise",
+  "vulnClass": "hot-wallet-compromise",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "hot-wallet-compromise",
+    "confidence": 0.37
+  },
   "technique": "Hot Wallet Key Compromised",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -38,6 +44,10 @@
     {
       "source": "RevertIQ",
       "text": "KICKICO suffered a major key compromise on Ethereum on 26 July 2018. Attackers used the stolen private key to destroy tokens at user addresses and recreate them at attacker-controlled addresses, affecting approximately 70 million KICK tokens valued around $7.7 million. The operator replaced the compromised key and committed to restoring user balances. No primary on-chain evidence or verified remediation record has been found. The single private key controlling the KICKICO token contract was compromised. This allowed attackers to burn tokens at legitimate user addresses and mint them in attacker-controlled wallets, with no secondary validation or multisig safeguard in place."
+    },
+    {
+      "source": "Blockchain Graveyard",
+      "text": "KICKICO posted details of a breach regarding their smart contract. An attacker managed to obtain the private key to the smart contract and used that to transfer $7.7M in funds into their possession. The hackers gained access to the private key of the owner of the KickCoin smart contract. In order to hide the results of their activities, they employed methods used by the KickCoin smart contract in integration with the Bancor network: hackers destroyed tokens at approximately 40 addresses and created tokens at the other 40 addresses in the corresponding amount. In result, the total number of tokens in the network has not changed. The attackers circumvent…"
     }
   ],
   "audit": null,
@@ -46,7 +56,8 @@
   "sources": [
     "defillama",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "graveyard"
   ],
   "references": [
     {

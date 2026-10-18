@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "reentrancy",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "cross-function-reentrancy",
+    "confidence": 0.25
+  },
   "technique": "Reentrancy",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -46,6 +52,10 @@
     {
       "source": "RevertIQ",
       "text": "On July 14, 2024, Minterest’s Mantle deployment was exploited for $1.4M through a reentrancy vulnerability in its mUSDY market. The attacker used a flash loan and reentrant lending to manipulate the exchange rate, mint excess mTokens, borrow from collateral markets, and bridge proceeds to Ethereum. The mUSDY market contract permitted reentrant operations during flash loans. Exchange rate calculations relied on intermediate cash balances, allowing the attacker to inflate mUSDY minting by reentering before state was consistent. Critical functions lacked both checks-effects-interactions ordering and reentrancy protection."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "An attacker stole $1.4 million from the defi lending project Minterest. Using a flash loan attack, they manipulated the exchange rate calculated by the project, allowing them to withdraw more tokens than they originally loaned. Minterest paused the supply and borrow portions of their protocol after the attack, and attempted to contact the attacker to negotiate a return of some of the funds."
     }
   ],
   "audit": null,
@@ -60,7 +70,8 @@
     "defihacklabs",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -112,6 +123,16 @@
       "source": "revertiq",
       "label": "docs.minterest.com",
       "url": "https://docs.minterest.com/minterest-faq/security-audits/minterest-security-incident-documentation"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=minterest-hack"
+    },
+    {
+      "source": "w3igg",
+      "label": "x.com",
+      "url": "https://x.com/shoucccc/status/1812659977464729991"
     }
   ]
 }

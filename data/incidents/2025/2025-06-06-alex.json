@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "access-control",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "access-misconfiguration",
+    "confidence": 0.19
+  },
   "technique": "Caller Impersonation",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -54,6 +60,10 @@
     {
       "source": "RevertIQ",
       "text": "On June 6, 2025, AlexLab on the Stacks smart contract layer was exploited for at least $8.4M after a flaw in its self-listing feature let an attacker list a malicious token. The attacker bypassed validation, drained assets from vaults through swaps and farms, and moved funds out. Full user reimbursement was later announced, but no primary on-chain data is present. AlexLab's self-listing feature allowed new tokens to be listed without robust verification of contract behavior. The system's checks were susceptible to bypass by a malicious token contract that returned crafted values. Once listed, the attacker gained vault-level permissions, enabling them t…"
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "ALEX Lab lost $8.3 million in various currencies after an attacker exploited a flaw in the project's smart contracts that allowed them to create a malicious token. They drained a number of pools on the protocol, amounting to around $8.3 million. ALEX announced they would reimburse stolen user funds. This is the second exploit affecting ALEX Labs, after a thief stole around $2 million in May 2024."
     }
   ],
   "audit": null,
@@ -65,7 +75,8 @@
     "defillama",
     "rekt",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -122,6 +133,16 @@
       "source": "revertiq",
       "label": "blockchainbreaches.com",
       "url": "https://www.blockchainbreaches.com/en/victim/alex-lab"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=alex-lab-exploit-2"
+    },
+    {
+      "source": "w3igg",
+      "label": "theblock.co",
+      "url": "https://www.theblock.co/post/357368/stacks-based-alex-lab-to-reimburse-users-after-8-3-million-exploit-as-token-drops-45?utm_source=rss&utm_medium=rss"
     }
   ]
 }

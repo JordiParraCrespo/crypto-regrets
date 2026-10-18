@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "oracle-manipulation",
+  "vulnClass": "spot-price-oracle",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "stale-misconfigured-feed",
+    "confidence": 0.94
+  },
   "technique": "Spot Price Manipulation",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -54,6 +60,10 @@
     {
       "source": "RevertIQ",
       "text": "On February 23, 2024, Blueberry Protocol was exploited for $1.3M due to a price oracle misconfiguration that failed to account for differing token decimals. The attacker flash-loaned WETH, deposited it as collateral, and borrowed OHM, USDC, and WBTC at inflated values. A MEV whitehat front-ran the attack, returning most funds, leaving a net loss of 91 ETH to validators. The CoreOracle returned prices scaled to 18 decimals for all assets, causing tokens with fewer decimals (such as USDC and BTC) to be massively overvalued as collateral, enabling over-borrowing and draining protocol liquidity."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The Blueberry defi leverage project had a bug in their lending contract, where improper decimal handling allowed for an exploit. An attacker tried to exploit the vulnerability, but was front-run by c0ffeebabe.eth, a well-known MEV bot operator and whitehat who has in the past been able to front-run other exploits and return the funds to the projects. About 457.7 ETH ($1.35 million) was drained from the project, but 366.6 ETH ($1.08 million) of that was able to be returned. The remaining ~91 ETH (~$265,000) was lost to validator payments. Blueberry paused their protocol as they investigated the hack, and stated that they \"aim for a full repayment to users as the goal\"."
     }
   ],
   "audit": null,
@@ -66,7 +76,8 @@
     "defihacklabs",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -138,6 +149,16 @@
       "source": "revertiq",
       "label": "olympix.security",
       "url": "https://olympix.security/biweekly-exploits/4m-drained-mozaic-insider-attack-blueberry-oracle-fail-xpet-and-miner-exploits"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=blueberry-protocol-narrowly-avoids-1-3-million-hack"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/CertiKAlert/status/1760961269270548809"
     }
   ]
 }

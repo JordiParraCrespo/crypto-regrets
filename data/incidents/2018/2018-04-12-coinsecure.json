@@ -10,6 +10,12 @@
   ],
   "targetType": "CEX",
   "category": "key-compromise",
+  "vulnClass": "key-leak-infrastructure",
+  "vulnClassBy": "typesafe",
+  "aiClass": {
+    "id": "key-leak-infrastructure",
+    "confidence": 0.93
+  },
   "technique": "Private Key Compromised",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -42,6 +48,10 @@
     {
       "source": "RevertIQ",
       "text": "Coinsecure, a major Indian cryptocurrency exchange, lost 438 Bitcoin (~$3.3M) in April 2018 when its primary wallet's private key was compromised during a Bitcoin Gold extraction operation. Legal accusations and internal disputes followed, but there is no evidence of funds recovery or detailed technical disclosure. The primary wallet's private key was exposed or misused during an internal extraction process, allowing an unauthorized transfer of Bitcoin out of Coinsecure's control. The precise mechanism is unverified, but evidence points to improper key management or potential insider misuse."
+    },
+    {
+      "source": "Blockchain Graveyard",
+      "text": "A failed cold storage restoration exercise seems to have exposed private keys intended for offline storage (effectively making them online). However, the CEO has expressed an insider's involvement. Police found private keys exposed online for more than 12 hours. Our system itself has never been compromised or hacked, and the current issue points towards losses caused during an exercise to extract BTG to distribute to our customers. Our CSO, Dr. Amitabh Saxena, was extracting BTG and he claims that funds have been lost in the process during the extraction of the private keys."
     }
   ],
   "audit": null,
@@ -50,7 +60,8 @@
   "sources": [
     "defillama",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "graveyard"
   ],
   "references": [
     {
@@ -77,6 +88,11 @@
       "source": "revertiq",
       "label": "blog.ueex.com",
       "url": "https://blog.ueex.com/crypto-hacks/coincsecure/"
+    },
+    {
+      "source": "graveyard",
+      "label": "economictimes.indiatimes.com",
+      "url": "https://economictimes.indiatimes.com/industry/banking/finance/banking/bitcoins-worth-rs-20-crore-stolen-from-exchange-in-indias-biggest-crypto-theft/articleshow/63740771.cms?from=mdr"
     }
   ]
 }

@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "signature-crypto",
+  "vulnClass": "signature-replay",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "signature-replay",
+    "confidence": 0.53
+  },
   "technique": "Signature Replay",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -50,6 +56,10 @@
     {
       "source": "RevertIQ",
       "text": "AzukiDAO’s BEAN airdrop contract on Ethereum was exploited on 2023-06-30 through a signature replay flaw in the claim() function. Attackers repeatedly reused the same valid signature to mint additional BEAN tokens, with reported proceeds of roughly 35 ETH, about $68,000 to $69,000 at the time. The BEAN token airdrop contract failed to enforce one-time use of signed claims. The contract recorded signatures in signatureClaimed[_signature] but did not reject already-used signatures during subsequent claim() calls, allowing attackers to replay the same authorization repeatedly."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "After paying nearly $40 million for a new set of Azuki NFTs, the Azuki community is pissed that they were \"dilutive\" near-copies of the original Azuki collection. To fight back against the perceived \"blatant scamming\" by the Azuki creators, holders claiming to have collectively spent millions on Azuki projects formed an Azuki DAO . The DAO created a governance token , $BEAN, which it distributed to Azuki NFT owners. The DAO then embarked on a vote to hire a lawyer, sue Azuki's creator, and demand a refund of the 20,000 ETH (~$38 million) collectively spent on Elementals NFTs. However, shortly after the DAO was created, the governance token was exploited.…"
     }
   ],
   "audit": null,
@@ -61,7 +71,8 @@
     "defillama",
     "defihacklabs",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -113,6 +124,16 @@
       "source": "revertiq",
       "label": "raw.githubusercontent.com",
       "url": "https://raw.githubusercontent.com/SunWeb3Sec/DeFiHackLabs/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/src/test/2023-07/AzukiDAO_exp.sol"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=azukidao-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "decrypt.co",
+      "url": "https://decrypt.co/147115/angry-azuki-elementals-holders-unite-to-demand-39-million-refund-lose-thousands-more-in-subsequent-hack"
     }
   ]
 }

@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "oracle-manipulation",
+  "vulnClass": "stale-misconfigured-feed",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "stale-misconfigured-feed",
+    "confidence": 1
+  },
   "technique": "Oracle Misconfiguration",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -54,6 +60,10 @@
     {
       "source": "RevertIQ",
       "text": "BonqDAO was exploited on Polygon Mainnet on 1 February 2023 after an attacker manipulated the Tellor oracle for wALBT collateral. The protocol used the most recent price submitted to Tellor, enabling the attacker to inflate and then deflate wALBT’s price. This allowed borrowing massive amounts of BEUR against negligible collateral, forcibly liquidating other users’ troves, and seizing their wALBT. Loss estimates are nominally over $120 million, but actual liquidated amounts were much lower due to market illiquidity. BonqDAO integrated the Tellor oracle as a price feed for wALBT but consumed the latest reported price immediately via getCurrentValue with no time delay or dispute window.…"
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The Polygon-based defi borrowing protocol Bonq suffered an attack in which 112 million ALBT tokens and around 100 million BEUR tokens were stolen. A flaw in the protocol enabled the attacker to modify oracle prices, allowing them to mint new ALBT and BEUR for significantly less than market price. The attacker quickly bridged the tokens to the Ethereum chain and swapped them for ETH and USDC, collectively worth around $1.7 million. The price of ALBT plunged around 50%, and the BEUR Euro-pegged stablecoin significantly lost its peg ."
     }
   ],
   "audit": "Out of scope",
@@ -69,7 +79,8 @@
     "rekt",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -161,6 +172,16 @@
       "source": "revertiq",
       "label": "immunefi.com",
       "url": "https://immunefi.com/blog/bug-fix-reviews/hack-analysis-bonqdao-february-2023/"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=bonq-defi-borrowing-project-exploited"
+    },
+    {
+      "source": "w3igg",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/business/2023/02/01/allianceblock-token-plunges-51-after-5m-exploit/"
     }
   ]
 }

@@ -11,6 +11,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "logic-error",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "state-update-flaw",
+    "confidence": 0.68
+  },
   "technique": "Deposit Logic Flaw",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -43,6 +49,10 @@
     {
       "source": "RevertIQ",
       "text": "Clipper lost $450,000 on Optimism and Base on December 1, 2024, when an exploit targeted a deposit and withdrawal logic flaw in its liquidity pools. The vulnerability was in the single-token withdrawal process, not a key compromise. A logic flaw in Clipper's single-token deposit/withdrawal process allowed attackers to manipulate pool balances between actions after obtaining a valid server signature, breaking the accounting assumptions and enabling unauthorized withdrawals."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The Clipper decentralized exchange suffered a $450,000 exploit across two Ethereum layer-2 chains. Although some speculated that the issue may have been a private key leak, Clipper denied this, and instead said that an attacker had exploited a feature allowing people to make withdrawals denominated in a single token by performing swaps along with the withdrawal. Although the $450,000 theft is relatively small compared to some other crypto hacks, it represented around 6% of the total value locked on Clipper. Clipper stated they were working to trace and attempt to recover funds, and asked the hacker to contact them to potentially negotiate a return of some funds."
     }
   ],
   "audit": null,
@@ -51,7 +61,8 @@
   "sources": [
     "defillama",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -78,6 +89,16 @@
       "source": "revertiq",
       "label": "bitdegree.org",
       "url": "https://www.bitdegree.org/crypto/news/not-a-private-key-leak-clipper-reveals-the-truth-behind-the-450000-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=clipper-dex-hack"
+    },
+    {
+      "source": "w3igg",
+      "label": "x.com",
+      "url": "https://x.com/Clipper_DEX/status/1863263893470003460"
     }
   ]
 }

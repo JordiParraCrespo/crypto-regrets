@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "key-compromise",
+  "vulnClass": "key-leak-infrastructure",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "key-leak-infrastructure",
+    "confidence": 0.79
+  },
   "technique": "API Key Compromised",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -46,6 +52,10 @@
     {
       "source": "RevertIQ",
       "text": "On 9 June 2024, Loopring's smart wallet 'Guardian' recovery service was exploited after its centralized two-factor authentication (2FA) server was compromised, enabling attackers to take control of user wallets and steal approximately $5 million. Only wallets relying solely on Loopring's Official Guardian for recovery were affected. The core failure was a compromise of Loopring's AWS-hosted 2FA server, which allowed attackers to take control of the Official Guardian account and approve malicious wallet recovery requests, bypassing owner consent and all other controls."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Although Loopring markets its wallet application as \"Ethereum's most secure wallet\", that's evidently a pretty low bar. They disclosed that they had suffered a breach in their wallet recovery service, which allows individuals to designate trusted entities to recover assets or freeze compromised accounts. An attacker was able to \"recover\" assets from wallets that had only designated a single Loopring guardian, pilfering at least $5 million. Loopring announced that they had suspended their account recovery operations, and were working with law enforcement to trace the attackers."
     }
   ],
   "audit": null,
@@ -54,7 +64,8 @@
   "sources": [
     "defillama",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -81,6 +92,16 @@
       "source": "revertiq",
       "label": "cointelegraph.com",
       "url": "https://cointelegraph.com/news/loopring-smart-wallet-hack-5-million"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=loopring-wallet-hack"
+    },
+    {
+      "source": "w3igg",
+      "label": "theblock.co",
+      "url": "https://theblock.co/post/299177/loopring-suffers-5-million-hack-after-guardian-two-factor-authentication-service-is-compromised"
     }
   ]
 }

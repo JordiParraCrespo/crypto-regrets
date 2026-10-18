@@ -11,6 +11,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "frontend-infra",
+  "vulnClass": "dns-domain-hijack",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "dns-domain-hijack",
+    "confidence": 1
+  },
   "technique": "DNS Hijack",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -39,6 +45,10 @@
     {
       "source": "RevertIQ",
       "text": "Aerodrome Finance’s centralized domains were suspected of being DNS hijacked on 2025-11-22, rerouting Base users to phishing frontends that requested malicious wallet signatures and approvals. The public record does not verify drained funds or a transaction-backed loss total. A compromise of Aerodrome Finance’s centralized DNS layer redirected browser traffic from the intended frontend to a lookalike phishing site. The attack surface was the wallet-signing flow on the counterfeit page. The public record does not establish the upstream takeover method or any verified on-chain theft total."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Attackers redirected users intending to visit the websites for the decentralized exchanges Aerodrome and Velodrome to their own fraudulent versions using DNS hijacking, after taking control of the websites' domains. The platforms urged users not to visit the websites as they worked to regain control. This is the second time such an attack has happened to these same platforms, with another DNS hijacking incident occurring almost exactly two years ago. In that instance, users lost around $100,000 when submitting transactions via the scam websites."
     }
   ],
   "audit": null,
@@ -47,7 +57,8 @@
   "sources": [
     "defillama",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -79,6 +90,16 @@
       "source": "revertiq",
       "label": "coindesk.com",
       "url": "https://www.coindesk.com/web3/2025/11/22/aerodrome-finance-hit-by-front-end-attack-users-urged-to-avoid-main-domain"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=aerodrome-and-velodrome-website-takeovers"
+    },
+    {
+      "source": "w3igg",
+      "label": "theblock.co",
+      "url": "https://www.theblock.co/post/380037/top-dexs-aerodrome-velodrome-hit-with-front-end-compromise-urge-users-to-avoid-main-domains"
     }
   ]
 }

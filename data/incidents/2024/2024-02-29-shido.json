@@ -10,6 +10,12 @@
   ],
   "targetType": "Other",
   "category": "key-compromise",
+  "vulnClass": "admin-key-compromise",
+  "vulnClassBy": "typesafe",
+  "aiClass": {
+    "id": "admin-key-compromise",
+    "confidence": 1
+  },
   "technique": "Private Key Compromised",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -46,6 +52,10 @@
     {
       "source": "RevertIQ",
       "text": "On February 29, 2024, Shido’s Ethereum staking proxy was upgraded to malicious logic after a reported ownership transfer involving the proxy admin. The attacker then withdrew more than 4.35 billion SHIDO tokens from the staking contract, triggering a rapid collapse in the token price as the tokens were sold on the market. An address with upgrade authority over Shido’s StakingV4Proxy gained the ability to deploy a malicious implementation containing a hidden token withdrawal function. Public reporting consistently described this as a sudden ownership transfer, but the available evidence does not independently establish whether the privileged access resu…"
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The Shido blockchain suffered an exploit of their staking smart contract , in which an attacker was able to transfer ownership of the contract to another address and then upgrade the contract with a function that allowed them to withdraw staked tokens. Altogether, the attacker withdrew all 4.3 billion staked $SHIDO tokens — over half the entire circulating supply. Although the stolen tokens were nominally priced at $35 million, the massive theft caused the price to plummet 94%. The attacker has converted the stolen tokens to around 956 ETH ($3.3 million). The Shido team announced that they would be trying to offer a \" bounty \" to the hacker."
     }
   ],
   "audit": null,
@@ -57,7 +67,8 @@
   "sources": [
     "defillama",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -89,6 +100,16 @@
       "source": "revertiq",
       "label": "crypto.news",
       "url": "https://crypto.news/shido-token-dives-over-90-after-ethereum-staking-contract-exploit/"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=shido-contract-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "cointelegraph.com",
+      "url": "https://cointelegraph.com/news/shido-token-plummet-attacker-drains-staking-contract"
     }
   ]
 }

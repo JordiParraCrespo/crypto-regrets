@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "reentrancy",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "single-function-reentrancy",
+    "confidence": 0.68
+  },
   "technique": "Reentrancy",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -50,6 +56,10 @@
     {
       "source": "RevertIQ",
       "text": "On March 27, 2022, Revest Finance was exploited via a reentrancy vulnerability affecting its Ethereum smart contracts, resulting in losses exceeding $2 million across several supported tokens. The attacker manipulated the FNFT minting flow to mint and redeem tokens without backing deposits, draining vaults for assets including RENA, BLOCKS, ECO, LYXe, and others. The root cause was a reentrancy vulnerability in the FNFT minting and deposit mechanism. Specifically, the protocol failed to update internal accounting variables before allowing external calls, permitting reentrant manipulation of FNFT supply and vault balances to mint and redeem unbacked tokens."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The Revest protocol was targeted with an attack that stole $BLOCKS, $ECO, and $RENA tokens from their vault. The protocol wrote that the attacker used a \"highly sophisticated attack on a vulnerability that went unnoticed during our Solidity.Finance audit as well as ... multiple peer-reviews\". The hacker quickly swapped the stolen tokens for ETH via various decentralized exchanges, then tumbled the funds using Tornado Cash. The protocol wrote that they \"do not possess the funds needed for meaningful financial recompense, and are not covered by any DeFi insurance provider\", but promised to try to \"do everything within our power to make things as right as they can possibly be made\"."
     }
   ],
   "audit": "Solidity Finance",
@@ -66,7 +76,8 @@
     "defihacklabs",
     "rekt",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -113,6 +124,16 @@
       "source": "revertiq",
       "label": "therecord.media",
       "url": "https://therecord.media/2-million-stolen-from-defi-protocol-revest-finance-platform-unable-to-reimburse-victims"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=revest-finance-is-hacked-for-2-million"
+    },
+    {
+      "source": "w3igg",
+      "label": "revestfinance.medium.com",
+      "url": "https://revestfinance.medium.com/revest-protocol-exploit-recovery-plan-b06ca33fbdf5"
     }
   ]
 }

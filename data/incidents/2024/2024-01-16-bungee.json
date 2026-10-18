@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "input-validation",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "unvalidated-address-input",
+    "confidence": 0.59
+  },
   "technique": "Missing Input Validation",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -42,6 +48,10 @@
     {
       "source": "RevertIQ",
       "text": "Bungee, operated by Socket, was exploited on Ethereum Mainnet on 16 January 2024. A newly added bridge route without input validation allowed attackers to drain tokens from wallets with unlimited approvals, resulting in an estimated $3.3M loss. Socket paused operations, deployed a fix, and partially recovered funds. A newly deployed bridge route lacked input validation, enabling attackers to pass arbitrary data which allowed unauthorized transferFrom calls using user-approved tokens."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The Socket cross-chain infrastructure protocol was hacked for around $3.3 million in an attack that exploited its Bungee bridge . The thieves were able to exploit a bug that allowed them to take assets from those who had granted approval to a portion of the system called SocketGateway. A little over 700 victims were affected, and the highest loss from a single wallet was around $657,000. 121 wallets lost assets priced at more than $10,000. On January 23, the protocol announced they had recovered 1,032 ETH (~$2.23 million) of the stolen funds."
     }
   ],
   "audit": null,
@@ -49,7 +59,9 @@
   "poc": null,
   "sources": [
     "defillama",
-    "revertiq"
+    "revertiq",
+    "seal911",
+    "w3igg"
   ],
   "references": [
     {
@@ -71,6 +83,26 @@
       "source": "revertiq",
       "label": "theblock.co",
       "url": "https://www.theblock.co/news/ecosystems/2024-01-16-socket-says-bungee-protocol-exploited-272986"
+    },
+    {
+      "source": "seal911",
+      "label": "SEAL 911",
+      "url": "https://x.com/SOCKETProtocol/status/1749734794320363802"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=socket-service-and-its-bungee-bridge-suffer-3-3-million-theft"
+    },
+    {
+      "source": "w3igg",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/tech/2024/01/17/socket-bungee-restart-operations-after-apparent-33m-exploit/"
+    },
+    {
+      "source": "w3igg",
+      "label": "blockworks.co",
+      "url": "https://blockworks.co/news/socket-bridge-protocol-exploit"
     }
   ]
 }

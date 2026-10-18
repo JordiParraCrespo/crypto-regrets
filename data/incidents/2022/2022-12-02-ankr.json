@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "access-control",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "access-misconfiguration",
+    "confidence": 0.74
+  },
   "technique": "Improper Access Control",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -50,6 +56,10 @@
     {
       "source": "RevertIQ",
       "text": "On December 1, 2022, Ankr's aBNBc liquid staking token on BNB Chain was exploited after a former team member compromised the deployer private key. The attacker minted trillions of aBNBc and dumped them, collapsing the price. A secondary attacker exploited Helio Protocol's stale price oracle to borrow $15M+ worth of HAY stablecoin against nearly worthless collateral. Combined losses reached approximately $20M. A former Ankr employee retained access to the deployer private key, which had not revoked its minting authority. The attacker used this key to mint 60 quadrillion aBNBc tokens. Helio Protocol's price oracle failed to update promptly after the coll…"
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The BNB Chain-based Ankr defi protocol suffered an exploit of their aBNBc token. \"We are currently working with exchanges to immediately halt trading,\" they wrote. However, the attacker had already bridged and tumbled around $5 million in funds from the exploit before the announcement was even made. The attacker, and possible subsequent copycat attackers, used a vulnerability in the project smart contract to mint quadrillions of aBNBc, which they then swapped to various other tokens. Binance halted trading on aBNBc tokens, as well as on HAY tokens, a stablecoin project that was subsequently exploited . Ankr also tweeted that \"We have been in touch with…"
     }
   ],
   "audit": null,
@@ -59,7 +69,8 @@
     "defillama",
     "rekt",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -111,6 +122,26 @@
       "source": "revertiq",
       "label": "smartcontractaudit.com",
       "url": "https://www.smartcontractaudit.com/guides/ankr-protocol-2022-deployer-key-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=ankr-defi-project-exploited"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/ankr/status/1598503332477280256"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/lookonchain/status/1598499855412121600"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/peckshield/status/1598508401755144196"
     }
   ]
 }

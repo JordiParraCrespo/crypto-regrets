@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "accounting-math",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "integer-overflow",
+    "confidence": 0.21
+  },
   "technique": "Arithmetic Error",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -50,6 +56,10 @@
     {
       "source": "RevertIQ",
       "text": "On May 7, 2021, ValueDefi's vSwap AMM on BNB Chain was exploited through a critical arithmetic flaw in the weighted constant-product invariant calculation for non 50/50 pools. The incident allowed an attacker to drain approximately $11 million across nine liquidity pools by crafting swaps that intentionally violated the invariant's assumptions. Incorrect use of a power() exponentiation routine in the invariant enforcement logic for vSwap pools with non-50/50 asset weights. The power() helper was valid only when its numerator exceeded or equaled its denominator, but the swap function permitted crafted inputs that broke this assumption. This let the inva…"
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "After a $10 million hack just two days prior, Value DeFi had another $11 million stolen after attackers found and exploited a different bug in their smart contract ."
     }
   ],
   "audit": "Unaudited",
@@ -62,7 +72,8 @@
     "defihacklabs",
     "rekt",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -109,6 +120,21 @@
       "source": "revertiq",
       "label": "medium.com",
       "url": "https://medium.com/peckshield/valuedefi-incident-incorrect-weighted-constant-product-invariant-calculation-1bbaa220a02b"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=value-defi-hacked-for-third-time-in-six-months"
+    },
+    {
+      "source": "w3igg",
+      "label": "thedefiant.io",
+      "url": "https://thedefiant.io/22-million-was-stolen-from-three-defi-platforms-last-weekend/"
+    },
+    {
+      "source": "w3igg",
+      "label": "rekt.news",
+      "url": "https://rekt.news/value-rekt3/"
     }
   ]
 }

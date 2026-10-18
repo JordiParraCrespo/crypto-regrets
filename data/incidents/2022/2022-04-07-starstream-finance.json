@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "rugpull",
+  "vulnClass": "liquidity-rug",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "backdoor-privilege",
+    "confidence": 0.96
+  },
   "technique": "Admin Drain",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -46,6 +52,10 @@
     {
       "source": "RevertIQ",
       "text": "On April 7, 2022, Starstream Finance on Metis was exploited when an insecure external call in its treasury contract allowed an attacker to drain over 532 million STARS tokens, which were then used to manipulate the Agora lending protocol, resulting in over $8 million of bad debt and severe ecosystem disruption. The DistributorTreasury contract had an externally callable execute() function with a low-level call, allowing arbitrary function execution and unauthorized withdrawals from the StarstreamTreasury contract. Insufficient permission controls failed to restrict this operation to authorized actors."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Starstream, a defi project built on the Andromeda layer 2 Ethereum protocol, had its treasury drained. Blockchain security company CertiK reported that the treasury appeared to have contained around $4 million in STARS, all of which was stolen. Shortly after the hack, the attacker transferred 900 ETH ($2.9 million) to a crypto tumbler . Starstream had been audited by two security firms prior to the exploit."
     }
   ],
   "audit": null,
@@ -56,7 +66,8 @@
   "sources": [
     "defillama",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -88,6 +99,21 @@
       "source": "revertiq",
       "label": "official.beosin.com",
       "url": "https://official.beosin.com/resources/beosin-analysis-of-the-attack-on-starstream"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=starstream-treasury-drained"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/CertiKAlert/status/1512155452217479171"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/starstreamfin/status/1512151107086295050"
     }
   ]
 }

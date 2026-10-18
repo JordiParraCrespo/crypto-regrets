@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "access-control",
+  "vulnClass": "access-misconfiguration",
+  "vulnClassBy": "typesafe",
+  "aiClass": {
+    "id": "access-misconfiguration",
+    "confidence": 0.9
+  },
   "technique": "Improper Access Control",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -46,6 +52,10 @@
     {
       "source": "RevertIQ",
       "text": "The Atlantis Loans protocol on BNB Chain was exploited on June 10, 2023, through a governance attack that allowed an attacker to upgrade key contracts and drain funds from user wallets with active token approvals. Reported losses range from $1 million to $2.5 million USD. The on-chain governance mechanism remained vulnerable after the Atlantis Loans team abandoned the protocol. Low participation allowed an attacker to gain sufficient voting power, pass a proposal that upgraded contract logic, and weaponize existing user token approvals for mass fund drainage."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Although developers abandoned the Atlantis Loans defi lending project in early April due to \"financial difficulties\", as a self-executing defi protocol it has continued to chug along rather like a zombie. As the developers wrote when they abandoned the project, \"Atlantis Loans as a protocol is fully decentralized and the only way to make changes or turn things off will have to be done through the governance.\" Evidently, few people continued to pay much attention to the project, because an exploiter was able to come along and perform a governance attack targeting the users who still had active smart contract approvals with the defunct project. They publ…"
     }
   ],
   "audit": "Unaudited",
@@ -57,7 +67,8 @@
     "defillama",
     "rekt",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -94,6 +105,16 @@
       "source": "revertiq",
       "label": "blog.solidityscan.com",
       "url": "https://blog.solidityscan.com/atlantis-loans-hack-analysis-7f3fb2e295e0/"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=abandoned-atlantis-loans-project-exploited-for-1-1-million"
+    },
+    {
+      "source": "w3igg",
+      "label": "protos.com",
+      "url": "https://protos.com/latest-round-of-defi-exploits-display-its-wide-range-of-vulnerabilities/"
     }
   ]
 }

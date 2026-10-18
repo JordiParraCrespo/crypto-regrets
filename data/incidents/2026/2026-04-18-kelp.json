@@ -11,6 +11,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "bridge-crosschain",
+  "vulnClass": "message-verification-bypass",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "message-verification-bypass",
+    "confidence": 0.97
+  },
   "technique": "Cross-Chain Message Spoofing",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -59,6 +65,10 @@
     {
       "source": "RevertIQ",
       "text": "On April 18, 2026, KelpDAO's rsETH bridge lost approximately $292M after an attacker compromised off-chain RPC infrastructure supporting its LayerZero single-verifier configuration. The forged message led to a release of real rsETH on Ethereum, triggering cross-chain market freezes and partial recovery actions. The exploit occurred because KelpDAO's rsETH LayerZero bridge was configured with only one Decentralized Verifier Network (DVN) , LayerZero Labs as sole verifier. The attacker compromised the DVN's downstream RPC nodes, forcing it to attest to a fabricated cross-chain message and release 116,500 rsETH without a corresponding event on the source chain."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "An attacker stole 116,500 rsETH ( restaked ether) from a blockchain bridge run by Kelp DAO. Based on prices at the time of the theft, the stolen tokens would be worth around $292 million — however, the attacker is likely to face challenges selling a quantity of tokens that amounts to 18% of rsETH's circulating supply. When tokens are bridged from one chain to another, the tokens on the original chain are locked in the bridge smart contract while the token is used on the other chain, preventing its owner from double-spending the asset. With 116,500 locked rsETH now stolen, those using the token on other blockchains are now holding possibly unbacked tokens.…"
     }
   ],
   "audit": null,
@@ -72,7 +82,9 @@
     "defihacklabs",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "seal911",
+    "w3igg"
   ],
   "references": [
     {
@@ -149,6 +161,21 @@
       "source": "revertiq",
       "label": "layerzero.network",
       "url": "https://layerzero.network/blog/kelpdao-incident-statement"
+    },
+    {
+      "source": "seal911",
+      "label": "SEAL 911",
+      "url": "https://x.com/KelpDAO/status/2046481564616523976"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=kelp-dao-hack"
+    },
+    {
+      "source": "w3igg",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/tech/2026/04/19/2026-s-biggest-crypto-exploit-kelp-dao-hit-for-usd292-million-with-wrapped-ether-stranded-across-20-chains"
     }
   ]
 }

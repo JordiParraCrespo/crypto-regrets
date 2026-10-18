@@ -8,30 +8,36 @@
   "chains": [],
   "targetType": null,
   "category": "logic-error",
-  "technique": null,
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "business-logic-flaw",
+    "confidence": 0.92
+  },
+  "technique": "application vulnerability",
   "classificationNote": "Classified by keyword rules from the SlowMist label and description.",
   "classifiedBy": "keywords",
   "ai": {
     "model": "jev-1.13.0",
     "category": "key-compromise",
-    "confidence": 0.93,
+    "confidence": 0.63,
     "top": [
       {
         "category": "key-compromise",
-        "p": 0.93
+        "p": 0.65
       },
       {
         "category": "frontend-infra",
-        "p": 0.05
+        "p": 0.14
       },
       {
         "category": "access-control",
-        "p": 0.02
+        "p": 0.13
       }
     ],
     "flashLoan": 0.02,
     "stateActor": 0.02,
-    "hasRootCause": 0.06
+    "hasRootCause": 0.07
   },
   "bridge": false,
   "language": null,
@@ -40,19 +46,34 @@
     {
       "source": "SlowMist",
       "text": "MapleChange, based in Canada, announced on Twitter the exchange \"sustained a hack\" and was investigating the issue. The post also said the exchange had turned off users' accounts temporarily. About refunding its customers, it opened a Discord server (a platform for users to chat) so customers could post there about their missing funds, based on which it would initiate refunds. The exchange's website was down."
+    },
+    {
+      "source": "Blockchain Graveyard",
+      "text": "There are heavy accusation of an exit scam, so I delayed the posting of this breach. Due to a bug, some people have managed to withdraw all the funds from our exchange. We are in the process of a thorough investigation for this. We are extremely sorry that it has to come to end like this. Until the investigation is over, we cannot refund anything. A follow up tweet includes a post mortem: The method unlock_and_sub_funds has proper conditionals, immediately raising exceptions if the sub amount goes below the balance of the user. In this case, even if the malformed/exploited order did get processed, it would stop here, properly throwing an error in our l…"
     }
   ],
   "audit": null,
   "txHashes": [],
   "poc": null,
   "sources": [
-    "slowmist"
+    "slowmist",
+    "graveyard"
   ],
   "references": [
     {
       "source": "slowmist",
       "label": "ibtimes.com",
       "url": "https://www.ibtimes.com/cryptocurrency-exchange-maplechange-hacked-exit-scam-allegations-surface-2728232"
+    },
+    {
+      "source": "graveyard",
+      "label": "pastebin.com",
+      "url": "https://pastebin.com/PZD3Qb35"
+    },
+    {
+      "source": "graveyard",
+      "label": "github.com",
+      "url": "https://github.com/peatio/peatio/blob/6fe7e960a12c40053370cb25cdd0968b67041aa0/app/models/order.rb"
     }
   ]
 }

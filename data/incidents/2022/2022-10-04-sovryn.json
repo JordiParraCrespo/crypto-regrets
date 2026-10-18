@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "reentrancy",
+  "vulnClass": "single-function-reentrancy",
+  "vulnClassBy": "typesafe",
+  "aiClass": {
+    "id": "single-function-reentrancy",
+    "confidence": 0.95
+  },
   "technique": "Reentrancy",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -42,6 +48,10 @@
     {
       "source": "RevertIQ",
       "text": "On October 4, 2022, an attacker exploited a vulnerability in Sovryn’s lending pools on Rootstock, enabling the extraction of over $1.1 million by manipulating iToken pricing through cross-contract reentrancy. About half of the funds were recovered after the incident, and the remainder was covered by Sovryn’s treasury. The protocol's lending pool and core contracts could be manipulated by reentrant calls made possible via asset transfer callbacks (native RBTC or ERC777 rUSDT), which allowed the attacker to mint iTokens at a temporarily deflated price during a loan closing process. State updates were performed before underlying assets arrived, leading to an exploitably incorrect iToken price."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Bitcoin-based defi protocol, Sovryn, lost $1 million to a price manipulation attack. An exploiter was able to use the project's legacy lend and borrow functionality to maliciously withdraw 44.93 RBTC (~$915,000) and 211,045 USDT. According to the protocol, their developers \"were able to identify and recover funds as the attacker was attempting to withdraw the funds\". They have also announced that Exchequer, the project's treasury committee, would \"reinject\" the remaining stolen funds."
     }
   ],
   "audit": "Unaudited",
@@ -55,7 +65,8 @@
     "defillama",
     "rekt",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -87,6 +98,16 @@
       "source": "revertiq",
       "label": "sovryn.com",
       "url": "https://sovryn.com/all-things-sovryn/october-2022-lending-pool-exploit-postmortem"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=more-than-1-1-million-stolen-from-sovryn-defi-protocol"
+    },
+    {
+      "source": "w3igg",
+      "label": "cryptopotato.com",
+      "url": "https://cryptopotato.com/bitcoin-defi-protocol-sovryn-gets-hacked-for-over-1-million/"
     }
   ]
 }

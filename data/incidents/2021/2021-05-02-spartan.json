@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "accounting-math",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "rounding-precision",
+    "confidence": 0.42
+  },
   "technique": "Incorrect Share Accounting",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -46,6 +52,10 @@
     {
       "source": "RevertIQ",
       "text": "On May 2, 2021, Spartan Protocol on BNB Chain lost approximately $30.5 million when an attacker exploited a fundamental flaw in its liquidity pool share calculation, allowing pool balances to be inflated and drained using flash loans. The protocol calculated LP share redemptions based on current ERC-20 token balances, not synchronized internal reserves. This let attackers artificially inflate pool balances and withdraw much more than their true share by combining flash loans and direct transfers."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "A flawed calculation pertaining to the liquidity pool of Spartan Protocol allowed an attacker to drain $30 million from the project."
     }
   ],
   "audit": null,
@@ -59,7 +69,8 @@
     "defihacklabs",
     "rekt",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -101,6 +112,16 @@
       "source": "revertiq",
       "label": "medium.com",
       "url": "https://medium.com/amber-group/exploiting-spartan-protocols-lp-share-calculation-flaws-391437855e74"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=attacker-steals-30-million-from-spartan-protocol"
+    },
+    {
+      "source": "w3igg",
+      "label": "cointelegraph.com",
+      "url": "https://cointelegraph.com/news/spartan-protocol-exploit-results-in-loss-of-30m"
     }
   ]
 }

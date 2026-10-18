@@ -11,6 +11,12 @@
   ],
   "targetType": "Wallet",
   "category": "access-control",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "access-misconfiguration",
+    "confidence": 0.76
+  },
   "technique": "Improper Access Control",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -47,6 +53,10 @@
     {
       "source": "RevertIQ",
       "text": "On August 9, 2026, Coinsbuy, a centralized payments provider, suffered a cross-chain attack draining over $7.9 million from hot wallets on Ethereum and Tron. Attackers exploited privileged access, quickly laundering stolen assets through swap services and privacy networks. Coinsbuy replenished client funds from reserves, but the root cause remains undisclosed. The attack stemmed from unauthorized access to Coinsbuy's privileged wallet infrastructure, likely at the hot-wallet key management or admin controls layer. The exact technical breach (key compromise, admin session hijack, or internal control failure) has not been publicly confirmed or detailed by the company."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The Coinsbuy crypto platform was exploited for around $8 million across both the Ethereum and Tron blockchains. The attacker was able to steal the funds from eight wallets belonging to the exchange. The wallets were later replenished by Coinsbuy, suggesting that the attack vector did not involve compromising the wallets themselves. Coinsbuy has said that the vulnerability has been addressed, and offered a $100,000 \" bounty \" for the returned funds."
     }
   ],
   "audit": null,
@@ -56,7 +66,8 @@
     "defillama",
     "rekt",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -88,6 +99,16 @@
       "source": "revertiq",
       "label": "kucoin.com",
       "url": "https://www.kucoin.com/news/flash/coinsbuy-exchange-loses-8m-in-coordinated-tron-ethereum-attack"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=coinsbuy-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "decrypt.co",
+      "url": "https://decrypt.co/375213/hackers-drain-8-million-from-crypto-platform-coinsbuy"
     }
   ]
 }

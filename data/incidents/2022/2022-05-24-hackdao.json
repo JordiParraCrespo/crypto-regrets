@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "access-control",
+  "vulnClass": "missing-access-modifier",
+  "vulnClassBy": "typesafe",
+  "aiClass": {
+    "id": "missing-access-modifier",
+    "confidence": 0.9
+  },
   "technique": "Improper Access Control",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -50,6 +56,10 @@
     {
       "source": "RevertIQ",
       "text": "On 24 May 2022, HackDao was exploited on BNB Chain due to a flaw in the token's transfer fee logic and pool accounting. The attacker used flashloans and manipulated the LP pools using the skim and extra fee mechanisms, draining approximately 200 BNB (worth $65,000) from HackDao liquidity pools. The root cause was a flawed interaction between the HackDao token contract's special extra fee logic for transfers to specific pools (particularly the HackDao,USDT pool) and the UniswapV2Pair skim function. This enabled the attacker to drain tokens from liquidity pools by exploiting differences between recorded and actual balances after fee deductions."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Attackers gained control of the Twitter account belonging to Beeple, an artist known for \"selling\" an NFT for $69 million in March 2021 and for his recent horror-inducing NFT collab with Madonna. They used the account to share two scam mint links — first to a supposed NFT collaboration with Louis Vuitton, then to \"extra\" artwork Beeple supposedly created but never minted as NFTs. The scam drew in around $272,000 in ETH and stole 45 NFTs worth approximately $166,000 before Beeple regained control of his Twitter account about five hours later. Various commenters replied to Beeple's tweet to say they'd been scammed, and to ask if he could help them recover their funds or NFTs.…"
     }
   ],
   "audit": null,
@@ -61,7 +71,8 @@
   "sources": [
     "defillama",
     "defihacklabs",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -98,6 +109,16 @@
       "source": "revertiq",
       "label": "certik.com",
       "url": "https://www.certik.com/blog/hackerdao-incident-analysis"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=beeples-twitter-account-is-hacked-and-used-to-promote-scams"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/sniko_/status/1528320829741842432"
     }
   ]
 }

@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "logic-error",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "business-logic-flaw",
+    "confidence": 0.73
+  },
   "technique": "Withdrawal Logic Flaw",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -46,6 +52,10 @@
     {
       "source": "RevertIQ",
       "text": "Earning.Farm's EFLeverVault contract on Ethereum was exploited on 14 October 2022 due to missing checks on flash loan initiator, allowing unauthorized withdrawal of 748 ETH (around $971,000 at the time), with a MEV bot capturing the majority of funds through frontrunning. The EFLeverVault contract did not verify that flash loan withdrawal calls originated from authorized protocol sources, allowing external actors to initiate withdrawals and drain funds."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The defi project Earning.Farm lost 748 ETH (~$971,000) to a hacker using a flash loan attack. The project contract was missing a check that a flash loan was initiated by the protocol, so the attacker was able to instruct the project to withdraw large amounts of funds, which they then were able to transfer to themselves. Amusingly, one of the transactions by the hacker was frontrun by a MEV bot known as 0xa57, which made a tidy 480 ETH (~$623,000) from the attack. The second transaction succeeded, landing the attacker 268 ETH (~$348,000). According to a MEV researcher, 0xa57 has been known to return funds that were obtained as a result of a hack."
     }
   ],
   "audit": null,
@@ -56,7 +66,8 @@
   "sources": [
     "defillama",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -83,6 +94,26 @@
       "source": "revertiq",
       "label": "smartcontractshacking.com",
       "url": "https://smartcontractshacking.com/hacks/earning-farm-hack-2022"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=earningfarm-exploited-for-971000"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/MevRefund/status/1580917351217627136"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Supremacy_CA/status/1581012823701786624"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/danielvf/status/1580936010556661761"
     }
   ]
 }

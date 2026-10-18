@@ -11,6 +11,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "input-validation",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "missing-bounds-check",
+    "confidence": 0.82
+  },
   "technique": "Missing Input Validation",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -51,6 +57,10 @@
     {
       "source": "RevertIQ",
       "text": "DeltaPrime's November 11, 2024 exploit on Arbitrum and Avalanche used attacker-controlled reward callbacks and weak repayment validation to drain about $4.75 million, then routed part of the proceeds into pools and bridges. DeltaPrime's Prime Account let attacker-supplied pair contracts participate in claimReward() before reward accounting finalized, so a malicious callback could change the wrapped balance that the contract later treated as a reward. In the Arbitrum path, swapDebtParaSwap() also let borrowed assets be redirected while _repayAmount stayed at zero, so the debt leg was not settled when the collateral was moved."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The DeltaPrime defi protocol was hacked for the second time in two months, losing $4.8 million in Arbitrum and Avalanche tokens. The attacker appeared to have exploited a flaw in one of the platform's smart contracts that enabled them to borrow more than they put up in collateral. DeltaPrime paused the protocol on both Arbitrum and Avalanche, stopping the attacker from being able to steal more funds than they already had. DeltaPrime was hacked previously on September 16 , losing $6 million after a leaked private key enabled an attacker to mint a huge number of the platform's stablecoin deposit receipts."
     }
   ],
   "audit": "Peckshield",
@@ -72,7 +82,8 @@
     "rekt",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -134,6 +145,16 @@
       "source": "revertiq",
       "label": "certik.medium.com",
       "url": "https://certik.medium.com/deltaprime-incident-analysis-21ba7d9a00a1"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=deltaprime-hack-2"
+    },
+    {
+      "source": "w3igg",
+      "label": "x.com",
+      "url": "https://x.com/DeltaPrimeDefi/status/1855899502944903195"
     }
   ]
 }

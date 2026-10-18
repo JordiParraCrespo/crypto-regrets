@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "frontend-infra",
+  "vulnClass": "frontend-injection",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "dns-domain-hijack",
+    "confidence": 1
+  },
   "technique": "Frontend Compromise",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -42,6 +48,10 @@
     {
       "source": "RevertIQ",
       "text": "Balancer V2’s web frontend was compromised on Ethereum on September 19, 2023. Users connecting to the site were prompted to approve malicious contract transactions, resulting in around $238,000 in losses. Balancer’s web frontend (balancer.fi) was compromised via a DNS hijack or similar infrastructure attack. Users interacting with the site were redirected to a malicious interface, where they unknowingly approved fraudulent wallet-draining transactions."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Balancer issued an urgent warning to stop using its web interface, as it was evidently compromised by malicious actors who redirected the funds to themselves. Within 30 minutes of the tweeted warning, $240,000 had already been stolen. This is the second theft from Balancer in a month, after it warned of a critical vulnerability on August 22, and that vulnerability was exploited for around $2 million several days later."
     }
   ],
   "audit": null,
@@ -50,7 +60,8 @@
   "sources": [
     "defillama",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -77,6 +88,21 @@
       "source": "revertiq",
       "label": "smartcontractshacking.com",
       "url": "https://smartcontractshacking.com/hacks/balancer-v2-hack-2023"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=balancer-frontend-compromise"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Balancer/status/1704281611326357567"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/zachxbt/status/1704286832844828914"
     }
   ]
 }

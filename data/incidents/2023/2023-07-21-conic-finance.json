@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "reentrancy",
+  "vulnClass": "read-only-reentrancy",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "read-only-reentrancy",
+    "confidence": 0.99
+  },
   "technique": "Read-Only Reentrancy",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -58,6 +64,14 @@
     {
       "source": "RevertIQ",
       "text": "On July 21, 2023, Conic Finance's ETH Omnipool was exploited for over $3.26 million due to a read-only reentrancy vulnerability triggered by a misidentified ETH/WETH address. The attacker used flash loans to manipulate Curve pool prices and drained funds from Omnipools before the team paused operations. The vulnerable CurveLPOracleV2 code wrongly assumed Curve v2 pools used the native ETH address for ETH-related pools but Curve actually employed the WETH address. This mistake caused the _isETH check to return false, which led to the reentrancy guard not activating. The attacker exploited this gap to recursively call withdrawals in the midst of liquidit…"
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Hours after suffering a $3.2 million exploit on their ETH pools, Conic Finance was hacked for a second time. Although Conic had assured the public that the incident was limited to the ETH pool and other pools were not at risk, an attacker successfully exploited their crvUSD pool. The attacker stole around $934,000, though ultimately only was able to realize around $300,000 in profit."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "A re-entrancy vulnerability in the Conic Finance defi project enabled an attacker to steal 1,700 ETH (~$3.22 million) from the project's ETH pool. Conic Finance announced that they had disabled deposits on the front-end of their project, and were working to patch the vulnerable smart contract. The team also attempted to contact the exploiter via blockchain message, asking if they \"would be open to discussing any potential next steps\"."
     }
   ],
   "audit": "Out of scope",
@@ -74,7 +88,8 @@
     "rekt",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -141,6 +156,16 @@
       "source": "revertiq",
       "label": "merklescience.com",
       "url": "https://www.merklescience.com/blog/hack-track-investigating-conic-finance-flow-of-funds"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=conic-finance-exploit-2"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=conic-finance-exploit"
     }
   ]
 }

@@ -10,6 +10,12 @@
   ],
   "targetType": "CEX",
   "category": "access-control",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "missing-access-modifier",
+    "confidence": 0.65
+  },
   "technique": "Improper Access Control",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -42,6 +48,10 @@
     {
       "source": "RevertIQ",
       "text": "On July 13, 2014, attackers exploited a SQL injection in MintPal's withdrawal system, stealing about 8 million VeriCoin (~$2 million in value) from the exchange's hot wallet. The loss was overwhelmingly restored when the VeriCoin blockchain was hard-forked to orphan the theft transaction. BTC and LTC on MintPal were unaffected due to cold storage. Less than $4,000 in VRC escaped before the rollback and was unrecoverable. A SQL injection vulnerability in MintPal's withdrawal backend allowed an attacker to forge unauthorized withdrawal requests and drain the VeriCoin hot wallet. Poor cold storage practice left most VRC exposed online."
+    },
+    {
+      "source": "Blockchain Graveyard",
+      "text": "Little information provided. A few hours ago we were unfortunately the subject of a successful attack against the exchange. Our investigations have shown that whilst our security was breached, VeriCoin was the target. We would like to stress that VeriCoin and the VeriCoin network has not been in any way compromised. We have worked to secure the exchange and the withdraw process from any further attack."
     }
   ],
   "audit": null,
@@ -50,7 +60,8 @@
   "sources": [
     "defillama",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "graveyard"
   ],
   "references": [
     {
@@ -77,6 +88,11 @@
       "source": "revertiq",
       "label": "quadrigainitiative.com",
       "url": "https://www.quadrigainitiative.com/casestudy/mintpalvericoinhackrollback.php"
+    },
+    {
+      "source": "graveyard",
+      "label": "Blockchain Graveyard",
+      "url": "https://archive.is/6H9Xi"
     }
   ]
 }

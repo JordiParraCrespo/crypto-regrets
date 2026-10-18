@@ -12,6 +12,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "bridge-crosschain",
+  "vulnClass": "message-verification-bypass",
+  "vulnClassBy": "curated",
+  "aiClass": {
+    "id": "message-verification-bypass",
+    "confidence": 1
+  },
   "technique": "Cross-chain message called privileged keeper function",
   "classificationNote": "Curated: reclassified from \"access-control\" based on the published post-mortem.",
   "classifiedBy": "curated",
@@ -68,6 +74,10 @@
     {
       "source": "RevertIQ",
       "text": "On August 10, 2021, Poly Network’s cross-chain bridge was exploited for approximately $611 million across Ethereum, Binance Smart Chain, and Polygon. The attacker abused a flaw in cross-chain message handling to seize validator control, then drained bridge assets. Poly Network’s EthCrossChainManager contract permitted cross-chain messages to instruct it to call arbitrary methods on arbitrary contracts, including privileged admin functions. The manager was owner of EthCrossChainData, allowing an attacker to update keeper (validator) keys and seize control without proper access restriction."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Hackers stole approximately $611 million from the decentralized finance platform Poly Network in the largest cryptocurrency theft against a single platform to date. In a bizarre twist, the hacker returned the funds, and Poly Network offered them a position as a chief security advisor (though it is not clear if they accepted)."
     }
   ],
   "audit": "Unaudited",
@@ -82,6 +92,7 @@
     "rekt",
     "slowmist",
     "revertiq",
+    "w3igg",
     "curated"
   ],
   "references": [
@@ -164,6 +175,21 @@
       "source": "revertiq",
       "label": "github.com",
       "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/past/2021/README.md#L414"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=611-million-stolen-from-poly-network"
+    },
+    {
+      "source": "w3igg",
+      "label": "cnbc.com",
+      "url": "https://www.cnbc.com/2021/08/17/poly-network-cryptocurrency-hack-latest.html"
+    },
+    {
+      "source": "w3igg",
+      "label": "en.wikipedia.org",
+      "url": "https://en.wikipedia.org/wiki/Poly_Network_Exploit"
     }
   ]
 }

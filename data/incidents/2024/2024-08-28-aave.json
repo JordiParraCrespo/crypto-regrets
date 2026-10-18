@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "arbitrary-call",
+  "vulnClass": "arbitrary-external-call",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "arbitrary-external-call",
+    "confidence": 0.8
+  },
   "technique": "Arbitrary External Call",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -50,6 +56,10 @@
     {
       "source": "RevertIQ",
       "text": "On August 28, 2024, an attacker exploited a vulnerability in Aave's ParaSwap Repay Adapter periphery contract, stealing roughly $56,000 in DAO-owned tokens on Ethereum. The attacker crafted malicious swap data to extract leftover balances by leveraging arbitrary external call capability in the adapter. Core protocol and user funds were not at risk. The core cause was the adapter contract's unsanitized paraswapData input, allowing arbitrary external calls to the ParaSwap Augustus contract with unchecked token allowances, enabling funds in the adapter to be drained via malicious swap actions."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The popular defi lending platform, Aave, suffered a smart contract exploit that allowed an attacker to steal around $56,000. A smart contract outside of the core Aave protocol, which is used to allow people to use existing collateral to repay their loans, had gradually accrued a balance of tokens leftover from slippage . These small leftover token amounts are sometimes called \"dust\". Altogether, these tokens amounted to around $70,000 across several blockchain networks. An exploiter was able to take advantage of an arbitrary call error that allowed them to steal funds from these various contracts, amounting to around $56,000. Various people associated…"
     }
   ],
   "audit": null,
@@ -61,7 +71,8 @@
     "defillama",
     "defihacklabs",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -108,6 +119,16 @@
       "source": "revertiq",
       "label": "blog.solidityscan.com",
       "url": "https://blog.solidityscan.com/aave-repay-adapter-hack-analysis-aafd234e15b9/"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=peripheral-aave-smart-contract-hack"
+    },
+    {
+      "source": "w3igg",
+      "label": "protos.com",
+      "url": "https://protos.com/aave-hacked-via-periphery-contract-56k-stolen-from-tip-jar/"
     }
   ]
 }

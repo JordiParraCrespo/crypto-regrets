@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "frontend-infra",
+  "vulnClass": "frontend-injection",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "frontend-injection",
+    "confidence": 1
+  },
   "technique": "Frontend Compromise",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -42,6 +48,10 @@
     {
       "source": "RevertIQ",
       "text": "On February 3, 2022, KlaySwap users lost approximately $1.9 million after attackers executed a BGP (Border Gateway Protocol) hijack that allowed them to serve a malicious Kakao JavaScript SDK file to the KlaySwap website. This frontend attack redirected DeFi user transactions to attacker-controlled wallets, leveraging fundamental weaknesses in internet routing and web supply-chain practices. Attackers used BGP hijacking to route traffic destined for Kakao's SDK servers to malicious infrastructure. They obtained a valid TLS certificate for the hijacked domain via manipulated domain control validation, then served a tampered JavaScript library to KlaySwap users.…"
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Some sophisticated hackers managed a BGP hijack on the servers powering KakaoTalk, a marketing and customer service application used by the South Korean KLAYswap cryptocurrency exchange. The hijacking enabled the hackers to serve malicious JavaScript that allowed hackers to intercept funds as a user initiated a transaction. Over a two-hour period, the hackers stole cryptocurrency totaling ₩2.2 million (about $1.9 million) from 325 customer wallets. The exchange acknowledged the hack the same day, and promised to compensate affected users."
     }
   ],
   "audit": null,
@@ -50,7 +60,8 @@
   "sources": [
     "defillama",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -82,6 +93,16 @@
       "source": "revertiq",
       "label": "certik.com",
       "url": "https://www.certik.com/blog/bgp-hijacking-the-usd1-9m-klayswap-attack-through-manipulated-network-flow"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=klayswap-hacked"
+    },
+    {
+      "source": "w3igg",
+      "label": "therecord.media",
+      "url": "https://therecord.media/klayswap-crypto-users-lose-funds-after-bgp-hijack/"
     }
   ]
 }

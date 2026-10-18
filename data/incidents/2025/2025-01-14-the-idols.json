@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "logic-error",
+  "vulnClass": "reward-logic-flaw",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "reward-logic-flaw",
+    "confidence": 0.99
+  },
   "technique": "Reward Logic Flaw",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -50,6 +56,10 @@
     {
       "source": "RevertIQ",
       "text": "On January 14, 2025, The Idols NFT staking contract on Ethereum was exploited through repeated NFT self-transfers, resulting in the loss of about 97 stETH (≈$340,000). The attacker abused reward logic to repeatedly reset and claim staking rewards without moving the token. The protocol's reward logic allowed self-transfers of NFTs, and the _beforeTokenTransfer function deleted and reset claimedSnapshots when sender and receiver were the same and balance was one. This error enabled infinite reward claims through repeated self-transfers."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "An attacker noticed a vulnerability in a smart contract for The Idols, an NFT project that also incorporates ETH staking functionality. They discovered that a function used to distribute rewards had a bug when the sender and recipient addresses were the same, allowing a holder to repeatedly claim rewards. By taking advantage of this bug, they were able to siphon 97 stETH (~$324,000) from the project. Although The Idols boasts of two audits from several years ago, the contract containing the vulnerability may not have been audited."
     }
   ],
   "audit": null,
@@ -77,7 +87,8 @@
     "rekt",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -139,6 +150,11 @@
       "source": "revertiq",
       "label": "blog.solidityscan.com",
       "url": "https://blog.solidityscan.com/the-idols-nft-hack-analysis-95f3abdd0deb/"
+    },
+    {
+      "source": "w3igg",
+      "label": "rekt.news",
+      "url": "https://rekt.news/theidolsnft-rekt/"
     }
   ]
 }

@@ -12,6 +12,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "key-compromise",
+  "vulnClass": "multisig-threshold-compromise",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "multisig-threshold-compromise",
+    "confidence": 0.91
+  },
   "technique": "Validator Key Compromised",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -56,6 +62,10 @@
     {
       "source": "RevertIQ",
       "text": "On July 6, 2023, Multichain's bridge contracts on Ethereum Mainnet and other chains experienced abnormal outflows exceeding $125 million. The loss was traced to compromised centralized custody of MPC keys, not a smart contract bug, allowing unauthorized withdrawals to unknown addresses. Centralized custody of Multichain's bridge MPC keys enabled unauthorized withdrawals once control was lost, likely following the CEO's arrest. The protocol had a single-point-of-failure in its off-chain key management, with no contract-level protection against abnormal signatures."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Blockchain watchers observed $130 million in various assets flowing out of the Multichain blockchain bridge, questioning whether there had been an exploit. Multichain tweeted, \"The team is not sure what happened and is currently investigating,\" and recommended users stop using the service and revoke contract approvals. Several hours later, Multichain wrote that they had stopped service, and that \"all bridge transactions will be stuck on the source chains. There is no confirmed resume time.\" In May, Multichain suffered a bizarre slew of issues , culminating in the project team admitting that their CEO had gone missing and could not be contacted. So far, they have not reported his return.…"
     }
   ],
   "audit": null,
@@ -71,7 +81,8 @@
     "defillama",
     "rekt",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -123,6 +134,26 @@
       "source": "revertiq",
       "label": "chainscorelabs.com",
       "url": "https://chainscorelabs.com/blog/security-post-mortems-hacks-and-exploits/formal-verification-case-studies/why-the-multichain-exploit-points-to-a-crisis-in-cross-chain-assumptions"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=multichain-suspected-hack"
+    },
+    {
+      "source": "w3igg",
+      "label": "blockworks.co",
+      "url": "https://blockworks.co/news/multichain-anyswap-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/MultichainOrg/status/1677096839731097600"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/MultichainOrg/status/1677180114227056641"
     }
   ]
 }

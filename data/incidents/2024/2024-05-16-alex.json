@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "social-engineering",
+  "vulnClass": "phishing-credential-theft",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "phishing-credential-theft",
+    "confidence": 1
+  },
   "technique": "Phishing",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -50,6 +56,10 @@
     {
       "source": "RevertIQ",
       "text": "On May 14, 2024, ALEXLabBTC's bridge contract on Binance Smart Chain was exploited by an attacker who compromised a deployer key. The attacker upgraded the proxy contract to a malicious implementation lacking access controls, but a whitehat rescued the assets through rapid intervention. Most funds were recovered. The privileged deployer key controlling the BSC bridge endpoint was compromised through phishing, enabling the attacker to upgrade the proxy contract to an implementation with no access controls. This allowed unrestricted withdrawals from the contract. The attacker failed to secure exclusive withdrawal rights, allowing a whitehat to front-run and recover the assets."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "An attacker tried to pull off what could have been a ~$12 million heist from ALEX Lab's XLink bridge after a private key was compromised. However, the sloppy work by the attacker enabled an apparent whitehat hacker to step in. The attacker was successfully able to transfer around 13.8 million STX (~$2 million) on the Stack BTC layer-2 chain. However, their attempts to steal assets notionally worth around $4.3 million from the project's BNB Chain implementation failed when they upgraded the project contract to a malicious version, but failed to prevent other people from calling the withdraw function. The attacker's first transactions to withdraw the fun…"
     }
   ],
   "audit": "CoinFabrik",
@@ -62,7 +72,8 @@
     "defillama",
     "rekt",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -114,6 +125,26 @@
       "source": "revertiq",
       "label": "cryptobriefing.com",
       "url": "https://cryptobriefing.com/alex-l2-protocol-bridge-drained/"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=alex-xlink-bridge-theft"
+    },
+    {
+      "source": "w3igg",
+      "label": "certik.com",
+      "url": "https://www.certik.com/resources/blog/alex"
+    },
+    {
+      "source": "w3igg",
+      "label": "x.com",
+      "url": "https://x.com/ALEXLabBTC/status/1791020176332230988"
+    },
+    {
+      "source": "w3igg",
+      "label": "x.com",
+      "url": "https://x.com/ALEXLabBTC/status/1790815791832498291"
     }
   ]
 }

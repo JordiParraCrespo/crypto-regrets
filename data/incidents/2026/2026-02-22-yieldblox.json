@@ -10,6 +10,12 @@
   ],
   "targetType": null,
   "category": "oracle-manipulation",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "spot-price-oracle",
+    "confidence": 0.79
+  },
   "technique": "Vulnerable Price Dependency",
   "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 1.00).",
   "classifiedBy": "typesafe",
@@ -38,6 +44,10 @@
     {
       "source": "RevertIQ",
       "text": "YieldBlox suffered a $10M loss on February 22, 2026, after an attacker manipulated a thinly traded Stellar DEX oracle price for USTRY/USDC, inflating collateral value and draining USDC and XLM from a Blend V2 lending pool. The lending pool operator configured its oracle to source USTRY prices from a near-zero-volume SDEX market, enabling price manipulation by a single abnormal trade. There were no liquidity/deviation checks or circuit breakers at the protocol or oracle-adapter layer."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "A lending pool operated by YieldBlox on the Stellar blockchain was emptied of around $10.2 million in an oracle manipulation attack on the Reflector oracle supplying prices for the USTRY/USDC market. Reflector has said that there was no flaw with their oracle, and that market illiquidity caused the problem. \"Reflector quoted correct prices. ... but it's impossible to quote adequate prices for a market fully handled by a single market-maker with almost zero trading activity.\" The attacker was able to manipulate the oracle price to show that USTRY was priced at $100 (rather than its actual trading price of around $1.05). Then, they borrowed against the o…"
     }
   ],
   "audit": null,
@@ -49,7 +59,8 @@
   "sources": [
     "rekt",
     "blocksec",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -86,6 +97,21 @@
       "source": "revertiq",
       "label": "olympix.security",
       "url": "https://olympix.security/blog/the-yieldblox-exploit-how-olympix-could-have-prevented-the-10m-loss"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=yieldblox-theft"
+    },
+    {
+      "source": "w3igg",
+      "label": "x.com",
+      "url": "https://x.com/script3official/status/2025403423840141450"
+    },
+    {
+      "source": "w3igg",
+      "label": "x.com",
+      "url": "https://x.com/in_reflector/status/2025700358626877576"
     }
   ]
 }

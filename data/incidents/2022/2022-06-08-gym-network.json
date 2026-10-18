@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "access-control",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "missing-access-modifier",
+    "confidence": 0.8
+  },
   "technique": "Improper Access Control",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -50,6 +56,10 @@
     {
       "source": "RevertIQ",
       "text": "Gym Network was exploited on BNB Chain on June 8, 2022. Attackers used an unauthenticated deposit function to mint large amounts of GYMNET tokens without providing collateral, converting them to BNB and causing losses of at least $2.1 million. The vulnerable function was quickly patched. A newly deployed deposit function in GymSinglePool lacked authentication. It allowed any caller to create deposit records and mint tokens without transferring assets or verifying associated signatures. This missing check let attackers inflate balances and drain protocol funds."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Attackers stole around $2.1 million from the GYM Network defi project after exploiting a bug in a recently-deployed contract that failed to check the identity of the caller. The attackers quickly transferred the stolen funds to the Tornado Cash cryptocurrency tumbler to cover their tracks. GYM Network promised to use the entire project treasury to bolster the price of their token, which tanked as a result of the massive sell-off. \"We can't promise that it will bring the price back to 0.20$ but we will use it All to recover this attack,\" they wrote on Telegram."
     }
   ],
   "audit": "Out of scope",
@@ -64,7 +74,8 @@
     "defihacklabs",
     "rekt",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -126,6 +137,16 @@
       "source": "revertiq",
       "label": "blockchainbreaches.com",
       "url": "https://www.blockchainbreaches.com/en/breaches/gym-network-2022"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=gym-network-exploited-for-2-1-million"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Yao62816288/status/1534425226767114240"
     }
   ]
 }

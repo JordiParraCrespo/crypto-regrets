@@ -10,6 +10,12 @@
   ],
   "targetType": "CEX",
   "category": "key-compromise",
+  "vulnClass": "hot-wallet-compromise",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "hot-wallet-compromise",
+    "confidence": 0.67
+  },
   "technique": "Hot Wallet Key Compromised",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -46,6 +52,10 @@
     {
       "source": "RevertIQ",
       "text": "On May 7, 2019, Binance’s Bitcoin hot wallet was compromised in a single large-scale withdrawal. Hackers obtained user API keys and 2FA codes via undisclosed methods, bypassed security checks, and stole about 7,000 BTC (≈$40.7 million). Binance covered user losses through its SAFU fund and suspended withdrawals for a security review. Attackers compromised user API keys and 2FA codes, allowing unauthorized access to Binance’s Bitcoin hot wallet. Security checks failed to detect the aggregate withdrawal across multiple compromised accounts, enabling the mass theft."
+    },
+    {
+      "source": "Blockchain Graveyard",
+      "text": "Estimates put this breach squarely at 7000 BTC, given it is in a single transaction. There is not a lot of technical details released in the multiple follow ups from Binance. I can't make a strong estimation on root cause regardless of the number of statements made by Binance. The most informative statements are below: We are making significant changes to the API, 2FA, and withdrawal validation areas, *which was an area exploited by hackers during this incident*. We are improving our risk management, user behavior analysis, and KYC procedures. We are working on more innovative ways to fight phishing. We also have a number of additional security measure…"
     }
   ],
   "audit": null,
@@ -54,7 +64,8 @@
   "sources": [
     "defillama",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "graveyard"
   ],
   "references": [
     {
@@ -81,6 +92,21 @@
       "source": "revertiq",
       "label": "binance.com",
       "url": "https://www.binance.com/en/blog/all/333497959022997504"
+    },
+    {
+      "source": "graveyard",
+      "label": "Blockchain Graveyard",
+      "url": "https://www.binance.com/en/support/articles/360028031711"
+    },
+    {
+      "source": "graveyard",
+      "label": "blockchain.com",
+      "url": "https://www.blockchain.com/btc/tx/e8b406091959700dbffcff30a60b190133721e5c39e89bb5fe23c5a554ab05ea"
+    },
+    {
+      "source": "graveyard",
+      "label": "binance.com",
+      "url": "https://www.binance.com/en/support/articles/360027851252-Security-Update-API-Key-Reset"
     }
   ]
 }

@@ -1,8 +1,9 @@
 import { z } from 'zod';
 import { CATEGORY_IDS, type CategoryId } from './taxonomy';
+import { CLASS_IDS, type ClassId } from './classes';
 
 /** Source datasets an incident record can be attributed to. */
-export const SOURCE_IDS = ['defillama', 'defihacklabs', 'rekt', 'slowmist', 'blocksec', 'revertiq', 'curated'] as const;
+export const SOURCE_IDS = ['defillama', 'defihacklabs', 'rekt', 'slowmist', 'blocksec', 'revertiq', 'graveyard', 'seal911', 'w3igg', 'curated'] as const;
 export type SourceId = (typeof SOURCE_IDS)[number];
 
 export const CLASSIFIERS = ['defillama', 'keywords', 'typesafe', 'curated', 'none'] as const;
@@ -25,6 +26,12 @@ export const incidentSchema = z.object({
   chains: z.array(z.string()),
   targetType: z.string().nullable(),
   category: z.enum(CATEGORY_IDS as [CategoryId, ...CategoryId[]]),
+  /** Vulnerability class (the level below `category`), or null when the evidence doesn't say. */
+  vulnClass: z.enum(CLASS_IDS as [ClassId, ...ClassId[]]).nullable(),
+  /** Who decided `vulnClass`: an unambiguous analyst technique label, a curated post-mortem, or TypeSafe. */
+  vulnClassBy: z.enum(['technique', 'curated', 'typesafe']).nullable(),
+  /** TypeSafe's class answer within the assigned category, kept even when not adopted. */
+  aiClass: z.object({ id: z.enum(CLASS_IDS as [ClassId, ...ClassId[]]), confidence: z.number().min(0).max(1) }).nullable(),
   /** Finer-grained technique label, e.g. "Spot Price Manipulation". */
   technique: z.string().nullable(),
   /** Why we chose a category different from the upstream label, if we did. */
@@ -79,7 +86,7 @@ export type AdvisoryImpact = (typeof ADVISORY_IMPACTS)[number];
 
 export const advisorySchema = z.object({
   id: z.string(),
-  project: z.enum(['Bitcoin Core', 'Geth', 'Cosmos']),
+  project: z.string(),
   cve: z.string().nullable(),
   title: z.string(),
   date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).nullable(),

@@ -10,6 +10,12 @@
   ],
   "targetType": "CEX",
   "category": "access-control",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "access-misconfiguration",
+    "confidence": 0.62
+  },
   "technique": "Improper Access Control",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -46,6 +52,10 @@
     {
       "source": "RevertIQ",
       "text": "BitGrail, an Italian cryptocurrency exchange, lost approximately 17 million Nano (XRB) valued around $170 million in a prolonged multi-stage exploit culminating in February 2018. Attackers abused a withdrawal system flaw that permitted multiple Nano withdrawals on the same balance, draining the exchange's hot wallet. BitGrail's withdrawal system failed to implement idempotency and double-spend prevention, allowing attackers to submit repeated withdrawal requests for the same Nano deposit. The system credited and executed these withdrawals multiple times, draining funds beyond customer balances."
+    },
+    {
+      "source": "Blockchain Graveyard",
+      "text": "This is one of the harder breaches to decipher, as there are a lot of conspiracy articles and accusations by all parties involved. Underlying the Bitgrail breach seems to be some kind of application error of some sort, as opposed to a fully hijacked wallet, but this doesn't have a lot of certainty involved. The Nano core team (the currency involved) announced suspicion of the exchange and their claims. We now have sufficient reason to believe that Firano has been misleading the Nano Core Team and the community regarding the solvency of the BitGrail exchange for a significant period of time. However, the Bitgrail accusations have pointed towards a thief…"
     }
   ],
   "audit": null,
@@ -54,7 +64,8 @@
   "sources": [
     "defillama",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "graveyard"
   ],
   "references": [
     {
@@ -81,6 +92,21 @@
       "source": "revertiq",
       "label": "techcrunch.com",
       "url": "https://techcrunch.com/2018/02/12/bitgrail-hack-nano/"
+    },
+    {
+      "source": "graveyard",
+      "label": "Blockchain Graveyard",
+      "url": "https://cointelegraph.com/news/bitgrail-vs-nano-who-is-responsible-for-the-150-million-theft"
+    },
+    {
+      "source": "graveyard",
+      "label": "medium.com",
+      "url": "https://medium.com/@nanocurrency/official-statement-regrading-bitgrail-insolvency-ed4422bf274b"
+    },
+    {
+      "source": "graveyard",
+      "label": "archive.is",
+      "url": "http://archive.is/huzBF"
     }
   ]
 }

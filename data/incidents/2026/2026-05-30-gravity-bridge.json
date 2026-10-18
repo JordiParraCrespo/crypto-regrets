@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "key-compromise",
+  "vulnClass": "multisig-threshold-compromise",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "admin-key-compromise",
+    "confidence": 0.33
+  },
   "technique": "Validator Key Compromised",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -50,6 +56,10 @@
     {
       "source": "RevertIQ",
       "text": "Gravity Bridge lost roughly $5.4M on May 30, 2026 due to cross-chain registry poisoning. An attacker exploited weak validation in the bridge’s token-denomination mapping process, allowing withdrawal of real Ethereum assets in exchange for worthless tokens minted for free on Osmosis. The cross-chain registry update process accepted a maliciously crafted Cosmos 'denom' string without validation. The attacker embedded the real addresses of Ethereum custody tokens in fabricated denoms, and the validator attestation process wrote these as trusted mappings, allowing the attacker to withdraw real assets without depositing real value."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Gravity Bridge, a bridge between the Cosmos and Ethereum blockchains, suffered $5.4 million in losses likely due compromised private keys. The developers of the protocol urged validators to halt while the theft was investigated, and the bridge was indeed halted shortly after. Two weeks after the hack, the Gravity Bridge interface remained unavailable."
     }
   ],
   "audit": null,
@@ -69,7 +79,8 @@
     "rekt",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -111,6 +122,21 @@
       "source": "revertiq",
       "label": "security4web3.com",
       "url": "https://security4web3.com/blogposts/post22-gravity-bridge-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=gravity-bridge-theft"
+    },
+    {
+      "source": "w3igg",
+      "label": "x.com",
+      "url": "https://x.com/SpecterAnalyst/status/2060613063816941820?s=20"
+    },
+    {
+      "source": "w3igg",
+      "label": "x.com",
+      "url": "https://x.com/gravity_bridge/status/2060737691348807698"
     }
   ]
 }

@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "bridge-crosschain",
+  "vulnClass": "message-verification-bypass",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "message-verification-bypass",
+    "confidence": 1
+  },
   "technique": "Spoofed Event Log",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -38,6 +44,10 @@
     {
       "source": "RevertIQ",
       "text": "Across's Solana relayer accepted forged deposit events and advanced about $4.5 million in relayer capital before Solana routing was paused and later rerouted through CCTP. User funds were reportedly unaffected, but the final net loss and recovery are still not fully reconciled. The offchain Solana relayer trusted event-shaped inner instructions as real deposits after matching the Across program id and event-authority PDA, but it did not fully verify the Anchor event discriminator or reject failed transactions. That let a reverted transaction look like a valid deposit to the relayer."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The Solana deployment of the Across bridge was hacked for around $3.35 million. According to Across, the stolen funds belonged to Risk Labs, the foundation supporting the project, rather than users of the bridge."
     }
   ],
   "audit": null,
@@ -46,7 +56,9 @@
   "sources": [
     "defillama",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "seal911",
+    "w3igg"
   ],
   "references": [
     {
@@ -73,6 +85,26 @@
       "source": "revertiq",
       "label": "blog.asymmetric.re",
       "url": "https://blog.asymmetric.re/across-solana-event-spoofing/"
+    },
+    {
+      "source": "seal911",
+      "label": "SEAL 911",
+      "url": "https://x.com/acrossprotocol/status/2078036118209982566"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=across-protocol-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "x.com",
+      "url": "https://x.com/AcrossProtocol/status/2078036118209982566"
+    },
+    {
+      "source": "w3igg",
+      "label": "x.com",
+      "url": "https://x.com/AcrossProtocol/status/2078164426268557340"
     }
   ]
 }

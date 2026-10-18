@@ -10,6 +10,12 @@
   ],
   "targetType": "NFTfi",
   "category": "arbitrary-call",
+  "vulnClass": "approval-drain",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "approval-drain",
+    "confidence": 0.92
+  },
   "technique": "Token Approval Abuse",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -42,6 +48,10 @@
     {
       "source": "RevertIQ",
       "text": "Gondi V3's Ethereum NFT lending platform was exploited on 9 March 2026, resulting in the theft of approximately 78 idle NFTs worth ~$230,000. The attacker abused lingering user approvals in a newly deployed Sell & Repay contract's Purchase Bundler function, which lacked proper caller verification. The Purchase Bundler function in the Sell & Repay contract omitted caller verification, allowing anyone with a wallet to trigger NFT transfers using lingering user approvals. This access-control flaw led to unauthorized batch withdrawals of idle NFTs from users who had previously approved the contract."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "A thief exploited a smart contract belonging to the Gondi NFT platform to steal 78 NFTs priced at $230,000. Perhaps the most shocking part of the theft is that the attacker managed to find NFTs still holding any value at all. Around half of the stolen NFTs were taken from a single wallet. According to Gondi, the exploiter took advantage of functionality that allowed users to sell their NFTs to automatically repay loans. Gondi has said it has reimbursed customers by buying them \"comparable items\" from the same collections as their stolen NFTs, although it seems questionable that this will satisfy customers who purchased products whose whole selling point is that they aren't interchangeable."
     }
   ],
   "audit": null,
@@ -52,7 +62,8 @@
   "sources": [
     "defillama",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -79,6 +90,16 @@
       "source": "revertiq",
       "label": "coinalertnews.com",
       "url": "https://www.coinalertnews.com/news/2026/03/10/gondi-nft-platform-exploit-230k"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=gondi-theft"
+    },
+    {
+      "source": "w3igg",
+      "label": "cointelegraph.com",
+      "url": "https://cointelegraph.com/news/nft-platform-gondi-secure-after-230k-hack"
     }
   ]
 }

@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "logic-error",
+  "vulnClass": "business-logic-flaw",
+  "vulnClassBy": "typesafe",
+  "aiClass": {
+    "id": "business-logic-flaw",
+    "confidence": 0.93
+  },
   "technique": "Withdrawal Logic Flaw",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -50,6 +56,10 @@
     {
       "source": "RevertIQ",
       "text": "On July 11, 2023, Platypus Finance on Avalanche suffered a $51,000 loss due to a liquidity conversion logic flaw between LP tokens and stablecoins. The exploit allowed an attacker to withdraw more funds than deposited by abusing inconsistent internal ratios for different LP tokens. The pool's withdrawal calculation let withdrawals be based on a faulty LP-token-to-asset ratio, allowing a user to withdraw more from one pool than what was deposited in another, leading to an accounting mismatch and net loss."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Platypus Finance paused their pools after they were alerted to what they described as \"suspicious activities\". Security firm PeckShield was apparently the first to notice the activity, sending them a dreaded \"hi, you might want to take a look\" tweet that has become their signature way of alerting protocols that something bad has just happened. The CertiK security project also tweeted that they'd observed multiple suspicious flash loans involving the project. This is the second apparent hack of Platypus Finance, following an $8.5 million hack only ten days after it launched in February 2023. The first hack also involved flash loans."
     }
   ],
   "audit": null,
@@ -61,7 +71,8 @@
     "defillama",
     "defihacklabs",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -98,6 +109,16 @@
       "source": "revertiq",
       "label": "github.com",
       "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/past/2023/README.md#L2653"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=platypus-finance-hack-2"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Platypusdefi/status/1678817657641123846"
     }
   ]
 }

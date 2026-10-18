@@ -10,6 +10,12 @@
   ],
   "targetType": "Other",
   "category": "key-compromise",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "admin-key-compromise",
+    "confidence": 1
+  },
   "technique": "Private Key Compromised",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -42,6 +48,10 @@
     {
       "source": "RevertIQ",
       "text": "A compromised admin account exploited ZKsync's airdrop distribution contracts, minting approximately 111 million ZK tokens ($5 million) by calling a privileged sweep function. The loss was limited to unclaimed airdrop tokens and later fully recovered through a negotiated bounty. The airdrop distributor contracts used a single-signature admin multisig with no timelock or multi-party approval. When the admin key was compromised, the attacker could authorize sweepUnclaimed() calls and mint all unclaimed tokens without further security checks."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "An attacker compromised an admin account belonging to the ZKsync Ethereum layer-2 project, which is built by Matter Labs. By doing so, they were able to steal approximately $5 million worth of the ZK token, which the project said were \"the remaining unclaimed tokens from the ZKsync airdrop \". ZK Sync offered a 10% \" bug bounty \" to the thief, who accepted and returned 90% of the stolen funds."
     }
   ],
   "audit": null,
@@ -52,7 +62,8 @@
   "sources": [
     "defillama",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -99,6 +110,21 @@
       "source": "revertiq",
       "label": "web3exploit.com",
       "url": "https://web3exploit.com/case-research/zksync-2025-airdrop-admin-compromise-case-research"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=zksync-theft"
+    },
+    {
+      "source": "w3igg",
+      "label": "theblock.co",
+      "url": "https://www.theblock.co/post/350839/zksync-discloses-5-million-attack-compromised-airdrop-contract-admin-account"
+    },
+    {
+      "source": "w3igg",
+      "label": "x.com",
+      "url": "https://x.com/zksync/status/1912141160744632737"
     }
   ]
 }

@@ -10,6 +10,12 @@
   ],
   "targetType": "Wallet",
   "category": "signature-crypto",
+  "vulnClass": "weak-key-generation",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "weak-key-generation",
+    "confidence": 1
+  },
   "technique": "Weak Key Generation",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -46,6 +52,10 @@
     {
       "source": "RevertIQ",
       "text": "Between July 30 and August 4, 2026, a firmware flaw in the Coldcard hardware wallet permitted attackers to brute-force weakly generated Bitcoin seeds, resulting in losses exceeding $116 million. The incident stemmed from a software bug that bypassed hardware-based entropy during wallet seed generation. A build configuration error in Coldcard firmware released March 2021 caused the device to generate wallet seeds using a weak software-based pseudorandom number generator (PRNG) instead of the intended hardware random number generator, producing seeds with as little as 40 bits of entropy. This made the resulting private keys susceptible to brute-force att…"
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Thousands of users of a hardware wallet called Coldcard, a physical device developed by the Canadian Coinkite firm to allow bitcoin holders to store their bitcoin on a device that's not connected to the internet, have suffered at least 2,055 BTC (~$130 million) in combined losses after thieves began exploiting a flaw with the wallet firmware's seed phrase generation. A 2021 version of the device firmware, which affects a wide range of Coldcard devices, skipped the device's more secure hardware randomness generator and instead fell back to generating seed phrases with random numbers seeded from the device's serial number and clock registers. The resulti…"
     }
   ],
   "audit": null,
@@ -55,7 +65,8 @@
     "defillama",
     "rekt",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -87,6 +98,21 @@
       "source": "revertiq",
       "label": "shattered.io",
       "url": "https://shattered.io/coldcard-hack-116-million-rng-flaw-2026/"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=coldcard-hardware-wallet-flaw"
+    },
+    {
+      "source": "w3igg",
+      "label": "decrypt.co",
+      "url": "https://decrypt.co/374817/coldcard-bitcoin-exploit-88-million-attackers-draining-wallets"
+    },
+    {
+      "source": "w3igg",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/tech/2026/07/31/major-bitcoin-wallet-flaw-drains-594-btc-in-25-minute-sweep"
     }
   ]
 }

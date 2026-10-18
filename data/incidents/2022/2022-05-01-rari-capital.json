@@ -11,6 +11,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "reentrancy",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "cross-function-reentrancy",
+    "confidence": 0.61
+  },
   "technique": "Reentrancy",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -51,6 +57,10 @@
     {
       "source": "RevertIQ",
       "text": "Rari Capital's Fuse pools suffered a reentrancy exploit that drained about $80 million in assets on April 30, 2022. The attacker abused insufficient reentrancy protection in the borrow logic, allowing repeated withdrawals before debt records were updated. The vulnerable Fuse pool contracts transferred assets via doTransferOut before updating borrow records. This enabled reentrancy: an attacker triggered exitMarket in a callback, letting them withdraw collateral before borrow state was finalized."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "A hacker attacked multiple Rari liquidity pools relating to the Fei Protocol, exploiting a known re-entrancy vulnerability that exists on forks of the Compound protocol. The attacker stole more than $80 million from the projects. Fei Protocol tweeted that they had paused borrowing to avoid further thefts, and offered a $10 million bug bounty if the hacker returned the money."
     }
   ],
   "audit": "Unaudited",
@@ -70,7 +80,8 @@
     "defihacklabs",
     "rekt",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -137,6 +148,16 @@
       "source": "revertiq",
       "label": "blog.solidityscan.com",
       "url": "https://blog.solidityscan.com/rari-capital-re-entrancy-vulnerability-analysis-25df2bbfc803/"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=80-million-stolen-from-fei-protocol-and-rari"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BlockSecTeam/status/1520350965274386433"
     }
   ]
 }

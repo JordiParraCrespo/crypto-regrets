@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "access-control",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "missing-access-modifier",
+    "confidence": 0.87
+  },
   "technique": "Improper Access Control",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -38,6 +44,10 @@
     {
       "source": "RevertIQ",
       "text": "On January 15, 2024, Hector Network on Ethereum Mainnet suffered a $2.7 million USDC loss when a moderator-controlled access function allowed an attacker-controlled address to be added as eligible for a treasury redemption. The attacker withdrew assets via privileged flow. A centralized moderator role could assign arbitrary addresses as 'eligible' for treasury redemption without sufficient independent checks. This enabled the attacker to withdraw funds by authorizing their own address and invoking privileged withdrawal logic."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "In July 2023, angry investors in the Hector Network project opted to \"rage quit\" — an option reserved by some defi projects that allows investors to vote to liquidate a project's remaining treasury and distribute it to token holders. The successful rage-quit vote in Hector's case came after the protocol lost $8 million in the Multichain disaster , although investors say that was only the final straw in a series of poor management choices and inflated salaries that saw the project treasury dwindle from over $100 million to around $16 million. Now, another $2.7 million is gone after an apparent thief was able to exploit a smart contract that was intended…"
     }
   ],
   "audit": null,
@@ -49,7 +59,8 @@
   "sources": [
     "defillama",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -76,6 +87,16 @@
       "source": "revertiq",
       "label": "smartcontractshacking.com",
       "url": "https://smartcontractshacking.com/hacks/hector-network-hack-2024"
+    },
+    {
+      "source": "w3igg",
+      "label": "dlnews.com",
+      "url": "https://www.dlnews.com/articles/defi/mysterious-27-million-withdrawal-from-hector-network-leaves-investors-perplexed/"
+    },
+    {
+      "source": "w3igg",
+      "label": "dlnews.com",
+      "url": "https://www.dlnews.com/articles/defi/hector-network-dao-rage-quits-after-draining-100m-treasury/"
     }
   ]
 }

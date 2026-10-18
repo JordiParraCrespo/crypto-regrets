@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "oracle-manipulation",
+  "vulnClass": "spot-price-oracle",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "spot-price-oracle",
+    "confidence": 0.85
+  },
   "technique": "Spot Price Manipulation",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -58,6 +64,10 @@
     {
       "source": "RevertIQ",
       "text": "Jimbos Protocol lost approximately $7.5 million (about 4,090 ETH) on 28 May 2023 on Arbitrum One when attackers used a flash loan to manipulate its JIMBO token pool price and triggered a protocol liquidity shift at a distorted price, exploiting a lack of access control and slippage protections. The JimboController contract allowed anyone to call its liquidity-shifting function without access restrictions or price sanity checks, making protocol liquidity vulnerable to manipulation through flash loans and temporary price distortion."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Three days after the launch of its v2 protocol, the Arbitrum-based Jimbos Protocol was exploited for 4,090 ETH (~$7.5 million). The project had not properly controlled for slippage , which enabled an attacker to use a flash loan to manipulate the trading pairs on the project. The attacker then bridged the stolen funds to the Ethereum chain. After the attack, Jimbos Protocol tweeted \"We are aware of the exploit regarding our protocol and are actively in contact with law enforcement and security professionals. We will release further information when possible.\" They also sent an on-chain message to the exploiter, offering to stop all investigations if th…"
     }
   ],
   "audit": "Unaudited",
@@ -74,7 +84,8 @@
     "rekt",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -146,6 +157,26 @@
       "source": "revertiq",
       "label": "olympix.security",
       "url": "https://olympix.security/biweekly-exploits/ede-jimbos-cs-token-oracle-backdoors-slippage-gaps-and-flash-loan-boosted-burns"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=jimbos-protocol-exploited"
+    },
+    {
+      "source": "w3igg",
+      "label": "theblock.co",
+      "url": "https://www.theblock.co/post/232419/jimbos-protocol-exploited-for-7-5-million-three-days-after-v2-launch"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/jimbosprotocol/status/1662711995072909312"
+    },
+    {
+      "source": "w3igg",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xa77e60f93a350588211275c20d6e05b3b134b3e0de9d15f9cbd77c9e8782912b"
     }
   ]
 }

@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "social-engineering",
+  "vulnClass": "address-poisoning-drainer",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "address-poisoning-drainer",
+    "confidence": 1
+  },
   "technique": "Address Poisoning",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -34,6 +40,10 @@
     {
       "source": "RevertIQ",
       "text": "Florence Finance lost $1.45 million USDC on Ethereum due to an address poisoning attack on November 28, 2023. The attacker crafted a scam address almost identical to the intended recipient, tricking Florence's operators into transferring funds to the fake account. Confirmed on-chain evidence establishes the loss and subsequent laundering steps. The Florence Finance team relied on wallet transaction history and visual similarity when selecting recipient addresses for a large USDC transfer, failing to verify the entire address. An attacker exploited this practice by inserting a lookalike vanity address through fake token transfers, leading to an inadvert…"
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "An apparent address poisoning attack on the Florence Finance real-world asset lending protocol led to the loss of $1.45 million in the USDC stablecoin . As of December 4, Florence Finance had not publicly acknowledged the theft."
     }
   ],
   "audit": null,
@@ -45,7 +55,8 @@
   "poc": null,
   "sources": [
     "defillama",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -67,6 +78,16 @@
       "source": "revertiq",
       "label": "smartcontractshacking.com",
       "url": "https://smartcontractshacking.com/hacks/florence-finance-hack-2023"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=florence-finance-theft"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/PeckShieldAlert/status/1730045158509727968"
     }
   ]
 }

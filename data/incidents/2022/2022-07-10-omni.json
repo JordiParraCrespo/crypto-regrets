@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "reentrancy",
+  "vulnClass": "token-hook-reentrancy",
+  "vulnClassBy": "typesafe",
+  "aiClass": {
+    "id": "token-hook-reentrancy",
+    "confidence": 1
+  },
   "technique": "Reentrancy",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -46,6 +52,10 @@
     {
       "source": "RevertIQ",
       "text": "Omni, an NFT lending protocol on Ethereum Mainnet, lost about 1,300 ETH (~$1.4 million) from protocol testing funds on July 10, 2022, due to a reentrancy vulnerability in its liquidation logic. No customer funds were lost. The vulnerable smart contract allowed reentrant calls during NFT liquidation, enabling an attacker to clear or reduce their debt after entering the liquidation process but before accounting was updated. This broke the intended checks-effects-interactions order, letting the attacker extract more Ether than their collateral justified."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Hackers used a flash loan attack to steal around 1,300 ETH ($1.43 million) from the NFT lending platform Omni. Omni allows users to borrow cryptocurrency against their NFTs. Hackers used NFTs from the popular Doodles collection as collateral to borrow w ETH, then withdrew all but one of the NFTs, allowing them to perform a re-entrancy attack. The attacker then laundered the funds using the Tornado Cash cryptocurrency tumbler . According to Omni, only funds belonging to the platform that were being used for testing were taken by the attacker."
     }
   ],
   "audit": null,
@@ -55,7 +65,8 @@
     "defillama",
     "defihacklabs",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -107,6 +118,16 @@
       "source": "revertiq",
       "label": "cryptonews.net",
       "url": "https://cryptonews.net/news/security/9133333/"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=hackers-steal-1-43-million-from-omni-nft-lending-platform"
+    },
+    {
+      "source": "w3igg",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/address/0x627a22ff70cb84e74c9c70e2d5b0b75af5a1dcb9"
     }
   ]
 }

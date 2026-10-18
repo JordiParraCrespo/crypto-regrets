@@ -11,6 +11,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "access-control",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "missing-access-modifier",
+    "confidence": 0.4
+  },
   "technique": "Delegatecall Hijack",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -55,6 +61,10 @@
     {
       "source": "RevertIQ",
       "text": "On 2025-09-22, UXLINK's multisig on Ethereum and Arbitrum was taken over through a delegateCall path that let the attacker rewrite signer state, drain treasury assets, and mint 1,000,000,000 UXLINK. The direct treasury loss was about $11.3 million, while downstream liquidation and a later attacker-side phishing transfer produced larger figures that should not be conflated. A privileged delegateCall path in UXLINK's multisig executed attacker-controlled code in the wallet's storage context, which let the attacker rewrite signer and threshold state and then use that authority to drain treasury assets and authorize unauthorized minting. The public record…"
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The \"AI-powered web3 social platform\" UXLINK was exploited by an attacker that gained control of the project's multisignature wallet , then minted billions of the project's UXLINK token. Though the tokens were worth hundreds of millions of dollars on paper, low liquidity and a crashing token price means the attacker cashed out around $28 million. Shortly after the hack, the attacker apparently approved a phishing contract, perhaps in their rush to swap tokens before the price crashed further or before exchanges could freeze the tokens. Around 542 million of the UXLINK tokens were sent to a phishing address as a result, though it doesn't appear the phis…"
     }
   ],
   "audit": null,
@@ -70,7 +80,8 @@
     "defihacklabs",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -122,6 +133,21 @@
       "source": "revertiq",
       "label": "dapp.uxlink.io",
       "url": "https://dapp.uxlink.io/new-uxlink-tokens/claim"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=uxlink-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "protos.com",
+      "url": "https://protos.com/uxlink-goes-from-bad-to-worse-to-weird-after-hacker-loses-stolen-tokens/"
+    },
+    {
+      "source": "w3igg",
+      "label": "x.com",
+      "url": "https://x.com/lookonchain/status/1970330298568319083"
     }
   ]
 }

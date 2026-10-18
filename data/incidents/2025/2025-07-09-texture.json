@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "access-control",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "missing-access-modifier",
+    "confidence": 0.74
+  },
   "technique": "Improper Access Control",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -38,6 +44,10 @@
     {
       "source": "RevertIQ",
       "text": "Texture Finance suffered a $2.2 million USDC loss on Solana on July 9, 2025, when an attacker exploited a missing account ownership check in the Vaults contract's rebalance function. The team quickly negotiated the return of 90 percent of stolen funds for a 10 percent bounty. Only the USDC vault was affected. The Vaults contract did not check ownership of destination SPL token accounts during rebalance, allowing an attacker to supply their own account to receive LP tokens and then redeem for USDC."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "An attacker exploited the Solana-based lending protocol Texture, stealing $2.2 million in user funds from one of the project's vaults. Shortly after the attack, Texture sent a message to the thief: \"We are offering a 10% bounty of any funds stolen, which are yours to keep if you return the remaining 90%. You made an opsec mistake, but it’s not too late to avoid escalating the situation.\" The threat and \" bounty \" offer apparently worked, and the hacker returned $1.98 million, keeping $220,000 as a so-called \"greyhat bounty\". \"As the hacker has fulfilled their side of the agreement, we will not pursue the matter further,\" wrote Texture."
     }
   ],
   "audit": null,
@@ -47,7 +57,8 @@
     "defillama",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -74,6 +85,16 @@
       "source": "revertiq",
       "label": "quadrigainitiative.com",
       "url": "https://quadrigainitiative.com/casestudy/texturefinancevaultrebalancemissingownershipchecktheft.php"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=texture-hack"
+    },
+    {
+      "source": "w3igg",
+      "label": "x.com",
+      "url": "https://x.com/texture_fi/status/1943348423047991567"
     }
   ]
 }

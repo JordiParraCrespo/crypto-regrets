@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "oracle-manipulation",
+  "vulnClass": "spot-price-oracle",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "spot-price-oracle",
+    "confidence": 0.97
+  },
   "technique": "Spot Price Manipulation",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -38,6 +44,10 @@
     {
       "source": "RevertIQ",
       "text": "On November 2,3, 2021, Vesper Finance's lending product (Rari Fuse Pool #23) was exploited for approximately $3.37 million. An attacker manipulated the Uniswap v3 price oracle for VUSD, inflating its value and using this to borrow all assets from the pool. Controls to prevent extreme price manipulation or set sanity bounds for collateral were absent. Rari Fuse Pool #23 (Vesper Lend beta) relied on a manipulable Uniswap v3 TWAP spot price for VUSD collateral valuation. The attacker was able to drain liquidity, push the pool to the extreme price tick, and after waiting for TWAP to update, supply inflated VUSD as collateral. The pool lacked circuit breakers or price sanity checks."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "By manipulating the price of a low-liquidity, beta-stage stablecoin , an attacker was able to borrow all tokens in a Rari Fuse pool using the initial token as (inflated) collateral. They then swapped the tokens for Ethereum, and made off with more than $3 million."
     }
   ],
   "audit": null,
@@ -49,7 +59,8 @@
   "sources": [
     "defillama",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -76,6 +87,16 @@
       "source": "revertiq",
       "label": "smartcontractshacking.com",
       "url": "https://smartcontractshacking.com/hacks/vesper-finance-hack-2021"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=vesper-finance-hack"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/VesperFi/status/1455567032536248324"
     }
   ]
 }

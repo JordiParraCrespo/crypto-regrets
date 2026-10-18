@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "bridge-crosschain",
+  "vulnClass": "message-verification-bypass",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "message-verification-bypass",
+    "confidence": 1
+  },
   "technique": "Proof Verifier Bug",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -42,6 +48,10 @@
     {
       "source": "RevertIQ",
       "text": "On October 6, 2022, an attacker exploited the BNB Chain bridge by forging IAVL Merkle proofs, enabling unauthorized minting of 2 million BNB. Vigilant chain pausing and address blacklisting preserved most funds; estimated net loss is near $100 million. A logic flaw in the IAVL Merkle proof verifier used by BSC Token Hub allowed the attacker to forge inclusion proofs. The bridge accepted these, minting BNB for unbacked, unauthorized payloads."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Binance Smart Chain, the relatively popular blockchain that Binance is trying to rebrand as \"BNB Chain\", was halted when an attacker exploited \"BSC Token Hub\", the bridge between the old Binance Beacon Chain and BSC. The attacker successfully moved around $127 million of the stolen crypto assets off the chain before it was paused. The attacker's wallet contained 2 million BNB, valued at $586 million based on the price at the time of the hack, but as a result of the chain halt, they were not able to exfiltrate the entire amount. Binance CEO Changpeng Zhao (\"CZ\") tweeted that \"An exploit on a cross-chain bridge, BSC Token Hub, resulted in extra BNB. We h…"
     }
   ],
   "audit": "Unaudited",
@@ -53,7 +63,8 @@
   "sources": [
     "defillama",
     "rekt",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -80,6 +91,26 @@
       "source": "revertiq",
       "label": "defi-intel.com",
       "url": "https://defi-intel.com/incidents/bnb-chain-bridge-2022/"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=binance-smart-chain-halts-after-bridge-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/business/2022/10/06/binance-linked-bnb-price-falls-close-to-4-on-hack-rumors/"
+    },
+    {
+      "source": "w3igg",
+      "label": "bnbchain.org",
+      "url": "https://www.bnbchain.org/en/blog/bnb-chain-ecosystem-update/"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/cz_binance/status/1578190677241778177"
     }
   ]
 }

@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "key-compromise",
+  "vulnClass": "multisig-threshold-compromise",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "multisig-threshold-compromise",
+    "confidence": 1
+  },
   "technique": "Validator Key Compromised",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -50,6 +56,10 @@
     {
       "source": "RevertIQ",
       "text": "On 12 September 2025, attackers exploited the Shibarium bridge by compromising validator keys and using a flash loan to seize majority control, enabling fraudulent withdrawals of ETH, SHIB, and other tokens. Immediate response actions immobilized some stolen or targeted assets, but unrecovered losses range from $2.3 million to $4.1 million. Compromise of the majority of validator private keys enabled stake amplification and malicious checkpoint signing, permitting unauthorized asset withdrawals from the Shibarium bridge contract."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "A bridge for Shibarium, the layer-2 network for the Shiba Inu project, was exploited for approximately $2.4 million in funds. The attacker bought 4.6 million BONE tokens (the governance token for Shibarium) using a flash loan , then used compromised validator signing keys to take control of the majority of validator power. Then, they used that control to drain around 225 ETH and 92.6 billion SHIB, together priced at around $2.4 million at the time of the theft. The project has paused staking on the network, freezing the BONE tokens borrowed by the attacker, which may limit the attacker's profits."
     }
   ],
   "audit": null,
@@ -59,7 +69,8 @@
     "defillama",
     "rekt",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -91,6 +102,21 @@
       "source": "revertiq",
       "label": "bitrue.com",
       "url": "https://www.bitrue.com/blog/shibarium-hack-2025"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=shibarium-bridge-hit-with-2-4-million-flash-loan-attack"
+    },
+    {
+      "source": "w3igg",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/markets/2025/09/13/bone-price-surges-40-after-shibarium-flash-loan-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "theblock.co",
+      "url": "https://www.theblock.co/post/370536/shibarium-bridge-suffers-sophisticated-flash-loan-attack-with-2-4-million-drained?utm_source=rss&utm_medium=rss"
     }
   ]
 }

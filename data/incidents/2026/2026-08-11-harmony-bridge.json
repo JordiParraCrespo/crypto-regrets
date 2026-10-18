@@ -10,6 +10,12 @@
   ],
   "targetType": "Chain",
   "category": "bridge-crosschain",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "unbacked-crosschain-mint",
+    "confidence": 0.16
+  },
   "technique": "Bridge Logic Flaw",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -50,6 +56,10 @@
     {
       "source": "RevertIQ",
       "text": "On August 11, 2026, Harmony's cross-shard protocol was exploited by replaying forged receipt proofs, enabling attackers to mint over two trillion ONE tokens. While the printed token total was massive, the realized market loss was about $3.2 million before Harmony rolled back the affected blocks and deployed a patch to fix the core chain-level logic flaw. The replay-protection check for cross-shard receipts relied on mutable, unauthenticated Merkle proof fields (ShardID, BlockNum) instead of the committee-signed source block header. This allowed attackers to alter valid already-spent receipts to evade single-use enforcement and repeatedly mint new tokens from the same proof."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "An attacker was able to exploit the Harmony blockchain to mint 4 billion of the network's $ONE token. The massive increase in token supply caused the token price to plunge 40%. Harmony paused its token bridge and asked exchanges to freeze tokens coming from four addresses connected to the attacker. They also said they were considering a possible rollback — that is, reverting the blockchain to a pre-attack state, undoing all transactions since that point. This is a very controversial choice in the crypto world, where blockchains are prized for their immutability. It also becomes less effective if attackers are able to move tokens off the network before the rollback happens.…"
     }
   ],
   "audit": null,
@@ -62,7 +72,8 @@
     "defillama",
     "rekt",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -94,6 +105,16 @@
       "source": "revertiq",
       "label": "blocksec.com",
       "url": "https://blocksec.com/blog/web3-security-harmony-kite-exploits"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=harmony-unauthorized-mint"
+    },
+    {
+      "source": "w3igg",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/markets/2026/08/12/harmony-s-one-falls-26-after-attacker-allegedly-mints-4-billion-tokenshttps://www.coindesk.com/markets/2026/08/12/harmony-s-one-falls-26-after-attacker-allegedly-mints-4-billion-tokens"
     }
   ]
 }

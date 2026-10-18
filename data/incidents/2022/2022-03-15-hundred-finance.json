@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "reentrancy",
+  "vulnClass": "token-hook-reentrancy",
+  "vulnClassBy": "typesafe",
+  "aiClass": {
+    "id": "token-hook-reentrancy",
+    "confidence": 1
+  },
   "technique": "Reentrancy",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -50,6 +56,10 @@
     {
       "source": "RevertIQ",
       "text": "Hundred Finance on Gnosis Chain was drained of over $6.2 million on 15 March 2022. The exploit used a reentrancy attack enabled by non-standard tokens with transfer hooks, allowing the attacker to borrow against collateral multiple times before debt was updated. The protocol released borrowed tokens before updating the borrower's debt, allowing a contract to reenter through ERC-677/667 transfer hooks and borrow again against the same collateral. Forking Compound code for Gnosis Chain without adapting to callback-enabled token semantics made this exploit possible."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "An attacker using a flash loan attack targeted two projects on the Gnosis blockchain: Hundred Finance and Agave Finance. Each project paused their smart contracts, but not before the attacker made off with a considerable sum of money. That day, the attacker put the funds through a cryptocurrency tumbler , making it much more difficult to trace the collective 4,479 ETH that was stolen in roughly equal amounts from each protocol. Hundred and Agave were the second and third defi protocols targeted by flash loan attacks that same day, with Deus Finance losing more than $3 million to hackers using the same class of exploit."
     }
   ],
   "audit": "Unaudited",
@@ -62,7 +72,8 @@
     "defihacklabs",
     "rekt",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -114,6 +125,26 @@
       "source": "revertiq",
       "label": "blockchainbreaches.com",
       "url": "https://www.blockchainbreaches.com/en/breaches/agave-2022"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=hundred-finance-and-agave-finance-are-both-exploited-for-a-collective-12-million"
+    },
+    {
+      "source": "w3igg",
+      "label": "theblockcrypto.com",
+      "url": "https://www.theblockcrypto.com/post/137932/defi-protocols-agave-and-hundred-finance-exploited-on-gnosis-chain-for-11-million"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/PeckShieldAlert/status/1503927403584061442"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/PeckShieldAlert/status/1503927526208700416"
     }
   ]
 }

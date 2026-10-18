@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "access-control",
+  "vulnClass": "missing-access-modifier",
+  "vulnClassBy": "typesafe",
+  "aiClass": {
+    "id": "missing-access-modifier",
+    "confidence": 0.99
+  },
   "technique": "Improper Access Control",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -50,6 +56,10 @@
     {
       "source": "RevertIQ",
       "text": "Rikkei Finance was exploited on BNB Chain on 15 April 2022 through public access to the price oracle contract, allowing an attacker to substitute a malicious oracle and drain collateral pools. Estimated loss was about 2,672 BNB (~$1.1M). The contract's setOracleData function was not restricted, enabling any user to replace the price oracle address. This allowed manipulation of collateral prices and unauthorized lending withdrawals."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Rikkei Finance, which describes itself as a metaverse defi project, was apparently exploited. 2,571 BNB, priced at around $1.07 million, was transferred out of the protocol and quickly moved to a tumbler ."
     }
   ],
   "audit": null,
@@ -61,7 +71,8 @@
     "defillama",
     "defihacklabs",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -108,6 +119,21 @@
       "source": "revertiq",
       "label": "certik.com",
       "url": "https://www.certik.com/blog/revisiting-rikkei-finance-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=rikkei-finance-exploited-for-1-million"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/peckshield/status/1514809005700395022"
+    },
+    {
+      "source": "w3igg",
+      "label": "bscscan.com",
+      "url": "https://bscscan.com/tx/0x93a9b022df260f1953420cd3e18789e7d1e095459e36fe2eb534918ed1687492"
     }
   ]
 }

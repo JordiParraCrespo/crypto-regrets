@@ -5,24 +5,32 @@
   "year": 2024,
   "amountUsd": 3000000,
   "returnedUsd": null,
-  "chains": [],
+  "chains": [
+    "Ethereum"
+  ],
   "targetType": "CEX",
   "category": "key-compromise",
+  "vulnClass": "key-leak-infrastructure",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "key-leak-infrastructure",
+    "confidence": 1
+  },
   "technique": "Key Leaked via Infrastructure",
   "classificationNote": null,
   "classifiedBy": "defillama",
   "ai": {
     "model": "jev-1.13.0",
     "category": "key-compromise",
-    "confidence": 0.54,
+    "confidence": 0.6,
     "top": [
       {
         "category": "key-compromise",
-        "p": 0.5700000000000001
+        "p": 0.62
       },
       {
         "category": "frontend-infra",
-        "p": 0.43
+        "p": 0.38
       }
     ],
     "flashLoan": 0.03,
@@ -40,6 +48,10 @@
     {
       "source": "RevertIQ",
       "text": "FixedFloat's centralized exchange infrastructure was breached on March 31, 2024. Attackers exploited vulnerabilities in the third-party hosting provider's environment, gaining administrative access to wallet nodes and extracting approximately $3 million from service reserves. There are no published on-chain withdrawal records or smart contract evidence. Attackers escalated access after compromising a technical server hosted by Time4VPS. The breach enabled them to control hosting account credentials, reset server passwords and email, and access wallet-related functions. Weak password reset controls, insufficient host segregation, and delayed server destruction contributed to the loss."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The FixedFloat cryptocurrency exchange was exploited again, this time for around $2.8 million. This follows shortly after a February 18 hack in which attackers made off with $26 million. FixedFloat acknowledged the theft in a Twitter post, and blamed the same thieves. They claimed that this theft was enabled by a vulnerability in a third-party service."
     }
   ],
   "audit": null,
@@ -48,7 +60,8 @@
   "sources": [
     "defillama",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -75,6 +88,21 @@
       "source": "revertiq",
       "label": "smartcontractshacking.com",
       "url": "https://smartcontractshacking.com/hacks/fixedfloat-hack-2024-3908"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=fixedfloat-hack-2"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/FixedFloat/status/1775172224216875223"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/CyversAlerts/status/1775072778112180640"
     }
   ]
 }

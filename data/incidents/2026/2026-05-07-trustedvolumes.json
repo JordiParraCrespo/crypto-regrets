@@ -10,6 +10,12 @@
   ],
   "targetType": "Other",
   "category": "access-control",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "missing-access-modifier",
+    "confidence": 0.77
+  },
   "technique": "Caller Impersonation",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -62,6 +68,10 @@
     {
       "source": "RevertIQ",
       "text": "On May 7, 2026, the TrustedVolumes market maker lost about $5.87 million after an attacker exploited a custom RFQ proxy contract on Ethereum. The attacker combined flaws in signer authorization, access control, and replay protection to drain four major tokens from TrustedVolumes’ inventory wallet using their own contract as the exploit vector. The RFQ proxy implemented an authorization boundary failure: it allowed any address to register arbitrary signers for itself, authorized signers relative to the taker (not the token source), and permitted token transfers from attacker-supplied addresses. The proxy also used broken replay protection, making the sa…"
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "TrustedVolumes, a resolver and market maker used by 1inch and other defi platforms, suffered a $6.7 million exploit after an attacker was able to steal funds without proper validation. The thief then swapped the stolen w ETH, USDT, wBTC, and USDC through ChangeNow and converted them to ETH to evade freezes . Blockchain research firm Blockaid has linked the attacker to a similar exploit in March 2025 that saw $5 million drained from 1inch. This time, 1inch has asserted that although they use TrustedVolumes as a resolver, the exploit did not involve any of their systems."
     }
   ],
   "audit": null,
@@ -75,7 +85,8 @@
     "rekt",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -137,6 +148,16 @@
       "source": "revertiq",
       "label": "blocksec.com",
       "url": "https://blocksec.com/blog/weekly-web3-security-roundup-2026-05-10"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=trustedvolumes-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "decrypt.co",
+      "url": "https://decrypt.co/367070/defi-platform-trustedvolumes-hit-by-6-7m-exploit"
     }
   ]
 }

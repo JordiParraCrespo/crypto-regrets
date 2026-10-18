@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "logic-error",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "solvency-check-flaw",
+    "confidence": 0.47
+  },
   "technique": "Borrow Logic Flaw",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -38,6 +44,10 @@
     {
       "source": "RevertIQ",
       "text": "MOBOX's Optimism-based lending protocol was exploited on 14 March 2024 for approximately $750,000. The exploit targeted a flaw in the contract's borrow logic and referral reward mechanism, allowing the attacker to repeatedly borrow, inflate token prices, and stack referral rewards to drain funds. The borrow() function compounded referral rewards and burned tokens in a way that allowed the attacker to inflate MO token prices and repeatedly borrow more USDT with minimal MO tokens. Referral rewards sent to attacker-controlled addresses were looped back, compounding value and bypassing controls."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The decentralized lending protocol, MOBOX, was exploited on March 14, 2024 after an attacker was able to take advantage of a bug in its referral program and borrowing functionality. By repeatedly borrowing funds and earning rewards, they were able to drain around $750,000 in USDT."
     }
   ],
   "audit": null,
@@ -48,7 +58,8 @@
   "sources": [
     "defillama",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -75,6 +86,16 @@
       "source": "revertiq",
       "label": "chaincatcher.com",
       "url": "https://www.chaincatcher.com/en/article/2117891"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=mobox-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "slowmist.medium.com",
+      "url": "https://slowmist.medium.com/analysis-of-the-mobox-security-breach-f8fe63389aae"
     }
   ]
 }

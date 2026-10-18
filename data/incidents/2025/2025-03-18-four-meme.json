@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "access-control",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "missing-access-modifier",
+    "confidence": 0.68
+  },
   "technique": "Improper Access Control",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -46,6 +52,10 @@
     {
       "source": "RevertIQ",
       "text": "Four Meme's launchpad on BNB Chain was exploited on March 18, 2025 for around $120,000. The attacker bypassed intended transfer restrictions, sent pre-launch tokens to a liquidity pool, and manipulated the launch to drain funds. The technical root cause is a failure to enforce pre-launch transfer locks on the token contract. The Four Meme token's transfer function did not enforce the intended pre-launch restriction. This allowed direct transfers of pre-launch tokens,including to the predicted PancakeSwap pair address,allowing the attacker to manipulate liquidity before official trading began."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "After suffering an $183,000 loss to an attack in February, the BNB-based Four.Meme memecoin launchpad has been hacked again, this time for around $130,000. Four.Meme aims to be BNB's version of pump.fun, the popular Solana-based memecoin platform. Four.Meme acknowledged the latest theft on Twitter, writing that they intended to reimburse users who lost money."
     }
   ],
   "audit": null,
@@ -54,7 +64,8 @@
   "sources": [
     "defillama",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -86,6 +97,16 @@
       "source": "revertiq",
       "label": "bitdegree.org",
       "url": "https://www.bitdegree.org/crypto/news/120000-vanished-four-meme-restores-services-post-hack"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=fourmeme-hack-2"
+    },
+    {
+      "source": "w3igg",
+      "label": "protos.com",
+      "url": "https://protos.com/binance-memecoin-platform-four-meme-exploited-again-this-time-for-130k/"
     }
   ]
 }

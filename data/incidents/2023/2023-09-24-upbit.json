@@ -8,6 +8,12 @@
   "chains": [],
   "targetType": null,
   "category": "input-validation",
+  "vulnClass": "unvalidated-address-input",
+  "vulnClassBy": "typesafe",
+  "aiClass": {
+    "id": "unvalidated-address-input",
+    "confidence": 0.98
+  },
   "technique": "False top-up",
   "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.90).",
   "classifiedBy": "typesafe",
@@ -40,19 +46,34 @@
     {
       "source": "SlowMist",
       "text": "On September 24th, according to Definalist on Twitter, scammers had deposited fake APT tokens into South Korea's largest exchange, Upbit. After these fake tokens were deposited into numerous user accounts, many users proceeded to directly sell them. The only explanation for this situation is that Upbit's wallet system only checked the type and data and processed deposits and withdrawals."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Upbit, a major South Korean cryptocurrency exchange, suddenly suspended deposits and withdrawals of the Aptos $APT token after some users were able to deposit and withdraw fake versions of the token that were intended to spoof the original. Because of a bug in how Upbit verified tokens, transfers of the spoofed token were identified as transfers of the native Aptos token, which could have caused a massive loss if users began redeeming the fake Aptos tokens as though they were real. However, a bug on the part of the counterfeiter prevented massive losses. The spoofer used only six decimal places instead of eight, meaning that those who tried to redeem t…"
     }
   ],
   "audit": null,
   "txHashes": [],
   "poc": null,
   "sources": [
-    "slowmist"
+    "slowmist",
+    "w3igg"
   ],
   "references": [
     {
       "source": "slowmist",
       "label": "twitter.com",
       "url": "https://twitter.com/definalist/status/1705900412208029894"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=upbit-aptos-transaction-spoofing"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/definalist/status/1705916604473901076"
     }
   ]
 }

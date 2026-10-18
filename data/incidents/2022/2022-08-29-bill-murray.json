@@ -5,29 +5,37 @@
   "year": 2022,
   "amountUsd": 174000,
   "returnedUsd": null,
-  "chains": [],
+  "chains": [
+    "Ethereum"
+  ],
   "targetType": null,
   "category": "key-compromise",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "key-leak-infrastructure",
+    "confidence": 0.85
+  },
   "technique": "Mnemonic Leakage",
-  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.98).",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.99).",
   "classifiedBy": "typesafe",
   "ai": {
     "model": "jev-1.13.0",
     "category": "key-compromise",
-    "confidence": 0.98,
+    "confidence": 0.99,
     "top": [
       {
         "category": "key-compromise",
-        "p": 0.98
+        "p": 0.99
       },
       {
         "category": "social-engineering",
-        "p": 0.02
+        "p": 0.01
       }
     ],
     "flashLoan": 0.02,
     "stateActor": 0.02,
-    "hasRootCause": 0.79
+    "hasRootCause": 0.77
   },
   "bridge": false,
   "language": null,
@@ -36,19 +44,34 @@
     {
       "source": "SlowMist",
       "text": "Actor and comedian Bill Murray's personal wallet was stolen, resulting in the loss of funds raised by the actor's charity NFT, hackers stole about 112.05 wETH (worth about $174,000), which was then converted into ETH and sent to 5 EOA, Eventually it was transferred to Binance. The transfer of stolen assets did not indicate any malicious behavior, indicating that a mnemonic phrase was most likely compromised."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Bill Murray auctioned off an NFT representing the right to drink a beer with him, during which a painter will paint a picture of the scene that the buyer can keep. The auction benefits Chive Charities, which is a veteran- and first responder-focused non-profit. The NFT sold for 119.2 ETH (~$185,000). However, hours after the auction, a hacker gained access to Murray's crypto wallet and snagged the ETH for themselves. They also attempted to steal 800 NFTs from the remaining collection by Bill Murray, though a wallet security team was able to safeguard those NFTs in time. Murray's team confirmed the theft, and said they are working with the police and Chainalysis to identify the hacker."
     }
   ],
   "audit": null,
   "txHashes": [],
   "poc": null,
   "sources": [
-    "slowmist"
+    "slowmist",
+    "w3igg"
   ],
   "references": [
     {
       "source": "slowmist",
       "label": "decrypt.co",
       "url": "https://decrypt.co/108882/bill-murray-ethereum-wallet-hacked-174k-nft-charity-auction"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=bill-murrays-nft-charity-auction-nets-185000-which-is-then-immediately-stolen"
+    },
+    {
+      "source": "w3igg",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/business/2022/09/02/hacker-steals-bill-murrays-crypto-after-185k-nft-charity-auction/"
     }
   ]
 }

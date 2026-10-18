@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "logic-error",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "business-logic-flaw",
+    "confidence": 0.89
+  },
   "technique": "Withdrawal Logic Flaw",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -46,6 +52,10 @@
     {
       "source": "RevertIQ",
       "text": "On July 19, 2026, Allbridge Core's Solana stablecoin bridge was exploited for $1.65M. The attacker abused a missing check that allowed the same pool account to be passed as both sender and receiver in a swap, corrupting the protocol's internal accounting and enabling outsized withdrawals. The Solana program for Allbridge Core failed to validate that the send and receive pool account addresses in the swap instruction were distinct. When the same account was used in both roles, Solana instantiated two local mutable objects from the same on-chain state. Only the second object (receive leg) was ultimately written back, so the send leg's critical accounting changes were silently discarded.…"
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The Allbridge blockchain bridge was exploited for $1.66 million in a flash loan attack. The attacker took advantage of a flaw in the project's logic that reprices assets against one another, after discovering that the same would happen even when borrowing an asset against collateral denominated in the same token. They were able to manipulate the project's internal pricing logic so that the asset's actual price diverged away from reality, pocketing $1.66 million in proceeds."
     }
   ],
   "audit": null,
@@ -57,7 +67,8 @@
     "defillama",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -94,6 +105,11 @@
       "source": "revertiq",
       "label": "bir.badjoke-lab.com",
       "url": "https://bir.badjoke-lab.com/incident/allbridge-core-2026-solana-pool-exploit/"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=allbridge-exploit"
     }
   ]
 }

@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "reentrancy",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "cross-function-reentrancy",
+    "confidence": 0.53
+  },
   "technique": "Reentrancy",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -62,6 +68,10 @@
     {
       "source": "RevertIQ",
       "text": "On September 3, 2024, Penpie Protocol was exploited for approximately $27 million through a reentrancy vulnerability in its PendleStaking reward harvesting mechanism. The attacker leveraged permissionless market registration and a fake SY token, manipulating reward calculation and draining assets across Ethereum and Arbitrum. The batchHarvestMarketRewards() function of the PendleStaking contract lacked a reentrancy guard and trusted any market registered through Pendle's permissionless market factory. This allowed an attacker to deploy a malicious SY token, register a fake market, and re-enter the function to inflate reward balances, extracting excessive assets."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The defi protocol Penpie was exploited for 11,113.6 ETH (~$27.3 million) by an attacker who exploited a flaw allowing them to withdraw unearned \"rewards\". Although the protocol claimed to have been audited by two blockchain security firms, they later disclosed that the smart contracts containing the bugs had not been fully audited. The team behind Pendle (the platform on which Pendie is built) detected the attack and paused Pendle an hour after the attack began, which they claim prevented another $105 million from being stolen. Members of the Penpie team filed complaints with Singaporean police and the US FBI. They also attempted to negotiate a \" bug b…"
     }
   ],
   "audit": "Watch Pug, Zokyo",
@@ -79,7 +89,8 @@
     "rekt",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -176,6 +187,21 @@
       "source": "revertiq",
       "label": "zokyo.io",
       "url": "https://zokyo.io/blog/penpie-postmortem/"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=penpie-hacked-for-27-3-million"
+    },
+    {
+      "source": "w3igg",
+      "label": "blog.penpiexyz.io",
+      "url": "https://blog.penpiexyz.io/penpie-post-mortem-report-1ac9863b663a"
+    },
+    {
+      "source": "w3igg",
+      "label": "x.com",
+      "url": "https://x.com/pendle_fi/status/1831168623634993402"
     }
   ]
 }

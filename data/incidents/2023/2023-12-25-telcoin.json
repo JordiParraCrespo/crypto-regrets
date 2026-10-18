@@ -10,6 +10,12 @@
   ],
   "targetType": "Payments",
   "category": "access-control",
+  "vulnClass": "uninitialized-implementation",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "unprotected-initializer",
+    "confidence": 0.92
+  },
   "technique": "Uninitialized Proxy",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -46,6 +52,10 @@
     {
       "source": "RevertIQ",
       "text": "On December 25, 2023, Telcoin Polygon wallets were exploited due to improper proxy initialization. Attackers reinitialized vulnerable wallet contracts, bypassed access controls, and drained over $1.2 million in TEL tokens from affected wallets, mostly those with no prior transactions. The root cause was a storage collision between wallet contract and proxy initialization variables. This allowed the attacker to reinitialize Cloneable Proxy wallets and redirect ownership, bypassing protection against repeated initialization."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "$TEL, the token associated with the Telcoin remittances project, plunged 40% as an exploiter was able to steal around $1.25 million from the project. The company later disclosed that the issue had to do with how the project had been implemented on the Polygon network. The app was taken offline as the company investigated the hack. Telcoin later announced that they \"plan[ned] to restore all wallets to their previous balances\", though did not say whether or how they would be making up the $1.25 million deficit. Telcoin had been audited by CertiK, though CertiK tweeted to say that \"this contract was not in the scope of the audit conducted by CertiK\"."
     }
   ],
   "audit": null,
@@ -57,7 +67,8 @@
     "defillama",
     "defihacklabs",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -114,6 +125,21 @@
       "source": "revertiq",
       "label": "dn.institute",
       "url": "https://dn.institute/research/cyberattacks/incidents/2023-12-25-telcoin/"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=telcoin-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/telcoin/status/1739582160053682597"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/CertiKAlert/status/1739619921779408965"
     }
   ]
 }

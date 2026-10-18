@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "input-validation",
+  "vulnClass": "unvalidated-address-input",
+  "vulnClassBy": "typesafe",
+  "aiClass": {
+    "id": "unvalidated-address-input",
+    "confidence": 0.92
+  },
   "technique": "Missing Input Validation",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -46,6 +52,10 @@
     {
       "source": "RevertIQ",
       "text": "On August 1, 2024, Convergence Finance was exploited via a missing input validation in its reward distributor contract, allowing an attacker to mint 58 million CVG tokens, swap them for roughly $210,000 worth of ETH and stablecoins, and move proceeds through Tornado Cash. The CvxRewardDistributor contract's claimMultipleStaking function accepted arbitrary staking contract addresses without verifying their legitimacy. This allowed a malicious contract to return inflated reward amounts, causing unauthorized minting of CVG tokens."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "An attacker took advantage of a flaw in the code for the yield farming project ConvergenceFi, draining it of all the tokens that had been allocated for staking emissions. Because a function call in the smart contract did not do proper validation, an attacker was able to provide their own smart contract that set the amount of tokens to return to anything they wanted. Naturally, the attacker set it to return all 58.7 million tokens available to them, which they quickly swapped to around $210,000 and laundered through Tornado Cash. Although ConvergenceFi described itself as audited , they admitted they had made changes to that portion of the code after the audits.…"
     }
   ],
   "audit": null,
@@ -58,7 +68,8 @@
     "defihacklabs",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -120,6 +131,11 @@
       "source": "revertiq",
       "label": "blog.solidityscan.com",
       "url": "https://blog.solidityscan.com/convergence-finance-hack-analysis-12e6acd9ea08/"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=convergencefi-hack"
     }
   ]
 }

@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "input-validation",
+  "vulnClass": "unvalidated-address-input",
+  "vulnClassBy": "typesafe",
+  "aiClass": {
+    "id": "unvalidated-address-input",
+    "confidence": 0.98
+  },
   "technique": "Missing Input Validation",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -54,6 +60,14 @@
     {
       "source": "RevertIQ",
       "text": "On January 27, 2022, Qubit Finance's QBridge allowed an attacker to deposit zero ETH on Ethereum, mint unbacked qXETH on BNB Chain, and drain $80 million of assets by borrowing against this fake collateral. The exploit relied on a flawed deposit logic that did not check that funds were actually sent. The Ethereum-side QBridgeHandler's deposit() function accepted calldata-encoded ETH deposit claims but did not verify msg.value matched the claimed amount. SafeTransferFrom on the zero address (an EOA) silently succeeded, permitting phantom deposits that triggered qXETH minting on BNB Chain."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "After a bug in their code allowed an attacker to make off with $80 million , Qubit immediately began trying to contact the exploiter and convince them to return the money. First they wrote that they were \"prepared to offer the maximum bounty\", which was $250,000, or 0.3% of the amount the attacker had just stolen. The exploiter presumably felt that $80 million was truly the maximum bounty, and didn't take them up on the offer. The next day, Qubit wrote a message asking the exploiter to \"negotiate directly with us... if the maximum bounty offer is not what you are looking for\". The day after that, Qubit bumped the reward to $1 million (a whole 1.25% of…"
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "An attacker exploited a bug in Qubit Finance, a decentralized lending platform. The bug allowed them to call the \"deposit\" function without actually depositing any funds. This enabled the attacker to mint 77,162 xETH collateral, which they exchanged for BNB worth nearly $80 million. The platform has said they have tried to contact the exploiter to offer the \"maximum bounty\", which is apparently $250,000. Tempting, I'm sure."
     }
   ],
   "audit": "Unaudited",
@@ -68,7 +82,8 @@
     "defihacklabs",
     "rekt",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -135,6 +150,36 @@
       "source": "revertiq",
       "label": "qbt.wiki",
       "url": "https://qbt.wiki/en/incident/technical-analysis/"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=qubit-continues-to-try-to-tempt-attackers"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/QubitFin"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=qubit-finance-exploited"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/QubitFin/status/1486870238591594497"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/CertiKCommunity/status/1486882149378756612"
+    },
+    {
+      "source": "w3igg",
+      "label": "theverge.com",
+      "url": "https://www.theverge.com/2022/1/28/22906366/cryptocurrency-hackers-steal-qubit-binance-ethereum"
     }
   ]
 }

@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "social-engineering",
+  "vulnClass": "phishing-credential-theft",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "phishing-credential-theft",
+    "confidence": 0.75
+  },
   "technique": "Phishing",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -50,6 +56,10 @@
     {
       "source": "RevertIQ",
       "text": "GANA Payment was exploited on BNB Chain on 20 November 2025 through unauthorized admin actions enabled by compromised deployer keys and EIP-7702 transaction bypass, resulting in the loss of approximately $3.1M in liquidity. The attacker gained control over the GANA Payment deployer/admin key, using its privileges to inflate staking rewards and withdraw liquidity. The protocol relied on EOA-only checks that were bypassed using EIP-7702, allowing malicious unstake and rate manipulation transactions. There was no multi-signature governance or hard parameter limits to restrict these actions."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "An attacker stole approximately $3.1 million from the BNB chain-based GANA Payment project. The thief laundered about $1 million of the stolen funds through Tornado Cash shortly after. The attacker was able transfer ownership of the GANA contract to themselves, possibly after a private key leak. The theft was first observed by crypto sleuth zachxbt. Not long after, the project acknowledged on its Twitter account that \"GANA's interaction contract has been targeted by an external attack, resulting in unauthorized asset theft.\""
     }
   ],
   "audit": null,
@@ -62,7 +72,8 @@
     "defillama",
     "rekt",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -94,6 +105,21 @@
       "source": "revertiq",
       "label": "coincentral.com",
       "url": "https://coincentral.com/gana-payment-exploit-leads-to-3-1m-loss-across-bsc-and-ethereum/"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=gana-payment-hacked-for-3-1-million"
+    },
+    {
+      "source": "w3igg",
+      "label": "t.me",
+      "url": "https://t.me/investigations/289"
+    },
+    {
+      "source": "w3igg",
+      "label": "x.com",
+      "url": "https://x.com/GANA_PayFi/status/1991424973190361394"
     }
   ]
 }

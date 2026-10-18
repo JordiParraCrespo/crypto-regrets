@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "accounting-math",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "integer-overflow",
+    "confidence": 0.59
+  },
   "technique": "Arithmetic Error",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -58,6 +64,10 @@
     {
       "source": "RevertIQ",
       "text": "On January 8, 2026, Truebit Protocol's Purchase contract was exploited through an unchecked integer overflow in its token pricing logic. Attackers supplied extremely large values to manipulate the calculation, minting massive TRU tokens for negligible ETH and immediately draining ~8,535 ETH (~$26.4M) from the contract. The protocol was running unaudited, legacy Solidity code without overflow protection, and no funds were recovered. The Purchase contract's getPurchasePrice() function calculated ETH prices for TRU tokens using arithmetic operations on user-supplied and contract state values. Compiled with Solidity 0.6.10 (pre-0.8.x, no built-in overflow…"
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "A bug in a smart contract belonging to the Ethereum-based Truebit project allowed an attacker to steal 8,535 ETH (~$26.4 million). The thief targeted one of the project's older contracts — deployed in 2021 — which contained a bug in which the price calculation to mint sufficiently large quantities of the protocol's TRU token would overflow , erroneously allowing people to mint large amounts of TRU for next to nothing. The exploiter took advantage of this by minting TRU and swapping it for ETH, ultimately causing the TRU token price to crash 99.9%. Another subsequent attack saw around $300,000 more drained from the project. Truebit acknowledged the hack…"
     }
   ],
   "audit": null,
@@ -71,7 +81,8 @@
     "defihacklabs",
     "rekt",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -123,6 +134,26 @@
       "source": "revertiq",
       "label": "smartcontractaudit.com",
       "url": "https://www.smartcontractaudit.com/guides/truebit-2026-integer-overflow-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=truebit-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "x.com",
+      "url": "https://x.com/Truebitprotocol/status/2009328032813850839"
+    },
+    {
+      "source": "w3igg",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/markets/2026/01/09/truebit-token-tru-crashes-99-9-after-usd26-6m-exploit-drains-8-535-eth"
+    },
+    {
+      "source": "w3igg",
+      "label": "dlnews.com",
+      "url": "https://www.dlnews.com/articles/defi/truebit-hit-by-exploit-as-attackers-increasingly-target-older-defi-protocols/"
     }
   ]
 }

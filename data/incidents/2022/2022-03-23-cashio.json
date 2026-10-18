@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "input-validation",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "unvalidated-address-input",
+    "confidence": 0.64
+  },
   "technique": "Missing Input Validation",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -46,6 +52,10 @@
     {
       "source": "RevertIQ",
       "text": "On March 23, 2022, Cashio on Solana suffered a loss of about $52.8 million after an attacker forged a chain of fake accounts to bypass collateral ownership checks, enabling infinite unbacked minting of the CASH stablecoin. The attacker swapped these tokens for real stablecoins, collapsing CASH's value and draining protocol reserves. Cashio's minting logic failed to verify program ownership for each account in the collateral chain, specifically omitting the check for the intermediate 'arrow' collateral account. This allowed an attacker to supply a counterfeit account and mint unlimited unbacked CASH tokens."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "A hacker was able to exploit an infinite mint glitch in the protocol of Cashio, a Solana stablecoin project. They were able to pull around $50 million out of the platform, while also tanking the value of the $CASH token in the process. The attacker left a note in the input data of their Ethereum transactions that \"Account with less 100k have been returned. all other money will be donated to charity.\" Saber, the providers of the Cashio liquidity pool , published a postmortem of the attack in which they wrote that \"We do not have the money to pay back depositors.\" The hack was the second largest in Solana history, behind the February Wormhole hack . Sabe…"
     }
   ],
   "audit": "Unaudited",
@@ -55,7 +65,8 @@
     "defillama",
     "rekt",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -92,6 +103,26 @@
       "source": "revertiq",
       "label": "smartcontractaudit.com",
       "url": "https://www.smartcontractaudit.com/guides/cashio-2022-collateral-verification-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=robin-hood-esque-attacker-steals-52-million-from-cashio-then-returns-smaller-amounts-and-pledges-to-donate-the-rest-to-charity"
+    },
+    {
+      "source": "w3igg",
+      "label": "decrypt.co",
+      "url": "https://decrypt.co/95772/solana-stablecoin-project-cashio-plummets-zero-multi-million-dollar-hack"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/CertiKAlert/status/1506603878229368832"
+    },
+    {
+      "source": "w3igg",
+      "label": "web.archive.org",
+      "url": "https://web.archive.org/web/20220327045806/https://medium.com/@saberlabs/postmortem-cashio-hack-ecaf45301f48"
     }
   ]
 }

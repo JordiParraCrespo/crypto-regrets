@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "accounting-math",
+  "vulnClass": "unbacked-mint",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "rounding-precision",
+    "confidence": 0.74
+  },
   "technique": "Infinite Mint",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -50,6 +56,10 @@
     {
       "source": "RevertIQ",
       "text": "Raft Finance, an Ethereum-based CDP stablecoin protocol, was exploited on November 10, 2023, due to a rounding flaw in its collateral index arithmetic. The attacker used a flash loan to inflate collateral shares, minting 6.7 billion unbacked R stablecoins. $3.3M in ETH collateral was drained, with most burned by the attacker, leaving both protocol and exploiter with net losses. A rounding error existed in Raft’s collateral share index arithmetic. By manipulating the index mid-transaction with flash-loan-scale collateral, an attacker could inflate their share count relative to actual collateral, enabling the minting of unbacked R stablecoins."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "An attacker exploited the Raft defi project after finding a vulnerability that allowed them to mint 6.7 million of Raft's R stablecoin without any backing. The attacker then went to convert the R into ETH, which they would then be able to launder and cash out. However, an error in the attacker's code caused 1,570 ETH ($3.25 million) to be sent to the burn address, rendering it permanently inaccessible to everyone including the hacker. Only 7 ETH remained. However, because they had to spend ETH to fund the attack, the hack ultimately resulted in a loss of 4 ETH (~$8,000) for the perpetrator. Oops. As a result of the hack, the R stablecoin lost its dolla…"
     }
   ],
   "audit": "Trail of Bits, Hats Finance",
@@ -63,7 +73,8 @@
     "rekt",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -125,6 +136,21 @@
       "source": "revertiq",
       "label": "smartcontractaudit.com",
       "url": "https://www.smartcontractaudit.com/guides/raft-finance-2023-collateral-inflation-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=raft-hack"
+    },
+    {
+      "source": "w3igg",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/tech/2023/11/10/defi-platform-raft-suffers-33m-exploit-but-hacker-likely-takes-a-loss-on-the-attack/"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/0xngmi/status/1723073285263380924"
     }
   ]
 }
