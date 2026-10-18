@@ -66,6 +66,27 @@ Answers are cached in `data/typesafe/classifications.json` (keyed by incident id
 
 **Adoption policy** (`applyTypeSafe` in `scripts/ingest.ts`): the model's category is used only where no human label exists (keyword guesses and unclassified incidents) and confidence ≥ 0.5. DefiLlama and curated labels are never overwritten; disagreements are shown on each incident page, listed on `/sources`, and filterable at `/hacks?by=dis`. First run: 84% agreement with DefiLlama's labels, 445 incidents classified by the model, unclassified incidents down from 79 to 26.
 
+## Coding agents: Cursor Cloud Agents and Grok Build
+
+You can hand maintenance work to [Cursor Cloud Agents](https://cursor.com/docs/cloud-agent/api/endpoints) or xAI's [Grok Build](https://docs.x.ai/build/overview). Named automations live in `scripts/agents/tasks.ts`: `refresh-data`, `triage-unclassified`, `add-recent-incidents`, `review-patterns`. You can also pass any free-form prompt.
+
+| | Cursor | Grok Build |
+|---|---|---|
+| Where it runs | Cursor's cloud VMs (API v1, public beta) | Headless CLI on your machine or the GitHub Actions runner. Grok Build has no hosted session API. |
+| Credentials | `CURSOR_API_KEY` (Dashboard → API Keys) + Cursor GitHub app on the repo | `XAI_API_KEY`, or `grok login` locally |
+| Who opens the PR | The agent (`autoCreatePR`) | The `Agents` workflow |
+
+```sh
+npm run agent -- tasks                                         # list automations
+npm run agent -- cursor launch refresh-data --wait             # start a cloud session; prints the agent URL, waits for the PR
+npm run agent -- cursor launch "Fix the date parsing in REKT ingest" --plan
+npm run agent -- cursor list | status <id> | follow-up <id> "..." | cancel <id>
+npm run agent -- grok run triage-unclassified                  # needs the grok CLI: curl -fsSL https://x.ai/cli/install.sh | bash
+npm run agent -- grok resume <sessionId> "now also update the README"
+```
+
+**From GitHub:** go to Actions → *Agents* → *Run workflow*, then pick the platform, the task (or `custom` plus a prompt) and an optional model. To set it up, add the repository secrets `CURSOR_API_KEY` and/or `XAI_API_KEY`. For Grok, also enable *Settings → Actions → Allow GitHub Actions to create pull requests*. Grok runs with auto-approve, but the checkout has no push credentials; the workflow commits and opens the PR itself. Because that PR is created with `GITHUB_TOKEN`, CI won't start on its own: close and reopen it, or push to it, to run CI. A weekly `refresh-data` run (Mondays) is off by default. Set the repository variable `AGENT_SCHEDULE_PLATFORM` to `cursor` or `grok` to turn it on.
+
 ## Data licensing & caveats
 
 - DeFiHackLabs: Apache-2.0. DefiLlama: public API, attribution. REKT: we store only titles, slugs, dates, amounts, audit status and short excerpts, and link to the articles.

@@ -1,0 +1,117 @@
+# Start a coding-agent session from the Actions tab (Run workflow) or on a schedule.
+#
+#   cursor → launches a Cursor Cloud Agent via API; it runs on Cursor's machines and opens its own PR.
+#            Needs secret CURSOR_API_KEY and the Cursor GitHub app installed on this repo.
+#   grok   → runs Grok Build headless on this runner; the workflow opens the PR.
+#            Needs secret XAI_API_KEY and "Allow GitHub Actions to create pull requests" (Settings → Actions).
+#
+# Scheduled runs are off until you set repository variable AGENT_SCHEDULE_PLATFORM to cursor or grok.
+name: Agents
+
+on:
+  workflow_dispatch:
+    inputs:
+      platform:
+        type: choice
+        options: [cursor, grok]
+        default: cursor
+      task:
+        description: Named automation (scripts/agents/tasks.ts), or "custom" to use the prompt below
+        type: choice
+        options: [refresh-data, triage-unclassified, add-recent-incidents, review-patterns, custom]
+        default: refresh-data
+      prompt:
+        description: Prompt for task "custom"
+        type: string
+        required: false
+      model:
+        description: Model id (optional; platform default otherwise)
+        type: string
+        required: false
+  schedule:
+    - cron: '17 6 * * 1' # Mondays 06:17 UTC: refresh-data
+
+concurrency:
+  group: agents-${{ github.event.inputs.platform || vars.AGENT_SCHEDULE_PLATFORM }}-${{ github.event.inputs.task || 'refresh-data' }}
+  cancel-in-progress: false
+
+env:
+  PLATFORM: ${{ github.event_name == 'schedule' && vars.AGENT_SCHEDULE_PLATFORM || github.event.inputs.platform }}
+  TASK: ${{ github.event.inputs.task || 'refresh-data' }}
+  CUSTOM_PROMPT: ${{ github.event.inputs.prompt }}
+  MODEL: ${{ github.event.inputs.model }}
+
+jobs:
+  cursor:
+    if: (github.event_name == 'schedule' && vars.AGENT_SCHEDULE_PLATFORM == 'cursor') || github.event.inputs.platform == 'cursor'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - id: launch
+        env:
+          CURSOR_API_KEY: ${{ secrets.CURSOR_API_KEY }}
+          CURSOR_REPO: https://github.com/${{ github.repository }}
+        run: |
+          input="$TASK"; [ "$TASK" = custom ] && input="$CUSTOM_PROMPT"
+          [ -n "$input" ] || { echo "::error::task is custom but prompt is empty"; exit 1; }
+          npm run --silent agent -- cursor launch "$input" --ref "$GITHUB_REF_NAME" ${MODEL:+--model "$MODEL"}
+      - run: |
+          echo "### Cursor Cloud Agent started" >> "$GITHUB_STEP_SUMMARY"
+          echo "Task: \`$TASK\` · agent \`${{ steps.launch.outputs.agent_id }}\` · ${{ steps.launch.outputs.agent_url }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "The agent opens a PR when it finishes. Follow up with \`npm run agent -- cursor follow-up <id> \"...\"\`." >> "$GITHUB_STEP_SUMMARY"
+
+  grok:
+    if: (github.event_name == 'schedule' && vars.AGENT_SCHEDULE_PLATFORM == 'grok') || github.event.inputs.platform == 'grok'
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      # No persisted token: the agent runs with auto-approve and must not be able to push.
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: |
+          curl -fsSL https://x.ai/cli/install.sh | bash
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+          echo "$HOME/.grok/bin" >> "$GITHUB_PATH"
+      - name: Run Grok Build
+        env:
+          XAI_API_KEY: ${{ secrets.XAI_API_KEY }}
+        run: |
+          grok --version
+          input="$TASK"; [ "$TASK" = custom ] && input="$CUSTOM_PROMPT"
+          [ -n "$input" ] || { echo "::error::task is custom but prompt is empty"; exit 1; }
+          npm run --silent agent -- grok run "$input" --yolo --max-turns 200 ${MODEL:+--model "$MODEL"} \
+            --rules "You are running unattended in CI. Do not run git commit, git push or create branches; leave your changes in the working tree. When done, write the pull request description (summary of changes, checks you ran and their results) to .agent-pr.md in the repo root."
+      - name: Open pull request
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          body="$(cat .agent-pr.md 2>/dev/null || echo "Automated run of \`$TASK\` by Grok Build.")"
+          rm -f .agent-pr.md
+          if [ -z "$(git status --porcelain)" ]; then echo "No changes; nothing to open." >> "$GITHUB_STEP_SUMMARY"; exit 0; fi
+          branch="grok/$TASK-$GITHUB_RUN_ID"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$branch"
+          git add -A
+          git commit -m "Grok Build: $TASK"
+          git push "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "$branch"
+          url=$(gh pr create --base "$GITHUB_REF_NAME" --head "$branch" --title "Grok Build: $TASK" --body "$body
+
+          _Opened by the Agents workflow, run ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}_")
+          echo "### Grok Build opened $url" >> "$GITHUB_STEP_SUMMARY"
