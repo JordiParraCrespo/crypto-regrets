@@ -1,43 +1,78 @@
 ---
 import Base from '../layouts/Base.astro';
-import CategoryChip from '../components/CategoryChip.astro';
-import { allCategoryStats, fmtUsd, href, incidents } from '../lib/data';
+import { classStats, fmtUsd, href, incidents, CLASSES } from '../lib/data';
 import { CATEGORIES } from '../lib/taxonomy';
-const ranked = allCategoryStats.filter((s) => s.id !== 'unknown' && CATEGORIES[s.id].prevention.length > 0);
-const total = incidents.length;
-const audited = incidents.filter((i) => i.audit && !/unaudited|out of scope/i.test(i.audit));
-const unaudited = incidents.filter((i) => i.audit && /unaudited/i.test(i.audit));
-const oos = incidents.filter((i) => i.audit && /out of scope/i.test(i.audit));
+const ranked = classStats.filter((s) => s.count > 0).sort((a, b) => b.count - a.count);
+const code = ranked.filter((s) => CLASSES[s.id].vulnerable?.lang === 'solidity');
+const ops = ranked.filter((s) => CLASSES[s.id].vulnerable?.lang !== 'solidity');
+const withAudit = incidents.filter((i) => i.audit);
+const unaudited = withAudit.filter((i) => /unaudited/i.test(i.audit!)).length;
+const oos = withAudit.filter((i) => /out of scope/i.test(i.audit!)).length;
+const audited = withAudit.length - unaudited - oos;
 ---
-<Base title="For developers" description="A secure-development checklist derived from every crypto hack, ordered by money lost.">
-  <h1>Secure development checklist</h1>
-  <p class="lede">The prevention advice from every pattern, ordered by how much money that pattern has cost. If you only have time for the top of this list, start there.</p>
+<Base title="Secure-coding checklist" description="A secure-development checklist built from every crypto hack, ranked by how often each vulnerability class occurs.">
+  <section class="wrap head">
+    <p class="eyebrow">For developers</p>
+    <h1 class="h-lg">The checklist written<br />by attackers.</h1>
+    <p class="lede">Every item below is a vulnerability class that has drained real money, ordered by how often it happens. Work from the top.</p>
+  </section>
 
-  <div class="callout">
-    <p style="margin:0"><strong>Audits help, but they aren't enough.</strong> Of the incidents where REKT recorded audit status, {unaudited.length} were unaudited, {audited.length} had been audited, and {oos.length} were hacked in code that was <em>out of the audit's scope</em>. An audit covers a specific commit and scope. Upgrades, integrations and operational security fall outside it.</p>
-  </div>
+  <section class="wrap section">
+    <div class="card wash">
+      <p class="eyebrow" style="margin:0">Audits help, but they aren't enough</p>
+      <p class="h-sm" style="margin:12px 0 0;max-width:40ch">Of the {withAudit.length} incidents where REKT recorded audit status, {unaudited} were unaudited, {audited} had been audited, and {oos} were hacked in code outside the audit's scope.</p>
+    </div>
+  </section>
 
-  {ranked.map((s, k) => (
-    <section class="item">
-      <h2><span class="rank mono">{k + 1}</span> {CATEGORIES[s.id].name}</h2>
-      <p class="small"><CategoryChip id={s.id} /> <span class="muted">{fmtUsd(s.usd)} lost across {s.count} incidents ({((s.count / total) * 100).toFixed(1)}% of all)</span></p>
-      <ul class="check">{CATEGORIES[s.id].prevention.map((p) => <li>{p}</li>)}</ul>
-      <p class="small"><a href={href(`/patterns/${s.id}`)}>Pattern guide and case studies →</a></p>
-    </section>
-  ))}
+  <section class="wrap section">
+    <div class="section-head"><div><p class="eyebrow">In your code</p><h2 class="h-md" style="margin-top:8px">Smart-contract classes</h2></div></div>
+    <ol class="rows list">
+      {code.map((s, k) => (
+        <li>
+          <span class="mono caption fog idx">{String(k + 1).padStart(2, '0')}</span>
+          <div>
+            <a class="h-xs" href={href(`/classes/${s.id}`)}>{CLASSES[s.id].name}</a>
+            <p class="body-sm fog" style="margin:2px 0 8px">{s.count} incidents · {fmtUsd(s.usd)} · {CATEGORIES[CLASSES[s.id].parent].name}</p>
+            <ul class="check">{CLASSES[s.id].fix.map((f) => <li>{f}</li>)}</ul>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </section>
 
-  <h2>Learning path for security researchers</h2>
-  <ol>
-    <li>Read the <a href="https://scs.owasp.org/sctop10/">OWASP Smart Contract Top 10</a> to get the vocabulary.</li>
-    <li>For each pattern above, read three case studies on this site, then run their <a href="https://github.com/SunWeb3Sec/DeFiHackLabs">DeFiHackLabs</a> PoCs with <code>forge test -vvvv</code> and trace the calls.</li>
-    <li>Read real audit findings for the same pattern on <a href="https://solodit.cyfrin.io/">Solodit</a>. The same bugs show up there before they show up as hacks.</li>
-    <li>Practice on the <a href="https://github.com/immunefi-team/Web3-Security-Library">Immunefi Web3 Security Library</a> and CTFs (Ethernaut, Damn Vulnerable DeFi).</li>
-    <li>Follow new incidents on <a href="https://rekt.news/">REKT</a> and through <a href="https://github.com/security-alliance/seal-911">SEAL 911</a>.</li>
-  </ol>
+  <section class="wrap section">
+    <div class="section-head"><div><p class="eyebrow">Around your code</p><h2 class="h-md" style="margin-top:8px">Keys, people, infrastructure</h2></div></div>
+    <ol class="rows list">
+      {ops.map((s, k) => (
+        <li>
+          <span class="mono caption fog idx">{String(k + 1).padStart(2, '0')}</span>
+          <div>
+            <a class="h-xs" href={href(`/classes/${s.id}`)}>{CLASSES[s.id].name}</a>
+            <p class="body-sm fog" style="margin:2px 0 8px">{s.count} incidents · {fmtUsd(s.usd)} · {CATEGORIES[CLASSES[s.id].parent].name}</p>
+            <ul class="check">{CLASSES[s.id].fix.map((f) => <li>{f}</li>)}</ul>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <section class="wrap section">
+    <div class="card">
+      <p class="eyebrow" style="margin:0">Learning path</p>
+      <h2 class="h-sm" style="margin:8px 0 20px">For security researchers</h2>
+      <ol class="numbered">
+        <li>Read the <a class="link" href="https://scs.owasp.org/sctop10/">OWASP Smart Contract Top 10</a> for the vocabulary.</li>
+        <li>For each class above, read three incidents, then run their DeFiHackLabs PoCs with <code>forge test -vvvv</code> and trace the calls.</li>
+        <li>Find the same class in audit reports on <a class="link" href="https://solodit.cyfrin.io/">Solodit</a>: bugs show up in audits before they show up as hacks.</li>
+        <li>Practice with Ethernaut, Damn Vulnerable DeFi and the <a class="link" href="https://github.com/immunefi-team/Web3-Security-Library">Immunefi Web3 Security Library</a>.</li>
+        <li>Follow new incidents on <a class="link" href="https://rekt.news/">REKT</a> and <a class="link" href="https://github.com/security-alliance/seal-911">SEAL 911</a>.</li>
+      </ol>
+    </div>
+  </section>
 </Base>
 <style>
-  .item { border-top: 1px solid var(--border); margin-top: 24px; }
-  .rank { color: var(--accent); margin-right: 6px; }
-  .check { padding-left: 1.2em; }
-  .check li { margin: 4px 0; }
+  .head { padding-top: 80px; display: grid; gap: 20px; }
+  .list > li { display: grid; grid-template-columns: 48px 1fr; gap: 8px; padding: 24px 0; }
+  .idx { padding-top: 4px; }
+  .list a.h-xs:hover { text-decoration: underline; text-underline-offset: 3px; }
 </style>

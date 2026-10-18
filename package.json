@@ -9,7 +9,11 @@
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check && tsc --noEmit",
-    "classify": "tsx scripts/classify.ts"
+    "classify": "tsx scripts/classify.ts",
+    "fetch": "tsx scripts/ingest.ts --fetch && tsx scripts/fetch-extra.ts && tsx scripts/fetch-more.ts",
+    "classify:classes": "tsx scripts/classify-classes.ts",
+    "eval": "tsx scripts/eval-variants.ts",
+    "eval:classes": "tsx scripts/eval-classes.ts --blind"
   },
   "dependencies": {
     "astro": "^5.18.2"

@@ -1,64 +1,110 @@
 ---
 import Base from '../../layouts/Base.astro';
-import CategoryChip from '../../components/CategoryChip.astro';
-import { incidents, fmtUsd, fmtDate, href, YEARS } from '../../lib/data';
+import { incidents, fmtUsd, fmtDate, href, YEARS, CLASSES } from '../../lib/data';
 import { CATEGORIES, CATEGORY_IDS } from '../../lib/taxonomy';
-const chains = [...new Set(incidents.flatMap((i) => i.chains))].sort((a, b) => incidents.filter((i) => i.chains.includes(b)).length - incidents.filter((i) => i.chains.includes(a)).length).slice(0, 40);
+import { CLASS_IDS } from '../../lib/classes';
+const chainCount = new Map<string, number>();
+for (const i of incidents) for (const c of i.chains) chainCount.set(c, (chainCount.get(c) ?? 0) + 1);
+const chains = [...chainCount].sort((a, b) => b[1] - a[1]).slice(0, 40).map(([c]) => c);
+const classOptions = [...CLASS_IDS].sort((a, b) => CLASSES[a].name.localeCompare(CLASSES[b].name));
 ---
-<Base title="All hacks" description="Search and filter every indexed crypto hack by pattern, chain, year and amount.">
-  <h1>All hacks</h1>
-  <p class="lede">{incidents.length.toLocaleString('en')} incidents. Filter by pattern, chain or year, or search names and root-cause text.</p>
-  <form class="filters" onsubmit="return false">
-    <input type="search" id="q" placeholder="Search name or root cause…" aria-label="Search" />
-    <select id="cat" aria-label="Pattern"><option value="">All patterns</option>{CATEGORY_IDS.map((c) => <option value={c}>{CATEGORIES[c].name}</option>)}</select>
-    <select id="chain" aria-label="Chain"><option value="">All chains</option>{chains.map((c) => <option value={c}>{c}</option>)}</select>
-    <select id="year" aria-label="Year"><option value="">All years</option>{[...YEARS].reverse().map((y) => <option value={y}>{y}</option>)}</select>
-    <select id="min" aria-label="Minimum loss"><option value="0">Any amount</option><option value="1000000">≥ $1M</option><option value="10000000">≥ $10M</option><option value="100000000">≥ $100M</option></select>
-    <select id="by" aria-label="Classified by"><option value="">Any classifier</option><option value="defillama">DefiLlama label</option><option value="typesafe">TypeSafe (Jev)</option><option value="curated">Curated</option><option value="keywords">Keyword rules</option><option value="dis">Model disagrees</option></select>
-    <label class="small"><input type="checkbox" id="poc" /> Has PoC</label>
-    <label class="small"><input type="checkbox" id="fl" /> Flash loan</label>
-    <select id="sort" aria-label="Sort"><option value="date">Newest first</option><option value="amount">Largest first</option></select>
-  </form>
-  <p class="small muted" id="count" aria-live="polite"></p>
-  <div class="table-wrap">
-    <table>
-      <thead><tr><th>Date</th><th>Incident</th><th>Pattern</th><th>Chain</th><th class="num">Lost</th></tr></thead>
-      <tbody id="rows">
-        {incidents.map((i) => (
-          <tr data-c={i.category} data-ch={i.chains.join('|')} data-y={i.year} data-a={i.amountUsd ?? 0} data-d={i.date} data-p={i.poc ? 1 : 0} data-by={i.classifiedBy} data-dis={i.ai && i.ai.category !== i.category ? 1 : 0} data-fl={i.ai && i.ai.flashLoan >= 0.5 ? 1 : 0} data-t={`${i.name} ${i.technique ?? ''} ${i.rootCause ?? ''}`.toLowerCase()}>
-            <td class="mono small" style="white-space:nowrap">{fmtDate(i.date)}</td>
-            <td><a href={href(`/hacks/${i.id}`)}>{i.name}</a>{i.poc && <span class="muted small"> · PoC</span>}{i.technique && <div class="muted small">{i.technique}</div>}</td>
-            <td><CategoryChip id={i.category} /></td>
-            <td class="small">{i.chains.slice(0, 3).join(', ')}</td>
-            <td class="num">{fmtUsd(i.amountUsd)}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  </div>
+<Base title="Incident index" description="Search and filter every indexed crypto hack by vulnerability class, pattern, chain, year and loss.">
+  <section class="wrap head">
+    <p class="eyebrow">Incident index</p>
+    <h1 class="h-lg">{incidents.length.toLocaleString('en')} incidents</h1>
+    <p class="lede">Search names and root-cause text, or filter by vulnerability class, chain and year. Filters are kept in the URL, so you can share a view.</p>
+  </section>
+
+  <section class="wrap section" style="margin-top:40px">
+    <form class="filters" onsubmit="return false" aria-label="Filters">
+      <input class="input q" type="search" id="q" placeholder="Search: reentrancy, Ronin, flash loan…" aria-label="Search" />
+      <select class="select" id="cls" aria-label="Vulnerability class"><option value="">All vulnerability classes</option>{classOptions.map((c) => <option value={c}>{CLASSES[c].name}</option>)}</select>
+      <select class="select" id="cat" aria-label="Pattern"><option value="">All patterns</option>{CATEGORY_IDS.map((c) => <option value={c}>{CATEGORIES[c].name}</option>)}</select>
+      <select class="select" id="chain" aria-label="Chain"><option value="">All chains</option>{chains.map((c) => <option value={c}>{c}</option>)}</select>
+      <select class="select" id="year" aria-label="Year"><option value="">All years</option>{[...YEARS].reverse().map((y) => <option value={y}>{y}</option>)}</select>
+      <select class="select" id="min" aria-label="Minimum loss"><option value="0">Any loss</option><option value="1000000">≥ $1M</option><option value="10000000">≥ $10M</option><option value="100000000">≥ $100M</option></select>
+      <select class="select" id="by" aria-label="Classified by"><option value="">Any classifier</option><option value="defillama">Analyst label</option><option value="typesafe">TypeSafe</option><option value="curated">Curated</option><option value="keywords">Keyword rules</option><option value="dis">Model disagrees</option></select>
+      <label class="toggle"><input type="checkbox" id="poc" /> <span>Has PoC</span></label>
+      <label class="toggle"><input type="checkbox" id="fl" /> <span>Flash loan</span></label>
+      <select class="select" id="sort" aria-label="Sort"><option value="date">Newest first</option><option value="amount">Largest first</option></select>
+    </form>
+    <p class="mono caption fog" id="count" aria-live="polite" style="margin:16px 0 8px"></p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Date</th><th>Incident</th><th class="hide-sm">Vulnerability</th><th class="num">Lost</th></tr></thead>
+        <tbody id="rows">
+          {incidents.map((i) => (
+            <tr
+              data-c={i.category}
+              data-k={i.vulnClass ?? ''}
+              data-ch={i.chains.join('|')}
+              data-y={i.year}
+              data-a={i.amountUsd ?? 0}
+              data-d={i.date}
+              data-p={i.poc ? 1 : 0}
+              data-by={i.classifiedBy}
+              data-dis={i.ai && i.ai.category !== i.category ? 1 : 0}
+              data-fl={i.ai && i.ai.flashLoan >= 0.5 ? 1 : 0}
+              data-t={`${i.name} ${i.technique ?? ''} ${i.rootCause ?? ''}`.toLowerCase()}
+            >
+              <td class="mono caption fog" style="white-space:nowrap">{fmtDate(i.date)}</td>
+              <td>
+                <a class="medium" href={href(`/hacks/${i.id}`)}>{i.name}</a>
+                {i.poc && <span class="pill pill-sand pill-mono poc">PoC</span>}
+                <div class="caption fog">{[i.chains.slice(0, 3).join(' · '), i.technique].filter(Boolean).join(' — ')}</div>
+              </td>
+              <td class="caption hide-sm">{i.vulnClass ? CLASSES[i.vulnClass].name : <span class="fog">{CATEGORIES[i.category].name}</span>}</td>
+              <td class="num">{fmtUsd(i.amountUsd)}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <p class="body-sm fog" id="empty" hidden style="padding:48px 0;text-align:center">No incidents match these filters.</p>
+  </section>
   <script>
     const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
     const tbody = $('rows');
     const rows = Array.from(tbody.querySelectorAll('tr')) as HTMLTableRowElement[];
-    const ids = ['q', 'cat', 'chain', 'year', 'min', 'by', 'poc', 'fl', 'sort'];
+    const ids = ['q', 'cls', 'cat', 'chain', 'year', 'min', 'by', 'poc', 'fl', 'sort'];
     const params = new URLSearchParams(location.search);
-    for (const id of ids) { const v = params.get(id); const el = $<HTMLInputElement>(id); if (v != null) { if (el.type === 'checkbox') el.checked = v === '1'; else el.value = v; } }
+    for (const id of ids) {
+      const v = params.get(id);
+      const el = $<HTMLInputElement>(id);
+      if (v != null) el.type === 'checkbox' ? (el.checked = v === '1') : (el.value = v);
+    }
     function apply() {
       const q = $<HTMLInputElement>('q').value.trim().toLowerCase();
-      const cat = $<HTMLSelectElement>('cat').value, chain = $<HTMLSelectElement>('chain').value, year = $<HTMLSelectElement>('year').value;
-      const min = Number($<HTMLSelectElement>('min').value), poc = $<HTMLInputElement>('poc').checked, sort = $<HTMLSelectElement>('sort').value;
-      const by = $<HTMLSelectElement>('by').value, fl = $<HTMLInputElement>('fl').checked;
+      const v = (id: string) => $<HTMLSelectElement>(id).value;
+      const on = (id: string) => $<HTMLInputElement>(id).checked;
+      const min = Number(v('min'));
       let n = 0;
       for (const r of rows) {
         const d = r.dataset;
-        const ok = (!q || d.t!.includes(q)) && (!cat || d.c === cat) && (!chain || d.ch!.split('|').includes(chain)) && (!year || d.y === year) && Number(d.a) >= min && (!poc || d.p === '1') && (!fl || d.fl === '1') && (!by || (by === 'dis' ? d.dis === '1' : d.by === by));
-        r.hidden = !ok; if (ok) n++;
+        const by = v('by');
+        const ok =
+          (!q || d.t!.includes(q)) &&
+          (!v('cls') || d.k === v('cls')) &&
+          (!v('cat') || d.c === v('cat')) &&
+          (!v('chain') || d.ch!.split('|').includes(v('chain'))) &&
+          (!v('year') || d.y === v('year')) &&
+          Number(d.a) >= min &&
+          (!on('poc') || d.p === '1') &&
+          (!on('fl') || d.fl === '1') &&
+          (!by || (by === 'dis' ? d.dis === '1' : d.by === by));
+        r.hidden = !ok;
+        if (ok) n++;
       }
-      const sorted = [...rows].sort(sort === 'amount' ? (a, b) => Number(b.dataset.a) - Number(a.dataset.a) : (a, b) => b.dataset.d!.localeCompare(a.dataset.d!));
+      const sorted = [...rows].sort(v('sort') === 'amount' ? (a, b) => Number(b.dataset.a) - Number(a.dataset.a) : (a, b) => b.dataset.d!.localeCompare(a.dataset.d!));
       tbody.append(...sorted);
       $('count').textContent = `${n.toLocaleString('en')} of ${rows.length.toLocaleString('en')} incidents`;
+      $('empty').hidden = n > 0;
       const p = new URLSearchParams();
-      for (const id of ids) { const el = $<HTMLInputElement>(id); const v = el.type === 'checkbox' ? (el.checked ? '1' : '') : el.value; if (v && !(id === 'min' && v === '0') && !(id === 'sort' && v === 'date')) p.set(id, v); }
+      for (const id of ids) {
+        const el = $<HTMLInputElement>(id);
+        const val = el.type === 'checkbox' ? (el.checked ? '1' : '') : el.value;
+        if (val && !(id === 'min' && val === '0') && !(id === 'sort' && val === 'date')) p.set(id, val);
+      }
       history.replaceState(null, '', p.toString() ? `?${p}` : location.pathname);
     }
     for (const id of ids) $(id).addEventListener('input', apply);
@@ -66,8 +112,12 @@ const chains = [...new Set(incidents.flatMap((i) => i.chains))].sort((a, b) => i
   </script>
 </Base>
 <style>
-  .filters { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 16px 0 8px; }
-  .filters input[type='search'] { flex: 1 1 260px; }
-  .filters input[type='search'], .filters select { font: inherit; font-size: 0.9rem; padding: 7px 10px; border-radius: 8px; border: 1px solid var(--border); background: var(--surface); color: var(--text); max-width: 100%; }
-  .table-wrap { max-height: 75vh; }
+  .head { padding-top: 80px; display: grid; gap: 20px; }
+  .filters { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; position: sticky; top: 64px; z-index: 5; background: rgba(255,255,255,0.92); backdrop-filter: blur(12px); padding: 12px 0; }
+  .q { flex: 1 1 280px; }
+  .select { max-width: 100%; }
+  .toggle { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; padding: 0 6px; cursor: pointer; }
+  .toggle input { accent-color: var(--color-jet-ink); }
+  .poc { margin-left: 8px; padding: 0 8px; }
+  @media (max-width: 960px) { .filters { position: static; } }
 </style>

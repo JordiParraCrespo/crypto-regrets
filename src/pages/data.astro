@@ -1,46 +1,80 @@
 ---
 import Base from '../layouts/Base.astro';
-import { incidents, advisories, href, YEARS } from '../lib/data';
+import Terminal from '../components/Terminal.astro';
+import { incidents, advisories, href, YEARS, classified, CLASSES } from '../lib/data';
 const REPO = 'https://github.com/JordiParraCrespo/crypto-regrets';
-const perYear = YEARS.map((y) => ({ y, n: incidents.filter((i) => i.year === y).length })).filter((x) => x.n > 0).reverse();
-const example = incidents.find((i) => i.poc && i.ai && i.descriptions.length > 1) ?? incidents[0];
+const example = incidents.find((i) => i.poc && i.vulnClass && i.txHashes.length && i.descriptions.length > 1) ?? incidents[0];
+const exampleJson = JSON.stringify(
+  { ...example, descriptions: example.descriptions.slice(0, 2), references: example.references.slice(0, 2) },
+  null,
+  2,
+);
+const usage = `# every reentrancy incident with a runnable exploit
+curl -s ${'$SITE'}/api/vulnerability-classes.json \\
+  | jq '.[] | select(.category=="reentrancy") | .cases[] | select(.poc) | {name, poc}'`;
 ---
-<Base title="Data" description="Download every indexed crypto incident as JSON or CSV, or browse one file per incident.">
-  <h1>Data</h1>
-  <p class="lede">Every incident on this site is a plain file in the repository's <a href={`${REPO}/tree/main/data`}><code>data/</code></a> directory. Download it, diff it, or send a correction as a pull request.</p>
+<Base title="Data" description="Download every indexed crypto incident and the vulnerability-class dataset as JSON or CSV.">
+  <section class="wrap head">
+    <p class="eyebrow">Data</p>
+    <h1 class="h-lg">Every incident is a file.</h1>
+    <p class="lede">The whole index lives in the repository's <a class="link" href={`${REPO}/tree/main/data`}><code>data/</code></a> directory. Download it, diff it, build on it, or correct an incident with a pull request.</p>
+  </section>
 
-  <h2>Downloads</h2>
-  <div class="table-wrap">
-    <table>
-      <thead><tr><th>File</th><th>Contents</th><th class="num">Records</th></tr></thead>
-      <tbody>
-        <tr><td><a href={href('/api/incidents.json')}><code>incidents.json</code></a></td><td>All incidents, full schema</td><td class="num">{incidents.length.toLocaleString('en')}</td></tr>
-        <tr><td><a href={href('/data/incidents.csv')}><code>incidents.csv</code></a></td><td>Flat export for spreadsheets (main fields + best root cause)</td><td class="num">{incidents.length.toLocaleString('en')}</td></tr>
-        <tr><td><a href={href('/api/advisories.json')}><code>advisories.json</code></a></td><td>Bitcoin Core, Geth and Cosmos client advisories</td><td class="num">{advisories.length}</td></tr>
-        <tr><td><a href={href('/api/taxonomy.json')}><code>taxonomy.json</code></a></td><td>Layers, patterns (with prevention guidance) and eras</td><td class="num">—</td></tr>
-      </tbody>
-    </table>
-  </div>
+  <section class="wrap section">
+    <div class="grid cols-2">
+      <div class="card">
+        <p class="eyebrow" style="margin:0">For tool builders</p>
+        <h2 class="h-sm" style="margin:8px 0 12px">vulnerability-classes.json</h2>
+        <p class="body-sm steel" style="margin:0 0 20px">{Object.keys(CLASSES).length} classes, each with CWE/SWC ids, vulnerable and fixed code, detection signals and remediation, plus the {classified.toLocaleString('en')} real incidents labelled with it. Cases with PoCs and attack transactions come first, ready to use as test cases.</p>
+        <a class="btn btn-primary" href={href('/api/vulnerability-classes.json')}>Download JSON</a>
+      </div>
+      <div class="card">
+        <p class="eyebrow" style="margin:0">Everything</p>
+        <h2 class="h-sm" style="margin:8px 0 12px">incidents.json · incidents.csv</h2>
+        <p class="body-sm steel" style="margin:0 0 20px">All {incidents.length.toLocaleString('en')} incidents with pattern, class, every source's description, tx hashes, PoC links, references and the model's second opinion. The CSV has the main fields for spreadsheets.</p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <a class="btn btn-compact" href={href('/api/incidents.json')}>JSON</a>
+          <a class="btn btn-compact" href={href('/data/incidents.csv')}>CSV</a>
+          <a class="btn btn-compact" href={href('/api/advisories.json')}>Advisories ({advisories.length})</a>
+          <a class="btn btn-compact" href={href('/api/taxonomy.json')}>Taxonomy</a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <h2>Repository layout</h2>
-  <pre class="tree"><code>{`data/
-├── incidents.json              every incident, one per line
-├── incidents.csv               flat export
-├── incidents/<year>/<id>.json  one file per incident
-├── advisories.json             client & consensus advisories
-├── sources.json                audit of the 30 sources we evaluated
-├── typesafe/                   cached model classifications + evaluation
-└── raw/                        source snapshots the index is built from`}</code></pre>
-  <p class="small muted">Files per year: {perYear.map((x) => `${x.y}: ${x.n}`).join(' · ')}</p>
+  <section class="wrap section">
+    <div class="grid cols-2 split">
+      <div>
+        <h2 class="h-sub">Repository layout</h2>
+        <ul class="rows" style="margin-top:20px">
+          <li class="f"><code>data/incidents.json</code><span class="body-sm fog">every incident, one per line</span></li>
+          <li class="f"><code>data/incidents/&lt;year&gt;/&lt;id&gt;.json</code><span class="body-sm fog">one file per incident</span></li>
+          <li class="f"><code>data/vulnerability-classes.json</code><span class="body-sm fog">class knowledge + labelled cases</span></li>
+          <li class="f"><code>data/incidents.csv</code><span class="body-sm fog">flat export</span></li>
+          <li class="f"><code>data/advisories.json</code><span class="body-sm fog">client, SDK and compiler advisories</span></li>
+          <li class="f"><code>data/typesafe/</code><span class="body-sm fog">cached model answers and evaluations</span></li>
+          <li class="f"><code>data/raw/</code><span class="body-sm fog">source snapshots the index is built from</span></li>
+        </ul>
+        <p class="caption fog" style="margin-top:16px">Files per year: {YEARS.slice().reverse().map((y) => `${y} ${incidents.filter((i) => i.year === y).length}`).join(' · ')}</p>
+      </div>
+      <div>
+        <h2 class="h-sub">Query it</h2>
+        <div style="margin-top:20px"><Terminal title="zsh" code={usage} /></div>
+        <p class="body-sm fog" style="margin-top:16px">Schemas are defined once with zod in <a class="link" href={`${REPO}/blob/main/src/lib/types.ts`}><code>src/lib/types.ts</code></a> and validated on every build, so <code>category</code> and <code>vulnClass</code> are always valid ids.</p>
+      </div>
+    </div>
+  </section>
 
-  <h2>Example record</h2>
-  <p class="small"><a href={`${REPO}/blob/main/data/incidents/${example.year}/${example.id}.json`}><code>data/incidents/{example.year}/{example.id}.json</code></a></p>
-  <pre class="json"><code>{JSON.stringify(example, null, 2)}</code></pre>
-
-  <h2>Schema</h2>
-  <p>Defined once with zod in <a href={`${REPO}/blob/main/src/lib/types.ts`}><code>src/lib/types.ts</code></a> and validated on every build. <code>category</code> is always one of the ids in <a href={href('/api/taxonomy.json')}>taxonomy.json</a>; <code>classifiedBy</code> says who decided it (<code>defillama</code>, <code>curated</code>, <code>typesafe</code>, <code>keywords</code> or <code>none</code>), and <code>ai</code> holds the model's second opinion.</p>
+  <section class="wrap section">
+    <h2 class="h-sub">Example record</h2>
+    <p class="caption fog" style="margin:4px 0 20px"><a class="link" href={`${REPO}/blob/main/data/incidents/${example.year}/${example.id}.json`}>data/incidents/{example.year}/{example.id}.json</a> (lists shortened)</p>
+    <Terminal title={`${example.id}.json`} code={exampleJson} />
+  </section>
 </Base>
 <style>
-  pre { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; overflow-x: auto; font-size: 0.82rem; line-height: 1.5; }
-  pre.json { max-height: 520px; }
+  .head { padding-top: 80px; display: grid; gap: 20px; }
+  .split { gap: 48px; align-items: start; }
+  .f { display: grid; gap: 4px; }
+  .f code { justify-self: start; }
+  :global(.terminal pre) { max-height: 520px; }
 </style>

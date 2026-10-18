@@ -1,9 +1,11 @@
 ---
 import Base from '../../layouts/Base.astro';
+import Bars from '../../components/Bars.astro';
 import IncidentTable from '../../components/IncidentTable.astro';
-import { categoryStats, byCategory, yearCategorySeries, fmtUsd, fmtDate, href, layerSlot } from '../../lib/data';
+import { categoryStats, yearCategorySeries, fmtUsd, href, classStats, CLASSES } from '../../lib/data';
 import { CATEGORIES, CATEGORY_IDS, LAYERS, type CategoryId, type Category } from '../../lib/taxonomy';
 import { RUBRIC } from '../../lib/rubric';
+import { classesOf } from '../../lib/classes';
 
 export function getStaticPaths() {
   return CATEGORY_IDS.map((id) => ({ params: { id } }));
@@ -11,87 +13,66 @@ export function getStaticPaths() {
 const id = Astro.params.id as CategoryId;
 const c: Category = CATEGORIES[id];
 const s = categoryStats(id);
-const series = yearCategorySeries(id);
-const all = byCategory(id);
-const maxCount = Math.max(...series.map((x) => x.count), 1);
-const peak = [...series].sort((a, b) => b.count - a.count)[0];
-const withPoc = all.filter((i) => i.poc).slice(0, 12);
-const techniques = Object.entries(all.reduce<Record<string, number>>((m, i) => { if (i.technique) m[i.technique] = (m[i.technique] ?? 0) + 1; return m; }, {})).sort((a, b) => b[1] - a[1]).slice(0, 10);
-const slot = layerSlot(c.layer);
+const series = yearCategorySeries(id).filter((d) => d.year >= 2016).map((d) => ({ year: d.year, value: d.count }));
 const rubric = id === 'unknown' ? undefined : RUBRIC[id];
+const classes = classesOf(id).map((x) => classStats.find((k) => k.id === x)!);
 ---
 <Base title={c.name} description={`${c.name}: ${c.short} ${s.count} incidents, ${fmtUsd(s.usd)} lost.`}>
-  <p class="small"><a href={href('/patterns')}>← All patterns</a> · <span class={`dot l${slot}`} /> {LAYERS[c.layer].name}</p>
-  <h1>{c.name}</h1>
-  <p class="lede">{c.description}</p>
-
-  <div class="grid grid-4">
-    <div class="card stat"><div class="value">{s.count}</div><div class="label">incidents</div></div>
-    <div class="card stat"><div class="value">{fmtUsd(s.usd)}</div><div class="label">lost</div></div>
-    <div class="card stat"><div class="value">{s.first ? s.first.year : '—'}</div><div class="label">first seen{s.first && <> · <a href={href(`/hacks/${s.first.id}`)}>{s.first.name}</a></>}</div></div>
-    <div class="card stat"><div class="value">{peak.count ? peak.year : '—'}</div><div class="label">peak year ({peak.count} incidents)</div></div>
-  </div>
-
-  <figure class="card spark">
-    <figcaption><strong>Incidents per year</strong></figcaption>
-    <div class="bars" role="img" aria-label={`Incidents per year: ${series.map((x) => `${x.year} ${x.count}`).join(', ')}`}>
-      {series.map((x) => (
-        <div class="col" title={`${x.year}: ${x.count} incidents, ${fmtUsd(x.usd)}`}>
-          <div class={`b l${slot}`} style={`height:${(x.count / maxCount) * 100}%`} />
-          <span class="yr">{String(x.year).slice(2)}</span>
-        </div>
-      ))}
+  <section class="wrap head">
+    <p class="eyebrow"><a href={href('/patterns')}>Failure patterns</a> / {LAYERS[c.layer].name}</p>
+    <h1 class="h-lg">{c.name}</h1>
+    <p class="lede">{c.description}</p>
+    <div class="grid cols-4 stats">
+      <div class="stat-inline"><div class="value">{s.count}</div><div class="label">incidents</div></div>
+      <div class="stat-inline"><div class="value">{fmtUsd(s.usd)}</div><div class="label">lost</div></div>
+      <div class="stat-inline"><div class="value">{s.first?.year ?? '—'}</div><div class="label">first seen{s.first && ` · ${s.first.name}`}</div></div>
+      <div class="stat-inline"><div class="value">{c.owasp?.[0]?.split(':')[0] ?? '—'}</div><div class="label">OWASP Smart Contract Top 10</div></div>
     </div>
-  </figure>
+  </section>
 
-  <div class="grid grid-2">
-    {c.anatomy.length > 0 && (
-      <div class="card"><h3>Anatomy of the attack</h3><ol>{c.anatomy.map((a) => <li>{a}</li>)}</ol></div>
-    )}
-    {c.prevention.length > 0 && (
-      <div class="card"><h3>How to prevent it</h3><ul>{c.prevention.map((p) => <li>{p}</li>)}</ul>
-        {(c.owasp || c.swc) && <p class="small muted">{c.owasp?.join(' · ')}{c.owasp && c.swc ? ' · ' : ''}{c.swc?.join(', ')}</p>}
+  {classes.length > 0 && (
+    <section class="wrap section">
+      <p class="eyebrow" style="margin:0 0 12px">Vulnerability classes</p>
+      <div class="grid cols-3">
+        {classes.map((k) => (
+          <a class="card card-sm" href={href(`/classes/${k.id}`)}>
+            <h3 class="h-xs">{CLASSES[k.id].name}</h3>
+            <p class="body-sm fog" style="margin:6px 0 12px">{CLASSES[k.id].summary}</p>
+            <p class="mono caption" style="margin:0">{k.count} incidents{k.withPoc ? ` · ${k.withPoc} PoCs` : ''}</p>
+          </a>
+        ))}
       </div>
-    )}
-  </div>
+    </section>
+  )}
 
-  {rubric && (
-    <div class="card" style="margin-top:16px">
-      <h3>How to tell it apart</h3>
-      <p class="small"><strong>Not to be confused with:</strong> {rubric.not_for}</p>
-      <p class="small" style="margin-bottom:4px"><strong>Typical examples</strong></p>
-      <ul class="small">{rubric.examples.map((e) => <li>{e}</li>)}</ul>
+  <section class="wrap section">
+    <div class="grid cols-2 split">
+      <div class="grid" style="gap:40px">
+        {c.anatomy.length > 0 && <div><h2 class="h-xs">How the attack unfolds</h2><ol class="numbered" style="margin-top:12px">{c.anatomy.map((a) => <li>{a}</li>)}</ol></div>}
+        {c.prevention.length > 0 && <div><h2 class="h-xs">Prevention</h2><ul class="check" style="margin-top:12px">{c.prevention.map((p) => <li>{p}</li>)}</ul></div>}
+        {rubric && (
+          <div>
+            <h2 class="h-xs">How to tell it apart</h2>
+            <p class="body-sm steel" style="margin:8px 0">Not to be confused with: {rubric.not_for}</p>
+            <ul class="check">{rubric.examples.map((e) => <li>{e}</li>)}</ul>
+          </div>
+        )}
+      </div>
+      <div class="card">
+        <p class="body-sm medium" style="margin:0">Incidents per year</p>
+        <p class="caption fog" style="margin:0 0 20px">since 2016</p>
+        <Bars data={series} height={180} label={`${c.name}: incidents per year`} />
+      </div>
     </div>
-  )}
+  </section>
 
-  {techniques.length > 0 && (
-    <>
-      <h2>Techniques seen</h2>
-      <p class="tech">{techniques.map(([t, n]) => <span class="chip">{t} <span class="muted">{n}</span></span>)}</p>
-    </>
-  )}
-
-  <h2>Largest incidents</h2>
-  <IncidentTable items={s.biggest} />
-
-  {withPoc.length > 0 && (
-    <>
-      <h2>Study these: incidents with runnable PoCs</h2>
-      <p class="small muted">Clone <a href="https://github.com/SunWeb3Sec/DeFiHackLabs">DeFiHackLabs</a> and run them with <code>forge test --contracts &lt;file&gt; -vvv</code>.</p>
-      <ul class="clean">{withPoc.map((i) => <li><a href={href(`/hacks/${i.id}`)}>{i.name}</a> <span class="muted small">· {fmtDate(i.date)} · {fmtUsd(i.amountUsd)}</span> · <a class="small" href={i.poc!}>PoC ↗</a>{i.rootCause && <div class="small muted">{i.rootCause.slice(0, 220)}{i.rootCause.length > 220 ? '…' : ''}</div>}</li>)}</ul>
-    </>
-  )}
-
-  <h2>All {s.count} incidents</h2>
-  <p><a href={href(`/hacks?cat=${id}`)}>Open in the filterable index →</a></p>
-  <details><summary>Show list</summary><IncidentTable items={all} /></details>
+  <section class="wrap section">
+    <div class="section-head"><h2 class="h-sub">Largest incidents</h2><a class="btn btn-ghost" href={href(`/hacks?cat=${id}`)}>All {s.count} →</a></div>
+    <IncidentTable items={s.biggest} />
+  </section>
 </Base>
 <style>
-  .spark { margin: 16px 0; }
-  .bars { display: flex; align-items: flex-end; gap: 3px; height: 140px; margin-top: 8px; }
-  .col { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; height: 100%; align-items: center; min-width: 0; }
-  .b { width: 100%; max-width: 32px; background: var(--c); border-radius: 4px 4px 0 0; min-height: 1px; }
-  .yr { font-size: 0.7rem; color: var(--muted); margin-top: 4px; }
-  .tech { display: flex; flex-wrap: wrap; gap: 6px; }
-  ol, ul { padding-left: 1.2em; }
+  .head { padding-top: 80px; display: grid; gap: 20px; }
+  .stats { margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--color-dove); }
+  .split { gap: 48px; align-items: start; }
 </style>
