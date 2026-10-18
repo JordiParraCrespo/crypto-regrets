@@ -85,7 +85,7 @@ npm run agent -- grok run triage-unclassified                  # needs the grok 
 npm run agent -- grok resume <sessionId> "now also update the README"
 ```
 
-**From GitHub:** go to Actions → *Agents* → *Run workflow*, then pick the platform, the task (or `custom` plus a prompt) and an optional model. To set it up, add the repository secrets `CURSOR_API_KEY` and/or `XAI_API_KEY`. For Grok, also enable *Settings → Actions → Allow GitHub Actions to create pull requests*. Grok runs with auto-approve, but the checkout has no push credentials; the workflow commits and opens the PR itself. Because that PR is created with `GITHUB_TOKEN`, CI won't start on its own: close and reopen it, or push to it, to run CI. A weekly `refresh-data` run (Mondays) is off by default. Set the repository variable `AGENT_SCHEDULE_PLATFORM` to `cursor` or `grok` to turn it on.
+**From GitHub:** go to Actions → *Agents* → *Run workflow*, then pick the platform, the task (or `custom` plus a prompt) and an optional model. To set it up, add the repository secrets `CURSOR_API_KEY` and/or `XAI_API_KEY`. For Grok, also enable *Settings → Actions → Allow GitHub Actions to create pull requests*. Grok runs with auto-approve in a read-only job with no push credentials. Its changes are exported as a patch, and a separate job applies that patch in a fresh checkout and opens the PR. Because that PR is created with `GITHUB_TOKEN`, CI won't start on its own: close and reopen it, or push to it, to run CI. A weekly `refresh-data` run (Mondays) is off by default. Set the repository variable `AGENT_SCHEDULE_PLATFORM` to `cursor` or `grok` to turn it on.
 
 ## Data licensing & caveats
 

@@ -2,7 +2,7 @@
 #
 #   cursor → launches a Cursor Cloud Agent via API; it runs on Cursor's machines and opens its own PR.
 #            Needs secret CURSOR_API_KEY and the Cursor GitHub app installed on this repo.
-#   grok   → runs Grok Build headless on this runner; the workflow opens the PR.
+#   grok   → runs Grok Build headless on a read-only runner; a separate job applies its patch and opens the PR.
 #            Needs secret XAI_API_KEY and "Allow GitHub Actions to create pull requests" (Settings → Actions).
 #
 # Scheduled runs are off until you set repository variable AGENT_SCHEDULE_PLATFORM to cursor or grok.
@@ -71,11 +71,11 @@ jobs:
     if: (github.event_name == 'schedule' && vars.AGENT_SCHEDULE_PLATFORM == 'grok') || github.event.inputs.platform == 'grok'
     runs-on: ubuntu-latest
     timeout-minutes: 90
+    # Read-only and no persisted token: the agent runs with auto-approve, so nothing it controls may hold
+    # write credentials. Its changes leave this job only as a patch, published by grok-pr below.
     permissions:
-      contents: write
-      pull-requests: write
+      contents: read
     steps:
-      # No persisted token: the agent runs with auto-approve and must not be able to push.
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
@@ -97,21 +97,46 @@ jobs:
           [ -n "$input" ] || { echo "::error::task is custom but prompt is empty"; exit 1; }
           npm run --silent agent -- grok run "$input" --yolo --max-turns 200 ${MODEL:+--model "$MODEL"} \
             --rules "You are running unattended in CI. Do not run git commit, git push or create branches; leave your changes in the working tree. When done, write the pull request description (summary of changes, checks you ran and their results) to .agent-pr.md in the repo root."
+      - name: Export patch
+        run: |
+          mkdir -p "$RUNNER_TEMP/out"
+          mv .agent-pr.md "$RUNNER_TEMP/out/body.md" 2>/dev/null || echo "Automated run of \`$TASK\` by Grok Build." > "$RUNNER_TEMP/out/body.md"
+          git add -A
+          git diff --cached --binary > "$RUNNER_TEMP/out/changes.patch"
+          git diff --cached --stat
+      - uses: actions/upload-artifact@v4
+        with:
+          name: grok-changes
+          path: ${{ runner.temp }}/out
+          retention-days: 7
+
+  # Fresh workspace: only the patch and PR text cross over from the agent job, never its files or hooks.
+  grok-pr:
+    needs: grok
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: grok-changes
+          path: ${{ runner.temp }}/in
       - name: Open pull request
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          body="$(cat .agent-pr.md 2>/dev/null || echo "Automated run of \`$TASK\` by Grok Build.")"
-          rm -f .agent-pr.md
-          if [ -z "$(git status --porcelain)" ]; then echo "No changes; nothing to open." >> "$GITHUB_STEP_SUMMARY"; exit 0; fi
+          patch="$RUNNER_TEMP/in/changes.patch"
+          if [ ! -s "$patch" ]; then echo "No changes; nothing to open." >> "$GITHUB_STEP_SUMMARY"; exit 0; fi
+          echo "" >> "$RUNNER_TEMP/in/body.md"
+          echo "_Opened by the Agents workflow, run ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}_" >> "$RUNNER_TEMP/in/body.md"
           branch="grok/$TASK-$GITHUB_RUN_ID"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git checkout -b "$branch"
-          git add -A
-          git commit -m "Grok Build: $TASK"
-          git push "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "$branch"
-          url=$(gh pr create --base "$GITHUB_REF_NAME" --head "$branch" --title "Grok Build: $TASK" --body "$body
-
-          _Opened by the Agents workflow, run ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}_")
+          git apply --index "$patch"
+          git -c core.hooksPath=/dev/null commit -m "Grok Build: $TASK"
+          git push origin "$branch"
+          url=$(gh pr create --base "$GITHUB_REF_NAME" --head "$branch" --title "Grok Build: $TASK" --body-file "$RUNNER_TEMP/in/body.md")
           echo "### Grok Build opened $url" >> "$GITHUB_STEP_SUMMARY"

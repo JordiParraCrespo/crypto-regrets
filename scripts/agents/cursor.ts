@@ -83,8 +83,8 @@ export class CursorClient {
     });
   }
 
-  followUp(agentId: string, prompt: string) {
-    return this.call(runSchema, 'POST', `/agents/${agentId}/runs`, { prompt: { text: prompt } });
+  async followUp(agentId: string, prompt: string) {
+    return (await this.call(z.object({ run: runSchema }), 'POST', `/agents/${agentId}/runs`, { prompt: { text: prompt } })).run;
   }
 
   agent(agentId: string) {
