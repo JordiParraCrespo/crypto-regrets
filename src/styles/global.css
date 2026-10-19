@@ -21,10 +21,28 @@
   --text-secondary: #707070;
   --text-tertiary: #727272;
 
-  /* Fonts: Inter / Geist Mono substitute universalSans / GeistMono */
-  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-display: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-mono: 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  /* Heatmap: a 7-step ink ramp. Steps 1-4 take ink text, 5-7 take paper text (≥ 4.5:1 either way). */
+  --ramp-1: #eeece8;
+  --ramp-2: #dedbd5;
+  --ramp-3: #c9c6bf;
+  --ramp-4: #aeaba4;
+  --ramp-5: #5a5956;
+  --ramp-6: #353533;
+  --ramp-7: var(--color-jet-ink);
+
+  /* Code on the charcoal terminal */
+  --code-fg: #e8e6e1;
+  --code-muted: #8b8a86;
+  --code-comment: #7d7b76;
+  --code-keyword: var(--color-sand);
+  --code-string: #91c17a;
+  --code-number: var(--color-sunbeam);
+  --code-error: #ff8a80;
+
+  /* Fonts: Inter / Geist Mono (self-hosted by the Astro Fonts API, see astro.config.mjs) substitute universalSans / GeistMono */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-display: var(--font-inter), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
   /* Spacing */
   --s-4: 4px;
@@ -348,7 +366,7 @@ a.card:hover {
 /* Terminal / code */
 .terminal {
   background: var(--color-charcoal);
-  color: #e8e6e1;
+  color: var(--code-fg);
   border-radius: var(--r-code);
   font: 400 13px/22px var(--font-mono);
   letter-spacing: -0.01em;
@@ -360,7 +378,7 @@ a.card:hover {
   align-items: center;
   gap: 8px;
   padding: 12px 16px;
-  color: #8b8a86;
+  color: var(--code-muted);
   font-size: 12px;
 }
 .terminal-bar i {
@@ -386,19 +404,19 @@ a.card:hover {
   white-space: pre;
 }
 .terminal .c {
-  color: #7d7b76;
+  color: var(--code-comment);
 }
 .terminal .k {
-  color: #f2ede5;
+  color: var(--code-keyword);
 }
 .terminal .s {
-  color: #91c17a;
+  color: var(--code-string);
 }
 .terminal .n {
-  color: #ffbd2e;
+  color: var(--code-number);
 }
 .terminal .e {
-  color: #ff8a80;
+  color: var(--code-error);
 }
 
 /* Language / view tabs */
@@ -567,8 +585,11 @@ td.num:last-child {
 }
 .input:focus,
 .select:focus {
-  outline: none;
   box-shadow: inset 0 0 0 1px var(--color-jet-ink);
+}
+.input:focus:not(:focus-visible),
+.select:focus:not(:focus-visible) {
+  outline: none;
 }
 .select {
   appearance: none;
@@ -611,10 +632,14 @@ td.num:last-child {
 .combo-btn:hover {
   box-shadow: inset 0 0 0 1px var(--color-pewter);
 }
-.combo-btn:focus-visible,
 .combo-btn[aria-expanded='true'] {
-  outline: none;
   box-shadow: inset 0 0 0 1px var(--color-jet-ink);
+}
+/* An outline ring (not a box-shadow) so it also shows on the dark "value set" state. */
+.combo-btn:focus-visible {
+  outline: 2px solid var(--color-jet-ink);
+  outline-offset: 2px;
+  border-radius: var(--r-pill);
 }
 .combo-btn.is-set {
   color: var(--color-paper);
@@ -655,7 +680,7 @@ td.num:last-child {
 }
 .combo-search:focus {
   outline: none;
-  box-shadow: inset 0 0 0 1px var(--color-jet-ink);
+  box-shadow: inset 0 0 0 2px var(--color-jet-ink);
 }
 .combo-list {
   list-style: none;
@@ -678,8 +703,10 @@ td.num:last-child {
   line-height: 20px;
   cursor: pointer;
 }
+/* The active option is the keyboard position (aria-activedescendant): a ≥3:1 ink ring, not just a tint. */
 .combo-opt.is-active {
   background: var(--color-sand);
+  box-shadow: inset 0 0 0 2px var(--color-jet-ink);
 }
 .combo-opt[aria-selected='true'] {
   font-weight: 500;
@@ -759,6 +786,89 @@ td.num:last-child {
     display: none;
   }
 }
+/* Keep focused elements clear of the sticky header (WCAG 2.4.11); /hacks raises it for its sticky filter bar. */
+html {
+  scroll-padding-top: 80px;
+}
+.nowrap {
+  white-space: nowrap;
+}
+.poc {
+  margin-left: var(--s-8);
+  padding: 0 var(--s-8);
+}
+
+/* Layout pieces shared across pages */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.split {
+  gap: var(--s-48);
+  align-items: start;
+}
+.stats {
+  margin-top: var(--s-24);
+  padding-top: var(--s-24);
+  border-top: 1px solid var(--color-dove);
+}
+.ranked {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 14px;
+}
+.ranked a,
+.ranked li {
+  display: grid;
+  gap: 6px;
+}
+.ranked a:hover .medium {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.ranked .row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+/* Page header shared by every page: eyebrow, title, lede. */
+.page-head {
+  padding-top: 80px;
+  display: grid;
+  gap: var(--s-20);
+}
+.cta {
+  display: flex;
+  gap: var(--s-8);
+  flex-wrap: wrap;
+  margin-top: var(--s-8);
+}
+
+/* Scoped `display` rules would otherwise beat the UA style and show hidden elements. */
+[hidden] {
+  display: none !important;
+}
+
+.skip-link {
+  position: absolute;
+  left: 16px;
+  top: 8px;
+  z-index: 50;
+  padding: 8px 16px;
+  border-radius: var(--r-pill);
+  background: var(--color-jet-ink);
+  color: var(--color-paper);
+  font: 500 14px/20px var(--font-sans);
+  transform: translateY(-200%);
+}
+.skip-link:focus {
+  transform: none;
+}
+
 .sr-only {
   position: absolute;
   width: 1px;

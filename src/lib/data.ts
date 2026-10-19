@@ -1,11 +1,28 @@
 import { z } from 'zod';
 import incidentsJson from '../../data/incidents.json';
 import advisoriesJson from '../../data/advisories.json';
-import { incidentSchema, advisorySchema, sourceAuditSchema, type Incident, type SourceAudit } from './types';
+import tvlRaw from '../../data/raw/llama_tvl.json';
+import {
+  incidentSchema,
+  advisorySchema,
+  sourceAuditSchema,
+  cosmosIncidentSchema,
+  cosmosAdvisorySchema,
+  type Incident,
+  type SourceAudit,
+  type SourceId,
+  type Classifier,
+} from './types';
 import { CATEGORIES, CATEGORY_IDS, LAYERS, ERAS, eraForYear, type CategoryId, type LayerId } from './taxonomy';
+import { CLASSES, CLASS_IDS, type ClassId } from './classes';
+import { CHAIN_FAMILIES, chainFamily, type ChainFamilyId } from './chains';
 
 // Validate at build time: a malformed record fails the build instead of rendering garbage.
-export const incidents: Incident[] = z.array(incidentSchema).parse(incidentsJson);
+// Newest first, largest first on the same day: "latest" lists and the /hacks default view rely on this order.
+export const incidents: Incident[] = z
+  .array(incidentSchema)
+  .parse(incidentsJson)
+  .sort((a, b) => b.date.localeCompare(a.date) || (b.amountUsd ?? 0) - (a.amountUsd ?? 0));
 export const advisories = z.array(advisorySchema).parse(advisoriesJson);
 
 const sourceFiles = import.meta.glob<{ default: unknown }>('../../data/sources.json', { eager: true });
@@ -104,15 +121,14 @@ export function eraStats() {
   });
 }
 
-export const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-export const href = (p: string) => `${base}${p.startsWith('/') ? p : `/${p}`}`;
+export { base, href } from './paths';
 
 // ------------------------------------------------------------------ labels shared across pages
 
-import type { SourceId, Classifier } from './types';
-import { CLASSES as CLASS_DEFS, CLASS_IDS, type ClassId, type VulnClass } from './classes';
-/** Widened to VulnClass so optional fields (vulnerable, cwe, ...) are accessible on any class. */
-export const CLASSES: Record<ClassId, VulnClass> = CLASS_DEFS;
+export { CLASSES };
+
+/** The most specific label an incident has: its vulnerability class, else its failure pattern. */
+export const labelOf = (i: Incident) => (i.vulnClass ? CLASSES[i.vulnClass].name : CATEGORIES[i.category].name);
 
 export const SOURCE_NAMES = {
   defillama: 'DefiLlama',
@@ -181,8 +197,6 @@ export function yearSeries(metric: 'count' | 'usd', filter: (i: Incident) => boo
 
 // ------------------------------------------------------------------ trends
 
-import tvlRaw from '../../data/raw/llama_tvl.json';
-import { CHAIN_FAMILIES, chainFamily, type ChainFamilyId } from './chains';
 
 export const familyOf = (i: Incident): ChainFamilyId => chainFamily(i.chains, i.targetType);
 export const FAMILY_IDS = Object.keys(CHAIN_FAMILIES) as ChainFamilyId[];
@@ -234,33 +248,6 @@ export const isDefiLoss = (i: Incident) =>
 
 // ------------------------------------------------------------------ Cosmos ecosystem research
 
-const cosmosIncidentSchema = z.object({
-  name: z.string(),
-  date: z.string(),
-  chain: z.string().nullish(),
-  lossUsd: z.number().nullish(),
-  component: z.string().nullish(),
-  rootCause: z.string().nullish(),
-  vulnerabilityClass: z.string().nullish(),
-  language: z.string().nullish(),
-  patchedIn: z.union([z.string(), z.array(z.string())]).nullish(),
-  sources: z.array(z.string()).default([]),
-  confidence: z.string().nullish(),
-  incidentType: z.string().nullish(),
-  notes: z.string().nullish(),
-});
-const cosmosAdvisorySchema = z.object({
-  id: z.string(),
-  aliases: z.array(z.string()).default([]),
-  project: z.string(),
-  title: z.string(),
-  summary: z.string().nullish(),
-  published: z.string().nullish(),
-  severity: z.string().nullish(),
-  component: z.string().nullish(),
-  impact: z.string().nullish(),
-  url: z.string().nullish(),
-});
 export type CosmosIncident = z.infer<typeof cosmosIncidentSchema>;
 export type CosmosAdvisory = z.infer<typeof cosmosAdvisorySchema>;
 
@@ -352,3 +339,10 @@ export function ecosystem(f: ChainFamilyId) {
     advisories: advisories.filter((a) => projects.includes(a.project)),
   };
 }
+
+/** Incidents that share a name and date with another one (separate exploits the sources list apart). */
+export const sharesNameAndDate = (() => {
+  const seen = new Map<string, number>();
+  for (const i of incidents) seen.set(`${i.name}|${i.date}`, (seen.get(`${i.name}|${i.date}`) ?? 0) + 1);
+  return (i: Incident) => (seen.get(`${i.name}|${i.date}`) ?? 0) > 1;
+})();

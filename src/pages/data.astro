@@ -9,12 +9,27 @@ const exampleJson = JSON.stringify(
   null,
   2,
 );
+const dataset = {
+  '@type': 'Dataset',
+  name: 'Crypto Regrets: classified crypto security incidents',
+  description: `${incidents.length.toLocaleString('en')} crypto hacks and exploits from ${YEARS[0]} to ${YEARS[YEARS.length - 1]}, merged from ten public sources and deduplicated, each with a failure pattern, a vulnerability class where the evidence allows, loss in USD, chains, sources, attack transactions and Foundry PoC links.`,
+  url: new URL(href('/data'), Astro.site).toString(),
+  keywords: ['crypto hacks', 'smart contract vulnerabilities', 'DeFi exploits', 'blockchain security', 'vulnerability classification'],
+  isAccessibleForFree: true,
+  creator: { '@type': 'Organization', name: 'Crypto Regrets', url: new URL(href('/'), Astro.site).toString() },
+  temporalCoverage: `${YEARS[0]}/${YEARS[YEARS.length - 1]}`,
+  distribution: [
+    { '@type': 'DataDownload', encodingFormat: 'application/json', contentUrl: new URL(href('/api/incidents.json'), Astro.site).toString() },
+    { '@type': 'DataDownload', encodingFormat: 'text/csv', contentUrl: new URL(href('/data/incidents.csv'), Astro.site).toString() },
+    { '@type': 'DataDownload', encodingFormat: 'application/json', contentUrl: new URL(href('/api/vulnerability-classes.json'), Astro.site).toString() },
+  ],
+};
 const usage = `# every reentrancy incident with a runnable exploit
 curl -s ${'$SITE'}/api/vulnerability-classes.json \\
   | jq '.[] | select(.category=="reentrancy") | .cases[] | select(.poc) | {name, poc}'`;
 ---
-<Base title="Data" description="Download every indexed crypto incident and the vulnerability-class dataset as JSON or CSV.">
-  <section class="wrap head">
+<Base title="Data" description="Download every indexed crypto incident and the vulnerability-class dataset as JSON or CSV." jsonLd={[dataset]}>
+  <section class="wrap page-head">
     <p class="eyebrow">Data</p>
     <h1 class="h-lg">Every incident is a file.</h1>
     <p class="lede">The whole index lives in the repository's <a class="link" href={`${REPO}/tree/main/data`}><code>data/</code></a> directory. Download it, diff it, build on it, or correct an incident with a pull request.</p>
@@ -59,7 +74,7 @@ curl -s ${'$SITE'}/api/vulnerability-classes.json \\
       </div>
       <div>
         <h2 class="h-sub">Query it</h2>
-        <div style="margin-top:20px"><Terminal title="zsh" code={usage} /></div>
+        <Terminal title="zsh" code={usage} style="margin-top:20px" />
         <p class="body-sm fog" style="margin-top:16px">Schemas are defined once with zod in <a class="link" href={`${REPO}/blob/main/src/lib/types.ts`}><code>src/lib/types.ts</code></a> and validated on every build, so <code>category</code> and <code>vulnClass</code> are always valid ids.</p>
       </div>
     </div>
@@ -72,8 +87,6 @@ curl -s ${'$SITE'}/api/vulnerability-classes.json \\
   </section>
 </Base>
 <style>
-  .head { padding-top: 80px; display: grid; gap: 20px; }
-  .split { gap: 48px; align-items: start; }
   .f { display: grid; gap: 4px; }
   .f code { justify-self: start; }
   :global(.terminal pre) { max-height: 520px; }

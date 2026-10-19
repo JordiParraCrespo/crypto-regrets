@@ -1,6 +1,8 @@
 ---
 import Base from '../../layouts/Base.astro';
-import { incidents, fmtUsd, fmtDate, href, YEARS, CLASSES } from '../../lib/data';
+import IncidentRow from '../../components/IncidentRow.astro';
+import FilterSelect from '../../components/FilterSelect.astro';
+import { incidents, href, YEARS, CLASSES } from '../../lib/data';
 import { CATEGORIES, CATEGORY_IDS } from '../../lib/taxonomy';
 import { CLASS_IDS } from '../../lib/classes';
 const chainCount = new Map<string, number>();
@@ -17,72 +19,68 @@ const countBy = (key: (i: (typeof incidents)[number]) => string | number | null 
 const classCount = countBy((i) => i.vulnClass);
 const catCount = countBy((i) => i.category);
 const yearCount = countBy((i) => i.year);
+const PAGE = 100;
 const classOptions = [...CLASS_IDS].filter((c) => classCount.has(c)).sort((a, b) => CLASSES[a].name.localeCompare(CLASSES[b].name));
 ---
 <Base title="Incident index" description="Search and filter every indexed crypto hack by vulnerability class, pattern, chain, year and loss.">
-  <section class="wrap head">
+  <section class="wrap page-head">
     <p class="eyebrow">Incident index</p>
     <h1 class="h-lg">{incidents.length.toLocaleString('en')} incidents</h1>
     <p class="lede">Search names and root-cause text, or filter by vulnerability class, chain and year. Filters are kept in the URL, so you can share a view.</p>
   </section>
 
   <section class="wrap section" style="margin-top:40px">
-    <form class="filters" onsubmit="return false" aria-label="Filters">
+    <form class="filters" aria-label="Filters">
       <input class="input q" type="search" id="q" placeholder="Search: reentrancy, Ronin, flash loan…" aria-label="Search" />
-      <select class="select" id="cls" aria-label="Vulnerability class"><option value="">All vulnerability classes</option>{classOptions.map((c) => <option value={c} data-count={classCount.get(c)}>{CLASSES[c].name}</option>)}</select>
-      <select class="select" id="cat" aria-label="Pattern"><option value="">All patterns</option>{CATEGORY_IDS.map((c) => <option value={c} data-count={catCount.get(c) ?? 0}>{CATEGORIES[c].name}</option>)}</select>
-      <select class="select" id="chain" aria-label="Chain"><option value="">All chains</option>{chains.map(([c, n]) => <option value={c} data-count={n}>{c}</option>)}</select>
-      <select class="select" id="year" aria-label="Year"><option value="">All years</option>{[...YEARS].reverse().map((y) => <option value={y} data-count={yearCount.get(String(y)) ?? 0}>{y}</option>)}</select>
-      <select class="select" id="min" aria-label="Minimum loss"><option value="0">Any loss</option><option value="1000000">≥ $1M</option><option value="10000000">≥ $10M</option><option value="100000000">≥ $100M</option></select>
-      <select class="select" id="by" aria-label="Classified by"><option value="">Any classifier</option><option value="defillama">Analyst label</option><option value="typesafe">TypeSafe</option><option value="curated">Curated</option><option value="keywords">Keyword rules</option><option value="dis">Model disagrees</option></select>
+      <FilterSelect id="cls" label="Vulnerability class" options={[{ value: '', label: 'All vulnerability classes' }, ...classOptions.map((c) => ({ value: c, label: CLASSES[c].name, count: classCount.get(c) }))]} />
+      <FilterSelect id="cat" label="Pattern" options={[{ value: '', label: 'All patterns' }, ...CATEGORY_IDS.map((c) => ({ value: c, label: CATEGORIES[c].name, count: catCount.get(c) ?? 0 }))]} />
+      <FilterSelect id="chain" label="Chain" options={[{ value: '', label: 'All chains' }, ...chains.map(([c, n]) => ({ value: c, label: c, count: n }))]} />
+      <FilterSelect id="year" label="Year" options={[{ value: '', label: 'All years' }, ...[...YEARS].reverse().map((y) => ({ value: y, label: String(y), count: yearCount.get(String(y)) ?? 0 }))]} />
+      <FilterSelect id="min" label="Minimum loss" options={[{ value: 0, label: 'Any loss' }, { value: 1e6, label: '≥ $1M' }, { value: 1e7, label: '≥ $10M' }, { value: 1e8, label: '≥ $100M' }]} />
+      <FilterSelect id="by" label="Classified by" options={[{ value: '', label: 'Any classifier' }, { value: 'defillama', label: 'Analyst label' }, { value: 'typesafe', label: 'TypeSafe' }, { value: 'curated', label: 'Curated' }, { value: 'keywords', label: 'Keyword rules' }, { value: 'dis', label: 'Model disagrees' }]} />
       <label class="toggle"><input type="checkbox" id="poc" /> <span>Has PoC</span></label>
       <label class="toggle"><input type="checkbox" id="fl" /> <span>Flash loan</span></label>
-      <select class="select" id="sort" aria-label="Sort"><option value="date">Newest first</option><option value="amount">Largest first</option></select>
+      <FilterSelect id="sort" label="Sort" options={[{ value: 'date', label: 'Newest first' }, { value: 'amount', label: 'Largest first' }]} />
       <button type="button" class="reset" id="reset" hidden>Clear filters</button>
     </form>
-    <p class="mono caption fog" id="count" aria-live="polite" style="margin:16px 0 8px"></p>
+    <p class="mono caption fog" id="count" aria-live="polite" style="margin:16px 0 8px">{incidents.length.toLocaleString('en')} of {incidents.length.toLocaleString('en')} incidents</p>
     <div class="table-wrap">
       <table>
         <thead><tr><th>Date</th><th>Incident</th><th class="hide-sm">Vulnerability</th><th class="num">Lost</th></tr></thead>
-        <tbody id="rows">
-          {incidents.map((i) => (
-            <tr
-              data-c={i.category}
-              data-k={i.vulnClass ?? ''}
-              data-ch={i.chains.join('|')}
-              data-y={i.year}
-              data-a={i.amountUsd ?? 0}
-              data-d={i.date}
-              data-p={i.poc ? 1 : 0}
-              data-by={i.classifiedBy}
-              data-dis={i.ai && i.ai.category !== i.category ? 1 : 0}
-              data-fl={i.ai && i.ai.flashLoan >= 0.5 ? 1 : 0}
-              data-t={`${i.name} ${i.technique ?? ''} ${i.rootCause ?? ''}`.toLowerCase()}
-            >
-              <td class="mono caption fog" style="white-space:nowrap">{fmtDate(i.date)}</td>
-              <td>
-                <a class="medium" href={href(`/hacks/${i.id}`)}>{i.name}</a>
-                {i.poc && <span class="pill pill-sand pill-mono poc">PoC</span>}
-                <div class="caption fog">{[i.chains.slice(0, 3).join(' · '), i.technique].filter(Boolean).join(' — ')}</div>
-              </td>
-              <td class="caption hide-sm">{i.vulnClass ? CLASSES[i.vulnClass].name : <span class="fog">{CATEGORIES[i.category].name}</span>}</td>
-              <td class="num">{fmtUsd(i.amountUsd)}</td>
-            </tr>
-          ))}
+        <tbody id="rows" data-base={href('/hacks/')}>
+          {incidents.slice(0, PAGE).map((i) => <IncidentRow i={i} detail />)}
         </tbody>
       </table>
     </div>
+    <template id="row-tpl"><IncidentRow /></template>
     <p class="body-sm fog" id="empty" hidden style="padding:48px 0;text-align:center">No incidents match these filters.</p>
-    <div class="more" id="more" hidden>
+    <div class="more" id="more" hidden={incidents.length <= PAGE}>
       <button type="button" class="btn btn-compact" id="more-btn">Show 100 more</button>
-      <span class="mono caption fog" id="more-count"></span>
+      <span class="mono caption fog" id="more-count" role="status">Showing {PAGE} of {incidents.length.toLocaleString('en')}</span>
     </div>
   </section>
   <script>
+    import type { IndexRow } from '../../lib/types';
+
     const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
-    const tbody = $('rows');
-    const rows = Array.from(tbody.querySelectorAll('tr')) as HTMLTableRowElement[];
+    const tbody = $<HTMLTableSectionElement>('rows');
+    const tpl = $<HTMLTemplateElement>('row-tpl');
+    const base = tbody.dataset.base!;
     const ids = ['q', 'cls', 'cat', 'chain', 'year', 'min', 'by', 'poc', 'fl', 'sort'];
+    const FILTERS = ids.filter((id) => id !== 'sort');
+    const PAGE = 100;
+    let limit = PAGE;
+
+    // The page ships the newest 100 rows; the full index (and, for text search, the root causes)
+    // load on demand from static JSON next to this page.
+    const json = <T,>(file: string) => fetch(base + file).then((r) => r.json() as Promise<T>);
+    let index: IndexRow[] | null = null;
+    let corpus: string[] | null = null;
+    let indexP: Promise<IndexRow[]> | null = null;
+    let corpusP: Promise<string[]> | null = null;
+    const loadIndex = () => (indexP ??= json<IndexRow[]>('rows.json').then((r) => (index = r)));
+    const loadCorpus = () => (corpusP ??= json<string[]>('search.json').then((r) => (corpus = r)));
+
     const params = new URLSearchParams(location.search);
     for (const id of ids) {
       const v = params.get(id);
@@ -91,49 +89,88 @@ const classOptions = [...CLASS_IDS].filter((c) => classCount.has(c)).sort((a, b)
     }
     const syncCombos = () => document.querySelectorAll('select.select').forEach((s) => s.dispatchEvent(new Event('combo:sync')));
     syncCombos();
-    const PAGE = 100;
-    let limit = PAGE;
-    function apply(reset = true) {
-      if (reset) limit = PAGE;
+
+    function rowFor(r: IndexRow): Node {
+      const tr = tpl.content.firstElementChild!.cloneNode(true) as HTMLTableRowElement;
+      const f = (name: string) => tr.querySelector<HTMLElement>(`[data-f="${name}"]`)!;
+      f('date').textContent = r.dl;
+      const a = f('name') as HTMLAnchorElement;
+      a.textContent = r.n;
+      a.href = `${base}${r.id}/`;
+      f('poc').hidden = !r.p;
+      f('sub').textContent = r.s;
+      f('label').textContent = r.l;
+      f('label').classList.toggle('fog', !r.k);
+      f('lost').textContent = r.al;
+      return tr;
+    }
+
+    function render(rows: IndexRow[], keepFocus: boolean) {
+      const before = tbody.rows.length;
+      tbody.replaceChildren(...rows.slice(0, limit).map(rowFor));
+      const n = rows.length;
+      $('count').textContent = `${n.toLocaleString('en')} of ${index!.length.toLocaleString('en')} incidents`;
+      $('more-count').textContent = `Showing ${Math.min(limit, n).toLocaleString('en')} of ${n.toLocaleString('en')}`;
+      $('empty').hidden = n > 0;
+      const moreHidden = n <= limit;
+      // If "Show more" disappears while focused, move focus to the first new row instead of losing it.
+      if (keepFocus && moreHidden && document.activeElement === $('more-btn')) tbody.rows[before]?.querySelector('a')?.focus();
+      $('more').hidden = moreHidden;
+    }
+
+    function matches(): IndexRow[] {
       const q = $<HTMLInputElement>('q').value.trim().toLowerCase();
       const v = (id: string) => $<HTMLSelectElement>(id).value;
       const on = (id: string) => $<HTMLInputElement>(id).checked;
+      const [cls, cat, chain, year, by] = [v('cls'), v('cat'), v('chain'), v('year'), v('by')];
       const min = Number(v('min'));
-      let n = 0;
-      for (const r of rows) {
-        const d = r.dataset;
-        const by = v('by');
-        const ok =
-          (!q || d.t!.includes(q)) &&
-          (!v('cls') || d.k === v('cls')) &&
-          (!v('cat') || d.c === v('cat')) &&
-          (!v('chain') || d.ch!.split('|').includes(v('chain'))) &&
-          (!v('year') || d.y === v('year')) &&
-          Number(d.a) >= min &&
-          (!on('poc') || d.p === '1') &&
-          (!on('fl') || d.fl === '1') &&
-          (!by || (by === 'dis' ? d.dis === '1' : d.by === by));
-        r.dataset.ok = ok ? '1' : '';
-        if (ok) n++;
-      }
-      const sorted = [...rows].sort(v('sort') === 'amount' ? (a, b) => Number(b.dataset.a) - Number(a.dataset.a) : (a, b) => b.dataset.d!.localeCompare(a.dataset.d!));
-      // Only the first `limit` matches are shown; rendering all 3,000 rows makes the page enormous.
-      let shown = 0;
-      for (const r of sorted) r.hidden = !(r.dataset.ok && shown++ < limit);
-      tbody.append(...sorted);
-      $('more').hidden = n <= limit;
-      $('more-count').textContent = `Showing ${Math.min(limit, n).toLocaleString('en')} of ${n.toLocaleString('en')}`;
-      $('count').textContent = `${n.toLocaleString('en')} of ${rows.length.toLocaleString('en')} incidents`;
-      $('empty').hidden = n > 0;
+      const out = index!.filter(
+        (r, k) =>
+          (!q || (corpus ? corpus[k] : r.t).includes(q)) &&
+          (!cls || r.k === cls) &&
+          (!cat || r.c === cat) &&
+          (!chain || r.ch.includes(chain)) &&
+          (!year || r.d.startsWith(year)) &&
+          r.a >= min &&
+          (!on('poc') || r.p) &&
+          (!on('fl') || r.fl) &&
+          (!by || (by === 'dis' ? r.dis : r.by === by)),
+      );
+      // rows.json is already newest first.
+      return v('sort') === 'amount' ? out.sort((a, b) => b.a - a.a) : out;
+    }
+
+    function syncUrl() {
       const p = new URLSearchParams();
       for (const id of ids) {
         const el = $<HTMLInputElement>(id);
         const val = el.type === 'checkbox' ? (el.checked ? '1' : '') : el.value;
         if (val && !(id === 'min' && val === '0') && !(id === 'sort' && val === 'date')) p.set(id, val);
       }
-      $('reset').hidden = !['q', 'cls', 'cat', 'chain', 'year', 'min', 'by', 'poc', 'fl'].some((id) => p.has(id));
+      $('reset').hidden = !FILTERS.some((id) => p.has(id));
       history.replaceState(null, '', p.toString() ? `?${p}` : location.pathname);
     }
+
+    async function apply({ reset = true, keepFocus = false } = {}) {
+      if (reset) limit = PAGE;
+      syncUrl();
+      const q = $<HTMLInputElement>('q').value.trim();
+      if (q && !corpus) loadCorpus().then(() => apply({ reset: false }));
+      await loadIndex();
+      render(matches(), keepFocus);
+    }
+
+    let timer = 0;
+    $('q').addEventListener('input', () => {
+      clearTimeout(timer);
+      timer = window.setTimeout(() => apply(), 120);
+    });
+    $('q').addEventListener('focus', () => void loadCorpus(), { once: true });
+    for (const id of ids.filter((x) => x !== 'q')) $(id).addEventListener('input', () => apply());
+    $('more-btn').addEventListener('click', () => {
+      limit += PAGE;
+      void apply({ reset: false, keepFocus: true });
+    });
     $('reset').addEventListener('click', () => {
       for (const id of ids) {
         const el = $<HTMLInputElement>(id);
@@ -141,28 +178,29 @@ const classOptions = [...CLASS_IDS].filter((c) => classCount.has(c)).sort((a, b)
         else if (id !== 'sort') el.value = id === 'min' ? '0' : '';
       }
       syncCombos();
-      apply();
+      void apply();
       $('q').focus();
     });
-    for (const id of ids) $(id).addEventListener('input', () => apply());
-    $('more-btn').addEventListener('click', () => {
-      limit += PAGE;
-      apply(false);
-    });
-    apply();
-  </script>
-  <script>
-    import '../../scripts/combobox';
+    // A shared link with filters renders the filtered view straight away; otherwise the server rows stand.
+    if ([...params.keys()].some((k) => ids.includes(k))) void apply();
+
+    // The filter bar is sticky on wide screens: keep keyboard focus from landing underneath it (WCAG 2.4.11).
+    const filters = document.querySelector<HTMLFormElement>('.filters')!;
+    // Filtering is live; Enter in the search box must not submit the form and reload the page.
+    filters.addEventListener('submit', (e) => e.preventDefault());
+    const pad = () => {
+      const sticky = getComputedStyle(filters).position === 'sticky';
+      document.documentElement.style.scrollPaddingTop = sticky ? `${filters.getBoundingClientRect().height + 64 + 16}px` : '';
+    };
+    new ResizeObserver(pad).observe(filters);
   </script>
 </Base>
 <style>
-  .head { padding-top: 80px; display: grid; gap: 20px; }
-  .filters { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; position: sticky; top: 64px; z-index: 5; background: rgba(255,255,255,0.92); backdrop-filter: blur(12px); padding: 12px 0; }
+  .filters { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; position: sticky; top: 64px; z-index: 5; background: color-mix(in srgb, var(--color-paper) 92%, transparent); backdrop-filter: blur(12px); padding: 12px 0; }
   .q { flex: 1 1 100%; border-radius: var(--r-pill); padding: 11px 16px 11px 40px; background: var(--color-paper) no-repeat 16px center / 16px url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23858585' stroke-width='1.5'%3E%3Ccircle cx='7' cy='7' r='4.5'/%3E%3Cpath d='M10.5 10.5L14 14'/%3E%3C/svg%3E"); }
   .reset { font: 500 14px/20px var(--font-sans); color: var(--color-jet-ink); background: none; border: 0; padding: 9px 8px; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
   .reset:hover { color: var(--color-steel); }
   .reset:focus-visible { outline: 2px solid var(--color-jet-ink); outline-offset: 2px; border-radius: 4px; }
-  .poc { margin-left: 8px; padding: 0 8px; }
   .more { display: flex; align-items: center; gap: 16px; justify-content: center; padding: 32px 0 0; }
   @media (max-width: 960px) { .filters { position: static; } }
 </style>

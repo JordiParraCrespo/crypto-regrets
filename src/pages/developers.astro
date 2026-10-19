@@ -11,7 +11,7 @@ const oos = withAudit.filter((i) => /out of scope/i.test(i.audit!)).length;
 const audited = withAudit.length - unaudited - oos;
 ---
 <Base title="Secure-coding checklist" description="A secure-development checklist built from every crypto hack, ranked by how often each vulnerability class occurs.">
-  <section class="wrap head">
+  <section class="wrap page-head">
     <p class="eyebrow">For developers</p>
     <h1 class="h-lg">The checklist written<br />by attackers.</h1>
     <p class="lede">Every item below is a vulnerability class that has drained real money, ordered by how often it happens. Work from the top.</p>
@@ -24,37 +24,26 @@ const audited = withAudit.length - unaudited - oos;
     </div>
   </section>
 
-  <section class="wrap section">
-    <div class="section-head"><div><p class="eyebrow">In your code</p><h2 class="h-md" style="margin-top:8px">Smart-contract classes</h2></div></div>
-    <ol class="rows list">
-      {code.map((s, k) => (
-        <li>
-          <span class="mono caption fog idx">{String(k + 1).padStart(2, '0')}</span>
-          <div>
-            <a class="h-xs" href={href(`/classes/${s.id}`)}>{CLASSES[s.id].name}</a>
-            <p class="body-sm fog" style="margin:2px 0 8px">{s.count} incidents · {fmtUsd(s.usd)} · {CATEGORIES[CLASSES[s.id].parent].name}</p>
-            <ul class="check">{CLASSES[s.id].fix.map((f) => <li>{f}</li>)}</ul>
-          </div>
-        </li>
-      ))}
-    </ol>
-  </section>
-
-  <section class="wrap section">
-    <div class="section-head"><div><p class="eyebrow">Around your code</p><h2 class="h-md" style="margin-top:8px">Keys, people, infrastructure</h2></div></div>
-    <ol class="rows list">
-      {ops.map((s, k) => (
-        <li>
-          <span class="mono caption fog idx">{String(k + 1).padStart(2, '0')}</span>
-          <div>
-            <a class="h-xs" href={href(`/classes/${s.id}`)}>{CLASSES[s.id].name}</a>
-            <p class="body-sm fog" style="margin:2px 0 8px">{s.count} incidents · {fmtUsd(s.usd)} · {CATEGORIES[CLASSES[s.id].parent].name}</p>
-            <ul class="check">{CLASSES[s.id].fix.map((f) => <li>{f}</li>)}</ul>
-          </div>
-        </li>
-      ))}
-    </ol>
-  </section>
+  {[
+    { eyebrow: 'In your code', title: 'Smart-contract classes', items: code },
+    { eyebrow: 'Around your code', title: 'Keys, people, infrastructure', items: ops },
+  ].map(({ eyebrow, title, items }) => (
+    <section class="wrap section">
+      <div class="section-head"><div><p class="eyebrow">{eyebrow}</p><h2 class="h-md" style="margin-top:8px">{title}</h2></div></div>
+      <ol class="rows list">
+        {items.map((s, k) => (
+          <li>
+            <span class="mono caption fog idx">{String(k + 1).padStart(2, '0')}</span>
+            <div>
+              <a class="h-xs" href={href(`/classes/${s.id}`)}>{CLASSES[s.id].name}</a>
+              <p class="body-sm fog" style="margin:2px 0 8px">{s.count} incidents · {fmtUsd(s.usd)} · {CATEGORIES[CLASSES[s.id].parent].name}</p>
+              <ul class="check">{CLASSES[s.id].fix.map((f) => <li>{f}</li>)}</ul>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </section>
+  ))}
 
   <section class="wrap section">
     <div class="card">
@@ -71,7 +60,6 @@ const audited = withAudit.length - unaudited - oos;
   </section>
 </Base>
 <style>
-  .head { padding-top: 80px; display: grid; gap: 20px; }
   .list > li { display: grid; grid-template-columns: 48px 1fr; gap: 8px; padding: 24px 0; }
   .idx { padding-top: 4px; }
   .list a.h-xs:hover { text-decoration: underline; text-underline-offset: 3px; }

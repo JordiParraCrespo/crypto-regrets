@@ -245,10 +245,6 @@ const SEAL_LABELS = [
   "dns takeover", "x account takeover", "twitter account takeover", "supply chain attack",
   "incident support", "ransom incident support", "app takedown", "vulnerability patch",
 ];
-const MONTHS: Record<string, string> = {
-  jan: "01", feb: "02", mar: "03", apr: "04", may: "05", jun: "06",
-  jul: "07", aug: "08", sep: "09", oct: "10", nov: "11", dec: "12",
-};
 function snowflakeDate(url: string): string | null {
   const m = url.match(/(?:twitter\.com|x\.com)\/[^/]+\/status(?:es)?\/(\d{15,20})/i);
   if (!m) return null;

@@ -1,0 +1,24 @@
+---
+/**
+ * One incident table row. Rendered on the server for each incident and, without `i`, as the empty
+ * <template> the /hacks filter script clones, so both paths share this markup. `data-f` marks the
+ * fields that script fills in.
+ */
+import type { HTMLAttributes } from 'astro/types';
+import type { Incident } from '../lib/types';
+import { href, fmtUsd, fmtDate, labelOf } from '../lib/data';
+
+type Props = HTMLAttributes<'tr'> & { i?: Incident; showClass?: boolean; detail?: boolean };
+const { i, showClass = true, detail = false, ...rest } = Astro.props;
+const sub = i ? [i.chains.slice(0, 3).join(' · '), detail ? i.technique : null].filter(Boolean).join(' — ') : '';
+---
+<tr {...rest}>
+  <td class="mono caption fog nowrap" data-f="date">{i && fmtDate(i.date)}</td>
+  <td>
+    <a class="medium" data-f="name" href={i && href(`/hacks/${i.id}`)}>{i?.name}</a>
+    <span class="pill pill-sand pill-mono poc" data-f="poc" hidden={!i?.poc}>PoC</span>
+    <div class="caption fog" data-f="sub">{sub}</div>
+  </td>
+  {showClass && <td class="caption hide-sm"><span data-f="label" class:list={[{ fog: i && !i.vulnClass }]}>{i && labelOf(i)}</span></td>}
+  <td class="num" data-f="lost">{i && fmtUsd(i.amountUsd)}</td>
+</tr>

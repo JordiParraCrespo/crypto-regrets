@@ -4,13 +4,14 @@ import Bars from '../../components/Bars.astro';
 import CodeTabs from '../../components/CodeTabs.astro';
 import IncidentTable from '../../components/IncidentTable.astro';
 import { byClass, classStats, classYearSeries, fmtUsd, fmtDate, href } from '../../lib/data';
-import { CLASSES, CLASS_IDS, classesOf, type ClassId, type VulnClass } from '../../lib/classes';
+import { CLASSES, CLASS_IDS, classesOf, type VulnClass } from '../../lib/classes';
 import { CATEGORIES, LAYERS } from '../../lib/taxonomy';
+import { breadcrumb } from '../../lib/seo';
+import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
 
-export function getStaticPaths() {
-  return CLASS_IDS.map((id) => ({ params: { id } }));
-}
-const id = Astro.params.id as ClassId;
+export const getStaticPaths = (() => CLASS_IDS.map((id) => ({ params: { id }, props: { id } }))) satisfies GetStaticPaths;
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+const { id } = Astro.props as Props;
 const c: VulnClass = CLASSES[id];
 const s = classStats.find((x) => x.id === id)!;
 const xs = byClass(id);
@@ -19,8 +20,8 @@ const pocs = xs.filter((i) => i.poc).sort((a, b) => b.date.localeCompare(a.date)
 const siblings = classesOf(c.parent).filter((x) => x !== id);
 const series = classYearSeries(id).filter((d) => d.year >= 2016);
 ---
-<Base title={c.name} description={`${c.name}: ${c.summary}`}>
-  <section class="wrap head">
+<Base title={c.name} description={`${c.name}: ${c.summary}`} jsonLd={[breadcrumb(Astro.site, [['Crypto Regrets', '/'], ['Vulnerability classes', '/classes'], [c.name, `/classes/${id}`]])]}>
+  <section class="wrap page-head">
     <p class="eyebrow"><a href={href('/classes')}>Vulnerability classes</a> / <a href={href(`/patterns/${c.parent}`)}>{CATEGORIES[c.parent].name}</a></p>
     <h1 class="h-lg">{c.name}</h1>
     <p class="lede">{c.summary}</p>
@@ -111,10 +112,7 @@ const series = classYearSeries(id).filter((d) => d.year >= 2016);
   )}
 </Base>
 <style>
-  .head { padding-top: 80px; display: grid; gap: 20px; }
   .ids, .related { display: flex; flex-wrap: wrap; gap: 6px; }
-  .stats { margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--color-dove); }
-  .split { gap: 48px; align-items: start; }
   .poc { display: grid; grid-template-columns: 1fr auto auto; gap: 16px; align-items: baseline; }
   @media (max-width: 640px) { .poc { grid-template-columns: 1fr; gap: 2px; } }
 </style>

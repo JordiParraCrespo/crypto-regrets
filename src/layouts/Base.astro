@@ -1,14 +1,9 @@
 ---
+import { Font } from 'astro:assets';
 import '../styles/global.css';
-import { href } from '../lib/data';
-interface Props {
-  title: string;
-  description?: string;
-}
-const {
-  title,
-  description = 'A classified index of every crypto hack in history: the vulnerability classes, the root causes, and how to fix them.',
-} = Astro.props;
+import Seo, { type Props as SeoProps } from '../components/Seo.astro';
+import { href } from '../lib/paths';
+type Props = SeoProps;
 const path = Astro.url.pathname;
 const nav = [
   ['/hacks', 'Index'],
@@ -26,16 +21,15 @@ const isActive = (p: string) => path.startsWith(href(p));
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title === 'Crypto Regrets' ? 'Crypto Regrets: every crypto hack, classified' : `${title} · Crypto Regrets`}</title>
-    <meta name="description" content={description} />
+    <Seo {...Astro.props} />
     <meta name="theme-color" content="#ffffff" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
     <link rel="icon" href={href('/favicon.svg')} type="image/svg+xml" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;700&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+    <Font cssVariable="--font-inter" preload />
+    <Font cssVariable="--font-geist-mono" />
   </head>
   <body>
-    <a class="sr-only" href="#main">Skip to content</a>
+    <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header">
       <div class="wrap bar">
         <a class="brand" href={href('/')} aria-label="Crypto Regrets home">
@@ -43,7 +37,7 @@ const isActive = (p: string) => path.startsWith(href(p));
           <span>Crypto Regrets</span>
         </a>
         <nav aria-label="Main">
-          {nav.map(([p, label]) => <a href={href(p)} class:list={['nav-link', { active: isActive(p) }]} aria-current={isActive(p) ? 'page' : undefined}>{label}</a>)}
+          {nav.map(([p, label]) => <a href={href(p)} data-astro-prefetch class:list={['nav-link', { active: isActive(p) }]} aria-current={isActive(p) ? 'page' : undefined}>{label}</a>)}
         </nav>
         <div class="actions">
           <a class="btn btn-compact hide-sm" href={href('/data')}>Data</a>
@@ -63,20 +57,20 @@ const isActive = (p: string) => path.startsWith(href(p));
         <div>
           <p class="eyebrow">Explore</p>
           <ul class="foot-links">
-            <li><a href={href('/hacks')}>Incident index</a></li>
-            <li><a href={href('/classes')}>Vulnerability classes</a></li>
-            <li><a href={href('/patterns')}>Failure patterns</a></li>
-            <li><a href={href('/trends')}>Trends</a></li>
-            <li><a href={href('/ecosystems')}>Ecosystems</a></li>
-            <li><a href={href('/history')}>History</a></li>
+            <li><a href={href('/hacks')} data-astro-prefetch>Incident index</a></li>
+            <li><a href={href('/classes')} data-astro-prefetch>Vulnerability classes</a></li>
+            <li><a href={href('/patterns')} data-astro-prefetch>Failure patterns</a></li>
+            <li><a href={href('/trends')} data-astro-prefetch>Trends</a></li>
+            <li><a href={href('/ecosystems')} data-astro-prefetch>Ecosystems</a></li>
+            <li><a href={href('/history')} data-astro-prefetch>History</a></li>
           </ul>
         </div>
         <div>
           <p class="eyebrow">Build</p>
           <ul class="foot-links">
-            <li><a href={href('/developers')}>Secure-coding checklist</a></li>
-            <li><a href={href('/data')}>Datasets &amp; API</a></li>
-            <li><a href={href('/sources')}>Method &amp; sources</a></li>
+            <li><a href={href('/developers')} data-astro-prefetch>Secure-coding checklist</a></li>
+            <li><a href={href('/data')} data-astro-prefetch>Datasets &amp; API</a></li>
+            <li><a href={href('/sources')} data-astro-prefetch>Method &amp; sources</a></li>
           </ul>
         </div>
         <div>
@@ -85,9 +79,10 @@ const isActive = (p: string) => path.startsWith(href(p));
         </div>
       </div>
     </footer>
-    <script is:inline>
+    <script>
+      // Hairline under the sticky header once the page scrolls; cosmetic, so a deferred module is fine.
       const h = document.querySelector('.site-header');
-      const onScroll = () => h && h.classList.toggle('scrolled', window.scrollY > 8);
+      const onScroll = () => h?.classList.toggle('scrolled', window.scrollY > 8);
       addEventListener('scroll', onScroll, { passive: true });
       onScroll();
     </script>
@@ -99,7 +94,7 @@ const isActive = (p: string) => path.startsWith(href(p));
     position: sticky;
     top: 0;
     z-index: 20;
-    background: rgba(255, 255, 255, 0.85);
+    background: color-mix(in srgb, var(--color-paper) 85%, transparent);
     backdrop-filter: saturate(180%) blur(12px);
     -webkit-backdrop-filter: saturate(180%) blur(12px);
     border-bottom: 1px solid transparent;

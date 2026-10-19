@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import FilterSelect from '../components/FilterSelect.astro';
 import IncidentTable from '../components/IncidentTable.astro';
 import { advisories, incidents, href } from '../lib/data';
 import { ADVISORY_IMPACTS } from '../lib/types';
@@ -10,7 +11,7 @@ const LABEL: Record<string, string> = { 'consensus-split': 'Consensus split', in
 const byImpact = ADVISORY_IMPACTS.map((im) => ({ im, n: advisories.filter((a) => a.impact === im).length })).filter((x) => x.n > 0);
 ---
 <Base title="Infrastructure" description="Consensus failures, 51% attacks, node crashes, chain halts and compiler bugs below the application layer.">
-  <section class="wrap head">
+  <section class="wrap page-head">
     <p class="eyebrow">Infrastructure</p>
     <h1 class="h-lg">Below the contracts.</h1>
     <p class="lede">Base layers, clients and compilers break too: value-overflow bugs, chain splits between versions, 51% attacks on small proof-of-work chains, P2P messages that crash nodes, and compiler bugs like the Vyper reentrancy-lock flaw behind the 2023 Curve exploits.</p>
@@ -26,7 +27,7 @@ const byImpact = ADVISORY_IMPACTS.map((im) => ({ im, n: advisories.filter((a) =>
       <div><h2 class="h-sub">Disclosed vulnerabilities</h2><p class="body-sm fog">{advisories.length} advisories across {projects.length} projects. Impact is our keyword classification of each title.</p></div>
     </div>
     <div class="chips" style="margin-bottom:24px">{byImpact.map((x) => <span class="pill">{LABEL[x.im]} <span class="fog">{x.n}</span></span>)}</div>
-    <form class="filters" onsubmit="return false"><select class="select" id="proj" aria-label="Project"><option value="">All projects</option>{projects.map((p) => <option value={p} data-count={advisories.filter((a) => a.project === p).length}>{p}</option>)}</select></form>
+    <form class="filters" id="adv-filter"><FilterSelect id="proj" label="Project" options={[{ value: '', label: 'All projects' }, ...projects.map((p) => ({ value: p, label: p, count: advisories.filter((a) => a.project === p).length }))]} /></form>
     <div class="table-wrap">
       <table>
         <thead><tr><th>Disclosed</th><th>Project</th><th>Advisory</th><th class="hide-sm">Impact</th><th class="hide-sm">Severity</th></tr></thead>
@@ -46,17 +47,13 @@ const byImpact = ADVISORY_IMPACTS.map((im) => ({ im, n: advisories.filter((a) =>
     <p class="caption fog" style="margin-top:16px">Sources: Bitcoin Core security advisories, Geth disclosures, the Cosmos ASA list, and OSV / GitHub Security Advisories. <a class="link" href={href('/classes/node-dos-halt')}>Node DoS class →</a></p>
   </section>
   <script>
+    document.getElementById('adv-filter')!.addEventListener('submit', (e) => e.preventDefault());
     const sel = document.getElementById('proj') as HTMLSelectElement;
     sel.addEventListener('input', () => {
       for (const r of document.querySelectorAll<HTMLTableRowElement>('#adv tr')) r.hidden = !!sel.value && r.dataset.p !== sel.value;
     });
   </script>
-  <script>
-    import '../scripts/combobox';
-  </script>
 </Base>
 <style>
-  .head { padding-top: 80px; display: grid; gap: 20px; }
-  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
   .filters { margin-bottom: 8px; }
 </style>

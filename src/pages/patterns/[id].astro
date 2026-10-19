@@ -3,22 +3,23 @@ import Base from '../../layouts/Base.astro';
 import Bars from '../../components/Bars.astro';
 import IncidentTable from '../../components/IncidentTable.astro';
 import { categoryStats, yearCategorySeries, fmtUsd, href, classStats, CLASSES } from '../../lib/data';
-import { CATEGORIES, CATEGORY_IDS, LAYERS, type CategoryId, type Category } from '../../lib/taxonomy';
+import { CATEGORIES, CATEGORY_IDS, LAYERS, type Category } from '../../lib/taxonomy';
 import { RUBRIC } from '../../lib/rubric';
 import { classesOf } from '../../lib/classes';
+import { breadcrumb } from '../../lib/seo';
+import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
 
-export function getStaticPaths() {
-  return CATEGORY_IDS.map((id) => ({ params: { id } }));
-}
-const id = Astro.params.id as CategoryId;
+export const getStaticPaths = (() => CATEGORY_IDS.map((id) => ({ params: { id }, props: { id } }))) satisfies GetStaticPaths;
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+const { id } = Astro.props as Props;
 const c: Category = CATEGORIES[id];
 const s = categoryStats(id);
 const series = yearCategorySeries(id).filter((d) => d.year >= 2016).map((d) => ({ year: d.year, value: d.count }));
 const rubric = id === 'unknown' ? undefined : RUBRIC[id];
 const classes = classesOf(id).map((x) => classStats.find((k) => k.id === x)!);
 ---
-<Base title={c.name} description={`${c.name}: ${c.short} ${s.count} incidents, ${fmtUsd(s.usd)} lost.`}>
-  <section class="wrap head">
+<Base title={c.name} description={`${c.name}: ${c.short} ${s.count} incidents, ${fmtUsd(s.usd)} lost.`} jsonLd={[breadcrumb(Astro.site, [['Crypto Regrets', '/'], ['Failure patterns', '/patterns'], [c.name, `/patterns/${id}`]])]}>
+  <section class="wrap page-head">
     <p class="eyebrow"><a href={href('/patterns')}>Failure patterns</a> / {LAYERS[c.layer].name}</p>
     <h1 class="h-lg">{c.name}</h1>
     <p class="lede">{c.description}</p>
@@ -32,7 +33,7 @@ const classes = classesOf(id).map((x) => classStats.find((k) => k.id === x)!);
 
   {classes.length > 0 && (
     <section class="wrap section">
-      <p class="eyebrow" style="margin:0 0 12px">Vulnerability classes</p>
+      <h2 class="eyebrow" style="margin:0 0 12px">Vulnerability classes</h2>
       <div class="grid cols-3">
         {classes.map((k) => (
           <a class="card card-sm" href={href(`/classes/${k.id}`)}>
@@ -71,8 +72,3 @@ const classes = classesOf(id).map((x) => classStats.find((k) => k.id === x)!);
     <IncidentTable items={s.biggest} />
   </section>
 </Base>
-<style>
-  .head { padding-top: 80px; display: grid; gap: 20px; }
-  .stats { margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--color-dove); }
-  .split { gap: 48px; align-items: start; }
-</style>
