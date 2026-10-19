@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "oracle-manipulation",
+  "vulnClass": "spot-price-oracle",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "spot-price-oracle",
+    "confidence": 0.41
+  },
   "technique": "Spot Price Manipulation",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -50,6 +56,10 @@
     {
       "source": "RevertIQ",
       "text": "42DAO's Balance Coin (BLC) on BNB Chain was reported exploited on 2026-07-21 after a manipulated BTCB spot price entered the protocol's liquidation path, with public loss estimates around $912,000 to $915,000 and a brief depeg to near $0.0013. Public analyses indicate that 42DAO's liquidation path accepted an abnormally low BTCB spot price without deviation checks, minimum price protections, or liquidation delay, so a manipulated price could drive liquidations or other accounting actions at a false valuation."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Balance Coin, a small algorithmic stablecoin built on BNB Chain, lost its dollar peg and crashed to fractions of a cent after an attacker successfully exploited a flaw in its pricing logic. The attacker was able to trick the system into accepting an incorrectly low bitcoin price, which they then used to drain multiple vaults used by the project's lending protocol. The attacker ultimately profited by about $912,000, consisting of funds stolen from 42DAO, the entity that runs the Balance protocol."
     }
   ],
   "audit": null,
@@ -63,7 +73,8 @@
     "defihacklabs",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -110,6 +121,16 @@
       "source": "revertiq",
       "label": "cryptotimes.io",
       "url": "https://www.cryptotimes.io/2026/07/22/42daos-blc-stablecoin-depegs-to-near-zero-after-912k-oracle-exploit/"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=balance-coin-algorithmic-stablecoin-crashes"
+    },
+    {
+      "source": "w3igg",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/tech/2026/07/22/balance-stablecoin-collapses-99-after-usd1-million-exploit-drains-its-bitcoin-vaults"
     }
   ]
 }

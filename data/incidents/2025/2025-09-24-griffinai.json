@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "bridge-crosschain",
+  "vulnClass": "message-verification-bypass",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "message-verification-bypass",
+    "confidence": 0.41
+  },
   "technique": "Cross-Chain Message Spoofing",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -54,6 +60,10 @@
     {
       "source": "RevertIQ",
       "text": "Griffin AI suffered a $3.5M loss when a compromised admin EOA enabled an attacker to misconfigure LayerZero peers, minting 5B unauthorized GAIN tokens and dumping them cross-chain within hours of its Binance Alpha launch. The incident was caused by a compromised admin wallet on BNB Chain, which allowed an attacker to set a fake LayerZero peer on Ethereum. The Griffin AI protocol failed to enforce peer validation and supply caps at the contract level, enabling arbitrary minting and cross-chain dumping."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "One day after Griffin AI launched its GAIN token on Binance Alpha, an attacker minted 5 billion fake GAIN tokens on the Ethereum blockchain, then exploited a cross-chain endpoint to trick the bridge to the Binance chain into recognizing them as the real thing. The attacker was only able to sell a small fraction of their tokens, but they made off with approximately $3 million as the token plunged in price. According to CEO Oliver Feldmeier, the exploit was enabled by \"a misconfigured layer Zero (cross-chain messaging) set-up and compromised key\". Griffin AI promises to allow customers to \"build, deploy, and scale autonomous AI agents for crypto finance\".…"
     }
   ],
   "audit": null,
@@ -76,7 +86,8 @@
     "defihacklabs",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -133,6 +144,21 @@
       "source": "revertiq",
       "label": "bitget.com",
       "url": "https://www.bitget.com/news/detail/12560604986216"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=griffin-ai-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "x.com",
+      "url": "https://x.com/OliFeldmeier/status/1971270096535326728"
+    },
+    {
+      "source": "w3igg",
+      "label": "x.com",
+      "url": "https://x.com/Griffin_AI/status/1971228237134004713"
     }
   ]
 }

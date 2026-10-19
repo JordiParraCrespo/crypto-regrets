@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "oracle-manipulation",
+  "vulnClass": "spot-price-oracle",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "spot-price-oracle",
+    "confidence": 1
+  },
   "technique": "Spot Price Manipulation",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -38,6 +44,10 @@
     {
       "source": "RevertIQ",
       "text": "Goledo Finance on Conflux suffered a flash loan-driven spot price manipulation on January 28, 2024. The attacker inflated the oracle price of a collateral asset, borrowed against it, and drained ~$1.7 million in lending pools within a single transaction. The protocol's reliance on manipulable AMM spot prices enabled the exploit. Goledo's lending pool accepted spot prices from integrated decentralized exchanges as collateral value oracles without sufficient resistance to manipulation. This allowed an attacker to use a flash loan to artificially inflate collateral value within one block, borrow against it, and drain assets."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Goledo Finance, an Aave-based lending protocol, was exploited through a flash loan attack. The attacker stole assets estimated by CertiK at around $1.7 million. Goledo Finance contacted the attacker to offer a 10% \" bounty \" for the return of the remaining assets. In a message on January 29, the attacker wrote: \"I hacked Goledo and want to negotiate\"."
     }
   ],
   "audit": null,
@@ -49,7 +59,8 @@
   "sources": [
     "defillama",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -76,6 +87,21 @@
       "source": "revertiq",
       "label": "smartcontractshacking.com",
       "url": "https://smartcontractshacking.com/hacks/goledo-finance-hack-2024"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=goledo-finance-hack"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/CertiKAlert/status/1752005387623051496"
+    },
+    {
+      "source": "w3igg",
+      "label": "evm.confluxscan.net",
+      "url": "https://evm.confluxscan.net/tx/0x9359dbee49fdb2567612908a419a95034df34af86874a0761f1e9111596526d9"
     }
   ]
 }

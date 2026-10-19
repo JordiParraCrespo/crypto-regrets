@@ -1,111 +1,161 @@
 ---
 import Base from '../../layouts/Base.astro';
-import CategoryChip from '../../components/CategoryChip.astro';
+import CodeTabs from '../../components/CodeTabs.astro';
 import IncidentTable from '../../components/IncidentTable.astro';
-import { incidents, fmtUsd, fmtDate, href } from '../../lib/data';
+import { incidents, fmtUsd, fmtDate, href, SOURCE_NAMES, CLASSIFIER_NAMES, CLASS_BY_NAMES, CLASSES } from '../../lib/data';
 import { CATEGORIES, LAYERS, ERAS, eraForYear } from '../../lib/taxonomy';
-import type { Incident, SourceId } from '../../lib/types';
+import type { Incident } from '../../lib/types';
+import type { VulnClass } from '../../lib/classes';
 
 export function getStaticPaths() {
   return incidents.map((i) => ({ params: { id: i.id }, props: { i } }));
 }
 const { i } = Astro.props as { i: Incident };
-const c = CATEGORIES[i.category];
+const cat = CATEGORIES[i.category];
+const cls: VulnClass | null = i.vulnClass ? CLASSES[i.vulnClass] : null;
 const era = ERAS.find((e) => e.id === eraForYear(i.year))!;
-const similar = incidents.filter((x) => x.category === i.category && x.id !== i.id).sort((a, b) => Math.abs(a.year - i.year) - Math.abs(b.year - i.year) || (b.amountUsd ?? 0) - (a.amountUsd ?? 0)).slice(0, 6);
-const SOURCE_NAMES = { defillama: 'DefiLlama', defihacklabs: 'DeFiHackLabs', rekt: 'REKT', slowmist: 'SlowMist', blocksec: 'BlockSec', revertiq: 'RevertIQ', curated: 'Curated' } as const satisfies Record<SourceId, string>;
-const CLASSIFIED_BY = { defillama: 'DefiLlama label', keywords: 'Keyword rules', typesafe: 'TypeSafe (Jev)', curated: 'Curated post-mortem', none: 'Unclassified' } as const;
+const similar = incidents
+  .filter((x) => x.id !== i.id && (i.vulnClass ? x.vulnClass === i.vulnClass : x.category === i.category))
+  .sort((a, b) => Math.abs(a.year - i.year) - Math.abs(b.year - i.year) || (b.amountUsd ?? 0) - (a.amountUsd ?? 0))
+  .slice(0, 6);
 const ai = i.ai;
-const aiAgrees = ai?.category === i.category;
 const pct = (p: number) => `${Math.round(p * 100)}%`;
+// Link hashes to Etherscan only when the incident is Ethereum-only (other chains need other explorers).
+const ethOnly = i.chains.length === 0 || (i.chains.length === 1 && i.chains[0] === 'Ethereum');
+const txUrl = (h: string) => (ethOnly && h.length === 66 ? `https://etherscan.io/tx/${h}` : null);
 ---
-<Base title={i.name} description={`${i.name} (${i.date}): ${c.name}. ${i.rootCause ?? c.short}`}>
-  <p class="small"><a href={href('/hacks')}>← All hacks</a></p>
-  <h1>{i.name}</h1>
-  <p class="meta"><span class="mono">{fmtDate(i.date)}</span> · <strong>{fmtUsd(i.amountUsd)}</strong> lost{i.returnedUsd ? ` · ${fmtUsd(i.returnedUsd)} returned/recovered (per DefiLlama)` : ''} · <CategoryChip id={i.category} /></p>
-
-  <div class="grid grid-2">
-    <div class="card">
-      <h3>Root cause</h3>
-      {i.rootCause ? <p>{i.rootCause}</p> : <p class="muted">No technical write-up in our sources yet. Pattern summary: {c.short}</p>}
-      {i.technique && <p class="small"><strong>Technique:</strong> {i.technique}</p>}
-      {i.classificationNote && <p class="small muted"><strong>Classification note:</strong> {i.classificationNote}</p>}
-      {i.poc && <p><a class="btn" href={i.poc}>View Foundry PoC on DeFiHackLabs ↗</a></p>}
+<Base title={i.name} description={`${i.name} (${i.date}): ${cls?.name ?? cat.name}. ${i.rootCause ?? cat.short}`}>
+  <section class="wrap head">
+    <p class="eyebrow"><a href={href('/hacks')}>Incident index</a> / {i.year}</p>
+    <h1 class="h-lg">{i.name}</h1>
+    <div class="facts">
+      <span class="mono caption fog">{fmtDate(i.date)}</span>
+      <span class="medium">{fmtUsd(i.amountUsd)} lost</span>
+      {i.chains.length > 0 && <span class="caption fog">{i.chains.join(' · ')}</span>}
     </div>
-    <div class="card">
-      <h3>Details</h3>
-      <dl>
-        <dt>Pattern</dt><dd><a href={href(`/patterns/${i.category}`)}>{c.name}</a></dd>
-        <dt>Layer</dt><dd>{LAYERS[c.layer].name}</dd>
-        <dt>Era</dt><dd><a href={href(`/history#${era.id}`)}>{era.name}</a></dd>
-        {i.chains.length > 0 && <><dt>Chains</dt><dd>{i.chains.join(', ')}</dd></>}
-        {i.targetType && <><dt>Target</dt><dd>{i.targetType}</dd></>}
-        {i.language && <><dt>Language</dt><dd>{i.language}</dd></>}
-        {i.audit && <><dt>Audit (per REKT)</dt><dd>{i.audit}</dd></>}
-        <dt>Bridge</dt><dd>{i.bridge ? 'Yes' : 'No'}</dd>
-        <dt>Sources</dt><dd>{i.sources.map((s) => SOURCE_NAMES[s]).join(', ')}</dd>
-        <dt>Classified by</dt><dd>{CLASSIFIED_BY[i.classifiedBy]}</dd>
-      </dl>
+    <div class="chips">
+      {cls ? <a class="pill pill-mono" href={href(`/classes/${i.vulnClass}`)}>{cls.name}</a> : <span class="pill pill-outline pill-mono fog">class unspecified</span>}
+      <a class="pill" href={href(`/patterns/${i.category}`)}>{cat.name}</a>
+      {i.poc && <a class="pill pill-sand" href={i.poc}>Foundry PoC ↗</a>}
     </div>
-  </div>
+  </section>
 
-  {ai && (
-    <section class="card ai">
-      <h3>Model second opinion <span class="muted small">· TypeSafe {ai.model}</span></h3>
-      <p class="small">
-        {aiAgrees ? <>Agrees with the assigned pattern</> : <>Suggests <a href={href(`/patterns/${ai.category}`)}>{CATEGORIES[ai.category].name}</a> instead</>}
-        {' '}with confidence <strong>{ai.confidence.toFixed(2)}</strong>.
-        {!aiAgrees && i.classifiedBy !== 'typesafe' && <span class="muted"> We keep the {CLASSIFIED_BY[i.classifiedBy].toLowerCase()}; disagreements are worth a look.</span>}
-      </p>
-      <ul class="clean probs">
-        {ai.top.map((t) => (
-          <li><span class="plabel">{CATEGORIES[t.category].name}</span><span class="ptrack"><span class="pfill" style={`width:${t.p * 100}%`} /></span><span class="mono small">{pct(t.p)}</span></li>
-        ))}
-      </ul>
-      {ai.hasRootCause < 0.5 && <p class="small muted">The model judged that the available descriptions don't explain how the attack worked ({pct(ai.hasRootCause)}), so its answer is a weak guess.</p>}
-      <p class="small muted" style="margin-bottom:0">From the write-up: flash loan used <strong>{pct(ai.flashLoan)}</strong> · attributed to a state actor <strong>{pct(ai.stateActor)}</strong>. These are model probabilities from the text above, not verified facts.</p>
-    </section>
-  )}
+  <section class="wrap section" style="margin-top:56px">
+    <div class="grid layout">
+      <div class="main">
+        <h2 class="h-xs">Root cause</h2>
+        {i.rootCause ? <p class="rc">{i.rootCause}</p> : <p class="rc fog">No technical write-up in our sources yet.</p>}
+        {i.technique && <p class="caption fog">Analyst technique label: <span class="steel">{i.technique}</span></p>}
 
-  {c.prevention.length > 0 && (
-    <section>
-      <h2>How to prevent this class of bug</h2>
-      <ul>{c.prevention.map((p) => <li>{p}</li>)}</ul>
-      <p class="small"><a href={href(`/patterns/${i.category}`)}>Full pattern guide: {c.name} →</a></p>
-    </section>
-  )}
+        {cls && (
+          <div style="margin-top:48px">
+            <h2 class="h-xs">The vulnerability: {cls.name}</h2>
+            <p class="body-sm steel" style="margin:4px 0 16px">{cls.summary}</p>
+            {cls.vulnerable && <CodeTabs id="incident-code" vulnerable={cls.vulnerable} fixed={cls.fixed} />}
+            <div class="grid cols-2" style="margin-top:24px;gap:32px">
+              <div><p class="eyebrow">Look for</p><ul class="check" style="margin-top:8px">{cls.detect.slice(0, 3).map((d) => <li>{d}</li>)}</ul></div>
+              <div><p class="eyebrow">Fix</p><ul class="check" style="margin-top:8px">{cls.fix.map((d) => <li>{d}</li>)}</ul></div>
+            </div>
+            <p class="caption" style="margin-top:16px"><a class="link" href={href(`/classes/${i.vulnClass}`)}>Full class guide and related exploits →</a></p>
+          </div>
+        )}
 
-  {i.descriptions.length > 1 && (
-    <>
-      <h2>What each source says</h2>
-      <div class="grid grid-2">
-        {i.descriptions.map((d) => <div class="card"><p class="small muted" style="margin-top:0"><strong>{d.source}</strong></p><p class="small" style="margin-bottom:0">{d.text}</p></div>)}
+        {!cls && cat.prevention.length > 0 && (
+          <div style="margin-top:48px">
+            <h2 class="h-xs">Preventing this pattern</h2>
+            <ul class="check" style="margin-top:12px">{cat.prevention.map((p) => <li>{p}</li>)}</ul>
+          </div>
+        )}
+
+        {i.descriptions.length > 1 && (
+          <div style="margin-top:48px">
+            <h2 class="h-xs">What each source says</h2>
+            <ul class="rows" style="margin-top:12px">
+              {i.descriptions.map((d) => <li><p class="eyebrow" style="margin:0 0 4px">{d.source}</p><p class="body-sm" style="margin:0">{d.text}</p></li>)}
+            </ul>
+          </div>
+        )}
       </div>
-    </>
+
+      <aside class="side">
+        <div class="card card-sm">
+          <dl>
+            <dt>Pattern</dt><dd><a class="link" href={href(`/patterns/${i.category}`)}>{cat.name}</a></dd>
+            <dt>Layer</dt><dd>{LAYERS[cat.layer].name}</dd>
+            <dt>Era</dt><dd><a class="link" href={href(`/history#${era.id}`)}>{era.name}</a></dd>
+            {i.targetType && <><dt>Target</dt><dd>{i.targetType}</dd></>}
+            {i.language && <><dt>Language</dt><dd>{i.language}</dd></>}
+            {i.audit && <><dt>Audit</dt><dd>{i.audit}</dd></>}
+            {i.returnedUsd ? <><dt>Returned</dt><dd>{fmtUsd(i.returnedUsd)} <span class="caption fog">per DefiLlama; may include reimbursement</span></dd></> : null}
+            <dt>Pattern by</dt><dd>{CLASSIFIER_NAMES[i.classifiedBy]}</dd>
+            {i.vulnClassBy && <><dt>Class by</dt><dd>{CLASS_BY_NAMES[i.vulnClassBy]}</dd></>}
+            <dt>Sources</dt><dd>{i.sources.map((s) => SOURCE_NAMES[s]).join(', ')}</dd>
+          </dl>
+          {i.classificationNote && <p class="caption fog" style="margin:16px 0 0">{i.classificationNote}</p>}
+        </div>
+
+        {ai && (
+          <div class="card card-sm">
+            <p class="eyebrow" style="margin:0">Model second opinion</p>
+            <p class="caption fog" style="margin:2px 0 12px">TypeSafe {ai.model}</p>
+            <ul class="probs">
+              {ai.top.map((t) => (
+                <li>
+                  <span class="caption">{CATEGORIES[t.category].name}</span>
+                  <span class="meter"><span style={`width:${t.p * 100}%`}></span></span>
+                  <span class="mono caption fog">{pct(t.p)}</span>
+                </li>
+              ))}
+            </ul>
+            <p class="caption fog" style="margin:12px 0 0">
+              {ai.category === i.category ? 'Agrees with the assigned pattern' : `Suggests ${CATEGORIES[ai.category].name}`} · confidence {ai.confidence.toFixed(2)}.
+              {ai.hasRootCause < 0.5 && ' The text is too thin to be sure.'}
+              {ai.flashLoan >= 0.5 && ` Flash loan mentioned (${pct(ai.flashLoan)}).`}
+              {ai.stateActor >= 0.5 && ` Attributed to a state actor (${pct(ai.stateActor)}).`}
+            </p>
+          </div>
+        )}
+
+        {i.txHashes.length > 0 && (
+          <div class="card card-sm">
+            <p class="eyebrow" style="margin:0 0 8px">Attack transactions</p>
+            <ul class="tx">
+              {i.txHashes.slice(0, 6).map((h) => <li class="mono caption">{txUrl(h) ? <a class="link" href={txUrl(h)!}>{h}</a> : h}</li>)}
+            </ul>
+          </div>
+        )}
+
+        <div>
+          <p class="eyebrow" style="margin:0 0 8px">References</p>
+          <ul class="refs">{i.references.map((r) => <li><a class="link body-sm" href={r.url} rel="noopener nofollow">{r.label}</a> <span class="caption fog">{SOURCE_NAMES[r.source]}</span></li>)}</ul>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  {similar.length > 0 && (
+    <section class="wrap section">
+      <h2 class="h-sub" style="margin-bottom:24px">{cls ? `Other ${cls.name.toLowerCase()} incidents` : 'Similar incidents'}</h2>
+      <IncidentTable items={similar} />
+    </section>
   )}
-
-  {i.txHashes.length > 0 && (
-    <>
-      <h2>Attack transactions</h2>
-      <ul class="mono small">{i.txHashes.slice(0, 8).map((h) => <li style="overflow-wrap:anywhere">{h}</li>)}</ul>
-    </>
-  )}
-
-  <h2>References</h2>
-  <ul>{i.references.map((r) => <li><a href={r.url} rel="noopener nofollow">{r.label}</a> <span class="muted small">({SOURCE_NAMES[r.source]})</span></li>)}</ul>
-
-  {similar.length > 0 && <><h2>Similar incidents</h2><IncidentTable items={similar} /></>}
 </Base>
 <style>
-  .meta { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; color: var(--text-2); }
-  dl { display: grid; grid-template-columns: max-content 1fr; gap: 6px 16px; margin: 0; font-size: 0.92rem; }
-  dt { color: var(--muted); }
+  .head { padding-top: 80px; display: grid; gap: 16px; }
+  .facts { display: flex; flex-wrap: wrap; gap: 16px; align-items: baseline; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .layout { grid-template-columns: minmax(0, 1fr) 360px; gap: 64px; align-items: start; }
+  @media (max-width: 960px) { .layout { grid-template-columns: minmax(0, 1fr); gap: 40px; } }
+  .rc { font-size: 18px; line-height: 28px; margin: 12px 0; overflow-wrap: anywhere; max-width: 68ch; }
+  .side { display: grid; gap: 16px; }
+  dl { display: grid; grid-template-columns: max-content 1fr; gap: 8px 16px; margin: 0; font-size: 14px; line-height: 20px; }
+  dt { color: var(--text-secondary); }
   dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
-  .ai { margin-top: 16px; }
-  .probs li { display: grid; grid-template-columns: minmax(0, 14rem) 1fr 3rem; gap: 10px; align-items: center; border: 0; padding: 3px 0; }
-  .plabel { font-size: 0.85rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .ptrack { height: 8px; background: var(--surface-2); border-radius: 4px; overflow: hidden; }
-  .pfill { display: block; height: 100%; background: var(--s1); border-radius: 0 4px 4px 0; }
+  .probs { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+  .probs li { display: grid; grid-template-columns: minmax(0, 1fr) 72px 34px; gap: 10px; align-items: center; }
+  .probs .caption:first-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .probs .mono { text-align: right; }
-  .btn { display: inline-block; border: 1px solid var(--border); padding: 6px 12px; border-radius: 8px; background: var(--surface-2); }
+  .tx, .refs { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; }
+  .tx li { overflow-wrap: anywhere; }
+  .rows li { overflow-wrap: anywhere; }
 </style>

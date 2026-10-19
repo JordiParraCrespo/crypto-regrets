@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "reentrancy",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "read-only-reentrancy",
+    "confidence": 0.23
+  },
   "technique": "Reentrancy",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -46,6 +52,10 @@
     {
       "source": "RevertIQ",
       "text": "On 4 April 2023, Sentiment on Arbitrum One suffered a $1.1 million loss in a reentrancy exploit targeting its Balancer LP token oracle integration. The attacker manipulated the collateral price through read-only reentrancy and borrowed against inflated collateral, draining the protocol. Most funds were later recovered after negotiation and insurance payouts. The exploit was enabled by a read-only reentrancy vulnerability in Balancer’s join/exit logic. A view call to Balancer’s pool pricing function reentered before pool balances were finalized, allowing the attacker to manipulate oracle-dependent collateral prices and borrow more than the actual value."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The Sentiment liquidity protocol on the Arbitrum blockchain was attacked on April 4 for almost $1 million in various tokens, including wrapped Bitcoin and Ether, and several different stablecoins . The attacker apparently took advantage of a re-entrancy vulnerability to execute the theft, then swapped the tokens and bridged them to the Ethereum main chain. Sentiment tweeted that they were aware of the attack and investigating what had happened. They also stated that they were working with law enforcement. Later that evening, they sent a message to the hacker, offering to let them keep 10% of the stolen funds as a bounty if they returned the rest. Senti…"
     }
   ],
   "audit": null,
@@ -58,7 +68,8 @@
     "defihacklabs",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -115,6 +126,16 @@
       "source": "revertiq",
       "label": "hackmd.io",
       "url": "https://hackmd.io/@sentimentxyz/Bk8XxMRbh"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=sentiment-protocol-hacked"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/sentimentxyz/status/1643391973280083970"
     }
   ]
 }

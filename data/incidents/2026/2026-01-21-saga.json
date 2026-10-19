@@ -10,6 +10,12 @@
   ],
   "targetType": "Chain",
   "category": "accounting-math",
+  "vulnClass": "unbacked-mint",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "unbacked-mint",
+    "confidence": 1
+  },
   "technique": "Infinite Mint",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -58,6 +64,10 @@
     {
       "source": "RevertIQ",
       "text": "SagaEVM paused its chain at block 6,593,800 after a reported $7 million exploit that minted unbacked Saga Dollar through an Ethermint based precompile bridge and moved value to Ethereum. The available record points to a validation failure in an Ethermint based bridge precompile. Crafted IBC messages were accepted as legitimate mint requests, which let the attacker create Saga Dollar without backing. The exact historical precompile function, source revision, and patch diff were not independently recovered here."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The Saga project halted its blockchain after acknowledging that $7 million had been stolen. An attacker was evidently able to mint a large quantity of Saga Dollar tokens, though it's not yet clear whether it was because of a smart contract vulnerability, private key compromise, or some other issue. The attacker was quick to swap most of the assets to ETH to thwart asset freezes or blockchain halts. The Saga Dollar token lost its peg and fell to around $0.75 after the attack."
     }
   ],
   "audit": null,
@@ -71,7 +81,8 @@
     "defihacklabs",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -133,6 +144,16 @@
       "source": "revertiq",
       "label": "cryptonews.com",
       "url": "https://cryptonews.com/news/saga-temporarily-shuts-sagaevm-chain-7m-exploit/"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=saga-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "protos.com",
+      "url": "https://protos.com/saga-becomes-latest-victim-in-defi-hacking-spree/"
     }
   ]
 }

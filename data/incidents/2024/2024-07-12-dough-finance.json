@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "arbitrary-call",
+  "vulnClass": "arbitrary-external-call",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "arbitrary-external-call",
+    "confidence": 1
+  },
   "technique": "Arbitrary External Call",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -50,6 +56,10 @@
     {
       "source": "RevertIQ",
       "text": "On July 12, 2024, Dough Finance on Ethereum was exploited for over $1.8 million (approximately 608 ETH) in a flash loan attack. The attacker manipulated unchecked calldata in the ConnectorDeleverageParaswap contract to withdraw collateral from multiple victim accounts. Most stolen funds were laundered via Tornado Cash, with only partial returns to the protocol. The ConnectorDeleverageParaswap contract accepted arbitrary external byte array input for swap/flash loan operations without validating its contents or enforcing sender and target restrictions. This allowed an attacker to craft malicious calldata, escalate token allowances, and execute unauthori…"
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Defi platform Dough Finance was hacked for 608 ETH ($1.8 million) by a hacker using a flash loan attack funded through the Railgun privacy service. Dough Finance sent an on-chain message to the attacker, asking them to return the \"misappropriated funds\", threatening that they would \"pursue all criminal, legal, and administrative avenues available\" in the event that the attacker did not do so."
     }
   ],
   "audit": null,
@@ -66,7 +76,8 @@
     "defihacklabs",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -138,6 +149,21 @@
       "source": "revertiq",
       "label": "avoid.net",
       "url": "https://avoid.net/dough-finance"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=dough-finance-hack"
+    },
+    {
+      "source": "w3igg",
+      "label": "cointelegraph.com",
+      "url": "https://cointelegraph.com/news/dough-finance-loses-1-8m-flash-loan-attack"
+    },
+    {
+      "source": "w3igg",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x38ad3247c6420518c829ff1163c36cd564de5a72b1eaf800437827365e6c4e85"
     }
   ]
 }

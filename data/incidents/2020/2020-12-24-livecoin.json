@@ -5,31 +5,35 @@
   "year": 2020,
   "amountUsd": 3300000,
   "returnedUsd": null,
-  "chains": [
-    "Multiple"
-  ],
+  "chains": [],
   "targetType": "CEX",
   "category": "key-compromise",
+  "vulnClass": "key-leak-infrastructure",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "key-leak-infrastructure",
+    "confidence": 0.95
+  },
   "technique": "API Key Compromised",
   "classificationNote": null,
   "classifiedBy": "defillama",
   "ai": {
     "model": "jev-1.13.0",
     "category": "key-compromise",
-    "confidence": 0.98,
+    "confidence": 0.97,
     "top": [
       {
         "category": "key-compromise",
-        "p": 0.98
+        "p": 0.97
       },
       {
         "category": "frontend-infra",
-        "p": 0.02
+        "p": 0.03
       }
     ],
     "flashLoan": 0.02,
     "stateActor": 0.03,
-    "hasRootCause": 0.13
+    "hasRootCause": 0.14
   },
   "bridge": false,
   "language": null,
@@ -42,6 +46,10 @@
     {
       "source": "RevertIQ",
       "text": "Livecoin, a Russian-based cryptocurrency exchange, suffered a catastrophic breach in December 2020. Attackers seized full control of the exchange's infrastructure, manipulated exchange rates, and facilitated mass withdrawals. The platform announced closure and an incomplete refund process after losses estimated at $3.3 million. The attackers achieved administrative access over the entire Livecoin server and backend infrastructure, including custody and rate-setting mechanisms. This enabled them to rewrite core logic, manipulate asset prices, and drain funds. The precise vector of the initial compromise remains undisclosed by the exchange."
+    },
+    {
+      "source": "Blockchain Graveyard",
+      "text": "Livecoin landing website was overwritten with the following message (with a RU translation underneath) ATTENTION!!! Dear clients, we ask you to stop using our service in all meanings: don't deposit funds, don't trade, don't use API. We are under a carefully planned attack, which has been prepared, as we assume, over the last few months. We lost control of all of our servers, backend and nodes. Thus, we were not able to stop our service in time. Our news channels were compromised as well. At the moment, we partially control frontend, and so we're able to place this announcement. We're fighting hard to get back our servers, nodes and funds, we're working 24/7.…"
     }
   ],
   "audit": null,
@@ -50,7 +58,8 @@
   "sources": [
     "defillama",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "graveyard"
   ],
   "references": [
     {

@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "logic-error",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "business-logic-flaw",
+    "confidence": 0.37
+  },
   "technique": "Withdrawal Logic Flaw",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -42,6 +48,10 @@
     {
       "source": "RevertIQ",
       "text": "MAYAChain halted on 2026-08-18 after a six-bug withdrawal and accounting exploit let an attacker inflate a thin CACAO pool, withdraw real reserves, and cause about $1.7 million in direct losses. A withdrawal compensation path treated a legitimate outbound transfer as missing, calculated an uncapped CACAO subsidy against a thin pool, and failed to roll back the inflated pool credit when the reserve transfer could not be funded."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The Maya Protocol announced that an attacker had stolen 20 BTC (~$1.4 million) and various other assets totaling $1.76 million. A postmortem disclosed that the \"sophisticated attacker exploited six chained bugs\" to steal the assets. \"The bugs exploited were not caught by Halborn audit , nor Fable 5 audit\", wrote Maya founder on Twitter. Halborn is a blockchain security firm; Fable 5 is an AI model developed by Anthropic."
     }
   ],
   "audit": null,
@@ -50,7 +60,8 @@
   "sources": [
     "defillama",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -77,6 +88,16 @@
       "source": "revertiq",
       "label": "en.cryptonomist.ch",
       "url": "https://en.cryptonomist.ch/2026/08/19/maya-protocol-exploit-theft/"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=mayachain-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "claude.ai",
+      "url": "https://claude.ai/code/artifact/469af51b-8f6c-44f0-a213-f7520c9f4b2d"
     }
   ]
 }

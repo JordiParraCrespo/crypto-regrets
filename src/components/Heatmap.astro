@@ -1,0 +1,80 @@
+---
+/**
+ * Ink heatmap: rows × years. Shade = sqrt-scaled value on a 7-step ink ramp (one hue, light →
+ * dark); every non-zero cell also prints its value, so nothing relies on shade alone. The ramp is
+ * stepped so each shade has a text color with ≥ 4.5:1 contrast (a continuous gradient passes
+ * through mid-grays where neither black nor white text does). Scrolls horizontally on phones.
+ */
+import { fmtUsd } from '../lib/data';
+interface Row { id: string; label: string; href?: string; values: Map<string, number> }
+interface Props { rows: Row[]; cols: string[]; format: 'usd' | 'count' | 'pct'; caption: string; showTotal?: boolean }
+const { rows, cols, format, caption, showTotal = true } = Astro.props;
+const fmt = (v: number) =>
+  format === 'usd' ? fmtUsd(v).replace(/\.0([MBK])$/, '$1') : format === 'pct' ? (v > 0 && v < 0.005 ? '<1%' : `${Math.round(v * 100)}%`) : v.toLocaleString('en');
+const max = Math.max(1e-9, ...rows.flatMap((r) => cols.map((c) => r.values.get(c) ?? 0)));
+// [background, text] per step; light steps take ink text, dark steps take white.
+const RAMP = [
+  ['#eeece8', '#0a0a0a'],
+  ['#dedbd5', '#0a0a0a'],
+  ['#c9c6bf', '#0a0a0a'],
+  ['#aeaba4', '#0a0a0a'],
+  ['#5a5956', '#ffffff'],
+  ['#353533', '#ffffff'],
+  ['#0a0a0a', '#ffffff'],
+] as const;
+const step = (v: number) => Math.min(RAMP.length - 1, Math.floor(Math.sqrt(v / max) * RAMP.length));
+// Lower bound of each step, for the legend tooltips; the range label uses real data values.
+const stepMin = (k: number) => max * (k / RAMP.length) ** 2;
+const minNonZero = Math.min(...rows.flatMap((r) => cols.map((c) => r.values.get(c) ?? 0)).filter((v) => v > 0));
+const total = (r: Row) => cols.reduce((s, c) => s + (r.values.get(c) ?? 0), 0);
+---
+<figure class="heat">
+  <div class="table-wrap">
+    <table>
+      <caption class="sr-only">{caption}</caption>
+      <thead>
+        <tr><th scope="col"></th>{cols.map((c) => <th scope="col" class="yr">{c === '≤2015' ? '≤15' : `'${c.slice(2)}`}</th>)}{showTotal && <th scope="col" class="num">Total</th>}</tr>
+      </thead>
+      <tbody>
+        {rows.map((r) => (
+          <tr>
+            <th scope="row" class="rowh">{r.href ? <a href={r.href}>{r.label}</a> : r.label}</th>
+            {cols.map((c) => {
+              const v = r.values.get(c) ?? 0;
+              const [bg, fg] = v > 0 ? RAMP[step(v)] : ['transparent', 'var(--color-jet-ink)'];
+              return (
+                <td class="cell" title={`${r.label} · ${c}: ${fmt(v)}`} style={`background:${bg};color:${fg}`}>
+                  {v > 0 ? fmt(v) : <span class="zero">·</span>}
+                </td>
+              );
+            })}
+            {showTotal && <td class="num total">{fmt(total(r))}</td>}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+  <figcaption class="caption fog">
+    <span>{caption}</span>
+    <span class="legend" aria-hidden="true">
+      {RAMP.map(([bg], k) => <span class="sw" style={`background:${bg}`} title={`≥ ${fmt(format === 'count' ? Math.ceil(stepMin(k)) : stepMin(k))}`}></span>)}
+      <span class="mono">{fmt(minNonZero)} → {fmt(max)}</span>
+    </span>
+  </figcaption>
+</figure>
+<style>
+  .heat { margin: 0; min-width: 0; }
+  table { border-collapse: separate; border-spacing: 2px; font-variant-numeric: tabular-nums; }
+  th, td { border: 0; padding: 0; background: none; }
+  thead th { font: 400 11px/16px var(--font-mono); color: var(--text-secondary); text-align: center; padding-bottom: 6px; }
+  .rowh { vertical-align: middle; text-align: left; font: 500 13px/18px var(--font-sans); color: var(--color-jet-ink); white-space: nowrap; padding-right: 12px; }
+  .rowh a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .cell { min-width: 52px; height: 34px; text-align: center; vertical-align: middle; font: 400 11px/1 var(--font-mono); border-radius: 4px; white-space: nowrap; padding: 0 4px; }
+  .zero { color: var(--color-dove); }
+  .total { vertical-align: middle; font: 500 12px/1 var(--font-mono); padding-left: 12px; white-space: nowrap; }
+  tbody tr:hover td { background: inherit; }
+  figcaption { margin-top: 10px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; align-items: center; }
+  .legend { display: inline-flex; align-items: center; gap: 2px; }
+  .sw { width: 18px; height: 10px; border-radius: 2px; }
+  .legend .mono { margin-left: 8px; font-size: 11px; }
+</style>

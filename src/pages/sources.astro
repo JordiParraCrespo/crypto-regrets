@@ -1,95 +1,147 @@
 ---
 import Base from '../layouts/Base.astro';
-import { sourceAudit, incidents, href, fmtUsd } from '../lib/data';
-import CategoryChip from '../components/CategoryChip.astro';
+import evaluation from '../../data/typesafe/evaluation.json';
+import { sourceAudit, incidents, href, fmtUsd, SOURCE_NAMES, CLASSES } from '../lib/data';
 import { CATEGORIES } from '../lib/taxonomy';
+import type { SourceId } from '../lib/types';
+
+const count = (s: SourceId) => incidents.filter((i) => i.sources.includes(s)).length;
 const withAi = incidents.filter((i) => i.ai);
 const llama = withAi.filter((i) => i.classifiedBy === 'defillama');
 const llamaAgree = llama.filter((i) => i.ai!.category === i.category).length;
-const curated = withAi.filter((i) => i.classifiedBy === 'curated');
-const curatedAgree = curated.filter((i) => i.ai!.category === i.category).length;
+const llamaConf = llama.filter((i) => i.ai!.confidence >= 0.7);
+const llamaConfAgree = llamaConf.filter((i) => i.ai!.category === i.category).length;
 const byTs = incidents.filter((i) => i.classifiedBy === 'typesafe').length;
-const replaced = incidents.filter((i) => i.classifiedBy === 'typesafe' && i.classificationNote?.includes('Replaced keyword')).length;
+const classBy = (b: string) => incidents.filter((i) => i.vulnClassBy === b).length;
 const disagreements = withAi
   .filter((i) => i.ai!.category !== i.category && i.ai!.confidence >= 0.9 && i.ai!.category !== 'unknown')
   .sort((a, b) => (b.amountUsd ?? 0) - (a.amountUsd ?? 0));
 const model = withAi[0]?.ai?.model ?? 'jev';
+const pct = (x: number) => `${(x * 100).toFixed(1)}%`;
 const groups = [...new Set(sourceAudit.map((s) => s.category))];
-const NAMES: Record<string, string> = { 'exploit-database': 'Hack & exploit databases', 'vulnerability-dataset': 'Vulnerability datasets', 'protocol-advisories': 'Client, consensus & protocol advisories', 'taxonomy-research': 'Taxonomies & research' };
-const count = (s: string) => incidents.filter((i) => i.sources.includes(s as never)).length;
+const NAMES: Record<string, string> = {
+  'exploit-database': 'Hack & exploit databases',
+  'vulnerability-dataset': 'Vulnerability datasets',
+  'protocol-advisories': 'Client, consensus & protocol advisories',
+  'taxonomy-research': 'Taxonomies & research',
+};
+const merged: { id: SourceId; url: string; role: string }[] = [
+  { id: 'defillama', url: 'https://defillama.com/hacks', role: 'Backbone: date, amount, chain, target, analyst labels' },
+  { id: 'defihacklabs', url: 'https://github.com/SunWeb3Sec/DeFiHackLabs', role: 'Technical root causes, Foundry PoCs, attack transactions' },
+  { id: 'rekt', url: 'https://rekt.news/', role: 'Post-mortem articles and audit status' },
+  { id: 'slowmist', url: 'https://hacked.slowmist.io/en/', role: 'Events since 2012 incl. exchanges and 51% attacks (frauds excluded)' },
+  { id: 'blocksec', url: 'https://blocksec.com/security-incident', role: 'Attack transactions and root-cause labels' },
+  { id: 'revertiq', url: 'https://revertiq.ai/hacks', role: 'Summaries and source citations (machine-written)' },
+  { id: 'graveyard', url: 'https://magoo.github.io/Blockchain-Graveyard/', role: 'Early exchange breaches, 2011–2021' },
+  { id: 'seal911', url: 'https://github.com/security-alliance/seal-911', role: 'Incident response log (names and dates)' },
+  { id: 'w3igg', url: 'https://www.web3isgoinggreat.com/', role: 'Enrichment only: descriptions for incidents already indexed' },
+  { id: 'curated', url: href('/sources'), role: 'Hand-written post-mortems for landmark and base-layer incidents' },
+];
 ---
-<Base title="Sources & method" description="The 30 blockchain-security sources we evaluated, what each provides, and how the index is built.">
-  <h1>Sources &amp; method</h1>
-  <p class="lede">How the index is built, and an audit of 30 public blockchain-security sources: what each covers, whether it is machine-readable, and how far to trust it.</p>
+<Base title="Method & sources" description="How the index is built and classified, how the classifier was evaluated, and an audit of 30 blockchain-security sources.">
+  <section class="wrap head">
+    <p class="eyebrow">Method</p>
+    <h1 class="h-lg">How it's built,<br />and how far to trust it.</h1>
+    <p class="lede">Ten sources merged and deduplicated, two levels of classification, and every model decision measured against human labels before it was allowed to set a label.</p>
+  </section>
 
-  <h2>How the index is built</h2>
-  <ol>
-    <li><strong>Backbone: <a href="https://defillama.com/hacks">DefiLlama</a></strong> ({count('defillama')} incidents, 2011 to today). Gives the date, amount, chain, target type and a two-level classification.</li>
-    <li><strong>Root causes and PoCs: <a href="https://github.com/SunWeb3Sec/DeFiHackLabs">DeFiHackLabs</a></strong> ({count('defihacklabs')} incidents). Matched by name and date (±7 days), with technical root-cause text and a runnable Foundry exploit. Unmatched entries are added as new incidents.</li>
-    <li><strong>Narrative and audit status: <a href="https://rekt.news/">REKT</a></strong> ({count('rekt')} incidents). The leaderboard adds an article link, excerpt and audit status (±10 days).</li>
-    <li><strong>More incidents and descriptions:</strong> the <a href="https://defihacklabs.io/explorer/index.html">DeFiHackLabs explorer</a> (detailed root causes, tx hashes), <a href="https://blocksec.com/security-incident">BlockSec</a> ({count('blocksec')}, attack transactions), <a href="https://hacked.slowmist.io/en/">SlowMist</a> ({count('slowmist')}, back to 2012, incl. exchanges, scams and 51% attacks) and <a href="https://revertiq.ai/hacks">RevertIQ</a> ({count('revertiq')}). Each is matched against everything merged before it (name + date, with a strict same-name fallback); unmatched records become new incidents. Third-party text is quoted briefly (≤ 700 characters) with a link back. SlowMist entries it labels <em>Scam</em> or <em>Ponzi</em> (51, e.g. BitConnect, OneCoin) are excluded: they are frauds, not security failures, and would dominate the loss totals.</li>
-    <li><strong>Infrastructure:</strong> Bitcoin Core, Geth and Cosmos advisories, plus {count('curated')} hand-curated records: base-layer failures (value overflow, chain splits, outages) and post-mortem root causes for landmark hacks (The DAO, Ronin, Wormhole, Bybit…).</li>
-    <li><strong>Classification:</strong> upstream labels are mapped onto our <a href={href('/patterns')}>taxonomy</a>, with documented overrides (e.g. 51% attacks that DefiLlama files as "Forged Proof"). Free-text-only records are classified by TypeSafe (below), falling back to ordered keyword rules. Every record is schema-validated (zod) at build time.</li>
-  </ol>
-  <h2>Model classification (TypeSafe)</h2>
-  <p>Every incident is also sent to <a href="https://typesafe.ai">TypeSafe</a>'s {model} model: one typed <em>Choice</em> over the {Object.keys(CATEGORIES).length - 1} patterns, plus three yes/no <em>Noul</em> questions (does the text explain the attack, was a flash loan used, is it attributed to a state actor). The model sees the incident's facts and its single most technical description, but not our label.</p>
-  <h3>How the questions were chosen</h3>
-  <p class="small">We tested designs against human labels (DefiLlama and our curated post-mortems) on a fixed test set of ~250 incidents stratified by pattern, asking all variants in the same request so they saw identical input:</p>
-  <ul class="small">
-    <li><strong>One description beats many.</strong> Sending every source's account cost 7 points of accuracy; the model works best on a short, focused input.</li>
-    <li><strong>Wording mattered less than expected.</strong> Plain definitions, detailed "covers / not for / examples" rubrics, and reversed option order all landed within 2.4 points (78–80% exact, ~87% at the layer level). We kept the cheapest.</li>
-    <li><strong>Confidence is the useful signal.</strong> At ≥ 0.9 confidence the model was right ~91% of the time; at 0.7–0.9, 76%. Below 0.7 our keyword rules did better, so the model's answer is adopted only at ≥ 0.7.</li>
-    <li><strong>Fixing the taxonomy mattered more than prompting.</strong> Several "errors" were our own mapping contradicting our definitions (e.g. keys stolen from servers filed as infrastructure). Fixing that raised measured agreement by about 3 points.</li>
-  </ul>
-  <div class="grid grid-4">
-    <div class="card stat"><div class="value">{Math.round((llamaAgree / Math.max(llama.length, 1)) * 100)}%</div><div class="label">agreement with DefiLlama's human labels ({llamaAgree}/{llama.length})</div></div>
-    <div class="card stat"><div class="value">{curatedAgree}/{curated.length}</div><div class="label">agreement with our curated post-mortems</div></div>
-    <div class="card stat"><div class="value">{byTs}</div><div class="label">incidents classified by TypeSafe (it replaced {replaced} keyword guesses)</div></div>
-    <div class="card stat"><div class="value">{disagreements.length}</div><div class="label">confident disagreements (≥ 0.9) worth reviewing</div></div>
-  </div>
-  <p class="small muted">Policy: the model's answer is adopted only when no human label exists (keyword guesses and unclassified incidents), its confidence is ≥ 0.7, and it judged that the description explains the attack. Human labels are never overwritten; the model's view is shown next to them. Answers are cached in <code>data/typesafe/classifications.json</code> and re-requested only when an incident's text changes.</p>
-  {disagreements.length > 0 && (
-    <details>
-      <summary>Show the {disagreements.length} confident disagreements</summary>
-      <div class="table-wrap" style="margin-top:8px">
-        <table>
-          <thead><tr><th>Incident</th><th>Assigned</th><th>Model says</th><th class="num">Conf.</th><th class="num">Lost</th></tr></thead>
-          <tbody>{disagreements.map((i) => <tr><td><a href={href(`/hacks/${i.id}`)}>{i.name}</a><div class="small muted">{i.technique}</div></td><td><CategoryChip id={i.category} /></td><td><CategoryChip id={i.ai!.category} /></td><td class="num">{i.ai!.confidence.toFixed(2)}</td><td class="num">{fmtUsd(i.amountUsd)}</td></tr>)}</tbody>
+  <section class="wrap section">
+    <div class="section-head"><div><p class="eyebrow">1 · Sources</p><h2 class="h-md" style="margin-top:8px">Merged into one record per incident</h2></div></div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Source</th><th>Role</th><th class="num">Incidents</th></tr></thead>
+        <tbody>{merged.map((m) => <tr><td><a class="medium" href={m.url}>{SOURCE_NAMES[m.id]}</a></td><td class="body-sm steel">{m.role}</td><td class="num">{count(m.id)}</td></tr>)}</tbody>
+      </table>
+    </div>
+    <p class="body-sm fog" style="margin-top:16px;max-width:80ch">Records are joined by a CamelCase-aware name key and a date window (±7 days, ±10 for REKT), with a strict same-name fallback within 2 days and a headline matcher for news sources. Third-party text is quoted briefly (≤ 700 characters) with a link back; DeFiHackLabs text is Apache-2.0. SlowMist entries labelled Scam or Ponzi are excluded: frauds, not security failures.</p>
+  </section>
+
+  <section class="wrap section">
+    <div class="section-head"><div><p class="eyebrow">2 · Classification</p><h2 class="h-md" style="margin-top:8px">Two levels, evidence first</h2></div></div>
+    <div class="grid cols-2">
+      <div class="card">
+        <h3 class="h-xs">Pattern (17)</h3>
+        <ol class="numbered" style="margin-top:16px">
+          <li>Curated post-mortem, if any</li>
+          <li>DefiLlama analyst label, mapped to our taxonomy with documented overrides</li>
+          <li>TypeSafe {model}, if confidence ≥ 0.7 and the text explains the attack ({byTs} incidents)</li>
+          <li>Keyword rules as a last resort</li>
+        </ol>
+      </div>
+      <div class="card">
+        <h3 class="h-xs">Vulnerability class ({Object.keys(CLASSES).length})</h3>
+        <ol class="numbered" style="margin-top:16px">
+          <li>Curated post-mortem ({classBy('curated')})</li>
+          <li>Analyst technique label that names exactly one class ({classBy('technique')})</li>
+          <li>TypeSafe, choosing only among the pattern's classes, at ≥ 0.9 confidence ({classBy('typesafe')})</li>
+          <li>Otherwise <em>unspecified</em>: we don't guess</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap section">
+    <div class="section-head"><div><p class="eyebrow">3 · Evaluation</p><h2 class="h-md" style="margin-top:8px">Measured, not assumed</h2><p class="lede">Every design choice was tested against human labels. Variants were asked in the same request, so they saw identical input.</p></div></div>
+    <div class="grid cols-2">
+      <div>
+        <h3 class="h-xs">Pattern level · {evaluation.pattern.testSet} incidents</h3>
+        <table style="margin-top:12px">
+          <thead><tr><th>Question design</th><th class="num">Exact</th><th class="num">Layer</th></tr></thead>
+          <tbody>{evaluation.pattern.variants.map((v) => <tr><td class="body-sm">{v.name}</td><td class="num">{pct(v.exact)}</td><td class="num">{pct(v.layer)}</td></tr>)}</tbody>
+        </table>
+        <table style="margin-top:24px">
+          <thead><tr><th>Model confidence</th><th class="num">TypeSafe</th><th class="num">Keyword rules</th></tr></thead>
+          <tbody>{evaluation.pattern.byConfidence.map((b) => <tr><td class="mono caption">{b.band}</td><td class="num">{pct(b.typesafe)}</td><td class="num">{pct(b.keywords)}</td></tr>)}</tbody>
         </table>
       </div>
-    </details>
-  )}
-
-  <p class="small muted">Amounts are nominal USD at the time of the incident, as reported by the source. Cross-source duplicates are merged with fuzzy name matching, so expect a small number of missed or incorrect merges. Corrections welcome.</p>
-
-  <h2>Source audit</h2>
-  {sourceAudit.length === 0 && <p class="muted">Source audit not available.</p>}
-  {groups.map((g) => (
-    <section>
-      <h3>{NAMES[g] ?? g}</h3>
-      <div class="table-wrap">
-        <table>
-          <thead><tr><th>#</th><th>Source</th><th>Status</th><th>Tracks</th><th>Machine-readable</th><th>Coverage</th><th>Concerns</th><th>Priority</th></tr></thead>
-          <tbody>
-            {sourceAudit.filter((s) => s.category === g).map((s) => (
-              <tr>
-                <td class="mono small">{s.id}</td>
-                <td><a href={s.url}>{s.name}</a><div class="small muted">{s.notes}</div></td>
-                <td><span class:list={['chip', s.status]}>{s.status}</span></td>
-                <td class="small">{s.tracks}</td>
-                <td class="small mono" style="overflow-wrap:anywhere;min-width:180px">{s.machineReadable}</td>
-                <td class="small">{s.coverage}<div class="muted">{s.chains}</div></td>
-                <td class="small">{s.concerns}<div class="muted">License: {s.license}</div></td>
-                <td class="num">{'★'.repeat(4 - s.priority)}</td>
-              </tr>
-            ))}
-          </tbody>
+      <div>
+        <h3 class="h-xs">Class level · {evaluation.class.testSet} incidents, analyst label hidden</h3>
+        <table style="margin-top:12px">
+          <thead><tr><th>Model confidence</th><th class="num">Correct</th><th class="num">Share</th></tr></thead>
+          <tbody>{evaluation.class.blindByConfidence.map((b) => <tr><td class="mono caption">{b.band}</td><td class="num">{pct(b.accuracy)}</td><td class="num">{pct(b.share)}</td></tr>)}</tbody>
         </table>
+        <ul class="check" style="margin-top:24px">
+          <li>Sending every source's description instead of the single best one cost {Math.abs(evaluation.pattern.allDescriptionsPenalty * 100)} points.</li>
+          <li>Claude Haiku scored {pct(evaluation.pattern.haiku.exact)} vs TypeSafe {pct(evaluation.pattern.haiku.typesafe)}; when they disagreed TypeSafe was right {evaluation.pattern.haiku.onDisagreement.typesafe} times, Haiku {evaluation.pattern.haiku.onDisagreement.haiku}. Not used.</li>
+          <li>Agreement with DefiLlama's labels across all {llama.length} incidents: {pct(llamaAgree / llama.length)}; where the model is ≥ 0.7 confident: {pct(llamaConfAgree / Math.max(llamaConf.length, 1))}.</li>
+        </ul>
       </div>
-    </section>
-  ))}
+    </div>
+    {disagreements.length > 0 && (
+      <details style="margin-top:32px">
+        <summary class="body-sm medium" style="cursor:pointer">{disagreements.length} confident disagreements with human labels, worth reviewing</summary>
+        <div class="table-wrap" style="margin-top:12px">
+          <table>
+            <thead><tr><th>Incident</th><th>Assigned</th><th>Model says</th><th class="num">Conf.</th><th class="num">Lost</th></tr></thead>
+            <tbody>{disagreements.map((i) => <tr><td><a class="medium" href={href(`/hacks/${i.id}`)}>{i.name}</a></td><td class="caption">{CATEGORIES[i.category].name}</td><td class="caption">{CATEGORIES[i.ai!.category].name}</td><td class="num">{i.ai!.confidence.toFixed(2)}</td><td class="num">{fmtUsd(i.amountUsd)}</td></tr>)}</tbody>
+          </table>
+        </div>
+      </details>
+    )}
+  </section>
+
+  <section class="wrap section">
+    <div class="section-head"><div><p class="eyebrow">4 · Source audit</p><h2 class="h-md" style="margin-top:8px">30 sources evaluated</h2><p class="lede">What each covers, whether it is machine-readable, and its caveats.</p></div></div>
+    {groups.map((g) => (
+      <div style="margin-bottom:40px">
+        <h3 class="h-xs" style="margin-bottom:8px">{NAMES[g] ?? g}</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Source</th><th>Status</th><th class="hide-sm">Machine-readable</th><th class="hide-sm">Concerns</th></tr></thead>
+            <tbody>
+              {sourceAudit.filter((s) => s.category === g).map((s) => (
+                <tr>
+                  <td style="min-width:200px"><a class="medium" href={s.url}>{s.name}</a><div class="caption fog">{s.coverage}</div></td>
+                  <td><span class:list={['pill', s.status === 'offline' ? 'pill-outline' : '']}>{s.status}</span></td>
+                  <td class="mono caption hide-sm" style="overflow-wrap:anywhere;max-width:340px">{s.machineReadable}</td>
+                  <td class="caption steel hide-sm" style="max-width:340px">{s.concerns}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    ))}
+  </section>
 </Base>
-<style>
-  .chip.offline { color: var(--accent); }
-  td { min-width: 110px; }
-</style>
+<style>.head { padding-top: 80px; display: grid; gap: 20px; }</style>

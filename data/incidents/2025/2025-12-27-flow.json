@@ -10,6 +10,12 @@
   ],
   "targetType": "Layer 1",
   "category": "accounting-math",
+  "vulnClass": "unbacked-mint",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "unbacked-mint",
+    "confidence": 1
+  },
   "technique": "Infinite Mint",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -46,6 +52,10 @@
     {
       "source": "RevertIQ",
       "text": "On 27 December 2025, an attacker exploited a type confusion vulnerability in Flow’s Cadence runtime, enabling the duplication of over 87 billion FLOW tokens and other assets. Roughly $3.9 million worth of counterfeit tokens were bridged out or swapped before a coordinated network halt contained the rest. Validators and partners destroyed the remaining counterfeit supply, restoring full network and exchange operations. The incident was caused by a complex multi-stage type confusion exploit in the Cadence execution layer (v1.8.8), allowing resources (tokens) to be duplicated via malformed transaction arguments and contract deployment logic that failed to enforce static type integrity."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The Flow blockchain suffered an exploit in which an attacker was able to mint a large number of wrapped FLOW tokens, which they then swapped to tokens on other blockchains. Ultimately around $3.9 million was stolen, and the FLOW token dramatically plunged in price. Some crypto exchanges, such as Upbit and Bithumb, halted withdrawals and deposits for FLOW after the exploit was discovered. Flow later confirmed the exploit, and said that validators \"executed a coordinated halt\" of the network to shut down the attack."
     }
   ],
   "audit": null,
@@ -54,7 +64,8 @@
   "sources": [
     "defillama",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -81,6 +92,16 @@
       "source": "revertiq",
       "label": "flow.com",
       "url": "https://flow.com/post/final-remediation-update-regarding-the-flow-security-incident-87-4-billion-counterfeit-tokens-have-been-destroyed-"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=flow-infinite-mint-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "theblock.co",
+      "url": "https://www.theblock.co/post/383796/flow-blockchain-probes-security-incident-as-flow-token-plunges-over-40"
     }
   ]
 }

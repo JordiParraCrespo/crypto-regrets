@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "key-compromise",
+  "vulnClass": "hot-wallet-compromise",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "multisig-threshold-compromise",
+    "confidence": 0.73
+  },
   "technique": "Hot Wallet Key Compromised",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -38,6 +44,10 @@
     {
       "source": "RevertIQ",
       "text": "On 10,11 November 2023, Samudai DAO's multisig and founder wallets were compromised on Ethereum, resulting in theft of over $1.25M in ETH and USDC. The proceeds were laundered via Tornado Cash, and a public on-chain bounty offer was made for recovery, but no funds returned. The root cause was the compromise of private keys controlling the Samudai DAO treasury multisig and the founder's wallet, enabling unauthorized transfers by the attacker."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The treasury of the Samudai DAO was apparently drained as an attacker compromised the project's multisignature wallets and the wallet belonging to the project's founder, Kushagra Agarwal. Altogether, around $1.25 million in ETH was stolen. Agarwal sent a message to the thief shortly afterwards, offering a 10% \"bounty\" in exchange for the return of the rest of the funds. The attacker didn't seem to be interested, and in mid-January began tumbling the assets through the Tornado Cash cryptocurrency mixer. Samudai didn't seem to publicly acknowledge the theft, even though they've posted on Twitter a few times since then. The organization had raised $2.5 million in pre-seed capital in June 2022."
     }
   ],
   "audit": null,
@@ -53,7 +63,8 @@
   "sources": [
     "defillama",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -80,6 +91,21 @@
       "source": "revertiq",
       "label": "web3isgoinggreat.com",
       "url": "https://www.web3isgoinggreat.com/?id=samudai-treasury-drained&tech=dao"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=samudai-treasury-drained"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/CyversAlerts/status/1747927183069184293"
+    },
+    {
+      "source": "w3igg",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x1199697252b603b95aa8a7bd8fa1012b1bdcd4a17dc9ee0d7347ba6a9424e5dc"
     }
   ]
 }

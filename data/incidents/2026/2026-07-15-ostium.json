@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "key-compromise",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "multisig-threshold-compromise",
+    "confidence": 0.24
+  },
   "technique": "Private Key Compromised",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -54,6 +60,10 @@
     {
       "source": "RevertIQ",
       "text": "On July 15, 2026, attackers drained Ostium's liquidity vault for $23.75M by exploiting compromised off-chain credentials controlling price feeds. They submitted validly signed, fabricated price reports, enabling rapid open-close leverage trades, and extracted profits the protocol could not detect. The attacker obtained the private key for an authorized off-chain price report signer and a registered keeper. The on-chain contracts accepted any validly signed price report from authorized figures, but performed no secondary checks for price plausibility or origin. No anomaly detection or circuit breaker stopped the rapid draining loop."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Decentralized perpetual futures exchange Ostium was drained of at least $24 million after an attacker manipulated its oracle system — a system that pulls in off-chain price data. After the attacker apparently gained access to the private key used to sign oracle messages, they were able to submit future-dated oracle reports that tricked the system into thinking trades were profitable. The attacker siphoned at least $24 million USDC from the protocol, which they quickly swapped into ETH and laundered via Tornado Cash."
     }
   ],
   "audit": null,
@@ -74,7 +84,9 @@
     "defihacklabs",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "seal911",
+    "w3igg"
   ],
   "references": [
     {
@@ -131,6 +143,26 @@
       "source": "revertiq",
       "label": "cryptotimes.io",
       "url": "https://www.cryptotimes.io/2026/07/30/ostium-post-mortem-confirms-23-75m-vault-loss-blames-off-chain-signer/"
+    },
+    {
+      "source": "seal911",
+      "label": "SEAL 911",
+      "url": "https://x.com/Ostium/status/2077628150054281700"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=ostium-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "decrypt.co",
+      "url": "https://decrypt.co/373566/defi-exploit-ostium-oracle-hack"
+    },
+    {
+      "source": "w3igg",
+      "label": "x.com",
+      "url": "https://x.com/PeckShieldAlert/status/2077548169811083373"
     }
   ]
 }

@@ -10,6 +10,12 @@
   ],
   "targetType": "Chain",
   "category": "signature-crypto",
+  "vulnClass": "signature-verification-flaw",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "signature-verification-flaw",
+    "confidence": 0.93
+  },
   "technique": "Signature Verification Flaw",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -42,6 +48,10 @@
     {
       "source": "RevertIQ",
       "text": "The Wanchain Cardano bridge was exploited on July 20, 2026, due to a fundamental flaw in its Plutus validator's message encoding. Attackers replayed a legitimate BNB Chain withdrawal signature to drain approximately $10 million in NIGHT tokens. Most stolen tokens were quickly liquidated and no confirmed recovery has been published. The TreasuryCheck validator on Cardano used raw concatenation of variable-length redeemer fields without explicit delimiters or length prefixes. This allowed different input sets to produce identical byte sequences, enabling attackers to replay a signature from a legitimate withdrawal on BNB Chain and drain much larger sums on Cardano."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "An attacker exploited the Wanchain bridge , stealing 515 million NIGHT tokens that had been bridged from Cardano to BNB. The NIGHT token belongs to Midnight, a privacy-focused blockchain linked to Cardano. The stolen tokens were priced at $9 million to $10 million at the time of the theft, although the massive outflow of tokens briefly caused the NIGHT token price to drop by about 43%."
     }
   ],
   "audit": null,
@@ -50,7 +60,8 @@
   "sources": [
     "defillama",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -77,6 +88,21 @@
       "source": "revertiq",
       "label": "cryptotimes.io",
       "url": "https://www.cryptotimes.io/2026/07/31/wanchain-sets-august-6-deadline-for-cardano-bridge-hacker/"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=cardano-midnight-bridge-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "x.com",
+      "url": "https://x.com/Phalcon_xyz/status/2079443108027421183"
+    },
+    {
+      "source": "w3igg",
+      "label": "x.com",
+      "url": "https://x.com/midnightfdn/status/2079370237334413522"
     }
   ]
 }

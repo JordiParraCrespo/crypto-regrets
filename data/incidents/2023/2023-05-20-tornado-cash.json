@@ -10,6 +10,12 @@
   ],
   "targetType": "DAO",
   "category": "governance",
+  "vulnClass": "malicious-proposal",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "malicious-proposal",
+    "confidence": 0.86
+  },
   "technique": "Malicious Proposal",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -42,6 +48,10 @@
     {
       "source": "RevertIQ",
       "text": "On 20 May 2023, Tornado Cash's Ethereum governance system was compromised through a malicious proposal exploiting metamorphic contract mechanics. The attacker injected arbitrary code to inflate their voting power and drain $2.17M in TORN tokens. A malicious governance proposal exploited Ethereum's metamorphic contract mechanics (CREATE2 and SELFDESTRUCT) to inject arbitrary code, granting the attacker fake voting power and control over the DAO, leading to treasury theft."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "A proposal ostensibly to penalize cheating network participants in the Tornado Cash crypto tumbler project successfully passed by DAO vote. However, the proposer had added an extra function, which they subsequently used to obtain 1.2 million votes. Now that they have more than the ~700,000 legitimate Tornado Cash votes, they have full control of the project. The attacker has already drained locked votes and sold some of the $TORN tokens, which are governance tokens that both entitle the holder to a vote but also were being traded for $5–$7 around the time of the attack. The attacker has since tumbled 360 ETH (~$655,300) through Tornado Cash to obscure its final destination.…"
     }
   ],
   "audit": "Unaudited",
@@ -51,7 +61,8 @@
     "defillama",
     "rekt",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -83,6 +94,21 @@
       "source": "revertiq",
       "label": "github.com",
       "url": "https://github.com/pcaversaccio/tornado-cash-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=tornado-cash-governance-attack"
+    },
+    {
+      "source": "w3igg",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/address/0x092123663804f8801b9b086b03b98d706f77bd59"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/samczsun/status/1660012956632104960"
     }
   ]
 }

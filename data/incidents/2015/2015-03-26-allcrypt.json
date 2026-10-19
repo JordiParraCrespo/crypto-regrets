@@ -1,0 +1,69 @@
+{
+  "id": "2015-03-26-allcrypt",
+  "name": "Allcrypt",
+  "date": "2015-03-26",
+  "year": 2015,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [],
+  "targetType": null,
+  "category": "key-compromise",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "hot-wallet-compromise",
+    "confidence": 0.35
+  },
+  "technique": "server hot wallet breach",
+  "classificationNote": "Classified by keyword rules from the Blockchain Graveyard label and description.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "frontend-infra",
+    "confidence": 0.53,
+    "top": [
+      {
+        "category": "frontend-infra",
+        "p": 0.56
+      },
+      {
+        "category": "key-compromise",
+        "p": 0.37
+      },
+      {
+        "category": "access-control",
+        "p": 0.04
+      }
+    ],
+    "flashLoan": 0.01,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "An attacker used a simple account takeover with multiple pivots to gain server access to a wallet. With administrative access to Wordpress, the attacker was able to upload PHP based tools to explore the filesystem and discover stored secrets. From there, database credentials were accessed and another PHP based database tool was used to access a database and modify a off-chain ledger. The attacker then dodged double accounting systems by discovering loopholes around the purchase/sale of bitcoins. This deserves a full read and is one of the better post mortems in the graveyard. Around 8PM on Sunday (all times EDT) our marketing director’s blog account requested a password reset.…",
+  "descriptions": [
+    {
+      "source": "Blockchain Graveyard",
+      "text": "An attacker used a simple account takeover with multiple pivots to gain server access to a wallet. With administrative access to Wordpress, the attacker was able to upload PHP based tools to explore the filesystem and discover stored secrets. From there, database credentials were accessed and another PHP based database tool was used to access a database and modify a off-chain ledger. The attacker then dodged double accounting systems by discovering loopholes around the purchase/sale of bitcoins. This deserves a full read and is one of the better post mortems in the graveyard. Around 8PM on Sunday (all times EDT) our marketing director’s blog account requested a password reset.…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "graveyard"
+  ],
+  "references": [
+    {
+      "source": "graveyard",
+      "label": "Blockchain Graveyard",
+      "url": "https://archive.is/2UY7e"
+    },
+    {
+      "source": "graveyard",
+      "label": "archive.is",
+      "url": "https://archive.is/2UY7e"
+    }
+  ]
+}

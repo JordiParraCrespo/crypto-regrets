@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "oracle-manipulation",
+  "vulnClass": "spot-price-oracle",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "spot-price-oracle",
+    "confidence": 0.73
+  },
   "technique": "Spot Price Manipulation",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -62,6 +68,10 @@
     {
       "source": "RevertIQ",
       "text": "On 19 May 2021, PancakeBunny on BNB Chain was exploited via a flash loan,driven price manipulation attack, resulting in an estimated loss of $45 million. The attacker manipulated AMM pool spot prices to inflate reward calculations and minted millions of BUNNY tokens, crashing the token price and draining protocol assets. Reward minting depended on manipulable PancakeSwap spot prices in the same transaction, allowing a flash loan to distort the price oracle and inflate minting."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "A hacker used flash loans to manipulate the price of other token pools, to then exploit a bug in PancakeBunny logic that calculates how many tokens should be minted. They were able to mint and then sell 7 million tokens, making off with $45 million and tanking the price of BUNNY tokens from $146 to $0.90. PancakeBunny tweeted shortly after the attack that they would be \"working on a reimbursement plan\" for those affected."
     }
   ],
   "audit": "Unaudited",
@@ -75,7 +85,8 @@
     "defihacklabs",
     "rekt",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -147,6 +158,21 @@
       "source": "revertiq",
       "label": "cmichel.io",
       "url": "https://cmichel.io/bsc-pancake-bunny-exploit-post-mortem/"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=45-million-stolen-from-pancakebunny-finance"
+    },
+    {
+      "source": "w3igg",
+      "label": "theblockcrypto.com",
+      "url": "https://www.theblockcrypto.com/post/105473/bsc-pancakebunny-defi-protocol-exploited-lost-45-million-bunny"
+    },
+    {
+      "source": "w3igg",
+      "label": "beincrypto.com",
+      "url": "https://beincrypto.com/pancakebunny-postmortem-details-attack-compensation-plan/"
     }
   ]
 }

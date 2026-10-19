@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "arbitrary-call",
+  "vulnClass": "arbitrary-external-call",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "arbitrary-external-call",
+    "confidence": 0.97
+  },
   "technique": "Arbitrary Call",
   "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.97).",
   "classifiedBy": "typesafe",
@@ -54,6 +60,10 @@
     {
       "source": "RevertIQ",
       "text": "On September 27, 2022, the Ethereum MEV bot '0xbad' lost over 1,100 WETH (worth about $1.4M) to an attacker exploiting a callback function designed for flash-loan protocols. The exploit used dYdX's SoloMargin contract to trick the bot into approving and draining all WETH funds. The 0xbad MEV bot contract delegated privileged callback permissions to both its owner and specific DeFi protocols, including dYdX's SoloMargin, but failed to restrict or validate the calldata enforced through these callback mechanisms. This allowed an attacker to use SoloMargin to call a crafted payload, manipulating the contract into granting token approval and enabling a follow-on transfer to drain all assets."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "MEV bots are a controversial category of bots who frontrun transactions in ways that are often detrimental to users. One such bot, known as 0xbadc0de, earned a windfall when a trader tried to sell 1.8 million cUSDC (USDC on the Compound protocol) — notionally worth $1.85 million — but only received $500 in assets in return due to low liquidity. The MEV bot, however, profited 800 ETH (~$1 million) from arbitrage trades surrounding the sale. One hour later, a hacker exploited a vulnerability in the bad code of 0xbadc0de, which allowed them to withdraw all of the ETH in the contract: not just the ETH they'd recently earned in the huge trade, but all 1,101 ETH (~$1.5 million).…"
     }
   ],
   "audit": null,
@@ -65,7 +75,8 @@
     "defihacklabs",
     "rekt",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -112,6 +123,11 @@
       "source": "revertiq",
       "label": "github.com",
       "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/src/test/2022-09/MEVbadc0de_exp.sol"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=mev-bot-earns-over-1-million-in-profit-loses-almost-1-5-million-in-hack-an-hour-later"
     }
   ]
 }

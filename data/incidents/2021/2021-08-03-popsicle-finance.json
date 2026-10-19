@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "logic-error",
+  "vulnClass": "reward-logic-flaw",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "reward-logic-flaw",
+    "confidence": 1
+  },
   "technique": "Reward Logic Flaw",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -46,6 +52,10 @@
     {
       "source": "RevertIQ",
       "text": "On August 3, 2021, Popsicle Finance’s Sorbetto Fragola vaults on Ethereum were exploited for approximately $20.7 million. The attacker repeatedly transferred LP tokens between controlled contracts to claim the same accumulated rewards multiple times, draining fee reserves in eight Uniswap V3-managed vaults via a single flash-loan sequence. The Sorbetto Fragola vaults failed to update the recipient's reward accounting when LP tokens were transferred. Without updating variables like token0PerSharePaid and token1PerSharePaid on each transfer, any new holder could claim all previously unclaimed rewards again, enabling repeated extraction of accumulated fee…"
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Popsicle Finance, a DeFi platform, lost $25 million to a bug exploited with flash loans . The organization later reimbursed users who lost money to the exploit."
     }
   ],
   "audit": "Peckshield",
@@ -58,7 +68,8 @@
     "defihacklabs",
     "rekt",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -100,6 +111,21 @@
       "source": "revertiq",
       "label": "defirisk.co",
       "url": "https://defirisk.co/learn/exploits/popsicle-rekt/"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=25-million-taken-from-popsicle-finance"
+    },
+    {
+      "source": "w3igg",
+      "label": "theblockcrypto.com",
+      "url": "https://www.theblockcrypto.com/linked/113482/defi-platform-popsicle-finance-suffers-20-million-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "cryptobriefing.com",
+      "url": "https://cryptobriefing.com/popsicle-finance-repays-victims-of-25-million-attack/"
     }
   ]
 }

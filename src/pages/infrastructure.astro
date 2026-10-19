@@ -3,38 +3,57 @@ import Base from '../layouts/Base.astro';
 import IncidentTable from '../components/IncidentTable.astro';
 import { advisories, incidents, href } from '../lib/data';
 import { ADVISORY_IMPACTS } from '../lib/types';
-const infra = incidents.filter((i) => i.category === 'client-bug' || i.category === 'consensus-attack' || (i.targetType && ['Chain', 'Layer 1'].includes(i.targetType)));
+const infra = incidents.filter((i) => i.category === 'client-bug' || i.category === 'consensus-attack');
 const sorted = [...advisories].sort((a, b) => (b.date ?? '0').localeCompare(a.date ?? '0'));
-const byImpact = ADVISORY_IMPACTS.map((im) => ({ im, n: advisories.filter((a) => a.impact === im).length })).filter((x) => x.n > 0);
+const projects = [...new Set(advisories.map((a) => a.project))].sort((a, b) => advisories.filter((x) => x.project === b).length - advisories.filter((x) => x.project === a).length);
 const LABEL: Record<string, string> = { 'consensus-split': 'Consensus split', inflation: 'Inflation', 'remote-crash': 'Remote crash', dos: 'Denial of service', 'chain-halt': 'Chain halt', rce: 'Remote code execution', censorship: 'Censorship', other: 'Other' };
+const byImpact = ADVISORY_IMPACTS.map((im) => ({ im, n: advisories.filter((a) => a.impact === im).length })).filter((x) => x.n > 0);
 ---
-<Base title="Infrastructure" description="Consensus failures, 51% attacks, node crashes and chain halts at the base layer.">
-  <h1>Chain &amp; client infrastructure</h1>
-  <p class="lede">Not every failure is a DeFi contract. Base layers break too: value-overflow bugs, chain splits between client versions, 51% attacks on small proof-of-work chains, and P2P messages that crash nodes. Most of these were caught and patched before they were exploited, which is why they rarely show up in hack databases.</p>
+<Base title="Infrastructure" description="Consensus failures, 51% attacks, node crashes, chain halts and compiler bugs below the application layer.">
+  <section class="wrap head">
+    <p class="eyebrow">Infrastructure</p>
+    <h1 class="h-lg">Below the contracts.</h1>
+    <p class="lede">Base layers, clients and compilers break too: value-overflow bugs, chain splits between versions, 51% attacks on small proof-of-work chains, P2P messages that crash nodes, and compiler bugs like the Vyper reentrancy-lock flaw behind the 2023 Curve exploits.</p>
+  </section>
 
-  <h2>Base-layer incidents</h2>
-  <p class="small muted">Includes 51% attacks (which DefiLlama files as "Forged Proof"; we reclassify them) and curated client failures.</p>
-  <IncidentTable items={infra} />
+  <section class="wrap section">
+    <div class="section-head"><h2 class="h-sub">Base-layer incidents</h2></div>
+    <IncidentTable items={infra} />
+  </section>
 
-  <h2>Disclosed client vulnerabilities</h2>
-  <p class="tech">{byImpact.map((x) => <span class="chip">{LABEL[x.im]} <span class="muted">{x.n}</span></span>)}</p>
-  <div class="table-wrap">
-    <table>
-      <thead><tr><th>Disclosed</th><th>Project</th><th>ID</th><th>Title</th><th>Impact</th><th>Severity</th></tr></thead>
-      <tbody>
-        {sorted.map((a) => (
-          <tr>
-            <td class="mono small">{a.date ?? '—'}</td>
-            <td>{a.project}</td>
-            <td class="mono small">{a.cve ?? '—'}</td>
-            <td><a href={a.url}>{a.title}</a>{a.summary && <div class="small muted">{a.summary}</div>}</td>
-            <td class="small">{LABEL[a.impact]}</td>
-            <td class="small">{a.severity ?? '—'}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  </div>
-  <p class="small muted">Sources: <a href="https://bitcoincore.org/en/security-advisories/">Bitcoin Core security advisories</a>, <a href="https://geth.ethereum.org/docs/developers/geth-developer/disclosures">Geth disclosures</a>, <a href="https://github.com/cosmos/security/blob/main/ADVISORIES.md">Cosmos ASA list</a>. Impact is our keyword classification of the title. <a href={href('/patterns/client-bug')}>Client bug pattern guide →</a></p>
+  <section class="wrap section">
+    <div class="section-head">
+      <div><h2 class="h-sub">Disclosed vulnerabilities</h2><p class="body-sm fog">{advisories.length} advisories across {projects.length} projects. Impact is our keyword classification of each title.</p></div>
+    </div>
+    <div class="chips" style="margin-bottom:24px">{byImpact.map((x) => <span class="pill">{LABEL[x.im]} <span class="fog">{x.n}</span></span>)}</div>
+    <form class="filters" onsubmit="return false"><select class="select" id="proj" aria-label="Project"><option value="">All projects</option>{projects.map((p) => <option value={p}>{p}</option>)}</select></form>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Disclosed</th><th>Project</th><th>Advisory</th><th class="hide-sm">Impact</th><th class="hide-sm">Severity</th></tr></thead>
+        <tbody id="adv">
+          {sorted.map((a) => (
+            <tr data-p={a.project}>
+              <td class="mono caption fog" style="white-space:nowrap">{a.date ?? '—'}</td>
+              <td class="caption">{a.project}</td>
+              <td><a class="medium" href={a.url}>{a.title}</a><div class="mono caption fog">{a.cve}</div></td>
+              <td class="caption hide-sm">{LABEL[a.impact]}</td>
+              <td class="caption hide-sm">{a.severity ?? '—'}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <p class="caption fog" style="margin-top:16px">Sources: Bitcoin Core security advisories, Geth disclosures, the Cosmos ASA list, and OSV / GitHub Security Advisories. <a class="link" href={href('/classes/node-dos-halt')}>Node DoS class →</a></p>
+  </section>
+  <script>
+    const sel = document.getElementById('proj') as HTMLSelectElement;
+    sel.addEventListener('input', () => {
+      for (const r of document.querySelectorAll<HTMLTableRowElement>('#adv tr')) r.hidden = !!sel.value && r.dataset.p !== sel.value;
+    });
+  </script>
 </Base>
-<style>.tech { display: flex; flex-wrap: wrap; gap: 6px; }</style>
+<style>
+  .head { padding-top: 80px; display: grid; gap: 20px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .filters { margin-bottom: 8px; }
+</style>

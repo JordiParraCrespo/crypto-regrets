@@ -10,6 +10,12 @@
   ],
   "targetType": "NFTfi",
   "category": "frontend-infra",
+  "vulnClass": "frontend-injection",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "frontend-injection",
+    "confidence": 1
+  },
   "technique": "Frontend Compromise",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -42,6 +48,10 @@
     {
       "source": "RevertIQ",
       "text": "On 17 July 2022, Premint's NFT whitelisting platform was compromised through a malicious JavaScript injection, leading to the theft of over 300 NFTs valued at approximately $375,000. The attacker tricked users into approving malicious wallet transactions and routed stolen assets through Tornado Cash. The root cause was a frontend compromise: a hacker injected malicious JavaScript code into Premint's website, which deceived users into granting wallet approvals (SetApprovalForAll). This allowed the attacker to transfer NFTs from victims' wallets."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "PREMINT is an NFT service intended to help project creators build access lists for new NFT projects based on various qualifications. The project was compromised on July 17, and users were asked to sign transactions that allowed hackers to drain all assets from their wallets. 314 NFTs were stolen, including from pricey collections such as Bored Ape Yacht Club, Otherside, Moonbirds Oddities, and Goblintown. The thiefs were able to flip the stolen NFTs for 270 ETH ($375,000), which they then tumbled through Tornado Cash. On July 20, PREMINT's CEO announced they would be compensating all users affected by the hack by sending them ETH equivalent to the floor price of the stolen NFTs.…"
     }
   ],
   "audit": null,
@@ -50,7 +60,8 @@
   "sources": [
     "defillama",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -77,6 +88,26 @@
       "source": "revertiq",
       "label": "cryptotimes.io",
       "url": "https://www.cryptotimes.io/2022/07/19/premint-gets-hacked-losing-375k-worth-of-nfts/"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=premint-nft-tool-hacked-user-wallets-drained"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/0xQuit/status/1548649395524194308"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/CertiKAlert/status/1548628664421580803"
+    },
+    {
+      "source": "w3igg",
+      "label": "theblock.co",
+      "url": "https://www.theblock.co/post/158147/a-hacker-stole-375000-from-users-of-premint-nft-platform"
     }
   ]
 }

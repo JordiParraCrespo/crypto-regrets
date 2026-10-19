@@ -1,0 +1,33 @@
+{
+  "note": "Measured on 2026-10-18 with jev-1.13.0. Reference labels: DefiLlama analyst labels + curated post-mortems (pattern level), analyst technique labels that map to one class (class level).",
+  "pattern": {
+    "testSet": 251,
+    "script": "scripts/eval-variants.ts",
+    "variants": [
+      { "name": "Plain definitions + instruction weighing the technique label (production)", "exact": 0.801, "layer": 0.873 },
+      { "name": "Plain definitions, original instruction", "exact": 0.785, "layer": 0.869 },
+      { "name": "Rubrics (covers / not for / examples)", "exact": 0.781, "layer": 0.869 },
+      { "name": "Rubrics, options in reversed order", "exact": 0.777, "layer": 0.876 }
+    ],
+    "allDescriptionsPenalty": -0.07,
+    "byConfidence": [
+      { "band": ">= 0.9", "typesafe": 0.91, "keywords": 0.72 },
+      { "band": "0.7 – 0.9", "typesafe": 0.76, "keywords": 0.59 },
+      { "band": "0.5 – 0.7", "typesafe": 0.58, "keywords": 0.64 },
+      { "band": "< 0.5", "typesafe": 0.44, "keywords": 0.56 }
+    ],
+    "haiku": { "exact": 0.713, "typesafe": 0.801, "onDisagreement": { "haiku": 12, "typesafe": 34 } }
+  },
+  "class": {
+    "testSet": 714,
+    "script": "scripts/eval-classes.ts --blind",
+    "withLabelVisible": 0.871,
+    "blind": 0.686,
+    "blindByConfidence": [
+      { "band": ">= 0.9", "accuracy": 0.811, "share": 0.52 },
+      { "band": "0.7 – 0.9", "accuracy": 0.667, "share": 0.19 },
+      { "band": "0.5 – 0.7", "accuracy": 0.562, "share": 0.12 },
+      { "band": "< 0.5", "accuracy": 0.412, "share": 0.17 }
+    ]
+  }
+}

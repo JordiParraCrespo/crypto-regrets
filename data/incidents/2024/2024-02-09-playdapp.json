@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "key-compromise",
+  "vulnClass": "hot-wallet-compromise",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "admin-key-compromise",
+    "confidence": 0.84
+  },
   "technique": "Hot Wallet Key Compromised",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -42,6 +48,10 @@
     {
       "source": "RevertIQ",
       "text": "PlayDapp's PLA token on Ethereum was compromised in February 2024 after an attacker obtained a privileged admin key, added themselves as a minter, and minted 1.79 billion PLA. Only about $32 million was converted; the rest was rendered worthless as exchanges froze tokens and migration excluded attacker-minted PLA. A privileged token contract admin key was compromised, allowing an unauthorized address to gain mint privileges and inflate the token supply without restriction, due to lack of multi-signature or timelock protection."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The South Korean blockchain gaming platform PlayDapp was hacked on February 9, and an attacker minted 200 million $PLA tokens. These were notionally priced at around $36.5 million, although because only 577 million $PLA were in circulation before the unauthorized mint, there would not have been sufficient liquidity for the attacker to sell them at around that price. Days after the initial attack, on February 12, the attacker minted another 1.59 billion $PLA. This has led to news reports that the platform was exploited for \"$290 million\". However, this value is being naively calculated based on the token price without taking into account the massive sup…"
     }
   ],
   "audit": null,
@@ -50,7 +60,8 @@
   "sources": [
     "defillama",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -82,6 +93,21 @@
       "source": "revertiq",
       "label": "blockchainbreaches.com",
       "url": "https://www.blockchainbreaches.com/en/breaches/playdapp-2024"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=playdapp-crypto-gaming-platform-exploited-spurring-misleading-headlines"
+    },
+    {
+      "source": "w3igg",
+      "label": "cointelegraph.com",
+      "url": "https://cointelegraph.com/news/playdapp-exploit-continues-4th-day-losses-reaching-290-million"
+    },
+    {
+      "source": "w3igg",
+      "label": "bleepingcomputer.com",
+      "url": "https://www.bleepingcomputer.com/news/security/hackers-steal-290-million-in-crypto-from-playdapp-gaming-platform/"
     }
   ]
 }

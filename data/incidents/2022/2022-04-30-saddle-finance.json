@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "logic-error",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "business-logic-flaw",
+    "confidence": 0.99
+  },
   "technique": "Swap Logic Flaw",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -42,6 +48,10 @@
     {
       "source": "RevertIQ",
       "text": "On April 30, 2022, Saddle Finance's sUSD MetaPool on Ethereum was exploited due to a virtual price calculation bug, resulting in a net loss of about $11.9 million. The attacker drained the pool by flash-loan-driven swaps, and a whitehat bot front-ran part of the exploit to recover a portion of the assets. The sUSD MetaPool was deployed with an outdated MetaSwapUtils library that failed to scale LP tokens by the base pool's virtual price during swaps. This pricing inconsistency allowed repeated profit extraction by attackers cycling between sUSD and the pool's LP token."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "An exploiter used a flash loan attack to pull 3,933 ETH (~$11 million) from the \"decentralized automated market maker\" Saddle Finance. Shortly after the attack, the hacker began moving the stolen funds through the Tornado Cash tumbler to launder the money. Saddle Finance had lost money once before , hours after it launched in January 2021. An individual was able to arbitrage Saddle Finance pools for a profit of around $275,000."
     }
   ],
   "audit": null,
@@ -53,7 +63,8 @@
     "defillama",
     "defihacklabs",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -105,6 +116,16 @@
       "source": "revertiq",
       "label": "blockchainbreaches.com",
       "url": "https://www.blockchainbreaches.com/en/breaches/saddle-finance-2022"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=saddle-finance-loses-more-than-11-million-to-hack"
+    },
+    {
+      "source": "w3igg",
+      "label": "medium.com",
+      "url": "https://medium.com/saddle/update-on-saddle-launch-cb5de01fa504"
     }
   ]
 }

@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "key-compromise",
+  "vulnClass": "hot-wallet-compromise",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "hot-wallet-compromise",
+    "confidence": 0.8
+  },
   "technique": "Hot Wallet Key Compromised",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -42,6 +48,10 @@
     {
       "source": "RevertIQ",
       "text": "On July 9, 2018, Bancor's Ethereum deployment suffered a hot wallet key compromise, resulting in losses of approximately $23.5 million across ETH, BNT, and NPXS. The attackers accessed a wallet responsible for contract upgrades, withdrew tokens, and forced Bancor to freeze its own BNT while collaborating with exchanges in unsuccessful attempts to block the liquidation of ETH and NPXS. An attacker obtained the private key for Bancor's upgrade wallet, allowing unauthorized withdrawals of token balances controlled by Bancor's contracts."
+    },
+    {
+      "source": "Blockchain Graveyard",
+      "text": "Bancor posted early details of an investigation into a security breach regarding a smart contract. A wallet used to upgrade smart contracts was used to steal somewhere in the range of $23M. Some amount of this was mitigated by protocol level features that allow the freezing of BNT tokens. A wallet used to upgrade some smart contracts was compromised. This compromised wallet was then used to withdraw ETH from the BNT smart contract in the amount of 24,984 ETH ($12.5M). The same wallet also stole: 229,356,645 NPXS (~$1M) 3,200,000 BNT (~$10M) Note: Charting as \"unknown\" until the method used to compromise the method is described."
     }
   ],
   "audit": null,
@@ -50,7 +60,8 @@
   "sources": [
     "defillama",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "graveyard"
   ],
   "references": [
     {
@@ -72,6 +83,11 @@
       "source": "revertiq",
       "label": "techcrunch.com",
       "url": "https://techcrunch.com/2018/07/10/bancor-loses-23.5m/"
+    },
+    {
+      "source": "graveyard",
+      "label": "Blockchain Graveyard",
+      "url": "https://twitter.com/Bancor/status/1016420621666963457"
     }
   ]
 }

@@ -6,12 +6,18 @@
   "amountUsd": 13900000,
   "returnedUsd": null,
   "chains": [
-    "Ethereum Mainnet",
+    "Ethereum",
     "Bitcoin",
     "WEMIX"
   ],
   "targetType": "CEX",
   "category": "key-compromise",
+  "vulnClass": "hot-wallet-compromise",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "hot-wallet-compromise",
+    "confidence": 1
+  },
   "technique": "Hot Wallet Key Compromised",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -25,9 +31,9 @@
         "p": 1
       }
     ],
-    "flashLoan": 0.01,
+    "flashLoan": 0.02,
     "stateActor": 0.02,
-    "hasRootCause": 0.41
+    "hasRootCause": 0.48
   },
   "bridge": false,
   "language": null,
@@ -40,6 +46,10 @@
     {
       "source": "RevertIQ",
       "text": "GDAC disclosed unauthorized withdrawals from its hot wallets on April 9, 2023, leading to losses reported at roughly $13 million across BTC, ETH, USDT, and WEMIX. Public reporting and later forensic reconstructions point to compromised wallet signing access, but GDAC did not publish a technical postmortem or a confirmed intrusion vector. GDAC reported that attackers transferred assets from exchange-controlled hot wallets to external addresses. The public record does not establish the initial intrusion path or provide a confirmed forensic explanation. Available third party reconstructions infer compromised signing credentials or private-key exposure fro…"
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Hackers made off with 61 BTC, 350.5 ETH, 10 million WEMIX, and 220,000 USDT from a hot wallet belonging to the South Korean cryptocurrency exchange GDAC. Altogether, the assets are notionally worth around $13 million. The stolen assets represented 23% of funds custodied on the GDAC exchange. GDAC halted deposits and withdrawals shortly after the attack, and stated that they had reported the exploit to South Korean law enforcement to investigate."
     }
   ],
   "audit": null,
@@ -48,7 +58,8 @@
   "sources": [
     "defillama",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -80,6 +91,21 @@
       "source": "revertiq",
       "label": "cryptonews.net",
       "url": "https://cryptonews.net/news/security/20792395/"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=gdac-exchange-hacked-for-assets-notionally-worth-more-than-14-million"
+    },
+    {
+      "source": "w3igg",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/tech/2023/04/10/s-korean-crypto-exchange-gdac-hacked-for-nearly-13m/"
+    },
+    {
+      "source": "w3igg",
+      "label": "cointelegraph.com",
+      "url": "https://cointelegraph.com/news/south-korean-crypto-exchange-gdac-hacked-for-nearly-14m"
     }
   ]
 }

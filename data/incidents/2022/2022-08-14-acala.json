@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "accounting-math",
+  "vulnClass": "unbacked-mint",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "unbacked-mint",
+    "confidence": 0.99
+  },
   "technique": "Infinite Mint",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -50,6 +56,10 @@
     {
       "source": "RevertIQ",
       "text": "Acala's iBTC/aUSD pool activated a deprecated reward path set to 50% of the pool's aUSD reserve every five blocks. Early unbacked issuance and an LP payout are recorded on August 13, 2022 UTC; the project later reported 3.022 billion aUSD error mints and a prolonged recovery. A nonzero DexSavingRewardRates configuration enabled deprecated stablecoin issuance in the incentives pallet. The 0.5 rate applied to the pool's aUSD reserve every five blocks, creating unbacked aUSD as rewards. Repeated liquidity additions could increase the base for later issuance."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "A misconfiguration in a newly-deployed liquidity pool allowed an attacker to mint 1.2 billion aUSD, a stablecoin built on the Polkadot network. The exploit caused aUSD to lose its USD peg , initially dropping as low as $0.60 and hovering around $0.90. Acala paused the protocol shortly after the attack, and disabled the transfer functionality of the stolen aUSD and of Acala-based tokens the attacker had swapped for some of the aUSD. It's important to note that the attacker could not earn a profit anywhere near $1.2 billion USD from the erroneous creation of new, unbacked tokens — they likely made off with around $1.6 million. Acala subsequently burned m…"
     }
   ],
   "audit": null,
@@ -61,7 +71,8 @@
   "sources": [
     "defillama",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -103,6 +114,21 @@
       "source": "revertiq",
       "label": "medium.com",
       "url": "https://medium.com/acalanetwork/acala-incident-report-14-08-2022-392089588642"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=misconfiguration-in-the-acala-stablecoin-project-allows-attacker-to-steal-1-2-billion-ausd"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/AcalaNetwork/status/1558785360670298112"
+    },
+    {
+      "source": "w3igg",
+      "label": "coinmarketcap.com",
+      "url": "https://coinmarketcap.com/currencies/acala-dollar/"
     }
   ]
 }

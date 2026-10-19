@@ -6,10 +6,16 @@
   "amountUsd": 1700000,
   "returnedUsd": null,
   "chains": [
-    "Ethereum Mainnet"
+    "Ethereum"
   ],
   "targetType": null,
   "category": "key-compromise",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "hot-wallet-compromise",
+    "confidence": 0.72
+  },
   "technique": "Private Key Leakage",
   "classificationNote": "Classified by keyword rules from the SlowMist label and description.",
   "classifiedBy": "keywords",
@@ -38,6 +44,10 @@
     {
       "source": "RevertIQ",
       "text": "Arthur Cheong reported a personal hot-wallet compromise after a suspected targeted email. Checked Ethereum receipts show 59 NFTs transferred in three batches, alongside ETH and token outflows. A standing LDO allowance enabled further withdrawals the following day. Cheong reported compromise of private-key or seed material and identified a portfolio-company-themed spear-phishing email as the likely entry point. Valid account authority moved the assets; a large standing LDO allowance then permitted recipient-initiated transferFrom calls on March 23."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Arthur_0x, a crypto investor and NFT whale , had two of their hot wallets compromised. The attacker stole ETH and transferred some big-ticket NFTs out of the wallets, including at least five CloneX NFTs and 17 Azuki NFTs. CloneX NFTs have been selling for an average of 16.76 ETH (about $50,000) over the past 30 days, and Azuki NFTs have been going for 12.5 ETH ($37,600). The attacker had not yet sold all the NFTs they had stolen, but within two hours of the attack they had 545 ETH (about $1.6 million) in their wallet. Arthur_0x wrote on Twitter that they had previously only ever used a hardware wallet on their PC, but when they started more regularly t…"
     }
   ],
   "audit": null,
@@ -62,7 +72,8 @@
   "poc": null,
   "sources": [
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -89,6 +100,26 @@
       "source": "revertiq",
       "label": "coinmarketcap.com",
       "url": "https://coinmarketcap.com/academy/article/experienced-crypto-investor-loses-1-7m-in-hot-wallet-hack-and-reveals-how-it-happened"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=hacker-steals-more-than-1-5-million-after-compromising-wallets-belonging-to-crypto-whale-arthur0x"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Arthur_0x/status/1506096947576205313"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Arthur_0x/status/1506109296701890563"
+    },
+    {
+      "source": "w3igg",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/address/0xe47e8cd58c8e95f765e642d7dcb898f622cefa83"
     }
   ]
 }

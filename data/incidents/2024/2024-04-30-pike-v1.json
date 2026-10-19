@@ -12,6 +12,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "access-control",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "uninitialized-implementation",
+    "confidence": 0.8
+  },
   "technique": "Proxy Upgrade Hijack",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -56,6 +62,10 @@
     {
       "source": "RevertIQ",
       "text": "On April 26, 2024, Pike Finance lost approximately $299,000 in USDC from Ethereum, Arbitrum, and Optimism due to a failure in cross-chain message validation. The vulnerability allowed an attacker to manipulate withdrawal approvals and drain USDC from Pike's pools. Pike Finance's integration with Circle CCTP for USDC cross-chain transfers failed to properly validate withdrawal requests, allowing an attacker to submit forged messages and unauthorized withdrawal parameters."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Pike Finance, a cross-chain lending protocol, was exploited twice in four days as attackers discovered vulnerabilities in the project's smart contracts . The first attack, on April 26, was enabled by a flaw in the security measures related to transfers of the USDC stablecoin. An attacker was able to change the recipient address and amount, ultimately making off with almost $300,000 in the stablecoin. Pike released a postmortem two days later, acknowledging that the bug had been identified by a third-party auditor but had not been rectified by their team. When the Pike team went to patch the smart contracts to thwart this attack, they introduced new, even worse vulnerabilities.…"
     }
   ],
   "audit": "unaudited",
@@ -74,7 +84,8 @@
     "rekt",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -156,6 +167,16 @@
       "source": "revertiq",
       "label": "certik.com",
       "url": "https://www.certik.com/blog/pike-finance-incident-analysis"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=pike-finance-hacks"
+    },
+    {
+      "source": "w3igg",
+      "label": "mirror.xyz",
+      "url": "https://mirror.xyz/pikefinance.eth/M1ToE42vwEHuE6xlz0dVRQwPT0xpaRtpIIw2arOdBAM"
     }
   ]
 }

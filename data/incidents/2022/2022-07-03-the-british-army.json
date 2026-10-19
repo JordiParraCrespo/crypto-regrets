@@ -5,32 +5,41 @@
   "year": 2022,
   "amountUsd": null,
   "returnedUsd": null,
-  "chains": [],
+  "chains": [
+    "Bitcoin",
+    "Ethereum"
+  ],
   "targetType": null,
-  "category": "unknown",
+  "category": "logic-error",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "business-logic-flaw",
+    "confidence": 0.97
+  },
   "technique": "Account Compromise",
-  "classificationNote": null,
-  "classifiedBy": "none",
+  "classificationNote": "Upstream label missing; classified by keyword rules from the root-cause text.",
+  "classifiedBy": "keywords",
   "ai": {
     "model": "jev-1.13.0",
     "category": "key-compromise",
-    "confidence": 0.83,
+    "confidence": 0.85,
     "top": [
       {
         "category": "key-compromise",
-        "p": 0.84
+        "p": 0.86
       },
       {
         "category": "social-engineering",
-        "p": 0.12
+        "p": 0.1
       },
       {
         "category": "frontend-infra",
         "p": 0.03
       }
     ],
-    "flashLoan": 0.01,
-    "stateActor": 0.03,
+    "flashLoan": 0.02,
+    "stateActor": 0.04,
     "hasRootCause": 0.27
   },
   "bridge": false,
@@ -40,19 +49,39 @@
     {
       "source": "SlowMist",
       "text": "According to Forbes, the official Twitter and YouTube accounts of the British Army were hacked and posted about cryptocurrencies and NFTs. The Twitter account retweeted posts promoting NFTs, and the YouTube account uploaded a video about Elon Musk and cryptocurrencies. Currently, all NFTs and encrypted content have been removed from both accounts."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The 362,000-follower verified Twitter account and 178,000-follower YouTube account for the British Army were simultaneously compromised, and used to shill two different crypto scams. On Twitter, the account details were changed to resemble the Possessed NFT project (as also happened to top Super Smash Bros. Ultimate player MkLeo in March ). Tweets from the account announced a \"new NFT collection\" and linked to a fake minting website, complete with a fake counter showing the number of available NFTs appearing to dwindle. Meanwhile, the YouTube account was rebranded to resemble ARK Invest, the investment management firm founded by Cathie Wood. It ran a s…"
     }
   ],
   "audit": null,
   "txHashes": [],
   "poc": null,
   "sources": [
-    "slowmist"
+    "slowmist",
+    "w3igg"
   ],
   "references": [
     {
       "source": "slowmist",
       "label": "forbes.com",
       "url": "https://www.forbes.com/sites/carlieporterfield/2022/07/03/british-armys-youtube-and-twitter-accounts-hacked-and-flooded-with-crypto-posts/?sh=6fac1b63"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=twitter-and-youtube-accounts-for-the-british-army-simultaneously-hacked"
+    },
+    {
+      "source": "w3igg",
+      "label": "web.archive.org",
+      "url": "https://web.archive.org/web/20220703165818/https://twitter.com/britisharmy"
+    },
+    {
+      "source": "w3igg",
+      "label": "web.archive.org",
+      "url": "https://web.archive.org/web/20220703165856/https://www.youtube.com/c/britisharmy?google_abuse=GOOGLE_ABUSE_EXEMPTION%3DID%3D4a03a37d7e33990b:TM%3D1656867536:C%3D%3E:IP%3D207.241.235.134-:S%3DTf5Mly9A_ISvvhwuVVYzOA%3B+path%3D/%3B+domain%3Dgoogle.com%3B+expires%3DSun,+03-Jul-2022+19:58:56+GMT"
     }
   ]
 }

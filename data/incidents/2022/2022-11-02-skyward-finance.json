@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "input-validation",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "missing-bounds-check",
+    "confidence": 0.66
+  },
   "technique": "Missing Input Validation",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -50,6 +56,10 @@
     {
       "source": "RevertIQ",
       "text": "On November 2, 2022, Skyward Finance's treasury on NEAR was drained for approximately $3.2 million. An attacker exploited a flaw in the redemption function, allowing repeated claims against the same SKYWARD token balance and rapidly emptying the protocol's reserves. A logic flaw in the treasury redemption contract allowed repeated asset redemptions against the same SKYWARD token balance, as accounting checks did not decrement or burn tokens before payout."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Skyward Finance is a project based on the NEAR blockchain, aiming to help users with initial token distribution. The project's treasury was drained of 1.1 million NEAR (~$3.2 million) after a hacker discovered a vulnerability in the project's smart contract . Crypto exploit research group Rekt wrote, \"The fact that it took over a year for anyone to find this relatively simple exploit is remarkable.\" and questioned, \"Was this incident an honest, albeit simple, mistake? Or a planned ejector seat?\" The project was unusually frank in their announcement, writing on Twitter that the hack had \"render[ed] the Treasury and the $SKYWARD token effectively worthless...…"
     }
   ],
   "audit": "Unaudited",
@@ -59,7 +69,8 @@
     "defillama",
     "rekt",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -96,6 +107,21 @@
       "source": "revertiq",
       "label": "blockchainbreaches.com",
       "url": "https://www.blockchainbreaches.com/en/breaches/skyward-finance-2022"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=skyward-finance-treasury-drained-of-3-2-million"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/skywardfinance/status/1587947957789331457"
+    },
+    {
+      "source": "w3igg",
+      "label": "rekt.news",
+      "url": "https://rekt.news/skyward-rekt/"
     }
   ]
 }

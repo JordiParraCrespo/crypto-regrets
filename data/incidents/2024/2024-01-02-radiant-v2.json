@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "accounting-math",
+  "vulnClass": "rounding-precision",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "rounding-precision",
+    "confidence": 1
+  },
   "technique": "Rounding Error",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -54,6 +60,10 @@
     {
       "source": "RevertIQ",
       "text": "On 2 January 2024, Radiant V2 on Arbitrum was exploited via a rounding error in a new USDC market, allowing an attacker to inflate pool indexes and withdraw excess funds, resulting in losses of around $4.5M (1902 ETH). A mathematical rounding error in share accounting within the new USDC market allowed the attacker to exploit mint/burn logic by precisely choosing deposit and withdrawal values after inflating the pool index using flash loans."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Radiant Capital, a cross-chain lending protocol built on the Arbitrum layer-2 network, was hacked for 1,900 ETH (~$4.5 million). The exploit relied on a flaw in the underlying code, which was forked from Compound and Aave. The original code has a known rounding issue, which makes new projects vulnerable to attack shortly after they are deployed if they are not specifically configured to avoid the issue. In this case, the attacker had observed the contract being deployed and performed the exploit only six seconds after the project was activated. Radiant Capital sent an on-chain message to the attacker, offering to negotiate a bounty ."
     }
   ],
   "audit": "Out of scope",
@@ -69,7 +79,8 @@
     "rekt",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -156,6 +167,21 @@
       "source": "revertiq",
       "label": "dn.institute",
       "url": "https://dn.institute/research/cyberattacks/incidents/2024-01-03-radiant-capital/"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=radiant-capital-hack"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/peckshield/status/1742334242120466580"
+    },
+    {
+      "source": "w3igg",
+      "label": "arbiscan.io",
+      "url": "https://arbiscan.io/tx/0xcd1865e3bf185fc5fe0b5fb055f6d74cfa68ee50335ff92ad721063538922664"
     }
   ]
 }

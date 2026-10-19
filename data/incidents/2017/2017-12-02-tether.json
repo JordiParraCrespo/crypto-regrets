@@ -1,0 +1,65 @@
+{
+  "id": "2017-12-02-tether",
+  "name": "Tether",
+  "date": "2017-12-02",
+  "year": 2017,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [],
+  "targetType": null,
+  "category": "key-compromise",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "hot-wallet-compromise",
+    "confidence": 0.8
+  },
+  "technique": "server hot wallet breach",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.98). Replaced keyword guess \"signature-crypto\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "key-compromise",
+    "confidence": 0.98,
+    "top": [
+      {
+        "category": "key-compromise",
+        "p": 0.98
+      },
+      {
+        "category": "frontend-infra",
+        "p": 0.02
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.03,
+    "hasRootCause": 0.55
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "Tether lost $31 million in \"tokens\". Tether tokens allow you to \"store, send and receive digital tokens pegged to dollars, euros, and yen person-to-person, globally\". Based on wording in Tether blog posts, a \"treasury wallet\" was drained by an external attacker. This infers that some sort of key material, or signature generating process was misused, so I estimate this ultimately required the breach of a high risk server. This estimation is low confidence and could change with new information, for instance, if the treasury wallet was cold, or held on a compromised endpoint by an employee. Remote access requires some aspect of wallet \"warmth\" which makes me believe it was online on a server.…",
+  "descriptions": [
+    {
+      "source": "Blockchain Graveyard",
+      "text": "Tether lost $31 million in \"tokens\". Tether tokens allow you to \"store, send and receive digital tokens pegged to dollars, euros, and yen person-to-person, globally\". Based on wording in Tether blog posts, a \"treasury wallet\" was drained by an external attacker. This infers that some sort of key material, or signature generating process was misused, so I estimate this ultimately required the breach of a high risk server. This estimation is low confidence and could change with new information, for instance, if the treasury wallet was cold, or held on a compromised endpoint by an employee. Remote access requires some aspect of wallet \"warmth\" which makes me believe it was online on a server.…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "graveyard"
+  ],
+  "references": [
+    {
+      "source": "graveyard",
+      "label": "Blockchain Graveyard",
+      "url": "https://tether.to/tether-critical-announcement/"
+    },
+    {
+      "source": "graveyard",
+      "label": "tether.to",
+      "url": "https://tether.to/tether-critical-announcement/"
+    }
+  ]
+}

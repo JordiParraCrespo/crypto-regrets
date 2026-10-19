@@ -10,6 +10,12 @@
   ],
   "targetType": "CEX",
   "category": "key-compromise",
+  "vulnClass": "key-leak-infrastructure",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "key-leak-infrastructure",
+    "confidence": 0.64
+  },
   "technique": "Key Leaked via Infrastructure",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -42,6 +48,10 @@
     {
       "source": "RevertIQ",
       "text": "On June 20,21, 2018, Bithumb, a major South Korean cryptocurrency exchange, lost approximately $31 million from its hot wallets during a breach of its exchange infrastructure. The attack did not involve a smart contract or frontend exploit; instead, hot wallet key compromise enabled unauthorized withdrawals. Subsequent efforts recovered about 45 percent of funds, with the exact method of initial intrusion and all affected addresses undisclosed. Attackers obtained unauthorized access to the private keys for Bithumb's hot wallets via an exchange infrastructure compromise. No technical postmortem or public forensic report confirms the specific method of that intrusion."
+    },
+    {
+      "source": "Blockchain Graveyard",
+      "text": "This is Bithumb's second appearance in the graveyard. 35 billion Korean won (around $31 million) is estimated to have been stolen, and data about root cause is sparse."
     }
   ],
   "audit": null,
@@ -50,7 +60,8 @@
   "sources": [
     "defillama",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "graveyard"
   ],
   "references": [
     {
@@ -77,6 +88,11 @@
       "source": "revertiq",
       "label": "securityaffairs.com",
       "url": "https://securityaffairs.com/73720/data-breach/bithumb-hack.html"
+    },
+    {
+      "source": "graveyard",
+      "label": "Blockchain Graveyard",
+      "url": "https://www.coindesk.com/bithumb-exchanges-31-million-hack-know-dont-know/"
     }
   ]
 }

@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "reentrancy",
+  "vulnClass": "read-only-reentrancy",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "read-only-reentrancy",
+    "confidence": 1
+  },
   "technique": "Read-Only Reentrancy",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -46,6 +52,10 @@
     {
       "source": "RevertIQ",
       "text": "EraLend, a lending protocol on zkSync Era, was exploited on 25 July 2023 via a read-only reentrancy vulnerability connected to price derivation from SyncSwap. The attacker used flash loans to manipulate reserve readings, leading to losses estimated between $2.7M and $3.4M. Borrowing was suspended and the protocol relaunched with new controls. EraLend derived collateral prices from a SyncSwap liquidity pair, which allowed re-entrancy during a burn callback before reserves were updated. The attacker exploited this window using flash loans, causing EraLend to price collateral off manipulated reserves."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The EraLend crypto lending platform was exploited for around $3.4 million after an attacker took advantage of a re-entrancy vulnerability to manipulate token prices and drain funds from the project. The thief then quickly distributed the stolen funds across various wallets and blockchains. EraLend paused various functions of their protocol while they investigated the attack, and said they were working with various security research organizations and law enforcement to investigate the theft. The BlockSec security research firm warned other projects that re-used a portion of code to be cautious if they re-used a portion of code from SyncSwap, because they could also be vulnerable."
     }
   ],
   "audit": "Out of scope",
@@ -55,7 +65,8 @@
     "defillama",
     "rekt",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -87,6 +98,16 @@
       "source": "revertiq",
       "label": "itokenly.com",
       "url": "https://itokenly.com/hacks/eralend"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=eralend-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BlockSecTeam/status/1683830744961912832"
     }
   ]
 }

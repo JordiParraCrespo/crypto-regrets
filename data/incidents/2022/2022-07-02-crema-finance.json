@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "access-control",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "missing-access-modifier",
+    "confidence": 0.5
+  },
   "technique": "Improper Access Control",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -50,6 +56,10 @@
     {
       "source": "RevertIQ",
       "text": "Crema Finance's Solana-based concentrated liquidity AMM was exploited on 2 July 2022, resulting in a loss of approximately $8.8M. The attacker forged tick accounts with inflated fee-growth values, bypassing insufficient program-derived address (PDA) validation. Most stolen funds were later returned after an on-chain negotiation. Crema Finance failed to validate that tick accounts passed to fee-claim instructions were the canonical program-derived addresses (PDAs) for the claimed pool and tick index. Ownership checks alone allowed attacker-created accounts with arbitrarily large fee-growth values to pass as genuine."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Solana liquidity protocol Crema Finance was exploited for around 69,500 SOL (~$2.3 million) and around $6.5 million worth of stablecoins for a total loss of around $8.8 million. The hacker then swapped the stablecoins for Ethereum via Uniswap. Crema Finance sent a message to the hacker via Ethereum transaction, writing that \"you have 72h from now to consider becoming a white hat and keeping $800k as the bounty ... Otherwise the police and legal force will officially get involved and there will be endless tracing waiting for you.\" On July 6, Crema announced that they had reached an agreement with the hacker, who returned most of the funds and kept 45,455 SOL ($1.68 million) as a \"bounty\".…"
     }
   ],
   "audit": "Bramah Systems",
@@ -59,7 +69,8 @@
     "defillama",
     "rekt",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -91,6 +102,26 @@
       "source": "revertiq",
       "label": "smartcontractaudit.com",
       "url": "https://www.smartcontractaudit.com/guides/crema-finance-2022-solana-clmm-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=crema-finance-hacked-for-8-8-million"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Crema_Finance/status/1543638844410499073"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Crema_Finance/status/1543520734839840769"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Crema_Finance/status/1544792330674135040"
     }
   ]
 }

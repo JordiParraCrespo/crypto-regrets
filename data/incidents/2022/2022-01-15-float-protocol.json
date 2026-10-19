@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "oracle-manipulation",
+  "vulnClass": "spot-price-oracle",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "spot-price-oracle",
+    "confidence": 1
+  },
   "technique": "Spot Price Manipulation",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -38,6 +44,10 @@
     {
       "source": "RevertIQ",
       "text": "Float Protocol's RariCapital Pool 90 was exploited on Ethereum Mainnet on 15 January 2022 via oracle manipulation. An attacker used low liquidity and a narrow band in the Uniswap V3 FLOAT/USDC pool to inflate the FLOAT price and borrow against artificially overvalued collateral, causing losses estimated at ~$1.16 million. Partial funds were returned after negotiation. RariCapital Pool 90 relied on the spot price from the FLOAT/USDC Uniswap V3 pool as its oracle. Low liquidity and narrow allocation bands made the pool susceptible to manipulation, permitting the attacker to inflate FLOAT prices and borrow assets with artificially high-value collateral."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Lack of liquidity in the Uniswap V3 FLOAT/USDC oracle allowed an attacker to manipulate the prices within the pool, then deposit it at a much higher rate. The hacker pulled about 350 ETH (equivalent to $1.1 million) out of the pool, though according to PeckShield they later returned around $250,000 for some reason."
     }
   ],
   "audit": null,
@@ -48,7 +58,8 @@
   "sources": [
     "defillama",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -75,6 +86,16 @@
       "source": "revertiq",
       "label": "threadreaderapp.com",
       "url": "https://threadreaderapp.com/thread/1482184042850263042.html"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=float-protocol-rari-capital-pool-exploited"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/peckshield/status/1482211298699923457"
     }
   ]
 }

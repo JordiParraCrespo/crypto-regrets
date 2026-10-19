@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "input-validation",
+  "vulnClass": "unvalidated-address-input",
+  "vulnClassBy": "typesafe",
+  "aiClass": {
+    "id": "unvalidated-address-input",
+    "confidence": 1
+  },
   "technique": "No input validation",
   "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 1.00).",
   "classifiedBy": "typesafe",
@@ -42,6 +48,10 @@
     {
       "source": "SlowMist",
       "text": "The redeem() function in OlympusDAO’s BondFixedExpiryTeller contract resulted in a loss of approximately $292,000 due to inability to properly validate inputs. The OlympusDAO hacker has returned the stolen funds to the DAO."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Insufficient validation on an OHM smart contract at Bond Protocol allowed an attacker to drain 30,437 OHM (~$300,000) from the Olympus DAO defi protocol. Olympus DAO wrote in an announcement that \"This bug was not found by 3 auditors, nor by our internal code review, nor reported via our Immunefi bug bounty.\" They also noted that because they had done a phased rollout of the contract, only a limited amount of the project's substantial funds were at risk. Olympus DAO initially announced that they would \"compensate all affected bonders in full\", but later revealed that the stolen funds had been returned. According to The Block , the Olympus team had succ…"
     }
   ],
   "audit": null,
@@ -49,7 +59,8 @@
   "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-10/OlympusDao_exp.sol",
   "sources": [
     "defihacklabs",
-    "slowmist"
+    "slowmist",
+    "w3igg"
   ],
   "references": [
     {
@@ -71,6 +82,16 @@
       "source": "slowmist",
       "label": "panewslab.com",
       "url": "https://www.panewslab.com/zh/sqarticledetails/1i3txm4e.html"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=almost-300000-stolen-from-olympus-dao-later-returned"
+    },
+    {
+      "source": "w3igg",
+      "label": "theblock.co",
+      "url": "https://www.theblock.co/post/178927/hacker-drains-olympus-daos-smart-contract-of-300000"
     }
   ]
 }

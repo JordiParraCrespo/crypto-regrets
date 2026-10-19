@@ -11,6 +11,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "oracle-manipulation",
+  "vulnClass": "spot-price-oracle",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "spot-price-oracle",
+    "confidence": 0.64
+  },
   "technique": "Spot Price Manipulation",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -47,6 +53,10 @@
     {
       "source": "RevertIQ",
       "text": "On November 4, 2025, Moonwell Lending on Base and Optimism suffered a critical oracle malfunction. A price feed assigned an absurd value to wrsETH collateral, allowing an attacker to borrow assets worth roughly $1 million, leaving up to $3.7 million in bad debt. The attack rapidly drained markets before protocol controls could respond. Moonwell used a price oracle feed for wrsETH that malfunctioned, returning an inflated value (~1.6 million ETH per wrsETH). The protocol multiplied this by the ETH/USD price, producing a multi-billion-dollar valuation for wrsETH and allowing the attacker to borrow excessive value against minuscule collateral."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The Moonwell lending protocol, built on the Base Ethereum L2 , wound up with $3.7 million in bad debt after an attacker took advantage of an oracle malfunction that caused the price of wrsETH to be massively inflated. The Chainlink oracle used by the project erroneously reported that a single wrsETH token (Kelp DAO's wrapped restaked ETH) was priced at around 1.65 million ETH (~$5.8 billion). Within 30 seconds of the oracle reporting bad data, an attacker took advantage of the error to borrow huge amounts of tokens, which they then swapped to other tokens to cash out. Ultimately the attacker profited around 295 ETH (~$1 million), but the protocol was s…"
     }
   ],
   "audit": null,
@@ -70,7 +80,8 @@
     "defihacklabs",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -122,6 +133,16 @@
       "source": "revertiq",
       "label": "ambcrypto.com",
       "url": "https://ambcrypto.com/chainlink-oracle-glitch-costs-moonwell-1m-as-defi-suffers-another-exploit/"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=moonwell-oracle-malfunction"
+    },
+    {
+      "source": "w3igg",
+      "label": "forum.moonwell.fi",
+      "url": "https://forum.moonwell.fi/t/wrseth-oracle-malfunction-11-4-25/2017"
     }
   ]
 }

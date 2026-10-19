@@ -1,0 +1,69 @@
+{
+  "id": "2013-05-10-vircurex",
+  "name": "Vircurex",
+  "date": "2013-05-10",
+  "year": 2013,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [],
+  "targetType": null,
+  "category": "key-compromise",
+  "vulnClass": "key-leak-infrastructure",
+  "vulnClassBy": "typesafe",
+  "aiClass": {
+    "id": "key-leak-infrastructure",
+    "confidence": 0.91
+  },
+  "technique": "cloud provider breach; server hot wallet breach",
+  "classificationNote": "Classified by keyword rules from the Blockchain Graveyard label and description.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "social-engineering",
+    "confidence": 0.32,
+    "top": [
+      {
+        "category": "social-engineering",
+        "p": 0.36
+      },
+      {
+        "category": "frontend-infra",
+        "p": 0.31
+      },
+      {
+        "category": "key-compromise",
+        "p": 0.3
+      }
+    ],
+    "flashLoan": 0.01,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "Cloud infrastructure compromise. After an initial credential breach, the attacker escalated access through social engineering. The victim blames the hosting provider for violating their own procedure for password resets. The attacker has acquired login credentials to our VPS control account with our hosting service provider and has then asked for the root password reset of all servers which – unfortunately – the service provider has then done and posted the credentials in their helpdesk ticket, rather than the standard process of sending it to our email address (which has 2FA protection), also the security setup of allowing only our IP range to login t…",
+  "descriptions": [
+    {
+      "source": "Blockchain Graveyard",
+      "text": "Cloud infrastructure compromise. After an initial credential breach, the attacker escalated access through social engineering. The victim blames the hosting provider for violating their own procedure for password resets. The attacker has acquired login credentials to our VPS control account with our hosting service provider and has then asked for the root password reset of all servers which – unfortunately – the service provider has then done and posted the credentials in their helpdesk ticket, rather than the standard process of sending it to our email address (which has 2FA protection), also the security setup of allowing only our IP range to login t…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "graveyard"
+  ],
+  "references": [
+    {
+      "source": "graveyard",
+      "label": "Blockchain Graveyard",
+      "url": "https://vircurex.com/Reports/2013-05.pdf"
+    },
+    {
+      "source": "graveyard",
+      "label": "vircurex.com",
+      "url": "https://vircurex.com/Reports/2013-05.pdf"
+    }
+  ]
+}

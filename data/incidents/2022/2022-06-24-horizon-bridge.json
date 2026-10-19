@@ -6,11 +6,17 @@
   "amountUsd": 100000000,
   "returnedUsd": null,
   "chains": [
-    "Ethereum Mainnet",
-    "BNB Chain"
+    "Ethereum",
+    "BSC"
   ],
   "targetType": null,
   "category": "key-compromise",
+  "vulnClass": "multisig-threshold-compromise",
+  "vulnClassBy": "typesafe",
+  "aiClass": {
+    "id": "multisig-threshold-compromise",
+    "confidence": 1
+  },
   "technique": "Private Key Compromise; Access Control",
   "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 1.00).",
   "classifiedBy": "typesafe",
@@ -35,13 +41,18 @@
     {
       "source": "RevertIQ",
       "text": "On June 24, 2022, attackers compromised two of the four private keys securing the Horizon Bridge multisig wallet, allowing them to drain around $100 million from the bridge contracts on Ethereum. The stolen funds were laundered via Tornado Cash. The attack was later attributed to North Korea's Lazarus Group. The Horizon Bridge on Ethereum was protected by a 2-of-4 multisig wallet. Attackers obtained two signing keys, giving them full control to authorize large withdrawals. This low threshold, combined with poor key security, allowed the breach."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The Horizon Bridge is a blockchain bridge allowing assets to be used across Ethereum, BNB, and Harmony blockchains. The bridge is run by the Harmony blockchain project. On June 23, someone was able to steal assets from the bridge that they then converted to more than 85,800 ETH. The stolen funds are notionally valued at almost $100 million, assuming the thief can cash them out successfully. Hours after the attack, most of the funds remained in the thief's wallet and had not yet been laundered. A June 29 analysis by blockchain research firm Ellipsis claimed that \"there are strong indications that North Korea's Lazarus Group may be responsible for this theft\".…"
     }
   ],
   "audit": null,
   "txHashes": [],
   "poc": null,
   "sources": [
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -63,6 +74,21 @@
       "source": "revertiq",
       "label": "merklescience.com",
       "url": "https://www.merklescience.com/blog/hack-track-analysis-of-harmonys-horizon-bridge-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=100-million-stolen-from-horizon-bridge"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/harmonyprotocol/status/1540110924400324608"
+    },
+    {
+      "source": "w3igg",
+      "label": "hub.elliptic.co",
+      "url": "https://hub.elliptic.co/analysis/the-100-million-horizon-hack-following-the-trail-through-tornado-cash-to-north-korea/"
     }
   ]
 }

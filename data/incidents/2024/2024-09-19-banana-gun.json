@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "frontend-infra",
+  "vulnClass": "frontend-injection",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "frontend-injection",
+    "confidence": 0.99
+  },
   "technique": "Frontend Compromise",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -50,6 +56,10 @@
     {
       "source": "RevertIQ",
       "text": "Banana Gun's Telegram crypto trading bot suffered a targeted exploit on September 19, 2024, allowing attackers to bypass the bot's message oracle authentication and drain $3 million from high-value user wallets. The vulnerability affected both the EVM and Solana bot versions, leading Banana Gun to pause operations, patch the exploit, and refund victims in full from its treasury. The message oracle used for authenticating and processing Telegram commands contained a vulnerability that allowed attackers to craft or inject messages interpreted as privileged transfer instructions. This bypass let the attacker trigger manual wallet transfers without legitim…"
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Some people use a Telegram-based crypto trading bot called \"Banana Gun\" to \" snipe \" crypto trades, copytrade , and perform other activities. On September 19, at least 11 victims lost around $3 million after their accounts were apparently compromised and drained. Banana Gun acknowledged the attack on Twitter and shut down the bot. They posted that they did not believe their backend was compromised, and stated that they believed the attack occurred via a \"front-end vulnerability\" — though it was not clear what this might have referred to."
     }
   ],
   "audit": null,
@@ -59,7 +69,8 @@
     "defillama",
     "rekt",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -96,6 +107,16 @@
       "source": "revertiq",
       "label": "blockchainbreaches.com",
       "url": "https://www.blockchainbreaches.com/en/breaches/banana-gun-2024"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=banana-gun-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "cointelegraph.com",
+      "url": "https://cointelegraph.com/news/telegram-bot-banana-gun-users-drained-500-ether"
     }
   ]
 }

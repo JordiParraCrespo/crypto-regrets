@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "reentrancy",
+  "vulnClass": "token-hook-reentrancy",
+  "vulnClassBy": "typesafe",
+  "aiClass": {
+    "id": "token-hook-reentrancy",
+    "confidence": 0.92
+  },
   "technique": "Reentrancy",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -38,6 +44,10 @@
     {
       "source": "RevertIQ",
       "text": "On March 31, 2022, Ola Finance's Fuse chain lending protocol was exploited via an ERC-677 reentrancy vulnerability, enabling repeated asset withdrawals within a single transaction. The attacker drained approximately $4.67 million in stablecoins, wrapped tokens, and FUSE by looping through pools before debts were properly recorded. The lending pool contracts permitted ERC-677 token transfers to invoke callbacks that reentered withdrawal logic before borrower debt and pool balances were updated. The contracts did not implement reentrancy guards or checks-effects-interactions ordering, exposing them to repeated withdrawals in a single transaction."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Ola Finance is a lending protocol that allows others to create their own lending networks. It promises to allow users to create their own loan platforms where \"assets can be listed without needing to pass cumbersome and expensive governance schemes or comply with numerous requirements (deep liquidity, high trading volumes, low volatility, etc.)\" One of their networks, built on top of the Fuse chain, was exploited for crypto assets priced at around $3.6 million. By taking advantage of a re-entrancy vulnerability, the attacker was able to take loans on the platform, then withdraw the collateral without paying back the loans. They then took the stolen ass…"
     }
   ],
   "audit": null,
@@ -46,7 +56,8 @@
   "sources": [
     "defillama",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -73,6 +84,16 @@
       "source": "revertiq",
       "label": "cybersecuritycasestudies.com",
       "url": "https://www.cybersecuritycasestudies.com/library/4-67-million-in-cryptocurrency-stolen-after-hack"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=ola-finance-hacked-for-3-6-million"
+    },
+    {
+      "source": "w3igg",
+      "label": "theblockcrypto.com",
+      "url": "https://www.theblockcrypto.com/post/140012/ola-finance-on-fuse-network-suffers-3-6-million-hack"
     }
   ]
 }

@@ -6,10 +6,16 @@
   "amountUsd": 2000000,
   "returnedUsd": null,
   "chains": [
-    "Ethereum Mainnet"
+    "Ethereum"
   ],
   "targetType": null,
   "category": "social-engineering",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "malware-fake-job",
+    "confidence": 0.57
+  },
   "technique": "Malware Attack",
   "classificationNote": "Classified by keyword rules from the SlowMist label and description.",
   "classifiedBy": "keywords",
@@ -46,6 +52,10 @@
     {
       "source": "RevertIQ",
       "text": "On June 22, 2024, CoinStats' infrastructure was compromised, allowing an attacker to access private keys of 1,590 user wallets and steal approximately $2.2 million in cryptocurrencies. The breach did not affect portfolio-tracking accounts, only wallets with imported keys. A sophisticated attacker exploited vulnerabilities in CoinStats' infrastructure and connected third-party services (including HashiCorp and AWS) after social-engineering an employee, ultimately gaining access to wallet private keys used by CoinStats Wallet. This enabled theft from imported user wallets."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "CoinStats, an application promising to help people track their cryptocurrency holdings, has suffered a breach impacting more than 1,500 user wallets. The application asks its users to connect their wallets to allow it to track their holdings, but promises on the website that it offers \"the ultimate security for your digital assets\". \"Since we ask for read-only access only, your holdings are perfectly safe under any conditions,\" the website promises, later touting its \"military-grade encryption\". CoinStats shut down the platform while investigating the incident. Losses have been estimated at around $2.2 million."
     }
   ],
   "audit": null,
@@ -53,7 +63,8 @@
   "poc": null,
   "sources": [
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -80,6 +91,16 @@
       "source": "revertiq",
       "label": "crypto.news",
       "url": "https://crypto.news/coinstats-releases-incident-report-following-2-2m-security-breach/"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=coinstats-wallet-compromises"
+    },
+    {
+      "source": "w3igg",
+      "label": "cointelegraph.com",
+      "url": "https://cointelegraph.com/news/cryptocurrency-portfolio-manager-coinstats-security-breach-wallets"
     }
   ]
 }

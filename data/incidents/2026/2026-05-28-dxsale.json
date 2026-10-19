@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "rugpull",
+  "vulnClass": "liquidity-rug",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "backdoor-privilege",
+    "confidence": 0.98
+  },
   "technique": "Liquidity Rug",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -58,6 +64,10 @@
     {
       "source": "RevertIQ",
       "text": "DxSale’s legacy liquidity locker on BNB Chain was exploited on 28 May 2026, draining an estimated $7.3 million from more than 1,400 liquidity providers. The attacker gained contract ownership through a series of concealed transfers and then used privileged functions to bypass lock restrictions, enabling mass withdrawal of funds. DxSale’s locker contract allowed ownership to be transferred without public notice or resistance, eventually granting an attacker admin privileges. Using owner-level access, the attacker invoked privileged functions (such as backdoor and fee-setting operations) to manipulate lock periods and fees, bypassing user-level timelocks and draining the locked funds.…"
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "DxSale, a project that was popular in 2021 for launching new tokens and creating liquidity pools , suffered a $7.3 million exploit after ownership of a locker contract was transferred to a new address. Nine months later, the contract ownership was repeatedly moved between many new wallets — likely in an attempt to cover tracks — before $7.3 million was taken from old liquidity pools. The stolen assets were then swapped to BNB and routed through bridges and mixers to obscure the trail."
     }
   ],
   "audit": null,
@@ -78,7 +88,8 @@
     "rekt",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -135,6 +146,16 @@
       "source": "revertiq",
       "label": "github.com",
       "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/README.md#L2466"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=dxsale-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "thedefiant.io",
+      "url": "https://thedefiant.io/news/hacks/old-dxsale-lockers-drained-for-7-3m-across-1-400-bnb-chain-pools-as-owner-privil"
     }
   ]
 }

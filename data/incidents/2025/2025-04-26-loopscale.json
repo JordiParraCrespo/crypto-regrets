@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "oracle-manipulation",
+  "vulnClass": "spot-price-oracle",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "spot-price-oracle",
+    "confidence": 0.3
+  },
   "technique": "Spot Price Manipulation",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -46,6 +52,10 @@
     {
       "source": "RevertIQ",
       "text": "On April 26, 2025, Loopscale, a Solana lending protocol, was exploited via manipulation of its collateral pricing logic, resulting in the loss of ~$5.8M before the team negotiated recovery of most funds. The attacker used a business logic flaw in the token value calculation, leveraging a misconfigured oracle to inflate collateral, drain lending vaults, and transfer assets. All funds were reportedly recovered after the team engaged the attacker. The core cause was that Loopscale's token pricing function failed to verify that the supplied price oracle matched the actual token type. The attacker exploited this by introducing a manipulated oracle, causing…"
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "A new Solana-based defi protocol called Loopscale, backed by Coinbase Ventures and Solana Labs, suffered a $5.8 million exploit only two weeks after its launch. The stolen funds represented 12% of the protocol's TVL . The project blamed the exploit on a bug in the protocol's pricing calculations. Although the project had been audited in February by OShield, the audit evidently did not detect the flaw."
     }
   ],
   "audit": null,
@@ -59,7 +69,8 @@
     "defihacklabs",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -106,6 +117,16 @@
       "source": "revertiq",
       "label": "github.com",
       "url": "https://github.com/alt-research2/SolanaGuard/blob/main/knowledge-base/exploits/loopscale.md"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=loopscale-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "theblock.co",
+      "url": "https://www.theblock.co/post/352083/solana-defi-protocol-loopscale-hit-with-5-8-million-exploit-two-weeks-after-launch"
     }
   ]
 }

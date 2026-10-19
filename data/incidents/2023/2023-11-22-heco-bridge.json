@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "key-compromise",
+  "vulnClass": "hot-wallet-compromise",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "hot-wallet-compromise",
+    "confidence": 1
+  },
   "technique": "Hot Wallet Key Compromised",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -50,6 +56,10 @@
     {
       "source": "RevertIQ",
       "text": "On November 22, 2023, the Heco Bridge's operator key was compromised, allowing unauthorized withdrawals totaling approximately $86.6 million across ETH, USDT, HBTC, SHIB, UNI, LINK, and other assets. The incident was an operator access-control failure and not a smart contract bug. The attacker gained access to the Heco Bridge operator's private key, enabling them to sign and authorize withdrawals directly from the Ethereum-side reserves. No smart contract vulnerability was involved."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Justin Sun confirmed that HTX (formerly Huobi) and its related Heco Chain protocol were hacked for a combined $115 million. It's been a rough few weeks for Sun, whose Poloniex exchange was hacked for around $120 million on November 10, and a rough few months for HTX, which was hacked for $8 million in late September. HTX suspended withdrawals as they investigated the hack, and wrote that the company would \"fully compensate for HTX's hot wallet losses\". Security firm Cyvers said they believed the theft was enabled by a private key leak."
     }
   ],
   "audit": null,
@@ -59,7 +69,8 @@
     "defillama",
     "rekt",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -111,6 +122,16 @@
       "source": "revertiq",
       "label": "defirisk.co",
       "url": "https://defirisk.co/learn/exploits/heco-bridge/"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=htx-and-heco-chain-hack"
+    },
+    {
+      "source": "w3igg",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/tech/2023/11/22/justin-sun-confirms-htx-heco-chain-exploited-after-100m-in-suspicious-transfers/"
     }
   ]
 }

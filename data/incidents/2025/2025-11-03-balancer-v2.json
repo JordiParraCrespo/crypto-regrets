@@ -15,6 +15,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "accounting-math",
+  "vulnClass": "rounding-precision",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "rounding-precision",
+    "confidence": 1
+  },
   "technique": "Rounding Error",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -55,6 +61,10 @@
     {
       "source": "RevertIQ",
       "text": "Balancer V2 Composable Stable Pools were exploited across multiple chains, losing over $120M due to a precision rounding mismatch in scaling operations. Attackers manipulated batch swaps to systematically deflate pool invariants and BPT prices, withdrawing discounted assets through atomic transactions. A rounding inconsistency between upscaling (mulDown, rounds down) and downscaling (divUp/divDown) let batch swaps push token balances to rounding cliffs. This caused precision loss in pool invariant D, which deflated BPT price below true pool value. Each micro-swap compounded the loss, draining pools without triggering protocol protections."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The defi protocol Balancer suffered a major exploit that drained over $110 million across several blockchains, including Ethereum, Polygon, Base, and Sonic. Attackers exploited faulty access control in the manageUserBalance function of Balancer's v2 smart contract , enabling unauthorized internal withdrawals. The stolen tokens included 6,850 osETH, 6,590 wETH, and 4,260 wstETH, later consolidated into new wallets likely for laundering. The exploit also impacted forked protocols like Beets Finance, which lost around $3 million. Balancer's BAL token dropped over 10% following the theft. This was Balancer's third major security incident since 2020, despit…"
     }
   ],
   "audit": null,
@@ -86,7 +96,9 @@
     "rekt",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "seal911",
+    "w3igg"
   ],
   "references": [
     {
@@ -158,6 +170,21 @@
       "source": "revertiq",
       "label": "blocksec.com",
       "url": "https://blocksec.com/blog/in-depth-analysis-the-balancer-v2-exploit"
+    },
+    {
+      "source": "seal911",
+      "label": "SEAL 911",
+      "url": "https://x.com/balancer/status/1986104426667401241"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=balancer-exploit-2"
+    },
+    {
+      "source": "w3igg",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/markets/2025/11/03/balancer-hit-by-apparent-exploit-as-usd70m-in-crypto-moves-to-new-wallets"
     }
   ]
 }

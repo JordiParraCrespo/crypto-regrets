@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "oracle-manipulation",
+  "vulnClass": "spot-price-oracle",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "spot-price-oracle",
+    "confidence": 0.85
+  },
   "technique": "Spot Price Manipulation",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -46,6 +52,10 @@
     {
       "source": "RevertIQ",
       "text": "Cypher Protocol on Solana was exploited on 2023-08-07, with public loss estimates around $1.0m to $1.035m. The public technical explanation points to stale sub-account state in the borrow path, combined with borrow checks that accepted inactive oracle conditions. A stale primary-account cache after a sub-account switched to isolated mode, combined with borrow checks that still accepted inactive oracle conditions."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The Solana-based Cypher protocol, a decentralized futures exchange, froze its smart contract after an attacker stole a little more than $1 million in Solana tokens and the USDC stablecoin . The project attempted to contact the hacker to negotiate the return of some of the funds. Meanwhile, various community members sent NFTs to the attacker wallet, requesting the return of the funds. One of them tried to convince the hacker, writing that they believed the attacker's identity could be discovered because they used centralized exchanges with KYC to try to withdraw funds. Another simply said \"give it back you shitlord\"."
     }
   ],
   "audit": null,
@@ -54,7 +64,8 @@
   "sources": [
     "defillama",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -81,6 +92,16 @@
       "source": "revertiq",
       "label": "crypto.news",
       "url": "https://crypto.news/cypher-protocol-recovers-nearly-50-of-stolen-assets/"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=cypher-protocol-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "cointelegraph.com",
+      "url": "https://cointelegraph.com/news/cypher-protocol-solana-hack-exploited-smart-contract"
     }
   ]
 }

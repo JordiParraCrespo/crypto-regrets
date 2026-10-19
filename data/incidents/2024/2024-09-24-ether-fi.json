@@ -3,13 +3,19 @@
   "name": "ether.fi",
   "date": "2024-09-24",
   "year": 2024,
-  "amountUsd": null,
+  "amountUsd": 2000000,
   "returnedUsd": null,
   "chains": [
     "Ethereum"
   ],
   "targetType": null,
   "category": "frontend-infra",
+  "vulnClass": "dns-domain-hijack",
+  "vulnClassBy": "typesafe",
+  "aiClass": {
+    "id": "dns-domain-hijack",
+    "confidence": 1
+  },
   "technique": "DNS Attack",
   "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 1.00).",
   "classifiedBy": "typesafe",
@@ -34,19 +40,34 @@
     {
       "source": "SlowMist",
       "text": "On September 24, ether.fi experienced a security incident involving its domain registrar, Gandi.net, resulting in the compromise of the ether[.]fi domain."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "A staking platform called Bedrock lost around $2 million after exploiters discovered a bug that allowed them to swap 1 ETH for 1 BTC despite the more than $63,000 difference in prices for the two assets. A security firm working with Bedrock had tried to warn Bedrock of the vulnerability several hours before the attack, but the team was asleep. The vulnerable contracts had been deployed a day and a half prior to the attack, and had not been audited . Fortunately for Bedrock, security groups were able to pause third-party projects surrounding Bedrock, which helped to limit the losses — which ultimately could have been as high as the entire value of funds on the protocol."
     }
   ],
   "audit": null,
   "txHashes": [],
   "poc": null,
   "sources": [
-    "slowmist"
+    "slowmist",
+    "w3igg"
   ],
   "references": [
     {
       "source": "slowmist",
       "label": "etherfi.gitbook.io",
       "url": "https://etherfi.gitbook.io/etherfi/security/sep-24-incident-attempted-domain-account-takeover"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=bedrock-bug"
+    },
+    {
+      "source": "w3igg",
+      "label": "decrypt.co",
+      "url": "https://decrypt.co/283440/staking-protocol-bug-let-users-swap-one-bitcoin-for-one-ethereum"
     }
   ]
 }

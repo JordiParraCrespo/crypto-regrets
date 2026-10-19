@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "rugpull",
+  "vulnClass": "liquidity-rug",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "liquidity-rug",
+    "confidence": 0.64
+  },
   "technique": "Admin Drain",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -46,6 +52,10 @@
     {
       "source": "RevertIQ",
       "text": "On 26 September 2025, the developers of HyperVault executed a rug pull on Hyperliquid L1, draining over $3.6 million in user assets. The project exploited a privileged internal ledger and admin-only control to move funds to Ethereum and obscure the trail using Tornado Cash. There is no evidence of recovery, and all social accounts were deleted immediately after. Privileged admin access and a hidden internal ledger enabled the HyperVault team to withdraw all user funds, exploiting trust and lack of transparency rather than a specific contract bug."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Exploiters drained $782,000 in crypto assets from two markets on the Hyperdrive lending protocol, which is built on the Hyperliquid layer-1 blockchain. The attacker apparently took advantage of a security flaw in one of the project's smart contracts to drain the funds. Hyperdrive paused all markets while investigating the vulnerability, and patched the bug. They also compensated those who had lost money in the exploit."
     }
   ],
   "audit": null,
@@ -54,7 +64,8 @@
   "sources": [
     "defillama",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -81,6 +92,21 @@
       "source": "revertiq",
       "label": "coincentral.com",
       "url": "https://coincentral.com/hypervault-finance-loses-3-6-million-in-suspected-rug-pull/"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=hyperdrive-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "theblock.co",
+      "url": "https://www.theblock.co/post/372662/hyperliquid-based-hyperdrive-loses-782000-after-smart-contract-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "x.com",
+      "url": "https://x.com/hyperdrivedefi/status/1972189259504537624"
     }
   ]
 }

@@ -1,0 +1,42 @@
+---
+/**
+ * Single-series bar chart (ink on paper). Hover shows the value; a table view follows for
+ * accessibility. Used as small multiples by passing a shared `max`.
+ */
+interface Props {
+  data: { year: number; value: number }[];
+  format?: 'count' | 'usd' | 'pct';
+  max?: number;
+  height?: number;
+  label: string;
+  compact?: boolean;
+}
+import { fmtUsd } from '../lib/data';
+const { data, format = 'count', max, height = 160, label, compact = false } = Astro.props;
+const fmt = (v: number) => (format === 'usd' ? (v ? fmtUsd(v) : '$0') : format === 'pct' ? `${(v * 100).toFixed(2)}%` : v.toLocaleString('en'));
+const top = Math.max(max ?? 0, ...data.map((d) => d.value), 1);
+const peak = data.reduce((a, b) => (b.value > a.value ? b : a), data[0]);
+---
+<figure class="bars" style={`--h:${height}px`} aria-label={label}>
+  <div class="plot" role="img" aria-label={`${label}: ${data.map((d) => `${d.year} ${fmt(d.value)}`).join(', ')}`}>
+    {data.map((d) => (
+      <div class="col" title={`${d.year} · ${fmt(d.value)}`}>
+        <span class="bar" style={`height:${Math.max((d.value / top) * 100, d.value ? 1.5 : 0)}%`}></span>
+      </div>
+    ))}
+  </div>
+  <div class="axis mono">
+    <span>{data[0].year}</span>
+    {!compact && <span class="peak">peak {peak.year} · {fmt(peak.value)}</span>}
+    <span>{data[data.length - 1].year}</span>
+  </div>
+</figure>
+<style>
+  .bars { margin: 0; }
+  .plot { height: var(--h); display: flex; align-items: flex-end; gap: 3px; border-bottom: 1px solid var(--color-dove); }
+  .col { flex: 1; height: 100%; display: flex; align-items: flex-end; min-width: 0; }
+  .col:hover { background: var(--color-sand); border-radius: 4px 4px 0 0; }
+  .bar { display: block; width: 100%; background: var(--color-jet-ink); border-radius: 3px 3px 0 0; }
+  .axis { display: flex; justify-content: space-between; font-size: 11px; color: var(--text-tertiary); margin-top: 8px; gap: 8px; }
+  .peak { color: var(--text-secondary); }
+</style>

@@ -18,6 +18,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "bridge-crosschain",
+  "vulnClass": "message-verification-bypass",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "message-verification-bypass",
+    "confidence": 1
+  },
   "technique": "Cross-Chain Message Spoofing",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -54,6 +60,10 @@
     {
       "source": "RevertIQ",
       "text": "On February 1, 2026, CrossCurve suffered an exploit on Arbitrum and other chains when an attacker spoofed cross-chain Axelar messages to drain assets from the bridge vault. The vulnerable ReceiverAxelar contract allowed arbitrary message execution with minimal checks. Estimated losses range from $1.4M to $3M, mainly in EYWA tokens and stablecoins. The expressExecute function in CrossCurve's ReceiverAxelar contract was publicly callable and lacked validation of cross-chain message authenticity. It relied only on a commandId uniqueness check and a single-party confirmation, allowing anyone to execute arbitrary payloads by crafting spoofed messages."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Hackers exploited a bug in smart contracts deployed by the defi protocol CrossCurve to steal an estimated $3 million across multiple blockchains. The thief was able to spoof cross-chain messages, causing the CrossCurve bridge to release assets not belonging to them. CrossCurve took a conciliatory tone in on-chain messages sent to the thief, writing, \"These tokens were wrongfully taken from users due to a smart contract exploit. We do not believe this was intentional on your part, and there is no indication of malicious intent.\" (Who among us hasn't accidentally stolen millions of dollars?) However, they warned, they planned to escalate to working with…"
     }
   ],
   "audit": null,
@@ -84,7 +94,8 @@
     "defillama",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -141,6 +152,16 @@
       "source": "revertiq",
       "label": "deficoverage.org",
       "url": "https://deficoverage.org/2026/02/07/crosscurve-fi-cross-chain-exploit-1-44m-drain-via-spoofed-messages-and-defi-coverage-options"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=crosscurve-users-exploited-for-around-3-million"
+    },
+    {
+      "source": "w3igg",
+      "label": "decrypt.co",
+      "url": "https://decrypt.co/356599/crosscurve-legal-action-3m-cross-chain-bridge-exploit"
     }
   ]
 }

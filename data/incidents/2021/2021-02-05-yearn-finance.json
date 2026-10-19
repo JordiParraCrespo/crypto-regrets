@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "oracle-manipulation",
+  "vulnClass": "spot-price-oracle",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "spot-price-oracle",
+    "confidence": 0.98
+  },
   "technique": "Spot Price Manipulation",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -50,6 +56,10 @@
     {
       "source": "RevertIQ",
       "text": "On February 4, 2021, Yearn Finance’s v1 yDAI vault on Ethereum lost $11 million after an attacker repeatedly manipulated Curve 3pool’s stablecoin balances, exploiting loose slippage limits and permissionless strategy calls to drain vault funds through a flash-loan-powered cycle. The v1 yDAI vault’s Curve strategy accounted for deposits and withdrawals using spot exchange rates from Curve 3pool, which were manipulable within a single transaction. Loose slippage checks (1%), disabled withdrawal fees (0%), and permissionless access to push deposits enabled the attacker to profitably cycle pool imbalances, draining value from the vault. The system assumed…"
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "An exploit in Yearn Finance's yDAI vault resulted in an $11 million loss to the platform, though \"only\" $2.8 million of this went to the hacker."
     }
   ],
   "audit": "Unaudited",
@@ -64,7 +74,8 @@
     "defillama",
     "defihacklabs",
     "rekt",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -106,6 +117,26 @@
       "source": "revertiq",
       "label": "de.fi",
       "url": "https://de.fi/blog/yearn-finance-exploit-explained-a10b07c280c8"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=yearn-finance-loses-11-million"
+    },
+    {
+      "source": "w3igg",
+      "label": "cointelegraph.com",
+      "url": "https://cointelegraph.com/news/yearn-finance-puts-expanded-treasury-to-use-by-repaying-victims-of-11m-hack"
+    },
+    {
+      "source": "w3igg",
+      "label": "theblockcrypto.com",
+      "url": "https://www.theblockcrypto.com/linked/93818/yearn-finance-dai-pool-defi-exploit-attack"
+    },
+    {
+      "source": "w3igg",
+      "label": "theblockcrypto.com",
+      "url": "https://www.theblockcrypto.com/linked/94365/defi-platform-yearn-moves-to-restore-exploited-vault-less-than-a-week-after-11-million-loss"
     }
   ]
 }

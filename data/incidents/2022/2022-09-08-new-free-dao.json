@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "logic-error",
+  "vulnClass": "reward-logic-flaw",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "reward-logic-flaw",
+    "confidence": 1
+  },
   "technique": "Reward Logic Flaw",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -54,6 +60,10 @@
     {
       "source": "RevertIQ",
       "text": "On September 8, 2022, New Free DAO on BNB Chain suffered a flash loan exploit that took advantage of flawed reward calculation logic in its unverified contract. The attacker drained ~4,481 WBNB worth over $1.25 million by amplifying rewards using flash-loaned NFD tokens. The reward contract failed to restrict reward claims based on flash-loaned balances. The rewards logic used a combination of token holdings and deposit time but did not implement protections against artificially inflating claims through instant, large borrowings within a single block."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "A flash loan attack against the New Free DAO project resulted in a $1.25 million loss. The project's token also crashed 99% in the wake of the theft. The hacker quickly sent 1,500 BNB (~$415,000) of the stolen funds through the Tornado Cash cryptocurrency mixer , and sent another 2,900 (~$803,000) to the PancakeSwap decentralized exchange."
     }
   ],
   "audit": null,
@@ -68,7 +78,8 @@
     "defillama",
     "defihacklabs",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -120,6 +131,16 @@
       "source": "revertiq",
       "label": "certik.com",
       "url": "https://www.certik.com/blog/new-free-dao-incident-analysis"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=new-free-dao-loses-1-25-million-in-flash-loan-attack"
+    },
+    {
+      "source": "w3igg",
+      "label": "cryptoslate.com",
+      "url": "https://cryptoslate.com/new-free-dao-crashes-99-after-1-25m-flash-loan-attack/"
     }
   ]
 }

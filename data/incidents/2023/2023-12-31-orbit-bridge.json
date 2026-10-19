@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "signature-crypto",
+  "vulnClass": "signature-verification-flaw",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "signature-verification-flaw",
+    "confidence": 1
+  },
   "technique": "Signature Verification Flaw",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -58,6 +64,10 @@
     {
       "source": "RevertIQ",
       "text": "On December 31, 2023, attackers drained Orbit Bridge’s Ethereum vaults of approximately $81.5 million by compromising the multi-signature signing authority. The exploit did not involve a smart contract bug but instead bypassed the intended security threshold by controlling the majority of signing keys. Attackers obtained control over a majority (reported 7 of 10) of the Orbit Bridge Ethereum vault multisig signing keys, allowing them to authorize and execute withdrawals."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The Orbit Bridge project, a cross-chain bridge for the Orbit Chain project, was exploited on December 31 for around $81 million. The attacker made off with around 26,742 ETH (~$64 million) and $18 million in the DAI stablecoin . Orbit Chain's total value locked plummeted from $152 million to $71 million as over half the funds were drained. Orbit began sending the attacker on-chain messages, writing that \"we will track you down and restore the damage you incurred to the ecosystem. And we will not stop.\" Orbit also wrote on Twitter that they were working with various law enforcement agencies."
     }
   ],
   "audit": "Out of scope",
@@ -70,7 +80,8 @@
     "defihacklabs",
     "rekt",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -117,6 +128,16 @@
       "source": "revertiq",
       "label": "blockchain.news",
       "url": "https://blockchain.news/news/cross-chain-orbit-bridge-allegedly-experiences-a-82-million-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=orbit-bridge-hack"
+    },
+    {
+      "source": "w3igg",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/business/2024/01/02/orbit-chain-loses-81m-in-cross-chain-bridge-exploit/"
     }
   ]
 }

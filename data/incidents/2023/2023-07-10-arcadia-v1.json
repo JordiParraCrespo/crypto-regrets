@@ -11,6 +11,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "access-control",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "missing-access-modifier",
+    "confidence": 0.79
+  },
   "technique": "Improper Access Control",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -59,6 +65,10 @@
     {
       "source": "RevertIQ",
       "text": "On July 10, 2023, Arcadia Finance's V1 protocol was exploited on both Ethereum Mainnet and Optimism, resulting in losses of approximately $455,000. The attacker leveraged a reentrancy flaw in the vault liquidation process, bypassing collateral health checks and enabling unauthorized asset extraction from user vaults. Reentrancy vulnerability in the liquidation process allowed collateral checks to be bypassed during vault liquidation, enabling repeated unauthorized withdrawals without adequate reentrancy protection."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Arcadia Finance is a defi margin trading protocol that launched on Ethereum and the Optimism Ethereum layer 2 protocol in March 2023. On July 9, an attacker used a flash loan to drain liquidity pools in the lending portion of the project, resulting in a total loss to the project of around 160 ETH and $163,000 in stablecoins for a total loss of almost $460,000. The Arcadia Finance team paused related smart contracts to prevent further attacks, and began working with various crypto security projects to investigate the attack. They also sent on-chain messages to the attacker, threatening law enforcement action and suggesting they \"return 90% of the funds... and walk away\"."
     }
   ],
   "audit": null,
@@ -72,7 +82,8 @@
     "defihacklabs",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -139,6 +150,26 @@
       "source": "revertiq",
       "label": "blog.solidityscan.com",
       "url": "https://blog.solidityscan.com/arcadiafi-hack-analysis-79fd2325fee1/"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=arcadia-finance-exploited"
+    },
+    {
+      "source": "w3igg",
+      "label": "protos.com",
+      "url": "https://protos.com/arcadia-finance-says-exploiter-contacted-after-450k-hack/"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/PeckShieldAlert/status/1678248292327763968"
+    },
+    {
+      "source": "w3igg",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x01e2683bfdb945fcb6af7ed6a656dbabb04d7c8135125184fd29f5665fd0546c"
     }
   ]
 }

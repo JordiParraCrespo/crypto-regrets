@@ -10,6 +10,12 @@
   ],
   "targetType": "CEX",
   "category": "logic-error",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "state-update-flaw",
+    "confidence": 0.39
+  },
   "technique": "Withdrawal Logic Flaw",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -46,6 +52,10 @@
     {
       "source": "RevertIQ",
       "text": "In March 2014, Poloniex lost about 12.3% of its Bitcoin, approximately 97 BTC, after an attacker exploited withdrawal logic to perform simultaneous withdrawals exceeding their balance. Users were initially given a temporary balance reduction, but Poloniex later reimbursed all customers in full. Concurrent handling of multiple withdrawal requests allowed an attacker to withdraw more bitcoin than their account balance without sufficient checks for negative balances."
+    },
+    {
+      "source": "Blockchain Graveyard",
+      "text": "Poloniex is a Bitcoin exchange that has been operating since 2014. In March of 2014, an Application Vulnerability was exploited and caused a loss of 97 BTC (a 12.3% loss on the exchange). The reported cause of the hack was that they did not properly check for a negative account balance while processing multiple, simultaneous withdrawals. The hacker found a vulnerability in the code that takes withdrawals. The hacker discovered that if you place several withdrawals all in practically the same instant, they will get processed at more or less the same time. This will result in a negative balance, but valid insertions into the database, which then get picked up by the withdrawal daemon.…"
     }
   ],
   "audit": null,
@@ -54,7 +64,8 @@
   "sources": [
     "defillama",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "graveyard"
   ],
   "references": [
     {
@@ -81,6 +92,11 @@
       "source": "revertiq",
       "label": "coindesk.com",
       "url": "https://www.coindesk.com/markets/2014/07/02/poloniex-claims-all-customers-repaid-following-march-bitcoin-hack"
+    },
+    {
+      "source": "graveyard",
+      "label": "Blockchain Graveyard",
+      "url": "https://bitcointalk.org/index.php?topic=499580"
     }
   ]
 }

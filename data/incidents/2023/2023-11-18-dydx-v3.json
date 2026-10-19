@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "market-manipulation",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "illiquid-collateral-pump",
+    "confidence": 0.88
+  },
   "technique": "Risk Parameter Abuse",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -50,6 +56,10 @@
     {
       "source": "RevertIQ",
       "text": "On 18 November 2023, dYdX v3's insurance fund lost over $9 million on Ethereum following multi-day market manipulation centered on the YFI-USD market. The attacker used leveraged positions and external spot market price manipulation, resulting in massive undercollateralized positions and a fund shortfall. The protocol's price oracle relied on a liquidity-sensitive spot market index, allowing an attacker to inflate YFI's price, create large leveraged long positions, and then trigger mass liquidations and undercollateralized losses when the price crashed. Insufficient safeguards against rapid open interest growth and large, highly-leveraged singular expo…"
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Around 40% of the \"insurance fund\", intended to protect dYdX users from having to backstop other traders' losing trades, was drained in what dYdX CEO described as \"pretty clearly a targeted attack against dYdX\". An attacker manipulated the market for the Yearn Finance token, which is not normally heavily traded on dYdX, but which experienced a surge in trades around the attack. By taking advantage of flaws in dYdX's risk management, the attacker was able to rack up big losses and then force the dYdX insurance fund to pay out."
     }
   ],
   "audit": null,
@@ -59,7 +69,8 @@
     "defillama",
     "rekt",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -91,6 +102,16 @@
       "source": "revertiq",
       "label": "crypto.news",
       "url": "https://crypto.news/dydx-exchange-reveals-post-mortem-results-of-9m-november-attack"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=dydx-insurance-fund-attack"
+    },
+    {
+      "source": "w3igg",
+      "label": "theblock.co",
+      "url": "https://www.theblock.co/post/263632/dydxs-insurance-fund-lost-9-million-as-a-result-of-targeted-attack-ceo"
     }
   ]
 }

@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "bridge-crosschain",
+  "vulnClass": "message-verification-bypass",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "unbacked-crosschain-mint",
+    "confidence": 0.25
+  },
   "technique": "Forged Proof",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -58,6 +64,10 @@
     {
       "source": "RevertIQ",
       "text": "On June 14, 2026, an attacker drained roughly $2.15M to $2.19M from Aztec Connect's deprecated RollupProcessorV3 on Ethereum by exploiting a mismatch between zk-proof commitments and Layer 1 settlement accounting. The exploit minted unbacked L2 balances that were later withdrawn as real ETH and ERC20 assets from the immutable legacy bridge. RollupProcessorV3 trusted a numRealTransactions value that was not fully bound into the proof commitment used by settlement verification. The zk proof committed transaction slots that included attacker-controlled deposit operations, but the Layer 1 settlement loop processed only the first numRealTransactions entries.…"
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Aztec Connect, an abandoned defi privacy bridge from Aztec Labs, was drained of $2.1 million after an attacker exploited a bug in the project's smart contracts. Although the project was deprecated three years ago, funds remained in the legacy system. \"Aztec Labs holds no admin keys or control over the system; it cannot be paused or upgraded by us,\" the project posted on social media. The theft is only the latest in a string of attacks targeting vulnerable legacy smart contracts, many of which cannot be deleted, paused, or changed due to blockchains' immutable nature. Raydium and DxSale are two other platforms that have recently suffered losses due to old, insecure code."
     }
   ],
   "audit": null,
@@ -71,7 +81,8 @@
     "rekt",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -138,6 +149,16 @@
       "source": "revertiq",
       "label": "raw.githubusercontent.com",
       "url": "https://raw.githubusercontent.com/SunWeb3Sec/DeFiHackLabs/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/src/test/2026-06/AztecConnect_exp.sol"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=aztec-connect-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "cointelegraph.com",
+      "url": "https://cointelegraph.com/news/aztec-connects-depreciated-smart-contract-exploited-for-2-million"
     }
   ]
 }

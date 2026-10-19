@@ -11,6 +11,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "arbitrary-call",
+  "vulnClass": "arbitrary-external-call",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "arbitrary-external-call",
+    "confidence": 0.95
+  },
   "technique": "Arbitrary External Call",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -51,6 +57,10 @@
     {
       "source": "RevertIQ",
       "text": "Dexible V2 was exploited on 17 February 2023 after selfSwap accepted caller-supplied router data, letting approved token allowances be turned into arbitrary transferFrom calls. Public disclosures place the loss at $2,047,635.17 across Ethereum mainnet and Arbitrum One. The selfSwap execution path trusted caller-supplied router address and calldata instead of restricting execution to approved swap adapters. That let Dexible's allowance handling become a general token-moving primitive, so the attacker could invoke transferFrom against users who had approved the protocol."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Decentralized exchange aggregator Dexible disclosed that they had suffered an exploit of one of their smart contracts, which allowed an attacker to steal funds from customer wallets. The exploit impacted 17 traders, most notably the investment firm BlockTower Capital. BlockTower suffered the largest loss, with the attacker stealing 18 million TrueFi tokens, notionally worth around $1.5 million. The attacker was able to swap their tokens for 931 ETH ($1.57 million), which they then laundered through Tornado Cash. \"There's no excuse for an exploit, but these things happen,\" the project wrote on Twitter."
     }
   ],
   "audit": "Unaudited",
@@ -64,7 +74,8 @@
     "rekt",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -131,6 +142,21 @@
       "source": "revertiq",
       "label": "threadreaderapp.com",
       "url": "https://threadreaderapp.com/user/DexibleApp"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=dexible-hacked-for-around-1-6-million"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/DexibleApp/status/1626575966003757056"
+    },
+    {
+      "source": "w3igg",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/tech/2023/02/17/blocktower-capital-loses-15m-in-defi-market-aggregator-dexible-exploit-blockchain-data"
     }
   ]
 }

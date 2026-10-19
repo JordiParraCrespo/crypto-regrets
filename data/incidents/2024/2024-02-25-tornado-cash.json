@@ -8,6 +8,12 @@
   "chains": [],
   "targetType": null,
   "category": "governance",
+  "vulnClass": "malicious-proposal",
+  "vulnClassBy": "typesafe",
+  "aiClass": {
+    "id": "malicious-proposal",
+    "confidence": 1
+  },
   "technique": "Governance Attack",
   "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.97). Replaced keyword guess \"frontend-infra\".",
   "classifiedBy": "typesafe",
@@ -36,19 +42,34 @@
     {
       "source": "SlowMist",
       "text": "SlowMist founder Cos tweeted that there is a backdoor code in the Tornado Cash IPFS version frontend that hijacks deposit certificates. A governance attack led to malicious proposals being passed, and the malicious code has been present for about two months."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "A community member of the Tornado Cash cryptocurrency tumbler project has reported that malicious code was added to the Tornado Cash project on January 1, which has put at risk funds deposited into the service. According to the community member, a successful governance proposal two months ago resulted in a code change, but malicious JavaScript included in the change went unnoticed. The code leaks private notes associated with deposits to a \"private malicious server\" owned by the person who initiated the code change. Private notes on Tornado Cash are the keys that allow a person to later withdraw the funds they have deposited into the mixing service. Th…"
     }
   ],
   "audit": null,
   "txHashes": [],
   "poc": null,
   "sources": [
-    "slowmist"
+    "slowmist",
+    "w3igg"
   ],
   "references": [
     {
       "source": "slowmist",
       "label": "gas404.medium.com",
       "url": "https://gas404.medium.com/tornado-cash-notes-exploit-from-jan-1st-and-the-actions-you-must-take-6076748bc886"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=tornado-cash-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/business/2024/02/26/tornado-cash-reportedly-suffers-backend-exploit-user-deposits-at-risk/"
     }
   ]
 }

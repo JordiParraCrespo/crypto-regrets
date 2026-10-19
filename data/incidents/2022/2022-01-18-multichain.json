@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "input-validation",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "unvalidated-address-input",
+    "confidence": 0.31
+  },
   "technique": "Missing Input Validation",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -50,6 +56,10 @@
     {
       "source": "RevertIQ",
       "text": "On January 18, 2022, attackers exploited a missing input validation issue in Multichain's router contract on Ethereum, enabling the unauthorized transfer of user tokens. At least $1.4 million in WETH was siphoned from user wallets that had previously approved the router, with further losses across other tokens. The root cause was the contract’s failure to restrict eligible tokens in a permit-based withdrawal function. The Multichain router function anySwapOutUnderlyingWithPermit lacked input validation to ensure the token parameter was an authorized Multichain-wrapped asset. This oversight allowed attackers to target arbitrary user-approved tokens, notably WETH, for unauthorized withdrawal."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Multichain publicly announced a vulnerability that was affecting their tokens, without first notifying users to ask them to remove vulnerable funds. Several hackers quickly exploited the vulnerability, stealing around $3 million from the platform. Security researchers described the saga as \"the worst way to treat a vulnerability\"."
     }
   ],
   "audit": null,
@@ -61,7 +71,8 @@
     "defillama",
     "defihacklabs",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -113,6 +124,21 @@
       "source": "revertiq",
       "label": "github.com",
       "url": "https://github.com/JIAMING-LI/MultichainExploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=multichain-publicly-announces-vulnerability-and-is-quickly-hacked"
+    },
+    {
+      "source": "w3igg",
+      "label": "vice.com",
+      "url": "https://www.vice.com/en/article/epxb8m/crypto-protocol-publicly-announces-flaw-users-relentlessly-owned-by-hackers"
+    },
+    {
+      "source": "w3igg",
+      "label": "vice.com",
+      "url": "https://www.vice.com/en/article/akv7aa/a-hacker-is-negotiating-with-victims-on-the-blockchain-after-dollar14m-heist"
     }
   ]
 }

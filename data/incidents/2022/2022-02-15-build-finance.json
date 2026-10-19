@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "governance",
+  "vulnClass": "malicious-proposal",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "malicious-proposal",
+    "confidence": 0.62
+  },
   "technique": "Malicious Proposal",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -46,6 +52,10 @@
     {
       "source": "RevertIQ",
       "text": "Build Finance’s February 2022 governance takeover on Ethereum let an attacker seize minting control of BUILD, drain liquidity, and remove treasury-held assets. Public estimates place the loss around $470,000. A low-participation governance path allowed an attacker-controlled proposal to transfer privileged control of the BUILD token contract, after which the attacker minted and sold additional BUILD and reached treasury-held value."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "A person managed to submit a proposal to the DAO that governs BuildFinance, a \"decentralized venture builder\", that would allow them to take over the project contract. The attacker succeeded in obtaining enough votes for the proposal to pass, primarily because they held an outsized number of governance tokens, and because they were able to disable community Discord features that would have alerted more of the community to the proposal. After the proposal passed and they were granted control over the project, they began minting and selling the project's native $BUILD token, draining the project treasury of about $470,000. According to BuildFinance, \"As…"
     }
   ],
   "audit": null,
@@ -57,7 +67,8 @@
     "defillama",
     "defihacklabs",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -99,6 +110,21 @@
       "source": "revertiq",
       "label": "api.llama.fi",
       "url": "https://api.llama.fi/hacks"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=buildfinance-dao-hostile-takeover"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/finance_build/status/1492591680716951556"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/finance_build/status/1493224636301156357"
     }
   ]
 }

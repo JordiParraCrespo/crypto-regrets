@@ -10,6 +10,12 @@
   ],
   "targetType": "Chain",
   "category": "bridge-crosschain",
+  "vulnClass": "message-verification-bypass",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "message-verification-bypass",
+    "confidence": 1
+  },
   "technique": "Forged Proof",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -42,6 +48,10 @@
     {
       "source": "RevertIQ",
       "text": "On June 21, 2026, Taiko's Ethereum L1 bridge lost approximately $1.7M after an attacker exploited a leaked SGX enclave signing key to forge L2 state proofs. The attacker used the compromised key and unchecked enclave attributes to register a rogue prover, issue fraudulent bridge messages, and drain the protocol. Taiko replenished the loss from treasury, confirming no user funds were lost. An RSA‑3072 private key used to sign SGX enclave attestations was committed to Taiko’s public GitHub repository. The on-chain attestation contract failed to check enclave DEBUG attributes, allowing an attacker to register a malicious DEBUG-mode prover and forge valid-…"
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The Taiko bridge , which allows assets to be transferred between the Ethereum mainnet and the Taiko Ethereum layer-2 chain, was exploited for at least $1.7 million before the network was halted, limiting losses. An attacker was able to forge withdrawal requests to appear as though they matched real deposits. Crypto security firm BlockSec said that the attacker may have gained access to a signing key that had been exposed on GitHub."
     }
   ],
   "audit": null,
@@ -54,7 +64,8 @@
   "sources": [
     "defillama",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -81,6 +92,16 @@
       "source": "revertiq",
       "label": "blocksec.com",
       "url": "https://blocksec.com/blog/web3-security-taiko-secondfi-exploits"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=taiko-bridge-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "x.com",
+      "url": "https://x.com/Phalcon_xyz/status/2068924424238321854"
     }
   ]
 }

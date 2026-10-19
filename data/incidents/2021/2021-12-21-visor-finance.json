@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "reentrancy",
+  "vulnClass": "cross-function-reentrancy",
+  "vulnClassBy": "typesafe",
+  "aiClass": {
+    "id": "cross-function-reentrancy",
+    "confidence": 0.92
+  },
   "technique": "Reentrancy",
   "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.93).",
   "classifiedBy": "typesafe",
@@ -58,6 +64,10 @@
     {
       "source": "RevertIQ",
       "text": "On December 21, 2021, Visor Finance’s vVISR staking contract was exploited via reentrancy, resulting in a loss of 8.8 million VISR tokens (~$8.2 million). The attacker used a malicious contract to re-enter the deposit logic, inflate share balances, and drain the staking contract, rapidly laundering the proceeds through Uniswap and Tornado Cash. The staking contract delegated token transfers to an external user-supplied delegateTransferERC20 implementation, invoking this external call before updating internal balances. This sequence permitted reentrancy whereby a malicious contract re-entered the deposit or withdrawal logic and inflated its vVISR share…"
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "A reentrancy exploit in the Ethereum-based Visor Finance DeFi protocol allowed hackers to pull 8.8 million VISR tokens out of the network, equivalent to about $8.2 million. The VISR token went from trading at around $0.93 to around $0.04, losing more than 95% of its value. The Visor team subsequently announced that they would perform a token migration to compensate affected users. Visor has suffered other hacks since its launch earlier in 2021, despite having undergone several audits ."
     }
   ],
   "audit": "Unaudited",
@@ -69,7 +79,8 @@
     "defihacklabs",
     "rekt",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -126,6 +137,16 @@
       "source": "revertiq",
       "label": "github.com",
       "url": "https://github.com/NanoJS10/Visor-finance-exploit-"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=visor-finance-hacked-for-about-8-2-million"
+    },
+    {
+      "source": "w3igg",
+      "label": "cryptobriefing.com",
+      "url": "https://cryptobriefing.com/8-2m-lost-visor-finance-suffers-latest-defi-hack/"
     }
   ]
 }

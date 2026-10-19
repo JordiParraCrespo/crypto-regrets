@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "oracle-manipulation",
+  "vulnClass": "spot-price-oracle",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "share-price-oracle",
+    "confidence": 0.89
+  },
   "technique": "Spot Price Manipulation",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -38,6 +44,10 @@
     {
       "source": "RevertIQ",
       "text": "QuickSwap's Market.xyz lending pool on Polygon was exploited on 24 October 2022 via a flash loan and Curve LP oracle manipulation. The attacker distorted collateral prices to borrow more funds, resulting in losses around $220,000. The incident led QuickSwap to close its lending service. The Curve LP oracle used by Market.xyz was vulnerable to read-only reentrancy in the get_virtual_price() function. Removing liquidity triggered contract fallback logic before pool balances updated, allowing the attacker to inflate the reported LP price and borrow undercollateralized funds."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Adding to the recent string of oracle manipulation attacks is an attack on the miMATIC ($MAI) market on the QuickSwap decentralized exchange. An exploiter was able to manipulate the spot price of assets to borrow funds, ultimately making off with 138 ETH ($188,000) that they mixed through Tornado Cash. The vulnerability was due to the use of a Curve LP oracle, which contains a vulnerability that was disclosed by a security firm earlier that month. Security firm PeckShield initially suggested the issue might have been with QiDAO, which creates the $MAI stablecoin . The vulnerability is not with their project, although it's possible that the theft will i…"
     }
   ],
   "audit": null,
@@ -48,7 +58,8 @@
   "poc": null,
   "sources": [
     "defillama",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -70,6 +81,21 @@
       "source": "revertiq",
       "label": "ambergroup.medium.com",
       "url": "https://ambergroup.medium.com/mai-finances-oracle-manipulation-vulnerability-explained-55e4b5cc2b82"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=oracle-manipulation-attack-on-a-quickswap-market-earns-exploiter-188000"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/peckshield/status/1584336827514638336"
+    },
+    {
+      "source": "w3igg",
+      "label": "chainsecurity.com",
+      "url": "https://chainsecurity.com/curve-lp-oracle-manipulation-post-mortem/"
     }
   ]
 }

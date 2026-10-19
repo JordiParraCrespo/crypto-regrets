@@ -11,6 +11,12 @@
   ],
   "targetType": "CEX",
   "category": "frontend-infra",
+  "vulnClass": "dependency-supply-chain",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "frontend-injection",
+    "confidence": 0.52
+  },
   "technique": "Supply Chain Attack",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -43,6 +49,10 @@
     {
       "source": "RevertIQ",
       "text": "On November 7, 2018, Gate.io was compromised through a supply-chain attack on its third-party analytics provider StatCounter. Malicious code injected into StatCounter's JavaScript targeted Gate.io's Bitcoin withdrawal page, replacing user-specified addresses with attacker-controlled Bitcoin addresses. The extent of user loss remains unknown, as the attack generated new recipient addresses for each withdrawal and no public on-chain transactions have been confirmed. Attackers injected malicious JavaScript into StatCounter's analytics script, which Gate.io loaded on its withdrawal page. The code checked for the withdrawal URI, loaded a second-stage script…"
+    },
+    {
+      "source": "Blockchain Graveyard",
+      "text": "A web analytics platform called StatCounter was compromised and impacted over 700k of its customers. However, only one company was discovered to be targeted, Gate.io, which embedded the script. According to ESET, the malicious code wouldn’t actually do anything unless the link contained a specific string: “myaccount/withdraw/BTC.” Researchers identified Gate.io to be the only website using a URL that contained this string. This attack evaded blockchain analysis, so a total loss is not available: ESET notes the script automatically generated a new Bitcoin address each time it was run. This effectively neutralizes the ability to link Bitcoin transactions…"
     }
   ],
   "audit": null,
@@ -51,7 +61,8 @@
   "sources": [
     "defillama",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "graveyard"
   ],
   "references": [
     {

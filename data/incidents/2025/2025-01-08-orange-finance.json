@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "key-compromise",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "multisig-threshold-compromise",
+    "confidence": 0.69
+  },
   "technique": "Private Key Compromised",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -46,6 +52,10 @@
     {
       "source": "RevertIQ",
       "text": "On January 8, 2025, Orange Finance on Arbitrum suffered an ~$843K loss after an attacker gained admin control via a misconfigured multisig wallet. The attacker used their upgrade authority to replace vault contracts and drain user assets from multiple pools. Misconfiguration of the controlling multisig wallet allowed protocol upgrades with only one signature. The attacker compromised the admin's private key, then upgraded vault proxies to malicious contracts, enabling asset drains without further approval."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The Arbitrum-based liquidity management project Orange Finance suffered at least $840,000 in losses after hackers compromised the project's admin address, then used it to upgrade the project's smart contracts and transfer funds. \"The team is not sure what happened,\" wrote Orange Finance in a tweet announcing the hack, encouraging people to revoke contract approvals for the compromised addresses. Orange Finance attempted to negotiate with the attacker via on-chain message, writing, \"If you respond positively to our offer within 24 hours, we guarantee that no law enforcement agencies will be involved, and the matter will be treated as a white-hat hack.\""
     }
   ],
   "audit": null,
@@ -62,7 +72,9 @@
   "sources": [
     "defillama",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "seal911",
+    "w3igg"
   ],
   "references": [
     {
@@ -94,6 +106,21 @@
       "source": "revertiq",
       "label": "defirisk.co",
       "url": "https://defirisk.co/learn/exploits/orange-finance-rekt/"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=orange-finance-hack"
+    },
+    {
+      "source": "w3igg",
+      "label": "x.com",
+      "url": "https://x.com/0xOrangeFinance/status/1876863611458801890"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/CyversAlerts/status/1876941066152153165"
     }
   ]
 }

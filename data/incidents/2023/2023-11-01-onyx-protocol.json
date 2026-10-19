@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "accounting-math",
+  "vulnClass": "share-inflation",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "share-inflation",
+    "confidence": 0.68
+  },
   "technique": "Donation Attack",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -54,6 +60,10 @@
     {
       "source": "RevertIQ",
       "text": "Onyx Protocol, a Compound V2 fork, was exploited on Ethereum Mainnet on November 1, 2023 via a precision loss vulnerability in its newly launched PEPE market. The attacker manipulated the exchange rate by donating PEPE tokens to the empty market, borrowed other assets against inflated collateral, and drained over $2.1M in value. The oPEPE market was launched without initial liquidity, allowing attackers to manipulate its share price via token donation. A rounding/precision bug in share accounting enabled overvaluation of oPEPE collateral, which the attacker exploited to borrow and redeem assets from other Onyx markets."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The Onyx Protocol was hacked for 1,164 ETH (~$2.1 million) after an exploiter took advantage of a known vulnerability affecting forks of Compound Finance. The bug allows attackers to siphon funds from new and unfunded markets on Compound forks — in this case, a new pool that had been created for the PEPE token. After pulling off the hack, the attacker received the usual flood of on-chain messages from people asking them to share some of their ill-gotten funds. Unusually, the attacker followed through, ultimately sharing 19.5 ETH (~$36,000) out of their spoils. Onyx is far from the first Compound fork to fail to patch known vulnerabilities and suffer hacks as a result.…"
     }
   ],
   "audit": null,
@@ -68,7 +78,8 @@
     "rekt",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -135,6 +146,11 @@
       "source": "revertiq",
       "label": "hacken.io",
       "url": "https://hacken.io/discover/onyx-protocol-hack/"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=onyx-hack-1"
     }
   ]
 }

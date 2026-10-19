@@ -10,6 +10,12 @@
   ],
   "targetType": "ICO",
   "category": "frontend-infra",
+  "vulnClass": "frontend-injection",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "frontend-injection",
+    "confidence": 0.87
+  },
   "technique": "Frontend Compromise",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -38,6 +44,10 @@
     {
       "source": "RevertIQ",
       "text": "The CoinDash ICO suffered a frontend website compromise during launch on July 17, 2017, with investors sending over $7 million worth of ETH to a fraudulent address after the attacker replaced the official wallet. CoinDash halted the sale, investigated, and committed to issuing tokens to affected contributors who sent ETH before the shutdown. A website frontend compromise allowed an attacker to modify the public ETH contribution address displayed to investors during the ICO. No cryptographic attestation or verification mechanism was in place to assure address authenticity."
+    },
+    {
+      "source": "Blockchain Graveyard",
+      "text": "CoinDash appears to be victimized by a hacked website, which a supposed adversary swapped out a funding address with a malicious address immediately after a token sale was launched. Marking this as a protocol vulnerability and server vulnerability. Contributors that sent ETH to the fraudulent Ethereum address, which was maliciously placed on our website, and sent ETH to the CoinDash.io official address will receive their CDT tokens accordingly. Transactions sent to any fraudulent address after our website was shut down will not be compensated. It is unfortunate for us to announce that we have suffered a hacking attack during our Token Sale event. Durin…"
     }
   ],
   "audit": null,
@@ -46,7 +56,8 @@
   "sources": [
     "defillama",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "graveyard"
   ],
   "references": [
     {
@@ -73,6 +84,11 @@
       "source": "revertiq",
       "label": "lancershield.github.io",
       "url": "https://lancershield.github.io/docs/hacks-db/critical/CoinDash.html"
+    },
+    {
+      "source": "graveyard",
+      "label": "Blockchain Graveyard",
+      "url": "https://web.archive.org/web/20170717181047/https://www.coindash.io/"
     }
   ]
 }

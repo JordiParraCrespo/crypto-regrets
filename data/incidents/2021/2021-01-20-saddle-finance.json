@@ -10,6 +10,12 @@
   ],
   "targetType": null,
   "category": "market-manipulation",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "mev-frontrunning",
+    "confidence": 0.34
+  },
   "technique": "Unbalanced initial pool; economic arbitrage of mispriced AMM swap rates",
   "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.88). Replaced keyword guess \"oracle-manipulation\".",
   "classifiedBy": "typesafe",
@@ -46,6 +52,10 @@
     {
       "source": "RevertIQ",
       "text": "Saddle Finance suffered a $275,000+ loss within an hour of its January 2021 launch on Ethereum due to unbalanced initial pool liquidity, allowing arbitrageurs to exploit pricing discrepancies and drain value from liquidity providers. Saddle Finance launched stableswap pools without sufficient, balanced initial liquidity. This exposed the automated market maker to immediate price imbalances, enabling sophisticated arbitrageurs to obtain assets at mispriced rates and rapidly extract value from the pools."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The Saddle Finance defi project, a fork of the Curve Finance project, launched on January 20. It promised it would \"eliminate slippage \". The project was exploited only hours later, by attackers who stole more than 7.9 BTC (~$275,000) by taking advantage of high slippage on the platform."
     }
   ],
   "audit": "Openzeppelin, Certik, Quantstamp",
@@ -57,7 +67,8 @@
   "poc": null,
   "sources": [
     "rekt",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -84,6 +95,16 @@
       "source": "revertiq",
       "label": "github.com",
       "url": "https://github.com/OriginProtocol/security/blob/master/incidents/2021-01-20-Saddle.md"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=saddle-finance-exploited-within-hours-of-launch"
+    },
+    {
+      "source": "w3igg",
+      "label": "rekt.news",
+      "url": "https://rekt.news/saddle-finance-rekt/"
     }
   ]
 }

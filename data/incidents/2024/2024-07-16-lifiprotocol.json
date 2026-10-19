@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "input-validation",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "unvalidated-address-input",
+    "confidence": 0.83
+  },
   "technique": "Incorrect input validation",
   "classificationNote": "Classified by keyword rules from the DeFiHackLabs root-cause title.",
   "classifiedBy": "keywords",
@@ -46,6 +52,10 @@
     {
       "source": "DeFiHackLabs explorer",
       "text": "arbitrary call Vulnerable code snippet: https://x.com/danielvf/status/1505689981385334784/photo/1 Attack tx: https://app.blocksec.com/explorer/tx/eth/0xd82fe84e63b1aa52e1ce540582ee0895ba4a71ec5e7a632a3faa1aff3e763873 Analysis: https://x.com/danielvf/status/1505689981385334784"
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Users of the cross-chain swapping API LI.FI Protocol, and of projects that build on top of it, suffered wallet drains amounting to at least $10 million (and counting). An attacker was able to exploit the users who had set infinite approvals . The protocol urged those who had interacted with several affected smart contracts to revoke permission, and warned: \"Please do not interact with any LI.FI powered applications for now!\""
     }
   ],
   "audit": null,
@@ -54,7 +64,8 @@
   ],
   "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2024-07/Lifiprotocol_exp.sol",
   "sources": [
-    "defihacklabs"
+    "defihacklabs",
+    "w3igg"
   ],
   "references": [
     {
@@ -76,6 +87,21 @@
       "source": "defihacklabs",
       "label": "app.blocksec.com",
       "url": "https://app.blocksec.com/explorer/tx/eth/0xd82fe84e63b1aa52e1ce540582ee0895ba4a71ec5e7a632a3faa1aff3e763873"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=lifi-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "x.com",
+      "url": "https://x.com/lifiprotocol/status/1813196697641570635"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/CyversAlerts/status/1813196692235210954"
     }
   ]
 }

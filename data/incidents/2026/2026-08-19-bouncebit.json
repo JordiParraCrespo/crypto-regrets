@@ -10,6 +10,12 @@
   ],
   "targetType": "Chain",
   "category": "access-control",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "missing-access-modifier",
+    "confidence": 0.74
+  },
   "technique": "Improper Access Control",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -38,6 +44,10 @@
     {
       "source": "RevertIQ",
       "text": "BounceBit Chain suffered a protocol-level authorization exploit on August 19,20, 2026, allowing an attacker to transfer 286.5 million BB tokens (~$3 million) from nine mainnet accounts. The exploit forced the permanent shutdown and planned migration of assets to BNB Chain. A flawed authorization check in BounceBit Chain's Evmos-based vesting/account lock module allowed unauthorized transfers. Attackers could select any source account for fund movement, bypassing intended access verification."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "An attacker took advantage of a bug in the authorization logic for the BounceBit layer-1 blockchain, allowing them to transfer around 286.5 million BB (~$3 million) from nine wallets. BounceBit halted the blockchain shortly after, then later announced they would be permanently shutting down the chain and reissuing tokens on Binance's BNB Chain. \"Maintaining a standalone Layer 1 is no longer the most effective way to serve our users,\" they said. They explained that it would be challenging to patch the underlying flaw because the chain was based on Evmos, an Ethereum blockchain implementation that was shut down in May. BounceBit, a bitcoin restaking prot…"
     }
   ],
   "audit": null,
@@ -46,7 +56,8 @@
   "sources": [
     "defillama",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -73,6 +84,21 @@
       "source": "revertiq",
       "label": "cryptotimes.io",
       "url": "https://www.cryptotimes.io/2026/08/21/bouncebit-shuts-down-chain-after-286m-bb-exploit/"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=bouncebit-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "x.com",
+      "url": "https://x.com/bouncebit/status/2090785561800061430"
+    },
+    {
+      "source": "w3igg",
+      "label": "theblock.co",
+      "url": "https://www.theblock.co/news/deals/2024-02-28-bitcoin-restaking-protocol-bouncebit-funding-tvl-279603"
     }
   ]
 }

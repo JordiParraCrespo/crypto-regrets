@@ -6,34 +6,40 @@
   "amountUsd": 12500000,
   "returnedUsd": null,
   "chains": [
-    "BNB Chain"
+    "BSC"
   ],
   "targetType": null,
   "category": "bridge-crosschain",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "message-verification-bypass",
+    "confidence": 0.64
+  },
   "technique": "Contract Vulnerability",
   "classificationNote": "Classified by keyword rules from the SlowMist label and description.",
   "classifiedBy": "keywords",
   "ai": {
     "model": "jev-1.13.0",
     "category": "bridge-crosschain",
-    "confidence": 0.68,
+    "confidence": 0.66,
     "top": [
       {
         "category": "bridge-crosschain",
-        "p": 0.7
+        "p": 0.6799999999999999
       },
       {
         "category": "access-control",
-        "p": 0.15
+        "p": 0.18
       },
       {
         "category": "logic-error",
-        "p": 0.07
+        "p": 0.06
       }
     ],
     "flashLoan": 0.04,
     "stateActor": 0.02,
-    "hasRootCause": 0.3
+    "hasRootCause": 0.26
   },
   "bridge": false,
   "language": null,
@@ -46,6 +52,10 @@
     {
       "source": "RevertIQ",
       "text": "On September 19, 2021, pNetwork's pBTC-on-BSC bridge suffered an exploit, allowing an attacker to mint 277 pBTC (approximately $12.5 million) without corresponding collateral. The breach resulted from flawed log event extraction in the attestation validation logic, enabling spoofed messages to trigger unauthorized minting. The bridge's attestation processing logic failed to verify the origin of event logs, erroneously treating logs emitted by attacker contracts as legitimate peg-out requests. The Rust-side event extraction did not differentiate between authentic pNetwork events and externally crafted logs, enabling the attacker to mint pBTC without BTC collateral."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "A hacker stole $12 million from the DeFi platform pNetwork after exploiting a bug in the codebase. The network offered a $1.5 million bounty to the attacker to return the funds."
     }
   ],
   "audit": null,
@@ -57,7 +67,8 @@
   "poc": null,
   "sources": [
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -84,6 +95,21 @@
       "source": "revertiq",
       "label": "cryptobriefing.com",
       "url": "https://cryptobriefing.com/12-4m-lost-defi-platform-pnetwork-suffers-exploit/"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=pnetwork-loses-12-million-to-a-bug"
+    },
+    {
+      "source": "w3igg",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/business/2021/09/20/cross-chain-protocol-pnetwork-loses-12m-to-hack/"
+    },
+    {
+      "source": "w3igg",
+      "label": "theblockcrypto.com",
+      "url": "https://www.theblockcrypto.com/post/118060/defi-pnetwork-hack-wrapped-bitcoin-12-million-lost"
     }
   ]
 }

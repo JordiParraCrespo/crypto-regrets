@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "social-engineering",
+  "vulnClass": "phishing-credential-theft",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "phishing-credential-theft",
+    "confidence": 0.96
+  },
   "technique": "Phishing",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -46,6 +52,10 @@
     {
       "source": "RevertIQ",
       "text": "On January 22, 2024, Concentric Finance on Arbitrum was exploited after an attacker compromised a deployer wallet via social engineering. The attacker transferred ownership of vault contracts, upgraded them to malicious logic, and minted/burned LP tokens to drain over $1.7 million in user funds. The attacker compromised a deployer wallet through social engineering, transferred vault contract ownership to their address, upgraded the vaults to malicious implementations, and minted LP tokens to extract user assets."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The Concentric Finance yield aggregator project issued a statement that the protocol had been exploited after a social engineering attack on a team member that had access to the project's deployer wallet. Tokens priced at around $1.8 million were drained from the project vaults. In a tweet, Concentric urged users to revoke contract approvals to avoid further losses. The wallet addresses used by the exploiter appeared to connect the attacker to the $2.7 million OKX DEX theft in December 2023."
     }
   ],
   "audit": null,
@@ -57,7 +67,8 @@
   "sources": [
     "defillama",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -89,6 +100,16 @@
       "source": "revertiq",
       "label": "certik.com",
       "url": "https://www.certik.com/blog/concentric-fi-incident-analysis"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=concentric-finance-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/CertiKAlert/status/1749427616082190827"
     }
   ]
 }

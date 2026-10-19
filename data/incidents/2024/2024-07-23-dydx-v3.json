@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "frontend-infra",
+  "vulnClass": "dns-domain-hijack",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "dns-domain-hijack",
+    "confidence": 1
+  },
   "technique": "DNS Hijack",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -38,6 +44,10 @@
     {
       "source": "RevertIQ",
       "text": "On July 23, 2024, dYdX V3's frontend was hijacked via a DNS attack, redirecting users to a phishing site. Two users lost a total of approximately $31,000 after interacting with the fake interface. The backend smart contracts were unaffected, and dYdX quickly restored domain control. The incident was caused by a DNS nameserver hijacking following a registrar migration, allowing attackers to disable DNSSEC and redirect dydx.exchange to a phishing frontend. This exposed visiting users to malicious wallet connection prompts and token approval requests."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Crypto exchange dYdX has announced that the website for their v3 exchange was compromised, and is urging people not to use it. This announcement came almost simultaneously with a report from Bloomberg that the company behind the exchange was looking to sell the software behind the v3 exchange, after they’d upgraded to what they call v4. The affected domain was hosted on Squarespace, which could connect this compromise to similar events earlier in the month affecting domains registered there."
     }
   ],
   "audit": null,
@@ -46,7 +56,8 @@
   "sources": [
     "defillama",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -73,6 +84,16 @@
       "source": "revertiq",
       "label": "quadrigainitiative.com",
       "url": "https://quadrigainitiative.com/casestudy/dydxexchangednshijackingattack.php"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=dydx-v3-exchange-website-compromised"
+    },
+    {
+      "source": "w3igg",
+      "label": "bloomberg.com",
+      "url": "https://www.bloomberg.com/news/articles/2024-07-23/defi-exchange-dydx-said-to-be-in-talks-to-sell-derivatives-trading-platform"
     }
   ]
 }

@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "input-validation",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "missing-bounds-check",
+    "confidence": 0.34
+  },
   "technique": "Missing Input Validation",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -46,6 +52,10 @@
     {
       "source": "RevertIQ",
       "text": "On February 8, 2022, an attacker exploited Superfluid on Polygon by forging calldata to impersonate user identities, draining roughly $8.7 million worth of assets from victim accounts. The attacker manipulated the context ('ctx') field during cross-contract calls, bypassing authentication and authorizing distributions from Super Token holders. The Superfluid protocol failed to validate that the context ('ctx') object decoded by agreement contracts was the same as the one stamped by the Host, allowing attackers to inject a forged sender and bypass user authorization during agreement calls."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "A vulnerability in the Superfluid crypto streaming protocol allowed an attacker to drain $8.7 million, affecting projects including Mai Finance, Stacker Ventures, Stake DAO, and the Museum of Crypto Art."
     }
   ],
   "audit": "Peckshield",
@@ -57,7 +67,8 @@
     "defillama",
     "rekt",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -89,6 +100,21 @@
       "source": "revertiq",
       "label": "smartcontractshacking.com",
       "url": "https://smartcontractshacking.com/hacks/superfluid-hack-2022"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=superfluid-exploited"
+    },
+    {
+      "source": "w3igg",
+      "label": "rekt.news",
+      "url": "https://rekt.news/superfluid-rekt/"
+    },
+    {
+      "source": "w3igg",
+      "label": "cointelegraph.com",
+      "url": "https://cointelegraph.com/news/polygon-stablecoin-qidao-exploited-for-13m-on-superfluid-vested-contract"
     }
   ]
 }

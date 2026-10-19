@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "oracle-manipulation",
+  "vulnClass": "spot-price-oracle",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "spot-price-oracle",
+    "confidence": 1
+  },
   "technique": "Spot Price Manipulation",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -42,6 +48,10 @@
     {
       "source": "RevertIQ",
       "text": "Moonwell's MAMO lending market on Base was exploited on August 27, 2026, via a sequence combining direct collateral-accounting inflation and spot price oracle manipulation. The attacker used thin-liquidity MAMO markets to spike the token’s oracle price, inflated collateral value, and borrowed assets totaling approximately $11M, with a net loss at $8.7M,$9M. Emergency response capped borrowing and supply immediately. Moonwell's Base deployment counted thin-liquidity MAMO as loan collateral, relying on an uncompounded spot oracle price without minimum liquidity, deviation bounds, or a TWAP. The attacker directly increased the mMAMO exchange rate by trans…"
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "An attacker stole around $8.7 million from the Moonwell defi lending protocol after manipulating the price of an illiquid token called MAMO. After pumping the MAMO token price, they \"borrowed\" various assets and abandoned the overinflated collateral. This theft is the fourth Moonwell exploit in less than a year, following a $3.7 million oracle manipulation attack in November 2025, another oracle attack in February 2026 amounting to $1.78 million, and a $1 million governance attack in March."
     }
   ],
   "audit": null,
@@ -59,7 +69,8 @@
   "sources": [
     "defillama",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -86,6 +97,16 @@
       "source": "revertiq",
       "label": "shattered.io",
       "url": "https://shattered.io/moonwell-hack-price-oracle-base-2026/"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=moonwell-price-manipulation-attack"
+    },
+    {
+      "source": "w3igg",
+      "label": "theblock.co",
+      "url": "https://www.theblock.co/news/defi/2026-08-27-moonwell-investigates-base-lending-market-issue-412913"
     }
   ]
 }

@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "key-compromise",
+  "vulnClass": "multisig-threshold-compromise",
+  "vulnClassBy": "typesafe",
+  "aiClass": {
+    "id": "multisig-threshold-compromise",
+    "confidence": 0.92
+  },
   "technique": "Private Key Compromised",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -46,6 +52,10 @@
     {
       "source": "RevertIQ",
       "text": "Unleash Protocol was exploited via a governance takeover on Story chain on December 30, 2025, resulting in a loss of approximately $3.9 million. The attacker gained administrative rights through the protocol's multisig, performed unauthorized contract upgrades, withdrew assets, and bridged funds to Ethereum, then obscured proceeds using Tornado Cash. The protocol's multisig governance system was compromised, allowing an externally owned address to gain administrative control and execute contract upgrades enabling unauthorized withdrawals."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Unleash Protocol, a project promising to allow creators to register their intellectual property on the blockchain, has been exploited for around $3.9 million. An attacker was able to gain administrative access, despite the project's governance system ostensibly being protected by a multisignature wallet . They then deployed a new smart contract , which allowed them to siphon assets from the project. The attacker then bridged the funds to ETH and laundered them via the Tornado Cash cryptocurrency mixer ."
     }
   ],
   "audit": null,
@@ -54,7 +64,9 @@
   "sources": [
     "defillama",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "seal911",
+    "w3igg"
   ],
   "references": [
     {
@@ -81,6 +93,16 @@
       "source": "revertiq",
       "label": "altcoindesk.com",
       "url": "https://altcoindesk.com/news/unleash-protocol-hit-by-3-9m-exploit-in-latest-2025-crypto-attack/article-19061/"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=unleash-protocol-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "theblock.co",
+      "url": "https://www.theblock.co/post/383981/unleash-hacker-laundering-4-million-eth-tornado-cash"
     }
   ]
 }

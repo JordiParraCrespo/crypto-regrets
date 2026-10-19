@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "accounting-math",
+  "vulnClass": "share-inflation",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "share-inflation",
+    "confidence": 0.99
+  },
   "technique": "Donation Attack",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -50,6 +56,10 @@
     {
       "source": "RevertIQ",
       "text": "On December 11, 2025, Yearn's yETH weighted stableswap pool on Ethereum lost $9M when an attacker manipulated the pool's Newton-Raphson invariant solver, causing excessive LP minting and an infinite mint bug. Exploiting unchecked arithmetic and an ungated bootstrap path, the attacker drained yETH and WETH from both the stableswap and affiliated Curve pool. The yETH pool's invariant solver allowed unchecked integer division and underflow, enabling product terms to be zeroed by extreme imbalanced deposits. The bootstrap initialization path could be re-entered after draining supply to zero, allowing an unchecked underflow to mint an astronomical yETH total.…"
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Only weeks after losing $6.6 million to an infinite mint exploit , a Yearn Finance smart contract has again been exploited, allowing an attacker to make off with around 103 ETH (~$300,000). The affected contract is a legacy contract that was part of the Yearn v1 project (once known as iearn). The attacker used a flash loan to manipulate the price of tokens in the vault, allowing them to withdraw the iearn assets, which they then swapped for ETH. This is Yearn's fourth hack, following the $6.6 million theft in November, an $11 million exploit in 2023 , and an $11 million exploit in 2021 . Yearn also lost around $1.4 million in 2023 in connection to the Euler Finance attack ."
     }
   ],
   "audit": null,
@@ -61,7 +71,8 @@
     "defillama",
     "rekt",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -93,6 +104,21 @@
       "source": "revertiq",
       "label": "blocksec.com",
       "url": "https://blocksec.com/blog/yearn-finance-incident-unsafe-arithmetic-in-the-invariant-solver-earns-its-name"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=yearn-finance-exploit-4"
+    },
+    {
+      "source": "w3igg",
+      "label": "x.com",
+      "url": "https://x.com/hklst4r/status/2001072409684685003"
+    },
+    {
+      "source": "w3igg",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x78921ce8d0361193b0d34bc76800ef4754ba9151a1837492f17c559f23771c43"
     }
   ]
 }

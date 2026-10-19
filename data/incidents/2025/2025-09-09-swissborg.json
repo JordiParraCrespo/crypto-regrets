@@ -10,6 +10,12 @@
   ],
   "targetType": "CEX",
   "category": "key-compromise",
+  "vulnClass": "key-leak-infrastructure",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "key-leak-infrastructure",
+    "confidence": 1
+  },
   "technique": "API Key Compromised",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -54,6 +60,10 @@
     {
       "source": "RevertIQ",
       "text": "SwissBorg lost approximately $41 million in SOL after an attacker compromised the API of staking partner Kiln, allowing hidden changes in stake account withdrawal authority. The attacker reassigned control of multiple accounts, waiting eight days before draining all funds. Attackers gained unauthorized access to Kiln’s API, which handled staking operations for SwissBorg. The API allowed the attacker to embed authority-reassignment instructions in a seemingly routine unstake transaction, transferring withdrawal authority to attacker-controlled addresses without detection. Existing monitoring focused on withdrawal actions failed to detect silent changes to staking account authorities."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Thieves stole 192,600 SOL (~$41.5 million) from a wallet belonging to the Swiss cryptocurrency exchange SwissBorg. The attack is being blamed on a vulnerability in the API of Kiln, a staking partner used for SwissBorg's \"Earn\" program. SwissBorg announced that they would be reimbursing impacted customers using treasury funds, and working with security firms and law enforcement to try to recover the stolen assets."
     }
   ],
   "audit": null,
@@ -63,7 +73,8 @@
     "defillama",
     "rekt",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -115,6 +126,21 @@
       "source": "revertiq",
       "label": "crypto.news",
       "url": "https://crypto.news/swissborg-crypto-loses-solana-api-related-hack-2025/"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=swissborg-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "cointelegraph.com",
+      "url": "https://cointelegraph.com/news/swissborg-hacked-41m-sol-api-compromise"
+    },
+    {
+      "source": "w3igg",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/tech/2025/09/09/swissborg-s-sol-earn-wallet-exploited-for-usd41-5m-after-partner-s-api-is-compromised"
     }
   ]
 }

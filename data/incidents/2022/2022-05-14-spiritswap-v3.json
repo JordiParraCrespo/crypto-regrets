@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "frontend-infra",
+  "vulnClass": "dns-domain-hijack",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "dns-domain-hijack",
+    "confidence": 1
+  },
   "technique": "DNS Hijack",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -42,6 +48,10 @@
     {
       "source": "RevertIQ",
       "text": "SpiritSwap V3, a Fantom-based DEX, was exploited via DNS hijacking on May 14, 2022. The attacker modified the website frontend, redirecting user funds during swaps to their own address, resulting in losses of about $18,000. The attacker gained access to SpiritSwap's domain provider, likely through stolen credentials or social engineering, and modified DNS records. This allowed them to serve a malicious frontend that rerouted user transactions to their own wallet."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "In what is beginning to become a pattern , SpiritSwap was the latest project where attackers gained control of their domain and were able to modify the frontend to divert funds to a wallet under their own control. SpiritSwap tweeted that the \"the hacker has managed to exploit Godaddy\" (unlikely — it was more likely a case of stolen credentials) and swap out the recipient address. The hacker only managed to exfiltrate around $18,000 before being discovered, and SpiritSwap shut down their swapping through their router to prevent the attack from continuing. MM.Finance suffered a similar attack earlier in the month, losing $2 million after an attacker gain…"
     }
   ],
   "audit": null,
@@ -50,7 +60,8 @@
   "sources": [
     "defillama",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -77,6 +88,11 @@
       "source": "revertiq",
       "label": "web3isgoinggreat.com",
       "url": "https://www.web3isgoinggreat.com/?id=spiritswap-is-the-latest-victim-of-a-domain-hijacking-attack"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Spirit_Swap/status/1525234200533925888"
     }
   ]
 }

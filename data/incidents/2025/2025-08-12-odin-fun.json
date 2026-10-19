@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "oracle-manipulation",
+  "vulnClass": "spot-price-oracle",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "spot-price-oracle",
+    "confidence": 1
+  },
   "technique": "Spot Price Manipulation",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -46,6 +52,10 @@
     {
       "source": "RevertIQ",
       "text": "On August 12, 2025, Odin.fun suffered a $7M theft when attackers exploited an AMM vulnerability by depositing worthless memecoins, manipulating internal pool prices through self-trading, and withdrawing BTC liquidity at inflated rates. Odin.fun's AMM allowed liquidity pools and swaps to rely entirely on internal token balances, with no external price oracle, value parity checks, or controls against non-economically backed tokens. The system permitted self-trading and manipulation, enabling attackers to artificially inflate the price of worthless memecoins and withdraw disproportionate BTC."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Odin.fun, a bitcoin-based memecoin launchpad sort of like the popular pump.fun, was exploited for 58.2 BTC (~$7 million). The attacker had apparently manipulated the price of various tokens, then withdrew bitcoin based on the inflated prices. A team member suggested they were unsure of the total amount stolen, \"but as of right now, our company treasury isn't big enough to cover the losses\"."
     }
   ],
   "audit": null,
@@ -55,7 +65,8 @@
     "defillama",
     "rekt",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -92,6 +103,16 @@
       "source": "revertiq",
       "label": "coindesk.com",
       "url": "https://www.coindesk.com/markets/2025/08/13/memecoin-launchpad-odin-fun-suffers-usd7m-liquidity-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=odinfun-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "x.com",
+      "url": "https://x.com/PeckShieldAlert/status/1955457951558406332"
     }
   ]
 }

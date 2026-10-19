@@ -1,0 +1,28 @@
+---
+/** Pill tabs that switch between pre-rendered views (e.g. $ lost vs number of incidents). */
+interface Props { id: string; labels: string[] }
+const { id, labels } = Astro.props;
+---
+<div class="switch" data-switch={id}>
+  <div class="tabs" role="tablist" aria-label="View">
+    {labels.map((l, k) => <button class="tab" role="tab" aria-selected={k === 0 ? 'true' : 'false'} data-view={k}>{l}</button>)}
+  </div>
+  <slot />
+</div>
+<script>
+  for (const root of document.querySelectorAll<HTMLElement>('[data-switch]')) {
+    const tabs = root.querySelectorAll<HTMLButtonElement>(':scope > .tabs [data-view]');
+    const views = root.querySelectorAll<HTMLElement>(':scope > [data-panel]');
+    views.forEach((v, k) => (v.hidden = k !== 0));
+    for (const t of tabs)
+      t.addEventListener('click', () => {
+        tabs.forEach((o) => o.setAttribute('aria-selected', String(o === t)));
+        views.forEach((v, k) => (v.hidden = String(k) !== t.dataset.view));
+      });
+  }
+</script>
+<style>
+  .switch { display: grid; gap: 16px; min-width: 0; }
+  .switch > :global([data-panel]) { min-width: 0; }
+  .switch > .tabs { justify-self: start; background: var(--color-cream); }
+</style>

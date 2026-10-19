@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "key-compromise",
+  "vulnClass": "admin-key-compromise",
+  "vulnClassBy": "typesafe",
+  "aiClass": {
+    "id": "admin-key-compromise",
+    "confidence": 1
+  },
   "technique": "Private Key Compromised",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -54,6 +60,10 @@
     {
       "source": "RevertIQ",
       "text": "On February 24, 2025, Infini lost $49.5M from its Morpho MEVCapital USDC Vault on Ethereum when an attacker compromised a privileged account that had not been properly revoked after an authority transfer. The attacker used this access to withdraw all vault funds, convert them to DAI and then ETH, and moved them to a new wallet. Failure to revoke a privileged withdrawal role from a legacy admin account after contract authority was transferred. The attacker compromised this account's key and used its unrestricted access to drain vault assets."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Around $49.5 million in the USDC stablecoin was stolen from the Infini crypto-focused \"stablecoin neobank\", a fintech company that promises \"financial freedom\" by \"democratizing banking\" and \"redefining the future of digital finance\". Infini experienced a different form of \"financial freedom\" when attackers liberated almost $50 million from the company after a thief with access to a wallet with admin rights drained tokens, then swapped them for the DAI stablecoin, which unlike USDC cannot be frozen by its issuer. The attack came only a day after a celebratory tweet from the company in which it had announced that they had achieved $50 million in total v…"
     }
   ],
   "audit": null,
@@ -71,7 +81,8 @@
     "defihacklabs",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -128,6 +139,26 @@
       "source": "revertiq",
       "label": "certik.com",
       "url": "https://www.certik.com/blog/0xinfini-incident-analysis"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=infini-hack"
+    },
+    {
+      "source": "w3igg",
+      "label": "certik.com",
+      "url": "https://www.certik.com/resources/blog/0xinfini-incident-analysis"
+    },
+    {
+      "source": "w3igg",
+      "label": "x.com",
+      "url": "https://x.com/0xinfini/status/1893973307596435871"
+    },
+    {
+      "source": "w3igg",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/idm?addresses=0x9881301e37b8f54780469beba92e58b7c2a902bc,0xfcc8ad911976d752890f2140d9f4edd2c64a6e49&type=1"
     }
   ]
 }

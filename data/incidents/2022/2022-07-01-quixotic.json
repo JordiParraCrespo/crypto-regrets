@@ -10,6 +10,12 @@
   ],
   "targetType": "NFTfi",
   "category": "signature-crypto",
+  "vulnClass": "signature-verification-flaw",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "signature-verification-flaw",
+    "confidence": 1
+  },
   "technique": "Signature Verification Flaw",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -54,6 +60,10 @@
     {
       "source": "RevertIQ",
       "text": "Quixotic, a major NFT marketplace on Optimism, was exploited in July 2022 after a contract update introduced a signature verification flaw in its Offer system. Attackers were able to transfer out users’ approved ERC-20 tokens, resulting in an estimated $100,000 in losses. The marketplace paused activity and later refunded affected users. The Quixotic marketplace's 'Offer' system only validated the seller's signature, missing buyer-side authentication. This allowed attackers to exploit the fillSellOrder function to execute unauthorized transfers of ERC-20 tokens by presenting forged offers."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Quixotic, an NFT marketplace on the Optimism network, was attacked after a hacker was able to exploit a recently updated smart contract . The attacker made off with at least $100,000. Quixotic is the largest NFT marketplace on Optimism, a layer 2 Ethereum network. Despite being the largest marketplace on the network, it still does fairly little in volume compared to NFT marketplaces on other networks, boasting only around $420,000 in trading volume in the last 30 days. Quixotic paused marketplace activity after discovering the hack, and promised to reimburse all users who had tokens stolen from them."
     }
   ],
   "audit": null,
@@ -65,7 +75,8 @@
     "defillama",
     "defihacklabs",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -117,6 +128,16 @@
       "source": "revertiq",
       "label": "github.com",
       "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/past/2022/README.md#L2095"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=quixotic-nft-marketplace-hacked"
+    },
+    {
+      "source": "w3igg",
+      "label": "cryptoslate.com",
+      "url": "https://cryptoslate.com/optimism-nft-marketplace-quixotic-suffers-exploit-following-contract-update/"
     }
   ]
 }

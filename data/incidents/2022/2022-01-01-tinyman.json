@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "accounting-math",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "balance-accounting-mismatch",
+    "confidence": 0.79
+  },
   "technique": "Incorrect Share Accounting",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -46,6 +52,10 @@
     {
       "source": "RevertIQ",
       "text": "Tinyman, a decentralized exchange on Algorand, was exploited on January 1, 2022, due to a flaw in its liquidity pool contract. Attackers manipulated the pool-token burn logic to extract more valuable assets, draining about $3 million across several pools. Tinyman's liquidity pool burn logic failed to enforce the correct two-asset redemption. Attackers could invoke the pool-token redemption in a way that returned two transfers of the same asset, disproportionately extracting high-value tokens."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Tinyman, a defi platform that bills itself as \"decentralized, secure trading\", had all liquidity drained from its goBTC and goETH pools after an attacker found a bug in their smart contracts . Liquidity throughout Tinyman dropped from about $43 million to around $20 million within hours of the attack, though the platform says they believe that most of this money was withdrawn by its rightful owners and not stolen. Tinyman asked users to remove liquidity from all pools while they work to patch their smart contracts, and announced they would reimburse affected users."
     }
   ],
   "audit": null,
@@ -54,7 +64,8 @@
   "sources": [
     "defillama",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -86,6 +97,16 @@
       "source": "revertiq",
       "label": "smartcontractshacking.com",
       "url": "https://smartcontractshacking.com/hacks/tinyman-hack-2022"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=tinymans-liquidity-pools-drained"
+    },
+    {
+      "source": "w3igg",
+      "label": "tinymanorg.medium.com",
+      "url": "https://tinymanorg.medium.com/official-announcement-about-the-incidents-of-01-01-2022-56abb19d8b19"
     }
   ]
 }

@@ -1,0 +1,37 @@
+---
+/** Vulnerable vs fixed code (or missing vs fixed control) in a terminal, switched by mono pill tabs. */
+import type { Snippet } from '../lib/classes';
+interface Props { id: string; vulnerable: Snippet; fixed?: Snippet }
+const { id, vulnerable, fixed } = Astro.props;
+const ext = (l: Snippet['lang']) => ({ solidity: '.sol', typescript: '.html', yaml: '.yml', json: '.json', text: '', go: '.go', rust: '.rs' })[l];
+---
+<div class="codetabs" data-codetabs>
+  <div class="terminal">
+    <div class="terminal-bar" aria-hidden="true"><i></i><i></i><i></i><span data-title>{`vulnerable${ext(vulnerable.lang)}`}</span></div>
+    <pre data-panel="vulnerable" id={`${id}-vulnerable`} role="tabpanel" tabindex="0"><code>{vulnerable.code}</code></pre>
+    {fixed && <pre data-panel="fixed" id={`${id}-fixed`} role="tabpanel" tabindex="0" hidden><code>{fixed.code}</code></pre>}
+  </div>
+  {fixed && (
+    <div class="tabs" role="tablist" aria-label="Code view">
+      <button class="tab" role="tab" aria-selected="true" aria-controls={`${id}-vulnerable`} data-tab="vulnerable" data-file={`vulnerable${ext(vulnerable.lang)}`}>Vulnerable</button>
+      <button class="tab" role="tab" aria-selected="false" aria-controls={`${id}-fixed`} data-tab="fixed" data-file={`fixed${ext(fixed.lang)}`}>Fixed</button>
+    </div>
+  )}
+</div>
+<script>
+  for (const root of document.querySelectorAll<HTMLElement>('[data-codetabs]')) {
+    const tabs = root.querySelectorAll<HTMLButtonElement>('[data-tab]');
+    for (const t of tabs) {
+      t.addEventListener('click', () => {
+        for (const o of tabs) o.setAttribute('aria-selected', String(o === t));
+        for (const p of root.querySelectorAll<HTMLElement>('[data-panel]')) p.hidden = p.dataset.panel !== t.dataset.tab;
+        const title = root.querySelector<HTMLElement>('[data-title]');
+        if (title) title.textContent = t.dataset.file ?? '';
+      });
+    }
+  }
+</script>
+<style>
+  .codetabs { display: grid; gap: 12px; justify-items: start; min-width: 0; }
+  .codetabs .terminal { width: 100%; }
+</style>

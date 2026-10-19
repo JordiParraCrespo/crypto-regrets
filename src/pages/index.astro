@@ -1,95 +1,208 @@
 ---
 import Base from '../layouts/Base.astro';
-import StackedBars from '../components/StackedBars.astro';
-import IncidentTable from '../components/IncidentTable.astro';
-import CategoryChip from '../components/CategoryChip.astro';
-import { incidents, advisories, sum, fmtUsd, yearLayerMatrix, allCategoryStats, href, YEARS, layerOf, LAYER_ORDER, layerSlot } from '../lib/data';
-import { CATEGORIES, LAYERS } from '../lib/taxonomy';
+import Bars from '../components/Bars.astro';
+import CodeTabs from '../components/CodeTabs.astro';
+import { incidents, advisories, sum, fmtUsd, fmtDate, href, YEARS, layerOf, LAYER_ORDER, classStats, classified, yearSeries, CLASSES } from '../lib/data';
+import { LAYERS, CATEGORIES } from '../lib/taxonomy';
 
 const total = sum(incidents);
 const withPoc = incidents.filter((i) => i.poc).length;
-const biggest = [...incidents].sort((a, b) => (b.amountUsd ?? 0) - (a.amountUsd ?? 0)).slice(0, 10);
-const latest = incidents.slice(0, 10);
-const top = allCategoryStats.filter((c) => c.id !== 'unknown');
+const latestYear = YEARS[YEARS.length - 1];
+const latest = incidents.filter((i) => i.amountUsd && i.amountUsd >= 250_000).slice(0, 8);
+const topClasses = classStats.filter((c) => c.count > 0).slice(0, 10);
+const maxClass = topClasses[0]?.count ?? 1;
 
-const layerTotals = LAYER_ORDER.map((l) => {
-  const xs = incidents.filter((i) => layerOf(i.category) === l);
-  return { l, count: xs.length, usd: sum(xs) };
-});
-const maxLayerUsd = Math.max(...layerTotals.map((x) => x.usd));
-// Simple then-vs-now: share of losses that were operational (keys, phishing, infra) before and after 2023.
+// Then vs now: where the money went, by layer.
 const share = (from: number, to: number, l: string) => {
   const xs = incidents.filter((i) => i.year >= from && i.year <= to);
   return sum(xs.filter((i) => layerOf(i.category) === l)) / Math.max(sum(xs), 1);
 };
-const opsThen = share(2020, 2022, 'operational');
-const opsNow = share(2023, YEARS[YEARS.length - 1], 'operational');
-const scThen = share(2020, 2022, 'smart-contract');
-const scNow = share(2023, YEARS[YEARS.length - 1], 'smart-contract');
 const pct = (x: number) => `${Math.round(x * 100)}%`;
+const opsThen = share(2020, 2022, 'operational');
+const opsNow = share(2023, latestYear, 'operational');
+const scThen = share(2020, 2022, 'smart-contract');
+const scNow = share(2023, latestYear, 'smart-contract');
+
+// Small multiples: one ink chart per layer on a shared scale.
+const layerSeries = LAYER_ORDER.map((l) => ({ l, data: yearSeries('count', (i) => layerOf(i.category) === l).filter((d) => d.year >= 2016) }));
+const sharedMax = Math.max(...layerSeries.flatMap((s) => s.data.map((d) => d.value)));
+
+const featured = CLASSES['integer-overflow'];
+const featuredCode = featured.vulnerable!; // integer-overflow always ships a code example
 ---
 <Base title="Crypto Regrets">
-  <h1>Every crypto hack, classified.</h1>
-  <p class="lede">
-    {incidents.length.toLocaleString('en')} incidents from {YEARS[0]} to {YEARS[YEARS.length - 1]}, {fmtUsd(total)} lost,
-    sorted into {Object.keys(CATEGORIES).length - 1} failure patterns. Built for security researchers and developers to see what keeps going wrong and what to do about it.
-  </p>
-
-  <div class="grid grid-4" style="margin-top:24px">
-    <div class="card stat"><div class="value">{incidents.length.toLocaleString('en')}</div><div class="label">incidents indexed</div></div>
-    <div class="card stat"><div class="value">{fmtUsd(total)}</div><div class="label">reported losses (nominal USD)</div></div>
-    <div class="card stat"><div class="value">{withPoc}</div><div class="label">with a runnable Foundry PoC</div></div>
-    <div class="card stat"><div class="value">{advisories.length}</div><div class="label">client &amp; consensus advisories</div></div>
-  </div>
-
-  <h2>How the failures changed</h2>
-  <div class="callout">
-    <p style="margin:0">
-      In 2020–2022, <strong>{pct(scThen)}</strong> of dollars lost came from smart-contract bugs and <strong>{pct(opsThen)}</strong> from keys, phishing and infrastructure.
-      Since 2023 that is <strong>{pct(scNow)}</strong> vs <strong>{pct(opsNow)}</strong>. By count, most hacks are still contract bugs in small protocols,
-      but the money is increasingly lost to operational failures. <a href={href('/history')}>Read the history →</a>
+  <section class="wrap hero">
+    <a class="pill pill-sand" href={href('/classes')}><span class="dot-new"></span> New · {Object.keys(CLASSES).length} vulnerability classes with fixes</a>
+    <h1 class="display">Every crypto hack,<br />classified.</h1>
+    <p class="lede">
+      {incidents.length.toLocaleString('en')} incidents from {YEARS[0]} to {latestYear}, {fmtUsd(total)} lost. Each traced to its failure pattern and, where the
+      evidence allows, to the exact vulnerability, with the code, the fix, and a runnable exploit.
     </p>
-  </div>
-  <div class="grid grid-2" style="margin-top:16px">
-    <StackedBars data={yearLayerMatrix('count')} metric="count" title="Incidents per year" caption="by failure layer" />
-    <StackedBars data={yearLayerMatrix('usd')} metric="usd" title="Losses per year" caption="by failure layer, nominal USD" />
-  </div>
+    <div class="cta">
+      <a class="btn btn-primary" href={href('/hacks')}>Browse the index</a>
+      <a class="btn btn-ghost" href={href('/classes')}>See what keeps going wrong →</a>
+    </div>
+    <div class="grid cols-4 stats">
+      <div class="stat-inline"><div class="value">{incidents.length.toLocaleString('en')}</div><div class="label">incidents indexed</div></div>
+      <div class="stat-inline"><div class="value">{fmtUsd(total)}</div><div class="label">reported losses</div></div>
+      <div class="stat-inline"><div class="value">{classified.toLocaleString('en')}</div><div class="label">traced to a vulnerability class</div></div>
+      <div class="stat-inline"><div class="value">{withPoc}</div><div class="label">with a Foundry exploit PoC</div></div>
+    </div>
+  </section>
 
-  <h2>Where in the stack it breaks</h2>
-  <div class="table-wrap">
-    <table>
-      <thead><tr><th>Layer</th><th class="num">Incidents</th><th class="num">Lost</th><th style="width:40%">Share of losses</th></tr></thead>
-      <tbody>
-        {layerTotals.map((x) => (
-          <tr>
-            <td><span class={`dot l${layerSlot(x.l)}`} /> <strong>{LAYERS[x.l].name}</strong><div class="muted small">{LAYERS[x.l].blurb}</div></td>
-            <td class="num">{x.count}</td>
-            <td class="num">{fmtUsd(x.usd)}</td>
-            <td><div class={`bar l${layerSlot(x.l)}`} style={`width:${(x.usd / maxLayerUsd) * 100}%`} title={fmtUsd(x.usd)} /></td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  </div>
+  <section class="wrap section">
+    <div class="grid cols-2 showcase">
+      <div class="card">
+        <p class="eyebrow">Vulnerability class</p>
+        <h2 class="h-sm" style="margin:8px 0 8px">{featured.name}</h2>
+        <p class="body-sm fog" style="margin:0 0 24px">{featured.summary}</p>
+        <CodeTabs id="home-overflow" vulnerable={featuredCode} fixed={featured.fixed} />
+        <p class="caption" style="margin:20px 0 0"><a class="link" href={href('/classes/integer-overflow')}>Detection signals, fixes and every incident →</a></p>
+      </div>
+      <div class="card">
+        <p class="eyebrow">Most common vulnerabilities</p>
+        <h2 class="h-sm" style="margin:8px 0 24px">What keeps going wrong</h2>
+        <ol class="ranked">
+          {topClasses.map((c) => (
+            <li>
+              <a href={href(`/classes/${c.id}`)}>
+                <span class="row"><span class="body-sm medium">{CLASSES[c.id].name}</span><span class="mono caption fog">{c.count}</span></span>
+                <span class="meter"><span style={`width:${(c.count / maxClass) * 100}%`}></span></span>
+              </a>
+            </li>
+          ))}
+        </ol>
+        <p class="caption" style="margin:20px 0 0"><a class="link" href={href('/classes')}>All {Object.keys(CLASSES).length} classes →</a></p>
+      </div>
+    </div>
+  </section>
 
-  <h2>Patterns ranked by money lost</h2>
-  <div class="grid grid-3">
-    {top.map((c) => (
-      <a class="card" href={href(`/patterns/${c.id}`)}>
-        <CategoryChip id={c.id} link={false} />
-        <div class="stat" style="margin-top:8px"><span class="value" style="font-size:1.5rem">{fmtUsd(c.usd)}</span> <span class="muted small">· {c.count} incidents</span></div>
-        <div class="small muted">{CATEGORIES[c.id].short}</div>
-      </a>
-    ))}
-  </div>
+  <section class="wrap section">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">How it changed</p>
+        <h2 class="h-md" style="margin-top:8px">The money moved from code to people.</h2>
+        <p class="lede">
+          In 2020–2022, {pct(scThen)} of losses came from smart-contract bugs and {pct(opsThen)} from keys, phishing and infrastructure.
+          Since 2023 it is {pct(scNow)} versus {pct(opsNow)}. By count, contract bugs in small protocols still dominate.
+        </p>
+      </div>
+      <a class="btn btn-ghost" href={href('/trends')}>Explore the trends →</a>
+    </div>
+    <div class="grid cols-3">
+      {layerSeries.map((s) => (
+        <div class="card card-sm">
+          <p class="body-sm medium" style="margin:0">{LAYERS[s.l].name}</p>
+          <p class="caption fog" style="margin:0 0 16px">{s.data.reduce((a, d) => a + d.value, 0).toLocaleString('en')} incidents since 2016</p>
+          <Bars data={s.data} max={sharedMax} height={96} label={`${LAYERS[s.l].name}: incidents per year`} />
+        </div>
+      ))}
+    </div>
+    <p class="caption fog" style="margin-top:12px">Incidents per year by layer, shared scale. Hover a bar for the value.</p>
+  </section>
 
-  <h2>The ten largest</h2>
-  <IncidentTable items={biggest} />
+  <section class="wrap section">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">Latest</p>
+        <h2 class="h-md" style="margin-top:8px">Recent incidents</h2>
+      </div>
+      <a class="btn btn-ghost" href={href('/hacks')}>All {incidents.length.toLocaleString('en')} →</a>
+    </div>
+    <div class="grid cols-4 news">
+      {latest.map((i) => (
+        <a href={href(`/hacks/${i.id}`)} class="news-item">
+          <p class="meta mono" style="margin:0">{fmtDate(i.date)} · {fmtUsd(i.amountUsd)}</p>
+          <p class="medium" style="margin:6px 0 4px">{i.name}</p>
+          <p class="caption fog" style="margin:0">{i.vulnClass ? CLASSES[i.vulnClass].name : CATEGORIES[i.category].name}</p>
+        </a>
+      ))}
+    </div>
+  </section>
 
-  <h2>Latest incidents</h2>
-  <IncidentTable items={latest} />
-  <p><a href={href('/hacks')}>Browse and filter all {incidents.length.toLocaleString('en')} →</a></p>
+  <section class="wrap section">
+    <div class="grid cols-2">
+      <div class="card">
+        <p class="eyebrow">For developers</p>
+        <h2 class="h-sm" style="margin:8px 0 16px">Write code that isn't on this list</h2>
+        <ul class="check">
+          <li>Every class has vulnerable and fixed code side by side</li>
+          <li>Detection signals for reviews, fuzzers and static analysis</li>
+          <li>A secure-coding checklist ranked by money lost</li>
+        </ul>
+        <a class="btn btn-primary" style="margin-top:32px" href={href('/developers')}>Open the checklist</a>
+      </div>
+      <div class="card">
+        <p class="eyebrow">For tool builders</p>
+        <h2 class="h-sm" style="margin:8px 0 16px">A labelled dataset of real exploits</h2>
+        <ul class="check">
+          <li>{incidents.length.toLocaleString('en')} incidents as JSON, CSV or one file each</li>
+          <li>Per-class fix knowledge with PoCs and attack transactions as test cases</li>
+          <li>{advisories.length} client and compiler advisories (Geth, Cosmos, Vyper…)</li>
+        </ul>
+        <a class="btn btn-ghost" style="margin-top:32px;margin-left:-20px" href={href('/data')}>Get the data →</a>
+      </div>
+    </div>
+  </section>
 </Base>
+
 <style>
-  .bar { height: 10px; border-radius: 0 4px 4px 0; background: var(--c); min-width: 2px; margin-top: 6px; }
+  .hero {
+    padding-top: 96px;
+    display: grid;
+    justify-items: start;
+    gap: 24px;
+  }
+  .hero h1 {
+    margin-top: 8px;
+  }
+  .cta {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+  }
+  .stats {
+    width: 100%;
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid var(--color-dove);
+  }
+  .ranked {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 14px;
+  }
+  .ranked a {
+    display: grid;
+    gap: 6px;
+  }
+  .ranked a:hover .medium {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .ranked .row {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .news {
+    row-gap: 32px;
+  }
+  .news-item {
+    display: block;
+    padding-top: 16px;
+    border-top: 1px solid var(--color-dove);
+  }
+  .news-item:hover .medium {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  @media (max-width: 640px) {
+    .hero {
+      padding-top: 48px;
+    }
+  }
 </style>

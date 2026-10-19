@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "access-control",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "missing-access-modifier",
+    "confidence": 0.41
+  },
   "technique": "Improper Access Control",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -62,6 +68,10 @@
     {
       "source": "RevertIQ",
       "text": "Cork V1 on Ethereum was exploited on 28 May 2025 for about $12 million due to a combination of mispriced token issuance from HIYA manipulation and missing access control in a Uniswap v4 hook. The attacker created a fake market and redeemed synthetic derivatives for real assets. The incident was caused by the protocol's failure to validate the redemption asset (RA) and lack of access control on a critical Uniswap v4 hook function (CorkHook.beforeSwap), allowing attackers to manipulate market parameters and call entry points directly with crafted data."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Cork Protocol, a defi project aimed at \"tokenizing the risk of de peg events for stablecoins and liquid (re) staking tokens\", suffered a $12 million loss after an attacker exploited a bug in how the project's smart contract calculated exchange rates. The attacker stole around 3,762 wrapped staked ETH (wstETH), which they exchanged for ETH. The project announced that they were investigating the theft and had paused markets. Cork had been audited in whole or in part by four different security firms. The project's funders include Andreessen Horowitz, OrangeDAO, and Steakhouse Financial, and Cork is a part of Andreessen Horowitz's Crypto Startup Accelerator."
     }
   ],
   "audit": null,
@@ -77,7 +87,8 @@
     "rekt",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -149,6 +160,21 @@
       "source": "revertiq",
       "label": "RevertIQ",
       "url": "https://revertiq.ai/hacks/cork-v1-2025-05-28"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=cork-protocol-hack"
+    },
+    {
+      "source": "w3igg",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/business/2025/05/28/a16z-backed-cork-protocol-suffers-usd12m-smart-contract-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "x.com",
+      "url": "https://x.com/Corkprotocol/status/1927716837271261621"
     }
   ]
 }

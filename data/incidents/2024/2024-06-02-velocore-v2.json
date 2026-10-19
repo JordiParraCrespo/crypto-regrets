@@ -11,6 +11,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "accounting-math",
+  "vulnClass": "balance-accounting-mismatch",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "balance-accounting-mismatch",
+    "confidence": 0.89
+  },
   "technique": "Incorrect Fee Accounting",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -51,6 +57,10 @@
     {
       "source": "RevertIQ",
       "text": "On June 2, 2024, Velocore's Balancer-style CPMM pools on zkSync Era and Linea suffered a $6.8 million loss due to a fee-multiplier overflow bug. The vulnerable velocoreexecute() function lacked access control and proper bounds checking, allowing an attacker to manipulate fee calculations and mint excessive LP tokens. The attacker bridged the proceeds to Ethereum and used Tornado Cash for obfuscation. The CPMM pool contract's velocoreexecute() function lacked access controls and upper bounds on the feeMultiplier parameter. This allowed an attacker to invoke the function directly, manipulate fee calculations via integer overflow, and mint LP tokens again…"
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The Velocore DEX, built on the Linea Ethereum layer-2 blockchain, was exploited for around $6.8 million in ETH. The hacker was able to take advantage of a bug in the project's smart contract in the logic to calculate swap fees. Using a flash loan attack funded through Tornado Cash, the attacker drained most of the tokens from the pool , bridged the tokens back to the Ethereum mainnet, and then tumbled the stolen funds back through Tornado. In an unusual move, the operators of the Linea layer-2 blockchain chose to unilaterally halt the chain in order to stop the outflow of stolen assets. Because Linea — like many layer-2 chains — is highly centralized,…"
     }
   ],
   "audit": "Zokyo, Hacken, Scalebit",
@@ -66,7 +76,8 @@
     "rekt",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -128,6 +139,16 @@
       "source": "revertiq",
       "label": "blog.solidityscan.com",
       "url": "https://blog.solidityscan.com/velocore-hack-analysis-642a13630be0/"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=velocore-hack"
+    },
+    {
+      "source": "w3igg",
+      "label": "x.com",
+      "url": "https://x.com/LineaBuild/status/1797283402745573837"
     }
   ]
 }

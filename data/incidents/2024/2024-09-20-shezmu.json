@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "access-control",
+  "vulnClass": "missing-access-modifier",
+  "vulnClassBy": "typesafe",
+  "aiClass": {
+    "id": "missing-access-modifier",
+    "confidence": 1
+  },
   "technique": "Access Control",
   "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 1.00).",
   "classifiedBy": "typesafe",
@@ -50,6 +56,10 @@
     {
       "source": "RevertIQ",
       "text": "Shezmu's Ethereum-based vault was exploited on September 20, 2024 after it accepted a freely mintable collateral token. An attacker minted large amounts of the token, deposited it as 'collateral,' and borrowed nearly $4.9M in ShezUSD. Most funds were returned after negotiation, minus a 20% bounty. The vault contract accepted a collateral token (0x641249db01d5c9a04d1a223765ffd15f95167924) whose mint function lacked access controls. Anyone could mint unlimited collateral and borrow ShezUSD against it. No validation existed for the collateral's minting restrictions."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "A crypto yield platform called Shezmu suffered a loss of around $4.9 million in $ShezUSD after an attacker exploited a flaw that allowed anyone to mint collateral, which they could then use to borrow ShezUSD. These tokens were relatively illiquid, however, so the total amount the attacker could have obtained was likely considerably less. Shortly after the attack, Shezmu offered a 10% \" bounty \" for the return of the funds. The attacker responded that they would only consider a 20% bounty. Shezmu agreed to the terms, and announced to their followers that they had achieved a recovery from the \" white hat \" hacker."
     }
   ],
   "audit": null,
@@ -66,7 +76,8 @@
     "rekt",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -123,6 +134,11 @@
       "source": "revertiq",
       "label": "defirisk.co",
       "url": "https://defirisk.co/learn/exploits/shezmu-rekt/"
+    },
+    {
+      "source": "w3igg",
+      "label": "cointelegraph.com",
+      "url": "https://cointelegraph.com/news/shezmu-recovers-5-million-stolen-funds-hacker-negotiation"
     }
   ]
 }

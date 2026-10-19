@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "key-compromise",
+  "vulnClass": "multisig-threshold-compromise",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "admin-key-compromise",
+    "confidence": 1
+  },
   "technique": "Validator Key Compromised",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -46,6 +52,10 @@
     {
       "source": "RevertIQ",
       "text": "IoTeX's ioTube Ethereum-side bridge was exploited on February 21, 2026, after an attacker compromised the validator-owner private key. The breach allowed malicious contract upgrades, unauthorized CIOTX minting, and a drain of approximately $4.4 million in bridge reserves. Most affected assets were traced and frozen, but funds bridged to Bitcoin remain unrecovered. The incident resulted from the compromise of the validator-owner private key controlling the Ethereum-side ioTube bridge. This granted the attacker full administrative control, enabling them to upgrade contracts, disable signature checks, and drain both minted tokens and bridge reserve assets."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "IoTeX, a platform to connect IoT devices to blockchain networks, lost around $2 million after a private key compromise enabled an attacker to drain funds from the project's token safe. Initial loss estimates were as high as $8.8 million, although IoTeX CEO Raullen Chai stated that the actual loss was closer to $2 million. Blockchain security researcher Specter has suggested there may be links between this attack and a $50 million theft from the Infini \"stablecoin neobank\" a year ago."
     }
   ],
   "audit": null,
@@ -69,7 +79,8 @@
     "defihacklabs",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -116,6 +127,16 @@
       "source": "revertiq",
       "label": "blog.iotex.io",
       "url": "https://blog.iotex.io/blog/how-iotex-responded-to-the-iotube-bridge-incident-a-full-month-in-review/"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=iotex-bridge-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "theblock.co",
+      "url": "https://www.theblock.co/post/390698/iotex-hit-by-private-key-exploit-draining-up-to-8-8-million-from-bridge-contracts"
     }
   ]
 }

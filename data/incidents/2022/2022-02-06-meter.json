@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "input-validation",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "unvalidated-address-input",
+    "confidence": 0.27
+  },
   "technique": "Missing Input Validation",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -54,6 +60,10 @@
     {
       "source": "RevertIQ",
       "text": "Meter Passport’s modified deposit path accepted wrapped-native bridge calls without proving that matching BNB or ETH had been sent, which let an attacker drain reserves on 2022-02-05 and left Meter with $4.25 million in direct liabilities. Meter Passport’s ERC20 handler trusted the wrapped-native deposit path to be funded, but the generic deposit() entrypoint could reach that branch without the native-value check enforced by the dedicated depositEth() flow. That broke the invariant that a claimed BNB or ETH bridge deposit had to be backed by an exact native transfer."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "A bug in the Meter Passport smart contract allowed an attacker to pull 1400 ETH (~$4.2 million) and 2 wrapped Bitcoin (~$83,000) from the Meter Passport blockchain bridge. This was the second hack of a blockchain bridge in three days, following the enormous Wormhole Network exploit . Meter urged its users not to trade any meterBNB, which are currently unbacked, and wrote that they were \"working on compensating funds to all affected users.\""
     }
   ],
   "audit": "Unaudited",
@@ -69,7 +79,8 @@
     "defihacklabs",
     "rekt",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -131,6 +142,21 @@
       "source": "revertiq",
       "label": "github.com",
       "url": "https://github.com/meterio/meter_docs/blob/main/passport/security-audit-for-meter-passport.md"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=meter-passport-bridge-exploited"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Meter_IO/status/1490045486606139392"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/CertiKCommunity/status/1490077809561198594"
     }
   ]
 }

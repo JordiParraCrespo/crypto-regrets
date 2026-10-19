@@ -11,6 +11,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "reentrancy",
+  "vulnClass": "read-only-reentrancy",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "read-only-reentrancy",
+    "confidence": 1
+  },
   "technique": "Read-Only Reentrancy",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -55,6 +61,10 @@
     {
       "source": "RevertIQ",
       "text": "On February 9,13, 2023, dForce’s lending protocol lost approximately $3.65 million on Arbitrum and Optimism to a read-only reentrancy exploit involving Curve Finance’s wstETH/ETH pool. The attacker manipulated collateral pricing via Curve’s remove_liquidity callback, draining assets. All funds were returned after negotiations. dForce integrated Curve’s wstETH/ETH pool’s get_virtual_price() as an oracle for LP token collateral valuation. Curve’s remove_liquidity can transfer ETH to a caller before updating balances, allowing a reentrant callback where get_virtual_price returns an inflated value. dForce did not check for safe state, enabling attackers to…"
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "An attacker using flash loans to exploit a common re-entrancy vulnerability siphoned $3.65 million from the dForce defi project on both Arbitrum and Optimism, which are Ethereum layer-2 networks. The exploit, which involves manipulating the oracle price in Curve liquidity pools, is a common one that was first reported to Curve in April 2022 and disclosed in October 2022. It has been used to attack various other projects, including QiDAO . dForce contacted the hacker via blockchain transaction, offering to negotiate a bounty . Several days later, the project tweeted that the attacker had \"c[o]me forward as a whitehat\", and that the funds had been fully returned.…"
     }
   ],
   "audit": "Out of scope",
@@ -69,7 +79,8 @@
     "rekt",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -151,6 +162,21 @@
       "source": "revertiq",
       "label": "certik.com",
       "url": "https://www.certik.com/blog/curve-conundrum-the-dforce-attack-via-a-read-only-reentrancy-vector-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=dforce-network-exploited-for-3-65-million-funds-returned"
+    },
+    {
+      "source": "w3igg",
+      "label": "rekt.news",
+      "url": "https://rekt.news/dforce-network-rekt/"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/dForcenet/status/1625004207395807232"
     }
   ]
 }

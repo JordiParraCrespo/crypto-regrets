@@ -12,6 +12,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "oracle-manipulation",
+  "vulnClass": "spot-price-oracle",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "stale-misconfigured-feed",
+    "confidence": 0.3
+  },
   "technique": "Spot Price Manipulation",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -60,6 +66,10 @@
     {
       "source": "RevertIQ",
       "text": "On April 14, 2025, KiloEx was exploited across Base, BNB Chain, and opBNB, losing about $7.4M through a privilege-escalation bug in the MinimalForwarder contract. The attacker bypassed signature checks, manipulated oracle prices, and extracted profits by opening and closing leveraged positions at artificial valuations. About 90% of the stolen funds were recovered days later through whitehat negotiation. A missing signature binding and insufficient access control in the MinimalForwarder (TrustedForwarder) contract allowed arbitrary callers to impersonate privileged roles, enabling unauthorized oracle price manipulation and draining protocol funds."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "KiloEx, a decentralized perpetual futures exchange, was exploited for $7.5 million. An attacker executed an oracle manipulation attack on KiloEx's pricing smart contracts to steal funds across the Base Ethereum layer-2 chain, BNB Chain, and Taiko. KiloEx halted trading on the platform while investigating the exploit, and contacted the hacker to try to negotiate a 90% return of funds. KiloEx later announced that the recovery had been successful, and that they would pay out the 10% \" bounty \"."
     }
   ],
   "audit": null,
@@ -79,7 +89,9 @@
     "defihacklabs",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "seal911",
+    "w3igg"
   ],
   "references": [
     {
@@ -156,6 +168,21 @@
       "source": "revertiq",
       "label": "blockchainbreaches.com",
       "url": "https://www.blockchainbreaches.com/en/breaches/kiloex-2025"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=kiloex-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "x.com",
+      "url": "https://x.com/KiloEx_perp/status/1911899600849617330"
+    },
+    {
+      "source": "w3igg",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/1911991384254402737"
     }
   ]
 }

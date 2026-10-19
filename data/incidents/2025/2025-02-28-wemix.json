@@ -6,10 +6,16 @@
   "amountUsd": 6220000,
   "returnedUsd": null,
   "chains": [
-    "Wemix"
+    "WEMIX"
   ],
   "targetType": "DeFi Protocol",
   "category": "key-compromise",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "key-leak-infrastructure",
+    "confidence": 0.2
+  },
   "technique": "Private Key Compromised",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -38,6 +44,10 @@
     {
       "source": "RevertIQ",
       "text": "On 28 February 2025, attackers used a stolen authentication key for Wemix's Nile platform to conduct 13 unauthorized withdrawals totaling 8,654,860 WEMIX tokens (approximately $6.22 million). The breach originated from a shared repository exposure, bypassing application and on-chain controls. Funds were rapidly dispersed via exchanges. There is no public evidence of recovered assets or forensic follow-up. The principal cause was a developer's inadvertent upload of privileged authentication keys for the Nile platform's monitoring service to a shared repository, exposing them for months. Attackers subsequently obtained the key and used it to bypass withdrawal controls.…"
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The Wemix Foundation, which runs the blockchain gaming platform WEMIX, suffered a $6.2 million hack of their blockchain bridge . Although the hack occurred on February 28, the company did not disclose the theft until four days after the incident, leading some to accuse Wemix of attempting to cover up the hack. Wemix has denied those allegations, claiming that the delay was in hopes of preventing market panic, and to ensure they had time to patch any security vulnerabilities before publicly disclosing a breach."
     }
   ],
   "audit": null,
@@ -46,7 +56,8 @@
   "sources": [
     "defillama",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -73,6 +84,16 @@
       "source": "revertiq",
       "label": "dailysecurityreview.com",
       "url": "https://dailysecurityreview.com/security-spotlight/6-1-million-crypto-stolen-in-wemix-hack/"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=wemix-foundation-hack"
+    },
+    {
+      "source": "w3igg",
+      "label": "theblock.co",
+      "url": "https://www.theblock.co/post/346565/wemix-hack-delayed-report"
     }
   ]
 }

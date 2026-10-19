@@ -11,6 +11,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "input-validation",
+  "vulnClass": "unvalidated-address-input",
+  "vulnClassBy": "typesafe",
+  "aiClass": {
+    "id": "unvalidated-address-input",
+    "confidence": 1
+  },
   "technique": "Missing Input Validation",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -63,6 +69,10 @@
     {
       "source": "RevertIQ",
       "text": "Hedgey Finance’s ClaimCampaigns contracts were exploited on Ethereum and Arbitrum on 2024-04-19 after campaign cancellation logic failed to revoke ERC-20 allowances granted to attacker-controlled locker contracts. Attackers used flash-loaned funds to create and immediately cancel malicious campaigns, then drained token balances with lingering approvals. Widely reported losses near $44.7 million were driven largely by illiquid BONUS token valuations, while several analyses estimated realized liquid losses closer to $2 million. The exploited ClaimCampaigns implementation granted ERC-20 approvals to a user-supplied tokenLocker address during createLockedC…"
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Hedgey Finance, a platform used to manage token claims, lockups, and vesting, was hit with a flash loan attack that drained $44.7 million of customer funds from the platform. The majority of assets were stolen from Hedgey on the Arbitrum layer-2 network, although around $2.1 million of them were stolen from the version deployed on the Ethereum mainnet. Hedgey Finance confirmed the exploit, and sent an optimistic and congratulatory message on-chain: \"Well done for finding it! We're assuming you executed this exploit as a white hat , so we'd like to get in touch with you to discuss next steps.\" No on-chain response thus far."
     }
   ],
   "audit": "Consensys Diligence",
@@ -93,7 +103,8 @@
     "rekt",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -160,6 +171,26 @@
       "source": "revertiq",
       "label": "certik.com",
       "url": "https://www.certik.com/blog/hedgey-finance-incident-analysis"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=hedgey-finance-hack"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/hedgeyfinance/status/1781400318644810138"
+    },
+    {
+      "source": "w3igg",
+      "label": "rekt.news",
+      "url": "https://rekt.news/hedgey-finance-rekt/"
+    },
+    {
+      "source": "w3igg",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/idm?addresses=0x5a4bc2bda1f6b9929b6efdcef4728246bec4c635,0xd84f48b7d1aafa7bd5905c95c5d1ffb2625ada46"
     }
   ]
 }

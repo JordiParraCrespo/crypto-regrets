@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "access-control",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "missing-access-modifier",
+    "confidence": 0.5
+  },
   "technique": "Improper Access Control",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -62,6 +68,10 @@
     {
       "source": "RevertIQ",
       "text": "On August 18, 2023, Exactly Protocol on Optimism suffered a $7.6m loss after attackers exploited inadequate validation in the DebtManager contract, allowing them to inject a malicious market contract and forged permit, drain collateral using reentrancy, and repeatedly liquidate user positions. The DebtManager contract's leverage() function trusted both a user-supplied permit and a market address, but validated only the permit, allowing attackers to pass a malicious market contract and forged permit, reenter withdrawal logic, and drain user collateral."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The Exactly Protocol, an attempt to \"decentralize the credit market\" built on the Optimism layer-2 network, was exploited. The protocol announced a pause to investigate a security issue, after they were alerted to suspicious transactions. An attacker has siphoned more than 7,160 ETH (~$12 million) from the project, which they've bridged back to the Ethereum main chain. The Exactly Protocol's TVL plunged from $37 million to under $12 million following the attack. Exactly writes on their website that they had been audited by four different firms: Chainsafe, Coinspect, ABDK, and Cryptecon."
     }
   ],
   "audit": "Out of scope",
@@ -81,7 +91,8 @@
     "rekt",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -148,6 +159,16 @@
       "source": "revertiq",
       "label": "olympix.security",
       "url": "https://olympix.security/blog/exactly-protocol-lost-7-3m-the-code-worked-the-assumptions-didnt"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=exactly-protocol-hack"
+    },
+    {
+      "source": "w3igg",
+      "label": "cryptopotato.com",
+      "url": "https://cryptopotato.com/optimism-based-exactly-protocol-hacked-over-12m-in-ether-drained/"
     }
   ]
 }

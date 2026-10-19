@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "accounting-math",
+  "vulnClass": "unbacked-mint",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "unbacked-mint",
+    "confidence": 1
+  },
   "technique": "Infinite Mint",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -50,6 +56,10 @@
     {
       "source": "RevertIQ",
       "text": "On May 20, 2024, Gala Games suffered an unauthorized mint of 5 billion GALA tokens on Ethereum by an attacker who gained control of a privileged minter/admin address through flawed access controls. Roughly 600 million tokens were sold for ETH, causing a swift 20% drop in GALA's price, while the remaining tokens were frozen and effectively burned. Gala Games contained the breach within 45 minutes and began collaborating with authorities. Compromise of a privileged minter/admin address enabled an unauthorized actor to mint GALA tokens. The cause was an access control failure: a dormant minter address on the GALA contract could still approve new mints aft…"
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Someone was able to mint 5 billion $GALA tokens, the native token of the Gala Games blockchain gaming project. The tokens would be notionally worth around $200 million based on their paper value, although such a massive amount wouldn't be sellable without impacting the token price. Furthermore, the Gala Games team was able to add the attacker's address to a blocklist shortly after the theft a few hours after the attack began, preventing them from swapping more of the tokens. Altogether, the attacker was able to swap around $21 million of the GALA tokens into ETH before the address was frozen. The attacker was able to perform the exploit because they ha…"
     }
   ],
   "audit": "Anchain, Certik",
@@ -65,7 +75,8 @@
     "defihacklabs",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -122,6 +133,21 @@
       "source": "revertiq",
       "label": "bitdigest.io",
       "url": "https://www.bitdigest.io/posts/gala-games-confirms-exploit-resulting-in-240-million-token-theft"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=gala-games-hack"
+    },
+    {
+      "source": "w3igg",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/address/0xe2Ca471124b124831e231fb835778840Ad100F97"
+    },
+    {
+      "source": "w3igg",
+      "label": "x.com",
+      "url": "https://x.com/0xQuit/status/1792672497957302686"
     }
   ]
 }

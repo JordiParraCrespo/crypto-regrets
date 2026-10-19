@@ -5,33 +5,41 @@
   "year": 2022,
   "amountUsd": 150000,
   "returnedUsd": null,
-  "chains": [],
+  "chains": [
+    "Ethereum"
+  ],
   "targetType": null,
   "category": "social-engineering",
+  "vulnClass": "phishing-credential-theft",
+  "vulnClassBy": "typesafe",
+  "aiClass": {
+    "id": "phishing-credential-theft",
+    "confidence": 1
+  },
   "technique": "Account Compromise",
-  "classificationNote": "Classified by keyword rules from the SlowMist label and description.",
-  "classifiedBy": "keywords",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.70).",
+  "classifiedBy": "typesafe",
   "ai": {
     "model": "jev-1.13.0",
     "category": "social-engineering",
-    "confidence": 0.62,
+    "confidence": 0.7,
     "top": [
       {
         "category": "social-engineering",
-        "p": 0.64
+        "p": 0.72
       },
       {
         "category": "key-compromise",
-        "p": 0.33
+        "p": 0.27
       },
       {
         "category": "frontend-infra",
-        "p": 0.02
+        "p": 0.01
       }
     ],
     "flashLoan": 0.01,
     "stateActor": 0.02,
-    "hasRootCause": 0.9
+    "hasRootCause": 0.92
   },
   "bridge": false,
   "language": null,
@@ -40,19 +48,34 @@
     {
       "source": "SlowMist",
       "text": "On July 16, hackers compromised the Twitter account of well-known NFT artist DeeKay. The 180,000 followers of DeeKay's hacked Twitter account saw it post a link announcing a limited number of new airdrops, which directed them to a phishing site that mimicked DeeKay's real site. One victim lost 4 Cool Cat NFTs and 3 Azuki NFTs with reserve prices around 4 ETH (~$5,350) and 12 ETH (~$16,200) respectively. The total value of the stolen NFTs was approximately $150,000. DeeKay said he wasn't sure how his Twitter account was stolen, but \"guessed that 2FA was shut down at a specific time.\""
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "On July 16, hackers compromised the Twitter account belonging to the well-known NFT artist DeeKay, who sold an NFT for 310 ETH (then $1 million) to Snoop Dogg in April. The 180,000 followers of DeeKay's compromised Twitter account saw it post a link announcing a new limited quantity airdrop , which directed them to a website mimicking DeeKay's real site. Some people fell for the scam, and in trying to claim their NFTs, actually approved transactions that allowed the scammers to empty their wallets. One victim lost four Cool Cat NFTs and three Azuki NFTs, which have floor prices of around 4 ETH (~$5,350) and 12 ETH (~$16,200) respectively. Altogether, t…"
     }
   ],
   "audit": null,
   "txHashes": [],
   "poc": null,
   "sources": [
-    "slowmist"
+    "slowmist",
+    "w3igg"
   ],
   "references": [
     {
       "source": "slowmist",
       "label": "nftevening.com",
       "url": "https://nftevening.com/hacker-target-nft-artist-deekays-twitter-wipe-nfts-worth-150k/"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=nfts-valued-at-150000-stolen-via-phishing-link-posted-to-the-hacked-twitter-account-of-nft-artist-deekay"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/CozomoMedici/status/1512235251585626112"
     }
   ]
 }

@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "signature-crypto",
+  "vulnClass": "signature-verification-flaw",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "signature-verification-flaw",
+    "confidence": 0.97
+  },
   "technique": "Signature Verification Flaw",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -46,6 +52,10 @@
     {
       "source": "RevertIQ",
       "text": "GMBL.COMPUTER suffered an exploit on Arbitrum on 5,6 September 2023 after the compromise of an off-chain signature key allowed an attacker to claim referral bonuses and extract about 471 ETH (roughly $770,000), much of it later returned. An off-chain signature key was leaked, allowing the attacker to forge valid signatures. The attacker exploited this by generating referral claims and draining the protocol's funds. The flaw lay in operational key management, not in the on-chain contract logic."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The brand new Arbitrum-based defi casino GMBL.COMPUTER was exploited for around 471 ETH (~$770,000). The project, which promises to \"generate yield from casino games\", had officially launched only hours earlier. The GMBL team later stated that they believed the exploit was due to a flaw in the platform's referral system, where people could place bets without depositing any funds and use them to generate referral bonuses. GMBL offered a \" bug bounty \" to the attacker, inviting them to return 90% of the stolen funds in exchange for a promise not to pursue legal action. The exploiter later returned 235 ETH (~$382,000), or half what they had stolen. GMBL p…"
     }
   ],
   "audit": null,
@@ -58,7 +68,8 @@
   "sources": [
     "defillama",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -85,6 +96,26 @@
       "source": "revertiq",
       "label": "chaincatcher.com",
       "url": "https://www.chaincatcher.com/en/article/2100914"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=gmblcomputer-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/PeckShieldAlert/status/1699263447425519661"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/cryptogle/status/1699307641598582832"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/gmblcomputer/status/1699448905052639595"
     }
   ]
 }

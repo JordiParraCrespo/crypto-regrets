@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "oracle-manipulation",
+  "vulnClass": "spot-price-oracle",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "spot-price-oracle",
+    "confidence": 0.61
+  },
   "technique": "Spot Price Manipulation",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -58,6 +64,10 @@
     {
       "source": "RevertIQ",
       "text": "On August 13, 2023, Zunami Protocol lost $2.1M to a flash loan-driven price manipulation exploit on Ethereum. The attacker skewed Curve pool balances, manipulated on-chain price readings, and drained the vaults by redeeming inflated collateral. Zunami Protocol priced LP collateral using spot Curve pool balances, not manipulation-resistant sources like Curve's virtual price or TWAPs. This allowed a flash loan-funded attacker to transiently inflate collateral value and extract more assets than held."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The Zunami Protocol stablecoin -focused yield farming aggregator was exploited for more than $2.1 million when an attacker was able to perform a price manipulation attack on the project's primary pool. Zunami attracted users by promising \"the highest APY on the market\": around 14%. The project had been audited by Ackee and HashEx. The attack was a \"classic price manipulation\" exploit, according to the Ironblocks security firm. The attacker was able to steal 1,152 ETH ($2.13 million) from the protocol. They then tumbled the stolen funds through Tornado Cash."
     }
   ],
   "audit": "Hashex",
@@ -78,7 +88,8 @@
     "rekt",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -145,6 +156,16 @@
       "source": "revertiq",
       "label": "rekt.news",
       "url": "https://www.rekt.news/zunami-protocol-case-file"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=zunami-protocol-exploit2-1-million"
+    },
+    {
+      "source": "w3igg",
+      "label": "decrypt.co",
+      "url": "https://decrypt.co/152366/zunami-protocol-curve-finance-hack"
     }
   ]
 }

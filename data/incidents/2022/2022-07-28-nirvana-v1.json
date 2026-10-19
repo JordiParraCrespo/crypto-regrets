@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "oracle-manipulation",
+  "vulnClass": "spot-price-oracle",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "spot-price-oracle",
+    "confidence": 1
+  },
   "technique": "Spot Price Manipulation",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -50,6 +56,10 @@
     {
       "source": "RevertIQ",
       "text": "Nirvana V1 was exploited on Solana on July 28, 2022, via manipulation of the ANA token's price using a flash loan. The attacker profited roughly $3.5 million by purchasing ANA at an artificially low price and selling it back at an inflated price. All treasury funds were drained, causing Nirvana's shutdown. The protocol used its AMM's spot price for ANA token valuation without resistance to manipulation. The vulnerable logic allowed a flash loan attacker to buy ANA at a low price, then sell it at a much higher price immediately after the manipulation, draining the treasury."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The Solana-based yield farming project, Nirvana Finance, was exploited by an attacker who used flash loans to drain the project of just under $3.5 million. The attacker took out a $10 million loan from the Solend project, used it to mint ANA tokens, swapped the ANA for $13.5 million, and then repaid the loan. The attack was similar to the attack on Crema Finance earlier in the month. The attack caused the project's ANA token to plunge in value by 80%, and the project's NIRV stablecoin to lose its dollar peg, falling to $0.08. Nirvana Finance tweeted, \"Please be advised: ANA has lost its collateral, and NIRV has lost its peg. Until the thief restores fu…"
     }
   ],
   "audit": "Sec3 Auto Audit Software",
@@ -61,7 +71,8 @@
     "defillama",
     "rekt",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -93,6 +104,26 @@
       "source": "revertiq",
       "label": "certik.com",
       "url": "https://www.certik.com/blog/nirvana-finance-incident-analysis"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=nirvana-finance-drained-of-3-5-million"
+    },
+    {
+      "source": "w3igg",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/tech/2022/07/28/solana-defi-protocol-nirvana-drained-of-liquidity-after-flash-loan-exploit/"
+    },
+    {
+      "source": "w3igg",
+      "label": "cryptoslate.com",
+      "url": "https://cryptoslate.com/solana-based-nirvana-loses-3-49m-to-flash-loan-exploit-tokens-tank-90/"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/nirvana_fi/status/1552668321962762242"
     }
   ]
 }

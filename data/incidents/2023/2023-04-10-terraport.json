@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "access-control",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "missing-access-modifier",
+    "confidence": 0.8
+  },
   "technique": "Improper Access Control",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -38,6 +44,10 @@
     {
       "source": "RevertIQ",
       "text": "Terraport, a DeFi platform on Terra Classic, was exploited on April 10, 2023, due to a vulnerability in its liquidity wallet controls, leading to a loss of roughly $4 million worth of assets. The root cause was a centralization-related access control failure in the Terraport liquidity wallet, which allowed an attacker to drain large amounts of LUNC, TERRA, and USTC tokens."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Terraport Finance is a defi project built on, believe it or not, the Terra blockchain. Yes, the same Terra blockchain on which the Terra/Luna projects were built. Despite the massive collapse of the flagship project in May 2022, there are still a number of Terra projects operating, and even some new projects being developed. Terraport Finance launched on March 31, apparently having gone live without any sort of audit . On April 10, Terraport disclosed that an attacker had apparently managed to drain all project liquidity pools, making off with assets priced at around $2 million."
     }
   ],
   "audit": null,
@@ -46,7 +56,8 @@
   "sources": [
     "defillama",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -73,6 +84,16 @@
       "source": "revertiq",
       "label": "certik.com",
       "url": "https://www.certik.com/blog/post-mortem-terraport-finance"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=terraport-finance-hacked-for-2-million-less-than-two-weeks-after-launch"
+    },
+    {
+      "source": "w3igg",
+      "label": "cointelegraph.com",
+      "url": "https://cointelegraph.com/news/terra-defi-project-terraport-suffers-2m-hack-days-after-launch"
     }
   ]
 }

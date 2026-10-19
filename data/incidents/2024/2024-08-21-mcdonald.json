@@ -3,35 +3,43 @@
   "name": "McDonald",
   "date": "2024-08-21",
   "year": 2024,
-  "amountUsd": null,
+  "amountUsd": 700000,
   "returnedUsd": null,
-  "chains": [],
+  "chains": [
+    "Solana"
+  ],
   "targetType": null,
-  "category": "unknown",
+  "category": "rugpull",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "backdoor-privilege",
+    "confidence": 0.86
+  },
   "technique": "Account Compromise",
-  "classificationNote": null,
-  "classifiedBy": "none",
+  "classificationNote": "Upstream label missing; classified by keyword rules from the root-cause text.",
+  "classifiedBy": "keywords",
   "ai": {
     "model": "jev-1.13.0",
     "category": "key-compromise",
-    "confidence": 0.81,
+    "confidence": 0.74,
     "top": [
       {
         "category": "key-compromise",
-        "p": 0.82
+        "p": 0.76
       },
       {
         "category": "social-engineering",
-        "p": 0.15
+        "p": 0.22
       },
       {
         "category": "frontend-infra",
-        "p": 0.03
+        "p": 0.02
       }
     ],
     "flashLoan": 0.02,
     "stateActor": 0.02,
-    "hasRootCause": 0.43
+    "hasRootCause": 0.47
   },
   "bridge": false,
   "language": null,
@@ -40,19 +48,34 @@
     {
       "source": "SlowMist",
       "text": "On-chain sleuth ZachXBT revealed that McDonald's Instagram account was allegedly hacked and used to promote the meme token GRIMACE."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "McDonald's Instagram account, as well as the Twitter account of a McDonald's marketing director, began promoting a memecoin called $GRIMACE (named for the restaurant chain's blobby purple mascot). The posts to McDonald's 5.1 million followers caused the token price to spike. Then, the attacker sold off their holdings, profiting around $700,000 and plunging the token price. They then boasted about their haul on the compromised Instagram account, changing the bio to say: \"Sorry mah nigga you have just been rug pulled by India_X_Kr3w thank you for the $700,000 in Solana 🇮🇳\". The token stunt by the massive company was perhaps made more believable by McDo…"
     }
   ],
   "audit": null,
   "txHashes": [],
   "poc": null,
   "sources": [
-    "slowmist"
+    "slowmist",
+    "w3igg"
   ],
   "references": [
     {
       "source": "slowmist",
       "label": "panewslab.com",
       "url": "https://www.panewslab.com/zh/sqarticledetails/1zi3hclx.html"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=mcdonalds-instagram-hack"
+    },
+    {
+      "source": "w3igg",
+      "label": "decrypt.co",
+      "url": "https://decrypt.co/245783/mcrugged-hackers-mcdonalds-instagram-make-700k-grimace-token"
     }
   ]
 }

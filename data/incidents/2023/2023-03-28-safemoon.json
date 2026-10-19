@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "access-control",
+  "vulnClass": "missing-access-modifier",
+  "vulnClassBy": "typesafe",
+  "aiClass": {
+    "id": "missing-access-modifier",
+    "confidence": 0.99
+  },
   "technique": "Improper Access Control",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -50,6 +56,10 @@
     {
       "source": "RevertIQ",
       "text": "On March 29, 2023, SafeMoon’s SFM/BNB liquidity pool on BNB Chain was exploited for $8.9 million after a contract upgrade introduced a burn function that could destroy tokens from any address. The attacker burned nearly all SFM pool tokens, manipulated the price, and swapped pre-purchased SFM for BNB at an inflated rate. A contract upgrade introduced a public burn function without access control, allowing anyone to burn tokens from arbitrary addresses,including the liquidity pool,enabling an attacker to manipulate SFM price and drain pool BNB."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "If the pump-and-dump didn't get you, the liquidity pool compromise might have! Holders of the SafeMoon token were informed that the SafeMoon liquidity pool had been compromised, and $8.9 million had been stolen, after a code upgrade introduced a bug. The attacker was able to take advantage of the bug to artificially inflate the price of the SafeMoon token, then sell it to steal the erroneous \"profit\"."
     }
   ],
   "audit": "Unaudited",
@@ -66,7 +76,8 @@
     "defihacklabs",
     "rekt",
     "blocksec",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -133,6 +144,21 @@
       "source": "revertiq",
       "label": "zellic.io",
       "url": "https://www.zellic.io/blog/safemoon-exploit-explained/"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=8-9-million-stolen-from-safemoon"
+    },
+    {
+      "source": "w3igg",
+      "label": "theblock.co",
+      "url": "https://www.theblock.co/post/223547/safemoon-liquidity-pair-compromised-in-8-9-million-hack"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/safemoon/status/1640825402795991048"
     }
   ]
 }

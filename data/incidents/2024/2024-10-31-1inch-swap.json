@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "frontend-infra",
+  "vulnClass": "dependency-supply-chain",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "dependency-supply-chain",
+    "confidence": 0.99
+  },
   "technique": "Supply Chain Attack",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -38,6 +44,10 @@
     {
       "source": "RevertIQ",
       "text": "Compromised Lottie Player releases reached the 1inch web dApp on October 30, 2024 and displayed fraudulent wallet prompts. A linked Avalanche transaction transferred 9.99984952 BTC.b from a wallet that had granted an unlimited allowance; the reported valuation was about $723,000. An upstream npm publishing credential was compromised, allowing malicious Lottie Player versions to execute in downstream web pages and seek wallet authorizations. The checked withdrawal used an existing unlimited BTC.b allowance; 1inch's protocol contracts were reported unaffected."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Attackers were able to inject malicious code into the popular \"LottieFiles\" JavaScript animations library. Visitors to websites using the library saw a prompt to connect their crypto wallets to what was ultimately a cryptocurrency wallet drainer . This affected some crypto platforms that used the library, including the 1inch decentralized exchange aggregator. One victim who connected their wallet suffered the loss of 10 BTC (~$723,000). Other crypto platforms affected included TEN Finance and Movement. Because the animations library is widely used, other non-crypto-related websites also showed the prompt."
     }
   ],
   "audit": null,
@@ -47,7 +57,8 @@
   "poc": null,
   "sources": [
     "defillama",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -69,6 +80,21 @@
       "source": "revertiq",
       "label": "x.com",
       "url": "https://x.com/1inch/status/1851832307746742686"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=lottiefiles-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "cointelegraph.com",
+      "url": "https://cointelegraph.com/news/crypto-app-sites-malicious-popups-after-ace-drainer-hacks-animation-library"
+    },
+    {
+      "source": "w3igg",
+      "label": "bleepingcomputer.com",
+      "url": "https://www.bleepingcomputer.com/news/security/lottiefiles-hacked-in-supply-chain-attack-to-steal-users-crypto/"
     }
   ]
 }

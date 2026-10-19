@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "reentrancy",
+  "vulnClass": "token-hook-reentrancy",
+  "vulnClassBy": "typesafe",
+  "aiClass": {
+    "id": "token-hook-reentrancy",
+    "confidence": 1
+  },
   "technique": "Reentrancy",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -50,6 +56,10 @@
     {
       "source": "RevertIQ",
       "text": "On August 30, 2021, Cream Finance was exploited for $18+ million through a reentrancy attack enabled by the AMP token's ERC-777 transfer hooks, allowing the attacker to borrow more than collateral permitted by reentering the borrow flow before internal accounting updated. Cream Finance listed AMP, an ERC-777 token with transfer hooks, without restricting reentrancy or updating its borrow logic. The borrow operation transferred AMP before updating the borrower's account state. AMP's hook let the attacker reenter to borrow again, bypassing collateral checks."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "A vulnerability in C.R.E.A.M. Finance allowed a re-entrancy attack to steal somewhere between $25 and $30 million from C.R.E.A.M. finance in its second multimillion dollar hack of the year."
     }
   ],
   "audit": "Unaudited",
@@ -62,7 +72,8 @@
     "defihacklabs",
     "rekt",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -129,6 +140,21 @@
       "source": "revertiq",
       "label": "github.com",
       "url": "https://github.com/dtr0x/cream-finance-reentrancy"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=cream-finance-exploited-again"
+    },
+    {
+      "source": "w3igg",
+      "label": "therecord.media",
+      "url": "https://therecord.media/hackers-steal-29-million-from-crypto-platform-cream-finance/"
+    },
+    {
+      "source": "w3igg",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/business/2021/08/30/defi-protocol-cream-finance-hacked/"
     }
   ]
 }

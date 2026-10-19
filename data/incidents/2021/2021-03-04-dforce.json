@@ -1,0 +1,71 @@
+{
+  "id": "2021-03-04-dforce",
+  "name": "dforce",
+  "date": "2021-03-04",
+  "year": 2021,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [],
+  "targetType": null,
+  "category": "reentrancy",
+  "vulnClass": "token-hook-reentrancy",
+  "vulnClassBy": "typesafe",
+  "aiClass": {
+    "id": "token-hook-reentrancy",
+    "confidence": 0.97
+  },
+  "technique": "smart contract",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 1.00).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "reentrancy",
+    "confidence": 1,
+    "top": [
+      {
+        "category": "reentrancy",
+        "p": 1
+      }
+    ],
+    "flashLoan": 0.06,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "$25 Million with smart contract exploit. Strangely, returned. We know that the hackers utilized a vulnerability with the combination of using ERC777 tokens and DeFi smart contracts to execute a reentrancy attack. The callback mechanism enabled the hacker to supply and withdraw ERC777 tokens repeatedly before the balance was updated. More analysis on the hack can be viewed from PeckShield’s report. - A Summary of the Attack on Lendf.Me on April 19, 2020 - by Mindao YANG - dForce - Medium - WooParadog on Twitter: \"@Rewkang @tomhschmidt This is the same exploit, hacker achieved unlimited collaterals then drain the pool by borrowing. https://t.co/WkicR04Yp…",
+  "descriptions": [
+    {
+      "source": "Blockchain Graveyard",
+      "text": "$25 Million with smart contract exploit. Strangely, returned. We know that the hackers utilized a vulnerability with the combination of using ERC777 tokens and DeFi smart contracts to execute a reentrancy attack. The callback mechanism enabled the hacker to supply and withdraw ERC777 tokens repeatedly before the balance was updated. More analysis on the hack can be viewed from PeckShield’s report. - A Summary of the Attack on Lendf.Me on April 19, 2020 - by Mindao YANG - dForce - Medium - WooParadog on Twitter: \"@Rewkang @tomhschmidt This is the same exploit, hacker achieved unlimited collaterals then drain the pool by borrowing. https://t.co/WkicR04Yp…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "graveyard"
+  ],
+  "references": [
+    {
+      "source": "graveyard",
+      "label": "Blockchain Graveyard",
+      "url": "https://medium.com/dforcenet/a-summary-of-the-attack-on-lendf-me-on-april-19-2020-e2f1c5d96640"
+    },
+    {
+      "source": "graveyard",
+      "label": "medium.com",
+      "url": "https://medium.com/dforcenet/a-summary-of-the-attack-on-lendf-me-on-april-19-2020-e2f1c5d96640"
+    },
+    {
+      "source": "graveyard",
+      "label": "t.co",
+      "url": "https://t.co/WkicR04YpT"
+    },
+    {
+      "source": "graveyard",
+      "label": "t.co",
+      "url": "https://t.co/0DcuagwMpz"
+    }
+  ]
+}

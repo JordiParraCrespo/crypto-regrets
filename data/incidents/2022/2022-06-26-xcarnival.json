@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "logic-error",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "state-update-flaw",
+    "confidence": 0.77
+  },
   "technique": "Deposit Logic Flaw",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -54,6 +60,10 @@
     {
       "source": "RevertIQ",
       "text": "XCarnival's NFT lending protocol on Ethereum was exploited on 26 June 2022, losing about 3,087 ETH (~$3.8 million). The attacker reused withdrawn NFT collateral order IDs to repeatedly borrow ETH. Around half the stolen funds were later returned after bounty negotiations. Withdrawn NFT collateral order IDs remained valid for borrowing. The protocol did not deactivate the order state after the NFT was withdrawn, allowing multiple borrow operations with the same asset."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "XCarnival is a project describing itself as a \" metaverse asset bank\". The project drew in users by promising high rewards, with one marketing campaign promising 41% APY . A hacker was able to exploit a flaw in the smart contract for the project, stealing crypto notionally worth $3.8 million. The loss to the protocol was likely higher. XCarnival paused its smart contract after learning about the hack from a crypto watchdog. On June 26, XCarnival announced that they had reached an agreement to give a 1,500 ETH \" bug bounty \" to the attacker, who agreed to return the remaining 1,587 ETH ($1.9 million) with an agreement that XCarnival would not pursue legal action."
     }
   ],
   "audit": null,
@@ -68,7 +78,8 @@
     "defillama",
     "defihacklabs",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -120,6 +131,11 @@
       "source": "revertiq",
       "label": "tokenview.io",
       "url": "https://tokenview.io/en/learn/nft-xcarnival.html"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=hacker-makes-off-with-3-8-million-from-the-xcarnival-metaverse-bank"
     }
   ]
 }

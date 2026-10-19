@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "oracle-manipulation",
+  "vulnClass": "spot-price-oracle",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "spot-price-oracle",
+    "confidence": 0.82
+  },
   "technique": "Spot Price Manipulation",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -58,6 +64,10 @@
     {
       "source": "RevertIQ",
       "text": "On April 28, 2022, Deus Finance on Fantom suffered a $13.4 million exploit. The attacker used flash loans to manipulate a price oracle that valued DEI stablecoin collateral. This allowed them to borrow large amounts of DEI against inflated collateral, draining protocol reserves. The attacker bridged proceeds to Ethereum and laundered them via Tornado Cash. Deus Finance's lending protocol relied on an on-chain DEI/USDC liquidity pool as its price oracle. This oracle could be manipulated by flash-loan-funded swaps, inflating collateral value. The protocol did not use manipulation-resistant or multi-source price feeds."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The defi project Deus Finance was hit with a flash loan attack that netted the hacker $13.4 million. The loss to the protocol was likely larger than what the hacker was able to withdraw, though Deus announced that no users had been liquidated and that \"the loss is on the protocol\". Deus had suffered a similar attack in March, with an attacker using a flash loan attack to steal more than $3.1 million. Deus reimbursed users who were liquidated in the incident. According to Deus' CEO, the exploit in this incident was not the same one used in the previous attack. He wrote on Twitter that the exploit was \"the first of its kind, a zero-day exploit on Solidly [decentralized crypto exchange] swaps\"."
     }
   ],
   "audit": "Armor Labs",
@@ -73,7 +83,8 @@
     "defihacklabs",
     "rekt",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -125,6 +136,26 @@
       "source": "revertiq",
       "label": "blockchainbreaches.com",
       "url": "https://www.blockchainbreaches.com/en/breaches/deus-dao-2022"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=deus-finance-exploited-for-13-4-million-in-the-second-hack-in-two-months"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/peckshield/status/1519530463337250817?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1519530463337250817%7Ctwgr%5E%7Ctwcon%5Es1_&ref_url=https%3A%2F%2Fwww.coindesk.com%2Ftech%2F2022%2F04%2F28%2Fhow-deus-finance-was-exploited-for-134m-on-fantom%2F"
+    },
+    {
+      "source": "w3igg",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/tech/2022/04/28/how-deus-finance-was-exploited-for-134m-on-fantom/"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/lafachief/status/1519645308061462528"
     }
   ]
 }

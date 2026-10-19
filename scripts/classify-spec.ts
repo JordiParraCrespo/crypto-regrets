@@ -15,6 +15,7 @@ import { createHash } from 'node:crypto';
 import { CATEGORIES, CATEGORY_IDS, LAYERS, type CategoryId, type LayerId } from '../src/lib/taxonomy';
 import type { Incident } from '../src/lib/types';
 import type { ChoiceQuestion, NoulQuestion } from './typesafe';
+import { CLASSES, classesOf, type ClassId } from '../src/lib/classes';
 
 export const SPEC_VERSION = 3;
 
@@ -103,3 +104,39 @@ export function layerProbabilities(p: Partial<Record<CategoryId, number>>): Reco
 }
 
 export const CACHE_FILE = 'data/typesafe/classifications.json';
+
+// ---------------------------------------------------------------- vulnerability class (level 2)
+//
+// Hierarchical classification, as TypeSafe's docs recommend for taxonomies: once the category is
+// known, a second Choice picks among that category's classes only.
+
+export const CLASS_CACHE_FILE = 'data/typesafe/classes.json';
+/**
+ * Measured with scripts/eval-classes.ts --blind (analyst label hidden, 714 labelled incidents):
+ * >= 0.9 → 81% correct, 0.7-0.9 → 67%, overall 69%. Below 0.9 we leave the class unspecified.
+ */
+export const TYPESAFE_CLASS_MIN_CONFIDENCE = 0.9;
+
+export function classQuestion(category: Exclude<CategoryId, 'unknown'>) {
+  const options = classesOf(category);
+  return {
+    type: 'choice',
+    instructions: {
+      question: `This incident is a case of "${CATEGORIES[category].name}". Which specific vulnerability class within it best matches the \`description\`?`,
+      focus: 'Pick the class describing the flaw that made the loss possible. Weigh `technique_label` as analyst evidence.',
+    },
+    criteria: Object.fromEntries(options.map((id) => [id, { name: CLASSES[id].name, covers: CLASSES[id].summary }])) as Record<ClassId, { name: string; covers: string }>,
+  } satisfies ChoiceQuestion<ClassId>;
+}
+
+export function classStateHash(i: Parameters<typeof aiState>[0] & { category: CategoryId }): string {
+  return createHash('sha256').update(JSON.stringify({ v: SPEC_VERSION, c: i.category, s: aiState(i) })).digest('hex').slice(0, 16);
+}
+
+export interface CachedClass {
+  hash: string;
+  model: string;
+  class: ClassId;
+  confidence: number;
+  probabilities: Partial<Record<ClassId, number>>;
+}

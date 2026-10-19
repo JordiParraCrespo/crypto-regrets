@@ -12,6 +12,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "bridge-crosschain",
+  "vulnClass": "message-verification-bypass",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "message-verification-bypass",
+    "confidence": 1
+  },
   "technique": "Forged Proof",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -52,6 +58,10 @@
     {
       "source": "RevertIQ",
       "text": "The July 2023 Poly Network incident involved an attacker forging bridge messages across multiple chains by compromising the keys for its off-chain validators, resulting in $10.2M of actual losses despite the ability to mint far larger paper amounts. Off-chain consensus keys controlling Poly Network’s cross-chain bridge were compromised, allowing the attacker to sign forged state roots and cross-chain transfer messages. Existing contract logic relied on these keys, so it treated malicious unlock commands as valid."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The name Poly Network may ring a bell, because in August 2021 they were exploited for an (at the time) record-setting $611 million. Now, it's happened again, and some reports are throwing around even more massive numbers like $42 billion. In reality, the exploiters were able to mint massive quantities of tokens on multiple networks, with their wallet balances showing numbers in the billions. However, complete lack of liquidity for these tokens meant their \"billions\" are worth substantially less. According to crypto research firm Beosin, the attackers have so far cashed out around 5,196 ETH (~$10.1 million) in liquid assets. Poly Network suspended services shortly after the attack."
     }
   ],
   "audit": null,
@@ -64,7 +74,8 @@
     "defillama",
     "rekt",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -101,6 +112,21 @@
       "source": "revertiq",
       "label": "dedaub.com",
       "url": "https://dedaub.com/blog/poly-network-hack/"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=polynetwork-exploited-again"
+    },
+    {
+      "source": "w3igg",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/tech/2023/07/02/polynetwork-attacker-issues-worthless-billions-in-shib-bnb-busd-in-latest-crypto-hack/"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BeosinAlert/status/1675773135755546625"
     }
   ]
 }

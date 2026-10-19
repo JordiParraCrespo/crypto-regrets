@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "input-validation",
+  "vulnClass": "missing-bounds-check",
+  "vulnClassBy": "typesafe",
+  "aiClass": {
+    "id": "missing-bounds-check",
+    "confidence": 0.98
+  },
   "technique": "Missing Input Validation",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -54,6 +60,10 @@
     {
       "source": "RevertIQ",
       "text": "On March 9, 2022, Fantasm Finance was exploited for approximately $2.62 million on Fantom. A contract logic flaw allowed the attacker to mint synthetic XFTM tokens using only protocol FSM tokens, bypassing the required FTM collateral. The attacker repeatedly executed this undercollateralized mint cycle, drained the pool, and bridged the FTM proceeds to Ethereum, where the assets were laundered via Tornado Cash. The vulnerable mint logic in Fantasm Finance's Pool contract failed to check for the required minimum amount of FTM collateral. This omission allowed synthetic assets (XFTM) to be minted using only FSM tokens, permitting extraction of pool collateral."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "An exploiter was able to use a bug in the Fantasm Mint contract to drain more than 1,000 ETH ($2,640,000) from Fantasm Finance. Fantasm urged their users to redeem their tokens they were staking and exit from liquidity pools , but attackers were still able to drain an enormous amount of funds from the protocol. It appeared that several other attackers joined in after the first attacker used the exploit, though it's not yet clear how much money was lost in total. The primary attacker transferred 1,007 ETH to the Tornado Cash tumbling service shortly after the attack. Fantasm Finance wrote on Twitter that they planned to publish a postmortem the followin…"
     }
   ],
   "audit": null,
@@ -68,7 +78,8 @@
     "defillama",
     "defihacklabs",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -125,6 +136,26 @@
       "source": "revertiq",
       "label": "itokenly.com",
       "url": "https://itokenly.com/hacks/fantasm-finance"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=fantasm-finance-exploited"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/fantasm_finance/status/1501586619928924160"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/RugDocIO/status/1501629678993518599"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/PeckShieldAlert/status/1501743350869012481"
     }
   ]
 }

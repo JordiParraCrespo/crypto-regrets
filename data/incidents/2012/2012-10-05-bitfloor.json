@@ -1,0 +1,65 @@
+{
+  "id": "2012-10-05-bitfloor",
+  "name": "BitFloor",
+  "date": "2012-10-05",
+  "year": 2012,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [],
+  "targetType": null,
+  "category": "key-compromise",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "hot-wallet-compromise",
+    "confidence": 0.44
+  },
+  "technique": "server hot wallet breach",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.93).",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "key-compromise",
+    "confidence": 0.93,
+    "top": [
+      {
+        "category": "key-compromise",
+        "p": 0.93
+      },
+      {
+        "category": "frontend-infra",
+        "p": 0.07
+      }
+    ],
+    "flashLoan": 0.01,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "Attackers likely gained access through a cloud infrastructure provider and accessed a server with unencrypted hot wallet. Last night, a few of our servers were compromised. As a result, the attacker gained accesses to an unencrypted backup of the wallet keys (the actual keys live in an encrypted area). Using these keys they were able to transfer the coins. This attack took the vast majority of the coins BitFloor was holding on hand. As a result, I have paused all exchange operations. Even tho only a small majority of the coins are ever in use at any time, I felt it inappropriate to continue operating not having the capability to cover all account balances for BTC at the time.",
+  "descriptions": [
+    {
+      "source": "Blockchain Graveyard",
+      "text": "Attackers likely gained access through a cloud infrastructure provider and accessed a server with unencrypted hot wallet. Last night, a few of our servers were compromised. As a result, the attacker gained accesses to an unencrypted backup of the wallet keys (the actual keys live in an encrypted area). Using these keys they were able to transfer the coins. This attack took the vast majority of the coins BitFloor was holding on hand. As a result, I have paused all exchange operations. Even tho only a small majority of the coins are ever in use at any time, I felt it inappropriate to continue operating not having the capability to cover all account balances for BTC at the time."
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "graveyard"
+  ],
+  "references": [
+    {
+      "source": "graveyard",
+      "label": "Blockchain Graveyard",
+      "url": "https://bitcointalk.org/index.php?topic=105818.0"
+    },
+    {
+      "source": "graveyard",
+      "label": "bitcointalk.org",
+      "url": "https://bitcointalk.org/index.php?topic=105818.0"
+    }
+  ]
+}

@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "reentrancy",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "read-only-reentrancy",
+    "confidence": 0.51
+  },
   "technique": "Reentrancy",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -54,6 +60,10 @@
     {
       "source": "RevertIQ",
       "text": "BurgerSwap, a BSC-based AMM, was exploited on May 27, 2021, losing approximately $7.2M due to a missing reentrancy guard and failure to update pool reserves before external calls, allowing repeated stale-reserve swaps via a flash loan and fake token pair. The vulnerable swap function allowed reentrant calls during external token transfers, resulting in repeated swaps using pre-reentry (stale) reserve values. The protocol did not update pool reserves before these calls and lacked a reentrancy guard. This allowed an attacker to withdraw excessive assets by exploiting a fake token's transferFrom() hook, combined with a flash loan."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "A missing line of code made it \"trivally\" easy for an attacker to use a flash loan attack to pull $7.2 million from the DeFi platform BurgerSwap. BurgerSwap said it would \"strive to cover all [users'] loss\"."
     }
   ],
   "audit": "Unaudited",
@@ -66,7 +76,8 @@
     "defihacklabs",
     "rekt",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -113,6 +124,21 @@
       "source": "revertiq",
       "label": "quillhashteam.medium.com",
       "url": "https://quillhashteam.medium.com/burgerswap-flash-loan-attack-analysis-888b1911daef"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=trivial-bug-costs-burgerswap-7-2-million"
+    },
+    {
+      "source": "w3igg",
+      "label": "theblockcrypto.com",
+      "url": "https://www.theblockcrypto.com/post/106457/missing-line-of-code-leads-to-7-2-million-exploit-of-dex-burgerswap"
+    },
+    {
+      "source": "w3igg",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/markets/2021/05/28/burgerswap-hit-by-flash-loan-attack-netting-over-7m/"
     }
   ]
 }

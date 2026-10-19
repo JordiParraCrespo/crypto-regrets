@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "access-control",
+  "vulnClass": "missing-access-modifier",
+  "vulnClassBy": "typesafe",
+  "aiClass": {
+    "id": "missing-access-modifier",
+    "confidence": 1
+  },
   "technique": "Merkle Proof Forgery",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -46,6 +52,10 @@
     {
       "source": "RevertIQ",
       "text": "On July 28, 2025, the SuperRare RareStakingV1 contract on Ethereum lost 11.9 million RARE tokens (~$730,000) due to a critical logic error in the updateMerkleRoot access control, allowing an attacker to set a fraudulent Merkle root and drain all staking rewards in one transaction. A misconfigured require statement in the access control for updateMerkleRoot let any address submit a new Merkle root, making staking claim proofs trivial for attackers."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "A hacker stole RARE tokens priced at around $731,000 after exploiting a vulnerability in a staking contract for the SuperRare NFT platform. The attacker funded the exploiter wallet around six months ago with assets transferred via the Tornado Cash cryptocurrency mixer ."
     }
   ],
   "audit": null,
@@ -58,7 +68,8 @@
     "defihacklabs",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -110,6 +121,21 @@
       "source": "revertiq",
       "label": "github.com",
       "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/src/test/2025-07/SuperRare_exp.sol"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=superrare-hack"
+    },
+    {
+      "source": "w3igg",
+      "label": "x.com",
+      "url": "https://x.com/CyversAlerts/status/1949766758635610276"
+    },
+    {
+      "source": "w3igg",
+      "label": "x.com",
+      "url": "https://x.com/PeckShieldAlert/status/1949764035408527414"
     }
   ]
 }

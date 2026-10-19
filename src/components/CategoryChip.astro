@@ -1,9 +1,0 @@
----
-import { CATEGORIES, type CategoryId } from '../lib/taxonomy';
-import { href, layerSlot } from '../lib/data';
-interface Props { id: CategoryId; link?: boolean }
-const { id, link = true } = Astro.props;
-const c = CATEGORIES[id];
-const cls = `chip l${layerSlot(c.layer)}`;
----
-{link ? <a class={cls} href={href(`/patterns/${id}`)}><span class="dot" />{c.name}</a> : <span class={cls}><span class="dot" />{c.name}</span>}

@@ -10,6 +10,12 @@
   ],
   "targetType": null,
   "category": "bridge-crosschain",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "unbacked-crosschain-mint",
+    "confidence": 0.55
+  },
   "technique": "Contract Vulnerability",
   "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.98).",
   "classifiedBy": "typesafe",
@@ -42,19 +48,39 @@
     {
       "source": "SlowMist",
       "text": "As reported by Cointelegraph, the BitBTC team has now fixed the bug after Twitter user @PlasmaPower0 disclosed a “fake minting” bug that existed in the cross-chain bridge between BitBTC and Optimism. It is reported that the vulnerability allows an attacker to fake tokens on one side of the bridge and exchange them for real tokens on the other side. Attackers have tried to extract 200 billion BitBTC tokens from Optimism through this vulnerability, but it is only a test."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "A security researcher published a frustrated Twitter thread reporting that \"BitBTC's Optimism bridge is trivially vulnerable. Their team has ignored my messages, so I'm going to publish the critical exploit here.\" They described an issue where it was possible for people to create tokens on the Optimism side of the bridge that could be tied to any token on the other side of the bridge — meaning an exploiter could create a valueless token and bridge it to an unrelated token with actual value. Less than a day after publishing the thread, someone did exactly what the researcher described, and was able to cause the bridge to mint and transfer 200 billion BitBTC.…"
     }
   ],
   "audit": null,
   "txHashes": [],
   "poc": null,
   "sources": [
-    "slowmist"
+    "slowmist",
+    "w3igg"
   ],
   "references": [
     {
       "source": "slowmist",
       "label": "cointelegraph.com",
       "url": "https://cointelegraph.com/news/twitter-user-saves-cross-chain-bridge-from-potential-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=vulnerability-in-bitbtc-bridge-ends-in-an-exploit-where-the-clock-is-ticking"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/PlasmaPower0/status/1582176532985880576"
+    },
+    {
+      "source": "w3igg",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0x22bc07c7d732fef9dded195d1f03bdb86edfc60673bd3b19a9d79bc831a87882"
     }
   ]
 }

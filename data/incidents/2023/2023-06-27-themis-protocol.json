@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "oracle-manipulation",
+  "vulnClass": "spot-price-oracle",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "spot-price-oracle",
+    "confidence": 0.46
+  },
   "technique": "Spot Price Manipulation",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -46,6 +52,10 @@
     {
       "source": "RevertIQ",
       "text": "Themis Protocol on Arbitrum was exploited on June 27, 2023 via oracle manipulation that allowed an attacker to inflate the value of Balancer LP tokens and borrow assets against their fake price, resulting in losses totaling approximately $370,000. The root cause was a vulnerable price oracle that calculated Balancer LP token value using spot pool reserves. The attacker manipulated pool composition through swaps, which caused the oracle to overestimate LP token price and enabled borrowing of unbacked assets."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Themis Protocol is a lending platform that has had somewhat of an excruciating rollout, with users waiting ever longer for the platform to finally go live as they endured multiphased airdrops but no usable product. On June 16, the project finally launched in beta on Arbitrum, an Ethereum layer 2. Only eleven days later, on June 27, the team boasted that the project \"has grown to over $1m TVL in 2 working days\". An hour after that, they announced that they would be suspending the protocol and beginning an immediate investigation into an apparent theft. Themis boasts in its documentation that \"security is the highest priority\" of the project, and lists multiple audits from PeckShield.…"
     }
   ],
   "audit": null,
@@ -57,7 +67,8 @@
     "defillama",
     "defihacklabs",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -104,6 +115,16 @@
       "source": "revertiq",
       "label": "blog.solidityscan.com",
       "url": "https://blog.solidityscan.com/themis-protocol-hack-analysis-7241f6470b2e/"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=themis-protocol-hacked-shortly-after-going-live"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/peckshield/status/1673763251824336896"
     }
   ]
 }

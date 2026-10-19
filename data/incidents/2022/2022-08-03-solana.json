@@ -5,33 +5,41 @@
   "year": 2022,
   "amountUsd": 8000000,
   "returnedUsd": null,
-  "chains": [],
+  "chains": [
+    "Solana"
+  ],
   "targetType": null,
-  "category": "unknown",
-  "technique": null,
-  "classificationNote": null,
-  "classifiedBy": "none",
+  "category": "key-compromise",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "key-leak-infrastructure",
+    "confidence": 0.53
+  },
+  "technique": "hack",
+  "classificationNote": "Upstream label missing; classified by keyword rules from the root-cause text.",
+  "classifiedBy": "keywords",
   "ai": {
     "model": "jev-1.13.0",
     "category": "key-compromise",
-    "confidence": 0.57,
+    "confidence": 0.47,
     "top": [
       {
         "category": "key-compromise",
-        "p": 0.6
+        "p": 0.5
       },
       {
         "category": "social-engineering",
-        "p": 0.22
+        "p": 0.24
       },
       {
         "category": "access-control",
-        "p": 0.07
+        "p": 0.1
       }
     ],
     "flashLoan": 0.04,
     "stateActor": 0.03,
-    "hasRootCause": 0.18
+    "hasRootCause": 0.19
   },
   "bridge": false,
   "language": null,
@@ -40,19 +48,44 @@
     {
       "source": "SlowMist",
       "text": "A large-scale incident of currency theft occurred on the Solana public chain, and a large number of users were transferred SOL and SPL tokens without their knowledge. According to SlowMist MistTrack statistics, more than 8,000 Solana wallets have been stolen so far. Assets are valued at approximately $4.5 million."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Nearly 8,000 Solana wallets were drained for at least $6 million worth of assets, including native SOL tokens and SPL tokens like USDC. The attack went on for nearly a day before Solana identified the likely cause: private keys that were exposed to an application monitoring service used by the crypto wallet Slope. Both Solana and Slope were vague about further details but explained that they were continuing to investigate."
     }
   ],
   "audit": null,
   "txHashes": [],
   "poc": null,
   "sources": [
-    "slowmist"
+    "slowmist",
+    "w3igg"
   ],
   "references": [
     {
       "source": "slowmist",
       "label": "foresightnews.pro",
       "url": "https://foresightnews.pro/news/h5Detail/8076"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=thousands-of-solana-wallets-drained"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/0xfoobar/status/1554627762807349249"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/SolportTom/status/1554609401369137152"
+    },
+    {
+      "source": "w3igg",
+      "label": "rekt.news",
+      "url": "https://rekt.news/unsolved-mystery/"
     }
   ]
 }

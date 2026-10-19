@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "oracle-manipulation",
+  "vulnClass": "spot-price-oracle",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "spot-price-oracle",
+    "confidence": 1
+  },
   "technique": "Spot Price Manipulation",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -54,6 +60,10 @@
     {
       "source": "RevertIQ",
       "text": "Polter Finance, a Fantom-based lending protocol, was exploited for at least $8.7M when an attacker manipulated the BOO token oracle through flash loans, inflating collateral far beyond its true value and draining multiple pools. Polter Finance’s oracle system depended on spot prices from SpookySwap pools, using a ChainlinkUniV2Adapter without checks against sudden price shifts. A flash loan drained BOO liquidity, spiking its reported price, which the lending protocol used to calculate collateral, enabling outsized borrowing and pool drain."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The Fantom-based Polter Finance defi project was exploited for $7 million when an attacker was able to perform an oracle manipulation attack. By artificially increasing the price of the $BOO token, which is a governance token used by the SpookySwap project, they were then able to use that token to drain Polter's liquidity pools using a flash loan . The attacker successfully drained the entire $12 million worth of tokens on the platform. The creator of the platform stated that they had filed a police report with Singaporean authorities. They also attempted to contact the hacker via on-chain message to negotiate the return of funds, but have not received a response."
     }
   ],
   "audit": "Unaudited",
@@ -67,7 +77,8 @@
     "rekt",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -149,6 +160,16 @@
       "source": "revertiq",
       "label": "blog.solidityscan.com",
       "url": "https://blog.solidityscan.com/polter-finance-hack-analysis-c5eaa6dcfd40/"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=polter-finance-hack"
+    },
+    {
+      "source": "w3igg",
+      "label": "cointelegraph.com",
+      "url": "https://cointelegraph.com/news/polter-finance-12m-hack-response"
     }
   ]
 }

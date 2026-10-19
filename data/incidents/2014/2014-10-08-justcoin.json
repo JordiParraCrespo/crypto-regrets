@@ -1,0 +1,79 @@
+{
+  "id": "2014-10-08-justcoin",
+  "name": "Justcoin",
+  "date": "2014-10-08",
+  "year": 2014,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [],
+  "targetType": null,
+  "category": "logic-error",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "business-logic-flaw",
+    "confidence": 0.88
+  },
+  "technique": "protocol vulnerability",
+  "classificationNote": "Classified by keyword rules from the Blockchain Graveyard label and description.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.53,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.56
+      },
+      {
+        "category": "input-validation",
+        "p": 0.2
+      },
+      {
+        "category": "client-bug",
+        "p": 0.16
+      }
+    ],
+    "flashLoan": 0.02,
+    "stateActor": 0.02,
+    "hasRootCause": 0.95
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "Justcoin had significant losses due to a protocol implementation issue with the Ripple protocol. A disclosure of the issue supposedly happened months before the bug was exploited. Cold storage is said to have limited losses greatly. The consequence, allegedly, is that hackers sent deposit transactions for large amounts, e.g. 100,000, to Justcoin. They set the tfPartialPayment flag to something like .0001. The transaction would be perfectly valid, and any client unaware of this behavior in the protocol would likely not be checking for the DeliveredAmount field – since it was never documented until a week ago. The transaction Amount field says “100,000” but the DeliveredAmount is only .0001.…",
+  "descriptions": [
+    {
+      "source": "Blockchain Graveyard",
+      "text": "Justcoin had significant losses due to a protocol implementation issue with the Ripple protocol. A disclosure of the issue supposedly happened months before the bug was exploited. Cold storage is said to have limited losses greatly. The consequence, allegedly, is that hackers sent deposit transactions for large amounts, e.g. 100,000, to Justcoin. They set the tfPartialPayment flag to something like .0001. The transaction would be perfectly valid, and any client unaware of this behavior in the protocol would likely not be checking for the DeliveredAmount field – since it was never documented until a week ago. The transaction Amount field says “100,000” but the DeliveredAmount is only .0001.…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "graveyard"
+  ],
+  "references": [
+    {
+      "source": "graveyard",
+      "label": "Blockchain Graveyard",
+      "url": "https://www.cryptocoinsnews.com/ripple-tfpartialpayment-causes-gox-style-hack-justcoin-exchange/"
+    },
+    {
+      "source": "graveyard",
+      "label": "cryptocoinsnews.com",
+      "url": "https://www.cryptocoinsnews.com/ripple-tfpartialpayment-causes-gox-style-hack-justcoin-exchange/"
+    },
+    {
+      "source": "graveyard",
+      "label": "medium.com",
+      "url": "https://medium.com/@abrkn/partial-payments-ripple-stellar-vulnerability-in-the-wild-29aaefd8a7ac"
+    },
+    {
+      "source": "graveyard",
+      "label": "web.archive.org",
+      "url": "https://web.archive.org/web/20141010105808/https://github.com/ripple/gatewayd/issues/186"
+    }
+  ]
+}

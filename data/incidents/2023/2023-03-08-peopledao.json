@@ -10,6 +10,12 @@
   ],
   "targetType": "DAO",
   "category": "social-engineering",
+  "vulnClass": "blind-signing",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "phishing-credential-theft",
+    "confidence": 0.47
+  },
   "technique": "Signer Phishing",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -46,6 +52,10 @@
     {
       "source": "RevertIQ",
       "text": "On March 6, 2023, PeopleDAO lost 76.5 ETH (~$120,000) on Ethereum when a public accounting spreadsheet with edit access enabled allowed an attacker to insert a hidden payout row. This unreviewed row was executed by the multisig, draining the treasury. The incident was caused by mistakenly granting public edit access to the DAO's accounting Google Sheet during its monthly payout process. An attacker inserted a hidden payout row, which was not detected upon review, and the multisig signers executed the resulting mass transfer without verifying all recipients, enabling the unauthorized withdrawal."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "PeopleDAO is the successor to ConstitutionDAO, a group that made an ill-fated attempt to buy a copy of the US Constitution in November 2021 . When the accounting lead for PeopleDAO accidentally shared an editable accounting spreadsheet link in a public Discord channel, an enterprising member of the Discord decided to take advantage. They inserted a row with their own wallet address for a 76 ETH (~$120,000) payment, then hid the row so it wouldn't display to the other viewers. When team leads reviewed the spreadsheet to sign off on the payments, they didn't see the row, and there was no rollup showing total payments or anything else that would've helped them catch the malicious activity.…"
     }
   ],
   "audit": null,
@@ -56,7 +66,8 @@
   "sources": [
     "defillama",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -88,6 +99,16 @@
       "source": "revertiq",
       "label": "threadreaderapp.com",
       "url": "https://threadreaderapp.com/thread/1634518915668668416.html"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=peopledao-loses-120000-after-payment-spreadsheet-is-shared-publicly"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/The_PeopleDAO/status/1634518915668668416"
     }
   ]
 }

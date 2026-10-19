@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "oracle-manipulation",
+  "vulnClass": "spot-price-oracle",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "spot-price-oracle",
+    "confidence": 0.91
+  },
   "technique": "Spot Price Manipulation",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -50,6 +56,10 @@
     {
       "source": "RevertIQ",
       "text": "On May 12, 2021, xToken's xSNXa and xBNTa strategies on Ethereum were exploited for roughly $24.5 million. The attacker used flash loans to manipulate DEX prices and flaws in price-path validation, minting and redeeming strategy tokens for vastly more value than provided. xToken's contracts relied on manipulable on-chain spot prices and failed to validate swap paths or use independent oracles, allowing flash-loan-enabled attackers to skew mint pricing and redeem excess value."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "A flash loan attack allowed hackers to exploit two vulnerabilities in the xToken DeFi platform and steal $24.5 million. This was the first of two large-scale hacks of the platform this year."
     }
   ],
   "audit": "Peckshield",
@@ -61,7 +71,8 @@
     "defillama",
     "rekt",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -98,6 +109,21 @@
       "source": "revertiq",
       "label": "smartcontractshacking.com",
       "url": "https://smartcontractshacking.com/hacks/xtoken-minting-hack-2021"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=24-5-million-emptied-from-xtoken-platform"
+    },
+    {
+      "source": "w3igg",
+      "label": "theblockcrypto.com",
+      "url": "https://www.theblockcrypto.com/post/104667/defi-protocol-xtoken-exploit-attack"
+    },
+    {
+      "source": "w3igg",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/defi-protocol-xtoken-suffers-24-5m-exploit/"
     }
   ]
 }

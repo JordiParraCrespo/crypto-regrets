@@ -10,6 +10,12 @@
   ],
   "targetType": "Wallet",
   "category": "signature-crypto",
+  "vulnClass": "weak-key-generation",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "weak-key-generation",
+    "confidence": 1
+  },
   "technique": "Weak Key Generation",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -46,6 +52,10 @@
     {
       "source": "RevertIQ",
       "text": "A cryptographic flaw in SecondFi's Ed25519 signing implementation enabled attackers to recover user private keys from Cardano transaction data. Approximately $2.4M in ADA was drained from 374 wallets before emergency rescue efforts secured further at-risk funds, and EMURGO permanently discontinued the wallet. SecondFi's Ed25519 signing code derived the signature nonce only from the public transaction message, omitting the secret prefix required by the Ed25519 standard. This made every signature publicly invertible: anyone could algebraically recover a wallet's private key from standard transaction data. The flaw affected every address that signed with…"
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Users of the Cardano wallet SecondFi (formerly Yoroi) have lost a cumulative 16 million ADA (~$2.4 million) across three attacks targeting a vulnerability in the project's wallet generation code. After the attacks commenced, SecondFi \"rescued\" another 129 million ADA (~$19.4 million) by moving the assets to a third party entity. They announced that an external accounting firm would verify the funds and process user claims. About a month after the hack, SecondFi announced it would shut down operations."
     }
   ],
   "audit": null,
@@ -55,7 +65,8 @@
     "defillama",
     "rekt",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -92,6 +103,21 @@
       "source": "revertiq",
       "label": "beosin.com",
       "url": "https://beosin.com/resources/ed25519-implementation-flaw-in-secondfi-wallet-leads-to-private-key-compromise"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=secondfi-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/business/2026/06/24/secondfi-loses-usd2-4-million-in-cardano-wallet-exploit-with-up-to-usd20-million-at-risk"
+    },
+    {
+      "source": "w3igg",
+      "label": "x.com",
+      "url": "https://x.com/secondfiapp/status/2069380358291001425"
     }
   ]
 }

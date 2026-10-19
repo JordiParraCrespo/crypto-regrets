@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "arbitrary-call",
+  "vulnClass": "arbitrary-external-call",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "arbitrary-external-call",
+    "confidence": 0.94
+  },
   "technique": "Arbitrary External Call",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -50,6 +56,10 @@
     {
       "source": "RevertIQ",
       "text": "Unizen's DEX aggregator proxy contract on Ethereum Mainnet was exploited on 8 March 2024 due to an unsafe external call vulnerability introduced in a contract upgrade, resulting in losses of about $2.1 million. The attacker drained user-approved USDT, quickly swapping to DAI and ETH. Most affected users (those with losses under $750,000) were reimbursed shortly after the incident. The exploit arose from an unsafe external call vulnerability introduced during a smart contract upgrade to Unizen's DEX aggregation proxy, allowing attackers to invoke arbitrary contract methods and withdraw funds from users who had previously granted token approvals."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The Unizen defi platform lost around $2.1 million in the Tether stablecoin in an attack that took advantage of a vulnerability an external call from the project smart contract . The project team sent on-chain messages to the attacker, offering a 20% \" bounty \" for the return of the remaining funds."
     }
   ],
   "audit": "Halborn, Verichains",
@@ -78,7 +88,8 @@
     "rekt",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -140,6 +151,16 @@
       "source": "revertiq",
       "label": "github.com",
       "url": "https://github.com/NanoJS10/Unizen-Protocol-Exploit-/blob/main/README.md"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=unizen-hack"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/unizen_io/status/1766768232147652918"
     }
   ]
 }

@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "reentrancy",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "single-function-reentrancy",
+    "confidence": 0.95
+  },
   "technique": "Reentrancy",
   "classificationNote": "Classified by keyword rules from the DeFiHackLabs root-cause title.",
   "classifiedBy": "keywords",
@@ -54,6 +60,10 @@
     {
       "source": "RevertIQ",
       "text": "Stars Arena (Arena SocialFi) was exploited on Avalanche through a bonding curve withdrawal logic flaw triggered by a reentrancy attack. The attacker drained approximately $2.97 million in AVAX, exploiting flawed accounting during share sales. Most funds were later partially recovered after negotiation. The Stars Arena contract allowed reentrant calls during a share sell operation. This enabled the attacker to manipulate internal variables used in share-price and withdrawal calculations, resulting in improperly inflated AVAX withdrawals. Insufficient protection against reentrancy and broken collateral accounting enabled the exploit."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Stars Arena, an Avalanche-based dupe of the popular Friend.Tech project, suffered a serious exploit in which an attacker drained tokens priced at around $3 million. Avalanche co-founder and CEO Emin Gün Sirer drew widespread mockery when announcing that \"the amount lost is only $3m\", apparently not perceiving that $3 million is a massive sum to most people. He also didn't mention that it constituted almost the entire total TVL of the Stars Arena project, which was left with less than $1 in tokens following the attack. Stars Arena was fortunate, in that the hacker ultimately contacted them offering to make a deal. The attacker returned 90% of the funds, keeping $300,000 as a \" bounty \"."
     }
   ],
   "audit": "Unaudited",
@@ -66,7 +76,8 @@
     "rekt",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -153,6 +164,21 @@
       "source": "revertiq",
       "label": "defillama.com",
       "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=stars-arena-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/tech/2023/10/07/avalanche-social-app-stars-arena-drained-of-3m-in-avax-after-hack/"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/el33th4xor/status/1710617850807832910"
     }
   ]
 }

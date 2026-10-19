@@ -6,25 +6,31 @@
   "amountUsd": null,
   "returnedUsd": null,
   "chains": [
-    "Ethereum Mainnet"
+    "Ethereum"
   ],
   "targetType": null,
-  "category": "logic-error",
+  "category": "reentrancy",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "token-hook-reentrancy",
+    "confidence": 0.19
+  },
   "technique": "Gas abuse via withdrawal callback; Excessive gas forwarded to a contract recipient",
-  "classificationNote": "Classified by keyword rules from the RevertIQ label and description.",
-  "classifiedBy": "keywords",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.72). Replaced keyword guess \"logic-error\".",
+  "classifiedBy": "typesafe",
   "ai": {
     "model": "jev-1.13.0",
     "category": "reentrancy",
-    "confidence": 0.66,
+    "confidence": 0.72,
     "top": [
       {
         "category": "reentrancy",
-        "p": 0.68
+        "p": 0.74
       },
       {
         "category": "logic-error",
-        "p": 0.28
+        "p": 0.23
       },
       {
         "category": "arbitrary-call",

@@ -6,10 +6,16 @@
   "amountUsd": 1800000,
   "returnedUsd": null,
   "chains": [
-    "Ethereum Mainnet"
+    "Ethereum"
   ],
   "targetType": null,
   "category": "key-compromise",
+  "vulnClass": "admin-key-compromise",
+  "vulnClassBy": "typesafe",
+  "aiClass": {
+    "id": "admin-key-compromise",
+    "confidence": 1
+  },
   "technique": "Private Key Leakage",
   "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.99).",
   "classifiedBy": "typesafe",
@@ -29,7 +35,7 @@
     ],
     "flashLoan": 0.03,
     "stateActor": 0.03,
-    "hasRootCause": 0.86
+    "hasRootCause": 0.85
   },
   "bridge": false,
   "language": null,
@@ -42,6 +48,10 @@
     {
       "source": "RevertIQ",
       "text": "Wilder World disclosed a March 16, 2024 compromise that allowed an attacker to take control of legacy vault contracts and drain WILD and MEOW tokens worth roughly 515 ETH. Available evidence points to a compromised private key and unauthorized ownership transfer of legacy contracts rather than a smart contract logic flaw. Available evidence indicates the incident resulted from compromise of a privileged private key that controlled legacy Wilder World vault contracts. The attacker used that access to transfer ownership or upgrade authority over legacy vault infrastructure and withdraw WILD and MEOW tokens. No public postmortem or verified vulnerable contract code has been published."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Wilder World is a blockchain-based racing game that uses all the buzzwords: blockchains, artificial intelligence, and metaverse . On March 16, someone with access to the project deployer's private key upgraded legacy contracts and transfer the project's $WILD and $MEOW tokens to themselves. Altogether, the attacker profited 515 ETH (~$1.8 million), which they then laundered through the Tornado Cash cryptocurrency tumbler . The project blamed the theft on a previous contractor who had the private key. They also explained that the attacker seemed to be a developer based on the fact that they had \"specialized knowledge of ZERO's internal security systems\"."
     }
   ],
   "audit": null,
@@ -51,7 +61,8 @@
   "poc": null,
   "sources": [
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -78,6 +89,11 @@
       "source": "revertiq",
       "label": "smartcontractshacking.com",
       "url": "https://smartcontractshacking.com/hacks/wilder-hack-2024"
+    },
+    {
+      "source": "w3igg",
+      "label": "certik.com",
+      "url": "https://www.certik.com/resources/blog/private-key-compromises"
     }
   ]
 }

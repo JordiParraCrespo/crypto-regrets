@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "oracle-manipulation",
+  "vulnClass": "spot-price-oracle",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "spot-price-oracle",
+    "confidence": 0.73
+  },
   "technique": "Spot Price Manipulation",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -54,6 +60,10 @@
     {
       "source": "RevertIQ",
       "text": "0VIX lost about $2 million after an attacker increased vGHST's value with a GHST donation and liquidated a controlled borrower. The Polygon transaction records 24 liquidations and final transfers of about 1.454 million USDC, 584,445 USDT, and 9,566 GHST to its caller. The configured vGHST oracle multiplied the wrapper's immediately mutable GHST-per-share conversion by the GHST price. A direct donation repriced existing vGHST debt, enabling the attacker to liquidate a controlled borrower, seize USDC collateral, and leave other lending liabilities exposed."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The 0VIX defi protocol on the Polygon blockchain was exploited for around $2 million. This was a substantial portion of the project's roughly $6.4 million TVL around the time of the hack. The attack was perpetrated by an attacker who manipulated an oracle , which then allowed them to execute a flash loan attack on the project. The protocol was paused following the attack. 0VIX later tweeted that they had been collaborating with security firms to investigate the hack, and had offered to let the attacker keep $125,000 if they returned the remaining funds in a bug bounty agreement that would also involve 0VIX not pursuing legal action."
     }
   ],
   "audit": null,
@@ -66,7 +76,8 @@
     "defihacklabs",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -138,6 +149,16 @@
       "source": "revertiq",
       "label": "polygonscan.com",
       "url": "https://polygonscan.com/address/0x450ac5c7c2b180477940aa4de39b3513c42ab74f#code"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=0vix-protocol-exploited-for-2-million"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/0vixProtocol/status/1651995828167344128"
     }
   ]
 }

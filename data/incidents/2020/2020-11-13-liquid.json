@@ -8,6 +8,12 @@
   "chains": [],
   "targetType": null,
   "category": "frontend-infra",
+  "vulnClass": "dns-domain-hijack",
+  "vulnClassBy": "typesafe",
+  "aiClass": {
+    "id": "dns-domain-hijack",
+    "confidence": 1
+  },
   "technique": "Information Leakage",
   "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.98).",
   "classifiedBy": "typesafe",
@@ -40,13 +46,18 @@
     {
       "source": "SlowMist",
       "text": "Mike Kayamori, CEO of cryptocurrency exchange Liquid, posted a notice on the official website that a data leakage security incident occurred on the exchange on November 13. A domain hosting provider that manages a core domain name mistakenly transferred control of the account and domain name to a malicious intruder, allowing it to change DNS records, thereby controlling a large number of internal email accounts, and being able to partially damage the exchange’s Infrastructure and gain access to stored documents. After detecting the intruder, immediate action was taken to intercept and contain the attack to prevent further intrusions and reduce the risk…"
+    },
+    {
+      "source": "Blockchain Graveyard",
+      "text": "On the 13th of November 2020, a domain name hosting provider that manages one of our core domain names incorrectly transferred control of the account and domain to a malicious actor. This gave the actor the ability to change DNS records and in turn, take control of a number of internal email accounts. In due course, the malicious actor was able to partially compromise our infrastructure, and gain access to document storage. We believe the malicious actor was able to obtain personal information from our user database. This may include data such as your email, name, address and encrypted password."
     }
   ],
   "audit": null,
   "txHashes": [],
   "poc": null,
   "sources": [
-    "slowmist"
+    "slowmist",
+    "graveyard"
   ],
   "references": [
     {

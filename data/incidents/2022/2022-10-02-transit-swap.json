@@ -11,6 +11,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "input-validation",
+  "vulnClass": "unvalidated-address-input",
+  "vulnClassBy": "typesafe",
+  "aiClass": {
+    "id": "unvalidated-address-input",
+    "confidence": 0.97
+  },
   "technique": "Missing Input Validation",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -59,6 +65,10 @@
     {
       "source": "RevertIQ",
       "text": "Transit Swap suffered an approval-drain exploit on October 1, 2022, allowing attackers to sweep ~$21M from user wallets on multiple chains. The swap contract forwarded arbitrary calldata, enabling crafted transferFrom calls against victim-approved tokens. Partial recovery followed on-chain communication and pressure. The vulnerable swap router contract forwarded user-supplied calldata and an arbitrary destination address with no validation. Attackers crafted calldata invoking transferFrom (with victim, attacker, amount) against ERC-20 tokens, using router-held user approvals to transfer assets directly to their accounts."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Transit Swap is a multi-chain decentralized exchange aggregator. Users of the project were collectively exploited for approximately $21 million when an attacker took advantage of a bug in the project's smart contract that allows arbitrary external calls. The attacker used this vulnerability to steal tokens that had been approved for swap by Transit Swap users. Amusingly, the hacker lost about $1 million of their ill-gotten funds to a MEV bot that was able to successfully front-run the swap. Multiple cryptocurrency security companies collaborated to investigate the hack shortly after it occurred. Transit Swap announced that \"through the joint efforts of…"
     }
   ],
   "audit": "Out of scope",
@@ -73,7 +83,8 @@
     "defihacklabs",
     "rekt",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -130,6 +141,21 @@
       "source": "revertiq",
       "label": "smartcontractaudit.com",
       "url": "https://www.smartcontractaudit.com/guides/transit-finance-2022-approval-drain-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=transit-swap-hacked-for-21-million-hacker-returns-large-portion"
+    },
+    {
+      "source": "w3igg",
+      "label": "rekt.news",
+      "url": "https://rekt.news/transit-swap-rekt/"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/TransitFinance/status/1576411330453479424"
     }
   ]
 }

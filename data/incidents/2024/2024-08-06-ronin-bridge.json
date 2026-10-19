@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "access-control",
+  "vulnClass": "uninitialized-implementation",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "access-misconfiguration",
+    "confidence": 0.54
+  },
   "technique": "Uninitialized Proxy",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -50,6 +56,10 @@
     {
       "source": "RevertIQ",
       "text": "On August 6, 2024, a Ronin Bridge upgrade left a new operator-weight variable uninitialized in the Ethereum gateway implementation. The resulting zero withdrawal threshold allowed unauthorized withdrawals of about 3,996 ETH and 1.99 million USDC before the bridge was paused. Ronin later stated that the assets were returned by whitehat and MEV participants. A Ronin Bridge proxy upgrade introduced the _totalOperatorWeight storage variable into MainchainGatewayV3, but the upgrade process executed initializeV4() without executing the required initializeV3() initializer. _totalOperatorWeight therefore remained zero, causing the computed withdrawal approval…"
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The Ronin bridge, which bridges crypto assets to the Ronin Network used by Axie Infinity and other gaming projects, has once again suffered a breach — though a considerably smaller one than the recordbreaking $625 million theft in March 2022. An update to the bridge code introduced a flaw with respect to how transactions were confirmed. Fortunately for the Ronin team, it seems that most of the losses actually went to whitehats and MEV bots that were frontrunning transactions by would-be exploiters. ETH and USDC priced at around $12 million were taken — the maximum amount before triggering a safety feature in the code. Later that day, Ronin announced th…"
     }
   ],
   "audit": "Unaudited",
@@ -67,7 +77,8 @@
     "defihacklabs",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -129,6 +140,26 @@
       "source": "revertiq",
       "label": "blog.solidityscan.com",
       "url": "https://blog.solidityscan.com/ronin-bridge-hack-analysis-d8f64b8fe683/"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=12-million-taken-by-whitehats-from-ronin-bridge"
+    },
+    {
+      "source": "w3igg",
+      "label": "protos.com",
+      "url": "https://protos.com/new-ronin-bridge-hack-down-to-dodgy-upgrade-team-banks-on-white-hat-op/"
+    },
+    {
+      "source": "w3igg",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/tech/2024/08/06/ronin-bridge-paused-after-9m-drained-in-apparent-whitehat-hack/"
+    },
+    {
+      "source": "w3igg",
+      "label": "x.com",
+      "url": "https://x.com/Ronin_Network/status/1820846361945792751"
     }
   ]
 }

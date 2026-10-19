@@ -11,6 +11,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "logic-error",
+  "vulnClass": "business-logic-flaw",
+  "vulnClassBy": "typesafe",
+  "aiClass": {
+    "id": "business-logic-flaw",
+    "confidence": 1
+  },
   "technique": "Swap Logic Flaw",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -59,6 +65,10 @@
     {
       "source": "RevertIQ",
       "text": "MonoX Finance lost approximately $31M on November 30, 2021, across Ethereum and Polygon due to a swap logic flaw. The protocol's single-sided liquidity pool design allowed the attacker to swap the MONO token for itself, inflating its price virtually and enabling the extraction of pool assets at manipulated rates. MonoX's swap function did not enforce token identity separation: it permitted swaps where the same token was set as both input and output. This allowed sequential 'self-swaps' of MONO, each artificially increasing its internal price due to non-cancelling accounting updates, ultimately enabling the attacker to drain real assets against the hyperinflated price."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "A hacker stole $31 million from the liquidity pool provider MonoX by exploiting a bug in their smart contract software that allowed them to exchange a token for itself and artificially inflate the price. MonoX took the classic approach of those burned by crypto issues, and tried to get the cash back by... asking nicely."
     }
   ],
   "audit": "Halborn, Peckshield",
@@ -72,7 +82,8 @@
     "defihacklabs",
     "rekt",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -139,6 +150,21 @@
       "source": "revertiq",
       "label": "smartcontractaudit.com",
       "url": "https://www.smartcontractaudit.com/guides/monox-finance-2021-single-sided-amm-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=31-million-stolen-from-monox"
+    },
+    {
+      "source": "w3igg",
+      "label": "arstechnica.com",
+      "url": "https://arstechnica.com/information-technology/2021/12/hackers-drain-31-million-from-cryptocurrency-service-monox-finance/"
+    },
+    {
+      "source": "w3igg",
+      "label": "cryptopotato.com",
+      "url": "https://cryptopotato.com/over-30-million-in-weth-and-matic-stolen-from-defi-project-monox/"
     }
   ]
 }

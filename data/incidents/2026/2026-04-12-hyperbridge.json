@@ -13,6 +13,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "bridge-crosschain",
+  "vulnClass": "message-verification-bypass",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "message-verification-bypass",
+    "confidence": 1
+  },
   "technique": "Forged Proof",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -53,6 +59,10 @@
     {
       "source": "RevertIQ",
       "text": "On April 13, 2026, Hyperbridge’s cross-chain bridge contracts on Ethereum, Base, BNB Chain, and Arbitrum were exploited. An attacker bypassed a Merkle Mountain Range proof verification, forged a state proof, gained admin control, and minted nearly 1 billion unbacked bridged tokens, draining ~$2.5 million in liquidity across chains. A missing bounds check in the MMR proof verifier (HandlerV1 contract) allowed forged proofs to pass and messages to execute. The flawed verification did not bind proofs to requests or check that all leaves were consumed, enabling replay and forgery attacks that granted admin and mint roles to the attacker."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "On April Fools' Day, the Hyperbridge blockchain bridge project posted a tweet claiming that the North Korean Lazarus hacking group had drained $37 million from the project. A linked blog post contained a Rickroll GIF and an explanation of \"Why Hyperbridge can't be hacked\". The following day, a Hyperbridge developer posted a screenshot of a blockchain transaction, writing \"Lmao the uniBTC exploiter is testing Hyperbridge. I hope you have a quantum computer bro\". Another commenter replied, \"Rule #1 dont actively provoke attackers\". About two weeks later, an attacker was able to forge a transaction to change the admin rights for the Polkadot/Ethereum brid…"
     }
   ],
   "audit": null,
@@ -72,7 +82,8 @@
     "defihacklabs",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -124,6 +135,21 @@
       "source": "revertiq",
       "label": "range.org",
       "url": "https://range.org/blog/1-billion-tokens-minted-inside-the-hyperbridge-gateway-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=hyperbridge-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "protos.com",
+      "url": "https://protos.com/hyperbridge-exploited-less-than-two-weeks-after-april-fools-day-hack-prank/"
+    },
+    {
+      "source": "w3igg",
+      "label": "x.com",
+      "url": "https://x.com/0xMarforio/status/2039767526356209710"
     }
   ]
 }

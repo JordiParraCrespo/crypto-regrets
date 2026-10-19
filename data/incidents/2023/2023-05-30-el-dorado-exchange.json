@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "logic-error",
+  "vulnClass": "business-logic-flaw",
+  "vulnClassBy": "typesafe",
+  "aiClass": {
+    "id": "business-logic-flaw",
+    "confidence": 1
+  },
   "technique": "Swap Logic Flaw",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -38,6 +44,10 @@
     {
       "source": "RevertIQ",
       "text": "El Dorado Exchange on Arbitrum was reported exploited on 2023-05-30 through a manipulable price path in its swap or oracle logic. DefiLlama records $120,000 lost, while secondary reports describe a larger gross extraction, partial fund returns, and a disputed whitehat framing. Manipulable price path in the oracle-backed swap logic."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The new Arbitrum-based El Dorado Exchange (EDE) was exploited for around $580,000. In an interesting twist, the attacker claimed to be a whitehat who was exposing that the developers had \"implemented a backdoor that allowed them to force liquidate any position they desired. This activity involved intentionally signing incorrect prices to manipulate users' positions and steal their funds\". The attacker promised to return all funds, minus a 10% \"white hat fee\", if the developers \"admit to manipulating the prices\", and also offered to disclose other vulnerabilities they claimed to have found in the project. The project founders wrote in response: \"Yes we…"
     }
   ],
   "audit": null,
@@ -45,7 +55,8 @@
   "poc": null,
   "sources": [
     "defillama",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -67,6 +78,16 @@
       "source": "revertiq",
       "label": "smartcontractshacking.com",
       "url": "https://smartcontractshacking.com/hacks/el-dorado-exchange-hack-2023"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=apparent-whitehat-exploits-el-dorado-exchange-claiming-developers-built-in-a-backdoor-to-steal-user-funds"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/peckshield/status/1663356082826141702"
     }
   ]
 }

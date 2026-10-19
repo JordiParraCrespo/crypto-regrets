@@ -10,6 +10,12 @@
   ],
   "targetType": "CEX",
   "category": "key-compromise",
+  "vulnClass": "hot-wallet-compromise",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "hot-wallet-compromise",
+    "confidence": 1
+  },
   "technique": "Hot Wallet Key Compromised",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -34,6 +40,10 @@
     {
       "source": "RevertIQ",
       "text": "On May 22, 2015, Bitfinex's hot wallet keys were compromised, allowing an attacker to withdraw approximately 1,500 BTC (then valued around $330,000). Bitfinex absorbed the loss and replaced all affected wallet infrastructure. The incident stemmed from single-key hot wallet exposure rather than a flaw in the core platform or multisig cold storage. Exposure or compromise of the single-signature private key associated with Bitfinex's hot wallet allowed unauthorized withdrawals. The exact method of compromise has not been published."
+    },
+    {
+      "source": "Blockchain Graveyard",
+      "text": "A small hot wallet compromise, although uncertain how they were accessed. Dear Customer although we keep over 99.5% of users' BTC deposits in secure multisig wallets, the small remaining amount in coins in our hot wallet are theoretically vulnerable to attack. We believe that our hot wallet keys might have been compromised and ask that all of our customer cease depositing cryptocurrency to old deposits addresses. We are in the process of creating a new hot wallet and will advise within the next few hours. Although this incident is unfortunate, its scale is small and will be fully absorbed by the company. Thanks a lot for your patience and comprehension. Bitfinex Team\""
     }
   ],
   "audit": null,
@@ -41,7 +51,8 @@
   "poc": null,
   "sources": [
     "defillama",
-    "revertiq"
+    "revertiq",
+    "graveyard"
   ],
   "references": [
     {
@@ -63,6 +74,11 @@
       "source": "revertiq",
       "label": "smartcontractshacking.com",
       "url": "https://smartcontractshacking.com/hacks/bitfinex-hack-2015"
+    },
+    {
+      "source": "graveyard",
+      "label": "Blockchain Graveyard",
+      "url": "https://www.bitfinex.com/posts/37"
     }
   ]
 }

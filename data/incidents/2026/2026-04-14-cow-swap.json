@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "frontend-infra",
+  "vulnClass": "dns-domain-hijack",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "dns-domain-hijack",
+    "confidence": 0.99
+  },
   "technique": "DNS Hijack",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -38,6 +44,10 @@
     {
       "source": "RevertIQ",
       "text": "CoW Swap's frontend was compromised by a DNS hijack on April 14, 2026, allowing attackers to redirect users to a phishing site and steal an estimated $1.2 million. The protocol's smart contracts remained unaffected, but users' wallet approvals were exploited through deceptive interface prompts. Attackers used forged identity documents and social engineering to gain registrar-level control of the cow.fi domain, redirecting CoW Swap users to a pixel-perfect malicious frontend. This enabled wallet drainer scripts to extract assets by convincing users to sign broad approvals."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Users who visited the website for the CoW Swap DEX aggregator on April 14 were unknowingly redirected to a malicious website that drained their crypto wallets. An attacker was able to socially engineer CoW Swap's domain registrar, allowing them to redirect visitors to a malicious site for a period of several hours. CoW Swap has estimated that people who used the service during that time lost around $1.2 million."
     }
   ],
   "audit": null,
@@ -46,7 +56,9 @@
   "sources": [
     "defillama",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "seal911",
+    "w3igg"
   ],
   "references": [
     {
@@ -68,6 +80,16 @@
       "source": "revertiq",
       "label": "kucoin.com",
       "url": "https://www.kucoin.com/blog/cow-swap-frontend-attack-explained-dns-hijacking-how-it-works-and-how-to-protect-your-wallet-in-defi"
+    },
+    {
+      "source": "seal911",
+      "label": "SEAL 911",
+      "url": "https://x.com/CoWSwap/status/2044924940886163780"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=cow-swap-dns-hijacking"
     }
   ]
 }

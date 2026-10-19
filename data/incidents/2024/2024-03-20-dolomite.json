@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "access-control",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "missing-access-modifier",
+    "confidence": 0.5
+  },
   "technique": "Improper Access Control",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -38,6 +44,10 @@
     {
       "source": "RevertIQ",
       "text": "Dolomite's legacy Loopring-based contract on Ethereum Mainnet was exploited on March 20, 2024, exposing users with lingering token approvals. Approximately $1.8 million in USDC, DAI, and WETH was stolen from 187 victims. The team recovered most assets and reimbursed remaining losses. The incident resulted from excessive gas-saving optimizations and defensive coding in a legacy Loopring Trade Delegate contract. Attackers were able to manipulate order state, bypass signature validation, and trigger unauthorized withdrawals from wallets holding stale ERC-20 approvals."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The Dolomite DEX suffered a $1.8 million theft as an exploiter was able to take advantage of a vulnerability in a smart contract that had been deployed in 2019. Although most contemporary users of the exchange use a version deployed on the Arbitrum layer-2 network, the old contracts were still usable on Ethereum. An attacker apparently discovered a reentrancy bug allowing them to drain user funds from those who had approved the old contract. Altogether, around $1.8 million was taken before the team disabled the contract. The attacker quickly tumbled the stolen funds through Tornado Cash."
     }
   ],
   "audit": null,
@@ -52,7 +62,8 @@
   "sources": [
     "defillama",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -74,6 +85,16 @@
       "source": "revertiq",
       "label": "zeroshadow.io",
       "url": "https://zeroshadow.io/blog/dolomite-legacy-smart-contract-vulnerability-post-mortem-analysis/"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=dolomite-exchange-hack"
+    },
+    {
+      "source": "w3igg",
+      "label": "cointelegraph.com",
+      "url": "https://cointelegraph.com/news/old-dolomite-exchange-contract-suffers-1-8-million-loss-from-approval-exploit"
     }
   ]
 }

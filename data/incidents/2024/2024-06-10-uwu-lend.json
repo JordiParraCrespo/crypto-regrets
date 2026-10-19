@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "oracle-manipulation",
+  "vulnClass": "spot-price-oracle",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "spot-price-oracle",
+    "confidence": 1
+  },
   "technique": "Spot Price Manipulation",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -50,6 +56,10 @@
     {
       "source": "RevertIQ",
       "text": "UwU Lend on Ethereum lost about $23.1 million across attacks on 2024-06-10 and 2024-06-13 after an attacker manipulated the sUSDe oracle that the pool used for collateral and liquidation checks. UwU Lend priced sUSDe from a median of 11 sources, including five Curve pool spot feeds that could be moved inside one atomic transaction. The lending pool trusted that manipulated price for borrow capacity and liquidation checks, so the attacker could shift account health before the oracle recovered."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The defi lending protocol UwU Lend was hacked for around $20 million. After various blockchain security firms observed suspicious outflows of funds, the protocol acknowledged there had been a \"situation\" on their Twitter account, and wrote that they had paused the protocol while they were investigating. UwU Lend was founded by Michael Patryn, aka Omar Dhanani, aka \"0xSifu\" — a co-founder of the ill-fated QuadrigaCX exchange and ex-con. He also pseudonymously ran the defi cryptocurrency project Wonderland until his identity was revealed after the protocol suffered a meltdown ."
     }
   ],
   "audit": "Peckshield",
@@ -66,7 +76,8 @@
     "rekt",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -128,6 +139,21 @@
       "source": "revertiq",
       "label": "raw.githubusercontent.com",
       "url": "https://raw.githubusercontent.com/SunWeb3Sec/DeFiHackLabs/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/src/test/2024-06/UwuLend_First_exp.sol"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=uwu-lend-hack"
+    },
+    {
+      "source": "w3igg",
+      "label": "x.com",
+      "url": "https://x.com/UwU_Lend/status/1800159455767843009"
+    },
+    {
+      "source": "w3igg",
+      "label": "cointelegraph.com",
+      "url": "https://cointelegraph.com/news/uwu-lend-hack-20-million"
     }
   ]
 }

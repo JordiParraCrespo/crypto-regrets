@@ -1,0 +1,120 @@
+---
+import Base from '../../layouts/Base.astro';
+import Bars from '../../components/Bars.astro';
+import CodeTabs from '../../components/CodeTabs.astro';
+import IncidentTable from '../../components/IncidentTable.astro';
+import { byClass, classStats, classYearSeries, fmtUsd, fmtDate, href } from '../../lib/data';
+import { CLASSES, CLASS_IDS, classesOf, type ClassId, type VulnClass } from '../../lib/classes';
+import { CATEGORIES, LAYERS } from '../../lib/taxonomy';
+
+export function getStaticPaths() {
+  return CLASS_IDS.map((id) => ({ params: { id } }));
+}
+const id = Astro.params.id as ClassId;
+const c: VulnClass = CLASSES[id];
+const s = classStats.find((x) => x.id === id)!;
+const xs = byClass(id);
+const biggest = [...xs].sort((a, b) => (b.amountUsd ?? 0) - (a.amountUsd ?? 0)).slice(0, 10);
+const pocs = xs.filter((i) => i.poc).sort((a, b) => b.date.localeCompare(a.date)).slice(0, 8);
+const siblings = classesOf(c.parent).filter((x) => x !== id);
+const series = classYearSeries(id).filter((d) => d.year >= 2016);
+---
+<Base title={c.name} description={`${c.name}: ${c.summary}`}>
+  <section class="wrap head">
+    <p class="eyebrow"><a href={href('/classes')}>Vulnerability classes</a> / <a href={href(`/patterns/${c.parent}`)}>{CATEGORIES[c.parent].name}</a></p>
+    <h1 class="h-lg">{c.name}</h1>
+    <p class="lede">{c.summary}</p>
+    <div class="ids">
+      {c.cwe?.map((x) => <a class="pill pill-mono" href={`https://cwe.mitre.org/data/definitions/${x.replace('CWE-', '')}.html`}>{x}</a>)}
+      {c.swc?.map((x) => <a class="pill pill-mono" href={`https://swcregistry.io/docs/${x}`}>{x}</a>)}
+      <span class="pill pill-outline">{LAYERS[CATEGORIES[c.parent].layer].name}</span>
+    </div>
+    <div class="grid cols-4 stats">
+      <div class="stat-inline"><div class="value">{s.count}</div><div class="label">incidents</div></div>
+      <div class="stat-inline"><div class="value">{s.usd ? fmtUsd(s.usd) : '—'}</div><div class="label">lost</div></div>
+      <div class="stat-inline"><div class="value">{s.first ? s.first.year : '—'}</div><div class="label">first seen{s.first && ` · ${s.first.name}`}</div></div>
+      <div class="stat-inline"><div class="value">{s.withPoc}</div><div class="label">with a runnable PoC</div></div>
+    </div>
+  </section>
+
+  <section class="wrap section">
+    <div class="grid cols-2 split">
+      <div>
+        {c.vulnerable ? (
+          <>
+            <p class="eyebrow" style="margin:0 0 12px">{c.vulnerable.lang === 'solidity' ? 'Vulnerable vs fixed' : 'Missing control vs fixed'}</p>
+            <CodeTabs id={id} vulnerable={c.vulnerable} fixed={c.fixed} />
+          </>
+        ) : (
+          <div class="card">
+            <p class="eyebrow">Not a code-level pattern</p>
+            <p class="body-sm steel" style="margin:8px 0 0">This class is about design, operations or infrastructure rather than a single code shape. Use the detection signals and fixes alongside.</p>
+          </div>
+        )}
+      </div>
+      <div class="grid" style="gap:40px">
+        <div>
+          <h2 class="h-xs">What to look for</h2>
+          <ul class="check" style="margin-top:12px">{c.detect.map((d) => <li>{d}</li>)}</ul>
+        </div>
+        <div>
+          <h2 class="h-xs">How to fix it</h2>
+          <ul class="check" style="margin-top:12px">{c.fix.map((d) => <li>{d}</li>)}</ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {s.count > 0 && (
+    <section class="wrap section">
+      <div class="grid cols-2 split">
+        <div class="card">
+          <p class="body-sm medium" style="margin:0">Incidents per year</p>
+          <p class="caption fog" style="margin:0 0 20px">since 2016</p>
+          <Bars data={series} height={140} label={`${c.name}: incidents per year`} />
+        </div>
+        <div>
+          <h2 class="h-xs">Study these exploits</h2>
+          {pocs.length > 0 ? (
+            <>
+              <p class="caption fog" style="margin:4px 0 12px">Clone <a class="link" href="https://github.com/SunWeb3Sec/DeFiHackLabs">DeFiHackLabs</a> and run <code>forge test --contracts &lt;file&gt; -vvvv</code>.</p>
+              <ul class="rows">
+                {pocs.map((i) => (
+                  <li class="poc">
+                    <a class="medium" href={href(`/hacks/${i.id}`)}>{i.name}</a>
+                    <span class="mono caption fog">{fmtDate(i.date)} · {fmtUsd(i.amountUsd)}</span>
+                    <a class="mono caption link" href={i.poc!}>PoC ↗</a>
+                  </li>
+                ))}
+              </ul>
+            </>
+          ) : (
+            <p class="body-sm fog">No public PoC for this class yet. See the incidents below for write-ups.</p>
+          )}
+        </div>
+      </div>
+    </section>
+  )}
+
+  {biggest.length > 0 && (
+    <section class="wrap section">
+      <div class="section-head"><h2 class="h-sub">Largest incidents</h2><a class="btn btn-ghost" href={href(`/hacks?cls=${id}`)}>All {s.count} in the index →</a></div>
+      <IncidentTable items={biggest} showClass={false} />
+    </section>
+  )}
+
+  {siblings.length > 0 && (
+    <section class="wrap section">
+      <p class="eyebrow" style="margin:0 0 12px">Related classes in {CATEGORIES[c.parent].name}</p>
+      <div class="related">{siblings.map((x) => <a class="pill" href={href(`/classes/${x}`)}>{CLASSES[x].name}</a>)}</div>
+    </section>
+  )}
+</Base>
+<style>
+  .head { padding-top: 80px; display: grid; gap: 20px; }
+  .ids, .related { display: flex; flex-wrap: wrap; gap: 6px; }
+  .stats { margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--color-dove); }
+  .split { gap: 48px; align-items: start; }
+  .poc { display: grid; grid-template-columns: 1fr auto auto; gap: 16px; align-items: baseline; }
+  @media (max-width: 640px) { .poc { grid-template-columns: 1fr; gap: 2px; } }
+</style>

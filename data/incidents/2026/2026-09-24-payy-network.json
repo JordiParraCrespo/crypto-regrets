@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "bridge-crosschain",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "message-verification-bypass",
+    "confidence": 0.33
+  },
   "technique": "Bridge Logic Flaw",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -42,6 +48,10 @@
     {
       "source": "SlowMist",
       "text": "Payy’s Ethereum bridge contract was exploited and fully drained, with about 1,832,149 USDC leaving the contract. Payy said the stolen funds were users’ non-custodial deposits to Payy Network / Payy Wallet, paused all transactions, and said it is working on fund retrieval and a root-cause analysis."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The Payy Network, a stablecoin infrastructure company, disclosed that a bridge contract had been fully drained of funds, netting attackers $1.8 million. They later stated that the theft was \"NOT a compromised key, social engineering or exploit of our off-chain infrastructure,\" but has not disclosed what it was. They also announced that the stolen funds were \"users' non-custodial deposits to Payy Network / Payy Wallet\", which is somewhat of an oxymoron. Payy Network has halted all activity following the attack."
     }
   ],
   "audit": null,
@@ -49,7 +59,8 @@
   "poc": null,
   "sources": [
     "defillama",
-    "slowmist"
+    "slowmist",
+    "w3igg"
   ],
   "references": [
     {
@@ -61,6 +72,21 @@
       "source": "slowmist",
       "label": "x.com",
       "url": "https://x.com/payy_link/status/2103123293687419136"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=payy-network-bridge-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "x.com",
+      "url": "https://x.com/payy_link/status/2103182268806373645"
+    },
+    {
+      "source": "w3igg",
+      "label": "x.com",
+      "url": "https://x.com/payy_link/status/2103537290425532889"
     }
   ]
 }

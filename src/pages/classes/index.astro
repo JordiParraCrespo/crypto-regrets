@@ -1,0 +1,57 @@
+---
+import Base from '../../layouts/Base.astro';
+import { classStats, classified, fmtUsd, href, incidents, CLASSES, LAYER_ORDER } from '../../lib/data';
+import { CATEGORIES, LAYERS, categoriesInLayer } from '../../lib/taxonomy';
+import { classesOf } from '../../lib/classes';
+const stat = Object.fromEntries(classStats.map((s) => [s.id, s]));
+---
+<Base title="Vulnerability classes" description="56 vulnerability classes behind every crypto hack, each with vulnerable vs fixed code, detection signals and real incidents.">
+  <section class="wrap head">
+    <p class="eyebrow">Vulnerability classes</p>
+    <h1 class="h-lg">What keeps going wrong,<br />and how to fix it.</h1>
+    <p class="lede">
+      {Object.keys(CLASSES).length} classes, from integer overflows to signer phishing. Each has the shape of the vulnerable code or missing control,
+      the fix, what a detector should look for, and every incident traced to it. {classified.toLocaleString('en')} of {incidents.length.toLocaleString('en')} incidents
+      have enough public detail to name a class.
+    </p>
+  </section>
+
+  {LAYER_ORDER.map((l) => (
+    <section class="wrap section">
+      <div class="section-head">
+        <div>
+          <h2 class="h-sub">{LAYERS[l].name}</h2>
+          <p class="body-sm fog" style="max-width:60ch">{LAYERS[l].blurb}</p>
+        </div>
+      </div>
+      {categoriesInLayer(l).filter((c) => c !== 'unknown').map((cat) => (
+        <div class="group">
+          <p class="eyebrow"><a href={href(`/patterns/${cat}`)}>{CATEGORIES[cat].name}</a></p>
+          <ul class="rows">
+            {classesOf(cat).map((id) => (
+              <li>
+                <a class="row" href={href(`/classes/${id}`)}>
+                  <span class="name medium">{CLASSES[id].name}</span>
+                  <span class="summary body-sm fog">{CLASSES[id].summary}</span>
+                  <span class="nums mono caption">
+                    <span>{stat[id].count} incidents</span>
+                    <span class="fog">{stat[id].usd ? fmtUsd(stat[id].usd) : '—'}</span>
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </section>
+  ))}
+</Base>
+<style>
+  .head { padding-top: 80px; display: grid; gap: 20px; }
+  .group + .group { margin-top: 32px; }
+  .group .eyebrow { margin: 0 0 8px; }
+  .row { display: grid; grid-template-columns: minmax(0, 18rem) minmax(0, 1fr) 9rem; gap: 24px; align-items: baseline; }
+  .row:hover .name { text-decoration: underline; text-underline-offset: 3px; }
+  .nums { display: grid; justify-items: end; }
+  @media (max-width: 760px) { .row { grid-template-columns: 1fr; gap: 4px; } .nums { justify-items: start; grid-auto-flow: column; gap: 12px; justify-content: start; } }
+</style>

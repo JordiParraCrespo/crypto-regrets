@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "governance",
+  "vulnClass": "flash-loan-governance",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "flash-loan-governance",
+    "confidence": 1
+  },
   "technique": "Flashloan Governance Attack",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -58,6 +64,10 @@
     {
       "source": "RevertIQ",
       "text": "On April 17, 2022, Beanstalk Farms on Ethereum was exploited for approximately $182 million. An attacker used a flash loan to gain supermajority voting power in Beanstalk’s live-balance governance system, submitted and executed a malicious proposal in a single block, and drained protocol assets. Beanstalk’s governance system used live-balance voting and allowed immediate execution of proposals with a supermajority via emergencyCommit(), with no timelock. This let a flash loan attacker acquire voting power and execute a malicious proposal atomically, draining protocol funds."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "All my magic beans gone. An attacker successfully used a flash loan attack to exploit a flaw in Beanstalk Farms' stablecoin protocol, which allowed them to make off with 24,830 ETH (almost $76 million). The attacker then donated $250,000 to Ukraine before moving the remaining funds to Tornado Cash to tumble . Estimated damages to the project were higher than the amount the hacker was able to take for themselves — around $182 million. The $BEAN token, once pegged to $1, dropped to nearly 0. The project creator wrote in the Discord, \"We are fucked. This project has not had any venture backing, so it is highly unlikely there is any sort of bail out coming…"
     }
   ],
   "audit": "Unaudited",
@@ -71,7 +81,8 @@
     "defihacklabs",
     "rekt",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -128,6 +139,26 @@
       "source": "revertiq",
       "label": "certik.com",
       "url": "https://www.certik.com/blog/revisiting-beanstalk-farms-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=beanstalk-farms-stablecoin-project-loses-182-million-to-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/CertiKAlert/status/1515672984148717570"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/peckshield/status/1515713013868814336"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/MikeBurgersburg/status/1515684866494447627"
     }
   ]
 }

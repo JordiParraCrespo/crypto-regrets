@@ -1,0 +1,844 @@
+[
+  {
+    "name": "THORChain ETH Bifrost/Router exploits",
+    "date": "2021-06-28",
+    "chain": "THORChain",
+    "lossUsd": 13000000,
+    "component": "bridge-offchain",
+    "rootCause": "THORChain's Bifrost observer for Ethereum trusted deposit data incorrectly: on 2021-06-28 a fake ERC-20 with symbol 'ETH' was parsed as native ETH, and on 2021-07-15/07-23 a malicious contract wrapping the ETH Router emitted spoofed Deposit events (and abused refund logic) that Bifrost credited without verifying the asset actually arrived.",
+    "vulnerabilityClass": "spoofed-deposit-event-trust",
+    "language": "Go",
+    "patchedIn": [
+      "THORNode patches after each incident"
+    ],
+    "sources": [
+      "https://blog.thorchain.org/eth-parsing-error-and-exploit",
+      "https://blog.thorchain.org/post-mortem-eth-router-exploits-1-2-and-premature-return-to-trading-incident"
+    ],
+    "confidence": "high",
+    "incidentType": "exploit",
+    "notes": "Correction to seed: THORChain IS built on a fork of the Cosmos SDK (v0.45) with Tendermint/CometBFT, but is not IBC-connected; the bugs were in its custom off-chain Bifrost observer, not SDK code. Loss is the sum of the June-July 2021 incidents (~$0.14M + ~$5M + ~$8M)."
+  },
+  {
+    "name": "Sentinel dVPN tokens stolen via HitBTC",
+    "date": "2021-08-21",
+    "chain": "Sentinel (Cosmos SDK)",
+    "lossUsd": 40000000,
+    "component": "frontend/key/opsec",
+    "rootCause": "About 40M USD of DVPN was moved out of HitBTC's hot wallet after the exchange's mnemonic was leaked. Sentinel's protocol code was not involved; the dispute was over custody at the exchange.",
+    "vulnerabilityClass": "exchange-key-compromise",
+    "language": "n/a",
+    "patchedIn": [],
+    "sources": [
+      "https://hacked.slowmist.io/",
+      "https://twitter.com/sentinel_co"
+    ],
+    "confidence": "medium",
+    "incidentType": "opsec"
+  },
+  {
+    "name": "Secret Network emergency upgrade (SecretSwap contract)",
+    "date": "2021-09-15",
+    "chain": "Secret Network",
+    "lossUsd": null,
+    "component": "cosmwasm-contract",
+    "rootCause": "A vulnerability in a single SecretSwap (Secret-contract, CosmWasm-derived) contract was being exploited. The team did an unplanned hard upgrade from secret-2 to secret-3 to stop it. SCRT and the bridge contracts were not affected. A public code-level root cause was not found.",
+    "vulnerabilityClass": "contract-logic-bug-unspecified",
+    "language": "Rust/CosmWasm",
+    "patchedIn": [
+      "secret-3 network upgrade"
+    ],
+    "sources": [
+      "https://twitter.com/SecretNetwork/status/1437856678830133258"
+    ],
+    "confidence": "low",
+    "incidentType": "exploit"
+  },
+  {
+    "name": "Mirror Protocol duplicate position-ID unlock (silent 7-month drain)",
+    "date": "2021-10-08",
+    "chain": "Terra Classic",
+    "lossUsd": 90000000,
+    "component": "cosmwasm-contract",
+    "rootCause": "The mirror_lock contract's unlock_position_funds accepted a user-supplied vector of position IDs without de-duplicating it. Passing the same ID many times released the locked UST for that position once per occurrence. The attacker drained ~$90M from Oct 2021, and it went unnoticed until May 2022.",
+    "vulnerabilityClass": "missing-duplicate-check-batch-input",
+    "language": "Rust/CosmWasm",
+    "patchedIn": [],
+    "sources": [
+      "https://twitter.com/FatManTerra/status/1529978941062139906",
+      "https://github.com/Auditware/AuditVault/blob/main/hacks/rekt-2021-10-08-mirror-protocol.md",
+      "https://rekt.news/mirror-rekt/"
+    ],
+    "confidence": "high",
+    "incidentType": "exploit"
+  },
+  {
+    "name": "MM Finance DNS hijack",
+    "date": "2022-05-04",
+    "chain": "Cronos (Cosmos SDK/Ethermint)",
+    "lossUsd": 2000000,
+    "component": "frontend/key/opsec",
+    "rootCause": "Attackers hijacked MM Finance's DNS and injected a malicious router address into the frontend, so user swaps sent funds to the attacker. The on-chain contracts were not affected.",
+    "vulnerabilityClass": "frontend-dns-hijack",
+    "language": "n/a",
+    "patchedIn": [],
+    "sources": [
+      "https://www.coindesk.com/tech/2022/05/05/decentralized-exchange-mmfinance-suffers-2m-exploit"
+    ],
+    "confidence": "high",
+    "incidentType": "opsec"
+  },
+  {
+    "name": "Anchor Protocol stale LUNC oracle after Terra 2.0 launch",
+    "date": "2022-05-29",
+    "chain": "Terra Classic",
+    "lossUsd": 800000,
+    "component": "oracle",
+    "rootCause": "After the Terra 2.0 fork, the Terra Classic oracle price feed used by Anchor reported a stale ~$5 LUNA/LUNC price instead of the collapsed market price. A user deposited ~20M bLUNA collateral at that inflated value and borrowed ~40M UST, netting ~$800k. Anchor then froze Earn and Borrow.",
+    "vulnerabilityClass": "stale-oracle",
+    "language": "n/a",
+    "patchedIn": [],
+    "sources": [
+      "https://u.today/anchor-protocol-got-exploited-with-launch-of-luna-20-user-makes-free-800000"
+    ],
+    "confidence": "medium",
+    "incidentType": "exploit"
+  },
+  {
+    "name": "Mirror Protocol post-fork oracle mispricing",
+    "date": "2022-05-30",
+    "chain": "Terra Classic",
+    "lossUsd": 2000000,
+    "component": "oracle",
+    "rootCause": "Validators running outdated oracle-feeder software on Terra Classic after the fork submitted the new LUNA (~$10) price for LUNC (~$0.0001). Mirror accepted it, so attackers could mint or borrow mAssets against near-worthless LUNC collateral and drain the BTC, ETH and DOT pools.",
+    "vulnerabilityClass": "stale-oracle",
+    "language": "n/a",
+    "patchedIn": [],
+    "sources": [
+      "https://www.certik.com/blog/mirror-protocol-exploited-due-to-incorrect-oracle-price",
+      "https://www.theblockcrypto.com/post/149361/mirror-protocol-suffers-new-exploit-and-could-be-drained-in-hours"
+    ],
+    "confidence": "high",
+    "incidentType": "exploit"
+  },
+  {
+    "name": "Osmosis LP share miscalculation (v9 JoinPool)",
+    "date": "2022-06-08",
+    "chain": "Osmosis",
+    "lossUsd": 5000000,
+    "component": "custom-chain-module",
+    "rootCause": "The x/gamm join logic shipped in the v9 upgrade (MaximalExactRatioJoin plus the single-asset 'remaining coins' path) credited LP shares for the leftover tokens as well. Joining and then exiting a pool returned ~1.5x the deposit. Validators halted the chain, and a patched binary removed the extra-shares path.",
+    "vulnerabilityClass": "lp-share-rounding-logic-error",
+    "language": "Go",
+    "patchedIn": [
+      "Osmosis v9.0.1"
+    ],
+    "sources": [
+      "https://www.certik.com/blog/osmosis-incident-analysis",
+      "https://www.coindesk.com/business/2022/06/08/osmosis-chain-halted-amid-possible-5m-exploit"
+    ],
+    "confidence": "medium",
+    "incidentType": "exploit"
+  },
+  {
+    "name": "BNB Beacon Chain Token Hub bridge (IAVL range-proof forgery)",
+    "date": "2022-10-06",
+    "chain": "BNB Beacon Chain / BSC (Cosmos SDK & IAVL fork)",
+    "lossUsd": 570000000,
+    "component": "ibc-core",
+    "rootCause": "BSC's cross-chain precompile verified Beacon Chain packages with Cosmos IAVL RangeProof Merkle proofs. The verifier did not reject a proof containing both left and right child hashes in an inner node, so the attacker grafted a forged leaf onto a real proof. That forged 2M BNB withdrawals, with ~$100M+ moved off-chain. This bug class triggered the Cosmos ICS-23 review that found Dragonberry.",
+    "vulnerabilityClass": "merkle-proof-forgery",
+    "language": "Go",
+    "patchedIn": [
+      "bnb-chain/bsc v1.1.15 (IAVL proof fix)"
+    ],
+    "sources": [
+      "https://forum.cosmos.network/t/cosmos-sdk-ibc-vulnerability-retrospective-security-advisories-dragonberry-and-elderflower-october-2022/8735",
+      "https://rekt.news/bnb-bridge-rekt/"
+    ],
+    "confidence": "high",
+    "incidentType": "exploit",
+    "notes": "Not an IBC chain itself, but the vulnerable code is Cosmos IAVL proof verification. It is included because the same bug class applies to light-client/ICS-23 verification. $570M is the minted face value."
+  },
+  {
+    "name": "Dragonberry (ICS-23 IAVL proof soundness)",
+    "date": "2022-10-09",
+    "chain": "All IBC-enabled Cosmos chains",
+    "lossUsd": 0,
+    "component": "ibc-core",
+    "rootCause": "The ICS-23 verifier did not validate the structure of IAVL proofs (spec lacked a soundness definition), so forged non-existence (and possibly existence) proofs could be accepted. That allowed forged IBC timeouts, which escalate to ICS-20 double-spends that drain escrow accounts. It was patched privately and in coordination before public disclosure.",
+    "vulnerabilityClass": "ibc-proof-forgery",
+    "language": "Go",
+    "patchedIn": [
+      "cosmos/ics23 v0.8.x/0.9.1 + ibc-go/cosmos-sdk releases of 2022-10-14"
+    ],
+    "sources": [
+      "https://forum.cosmos.network/t/ibc-security-advisory-dragonberry/7702",
+      "https://forum.cosmos.network/t/cosmos-sdk-ibc-vulnerability-retrospective-security-advisories-dragonberry-and-elderflower-october-2022/8735"
+    ],
+    "confidence": "high",
+    "incidentType": "advisory"
+  },
+  {
+    "name": "Elderflower (x/authz missing ValidateBasic)",
+    "date": "2022-10-11",
+    "chain": "Cosmos SDK v0.44-v0.46 chains",
+    "lossUsd": 0,
+    "component": "cosmos-sdk-module",
+    "rootCause": "The x/authz MsgExec path did not call ValidateBasic() on inner (wrapped) messages, so authz could deliver messages that skipped stateless validation. Depending on chain-specific handlers, this could enable invalid state transitions, including inflation or theft. Reported by Confio and patched together with Dragonberry.",
+    "vulnerabilityClass": "missing-validatebasic-nested-msg",
+    "language": "Go",
+    "patchedIn": [
+      "Cosmos SDK releases of 2022-10-14 (v0.45.9 / v0.46.2 line)"
+    ],
+    "sources": [
+      "https://forum.cosmos.network/t/cosmos-sdk-ibc-vulnerability-retrospective-security-advisories-dragonberry-and-elderflower-october-2022/8735"
+    ],
+    "confidence": "high",
+    "incidentType": "advisory"
+  },
+  {
+    "name": "Secret Network consensus seed extraction (SGX.fail / xapiens)",
+    "date": "2022-10-05",
+    "chain": "Secret Network",
+    "lossUsd": null,
+    "component": "frontend/key/opsec",
+    "rootCause": "Researchers used SGX attacks (AEPIC/MMIO-stale-data) on unpatched Intel SGX enclaves registered as Secret validators to extract the network-wide consensus seed. That key decrypts all historical private contract state and transaction inputs, so privacy was broken retroactively. No direct theft was reported. The cause was that one shared master key was protected only by TEE attestation.",
+    "vulnerabilityClass": "tee-master-key-extraction",
+    "language": "Rust/CosmWasm",
+    "patchedIn": [
+      "Secret v1.5 registration hardening (block vulnerable CPUs)"
+    ],
+    "sources": [
+      "https://sgx.fail/"
+    ],
+    "confidence": "medium",
+    "incidentType": "disclosure"
+  },
+  {
+    "name": "Terraport liquidity wallet drain",
+    "date": "2023-04-10",
+    "chain": "Terra Classic",
+    "lossUsd": 4000000,
+    "component": "frontend/key/opsec",
+    "rootCause": "Less than two weeks after launch, Terraport's liquidity was drained in two transactions (9.1M TERRA + 15.1B LUNC, then 576k TERRA + 5.5M USTC). Reporting attributes it to a centrally controlled liquidity wallet/contract admin that lacked proper access controls (centralization or key risk), not a CosmWasm logic bug.",
+    "vulnerabilityClass": "privileged-wallet-access-control",
+    "language": "n/a",
+    "patchedIn": [],
+    "sources": [
+      "https://twitter.com/_Terraport_/status/1645330062378508289",
+      "https://www.certik.com/blog/post-mortem-terraport-finance"
+    ],
+    "confidence": "medium",
+    "incidentType": "exploit"
+  },
+  {
+    "name": "Huckleberry (ibc-go events emitted for failed acks)",
+    "date": "2023-05-01",
+    "chain": "IBC chains (ibc-go <=7.0.0)",
+    "lossUsd": 0,
+    "component": "ibc-core",
+    "rootCause": "In ibc-go core RecvPacket, OnRecvPacket runs in a cached context that is discarded when the acknowledgement is an error, but the cached events were still re-emitted. A CosmWasm IBC contract could trigger transfer sub-messages and then return an error ack. Exchanges and event-driven bridges (cBridge, Multichain, legacy Wormhole) saw deposit events for transfers that never persisted.",
+    "vulnerabilityClass": "event-state-desync-failed-ack",
+    "language": "Go",
+    "patchedIn": [
+      "ibc-go v4.4.2, v5.2.1, v6.1.1, v7.0.1 (GHSA-qjcv-rx3v-7mvj / GO-2024-2874)"
+    ],
+    "sources": [
+      "https://jumpcrypto.com/writing/huckleberry-ibc-event-hallucinations/",
+      "https://api.osv.dev/v1/vulns/GHSA-qjcv-rx3v-7mvj"
+    ],
+    "confidence": "high",
+    "incidentType": "advisory"
+  },
+  {
+    "name": "CosmWasm stack overflow chain-halt bug (Jump)",
+    "date": "2023-06-01",
+    "chain": "All CosmWasm chains",
+    "lossUsd": 0,
+    "component": "cosmwasm-vm",
+    "rootCause": "Jump Crypto found a stack overflow reachable by anyone who could upload a contract. A crafted Wasm module crashed every node's wasmvm during processing, so a contract upload could fully halt CosmWasm chains. It was patched in coordination without user impact. This was a stack overflow, not an integer overflow as the seed stated.",
+    "vulnerabilityClass": "vm-stack-overflow-dos",
+    "language": "Rust/CosmWasm",
+    "patchedIn": [
+      "CWA-2023-002 (wasmvm 1.1.2 / 1.2.4 line)"
+    ],
+    "sources": [
+      "https://jumpcrypto.com/writing/stop-the-chain-cosmwasm-stack-overflow/"
+    ],
+    "confidence": "medium",
+    "incidentType": "advisory",
+    "notes": "Exact CWA id and wasmvm versions not verified from primary source (Jump's advisory file is named 2023-003-cosmwasm.md)."
+  },
+  {
+    "name": "Barberry (x/auth PeriodicVestingAccount griefing)",
+    "date": "2023-06-08",
+    "chain": "Cosmos SDK v0.46/v0.47 chains",
+    "lossUsd": 0,
+    "component": "cosmos-sdk-module",
+    "rootCause": "MsgCreatePeriodicVestingAccount let an attacker initialise a victim's not-yet-existing address as a malicious periodic vesting account. That account accepts deposits but never unlocks, so funds sent to the victim later were locked forever.",
+    "vulnerabilityClass": "vesting-account-hijack",
+    "language": "Go",
+    "patchedIn": [
+      "cosmos-sdk v0.46.13, v0.47.3 (GHSA-j2cr-jc39-wpx5 / GO-2023-1861)"
+    ],
+    "sources": [
+      "https://api.osv.dev/v1/vulns/GHSA-j2cr-jc39-wpx5",
+      "https://forum.cosmos.network/t/cosmos-sdk-security-advisory-barberry/10825"
+    ],
+    "confidence": "high",
+    "incidentType": "advisory"
+  },
+  {
+    "name": "Harbor Protocol (Comdex) cSwap spot-price manipulation",
+    "date": "2023-08-19",
+    "chain": "Comdex",
+    "lossUsd": 250000,
+    "component": "oracle",
+    "rootCause": "Harbor's vaults priced collateral (LUNA, stOSMO, WMATIC) from Comdex cSwap AMM spot reserves. The attacker pumped those thin pools, minted CMST stablecoin against the inflated collateral and bridged out. SlowMist lists ~$20k and Revert ~$250k, so the loss figure is uncertain.",
+    "vulnerabilityClass": "spot-price-oracle-manipulation",
+    "language": "Go",
+    "patchedIn": [],
+    "sources": [
+      "https://medium.com/comdexofficial/harbor-protocol-exploit-breakdown-incident-report-b07cd117b1d6",
+      "https://twitter.com/Harbor_Protocol/status/1692836252498723154"
+    ],
+    "confidence": "medium",
+    "incidentType": "exploit"
+  },
+  {
+    "name": "Levana Perps stale Pyth price exploitation",
+    "date": "2023-12-13",
+    "chain": "Osmosis",
+    "lossUsd": 1146000,
+    "component": "oracle",
+    "rootCause": "Levana's CosmWasm perps market let positions open and close against the last pushed Pyth price without enforcing freshness relative to the action. During Osmosis congestion (a fee-market bug made spam cheap), price-update bots were delayed, and the attacker traded against stale prices to drain ~10% of LP liquidity over two weeks.",
+    "vulnerabilityClass": "stale-oracle",
+    "language": "Rust/CosmWasm",
+    "patchedIn": [
+      "Levana contract upgrade (deferred execution with fresh prices)"
+    ],
+    "sources": [
+      "https://blog.levana.finance/levana-exploit-postmortem-df89a72cc92b",
+      "https://range.org/blog/levana-security-incident-in-depth-analysis"
+    ],
+    "confidence": "high",
+    "incidentType": "exploit"
+  },
+  {
+    "name": "ASA-2024-007 ibc-hooks OnTimeout reentrancy (advisory)",
+    "date": "2024-04-05",
+    "chain": "Chains using ibc-hooks wrapping ICS-20",
+    "lossUsd": 0,
+    "component": "ibc-app (ICS-20/ICA/hooks/PFM)",
+    "rootCause": "A malicious CosmWasm contract called by the ibc-hooks OnTimeout callback could submit the same MsgTimeout again before the packet commitment was deleted. That recursively ran ICS-20 OnTimeoutPacket refunds and drained the escrow. Fixed in ibc-go by deleting the commitment before invoking the callback.",
+    "vulnerabilityClass": "ibc-callback-reentrancy",
+    "language": "Go",
+    "patchedIn": [
+      "ibc-go v4.6.0, v5.4.0, v6.3.0, v7.4.0, v8.2.0 (GHSA-j496-crgh-34mx)"
+    ],
+    "sources": [
+      "https://api.osv.dev/v1/vulns/GHSA-j496-crgh-34mx"
+    ],
+    "confidence": "high",
+    "incidentType": "advisory"
+  },
+  {
+    "name": "Terra / Astroport ibc-hooks reentrancy (patch regression)",
+    "date": "2024-07-30",
+    "chain": "Terra (Phoenix)",
+    "lossUsd": 6400000,
+    "component": "ibc-app (ICS-20/ICA/hooks/PFM)",
+    "rootCause": "This exploited ASA-2024-007. Terra had patched it in April, but its June 2024 chain upgrade pulled in an outdated ibc-go fork and reintroduced the bug. The attacker's CosmWasm contract re-entered MsgTimeout through the ibc-hooks OnTimeout callback and received ICS-20 escrow refunds repeatedly, draining ASTRO, USDC, USDT and BTC (Astroport and others). Terra halted and patched.",
+    "vulnerabilityClass": "ibc-callback-reentrancy",
+    "language": "Go",
+    "patchedIn": [
+      "Terra core v2.11.x emergency patch (ibc-go fork with ASA-2024-007 fix)"
+    ],
+    "sources": [
+      "https://www.theblock.co/post/308440/attacker-exploits-ibc-hooks-vulnerability-to-steal-tokens-on-terra-blockchain",
+      "https://www.quillaudits.com/blog/hack-analysis/astroport-hack",
+      "https://rekt.news/astroport-rekt"
+    ],
+    "confidence": "high",
+    "incidentType": "exploit",
+    "notes": "Seed said 'reentrancy?': confirmed. The underlying lesson is a dependency regression: the patch was lost when a fork was rebased."
+  },
+  {
+    "name": "ASA-2024-010 sdk.Int/sdk.Dec bit-length mismatch panic (advisory)",
+    "date": "2024-11-20",
+    "chain": "Chains using cosmossdk.io/math <=1.3.0",
+    "lossUsd": 0,
+    "component": "cosmos-sdk-module",
+    "rootCause": "sdk.Int and sdk.Dec used different maximum bit-lengths, so converting or multiplying a large Dec in an Int context could panic. Panics in permissionless paths (e.g. tokenfactory, IBC amounts) are a chain-halt vector.",
+    "vulnerabilityClass": "integer-overflow-sdk-math",
+    "language": "Go",
+    "patchedIn": [
+      "cosmossdk.io/math v1.4.0 (GHSA-7225-m954-23v7)"
+    ],
+    "sources": [
+      "https://api.osv.dev/v1/vulns/GHSA-7225-m954-23v7"
+    ],
+    "confidence": "high",
+    "incidentType": "advisory"
+  },
+  {
+    "name": "ASA-2025-003 x/group division-by-zero chain halt (advisory)",
+    "date": "2025-02-20",
+    "chain": "Chains using x/group",
+    "lossUsd": 0,
+    "component": "cosmos-sdk-module",
+    "rootCause": "A malicious x/group proposal caused a division by zero during tally or decision-policy evaluation in EndBlocker. The resulting error halted the chain. Any user who could interact with x/group could trigger it.",
+    "vulnerabilityClass": "endblocker-panic-chain-halt",
+    "language": "Go",
+    "patchedIn": [
+      "cosmos-sdk v0.50.12, v0.47.16 (GHSA-x5vx-95h7-rv4p)"
+    ],
+    "sources": [
+      "https://api.osv.dev/v1/vulns/GHSA-x5vx-95h7-rv4p"
+    ],
+    "confidence": "high",
+    "incidentType": "advisory"
+  },
+  {
+    "name": "ASA-2025-004 ibc-go non-deterministic ack JSON unmarshalling (advisory)",
+    "date": "2025-02-28",
+    "chain": "IBC chains (ibc-go >=v7)",
+    "lossUsd": 0,
+    "component": "ibc-core",
+    "rootCause": "IBC acknowledgement deserialization behaved non-deterministically across nodes. Anyone able to open a channel could push state that split consensus and halted the chain.",
+    "vulnerabilityClass": "non-deterministic-deserialization",
+    "language": "Go",
+    "patchedIn": [
+      "ibc-go v7.9.2, v8.6.1 (GHSA-jg6f-48ff-5xrw)"
+    ],
+    "sources": [
+      "https://api.osv.dev/v1/vulns/GHSA-jg6f-48ff-5xrw"
+    ],
+    "confidence": "high",
+    "incidentType": "advisory"
+  },
+  {
+    "name": "Filament Finance order-book manipulation",
+    "date": "2025-04-06",
+    "chain": "Sei (EVM)",
+    "lossUsd": 572000,
+    "component": "oracle",
+    "rootCause": "Filament's perp DEX used its own thin order-book price for margining and liquidation, with no circuit breakers or multi-account defences. The attacker spoofed the book across Sybil accounts, opened leveraged positions and self-liquidated at manipulated prices to drain the pool.",
+    "vulnerabilityClass": "orderbook-price-manipulation",
+    "language": "Solidity",
+    "patchedIn": [],
+    "sources": [
+      "https://www.quillaudits.com/blog/hack-analysis/how-filament-finance-got-exploited",
+      "https://crypto.news/sei-ecosystem-based-filament-dex-exploited-for-572k/"
+    ],
+    "confidence": "medium",
+    "incidentType": "exploit"
+  },
+  {
+    "name": "Cosmos EVM / evmOS partial precompile state writes (ISA-2025-004)",
+    "date": "2025-05-14",
+    "chain": "Cosmos EVM / evmOS chains with stateful precompiles",
+    "lossUsd": 0,
+    "component": "cosmos-evm (precompile/x/vm/x/erc20)",
+    "rootCause": "A caller could set low EVM gas so a stateful precompile ran out of gas midway. Cosmos-side writes already made in the cache context were not reverted. On the distribution precompile this paid out rewards without zeroing the claimable amount (repeatable claim), and elsewhere it caused non-determinism or halts. Fixed with RunAtomic snapshot/revert around each precompile.",
+    "vulnerabilityClass": "precompile-partial-state-commit",
+    "language": "Go",
+    "patchedIn": [
+      "GHSA-mjfq-3qr2-6g84 / GO-2025-3684 patch (RunAtomic)"
+    ],
+    "sources": [
+      "https://api.osv.dev/v1/vulns/GHSA-mjfq-3qr2-6g84"
+    ],
+    "confidence": "high",
+    "incidentType": "advisory"
+  },
+  {
+    "name": "Kame Aggregator arbitrary executor call",
+    "date": "2025-09-12",
+    "chain": "Sei (EVM)",
+    "lossUsd": 1320000,
+    "component": "cosmos-evm (precompile/x/vm/x/erc20)",
+    "rootCause": "AggregationRouter.swap() accepted a user-supplied executor address and calldata and called it without restriction. Attacker executors called transferFrom on tokens that users had approved to the router, draining wallets with unlimited approvals. ~$946k was later recovered.",
+    "vulnerabilityClass": "arbitrary-external-call-approval-drain",
+    "language": "Solidity",
+    "patchedIn": [],
+    "sources": [
+      "https://kameagg.substack.com/p/post-mortem-kame-aggregator-exploit"
+    ],
+    "confidence": "high",
+    "incidentType": "exploit",
+    "notes": "Application-level Solidity bug on Sei EVM; component tag is approximate (no Cosmos EVM code involved)."
+  },
+  {
+    "name": "Noble official X account compromise",
+    "date": "2025-10-23",
+    "chain": "Noble",
+    "lossUsd": null,
+    "component": "frontend/key/opsec",
+    "rootCause": "Noble's official X account was hijacked and used to post phishing links. No protocol compromise was reported.",
+    "vulnerabilityClass": "social-account-takeover",
+    "language": "n/a",
+    "patchedIn": [],
+    "sources": [
+      "https://x.com/realScamSniffer/status/1981138805337051345"
+    ],
+    "confidence": "medium",
+    "incidentType": "opsec"
+  },
+  {
+    "name": "Mars Perps same-block funding / skew arbitrage",
+    "date": "2025-12-14",
+    "chain": "Neutron",
+    "lossUsd": 973000,
+    "component": "cosmwasm-contract",
+    "rootCause": "Mars Perps priced executions by long/short open-interest skew and accrued funding only on elapsed time between blocks. The attacker opened, pushed skew and closed within one block, paying zero funding. A partner credit account liquidated throwaway accounts so the loop could repeat (15x). The shortfall flowed into the shared Red Bank lending pool (USDC utilisation ~213%).",
+    "vulnerabilityClass": "intra-block-funding-skew-arbitrage",
+    "language": "Rust/CosmWasm",
+    "patchedIn": [],
+    "sources": [
+      "https://range.org/blog/mars-attacked-a-deep-dive-into-the-latest-exploit-in-cosmos",
+      "https://range.org/blog/tracking-the-mars-protocol-exploit"
+    ],
+    "confidence": "high",
+    "incidentType": "exploit"
+  },
+  {
+    "name": "SagaEVM ICS-20 precompile nested-execution double spend (ASA-2026-002)",
+    "date": "2026-01-21",
+    "chain": "SagaEVM",
+    "lossUsd": 7000000,
+    "component": "cosmos-evm (precompile/x/vm/x/erc20)",
+    "rootCause": "In Cosmos EVM's ICS20 precompile (Ethermint lineage, introduced July 2024), state updates made during recursive or nested EVM calls into the precompile were not reflected in the outer execution context. A helper contract could reuse one token balance many times in a transaction while issuing IBC transfers. The attacker used this to mint and bridge ~$7M of Saga Dollar collateral to Ethereum. The chain was halted at block 6,593,800.",
+    "vulnerabilityClass": "precompile-nested-call-state-desync",
+    "language": "Go",
+    "patchedIn": [
+      "cosmos/evm v0.6.0 (GHSA-54gx-3cgr-7mfm / ASA-2026-002 / GO-2026-4677); mitigation: disable ICS20 precompile"
+    ],
+    "sources": [
+      "https://api.osv.dev/v1/vulns/GHSA-54gx-3cgr-7mfm",
+      "https://github.com/cosmos/evm/security/advisories/GHSA-54gx-3cgr-7mfm",
+      "https://rekt.news/saga-rekt"
+    ],
+    "confidence": "high",
+    "incidentType": "exploit",
+    "notes": "Press said 'forged IBC messages'. The advisory gives the precise cause as nested-execution state handling in the ICS20 precompile."
+  },
+  {
+    "name": "ZetaChain GatewayEVM arbitrary-call approval drain",
+    "date": "2026-04-26",
+    "chain": "ZetaChain (connected EVM chains)",
+    "lossUsd": 333868,
+    "component": "bridge-offchain",
+    "rootCause": "ZetaChain's cross-chain messaging let anyone request arbitrary calls. The destination GatewayEVM contract executed nearly any command, including transferFrom, and deposit() flows had left unlimited approvals to the gateway. The attacker drained three internal team wallets on Ethereum, Arbitrum, Base and BSC.",
+    "vulnerabilityClass": "arbitrary-external-call-approval-drain",
+    "language": "Solidity",
+    "patchedIn": [],
+    "sources": [
+      "https://www.theblock.co/news/ecosystems/2026-04-29-zetachain-post-mortem-399315"
+    ],
+    "confidence": "medium",
+    "incidentType": "exploit"
+  },
+  {
+    "name": "TAC TON-side bridge fake jetton deposits",
+    "date": "2026-05-11",
+    "chain": "TAC (Cosmos EVM) <-> TON",
+    "lossUsd": 2854486,
+    "component": "bridge-offchain",
+    "rootCause": "TAC's sequencer did not verify the code hash of the TON jetton wallet or its canonical minter when observing deposits. Counterfeit jetton deposit messages were accepted, unbacked assets were minted on TAC, and real assets locked on TON were released through the normal return path. ~90% was returned on May 14.",
+    "vulnerabilityClass": "bridge-missing-canonical-token-check",
+    "language": "n/a",
+    "patchedIn": [
+      "repaired sequencer software (pending audit)"
+    ],
+    "sources": [
+      "https://cryptoslate.com/evm-network-halts-block-production-after-supply-exploit-as-ton-connection-remains-dark/",
+      "https://blocksec.com/blog/weekly-web3-security-roundup-2026-05-17",
+      "https://x.com/TacBuild/status/2054620834879381870"
+    ],
+    "confidence": "medium",
+    "incidentType": "exploit"
+  },
+  {
+    "name": "THORChain GG20 TSS vault key leakage",
+    "date": "2026-05-15",
+    "chain": "THORChain",
+    "lossUsd": 10700000,
+    "component": "bridge-offchain",
+    "rootCause": "A newly churned malicious node exploited missing Paillier-key proof validation in THORChain's GG20 threshold-signature implementation. Over repeated keygen and signing ceremonies it leaked share material until it could rebuild an Asgard vault key offline, then drained the vault.",
+    "vulnerabilityClass": "tss-missing-zk-proof-validation",
+    "language": "Go",
+    "patchedIn": [],
+    "sources": [
+      "https://blog.thorchain.org/thorchain-exploit-report-1",
+      "https://www.quillaudits.com/blog/hack-analysis/thorchain-gg20-hack"
+    ],
+    "confidence": "medium",
+    "incidentType": "exploit"
+  },
+  {
+    "name": "Gravity Bridge denom-registry poisoning",
+    "date": "2026-05-30",
+    "chain": "Gravity Bridge (Ethereum <-> Cosmos)",
+    "lossUsd": 5400000,
+    "component": "custom-chain-module",
+    "rootCause": "Gravity.sol deployERC20() is permissionless and emitted an unvalidated _cosmosDenom string. On the Cosmos side, the x/gravity handleErc20Deployed claim handler checked only that claim.TokenContract was a well-formed address. It never checked it against the actually deployed contract or existing custody tokens (ERC20ToDenomLookup was not called). Using worthless tokenfactory tokens IBC'd from Osmosis, the attacker mapped fake ibc/ denoms to the real USDC, USDT, WETH and PAXG contracts and withdrew custody via MsgBatchSendToEthClaim.",
+    "vulnerabilityClass": "bridge-token-registry-poisoning",
+    "language": "Go",
+    "patchedIn": [],
+    "sources": [
+      "https://www.quillaudits.com/blog/hack-analysis/gravity-bridge-demon-mapping-poisoning",
+      "https://rekt.news/gravity-bridge-rekt",
+      "https://x.com/PeckShieldAlert/status/2060636956984594521"
+    ],
+    "confidence": "medium",
+    "incidentType": "exploit",
+    "notes": "Early reports blamed a signing-key compromise. QuillAudits' code-level analysis contradicts that, and no official post-mortem was found."
+  },
+  {
+    "name": "Axelar-Secret ICS-20 bridge forged-channel mint",
+    "date": "2026-06-10",
+    "chain": "Secret Network <-> Axelar",
+    "lossUsd": 4670000,
+    "component": "ibc-app (ICS-20/ICA/hooks/PFM)",
+    "rootCause": "Secret's ics20-for-axelar contract (code ID 2446, a fork of snip20-ics20) replaced escrow-redeem logic with mint() and removed parse_voucher_denom() and reduce_channel_balance(), which implicitly authenticated the source channel. It only checked a token allow-list. The attacker ran a counterfeit chain, opened a permissionless IBC channel and sent 7 forged deposit packets (uusdt, weth-wei...). It then redeemed the minted saTokens through the legitimate Axelar channel, emptying Axelar's escrow. The exploit went undetected for 7 days.",
+    "vulnerabilityClass": "ibc-packet-forgery-missing-source-channel-check",
+    "language": "Rust/CosmWasm",
+    "patchedIn": [
+      "Axelar disabled Secret routes; no fixed code id published"
+    ],
+    "sources": [
+      "https://forum.scrt.network/t/security-incident-axelar-secret-ibc-bridge-exploit-june-10-2026/7995",
+      "https://www.theblock.co/post/405459",
+      "https://x.com/axelar/status/2068355855565594885"
+    ],
+    "confidence": "high",
+    "incidentType": "exploit"
+  },
+  {
+    "name": "Namada MASP shielded-pool drain via IBC transfer logic",
+    "date": "2026-06-19",
+    "chain": "Namada",
+    "lossUsd": 600000,
+    "component": "ibc-app (ICS-20/ICA/hooks/PFM)",
+    "rootCause": "~$600k of IBC assets (ATOM, USDC, OSMO, TIA, NYM) were drained from Namada's Multi-Asset Shielded Pool. Third parties attribute it to a flaw in Namada's IBC transfer/unshielding logic. A stale indexer hid the loss. No code-level post-mortem was found.",
+    "vulnerabilityClass": "ibc-unshield-accounting-flaw",
+    "language": "Rust/CosmWasm",
+    "patchedIn": [],
+    "sources": [
+      "https://x.com/f12sec/status/2068065239187218505",
+      "https://www.cryptotimes.io/2026/06/20/namadas-600k-masp-drain-goes-unnoticed-as-stale-indexer-masks-the-loss/"
+    ],
+    "confidence": "low",
+    "incidentType": "exploit",
+    "notes": "Namada is Rust (not CosmWasm); the language tag is approximate. The root cause has not been confirmed by Namada."
+  },
+  {
+    "name": "Quicksilver forged delegation-proof qAsset mint",
+    "date": "2026-06-21",
+    "chain": "Quicksilver",
+    "lossUsd": 3500,
+    "component": "custom-chain-module",
+    "rootCause": "Quicksilver's interchain liquid-staking issuance flow (ICQ-proof-based x/interchainstaking) accepted forged or unverified delegation proofs and minted unbacked qATOM (~505k) and qOSMO (~10M). Thin liquidity limited the realised drain to ~$3.5k. The chain was halted and the fake tokens burned with the Hub and Osmosis.",
+    "vulnerabilityClass": "unchecked-proof-unbacked-mint",
+    "language": "Go",
+    "patchedIn": [],
+    "sources": [
+      "https://x.com/Cosmos_Airdrops/status/2069848864643858660",
+      "https://hacked.slowmist.io/"
+    ],
+    "confidence": "low",
+    "incidentType": "exploit"
+  },
+  {
+    "name": "Nomic nBTC escrow self-transfer mint (forwarding bug)",
+    "date": "2026-06-25",
+    "chain": "Nomic -> Osmosis",
+    "lossUsd": 3150000,
+    "component": "ibc-app (ICS-20/ICA/hooks/PFM)",
+    "rootCause": "There were two bugs. (A) Nomic app.rs ibc_deliver passed raw IBC MsgTransfer to the handler without checking that the signer was the ICS-20 sender, so anyone could name the channel escrow account as sender. (B) orga ibc/transfer.rs escrow_coins_execute took two handles to the balance map, so sender == escrow made the debit and credit cancel. 25 self-referential packets in block 33137470 minted 40.65 unbacked nBTC on Osmosis. It was found 74 days later.",
+    "vulnerabilityClass": "unbacked-mint-missing-escrow-check",
+    "language": "Rust/CosmWasm",
+    "patchedIn": [
+      "Osmosis v31.1.0 (freeze only); Nomic code fix not confirmed"
+    ],
+    "sources": [
+      "https://sigintzero.com/blog/nomic-40-65-btc-escrow-self-transfer-mint",
+      "https://hackmd.io/optjLjTdTKadPNmMc60gJg",
+      "https://forum.osmosis.zone/t/alloyed-btc-restore-backing-after-the-nbtc-incident/4122",
+      "https://x.com/osmosis/status/2097623097696251926"
+    ],
+    "confidence": "high",
+    "incidentType": "exploit",
+    "notes": "Nomic is Rust (orga framework), not CosmWasm. The exploit was 2026-06-25 and was disclosed and frozen 2026-09-07/09."
+  },
+  {
+    "name": "Oraichain EVM cross-chain path unauthorized ORAI mint",
+    "date": "2026-08-08",
+    "chain": "Oraichain",
+    "lossUsd": null,
+    "component": "bridge-offchain",
+    "rootCause": "A vulnerability in Oraichain's EVM cross-chain transfer path (message verification failure) let an attacker mint ORAI without backing. The network halted 2026-08-09 04:00 UTC, and minted balances were later burned. ~3.9M ORAI was traced to MEXC and KuCoin. No code-level detail was published.",
+    "vulnerabilityClass": "bridge-message-verification-failure",
+    "language": "n/a",
+    "patchedIn": [],
+    "sources": [
+      "https://x.com/oraichain/status/2086774707882451012",
+      "https://bir.badjoke-lab.com/incident/oraichain-2026-evm-cross-chain-unauthorized-mint/"
+    ],
+    "confidence": "low",
+    "incidentType": "exploit",
+    "notes": "Predates the Cosmos EVM v0.6.2/v0.7.2 release by 11 days. There is no evidence that it shares GHSA-7g4w-cg88-2cq2."
+  },
+  {
+    "name": "BounceBit Evmos vesting-module funder authorization bypass",
+    "date": "2026-08-19",
+    "chain": "BounceBit (Evmos-fork)",
+    "lossUsd": 3100000,
+    "component": "cosmos-evm (precompile/x/vm/x/erc20)",
+    "rootCause": "In BounceBit's Evmos-derived vesting/lockup account module, the smart-contract (precompile) call path skipped the binding that requires the funder to authorise a transfer. A second authorization check was evaluated against the wrong account, so a contract caller could name any account as the funding source. 286.5M BB moved from 9 accounts in 14 txs between Aug 19 21:02 UTC and Aug 20 01:54 UTC. The chain halted at 20,702,857 and was sunset. BB was reissued on BNB Chain.",
+    "vulnerabilityClass": "precompile-authorization-bypass",
+    "language": "Go",
+    "patchedIn": [
+      "none (chain retired; Evmos discontinued)"
+    ],
+    "sources": [
+      "https://x.com/bouncebit/article/2090785561800061430",
+      "https://cryptobriefing.com/bouncebit-l1-shutdown-286m-bb-exploit/",
+      "https://theblock.co/news/ecosystems/2026-08-21-bouncebit-sunset-blockchain-migrate-bnb-chain-after-3-million-exploit-412485"
+    ],
+    "confidence": "medium",
+    "incidentType": "exploit",
+    "notes": "This is a distinct bug from GHSA-7g4w-cg88-2cq2, in the Evmos lineage rather than cosmos/evm. It shares the 'vesting account + EVM precompile' attack surface. The attack began ~2h BEFORE the v0.6.2/v0.7.2 releases (23:01 UTC Aug 19)."
+  },
+  {
+    "name": "MANTRA Chain - Cosmos EVM vesting/staking-precompile underflow",
+    "date": "2026-08-20",
+    "chain": "MANTRA Chain",
+    "lossUsd": 3600000,
+    "component": "cosmos-evm (precompile/x/vm/x/erc20)",
+    "rootCause": "Cosmos EVM's StateDB tracks only an account's spendable balance, but x/staking and the staking precompile let a vesting account delegate locked coins. Delegating more than spendable made the post-delegation write-back underflow in StateDB.SubBalance (unchecked uint256), wrapping the balance to ~2^256. Bug 2: that balance was sent as 2^256-balance(victim) to a high-balance account (0x0 burn address, genesis multisig, bonded_tokens_pool), overflowing the victim to 0 and netting the attacker its balance in one supply-neutral tx. The setup was a vesting account created at a precomputed contract address with the exploit contract then deployed there. ~720.9M OM was taken from the burn address and a dormant genesis multisig (2 attacks, 19:06 and 22:59 UTC).",
+    "vulnerabilityClass": "balance-underflow-statedb-vesting",
+    "language": "Go",
+    "patchedIn": [
+      "cosmos/evm v0.6.2, v0.7.2 (GHSA-7g4w-cg88-2cq2; PRs #1176 SubBalance underflow guard, #1187 locked-balance snapshot, commit 3524ebc module-account guard; backports #1253/#1254)",
+      "MANTRA evm v0.6.0-v8-mantra-6 hotfix; chain v8.4.0"
+    ],
+    "sources": [
+      "https://github.com/cosmos/security/blob/main/communications/cosmos_evm_GHSA-7g4w-cg88-2cq2_post_mortem.md",
+      "https://github.com/cosmos/evm/security/advisories/GHSA-7g4w-cg88-2cq2",
+      "https://x.com/MANTRA_Chain/status/2093288372995543088",
+      "https://rekt.news/mantra-rekt"
+    ],
+    "confidence": "high",
+    "incidentType": "exploit",
+    "notes": "This was the first victim, 20h after the patched releases and 12h after Push Chain PR #40 publicly described the exploit path. $3.6M is face value at pre-incident price; MANTRA says no user funds were lost."
+  },
+  {
+    "name": "TAC - Cosmos EVM vesting/staking-precompile underflow",
+    "date": "2026-08-22",
+    "chain": "TAC",
+    "lossUsd": 7500000,
+    "component": "cosmos-evm (precompile/x/vm/x/erc20)",
+    "rootCause": "Cosmos EVM's StateDB tracks only an account's spendable balance, but x/staking and the staking precompile let a vesting account delegate locked coins. Delegating more than spendable made the post-delegation write-back underflow in StateDB.SubBalance (unchecked uint256), wrapping the balance to ~2^256. Bug 2: that balance was sent as 2^256-balance(victim) to a high-balance account (0x0 burn address, genesis multisig, bonded_tokens_pool), overflowing the victim to 0 and netting the attacker its balance in one supply-neutral tx. The setup was a vesting account created at a precomputed contract address with the exploit contract then deployed there. 2,985,651,403 TAC was pulled from bonded_tokens_pool in one tx (height 24,662,148), bridged to BNB via LayerZero OFT, and ~1.21B sold for ~$950k USDT.",
+    "vulnerabilityClass": "balance-underflow-statedb-vesting",
+    "language": "Go",
+    "patchedIn": [
+      "cosmos/evm v0.6.2, v0.7.2 (GHSA-7g4w-cg88-2cq2; PRs #1176 SubBalance underflow guard, #1187 locked-balance snapshot, commit 3524ebc module-account guard; backports #1253/#1254)"
+    ],
+    "sources": [
+      "https://github.com/cosmos/security/blob/main/communications/cosmos_evm_GHSA-7g4w-cg88-2cq2_post_mortem.md",
+      "https://github.com/cosmos/evm/security/advisories/GHSA-7g4w-cg88-2cq2",
+      "https://tac.build/blog/tac-mainnet-security-incident",
+      "https://x.com/TacBuild/status/2091873937655574938"
+    ],
+    "confidence": "high",
+    "incidentType": "exploit",
+    "notes": "$7.5M is face value; realised proceeds ~$1M. TAC had received the Aug 21 upgrade notice but had not upgraded."
+  },
+  {
+    "name": "KiiChain - Cosmos EVM vesting/staking-precompile underflow",
+    "date": "2026-08-22",
+    "chain": "KiiChain",
+    "lossUsd": 9700000,
+    "component": "cosmos-evm (precompile/x/vm/x/erc20)",
+    "rootCause": "Cosmos EVM's StateDB tracks only an account's spendable balance, but x/staking and the staking precompile let a vesting account delegate locked coins. Delegating more than spendable made the post-delegation write-back underflow in StateDB.SubBalance (unchecked uint256), wrapping the balance to ~2^256. Bug 2: that balance was sent as 2^256-balance(victim) to a high-balance account (0x0 burn address, genesis multisig, bonded_tokens_pool), overflowing the victim to 0 and netting the attacker its balance in one supply-neutral tx. The setup was a vesting account created at a precomputed contract address with the exploit contract then deployed there. It was repeated 18 times: 148.3M KII taken, 67.6M bridged to BNB via Hyperlane and sold for ~$1.61M USDT, and ~80.7M frozen on-chain.",
+    "vulnerabilityClass": "balance-underflow-statedb-vesting",
+    "language": "Go",
+    "patchedIn": [
+      "cosmos/evm v0.6.2, v0.7.2 (GHSA-7g4w-cg88-2cq2; PRs #1176 SubBalance underflow guard, #1187 locked-balance snapshot, commit 3524ebc module-account guard; backports #1253/#1254)"
+    ],
+    "sources": [
+      "https://github.com/cosmos/security/blob/main/communications/cosmos_evm_GHSA-7g4w-cg88-2cq2_post_mortem.md",
+      "https://github.com/cosmos/evm/security/advisories/GHSA-7g4w-cg88-2cq2",
+      "https://x.com/KiiChainio/article/2091721027583709214",
+      "https://rekt.news/kiichain-rekt"
+    ],
+    "confidence": "high",
+    "incidentType": "exploit",
+    "notes": "This is an integer UNDERFLOW plus overflow of the victim balance (the seed said 'integer overflow?'). $9.7M is face value; realised ~$1.6M."
+  },
+  {
+    "name": "Nesa - Cosmos EVM balance-accounting exploit",
+    "date": "2026-08-24",
+    "chain": "Nesa",
+    "lossUsd": 50000000,
+    "component": "cosmos-evm (precompile/x/vm/x/erc20)",
+    "rootCause": "Cosmos EVM's StateDB tracks only an account's spendable balance, but x/staking and the staking precompile let a vesting account delegate locked coins. Delegating more than spendable made the post-delegation write-back underflow in StateDB.SubBalance (unchecked uint256), wrapping the balance to ~2^256. Bug 2: that balance was sent as 2^256-balance(victim) to a high-balance account (0x0 burn address, genesis multisig, bonded_tokens_pool), overflowing the victim to 0 and netting the attacker its balance in one supply-neutral tx. The setup was a vesting account created at a precomputed contract address with the exploit contract then deployed there. On Nesa the attacker inflated a ~1.1M NES deposit and withdrew 257.7M NES (~25.8% of supply) to Ethereum via Hyperlane. Thin liquidity limited net profit to ~$60k-$240k.",
+    "vulnerabilityClass": "balance-underflow-statedb-vesting",
+    "language": "Go",
+    "patchedIn": [
+      "cosmos/evm v0.6.2, v0.7.2 (GHSA-7g4w-cg88-2cq2; PRs #1176 SubBalance underflow guard, #1187 locked-balance snapshot, commit 3524ebc module-account guard; backports #1253/#1254)"
+    ],
+    "sources": [
+      "https://rekt.news/nesa-rekt",
+      "https://x.com/nesaorg/status/2091915864497066077",
+      "https://etherscan.io/tx/0xd443eabd4cfa1be6ad5f7ef861db9a9f271305040615667ed336bc195af05080",
+      "https://github.com/cosmos/security/blob/main/communications/cosmos_evm_GHSA-7g4w-cg88-2cq2_post_mortem.md"
+    ],
+    "confidence": "medium",
+    "incidentType": "exploit",
+    "notes": "$50M is nominal (Bubblemaps). Nesa is not named in the Cosmos Labs post-mortem (3 of the 6 victims are unnamed), but the timing, mechanism and Rekt analysis match."
+  },
+  {
+    "name": "Tectonic (Cronos) TONIC collateral price manipulation",
+    "date": "2026-08-30",
+    "chain": "Cronos (Cosmos SDK/Ethermint EVM)",
+    "lossUsd": 9190000,
+    "component": "oracle",
+    "rootCause": "Tectonic accepted its thin-liquidity governance token TONIC as collateral. The attacker pumped TONIC's price and borrowed ~$120.4M across 9 markets within ~10 minutes. Cronos validators halted at block 90,907,150 and rolled back to 90,896,188 (10,961 blocks), restoring ~$111.2M. ~$9.19M had already left the chain.",
+    "vulnerabilityClass": "spot-price-oracle-manipulation",
+    "language": "Solidity",
+    "patchedIn": [],
+    "sources": [
+      "https://www.theblock.co/news/ecosystems/2026-09-08-cronos-post-mortem-413724",
+      "https://www.coindesk.com/tech/2026/08/31/cronos-halts-blockchain-after-usd75-million-lending-exploit-hits-lending-app-tectonic",
+      "https://rekt.news/tectonic-rekt"
+    ],
+    "confidence": "high",
+    "incidentType": "exploit",
+    "notes": "This is an app-level Solidity issue, not Cosmos EVM. It is notable for a validator-coordinated rollback of a Cosmos chain."
+  },
+  {
+    "name": "Neutron malicious governance proposal - Astroport & Drop admin takeover",
+    "date": "2026-09-22",
+    "chain": "Neutron",
+    "lossUsd": 9300000,
+    "component": "governance",
+    "rootCause": "A proposal titled 'AI Agent Takeover' passed on Neutron, which was in long-term maintenance mode with low participation, through the expedited track with ~82% yes. The deciding voter bought ~31.6M NTRN (~$20k) and staked it <12 min before close. Governance holds admin over the Astroport and Drop CosmWasm contracts, so the passed messages handed the attacker admin/migrate rights and contracts were drained (~$4.9M Astroport, ~$4.4M Drop nominal). The Cosmos Hub halted ~25h (block 33,086,740) to freeze ~1.2M ATOM bridged there.",
+    "vulnerabilityClass": "malicious-governance-proposal",
+    "language": "n/a",
+    "patchedIn": [
+      "Neutron halted; Hub moved attacker ATOM to a 4-of-6 validator multisig"
+    ],
+    "sources": [
+      "https://x.com/astroport_fi/status/2102348511400403381",
+      "https://protos.com/cosmos-hub-halts-for-24-hours-after-neutron-governance-attack/",
+      "https://cryptobriefing.com/cosmos-hub-restarts-25-hour-halt-stolen-tokens/"
+    ],
+    "confidence": "medium",
+    "incidentType": "exploit",
+    "notes": "The exact proposal messages (MsgUpdateAdmin vs MsgMigrateContract) were not verified from the on-chain record. The low cost to buy voting power (~$20k) came from a low staking ratio and an expedited quorum on a chain in maintenance mode."
+  }
+]

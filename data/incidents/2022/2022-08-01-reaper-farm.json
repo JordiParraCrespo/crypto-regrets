@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "access-control",
+  "vulnClass": "missing-access-modifier",
+  "vulnClassBy": "typesafe",
+  "aiClass": {
+    "id": "missing-access-modifier",
+    "confidence": 1
+  },
   "technique": "Improper Access Control",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -46,6 +52,10 @@
     {
       "source": "RevertIQ",
       "text": "Reaper Farm's ReaperVaultV2 contracts on Fantom were exploited on 1 August 2022, allowing attackers to withdraw tokens from other users' vaults. The vulnerability was improper access control in the vault's share redemption logic, resulting in losses of approximately $1.7 million. The ReaperVaultV2 contract failed to check whether the caller was authorized to redeem another user's shares, allowing attackers to withdraw tokens from victims' vaults without their consent."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Yield farming project Reaper Farm suffered an exploit that resulted in a $1.7 million loss. The attackers discovered a vulnerability that allowed them to withdraw anyone else's funds. They then bridged funds to Ethereum, then laundered them through Tornado Cash. After discovering the exploit, Reaper Farms used the same vulnerability to remove funds from the remaining vulnerable vaults to prevent the attacker from stealing more. Shortly after the exploit, Reaper Farms announced they plained to raise capital via \"the sale of vested $OATH tokens from our treasury with desirable terms\", which would then be used alongside other assets in their treasury to compensate users."
     }
   ],
   "audit": null,
@@ -55,7 +65,8 @@
     "defillama",
     "defihacklabs",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -102,6 +113,16 @@
       "source": "revertiq",
       "label": "odaily.news",
       "url": "https://www.odaily.news/en/post/5180727"
+    },
+    {
+      "source": "w3igg",
+      "label": "docs.google.com",
+      "url": "https://docs.google.com/document/d/1aCEbz40BBC3y1RqDksnD9d-5IOXXgbeKAvJWMH2GoI4/edit"
+    },
+    {
+      "source": "w3igg",
+      "label": "docs.google.com",
+      "url": "https://docs.google.com/document/d/1wymADZrvisr8UNU9BHWh9bgEsO28D2-awhOHlxlQ3X8/edit"
     }
   ]
 }

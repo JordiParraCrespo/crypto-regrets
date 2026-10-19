@@ -10,6 +10,12 @@
   ],
   "targetType": "CEX",
   "category": "key-compromise",
+  "vulnClass": "hot-wallet-compromise",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "hot-wallet-compromise",
+    "confidence": 1
+  },
   "technique": "Hot Wallet Key Compromised",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -38,6 +44,10 @@
     {
       "source": "RevertIQ",
       "text": "On 2019-11-27, attackers transferred 342,000 ETH from an Upbit Ethereum hot wallet to an external address after gaining the ability to authorize withdrawals from the exchange's custody infrastructure. Upbit suspended deposits and withdrawals, moved remaining assets to cold storage, and stated that customer losses would be covered from corporate reserves. Attackers obtained the ability to authorize transfers from Upbit's Ethereum hot wallet infrastructure. Public evidence supports a hot-wallet or signing-system compromise rather than a smart contract vulnerability. The exact intrusion path and method used to obtain signing authority have not been publicly disclosed."
+    },
+    {
+      "source": "Blockchain Graveyard",
+      "text": "342,000 ETH was stolen from Upbit hot wallet on November 27, 2019. A full post mortem has not been released yet, though it looks like the unauthorized transaction was signed from a different process as; hot cold wallet reassignment and user withdrawals due to onchain variables: input data, gas limit, gas price. Popular service (whale_alert) tweeted the transaction on November 27, 2019 very shortly after the transaction was confirmed on the Ethereum (ETH) Network. Upbit took an impressive 50 minutes to be notified and roll out a plan to secure their remaining funds and issue an announcement."
     }
   ],
   "audit": null,
@@ -48,7 +58,8 @@
   "sources": [
     "defillama",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "graveyard"
   ],
   "references": [
     {
@@ -75,6 +86,16 @@
       "source": "revertiq",
       "label": "coindesk.com",
       "url": "https://www.coindesk.com/markets/2019/11/27/crypto-exchange-upbit-confirms-theft-of-49m-in-ether"
+    },
+    {
+      "source": "graveyard",
+      "label": "Blockchain Graveyard",
+      "url": "https://sg.upbit.com/service_center/notice?id=2312"
+    },
+    {
+      "source": "graveyard",
+      "label": "twitter.com",
+      "url": "https://twitter.com/whale_alert/status/1199540095126257664"
     }
   ]
 }

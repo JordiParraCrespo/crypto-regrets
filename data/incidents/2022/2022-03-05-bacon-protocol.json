@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "reentrancy",
+  "vulnClass": "token-hook-reentrancy",
+  "vulnClassBy": "typesafe",
+  "aiClass": {
+    "id": "token-hook-reentrancy",
+    "confidence": 1
+  },
   "technique": "Reentrancy",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -42,6 +48,10 @@
     {
       "source": "RevertIQ",
       "text": "Bacon Protocol was exploited on Ethereum on 2022-03-05 through a reentrancy flaw in the lend() flow. An attacker used a 6.36 million USDC flash loan, recursively re-entered the lending path through a callback hook, redeemed inflated bHOME balances, and exited with roughly 957,209 USDC after repaying the loan. Bacon Protocol’s lend() flow exposed externally callable callback execution before all internal accounting for bHOME issuance had finalized. The attacker repeatedly re-entered lend() during the same transaction and obtained more bHOME than the deposited USDC should have allowed. The historical implementation contract was unverified, so the exact v…"
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Bacon Protocol, a defi project seeking to provide NFT mortgage liens (yes, really) was hacked. A reentrancy bug in their smart contract enabled attackers to get more lending credits than they should have been allowed, and was exploited for a total loss to Bacon Protocol of around $1 million."
     }
   ],
   "audit": null,
@@ -53,7 +63,8 @@
   "sources": [
     "defillama",
     "defihacklabs",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -105,6 +116,21 @@
       "source": "revertiq",
       "label": "raw.githubusercontent.com",
       "url": "https://raw.githubusercontent.com/SunWeb3Sec/DeFiHackLabs/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/src/test/2022-03/Bacon_exp.sol"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=bacon-protocol-hacked-for-1-million"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BaconProtocol/status/1500174000206475265"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/peckshield/status/1500105933128495108?s=20&t=dchLtxAqTbbeVVuY8qy1ww"
     }
   ]
 }

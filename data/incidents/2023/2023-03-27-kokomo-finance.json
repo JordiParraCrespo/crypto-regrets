@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "rugpull",
+  "vulnClass": "liquidity-rug",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "liquidity-rug",
+    "confidence": 0.76
+  },
   "technique": "Admin Drain",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -46,6 +52,10 @@
     {
       "source": "RevertIQ",
       "text": "Kokomo Finance, a Compound-fork lending protocol on Optimism, was drained by its own deployers on 26,27 March 2023. The deployers used their privileged upgrade and pause authority to point a cBTC market to a malicious implementation and drain over $4 million in user-supplied WBTC. All social channels were deleted and no funds have been recovered. The protocol team retained privileged control of the lending contracts, including upgrade and pause permissions, which they used to pause cBTC withdrawals, deploy a malicious cBTC implementation, and transfer assets out of the protocol. This direct admin action allowed an irreversible rug pull."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The Kokomo Finance project on the Optimism Ethereum layer-2 network rug pulled for $4.5 million in assets. The project positioned itself as a non-custodial lending platform. After raising user funds, the project's creators drained its liquidity pools. They also convinced users to send funds to them with a technique known as \" ice phishing \". They then deleted their social media accounts and disappeared."
     }
   ],
   "audit": "Unaudited",
@@ -59,7 +69,8 @@
     "defillama",
     "rekt",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -91,6 +102,16 @@
       "source": "revertiq",
       "label": "blockapex.io",
       "url": "https://blockapex.io/kokomo-finance/"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=kokomo-finance-rug-pull"
+    },
+    {
+      "source": "w3igg",
+      "label": "certik.com",
+      "url": "https://www.certik.com/resources/blog/386yWfvZZDLwaIAs2blVpX-kokomo-finance"
     }
   ]
 }

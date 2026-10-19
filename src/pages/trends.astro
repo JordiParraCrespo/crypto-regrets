@@ -1,0 +1,175 @@
+---
+import Base from '../layouts/Base.astro';
+import Bars from '../components/Bars.astro';
+import Heatmap from '../components/Heatmap.astro';
+import Switch from '../components/Switch.astro';
+import {
+  incidents, sum, fmtUsd, href, YEARS, matrix, TREND_COLS, tvlByYear, isDefiLoss, familyOf, FAMILY_IDS,
+  classStats, layerOf, LAYER_ORDER, CLASSES, type Metric,
+} from '../lib/data';
+import { CATEGORIES, CATEGORY_IDS, LAYERS } from '../lib/taxonomy';
+import { CHAIN_FAMILIES } from '../lib/chains';
+
+const from2016 = YEARS.filter((y) => y >= 2016);
+const perYear = from2016.map((year) => {
+  const xs = incidents.filter((i) => i.year === year);
+  const biggest = [...xs].sort((a, b) => (b.amountUsd ?? 0) - (a.amountUsd ?? 0))[0];
+  const cats = CATEGORY_IDS.filter((c) => c !== 'unknown').map((c) => ({ c, usd: sum(xs.filter((i) => i.category === c)) }));
+  const top = cats.sort((a, b) => b.usd - a.usd)[0];
+  return { year, count: xs.length, usd: sum(xs), biggest, top };
+});
+
+// Losses relative to the money at stake (DeFi only, where TVL is the right denominator).
+const rateYears = YEARS.filter((y) => y >= 2019 && tvlByYear.has(y));
+const tvlSeries = rateYears.map((y) => ({ year: y, value: tvlByYear.get(y)! }));
+const rateSeries = rateYears.map((y) => ({ year: y, value: sum(incidents.filter((i) => i.year === y && isDefiLoss(i))) / tvlByYear.get(y)! }));
+const tvl = (y: number) => fmtUsd(tvlByYear.get(y));
+const peakTvlYear = tvlSeries.reduce((a, b) => (b.value > a.value ? b : a)).year;
+const peakRate = rateSeries.reduce((a, b) => (b.value > a.value ? b : a));
+const lastRate = rateSeries[rateSeries.length - 1];
+const fmtPct = (v: number) => `${(v * 100).toFixed(1)}%`;
+
+// Chain families.
+const famTotals = FAMILY_IDS.map((f) => {
+  const xs = incidents.filter((i) => familyOf(i) === f);
+  const chainCount = new Map<string, number>();
+  for (const i of xs) for (const c of i.chains) chainCount.set(c, (chainCount.get(c) ?? 0) + 1);
+  return { f, usd: sum(xs), count: xs.length, chains: [...chainCount].sort((a, b) => b[1] - a[1]).slice(0, 4).map(([c]) => c) };
+})
+  .filter((x) => x.count > 0)
+  .sort((a, b) => b.usd - a.usd);
+const totalUsd = sum(incidents);
+const maxFam = famTotals[0].usd;
+
+const heat = <R extends string>(rowIds: R[], rowOf: (i: (typeof incidents)[number]) => R | null, metric: Metric, label: (r: R) => string, link?: (r: R) => string) => {
+  const m = matrix(rowOf, metric);
+  return rowIds.filter((r) => m.has(r)).map((r) => ({ id: r, label: label(r), href: link?.(r), values: m.get(r)! }));
+};
+const famOrder = famTotals.map((x) => x.f);
+const famRows = (metric: Metric) => heat(famOrder, familyOf, metric, (f) => CHAIN_FAMILIES[f].name);
+
+const catOrder = CATEGORY_IDS.filter((c) => c !== 'unknown').sort((a, b) => sum(incidents.filter((i) => i.category === b)) - sum(incidents.filter((i) => i.category === a)));
+const catRows = (metric: Metric) => heat(catOrder, (i) => (i.category === 'unknown' ? null : i.category), metric, (c) => CATEGORIES[c].name, (c) => href(`/patterns/${c}`));
+
+const topClassIds = classStats.filter((c) => c.count >= 10).slice(0, 18).map((c) => c.id);
+const classRows = (metric: Metric) => heat(topClassIds, (i) => i.vulnClass, metric, (c) => CLASSES[c].name, (c) => href(`/classes/${c}`));
+
+// Share of each year's losses by layer.
+const layerShare = (() => {
+  const m = matrix((i) => layerOf(i.category), 'usd');
+  const colTotal = new Map(TREND_COLS.map((c) => [c, LAYER_ORDER.reduce((s, l) => s + (m.get(l)?.get(c) ?? 0), 0)]));
+  return LAYER_ORDER.map((l) => ({
+    id: l,
+    label: LAYERS[l].name,
+    values: new Map(TREND_COLS.map((c) => [c, (m.get(l)?.get(c) ?? 0) / Math.max(colTotal.get(c)!, 1)])),
+  }));
+})();
+
+const pct = (x: number) => `${Math.round(x * 100)}%`;
+---
+<Base title="Trends" description="How crypto hack losses evolved per year, per chain family and per vulnerability type, with DeFi TVL for context.">
+  <section class="wrap head">
+    <p class="eyebrow">Trends</p>
+    <h1 class="h-lg">How the losses<br />evolved.</h1>
+    <p class="lede">Losses per year, per chain and per type of vulnerability, from {YEARS[0]} to {YEARS[YEARS.length - 1]}. Hover any cell or bar for the exact value. Amounts are nominal USD at the time of each incident.</p>
+  </section>
+
+  <section class="wrap section">
+    <div class="section-head"><div><p class="eyebrow">Per year</p><h2 class="h-md" style="margin-top:8px">Total amount hacked</h2></div></div>
+    <Switch id="years" labels={['$ lost', 'Incidents']}>
+      <div data-panel class="card"><Bars data={perYear.map((p) => ({ year: p.year, value: p.usd }))} format="usd" height={240} label="Amount lost per year" /></div>
+      <div data-panel class="card"><Bars data={perYear.map((p) => ({ year: p.year, value: p.count }))} height={240} label="Incidents per year" /></div>
+    </Switch>
+    <div class="table-wrap" style="margin-top:24px">
+      <table>
+        <thead><tr><th>Year</th><th class="num">Lost</th><th class="num">Incidents</th><th>Largest incident</th><th class="hide-sm">Costliest pattern</th></tr></thead>
+        <tbody>
+          {[...perYear].reverse().map((p) => (
+            <tr>
+              <td class="mono">{p.year}</td>
+              <td class="num medium">{fmtUsd(p.usd)}</td>
+              <td class="num">{p.count}</td>
+              <td>{p.biggest ? <a class="link" href={href(`/hacks/${p.biggest.id}`)}>{p.biggest.name}</a> : '—'} <span class="caption fog">{p.biggest && fmtUsd(p.biggest.amountUsd)}</span></td>
+              <td class="caption hide-sm">{p.top?.usd ? <a class="link" href={href(`/patterns/${p.top.c}`)}>{CATEGORIES[p.top.c].name}</a> : '—'}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="wrap section">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">Why 2021?</p>
+        <h2 class="h-md" style="margin-top:8px">More money, more targets, better tracking</h2>
+      </div>
+    </div>
+    <div class="grid cols-3 why">
+      <div><p class="mono caption fog" style="margin:0">01</p><h3 class="h-xs">More money to steal</h3><p class="body-sm steel">DeFi deposits averaged {tvl(2019)} in 2019, {tvl(2020)} in 2020 and {tvl(2021)} in 2021. Attackers follow the money.</p></div>
+      <div><p class="mono caption fog" style="margin:0">02</p><h3 class="h-xs">More targets, cheaply copied</h3><p class="body-sm steel">BNB Chain (late 2020) made deploying a forked yield farm almost free. Thousands shipped with their template's bugs, and flash loans let anyone exploit them with borrowed millions.</p></div>
+      <div><p class="mono caption fog" style="margin:0">03</p><h3 class="h-xs">Better tracking</h3><p class="body-sm steel">DefiLlama, DeFiHackLabs and REKT began systematic coverage around 2020–2021. Earlier years are under-counted, especially small incidents.</p></div>
+    </div>
+    <div class="grid cols-2" style="margin-top:32px">
+      <div class="card">
+        <p class="body-sm medium" style="margin:0">Money at stake: DeFi TVL</p>
+        <p class="caption fog" style="margin:0 0 20px">yearly average, DefiLlama · peak {peakTvlYear}</p>
+        <Bars data={tvlSeries} format="usd" height={180} label="Average DeFi TVL per year" />
+      </div>
+      <div class="card">
+        <p class="body-sm medium" style="margin:0">Loss rate: on-chain DeFi losses ÷ TVL</p>
+        <p class="caption fog" style="margin:0 0 20px">share of the money at stake lost to hacks each year</p>
+        <Bars data={rateSeries} format="pct" height={180} label="DeFi losses as a share of TVL" />
+      </div>
+    </div>
+    <div class="card wash" style="margin-top:24px">
+      <p class="h-sm" style="margin:0;max-width:52ch">Total losses jumped in 2021, but the risk per dollar peaked in {peakRate.year}: {fmtPct(peakRate.value)} of everything deposited in DeFi was lost to hacks that year. In {lastRate.year} so far it is {fmtPct(lastRate.value)}. The jump came from far more money at stake, not from DeFi getting less safe.</p>
+    </div>
+    <p class="caption fog" style="margin-top:12px">Loss rate counts only on-chain DeFi incidents: exchanges, wallets, Bitcoin-family chains and chain-level events are excluded because TVL doesn't measure them. Read it as "how risky was each dollar in DeFi that year".</p>
+  </section>
+
+  <section class="wrap section">
+    <div class="section-head"><div><p class="eyebrow">Per chain</p><h2 class="h-md" style="margin-top:8px">Where the money was taken</h2><p class="lede">Chains grouped into families. Incidents touching several families (often bridges) count as multi-chain.</p></div></div>
+    <ol class="rows fams">
+      {famTotals.map((x) => (
+        <li>
+          <div class="fam-head">
+            <span class="medium">{CHAIN_FAMILIES[x.f].name}</span>
+            <span class="mono caption"><span class="medium">{fmtUsd(x.usd)}</span> <span class="fog">· {x.count} incidents · {pct(x.usd / totalUsd)}</span></span>
+          </div>
+          <span class="meter"><span style={`width:${(x.usd / maxFam) * 100}%`}></span></span>
+          <span class="caption fog">{x.chains.length ? x.chains.join(', ') : CHAIN_FAMILIES[x.f].blurb}</span>
+        </li>
+      ))}
+    </ol>
+    <div style="margin-top:40px">
+      <Switch id="chains" labels={['$ lost', 'Incidents']}>
+        <div data-panel><Heatmap rows={famRows('usd')} cols={TREND_COLS} format="usd" caption="Amount lost per chain family and year." /></div>
+        <div data-panel><Heatmap rows={famRows('count')} cols={TREND_COLS} format="count" caption="Incidents per chain family and year." /></div>
+      </Switch>
+    </div>
+  </section>
+
+  <section class="wrap section">
+    <div class="section-head"><div><p class="eyebrow">Per vulnerability</p><h2 class="h-md" style="margin-top:8px">What kind of failure, when</h2><p class="lede">By failure pattern (every incident) and by vulnerability class (the {topClassIds.length} most common, for incidents with enough detail to name one).</p></div></div>
+    <h3 class="h-sub" style="margin-bottom:16px">Failure patterns</h3>
+    <Switch id="patterns" labels={['$ lost', 'Incidents']}>
+      <div data-panel><Heatmap rows={catRows('usd')} cols={TREND_COLS} format="usd" caption="Amount lost per failure pattern and year." /></div>
+      <div data-panel><Heatmap rows={catRows('count')} cols={TREND_COLS} format="count" caption="Incidents per failure pattern and year." /></div>
+    </Switch>
+    <h3 class="h-sub" style="margin:56px 0 16px">Vulnerability classes</h3>
+    <Switch id="classes" labels={['Incidents', '$ lost']}>
+      <div data-panel><Heatmap rows={classRows('count')} cols={TREND_COLS} format="count" caption="Incidents per vulnerability class and year." /></div>
+      <div data-panel><Heatmap rows={classRows('usd')} cols={TREND_COLS} format="usd" caption="Amount lost per vulnerability class and year." /></div>
+    </Switch>
+    <h3 class="h-sub" style="margin:56px 0 16px">Share of each year's losses by layer</h3>
+    <Heatmap rows={layerShare} cols={TREND_COLS} format="pct" showTotal={false} caption="Each column sums to 100%. Keys and operational failures took most of the losses in 2023–2025; 2026 so far is more mixed." />
+  </section>
+</Base>
+<style>
+  .head { padding-top: 80px; display: grid; gap: 20px; }
+  .why h3 { margin: 6px 0 8px; }
+  .why p { margin: 0; }
+  .fams > li { display: grid; gap: 6px; padding: 14px 0; }
+  .fam-head { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+</style>

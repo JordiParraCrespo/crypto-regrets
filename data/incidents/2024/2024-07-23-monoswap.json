@@ -3,13 +3,19 @@
   "name": "MonoSwap",
   "date": "2024-07-23",
   "year": 2024,
-  "amountUsd": null,
+  "amountUsd": 1300000,
   "returnedUsd": null,
   "chains": [
     "Blast"
   ],
   "targetType": null,
   "category": "key-compromise",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "key-leak-infrastructure",
+    "confidence": 0.36
+  },
   "technique": "Social Engineering; Malware; Private Key Compromise",
   "classificationNote": "Classified by keyword rules from the RevertIQ label and description.",
   "classifiedBy": "keywords",
@@ -38,13 +44,18 @@
     {
       "source": "RevertIQ",
       "text": "MonoSwap’s July 23, 2024 social-engineering compromise on Blast exposed wallets and contracts after a developer installed phishing software during a fake VC call, leading to a reported $1.3M loss from staked liquidity. A developer installed phishing software during a fake venture-capital call, and that malware ran on an office machine that could access MonoSwap wallets and contracts. The public record does not establish a multisig or hardware-wallet barrier, so endpoint compromise became protocol control."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The MonoSwap DEX announced on July 24 that it had been compromised, and urged its users to withdraw their funds to avoid losses. According to the project team, one of their developers had been lured into a call with someone pretending to be a venture capitalist, who convinced them to download what they claimed was video call software, but which instead was malware. MonoSwap claimed this gave the hackers \"access to all MonoSwap-related wallets and contracts\". The malicious video chat software attack vector has been widely used in the crypto world, with a victim losing cryptocurrency to an attacker using the same technique and impersonating an Andreessen Horowitz partner last month.…"
     }
   ],
   "audit": null,
   "txHashes": [],
   "poc": null,
   "sources": [
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -66,6 +77,16 @@
       "source": "revertiq",
       "label": "web3isgoinggreat.com",
       "url": "https://www.web3isgoinggreat.com/?id=monoswap-hack"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/PeckShieldAlert/status/1816287628062515459"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/monoswapio/status/1816151998267547851"
     }
   ]
 }

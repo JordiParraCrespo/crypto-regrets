@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "access-control",
+  "vulnClass": "missing-access-modifier",
+  "vulnClassBy": "typesafe",
+  "aiClass": {
+    "id": "missing-access-modifier",
+    "confidence": 1
+  },
   "technique": "Missing caller check",
   "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 1.00).",
   "classifiedBy": "typesafe",
@@ -38,6 +44,10 @@
     {
       "source": "SlowMist",
       "text": "A third-party Gnosis Safe module named SquidRouterModule was exploited, draining approximately $3-3.2 million from 86 Gnosis Safe wallets on Ethereum and Base within about 2 hours. The module has no affiliation with the official Squid Router protocol—confusion arose solely due to the contract name on Basescan. Victims had previously added this faulty third-party module as a trusted Safe Module, granting it permission to spend any tokens without signatures. The attacker exploited weak authentication (accepting a publicly visible constant string as \"message security\" proof) to execute arbitrary calldata, forcing fake Uniswap V3 swaps (real tokens for wor…"
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "A third-party Gnosis Safe smart contract called SquidRouterModule was exploited for $3.2 million. The smart contract included a set string that could be passed to identify a \"safe\" message; however, the string was visible in the public smart contract code and used by an attacker to impersonate Gnosis Safe users and then drain their wallets. 86 wallets had used the module, and lost a combined $3.2 million. The name led to some confusion due to the similarly named Squid Router, which is not related. It's not clear if the users who installed the module were aware that the two projects were separate."
     }
   ],
   "audit": null,
@@ -48,7 +58,8 @@
   "sources": [
     "defihacklabs",
     "blocksec",
-    "slowmist"
+    "slowmist",
+    "w3igg"
   ],
   "references": [
     {
@@ -75,6 +86,16 @@
       "source": "slowmist",
       "label": "x.com",
       "url": "https://x.com/squidrouter/status/2058890710611276238"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=squidroutermodule-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "halborn.com",
+      "url": "https://www.halborn.com/blog/post/explained-the-squidroutermodule-hack-may-2026"
     }
   ]
 }

@@ -10,6 +10,12 @@
   ],
   "targetType": "Other",
   "category": "key-compromise",
+  "vulnClass": "key-leak-infrastructure",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "key-leak-infrastructure",
+    "confidence": 0.99
+  },
   "technique": "Key Leaked via Infrastructure",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -46,6 +52,10 @@
     {
       "source": "RevertIQ",
       "text": "General Bytes' Bitcoin ATM cloud and standalone servers were breached on March 17-18, 2023. Attackers exploited a master service interface to deploy malicious software, accessing databases, hot wallets, and user credentials, resulting in theft of at least 56 BTC and additional assets. A vulnerability in the master service interface allowed remote file upload without proper access control, enabling attackers to execute malicious applications on ATM servers with BATM user privileges."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The largest manufacturer of Bitcoin ATMs, General Bytes, disclosed that attackers had stolen more than $1.6 million by exploiting a vulnerability in their software. The company released a statement on March 18 disclosing the breach, and urging operators of their ATMs to immediately upgrade their software to patch the devices. In addition to standalone servers, General Bytes' cloud service was impacted, and the company announced that it would be permanently shuttering it. \"It is theoretically (and practically) impossible to secure a system granting access to multiple operators at the same time where some of them are bad actors,\" wrote the company in the…"
     }
   ],
   "audit": null,
@@ -54,7 +64,8 @@
   "sources": [
     "defillama",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -81,6 +92,26 @@
       "source": "revertiq",
       "label": "generalbytes.com",
       "url": "https://www.generalbytes.com/en/news/general-bytes-statement-on-the-security-incident-that-occurred-on-march-18-2023"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=general-bytes-crypto-atms-exploited-for-over-1-6-million"
+    },
+    {
+      "source": "w3igg",
+      "label": "bleepingcomputer.com",
+      "url": "https://www.bleepingcomputer.com/news/security/general-bytes-bitcoin-atms-hacked-using-zero-day-15m-stolen/"
+    },
+    {
+      "source": "w3igg",
+      "label": "bleepingcomputer.com",
+      "url": "https://www.bleepingcomputer.com/news/security/hackers-steal-crypto-from-bitcoin-atms-by-exploiting-zero-day-bug/"
+    },
+    {
+      "source": "w3igg",
+      "label": "blog.kraken.com",
+      "url": "https://blog.kraken.com/post/11263/kraken-security-labs-identifies-vulnerabilities-in-commonly-used-bitcoin-atm/"
     }
   ]
 }

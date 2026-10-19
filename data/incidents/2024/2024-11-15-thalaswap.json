@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "input-validation",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "missing-bounds-check",
+    "confidence": 0.36
+  },
   "technique": "Missing Input Validation",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -50,6 +56,10 @@
     {
       "source": "RevertIQ",
       "text": "ThalaSwap’s v1 farming contract on Aptos was exploited on 15 November 2024 due to a missing input validation in its unstake logic, allowing an attacker to withdraw $25.5 million in LP tokens. The protocol recovered all assets within hours after pausing contracts and negotiating a bounty. A patch to the v1 farming contract introduced an unstake function that failed to check whether the requested withdrawal amount exceeded the user's staked balance, enabling unauthorized withdrawals."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The Thala Labs Aptos-based defi project suffered a $25.5 million theft when an attacker exploited a vulnerability in one of their smart contracts . They paused related smart contracts and froze tokens where they were able, ultimately freezing around $11.5 million in assets. After working with law enforcement and several blockchain security teams, they successfully negotiated the return of the assets, leaving the attacker with a \" bounty \" of $300,000."
     }
   ],
   "audit": null,
@@ -58,7 +68,9 @@
   "sources": [
     "defillama",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "seal911",
+    "w3igg"
   ],
   "references": [
     {
@@ -120,6 +132,21 @@
       "source": "revertiq",
       "label": "itokenly.com",
       "url": "https://itokenly.com/hacks/thala"
+    },
+    {
+      "source": "seal911",
+      "label": "SEAL 911",
+      "url": "https://x.com/ThalaLabs/status/1857703541089120541"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=thala-hack"
+    },
+    {
+      "source": "w3igg",
+      "label": "cointelegraph.com",
+      "url": "https://cointelegraph.com/news/thala-recovers-25-million-exploiter-hacker-caught"
     }
   ]
 }

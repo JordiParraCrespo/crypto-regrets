@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "oracle-manipulation",
+  "vulnClass": "spot-price-oracle",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "share-price-oracle",
+    "confidence": 0.97
+  },
   "technique": "Spot Price Manipulation",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -58,6 +64,10 @@
     {
       "source": "RevertIQ",
       "text": "On December 10, 2022, Lodestar Finance on Arbitrum was exploited through an oracle manipulation attack targeting the plvGLP collateral. The attacker inflated the price of plvGLP, excessively borrowed platform assets, and exited with roughly $5.8M,$6.5M in value, leaving Lodestar with bad debt. The Lodestar GLPOracle contract allowed the price of plvGLP collateral to be manipulated via calls to a donate mechanism. This manipulation let the attacker artificially increase the value of their plvGLP holdings, enabling over-borrowing and platform drains in a single flash-loan-powered sequence."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The Arbitrum-based crypto lending platform Lodestar Finance was attacked by an exploiter who was able to manipulate the price of the plvGLP token, allowing them to \"borrow\" the entire available liquidity of the Lodestar platform with the inflated token. The attacker made around $6.4 million in profit. Some of the stolen tokens were burned —hence the difference between the attacker profit and the loss to the platform. According to Lodestar, they think they may be able to recover around $2.4 million of the stolen funds. Meanwhile, they have attempted to contact the thief to try to negotiate the return of stolen funds. \"We will generously reward your collaboration,\" they wrote on Twitter."
     }
   ],
   "audit": "Unaudited",
@@ -70,7 +80,8 @@
     "defihacklabs",
     "rekt",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -137,6 +148,11 @@
       "source": "revertiq",
       "label": "certik.com",
       "url": "https://www.certik.com/blog/lodestar-finance-incident-analysis"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=lodestar-finance-attacked"
     }
   ]
 }

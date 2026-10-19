@@ -8,6 +8,12 @@
   "chains": [],
   "targetType": null,
   "category": "frontend-infra",
+  "vulnClass": "dns-domain-hijack",
+  "vulnClassBy": "typesafe",
+  "aiClass": {
+    "id": "dns-domain-hijack",
+    "confidence": 1
+  },
   "technique": "DNS hijacking",
   "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.99).",
   "classifiedBy": "typesafe",
@@ -36,13 +42,18 @@
     {
       "source": "SlowMist",
       "text": "User orbit84 posted on Reddit that a hacker entered his hosting provider account and changed the DNS settings to his own hosted version of BlackWallet. The attacker's wallet seems to have accumulated about $400,000 worth of cryptocurrency, and its market value has almost tripled in the past month. In a statement, the founder of BlackWallet claimed that the open source online \"star wallet\" BlackWallet had been hacked."
+    },
+    {
+      "source": "Blockchain Graveyard",
+      "text": "BlackWallet is a wallet used to send and receive Lumens (XLM) on the Stellar network. The creator of BlackWallet announced on Reddit an infrastructure compromise resulting in in a hacked website that attacked users who entered private keys into it. It should be noted that BlackWallet was not in possession of user private keys, but it was a more of a wallet client that could be used to view a wallet. BlackWallet appears to have existed since August 2017, with a DNS hijack on January 13 pointing traffic towards Cloudflare, and a malicious browser based wallet. BlackWallet only existed for five months before being victimized. I am the creator of Blackwallet.…"
     }
   ],
   "audit": null,
   "txHashes": [],
   "poc": null,
   "sources": [
-    "slowmist"
+    "slowmist",
+    "graveyard"
   ],
   "references": [
     {

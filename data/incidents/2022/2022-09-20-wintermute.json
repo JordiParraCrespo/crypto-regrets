@@ -10,6 +10,12 @@
   ],
   "targetType": "Other",
   "category": "social-engineering",
+  "vulnClass": "phishing-credential-theft",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "blind-signing",
+    "confidence": 0.4
+  },
   "technique": "Phishing",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -50,6 +56,10 @@
     {
       "source": "RevertIQ",
       "text": "Wintermute lost approximately $160 million in assets on Ethereum after an attacker brute-forced a Profanity-generated vanity address private key. The attacker used legitimate admin privileges to drain multiple DeFi vaults, exploiting a cryptographic weakness rather than a contract bug. The incident was caused by the use of the Profanity vanity address generator, which relied on only 32 bits of entropy for key generation. This allowed attackers to recover the private key for an address with a recognizable pattern using affordable GPU brute-force, enabling unrestricted access to contracts where the compromised address retained admin privileges."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The algorithmic market maker Wintermute suffered a major hack, according to their CEO. He estimated the loss at around $160 million, also writing that the company is \"solvent with twice over that amount in equity left\". Wintermute hasn't disclosed more about the attack, but it's possible that the hacker may have exploited the vulnerability in the vanity wallet address generator Profanity , which was disclosed five days prior. The crypto asset vault admin had a wallet address prefixed with 0x0000000 , a vanity address that would have been susceptible to attack if it was created using the Profanity tool. This is the second incident involving Wintermute in the past few months.…"
     }
   ],
   "audit": null,
@@ -59,7 +69,8 @@
     "defillama",
     "rekt",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -91,6 +102,21 @@
       "source": "revertiq",
       "label": "5cip.com",
       "url": "https://5cip.com/topics/wintermute-vanity-address-hack-investigation"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=wintermute-hacked-for-160-million"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/EvgenyGaevoy/status/1572134271011225601"
+    },
+    {
+      "source": "w3igg",
+      "label": "theblock.co",
+      "url": "https://www.theblock.co/post/171192/experts-blame-a-vanity-address-bug-for-wintermutes-160-million-hack"
     }
   ]
 }

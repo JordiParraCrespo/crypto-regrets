@@ -10,6 +10,12 @@
   ],
   "targetType": "CEX",
   "category": "key-compromise",
+  "vulnClass": "hot-wallet-compromise",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "hot-wallet-compromise",
+    "confidence": 1
+  },
   "technique": "Hot Wallet Key Compromised",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -38,6 +44,10 @@
     {
       "source": "RevertIQ",
       "text": "On August 2, 2016, Bitfinex suffered a security breach on Bitcoin resulting in the theft of 119,755 BTC (roughly $72 million at the time). Attackers exploited a flaw in multisignature wallet key management, but exact technical details remain based on secondary sources, as the full post-incident report and code are not public. Attackers were able to access enough multisignature wallet keys to initiate mass unauthorized withdrawals. Secondary reporting indicates this was likely due to a key management flaw that stored two required signing keys on the same system, bypassing intended multi-party controls. This technical mechanism is not officially confirmed by Bitfinex or BitGo."
+    },
+    {
+      "source": "Blockchain Graveyard",
+      "text": "This is Bitfinex's second appearance in the graveyard. All below information is inferred or directly from reddit comments of Bitfinex employees. Employees repeatedly offer insight in comments that an internal breach allowed an attacker to interact with their BitGo implementation, and that BitGo's security was not compromised. Bitfinex suggests in these comments that several withdrawal limits existed per user and system wide, and employees are unsure how they were bypassed. BitGo is a multisignature solution that heavily protects loss from a single key material breach. This approach greatly mitigates many of the risks associated with BTC, but still has…"
     }
   ],
   "audit": null,
@@ -46,7 +56,8 @@
   "sources": [
     "defillama",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "graveyard"
   ],
   "references": [
     {
@@ -73,6 +84,16 @@
       "source": "revertiq",
       "label": "support.bitfinex.com",
       "url": "https://support.bitfinex.com/hc/en-us/articles/4417401349657-2016-Security-Breach-Bitcoin-Recovery-Frequently-Asked-Questions-FAQ"
+    },
+    {
+      "source": "graveyard",
+      "label": "Blockchain Graveyard",
+      "url": "http://archive.is/CnjAn"
+    },
+    {
+      "source": "graveyard",
+      "label": "gist.github.com",
+      "url": "https://gist.github.com/magoo/f2639251b050dd2b37b53c37898c6556"
     }
   ]
 }

@@ -1,0 +1,69 @@
+{
+  "id": "2011-08-05-mybitcoin",
+  "name": "MyBitcoin",
+  "date": "2011-08-05",
+  "year": 2011,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [],
+  "targetType": null,
+  "category": "key-compromise",
+  "vulnClass": "hot-wallet-compromise",
+  "vulnClassBy": "typesafe",
+  "aiClass": {
+    "id": "hot-wallet-compromise",
+    "confidence": 0.93
+  },
+  "technique": "application vulnerability",
+  "classificationNote": "Classified by keyword rules from the Blockchain Graveyard label and description.",
+  "classifiedBy": "keywords",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "logic-error",
+    "confidence": 0.63,
+    "top": [
+      {
+        "category": "logic-error",
+        "p": 0.65
+      },
+      {
+        "category": "bridge-crosschain",
+        "p": 0.19
+      },
+      {
+        "category": "input-validation",
+        "p": 0.13
+      }
+    ],
+    "flashLoan": 0.01,
+    "stateActor": 0.02,
+    "hasRootCause": 0.96
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "This sounds like an application vulnerability that allowed forged deposits that could eventually be withdrawn from a hot wallet. This sort of attack is more common with \"off blockchain\" ledgers. After careful analysis of the intrusion we have concluded that the software that waited for Bitcoin confirmations was far too lenient. An unknown attacker was able to forge Bitcoin deposits via the Shopping Cart Interface (SCI) and withdraw confirmed/older Bitcoins. This led to a slow trickle of theft that went unnoticed for a few days. Luckily, we do keep a percentage of the holdings in cold storage so the attackers didn’t completely clean us out. Just to clar…",
+  "descriptions": [
+    {
+      "source": "Blockchain Graveyard",
+      "text": "This sounds like an application vulnerability that allowed forged deposits that could eventually be withdrawn from a hot wallet. This sort of attack is more common with \"off blockchain\" ledgers. After careful analysis of the intrusion we have concluded that the software that waited for Bitcoin confirmations was far too lenient. An unknown attacker was able to forge Bitcoin deposits via the Shopping Cart Interface (SCI) and withdraw confirmed/older Bitcoins. This led to a slow trickle of theft that went unnoticed for a few days. Luckily, we do keep a percentage of the holdings in cold storage so the attackers didn’t completely clean us out. Just to clar…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "graveyard"
+  ],
+  "references": [
+    {
+      "source": "graveyard",
+      "label": "Blockchain Graveyard",
+      "url": "http://archive.is/LUMzs"
+    },
+    {
+      "source": "graveyard",
+      "label": "archive.is",
+      "url": "http://archive.is/LUMzs"
+    }
+  ]
+}

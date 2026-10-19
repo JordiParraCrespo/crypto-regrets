@@ -1,0 +1,74 @@
+{
+  "id": "2016-04-08-coinwallet",
+  "name": "CoinWallet",
+  "date": "2016-04-08",
+  "year": 2016,
+  "amountUsd": null,
+  "returnedUsd": null,
+  "chains": [],
+  "targetType": null,
+  "category": "input-validation",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "missing-bounds-check",
+    "confidence": 0.76
+  },
+  "technique": "application vulnerability",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.95). Replaced keyword guess \"logic-error\".",
+  "classifiedBy": "typesafe",
+  "ai": {
+    "model": "jev-1.13.0",
+    "category": "input-validation",
+    "confidence": 0.95,
+    "top": [
+      {
+        "category": "input-validation",
+        "p": 0.95
+      },
+      {
+        "category": "frontend-infra",
+        "p": 0.04
+      },
+      {
+        "category": "logic-error",
+        "p": 0.01
+      }
+    ],
+    "flashLoan": 0.01,
+    "stateActor": 0.02,
+    "hasRootCause": 0.83
+  },
+  "bridge": false,
+  "language": null,
+  "rootCause": "Application vulnerability due to a lack of input sanitation, type unknown, though it does reference a \"database call\" which implies some form of database injection like SQLi. Strangely, they claim that no coins were lost, though CoinWallet shut down anyway. It is with great regret that we announce the closure of CoinWallet.co. Our decision to close is based on several factors. Primarily, on the 6th of April we suffered a data breach. Despite our best efforts there was a small error in a part of our code that should have checked and sanitized user input on a recently added function. Checks were in place but the check was then subsequently not used to block the database call.…",
+  "descriptions": [
+    {
+      "source": "Blockchain Graveyard",
+      "text": "Application vulnerability due to a lack of input sanitation, type unknown, though it does reference a \"database call\" which implies some form of database injection like SQLi. Strangely, they claim that no coins were lost, though CoinWallet shut down anyway. It is with great regret that we announce the closure of CoinWallet.co. Our decision to close is based on several factors. Primarily, on the 6th of April we suffered a data breach. Despite our best efforts there was a small error in a part of our code that should have checked and sanitized user input on a recently added function. Checks were in place but the check was then subsequently not used to block the database call.…"
+    }
+  ],
+  "audit": null,
+  "txHashes": [],
+  "poc": null,
+  "sources": [
+    "graveyard"
+  ],
+  "references": [
+    {
+      "source": "graveyard",
+      "label": "Blockchain Graveyard",
+      "url": "http://archive.is/Nmxrb"
+    },
+    {
+      "source": "graveyard",
+      "label": "archive.is",
+      "url": "http://archive.is/Nmxrb"
+    },
+    {
+      "source": "graveyard",
+      "label": "en.wikipedia.org",
+      "url": "https://en.wikipedia.org/wiki/SQL_injection"
+    }
+  ]
+}

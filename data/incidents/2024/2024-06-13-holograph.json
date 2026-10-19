@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "accounting-math",
+  "vulnClass": "unbacked-mint",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "unbacked-mint",
+    "confidence": 1
+  },
   "technique": "Infinite Mint",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -54,6 +60,10 @@
     {
       "source": "RevertIQ",
       "text": "On 2024-06-13, Holograph's Operator contract was abused to mint 1 billion unauthorized HLG tokens. The attacker used a privileged execution path tied to the protocol's minting flow, then sold part of the inflated supply as HLG market value collapsed. The available evidence points to an authorization failure in Holograph's Operator execution flow. Public statements and later investigation summaries described a former contractor or other privileged actor retaining access capable of invoking HLG minting operations without sufficient authorization constraints."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The Holograph tokenization project was exploited on June 13 after they took advantage of a flaw in a smart contract that allowed them to mint 1 billion HLG tokens. Notionally worth $14.4 million at the time the tokens were minted, relatively low liquidity meant that the introduction of a billion additional tokens crashed the token price by 80%. The attacker ultimately was able to cash out around 348 ETH (~$1.2 million). One of the addresses involved in the exploit appears to have contributed to the Holograph protocol, though it's not clear if they took advantage of insider knowledge to pull off the heist."
     }
   ],
   "audit": null,
@@ -66,7 +76,8 @@
     "defihacklabs",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -123,6 +134,26 @@
       "source": "revertiq",
       "label": "coindesk.com",
       "url": "https://www.coindesk.com/tech/2024/06/13/hlg-down-over-60-as-exploiter-mints-1-billion-new-tokens"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=holograph-hack"
+    },
+    {
+      "source": "w3igg",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/tech/2024/06/13/hlg-down-over-60-as-exploiter-mints-1-billion-new-tokens/"
+    },
+    {
+      "source": "w3igg",
+      "label": "cointelegraph.com",
+      "url": "https://cointelegraph.com/news/holograph-hacked-for-1-billion-hlg-tokens-worth-14-million"
+    },
+    {
+      "source": "w3igg",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/address/0xa198fa5db682a2a828a90b42d3cd938dacc01ade"
     }
   ]
 }

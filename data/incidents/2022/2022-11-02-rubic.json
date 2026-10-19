@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "key-compromise",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "hot-wallet-compromise",
+    "confidence": 0.33
+  },
   "technique": "Private Key Compromised",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -38,6 +44,10 @@
     {
       "source": "RevertIQ",
       "text": "On December 25, 2022, Rubic's Ethereum RubicProxy contract suffered a critical smart contract access control flaw, allowing attackers to drain at least $1.4 million in user-approved USDC by abusing a misconfigured router whitelist. The attacker swapped the stolen funds for ETH and laundered them through Tornado Cash. Rubic suspended affected contracts and replaced them after the exploit, but the final user reimbursement status is not fully verified. The RubicProxy contract mistakenly whitelisted the USDC token address as a router, allowing the attacker to call USDC's transferFrom function through routerCallNative(). This enabled unauthorized USDC trans…"
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "An attacker was able to compromise the private key of an admin wallet for the Rubic crypto exchange, transferring around 34 million Rubic tokens. The attacker then sold the tokens on decentralized exchanges Uniswap and PancakeSwap. The enormous sale caused the token price to plummet from $0.082 to $0.016, an 80% decrease. The stolen tokens were nominally worth almost $2.8 million (priced at the value before the theft), but it's not likely the attackers were able to exchange them for that much given the lack of liquidity to absorb such a huge sale."
     }
   ],
   "audit": null,
@@ -50,7 +60,8 @@
   "sources": [
     "defillama",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -77,6 +88,16 @@
       "source": "revertiq",
       "label": "blog.solidityscan.com",
       "url": "https://blog.solidityscan.com/rubic-exchange-hack-analysis-whitelisting-does-not-always-work-effectively-d3aeb0816af4/"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=rubic-exchange-private-key-compromised-token-plummets"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/CryptoRubic/status/1587801263781171203"
     }
   ]
 }

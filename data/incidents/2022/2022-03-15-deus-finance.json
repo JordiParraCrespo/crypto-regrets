@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "oracle-manipulation",
+  "vulnClass": "spot-price-oracle",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "spot-price-oracle",
+    "confidence": 1
+  },
   "technique": "Spot Price Manipulation",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -42,6 +48,10 @@
     {
       "source": "RevertIQ",
       "text": "On 2022-03-15, DEUS Finance’s Fantom lending market was exploited after a flash-loan-sized trade moved the USDC/DEI price used in solvency checks, letting the attacker trigger liquidations and extract about $3 million. DEUS let solvency and liquidation logic depend on a USDC/DEI AMM spot price that the same transaction could move. That coupled valuation to a manipulable pool state, so a temporary flash-loan-funded swap could distort the oracle input long enough to change liquidation outcomes."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Hackers were able to use a flash loan attack to manipulate a price oracle, pulling 200,000 DAI and 1101.8 ETH (totaling almost $3.1 million) out of the Deus Finance defi platform. PeckShield, the analysis firm that identified the vulnerability, wrote that the $3 million number represented the amount the hackers were actually able to withdraw and put through a cryptocurrency tumbler , but that the loss to the project may have been larger. The CEO of Deus Finance subsequently wrote on Twitter that users whose positions were liquidated as a result of the exploit would be repaid."
     }
   ],
   "audit": null,
@@ -53,7 +63,8 @@
   "sources": [
     "defillama",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -90,6 +101,21 @@
       "source": "revertiq",
       "label": "medium.com",
       "url": "https://medium.com/%40Knownsec_Blockchain_Lab/knownsec-blockchain-lab-deus-finance-prophecy-machine-attack-event-analysis-32aa48383659"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=hackers-make-off-with-over-3-million-from-deus-finance"
+    },
+    {
+      "source": "w3igg",
+      "label": "cointelegraph.com",
+      "url": "https://cointelegraph.com/news/deus-finance-exploit-hackers-get-away-with-3m-worth-of-dai-and-ether"
+    },
+    {
+      "source": "w3igg",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/tech/2022/03/15/derivatives-platform-deus-finance-exploited-for-3m-on-fantom-network/"
     }
   ]
 }

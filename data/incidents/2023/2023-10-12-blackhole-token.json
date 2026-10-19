@@ -10,6 +10,12 @@
   ],
   "targetType": "Token",
   "category": "oracle-manipulation",
+  "vulnClass": "spot-price-oracle",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "spot-price-oracle",
+    "confidence": 1
+  },
   "technique": "Spot Price Manipulation",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -46,6 +52,10 @@
     {
       "source": "RevertIQ",
       "text": "On 11 October 2023, BlackHole Token (BH) was exploited on BNB Chain through flashloan-driven price manipulation of the BH/USDT PancakeSwap pool. The attacker extracted approximately $1.27 million by distorting pool reserves and exploiting manipulated liquidity removal ratios. No on-chain recovery or confirmed patch appears in any available records. The BlackHole Token contracts and liquidity pool pricing relied directly on the manipulable spot reserve ratio of the BH/USDT pair. The attacker used a flashloan to artificially alter the pool's reserve balance, accelerating slippage and enabling abnormal liquidity withdrawal at inflated ratios, ultimately extracting outsized profit.…"
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The Black Hole Token project suffered a $1.28 million apparent exploit, according to security firm PeckShield, though it's hard not to wonder if it might have been a rug pull . Black Hole Token is a Chinese project built on BNB Chain, which promises an original mechanism that only goes up. \"The more you sell, the more the price goes up\", promises their website. Sounds legit."
     }
   ],
   "audit": null,
@@ -56,7 +66,8 @@
   "sources": [
     "defillama",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -83,6 +94,16 @@
       "source": "revertiq",
       "label": "olympix.security",
       "url": "https://olympix.security/biweekly-exploits/fantom-blackhole-uniclynft-keys-burns-and-reentrancy-all-over-again"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=black-hole-token-hack"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/peckshield/status/1712113960508612766"
     }
   ]
 }

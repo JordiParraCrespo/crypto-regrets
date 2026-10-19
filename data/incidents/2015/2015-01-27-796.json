@@ -10,6 +10,12 @@
   ],
   "targetType": "CEX",
   "category": "access-control",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "missing-access-modifier",
+    "confidence": 0.49
+  },
   "technique": "Improper Access Control",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -42,6 +48,10 @@
     {
       "source": "RevertIQ",
       "text": "796 Exchange reported that a lookalike address replaced a customer's withdrawal destination. The associated Bitcoin transaction paid 999.9999 BTC to that address. Two later payments totaling 1,000 BTC reached the reported intended destination. A reported flaw in an updated withdrawal submodule allowed destination substitution. Phone and email checks did not distinguish the lookalike address from the intended payee. The precise intrusion and timing of the substitution remain unknown."
+    },
+    {
+      "source": "Blockchain Graveyard",
+      "text": "Not much information available, other than the victim stating that the hacker was putting a lot of effort towards their attack. We have been constantly monitoring the hacking activities on our servers and 3 months back then we took the precautionary step to migrate our servers to a highly secured cloud site. Unfortunately, that didn’t stop the incident from happening last night. In the last 24 hours, our security team worked around the clock to trace back the codes and processes. At this moment, we have a pretty good idea of exactly how they did it. This was not a generalized attack. The hacker’s strategy was precisely calculated and well targeted to c…"
     }
   ],
   "audit": null,
@@ -49,7 +59,8 @@
   "poc": null,
   "sources": [
     "defillama",
-    "revertiq"
+    "revertiq",
+    "graveyard"
   ],
   "references": [
     {
@@ -71,6 +82,11 @@
       "source": "revertiq",
       "label": "bitcointalk.org",
       "url": "https://bitcointalk.org/index.php?topic=938765.20"
+    },
+    {
+      "source": "graveyard",
+      "label": "Blockchain Graveyard",
+      "url": "http://cointelegraph.com/news/chinese-exchange-suffers-1000-btc-loss-in-uncertain-service-compromise"
     }
   ]
 }

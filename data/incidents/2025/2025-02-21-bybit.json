@@ -10,6 +10,12 @@
   ],
   "targetType": "CEX",
   "category": "social-engineering",
+  "vulnClass": "blind-signing",
+  "vulnClassBy": "curated",
+  "aiClass": {
+    "id": "blind-signing",
+    "confidence": 1
+  },
   "technique": "Compromised Safe{Wallet} UI; signers blind-signed delegatecall",
   "classificationNote": null,
   "classifiedBy": "curated",
@@ -58,6 +64,10 @@
     {
       "source": "RevertIQ",
       "text": "On February 21, 2025, Bybit's main Ethereum multisig cold wallet was compromised via supply-chain JavaScript injection, causing signers to approve a delegatecall transaction that swapped the wallet's logic, enabling attackers to drain over $1.4 billion in ETH and other tokens. Injected malicious JavaScript in the Safe{Wallet} web interface caused authorized signers to approve a masked delegatecall transaction, replacing the wallet’s masterCopy with an attacker-controlled backdoor contract. This gave full control to the attacker, enabling asset theft."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "In what is looking like largest ever theft from a cryptocurrency exchange, attackers took control of a hot wallet belonging to the Bybit cryptocurrency exchange and moved a massive amount of ETH-based tokens amounting to approximately $1.5 billion in notional value (though it should be noted that that quantity of stolen tokens could not be quickly cashed out for that many dollars without affecting the ETH price). Bybit CEO Ben Zhou confirmed the attack on Twitter, writing that an attacker used an advanced phishing technique to take control of the hot wallet. Zhou also promised \"Bybit is Solvent even if this hack loss is not recovered, all of clients as…"
     }
   ],
   "audit": null,
@@ -77,6 +87,7 @@
     "blocksec",
     "slowmist",
     "revertiq",
+    "w3igg",
     "curated"
   ],
   "references": [
@@ -139,6 +150,21 @@
       "source": "revertiq",
       "label": "halborn.com",
       "url": "https://www.halborn.com/blog/post/explained-the-bybit-hack-revisited"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=bybit-hack"
+    },
+    {
+      "source": "w3igg",
+      "label": "x.com",
+      "url": "https://x.com/benbybit/status/1892963530422505586"
+    },
+    {
+      "source": "w3igg",
+      "label": "x.com",
+      "url": "https://x.com/benbybit/status/1892969284587966869"
     },
     {
       "source": "curated",

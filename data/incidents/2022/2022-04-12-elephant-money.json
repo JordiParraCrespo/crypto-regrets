@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "oracle-manipulation",
+  "vulnClass": "spot-price-oracle",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "spot-price-oracle",
+    "confidence": 1
+  },
   "technique": "Spot Price Manipulation",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -50,6 +56,10 @@
     {
       "source": "RevertIQ",
       "text": "On April 12, 2022, Elephant Money on BNB Chain was exploited via a flash loan and price manipulation, resulting in a loss of approximately $11.2 million. The attacker used a large WBNB flash loan to artificially inflate ELEPHANT token prices, minted TRUNK stablecoins at the manipulated rate, and redeemed TRUNK for BUSD, extracting real stablecoin value. The exploit was caused by reliance on a manipulable spot price oracle from PancakeSwap, lacking protections against flash loan-driven price distortion. The protocol's TRUNK mint function valued ELEPHANT collateral using the PancakeSwap spot reserve ratio, which was directly manipulable by an attacker using flash loan-driven AMM trades.…"
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "A person was able to use a flash loan attack to drain the Elephant Money project, crashing the token price to 0 while cashing out 27,416 BNB ($11 million). Losses to the project were likely higher, including the loss of 30 billion $ELEPHANT tokens (~$10 million). The project boasted audits by both CertiK and Solidity Finance on its website, though CertiK later tweeted that the flaw was with the treasury contract, which was unverified and unaudited. Elephant Money is a defi project with some questionable promises — its Twitter account advertises that people can \"earn 672% APY\", and a recent tweet encouraged people to use Elephant Money \"as your new bank…"
     }
   ],
   "audit": null,
@@ -61,7 +71,8 @@
     "defillama",
     "defihacklabs",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -133,6 +144,26 @@
       "source": "revertiq",
       "label": "rekt.news",
       "url": "https://rekt.news/elephant-money-rekt"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=attacker-cashes-out-more-than-11-million-from-elephant-money"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/PeckShieldAlert/status/1513930003943026690"
+    },
+    {
+      "source": "w3igg",
+      "label": "web.archive.org",
+      "url": "http://web.archive.org/web/20220412200534/https://twitter.com/ElephantStatus"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/CertiKAlert/status/1514345918564286482"
     }
   ]
 }

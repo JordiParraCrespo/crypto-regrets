@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "accounting-math",
+  "vulnClass": "share-inflation",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "share-inflation",
+    "confidence": 0.73
+  },
   "technique": "Donation Attack",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -50,6 +56,10 @@
     {
       "source": "RevertIQ",
       "text": "On April 15, 2023, Hundred Finance on Optimism was exploited for approximately $7.4 million. The attacker leveraged a well-documented ERC-4626 share inflation flaw by depositing a minimal amount into an empty hWBTC market, directly donating a large amount of WBTC, and borrowing inflated collateral to drain other markets. The newly migrated ERC-4626 share accounting allowed an attacker to become the sole depositor in an empty hWBTC market, then donate assets to inflate the share price. With an inflated collateral value, the protocol allowed excessive borrowing. The protocol did not use a virtual-shares offset or seed initial deposits, leaving it open to…"
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "An attacker was able to manipulate the exchange rate between tokens and their interest-bearing equivalents on the Hundred Finance system on the Optimism layer-2 network, ultimately siphoning around $7.4 million from the project. Hundred Finance announced that they were trying to communicate with the attacker to try to convince them to return some of the funds. This was not the first exploit to impact Hundred Finance: in March 2022, both Hundred Finance and Agave Finance were targeted with a flash loan attack by a hacker who stole a total of $12 million from the two projects."
     }
   ],
   "audit": "WhiteHatDAO",
@@ -63,7 +73,8 @@
     "rekt",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -140,6 +151,21 @@
       "source": "revertiq",
       "label": "smartcontractaudit.com",
       "url": "https://www.smartcontractaudit.com/guides/hundred-finance-2023-erc4626-donation-attack"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=hundred-finance-exploited-for-7-4-million"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/CertiKAlert/status/1647330607565885441"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/HundredFinance/status/1647465798665945088"
     }
   ]
 }

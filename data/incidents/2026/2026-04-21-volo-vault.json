@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "key-compromise",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "hot-wallet-compromise",
+    "confidence": 0.36
+  },
   "technique": "Private Key Compromised",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -46,6 +52,10 @@
     {
       "source": "RevertIQ",
       "text": "On April 21, 2026, Volo Vault on Sui lost $3.5 million across WBTC, XAUm, and USDC vaults after an attacker gained access to the protocol's single-signature admin key through social engineering. No contract logic flaw was involved; asset freezes partially limited further loss. A single admin private key, exposed via social engineering, allowed the attacker privileged access to directly drain three vaults. The design lacked multi-party authorization or separation of critical privileges, making one compromised operator a single point of failure. No smart-contract bug was exploited."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The Sui-based Volo Protocol defi yield platform was exploited for around $3.5 million after an attacker targeted three vaults holding w BTC, XAUm (a tokenized gold asset), and the USDC stablecoin. Volo says they have frozen or recovered all but around $60,000. They have also said they are \"prepared to absorb this loss\", rather than passing losses along to their users."
     }
   ],
   "audit": null,
@@ -55,7 +65,8 @@
     "defillama",
     "rekt",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -87,6 +98,16 @@
       "source": "revertiq",
       "label": "coindesk.com",
       "url": "https://www.coindesk.com/markets/2026/04/22/another-defi-protocol-loses-millions-in-hack-days-after-kelpdao-breach"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=volo-protocol-exploited-for-3-5-million-most-recovered"
+    },
+    {
+      "source": "w3igg",
+      "label": "x.com",
+      "url": "https://x.com/volo_sui/status/2049025687856501225"
     }
   ]
 }

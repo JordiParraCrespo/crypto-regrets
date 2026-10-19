@@ -10,6 +10,12 @@
   ],
   "targetType": "Token",
   "category": "accounting-math",
+  "vulnClass": "unbacked-mint",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "unbacked-mint",
+    "confidence": 0.73
+  },
   "technique": "Infinite Mint",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -54,6 +60,10 @@
     {
       "source": "RevertIQ",
       "text": "DeezNutz_404 was exploited on Ethereum on 2024-02-21 after an ERC-404 token implementation mishandled self transfers. The attacker repeatedly transferred DN tokens to the same address, inflated the balance through faulty accounting, then sold the unbacked tokens for about 58.65 ETH. The DeezNutz_404 ERC-404 token implementation failed to handle transfer() calls where the sender and recipient were the same address. Cached balance values were updated in the wrong order, so a self transfer increased the attacker's balance instead of leaving it unchanged. The attacker repeatedly self transferred tokens to mint unbacked supply and drained liquidity from the DN/WETH market."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "I might otherwise skip over news of a $170,000 hack, given how commonly thefts of that scale happen in the crypto world, but with a name like this... come on. One thing that keeps me from ever trying my hand as a crypto project hacker is that if I made $170,000 from exploiting a project called \"DeezNutz_404\", I would immediately be caught because I wouldn't be able to resist telling everyone I know that I'd just made enough money to not have to work for a couple years by exploiting deez nuts . Anyway, there was a bug in their code that allowed an attacker to mint infinite tokens and steal around 58.65 ETH (~$170,000)."
     }
   ],
   "audit": null,
@@ -65,7 +75,8 @@
     "defillama",
     "defihacklabs",
     "blocksec",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -117,6 +128,16 @@
       "source": "revertiq",
       "label": "raw.githubusercontent.com",
       "url": "https://raw.githubusercontent.com/SunWeb3Sec/DeFiHackLabs/main/src/test/2024-02/DeezNutz404_exp.sol"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=deeznutz404-hack"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/CertiKAlert/status/1760583150382579879"
     }
   ]
 }

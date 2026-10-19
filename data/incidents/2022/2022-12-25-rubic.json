@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "arbitrary-call",
+  "vulnClass": "arbitrary-external-call",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "arbitrary-external-call",
+    "confidence": 0.95
+  },
   "technique": "Arbitrary External Call",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -50,6 +56,10 @@
     {
       "source": "RevertIQ",
       "text": "On December 25, 2022, an attacker exploited a misconfiguration in Rubic's RubicProxy router whitelist on Ethereum, allowing them to drain over $1.4 million in user-approved USDC via arbitrary ‘transferFrom’ calls. The RubicProxy contract mistakenly whitelisted the USDC token contract as a router, enabling arbitrary smart contract calls to USDC using user approvals. This allowed the attacker to invoke transferFrom through RubicProxy and drain funds from multiple victims."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The Rubic cross-chain exchange suffered an exploit in which attackers were able to siphon a total of around $1.4 million in user funds from their wallets. The exploit was enabled by an error by the project team, who erroneously added the USDC stablecoin address as a router, which allowed attackers to arbitrarily withdraw USDC held by Rubic users. The hacker then transferred the stolen funds through the Tornado Cash cryptocurrency mixer . Rubic paused their project to limit further thefts, and stated they would pursue audits before coming back online. They also stated that they would \"strive to compensate for the losses\"."
     }
   ],
   "audit": null,
@@ -61,7 +71,8 @@
     "defillama",
     "defihacklabs",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -113,6 +124,21 @@
       "source": "revertiq",
       "label": "github.com",
       "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/past/2022/README.md#L305"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=rubic-cross-chain-exchange-hacked"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/CryptoRubic/status/1607400412583432193"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/CryptoRubic/status/1606970530032230403"
     }
   ]
 }

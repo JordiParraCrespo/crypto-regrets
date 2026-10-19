@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "bridge-crosschain",
+  "vulnClass": "trusted-root-misinit",
+  "vulnClassBy": "curated",
+  "aiClass": {
+    "id": "trusted-root-misinit",
+    "confidence": 1
+  },
   "technique": "Zero hash initialized as trusted root",
   "classificationNote": null,
   "classifiedBy": "curated",
@@ -58,6 +64,10 @@
     {
       "source": "RevertIQ",
       "text": "Nomad's bridge lost approximately $190 million beginning August 1, 2022 UTC. A zero root accepted during an upgrade collided with the default mapping value for unproved messages, allowing forged withdrawals and copycat transactions to release bridge-held assets. Replica initialization pre-approved a zero committed root with confirmAt[0] = 1. Unproved messages also resolved to zero in the messages mapping. process() passed that default value to acceptableRoot(), which accepted it, allowing unauthenticated withdrawal instructions to reach the BridgeRouter."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "After an attacker began exploiting a vulnerability in the Nomad bridge , many people rushed to replicate the attack and steal some of the roughly $190 million of various cryptocurrencies in the bridge. Some didn't seem to think through the consequences of using wallets tied to their real-life identities to exploit the vulnerability, which should be interesting to watch. Nomad posted on Discord and tweeted that they were \"aware of the incident\" and \"investigating\", but the attack was ongoing over an hour after the acknowledgement. Four days before the attack, Nomad announced that they'd raised a $22.4 million seed round from investors including Coinbase, OpenSea, and Crypto.com."
     }
   ],
   "audit": null,
@@ -72,6 +82,7 @@
     "rekt",
     "slowmist",
     "revertiq",
+    "w3igg",
     "curated"
   ],
   "references": [
@@ -134,6 +145,21 @@
       "source": "revertiq",
       "label": "rekt.news",
       "url": "https://rekt.news/nomad-rekt/"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=nomad-bridge-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/0xfoobar/status/1554234268884389888"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/0xngmi/status/1554249779798065153"
     },
     {
       "source": "curated",

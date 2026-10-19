@@ -10,6 +10,12 @@
   ],
   "targetType": null,
   "category": "reentrancy",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "single-function-reentrancy",
+    "confidence": 0.69
+  },
   "technique": "Compiler Bug",
   "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 1.00).",
   "classifiedBy": "typesafe",
@@ -46,6 +52,10 @@
     {
       "source": "RevertIQ",
       "text": "A reentrancy-guard bug in Vyper compiler versions 0.2.15, 0.2.16, and 0.3.0 enabled attackers to drain multiple Ethereum DeFi liquidity pools on July 30, 2023, including Curve, Metronome, and Alchemix. The affected contracts' reentrancy locks failed to prevent cross-function reentry, resulting in approximately $52 million in realized losses after partial whitehat recovery. A bug in certain Vyper compiler versions misallocated storage for reentrancy locks, allowing add_liquidity and remove_liquidity functions to be reentered from each other and defeating the intended protection."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Some types of Curve factory pools, including one operated by AlchemixFi and one by JPEG'd, were exploited. The attack stemmed from an issue in the Vyper language, a smart contract programming language that is similar to Solidity. Early investigations suggested that versions of the Vyper compiler had improperly implemented a re-entrancy guard, leaving some projects vulnerable to that type of attack. Vyper tweeted an announcement that the versions were vulnerable, and urged \"projects relying on these versions [to] immediately reach out to us\". Curve itself lost $61 million to the exploit. AlchemixFi was exploited for around $13 million in assets, and JPEG'd suffered a $11 million loss.…"
     }
   ],
   "audit": null,
@@ -60,7 +70,8 @@
   "poc": null,
   "sources": [
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -117,6 +128,26 @@
       "source": "revertiq",
       "label": "blockchain.news",
       "url": "https://blockchain.news/news/curve-finance-and-the-vyper-vulnerability-a-technical-post-mortem-report"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=vyper-vulnerability"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/shoucccc/status/1685688647637725184"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/tonyke_bot/status/1685688149090213889"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/vyperlang/status/1685692973051498497"
     }
   ]
 }

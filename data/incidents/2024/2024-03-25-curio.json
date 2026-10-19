@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "access-control",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "access-misconfiguration",
+    "confidence": 0.87
+  },
   "technique": "Delegatecall Hijack",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -54,6 +60,10 @@
     {
       "source": "RevertIQ",
       "text": "CurioDAO on Ethereum suffered a privilege escalation exploit on March 23, 2024. A governance contract flaw enabled an attacker to mint billions of CGT tokens, escalating their voting power and executing arbitrary contract actions. The reported $16M loss remains mostly nominal due to illiquid CGT supply. A critical flaw in MakerDAO-derived voting power logic allowed a handful of CGT tokens to be locked and artificially grow voting power. This bypassed privilege checks, enabling delegatecall-based arbitrary contract actions, notably mass CGT minting, through functions like cook. Root cause is supported by incident reporting, not direct contract code."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Curio, a crypto project that creates tokens based on \"real-world assets\" (RWAs) like cars, watches, wine, and other goods, has suffered an attack that saw around $16 million drained from the project's funds. A bug in the project's Ethereum smart contract enabled an attacker to mint 1 billion of the project's CGT governance token . Although the tokens were notionally priced at around $40 million, the loss to the project was estimated at closer to $16 million. Curio DAO announced that they intended to compensate users affected by the theft over a year-long period."
     }
   ],
   "audit": null,
@@ -67,7 +77,8 @@
     "defihacklabs",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -109,6 +120,26 @@
       "source": "revertiq",
       "label": "RevertIQ",
       "url": "https://revertiq.ai/hacks/curio-2024-03-25"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=curio-hack"
+    },
+    {
+      "source": "w3igg",
+      "label": "cointelegraph.com",
+      "url": "https://cointelegraph.com/news/curio-smart-contract-exploit-hacker-mints-1-billion-tokens"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/CyversAlerts/status/1772216818645565673"
+    },
+    {
+      "source": "w3igg",
+      "label": "investcurio.medium.com",
+      "url": "https://investcurio.medium.com/curiodaos-recovery-plan-1255427f35de"
     }
   ]
 }

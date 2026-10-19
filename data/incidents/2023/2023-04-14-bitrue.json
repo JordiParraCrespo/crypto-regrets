@@ -6,10 +6,16 @@
   "amountUsd": 23000000,
   "returnedUsd": null,
   "chains": [
-    "Ethereum Mainnet"
+    "Ethereum"
   ],
   "targetType": "CEX",
   "category": "key-compromise",
+  "vulnClass": "hot-wallet-compromise",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "hot-wallet-compromise",
+    "confidence": 1
+  },
   "technique": "Hot Wallet Key Compromised",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -25,7 +31,7 @@
     ],
     "flashLoan": 0.02,
     "stateActor": 0.02,
-    "hasRootCause": 0.31
+    "hasRootCause": 0.27
   },
   "bridge": false,
   "language": null,
@@ -38,6 +44,10 @@
     {
       "source": "RevertIQ",
       "text": "On April 14, 2023, Bitrue's Ethereum hot wallet was drained after an attacker obtained unauthorized signing authority, resulting in approximately $23 million stolen across six major token types. The attacker rapidly converted most assets to ETH, laundered funds via Tornado Cash, and Bitrue temporarily suspended withdrawals before restoring operations and committing to compensate affected users. A single-signing-key access compromise enabled the attacker to drain Bitrue's Ethereum hot wallet. The precise method,private key exposure, credential leak, or infrastructure flaw,has not been publicly confirmed. No additional access controls, multisig, or withd…"
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The Singapore-based Bitrue crypto exchange suffered a hack on April 14 in which attackers siphoned tokens including Ethereum, Shiba Inu, and MATIC (the token for the Polygon network). Altogether the stolen funds were estimated at around $23 million. Bitrue didn't release details on how the attack had been achieved, but explained that one of their hot wallets had been impacted. They announced that they would be pausing withdrawals for several days as they investigated the incident, and that they would be compensating affected users."
     }
   ],
   "audit": null,
@@ -46,7 +56,8 @@
   "sources": [
     "defillama",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -78,6 +89,16 @@
       "source": "revertiq",
       "label": "cryptotimes.io",
       "url": "https://www.cryptotimes.io/2023/04/14/bitrue-suffers-a-23-million-exploit-on-its-hot-wallet/"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=bitrue-crypto-exchange-hacked-for-23-million"
+    },
+    {
+      "source": "w3igg",
+      "label": "support.bitrue.com",
+      "url": "https://support.bitrue.com/hc/en-001/articles/17538384324121"
     }
   ]
 }

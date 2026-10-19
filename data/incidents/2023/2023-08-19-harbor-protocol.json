@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "oracle-manipulation",
+  "vulnClass": "spot-price-oracle",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "spot-price-oracle",
+    "confidence": 0.89
+  },
   "technique": "Spot Price Manipulation",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -46,6 +52,10 @@
     {
       "source": "RevertIQ",
       "text": "Harbor Protocol on Comdex was exploited on August 19, 2023, by manipulation of spot prices on the cSwap AMM. The attacker inflated collateral asset prices, borrowed stablecoins against artificially high values, and moved funds through multiple chains, resulting in losses of approximately $250,000. The protocol's price oracle relied on cSwap AMM for spot prices, which could be manipulated without resistance to rapid reserve shifts. The attacker inflated the spot prices of Luna, stOsmo, and wMATIC on cSwap, allowing extraction of overvalued collateral."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "The \"interchain stablecoin protocol\" Harbor announced on August 19 that they had experienced an exploit that drained some of the funds in the project pools. They wrote on Twitter that they were \"working hard to estimate the total losses incurred as well as investigate the exploiter(s) and trace the funds.\" According to data on DefiLlama, TVL on the project dropped from around $370,000 to only $81,000. The TVL was already significantly down from the project's peak of almost $1.5 million."
     }
   ],
   "audit": null,
@@ -54,7 +64,8 @@
   "sources": [
     "defillama",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -81,6 +92,11 @@
       "source": "revertiq",
       "label": "monitoringroom.com",
       "url": "https://monitoringroom.com/situation/crypto-hack/harbor-protocol"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=harbor-protocol-exploit"
     }
   ]
 }

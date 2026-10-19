@@ -13,7 +13,7 @@
 import { readFileSync, writeFileSync, mkdirSync, existsSync, rmSync } from 'node:fs';
 import { join } from 'node:path';
 import { z } from 'zod';
-import { type CategoryId } from '../src/lib/taxonomy';
+import { CATEGORIES, type CategoryId } from '../src/lib/taxonomy';
 import {
   incidentSchema,
   advisorySchema,
@@ -23,8 +23,10 @@ import {
   type SourceId,
 } from '../src/lib/types';
 import { CURATED } from './curated';
+import { canonicalChain } from '../src/lib/chains';
 import { classifyText } from './keywords';
-import { CACHE_FILE, stateHash, type CachedClassification } from './classify-spec';
+import { CACHE_FILE, CLASS_CACHE_FILE, TYPESAFE_CLASS_MIN_CONFIDENCE, classStateHash, stateHash, type CachedClass, type CachedClassification } from './classify-spec';
+import { CLASSES, CLASS_IDS, TECHNIQUE_TO_CLASS, type ClassId } from '../src/lib/classes';
 
 const RAW = 'data/raw';
 const OUT = 'data';
@@ -38,6 +40,7 @@ const FETCH: Record<string, string> = {
   'btc.html': 'https://bitcoincore.org/en/security-advisories/',
   'geth.json': 'https://geth.ethereum.org/docs/vulnerabilities/vulnerabilities.json',
   'cosmos.md': 'https://raw.githubusercontent.com/cosmos/security/main/ADVISORIES.md',
+  'llama_tvl.json': 'https://api.llama.fi/v2/historicalChainTvl',
 };
 
 async function fetchAll() {
@@ -241,9 +244,25 @@ function applyTypeSafe(i: Incident): Incident {
   };
 }
 
+// Vulnerability class: curated post-mortem > unambiguous analyst technique label > TypeSafe.
+const typesafeClassCache: Record<string, CachedClass> = existsSync(CLASS_CACHE_FILE) ? JSON.parse(readFileSync(CLASS_CACHE_FILE, 'utf8')) : {};
+
+function applyClasses(i: Incident, curatedClass: ClassId | undefined): Incident {
+  const cached = typesafeClassCache[i.id];
+  const aiClass = cached && cached.hash === classStateHash(i) ? { id: cached.class, confidence: cached.confidence } : null;
+  const fromTechnique = i.technique ? TECHNIQUE_TO_CLASS[i.technique] : undefined;
+  if (curatedClass) return { ...i, vulnClass: curatedClass, vulnClassBy: 'curated', aiClass };
+  if (fromTechnique && CLASSES[fromTechnique].parent === i.category) return { ...i, vulnClass: fromTechnique, vulnClassBy: 'technique', aiClass };
+  if (aiClass && aiClass.confidence >= TYPESAFE_CLASS_MIN_CONFIDENCE && (i.ai?.hasRootCause ?? 1) >= 0.5) {
+    return { ...i, vulnClass: aiClass.id, vulnClassBy: 'typesafe', aiClass };
+  }
+  return { ...i, aiClass };
+}
+
 // ---------------------------------------------------------------- sources
 
-type Draft = Omit<Incident, 'id' | 'year'>;
+/** Class fields are filled at the end (applyClasses); curatedClass is internal and stripped by zod. */
+type Draft = Omit<Incident, 'id' | 'year' | 'vulnClass' | 'vulnClassBy' | 'aiClass'> & { curatedClass?: ClassId };
 
 function fromLlama(): Draft[] {
   const data = JSON.parse(raw('llama.json')) as LlamaHack[];
@@ -357,11 +376,15 @@ const extraRecordSchema = z.object({
  * Processed in this order, each matched against everything merged before it. DeFiHackLabs is
  * Apache-2.0, so its text is kept whole; other sources are quoted briefly with a link back.
  */
-const EXTRA_SOURCES: { id: SourceId; name: string; file: string; maxText: number }[] = [
+const EXTRA_SOURCES: { id: SourceId; name: string; file: string; maxText: number; headlines?: boolean; enrichOnly?: boolean }[] = [
   { id: 'defihacklabs', name: 'DeFiHackLabs explorer', file: 'dhl_explorer.json', maxText: 2000 },
   { id: 'blocksec', name: 'BlockSec', file: 'blocksec.json', maxText: 700 },
   { id: 'slowmist', name: 'SlowMist', file: 'slowmist.json', maxText: 700 },
   { id: 'revertiq', name: 'RevertIQ', file: 'revertiq.json', maxText: 700 },
+  { id: 'graveyard', name: 'Blockchain Graveyard', file: 'graveyard.json', maxText: 700 },
+  { id: 'seal911', name: 'SEAL 911', file: 'seal911.json', maxText: 700 },
+  // Headlines include individual thefts, lawsuits and news: enrich known incidents only.
+  { id: 'w3igg', name: 'Web3 Is Going Great', file: 'web3isgoinggreat.json', maxText: 700, headlines: true, enrichOnly: true },
 ];
 
 function capText(t: string, max: number): string {
@@ -392,6 +415,27 @@ const rawKey = (n: string) => n.toLowerCase().replace(/[^a-z0-9]/g, '');
 function namesMatchStrict(a: string, b: string): boolean {
   const [s, l] = [rawKey(a), rawKey(b)].sort((x, y) => x.length - y.length);
   return s.length >= 4 && l.startsWith(s);
+}
+
+/** For sources whose "name" is a news headline: an incident within 3 days whose name appears in it. */
+function findInHeadline(pool: Draft[], headline: string, date: string): Draft | undefined {
+  const h = rawKey(headline);
+  let best: Draft | undefined;
+  let bestScore = -Infinity;
+  for (const d of pool) {
+    const days = daysApart(d.date, date);
+    const k = rawKey(d.name);
+    const core = nameKey(d.name);
+    if (days > 3) continue;
+    const hit = (k.length >= 4 && h.includes(k)) || (core.length >= 4 && h.includes(core));
+    if (!hit) continue;
+    const score = Math.max(k.length, core.length) - days; // longer, closer names win
+    if (score > bestScore) {
+      best = d;
+      bestScore = score;
+    }
+  }
+  return best;
 }
 
 function findMatch(pool: Draft[], name: string, date: string, maxDays: number): Draft | undefined {
@@ -501,7 +545,7 @@ function build(): { incidents: Incident[]; stats: Record<string, number> } {
     for (const r of recs) {
       const text = r.rootCause ? capText(r.rootCause, src.maxText) : null;
       const refs = [...(r.url ? [{ label: src.name, url: r.url }] : []), ...r.references.slice(0, 3).map((url) => ({ label: hostOf(url), url }))];
-      const match = findMatch(drafts, r.name, r.date, 7);
+      const match = src.headlines ? findInHeadline(drafts, r.name, r.date) : findMatch(drafts, r.name, r.date, 7);
       if (match) {
         matched++;
         addDescription(match, src.name, text);
@@ -512,7 +556,7 @@ function build(): { incidents: Incident[]; stats: Record<string, number> } {
         for (const h of r.txHashes) if (!match.txHashes.includes(h)) match.txHashes.push(h);
         if (match.category === 'unknown') setKeywordCategory(match, classifyText(`${r.label ?? ''} ${text ?? ''}`));
         for (const ref of refs) attach(match, src.id, ref);
-      } else {
+      } else if (!src.enrichOnly) {
         drafts.push({
           name: r.name,
           date: r.date,
@@ -552,6 +596,7 @@ function build(): { incidents: Incident[]; stats: Record<string, number> } {
         match.category = c.category;
       }
       match.classifiedBy = 'curated';
+      match.curatedClass = c.vulnClass;
       for (const ref of c.references) attach(match, 'curated', ref);
       continue;
     }
@@ -566,6 +611,7 @@ function build(): { incidents: Incident[]; stats: Record<string, number> } {
       technique: c.technique,
       classificationNote: null,
       classifiedBy: 'curated',
+      curatedClass: c.vulnClass,
       ai: null,
       bridge: false,
       language: null,
@@ -579,13 +625,16 @@ function build(): { incidents: Incident[]; stats: Record<string, number> } {
     });
   }
 
+  // One spelling per chain across sources ("BNB Chain" / "Binance Smart Chain" → "BSC").
+  for (const d of drafts) d.chains = [...new Set(d.chains.map(canonicalChain).filter((c): c is string => c !== null))];
+
   drafts.sort((a, b) => b.date.localeCompare(a.date) || (b.amountUsd ?? 0) - (a.amountUsd ?? 0));
   const ids = new Set<string>();
   const incidents = drafts.map((d) => {
     let id = `${d.date}-${slugify(d.name)}`;
     for (let i = 2; ids.has(id); i++) id = `${d.date}-${slugify(d.name)}-${i}`;
     ids.add(id);
-    return applyTypeSafe({ ...d, id, year: Number(d.date.slice(0, 4)) });
+    return applyClasses(applyTypeSafe({ ...d, id, year: Number(d.date.slice(0, 4)), vulnClass: null, vulnClassBy: null, aiClass: null }), d.curatedClass);
   });
   return { incidents: incidents.map((i) => incidentSchema.parse(i)), stats };
 }
@@ -659,11 +708,68 @@ function buildAdvisories(): Advisory[] {
     });
   }
 
+  // OSV (GitHub Security Advisories + Go/PyPI databases) for clients, SDKs and compilers.
+  const ghsa = (x: string) => x.match(/GHSA-[\w-]+/i)?.[0]?.toUpperCase();
+  const seen2 = new Set(out.flatMap((a) => [ghsa(a.url), a.cve].filter(Boolean) as string[]));
+  const osv = z
+    .array(z.object({ project: z.string(), id: z.string(), aliases: z.array(z.string()), title: z.string(), summary: z.string().nullable(), published: z.string().nullable(), severity: z.string().nullable(), url: z.string() }))
+    .parse(JSON.parse(raw('osv_advisories.json')));
+  const PROJECT: Record<string, string> = { vyper: 'Vyper', 'go-ethereum': 'Geth', 'cosmos-sdk': 'Cosmos', cometbft: 'Cosmos', tendermint: 'Cosmos', 'ibc-go': 'Cosmos', evmos: 'Evmos', btcd: 'btcd', lnd: 'Lightning (lnd)', besu: 'Besu', 'web3.js': 'web3.js' };
+  for (const o of osv) {
+    const ids = [o.id, ...o.aliases].map((x) => x.toUpperCase());
+    if (ids.some((x) => seen2.has(x))) continue;
+    ids.forEach((x) => seen2.add(x));
+    const first = o.project.split(',')[0].trim();
+    out.push({
+      id: `osv-${slugify(o.id)}`,
+      project: first.startsWith('openzeppelin') ? 'OpenZeppelin Contracts' : (PROJECT[first] ?? first),
+      cve: ids.find((x) => x.startsWith('CVE-')) ?? o.id,
+      title: o.title.replace(/^Vyper:\s*/i, ''),
+      date: o.published && /^\d{4}-\d{2}-\d{2}$/.test(o.published) ? o.published : null,
+      severity: o.severity,
+      impact: impactFromText(`${o.title} ${o.summary ?? ''}`),
+      summary: o.summary ? capText(o.summary, 400) : null,
+      url: o.url,
+    });
+  }
   return out.map((a) => advisorySchema.parse(a));
 }
 
+/**
+ * The dataset a detection / auto-fix tool consumes: every class with its fix knowledge, plus the
+ * real incidents labelled with it (PoCs and attack transactions first, as test cases).
+ */
+function classDataset(xs: Incident[]) {
+  return CLASS_IDS.map((id) => {
+    const c = CLASSES[id];
+    const cases = xs
+      .filter((i) => i.vulnClass === id)
+      .sort((a, b) => Number(!!b.poc) - Number(!!a.poc) || b.txHashes.length - a.txHashes.length || (b.amountUsd ?? 0) - (a.amountUsd ?? 0));
+    return {
+      id,
+      ...c,
+      category: c.parent,
+      layer: CATEGORIES[c.parent].layer,
+      incidents: cases.length,
+      lossUsd: cases.reduce((s, i) => s + (i.amountUsd ?? 0), 0),
+      withPoc: cases.filter((i) => i.poc).length,
+      cases: cases.map((i) => ({
+        id: i.id,
+        name: i.name,
+        date: i.date,
+        chains: i.chains,
+        lossUsd: i.amountUsd,
+        labelledBy: i.vulnClassBy,
+        rootCause: i.rootCause,
+        poc: i.poc,
+        txHashes: i.txHashes,
+      })),
+    };
+  });
+}
+
 function toCsv(xs: Incident[]): string {
-  const cols = ['id', 'date', 'name', 'amountUsd', 'chains', 'targetType', 'category', 'technique', 'classifiedBy', 'aiCategory', 'aiConfidence', 'bridge', 'audit', 'poc', 'sources', 'rootCause'] as const;
+  const cols = ['id', 'date', 'name', 'amountUsd', 'chains', 'targetType', 'category', 'vulnClass', 'vulnClassBy', 'technique', 'classifiedBy', 'aiCategory', 'aiConfidence', 'bridge', 'audit', 'poc', 'sources', 'rootCause'] as const;
   const cell = (v: unknown) => {
     const s = v == null ? '' : Array.isArray(v) ? v.join('; ') : String(v);
     return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
@@ -691,6 +797,7 @@ for (const i of incidents) {
   writeFileSync(join(dir, `${i.id}.json`), `${JSON.stringify(i, null, 2)}\n`);
 }
 writeFileSync(join(OUT, 'incidents.csv'), toCsv(incidents));
+writeFileSync(join(OUT, 'vulnerability-classes.json'), `${JSON.stringify(classDataset(incidents), null, 1)}\n`);
 console.log(stats);
 console.log(`incidents: ${incidents.length}, advisories: ${advisories.length}`);
 const byCat: Record<string, number> = {};

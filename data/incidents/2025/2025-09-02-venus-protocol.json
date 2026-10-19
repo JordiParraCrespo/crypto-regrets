@@ -6,25 +6,31 @@
   "amountUsd": 13500000,
   "returnedUsd": null,
   "chains": [
-    "BNB Chain"
+    "BSC"
   ],
   "targetType": null,
   "category": "social-engineering",
+  "vulnClass": null,
+  "vulnClassBy": null,
+  "aiClass": {
+    "id": "address-poisoning-drainer",
+    "confidence": 0.55
+  },
   "technique": "phishing; malicious approval",
-  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.94).",
+  "classificationNote": "Classified by TypeSafe jev-1.13.0 (confidence 0.95).",
   "classifiedBy": "typesafe",
   "ai": {
     "model": "jev-1.13.0",
     "category": "social-engineering",
-    "confidence": 0.94,
+    "confidence": 0.95,
     "top": [
       {
         "category": "social-engineering",
-        "p": 0.94
+        "p": 0.95
       },
       {
         "category": "arbitrary-call",
-        "p": 0.05
+        "p": 0.04
       },
       {
         "category": "access-control",
@@ -42,6 +48,10 @@
     {
       "source": "RevertIQ",
       "text": "A Venus Protocol user on BNB Chain signed a malicious approval on 2025-09-02, letting an attacker move the account’s positions. Public reporting corrected the net loss to about $13.5 million after debt was excluded, and Venus paused then restored the affected markets the same day. The failure was a malicious wallet approval on BNB Chain. The signed approval granted another address authority over the user’s Venus positions, so later actions were treated as authorized even though the Venus contracts themselves were not shown to be compromised."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "A user of the Venus Protocol borrowing and lending platform was successfully phished by an attacker who gained access to their account and drained $13.5 million in stablecoins and wBETH. The user signed a malicious transaction, approving the attacker's address for token withdrawals. Venus paused the protocol as they investigated the theft. The project then proposed a vote to force liquidation of the attacker's wallet and recover the stolen funds."
     }
   ],
   "audit": null,
@@ -50,7 +60,8 @@
   ],
   "poc": null,
   "sources": [
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -72,6 +83,16 @@
       "source": "revertiq",
       "label": "crypto.news",
       "url": "https://crypto.news/venus-protocol-recovers-funds-phishing-attack-2025/"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=venus-protocol-user-exploited"
+    },
+    {
+      "source": "w3igg",
+      "label": "theblock.co",
+      "url": "https://www.theblock.co/post/369040/venus-protocol-pauses-after-user-loses-27-million-in-suspected-phishing-attack"
     }
   ]
 }

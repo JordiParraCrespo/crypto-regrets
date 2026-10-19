@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "arbitrary-call",
+  "vulnClass": "arbitrary-external-call",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "arbitrary-external-call",
+    "confidence": 0.91
+  },
   "technique": "Arbitrary External Call",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -58,6 +64,10 @@
     {
       "source": "RevertIQ",
       "text": "On March 5, 2025, an attacker used a low-level calldata corruption bug in 1inch's deprecated Fusion v1 Settlement contract to impersonate a trusted resolver, draining over $5 million (2.4M USDC and 1,276 WETH) from market-making resolver contracts still approving the old logic. The Fusion v1 Settlement contract's _settleOrder() function allowed an attacker-controlled interactionLength value, causing a pointer arithmetic underflow during settlement calldata assembly. This enabled forged resolver context to be injected, letting the attacker bypass access checks based only on msg.sender and a resolver address they supplied. Vulnerable resolvers had not re…"
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "An attacker exploited a smart contract belonging to the 1inch DEX aggregator, stealing $5 million in the USDC stablecoin and w ETH. According to the platform, the vulnerability existed in \"smart contracts using the obsolete Fusion v1 implementation\", and the stolen funds belonged to resolvers (that is, entities that fulfill 1inch orders) rather than users."
     }
   ],
   "audit": null,
@@ -80,7 +90,8 @@
     "rekt",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
@@ -137,6 +148,21 @@
       "source": "revertiq",
       "label": "coincentral.com",
       "url": "https://coincentral.com/1inch-exchange-reports-5-million-loss-in-smart-contract-exploit/"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=1inch-loses-5-million-to-smart-contract-bug"
+    },
+    {
+      "source": "w3igg",
+      "label": "x.com",
+      "url": "https://x.com/1inch/status/1897695348232978770"
+    },
+    {
+      "source": "w3igg",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/1897945772307759483"
     }
   ]
 }

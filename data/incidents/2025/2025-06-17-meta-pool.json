@@ -10,6 +10,12 @@
   ],
   "targetType": "DeFi Protocol",
   "category": "accounting-math",
+  "vulnClass": "unbacked-mint",
+  "vulnClassBy": "technique",
+  "aiClass": {
+    "id": "unbacked-mint",
+    "confidence": 1
+  },
   "technique": "Infinite Mint",
   "classificationNote": null,
   "classifiedBy": "defillama",
@@ -62,6 +68,10 @@
     {
       "source": "RevertIQ",
       "text": "A failure to restrict Meta Pool's ERC-4626 mint function allowed attackers to freely mint ~9,700 mpETH tokens (theoretically worth $27M) on June 17, 2025, without depositing collateral. Due to low pool liquidity, only ~52.5 ETH (about $130,000) could be exchanged for real value, limiting actual losses. The Meta Pool staking contract inherited the ERC-4626 standard's mint function without proper override or collateral validation. It allowed public minting of mpETH tokens with no ETH provided, violating the economic invariant that each mpETH must be fully backed."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "An attacker exploited a vulnerability in the staking contract for Meta Pool, which is a liquid staking project. This allowed them to mint 9,700 mpETH, the project's liquid staking token, which is notionally worth $27 million. However, very low liquidity for the token meant that the attacker was only able to swap 10 ETH (~$25,000) of tokens. Meta Pool acknowledged the theft in a post shortly after the exploit was noticed by a blockchain security firm, and announced that the team had paused the project's smart contract."
     }
   ],
   "audit": null,
@@ -77,7 +87,8 @@
     "defihacklabs",
     "blocksec",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
