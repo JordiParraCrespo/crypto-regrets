@@ -15,7 +15,7 @@ export const COSMOS_AREAS = {
   ibc: { name: 'IBC', blurb: 'Packets, acknowledgements, timeouts, light clients and the middleware between them.' },
   cosmwasm: { name: 'CosmWasm contracts', blurb: 'Rust contracts on wasmd: sender checks, submessages, address handling.' },
   evm: { name: 'Cosmos EVM', blurb: 'EVM on Cosmos (formerly Evmos): precompiles and the boundary between EVM state and Cosmos keepers.' },
-  governance: { name: 'Governance & operations', blurb: 'Proposals that execute arbitrary messages, bridges secured by keys, oracles.' },
+  governance: { name: 'Governance, operations & upgrades', blurb: 'Proposals that execute arbitrary messages, bridges secured by keys, oracles, and keeping the stack patched.' },
 } as const;
 
 export type CosmosAreaId = keyof typeof COSMOS_AREAS;
@@ -134,7 +134,7 @@ k.updateIndex(ctx)                                  // sequential` },
     summary: 'Deeply nested Any/proto messages, oversized inputs or malicious peers exhaust stack, memory or CPU before gas applies (transaction decoding, blocksync, block parts).',
     rules: [{ id: 'cosmos-go-any-unpack-depth', target: 'go', regex: 'UnpackAny|UnpackInterfaces|codectypes\\.Any', confirm: 'recursive unpacking of user-supplied Any without depth/size limits on a path executed before gas metering (ante, CheckTx, mempool).' }],
     fix: ['Upgrade to patched SDK/CometBFT versions', 'Enforce max message depth/size before decoding', 'Rate-limit and score peers'],
-    seenIn: ['ASA-2024-012/013 (tx decoding stack overflow)', 'ASA-2024-008, ASA-2025-001/002 (blocksync / block-part DoS)'],
+    seenIn: ['ASA-2024-012/013 (tx decoding stack overflow)', 'ASA-2024-008, ASA-2025-001/002 (blocksync / block-part DoS)', 'CosmWasm VM stack overflow, Jump Crypto 2023 (CWA-2023-002: any contract upload could halt the chain)', 'CWA-2026-006 (Wasmer Singlepass sandbox escape)'],
   },
 
   // ------------------------------------------------------------------ authorization
@@ -158,7 +158,7 @@ k.updateIndex(ctx)                                  // sequential` },
       { id: 'cosmos-proto-signer-field', target: 'config', regex: 'option\\s+\\(cosmos\\.msg\\.v1\\.signer\\)', confirm: 'the signer field declared in proto is the same field the handler treats as the acting account.' },
     ],
     fix: ['Compare msg.Authority with the module authority (x/gov address) for privileged msgs', 'Ensure the proto signer field is the account the handler acts for'],
-    seenIn: ['Recurring audit finding; MANTRA Chain 2026 (contract-level authorization) under investigation'],
+    seenIn: ['Recurring audit finding', 'BounceBit 2026 ($3.1M): the contract call path of an Evmos-derived vesting module skipped the funder authorization and checked the wrong account'],
   },
   'nested-msg-bypass': {
     name: 'Nested message bypass (authz / ICA / x/group)',
@@ -183,7 +183,7 @@ check = func(msgs []sdk.Msg, depth int) error {
 }` },
     rules: [{ id: 'cosmos-go-ante-toplevel-only', target: 'go', regex: 'range\\s+tx\\.GetMsgs\\(\\)', confirm: 'decorator enforces a restriction per message type but does not unwrap authz.MsgExec / group / gov / ICA wrappers.' }],
     fix: ['Enforce restrictions in the message server (runs for nested msgs too), not only in ante', 'Recursively unwrap MsgExec with a depth limit', 'Use the circuit breaker / msg allow-lists for ICA host'],
-    seenIn: ['Evmos 2023 authz/vesting bypass class; recurring audit finding'],
+    seenIn: ['Recurring audit finding (authz MsgExec, ICA host, gov/group proposals)'],
   },
   'module-account-transfer': {
     name: 'Blocked / module account transfers',
@@ -209,7 +209,7 @@ out, overflow := bits.Mul64(msg.Amount.Uint64(), price); if overflow != 0 { retu
       { id: 'cosmos-go-truncate-direction', target: 'go', regex: 'TruncateInt\\(|RoundInt\\(|QuoTruncate\\(', confirm: 'rounding direction favours the caller on mint/withdraw/redeem paths.' },
     ],
     fix: ['Bounds-check before converting; prefer math.Int end to end', 'Round in the protocol\'s favour (ceil when taking, floor when giving)', 'Property tests: deposit → withdraw never returns more'],
-    seenIn: ['ASA-2024-010', 'KiiChain 2026 (integer overflow, $9.7M)', 'CosmWasm 2023 (Jump Crypto report)'],
+    seenIn: ['ASA-2024-010 (math bit-length mismatch → panic)', 'See also the Cosmos EVM StateDB underflow (GHSA-7g4w-cg88-2cq2) under EVM ↔ Cosmos state desync'],
   },
   'supply-escrow-invariant': {
     name: 'Unbacked mint / escrow invariant break',
@@ -239,7 +239,7 @@ out, overflow := bits.Mul64(msg.Amount.Uint64(), price); if overflow != 0 { retu
     summary: 'A counterparty proof (ICS23/IAVL membership proof, light-client header, custom verifier) can be crafted to prove a packet or state that never existed, so the chain mints or releases funds.',
     rules: [{ id: 'cosmos-go-custom-light-client', target: 'go', regex: 'VerifyMembership|VerifyNonMembership|VerifyClientMessage|ics23\\.', confirm: 'custom client or verifier: proof spec, path and value are all checked; existence proofs cannot be satisfied with crafted leaf/inner ops; header validation checks trusting period and validator set transitions.' }],
     fix: ['Use maintained light clients (07-tendermint, 08-wasm with audited code)', 'Pin ics23/iavl to patched versions (Dragonberry)', 'Rate-limit inbound IBC flows (ibc-apps rate-limiting)'],
-    seenIn: ['Dragonberry 2022 (ICS23/IAVL)', 'BNB Chain bridge 2022 (same IAVL class)', 'Saga 2026 (forged IBC messages, $7M)'],
+    seenIn: ['Dragonberry 2022 (ICS23/IAVL proof forgery, coordinated patch)', 'BNB Chain bridge 2022 (same IAVL class, ~$570M)', 'Huckleberry 2023 (ibc-go emitted events for failed acks: exchanges credited deposits that never happened)'],
   },
   'ibc-callback-reentrancy': {
     name: 'IBC callback / middleware reentrancy',
@@ -257,7 +257,7 @@ out, overflow := bits.Mul64(msg.Amount.Uint64(), price); if overflow != 0 { retu
 }` },
     rules: [{ id: 'cosmos-go-ibc-callback-order', target: 'go', regex: 'OnAcknowledgementPacket|OnTimeoutPacket|OnRecvPacket', confirm: 'middleware invokes external/contract code before the wrapped app finalises escrow/refund state, without a reentrancy guard or cache context.' }],
     fix: ['Finalise refunds and escrow before callbacks; run callbacks in a cache context with gas limits', 'Upgrade ibc-hooks / callbacks middleware to patched versions'],
-    seenIn: ['ASA-2024-007 (critical: reentrancy via timeout callbacks in ibc-hooks)'],
+    seenIn: ['ASA-2024-007 (critical: reentrancy via timeout callbacks in ibc-hooks)', 'Terra / Astroport 2024 ($6.4M): exploited ASA-2024-007 after a chain upgrade pulled in an outdated ibc-go fork and undid the April patch'],
   },
   'ics20-denom-escrow': {
     name: 'ICS-20 denom / escrow accounting',
@@ -265,7 +265,7 @@ out, overflow := bits.Mul64(msg.Amount.Uint64(), price); if overflow != 0 { retu
     summary: 'Transfer logic confuses native and voucher denoms, mis-parses denom traces, or forwards (PFM / custom forwarding) without updating escrow, letting attackers mint vouchers or drain escrow.',
     rules: [{ id: 'cosmos-go-denom-trace-parse', target: 'go', regex: 'ReceiverChainIsSource|SenderChainIsSource|ParseDenomTrace|ExtractDenomFromPath|transfertypes\\.', confirm: 'custom code decides "native vs voucher" or computes escrow amounts outside the ibc-go transfer keeper; forwarding paths update escrow exactly once.' }],
     fix: ['Use ibc-go transfer keeper APIs; never re-implement denom logic', 'Monitor escrow balance == outstanding vouchers per channel'],
-    seenIn: ['Nomic 2026 (forwarding minted unbacked nBTC)', 'Axelar–Secret IBC bridge 2026 (unbacked mint)'],
+    seenIn: ['Nomic 2026 (forwarding minted unbacked nBTC)', 'Axelar–Secret IBC bridge 2026 ($4.67M, unbacked mint)', 'Gravity Bridge 2026 ($5.4M): x/gravity accepted an unvalidated denom ↔ ERC-20 mapping from permissionless deployERC20 (registry poisoning)'],
   },
 
   // ------------------------------------------------------------------ CosmWasm
@@ -285,7 +285,7 @@ out, overflow := bits.Mul64(msg.Amount.Uint64(), price); if overflow != 0 { retu
 }` },
     rules: [{ id: 'cosmwasm-rs-execute-no-sender', target: 'rust', regex: 'ExecuteMsg::\\w+', confirm: 'branch writes privileged state (config, owner, minter, fees, withdraw) without comparing info.sender to a stored role (or cw_ownable::assert_owner).' }],
     fix: ['Use cw-ownable / explicit role checks on every privileged branch', 'Set contract admin to governance or a multisig'],
-    seenIn: ['Recurring audit finding; Terraport 2023 ($4M)'],
+    seenIn: ['Recurring audit finding', 'Terraport 2023 ($4M): centrally controlled liquidity wallet / contract admin without proper access control'],
   },
   'cosmwasm-submsg-reply': {
     name: 'CosmWasm: submessage / reply state handling',
@@ -299,7 +299,7 @@ PENDING.save(deps.storage, SEND_ID, &Pending { who: info.sender.clone(), amount 
 // reply(): on Ok → finalize; on Err → restore exactly once from PENDING, then remove it` },
     rules: [{ id: 'cosmwasm-rs-reply-on-error', target: 'rust', regex: 'reply_on_error|reply_always|ReplyOn::(Error|Always)', confirm: 'state mutated before the submessage is not restored in the reply error branch, or reply handler can run twice for one logical operation.' }],
     fix: ['Track pending operations explicitly and settle them in reply', 'Prefer plain messages (atomic revert) unless partial failure is required'],
-    seenIn: ['Astroport / Terra 2024 (reentrancy-class loss, $6.4M) — under review in research'],
+    seenIn: ['Recurring audit finding (Oak Security, Zellic CosmWasm reviews)'],
   },
   'cosmwasm-address-validation': {
     name: 'CosmWasm: unvalidated addresses',
@@ -330,31 +330,47 @@ PENDING.save(deps.storage, SEND_ID, &Pending { who: info.sender.clone(), amount 
 }` },
     rules: [{ id: 'cosmos-evm-precompile-actor', target: 'go', regex: 'func\\s+\\(\\w+\\s+\\*?Precompile\\)\\s+\\w+\\(', confirm: 'state-changing precompile method whose acting account comes from calldata or `origin`, not `contract.Caller()`, without an allowance/authorization check.' }],
     fix: ['Authorize against contract.Caller(); use explicit allowances for third-party spends', 'Upgrade to patched cosmos/evm releases; disable unneeded precompiles'],
-    seenIn: ['BounceBit 2026 ("authorization flaw in the Evmos stack")', 'Late-Aug 2026 Cosmos EVM cluster — see research findings'],
+    seenIn: ['BounceBit 2026 ($3.1M, vesting funder authorization bypassed on the precompile path)', 'Oraichain 2026 (forged mint through its EVM cross-chain transfer path)'],
   },
   'evm-cosmos-state-desync': {
     name: 'EVM ↔ Cosmos state desync',
     area: 'evm',
-    summary: 'Precompile calls write Cosmos state that is not journaled with the EVM StateDB: an EVM revert (or try/catch) leaves the Cosmos-side transfer committed, or balances are read stale, enabling double spends and unbacked mints between the native and ERC-20 representations.',
-    vulnerable: { lang: 'solidity', code: `// attacker contract on a Cosmos EVM chain
-try IBank(BANK).send(attacker, amount) {} catch {}
-revert(); // EVM state reverts, Cosmos-side send (not journaled) does not` },
-    fixed: { lang: 'text', code: `precompile writes go through the StateDB journal (CacheContext snapshot per call)
-EVM revert restores both EVM and Cosmos state
-x/erc20 conversions re-read balances after every precompile call` },
-    rules: [{ id: 'cosmos-evm-unjournaled-write', target: 'go', regex: 'stateDB\\.|statedb\\.|CacheContext\\(', confirm: 'precompile writes to a Cosmos keeper without registering a journal entry / snapshot that is reverted with the EVM call frame.' }],
-    fix: ['Run on a cosmos/evm release where precompile writes are journaled', 'Invariant: native supply == ERC-20 representation supply for every converted denom'],
-    seenIn: ['Evmos precompile revert bug class (2024 bug bounty)', 'TAC 2026 ($7.5M "via the Cosmos EVM")'],
+    summary: 'The EVM StateDB and the Cosmos keepers disagree about a balance: precompile writes are not journaled with the EVM call frame (nested calls reuse one balance), or the StateDB tracks only spendable coins while x/staking can move locked vesting coins, so an unchecked SubBalance wraps to ~2^256.',
+    vulnerable: { lang: 'go', code: `// StateDB tracks spendable balance only; the staking precompile can delegate
+// locked (vesting) coins, so amount can exceed what StateDB thinks exists
+func (s *StateDB) SubBalance(addr common.Address, amount *uint256.Int) {
+    obj := s.getOrNewStateObject(addr)
+    obj.SetBalance(new(uint256.Int).Sub(obj.Balance(), amount)) // wraps to ~2^256
+}` },
+    fixed: { lang: 'go', code: `func (s *StateDB) SubBalance(addr common.Address, amount *uint256.Int) error {
+    obj := s.getOrNewStateObject(addr)
+    if obj.Balance().Lt(amount) {
+        return ErrInsufficientBalance          // never wrap
+    }
+    obj.SetBalance(new(uint256.Int).Sub(obj.Balance(), amount))
+    return nil
+}
+// plus: snapshot locked (vesting) balances around precompile calls,
+// journal every precompile write, refuse sends to module accounts` },
+    rules: [
+      { id: 'cosmos-evm-unchecked-balance-sub', target: 'go', regex: 'new\\(uint256\\.Int\\)\\.Sub\\(|\\.SubBalance\\(', confirm: 'balance subtraction without a preceding Lt/Cmp guard on the same operands, or SubBalance callers that can pass an amount derived from Cosmos-side state (staking, vesting, bank).' },
+      { id: 'cosmos-evm-unjournaled-write', target: 'go', regex: 'func\\s+\\(\\w+\\s+\\*?Precompile\\)\\s+\\w+\\(', confirm: 'precompile writes to a Cosmos keeper without a StateDB journal entry / snapshot that is reverted with the EVM frame; nested calls into the same precompile must observe earlier writes.' },
+    ],
+    fix: ['Upgrade to cosmos/evm v0.6.2 / v0.7.2 or later', 'Guard every balance subtraction; treat vesting (locked) coins explicitly in StateDB', 'Invariant monitoring: total supply and per-account balances consistent across EVM and bank views'],
+    seenIn: [
+      'GHSA-7g4w-cg88-2cq2, Aug 2026: MANTRA ($3.6M), TAC ($7.5M), KiiChain ($9.7M), Nesa (likely) exploited on unpatched chains',
+      'ASA-2026-002 (GHSA-54gx-3cgr-7mfm): SagaEVM ICS-20 precompile nested-execution double spend, $7M',
+    ],
   },
 
   // ------------------------------------------------------------------ governance & ops
   'malicious-governance-proposal': {
     name: 'Malicious governance proposal',
     area: 'governance',
-    summary: 'A proposal executes arbitrary messages (contract migrate, admin change, treasury send). Low quorum, short voting periods or unreviewed payloads let attackers pass it.',
+    summary: 'A proposal executes arbitrary messages (contract migrate, admin change, treasury send). Low quorum, expedited tracks, short voting periods, stake that can be bought and bonded just before the vote closes, or unreviewed payloads let attackers pass it.',
     rules: [{ id: 'cosmos-config-gov-params', target: 'config', confirm: 'governance params: quorum, voting period, expedited proposals, deposit size; proposals able to MsgMigrateContract / MsgUpdateAdmin on core contracts; no simulation of proposal payloads in CI/monitoring.' }],
     fix: ['Simulate every proposal and alert on admin/migrate/treasury messages', 'Raise deposits and quorum; use expedited proposals sparingly', 'Timelock contract upgrades behind a guardian'],
-    seenIn: ['Astroport (Neutron) 2026 ($4.9M)', 'Drop (Neutron) 2026 ($4.4M)'],
+    seenIn: ['Neutron 2026 ($9.3M, Astroport + Drop): an expedited "AI Agent Takeover" proposal passed on a low-participation chain; the deciding voter bought and staked NTRN minutes before the vote closed'],
   },
   'bridge-validator-keys': {
     name: 'Bridge validator / multisig compromise',
@@ -362,7 +378,21 @@ x/erc20 conversions re-read balances after every precompile call` },
     summary: 'Peg-zone bridges secured by a validator multisig or orchestrator keys are drained when enough keys are compromised or signing logic is abused.',
     rules: [{ id: 'cosmos-config-bridge-threshold', target: 'config', confirm: 'signer threshold vs number of independent operators; orchestrator keys on shared infrastructure; rate limits on outflows.' }],
     fix: ['Raise thresholds, diversify operators, rate-limit outflows'],
-    seenIn: ['Gravity Bridge 2026 ($5.4M)', 'Sentinel 2021 ($40M, key compromise)'],
+    seenIn: ['Sentinel 2021 ($40M, key compromise)', 'TAC 2026-05 (TON-side sequencer accepted counterfeit jetton deposits)', 'THORChain (Cosmos SDK fork) TSS / observer incidents'],
+  },
+  'unpatched-dependency': {
+    name: 'Unpatched or regressed stack dependency',
+    area: 'governance',
+    summary: 'The chain runs a version (or a private fork) of cosmos-sdk, ibc-go, cosmos/evm, wasmvm or CometBFT inside an advisory\'s affected range, or an upgrade pulls an old fork back in and silently reverts a security fix. Public patches become exploit guides for every chain that has not upgraded.',
+    vulnerable: { lang: 'text', code: `// go.mod
+require github.com/cosmos/evm v0.6.0
+replace github.com/cosmos/ibc-go/v8 => github.com/acme/ibc-go/v8 v8.0.0-acme.1  // fork, months behind upstream` },
+    fixed: { lang: 'text', code: `require github.com/cosmos/evm v0.6.2          // contains GHSA-7g4w-cg88-2cq2 fix
+replace github.com/cosmos/ibc-go/v8 => github.com/acme/ibc-go/v8 v8.5.2-acme.1   // rebased on upstream security release
+// CI: govulncheck + OSV scan of the resolved module graph on every PR and nightly` },
+    rules: [{ id: 'cosmos-gomod-affected-version', target: 'config', regex: '^\\s*(github\\.com/(cosmos/(cosmos-sdk|ibc-go|evm|iavl|ics23)|cometbft/cometbft|CosmWasm/wasmvm|CosmWasm/wasmd|evmos/evmos))\\S*\\s+v', confirm: 'resolve the module graph (including replace directives to forks) and check every Cosmos-stack module against OSV / GHSA / ASA affected ranges; for forks, verify the upstream security commits are present.' }],
+    fix: ['Subscribe to Cosmos ASA/ISA, GHSA and CosmWasm CWA notices; patch within hours of a release', 'Run govulncheck / OSV scanning in CI on the resolved module graph', 'Rebase forks on every upstream security release; diff security commits during upgrades'],
+    seenIn: ['Terra 2024 ($6.4M): June upgrade pulled in an outdated ibc-go fork and undid the ASA-2024-007 patch', 'Aug 2026 Cosmos EVM cluster: fixed on main 15 May, releases 19 Aug, public exploit path 20 Aug, exploits on unpatched chains 20–25 Aug'],
   },
   'oracle-staleness': {
     name: 'Stale or manipulable oracle',
@@ -370,7 +400,7 @@ x/erc20 conversions re-read balances after every precompile call` },
     summary: 'Chain-native oracles (x/oracle, price feeders) or contract oracles return stale prices after halts, upgrades or feeder outages; protocols keep trading or lending on them.',
     rules: [{ id: 'cosmos-oracle-staleness', target: 'go', regex: 'GetPrice|GetExchangeRate|QueryPrice', confirm: 'consumer checks the price timestamp / block height against a max age and halts markets on staleness.' }],
     fix: ['Max-age checks and circuit breakers', 'Pause markets after chain upgrades until feeds resume'],
-    seenIn: ['Anchor 2022 (stale price)', 'Levana Perps 2023 ($1.1M)', 'Harbor Protocol 2023'],
+    seenIn: ['Anchor 2022 (stale price after the Terra 2.0 fork, $800K)', 'Levana Perps 2023 ($1.1M)', 'Harbor Protocol 2023 (Comdex)', 'Tectonic on Cronos 2024/2026', 'Filament on Sei 2025'],
   },
 } as const satisfies Record<string, CosmosClass>;
 

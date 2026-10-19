@@ -246,6 +246,8 @@ const cosmosIncidentSchema = z.object({
   patchedIn: z.union([z.string(), z.array(z.string())]).nullish(),
   sources: z.array(z.string()).default([]),
   confidence: z.string().nullish(),
+  incidentType: z.string().nullish(),
+  notes: z.string().nullish(),
 });
 const cosmosAdvisorySchema = z.object({
   id: z.string(),

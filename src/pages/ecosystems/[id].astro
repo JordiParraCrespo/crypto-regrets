@@ -52,9 +52,20 @@ const maxComp = comps[0]?.[1] ?? 1;
 const critByYear = advYears.map((y) => ({ y, total: cosmosAdvisories.filter((a) => a.published?.startsWith(y)).length, crit: cosmosAdvisories.filter((a) => a.published?.startsWith(y) && (a.severity ?? '').toUpperCase() === 'CRITICAL').length }));
 const lastYear = critByYear[critByYear.length - 1];
 const recentCritical = cosmosAdvisories.filter((a) => (a.severity ?? '').toUpperCase() === 'CRITICAL').slice(0, 8);
+const cosmosExploits = cosmosIncidents.filter((i) => i.incidentType !== 'advisory' && i.incidentType !== 'disclosure');
+const cosmosDisclosures = cosmosIncidents.filter((i) => i.incidentType === 'advisory' || i.incidentType === 'disclosure');
+const resYears = [...new Set(cosmosExploits.map((i) => Number(i.date.slice(0, 4))))].sort();
+const resYearSeries = (metric: 'usd' | 'count') =>
+  resYears.length
+    ? Array.from({ length: resYears[resYears.length - 1] - resYears[0] + 1 }, (_, k) => resYears[0] + k).map((y) => {
+        const ys = cosmosExploits.filter((i) => i.date.startsWith(String(y)));
+        return { year: y, value: metric === 'usd' ? ys.reduce((a, i) => a + (i.lossUsd ?? 0), 0) : ys.length };
+      })
+    : [];
+const shortComp = (c: string | null | undefined) => (c ?? 'unknown').replace(/\s*\(.*\)$/, '');
 const resCompCount = new Map<string, { n: number; usd: number }>();
-for (const i of cosmosIncidents) {
-  const k = i.component ?? 'unknown';
+for (const i of cosmosExploits) {
+  const k = shortComp(i.component);
   const v = resCompCount.get(k) ?? { n: 0, usd: 0 };
   v.n++;
   v.usd += i.lossUsd ?? 0;
@@ -200,26 +211,56 @@ const getClass = (c: (typeof COSMOS_CLASS_IDS)[number]): CosmosClass => COSMOS_C
 
       {cosmosIncidents.length > 0 && (
         <section class="wrap section">
-          <div class="section-head"><div><p class="eyebrow">Incident research</p><h2 class="h-md" style="margin-top:8px">Which component failed</h2><p class="lede">{cosmosIncidents.length} Cosmos incidents researched from post-mortems and advisories, tagged with the component that failed.</p></div></div>
-          <ol class="ranked">
-            {resComps.map(([c, v]) => <li><span class="row"><span class="body-sm medium mono">{c}</span><span class="mono caption fog">{v.n} incidents · {fmtUsd(v.usd)}</span></span><span class="meter"><span style={`width:${(v.n / maxResComp) * 100}%`}></span></span></li>)}
-          </ol>
-          <div class="table-wrap" style="margin-top:32px">
+          <div class="section-head"><div><p class="eyebrow">Incident research</p><h2 class="h-md" style="margin-top:8px">Which component failed</h2><p class="lede">{cosmosExploits.length} real-world Cosmos exploits and operational incidents researched from post-mortems and advisories, plus {cosmosDisclosures.length} critical disclosures that were patched before any loss.</p></div></div>
+          <div class="grid cols-2 split">
+            <div class="card">
+              <p class="body-sm medium" style="margin:0">Losses per year</p>
+              <p class="caption fog" style="margin:0 0 20px">researched Cosmos exploits</p>
+              <Bars data={resYearSeries('usd')} format="usd" height={180} label="Cosmos exploit losses per year" />
+            </div>
+            <div>
+              <h3 class="h-xs">By failing component</h3>
+              <ol class="ranked" style="margin-top:16px">
+                {resComps.map(([c, v]) => <li><span class="row"><span class="body-sm medium mono">{c}</span><span class="mono caption fog">{v.n} · {fmtUsd(v.usd)}</span></span><span class="meter"><span style={`width:${(v.n / maxResComp) * 100}%`}></span></span></li>)}
+              </ol>
+            </div>
+          </div>
+
+          <div class="card wash case">
+            <p class="eyebrow" style="margin:0">Case study · August 2026</p>
+            <h3 class="h-sm" style="margin:8px 0 12px">One patched bug, four chains drained</h3>
+            <p class="body-sm steel" style="margin:0 0 20px;max-width:72ch">In Cosmos EVM, the StateDB tracked only spendable balance while the staking precompile let a vesting account delegate locked coins. Delegating more than the spendable balance made <code>StateDB.SubBalance</code> underflow to ~2²⁵⁶ (GHSA-7g4w-cg88-2cq2). The fix existed for three months; exploitation began within a day of the public release.</p>
+            <ol class="timeline">
+              <li><span class="mono caption">25 Apr</span><span class="body-sm">Reported privately; initially judged not fund-threatening on 18-decimal chains</span></li>
+              <li><span class="mono caption">15 May</span><span class="body-sm">Fixed on main (PRs #1176, #1187), no advisory</span></li>
+              <li><span class="mono caption">19 Aug</span><span class="body-sm">Patched releases v0.6.2 / v0.7.2 published</span></li>
+              <li><span class="mono caption">20 Aug</span><span class="body-sm">A public fork PR describes the exploit path; MANTRA exploited the same evening</span></li>
+              <li><span class="mono caption">20–25 Aug</span><span class="body-sm">TAC, KiiChain and (likely) Nesa exploited, all on unpatched versions</span></li>
+            </ol>
+            <p class="caption steel" style="margin:20px 0 0">Lesson for scanners: the cheapest high-value check is <a class="link" href="#unpatched-dependency">dependency versions against advisories</a>. Sources: <a class="link" href="https://github.com/cosmos/security/blob/main/communications/cosmos_evm_GHSA-7g4w-cg88-2cq2_post_mortem.md">Cosmos Labs post-mortem</a>, <a class="link" href="https://github.com/cosmos/evm/security/advisories/GHSA-7g4w-cg88-2cq2">GHSA-7g4w-cg88-2cq2</a>.</p>
+          </div>
+
+          <div class="table-wrap" style="margin-top:40px">
             <table>
               <thead><tr><th>Date</th><th>Incident</th><th class="hide-sm">Component</th><th class="hide-sm">Root cause</th><th class="num">Lost</th></tr></thead>
               <tbody>
                 {cosmosIncidents.map((i) => (
                   <tr>
                     <td class="mono caption fog" style="white-space:nowrap">{i.date}</td>
-                    <td><span class="medium">{i.name}</span><div class="caption fog">{i.chain}</div>{i.sources[0] && <a class="caption link" href={i.sources[0]}>source</a>}</td>
-                    <td class="mono caption hide-sm">{i.component}</td>
+                    <td style="min-width:200px">
+                      <span class="medium">{i.name}</span>
+                      <div class="caption fog">{[i.chain, i.incidentType].filter(Boolean).join(' · ')}</div>
+                      {i.sources.slice(0, 2).map((u, k) => <a class="caption link" style="margin-right:8px" href={u}>source {k + 1}</a>)}
+                    </td>
+                    <td class="mono caption hide-sm">{shortComp(i.component)}</td>
                     <td class="caption steel hide-sm" style="max-width:520px">{i.rootCause}</td>
-                    <td class="num">{fmtUsd(i.lossUsd ?? null)}</td>
+                    <td class="num">{i.lossUsd ? fmtUsd(i.lossUsd) : '—'}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
+          <p class="caption fog" style="margin-top:12px">Confidence varies: some 2026 incidents (Namada, Quicksilver, Oraichain, BounceBit) have no primary code-level post-mortem yet; Gravity Bridge's early key-compromise reports conflict with a detailed auditor analysis (denom-registry poisoning), which we follow.</p>
         </section>
       )}
 
@@ -297,4 +338,7 @@ const getClass = (c: (typeof COSMOS_CLASS_IDS)[number]): CosmosClass => COSMOS_C
   @media (max-width: 960px) { .cls { grid-template-columns: minmax(0, 1fr); } }
   .rules { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
   .re { overflow-wrap: anywhere; margin: 2px 0; }
+  .case { margin-top: 48px; }
+  .timeline { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+  .timeline li { display: grid; grid-template-columns: 80px 1fr; gap: 16px; align-items: baseline; }
 </style>
