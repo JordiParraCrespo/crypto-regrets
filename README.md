@@ -22,6 +22,7 @@ jq '.[] | select(.id=="integer-overflow") | .cases[] | select(.poc) | {name, poc
 | Route | What |
 |---|---|
 | `/` | Overview: top vulnerability classes, how failures moved from code to people, latest incidents |
+| `/trends` | Losses and incidents per year, DeFi TVL and loss rate, chain-family and vulnerability heatmaps over time |
 | `/classes`, `/classes/[id]` | Vulnerability classes: vulnerable vs fixed code, detection, fixes, PoCs, incidents |
 | `/hacks`, `/hacks/[id]` | Filterable index (state in URL, e.g. `/hacks?cls=read-only-reentrancy&poc=1`) and one page per incident |
 | `/patterns`, `/history`, `/infrastructure` | Failure patterns, eras, base-layer incidents and advisories |
@@ -47,6 +48,7 @@ data/raw/*            source snapshots (committed so builds are reproducible off
 scripts/fetch-extra.ts  scrapes DeFiHackLabs explorer, BlockSec, SlowMist, RevertIQ → data/raw
 scripts/fetch-more.ts   scrapes Blockchain Graveyard, SEAL 911, Web3 Is Going Great, OSV advisories → data/raw
 src/lib/classes.ts    the 57 vulnerability classes (fix knowledge) + analyst-label → class map
+src/lib/chains.ts     canonical chain names + chain families
 scripts/ingest.ts     parse → match/merge across sources → classify → zod-validate → data/incidents*
 scripts/curated.ts    hand-written landmark + base-layer incidents (post-mortem root causes)
 src/lib/taxonomy.ts   layers, categories, eras ─ the classification is typed (CategoryId is a literal union)

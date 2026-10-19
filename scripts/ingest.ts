@@ -23,6 +23,7 @@ import {
   type SourceId,
 } from '../src/lib/types';
 import { CURATED } from './curated';
+import { canonicalChain } from '../src/lib/chains';
 import { classifyText } from './keywords';
 import { CACHE_FILE, CLASS_CACHE_FILE, TYPESAFE_CLASS_MIN_CONFIDENCE, classStateHash, stateHash, type CachedClass, type CachedClassification } from './classify-spec';
 import { CLASSES, CLASS_IDS, TECHNIQUE_TO_CLASS, type ClassId } from '../src/lib/classes';
@@ -39,6 +40,7 @@ const FETCH: Record<string, string> = {
   'btc.html': 'https://bitcoincore.org/en/security-advisories/',
   'geth.json': 'https://geth.ethereum.org/docs/vulnerabilities/vulnerabilities.json',
   'cosmos.md': 'https://raw.githubusercontent.com/cosmos/security/main/ADVISORIES.md',
+  'llama_tvl.json': 'https://api.llama.fi/v2/historicalChainTvl',
 };
 
 async function fetchAll() {
@@ -622,6 +624,9 @@ function build(): { incidents: Incident[]; stats: Record<string, number> } {
       references: c.references.map((r) => ({ source: 'curated' as const, ...r })),
     });
   }
+
+  // One spelling per chain across sources ("BNB Chain" / "Binance Smart Chain" → "BSC").
+  for (const d of drafts) d.chains = [...new Set(d.chains.map(canonicalChain).filter((c): c is string => c !== null))];
 
   drafts.sort((a, b) => b.date.localeCompare(a.date) || (b.amountUsd ?? 0) - (a.amountUsd ?? 0));
   const ids = new Set<string>();

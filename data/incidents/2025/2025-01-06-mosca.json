@@ -6,7 +6,7 @@
   "amountUsd": 37600,
   "returnedUsd": null,
   "chains": [
-    "Binance"
+    "BSC"
   ],
   "targetType": "DeFi Protocol",
   "category": "accounting-math",
@@ -14,7 +14,7 @@
   "vulnClassBy": "typesafe",
   "aiClass": {
     "id": "balance-accounting-mismatch",
-    "confidence": 0.99
+    "confidence": 1
   },
   "technique": "Incorrect Share Accounting",
   "classificationNote": null,
@@ -22,15 +22,19 @@
   "ai": {
     "model": "jev-1.13.0",
     "category": "accounting-math",
-    "confidence": 0.57,
+    "confidence": 0.54,
     "top": [
       {
         "category": "accounting-math",
-        "p": 0.6
+        "p": 0.57
       },
       {
         "category": "logic-error",
-        "p": 0.4
+        "p": 0.42
+      },
+      {
+        "category": "reentrancy",
+        "p": 0.01
       }
     ],
     "flashLoan": 0.03,

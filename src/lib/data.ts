@@ -178,3 +178,56 @@ export function yearSeries(metric: 'count' | 'usd', filter: (i: Incident) => boo
   });
 }
 
+
+// ------------------------------------------------------------------ trends
+
+import tvlRaw from '../../data/raw/llama_tvl.json';
+import { CHAIN_FAMILIES, chainFamily, type ChainFamilyId } from './chains';
+
+export const familyOf = (i: Incident): ChainFamilyId => chainFamily(i.chains, i.targetType);
+export const FAMILY_IDS = Object.keys(CHAIN_FAMILIES) as ChainFamilyId[];
+
+/** Heatmap columns: early years are sparse, so they share one bucket. */
+export const TREND_COLS = ['≤2015', ...YEARS.filter((y) => y >= 2016).map(String)];
+export const trendCol = (year: number) => (year <= 2015 ? '≤2015' : String(year));
+
+export type Metric = 'usd' | 'count';
+
+/** rows × TREND_COLS matrix of losses or counts. */
+export function matrix<R extends string>(rowOf: (i: Incident) => R | null, metric: Metric, xs: Incident[] = incidents) {
+  const m = new Map<R, Map<string, number>>();
+  for (const i of xs) {
+    const r = rowOf(i);
+    if (r === null) continue;
+    const row = m.get(r) ?? new Map<string, number>();
+    const c = trendCol(i.year);
+    row.set(c, (row.get(c) ?? 0) + (metric === 'usd' ? (i.amountUsd ?? 0) : 1));
+    m.set(r, row);
+  }
+  return m;
+}
+
+/** DefiLlama total DeFi TVL, averaged per calendar year. */
+export const tvlByYear: Map<number, number> = (() => {
+  const acc = new Map<number, { s: number; n: number }>();
+  for (const p of tvlRaw as { date: number; tvl: number }[]) {
+    const y = new Date(p.date * 1000).getUTCFullYear();
+    const a = acc.get(y) ?? { s: 0, n: 0 };
+    a.s += p.tvl;
+    a.n += 1;
+    acc.set(y, a);
+  }
+  return new Map([...acc].map(([y, a]) => [y, a.s / a.n]));
+})();
+
+/**
+ * Losses comparable to DeFi TVL: on smart-contract chains, not exchanges, wallets or chain-level
+ * events. (LuBian's $3.5B Bitcoin mining-pool theft would otherwise read as an 85% "DeFi loss rate".)
+ */
+const NON_DEFI_FAMILIES = new Set<ChainFamilyId>(['bitcoin', 'offchain', 'unknown']);
+const NON_DEFI_TARGETS = new Set(['CEX', 'Wallet', 'Chain', 'Layer 1']);
+export const isDefiLoss = (i: Incident) =>
+  !NON_DEFI_FAMILIES.has(familyOf(i)) &&
+  !NON_DEFI_TARGETS.has(i.targetType ?? '') &&
+  i.category !== 'client-bug' &&
+  i.category !== 'consensus-attack';
