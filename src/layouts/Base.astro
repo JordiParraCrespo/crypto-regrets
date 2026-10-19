@@ -39,7 +39,7 @@ const isActive = (p: string) => path.startsWith(href(p));
     <header class="site-header">
       <div class="wrap bar">
         <a class="brand" href={href('/')} aria-label="Crypto Regrets home">
-          <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><rect width="20" height="20" rx="10" fill="#0a0a0a"></rect><path d="M6.5 6.5l7 7M13.5 6.5l-7 7" stroke="#fff" stroke-width="1.8" stroke-linecap="round"></path></svg>
+          <img src={href('/favicon.svg')} width="24" height="24" alt="" />
           <span>Crypto Regrets</span>
         </a>
         <nav aria-label="Main">
@@ -81,7 +81,7 @@ const isActive = (p: string) => path.startsWith(href(p));
         </div>
         <div>
           <p class="eyebrow">Sources</p>
-          <p class="caption fog" style="margin:0">DefiLlama, DeFiHackLabs (Apache-2.0), REKT, SlowMist, BlockSec, RevertIQ, and Bitcoin Core / Geth / Cosmos advisories. Classification by TypeSafe Jev and analyst labels.</p>
+          <p class="caption fog" style="margin:0">DefiLlama, DeFiHackLabs (Apache-2.0), REKT, SlowMist, BlockSec, RevertIQ and four more, plus Bitcoin Core, Geth, Cosmos and OSV advisories. Classification by analyst labels and TypeSafe Jev. <a class="link" href={href('/sources')}>Method</a></p>
         </div>
       </div>
     </footer>
@@ -161,6 +161,9 @@ const isActive = (p: string) => path.startsWith(href(p));
       overflow-x: auto;
       gap: 20px;
       scrollbar-width: none;
+      /* Fade the right edge so it reads as a scrollable row, not a cut-off one. */
+      mask-image: linear-gradient(to right, #000 calc(100% - 40px), transparent);
+      padding-right: 32px;
     }
     .actions {
       margin-left: auto;
@@ -168,8 +171,11 @@ const isActive = (p: string) => path.startsWith(href(p));
   }
   .site-footer {
     margin-top: 144px;
-    padding-top: 48px;
     padding-bottom: 64px;
+  }
+  /* The rule sits on the grid, not the padded footer, so it lines up with the content edge. */
+  .foot {
+    padding-top: 48px;
     border-top: 1px solid var(--color-dove);
   }
   .foot-links {

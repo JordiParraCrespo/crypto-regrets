@@ -34,7 +34,7 @@ const txUrl = (h: string) => (ethOnly && h.length === 66 ? `https://etherscan.io
       {i.chains.length > 0 && <span class="caption fog">{i.chains.join(' · ')}</span>}
     </div>
     <div class="chips">
-      {cls ? <a class="pill pill-mono" href={href(`/classes/${i.vulnClass}`)}>{cls.name}</a> : <span class="pill pill-outline pill-mono fog">class unspecified</span>}
+      {cls ? <a class="pill" href={href(`/classes/${i.vulnClass}`)}>{cls.name}</a> : <span class="pill pill-outline fog">class unspecified</span>}
       <a class="pill" href={href(`/patterns/${i.category}`)}>{cat.name}</a>
       {i.poc && <a class="pill pill-sand" href={i.poc}>Foundry PoC ↗</a>}
     </div>
@@ -136,7 +136,7 @@ const txUrl = (h: string) => (ethOnly && h.length === 66 ? `https://etherscan.io
   {similar.length > 0 && (
     <section class="wrap section">
       <h2 class="h-sub" style="margin-bottom:24px">{cls ? `Other ${cls.name.toLowerCase()} incidents` : 'Similar incidents'}</h2>
-      <IncidentTable items={similar} />
+      <IncidentTable items={similar} showClass={!cls} />
     </section>
   )}
 </Base>
