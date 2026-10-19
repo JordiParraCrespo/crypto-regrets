@@ -231,3 +231,41 @@ export const isDefiLoss = (i: Incident) =>
   !NON_DEFI_TARGETS.has(i.targetType ?? '') &&
   i.category !== 'client-bug' &&
   i.category !== 'consensus-attack';
+
+// ------------------------------------------------------------------ Cosmos ecosystem research
+
+const cosmosIncidentSchema = z.object({
+  name: z.string(),
+  date: z.string(),
+  chain: z.string().nullish(),
+  lossUsd: z.number().nullish(),
+  component: z.string().nullish(),
+  rootCause: z.string().nullish(),
+  vulnerabilityClass: z.string().nullish(),
+  language: z.string().nullish(),
+  patchedIn: z.union([z.string(), z.array(z.string())]).nullish(),
+  sources: z.array(z.string()).default([]),
+  confidence: z.string().nullish(),
+});
+const cosmosAdvisorySchema = z.object({
+  id: z.string(),
+  aliases: z.array(z.string()).default([]),
+  project: z.string(),
+  title: z.string(),
+  summary: z.string().nullish(),
+  published: z.string().nullish(),
+  severity: z.string().nullish(),
+  component: z.string().nullish(),
+  impact: z.string().nullish(),
+  url: z.string().nullish(),
+});
+export type CosmosIncident = z.infer<typeof cosmosIncidentSchema>;
+export type CosmosAdvisory = z.infer<typeof cosmosAdvisorySchema>;
+
+const cosmosFiles = import.meta.glob<{ default: unknown }>(['../../data/raw/cosmos_incidents_research.json', '../../data/raw/cosmos_advisories.json'], { eager: true });
+const pick = (name: string) => Object.entries(cosmosFiles).find(([k]) => k.endsWith(name))?.[1]?.default ?? [];
+export const cosmosIncidents: CosmosIncident[] = z.array(cosmosIncidentSchema).parse(pick('cosmos_incidents_research.json'))
+  .filter((i) => /^\d{4}-\d{2}/.test(i.date))
+  .sort((a, b) => b.date.localeCompare(a.date));
+export const cosmosAdvisories: CosmosAdvisory[] = z.array(cosmosAdvisorySchema).parse(pick('cosmos_advisories.json'))
+  .sort((a, b) => (b.published ?? '').localeCompare(a.published ?? ''));

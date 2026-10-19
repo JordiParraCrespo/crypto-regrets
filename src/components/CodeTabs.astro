@@ -3,7 +3,7 @@
 import type { Snippet } from '../lib/classes';
 interface Props { id: string; vulnerable: Snippet; fixed?: Snippet }
 const { id, vulnerable, fixed } = Astro.props;
-const ext = (l: Snippet['lang']) => ({ solidity: '.sol', typescript: '.html', yaml: '.yml', json: '.json', text: '' })[l];
+const ext = (l: Snippet['lang']) => ({ solidity: '.sol', typescript: '.html', yaml: '.yml', json: '.json', text: '', go: '.go', rust: '.rs' })[l];
 ---
 <div class="codetabs" data-codetabs>
   <div class="terminal">

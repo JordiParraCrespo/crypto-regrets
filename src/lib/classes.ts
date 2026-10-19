@@ -9,7 +9,7 @@
 import type { CategoryId } from './taxonomy';
 
 export interface Snippet {
-  lang: 'solidity' | 'typescript' | 'yaml' | 'text' | 'json';
+  lang: 'solidity' | 'typescript' | 'yaml' | 'text' | 'json' | 'go' | 'rust';
   code: string;
 }
 
