@@ -176,7 +176,7 @@ function enhance(select: HTMLSelectElement) {
     else if (e.key === 'End' && !search) setActive(vis.length - 1);
     else if (e.key === 'PageDown') setActive(active + 8);
     else if (e.key === 'PageUp') setActive(active - 8);
-    else if (e.key === 'Enter') vis[active] && choose(vis[active].value);
+    else if (e.key === 'Enter' || (e.key === ' ' && !search)) vis[active] && choose(vis[active].value);
     else if (e.key === 'Escape') close();
     else if (e.key === 'Tab') return close(false);
     else return;

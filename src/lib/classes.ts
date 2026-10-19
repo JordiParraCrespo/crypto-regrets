@@ -9,7 +9,7 @@
 import type { CategoryId } from './taxonomy';
 
 export interface Snippet {
-  lang: 'solidity' | 'typescript' | 'yaml' | 'text' | 'json' | 'go' | 'rust';
+  lang: 'solidity' | 'typescript' | 'html' | 'yaml' | 'text' | 'json' | 'go' | 'rust';
   code: string;
 }
 
@@ -27,7 +27,7 @@ export interface VulnClass {
   fix: string[];
 }
 
-export const CLASSES = {
+const CLASS_DEFS = {
   // ------------------------------------------------------------------ access control
   'missing-access-modifier': {
     name: 'Missing access modifier',
@@ -829,8 +829,8 @@ alert on any NS/A/CNAME change` },
     parent: 'frontend-infra',
     summary: 'Malicious JavaScript is served through a compromised CDN, hosting bucket or third-party script, changing what users sign.',
     cwe: ['CWE-494', 'CWE-829'],
-    vulnerable: { lang: 'typescript', code: `<script src="https://cdn.example.com/widget.js"></script>   <!-- no integrity, mutable -->` },
-    fixed: { lang: 'typescript', code: `<script src="https://cdn.example.com/widget@1.4.2.js"
+    vulnerable: { lang: 'html', code: `<script src="https://cdn.example.com/widget.js"></script>   <!-- no integrity, mutable -->` },
+    fixed: { lang: 'html', code: `<script src="https://cdn.example.com/widget@1.4.2.js"
         integrity="sha384-…" crossorigin="anonymous"></script>
 // + Content-Security-Policy: script-src 'self' cdn.example.com` },
     detect: ['third-party scripts without Subresource Integrity', 'writable hosting buckets / CI deploy keys', 'missing Content-Security-Policy'],
@@ -938,7 +938,9 @@ alert on any NS/A/CNAME change` },
   },
 } as const satisfies Record<string, VulnClass>;
 
-export type ClassId = keyof typeof CLASSES;
+export type ClassId = keyof typeof CLASS_DEFS;
+/** Widened to VulnClass so optional fields (vulnerable, cwe, ...) are readable on any class. */
+export const CLASSES: Record<ClassId, VulnClass> = CLASS_DEFS;
 export const CLASS_IDS = Object.keys(CLASSES) as ClassId[];
 
 export function classesOf(category: CategoryId): ClassId[] {

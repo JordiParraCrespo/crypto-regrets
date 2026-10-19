@@ -1,14 +1,13 @@
 ---
 import Base from '../../layouts/Base.astro';
 import Bars from '../../components/Bars.astro';
-import { ecosystem, ECOSYSTEM_IDS, fmtUsd, href, sum, incidents } from '../../lib/data';
+import { ecosystem, ECOSYSTEM_IDS, fmtUsd, href } from '../../lib/data';
 import { CHAIN_FAMILIES } from '../../lib/chains';
 import { CATEGORIES } from '../../lib/taxonomy';
 const ecos = ECOSYSTEM_IDS.map((f) => ecosystem(f)).filter((e) => e.count >= 5).sort((a, b) => b.usd - a.usd);
-const total = sum(incidents);
 ---
 <Base title="Ecosystems" description="Crypto security incidents by blockchain ecosystem: Ethereum, BNB Chain, Solana, Bitcoin, Cosmos and more.">
-  <section class="wrap head">
+  <section class="wrap page-head">
     <p class="eyebrow">Ecosystems</p>
     <h1 class="h-lg">Every chain fails<br />in its own way.</h1>
     <p class="lede">The same index, split by blockchain ecosystem. Each page shows how losses evolved, which failure patterns are typical there compared with everywhere else, and the client and SDK advisories behind the chain.</p>
@@ -34,6 +33,5 @@ const total = sum(incidents);
   </section>
 </Base>
 <style>
-  .head { padding-top: 80px; display: grid; gap: 20px; }
   .eco-head { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
 </style>

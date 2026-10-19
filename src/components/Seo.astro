@@ -1,0 +1,51 @@
+---
+import { href } from '../lib/paths';
+
+export interface Props {
+  title: string;
+  description?: string;
+  /** Root-relative path of a 1200×630 PNG; defaults to the site card. */
+  image?: string;
+  /** Root-relative path (base is added); defaults to the current route. */
+  canonical?: string;
+  noindex?: boolean;
+  type?: 'website' | 'article';
+  /** schema.org nodes, emitted together as one @graph. */
+  jsonLd?: Record<string, unknown>[];
+}
+
+const SITE_NAME = 'Crypto Regrets';
+const DEFAULT_DESCRIPTION = 'A classified index of every crypto hack in history: the vulnerability classes, the root causes, and how to fix them.';
+
+const { title, description = DEFAULT_DESCRIPTION, image = '/og-default.png', canonical, noindex = false, type = 'website', jsonLd = [] } = Astro.props;
+
+/** Search engines cut descriptions around 155 characters; cut at a word boundary instead of mid-word. */
+function clip(s: string, max = 155): string {
+  const t = s.replace(/\s+/g, ' ').trim();
+  if (t.length <= max) return t;
+  const cut = t.slice(0, max - 1);
+  return `${cut.slice(0, cut.lastIndexOf(' ')).replace(/[\s,.;:—-]+$/, '')}…`;
+}
+
+const fullTitle = title === SITE_NAME ? `${SITE_NAME}: every crypto hack, classified` : `${title} · ${SITE_NAME}`;
+const desc = clip(description);
+const canonicalUrl = new URL(canonical ? href(canonical) : Astro.url.pathname, Astro.site);
+const imageUrl = new URL(href(image), Astro.site);
+// Incident names come from third-party feeds: escape '<' so a name can never close the script element.
+const graph = JSON.stringify({ '@context': 'https://schema.org', '@graph': jsonLd }).replace(/</g, '\\u003c');
+---
+<title>{fullTitle}</title>
+<meta name="description" content={desc} />
+<link rel="canonical" href={canonicalUrl} />
+{noindex && <meta name="robots" content="noindex, follow" />}
+<meta property="og:site_name" content={SITE_NAME} />
+<meta property="og:type" content={type} />
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={desc} />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:image" content={imageUrl} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="sitemap" href={href('/sitemap-index.xml')} />
+{jsonLd.length > 0 && <script type="application/ld+json" set:html={graph} />}

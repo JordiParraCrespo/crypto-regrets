@@ -2,8 +2,8 @@
 import Base from '../layouts/Base.astro';
 import Bars from '../components/Bars.astro';
 import CodeTabs from '../components/CodeTabs.astro';
-import { incidents, advisories, sum, fmtUsd, fmtDate, href, YEARS, layerOf, LAYER_ORDER, classStats, classified, yearSeries, CLASSES } from '../lib/data';
-import { LAYERS, CATEGORIES } from '../lib/taxonomy';
+import { incidents, advisories, sum, fmtUsd, fmtDate, href, YEARS, layerOf, LAYER_ORDER, classStats, classified, yearSeries, CLASSES, labelOf } from '../lib/data';
+import { LAYERS } from '../lib/taxonomy';
 
 const total = sum(incidents);
 const withPoc = incidents.filter((i) => i.poc).length;
@@ -30,7 +30,7 @@ const sharedMax = Math.max(...layerSeries.flatMap((s) => s.data.map((d) => d.val
 const featured = CLASSES['integer-overflow'];
 const featuredCode = featured.vulnerable!; // integer-overflow always ships a code example
 ---
-<Base title="Crypto Regrets">
+<Base title="Crypto Regrets" jsonLd={[{ '@type': 'WebSite', name: 'Crypto Regrets', url: new URL(href('/'), Astro.site).toString(), description: 'A classified index of every crypto hack in history: the vulnerability classes, the root causes, and how to fix them.' }]}>
   <section class="wrap hero">
     <h1 class="display">Every crypto hack,<br />classified.</h1>
     <p class="lede">
@@ -113,7 +113,7 @@ const featuredCode = featured.vulnerable!; // integer-overflow always ships a co
         <a href={href(`/hacks/${i.id}`)} class="news-item">
           <p class="meta mono" style="margin:0">{fmtDate(i.date)} · {fmtUsd(i.amountUsd)}</p>
           <p class="medium" style="margin:6px 0 4px">{i.name}</p>
-          <p class="caption fog" style="margin:0">{i.vulnClass ? CLASSES[i.vulnClass].name : CATEGORIES[i.category].name}</p>
+          <p class="caption fog" style="margin:0">{labelOf(i)}</p>
         </a>
       ))}
     </div>
@@ -155,37 +155,9 @@ const featuredCode = featured.vulnerable!; // integer-overflow always ships a co
   .hero h1 {
     margin-top: 8px;
   }
-  .cta {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    margin-top: 8px;
-  }
   .stats {
     width: 100%;
     margin-top: 48px;
-    padding-top: 24px;
-    border-top: 1px solid var(--color-dove);
-  }
-  .ranked {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: grid;
-    gap: 14px;
-  }
-  .ranked a {
-    display: grid;
-    gap: 6px;
-  }
-  .ranked a:hover .medium {
-    text-decoration: underline;
-    text-underline-offset: 3px;
-  }
-  .ranked .row {
-    display: flex;
-    justify-content: space-between;
-    gap: 12px;
   }
   .news {
     row-gap: 32px;

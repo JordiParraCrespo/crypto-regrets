@@ -3,13 +3,15 @@ import Base from '../../layouts/Base.astro';
 import { allCategoryStats, fmtUsd, href, LAYER_ORDER, CLASSES } from '../../lib/data';
 import { CATEGORIES, LAYERS, categoriesInLayer } from '../../lib/taxonomy';
 import { classesOf } from '../../lib/classes';
+import { countWord } from '../../lib/seo';
+const patternCount = Object.keys(CATEGORIES).filter((c) => c !== 'unknown').length;
 const stat = Object.fromEntries(allCategoryStats.map((s) => [s.id, s]));
 ---
-<Base title="Failure patterns" description="17 failure patterns across 6 layers of the stack, each with the vulnerability classes beneath it.">
-  <section class="wrap head">
+<Base title="Failure patterns" description={`${patternCount} failure patterns across ${LAYER_ORDER.length} layers of the stack, each with the vulnerability classes beneath it.`}>
+  <section class="wrap page-head">
     <p class="eyebrow">Failure patterns</p>
     <h1 class="h-lg">Where in the stack<br />it breaks.</h1>
-    <p class="lede">Seventeen patterns grouped by layer. Each incident gets exactly one; the <a class="link" href={href('/classes')}>vulnerability classes</a> beneath them are the level a fix works at.</p>
+    <p class="lede">{countWord(patternCount)} patterns grouped by layer. Each incident gets exactly one; the <a class="link" href={href('/classes')}>vulnerability classes</a> beneath them are the level a fix works at.</p>
   </section>
   {LAYER_ORDER.map((l) => (
     <section class="wrap section">
@@ -28,4 +30,3 @@ const stat = Object.fromEntries(allCategoryStats.map((s) => [s.id, s]));
   ))}
   <p class="wrap caption fog" style="margin-top:48px">{stat.unknown.count} incidents remain <a class="link" href={href('/hacks?cat=unknown')}>unclassified</a> because no public source explains the root cause.</p>
 </Base>
-<style>.head { padding-top: 80px; display: grid; gap: 20px; }</style>

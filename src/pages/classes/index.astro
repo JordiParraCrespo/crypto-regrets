@@ -2,11 +2,11 @@
 import Base from '../../layouts/Base.astro';
 import { classStats, classified, fmtUsd, href, incidents, CLASSES, LAYER_ORDER } from '../../lib/data';
 import { CATEGORIES, LAYERS, categoriesInLayer } from '../../lib/taxonomy';
-import { classesOf } from '../../lib/classes';
+import { classesOf, CLASS_IDS } from '../../lib/classes';
 const stat = Object.fromEntries(classStats.map((s) => [s.id, s]));
 ---
-<Base title="Vulnerability classes" description="56 vulnerability classes behind every crypto hack, each with vulnerable vs fixed code, detection signals and real incidents.">
-  <section class="wrap head">
+<Base title="Vulnerability classes" description={`${CLASS_IDS.length} vulnerability classes behind every crypto hack, each with vulnerable vs fixed code, detection signals and real incidents.`}>
+  <section class="wrap page-head">
     <p class="eyebrow">Vulnerability classes</p>
     <h1 class="h-lg">What keeps going wrong,<br />and how to fix it.</h1>
     <p class="lede">
@@ -47,7 +47,6 @@ const stat = Object.fromEntries(classStats.map((s) => [s.id, s]));
   ))}
 </Base>
 <style>
-  .head { padding-top: 80px; display: grid; gap: 20px; }
   .group + .group { margin-top: 32px; }
   .group .eyebrow { margin: 0 0 8px; }
   .row { display: grid; grid-template-columns: minmax(0, 18rem) minmax(0, 1fr) 9rem; gap: 24px; align-items: baseline; }

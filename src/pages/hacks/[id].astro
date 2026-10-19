@@ -2,15 +2,15 @@
 import Base from '../../layouts/Base.astro';
 import CodeTabs from '../../components/CodeTabs.astro';
 import IncidentTable from '../../components/IncidentTable.astro';
-import { incidents, fmtUsd, fmtDate, href, SOURCE_NAMES, CLASSIFIER_NAMES, CLASS_BY_NAMES, CLASSES } from '../../lib/data';
+import { incidents, fmtUsd, fmtDate, href, SOURCE_NAMES, CLASSIFIER_NAMES, CLASS_BY_NAMES, CLASSES, sharesNameAndDate } from '../../lib/data';
 import { CATEGORIES, LAYERS, ERAS, eraForYear } from '../../lib/taxonomy';
-import type { Incident } from '../../lib/types';
 import type { VulnClass } from '../../lib/classes';
+import { breadcrumb } from '../../lib/seo';
+import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
 
-export function getStaticPaths() {
-  return incidents.map((i) => ({ params: { id: i.id }, props: { i } }));
-}
-const { i } = Astro.props as { i: Incident };
+export const getStaticPaths = (() => incidents.map((i) => ({ params: { id: i.id }, props: { i } }))) satisfies GetStaticPaths;
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+const { i } = Astro.props as Props;
 const cat = CATEGORIES[i.category];
 const cls: VulnClass | null = i.vulnClass ? CLASSES[i.vulnClass] : null;
 const era = ERAS.find((e) => e.id === eraForYear(i.year))!;
@@ -23,9 +23,17 @@ const pct = (p: number) => `${Math.round(p * 100)}%`;
 // Link hashes to Etherscan only when the incident is Ethereum-only (other chains need other explorers).
 const ethOnly = i.chains.length === 0 || (i.chains.length === 1 && i.chains[0] === 'Ethereum');
 const txUrl = (h: string) => (ethOnly && h.length === 66 ? `https://etherscan.io/tx/${h}` : null);
+
+// Sources name some incidents "Unknown" or "unverified"; a title built from them is not unique or useful.
+const unnamed = /^(unknown|unverified)$/i.test(i.name.trim());
+const label = cls?.name ?? cat.name;
+const subject = unnamed ? `Unattributed ${[i.chains[0], label.toLowerCase()].filter(Boolean).join(' ')} exploit` : `${i.name} hack`;
+const seoTitle = `${subject}, ${fmtDate(i.date)}${sharesNameAndDate(i) && i.amountUsd ? ` (${fmtUsd(i.amountUsd)})` : ''}`;
+const seoDescription = `${unnamed ? subject : i.name} ${i.amountUsd ? `lost ${fmtUsd(i.amountUsd)}` : 'was exploited'} on ${fmtDate(i.date)}: ${label}. ${i.rootCause ?? cat.short}`;
+const crumbs = breadcrumb(Astro.site, [['Crypto Regrets', '/'], ['Incident index', '/hacks'], [i.name, `/hacks/${i.id}`]]);
 ---
-<Base title={i.name} description={`${i.name} (${i.date}): ${cls?.name ?? cat.name}. ${i.rootCause ?? cat.short}`}>
-  <section class="wrap head">
+<Base title={seoTitle} description={seoDescription} type="article" jsonLd={[crumbs]}>
+  <section class="wrap page-head">
     <p class="eyebrow"><a href={href('/hacks')}>Incident index</a> / {i.year}</p>
     <h1 class="h-lg">{i.name}</h1>
     <div class="facts">
@@ -141,9 +149,7 @@ const txUrl = (h: string) => (ethOnly && h.length === 66 ? `https://etherscan.io
   )}
 </Base>
 <style>
-  .head { padding-top: 80px; display: grid; gap: 16px; }
   .facts { display: flex; flex-wrap: wrap; gap: 16px; align-items: baseline; }
-  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
   .layout { grid-template-columns: minmax(0, 1fr) 360px; gap: 64px; align-items: start; }
   @media (max-width: 960px) { .layout { grid-template-columns: minmax(0, 1fr); gap: 40px; } }
   .rc { font-size: 18px; line-height: 28px; margin: 12px 0; overflow-wrap: anywhere; max-width: 68ch; }

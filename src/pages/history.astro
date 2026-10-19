@@ -1,9 +1,11 @@
 ---
 import Base from '../layouts/Base.astro';
 import Bars from '../components/Bars.astro';
-import { eraStats, fmtUsd, fmtDate, href, yearSeries, incidents, CLASSES } from '../lib/data';
+import { eraStats, fmtUsd, fmtDate, href, yearSeries, incidents, CLASSES, YEARS, labelOf } from '../lib/data';
 import { CATEGORIES } from '../lib/taxonomy';
 import type { ClassId } from '../lib/classes';
+import { countWord } from '../lib/seo';
+const span = YEARS[YEARS.length - 1] - YEARS[0];
 const eras = eraStats();
 const counts = yearSeries('count');
 const losses = yearSeries('usd');
@@ -14,9 +16,9 @@ const topClasses = (from: number, to: number) => {
 };
 ---
 <Base title="History" description="How crypto security failures evolved from the 2010 Bitcoin overflow to today, era by era.">
-  <section class="wrap head">
+  <section class="wrap page-head">
     <p class="eyebrow">History</p>
-    <h1 class="h-lg">Sixteen years of<br />expensive lessons.</h1>
+    <h1 class="h-lg">{countWord(span)} years of<br />expensive lessons.</h1>
     <p class="lede">Each era had its own way of losing money. Attackers follow the money: from exchange servers to contracts, to economic design, to bridges, and back to people and keys.</p>
   </section>
 
@@ -56,7 +58,7 @@ const topClasses = (from: number, to: number) => {
                 <li class="inc">
                   <a class="medium" href={href(`/hacks/${i.id}`)}>{i.name}</a>
                   <span class="mono caption fog">{fmtDate(i.date)} · {fmtUsd(i.amountUsd)}</span>
-                  <span class="caption steel">{i.vulnClass ? CLASSES[i.vulnClass].name : CATEGORIES[i.category].name}</span>
+                  <span class="caption steel">{labelOf(i)}</span>
                 </li>
               ))}
             </ul>
@@ -67,11 +69,9 @@ const topClasses = (from: number, to: number) => {
   })}
 </Base>
 <style>
-  .head { padding-top: 80px; display: grid; gap: 20px; }
   .era { padding-top: 48px; border-top: 1px solid var(--color-dove); }
   .era-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; align-items: start; }
   @media (max-width: 960px) { .era-grid { grid-template-columns: minmax(0, 1fr); } }
-  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
   .inc { display: grid; gap: 2px; }
   .card .rows > li:last-child { border-bottom: 0; }
 </style>

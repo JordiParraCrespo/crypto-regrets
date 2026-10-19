@@ -1,0 +1,15 @@
+---
+/**
+ * A native <select> that src/scripts/combobox.ts upgrades into a searchable listbox. Importing the
+ * script here (Astro bundles it once per page) means a page can't use the filter without it.
+ */
+export interface Option { value: string | number; label: string; count?: number }
+interface Props { id: string; label: string; options: Option[] }
+const { id, label, options } = Astro.props;
+---
+<select class="select" id={id} aria-label={label}>
+  {options.map((o) => <option value={o.value} data-count={o.count}>{o.label}</option>)}
+</select>
+<script>
+  import '../scripts/combobox';
+</script>

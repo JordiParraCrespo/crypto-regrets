@@ -12,16 +12,8 @@ const { rows, cols, format, caption, showTotal = true } = Astro.props;
 const fmt = (v: number) =>
   format === 'usd' ? fmtUsd(v).replace(/\.0([MBK])$/, '$1') : format === 'pct' ? (v > 0 && v < 0.005 ? '<1%' : `${Math.round(v * 100)}%`) : v.toLocaleString('en');
 const max = Math.max(1e-9, ...rows.flatMap((r) => cols.map((c) => r.values.get(c) ?? 0)));
-// [background, text] per step; light steps take ink text, dark steps take white.
-const RAMP = [
-  ['#eeece8', '#0a0a0a'],
-  ['#dedbd5', '#0a0a0a'],
-  ['#c9c6bf', '#0a0a0a'],
-  ['#aeaba4', '#0a0a0a'],
-  ['#5a5956', '#ffffff'],
-  ['#353533', '#ffffff'],
-  ['#0a0a0a', '#ffffff'],
-] as const;
+// [background, text] per step (tokens in global.css); light steps take ink text, dark steps take paper.
+const RAMP = [1, 2, 3, 4, 5, 6, 7].map((k) => [`var(--ramp-${k})`, k <= 4 ? 'var(--color-jet-ink)' : 'var(--color-paper)'] as const);
 const step = (v: number) => Math.min(RAMP.length - 1, Math.floor(Math.sqrt(v / max) * RAMP.length));
 // Lower bound of each step, for the legend tooltips; the range label uses real data values.
 const stepMin = (k: number) => max * (k / RAMP.length) ** 2;

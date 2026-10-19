@@ -1,0 +1,16 @@
+---
+import Base from '../layouts/Base.astro';
+import { href } from '../lib/paths';
+---
+<Base title="Page not found" description="This page does not exist. Browse the incident index, the vulnerability classes or the datasets instead." noindex>
+  <section class="wrap page-head">
+    <p class="eyebrow">404</p>
+    <h1 class="h-lg">This page is not on the list.</h1>
+    <p class="lede">Incident pages are named after the date and project, so an old link may point to an id that changed when sources were merged. Try one of these:</p>
+    <div class="cta">
+      <a class="btn btn-primary" href={href('/hacks')}>Search the index</a>
+      <a class="btn btn-ghost" href={href('/classes')}>Vulnerability classes →</a>
+      <a class="btn btn-ghost" href={href('/data')}>Datasets →</a>
+    </div>
+  </section>
+</Base>

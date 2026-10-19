@@ -1,0 +1,209 @@
+---
+/**
+ * Cosmos-only research shown on /ecosystems/cosmos: advisory severity and projects over time,
+ * researched exploits by failing component, the August 2026 case study and the scanner classes.
+ */
+import Bars from './Bars.astro';
+import Heatmap from './Heatmap.astro';
+import CodeTabs from './CodeTabs.astro';
+import { fmtUsd, href, cosmosAdvisories, cosmosIncidents } from '../lib/data';
+import { COSMOS_AREAS, COSMOS_CLASSES, COSMOS_CLASS_IDS, type CosmosClass } from '../lib/cosmos';
+
+const advYears = [...new Set(cosmosAdvisories.map((a) => a.published?.slice(0, 4)).filter(Boolean) as string[])].sort();
+const SEVERITIES = ['CRITICAL', 'HIGH', 'MODERATE', 'LOW'] as const;
+const sevRows = SEVERITIES.map((s) => ({
+  id: s,
+  label: s[0] + s.slice(1).toLowerCase(),
+  values: new Map(advYears.map((y) => [y, cosmosAdvisories.filter((a) => a.published?.startsWith(y) && (a.severity ?? '').toUpperCase() === s).length])),
+}));
+const projCount = new Map<string, number>();
+for (const a of cosmosAdvisories) projCount.set(a.project, (projCount.get(a.project) ?? 0) + 1);
+const projRows = [...projCount].sort((a, b) => b[1] - a[1]).slice(0, 12).map(([p]) => ({
+  id: p,
+  label: p,
+  values: new Map(advYears.map((y) => [y, cosmosAdvisories.filter((a) => a.project === p && a.published?.startsWith(y)).length])),
+}));
+const compCount = new Map<string, number>();
+for (const a of cosmosAdvisories.filter((a) => (a.published ?? '') >= '2024')) if (a.component) compCount.set(a.component, (compCount.get(a.component) ?? 0) + 1);
+const comps = [...compCount].sort((a, b) => b[1] - a[1]).slice(0, 10);
+const maxComp = comps[0]?.[1] ?? 1;
+const critByYear = advYears.map((y) => ({ y, total: cosmosAdvisories.filter((a) => a.published?.startsWith(y)).length, crit: cosmosAdvisories.filter((a) => a.published?.startsWith(y) && (a.severity ?? '').toUpperCase() === 'CRITICAL').length }));
+const lastYear = critByYear[critByYear.length - 1];
+const recentCritical = cosmosAdvisories.filter((a) => (a.severity ?? '').toUpperCase() === 'CRITICAL').slice(0, 8);
+const cosmosExploits = cosmosIncidents.filter((i) => i.incidentType !== 'advisory' && i.incidentType !== 'disclosure');
+const cosmosDisclosures = cosmosIncidents.filter((i) => i.incidentType === 'advisory' || i.incidentType === 'disclosure');
+const resYears = [...new Set(cosmosExploits.map((i) => Number(i.date.slice(0, 4))))].sort();
+const resYearSeries = (metric: 'usd' | 'count') =>
+  resYears.length
+    ? Array.from({ length: resYears[resYears.length - 1] - resYears[0] + 1 }, (_, k) => resYears[0] + k).map((y) => {
+        const ys = cosmosExploits.filter((i) => i.date.startsWith(String(y)));
+        return { year: y, value: metric === 'usd' ? ys.reduce((a, i) => a + (i.lossUsd ?? 0), 0) : ys.length };
+      })
+    : [];
+const shortComp = (c: string | null | undefined) => (c ?? 'unknown').replace(/\s*\(.*\)$/, '');
+const resCompCount = new Map<string, { n: number; usd: number }>();
+for (const i of cosmosExploits) {
+  const k = shortComp(i.component);
+  const v = resCompCount.get(k) ?? { n: 0, usd: 0 };
+  v.n++;
+  v.usd += i.lossUsd ?? 0;
+  resCompCount.set(k, v);
+}
+const resComps = [...resCompCount].sort((a, b) => b[1].n - a[1].n);
+const maxResComp = resComps[0]?.[1].n ?? 1;
+const cosmosByArea = Object.keys(COSMOS_AREAS).map((a) => ({ area: a as keyof typeof COSMOS_AREAS, ids: COSMOS_CLASS_IDS.filter((c) => COSMOS_CLASSES[c].area === a) }));
+const getClass = (c: (typeof COSMOS_CLASS_IDS)[number]): CosmosClass => COSMOS_CLASSES[c];
+---
+  <section class="wrap section">
+    <div class="section-head"><div><p class="eyebrow">Security advisories</p><h2 class="h-md" style="margin-top:8px">The 2026 spike is in severity</h2>
+      <p class="lede">{cosmosAdvisories.length} advisories across the Cosmos stack (SDK, CometBFT, IBC-Go, Cosmos EVM / Evmos, CosmWasm, Osmosis…). {lastYear && `${lastYear.crit} of ${lastYear.total} advisories in ${lastYear.y} so far are critical,`} concentrated in the Cosmos EVM (precompiles, StateDB) and the CosmWasm VM.</p></div></div>
+    <div class="grid cols-2">
+      <div class="card">
+        <p class="body-sm medium" style="margin:0">Advisories per year</p>
+        <p class="caption fog" style="margin:0 0 20px">all severities</p>
+        <Bars data={critByYear.map((x) => ({ year: Number(x.y), value: x.total }))} height={160} label="Cosmos advisories per year" />
+      </div>
+      <div class="card">
+        <p class="body-sm medium" style="margin:0">Critical advisories per year</p>
+        <p class="caption fog" style="margin:0 0 20px">fund loss, chain halt or VM escape</p>
+        <Bars data={critByYear.map((x) => ({ year: Number(x.y), value: x.crit }))} height={160} label="Critical Cosmos advisories per year" />
+      </div>
+    </div>
+    <h3 class="h-sub" style="margin:48px 0 16px">Severity by year</h3>
+    <Heatmap rows={sevRows} cols={advYears} format="count" caption="Advisories by severity and publication year (GitHub Security Advisories, OSV, Cosmos ASA list, CosmWasm CWA)." />
+    <h3 class="h-sub" style="margin:48px 0 16px">Which project</h3>
+    <Heatmap rows={projRows} cols={advYears} format="count" caption="Advisories by project and year." />
+    <div class="grid cols-2 split" style="margin-top:48px">
+      <div>
+        <h3 class="h-xs">Most affected components since 2024</h3>
+        <ol class="ranked" style="margin-top:16px">
+          {comps.map(([c, n]) => <li><span class="row"><span class="body-sm medium mono">{c}</span><span class="mono caption fog">{n}</span></span><span class="meter"><span style={`width:${(n / maxComp) * 100}%`}></span></span></li>)}
+        </ol>
+      </div>
+      <div>
+        <h3 class="h-xs">Latest critical advisories</h3>
+        <ul class="rows" style="margin-top:16px">
+          {recentCritical.map((a) => (
+            <li><a class="medium body-sm" href={a.url ?? '#'}>{a.title}</a><div class="mono caption fog">{a.published} · {a.project} · {a.id}</div></li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  {cosmosIncidents.length > 0 && (
+    <section class="wrap section">
+      <div class="section-head"><div><p class="eyebrow">Incident research</p><h2 class="h-md" style="margin-top:8px">Which component failed</h2><p class="lede">{cosmosExploits.length} real-world Cosmos exploits and operational incidents researched from post-mortems and advisories, plus {cosmosDisclosures.length} critical disclosures that were patched before any loss.</p></div></div>
+      <div class="grid cols-2 split">
+        <div class="card">
+          <p class="body-sm medium" style="margin:0">Losses per year</p>
+          <p class="caption fog" style="margin:0 0 20px">researched Cosmos exploits</p>
+          <Bars data={resYearSeries('usd')} format="usd" height={180} label="Cosmos exploit losses per year" />
+        </div>
+        <div>
+          <h3 class="h-xs">By failing component</h3>
+          <ol class="ranked" style="margin-top:16px">
+            {resComps.map(([c, v]) => <li><span class="row"><span class="body-sm medium mono">{c}</span><span class="mono caption fog">{v.n} · {fmtUsd(v.usd)}</span></span><span class="meter"><span style={`width:${(v.n / maxResComp) * 100}%`}></span></span></li>)}
+          </ol>
+        </div>
+      </div>
+
+      <div class="card wash case">
+        <p class="eyebrow" style="margin:0">Case study · August 2026</p>
+        <h3 class="h-sm" style="margin:8px 0 12px">One patched bug, four chains drained</h3>
+        <p class="body-sm steel" style="margin:0 0 20px;max-width:72ch">In Cosmos EVM, the StateDB tracked only spendable balance while the staking precompile let a vesting account delegate locked coins. Delegating more than the spendable balance made <code>StateDB.SubBalance</code> underflow to ~2²⁵⁶ (GHSA-7g4w-cg88-2cq2). The fix existed for three months; exploitation began within a day of the public release.</p>
+        <ol class="timeline">
+          <li><span class="mono caption">25 Apr</span><span class="body-sm">Reported privately; initially judged not fund-threatening on 18-decimal chains</span></li>
+          <li><span class="mono caption">15 May</span><span class="body-sm">Fixed on main (PRs #1176, #1187), no advisory</span></li>
+          <li><span class="mono caption">19 Aug</span><span class="body-sm">Patched releases v0.6.2 / v0.7.2 published</span></li>
+          <li><span class="mono caption">20 Aug</span><span class="body-sm">A public fork PR describes the exploit path; MANTRA exploited the same evening</span></li>
+          <li><span class="mono caption">20–25 Aug</span><span class="body-sm">TAC, KiiChain and (likely) Nesa exploited, all on unpatched versions</span></li>
+        </ol>
+        <p class="caption steel" style="margin:20px 0 0">Lesson for scanners: the cheapest high-value check is <a class="link" href="#unpatched-dependency">dependency versions against advisories</a>. Sources: <a class="link" href="https://github.com/cosmos/security/blob/main/communications/cosmos_evm_GHSA-7g4w-cg88-2cq2_post_mortem.md">Cosmos Labs post-mortem</a>, <a class="link" href="https://github.com/cosmos/evm/security/advisories/GHSA-7g4w-cg88-2cq2">GHSA-7g4w-cg88-2cq2</a>.</p>
+      </div>
+
+      <div class="table-wrap" style="margin-top:40px">
+        <table>
+          <thead><tr><th>Date</th><th>Incident</th><th class="hide-sm">Component</th><th class="hide-sm">Root cause</th><th class="num">Lost</th></tr></thead>
+          <tbody>
+            {cosmosIncidents.map((i) => (
+              <tr>
+                <td class="mono caption fog" style="white-space:nowrap">{i.date}</td>
+                <td style="min-width:200px">
+                  <span class="medium">{i.name}</span>
+                  <div class="caption fog">{[i.chain, i.incidentType].filter(Boolean).join(' · ')}</div>
+                  {i.sources.slice(0, 2).map((u, k) => <a class="caption link" style="margin-right:8px" href={u}>source {k + 1}</a>)}
+                </td>
+                <td class="mono caption hide-sm">{shortComp(i.component)}</td>
+                <td class="caption steel hide-sm" style="max-width:520px"><p class="clamp">{i.rootCause}</p><button type="button" class="clamp-toggle" hidden aria-expanded="false">Read more</button></td>
+                <td class="num">{i.lossUsd ? fmtUsd(i.lossUsd) : '—'}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="caption fog" style="margin-top:12px">Confidence varies: some 2026 incidents (Namada, Quicksilver, Oraichain, BounceBit) have no primary code-level post-mortem yet; Gravity Bridge's early key-compromise reports conflict with a detailed auditor analysis (denom-registry poisoning), which we follow.</p>
+    </section>
+  )}
+
+  <section class="wrap section">
+    <div class="section-head"><div><p class="eyebrow">For scanners</p><h2 class="h-md" style="margin-top:8px">Cosmos vulnerability classes</h2><p class="lede">{COSMOS_CLASS_IDS.length} classes specific to Cosmos SDK modules, IBC, CosmWasm and the Cosmos EVM. Each rule has a regex prefilter (finds candidates) and the condition an AST/taint check must confirm. Export: <a class="link" href={href('/api/cosmos-scanner-rules.json')}>cosmos-scanner-rules.json</a>.</p></div></div>
+    {cosmosByArea.map(({ area, ids }) => (
+      <div class="area">
+        <h3 class="h-sub">{COSMOS_AREAS[area].name}</h3>
+        <p class="body-sm fog" style="margin:4px 0 24px;max-width:70ch">{COSMOS_AREAS[area].blurb}</p>
+        {ids.map((cid) => {
+          const k = getClass(cid);
+          return (
+            <article class="cls" id={cid}>
+              <div class="cls-text">
+                <h4 class="h-xs">{k.name}</h4>
+                <p class="body-sm steel" style="margin:6px 0 16px">{k.summary}</p>
+                <p class="eyebrow" style="margin:0 0 6px">Scanner rules</p>
+                <ul class="rules">
+                  {k.rules.map((r) => (
+                    <li>
+                      <span class="mono caption medium">{r.id}</span> <span class="pill pill-mono" style="padding:0 8px">{r.target}</span>
+                      {r.regex && <div class="mono caption fog re">{r.regex}</div>}
+                      <div class="caption steel">{r.confirm}</div>
+                    </li>
+                  ))}
+                </ul>
+                <p class="eyebrow" style="margin:16px 0 6px">Fix</p>
+                <ul class="check">{k.fix.map((f) => <li>{f}</li>)}</ul>
+                {k.seenIn.length > 0 && <p class="caption fog" style="margin:12px 0 0">Seen in: {k.seenIn.join(' · ')}</p>}
+              </div>
+              <div>{k.vulnerable && <CodeTabs id={`cosmos-${cid}`} vulnerable={k.vulnerable} fixed={k.fixed} />}</div>
+            </article>
+          );
+        })}
+      </div>
+    ))}
+  </section>
+<script>
+  // Long root causes are clamped to four lines; only cells that actually overflow get a toggle.
+  for (const p of document.querySelectorAll<HTMLElement>('.clamp')) {
+    const btn = p.nextElementSibling as HTMLButtonElement;
+    if (p.scrollHeight <= p.clientHeight + 1) continue;
+    btn.hidden = false;
+    btn.addEventListener('click', () => {
+      const open = p.classList.toggle('open');
+      btn.setAttribute('aria-expanded', String(open));
+      btn.textContent = open ? 'Show less' : 'Read more';
+    });
+  }
+</script>
+<style>
+  .clamp { margin: 0; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
+  .clamp.open { display: block; }
+  .clamp-toggle { font: 500 12px/20px var(--font-sans); color: var(--color-jet-ink); background: none; border: 0; padding: 4px 0 0; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+  .clamp-toggle:focus-visible { outline: 2px solid var(--color-jet-ink); outline-offset: 2px; border-radius: 2px; }
+  .area { margin-top: 56px; }
+  .cls { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 40px; padding: 32px 0; border-top: 1px solid var(--color-dove); }
+  @media (max-width: 960px) { .cls { grid-template-columns: minmax(0, 1fr); } }
+  .rules { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+  .re { overflow-wrap: anywhere; margin: 2px 0; }
+  .case { margin-top: 48px; }
+  .timeline { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+  .timeline li { display: grid; grid-template-columns: 80px 1fr; gap: 16px; align-items: baseline; }
+</style>
