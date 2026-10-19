@@ -35,7 +35,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Access Control. Lost: 48.3K USD",
+  "rootCause": "The attacker exploited an unverified token (a TransparentUpgradeableProxy token) paired with a privileged callable function on a helper contract (selector 0x5ff02eae) inside a PancakeSwap V3 flash-loan sandwich. After taking a flash loan of the proxy token from the V3 pool, the attacker swapped it into the project Token, then called the privileged 0x5ff02eae function on the addr contract which manipulated balances/supply (e.g. an unprotected mint or rebase favoring the holder), and swapped the inflated Token holdings back into the proxy token at a profit before repaying the flash loan. The lack of access control on that privileged function let an arbitrary caller mint/inflate value and skim it through the V3 pool, netting ~$48.3K. Vulnerable code snippet: Attack Tx: https://bscscan.com/tx/0x9191153c8523d97f3441a08fef1da5e4169d9c2983db9398364071daa33f59d1 Analysis: TenArmorAlert",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

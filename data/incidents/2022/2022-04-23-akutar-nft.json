@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Denial of Service. Lost: 34M USD",
+  "rootCause": "Incorrect validation and External calls can fail deliberately. Vulnerable code snippet: (1)DOS https://etherscan.io/address/0xf42c318dbfbaab0eee040279c6a2588fa01a961d#code#L585 Bidder can be a malicious contract to cause DOS. How to fix, follow favor pull over push for external calls. https://consensysdiligence.github.io/smart-contract-best-practices/development-recommendations/general/external-calls/#favor-pull-over-push-for-external-calls (2)Fund lock https://etherscan.io/address/0xf42c318dbfbaab0eee040279c6a2588fa01a961d#code#L618 It should compare with _bidIndex instead of totalBids. Due to this issue, the requirement will never be satisfied, and the Ether in the contract can be locked for ever",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

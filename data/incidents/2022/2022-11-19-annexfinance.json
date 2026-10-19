@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Verify flashLoan Callback. Lost: $3k",
+  "rootCause": "Missing validation on target token for the liquidator Vulnerable code snippet: Attack tx: https://bscscan.com/tx/0x3757d177482171dcfad7066c5e88d6f0f0fe74b28f32e41dd77137cad859c777 Analysis: 1. The attacker prepares a new token and creates pool(add liquidity) for the new token 2. Invoke the swap function with new pair and trigger the liquidating process 3. Since there is no limitation on the liquidate target, the attacker put the attack contract address for three times for the liquidate information: 1. Since the repayAToken is the attacker's address, it will not use the allowance in the liquidateBorrow 2. The attacker utilizes the allowance to remove funds from the liquidator https://twitter.com/AnciliaInc/status/1593690338526273536",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

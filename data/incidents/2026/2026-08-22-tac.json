@@ -9,42 +9,46 @@
     "TAC"
   ],
   "targetType": "Chain",
-  "category": "logic-error",
-  "vulnClass": null,
-  "vulnClassBy": null,
+  "category": "accounting-math",
+  "vulnClass": "integer-overflow",
+  "vulnClassBy": "curated",
   "aiClass": {
-    "id": "state-update-flaw",
-    "confidence": 0.35
+    "id": "integer-overflow",
+    "confidence": 0.96
   },
-  "technique": "Withdrawal Logic Flaw",
-  "classificationNote": null,
-  "classifiedBy": "defillama",
+  "technique": "Cosmos EVM StateDB balance underflow (GHSA-7g4w-cg88-2cq2)",
+  "classificationNote": "Curated: reclassified from \"logic-error\" based on the published post-mortem.",
+  "classifiedBy": "curated",
   "ai": {
     "model": "jev-1.13.0",
-    "category": "logic-error",
-    "confidence": 0.93,
+    "category": "accounting-math",
+    "confidence": 0.98,
     "top": [
       {
-        "category": "logic-error",
-        "p": 0.93
+        "category": "accounting-math",
+        "p": 0.98
       },
       {
-        "category": "access-control",
-        "p": 0.04
+        "category": "logic-error",
+        "p": 0.01
       },
       {
         "category": "client-bug",
-        "p": 0.02
+        "p": 0.01
       }
     ],
     "flashLoan": 0.03,
     "stateActor": 0.02,
-    "hasRootCause": 0.95
+    "hasRootCause": 0.98
   },
   "bridge": false,
   "language": "Go",
-  "rootCause": "An attacker drained 2.985B TAC (~$7.5M) from its bonded-token pool via the Cosmos EVM underflow bug that hit MANTRA. TAC halted four hours too late, funds already bridged out. Cosmos Labs had the bug since April but apparently misjudged its severity.",
+  "rootCause": "Cosmos EVM's StateDB tracked only an account's spendable balance, while x/staking and the staking precompile let a vesting account delegate locked coins. Delegating more than the spendable balance made the write-back in StateDB.SubBalance underflow (unchecked uint256) to ~2^256. The fix had been on main since May but shipped in v0.6.2 / v0.7.2 only on 19 Aug; the chain was still on an unpatched version. On TAC, 2,985,651,403 TAC was pulled from bonded_tokens_pool in one transaction, bridged to BNB Chain via LayerZero OFT and ~1.21B sold for ~$950K USDT.",
   "descriptions": [
+    {
+      "source": "Curated post-mortem",
+      "text": "Cosmos EVM's StateDB tracked only an account's spendable balance, while x/staking and the staking precompile let a vesting account delegate locked coins. Delegating more than the spendable balance made the write-back in StateDB.SubBalance underflow (unchecked uint256) to ~2^256. The fix had been on main since May but shipped in v0.6.2 / v0.7.2 only on 19 Aug; the chain was still on an unpatched version. On TAC, 2,985,651,403 TAC was pulled from bonded_tokens_pool in one transaction, bridged to BNB Chain via LayerZero OFT and ~1.21B sold for ~$950K USDT."
+    },
     {
       "source": "REKT",
       "text": "An attacker drained 2.985B TAC (~$7.5M) from its bonded-token pool via the Cosmos EVM underflow bug that hit MANTRA. TAC halted four hours too late, funds already bridged out. Cosmos Labs had the bug since April but apparently misjudged its severity."
@@ -67,7 +71,8 @@
     "defillama",
     "rekt",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "curated"
   ],
   "references": [
     {
@@ -99,6 +104,16 @@
       "source": "revertiq",
       "label": "blockport.io",
       "url": "https://blockport.io/latest-news/tac-chain-frozen-10-days-after-2-985b-tac-exploit/"
+    },
+    {
+      "source": "curated",
+      "label": "Cosmos Labs post-mortem",
+      "url": "https://github.com/cosmos/security/blob/main/communications/cosmos_evm_GHSA-7g4w-cg88-2cq2_post_mortem.md"
+    },
+    {
+      "source": "curated",
+      "label": "GHSA-7g4w-cg88-2cq2",
+      "url": "https://github.com/cosmos/evm/security/advisories/GHSA-7g4w-cg88-2cq2"
     }
   ]
 }

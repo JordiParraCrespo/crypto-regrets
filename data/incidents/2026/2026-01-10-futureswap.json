@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Unit Mismatch. Lost: 433K USD",
+  "rootCause": "FutureSwap's position contract computes a trading fee in token units (abs(delta) * feeRateWad / 1e18) and forwards that token-denominated value into FeeManager.addFee(...), where the receiving system instead interprets the argument as a fee weight / basis-points / share value. Because of this unit mismatch, an attacker opening positions with carefully chosen deltaAsset/deltaStable could inject absurdly large \"bps\"/weight values into the fee accounting. The attacker (using an Aave flashloan of ~500k USDC.e) seeded several positions through helper contracts, then called changePosition() with a large negative stable delta (changePosition(0, -894_992.852305 USDC, 0)) to redeem an inflated balance, draining ~394.7k USDC.e and ~67.5 WETH from the victim's inventory. Root cause: the value passed between the position logic and the FeeManager carried inconsistent units and lacked range validation. Vulnerable code snippet: Attack Tx: https://skylens.certik.com/tx/arb/0xe1e6aa5332deaf0fa0a3584113c17bedc906148730cbbc73efae16306121687b Analysis: https://x.com/nn0b0dyyy/status/2009922304927731717",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

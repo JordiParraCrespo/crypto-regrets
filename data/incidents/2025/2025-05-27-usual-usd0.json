@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Arbitrage. Lost: 43k USD",
+  "rootCause": "This was a pricing/arbitrage exploit against Usual Money's USD0++ (USD0Plus) VaultRouter deposit flow combined with the USD0/USD0++ Curve pool. The attacker took a Morpho Blue flash loan of ~1.9M USD0++, deposited it through the VaultRouter's deposit() which performs a swap via ParaSwap/Augustus at a stale or mispriced sync-vault rate, then arbitraged the resulting tokens back and forth through the USD0/USD0++ Curve pool (exchange index 0 1) where the redemption/exchange rate was favorable relative to the deposit price. The mispricing between the vault's internal valuation and the Curve pool's market price let the attacker repay the flash loan and walk away with the spread, finally routing USD0 -> USDC -> WETH on Uniswap V3 for ~$43K profit. Vulnerable code snippet: Attack Tx: https://etherscan.io/tx/0x585d8be6a0b07ca2f94cfa1d7542f1a62b0d3af5fab7823cbcf69fb243f271f8 Analysis: BlockSec / QuadrigaInitiative post-mortem",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

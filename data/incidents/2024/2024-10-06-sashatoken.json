@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Price Manipulation",
+  "rootCause": "The SASHA token contract and its associated Uniswap V2 and V3 pools were vulnerable to price manipulation due to insufficient liquidity and lack of slippage protection. The attacker used a small initial deposit (0.07 ETH) to swap for SASHA tokens via Uniswap V2, then transferred 1,000,000,000,000,000,000 SASHA tokens to the Uniswap V2 pool (UniswapV2_SASHA21), artificially inflating the pool's SASHA balance. This manipulation enabled a subsequent swap of 99,000,000,000,000,000,000,000 SASHA tokens for 249.276 ETH via Uniswap V3, exploiting the skewed price caused by the pool imbalance. The contract's lack of anti-manipulation mechanisms or transfer restrictions allowed the attacker to drain significant ETH from the pool, resulting in a profit of ~249 ETH. Vulnerable code snippet: https://etherscan.io/address/0xd1456d1b9ceb59abd4423a49d40942a9485ceef6 Attack tx: https://app.blocksec.com/explorer/tx/eth/0xd9fdc7d03eec28fc2453c5fa68eff82d4c297f436a6a5470c54ca3aecd2db17e Analysis:",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

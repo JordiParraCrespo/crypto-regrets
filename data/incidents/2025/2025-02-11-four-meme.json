@@ -39,7 +39,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Logic Flaw. Lost: ~186k",
+  "rootCause": "Four.MeMe, a BSC-based meme coin launchpad, was exploited for approximately $183,000 through a business logic flaw in its token launch and liquidity migration mechanism. The protocol's internal transfer restrictions on pre-launch tokens could be bypassed using specific contract functions (e.g., buyTokenAMAP), allowing tokens to be transferred to a PancakeSwap pair address that did not yet exist. The attacker pre-seeded liquidity into the predicted pair address before the official launch migration occurred. When the bonding curve reached 100% and Four.MeMe triggered migration to PancakeSwap, the protocol failed to account for the possibility of pre-existing liquidity in the pair. The attacker then sandwiched the migration transaction using MEV: they surrounded it with their own transactions to drain the pool — first withdrawing pre-added liquidity and then swapping held meme tokens to exhaust the WBNB in the pool — before repaying a flash loan and keeping the profit. Attack Tx: 0x2f77c6d50074b5b89aec04cf066419f7e2acc4bfed6edfc3238d012130303d62 Analysis: BSC-Based Meme Coin LaunchPad Four.Meme Suffers $183K Exploit",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

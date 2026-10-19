@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": null,
-  "rootCause": "Business Logic Flaw. Lost: ~$1.4M",
+  "rootCause": "Ekubo's flash-accounting lock/forward/pay/withdraw flow let the attacker settle a victim's funds against the protocol's own balance accounting instead of their own. Inside the locked callback the attacker called CORE.forward(WBTC) and CORE.withdraw(WBTC, attacker, 20_000_000) to pull WBTC out, then satisfied the resulting debt via pay, whose payCallback transferred the owed WBTC from the victim (who had approved Ekubo Core) rather than from the attacker. Because the core trusted the router's accounting and the pay was sourced from the victim's standing approval, each lock iteration netted 0.2 WBTC of the victim's funds to the attacker for free. Repeating the lock 85 times drained 1,700,000 (17 WBTC, ~$1.4M) entirely from the victim's approved balance. Vulnerable code snippet: Attack Tx: https://etherscan.io/tx/0x770bc9a1f7c32cb63a5002b9ceb5c7994cd3af0fc6b2309cb32d3c46f629daa0 Analysis: https://x.com/EkuboProtocol/status/2051754481465856038",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

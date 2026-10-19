@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "reentrancy. Lost: ~2 ETH",
+  "rootCause": "The EGGX reward/claim contract (0xFb35DE57B117FA770761C1A344784075745F84F9) exposes a check(uint256[]) function that mints/credits EGGX tokens for a list of NFT ids without properly tracking or invalidating already-claimed ids within the same transaction. The attacker took a Uniswap V3 flash loan of the pool's entire EGGX balance and, inside the uniswapV3FlashCallback, invoked check() repeatedly across many batches of NFT ids to farm a large amount of EGGX in a single transaction. The newly accumulated EGGX was then dumped against the EGGX/WETH V3 pool via pool.swap, realizing the profit in WETH before repaying the flash loan. The core flaw is missing validation of claim eligibility/state in the reward distributor, enabling reentrant/repeated minting. Analysis: https://x.com/PeiQi_0/status/1759826303044497726",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

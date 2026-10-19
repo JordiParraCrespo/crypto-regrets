@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Incorrect input validation. Lost: ~18k USD",
+  "rootCause": "vulnerability in a MEV bot contract , specifically in the uniswapV3SwapCallback function, which lacked proper access control, allowing unauthorized token transfers. The MEV bot contract lacks proper access control in itsuniswapV3SwapCallback function. This function is intended to be called by Uniswap V3 after a swap operation, but it was not restricted to only being callable by Uniswap. As a result, an attacker was able to call this function directly and manipulate the MEV bot's logic, leading to a loss of funds. Vulnerable code snippet: The contract is not verified on Etherscan. Attack tx: https://app.blocksec.com/explorer/tx/eth/0x53334c36502bd022bd332f2aa493862fd8f722138d1989132a46efddcc6b04d4 Analysis: https://x.com/SlowMist_Team/status/1815656653100077532",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

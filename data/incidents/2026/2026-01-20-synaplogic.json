@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Business Logic Flaw. Lost: 27.6 ETH & 3450 USDC",
+  "rootCause": "SynapLogic's token-sale proxy exposes a buy(recipients, rates, refundFlags) (selector 0x670a3267) and a swap(amount, recipients, rates, refundFlags) (selector 0x7f7f92f5) that loop over caller-supplied arrays and issue refunds at a caller-controlled rate per iteration with no authorization or sanity checks. By supplying many array entries all pointing at the attacker with refundFlag = true and rate = 10 (10%), the attacker forces the contract to pay out a refund of (rate * iters)% of the deposited value, i.e. an arbitrary multiple of what was sent. With enough iterations the cumulative refund vastly exceeds the deposit, draining the sale contract's ETH (BNB-side) and its USDC balance. NOTE: the repo flags this contract as effectively a cheat/backdoor/rug-style contract; the logic lets any caller mint themselves unbounded refunds. Vulnerable code snippet: Attack Tx: https://skylens.certik.com/tx/base/0xc54c00046364b6e889db18c73beee9b81df6b5ca822b6d262b3d30cdf376c4b1 Analysis: https://github.com/anon-cBE4/anon-cBE4/blob/main/writeups/SynapLogic_attack_analyze.md",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

@@ -39,7 +39,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "loss of precision. Lost: ~200K USD",
+  "rootCause": "The vulnerability lies in the removeLiquidity function of the DefiPlaza contract. Specifically, it involved a rounding error when inputting a LPamount that exceeded 15/16ths of the total LP amount. For sufficiently large input fractions, F_ it will be rounded down to zero at line 322. The result of this rounding error is that all liquidity for this token was removed Vulnerable code snippet: Attack tx: https://app.blocksec.com/explorer/tx/eth/0xa245deda8553c6e4c575baff9b50ef35abf4c8f990f8f36897696f896f240e3a Analysis: https://defiplaza.net/blog/post-mortem-of-defiplaza-ethereum-exploit/",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

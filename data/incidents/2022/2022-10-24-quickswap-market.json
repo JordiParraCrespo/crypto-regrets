@@ -22,24 +22,24 @@
   "ai": {
     "model": "jev-1.13.0",
     "category": "reentrancy",
-    "confidence": 0.82,
+    "confidence": 0.93,
     "top": [
       {
         "category": "reentrancy",
-        "p": 0.83
+        "p": 0.93
       },
       {
         "category": "oracle-manipulation",
-        "p": 0.17
+        "p": 0.07
       }
     ],
     "flashLoan": 0.97,
-    "stateActor": 0.02,
+    "stateActor": 0.01,
     "hasRootCause": 0.97
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "QuickSwap's Market.xyz lending pool on Polygon was exploited on 24 October 2022 via a flash loan and Curve LP oracle manipulation. The attacker distorted collateral prices to borrow more funds, resulting in losses around $220,000. The incident led QuickSwap to close its lending service. The Curve LP oracle used by Market.xyz was vulnerable to read-only reentrancy in the get_virtual_price() function. Removing liquidity triggered contract fallback logic before pool balances updated, allowing the attacker to inflate the reported LP price and borrow undercollateralized funds.",
+  "rootCause": "Market.xyz had been utilizing the Curve LP Oracle for their lending and borrowing markets. However, a price manipulation vulnerability arose because of the presence of Read-Only Reentrancy in the Curve LP Oracle. Vulnerable code snippet: Attack tx: https://polygonscan.com/tx/0xb8efe839da0c89daa763f39f30577dc21937ae351c6f99336a0017e63d387558 https://polygonscan.com/tx/0x303c770b81d8866693aa341774eaa2cd5dc3a5f1d2ad855b9d6f0c10b5c36d5d Analysis: The attack flow as follow: 1. Execute a flashloan of WMATIC and stMATIC tokens. 2. Provide liquidity to the WMATIC/stMATIC Curve pool and receive Curve LP tokens. 3. Utilize a portion of the Curve LP tokens as collateral on http://market.xyz. 4. Increase the collateral's value by removing liquidity from the Curve pool. 1. when removing the liquidity, D value remain unchanged but total supply already updated. 2. more: https://chainsecurity.com/curve-lp-oracle-manipulation-post-mortem/ 5. Use the expensive collateral to borrow MAI using a fallback function. 6. Initiate self-liquidation to acquire the collateral at a discounted price. 7. Repay the flashloan. https://quillaudits.medium.com/decoding-220k-read-only-reentrancy-exploit-quillaudits-30871d728ad5",
   "descriptions": [
     {
       "source": "RevertIQ",
@@ -48,6 +48,14 @@
     {
       "source": "Web3 Is Going Great",
       "text": "Adding to the recent string of oracle manipulation attacks is an attack on the miMATIC ($MAI) market on the QuickSwap decentralized exchange. An exploiter was able to manipulate the spot price of assets to borrow funds, ultimately making off with 138 ETH ($188,000) that they mixed through Tornado Cash. The vulnerability was due to the use of a Curve LP oracle, which contains a vulnerability that was disclosed by a security firm earlier that month. Security firm PeckShield initially suggested the issue might have been with QiDAO, which creates the $MAI stablecoin . The vulnerability is not with their project, although it's possible that the theft will i…"
+    },
+    {
+      "source": "DeFiHackLabs",
+      "text": "Read-only Reentrancy. Lost: $220k"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Market.xyz had been utilizing the Curve LP Oracle for their lending and borrowing markets. However, a price manipulation vulnerability arose because of the presence of Read-Only Reentrancy in the Curve LP Oracle. Vulnerable code snippet: Attack tx: https://polygonscan.com/tx/0xb8efe839da0c89daa763f39f30577dc21937ae351c6f99336a0017e63d387558 https://polygonscan.com/tx/0x303c770b81d8866693aa341774eaa2cd5dc3a5f1d2ad855b9d6f0c10b5c36d5d Analysis: The attack flow as follow: 1. Execute a flashloan of WMATIC and stMATIC tokens. 2. Provide liquidity to the WMATIC/stMATIC Curve pool and receive Curve LP tokens. 3. Utilize a portion of the Curve LP tokens as collateral on http://market.xyz. 4. Increase the collateral's value by removing liquidity from the Curve pool. 1. when removing the liquidity, D value remain unchanged but total supply already updated. 2. more: https://chainsecurity.com/curve-lp-oracle-manipulation-post-mortem/ 5. Use the expensive collateral to borrow MAI using a fallback function. 6. Initiate self-liquidation to acquire the collateral at a discounted price. 7. Repay the flashloan. https://quillaudits.medium.com/decoding-220k-read-only-reentrancy-exploit-quillaudits-30871d728ad5"
     }
   ],
   "audit": null,
@@ -55,11 +63,12 @@
     "0xb8efe839da0c89daa763f39f30577dc21937ae351c6f99336a0017e63d387558",
     "0x303c770b81d8866693aa341774eaa2cd5dc3a5f1d2ad855b9d6f0c10b5c36d5d"
   ],
-  "poc": null,
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-10/Market_exp.sol",
   "sources": [
     "defillama",
     "revertiq",
-    "w3igg"
+    "w3igg",
+    "defihacklabs"
   ],
   "references": [
     {
@@ -96,6 +105,51 @@
       "source": "w3igg",
       "label": "chainsecurity.com",
       "url": "https://chainsecurity.com/curve-lp-oracle-manipulation-post-mortem/"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-10/Market_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "polygonscan.com",
+      "url": "https://polygonscan.com/tx/0xb8efe839da0c89daa763f39f30577dc21937ae351c6f99336a0017e63d387558"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "polygonscan.com",
+      "url": "https://polygonscan.com/tx/0x303c770b81d8866693aa341774eaa2cd5dc3a5f1d2ad855b9d6f0c10b5c36d5d"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "market.xyz**",
+      "url": "http://market.xyz**"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/moola-market-2022-10-19"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsec.io",
+      "url": "https://chainsec.io/defi-hacks/"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/mango-markets-2022-10-11"
+    },
+    {
+      "source": "revertiq",
+      "label": "raw.githubusercontent.com",
+      "url": "https://raw.githubusercontent.com/SunWeb3Sec/DeFiHackLabs/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/src/test/2022-10/Market_exp.sol"
+    },
+    {
+      "source": "revertiq",
+      "label": "chainsecurity.com",
+      "url": "https://www.chainsecurity.com/blog/curve-lp-oracle-manipulation-post-mortem"
     }
   ]
 }

@@ -35,7 +35,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Price Oracle Manipulation. Lost: 5k USD",
+  "rootCause": "The Gradient Market Maker Pool prices the GRAY token and computes LP shares using the spot price of a Uniswap V2 GRAY/WETH pool, with no TWAP or manipulation resistance. The attacker took a 3 WETH Morpho flash loan, swapped WETH for a large amount of GRAY on Uniswap (skewing the spot reserves), and then called provideLiquidity() with ETH and the cheaply-acquired GRAY. Because the pool valued the deposited GRAY using the just-manipulated spot price, the attacker was minted far more LP shares than the true value of their deposit; withdrawLiquidity() then returned more ETH/value than was put in. The funds were used to repay the flash loan with a profit. Root cause: liquidity valuation depends on a manipulable in-block AMM spot price. Attack Tx: https://etherscan.io/tx/0xb5cfa3f86ce9506e2364475dc43c44de444b079d4752edbffcdad7d1654b1f67 Analysis: DeFiMon alert",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

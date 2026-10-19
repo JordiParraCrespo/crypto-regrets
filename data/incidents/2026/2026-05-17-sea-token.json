@@ -39,7 +39,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Business Logic Flaw. Lost: ~$110K",
+  "rootCause": "The MetaSea \"Round\" position contract let users open a position with USDC and then redeemPosition() to receive SEA rewards funded by a separate SEA distributor. The redemption accounting was flawed: opening a position and immediately redeeming paid out more SEA from the distributor than the economics justified, letting the attacker repeatedly mint a profit each loop. Backed by an Aave V3 USDT flash loan, the attacker buys a little SEA on the SEA/USDT pool, opens a 3,000 USDC position, redeems it for distributor SEA, and dumps the SEA back to USDT, looping 12 times to drain ~245K SEA from the distributor and net ~$13.9K USDT after repaying the flash loan. The root cause is a business-logic/accounting flaw in the open-then-redeem flow that over-credits SEA rewards relative to the deposited value. Vulnerable code snippet: Attack Tx: https://arbiscan.io/tx/0x001cb16e17c4c5a5c4d02423c9e9b2f2b11ab6b2a1baf2ba53b8fcaf06167716 Analysis: https://anomly.rs/metasea-redeemposition-distributor-drain-arb-2026-05-17",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

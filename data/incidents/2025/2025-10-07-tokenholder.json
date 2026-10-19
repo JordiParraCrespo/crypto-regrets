@@ -39,7 +39,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Access Control. Lost: 20 WBNB",
+  "rootCause": "The BorrowerOperationsV6 contract's sell() function accepts caller-supplied parameters including sellingCode (arbitrary calldata), tokenHolder, inchRouter, integratorFeeAddress, and whitelistedDex and then performs an external call using that calldata without validating the target/selector or enforcing access control. The attacker pointed whitelistedDex (and tokenHolder/integrator) at their own contract and crafted sellingCode as privilegedLoan(WBNB, 20 ether), causing the privileged contract to execute the attacker-controlled call path and release 20 WBNB. Because sell() does not restrict who can call it or constrain the encoded action, it became an arbitrary-call primitive operating with the protocol's privileges. Vulnerable code snippet: Attack Tx: https://bscscan.com/tx/0xc291d70f281dbb6976820fbc4dbb3cfcf56be7bf360f2e823f339af4161f64c6 Analysis: https://bscscan.com/address/0x8c7f34436C0037742AeCf047e06fD4B27Ad01117#code",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

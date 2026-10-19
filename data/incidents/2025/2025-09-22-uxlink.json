@@ -44,7 +44,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "An admin coup on UXLink, followed by cross-chain laundering and billions of UXLINK minted led to an estimated $41 million exploit. Leading to a new contract with a 1 to 1 swap, hacker funds frozen, shaky compensation plans, leaving chaos, and unanswered questions.",
+  "rootCause": "The UXLINK multisig admin wallet was compromised via a delegateCall vulnerability embedded in the multisig contract's implementation logic. The attacker executed a delegateCall that ran arbitrary code within the multisig's storage context, invoking addOwnerWithThreshold to replace the legitimate signers with an attacker-controlled address and grant themselves full administrative privileges. With that control, the attacker seized approximately 490 million existing UXLINK tokens from the treasury and minted up to 10 trillion additional UXLINK tokens — made possible by the absence of a hardcoded supply cap and lax minting access controls. The attacker also drained ~$4M USDT, $500K USDC, 3.7 WBTC, and 25 ETH; stablecoins were converted to DAI and ETH, and approximately $8.1M in ETH was subsequently deposited into Tornado Cash across 46 separate 100-ETH transactions. UXLINK responded by migrating to a new audited contract that permanently removed the mint-burn function and executed a 1:1 token swap to exclude the fraudulently minted supply. Attack Tx: 0x9f4d507cb7d8279fd110ef13e59dbfd74a0cebaf456de909826a5761e32574e6 Analysis: CoinTelegraph — UXLink hack shows risks of centralized control in DeFi projects",
   "descriptions": [
     {
       "source": "REKT",

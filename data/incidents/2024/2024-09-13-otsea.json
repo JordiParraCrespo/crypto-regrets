@@ -35,7 +35,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Logic Flaw. Lost: 26k",
+  "rootCause": "The OTSeaStaking contract allowed repeated claiming and withdrawal of rewards for the same staking indexes without proper validation or restrictions. The attacker exploited this by calling the claim and withdraw functions multiple times for overlapping and specific indexes, accumulating an excessive amount of OTSea tokens. The contract lacked checks to prevent duplicate claims or withdrawals and failed to update staking states, enabling the attacker to drain rewards and swap them for ETH via Uniswap, profiting from the flawed logic. Vulnerable code snippet: Attack tx: https://etherscan.io/tx/0x90b4fcf583444d44efb8625e6f253cfcb786d2f4eda7198bdab67a54108cd5f4 Analysis:",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

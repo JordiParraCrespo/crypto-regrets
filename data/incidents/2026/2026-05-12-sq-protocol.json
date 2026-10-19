@@ -35,7 +35,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Access Control. Lost: ~$346.1K",
+  "rootCause": "The SQTokenStaking contract exposed privileged owner-only functions without proper access control protection. The attacker (using an EIP-7702 delegated EOA) simply called transferOwnership to seize ownership of the staking contract, then abused owner-gated functions: bind, setUintArray (to set stake lockup days to 0), stakeOwner (to credit themselves arbitrary stakes for free), unstake (to claim those stakes), and finally withdrawalTokens to sweep the entire SQi balance out of the contract. The looted SQi was then dumped into the PancakeSwap SQi/USDT pool for ~$346K of USDT. The root cause is a complete absence of (or trivially bypassable) ownership/authorization checks: transferOwnership was callable by anyone, handing full administrative control to the attacker. Vulnerable code snippet: Attack Tx: https://bscscan.com/tx/0x1bae633eda9b3d98999ea116bc403712eaa07093ec32bd6d559085cc4607f5b8 Analysis: https://x.com/Defi_Nerd_sec/status/2054425936746148148",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

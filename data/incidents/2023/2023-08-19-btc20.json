@@ -35,7 +35,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Price Manipulation. Lost: ~$18ETH",
+  "rootCause": "The vulnerable fetchPrice function calls getAmountsIn on the Uniswap router using the WETH-BTC20 pair, which relies on the pair's reserves. The attacker bought a large amount of BTC20 in the WETH-BTC20 pair to manipulate the price Vulnerable Code Snippet: Attack Transaction: https://etherscan.io/tx/0xcdd93e37ba2991ce02d8ca07bf6563bf5cd5ae801cbbce3dd0babb22e30b2dbe Analysis: https://twitter.com/DecurityHQ/status/1692924369662513472",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": null,
-  "rootCause": "Logic Flaw. Lost: 19K",
+  "rootCause": "The hack was due to an inconsistency in how user balances were updated during the exit process. When a user called exitProgram(), their user.balance was correctly set to zero. However, the associated user.balanceUSDT and user.balanceUSDC fields were not reset. The withdrawAll() function, which transfers rewards to the user upon exiting, calculated the total reward as the sum of user.balance, user.balanceUSDT, and user.balanceUSDC. The attacker exploited this by joining the protocol, triggering reward accrual, and then repeatedly calling join() and exitProgram(). Each time they exited, they could withdraw the accumulated USDC rewards because user.balanceUSDC retained its value, while a new entry upon rejoining would allow for further reward accumulation. The failure to reset all relevant balance fields (user.balanceUSDT and user.balanceUSDC) in the exitProgram() function, violating the Checks-Effects-Interactions pattern, was the fundamental cause of the vulnerability. Vulnerable code snippet: Attack tx: https://bscscan.com/tx/0x4e5bb7e3f552f5ee6ee97db9a9fcf07287aae9a1974e24999690855741121aff Analysis: https://blog.verichains.io/p/mosca-hack-analysis",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

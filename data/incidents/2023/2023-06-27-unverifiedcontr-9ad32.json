@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Business Logic Flaw. Lost: ~5955 USD",
+  "rootCause": "The vulnerable contract (0xAC899Ef6...) exposed deposit (selector 0xe2bbb158) and withdraw (selector 0xc3490263) functions guarding BUSD with no proper access control or accounting validation, and it left an attacker-usable ERC20 allowance over its own BUSD balance. The attacker took a DODO DPP flashloan of BUSD, approved the vulnerable contract, called deposit then withdraw to satisfy the contract's bookkeeping, and then simply ran BUSD.transferFrom(Vulncontract, attacker, amount) to pull the contract's BUSD straight out. The flashloaned principal was repaid in the same callback. The root cause is a business-logic / permission flaw: the contract's fund-movement path could be driven by an arbitrary caller to extract assets it did not own. Vulnerable code snippet: Attack Tx: https://app.blocksec.com/explorer/tx/bsc/0xe1bf84b7a57498c0573361b20b16077cc933e4c47aa0821bcea5b158a60ef505 Analysis: DecurityHQ on X",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

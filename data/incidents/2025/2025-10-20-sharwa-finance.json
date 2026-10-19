@@ -39,7 +39,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Post Insolvency Check. Lost: 146,000 USD",
+  "rootCause": "Sharwa Finance's margin trading system contains a logic flaw: LP pool shares deposited as collateral could be immediately withdrawn by the same depositor within the same transaction, with no accounting check that an open leveraged position was still relying on those funds. In the first attack transaction, the attacker flashloaned 40M USDC from Morpho, deposited it into the SF-LP-USDC supply pool to receive LP shares, provided 2.2M USDC as margin collateral to open a long WBTC position, and then immediately called pool.withdraw to reclaim all LP shares — effectively opening a leveraged position with zero net capital locked. In the second transaction, the attacker flashloaned WBTC, sold it on Uniswap V3 to suppress the WBTC/USDC price, called decreaseLongPosition to close at the depressed price (which, due to the accounting mismatch between the opening and closing valuations, released excess USDC), swapped the USDC back to WBTC, and repaid the flash loan, netting approximately $146K. Vulnerable code snippet: Attack Tx: 0xd64729c528e6689cb18b0c90345ab0c9ed18fea44247c89af2f1374643fc89c2 Analysis: Phalcon Alert",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

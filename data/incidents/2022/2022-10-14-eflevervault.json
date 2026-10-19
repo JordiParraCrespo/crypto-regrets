@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Verify flashLoan Callback. Lost: 750 ETH",
+  "rootCause": "insufficient validation. Vulnerable code snippet: https://etherscan.io/address/0xe39fd820B58f83205Db1D9225f28105971c3D309#code#L310 https://etherscan.io/address/0xe39fd820B58f83205Db1D9225f28105971c3D309#code#L429 Attacker can directly call Flashloan with userData “0x307832” which is bytes “0x2” from balancer and set EFLeverVault as recipient to trigger _withdraw(loan_amount, fee_amount); to make vault retain enough ETH. Then attacker can call withdraw to drain out the ETH in L429.",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

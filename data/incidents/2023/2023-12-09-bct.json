@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Price Manipulation. Lost: ~10.2BNB",
+  "rootCause": "BCT is a fee/reward token whose buy and transfer logic mints inflated BCT rewards to a chain of registered \"inviters\" (referrers) based on the live PancakeSwap reserves. The attacker first ran a preparation transaction that created several self-controlled Tool contracts and registered them as each other's inviters so that the attacker controlled an entire referral chain. In the attack transaction, the attacker took a flash-swap of WBNB and, inside pancakeCall, repeatedly pumped WBNB into the BCT/WBNB pool and called buy(...) on each inviter. Because the reward calculation reads the manipulated pool reserves (getReserves) to size the BCT distributed to inviters, each loop iteration paid out far more BCT than was justified; the attacker then skimmed the LP and converted the accumulated BCT/BUSD back to WBNB. The root cause is that referral reward amounts were derived from instantaneous, attacker-manipulable AMM reserves while the referral chain was permissionlessly self-registrable. Vulnerable code snippet: Attack Tx: https://bscscan.com/tx/0xdae0b85e01670e6b6b317657a72fb560fc388664cf8bfdd9e1b0ae88e0679103",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

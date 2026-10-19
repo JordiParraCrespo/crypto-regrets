@@ -35,7 +35,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Price Manipulation. Lost: 19.3M",
+  "rootCause": "UwU Lend's price oracle for sUSDE derived spot prices from Curve pool reserve balances, making it trivially manipulable within a single transaction using large flash loans. The attacker assembled layered flash loans totalling hundreds of millions of dollars across Aave, Spark, Morpho Blue, a Uniswap V3 pair, Balancer, and MakerDAO. They first sold enormous volumes of USDE into five Curve pools to crash the sUSDE oracle price by a measurable ratio. At the artificially depressed sUSDE price, a helper contract deposited WETH collateral and borrowed sUSDE to the maximum LTV, then withdrew just enough WETH to push the position to the liquidation threshold. The attacker then reversed all five Curve swaps to restore the sUSDE price to normal. Now the helper's sUSDE debt was revalued at the original price while its WETH collateral was insufficient — creating a self-manufactured bad-debt position. The attacker liquidated this position, receiving WETH at the liquidation bonus discount. The attacker then used the stolen sUSDE as fresh collateral in a BorrowHelper contract to drain every remaining DAI, USDT, WETH, and WBTC from the UwU Lend protocol reserves, netting approximately $19.3M. Vulnerable code snippet: Attack Tx: 0x242a0fb4fde9de0dc2fd42e8db743cbc197ffa2bf6a036ba0bba303df296408b Analysis: Phalcon_xyz thread",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

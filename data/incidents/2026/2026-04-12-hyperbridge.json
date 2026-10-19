@@ -42,7 +42,7 @@
   },
   "bridge": true,
   "language": "Solidity",
-  "rootCause": "On April 13, 2026, a missing bounds check in Hyperbridge's MMR proof verifier allowed forged proofs to pass. 1 billion DOT minted. Two attacks, combined with opportunistic withdrawals from drained pools, leading to $2.5 million in losses according to Hyperbridge.",
+  "rootCause": "The Hyperbridge cross-chain bridge (Polkadot) was exploited via a forged proof attack on its Ethereum TokenGateway contract. The root cause was a missing bounds check in the VerifyProof() function inside the HandlerV1.handlePostRequests handler — code written over two years before the attack. The attacker constructed a Merkle Mountain Range (MMR) proof that was not cryptographically bound to any specific cross-chain request, enabling it to be replayed against arbitrary targets. A zero-second challenge period provided no time-based defense, allowing the forged proof to execute immediately upon submission. The exploit gave the attacker unauthorized control to mint approximately 1 billion bridged DOT tokens on Ethereum, which were swapped into available DEX liquidity, extracting ~$242K from the TokenGateway in the initial Ethereum-side phase. Hyperbridge later revised its total multi-chain loss estimate upward to approximately $2.5M after accounting for additional impact on Arbitrum, Base, and BNB Chain across its incentive pools. Attack Tx: 0xb93aab835e4002f7d46b63e37a156c78abd1d9256df094d63321deeb514a0634 Analysis: Hyperbridge Responds to $237K Exploit, Pauses Bridge Activity — CryptoTimes Phalcon_xyz on X",
   "descriptions": [
     {
       "source": "REKT",

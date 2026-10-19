@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Incorrect Burn Logic. Lost: 101k USD",
+  "rootCause": "The attacker flash-loaned 1,000,000 BUSD from a PancakeSwap V3 pool and used it to manipulate the BUSD/WETC PancakeSwap V2 pair. The exploit relies on the WETC token's flawed transfer logic combined with the AMM's skim/sync functions: the attacker repeatedly transferred large amounts of WETC directly to the pair contract and then called skim (sending the excess to a chosen address) followed by sync (which updates the pair's internal reserves to match the manipulated balances). This forced the pair's reserves out of sync with real balances and grossly distorted the WETC price. With the price manipulated, the attacker swapped the remaining position for a large amount of BUSD (351,495 BUSD out), repaid the flash loan plus fee, and kept ~$101K profit. The root cause is that the WETC token's fee/transfer behavior, combined with externally callable skim/sync, lets an attacker arbitrarily desynchronize and re-set the pool reserves to manipulate price. Vulnerable code snippet: Attack Tx: https://bscscan.com/tx/0x2b6b411adf6c452825e48b97857375ff82b9487064b2f3d5bc2ca7a5ed08d615 Analysis: evmhacks post-mortem",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

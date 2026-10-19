@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "FlashLoan. Lost: 4.37 ETH (~11527 USD)",
+  "rootCause": "The OMPxContract allowed repeated purchase and buyBack operations within a single transaction, lacking restrictions on rapid token price manipulation. The attacker used a flash loan of 100 ETH to repeatedly call purchase with inflated ETH payments and buyBack at manipulated prices, exploiting the contract's failure to validate price consistency or enforce time delays. This enabled the attacker to drain 4.37 ETH by artificially inflating the token price and selling back at a profit. Vulnerable code snippet: Attack tx: https://app.blocksec.com/explorer/tx/eth/0xd927843e30c6b2bf43103d83bca6abead648eac3cad0d05b1b0eb84cd87de9b6?line=0 Analysis:",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

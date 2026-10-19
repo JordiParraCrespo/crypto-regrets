@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Price Manipulation. Lost: ~$30.5BNB",
+  "rootCause": "the burn function which was left as an external function. here is called repeatedly to burn portions of the HCT tokens held by the contract to reduce the supply , then the sync function is called on the router to inflate the price based tokens available, then sell at that inflated price Vulnerable Code Snippet: Attack Transaction: https://bscscan.com/tx/0x84bd77f25cc0db493c339a187c920f104a69f89053ab2deabb93c35220e6dfc0 Analysis: https://twitter.com/leovctech/status/1699775506785198499",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

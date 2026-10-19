@@ -35,7 +35,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Misconfiguration. Lost: 300k USD",
+  "rootCause": "This was a misconfiguration loss rather than a contract bug. A Coinbase fee-receiver account (0x382f...2bA1) mistakenly granted ERC-20 token approvals to the 0x mainnet Settler contract (0xDf31...fd0f), which by design lets anyone submit and execute arbitrary actions. The attacker called the Settler's execute with a crafted action that wrapped an IERC20.transferFrom(coinbaseFee, attacker, balance) call. Because the Settler held the approval, it pulled the full ANDY (and other) token balances out of the Coinbase fee account to the attacker, draining ~300K USD. The root cause is the dangerous combination of a permissionless arbitrary-call router plus a token approval from a wallet holding real funds. Vulnerable code snippet: Attack Tx: https://etherscan.io/tx/0x33b2cb5bc3c0ccb97f0cc21e231ecb6457df242710dfce8d1b68935f0e05773b Analysis: deeberiroz on X",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

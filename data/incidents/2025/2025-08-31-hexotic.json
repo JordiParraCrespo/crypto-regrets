@@ -35,7 +35,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Incorrect Input Validation. Lost: 500 USD",
+  "rootCause": "The Hexotic contract's take(bytes32 id) function did not properly validate the supplied order/position id, allowing an attacker to call take with crafted ids (0x...43 and 0x...2b) and extract value on terms that should not have been claimable. The attacker bootstrapped the needed HEX liquidity with a flash swap from the Uniswap V3 HEX pool (paying back 0.037 ETH worth of WETH in the swap callback), approved Hexotic to pull HEX, and then invoked take twice with the chosen ids to drain value from the contract (~500 USD). The core flaw is missing/incorrect validation of the take parameter against the actual state it is supposed to reference. Vulnerable code snippet: Attack Tx: https://etherscan.io/tx/0x23b69bef57656f493548a5373300f7557777f352ade8131353ff87a1b27e2bb3 Analysis: https://t.me/defimon_alerts/1757",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

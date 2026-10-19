@@ -35,7 +35,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Reentrancy. Lost: $1.4M",
+  "rootCause": "safeTransferFrom in burn function. project without nonReentrant protection. Vulnerable code snippet: https://etherscan.io/address/0x50c7a557d408a5f5a7fdbe1091831728ae7eba45#code#F7#L280 executeWithdrawERC721 trigger burn function https://etherscan.io/address/0x4e21f48add00e579b774cdad1656c6625c280381#code#F1#L106#116 In burn function trigger safeTransferFrom. As we know this function will call external OnERC721Received. So we can control execution flow to do reentrancy here.",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

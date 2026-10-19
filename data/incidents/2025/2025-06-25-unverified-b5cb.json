@@ -35,7 +35,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Access Control. Lost: 2M USD",
+  "rootCause": "An unverified contract (the \"victim\" at 0xB5CB0555c4A333543DbE0b219923C7B3e9D84a87) exposed a privileged function (selector 0x94655f2b) that lacked any caller authorization check. Anyone could invoke it with attacker-controlled parameters to move/extract the victim's token holdings to an arbitrary recipient. The PoC simply replays seven raw calls with the captured calldata, each draining a different asset held by the contract (WBNB, ETH proxy token, USDT, several upgradeable-proxy tokens) to the attacker address 0xd5c6...122c, for ~2M USD total. The root cause is missing access control on a sensitive function that performs token transfers / swaps on behalf of the contract, allowing an external attacker to drain its balances. Vulnerable code snippet: Attack Tx: https://app.blocksec.com/explorer/tx/bsc/0x8c026c3939f7e2d0376d13e30859fa918a5a567348ca1329836df88bef30c73e Analysis: TenArmorAlert",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

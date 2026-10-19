@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Storage Collision. Lost: ~$5.1M",
+  "rootCause": "Bad contract upgrades cause storage collision Details: The upgrade introduced new storage items, and modifications were made to the existing storage structure. The original storage order of variables was not maintained. The data storage structure of the old version was not taken into account, so when reading the assetDecimal variable in the new implementation contract, the data read is still the proxy contract slot, which is the value of the maxDeposit variable of the old version. Vulnerable code snippet: https://etherscan.io/address/0x80cb73074a6965f60df59bf8fa3ce398ffa2702c#code#F1#L145 Due to the Storage Collision, The value of maxDeposit was set to 5000000000000, which is much higher than the value it is expected to set. This results in the return value of the assetPerShare function being much larger and thus the value of assets becomes larger. Attack txns: Upgrade tx: 0xab86672eb5335264c4c4b75262630ae1fb8dcf2a68aaafe4bb9fc3232b886712 Exploit tx: 0x31565843d565ecab7ab65965d180e45a99d4718fa192c2f2221410f65ea03743 Analysis: https://twitter.com/BeosinAlert/status/1630884733671579653 Recommendation: To prevent similar attacks during contract upgrades, it is crucial to follow best practices and ensure that the original storage order of variables remains unchanged. ---",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Lack of slippage protection. Lost: ~26 ETH",
+  "rootCause": "The protocol lost 26 ETH due to insufficient slippage control. The attacker exploited the _transfer function in the GROK contract to trigger swapTokensForEth when the balance surpassed _taxSwapThreshold, allowing them to harvest and convert extra GROK tokens into ETH. As shown in the Vulnerable Code Snippet section, there is no slippage check in the interaction with the Uniswap V2 router. Vulnerable code snippet: Attack tx: 0x3e9bcee951cdad8480 | Phalcon Explorer Analysis: Root cause: Vulnerable code snippet: Attack tx: Analysis: BlockSec Phalcon on Twitter / X",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

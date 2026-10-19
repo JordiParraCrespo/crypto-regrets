@@ -253,7 +253,7 @@ const getClass = (c: (typeof COSMOS_CLASS_IDS)[number]): CosmosClass => COSMOS_C
                       {i.sources.slice(0, 2).map((u, k) => <a class="caption link" style="margin-right:8px" href={u}>source {k + 1}</a>)}
                     </td>
                     <td class="mono caption hide-sm">{shortComp(i.component)}</td>
-                    <td class="caption steel hide-sm" style="max-width:520px">{i.rootCause}</td>
+                    <td class="caption steel hide-sm" style="max-width:520px"><p class="clamp">{i.rootCause}</p><button type="button" class="clamp-toggle" hidden aria-expanded="false">Read more</button></td>
                     <td class="num">{i.lossUsd ? fmtUsd(i.lossUsd) : '—'}</td>
                   </tr>
                 ))}
@@ -305,7 +305,7 @@ const getClass = (c: (typeof COSMOS_CLASS_IDS)[number]): CosmosClass => COSMOS_C
     <section class="wrap section">
       <div class="section-head"><div><p class="eyebrow">Client & library advisories</p><h2 class="h-md" style="margin-top:8px">Below the applications</h2></div><a class="btn btn-ghost" href={href('/infrastructure')}>All advisories →</a></div>
       <ul class="rows">
-        {e.advisories.slice(0, 10).map((a) => <li><a class="medium body-sm" href={a.url}>{a.title}</a><div class="mono caption fog">{a.date ?? '—'} · {a.project} · {a.cve}{a.severity ? ` · ${a.severity}` : ''}</div></li>)}
+        {e.advisories.slice(0, 10).map((a) => <li><a class="medium body-sm" href={a.url}>{a.title}</a><div class="mono caption fog">{[a.date ?? '—', a.project, a.cve, a.severity].filter(Boolean).join(' · ')}</div></li>)}
       </ul>
     </section>
   )}
@@ -318,8 +318,25 @@ const getClass = (c: (typeof COSMOS_CLASS_IDS)[number]): CosmosClass => COSMOS_C
     <h2 class="h-sub" style="margin-bottom:24px">Latest incidents</h2>
     <IncidentTable items={e.latest} />
   </section>
+  <script>
+    // Long root causes are clamped to four lines; only cells that actually overflow get a toggle.
+    for (const p of document.querySelectorAll<HTMLElement>('.clamp')) {
+      const btn = p.nextElementSibling as HTMLButtonElement;
+      if (p.scrollHeight <= p.clientHeight + 1) continue;
+      btn.hidden = false;
+      btn.addEventListener('click', () => {
+        const open = p.classList.toggle('open');
+        btn.setAttribute('aria-expanded', String(open));
+        btn.textContent = open ? 'Show less' : 'Read more';
+      });
+    }
+  </script>
 </Base>
 <style>
+  .clamp { margin: 0; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
+  .clamp.open { display: block; }
+  .clamp-toggle { font: 500 12px/20px var(--font-sans); color: var(--color-jet-ink); background: none; border: 0; padding: 4px 0 0; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+  .clamp-toggle:focus-visible { outline: 2px solid var(--color-jet-ink); outline-offset: 2px; border-radius: 2px; }
   .head { padding-top: 80px; display: grid; gap: 20px; }
   .chips { display: flex; flex-wrap: wrap; gap: 6px; }
   .stats { margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--color-dove); }

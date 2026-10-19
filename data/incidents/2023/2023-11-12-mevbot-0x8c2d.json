@@ -35,7 +35,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Lack of Access Control. Lost: ~$365K",
+  "rootCause": "The MEV bot contracts contained a publicly callable function (selector 0xf6ebebbb) with no access control that accepted arbitrary caller-supplied token addresses and a Curve pool address, then swapped the bot's entire balance of that token through the specified pool. Any external account could drain the bot's holdings simply by invoking this function with chosen parameters. The PoC (shared across multiple affected bots including 0x05f016 on Ethereum, which lost ~$2M) demonstrates the pattern: flash-loan funds, call the unprotected swap function repeatedly for each token the bot holds, then convert the extracted tokens back, repay the loan and pocket the profit. Vulnerable code snippet: Attack Tx: 0x3dcb26a1f49eb4d02ca29960b4833bfb2e83d7b5d9591aed1204168944c8c9b3 Analysis: Phalcon_xyz on X",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "business logic flaw. Lost: ~0.3 ETH",
+  "rootCause": "The vulnerability lies in the token contract’s _transfer logic, which automatically triggers swapTokensForEth during sell transactions under certain conditions. Because the contract holds a large token balance, this automatic swap can significantly impact market price, enabling arbitrage opportunities for an attacker. Vulnerable code snippet: Attack tx: https://app.blocksec.com/explorer/tx/eth/0x6fb7f8e9eb09d6ae17dbe82b2b42f46f64fb9c3197438b68ecf03e832d5fc791 Analysis: During token transfers, especially sells to the Uniswap pair, if the contract’s token balance exceeds _taxSwapThreshold, the contract will automatically perform a swapTokensForEth. Since the contract holds a significant number of tokens, this swap can cause substantial slippage and temporarily depress the token price. An attacker can exploit this by: 1. Using a flashloan to borrow assets. 2. Selling tokens to trigger the contract’s swapTokensForEth logic. 3. Taking advantage of the temporary price drop caused by the swap. 4. Buying back tokens at the manipulated lower price. 5. Repaying the flashloan and profiting from the price difference. This kind of manipulation effectively creates an arbitrage loop that drains value from other users and destabilizes the token economy.",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

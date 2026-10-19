@@ -35,7 +35,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "lack-of-access-control. Lost: 9K USD",
+  "rootCause": "The vulnerable contract exposed an unwrapWETH(uint256, address) function with no access control, which would unwrap WETH held by the contract and send the resulting native ETH to an arbitrary caller-specified recipient. Using a Balancer flashloan of ~100.85 WETH, the attacker transferred the WETH into the vulnerable contract, then called unwrapWETH(...) directing the unwrapped ETH (including the contract's own pre-existing WETH balance) to itself, re-wrapped exactly the borrowed amount and repaid the flashloan, keeping the difference (~9k USDT worth). Root cause: missing authorization on a function that releases funds to an attacker-chosen address. Vulnerable code snippet: Attack Tx: https://app.blocksec.com/explorer/tx/base/0xac6f716c57bbb1a4c1e92f0a9531019ea2ecfcaea67794bbd27115d400ae9b41 Analysis: Vulnerable contract",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

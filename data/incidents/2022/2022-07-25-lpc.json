@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Business Logic Flaw : Incorrect recipient balance check, did not check sender!=recipient in transfer. Lost: 178 BNB (~45,715 US$)",
+  "rootCause": "Incorrect recipient balance check, did not check sender!=recipient in transfer. Vulnerable code snippet: https://bscscan.com/address/0x1e813fa05739bf145c1f182cb950da7af046778d#code#L1240 Increase directly on the recipientAmount to recipient, deduct sender balance incorrectly. Fixed: https://etherscan.io/address/0x1c91aF03A390b4c619B444425b3119e553B5B44b#code#L414 Audius: The key difference in the patched Initialization contract is the two padding fields that disambiguate the proxyAdmin field used in the proxy contract from the initialized and initializing fields used in the implementation contract. This change prevents repetition of the initialization flow of the deployed contract.",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

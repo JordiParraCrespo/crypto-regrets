@@ -35,7 +35,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Price Manipulation Via Reentrancy. Lost: ~$53k",
+  "rootCause": "The Carol::sell function can be re-entered due to the lack of a reentrancy guard, allowing the attacker to swap more CAROL for WETH in each recursive call. The getTokenLiquidity() function will then return a disproportionate result, leading to the manipulation of ethReserved. Vulnerable code snippet: Attack tx: - Preparation Transaction 0x6462f5e358eb2c7769 | Phalcon Explorer - Attack Transaction 0xd962d397a7f8b3aadc | Phalcon Explorer Analysis: MetaSec on Twitter / X",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

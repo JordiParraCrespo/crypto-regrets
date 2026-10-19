@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "LBP balanceOf reward accounting. Lost: 610.56 BNB",
+  "rootCause": "LBP (Little Boy Plus) tracks an internal rawBalanceOf separate from the reward-inflated value returned by balanceOf. Its hashrate/reward accounting (LBPHashrate, PolVault) credits extra hLBP on certain transfer hooks, so an account's reported balanceOf can exceed its real rawBalanceOf holdings. Funded by a Moolah USDT flash loan and a Pancake Vault lock/take for transient USDT, the attacker stages LBP/USDT LP liquidity, calls polVault.flushPol() and hashrate.bindReferral, then forces the reward hooks via zero-value transfers (lbp.transfer(this,0), hashrate.transferFrom(LBP_PAIR, dead, 0)). This inflates the attacker's balanceOf(this) reward credit, which is then dumped: _sellAllVisibleLbpForUsdt reads the full inflated balanceOf, transfers it into the pair, and swaps the surplus (rawBalanceOf(pair) - reserveLbp) for USDT. The USDT is converted to WBNB, unwrapped to BNB, and forwarded as ~610 BNB profit after a 5 BNB builder payment. Vulnerable code snippet: Attack Tx: https://bscscan.com/tx/0x55856d9fda4c5be5193561c7d775e823c3d6e499da44aab9da963daf61c50b0c Analysis: DefimonAlerts",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

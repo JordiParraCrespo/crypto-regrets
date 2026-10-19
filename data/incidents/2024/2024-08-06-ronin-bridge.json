@@ -39,7 +39,7 @@
   },
   "bridge": true,
   "language": "Solidity",
-  "rootCause": "The Ronin Network bridge was exploited for roughly $12 million, due to a critical oversight in a contract upgrade. For the Axie Infinity community and Ronin Network users, the words \"bridge exploit\" likely trigger PTSD.",
+  "rootCause": "During the deployment of the Ronin Bridge V2 contract upgrade, the team called initializeV4 but omitted a call to initializeV3, leaving the _totalOperatorWeight storage variable at its default value of zero. Ronin's bridge requires 70% of operator weight to approve a withdrawal; with _totalOperatorWeight equal to zero, minimumVoteWeight evaluated to zero as well, meaning any transaction—regardless of actual signatures—satisfied the threshold. MEV bots detected the misconfiguration and extracted 3,996 ETH (~$9.8M) and ~$2M USDC before the Ronin team paused the bridge 38 minutes after the first exploit transaction. The extracting bots turned out to be white-hat operators who later returned the funds in exchange for a $500K bounty. A daily withdrawal limit on the contract prevented an additional ~$72M from being stolen. The root cause was the absence of post-upgrade deployment validation and the failure to audit the upgrade transaction before it went live on mainnet. Attack Tx: 0xbce5b8548db486c561948e8a177c8ccaa72810f972cee3909ea50af015a60ad8 Analysis: Explained: The Ronin Network Hack (August 2024) – Halborn Ronin's $12M Exploit Wasn't a Hack. It Was a Misconfiguration – Olympix (Medium) Ronin Bridge Attack: $12M Exploit Analysis – Three Sigma Phalcon Alert",
   "descriptions": [
     {
       "source": "REKT",

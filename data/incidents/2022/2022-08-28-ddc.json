@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Unchecked External Calls",
+  "rootCause": "handleDeductFee function does not validate feeAmount and does not check the incoming addresses. Vulnerable code snippet: - Manipulating balanceOf: The attacker utilized the balanceOf function to ascertain the total amount of $DDC in the pool. Following this, the attacker proceeded to call the handleDeductFee function of the DDC contract. Attack tx: https://bscscan.com/tx/0xd08cfb22d14bc4f2808970b5ce2557124ae3d7dc9fda756647a3427b8275f054 Analysis: https://x.com/BeosinAlert/status/1564240190851383302 https://immunebytes.com/blog/ddc-token-hack-aug-28-2022-detailed-analysis/",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

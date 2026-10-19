@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Business Logic Flaw & FlashLoan price manipulation. Lost: $60k",
+  "rootCause": "Manipulate the price via the skim of the BNB-AES pool because AES is a deflationary token. The attacker sends the AES to the BNB-AES pool and invokes the skim function repeatedly. In this process, the pool's balance is burned, and the swap fee in the AES contract is increased. After that, the attacker invokes the 'distributeFee' function in the AES contract to transfer the swap fee out of the pair directly, thereby increasing the price of the AES token. Vulnerable code snippet: https://bscscan.com/address/0xddc0cff76bcc0ee14c3e73af630c029fe020f907#code#L1325 Attack tx: https://explorer.phalcon.xyz/tx/bsc/0xca4d0d24aa448329b7d4eb81be653224a59e7b081fc7a1c9aad59c5a38d0ae19 Analysis: https://twitter.com/BlockSecTeam/status/1600442137811689473 https://twitter.com/peckshield/status/1600418002163625984",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

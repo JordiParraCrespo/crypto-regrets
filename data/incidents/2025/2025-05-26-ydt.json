@@ -39,7 +39,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Logic Flaw. Lost: 41k USD",
+  "rootCause": "The YDT token contract exposed a flawed/unprotected transfer-style function (selector 0xec22f4c7, taking from/to/amount/tax-module arguments) that let any caller move YDT tokens out of an arbitrary holder, including the PancakeSwap pair, without owning the tokens or an allowance. The attacker invoked this function to pull nearly all YDT (pair balance minus 1000e6) from the liquidity pair to itself, then called sync() (selector 0xfff6cae9) on the pair to refresh reserves so the pool reflected the drained state, and finally swapped a portion of the stolen YDT for USDT via the fee-on-transfer router path, extracting ~$41K profit. Vulnerable code snippet: Attack Tx: N/A (attack tx not recorded in PoC; see analysis) Analysis: TenArmorAlert",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

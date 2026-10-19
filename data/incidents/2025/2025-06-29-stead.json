@@ -35,7 +35,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Access Control. Lost: 14.5k USD",
+  "rootCause": "The victim contract (0xf9FF933f51bA180a474634440a406c95DfB27596) on Arbitrum exposed a function (selector 0x16fb27ce) that transfers/withdraws STEAD tokens but performs no caller authorization check. Any address can invoke it to drain the STEAD tokens held by the contract. The PoC exploits it with a single unprivileged call passing trivial arguments (1, 1, 1), draining ~14.5k USD worth of STEAD. Root cause is missing access control (no owner/role gate) on a state-changing, asset-moving function. Vulnerable code snippet: Attack Tx: https://arbiscan.io/tx/0x32dbfce2253002498cd41a2d79e249250f92673bc3de652f3919591ee26e8001 Analysis: TenArmorAlert",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

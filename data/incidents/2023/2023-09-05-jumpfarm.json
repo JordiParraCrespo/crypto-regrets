@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Rebasing logic issue. Lost: ~$2.4ETH",
+  "rootCause": "The problem originated from the stake() function in the FloorDAO contract. This function sends funds to the caller before triggering a rebase. As a result, instead of distributing an amount of sJUMP equal to the newly minted JUMP in the next rebase, it includes the user's stake. This causes a mismatch between the contract's JUMP balance and the circulating sJUMP. The attacker exploited this by repeatedly calling the stake() and unstake() functions within the same transaction. Vulnerable Code Snippet: Attack Transaction: https://explorer.phalcon.xyz/tx/eth/0x6189ad07894507d15c5dff83f547294e72f18561dc5662a8113f7eb932a5b079 Analysis: https://twitter.com/DecurityHQ/status/1699384904218202618",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

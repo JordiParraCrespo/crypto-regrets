@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Business Logic Flaw. Lost: ~$31K",
+  "rootCause": "- The balanceOf function of Shiba is not changed, so it will return all balances(including the locked amount). This is not a best practice. - User could transferLockToken or batchTransferLockToken to the pair address. And the pair itself could not identify if the token is locked or not. As a result, the swap would still succeed. And the user could sell the locked token. Vulnerable code snippet: Attack tx: https://explorer.phalcon.xyz/tx/bsc/0x75a26224da9faf37c2b3a4a634a096af7fec561f631a02c93e11e4a19d159477 Analysis: https://app.blocksec.com/explorer/tx/bsc/0x75a26224da9faf37c2b3a4a634a096af7fec561f631a02c93e11e4a19d159477",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

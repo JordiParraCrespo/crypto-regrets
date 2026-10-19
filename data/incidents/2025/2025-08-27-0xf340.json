@@ -35,7 +35,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Access Control. Lost: 4k USD",
+  "rootCause": "The victim contract (0xF340bd...63436) exposed an initVRF(address, address) function with no access control or initialization guard, letting anyone write attacker-chosen addresses into the contract's storage (an arbitrary recipient and the LINK token address). After seeding storage with its own address, the attacker repeatedly invoked function selector 0x607d60e6 (which pays out / transfers LINK to the configured recipient) with zero ETH, draining the contract's LINK balance over 80 iterations. The stolen LINK was then swapped to ETH via the Uniswap V2 router (~4k USD). Vulnerable code snippet: Attack Tx: https://etherscan.io/tx/0x103b4550a1a2bdb73e3cb5ea484880cd8bed7e4842ecdd18ed81bf67ed19e03c Analysis: https://t.me/defimon_alerts/1733",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

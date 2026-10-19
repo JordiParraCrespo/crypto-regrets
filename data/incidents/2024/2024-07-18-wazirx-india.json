@@ -39,7 +39,7 @@
   },
   "bridge": false,
   "language": null,
-  "rootCause": "India's leading crypto exchange, WazirX took a massive $235 million hit when it's Safe multisig wallet crumbled under a devastating breach. How many times do we need to be reminded of not your keys, not your crypto?",
+  "rootCause": "WazirX operated a Safe (Gnosis Safe) multi-signature wallet requiring 4-of-6 signatures—five keys held by WazirX personnel on hardware wallets and one HSM key held by Liminal Custody. Attackers, later attributed to North Korea's Lazarus Group, prepared for eight days by funding operations through Tornado Cash. They then exploited a discrepancy between what Liminal's custody interface displayed to signers and the actual transaction payload being signed: WazirX signers approved what they believed to be routine transactions, but were actually signing approval for the multisig wallet's implementation contract to be upgraded to a malicious contract the attacker had pre-deployed. Once the upgrade was applied with the required three WazirX signatures plus Liminal's co-signature, the attacker gained unilateral control over the wallet and drained approximately $234.9M in assets—including $102M in SHIB and $52.6M in ETH—without requiring any further approvals. Stolen funds were rapidly converted to ETH and laundered via Tornado Cash. The root cause was a combination of insufficient transaction-payload verification by human signers, UI-level deception by the attacker, and the absence of an independent payload-verification step separate from the custody platform's interface. Attack Tx: 0x48164d3adbab78c2cb9876f6e17f88e321097fcd14cadd57556866e4ef3e185d Analysis: Explained: The WazirX Hack (July 2024) – Halborn 2024 WazirX hack – Wikipedia WazirX Hacking Incident Analysis – Cobo Security Team WazirX Twitter Statement",
   "descriptions": [
     {
       "source": "REKT",
@@ -52,11 +52,19 @@
     {
       "source": "SlowMist",
       "text": "The cryptocurrency exchange WazirX posted preliminary investigation results of the cyber attack on Twitter, stating that one of its multisig wallets was compromised, resulting in a loss of over $230 million."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "On July 18,19, 2024, WazirX lost approximately $235 million from a Gnosis Safe multisig wallet when attackers compromised the signing interface. They substituted a malicious contract upgrade payload that drained most assets. The breach was attributed to a UI transaction substitution attack, not a direct contract vulnerability. The attacker exploited a mismatch between the multisig wallet signing interface and actual transaction calldata. Signers approved a malicious contract upgrade shown as benign on the UI, allowing the attacker to drain assets. This was supported by compromised keys and phishing, but the decisive vector was UI transaction spoofing."
     }
   ],
   "audit": null,
   "txHashes": [
-    "0x48164d3adbab78c2cb9876f6e17f88e321097fcd14cadd57556866e4ef3e185d"
+    "0x48164d3adbab78c2cb9876f6e17f88e321097fcd14cadd57556866e4ef3e185d",
+    "0xe3b4cf64e0fc25fafb10d226984b18addc038879ed77f730abbed4737db6a5fc",
+    "0x1e523051a8a481c5a57fe8261cced4cb3e775ce9315168b041fd34fc25d563ac",
+    "0x8b99ae634e1e7180b3fcc66e8fe5d076351477077051a7bbf5ec626a9d0588ef",
+    "0x87c01ca1f56ef3663651b05cd8ebcf133281c5fdd0ef1016f83a16a862c4a235"
   ],
   "poc": null,
   "sources": [
@@ -64,7 +72,8 @@
     "rekt",
     "defihacklabs",
     "blocksec",
-    "slowmist"
+    "slowmist",
+    "revertiq"
   ],
   "references": [
     {
@@ -106,6 +115,71 @@
       "source": "slowmist",
       "label": "x.com",
       "url": "https://x.com/SlowMist_Team/status/1813848794360139808"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/wazirx-access-control-2024-07-19"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/de-fi-rekt-report-over-671-million-lost-in-q3-2024"
+    },
+    {
+      "source": "revertiq",
+      "label": "wazirx.com",
+      "url": "https://wazirx.com/blog/preliminary-report-cyber-attack-on-wazirx-multisig-wallet/"
+    },
+    {
+      "source": "revertiq",
+      "label": "quillaudits.com",
+      "url": "https://www.quillaudits.com/blog/hack-analysis/wazirx-235m-hack"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/wazirx-230-000-000-2024-07-19"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/defi-rekt-report-over-250m-lost-in-july-2024"
+    },
+    {
+      "source": "revertiq",
+      "label": "wazirx.com",
+      "url": "https://wazirx.com/blog/wazirx-cyber-attack-day-wise-report/"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/another-lazarus-group-2024-07-19"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractaudit.com",
+      "url": "https://www.smartcontractaudit.com/guides/wazirx-2024-safe-multisig-compromise"
+    },
+    {
+      "source": "revertiq",
+      "label": "defi-intel.com",
+      "url": "https://defi-intel.com/incidents/wazirx-2024/"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/wazirx-multisig-2024-07-19"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/de-fi-rekt-report-2024-over-1-45-billion-lost-to-crypto-exploits"
+    },
+    {
+      "source": "revertiq",
+      "label": "cobo.com",
+      "url": "https://www.cobo.com/post/wazirx-hack-incident-analysis"
     }
   ]
 }

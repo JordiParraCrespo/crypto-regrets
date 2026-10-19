@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Pair Balance Manipulation. Lost: 12.34 ETH (~$41.2K USD)",
+  "rootCause": "The exploit was caused by a design flaw in the removeLiquidityWhenKIncreases function within the LAURAToken contract. This function relied solely on the K value (constant product) of the LAURA/WETH Uniswap V2 liquidity pool as a trigger for its logic. The vulnerability was that the contract did not validate the source of the increase in the K value. An attacker could manipulate the K value by injecting a large amount of WETH via a flash loan, artificially inflating the price of LAURA. This manipulated increase in K then triggered the removeLiquidityWhenKIncreases function, allowing the attacker to remove liquidity at a skewed price and extract more LAURA tokens than they should have, which they subsequently swapped for WETH for profit. Vulnerable code snippet: Attack tx: https://etherscan.io/tx/0xef34f4fdf03e403e3c94e96539354fb4fe0b79a5ec927eacc63bc04108dbf420 Analysis: https://learnblockchain.cn/article/12139",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

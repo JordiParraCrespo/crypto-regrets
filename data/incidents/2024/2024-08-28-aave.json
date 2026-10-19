@@ -39,7 +39,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Arbitrary Call Error. Lost: 52000",
+  "rootCause": "The root cause of the vulnerability in the *_buyOnParaSwap* function is that it leaves a high token allowance unadjusted if the swap fails, processes unvalidated/ unsanitized *paraswapData*, and lacks proper swap outcome verification, allowing attackers to exploit and withdraw unauthorized tokens. Vulnerable code snippet: Attack tx: https://etherscan.io/tx/0xc27c3ec61c61309c9af35af062a834e0d6914f9352113617400577c0f2b0e9de Analysis: https://blog.solidityscan.com/aave-repay-adapter-hack-analysis-aafd234e15b9",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

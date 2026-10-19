@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Protocol Specific Price Manipulation. Lost: ~$8M",
+  "rootCause": "This attack exploited a vulnerability in the JimboController contract, which allows anyone to use the shift() function to make the contract execute liquidity removal and addition operations. The shift() function takes the funds of the contract to add liquidity, resulting in all the WETH of the JimboController contract being added as liquidity. Since the prices of WETH and JIMBO in the pool are not balanced, when adding liquidity, the required token quantity will be calculated based on the current price, allowing the attacker to obtain more WETH. Vulnerable code snippet: https://arbiscan.io/address/0x271944d9D8CA831F7c0dBCb20C4ee482376d6DE7#code#F1#L308 Attack tx: https://arbiscan.io/tx/0xf9baf8cee8973cf9700ae1b1f41c625d7a2abdbcbc222582d24a8f2f790d0b5a https://arbiscan.io/tx/0xfda5464e97043a2d0093cbed6d0a64f6a86049f5e9608c014396a7390188670e https://arbiscan.io/tx/0x3c6e053faecd331883641c1d23c9d9d37d065e4f9c4086e94a3c34bf8702618a https://arbiscan.io/tx/0x44a0f5650a038ab522087c02f734b80e6c748afb207995e757ed67ca037a5eda Analysis: https://twitter.com/cryptofishx/status/1662888991446941697 https://twitter.com/yicunhui2/status/1663793958781353985",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

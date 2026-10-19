@@ -39,7 +39,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Incorrect input validation. Lost: ~404 WBNB (~234.8K USD)",
+  "rootCause": "The buyfor function in the Bankroll Network's smart contract lacked input validation, allowing the attacker to set the _customerAddress as the contract itself. This enabled repeated calls to buyfor without transferring WBNB, inflating the profitPerShare_ value. The inflated profitPerShare_, combined with the attacker's initial share purchase using a 16,000 WBNB flash loan from PancakeSwap, allowed excessive withdrawals via the withdraw function, which calculated payouts based on myDividends. The absence of restrictions on self-referential purchases and failure to validate _customerAddress led to the attacker draining 16,412 WBNB, yielding a profit of 403 WBNB after repaying the flash loan. Vulnerable code snippet: Attack tx: https://bscscan.com/tx/0xd4c7c11c46f81b6bf98284e4921a5b9f0ff97b4c71ebade206cb10507e4503b0 Analysis: https://lunaray.medium.com/bankroll-hack-analysis-49ca196c6844",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

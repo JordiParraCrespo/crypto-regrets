@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Signature Replay. Lost: ~$5.87M",
+  "rootCause": "The TrustedVolumes RFQ settlement proxy suffered a two-bug exploit chain. The first flaw is that registerAllowedOrderSigner(address signer, bool allowed) has zero access control, allowing any address to register any EOA as a trusted signer under their own key (_allowedOrderSigner[msg.sender][signer] = allowed). The second and more critical flaw is that the order fill function validates the recovered ECDSA signer against the taker's registry entry (_allowedOrderSigner[order.taker][recoveredSigner]) instead of the maker's, even though it then transfers makerAsset from the maker using the maker's pre-existing ERC-20 approval — authorization and fund source are decoupled. The attacker deployed a contract (the taker) that called registerAllowedOrderSigner(attackerEOA, true), then submitted four signed orders listing the victim resolver (which had granted unlimited approvals to the proxy) as maker, paying only 1 wei USDC dust per order. Because the authorization check used the attacker-controlled taker address as the lookup key, all four orders passed and the proxy drained 1,291 WETH, 206,282 USDT, 16.939 WBTC, and 1,268,771 USDC (~$5.87M) from the victim. Vulnerable code snippet: Attack Tx: 0xc5c61b3ac39d854773b9dc34bd0cdbc8b5bbf75f18551802a0b5881fcb990513 Analysis: Phalcon Alert",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

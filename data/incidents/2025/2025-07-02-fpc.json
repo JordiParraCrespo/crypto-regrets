@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Logic Flaw. Lost: 4.7M USDT",
+  "rootCause": "The FPC token has a deflationary transfer hook that burns tokens whenever they are transferred to its PancakeSwap liquidity pool. Burning tokens directly out of the pair's balance reduces the FPC side of the reserves without a corresponding sync/swap, artificially raising the price of FPC relative to USDT. The attacker flash-loaned 23,020,000 USDT from a PancakeV3 pool, pushed USDT into the FPC/USDT pair and acquired a large FPC position; the FPC burn-on-transfer-to-pool logic skewed reserves so FPC could then be sold back at an inflated price. Routing the FPC->USDT sell through swapExactTokensForTokensSupportingFeeOnTransferTokens, the attacker received far more USDT than the FPC was worth, repaid the flash loan, and netted ~4.7M USDT. Root cause: a token whose burn-on-transfer-to-pool logic corrupts the AMM invariant, letting an attacker sell at a manipulated price. Vulnerable code snippet: Attack Tx: https://bscscan.com/tx/0x3a9dd216fb6314c013fa8c4f85bfbbe0ed0a73209f54c57c1aab02ba989f5937 Analysis: TenArmorAlert",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

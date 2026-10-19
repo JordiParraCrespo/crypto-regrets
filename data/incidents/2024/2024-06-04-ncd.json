@@ -35,7 +35,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Business Logic Flaw. Lost: $6.4K",
+  "rootCause": "The NCD token incorrectly treats tokens received via a skim() call on the pair contract as a buy action. As a result, the mineStartTime is incorrectly initialized for the recipient, enabling attackers to create multiple contracts that start mining rewards without making legitimate buys. This leads to disproportionate reward claims and potential inflation of the reward pool. Vulnerable code snippet: Attack tx: https://bscscan.com/tx/0xbfb9b3b8a0d3c589a02f06c516b5c7b7569739edd00f9836645080f2148aefc7 Analysis: In the _transfer function of the NCD token, the contract checks if the sender == uniswapV2Pair to determine a buy action, however, the following check could be bypassed via a skim call to the uniswapV2pool The attacker exploits this by: 1. Buying tokens once. 2. Sending tokens to the pair. 3. Creating new contracts and calling skim() to retrieve the tokens. Each recipient contract now has a valid mineStartTime, despite not performing a legitimate buy.",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

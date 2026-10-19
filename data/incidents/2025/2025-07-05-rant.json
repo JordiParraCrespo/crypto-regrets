@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Logic Flaw. Lost: ~ $204K",
+  "rootCause": "The attacker used a flash loan from a PancakeSwap V3 pool to obtain a large amount of WBNB, then used it to perform a swap on the RANT/WBNB Cake-LP pair and to interact with the RANT token contract. The RANT token contract (0xc321...2dd0) contained flawed internal logic tied to its liquidity pair: transferring RANT directly to the RANT contract address triggered a buy-back / reserve mechanism that mispriced the token, allowing the attacker to extract far more WBNB from the pool than the value deposited. By combining the flash loan, the LP swap, and a large direct transfer of RANT to its own contract (IERC20(RANT).transfer(RANT, ...)), the attacker drained the pool's WBNB, repaid the flash loan plus fee, and walked away with ~311.4 BNB. The root cause is faulty token-side transfer/burn logic that lets an attacker manipulate the pool reserves and the effective token price. Vulnerable code snippet: Attack Tx: https://bscscan.com/tx/0x2d9c1a00cf3d2fda268d0d11794ad2956774b156355e16441d6edb9a448e5a99 Analysis: Phalcon_xyz",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

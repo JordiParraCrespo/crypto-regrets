@@ -37,7 +37,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Arbitrage. Lost: 100k USD",
+  "rootCause": "EverValueCoin's orderbook contract (0x03339E...80A0) let a caller submit an order via addNewOrder(pairId, quantity, price, isBuy, timestamp) with an attacker-chosen price and timestamp, and this self-asserted price was used to value the EVA/WBTC pair without validation against a trustworthy market source. The attacker took a 1,200 WBTC-unit (1200000000) flash loan from Morpho Blue, placed a large buy order at a manipulated price to mint/obtain a huge amount of EVA cheaply, then dumped that EVA for WBTC across two Uniswap V3 routers (the EVA/WBTC 1% fee pool). The proceeds repaid the Morpho flash loan and left the attacker with roughly 100k USD of profit, an arbitrage made possible solely by the unvalidated price input in the orderbook. Vulnerable code snippet: Attack Tx: https://arbiscan.io/tx/0xb13b2ab202cb902b8986cbd430d7227bf3ddca831b79786af145ccb5f00fcf3f Analysis: https://x.com/SuplabsYi/status/1961906638438445268",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

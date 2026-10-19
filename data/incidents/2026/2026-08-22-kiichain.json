@@ -11,32 +11,44 @@
   "targetType": "Chain",
   "category": "accounting-math",
   "vulnClass": "integer-overflow",
-  "vulnClassBy": "typesafe",
+  "vulnClassBy": "curated",
   "aiClass": {
     "id": "integer-overflow",
-    "confidence": 0.99
+    "confidence": 0.95
   },
-  "technique": "Arithmetic Error",
+  "technique": "Cosmos EVM StateDB balance underflow (GHSA-7g4w-cg88-2cq2)",
   "classificationNote": null,
-  "classifiedBy": "defillama",
+  "classifiedBy": "curated",
   "ai": {
     "model": "jev-1.13.0",
     "category": "accounting-math",
-    "confidence": 1,
+    "confidence": 0.98,
     "top": [
       {
         "category": "accounting-math",
-        "p": 1
+        "p": 0.98
+      },
+      {
+        "category": "logic-error",
+        "p": 0.01
+      },
+      {
+        "category": "client-bug",
+        "p": 0.01
       }
     ],
-    "flashLoan": 0.02,
+    "flashLoan": 0.03,
     "stateActor": 0.02,
-    "hasRootCause": 0.98
+    "hasRootCause": 0.97
   },
   "bridge": false,
   "language": "Go",
-  "rootCause": "An attacker drained 148.3 million KII, worth roughly $9.7 million at the pre-exploit price, from KiiChain through the Cosmos EVM exploit class that also hit MANTRA and TAC. A halt immobilized 54.4% on-chain, but the rest had already crossed to BNB Chain.",
+  "rootCause": "Cosmos EVM's StateDB tracked only an account's spendable balance, while x/staking and the staking precompile let a vesting account delegate locked coins. Delegating more than the spendable balance made the write-back in StateDB.SubBalance underflow (unchecked uint256) to ~2^256. The fix had been on main since May but shipped in v0.6.2 / v0.7.2 only on 19 Aug; the chain was still on an unpatched version. Repeated 18 times on KiiChain: 148.3M KII taken, 67.6M bridged to BNB Chain via Hyperlane and sold for ~$1.61M USDT; ~80.7M was frozen on-chain.",
   "descriptions": [
+    {
+      "source": "Curated post-mortem",
+      "text": "Cosmos EVM's StateDB tracked only an account's spendable balance, while x/staking and the staking precompile let a vesting account delegate locked coins. Delegating more than the spendable balance made the write-back in StateDB.SubBalance underflow (unchecked uint256) to ~2^256. The fix had been on main since May but shipped in v0.6.2 / v0.7.2 only on 19 Aug; the chain was still on an unpatched version. Repeated 18 times on KiiChain: 148.3M KII taken, 67.6M bridged to BNB Chain via Hyperlane and sold for ~$1.61M USDT; ~80.7M was frozen on-chain."
+    },
     {
       "source": "REKT",
       "text": "An attacker drained 148.3 million KII, worth roughly $9.7 million at the pre-exploit price, from KiiChain through the Cosmos EVM exploit class that also hit MANTRA and TAC. A halt immobilized 54.4% on-chain, but the rest had already crossed to BNB Chain."
@@ -62,7 +74,8 @@
     "rekt",
     "slowmist",
     "revertiq",
-    "w3igg"
+    "w3igg",
+    "curated"
   ],
   "references": [
     {
@@ -109,6 +122,16 @@
       "source": "w3igg",
       "label": "x.com",
       "url": "https://x.com/bubblemaps/status/2092613204396650888"
+    },
+    {
+      "source": "curated",
+      "label": "Cosmos Labs post-mortem",
+      "url": "https://github.com/cosmos/security/blob/main/communications/cosmos_evm_GHSA-7g4w-cg88-2cq2_post_mortem.md"
+    },
+    {
+      "source": "curated",
+      "label": "GHSA-7g4w-cg88-2cq2",
+      "url": "https://github.com/cosmos/evm/security/advisories/GHSA-7g4w-cg88-2cq2"
     }
   ]
 }

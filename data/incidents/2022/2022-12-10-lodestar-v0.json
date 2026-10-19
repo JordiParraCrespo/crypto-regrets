@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "FlashLoan price manipulation. Lost: $4M",
+  "rootCause": "FlashLoan price manipulation - Incorrect logic in GLPOracle. The root cause is attributed to the construction of the Lodestar GLPOracle and how it obtained the price of plvGLP tokens. The GLPOracle failed to consider the impact of a user calling the donate() function on the GlpDepositor contract. This action inflated the assets of the GlpDepositor contract, consequently affecting the oracle-delivered price of the plvGLP token. As a result, the price reported by the GLPOracle became inaccurate due to the improper handling of the donation mechanism, leading to the vulnerability exploited by malicious users. Vulnerable code snippet: https://arbiscan.io/address/0xba46f854a5b099fcea178c6e7ed047baffece5ac#code#F1#L65 https://arbiscan.io/address/0x13F0D29b5B83654A200E4540066713d50547606E#code#F1#L106 Attack tx: https://explorer.phalcon.xyz/tx/arbitrum/0xc523c6307b025ebd9aef155ba792d1ba18d5d83f97c7a846f267d3d9a3004e8c Analysis: https://twitter.com/SolidityFinance/status/1601684150456438784 https://blog.lodestarfinance.io/post-mortem-summary-13f5fe0bb336",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

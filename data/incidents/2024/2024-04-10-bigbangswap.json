@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "precission loss. Lost: $~5K $BUSD",
+  "rootCause": "In the unverified contract at 0x6ef6…32cf, the sellRewardToken function (selector 0xba531b6d) allows users to trigger liquidity removal, sell reward tokens, and extract value without sufficient access control or safeguards. This leads to unbounded token extraction, and potentially MEV or griefing vectors Vulnerable code snippet: Unverified(https://app.dedaub.com/binance/address/0x6ef66fd568903c072a9654e2c8db9520686932cf/decompiled) Attack tx: https://app.blocksec.com/explorer/tx/bsc/0x05aca126a6a6588e33f4236ab017f10ca87a47a7a2631393c48bf71b1e6a4055?line=50 Analysis: In the attack, the attacker make use of the logic flaw in the TransparentUpgradeableProxy(should be the staking pool). The stakingPool mistakenly regard BGG as the LP. Thus the malicious attacker could deliberately burn BGG and earn profits due to BUSD+BGG value is greater than BGG.",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "An attacker used a trusted price forwarder to feed the vault a fake $60K Bitcoin quote to drain $23.75 million from Ostium on Arbitrum, then collected the payout on trades that were never real.",
+  "rootCause": "Compromised oracle signer key used to submit malicious price reports through registered forwarder. Attacker executed 20x leveraged trade loops with artificially favorable prices via delegatedAction → openTrade + performUpkeep(closeTradeMarket), draining ~11.86M USDC from OstiumVault (oLP), representing ~32% of $34.3M TVL. Attack Tx: https://arbiscan.io/tx/0x359f8c05b86a4409d60cfba02084334313fd94b19f74a294fb7fc4ea7d4870e0 Source: https://twitter.com/DefimonAlerts/status/2077409855166394697",
   "descriptions": [
     {
       "source": "REKT",

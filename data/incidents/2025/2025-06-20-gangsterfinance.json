@@ -39,7 +39,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Incorrect dividends. Lost: 16.5k USD",
+  "rootCause": "Gangsterfinance's TokenVault is another Bankroll/PoWH-style dividend contract, this time denominated in BTCB. It exposes donate(), depositTo(), resolve() (sell) and harvest() (withdraw dividends). The dividend accounting fails to correctly net out the donor's own freshly-minted shares from the donated reward pool, so an attacker who donates and then immediately deposits a small stake is credited with dividends that include their own donation. Financing the sequence with a 1.02 BTCB PancakeSwap flash swap, the attacker called donate(1e18), depositTo(self, 0.01572e18), resolve(myTokens()), then harvest() to drain the miscredited BTCB, repaid the loan, and profited ~16.5k USD. Root cause is the incorrect dividends-per-share calculation that lets a single-transaction donate-deposit-harvest loop be net-profitable. Attack Tx: https://bscscan.com/tx/0xf34e59e4fe2c9b454d2b73a1a3f3aaf07d484a0c71ff8278b1c068cdedc4b64d Analysis: DeFiMon alert",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Business Logic Flaw. Lost: $7k",
+  "rootCause": "Business Logic Flaw In the SEAMAN project, the hacker exploited a vulnerability in the distribution mechanism of GVC tokens in the LP deposits. By calling the transfer function with the minimum unit of $SEAMAN, the attacker triggered a series of swaps. First, $SEAMAN was swapped for $BUSD in the BUSD-SEAMAN pair. Then, $BUSD was further swapped for $GVC in the BUSD-GVC pair. This caused a depletion of GVC tokens in the BUSD-GVC pair and resulted in an increase in the price of $GVC. As a result of this flash loan attack, the attacker was able to make a profit of approximately $7,800. Vulnerable code snippet: Attack tx: https://explorer.phalcon.xyz/tx/bsc/0x6f1af27d08b10caa7e96ec3d580bf39e29fd5ece00abda7d8955715403bf34a8 Analysis: https://twitter.com/CertiKAlert/status/1597513374841044993 https://twitter.com/BeosinAlert/status/1597535796621631489",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

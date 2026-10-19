@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Lack Slippage Protection. Lost: ~$31K",
+  "rootCause": "The root cause is the lack of slippage check. Specifically, the pool's slippage check for token swaps relied solely on a spot price, which allowed the attacker to manipulate the price, make the pool to execute a one-directional token swap, and then profit by sandwiching the swap. Attack TX: https://bscscan.com/tx/0x557628123d137ea49564e4dccff5f5d1e508607e96dd20fe99a670519b679cb5 Analysis: https://twitter.com/Phalcon_xyz/status/1680961588323557376",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

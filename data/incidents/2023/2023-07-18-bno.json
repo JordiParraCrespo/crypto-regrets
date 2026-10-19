@@ -39,7 +39,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Invalid emergency withdraw mechanism. Lost: ~$505K",
+  "rootCause": "Emergency withdrawals were made without withdrawing the staked NFTs, and the rewardDebt ledger is set to 0, resulting in them still being claimable when the stake was canceled. The attacker repeats this process and obtains a large reward. Attack TX: https://bscscan.com/tx/0x33fed54de490797b99b2fc7a159e43af57e9e6bdefc2c2d052dc814cfe0096b9 Analysis: https://twitter.com/BeosinAlert/status/1681116206663876610",
   "descriptions": [
     {
       "source": "DeFiHackLabs",
@@ -109,6 +109,21 @@
       "source": "revertiq",
       "label": "raw.githubusercontent.com",
       "url": "https://raw.githubusercontent.com/SunWeb3Sec/DeFiHackLabs/f310fcaafefcc6af92b8a5bc3ca3dc3b569f29c5/src/test/2023-07/BNO_exp.sol"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/decoding-ocean-bno-s-500k-2024-06-17"
+    },
+    {
+      "source": "revertiq",
+      "label": "quillaudits.com",
+      "url": "https://www.quillaudits.com/blog/hack-analysis/ocean-bno-exploit"
+    },
+    {
+      "source": "revertiq",
+      "label": "blog.solidityscan.com",
+      "url": "https://blog.solidityscan.com/bno-hack-analysis-15436d73e44e/"
     }
   ]
 }

@@ -39,7 +39,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Incorrect Reward calculation. Lost: $32,196.28",
+  "rootCause": "The SWAPP staking contract (0x245a...3461) lets users deposit tokens (e.g. cUSDC) and later withdraw them, with an emergencyWithdraw escape hatch. The accounting flaw is that emergencyWithdraw returns funds based on the contract's current token balance / the user's recorded balance rather than only the amount the user actually deposited net of others, so an attacker who deposits an amount equal to the entire pool balance can then call emergencyWithdraw and receive the full contract balance (their deposit plus everyone else's). The attacker first initialized all required epochs (manualEpochInit) so deposit would succeed, deposited cUSDC equal to the staking contract's entire cUSDC balance, then called emergencyWithdraw(cUSDC) to pull out the inflated amount, draining the pool of ~$32K. The root cause is incorrect reward/balance accounting in the emergency-withdraw path that fails to isolate per-user principal. Vulnerable code snippet: Attack Tx: https://app.blocksec.com/explorer/tx/eth/0xa02b159fb438c8f0fb2a8d90bc70d8b2273d06b55920b26f637cab072b7a0e3e Analysis: deeberiroz",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

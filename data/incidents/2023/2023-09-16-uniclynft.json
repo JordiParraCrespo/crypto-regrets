@@ -35,7 +35,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Reentrancy. Lost: 1 NFT",
+  "rootCause": "For the first step, the attacker deployed a malicious contract, swapped 0.5 ETH for 3528 uJENNY tokens, and deposited them to PointFarm to accumulate initial rewards. Two days later, the attacker launched the actual attack exploiting two bugs: 1. The deposit function allows a 0 _amount for minting new tokens. 2. user.rewardDebt is updated only after the external call to ERC1155 callback. During withdrawal, the attacker could only retrieve their initial deposit since user.amount wasn't updated during the reentrancy. Instead, they used their inflated balance in PointFarm to redeem a LootRealms NFT in the PointShop contract. This is a classic reentrancy vulnerability that does not follow the check-effect-interaction pattern. Vulnerable code snippet: Attack tx: Analysis: Decurity on Twitter / X",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

@@ -45,7 +45,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "It’s a hat trick for Deus DAO.  Token holders lost a total of ~$6.5M and DEI depegged by over 80%. How many times can a thrice-hacked protocol be trusted?",
+  "rootCause": "DEUS Finance's DEI burnFrom bug on Arbitrum let an attacker contract reverse allowance checks, pull 4.6028M DEI from the DEI/USDC pool, and receive 5.047M USDC in one transaction. DEUS and DefiLlama place the broader 5 May 2023 incident across Arbitrum, BNB Chain, and Ethereum at about $6.5M. DEI's custom burnFrom implementation read allowances with owner and spender reversed. Because the attacker contract had already approved the pair, burnFrom(pair, 0) caused DEI to emit Approval(pair, attacker contract, MAX), which gave the attacker contract transferFrom rights over the pair's DEI.",
   "descriptions": [
     {
       "source": "REKT",

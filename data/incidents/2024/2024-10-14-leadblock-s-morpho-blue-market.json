@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Overpriced Asset in Oracle. Lost: $230,000",
+  "rootCause": "The MorphoBundler contract contained a critical vulnerability that allowed arbitrary users to set authorizations on behalf of others when using its multicall function. The exploit leveraged the setAuthorization function call through the bundler without proper verification of the caller's identity. This allowed the attacker to gain authorization to the victim's Morpho account, access the victim's collateral (PAXG), and borrow USDC against it. The vulnerability stems from the bundler not validating that the account setting authorization is the actual transaction initiator, allowing the attacker to impersonate the victim and authorize themselves to manipulate the victim's positions. Vulnerable code snippet: Attack tx: https://etherscan.io/tx/0x256979ae169abb7fbbbbc14188742f4b9debf48b48ad5b5207cadcc99ccb493b Analysis: https://blog.verichains.io/p/morpho-protocol-market-oracle-price",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

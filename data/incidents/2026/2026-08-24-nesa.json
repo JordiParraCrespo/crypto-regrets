@@ -10,33 +10,45 @@
   ],
   "targetType": "Chain",
   "category": "accounting-math",
-  "vulnClass": null,
-  "vulnClassBy": null,
+  "vulnClass": "integer-overflow",
+  "vulnClassBy": "curated",
   "aiClass": {
-    "id": "balance-accounting-mismatch",
-    "confidence": 0.82
+    "id": "integer-overflow",
+    "confidence": 0.96
   },
-  "technique": "Arithmetic Error",
+  "technique": "Cosmos EVM StateDB balance underflow (GHSA-7g4w-cg88-2cq2)",
   "classificationNote": null,
-  "classifiedBy": "defillama",
+  "classifiedBy": "curated",
   "ai": {
     "model": "jev-1.13.0",
     "category": "accounting-math",
-    "confidence": 1,
+    "confidence": 0.96,
     "top": [
       {
         "category": "accounting-math",
-        "p": 1
+        "p": 0.96
+      },
+      {
+        "category": "logic-error",
+        "p": 0.02
+      },
+      {
+        "category": "client-bug",
+        "p": 0.02
       }
     ],
-    "flashLoan": 0.04,
-    "stateActor": 0.03,
-    "hasRootCause": 0.92
+    "flashLoan": 0.03,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
   },
   "bridge": false,
   "language": "Go",
-  "rootCause": "An attacker bridged 257.7 million NES, roughly $50 million, from Nesa to Ethereum in an incident consistent with the Cosmos EVM bug chain that hit MANTRA, TAC, and KiiChain. Nesa never published the mechanism; Bubblemaps estimated slippage cut net profit to roughly $60k.",
+  "rootCause": "Cosmos EVM's StateDB tracked only an account's spendable balance, while x/staking and the staking precompile let a vesting account delegate locked coins. Delegating more than the spendable balance made the write-back in StateDB.SubBalance underflow (unchecked uint256) to ~2^256. The fix had been on main since May but shipped in v0.6.2 / v0.7.2 only on 19 Aug; the chain was still on an unpatched version. On Nesa the attacker inflated a ~1.1M NES deposit and withdrew 257.7M NES (~25.8% of supply) to Ethereum via Hyperlane; thin liquidity limited net profit to roughly $60K-240K, so the nominal loss overstates what was realised.",
   "descriptions": [
+    {
+      "source": "Curated post-mortem",
+      "text": "Cosmos EVM's StateDB tracked only an account's spendable balance, while x/staking and the staking precompile let a vesting account delegate locked coins. Delegating more than the spendable balance made the write-back in StateDB.SubBalance underflow (unchecked uint256) to ~2^256. The fix had been on main since May but shipped in v0.6.2 / v0.7.2 only on 19 Aug; the chain was still on an unpatched version. On Nesa the attacker inflated a ~1.1M NES deposit and withdrew 257.7M NES (~25.8% of supply) to Ethereum via Hyperlane; thin liquidity limited net profit to roughly $60K-240K, so the nominal loss overstates what was realised."
+    },
     {
       "source": "REKT",
       "text": "An attacker bridged 257.7 million NES, roughly $50 million, from Nesa to Ethereum in an incident consistent with the Cosmos EVM bug chain that hit MANTRA, TAC, and KiiChain. Nesa never published the mechanism; Bubblemaps estimated slippage cut net profit to roughly $60k."
@@ -54,7 +66,8 @@
   "sources": [
     "defillama",
     "rekt",
-    "revertiq"
+    "revertiq",
+    "curated"
   ],
   "references": [
     {
@@ -81,6 +94,16 @@
       "source": "revertiq",
       "label": "coinalertnews.com",
       "url": "https://coinalertnews.com/news/2026/08/27/cosmos-evm-module-exploit-halts"
+    },
+    {
+      "source": "curated",
+      "label": "Cosmos Labs post-mortem",
+      "url": "https://github.com/cosmos/security/blob/main/communications/cosmos_evm_GHSA-7g4w-cg88-2cq2_post_mortem.md"
+    },
+    {
+      "source": "curated",
+      "label": "GHSA-7g4w-cg88-2cq2",
+      "url": "https://github.com/cosmos/evm/security/advisories/GHSA-7g4w-cg88-2cq2"
     }
   ]
 }

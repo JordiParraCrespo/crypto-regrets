@@ -35,7 +35,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Reentrancy. Lost: $29k",
+  "rootCause": "The root cause of this incident is the ERC777 token reentrancy which allows attacker to use old totalSushi and updated totalShares for mint. Vulnerable code snippet: Attack tx: https://etherscan.io/tx/0x8037b3dc0bf9d5d396c10506824096afb8125ea96ada011d35faa89fa3893aea Analysis: The attacker exploits the potential for reentrancy with the ERC777 token (sushi). Within theenter function, the reentrancy can be initiated through the sushi.transferFrom call. In this function, the mint process is invoked first, which updates the total token supply. However, the update of totalSushi occurs after the transferFrom is finished. As a consequence, the calculation result uint256 what = _amount.mul(totalShares).div(totalSushi); becomes magnified due to the unchanged totalSushi value, despite an increase in totalShares. https://twitter.com/BlockSecTeam/status/1584959295829180416 https://twitter.com/AnciliaInc/status/1584955717877784576",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

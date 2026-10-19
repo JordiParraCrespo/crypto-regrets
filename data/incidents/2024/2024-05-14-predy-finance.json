@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Reentrancy. Lost: $464K",
+  "rootCause": "Predy Finance's registerPair() was permissionless, allowing anyone to create a trading pair with themselves as poolOwner. Calling trade() on that pair established the caller as the active \"locker\", granting unrestricted access to take() (token extraction) and supply() (LP deposit) within the trade callback. The attacker registered a custom pair pointing to a real Uniswap pool (USDC/WETH 0.05%), called trade() to become the locker, and inside predyTradeAfterCallback() called take() to drain all WETH and all USDC from the global PredyPool into their own address. They immediately followed each take() with a supply() call, re-depositing those same tokens as LP shares under their own pairId. Because finalizeLock() only verified that the net outflow was non-negative — and the supply() re-deposit balanced the take() extraction — the balance check passed silently. After the callback returned, the attacker called withdraw() twice (once for WETH, once for USDC) to redeem their newly registered LP shares, permanently draining all liquidity from other users' positions and netting ~$464K. Vulnerable code snippet: Attack Tx: 0xbe163f651d23f0c9e4d4a443c0cc163134a31a1c2761b60188adcfd33178f50f Analysis: Predy Finance official post",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

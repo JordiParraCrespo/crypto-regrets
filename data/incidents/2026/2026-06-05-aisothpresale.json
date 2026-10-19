@@ -39,7 +39,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Fixed-price presale arbitrage. Lost: 30,314.76 USDT",
+  "rootCause": "The AISOTH presale contract sells AIS tokens at a fixed price() regardless of the prevailing market price on the AIS/USDT PancakeSwap pair. Because the presale price was lower than the AMM market price, the attacker could risklessly arbitrage the gap: flash-swap USDT from the USDT/WBNB pair, buy() the entire claimable AIS inventory from the presale at the fixed price, immediately claim() it, then dump the AIS into the AIS/USDT pair via swapExactTokensForTokensSupportingFeeOnTransferTokens for more USDT than was spent, repay the flash swap, and keep ~30,314 USDT profit. The presale lacked any per-buyer cap, vesting/lockup, or price-vs-market check. Vulnerable code snippet: Attack Tx: https://bscscan.com/tx/0x11462984d7f5663db9cf95c07c6cd9ff91f5b2d6616268e8dd6a3013e190248c Analysis: https://x.com/audit_911/status/2063565495073415618",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

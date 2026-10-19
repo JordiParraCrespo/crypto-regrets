@@ -35,7 +35,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Access Control. Lost: 730K USD",
+  "rootCause": "The SuperRare staking contract (an ERC1967 upgradeable proxy at 0x3f4D749675B3e48bCCd932033808a7079328Eb48) distributes RARE token rewards via a Merkle-tree airdrop where eligible amounts are proven against an on-chain merkleRoot. The updateMerkleRoot function that sets this root was left without any access control (no onlyOwner/onlyAdmin modifier), so any account could overwrite it. The attacker simply called updateMerkleRoot with a self-crafted root whose leaf encoded the attacker's address and the staking contract's entire RARE balance, then called claim with the matching proof, draining all ~11.9M RARE (~730K USD) held by the contract. Vulnerable code snippet: Attack Tx: https://app.blocksec.com/explorer/tx/eth/0xd813751bfb98a51912b8394b5856ae4515be6a9c6e5583e06b41d9255ba6e3c1 Analysis: SuperRare Hack Analysis - SolidityScan",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

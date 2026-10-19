@@ -37,7 +37,7 @@
   },
   "bridge": false,
   "language": null,
-  "rootCause": "The perfect digital heist - missing reentrancy guards on Gem Pad let an attacker snatch roughly $1.9 million in locked tokens across three chains. Several protocols left wondering if their lock box provider should have checked their own locks first.",
+  "rootCause": "GemPad, a no-code smart contract deployment platform, was exploited for approximately $1.9–2.2 million across Ethereum, BNB Chain, and Base due to a reentrancy vulnerability in the collectFees function of its GempadLock liquidity locker contract. The collectFees function collected fees before updating internal state, and critically lacked a reentrancy guard. An attacker deployed a malicious token whose transfer callback re-entered the collectFees function mid-execution: each reentrant call triggered another fee collection cycle while the balance checks still reflected the pre-drain state, causing them to report more tokens as locked than actually were. This allowed the attacker to drain several multiples of the value they originally locked. Because the same vulnerable contract template was deployed across three chains, the exploit was replicated on all of them, affecting at least 27 projects whose liquidity was locked in GemPad's locker. Funds were subsequently routed through Tornado Cash. Attack Tx: 0x2bb6d2ca3b52a01ff9ec01c931f68762ded9a05693ea65d911a20602eea02763 Analysis: Explained: The GemPad Hack (December 2024)",
   "descriptions": [
     {
       "source": "REKT",

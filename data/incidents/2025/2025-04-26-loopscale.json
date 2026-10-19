@@ -35,7 +35,7 @@
   },
   "bridge": false,
   "language": "Rust",
-  "rootCause": "Sixteen days after launch, Loopscale lost $5.8M to a basic oracle manipulation. Audits flagged the vulnerability, but they claimed all critical issues fixed. Users trusted them. All funds returned. Is this protocol built on solid code or just lucky negotiations?",
+  "rootCause": "The Loopscale protocol on Solana relied on a flawed pricing mechanism for RateX Principal Token (PT) collateral. An attacker exploited the fact that Loopscale's oracle for RateX PT tokens could be manipulated to reflect an artificially inflated value. By deploying a malicious price feed and calling Loopscale's own create_loan function, the attacker caused the protocol to assess their RateX PT collateral as worth far more than its true value, enabling a series of undercollateralized loans that drained approximately $5.8M (5.7M USDC and 1,200 SOL) — roughly 12% of the protocol's TVL — just two weeks after launch. The funds were subsequently returned after the team negotiated a 10% whitehat bounty. Attack Tx: 2SkCkmX2Q8R7W7RDzgfc6ZFCmYgehmENw72sgTQLfNLHGupNdPDeNkW6S7qCNgYtintFcxhkBCsyf81XA9NSF2RJ Analysis: Loopscale - Rekt Explained: The Loopscale Hack (April 2025)",
   "descriptions": [
     {
       "source": "REKT",

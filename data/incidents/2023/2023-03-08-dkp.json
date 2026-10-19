@@ -35,7 +35,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "FlashLoan price manipulation. Lost: ~$80K",
+  "rootCause": "QuillAudits: The contract was not verified. So, after decompiling it, we found that the vulnerability was present in the exchange() function, which was used to swap USDT for DKP tokens. The problem arises because the price Oracle relies on the balance ratio of the two tokens in the USDT-DKP pair, making it vulnerable to flash loan attacks that allow the attacker to manipulate the pool. Vulnerable code snippet: https://bscscan.com/address/0x89257A52Ad585Aacb1137fCc8abbD03a963B9683#code https://library.dedaub.com/decompile?md5=0795fc50f96b806a37007ea095b360de Attack tx: https://bscscan.com/tx/0x0c850f54c1b497c077109b3d2ef13c042bb70f7f697201bcf2a4d0cb95e74271 https://bscscan.com/tx/0x2d31e45dce58572a99c51357164dc5283ff0c02d609250df1e6f4248bd62ee01 Analysis: https://twitter.com/CertiKAlert/status/1633421908996763648 https://blog.solidityscan.com/dkp-hack-analysis-improper-token-pair-ratio-calculation-282672cd0450 https://medium.com/coinmonks/decoding-dkp-token-s-80k-exploit-quillaudits-45c67df973d6",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

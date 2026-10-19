@@ -35,7 +35,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Access Control. Lost: 40k USDC",
+  "rootCause": "The victim contract (0x8d2Ef0...41288) implemented uniswapV3SwapCallback without verifying that the caller was a legitimate Uniswap V3 pool (it lacked the standard require(msg.sender == pool) / factory verification). The callback simply transferred the requested token amount to the address decoded from the supplied data parameter. An attacker therefore called uniswapV3SwapCallback directly, passing the victim's full USDC balance as amount0Delta and encoding (USDC, attacker) as data, causing the contract to send all of its USDC (~40k USDC) straight to the attacker without any real swap ever occurring. Vulnerable code snippet: Attack Tx: https://basescan.org/tx/0x6be0c4b5414883a933639c136971026977df4737b061f864a4a04e4bd7f07106 Analysis: https://basescan.org/address/0x8d2Ef0d39A438C3601112AE21701819E13c41288#code",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

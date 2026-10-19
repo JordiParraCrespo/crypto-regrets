@@ -35,7 +35,7 @@
   },
   "bridge": false,
   "language": null,
-  "rootCause": "FlashLoan Attack. Lost: $7M",
+  "rootCause": "The attack was caused by a flawed price oracle implementation in the ChainlinkUniV2Adapter contract for the BOO token. Instead of solely relying on the Chainlink oracle price feed, the contract combined it with the reserve ratio of the BOO/FTM Uniswap V2 pool to determine the final price. This allowed the attacker to manipulate the Uniswap V2 pool's reserve ratio through a flash loan of BOO tokens, artificially inflating the reported price of BOO. By leveraging this inflated price, the attacker could then over-collateralize their positions and borrow a significant amount of other assets from the Polter Finance protocol. The core issue was the improper blending of a potentially manipulable on-chain metric (Uniswap V2 reserve ratio) with a trusted off-chain oracle price. Vulnerable code snippet: Attack tx: https://ftmscan.com/tx/0x5118df23e81603a64c7676dd6b6e4f76a57e4267e67507d34b0b26dd9ee10eac Analysis: https://threesigma.xyz/blog/exploit/polter-finance-exploit-explained-usd12m-loss",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

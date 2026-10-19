@@ -39,7 +39,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Access Control & Arbitrary External Call. Lost: ~$100k",
+  "rootCause": "PhxProxy contract delegateCallSwap() function lack of access control and can be passed in any parameter // The lost money is mainly USDC in the d028 contract which the attacker converts into WETH in the 65ba contract through the buyLeverage() function and then swaps it into his own tokens by the delegateCallSwap() function, making a profit from it Vulnerable code snippet: Attack tx: https://polygonscan.com/tx/0x6fa6374d43df083679cdab97149af8207cda2471620a06d3f28b115136b8e2c4 Analysis: https://twitter.com/HypernativeLabs/status/1633090456157401088",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Not Slippage Protection. Lost: 15261.68240413121964707 BUSD",
+  "rootCause": "The YB token has fee/burn behavior on its YB/BUSD PancakeSwap V2 pair that desyncs the pair's reserves on transfer, and the swaps performed against it carry no slippage protection (amountOutMin = 0-style logic). Using a PancakeSwap V3 BUSD flash loan, the attacker ran 66 iterative micro-swaps: each iteration transferred a fixed slice of BUSD into the LP and called the pair's low-level swap with an output amount computed by getAmount0ToReachK to extract the maximum YB while keeping the constant-product invariant satisfied. Because YB's on-transfer burn shrinks the pool's YB balance without updating cached reserves, repeating this lets the attacker accumulate YB cheaply, then reverse the process (getAmount1ToReachK) to swap YB back into BUSD at an inflated rate, repaying the flash loan and netting ~15,261 BUSD profit. Vulnerable code snippet: Attack Tx: https://bscscan.com/tx/0xe1e7fa81c3761e2698aa83e084f7dd4a1ff907bcfc4a612d54d92175d4e8a28b Analysis: PoC author rotcivegaf on X/Twitter",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

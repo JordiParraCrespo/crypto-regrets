@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "business logic flaw. Lost: $52K",
+  "rootCause": "The updateExpiredOrders function will iterate through all orders to find all orders that are expired and needs to be settled. Later the settleExpiredPositions will buy back the tokens using the accumulated USDT calculated in updateExpiredOrders. When the back back amount is huge enough, this will greatly influence the price of the token. Vulnerable code snippet: Attack tx: TX1 : https://app.blocksec.com/explorer/tx/bsc/0xc12ccc3bdaf3f0ec1efa09d089a0c1dbad05519e1eb0fa6475ffcc6317cbde4d TX2 :https://app.blocksec.com/explorer/tx/bsc/0xefe58a14fc0022872262678b358aaae64a26fe2389d09093eb14752ea99415e9 Analysis: The updateExpiredOrders function will iterate through all orders to find all orders that are expired and needs to be settled. Later the settleExpiredPositions will buy back the tokens using the accumulated USDT calculated in updateExpiredOrders. When the back back amount is huge enough, this will greatly influence the price of the token. Anyone could call settleExpiredPositions with minTokensToReceive set to zero, this could pose the protocol into a vulnerable state. Due to lack of slippage control, the attacker could sandwich the transaction and make profits.",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

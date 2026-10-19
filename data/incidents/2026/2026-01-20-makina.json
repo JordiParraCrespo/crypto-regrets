@@ -35,7 +35,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Price Oracle Manipulation. Lost: 5.1M USD",
+  "rootCause": "Makina's AUM accounting relies on accountForPosition in the Caliber contract, which reads live Curve pool spot balances to compute position values, and updateTotalAum in the Machine contract persists this figure as the protocol's total assets. Because these spot values reflect real-time on-chain pool balances, they can be temporarily distorted by large pool imbalances within the same transaction. The attacker flashloaned 280M USDC and executed a two-pronged manipulation: 100M USDC were added to the DUSD/USDC Curve pool and 10M USDC were swapped for DUSD to inflate the apparent DUSD price; simultaneously, 170M USDC were deposited into the 3Pool for 3CRV, which was then used to skew the MIM/3CRV pool. With both Curve prices distorted, the attacker called accountForPosition and updateTotalAum to snap inflated values into Makina's state. They then sold DUSD and LP tokens back to the pools at the artificially favorable implied rate, extracting a profit. The cycle was executed twice in succession, draining approximately $5M from the protocol. Vulnerable code snippet: Attack Tx: 0x569733b8016ef9418f0b6bde8c14224d9e759e79301499908ecbcd956a0651f5 Analysis: Phalcon Alert",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

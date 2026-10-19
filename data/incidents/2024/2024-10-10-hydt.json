@@ -35,7 +35,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Oracle Price Manipulation",
+  "rootCause": "The HYDT token contract used the WBNB-USDT pair price as an unsafe oracle to determine token minting ratios This implementation allowed the attacker to manipulate the price by using a flash loan of 11 million USDT to significantly alter the WBNB-USDT exchange rate just before calling initialMint() with 11 BNB. After minting a large amount of HYDT tokens at the artificially favorable rate, the attacker swapped these tokens back to USDT through multiple DEX routes (Uniswap V3 and V2), generating approximately 5.8K USDT in profit after repaying the flash loan. Vulnerable code snippet: Attack tx: https://app.blocksec.com/explorer/tx/bsc/0xa9df1bd97cf6d4d1d58d3adfbdde719e46a1548db724c2e76b4cd4c3222f22b3?line=58 Analysis: https://x.com/TenArmorAlert/status/1844241843518951451",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

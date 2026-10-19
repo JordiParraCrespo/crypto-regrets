@@ -35,7 +35,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Business Logic Flaw. Lost: ~104M",
+  "rootCause": "The exploit was due to a vulnerability in the withdrawWithoutHedge function of a deprecated contract. The _withdraw function, called by withdrawWithoutHedge, calculated the withdrawal amount based on the t.share of the current \"tranche.\" However, the crucial flaw was that t.share was not updated after a withdrawal. Additionally, a state check (require(t.state == TrancheState.Open)) that should have restricted withdrawals to open tranches was commented out. This combination allowed the attacker to repeatedly call withdrawWithoutHedge within a loop, each time withdrawing funds based on the original t.share value, effectively draining the contract. Vulnerable code snippet: Attack tx: https://etherscan.io/tx/0x260d5eb9151c565efda80466de2e7eee9c6bd4973d54ff68c8e045a26f62ea73 https://etherscan.io/tx/0x444854ee7e7570f146b64aa8a557ede82f326232e793873f0bbd04275fa7e54c Analysis: https://blog.verichains.io/p/hegic-options-protocol-how-a-deprecated",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

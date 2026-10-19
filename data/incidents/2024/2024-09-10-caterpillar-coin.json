@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Price Manipulation. Lost: ~1.4M USD",
+  "rootCause": "The CUT token's price protection mechanism, implemented via the transferFunDealTypeContractAddress contract, was vulnerable to price manipulation. The mechanism relied on reserve ratios to calculate rewards and token transfers during liquidity pool operations. The attacker used a flash loan of 4,500,000 USDT to manipulate the USDT-CUT PancakeSwap pool's reserve ratio, adding liquidity with disproportionate token amounts and triggering flawed reward calculations in valuePreservationByRemoveLP(). This allowed the attacker to receive significantly more CUT tokens (275e9 instead of 60.7e9) when removing liquidity, which were then swapped for profit. The vulnerability stemmed from naive conversion of USDT differences to CUT tokens based on manipulable current prices, repeated 40 times to maximize gains. Vulnerable code snippet: Attack tx: https://bscscan.com/tx/0x2c123d08ca3d50c4b875c0b5de1b5c85d0bf9979dffbf87c48526e3a67396827 https://bscscan.com/tx/0xce6e474dc9555ef971473fee19f87716f38ba01a0df39e78207b71eda134c420 https://bscscan.com/tx/0x6262c0f15c88aed6f646ed1996eb6aae9ccc5d5704d5faccd1e1397dd047bc8a Analysis: https://www.certik.com/resources/blog/caterpillar-coin-cut-token-incident-analysis",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

@@ -39,7 +39,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Price Manipulation. Lost: 15114 BUSD",
+  "rootCause": "LifeProtocol's buy/sell functions priced LIFE tokens against BUSD using internal accounting that could be skewed by the actor's own repeated trades within a single transaction. Using a DODO DPP flashloan of 110,000 BUSD, the attacker repeatedly called buy(1000e18) 53 times to inflate the protocol's internal price/reserve state, then called sell(1000e18) 53 times to redeem at the manipulated favorable rate, extracting more BUSD than was put in before repaying the flashloan. The vulnerability is a manipulable internal price curve with no slippage/oracle protection, allowing a single flashloan-funded buy-then-sell loop to drain ~15,114 BUSD. Vulnerable code snippet: Attack Tx: https://bscscan.com/tx/0x487fb71e3d2574e747c67a45971ec3966d275d0069d4f9da6d43901401f8f3c0 Analysis: Vulnerable contract code",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

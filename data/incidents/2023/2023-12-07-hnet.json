@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Business logic flaw. Lost: ~2.4 $WBNB",
+  "rootCause": "The HNet token allowed burning tokens directly out of the liquidity pair and then having the pair's reserves re-synced, letting an attacker manipulate the HNet/WBNB price in their favor. After flash-loaning WBNB and swapping it for HNet, the attacker invoked HNet's burn via the token's multicall, relayed through an ERC2771 Forwarder.execute (using a pre-signed forward request). The crafted multicall encoded burn(amount) such that a large amount of HNet was burned from the pair's balance. Once the pair's HNet balance was drastically reduced, the attacker called Pair.sync() to update reserves to the new, lower HNet balance, dramatically inflating HNet's price. The attacker then swapped its HNet holdings back to WBNB at the manipulated rate and repaid the flash loan. The core flaw is a business-logic / accounting error allowing pair-held tokens to be burned and reserves resynced. Vulnerable code snippet: Attack Tx: https://app.blocksec.com/explorer/tx/bsc/0x67af906c1efc05067a01f197bd780ebf4e0a76729d54288a400e715f87ea50c7",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

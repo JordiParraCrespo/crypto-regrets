@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Business Logic Flaw. Lost: ~340K",
+  "rootCause": "1. Create an account with LPT tokens as collateral. 2. Generate one-sided trading fees for the LPT. 3. Use a different account to borrow and unwind the LPT tokens. 4. The wrapper mistakenly includes the fees as assets, causing a significant increase in the LPT token price due to low actual liquidity. 5. This boost in token price increases the first account's borrowing power, allowing it to borrow all the assets in the lending market. Donating assets via trading fees was identified as an attack vector. The wrapper attempts to prevent this by limiting trading fees to a maximum APR value, but this check was not triggered because only token0 fees exceeded the limit while token1 fees did not. Vulnerable code snippet: WrapperOracle | Address 0x7746872c6892bcfb4254390283719f2bd2d4da76 | Arbitrum One Attack tx: 0xcb1a2f5eeb1a767ea5 | Phalcon Explorer Analysis: BlockSec Phalcon on Twitter / X Lava Post-Mortem: March 28, 2024 - HackMD",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

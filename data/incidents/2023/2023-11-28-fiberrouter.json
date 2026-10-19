@@ -39,7 +39,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "input validation. Lost: 18 eth",
+  "rootCause": "FiberRouter's swapAndCrossOneInch accepts a caller-controlled swapRouter (the target address used for the swap) together with caller-controlled _calldata, and forwards them as a low-level call without validating either the router or the payload. Because the FiberRouter contract held outstanding token approvals from its users, an attacker could pass USDC itself as the swapRouter and craft _calldata equal to transferFrom(victim, attacker, victim_balance), causing the router to execute an arbitrary transferFrom on the victim's behalf and drain any user who had approved FiberRouter. This is a classic arbitrary-call / missing input-validation bug. Vulnerable code snippet: Attack Tx: https://app.blocksec.com/explorer/tx/bsc/0x7260ad0e4769ae68f0a680356c63140353c18d7be1b86a8c4e99a0fc3b6842c1 Analysis: https://x.com/MetaSec_xyz/status/1729323254610002277",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

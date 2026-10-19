@@ -39,7 +39,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Business Logic Flaw. Lost: ~12 $ETH",
+  "rootCause": "The vulnerable contract (0x1F90BDeB...) exposed a function (selector 0x4a75084c) that takes a recipient, a token address, and an amount and transfers that token out of the contract, but it performed no caller authorization and no validation of the request. The attacker simply called this function with (attacker, STRAC, STRAC.balanceOf(Contract_0x1f90)), instructing the contract to send its entire STRAC balance to the attacker. The attacker contract also exposes a stub transferFrom(...) that returns true, which trivially satisfies any internal transfer-success check. After receiving all the STRAC, the attacker dumped it into the STRAC/ETH PancakeSwap pool. Vulnerable code snippet: Attack Tx: https://bscscan.com/tx/0x1147b3c0f3ebdd524c4e58430bb736eba9f7fa522158f5ad81eb3e2394b466d0 Analysis: DecurityHQ on X",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

@@ -39,7 +39,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Claim Rewards Without Protection. Lost: 19025.9193312786235214 BUSD",
+  "rootCause": "The BTNFT contract treated transferring a BTNFT NFT to the contract itself (BTNFT address) as a reward-claim / burn event that minted BTT reward tokens to the caller, without verifying that the caller actually owned the NFT and without protecting against third parties processing other users' NFTs. The attacker enumerated every minted NFT (totalSupply()), and for each token called transferFrom(owner, BTNFT, id) to push all users' NFTs into the contract, harvesting the BTT rewards associated with every NFT. The attacker then dumped the accumulated BTT into the project pair via the router's swap in 50 chunks, realizing ~19,026 BUSD. The core flaw is missing access control / ownership validation on the reward-claim path tied to NFT transfers. Vulnerable code snippet: Attack Tx: https://bscscan.com/tx/0x1e90cbff665c43f91d66a56b4aa9ba647486a5311bb0b4381de4d653a9d8237d Analysis: PoC by rotcivegaf",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

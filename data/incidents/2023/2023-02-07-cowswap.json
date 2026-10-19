@@ -35,7 +35,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Arbitrary External Call Vulnerability. Lost: ~$120k",
+  "rootCause": "Arbitrary External Call Vulnerability The settle function allows arbitrary calls, and the solver contract doesn't validate the interaction data. This vulnerability allows attackers to have the GPv2 contract approve their malicious contract, ultimately leading to a drain of the settlement contract. Vulnerable code snippet: https://etherscan.io/address/0x9008d19f58aabd9ed0d60971565aa8510560ab41#code#F1#L121 https://etherscan.io/address/0x9008d19f58aabd9ed0d60971565aa8510560ab41#code#F2#L41 Attack tx: https://etherscan.io/tx/0x92f906bce94bab417cccc87ae046448d7fb8c2c0350b7ed911545577acb3bfc1 https://etherscan.io/tx/0x90b468608fbcc7faef46502b198471311baca3baab49242a4a85b73d4924379b Analysis: https://twitter.com/MevRefund/status/1622793836291407873 https://twitter.com/peckshield/status/1622801412727148544",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

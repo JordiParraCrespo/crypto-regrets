@@ -35,7 +35,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Donate Inflation ExchangeRate & Rounding Error. Lost: ~$3.2 M",
+  "rootCause": "- Through donation and self-liquidation, the variable collateralIndex could be manipulated, thus the calculation for minted share amount could be manipulated via precision loss. - The minting in rcbETH-c uses rounding-up, which could mint 1 share instead of 0 when dust of amount collateral is added. - With shares of cbETH, attacker could redeem the shares for profits. Attack Path: (from blocksec) Attack tx: https://etherscan.io/tx/0xfeedbf51b4e2338e38171f6e19501327294ab1907ab44cfd2d7e7336c975ace7 Analysis: https://x.com/BlockSecTeam/status/1723229393529835972",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

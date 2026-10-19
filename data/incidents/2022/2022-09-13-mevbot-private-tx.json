@@ -39,7 +39,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Incorrect access control. Lost: $140 K",
+  "rootCause": "Incorrect access control. Vulnerable code snippet: We can see a public function called pancakeCall, which means anyone can call this function. 1) Decompile contract https://bscscan.com/address/0x64dd59d6c7f09dc05b472ce5cb961b6e10106e1d We can see a public function called pancakeCall, which means anyone can call this function. 2)Check pancakeCall code logic Once pass all required check then perform 0x10a(v0, varg2, varg1); 3) Track into 0x10a(), we can see transfer funds to addree \"MEM[varg0.data+32]\". Since variable \"http://varg0.data\" attacker can control over calldata in pancakeCall. So that's why an attacker can drain out the funds from the MEV contract.",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

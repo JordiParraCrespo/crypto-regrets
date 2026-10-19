@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Price Manipulation. Lost: 190 BNB",
+  "rootCause": "The D3XAT project ran an internal swap proxy whose exchange(fromToken, toToken, amount) function priced D3XAT independently of (and more cheaply than) the PancakeSwap market price, while the on-market PancakeSwap pool reflected the real, higher price. The proxy effectively let anyone buy D3XAT low and sell it high without a sanity check tying its quote to a manipulation-resistant reference. The attacker flash-loaned 20M USDT from a PancakeV3 pool, then ran two parallel legs: buying D3XAT cheaply through the proxy's exchange() and selling it back at a higher rate, while simultaneously round-tripping through the PancakeSwap router across many helper buyer/seller contracts to harvest the spread. Repeating this across 27+ rounds drained the price discrepancy for a net profit of ~190 BNB, after which the USDT flash loan plus fee was repaid. Vulnerable code snippet: Attack Tx: https://bscscan.com/tx/0x26bcefc152d8cd49f4bb13a9f8a6846be887d7075bc81fa07aa8c0019bd6591f Analysis: https://x.com/suplabsyi/status/1956695597546893598",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

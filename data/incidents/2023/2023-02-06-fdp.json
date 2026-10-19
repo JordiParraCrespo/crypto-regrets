@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Reflection token. Lost: ~16 WBNB",
+  "rootCause": "Price Manipulation of deflationary tokens via flashloan Vulnerable code snippet: https://bscscan.com/address/0x1954b6bd198c29c3ecf2d6f6bc70a4d41ea1cc07#code#L575 The attacker uses the tAmount to call deliver function, which is to reduce the user-specified tAmount and add it to the fee. After calling deliver, _getRate becomes smaller when _rTotal is 28% less and _tTotal remains the same. Since transaction pair is not a deflation excluded address, the balance obtained becomes larger. The attacker can directly withdraw the increased FDP and swap into WBNB Attack tx: https://bscscan.com/tx/0x09925028ce5d6a54801d04ff8f39e79af6c24289e84b301ddcdb6adfa51e901b Analysis: https://twitter.com/BeosinAlert/status/1622806011269771266",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

@@ -35,7 +35,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Lack of access control. Lost: ~$2M",
+  "rootCause": "- The function 0xf6ebebbb has no access control, and it could be called by anyone to perform swap in Curve pool. - The attacker could use the funds in the MEV to pump the price of tokens like WBTC to gain profits for his own token. Attack Path: (from blocksec) Attack tx: https://explorer.phalcon.xyz/tx/eth/0xbc08860cd0a08289c41033bdc84b2bb2b0c54a51ceae59620ed9904384287a38 Analysis: https://twitter.com/BlockSecTeam/status/1722101942061601052",
   "descriptions": [
     {
       "source": "DeFiHackLabs",
@@ -56,6 +56,10 @@
     {
       "source": "RevertIQ",
       "text": "A Curve Finance-linked MEV bot was exploited on Ethereum mainnet on November 7, 2023, losing about $2 million. The attacker abused an unauthenticated swap function, manipulating Curve pool prices via a flash loan and capturing arbitrage proceeds. A public swap function (0xf6ebebbb) in the MEV bot's contract lacked proper access control, enabling unauthorized manipulation of pool prices by any user."
+    },
+    {
+      "source": "REKT",
+      "text": "The sandwicher has become the sandwiched. $2M was lost on Tuesday night as an MEV bot got a taste of its own medicine. Is this a simple case of ‘you win some, you lose some’?"
     }
   ],
   "audit": null,
@@ -67,7 +71,8 @@
     "defillama",
     "defihacklabs",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "rekt"
   ],
   "references": [
     {
@@ -129,6 +134,11 @@
       "source": "revertiq",
       "label": "crypto.news",
       "url": "https://crypto.news/mev-bot-in-curve-finance-pool-lost-2m-following-hack/"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: RIP MEV Bot 2",
+      "url": "https://rekt.news/ripmevbot2"
     }
   ]
 }

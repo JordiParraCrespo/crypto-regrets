@@ -39,7 +39,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "precission loss. Lost: ~75 $BNB",
+  "rootCause": "The victim contract exposes a dangerous function (0x11834d4c) that allows any external user to drain the full token balance (BNBX) of any address that has granted an allowance to the contract. This occurs due to a complete lack of access control or sender validation on a transferFrom call. Vulnerable code snippet: Attack tx: https://bscscan.com/address/0x389a9ae29fbe53cca7bc8b7a4d9d0a04078e1c24 Analysis: The function 0x11834d4c executes the following logic: 1. Reads the BNBXtoken balance of an arbitrary address varg0. 2. Transfers the entire balance from varg0 to msg.sender using transferFrom. There are no checks to ensure: - That msg.sender is authorized to perform the action. Since the attacker can repeatedly call 0x11834d4c to use up the allowance of all victim users.",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

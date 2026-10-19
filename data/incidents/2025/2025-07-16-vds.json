@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Logic Flaw. Lost: 13k USD",
+  "rootCause": "The VDS token contract (0x6ce6...9D5A) acts as a wrapper that lets users deposit AVD to mint VDS. The flaw is in its burn/redemption logic: simply transferring VDS tokens to the VDS contract address itself triggers a callback that returns the underlying AVD at a 1:1 ratio, regardless of the VDS amount's true backing value and without any proper accounting. The attacker flash-loaned 20K BSC-USD from Moolah, swapped it to AVD on PancakeSwap, deposited AVD to obtain VDS, then transferred a hand-picked VDS amount (168205391822) directly to the VDS contract, which paid back AVD 1:1 — yielding more AVD than was deposited. The extra AVD was swapped back to BSC-USD to repay the flash loan and pocket ~$13K profit. The root cause is a flawed self-transfer / burn handler that redeems underlying at a fixed 1:1 rate. Vulnerable code snippet: Attack Tx: https://bscscan.com/tx/0x0e01fd8798f970fd689014cb215e622aca8b7c8c243176c5b504e0043402e31f Analysis: SlowMist_Team",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

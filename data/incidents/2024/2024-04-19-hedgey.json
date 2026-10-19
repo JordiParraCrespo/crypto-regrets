@@ -44,7 +44,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Logic Flaw. Lost: 48M USD",
+  "rootCause": "The createLockedCampaign function accepted an attacker-controlled claimLockup.tokenLocker address with no validation. When cancelCampaign was subsequently called, the contract approved the campaign's tokenLocker — set by the attacker to their own address — to spend the contract's entire token balance, rather than directly transferring funds back to the manager. The attacker flash-loaned 1,305,000 USDC from Balancer, created a campaign designating themselves as tokenLocker, immediately cancelled it (which triggered an unlimited approval of HedgeyFinance's USDC balance to the attacker), repaid the flash loan with the returned USDC, then drained the remaining USDC from the contract via transferFrom. Vulnerable code snippet: Attack Tx: 0x2606d459a50ca4920722a111745c2eeced1d8a01ff25ee762e22d5d4b1595739 Analysis: Hedgey Finance Hack Detected by CUBE3.AI",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

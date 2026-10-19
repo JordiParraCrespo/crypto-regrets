@@ -39,7 +39,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Incorrect Access Control. Lost: 996B (CGT token)",
+  "rootCause": "The primary vulnerability in Curio DAO was due to improper access control over voting power. The attacker was able to exploit this by acquiring a small number of CGT tokens, which were sufficient to grant them elevated governance privileges. Attack tx: https://app.blocksec.com/explorer/tx/eth/0x4ff4028b03c3df468197358b99f5160e5709e7fce3884cc8ce818856d058e106 Analysis: With minimal CGT holdings, the attacker was able to bypass intended governance restrictions and escalate their voting rights within the protocol’s contract. This allowed the attacker to execute the plot function, which set a malicious contract as the new exec library. Since the system relies on delegatecall to the exec contract, this effectively handed the attacker arbitrary execution rights within the context of the Curio DAO contract, enabling a wide range of malicious actions. The source code of the contract is not publicly available. For more details, refer to the official postmortem https://investcurio.medium.com/curiodaos-recovery-plan-1255427f35de.",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

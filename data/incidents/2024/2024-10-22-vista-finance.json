@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "flashmint receive error. Lost: $28,000",
+  "rootCause": "The VISTA token contract contained a critical flaw in its flashLoan implementation where it allowed users to borrow tokens that were supposed to be frozen. When handling flash loans, the contract burned the borrowed tokens but failed to verify if those tokens were in a frozen state. This enabled the attacker to effectively \"unfreeze\" tokens by borrowing them through the flash loan functionality, then accessing the freed balance and selling it through the sale contract. The combination of token freezing mechanics with the flashLoan implementation created a bypass for the token's intended transfer restrictions Vulnerable code snippet: Attack tx: https://app.blocksec.com/explorer/tx/bsc/0x84c385aab658d86b64e132e8db0c092756d5a9331a1131bf05f8214d08efba56 Analysis: https://x.com/TenArmorAlert/status/1848403791881900130",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

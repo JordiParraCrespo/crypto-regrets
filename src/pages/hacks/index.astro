@@ -5,8 +5,19 @@ import { CATEGORIES, CATEGORY_IDS } from '../../lib/taxonomy';
 import { CLASS_IDS } from '../../lib/classes';
 const chainCount = new Map<string, number>();
 for (const i of incidents) for (const c of i.chains) chainCount.set(c, (chainCount.get(c) ?? 0) + 1);
-const chains = [...chainCount].sort((a, b) => b[1] - a[1]).slice(0, 40).map(([c]) => c);
-const classOptions = [...CLASS_IDS].sort((a, b) => CLASSES[a].name.localeCompare(CLASSES[b].name));
+const chains = [...chainCount].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
+const countBy = (key: (i: (typeof incidents)[number]) => string | number | null | undefined) => {
+  const m = new Map<string, number>();
+  for (const i of incidents) {
+    const k = key(i);
+    if (k != null) m.set(String(k), (m.get(String(k)) ?? 0) + 1);
+  }
+  return m;
+};
+const classCount = countBy((i) => i.vulnClass);
+const catCount = countBy((i) => i.category);
+const yearCount = countBy((i) => i.year);
+const classOptions = [...CLASS_IDS].filter((c) => classCount.has(c)).sort((a, b) => CLASSES[a].name.localeCompare(CLASSES[b].name));
 ---
 <Base title="Incident index" description="Search and filter every indexed crypto hack by vulnerability class, pattern, chain, year and loss.">
   <section class="wrap head">
@@ -18,15 +29,16 @@ const classOptions = [...CLASS_IDS].sort((a, b) => CLASSES[a].name.localeCompare
   <section class="wrap section" style="margin-top:40px">
     <form class="filters" onsubmit="return false" aria-label="Filters">
       <input class="input q" type="search" id="q" placeholder="Search: reentrancy, Ronin, flash loan…" aria-label="Search" />
-      <select class="select" id="cls" aria-label="Vulnerability class"><option value="">All vulnerability classes</option>{classOptions.map((c) => <option value={c}>{CLASSES[c].name}</option>)}</select>
-      <select class="select" id="cat" aria-label="Pattern"><option value="">All patterns</option>{CATEGORY_IDS.map((c) => <option value={c}>{CATEGORIES[c].name}</option>)}</select>
-      <select class="select" id="chain" aria-label="Chain"><option value="">All chains</option>{chains.map((c) => <option value={c}>{c}</option>)}</select>
-      <select class="select" id="year" aria-label="Year"><option value="">All years</option>{[...YEARS].reverse().map((y) => <option value={y}>{y}</option>)}</select>
+      <select class="select" id="cls" aria-label="Vulnerability class"><option value="">All vulnerability classes</option>{classOptions.map((c) => <option value={c} data-count={classCount.get(c)}>{CLASSES[c].name}</option>)}</select>
+      <select class="select" id="cat" aria-label="Pattern"><option value="">All patterns</option>{CATEGORY_IDS.map((c) => <option value={c} data-count={catCount.get(c) ?? 0}>{CATEGORIES[c].name}</option>)}</select>
+      <select class="select" id="chain" aria-label="Chain"><option value="">All chains</option>{chains.map(([c, n]) => <option value={c} data-count={n}>{c}</option>)}</select>
+      <select class="select" id="year" aria-label="Year"><option value="">All years</option>{[...YEARS].reverse().map((y) => <option value={y} data-count={yearCount.get(String(y)) ?? 0}>{y}</option>)}</select>
       <select class="select" id="min" aria-label="Minimum loss"><option value="0">Any loss</option><option value="1000000">≥ $1M</option><option value="10000000">≥ $10M</option><option value="100000000">≥ $100M</option></select>
       <select class="select" id="by" aria-label="Classified by"><option value="">Any classifier</option><option value="defillama">Analyst label</option><option value="typesafe">TypeSafe</option><option value="curated">Curated</option><option value="keywords">Keyword rules</option><option value="dis">Model disagrees</option></select>
       <label class="toggle"><input type="checkbox" id="poc" /> <span>Has PoC</span></label>
       <label class="toggle"><input type="checkbox" id="fl" /> <span>Flash loan</span></label>
       <select class="select" id="sort" aria-label="Sort"><option value="date">Newest first</option><option value="amount">Largest first</option></select>
+      <button type="button" class="reset" id="reset" hidden>Clear filters</button>
     </form>
     <p class="mono caption fog" id="count" aria-live="polite" style="margin:16px 0 8px"></p>
     <div class="table-wrap">
@@ -61,6 +73,10 @@ const classOptions = [...CLASS_IDS].sort((a, b) => CLASSES[a].name.localeCompare
       </table>
     </div>
     <p class="body-sm fog" id="empty" hidden style="padding:48px 0;text-align:center">No incidents match these filters.</p>
+    <div class="more" id="more" hidden>
+      <button type="button" class="btn btn-compact" id="more-btn">Show 100 more</button>
+      <span class="mono caption fog" id="more-count"></span>
+    </div>
   </section>
   <script>
     const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
@@ -73,7 +89,12 @@ const classOptions = [...CLASS_IDS].sort((a, b) => CLASSES[a].name.localeCompare
       const el = $<HTMLInputElement>(id);
       if (v != null) el.type === 'checkbox' ? (el.checked = v === '1') : (el.value = v);
     }
-    function apply() {
+    const syncCombos = () => document.querySelectorAll('select.select').forEach((s) => s.dispatchEvent(new Event('combo:sync')));
+    syncCombos();
+    const PAGE = 100;
+    let limit = PAGE;
+    function apply(reset = true) {
+      if (reset) limit = PAGE;
       const q = $<HTMLInputElement>('q').value.trim().toLowerCase();
       const v = (id: string) => $<HTMLSelectElement>(id).value;
       const on = (id: string) => $<HTMLInputElement>(id).checked;
@@ -92,11 +113,16 @@ const classOptions = [...CLASS_IDS].sort((a, b) => CLASSES[a].name.localeCompare
           (!on('poc') || d.p === '1') &&
           (!on('fl') || d.fl === '1') &&
           (!by || (by === 'dis' ? d.dis === '1' : d.by === by));
-        r.hidden = !ok;
+        r.dataset.ok = ok ? '1' : '';
         if (ok) n++;
       }
       const sorted = [...rows].sort(v('sort') === 'amount' ? (a, b) => Number(b.dataset.a) - Number(a.dataset.a) : (a, b) => b.dataset.d!.localeCompare(a.dataset.d!));
+      // Only the first `limit` matches are shown; rendering all 3,000 rows makes the page enormous.
+      let shown = 0;
+      for (const r of sorted) r.hidden = !(r.dataset.ok && shown++ < limit);
       tbody.append(...sorted);
+      $('more').hidden = n <= limit;
+      $('more-count').textContent = `Showing ${Math.min(limit, n).toLocaleString('en')} of ${n.toLocaleString('en')}`;
       $('count').textContent = `${n.toLocaleString('en')} of ${rows.length.toLocaleString('en')} incidents`;
       $('empty').hidden = n > 0;
       const p = new URLSearchParams();
@@ -105,19 +131,38 @@ const classOptions = [...CLASS_IDS].sort((a, b) => CLASSES[a].name.localeCompare
         const val = el.type === 'checkbox' ? (el.checked ? '1' : '') : el.value;
         if (val && !(id === 'min' && val === '0') && !(id === 'sort' && val === 'date')) p.set(id, val);
       }
+      $('reset').hidden = !['q', 'cls', 'cat', 'chain', 'year', 'min', 'by', 'poc', 'fl'].some((id) => p.has(id));
       history.replaceState(null, '', p.toString() ? `?${p}` : location.pathname);
     }
-    for (const id of ids) $(id).addEventListener('input', apply);
+    $('reset').addEventListener('click', () => {
+      for (const id of ids) {
+        const el = $<HTMLInputElement>(id);
+        if (el.type === 'checkbox') el.checked = false;
+        else if (id !== 'sort') el.value = id === 'min' ? '0' : '';
+      }
+      syncCombos();
+      apply();
+      $('q').focus();
+    });
+    for (const id of ids) $(id).addEventListener('input', () => apply());
+    $('more-btn').addEventListener('click', () => {
+      limit += PAGE;
+      apply(false);
+    });
     apply();
+  </script>
+  <script>
+    import '../../scripts/combobox';
   </script>
 </Base>
 <style>
   .head { padding-top: 80px; display: grid; gap: 20px; }
   .filters { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; position: sticky; top: 64px; z-index: 5; background: rgba(255,255,255,0.92); backdrop-filter: blur(12px); padding: 12px 0; }
-  .q { flex: 1 1 280px; }
-  .select { max-width: 100%; }
-  .toggle { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; padding: 0 6px; cursor: pointer; }
-  .toggle input { accent-color: var(--color-jet-ink); }
+  .q { flex: 1 1 100%; border-radius: var(--r-pill); padding: 11px 16px 11px 40px; background: var(--color-paper) no-repeat 16px center / 16px url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23858585' stroke-width='1.5'%3E%3Ccircle cx='7' cy='7' r='4.5'/%3E%3Cpath d='M10.5 10.5L14 14'/%3E%3C/svg%3E"); }
+  .reset { font: 500 14px/20px var(--font-sans); color: var(--color-jet-ink); background: none; border: 0; padding: 9px 8px; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+  .reset:hover { color: var(--color-steel); }
+  .reset:focus-visible { outline: 2px solid var(--color-jet-ink); outline-offset: 2px; border-radius: 4px; }
   .poc { margin-left: 8px; padding: 0 8px; }
+  .more { display: flex; align-items: center; gap: 16px; justify-content: center; padding: 32px 0 0; }
   @media (max-width: 960px) { .filters { position: static; } }
 </style>

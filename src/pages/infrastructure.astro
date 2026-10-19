@@ -26,7 +26,7 @@ const byImpact = ADVISORY_IMPACTS.map((im) => ({ im, n: advisories.filter((a) =>
       <div><h2 class="h-sub">Disclosed vulnerabilities</h2><p class="body-sm fog">{advisories.length} advisories across {projects.length} projects. Impact is our keyword classification of each title.</p></div>
     </div>
     <div class="chips" style="margin-bottom:24px">{byImpact.map((x) => <span class="pill">{LABEL[x.im]} <span class="fog">{x.n}</span></span>)}</div>
-    <form class="filters" onsubmit="return false"><select class="select" id="proj" aria-label="Project"><option value="">All projects</option>{projects.map((p) => <option value={p}>{p}</option>)}</select></form>
+    <form class="filters" onsubmit="return false"><select class="select" id="proj" aria-label="Project"><option value="">All projects</option>{projects.map((p) => <option value={p} data-count={advisories.filter((a) => a.project === p).length}>{p}</option>)}</select></form>
     <div class="table-wrap">
       <table>
         <thead><tr><th>Disclosed</th><th>Project</th><th>Advisory</th><th class="hide-sm">Impact</th><th class="hide-sm">Severity</th></tr></thead>
@@ -50,6 +50,9 @@ const byImpact = ADVISORY_IMPACTS.map((im) => ({ im, n: advisories.filter((a) =>
     sel.addEventListener('input', () => {
       for (const r of document.querySelectorAll<HTMLTableRowElement>('#adv tr')) r.hidden = !!sel.value && r.dataset.p !== sel.value;
     });
+  </script>
+  <script>
+    import '../scripts/combobox';
   </script>
 </Base>
 <style>

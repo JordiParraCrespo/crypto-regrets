@@ -35,7 +35,7 @@
   },
   "bridge": false,
   "language": null,
-  "rootCause": "Arbitary External Call. Lost: 18167.8 USD",
+  "rootCause": "Kame's aggregation router (0x14bb98...4d80) on Sei exposed a swap(SwapParams) function that performed an arbitrary external call to an attacker-controlled executor address with attacker-controlled executeParams calldata, all under the router's own context. Because the router itself held token approvals from users, the attacker set executor to the USDC token address and executeParams to an encoded transferFrom(targetUser, attacker, fullBalance) call. The router dutifully executed it, pulling the victim's entire approved USDC balance via the router's allowance. There was no allow-listing of call targets/selectors or validation that the external call wasn't a token transferFrom abusing user approvals, resulting in ~18,167 USD stolen. Vulnerable code snippet: Attack Tx: https://seiscan.io//tx/0x6150ec6b2b1b46d1bcba0cab9c3a77b5bca218fd1cdaad1ddc7a916e4ce792ec Analysis: https://x.com/SupremacyHQ/status/1966909841483636849",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

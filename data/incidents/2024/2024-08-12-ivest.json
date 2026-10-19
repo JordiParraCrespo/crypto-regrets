@@ -39,7 +39,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Business logic flaw. Lost: ~338 WBNB",
+  "rootCause": "The attack focused on the MakeDonation function, which is invoked when transferring iVest tokens. This function burns or donates additional tokens from the sender in certain cases. Deducting more tokens than the sending amount from the sender causes serious issues in the swap pool because the attacker can use it to decrease the number of tokens in the pool, altering the k ratio and enabling price manipulation. Vulnerable code snippet: Attack tx: https://app.blocksec.com/explorer/tx/bsc/0x12f27e81e54684146ec50973ea94881c535887c2e2f30911b3402a55d67d121d Analysis: https://blog.verichains.io/p/ivest-token-vulnerability-how-an",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

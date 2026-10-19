@@ -35,7 +35,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Business Logic Flaw. Lost: ~$21k",
+  "rootCause": "StakingDYNA contract does not handle the deposit time correctly. Vulnerable code snippet: https://bscscan.com/address/0xa7b5eabc3ee82c585f5f4ccc26b81c3bd62ff3a9#code#F1#L79 In the Contract, Users can deposit $DYNA to claim rewards, the interest is calculated based on the deposit duration. However, a vulnerability exists in the contract, as it fails to update the \"lastProcessAt\" parameter for any deposit. Consequently, the staking duration is miscalculated. Attack tx: https://bscscan.com/tx/0x06bbe093d9b84783b8ca92abab5eb8590cb2321285660f9b2a529d665d3f18e4 https://bscscan.com/tx/0xc09678fec49c643a30fc8e4dec36d0507dae7e9123c270e1f073d335deab6cf0 Analysis: https://twitter.com/BeosinAlert/status/1628301635834486784 https://twitter.com/BlockSecTeam/status/1628319536117153794",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

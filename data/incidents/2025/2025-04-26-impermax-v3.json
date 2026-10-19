@@ -39,7 +39,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "FlashLoan Price Oracle Manipulation. Lost: 62,628.66 USD",
+  "rootCause": "The Impermax V3 protocol on Base contained a business logic flaw: it assigned full collateral value to uncollected (pending) Uniswap V3 LP fees. The attacker flash-borrowed from Morpho, added liquidity to a low-liquidity WETH/USDC 1% pool on Uniswap V3, and performed circular swaps to rapidly inflate accrued fees on their LP position. They then borrowed WETH from Impermax against this artificially inflated fee-collateral. Next, they auto-compounded those fees into a new LP position at the wrong price range, sharply devaluing the position and pushing the protocol into bad debt. Finally, the attacker called the restructureBadDebt function to bypass normal liquidation procedures and retain the borrowed funds, causing approximately $300K in losses. Attack Tx: 0xaafafcbb0dcd86ed78e3a0facc4748c48a36ca5a74d107c383e807b0b89758e3 Analysis: Impermax V3 Exploit: Post Mortem Inside the Impermax V3 Hack - Verichains",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

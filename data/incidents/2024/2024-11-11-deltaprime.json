@@ -36,7 +36,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Reentrancy. Lost: $12.9 K",
+  "rootCause": "The exploit stemmed from two primary vulnerabilities: the claimReward() function in TraderJoeV2ArbitrumFacet lacked validation on the input pair parameter, allowing for the submission of malicious data to manipulate system logic, and the swapDebtParaSwap() function, inherited by the smart loan instance, inconsistently handled the _repayAmount parameter without proper validation between processing steps, enabling the attacker to set it to zero and bypass repayment obligations. By combining these flaws through a flash loan, the attacker fabricated a \"swap fee\" using the unvalidated claimReward() function after performing a zero-repayment \"swap\" via the malleable _repayAmount, ultimately siphoning 66 WETH from the DeltaPrime pool. The absence of robust input sanitization and consistent variable handling were the fundamental root causes that enabled this sophisticated attack. Vulnerable code snippet: Attack tx: https://arbiscan.io/tx/0x6a2f989b5493b52ffc078d0a59a3bf9727d134b403aa6e0bf309fd513a728f7f Analysis: https://blog.verichains.io/p/deltaprime-exploit-analysis",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

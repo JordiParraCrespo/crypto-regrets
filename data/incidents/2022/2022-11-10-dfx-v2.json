@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Reentrancy. Lost: $4M",
+  "rootCause": "The victim contract uses contract balance for the repayment judgment. As a result, the attacker uses deposit() to bypass the flashloan repayment. Vulnerable code snippet: Attack tx: https://etherscan.io/tx/0x6bfd9e286e37061ed279e4f139fbc03c8bd707a2cdd15f7260549052cbba79b7 Analysis: https://twitter.com/BlockSecTeam/status/1590960299246780417 https://twitter.com/BeosinAlert/status/1591012525914861570 https://twitter.com/AnciliaInc/status/1590839104731684865 https://twitter.com/peckshield/status/1590831589004816384",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

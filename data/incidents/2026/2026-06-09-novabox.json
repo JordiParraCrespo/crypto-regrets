@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Constructor Dividend Checkpoint Bypass. Lost: 56.73 ETH",
+  "rootCause": "NovaBox attempts to block contract depositors with an extcodesize(msg.sender) == 0 check, but a contract executing inside its own constructor has zero runtime code, so the check passes. Worse, when a new dual ETH/NOVA depositor is added to the dividend list, NovaBox does not initialize that depositor's dividend checkpoint to the current accumulator value. The attacker, using an Aave WETH flash loan and a NOVA seed, deposits NOVA and ETH from inside a constructor (bypassing the extcodesize gate), joins the dividend list with a zero checkpoint, then immediately withdraws its ETH and is paid out the entire historical ETH dividend accrued since the checkpoint origin - dividends it never earned. This nets ~56.73 ETH. Vulnerable code snippet: Attack Tx: https://etherscan.io/tx/0x0cfa357e9e4db1540246f17cb6bfa0634ff8727d7cf241b63fb22605021c8844 Analysis: https://x.com/DefimonAlerts/status/2064616360466919793",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

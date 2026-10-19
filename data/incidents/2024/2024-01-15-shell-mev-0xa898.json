@@ -39,7 +39,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "lack of access control. Lost: ~1K $BUSD",
+  "rootCause": "The Shell MEV bot contracts (Robot1 0xa898... and Robot2 0x923A...) exposed a swap-execution function (selector 0x5f90d725) that lacked any caller authorization (no owner/operator check). Because the bots already held token approvals from their associated victim wallets, the attacker could call this function directly, passing the victims' addresses and their full BUSD balances as parameters, instructing the bot to swap each victim's BUSD into SHELL tokens and deliver the resulting tokens to the attacker. The attacker repeated the call to drain the victims' BUSD, then swapped the SHELL back to BUSD via PancakeSwap. Vulnerable code snippet: Attack Tx: https://bscscan.com/tx/0x24f114c0ef65d39e0988d164e052ce8052fe4a4fd303399a8c1bb855e8da01e9",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

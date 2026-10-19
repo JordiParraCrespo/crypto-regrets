@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Signature Verification Bypass. Lost: ~5.45 ETH",
+  "rootCause": "The Mure Distribution contract's distribute function moves tokens from a victim to an arbitrary recipient based on a Distribution struct plus a signer/signature, but it let the caller supply the signer address and validated the signature via ERC-1271 against that caller-controlled signer. The attacker deployed a malicious contract that (a) implements isValidSignature to always return the ERC-1271 magic value, (b) implements supportsInterface/poolState to masquerade as a legitimate Mure pool/source, and passed itself as both source and signer. With validation thus self-satisfied, the attacker called distribute to pull 4,848,683,803,036 QUEST from the victim (who had granted allowance to the distributor) into the attacker contract, then routed QUEST -> USDC -> WETH via Uniswap V3 and unwrapped to ~5.45 ETH. The root cause is that signature/pool verification trusted attacker-supplied contracts instead of binding to a fixed trusted signer. Vulnerable code snippet: Attack Tx: https://etherscan.io/tx/0xb83040361a0ec72fa2d06ad69493226518a5f8b5d96c19b400626248f9c5b798 Analysis: https://x.com/DefimonAlerts/status/2058211424761942226",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

@@ -13,8 +13,8 @@
   "vulnClass": null,
   "vulnClassBy": null,
   "aiClass": {
-    "id": "hot-wallet-compromise",
-    "confidence": 0.31
+    "id": "key-leak-infrastructure",
+    "confidence": 0.28
   },
   "technique": "Private Key Compromised",
   "classificationNote": null,
@@ -29,17 +29,21 @@
         "p": 1
       }
     ],
-    "flashLoan": 0.02,
-    "stateActor": 0.03,
-    "hasRootCause": 0.29
+    "flashLoan": 0.03,
+    "stateActor": 0.04,
+    "hasRootCause": 0.26
   },
   "bridge": false,
   "language": null,
-  "rootCause": "On 2024-10-24, roughly $20 million in USDC, USDT, aUSDC, and ETH moved from a U.S. government linked Ethereum wallet associated with seized Bitfinex assets. Public reporting and on-chain monitoring flagged the transfers as unauthorized, but the exact authorization failure has not been publicly established. Most reports later stated that approximately $19.3 million was returned within a day. The exact authorization failure remains unknown. Public reporting described the event as a likely wallet compromise affecting a U.S. government linked Ethereum address that held seized Bitfinex assets. Available evidence does not establish whether the transfers resu…",
+  "rootCause": "According to a MistTrack tweet, a suspicious outflow was detected from a wallet controlled by the U.S. government (0xc9E...34c): nearly $20 million was transferred to 0x3486ee700ccaf3e2f9c5ec9730a2e916a4740a9f, including: 5.4M USDC, 1.12M USDT, 13.7M aUSDC and 178 ETH. Most tokens were swapped into ETH. Approximately 19.3M worth of tokens were later returned to the U.S. government address.",
   "descriptions": [
     {
       "source": "RevertIQ",
       "text": "On 2024-10-24, roughly $20 million in USDC, USDT, aUSDC, and ETH moved from a U.S. government linked Ethereum wallet associated with seized Bitfinex assets. Public reporting and on-chain monitoring flagged the transfers as unauthorized, but the exact authorization failure has not been publicly established. Most reports later stated that approximately $19.3 million was returned within a day. The exact authorization failure remains unknown. Public reporting described the event as a likely wallet compromise affecting a U.S. government linked Ethereum address that held seized Bitfinex assets. Available evidence does not establish whether the transfers resu…"
+    },
+    {
+      "source": "SlowMist",
+      "text": "According to a MistTrack tweet, a suspicious outflow was detected from a wallet controlled by the U.S. government (0xc9E...34c): nearly $20 million was transferred to 0x3486ee700ccaf3e2f9c5ec9730a2e916a4740a9f, including: 5.4M USDC, 1.12M USDT, 13.7M aUSDC and 178 ETH. Most tokens were swapped into ETH. Approximately 19.3M worth of tokens were later returned to the U.S. government address."
     }
   ],
   "audit": null,
@@ -47,7 +51,8 @@
   "poc": null,
   "sources": [
     "defillama",
-    "revertiq"
+    "revertiq",
+    "slowmist"
   ],
   "references": [
     {
@@ -69,6 +74,11 @@
       "source": "revertiq",
       "label": "cryptonews.com",
       "url": "https://cryptonews.com/news/us-govt-linked-crypto-wallet-hacked-for-20m/"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/MistTrack_io/status/1849663895545462919"
     }
   ]
 }

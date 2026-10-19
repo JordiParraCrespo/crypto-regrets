@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Rounding Error && Business Logic Flaw. Lost: ~$2M",
+  "rootCause": "The attack exploited a rounding down issue in the linear pools, letting the attacker manipulate the token exchange rate in the composable pool. By reducing BPT supply to zero and then performing a reverse swap, they achieved a nearly 1:1 exchange rate, which was lower than the linear pool’s rate Vulnerable Code Snippet: Attack Transaction: https://etherscan.io/tx/0x2a027c8b915c3737942f512fc5d26fd15752d0332353b3059de771a35a606c2d Analysis: https://slowmist.medium.com/review-and-recommendations-of-balancer-incident-d2b31b5bd863 https://medium.com/balancer-protocol/rate-manipulation-in-balancer-boosted-pools-technical-postmortem-53db4b642492 https://blocksecteam.medium.com/yet-another-risk-posed-by-precision-loss-an-in-depth-analysis-of-the-recent-balancer-incident-fad93a3c75d4",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

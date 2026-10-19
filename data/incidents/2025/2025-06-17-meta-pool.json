@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Infinite Mint via unvalidated ERC4626 mint. Lost: 25k USD",
+  "rootCause": "The mpETH liquid staking contract exposes a public mint(uint256 shares, address receiver) function with no access control — any address can call it to mint mpETH shares to an arbitrary receiver without depositing any ETH. Normally in an ERC-4626 vault, mint is meant to be paired with an equivalent asset deposit, but mpETH's implementation allowed free share minting. The attacker flashloaned 200 WETH from Balancer, legitimately deposited 107 ETH via depositETH to receive approximately 97 mpETH, then immediately called mint(97 ether, address(this)) to claim a second equal batch of mpETH for free, doubling their mpETH balance. Both batches were then swapped for ETH through the mpETH/ETH pool and Uniswap V3, generating approximately 8.98 ETH of profit per round. The exploit was carried out inside a contract constructor to bypass any Address.isContract() guard, and was repeated approximately 15 times across multiple blocks, draining an estimated $140K total. Vulnerable code snippet: Attack Tx: 0x57ee419a001d85085478d04dd2a73daa91175b1d7c11d8a8fb5622c56fd1fa69 Analysis: Meta Pool Announcement",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

@@ -39,7 +39,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Business Logic Flaw. Lost: ~$140K",
+  "rootCause": "INK Finance's Payroll contract computed an employee's claimable amount from the current USDT balance held by the treasury rather than from a fixed, pre-funded payroll entitlement. The attacker took a ~24,982 USDT Balancer flash loan, transferred the full borrowed amount into the treasury to artificially inflate its balance, then called claimPayroll(employeeId=3). Because the payout scaled with the inflated treasury balance, the contract paid out far more than the legitimate salary; the attacker then repaid the flash loan and swept the difference (~140,180 USDT, ~$140K) to itself. The claim also relied on an ERC165 supportsInterface callback hook (interface id 0xf3384444) on the receiver, which the attack contract implemented. Root cause: payroll entitlement derived from live, externally-manipulable treasury balance with no validation of the actual owed amount. Vulnerable code snippet: Attack Tx: https://polygonscan.com/tx/0xb469a24ec737be16fe41367a7b5b315c7f03b4e0ff3af50b3a2db03b3066b982 Analysis: https://www.cryptotimes.io/2026/05/11/ink-finance-exploited-on-polygon-140k-usdt-drained-in-flash-loan-attack/",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

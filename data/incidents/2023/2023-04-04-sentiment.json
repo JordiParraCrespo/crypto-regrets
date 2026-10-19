@@ -35,7 +35,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Read-Only-Reentrancy. Lost: $1M",
+  "rootCause": "Attacker re enter Balancer Vaults execute malicious code before pool balances were updated and steal money using overpriced collateral. the _joinOrExit function is called whenever the joinPool or exitPool is called by an external protocol user. Vulnerable code snippet: Attack tx: https://arbiscan.io/tx/0xa9ff2b587e2741575daf893864710a5cbb44bb64ccdc487a100fa20741e0f74d Analysis: https://twitter.com/peckshield/status/1643417467879059456 https://twitter.com/spreekaway/status/1643313471180644360 https://medium.com/coinmonks/theoretical-practical-balancer-and-read-only-reentrancy-part-1-d6a21792066c https://forum.balancer.fi/t/reentrancy-vulnerability-scope-expanded/4345",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

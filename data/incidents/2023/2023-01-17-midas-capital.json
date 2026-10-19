@@ -35,7 +35,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Read-only Reentrancy. Lost: $650k",
+  "rootCause": "Blocksec: It is due to an unexcepted external call before updating critical variables->reentrancy & miscalculation of the token prices. The key points to make profits are: 1) the calculation of a position's collateral depends on self.D and totalSupply; 2) self.D is updated after an unexcepted callback, so the four borrows in step 5 to use an outdated self.D. Vulnerable code snippet: https://bscscan.com/address/0x13a2eb858aa1ace895a2a89ac6afd48bd6b1f8d7#code#F6#L335 Image from blocksec Attack tx: https://polygonscan.com/tx/0x0053490215baf541362fc78be0de98e3147f40223238d5b12512b3e26c0a2c2f Analysis: https://twitter.com/peckshield/status/1614774855999844352 https://twitter.com/BlockSecTeam/status/1614864084956254209 https://www.kalos.xyz/blog/midas-capital-hack-analysis https://blog.solidityscan.com/midas-capital-hack-analysis-ae59ed052729 https://neptunemutual.com/blog/understanding-midas-capital-exploit/",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

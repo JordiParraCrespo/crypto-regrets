@@ -40,7 +40,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Precision Loss. Lost: 120M USD",
+  "rootCause": "Balancer V2 ComposableStablePools scale token amounts by per-token rate-based scaling factors before running StableMath. The attacker exploited a rounding/precision-loss flaw in the scaling: when computing amountOutScaled = mulDown(tokenAmountOut, scalingFactor), the downward rounding combined with a chosen trickAmt = 10000 / ((scalingFactor - 1e18) * 10000 / 1e18) allowed swaps where the rounded-down scaled output systematically understated the input required, letting the attacker repeatedly extract value while the pool invariant barely moved. Through a carefully crafted multi-step batchSwap (GIVEN_OUT) sequence (phase 1 to drain balances toward a tiny initBalance, phase 2 to iterate the rounding trick over many rounds, phase 3 to mint/extract BPT), the attacker manipulated the invariant/BPT pricing and withdrew internal balances to the beneficiary, draining roughly 120M USD across multiple pools (osETH/wETH, wstETH/wETH). Vulnerable code snippet: Attack Tx: https://app.blocksec.com/explorer/tx/eth/0x6ed07db1a9fe5c0794d44cd36081d6a6df103fab868cdd75d581e3bd23bc9742 Analysis: https://x.com/BlockSecTeam/status/1986057732810518640",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

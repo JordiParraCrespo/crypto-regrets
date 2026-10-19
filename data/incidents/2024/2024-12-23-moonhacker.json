@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "improper input validation. Lost: 318.9 k",
+  "rootCause": "The exploit stemmed from improper input validation and a lack of access control in the executeOperation function of the MoonHacker Vault contract. This vulnerability allowed the attacker to pass a malicious contract as the mToken address, bypassing intended security checks. By doing so, the attacker gained unauthorized token approvals and could manipulate the contract's logic to their advantage, ultimately leading to the unauthorized withdrawal of funds. The absence of a whitelist for the mToken address and inadequate restrictions on who could call executeOperation were the fundamental flaws that enabled this exploit. Vulnerable code snippet: Attack tx: https://app.blocksec.com/explorer/tx/optimism/0xd12016b25d7aef681ade3dc3c9d1a1cc12f35b2c99953ff0e0ee23a59454c4fe Analysis: https://blog.verichains.io/p/moonhacker-vault-hack-analysis",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

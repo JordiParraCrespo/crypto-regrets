@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Protocol Token incompatible. Lost: $13k",
+  "rootCause": "NUM token incompatible with the Multichain Router. The attacker took advantage of a vulnerability in the Multichain bridge Router contract by exploiting the lack of compatibility between the NUM token and the Router. The NUM token did not implement the required permit() function but had a fallback() function that could be exploited. To carry out the attack, the attacker created a fake token called anyToken, using NUM as the underlying token. They then deceived the Multichain Router by calling the anySwapOutUnderlyingWithPermit() function and providing the fake anyToken and a forged signature as parameters. Since the fallback function was present in NUM, the invocation of NUM.permit() succeeded. Subsequently, the attacker exchanged all the NUM tokens for approximately 13 Ether, making a profit from the attack. Vulnerable code snippet: https://etherscan.io/address/0xd39015041518064743d955cf550c611b0b68888c#code Attack tx: https://explorer.phalcon.xyz/tx/eth/0x8a8145ab28b5d2a2e61d74c02c12350731f479b3175893de2014124f998bff32 Analysis: https://twitter.com/BlockSecTeam/status/1595346020237352960 https://medium.com/numbers-protocol/investigation-report-of-multi-chain-bridge-incident-d4773cb3e87b https://neptunemutual.com/blog/taking-a-closer-look-at-the-numbers-protocol-hack/",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

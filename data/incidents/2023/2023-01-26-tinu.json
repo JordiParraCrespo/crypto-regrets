@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Reflection token. Lost: 22 ETH",
+  "rootCause": "reflective token skim abuse Vulnerable code snippet: https://etherscan.io/address/0x2d0e64b6bf13660a4c0de42a0b88144a7c10991f#code#L919 Tom Inu is a reflective token, aka each time a transfer happens holders will earn fees from it. 1. The Attacker Flashloan many WETH 2. Swap many WETH -> Tom Inu tokens, giving Uniswapv2 Pair large fees 3. Call skim on the Pair (gets fee). The skim function will balance the supply of pair and send the excess funds to the specified address. 4. Swap Tom Inu to WETH for profit. Attack tx: https://etherscan.io/tx/0x6200bf5c43c214caa1177c3676293442059b4f39eb5dbae6cfd4e6ad16305668 Analysis: https://twitter.com/libevm/status/1618731761894309889",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

@@ -36,7 +36,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Faulty Oracle. Lost: 1M USD",
+  "rootCause": "A Moonwell market on Base used a faulty oracle that overvalued wrsETH collateral (the mwrsETH cToken). The attacker flash-loaned wrsETH from a Velodrome/Aerodrome CL pool, supplied it to mint mwrsETH, entered the market as collateral, and was then able to borrow far more wstETH (BORROW_AMOUNT) than the deposited collateral's true value should have allowed because the oracle reported an inflated price for the collateral. The borrowed wstETH was swapped to WETH, then WETH back to wrsETH to repay the flash loan, leaving ~1M USD profit. The root cause is the lending market's reliance on an oracle that did not reflect the real wrsETH/wstETH price, enabling an under-collateralized over-borrow. Vulnerable code snippet: Attack Tx: https://app.blocksec.com/explorer/tx/base/0x190a491c0ef095d5447d6d813dc8e2ec11a5710e189771c24527393a2beb05ac Analysis: https://www.halborn.com/blog/post/explained-the-moonwell-hack-november-2025",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

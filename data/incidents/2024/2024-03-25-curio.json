@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Curio's MakerDAO-based smart contract on Ethereum was exploited for $16 million, due to a critical vulnerability involving voting power privileges.",
+  "rootCause": "CurioDAO's Ethereum-side smart contract was based on a MakerDAO governance fork. A vulnerability in the voting power privilege access control logic allowed an attacker who held only a small number of Curio Governance Tokens (CGT) to disproportionately inflate their voting weight. With this inflated voting power, the attacker invoked the plot function to register a malicious external contract as the protocol's executive library. Because the governance contract used delegatecall to execute library code, the malicious contract ran with the full identity and storage of CurioDAO's own contract. This allowed the attacker to mint approximately 1 billion CGT tokens, which were then laundered via token swaps and cross-chain transfers. The broader damage was estimated at $16M across the ecosystem; the $100K figure represents the portion directly traceable to the initial exploit transaction. Polkadot and Curio Chain contracts were not affected. Attack Tx: 0x4ff4028b03c3df468197358b99f5160e5709e7fce3884cc8ce818856d058e106 Analysis: Explained: The Curio Hack (March 2024)",
   "descriptions": [
     {
       "source": "REKT",

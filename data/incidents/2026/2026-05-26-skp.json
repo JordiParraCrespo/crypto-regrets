@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Owner Backdoor LP Burn + Price Manipulation. Lost: ~$212K USD",
+  "rootCause": "The SKP token exposes ownerBurnLiquidityPairTokens(uint256), an owner-only backdoor that burns SKP held directly inside the SKP/USDT PancakeSwap LP pair. The deployer/owner-attacker first burns the bulk (~95%) of the SKP sitting in the pair, then calls sync() on the pair to force the reserves to match the now-depleted SKP balance. Because the USDT reserve is untouched while the SKP reserve is slashed, the on-chain SKP/USDT price spikes (~20x). The owner-attacker then supplies the over-valued SKP as collateral on Venus/Lista DAO and borrows out BTCB + USDT (~$212K). This is a privileged-backdoor + oracle/price-manipulation incident: the token contract should never have been able to burn assets out of an external LP pair on the owner's command. Vulnerable code snippet: Attack Tx: https://bscscan.com/tx/0xbc01ea37bd2ff8f6aa6afcfbe0406114ff27a01e9aa56102bfa4ad8a0c2f25ee Analysis: DeFiHackLabs PoC",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

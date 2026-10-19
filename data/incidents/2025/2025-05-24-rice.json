@@ -39,7 +39,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Lack of Access Control. Lost: ~ $88.1K",
+  "rootCause": "The vulnerable (unverified) contract at 0xcfE0...5563 behaves like a BentoBox/Kashi-style token vault that holds user-deposited RICE. Its access control was broken: anyone could call registerProtocol() and setMasterContractApproval() to set themselves (their own contract) as an approved \"master contract\" operator on behalf of an arbitrary user, without that user's signature (the call passed empty v/r/s and the contract accepted it). With that self-granted approval, the attacker called withdraw(RICE, user, attacker, balance, share) to pull the victim's entire ~22.19M RICE balance out of the vault, then swapped RICE -> USDT -> USDC -> WETH on Uniswap V3, netting ~34.5 WETH (~$88.1K). Vulnerable code snippet: Attack Tx: https://basescan.org/tx/0x8421c96c1cafa451e025c00706599ef82780bdc0db7d17b6263511a420e0cf20 Analysis: TenArmorAlert",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

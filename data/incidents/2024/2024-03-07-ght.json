@@ -39,7 +39,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Business Logic Flaw. Lost: ~57K",
+  "rootCause": "The GHT token's transferFrom is broken: it lets an arbitrary caller move tokens out of any from address without a valid allowance (no allowance check). The attacker exploited this to first pull almost all GHT out of the WETH/GHT Uniswap V2 pair into the GHT contract and call sync() to crash the recorded reserve, then push GHT back into the pair. With the pair's recorded reserves now far below its actual GHT balance, the attacker computed the standard constant-product amountOut and called swap(0, amountOut, ...) to extract WETH essentially for free. Vulnerable code snippet: Attack Tx: https://app.blocksec.com/explorer/tx/eth/0xd17266bcdf30cbcbd7d0b5a006f43141981aeee2e1f860f68c9a1805ecacbc68",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

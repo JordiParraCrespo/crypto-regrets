@@ -35,7 +35,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Access Control. Lost: ~ $285.7K",
+  "rootCause": "The vulnerable ERC1967Proxy contract (0x54Cd...3525) exposed a privileged function (selector 0x03b79c24) that had no access-control check on the caller. The attacker invoked this function passing their own attack contract as the argument, which effectively authorized/registered the attacker as an operator over the contract's weETH holdings. The attacker then executed a Uniswap V3 swap on the weETH/WETH pool (0x202A...9b93) and, in the uniswapV3SwapCallback, paid for the swap using the victim contract's own weETH tokens (which the prior privileged call gave the attacker control over), receiving ~114.5 WETH out. The WETH was unwrapped to ETH and sent to the attacker, netting roughly $285.7K. The core flaw is a missing onlyOwner/authorization modifier on a state-changing privileged function, letting any external caller take control of the protocol's assets. Vulnerable code snippet: Attack Tx: https://app.blocksec.com/explorer/tx/eth/0xa57ec56af91ec70517ca71ca50101958d9c2ec9fdb61edcf35a9081c375725c2 Analysis: TenArmorAlert",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

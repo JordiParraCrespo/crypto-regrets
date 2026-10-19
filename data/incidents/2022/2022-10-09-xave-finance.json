@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Malicious Proposal Mint & Transfer Ownership. Lost: 100,000,000,000,000 RNBW",
+  "rootCause": "Xave Finance used a Reality.eth-based DAO module (a Zodiac SafeSnap-style Gnosis Safe module) whose addProposal and proposal-execution flow were permissionless and trusted the Reality.eth oracle answer without proper validation or quorum/bond enforcement. Anyone could register an arbitrary proposal by precomputing transaction hashes with getTransactionHash, calling addProposal, then submitAnswer on the Reality.eth question with a tiny bond to mark it resolved \"true\". After the ~24h cooldown elapsed, the attacker called executeProposalWithIndex to push four arbitrary transactions through the Safe: minting a huge amount of RNBW to themselves and transferring ownership of the RNBW token, LPOP token, and the Primary Bridge to the attacker EOA. Vulnerable code snippet: Attack Tx: https://etherscan.io/tx/0xc18ec2eb7d41638d9982281e766945d0428aaeda6211b4ccb6626ea7cff31f4a Analysis: Post-mortem: SafeNap DAO Module Bug",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

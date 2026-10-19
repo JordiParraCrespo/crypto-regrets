@@ -39,7 +39,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Incorrect Token Burn Mechanism. Lost: 150.2 WBNB",
+  "rootCause": "EST's BNBDeposit staking contract tracks accounting using the EST/WBNB PancakeSwap pair's reserves and balances, but the EST token's transfer/burn mechanism lets the pair's real EST balance be manipulated relative to its accounted reserves. Using a 20,000 WBNB flash loan from Moolah, the attacker (an EOA that delegated code via EIP-7702 because the deposit contract only allows EOAs to claim) deposited the maximum repeatedly, bought EST, then sent 1 EST to the deposit contract to desync its internal state. The core exploit was a 100-iteration loop that transferred EST into the pair and called skim() to the deposit contract: skim pushes out the excess (un-reserved) token balance, and because of EST's flawed burn/fee mechanics this repeatedly inflated the deposit contract's credited balance. The attacker then swapped all the harvested EST back to WBNB, repaid the flash loan, and netted ~150.2 WBNB. Vulnerable code snippet: Attack Tx: https://bscscan.com/tx/0x2f1c33eaaaace728f6101ff527793387341021ef465a4a33f53a0037f5bd1626 Analysis: https://bscscan.com/address/0xD4524Be41cd452576aB9FF7b68a0b89aF8498a91#code",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

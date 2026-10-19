@@ -39,7 +39,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Signature Replay. Lost: ~$9K",
+  "rootCause": "The root cause is the design of the contract, which was set up to accept payment using a token address provided by the user, which in this case gave the attacker room to exploit. The attacker targeted the vulnerable buyTokens() function, which accepts two structs as arguments: LinkParameters and PurchaseParameters. The PurchaseParameters struct handles important transaction details such as the amount of tokens the user is purchasing and the payment token used. Once the _buy() function was invoked by the buyTokens() function, the contract address for the paymentToken was sourced from the user-provided purchaseParams data, allowing the attacker to set it to their own malicious contract which imitates a legitimate ERC20 token. When the Minto contract sought to facilitate the repayment, it was misled into trading genuine BTCMT tokens for worthless imitation tokens created by the attacker, completing the attack. Attack TX: https://explorer.phalcon.xyz/tx/bsc/0x53be95dc8ffbc80060215133f76f48df35deef3cd7e1803e24b1e2f8aa53440b Analysis: https://twitter.com/bbbb/status/1683180340548890631?s=20",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

@@ -35,7 +35,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "incorrect-access-control. Lost: ~20 eth",
+  "rootCause": "The ADC MainPool game contract exposed calcStepIncome(uint256 pid_, uint256 value_, uint8 dividendAccount_) as a public/external function with no access control or caller validation. This function is meant to be invoked internally by the game's own accounting flow, but anyone could call it directly to arbitrarily inflate a player's payable balance. The attacker bought a ticket and joined the game with a modest amount, then directly called calcStepIncome(529, 36099999999999999900, 100) to credit themselves a huge stepIncome, and finally called withdraw() to drain pool funds far in excess of their deposit. Vulnerable code snippet: Attack Tx: https://app.blocksec.com/explorer/tx/eth/0xcf834aff4de9992f5da9c443600dad9c6277a8a00de5007842fece51564992db Analysis: EXVULSEC on X",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

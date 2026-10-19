@@ -35,7 +35,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Unsafe Math. Lost: 9M USD",
+  "rootCause": "Yearn's yETH stable pool tracks the running invariant via cached aggregates vb_prod and vb_sum (virtual-balance product and sum) that are updated incrementally on add/remove liquidity and rate updates. Due to unsafe math in how these cached values are maintained (rounding/precision and the way update_rates and rebases recompute them), an attacker could drive the cached invariant out of sync with the true pooled balances. The exploit performed a long, precisely tuned sequence of add_liquidity/remove_liquidity cycles, update_rates calls, and an OETH rebase() to progressively distort vb_prod/vb_sum, inflating the yETH minted per deposit and the assets returned per LP burned. A final remove_liquidity(pool.supply()) drained the pool of ~9M USD. The root cause is unsafe/imprecise invariant accounting that does not stay consistent with actual asset balances after rate updates and rebases. Vulnerable code snippet: Attack Tx: https://etherscan.io/tx/0x53fe7ef190c34d810c50fb66f0fc65a1ceedc10309cf4b4013d64042a0331156 Analysis: https://github.com/banteg/yeth-exploit/blob/main/report.pdf",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

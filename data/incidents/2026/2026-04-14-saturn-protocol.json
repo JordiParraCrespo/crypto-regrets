@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Vulnerability Disclosure. Lost: 0 (Disclosure only; no exploit occurred)",
+  "rootCause": "This is a vulnerability disclosure (no on-chain exploit) against Saturn Protocol's StakedUSDat (sUSDat) ERC4626 vault, covering two distinct bugs. SAT-001 (withdrawal freeze): convertFromStrc() computes vestedBalance = strcBalance - getUnvestedAmount(). After PROCESSOR calls transferInRewards() (adding to the linearly-vesting amount) and the WithdrawQueue then legitimately burns previously-vested shares via burnQueuedShares, strcBalance can drop below the still-unvested amount, causing a Solidity 0.8 arithmetic underflow (panic 0x11) that reverts and freezes all withdrawals for up to the 30-day vesting period — reachable through routine operations with no attacker and no admin escape hatch. SAT-002 (PROCESSOR extraction): _validateConversion() applies the same toleranceBps = 2000 (20%) tolerance independently to BOTH the price check and the amount check during convertFromUsdat(). Compounding the two 20% slacks lets a privileged PROCESSOR_ROLE credit the vault only 0.8/1.2 of fair value, extracting up to 1 - 0.8/1.2 = 33.33% of value per conversion. Vulnerable code snippet: Attack Tx: https://gist.github.com/sgInnora/b70ad98327649ed4ab976a122f45e485 Analysis: https://x.com/Innora_sg/status/2043979131617194043",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

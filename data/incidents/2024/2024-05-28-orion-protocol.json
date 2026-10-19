@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Business Logic Flaw. Lost: ~645K",
+  "rootCause": "When removing user’s liabilities, the removeLiability function incorrectly breaks the loop instead of continuing. However, since there could be duplicated liabilities, the removeLiability function doesn’t work as expected. Vulnerable code snippet: Attack tx: https://app.blocksec.com/explorer/tx/bsc/0x660837a1640dd9cc0561ab7ff6c85325edebfa17d8b11a3bb94457ba6dcae18c Analysis: When removing user’s liabilities, the removeLiability function incorrectly breaks the loop instead of continuing. However, since there could be duplicated liabilities, the removeLiability function doesn’t work as expected. As a result, the attacker could manipulate the liabilites array, thus doubling his value of collateral. Reference: https://x.com/MetaSec_xyz/status/1796012102244798941",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

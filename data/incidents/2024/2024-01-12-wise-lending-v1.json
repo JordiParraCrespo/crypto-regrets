@@ -35,7 +35,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Bad HealthFactor Check. Lost: ~464K",
+  "rootCause": "Wise Lending's share-based accounting for PLP-stETH pool tokens was vulnerable to share-price inflation. The attacker deposited 1e9 pool tokens via depositExactAmount to receive shares, then directly transferred 1e9 pool tokens to the contract address to inflate pseudoTotalPool without minting new shares. Over 20 iterations of depositing pseudoTotalPool * 2 - 1 tokens and immediately withdrawing, rounding left a residual in pseudoTotalPool each round, doubling it without a corresponding increase in totalDepositShares. This exponentially inflated the share-to-token exchange rate. A second address then deposited legitimate collateral and received very few shares, but maximumBorrowToken computed an inflated collateral value based on the distorted share price, allowing the victim to borrow wstETH far exceeding real collateral worth. Vulnerable code snippet: Attack Tx: 0x04e16a79ff928db2fa88619cdd045cdfc7979a61d836c9c9e585b3d6f6d8bc31 Analysis: Wise Lending Exploit by EXVULSEC",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

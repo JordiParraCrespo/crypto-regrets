@@ -39,7 +39,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Business Logic Flaw. Lost: 33BNB",
+  "rootCause": "The EXGIRL token’s _transfer function attempts to determine buy transactions by checking if from == pair && !isRemoveLiquidity(). It calculates the purchaseAmount using the difference between the current BUSD balance in the pair and the stored reserve0. However, this logic can be manipulated by donating BUSD to the pair contract, leading to artificial inflation of the purchasedAmount, which is then used in _distribute()to calculate rewards. Proof: https://bscscan.com/address/0x74f5FE81F67FA30A679d3547f7F9B97a2dd46BA5#readContract Vulnerable code snippet: Here, the purchaseAmount is determined by tokenBal - reserve0 which is actually the change of BUSD (the contract wants to record how much BUSD is used to buy the token) However, when people donate some BUSD to the pair(they could later get it back), this could get the same result. Thus the purchasedAmount could be manipulated via zero-amount transfer. The attacker could trigger a dummy transfer that runs _transfer(), which increments purchasedAmount. Later, the purchasedAmount is used to distribute rewards which could lead to excessive rewarding.",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

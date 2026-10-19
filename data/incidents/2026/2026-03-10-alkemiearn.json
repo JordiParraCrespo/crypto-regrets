@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Business Logic. Lost: 43.45 ETH",
+  "rootCause": "AlkemiEarn's lending logic allowed a borrower to liquidate their own position, and liquidateBorrow mis-accounts the collateral/borrow balances so the liquidator (the attacker) ends up able to withdraw more collateral than they supplied. Using a Balancer flashloan of 51 WETH, the attacker supplied 50 ETH as aWETH collateral, borrowed 39.5 ETH, then called liquidateBorrow(self, aweth, aweth, amount) repaying their own borrow with the same asset used as collateral. Because the contract credits the liquidator with seized collateral while the self-repayment effectively returns the borrowed funds, the attacker can then withdraw(aweth, type(uint256).max) and pull out more than was deposited, profiting ~43.45 ETH after repaying the flashloan. Root cause: no guard against self-liquidation combined with faulty balance accounting where borrow asset equals collateral asset. Vulnerable code snippet: Attack Tx: https://skylens.certik.com/tx/eth/0xa17001eb39f867b8bed850de9107018a2d2503f95f15e4dceb7d68fff5ef6d9d Analysis: https://x.com/blockaid_/status/2031351883470676048",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

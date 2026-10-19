@@ -35,7 +35,7 @@
   },
   "bridge": false,
   "language": "Move",
-  "rootCause": "$223 million from Cetus through broken math. Sui validators froze $162 million mid-heist. Over $60 million walked across Wormhole and never looked back. Was it an exploit - or just the math working as written?",
+  "rootCause": "Cetus Protocol's concentrated liquidity math library integer_mate contained a flawed checked_shlw overflow-detection function. The function was meant to abort if a value would overflow when shifted left by 64 bits, but compared values against 0xFFFFFFFFFFFFFFFF rather than >= comparison. This allowed certain large values that would produce an arithmetic overflow during the 64-bit left shift to pass the guard unchecked. An attacker supplied a carefully crafted liquidity value that passed this broken overflow check but triggered an overflow during the actual liquidity calculation, causing the protocol to record an astronomically large liquidity position assigned to the attacker in exchange for just 1 token. The attacker then withdrew genuine pool reserves against this fabricated position, replicating the attack across multiple pools to drain approximately $223 million in under 15 minutes. Sui validators froze roughly $162 million of the stolen funds before they could be bridged out; the attacker bridged approximately $62 million in USDC to Ethereum via Wormhole before the freeze. Attack Tx: 6hAcrsQpT83mz2hVpkf87EYdTSL8bwy5dVUNZiVBDrtt Analysis: Inside The $223M Cetus Exploit: Root Cause And Impact Analysis",
   "descriptions": [
     {
       "source": "REKT",

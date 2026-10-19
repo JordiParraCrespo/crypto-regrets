@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Weak Random Mint. Lost: 22470 USD",
+  "rootCause": "The exploit stemmed from a flawed logic within the transfer() function that triggered the minting of H2 and O2 tokens when H2O tokens were transferred from the PancakeSwap pair. This minting process, controlled by the _calulate function, was intended to reward users based on their H2O balance. However, the vulnerability arose from the fact that transferring H2O to the pair and subsequently calling the skim() function on the pair triggered the _calulate function again, this time with the pair as the from address and the attacker as the to address. This allowed the attacker to repeatedly mint H2 and O2 tokens. Furthermore, the \"randomness\" in the minting amount, determined by getRandomOnchain using predictable variables (block.timestamp, msg.sender, block.number), could potentially be influenced or predicted, although the attacker in this case resorted to repeatedly running the attack. The core issue was the unintended consequence of the transfer() logic interacting with the skim() function of the PancakeSwap pair, allowing for the uncontrolled minting of the underlying H2 and O2 tokens, which could then be used to drain value (in this case, indirectly leading to USDT loss). Vulnerable code snippet: Attack tx: https://bscscan.com/tx/0x994abe7906a4a955c103071221e5eaa734a30dccdcdaac63496ece2b698a0fc3 Analysis: https://blog.verichains.io/p/unsafe-transfers-leading-to-an-attack",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

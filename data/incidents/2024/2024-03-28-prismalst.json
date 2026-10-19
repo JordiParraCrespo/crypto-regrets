@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Insufficient Validation. Lost: $~11M",
+  "rootCause": "A vulnerability in both versions of the MigrateTroveZap (mkUSD and ULTRA) contracts of Prisma Finance led to an exploit. In response, Prisma Finance's emergency multi-sig paused the protocol's operations. The special-purpose contract, designed to migrate user positions between trove managers, was exploited due to a lack of input validation in the onFlashloan function. By directly calling the flashloan() function, the exploiter could manipulate other trove managers' positions, taking advantage of the mismatch between the collateral in the initial and new positions. This allowed the exploiter to take the difference in collateral. A thorough investigation is underway to identify the root cause and implement fixes. Trove owners should verify they have revoked any active approvals for the MigrateTroveZap. By directly calling the flashloan() function, the exploiter could manipulate other Trove Managers' positions. The contract allowed for a mismatch between the collateral in the initial position and the collateral in the new position, with the difference being susceptible to being taken. Vulnerable code snippet: Attack tx: Analysis: ExVul on Twitter / X Prisma Finance on Twitter / X",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

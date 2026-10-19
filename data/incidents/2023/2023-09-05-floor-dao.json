@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Rebasing logic issue. Lost: ~$40ETH",
+  "rootCause": "The problem originated from the stake() function in the FloorDAO contract. This function sends funds to the caller before triggering a rebase. As a result, instead of distributing an amount of sFLOOR equal to the newly minted FLOOR in the next rebase, it includes the user's stake. This causes a mismatch between the contract's FLOOR balance and the circulating sFLOOR. The attacker exploited this by repeatedly calling the stake() and unstake() functions within the same transaction Vulnerable Code Snippet: Attack Transaction: https://explorer.phalcon.xyz/tx/eth/0x1274b32d4dfacd2703ad032e8bd669a83f012dde9d27ed92e4e7da0387adafe4 Analysis: https://twitter.com/PeckShieldAlert/status/169896210505836132 https://medium.com/floordao/floor-post-mortem-incident-summary-september-5-2023-e054a2d5afa4",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

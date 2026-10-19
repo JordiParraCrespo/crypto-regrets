@@ -39,7 +39,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "lack of validation userData. Lost: ~88K",
+  "rootCause": "The contract's flashloan callback for Balancer only verified the caller but failed to validate user data from untrusted sources. This allowed attackers to exploit the function and steal collateral tokens by providing malicious inputs. Vulnerable code snippet: Attack transaction: https://phalcon.blocksec.com/explorer/tx/eth/0x03543ef96c26d6c79ff6c24219c686ae6d0eb5453b322e54d3b6a5ce456385e5 Analysis: https://medium.com/neptune-mutual/how-was-affine-protocol-exploited-f4933c4035b4",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

@@ -35,7 +35,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Share price manipulation. Lost: ~240,000 US$",
+  "rootCause": "A Curve LlamaLend market used sDOLA (an ERC4626 yield-bearing vault) as collateral, and its controller priced that collateral from the vault's live exchange rate (convertToAssets / share price) rather than a manipulation-resistant oracle. Using Morpho flashloans of USDC and WETH, the attacker routed funds through a long chain of Curve/Yearn/DOLA-savings pools to inflate the sDOLA share price (e.g. staking large DOLA amounts into DOLA_SAVINGS and minting sDOLA), then opened a create_loan against sDOLA collateral valued at the manipulated rate to borrow far more crvUSD/DOLA than the collateral was worth. A secondary contract liquidated the resulting underwater LlamaLend positions (users_to_liquidate / liquidate) to capture value, after which the share price was unwound and flashloans repaid, netting ~$240K. Root cause: LlamaLend valued the ERC4626 sDOLA collateral using a spot/instantaneous share price that the attacker could temporarily pump within a single transaction. Vulnerable code snippet: Attack Tx: https://etherscan.io/tx/0xb93506af8f1a39f6a31e2d34f5f6a262c2799fef6e338640f42ab8737ed3d8a4 Analysis: https://x.com/yieldsandmore/status/2028368378457362629",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

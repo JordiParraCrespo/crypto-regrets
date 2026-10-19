@@ -39,7 +39,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Fee-on-Transfer Reserve Manipulation. Lost: 111,097.59 USDC",
+  "rootCause": "DIP is a fee-on-transfer token whose buggy transfer pipeline lets an attacker desynchronize the DIP/AIC Pancake pair's reserves. After flash-swapping AIC and buying DIP, the attacker transfers a large amount of DIP directly into the pair (the 6% sell fee leaves slightly less than the pair's full DIP balance in the contract) and then calls skim to push the excess DIP out to the router rather than back to itself, followed by sync to lock in the shrunken DIP reserve. Because DIP's transfer accounting and the router's fee-supporting swap both mishandle the double router-transfer, the pair's DIP reserve is collapsed while its AIC reserve stays intact, making the AMM price wildly favorable. The attacker then swaps the remaining DIP for nearly all of the pair's AIC, repays the flash swap, and converts the residual AIC to ~111K USDC profit. Vulnerable code snippet: Attack Tx: https://bscscan.com/tx/0x1c09395848a87069c9d6ddbe5adc6249510aba7a2a83479a74b4280cafb5fb29 Analysis: TenArmorAlert",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

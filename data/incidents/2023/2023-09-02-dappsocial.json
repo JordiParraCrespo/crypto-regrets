@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Business Logic Flaw. Lost: ~$16K",
+  "rootCause": "The withdrawTokensWithAlt() function determined the withdrawal amount by subtracting a user-controlled balance from the msg.sender's balance. This vulnerability allowed the attacker to manipulate the user-controlled balance and profit from the exploit. Vulnerable Code Snippet: Attack Transaction: https://etherscan.io/tx/0xbd72bccec6dd824f8cac5d9a3a2364794c9272d7f7348d074b580e3c6e44312e Analysis: https://twitter.com/DecurityHQ/status/1698064511230464310",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

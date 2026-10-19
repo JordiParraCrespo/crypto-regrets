@@ -35,7 +35,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Access Control. Lost: $66K",
+  "rootCause": "On 2024-11-20, the MainnetSettler contract on Ethereum was used to execute an arbitrary ERC20 transferFrom against a wallet that had previously approved the contract to spend HOLD tokens. The attacker drained about 308.45 million HOLD tokens, valued at roughly $66,000 at the time of the incident. A wallet had granted the MainnetSettler contract a large HOLD token allowance, and the contract's execution flow allowed externally supplied call data to trigger arbitrary token operations. The attacker used this capability to execute a transferFrom against the approved wallet and move HOLD tokens to an attacker-controlled address.",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

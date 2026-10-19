@@ -36,7 +36,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Flashloan Attack + Reentrancy. Lost: $80 million",
+  "rootCause": "Not follow check-effect-interaction pattern. Vulnerable code snippet: https://etherscan.io/address/0xe16db319d9da7ce40b666dd2e365a4b8b3c18217#code#F13#L812 Do not follow check-effect-interaction pattern in function borrowFresh. https://etherscan.io/address/0xe16db319d9da7ce40b666dd2e365a4b8b3c18217#code#F6#L136 doTransferOut() function transfers ETH to the receiver via a low-level call, attacker can make a reentrant call in the fallback() function to “exitMarket().",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

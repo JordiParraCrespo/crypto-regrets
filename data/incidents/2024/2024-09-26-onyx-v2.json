@@ -39,7 +39,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Fake Market. Lost: 4.1M VUSD, 7.35M XCN, 5K DAI, 0.23 WBTC, 50K USDT (>$3.8M USD)",
+  "rootCause": "The root cause was unverified user input during the liquidation process. Specifically, key parameters of the liquidateWithSingleRepay function in the NFTLiquidation contract were controllable by the attacker, allowing manipulation of the extraRepayAmount variable through the repayAmount parameter. By exploiting this, the attacker was able to liquidate all collateral with just one token. Vulnerable code snippet: Attack tx: https://etherscan.io/tx/0x46567c731c4f4f7e27c4ce591f0aebdeb2d9ae1038237a0134de7b13e63d8729 Analysis: https://medium.com/coinmonks/decoding-onyxdaos-4m-exploit-e1858d35b3e6",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

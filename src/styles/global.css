@@ -314,12 +314,6 @@ a.pill:hover {
   font: 400 12px/20px var(--font-mono);
   letter-spacing: -0.01em;
 }
-.dot-new {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--color-sunbeam);
-}
 
 /* ------------------------------------------------------------------ surfaces */
 .card {
@@ -463,11 +457,14 @@ a.card:hover {
   line-height: 20px;
 }
 .check li {
-  display: grid;
-  grid-template-columns: 16px 1fr;
-  gap: 10px;
+  position: relative;
+  padding-left: 26px;
+  overflow-wrap: anywhere;
 }
 .check li::before {
+  position: absolute;
+  left: 0;
+  top: 0;
   content: '';
   width: 14px;
   height: 14px;
@@ -487,10 +484,14 @@ a.card:hover {
 }
 .numbered li {
   counter-increment: n;
-  display: grid;
-  grid-template-columns: 28px 1fr;
+  position: relative;
+  padding-left: 32px;
+  overflow-wrap: anywhere;
 }
 .numbered li::before {
+  position: absolute;
+  left: 0;
+  top: 0;
   content: counter(n, decimal-leading-zero);
   font: 400 12px/20px var(--font-mono);
   color: var(--text-tertiary);
@@ -574,6 +575,167 @@ td.num:last-child {
   padding-right: 32px;
   background: var(--color-paper) no-repeat right 10px center / 12px
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' fill='none' stroke='%23858585' stroke-width='1.5'%3E%3Cpath d='M3 4.5l3 3 3-3'/%3E%3C/svg%3E");
+}
+
+/* Searchable select (src/scripts/combobox.ts) */
+.combo {
+  position: relative;
+  display: inline-flex;
+  min-width: 0;
+  max-width: 100%;
+}
+.combo-native {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+.combo-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  min-width: 0;
+  font: 400 14px/20px var(--font-sans);
+  color: var(--color-jet-ink);
+  background: var(--color-paper) no-repeat right 12px center / 12px
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' fill='none' stroke='%23858585' stroke-width='1.5'%3E%3Cpath d='M3 4.5l3 3 3-3'/%3E%3C/svg%3E");
+  border: 0;
+  box-shadow: inset 0 0 0 1px var(--color-dove);
+  border-radius: var(--r-pill);
+  padding: 9px 34px 9px 16px;
+  cursor: pointer;
+  text-align: left;
+  transition: box-shadow 0.15s, background-color 0.15s;
+}
+.combo-btn:hover {
+  box-shadow: inset 0 0 0 1px var(--color-pewter);
+}
+.combo-btn:focus-visible,
+.combo-btn[aria-expanded='true'] {
+  outline: none;
+  box-shadow: inset 0 0 0 1px var(--color-jet-ink);
+}
+.combo-btn.is-set {
+  color: var(--color-paper);
+  background-color: var(--color-jet-ink);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' fill='none' stroke='%23ffffff' stroke-width='1.5'%3E%3Cpath d='M3 4.5l3 3 3-3'/%3E%3C/svg%3E");
+  box-shadow: none;
+}
+.combo-value {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.combo-pop {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  z-index: 30;
+  width: max(100%, 280px);
+  max-width: min(360px, calc(100vw - 32px));
+  background: var(--color-paper);
+  border-radius: var(--r-small);
+  box-shadow: var(--shadow-elevated);
+  padding: 6px;
+}
+.combo-pop.align-right {
+  left: auto;
+  right: 0;
+}
+.combo-search {
+  width: 100%;
+  font: 400 14px/20px var(--font-sans);
+  color: var(--color-jet-ink);
+  background: var(--color-cream);
+  border: 0;
+  border-radius: var(--r-input);
+  padding: 8px 10px;
+  margin-bottom: 6px;
+}
+.combo-search:focus {
+  outline: none;
+  box-shadow: inset 0 0 0 1px var(--color-jet-ink);
+}
+.combo-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 300px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.combo-list:focus {
+  outline: none;
+}
+.combo-opt {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 7px 10px;
+  border-radius: var(--r-input);
+  font-size: 14px;
+  line-height: 20px;
+  cursor: pointer;
+}
+.combo-opt.is-active {
+  background: var(--color-sand);
+}
+.combo-opt[aria-selected='true'] {
+  font-weight: 500;
+}
+.combo-opt[aria-selected='true']::after {
+  content: '✓';
+  margin-left: 4px;
+}
+.combo-count {
+  margin-left: auto;
+  font: 400 12px/20px var(--font-mono);
+  color: var(--text-secondary);
+}
+.combo-opt.is-active .combo-count {
+  color: var(--color-steel);
+}
+.combo-empty {
+  margin: 0;
+  padding: 10px;
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+/* Checkbox rendered as a pill toggle */
+.toggle {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font: 400 14px/20px var(--font-sans);
+  padding: 9px 16px;
+  border-radius: var(--r-pill);
+  box-shadow: inset 0 0 0 1px var(--color-dove);
+  background: var(--color-paper);
+  cursor: pointer;
+  user-select: none;
+  transition: box-shadow 0.15s, background-color 0.15s;
+}
+.toggle:hover {
+  box-shadow: inset 0 0 0 1px var(--color-pewter);
+}
+.toggle input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+.toggle:has(input:focus-visible) {
+  box-shadow: inset 0 0 0 1px var(--color-jet-ink), 0 0 0 2px var(--color-paper), 0 0 0 4px var(--color-jet-ink);
+}
+.toggle:has(input:checked) {
+  color: var(--color-paper);
+  background: var(--color-jet-ink);
+  box-shadow: none;
+}
+.toggle:has(input:checked)::before {
+  content: '✓';
 }
 
 /* Bar meter (single series, ink) */

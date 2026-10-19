@@ -35,7 +35,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Reentrancy. Lost: $3M",
+  "rootCause": "Reentrancy in the doSwapThroughOrionPool function The doswapThroughOrionPool function allows a user-provided swap path to be used with malicious tokens that can be used to re-enter deposits. After the transfer happens, the curBalance is updated. Therefore, a callback function is added to the transfer in the fake token. The callback code calls the depositAsset function, causing the curBalance to be updated incorrectly. Then, the attacker calls the withdraw function to take away the funds after paying back the flash loan. Vulnerable code snippet: https://etherscan.io/address/0x420a50a62b17c18b36c64478784536ba980feac8#code#F1#L78 Attack tx: https://etherscan.io/tx/0xa6f63fcb6bec8818864d96a5b1bb19e8bd85ee37b2cc916412e720988440b2aa https://bscscan.com/tx/0xfb153c572e304093023b4f9694ef39135b6ed5b2515453173e81ec02df2e2104 Analysis: https://twitter.com/BlockSecTeam/status/1621263393054420992 https://www.numencyber.com/analysis-of-orionprotocol-reentrancy-attack-with-poc/ Similar events https://github.com/SunWeb3Sec/DeFiHackLabs#20221223---defrost---reentrancy https://github.com/SunWeb3Sec/DeFiHackLabs#20221110---dfxfinance---reentrancy",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

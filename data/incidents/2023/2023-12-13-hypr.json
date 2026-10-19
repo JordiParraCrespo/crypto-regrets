@@ -39,7 +39,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Business Logic Flaw. Lost: ~$200k",
+  "rootCause": "The root cause was that the attacker managed to circumvent the 'finalizeERC20Withdrawal' function check by reinitializing the contract, due to the existence of the 'clearLegacySlot' modifier. Vulnerable code snippet: https://www.oklink.com/es-la/eth/address/0x40c31236b228935b0329eff066b1ad96e319595e/contract ‍ The clearLegacySlot modifier here will reset the value of the storage slot 0. This action, in turn, resets the value of storage slot 0 of the Initializable contract (to verify this, we can inspect the inheritance chain of the L1StandardBridge contract). If we read the comments carefully, we’ll know that the current version of this code is not ready for production. So, that’s the reason why this function can be called multiple times. Attack tx: https://www.oklink.com/es-la/eth/tx/0x51ce3d9cfc85c1f6a532b908bb2debb16c7569eb8b76effe614016aac6635f65 https://explorer.phalcon.xyz/tx/eth/0x51ce3d9cfc85c1f6a532b908bb2debb16c7569eb8b76effe614016aac6635f65 Analysis: https://x.com/BlockSecTeam/status/1735197818883588574 https://blog.verichains.io/p/hypers-op-stack-bridge-exploit-analysis REF Link: https://www.hypr.network/articles/incident-postmortem-bridge-exploit",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

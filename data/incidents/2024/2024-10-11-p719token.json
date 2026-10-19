@@ -35,7 +35,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Price Manipulation Inflate Attack",
+  "rootCause": "The P719 token's unverified transfer() function contains a business logic flaw: whenever tokens are transferred to the P719 contract address itself, the contract interprets it as a sell and executes a Uniswap-like swap to return BNB to the caller. Crucially, each such sell also burns the majority of the received tokens and distributes fee tokens from the contract's own reserve, artificially deflating supply and distorting the effective price upward. The attacker exploited this by taking a 4,000 WBNB flash loan from a PancakeV3 pool, deploying 47+ sub-contracts to purchase P719 tokens across multiple buys (140 WBNB in small lots plus 3,300 WBNB in larger lots), then distributing the purchased tokens across 100 sub-contracts each of which sold (transferred to the P719 address) their share. Each sell both drained BNB from the contract and further inflated the price via burning. The excess BNB profit was wrapped to WBNB and routed through a custom attacker-controlled MyToken/WBNB liquidity pair; upon removing that liquidity, the attacker netted approximately 547 BNB (~$315K). Vulnerable code snippet: Attack Tx: 0x9afcac8e82180fa5b2f346ca66cf6eb343cd1da5a2cd1b5117eb7eaaebe953b3 Analysis: TenArmorAlert post-mortem",
   "descriptions": [
     {
       "source": "DeFiHackLabs",
