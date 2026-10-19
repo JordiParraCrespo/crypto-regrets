@@ -35,7 +35,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Parameter manipulation. Lost: ~$61K",
+  "rootCause": "The 0x0DEX contract was exploited through parameter manipulation. It allows private fund transfers (ETH) via deposit and withdraw functions and added a swapOnWithdrawal function for private swaps of deposited funds. The swapOnWithdrawal function was exploited. The amount withdrawn, after fees, is set as _lastWithdrawal only when withdrawalData.wType is WithdrawalType.Swap. For normal withdrawals (withdrawalType.Direct), _lastWithdrawal isn't set. This oversight allowed exploitation: if Alice swaps 10 ETH (withdrawalType.Swap) and Bob swaps 0.1 ETH (withdrawalType.Direct), the _lastWithdrawal remains 10 ETH. Thus, Bob could receive 10 ETH worth of tokens instead of his intended 0.1 ETH. Vulnerable code snippet: Attack tx: 0x00b375f8e90fc54c13 | Phalcon Explorer Analysis: 0x0 Privacy DEX Exploit | Notion",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

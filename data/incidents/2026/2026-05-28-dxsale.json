@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Ownership Override Attack. Lost: ~7.3M USD",
+  "rootCause": "The DxSale legacy liquidity locker contains a privileged owner-only backdoor DXLOCKERLP(address,uint256) that lets the owner drain any user's locked LP position without honoring the per-lock timelock. The DxSale deployer secretly transferred locker ownership through ~89 wallets over 269 days; the final owner (attacker) then invoked DXLOCKERLP() to sweep all 1,400+ locked LP positions, bypassing every individual timelock. The batch drain was executed via an EIP-7702 type-4 delegation to a custom drainer contract, netting ~$7.3M in BNB/LP. Root cause is an undisclosed owner backdoor combined with the ability to silently migrate ownership, defeating the locker's entire trust premise. Vulnerable code snippet: Attack Tx: https://bscscan.com/tx/0xe211904a8a40f653acd64ffc33a42429ef571c1e2da16976d07ac0f9a0bcc9c1 Analysis: crypto.news post-mortem",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

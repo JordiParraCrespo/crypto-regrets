@@ -35,7 +35,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Reentrancy. Lost: 17 BNB",
+  "rootCause": "The WMRP contract contained a reentrancy vulnerability in its _removeLiquidity function, invoked during the transfer function. The contract failed to update its state before making external calls, allowing the attacker to repeatedly call the receive function via a malicious fallback function. This enabled the attacker to manipulate the transfer process, draining BNB by exploiting the lack of reentrancy guards and improper checks-effects-interactions pattern. Vulnerable code snippet: Attack tx: https://app.blocksec.com/explorer/tx/bsc/0x4353a6d37e95a0844f511f0ea9300ef3081130b24f0cf7a4bd1cae26ec393101 Analysis: https://blog.verichains.io/p/mrp-token-exploit-analysis",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

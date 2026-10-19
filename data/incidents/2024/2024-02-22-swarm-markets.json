@@ -35,7 +35,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "lack of validation. Lost: ~7k $DAI",
+  "rootCause": "Swarm Markets used an xTokenWrapper that maps native tokens (DAI, USDC, SMT, WETH) to corresponding xTokens and lets holders unwrap xTokens back into the underlying assets held by the wrapper. During a platform migration, an undocumented admin role was never revoked, leaving the wrapper's token-registry controllable by an outsider. The attacker registered attacker-controlled, freely-mintable fake xToken contracts in place of the legitimate ones, minted those fake xTokens to themselves, then called wrapper.unwrap(...) to redeem the real DAI/USDC sitting in the wrapper. There was no validation that the registered xToken was a trusted contract and the mint function carried no access control. Vulnerable code snippet: Attack Tx: https://app.blocksec.com/explorer/tx/eth/0xa4d7ee2ddb9db06961a17e2a5ae71743a266bcb720be138670f4a10e8dfc13e9 Analysis: Swarm Markets exploit: Post Mortem",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

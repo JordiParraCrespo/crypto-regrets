@@ -35,7 +35,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Incorrect input validation. Lost: ~1.8M USD",
+  "rootCause": "The ConnectorDeleverageParaswap.flashloanReq() function accepted a bytes[] memory swapData parameter and passed its contents verbatim to external calls with no validation of the call target, function selector, or encoded arguments. Because the connector held Aave approvals and could act on behalf of other users (via an onBehalfOf address), the attacker crafted two malicious swapData entries: the first encoded a call with selector 0x75b4b22d that swapped USDC from the victim's Aave position into WETH; the second encoded an ERC20 transferFrom() (selector 0x23b872dd) that moved that WETH from the victim's address (onBehalfOf) directly to the attacker. The connector executed both calls without questioning their content, effectively giving the attacker arbitrary code execution in the context of a privileged connector, and draining ~596 WETH (~$1.8M) from the victim position. Vulnerable code snippet: Attack Tx: 0x92cdcc732eebf47200ea56123716e337f6ef7d5ad714a2295794fdc6031ebb2e Analysis: Phalcon_xyz thread",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

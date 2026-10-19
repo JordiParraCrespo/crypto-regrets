@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Access Control. Lost: $14,773.35",
+  "rootCause": "Erc20transfer was exploited on Ethereum Mainnet on 22 October 2024 due to missing input validation in the erc20TransferFrom function, allowing attackers to steal $14,773 USDC by specifying arbitrary victim addresses. The vulnerable function permitted unauthorized token transfers from addresses with approved allowances, resulting in direct loss. The core vulnerability lay in the erc20TransferFrom function, which allowed any caller to specify both the token address and victim (from) address without checking whether the caller was authorized. There was no requirement that msg.sender was equal to from or that the sender held sufficient allowance to drain the victim’s balance.…",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

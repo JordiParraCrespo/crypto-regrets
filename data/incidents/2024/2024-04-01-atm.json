@@ -39,7 +39,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "business logic flaw. Lost: $~182K USD",
+  "rootCause": "A flawed transfer implementation leads to the attack. The root cause was using a swap to convert BNB to BUSDT for dividend payments, allowing the attacker to perform a sandwich attack. The attacker repeatedly transferred ATM tokens to the PancakeSwap pool and called the skim function, exploiting the bad implementation. As you can see, there is no slippage check in the swap operation. Vulnerable code snippet: Attack tx: 0xee10553c26742bec9a | Phalcon Explorer Analysis:",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

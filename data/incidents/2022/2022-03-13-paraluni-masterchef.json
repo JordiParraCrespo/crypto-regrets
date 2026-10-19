@@ -39,7 +39,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Flashloan & Reentrancy. Lost: $1.7 million",
+  "rootCause": "reentrancy & insufficient validation Vulnerable code snippet: https://bscscan.com/address/0xa386f30853a7eb7e6a25ec8389337a5c6973421d#code#L2501 From Halborn: The depositByAddLiquidity function calls an internal depositByAddLiquidityInternal function that transfers the attacker’s deposit into the appropriate pool. However the pool ID value (_pid) used to look up the appropriate pool is not validated internally. The attacker takes advantage of this by directing this to an attacker-controlled contract, whose malicious transferFrom function is called. This function then exploits the reentrancy vulnerability to call the Masterchef deposit function before the internal state is updated. Between the initial and malicious deposits, the attacker is credited with excess tokens and able to extract more value from the contract than they deposited.",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

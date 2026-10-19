@@ -39,7 +39,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Business Logic Flaw. Lost: ~$15K",
+  "rootCause": "The attacker exploited a validation flaw between the stake and unstake functions. They created a position by staking nothing, waited 38 days, then took a WETH loan, swapped it to EHIVE, and sent it to initial contracts. By unstaking across all contracts, they received more WETH despite not having staked anything initially. Vulnerable Code Snippet: Attack Transaction: https://etherscan.io/tx/0xad818ec910def08c70ac519ab0fffa084b4178014a91cd8aa2f882d972a511c1 Analysis: https://twitter.com/bulu4477/status/1693636187485872583",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

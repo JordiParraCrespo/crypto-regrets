@@ -35,7 +35,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Price Manipulation. Lost: ~25K USD",
+  "rootCause": "The Novax protocol relied on an oracle that calculated token prices based on token pair reserves, which were susceptible to manipulation via flash loans. The staking and withdrawal functions used real-time oracle prices without validation, allowing the attacker to manipulate the NovaX token price by borrowing USDT, purchasing and staking NovaX tokens, and withdrawing inflated amounts, exploiting the lack of time delays or circuit breakers. Vulnerable code snippet: Attack tx: https://bscscan.com/tx/0xb1ad1188d620746e2e64785307a7aacf2e8dbda4a33061a4f2fbc9721048e012 Analysis: https://blog.verichains.io/p/novax-incident-price-manupilation",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

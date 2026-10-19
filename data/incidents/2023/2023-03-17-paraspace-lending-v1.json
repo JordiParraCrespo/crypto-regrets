@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Flashloan + scaledBalanceOf Manipulation",
+  "rootCause": "There is a flawed logic in borrow() of the ParaProxy contract (0x638a98BBB92a7582d07C52ff407D49664DC8b3Ee ) of ParaSpace NFT . The attacker can borrow more tokens as his scaledBalance will be enlarged by depositing into the position of the proxy (0xC5c9fB6223A989208Df27dCEE33fC59ff5c26fFF), i.e., specifying the _recipient of depositApeCoin(). Vulnerable code snippet: Attack tx: https://etherscan.io/tx/0xe3f0d14cfb6076cabdc9057001c3fafe28767a192e88005bc37bd7d385a1116a Analysis: https://twitter.com/BlockSecTeam/status/1636650252844294144",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

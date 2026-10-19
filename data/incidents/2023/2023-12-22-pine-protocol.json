@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Business Logic Flaw. Lost: ~90k",
+  "rootCause": "Due to the shared pools between two different contracts This shared pool address between the old and new contract versions led to the execution of fund transfers originating from the same address but targeting different pools. The attacker initiated the process by using NFT tokens as collateral to borrow assets from the new version of the pool. Subsequently, they executed another flash loan from the old version of the pool, utilizing it to repay their initially borrowed assets. Vulnerable code snippet: https://etherscan.io/address/0x2405913d54fc46eeaf3fb092bfb099f46803872f old version: https://etherscan.io/address/0x2405913d54fc46eeaf3fb092bfb099f46803872f new version: https://etherscan.io/address/0xc3f4659588b13f23e09ec54783a3c407e39ad589 Attack tx: // NFT buy Tx: https://explorer.phalcon.xyz/tx/eth/0x2f328016764ecf1f57fda0f5490087a5ddba83706b51cf518bdbd7e65ae2383b // Borrow Tx: https://explorer.phalcon.xyz/tx/eth/0xf4f254c3c6b64ded778b5af292c6ab6ed886c1bdd8988510bdc0ca0cf7f9857e // Attack Tx : https://explorer.phalcon.xyz/tx/eth/0xec7523660f8b66d9e4a5931d97ad8b30acc679c973b20038ba4c15d4336b393d Analysis: https://medium.com/neptune-mutual/analysis-of-the-pine-protocol-exploit-e09dbcb80ca0 https://blog.solidityscan.com/pine-protocol-hack-analysis-7ce8621f444b",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

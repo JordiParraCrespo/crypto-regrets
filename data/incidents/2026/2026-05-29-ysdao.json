@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Price Manipulation and Tax Bypass. Lost: ~19.49K USDT",
+  "rootCause": "YSDAO's transfer-protection logic detects add/remove liquidity by reading the PancakeSwap V2 pair's current token balances against its reserves, which the attacker spoofs. Using a Pancake V3 USDT flash loan plus a V2 pair swap callback the attacker: (1) buys YSDAO while making the pair output 1 wei USDT so _isRemoveLiquidity() sees the pair USDT balance below reserve and skips buy-tax/cooldown accounting; (2) calls the YSDAO staking contract's sync() -- which has NO access control and donates all staking-held USDT into the YSDAO/USDT pair then resyncs reserves, inflating the apparent YSDAO price; (3) transfers 1 USDT into the pair before selling so _isAddLiquidity() treats the sale as a liquidity add and bypasses the harsher sell/profit-tax path. The combination lets the attacker sell the appreciated YSDAO tax-free, netting ~$19.5K USDT. Vulnerable code snippet: Attack Tx: https://bscscan.com/tx/0x91f26d96373bbec6a6a8517c7be995a739d65f20fed589d53bc47d8140f91907 Analysis: DeFiHackLabs PoC",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Read-Only-Reentrancy && MisConfiguration. Lost: ~$3.25M",
+  "rootCause": "Incorrect assumption about the address returned by the Curve element registry for ETH as the underlying for the Curve v2 pool. Specifically, the Conic ETH Omnipool uses the CurveHandlerV3 to check whether we are currently in a reentrant call. This check was only executed if the pool being interacted with contains ETH, which was checked by calling the _isETH method. Our assumption was that Curve v2 pools using ETH have the ETH address (0xeee…eee) as one of their coins. However, they instead have the WETH address. This led to _isETH returning false, and in turn, to the reentrancy guard of the rETH pool being bypassed. After bypass the check, attacker can manipulate the price of rETH Curve LP Token. Attack TX: https://etherscan.io/tx/0x8b74995d1d61d3d7547575649136b8765acb22882960f0636941c44ec7bbe146 Analysis: https://twitter.com/BlockSecTeam/status/1682356244299010049 https://medium.com/@ConicFinance/post-mortem-eth-and-crvusd-omnipool-exploits-c9c7fa213a3d",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

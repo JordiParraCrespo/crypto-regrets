@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Precision loss. Lost: ~5 $WBNB",
+  "rootCause": "DominoTT (an ERC20 with burn and multicall) was paired with WBNB on PancakeSwap. The attacker took a DODO flashloan, swapped WBNB for DominoTT, and then used an EIP-2771 meta-transaction Forwarder.execute (with a valid signature) to invoke DominoTT.multicall([burn(... of the pair address)]), burning a large amount of DominoTT tokens directly out of the PancakeSwap pair's reserves. Calling Pair.sync() then forced the pool to recognize the reduced DominoTT reserve, sharply skewing the price, after which they swapped their DominoTT back to WBNB at the inflated rate and repaid the flashloan. The core flaw is that token holdings inside the AMM pair could be burned by an external caller and synced, manipulating the reserve ratio. Vulnerable code snippet: Attack Tx: https://app.blocksec.com/explorer/tx/bsc/0x1ee617cd739b1afcc673a180e60b9a32ad3ba856226a68e8748d58fcccc877a8",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

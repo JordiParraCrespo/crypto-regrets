@@ -35,7 +35,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Access Control. Lost: 200K",
+  "rootCause": "After registering a token, the owner is set to the message sender. the attacker takes advantage of this in the withdraw function where it then withdraws an arbitrary token from the contract which is the FLIX token. which it then swaps out Vulnerable code snippet: Attack transaction : https://etherscan.io/tx/0xbeef09ee9d694d2b24f3f367568cc6ba1dad591ea9f969c36e5b181fd301be82 Analysis:",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

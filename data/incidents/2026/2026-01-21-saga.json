@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Forged IBC messages, $7 million minted from thin air. Saga’s bridge swallowed the fiction whole. Cosmos Labs traced it to Ethermint's codebase, they're now reaching out to other affected Cosmos EVM chains with short-term fixes.",
+  "rootCause": "The SagaEVM chainlet (chain ID 5464) was exploited for approximately $7M due to a vulnerability in Ethermint's EVM precompile code that SagaEVM inherited from its Cosmos-based EVM implementation. An attacker crafted transactions that bypassed collateral validation and accounting limit checks in the EVM precompile bridge, enabling the uncollateralized minting of the protocol's Saga Dollar (D) stablecoin. With a virtually unlimited supply of artificially created Saga Dollars, the attacker exchanged them for real user-deposited assets — USDC, yUSD, ETH, and tBTC — then bridged the proceeds to Ethereum and converted them into over 2,000 ETH (~$6M), with an additional $800K deployed into Uniswap V4 liquidity positions. The attack caused the Saga Dollar to depeg to $0.75 and protocol TVL to collapse by approximately 55%. The Saga team halted SagaEVM at block 6,593,800 and subsequently implemented a Cosmos security patch to remediate the precompile vulnerability before relaunching the network. Attack Tx: 0x1fc886dcacbc3e186941236be0e6a1605348d724c0368e21fbf485cb6157ba8f Analysis: Halborn — Explained: The SagaEVM Hack (January 2026)",
   "descriptions": [
     {
       "source": "REKT",

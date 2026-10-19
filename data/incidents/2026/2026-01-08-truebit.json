@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "OverFlow. Lost: 8540ETH",
+  "rootCause": "The Truebit bonding-curve pool prices TRU purchases via getPurchasePrice(), computed roughly as (200*amount*reserve*T + 100*amount^2*reserve) / (100*T^2 - parameter*T^2). The attacker chose a buy amount (solving the curve so (amount+T)^2 exceeds the safe range) that drove the numerator/denominator math past the boundary where the purchase price effectively underflows toward zero (or wraps), letting them mint a huge quantity of TRU for a negligible amount of ETH. They then immediately sellTRU() back into the pool at the legitimate sell price, extracting ETH. Looping this buy-cheap / sell-rich cycle drained the pool of ~8540 ETH. The core defect is that the pricing formula was not bounded/validated against extreme amount and totalSupply values, so an attacker-selected input produces an arithmetically valid but economically nonsensical (near-zero) purchase price. Vulnerable code snippet: Attack Tx: https://etherscan.io/tx/0xcd4755645595094a8ab984d0db7e3b4aabde72a5c87c4f176a030629c47fb014 Analysis: https://www.certik.com/zh-CN/resources/blog/truebit-incident-analysis",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

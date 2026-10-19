@@ -35,7 +35,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Uninitialized Proxy. Lost: ~$209K",
+  "rootCause": "Renegade's Dark Pool proxy (an Arbitrum Stylus contract) left its initialize function callable by anyone — it had never been locked after deployment. The attacker called initialize(...) with attacker-controlled parameters, setting itself as owner and injecting an attacker-controlled logic address into proxy storage. The attacker then called updateWallet(...), which delegatecalls the injected logic from the proxy's storage context. Because the proxy executed attacker code under its own context, the attacker's drainTokens routine swept every token the proxy held (26 different assets including 104,383 USDC, ~$209K total) to the attacker. Root cause: an unprotected/uninitialized initializer on an upgradeable proxy that lets an attacker set the implementation logic and execute it via delegatecall. Vulnerable code snippet: Attack Tx: https://arbiscan.io/tx/0x0e494685ace16d372066c5b4db959b58ebac6d88166c2d9d618e0e421dc0c77e Analysis: https://x.com/renegade_fi/status/2053531772634427599",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

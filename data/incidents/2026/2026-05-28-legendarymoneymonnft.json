@@ -39,7 +39,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "ecrecover address(0) Signature Bypass. Lost: ~$85.5K USD (85,519 USDT)",
+  "rootCause": "LegendaryMoneyMonNft.cliamRewred() lets a user pull an arbitrary ERC20 amount out of the contract as long as verify() returns true. verify() recovers the signer with recoverSigner() -> ecrecover(hash, v, r, s) and compares it to admin, but never checks for the address(0) return value. ecrecover returns address(0) for a malformed signature (e.g. r = s = 0), and changeadmin() had already been used to set admin to the zero address on-chain. The attacker therefore submits cliamRewred(...) with a 65-byte signature of (r=0, s=0, v=27): ecrecover returns address(0), which equals admin, verify() passes, and the contract transfers the requested amount to msg.sender. The attacker drained the contract's full MON balance and swapped it to USDT on PancakeSwap V3 (~$85.5K). The drain was run from the attacker EOA via an EIP-7702 SetCode (type-4) delegation. Vulnerable code snippet: Attack Tx: https://bscscan.com/tx/0x15c835c070672948b3487d35254bce96831bec9f5212f78b04e683fed74bf4a2 Analysis: SlowMist",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

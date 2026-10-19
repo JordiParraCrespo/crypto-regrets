@@ -39,7 +39,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Business Logic Flaw. Lost: ~$2M",
+  "rootCause": "The MasterPlatypusV4::emergencyWithdraw function checks solvency before updating LP tokens, allowing users to withdraw funds even if they are used as collateral for a debt. In contrast, the MasterPlatypusV4::withdraw function checks solvency after updating the LP tokens, preventing this issue. To fix the emergencyWithdraw function, the solvency check should be reordered to occur after setting the user's amount to 0 or use the debt amount from PlatypusTreasure::isSolvent to ensure no active debt. The attack originated from incorrect integration of MasterPlatypusV4 with PlatypusTreasure, where the solvency check order allowed collateral to be withdrawn with active debt, creating 'bad debt' and resulting in the exchange of USP tokens for stable coins. Vulnerable code snippet: Source: By Certik Attack tx: Transaction Details Analysis: BlockSec on Twitter / X PeckShield Inc. on Twitter / X",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

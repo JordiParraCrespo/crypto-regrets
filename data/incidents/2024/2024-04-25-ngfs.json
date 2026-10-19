@@ -35,7 +35,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Bad Access Control. Lost: ~190K",
+  "rootCause": "Access Control Vulnerable code snippet: https://bscscan.com/address/0xa608985f5b40cdf6862bec775207f84280a91e3a#code Attack tx: https://bscscan.com/tx/0x8ff764dde572928c353716358e271638fa05af54be69f043df72ad9ad054de25 https://app.blocksec.com/explorer/tx/bsc/0x8ff764dde572928c353716358e271638fa05af54be69f043df72ad9ad054de25 Analysis: https://blog.solidityscan.com/ngfs-token-hack-analysis-7a17f183e6a1 - The attacker initiated a call to delegateCallReserves, thereby assigning the uniswapV2Proxy to the attacker’s address. - Then the attacker gained the ability to manipulate the _uniswapV2Library to any desired address, facilitating access to the crucial third function. - Leveraging the reserveMultiSync function, the attacker was able to siphon off all funds from the PancakeSwap BSC-USD — NGFS pool to their own address, resulting in a loss of approximately $191k.",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

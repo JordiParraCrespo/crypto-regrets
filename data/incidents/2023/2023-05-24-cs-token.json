@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Outdated Global Variable. Lost: ~714K USD",
+  "rootCause": "Blocksec: The root cause is that in _transfer(), the burnAmount is calculated from SellAmount, but the issue is that SellAmount is not updated! Numen: By exploiting the mechanism of burning funds during the transaction, the attacker gradually reduced the quantity of CS tokens in the [BUSD, CS] trading pair. Vulnerable code snippet: https://bscscan.com/address/0x8BC6Ce23E5e2c4f0A96429E3C9d482d74171215e#code#L711 Attack tx: https://explorer.phalcon.xyz/tx/bsc/0x906394b2ee093720955a7d55bff1666f6cf6239e46bea8af99d6352b9687baa4 Analysis: https://twitter.com/BlockSecTeam/status/1661098394130198528 https://twitter.com/numencyber/status/1661207123102167041",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

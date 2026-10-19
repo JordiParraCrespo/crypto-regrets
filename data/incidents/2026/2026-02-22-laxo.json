@@ -39,7 +39,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Incorrect Burn Logic. Lost: ~137,000 US$",
+  "rootCause": "The LAXO token implements an automatic burn / reflection mechanism that destroys tokens held in its liquidity pairs based on transfer activity rather than on the pair's true reserves. The attacker flash-loaned 350k BUSD, swapped it into LAXO, then manipulated liquidity (addLiquidityETH / removeLiquidity on the WBNB pair) to trigger the faulty burn logic against the BUSD pair. This let the attacker force the LAXO balance held by the BUSD pair to a precisely controlled value (the PoC asserts 52,057...e18 LAXO at the busd_pair) without a corresponding reserve sync. By then transferring LAXO into the BUSD pair and swapping against the now-distorted reserves, the attacker extracted ~487k BUSD, repaid the 350.175k BUSD flashloan, and netted ~137k BUSD profit. Root cause: burn logic that mutates pair token balances without reconciling reserves, allowing the AMM price to be manipulated. Vulnerable code snippet: Attack Tx: https://bscscan.com/tx/0xd58f3ef6414b59f95f55dae1acb3d5d6e626acf5333917c6d43fe422d98ac7d3 Analysis: https://x.com/CertiKAlert/status/2027317095420072317",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

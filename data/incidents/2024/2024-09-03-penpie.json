@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Reentrancy and Reward Manipulation. Lost: 11,113.6 ETH (~$27,348,259 USD)",
+  "rootCause": "Its market registration process that assumed all markets created by Pendle Finance were legitimate without proper validation. The attacker exploited this by creating a malicious market with a custom SY (Simple Yield) contract through Pendle Finance's open market creation process. When Penpie interacted with this malicious SY contract during reward claiming, the attacker was able to manipulate the reward distribution logic Vulnerable code snippet: Attack tx: https://app.blocksec.com/explorer/tx/eth/0x67c5400da117b906f8c0fc5f5149e4ea10ed6358cd9ea2ec0ed8f559d757b7df https://app.blocksec.com/explorer/tx/eth/0x56e09abb35ff12271fdb38ff8a23e4d4a7396844426a94c4d3af2e8b7a0a2813 https://app.blocksec.com/explorer/tx/eth/0x42b2ec27c732100dd9037c76da415e10329ea41598de453bb0c0c9ea7ce0d8e5 https://app.blocksec.com/explorer/tx/eth/0x663b55a1ee992603f7636ef23ff5cf19d3b261ab81494d06e218c86482df5342 Analysis: https://slowmist.medium.com/slowmist-incident-analysis-penpie-hack-e6157975898f",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

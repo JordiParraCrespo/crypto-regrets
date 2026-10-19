@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "invalid-signature-verification. Lost: ~50k",
+  "rootCause": "The exploit was caused by an arbitrary call vulnerability in the OdosLimitOrderRouter contract. The contract allowed unverified user input to control a call that deployed an ERC-6492 contract. The attacker leveraged this to call ERC20.transfer to steal tokens. To bypass the signature check (IERC1271Wallet(_signer).isValidSignature), which normally requires the _signer contract to have executable code, the attacker cleverly used the 0x4 Identity pre-compiled contract. Pre-compiled contracts have zero code length but can still execute. By using 0x4 as the _signer, the call to isValidSignature succeeded without reverting, thus bypassing the intended security measure and allowing the arbitrary call to proceed with the token transfer. The core vulnerability was the lack of proper validation of user-supplied data in the arbitrary call mechanism, combined with the unexpected behavior of pre-compiled contracts in the context of the signature verification. Vulnerable code snippet: Attack tx: https://basescan.org/tx/0xd10faa5b33ddb501b1dc6430896c966048271f2510ff9ed681dd6d510c5df9f6 Analysis: https://coinsbench.com/odos-siganture-validation-hack-deep-analysis-906dd158db93",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

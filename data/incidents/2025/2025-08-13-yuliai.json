@@ -35,7 +35,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Price Manipulation. Lost: 78k USDT",
+  "rootCause": "The YuliAI victim contract (0x8262...6282) lets users sell YULIAI tokens back for USDT at a price derived from the live YULIAI/USDT PancakeSwap V3 pool spot price, with no TWAP or manipulation guard. The attacker flash-loaned 200,000 USDT from Moolah, bought YULIAI through the V3 pool (pushing the spot price up), then repeatedly called the victim's sellToken function to sell YULIAI back at the inflated spot price for far more USDT than fair value. After unwinding the YULIAI back to USDT and repaying the loan, the attacker profited ~78K USD. The core flaw is using an instantaneous, single-pool spot price as the redemption oracle. Vulnerable code snippet: Attack Tx: https://bscscan.com/tx/0xeab946cfea49b240284d3baef24a4071313d76c39de2ee9ab00d957896a6c1c4 Analysis: TenArmorAlert on X",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

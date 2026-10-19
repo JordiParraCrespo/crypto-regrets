@@ -46,7 +46,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Admin key compromised, UUPS upgrades pushed to over a dozen vaults across four chains - Wasabi Protocol lost $5.9 million before most users saw a single alert. No multisig. No timelock. April 2026 was DeFi's worst month on record. Are we April Fools?",
+  "rootCause": "The Wasabi Protocol deployer wallet (wasabideployer.eth) held unchecked ADMIN_ROLE across every upgradeable vault the protocol had ever deployed on Ethereum, Base, Blast, and Berachain — with no multisig requirement and no timelock. When an attacker compromised this single EOA private key, they used it to assign ADMIN_ROLE to a malicious smart contract they controlled. That contract then performed UUPS (Universal Upgradeable Proxy Standard) upgrades to Wasabi's vault contracts across all four chains simultaneously, replacing legitimate vault logic with malicious code that immediately drained all deposited assets. The drain — extracting USDC, WETH, REKT, PEPE, cbBTC, USDB, WBERA, and HONEY totaling ~$5.9M — completed in under three minutes. The absence of a multisig meant a single key was the entire security boundary; the absence of a timelock on upgrades eliminated any opportunity to detect and block the malicious changes before they executed. Stolen assets were bridged to Ethereum and partially routed through Tornado Cash. Attack Tx: 0x10b371603d42a672b0bffda526af8400885c65fa7b541678f2bd8dad6fcb7e40 Analysis: Wasabi Protocol on X",
   "descriptions": [
     {
       "source": "REKT",

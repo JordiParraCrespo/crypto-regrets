@@ -39,7 +39,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Arbitrary External Call Vulnerability. Lost: $89k",
+  "rootCause": "The contract zapper does not maintain enough validations, which allows attackers to manipulate the victims’ pre-approved funds with fake tokens. Vulnerable code snippet: https://vscode.blockscan.com/ethereum/0xd248b30a3207a766d318c7a87f5cf334a439446d Attack tx: https://etherscan.io/tx/0xeaef2831d4d6bca04e4e9035613be637ae3b0034977673c1c2f10903926f29c0 Analysis: 1. The attacker queried the USDC balance of one of the users 2. Invoke zapIn with an attacker-controlled token. 3. The zapIn invocation will trigger the zap function, transferring the pre-approved USDC tokens from the victim. https://medium.com/neptune-mutual/decoding-brahma-brahtopg-smart-contract-vulnerability-7b7c364b79d8",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

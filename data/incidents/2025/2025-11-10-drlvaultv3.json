@@ -35,7 +35,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Price Manipulation. Lost: 100k USD",
+  "rootCause": "DRLVaultV3's swapToWETH() performed a swap of USDC to WETH through the USDC/WETH pool without adequate slippage protection (the vault trusts the live pool price / accepts whatever the manipulated pool returns). The attacker took a large Morpho USDC flash loan and used it to massively skew the USDC/WETH Uniswap/Pancake V3 pool price, then called the vault's swapToWETH(100000 USDC); because the vault executed at the manipulated spot price with no real minimum-out guard, it swapped at a wildly unfavorable rate, transferring value to the attacker. After restoring the pool with reverse swaps and repaying the flash loan, the attacker kept ~100K USDT. The root cause is the vault swapping against a manipulable spot pool with insufficient slippage / price-validation. Vulnerable code snippet: Attack Tx: https://etherscan.io/tx/0xe3eab35b288c086afa9b86a97ab93c7bb61d21b1951a156d2a8f6f5d5715c475 Analysis: https://blog.verichains.io/p/the-drlvaultv3-exploit-a-slippage",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

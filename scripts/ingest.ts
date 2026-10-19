@@ -25,7 +25,7 @@ import {
 import { CURATED } from './curated';
 import { canonicalChain } from '../src/lib/chains';
 import { classifyText } from './keywords';
-import { CACHE_FILE, CLASS_CACHE_FILE, TYPESAFE_CLASS_MIN_CONFIDENCE, classStateHash, stateHash, type CachedClass, type CachedClassification } from './classify-spec';
+import { bestDescription, CACHE_FILE, CLASS_CACHE_FILE, TYPESAFE_CLASS_MIN_CONFIDENCE, classStateHash, stateHash, type CachedClass, type CachedClassification } from './classify-spec';
 import { CLASSES, CLASS_IDS, TECHNIQUE_TO_CLASS, type ClassId } from '../src/lib/classes';
 
 const RAW = 'data/raw';
@@ -83,6 +83,7 @@ const ALIASES: Record<string, string> = {
   wormhole: 'portal',
   onethatgotaway: 'lubian',
   ronin: 'roninbridge',
+  etc: 'ethereumclassic',
 };
 
 function namesMatch(a: string, b: string): boolean {
@@ -451,6 +452,77 @@ function findMatch(pool: Draft[], name: string, date: string, maxDays: number): 
   return best;
 }
 
+/** Sources that already list each event once: two of their records on the same days are two events. */
+const SELF_DEDUPED: SourceId[] = ['defillama', 'defihacklabs', 'rekt'];
+const GENERIC = new Set(['the', 'and', 'protocol', 'finance', 'network', 'exchange', 'bridge', 'hack', 'hacked', 'exploit', 'exploited', 'attack', 'multisig', 'wallet', 'token', 'labs', 'dao', 'swap', 'trade', 'india', 'hot', 'compromise', 'contract', 'chain', 'defi', 'access', 'control', 'million', 'stolen', 'user', 'users', 'fake', 'lending', 'unknown', 'pool', 'liquidity', 'ethereum', 'bsc', 'solana', 'base', 'arbitrum', 'polygon']);
+
+/** Ticker-style names that share no word with the full name ("ETC" / "Ethereum Classic"). */
+const TOKEN_ALIASES: Record<string, string> = { etc: 'classic', btg: 'gold', bsv: 'satoshi', xvg: 'verge', zen: 'zencash' };
+
+function nameTokens(name: string): Set<string> {
+  const words = name.replace(/([a-z0-9])([A-Z])/g, '$1 $2').toLowerCase().match(/[a-z][a-z0-9]+/g) ?? [];
+  return new Set(words.map((w) => TOKEN_ALIASES[w] ?? w).filter((w) => w.length > 2 && !GENERIC.has(w)));
+}
+
+/**
+ * Second pass over the merged drafts. The per-source join matches by name, so the same event can
+ * survive under names that share little ("WazirX: India", "WazirX Multisig", "WazirX Safe UI
+ * Substitution Attack"). Records within 3 days, within 10% on amount and sharing a distinctive name
+ * word are folded into the best-sourced one.
+ */
+function consolidate(drafts: Draft[], log: string[]): Draft[] {
+  const parent = drafts.map((_, i) => i);
+  const find = (i: number): number => (parent[i] === i ? i : (parent[i] = find(parent[i])));
+  const srcs = drafts.map((d) => new Set(d.sources));
+  const toks = drafts.map((d) => nameTokens(d.name));
+  // Records without an amount can only join on name and a 1-day window; with amounts, 3 days and ±10%.
+  const order = drafts.map((_, i) => i).filter((i) => !drafts[i].amountUsd || drafts[i].amountUsd! >= 100_000).sort((a, b) => drafts[a].date.localeCompare(drafts[b].date));
+  for (let x = 0; x < order.length; x++) {
+    const a = order[x];
+    for (let y = x + 1; y < order.length; y++) {
+      const b = order[y];
+      const days = daysApart(drafts[a].date, drafts[b].date);
+      if (days > 3) break;
+      const [va, vb] = [drafts[a].amountUsd, drafts[b].amountUsd];
+      if (va && vb) {
+        if (Math.abs(va - vb) / Math.max(va, vb) > 0.1 || ![...toks[a]].some((t) => toks[b].has(t))) continue;
+      } else if (days > 1 || !namesMatch(drafts[a].name, drafts[b].name)) continue;
+      const [ra, rb] = [find(a), find(b)];
+      if (ra === rb) continue;
+      if (SELF_DEDUPED.some((s) => srcs[ra].has(s) && srcs[rb].has(s))) continue;
+      parent[rb] = ra;
+      for (const s of srcs[rb]) srcs[ra].add(s);
+    }
+  }
+  const groups = new Map<number, number[]>();
+  drafts.forEach((_, i) => groups.set(find(i), [...(groups.get(find(i)) ?? []), i]));
+  const out: Draft[] = [];
+  const rank = (d: Draft) => (d.classifiedBy === 'curated' ? 1000 : 0) + (d.sources.includes('defillama') ? 100 : 0) + d.sources.length;
+  for (const idx of groups.values()) {
+    const [keep, ...rest] = idx.map((i) => drafts[i]).sort((p, q) => rank(q) - rank(p));
+    for (const d of rest) {
+      log.push(`${keep.date} "${keep.name}" ← ${d.date} "${d.name}" (${d.sources.join(',')})`);
+      for (const s of d.sources) if (!keep.sources.includes(s)) keep.sources.push(s);
+      for (const r of d.references) if (!keep.references.some((k) => k.url === r.url)) keep.references.push(r);
+      for (const t of d.descriptions) if (!keep.descriptions.some((k) => k.source === t.source)) keep.descriptions.push(t);
+      for (const h of d.txHashes) if (!keep.txHashes.includes(h)) keep.txHashes.push(h);
+      if (keep.chains.length === 0) keep.chains = d.chains;
+      keep.amountUsd ||= d.amountUsd;
+      keep.rootCause ??= d.rootCause;
+      keep.technique ??= d.technique;
+      keep.poc ??= d.poc;
+      keep.targetType ??= d.targetType;
+      if (keep.category === 'unknown' && d.category !== 'unknown') {
+        keep.category = d.category;
+        keep.classifiedBy = d.classifiedBy;
+        keep.classificationNote = d.classificationNote;
+      }
+    }
+    out.push(keep);
+  }
+  return out;
+}
+
 function build(): { incidents: Incident[]; stats: Record<string, number> } {
   const drafts = fromLlama();
   const stats: Record<string, number> = { defillama: drafts.length, dhl: 0, dhlMatched: 0, rekt: 0, rektMatched: 0, curated: 0, curatedMatched: 0 };
@@ -628,9 +700,15 @@ function build(): { incidents: Incident[]; stats: Record<string, number> } {
   // One spelling per chain across sources ("BNB Chain" / "Binance Smart Chain" → "BSC").
   for (const d of drafts) d.chains = [...new Set(d.chains.map(canonicalChain).filter((c): c is string => c !== null))];
 
-  drafts.sort((a, b) => b.date.localeCompare(a.date) || (b.amountUsd ?? 0) - (a.amountUsd ?? 0));
+  const merges: string[] = [];
+  const unique = consolidate(drafts, merges);
+  stats.consolidated = merges.length;
+  writeFileSync(join(RAW, '..', 'consolidated.log'), merges.join('\n') + '\n');
+  // Show the most technical write-up as the root cause (DeFiHackLabs over REKT's editorial intro), as the classifier does.
+  for (const d of unique) if (d.classifiedBy !== 'curated') d.rootCause = bestDescription(d)?.text ?? d.rootCause;
+  unique.sort((a, b) => b.date.localeCompare(a.date) || (b.amountUsd ?? 0) - (a.amountUsd ?? 0));
   const ids = new Set<string>();
-  const incidents = drafts.map((d) => {
+  const incidents = unique.map((d) => {
     let id = `${d.date}-${slugify(d.name)}`;
     for (let i = 2; ids.has(id); i++) id = `${d.date}-${slugify(d.name)}-${i}`;
     ids.add(id);

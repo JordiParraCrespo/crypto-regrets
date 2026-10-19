@@ -39,7 +39,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Native surplus accounting flaw. Lost: 67.85 ETH",
+  "rootCause": "Ambient's CrocSwapDex mishandles native-ETH surplus collateral accounting. The attacker flash-loans WETH from Balancer, unwraps it, and deposits the ETH as native surplus via ColdPath command 73. Then, exploiting the flaw in how native surplus is credited/debited across swaps and concentrated-liquidity (warmRange) operations, the attacker walks the ETH/USDC pool's price up grid-step by grid-step, mints a narrow range position, nudges the tick into range and harvests it, then swaps back to the start. Because the native surplus accounting over-credits the user's surplus collateral, the attacker disburses (ColdPath command 74) more native ETH surplus than was legitimately owed, re-wraps it, repays Balancer and keeps ~67.85 ETH worth of WETH/USDC profit. Vulnerable code snippet: Attack Tx: https://etherscan.io/tx/0xb2fc668c42623261074de6fc30d583efede2b0e20d7aded42b7b634f9322ff52 Analysis: https://x.com/TenArmorAlert/status/2063816231023427861",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

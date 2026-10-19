@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Price Manipulation. Lost: ~$2M",
+  "rootCause": "Zunami Protocol's contract calculates account balances using the cacheAssetPrice() value, which depends on totalHoldings. The attacker manipulated totalHoldings by flash loaning in funds from multiple sources, then swapping these funds for 4.8M UZD on Curve. Vulnerable Code Snippet: Attack Transaction: https://etherscan.io/tx/0x0788ba222970c7c68a738b0e08fb197e669e61f9b226ceec4cab9b85abe8cceb Analysis: https://twitter.com/peckshield/status/1690877589005778945 https://twitter.com/BlockSecTeam/status/1690931111776358400",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

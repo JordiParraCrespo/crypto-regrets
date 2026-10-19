@@ -39,7 +39,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Admin keys stolen, $8.4M drained in minutes through a malicious contract upgrade. Zoth suffers two hacks in three weeks - first for logic, now for keys. Auditing code is easy. Auditing the humans behind it? That’s where protocols bleed out.",
+  "rootCause": "The Zoth real-world asset (RWA) restaking protocol on Ethereum suffered a compromise of its deployer wallet's private key on March 21, 2025. With full administrative access, the attacker called upgradeToAndCall on the USD0PPSubVaultUpgradeable proxy contract, replacing the legitimate implementation with a malicious one that enabled unrestricted withdrawals. The attacker used this to drain 8,851,750 USD0++ tokens (~$8.85M), immediately converting them first to DAI and then to ETH before transferring the funds offchain. On-chain evidence showed the attack was premeditated weeks in advance, with all attacker-controlled accounts funded via ChangeNOW. The incident was Zoth's second exploit within a single month, following a $285K liquidity pool vulnerability earlier in March. Attack Tx: 0x33bf669d125d11c432ac9b52b9d56161101c072fd8b0ac2aa390f5760fb50ca4 Analysis: Zoth Protocol Statement Explained: The Zoth Hack (March 2025) - Halborn",
   "descriptions": [
     {
       "source": "REKT",
@@ -124,6 +124,16 @@
       "source": "revertiq",
       "label": "research.blockscope.co",
       "url": "https://research.blockscope.co/zoth-vault-breach"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/how-did-zoth-lose-8-4m-due-to-access-control-2025-03-24"
+    },
+    {
+      "source": "revertiq",
+      "label": "cryptonews.com",
+      "url": "https://cryptonews.com/news/rwa-restaking-protocol-zoth-suffers-security-breach/"
     }
   ]
 }

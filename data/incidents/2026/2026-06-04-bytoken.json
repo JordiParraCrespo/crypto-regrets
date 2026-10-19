@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Permissionless triggerAutoBurn Reserve Manipulation. Lost: ~$87,402 (146.60 WBNB)",
+  "rootCause": "BY token's triggerAutoBurn() is permissionless: anyone can call it once the burn interval elapses, and it burns BY held directly inside the BY/WBNB PancakeSwap pair, slashing the pair's BY reserve. The attacker corners BY supply by buying through the router, donates WBNB into the pair plus sync() to satisfy the trading-enable threshold, buys more BY for itself, then calls triggerAutoBurn() to crash the pair's BY reserve. With BY reserve crushed but WBNB reserve intact, BY becomes hugely overvalued against WBNB, so the attacker sells tiny amounts of BY (1 wei x5, then the remainder) to drain ~146.6 WBNB (~$87.4K) out of the pair. Root cause is a permissionless burn function that mutates external LP reserves, enabling free, on-demand price manipulation. Vulnerable code snippet: Attack Tx: https://bscscan.com/tx/0xe31c681eee764fb94b1b6bda3bbb0e4f25acb129c19040b9f58ad30541980979 Analysis: SlowMist",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

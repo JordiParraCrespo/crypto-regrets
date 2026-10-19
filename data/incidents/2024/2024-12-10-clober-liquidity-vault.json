@@ -35,7 +35,7 @@
   },
   "bridge": false,
   "language": null,
-  "rootCause": "Reentrancy. Lost: ~501K US$ (133.7 WETH)",
+  "rootCause": "The exploit was a reentrancy vulnerability within the LP token burning process. The burn function in the Rebalancer contract called the burnHook function on the strategy contract *before* updating the internal state of the pool (specifically, reducing the LP token supply and transferring the underlying assets). The attacker exploited this by creating a trading pool with a malicious strategy contract. This malicious burnHook function (burnHook in the CloberDex test contract) re-entered the burn function *before* the initial burn operation's state changes were applied, allowing the attacker to withdraw the underlying WETH multiple times for the same initial LP token burn. Vulnerable code snippet: Attack tx: https://basescan.org/tx/0x8fcdfcded45100437ff94801090355f2f689941dca75de9a702e01670f361c04 Analysis: https://lunaray.medium.com/cloberdex-hack-analysis-04bc7cd3cbc4",
   "descriptions": [
     {
       "source": "DeFiHackLabs",
@@ -126,6 +126,16 @@
       "source": "revertiq",
       "label": "certik.com",
       "url": "https://www.certik.com/blog/clober-dex-incident-analysis"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/breaking-down-cloberdex-s-costly-501k-2024-12-14"
+    },
+    {
+      "source": "revertiq",
+      "label": "quillaudits.com",
+      "url": "https://www.quillaudits.com/blog/hack-analysis/cloberdex-reentrancy-exploit-501k"
     }
   ]
 }

@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Logic Flaw. Lost: $16.3 K",
+  "rootCause": "ChiSale on Ethereum Mainnet was exploited on 2024-11-07 in a 25,000 WETH Balancer flash-loan transaction that routed through a separate receiver contract and left about 5.780779999999999987 ETH as residual profit after repayment. ChiSale’s historical buy() logic used caller-controlled msg.value for token and referral accounting, so an atomic flash-loan funded purchase path could recycle borrowed value through the sale contract and retain a surplus after repayment. The exact receiver-side substep that produced the profit is not fully reconstructed from the available trace.",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

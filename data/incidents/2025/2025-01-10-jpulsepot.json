@@ -35,7 +35,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Logic Flaw. Lost: 21.5K",
+  "rootCause": "The root cause of the exploit was that the swapProfitFees() function was missing access controls. This function swaps tokens owned by the contract to WBNB via PancakeSwap. Only admins should have access to trade with the contract’s earnings. The attacker traded WBNB for LINK externally, artificially increasing LINK token’s price in the pool. Then, the attacker called swapProfitFees() to swap the contract’s LINK back to WBNB at the higher rate, making a profit. Vulnerable code snippet: Attack tx: https://bscscan.com/tx/0xd6ba15ecf3df9aaae37450df8f79233267af41535793ee1f69c565b50e28f7da Analysis: https://www.cnblogs.com/ACaiGarden/p/18664999",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

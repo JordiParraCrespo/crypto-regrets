@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Price manipulation attack. Lost: ~200BNB",
+  "rootCause": "when the private updatePool function is invoked in the _transfer function, the resulting token transfer will burn the balance of the $BAMBOO token in the pair, causing a rise in the token price. Vulnerable code snippet: Attack tx: https://explorer.phalcon.xyz/tx/bsc/0x88a6c2c3ce86d4e0b1356861b749175884293f4302dbfdbfb16a5e373ab58a10 Analysis: Post-mortem : https://twitter.com/Phalcon_xyz/status/1676220090142916611",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

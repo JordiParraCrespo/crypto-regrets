@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Arbitrary Call. Lost: 500,000+ USD",
+  "rootCause": "SiloFinance's pre-release leverage contract LeverageUsingSiloFlashloanWithGeneralSwap contained an arbitrary external call vulnerability in its openLeveragePosition function. The function accepted user-controlled _swapArgs without any validation, allowing an attacker to embed malicious parameters that designated the attacker's own address as the token receiver while specifying a victim address (which had granted maximum allowance to the contract) as the borrower. The contract then called silo.borrow() on the victim's behalf and transferred borrowed assets directly to the attacker, draining approximately $552,000 in ETH. Core Silo vaults and markets were isolated from the exploit. Attack Tx: 0x8e8dbc6b975dd664f1610f36c1e1990822ff142aa54129c28f39c7506bad091b Analysis: BlockSec Team Alert",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

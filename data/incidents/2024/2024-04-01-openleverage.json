@@ -35,7 +35,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "business logic flaw. Lost: ~234K",
+  "rootCause": "The attacker exploited a logic flaw in the liquidation process. By creating a margin trade with a small borrow and collateral, they triggered liquidation via the liquidate function, which incorrectly included margin-borrowed amounts in its calculations. Using the repayBorrowEndByOpenLev function, the attacker was able to liquidate the position with minimal repayment, resulting in a zero borrow balance. In a second transaction, they used the payoffTrade function to withdraw tokens without repaying the borrowed amount, as the borrow balance was already cleared. This exploit required two transactions due to a block time check. Attack tx: - https://app.blocksec.com/explorer/tx/bsc/0xf78a85eb32a193e3ed2e708803b57ea8ea22a7f25792851e3de2d7945e6d02d5 - https://app.blocksec.com/explorer/tx/bsc/0x210071108f3e5cd24f49ef4b8bcdc11804984b0c0334e18a9a2cdb4cd5186067",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

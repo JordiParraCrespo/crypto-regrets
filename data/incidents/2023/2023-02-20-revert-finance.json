@@ -39,7 +39,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Arbitrary External Call Vulnerability. Lost: ~$30k",
+  "rootCause": "The V3Utils contract had insufficient input validation, allowing arbitrary external calls, resulting in the theft of funds from approved users. Vulnerable code snippet: https://etherscan.io/address/0x531110418d8591c92e9cbbfc722db8ffb604fafd#code#F1#L225 The contract relied on an external aggregator called Ox for executing swaps. The frontend called the Ox API, which returned two dynamic keys, \"to\" and \"allowanceTarget,\" specifying which contracts to call and approve tokens to. These dynamic values were forwarded to the V3Utils contract instead of being whitelisted. This allowed the attacker to send a token contract (e.g., USDC) as the swap router, granting them the ability to execute arbitrary code on it, such as the \"transferFrom\" function, which led to the attacker stealing funds from other addresses that have approved to the V3Utils contract. Attack tx: https://etherscan.io/tx/0xdaccbc437cb07427394704fbcc8366589ffccf974ec6524f3483844b043f31d5 Analysis: https://mirror.xyz/revertfinance.eth/3sdpQ3v9vEKiOjaHXUi3TdEfhleAXXlAEWeODrRHJtU https://twitter.com/revertfinance/status/1627490043026890752",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

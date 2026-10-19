@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Swap ETH/BTC 1/1 in mint function. Lost: 27.83925883 BTC (~$1.7M USD)",
+  "rootCause": "The cause of this vulnerability is that the exchange ratio of WETH and uniBTC was not properly handled, resulting in WETH and uniBTC being exchanged at 1:1, and the value of WETH was magnified tens of thousands of times. The attacker used the distorted price to make a profit through lending, and eventually the attacker used the borrowed WETH to empty the project’s uniBTC tokens. Vulnerable code snippet: Attack tx: https://etherscan.io/tx/0x725f0d65340c859e0f64e72ca8260220c526c3e0ccde530004160809f6177940 Analysis: https://lunaray.medium.com/bedrock-unibtc-hack-analysis-7808902e5a7c",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

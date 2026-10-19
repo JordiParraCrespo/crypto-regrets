@@ -9,32 +9,32 @@
     "MANTRA"
   ],
   "targetType": "Chain",
-  "category": "access-control",
-  "vulnClass": null,
-  "vulnClassBy": null,
+  "category": "accounting-math",
+  "vulnClass": "integer-overflow",
+  "vulnClassBy": "curated",
   "aiClass": {
-    "id": "missing-access-modifier",
-    "confidence": 0.89
+    "id": "integer-overflow",
+    "confidence": 0.95
   },
-  "technique": "Improper Access Control",
-  "classificationNote": null,
-  "classifiedBy": "defillama",
+  "technique": "Cosmos EVM StateDB balance underflow (GHSA-7g4w-cg88-2cq2)",
+  "classificationNote": "Curated: reclassified from \"access-control\" based on the published post-mortem.",
+  "classifiedBy": "curated",
   "ai": {
     "model": "jev-1.13.0",
     "category": "accounting-math",
-    "confidence": 0.88,
+    "confidence": 0.97,
     "top": [
       {
         "category": "accounting-math",
-        "p": 0.89
+        "p": 0.97
       },
       {
-        "category": "access-control",
-        "p": 0.09
+        "category": "logic-error",
+        "p": 0.02
       },
       {
         "category": "client-bug",
-        "p": 0.02
+        "p": 0.01
       }
     ],
     "flashLoan": 0.03,
@@ -43,8 +43,12 @@
   },
   "bridge": false,
   "language": "Go",
-  "rootCause": "An attacker drained 720M MANTRA, worth $3.6 million per Mantra’s postmortem, through a confirmed Cosmos EVM underflow bug. The halt came too late for 94.7% of it, which had already reached an exchange. Three more chains fell to the same flaw days later.",
+  "rootCause": "Cosmos EVM's StateDB tracked only an account's spendable balance, while x/staking and the staking precompile let a vesting account delegate locked coins. Delegating more than the spendable balance made the write-back in StateDB.SubBalance underflow (unchecked uint256) to ~2^256. The fix had been on main since May but shipped in v0.6.2 / v0.7.2 only on 19 Aug; the chain was still on an unpatched version. On MANTRA, ~720.9M OM was taken from the burn address and a dormant genesis multisig in two attacks, the same evening a public fork PR described the exploit path.",
   "descriptions": [
+    {
+      "source": "Curated post-mortem",
+      "text": "Cosmos EVM's StateDB tracked only an account's spendable balance, while x/staking and the staking precompile let a vesting account delegate locked coins. Delegating more than the spendable balance made the write-back in StateDB.SubBalance underflow (unchecked uint256) to ~2^256. The fix had been on main since May but shipped in v0.6.2 / v0.7.2 only on 19 Aug; the chain was still on an unpatched version. On MANTRA, ~720.9M OM was taken from the burn address and a dormant genesis multisig in two attacks, the same evening a public fork PR described the exploit path."
+    },
     {
       "source": "REKT",
       "text": "An attacker drained 720M MANTRA, worth $3.6 million per Mantra’s postmortem, through a confirmed Cosmos EVM underflow bug. The halt came too late for 94.7% of it, which had already reached an exchange. Three more chains fell to the same flaw days later."
@@ -65,7 +69,8 @@
     "defillama",
     "rekt",
     "slowmist",
-    "revertiq"
+    "revertiq",
+    "curated"
   ],
   "references": [
     {
@@ -97,6 +102,16 @@
       "source": "revertiq",
       "label": "bitzo.com",
       "url": "https://bitzo.com/2026/08/mantra-chain-halt-cosmos-evm-exploit-attempt"
+    },
+    {
+      "source": "curated",
+      "label": "Cosmos Labs post-mortem",
+      "url": "https://github.com/cosmos/security/blob/main/communications/cosmos_evm_GHSA-7g4w-cg88-2cq2_post_mortem.md"
+    },
+    {
+      "source": "curated",
+      "label": "GHSA-7g4w-cg88-2cq2",
+      "url": "https://github.com/cosmos/evm/security/advisories/GHSA-7g4w-cg88-2cq2"
     }
   ]
 }

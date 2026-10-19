@@ -35,7 +35,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Reentrancy. Lost: ~$3M",
+  "rootCause": "The NFT Trader closeSwapIntent function lacked reentrancy protection. When closing a swap it called safeTransferFrom to deliver an NFT to the recipient, which triggered the ERC-721 onERC721Received callback on the attacker's contract before the swap's state was finalized. Inside that callback the attacker called editCounterPart to substitute the victim as the swap's counterparty. Execution then returned to closeSwapIntent, which proceeded to pull valuable CloneX NFTs from the now-redirected victim address to complete the tampered swap, draining ~$3M in NFTs with a nearly worthless Uniswap V3 position as the offered collateral. Vulnerable code snippet: Attack Tx: 0xec7523660f8b66d9e4a5931d97ad8b30acc679c973b20038ba4c15d4336b393d Analysis: Phalcon / AnciliaInc analysis on X",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

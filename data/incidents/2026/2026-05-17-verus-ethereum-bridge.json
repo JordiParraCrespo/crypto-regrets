@@ -35,7 +35,7 @@
   },
   "bridge": true,
   "language": "Solidity",
-  "rootCause": "Insufficient Validation. Lost: ~$11.58M",
+  "rootCause": "The Verus Ethereum bridge's submitImports path (proxy -> SubmitImports._createImports -> VerusProof.proveImports -> TokenManager.processTransactions) accepted a CReserveTransferImport containing a partial transaction proof and serialized reserve transfers, but the Merkle/MMR proof verification was insufficient: the attacker was able to craft a partialtransactionproof (hand-built branch/index/size values and serialized component data) that the bridge's proof logic accepted as valid against the confirmed state root, even though no corresponding deposit existed on the Verus chain. With a single forged import the attacker released ETH, tBTC and USDC reserves to a receiver address by encoding spoofed reserve transfers, draining ~1,625 ETH, ~103 tBTC and ~147K USDC (~$11.58M). The root cause is a flaw in the import/Merkle-proof validation that let a forged proof pass verification and mint/release bridge reserves. Vulnerable code snippet: Attack Tx: https://etherscan.io/tx/0x6990f01720f57fc515d0e976a0c4f8157e0a9529194c4c15d190e98d087eb321 Analysis: https://x.com/VerusCoin/status/2056829444124213652",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

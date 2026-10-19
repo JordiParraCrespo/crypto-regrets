@@ -35,7 +35,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "business logic flaw. Lost: ~2ETH",
+  "rootCause": "Blocksec: QTN token has an inflation mechanism: all QTN holders' balanceOf will increase for each QTN's sale in Uniswap. However, the QTN's developer uses “from == UniswapPair” to judge if there is a QTN's sale. The incorrect condition is the root cause of this attack. Uniswap pair has a function named skim that can cheat QTN, so the attack contract increases his QTN's balance via 3 steps: 1) transfer x QTN to Uniswap pair; 2）invoke the skim function to a created contract; 3) transfer y QTN back to the attack contract (y > x). Vulnerable code snippet: https://etherscan.io/address/0xc9fa8f4cfd11559b50c5c7f6672b9eea2757e1bd#code#L287 Attack tx: https://etherscan.io/tx/0x37cb8626e45f0749296ef080acb218e5ccc7efb2ae4d39c952566dc378ca1c4c https://etherscan.io/tx/0xfde10ad92566f369b23ed5135289630b7a6453887c77088794552c2a3d1ce8b7 Analysis: https://twitter.com/BlockSecTeam/status/1615625901739511809",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

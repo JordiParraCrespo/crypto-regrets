@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "insufficient validation. Lost: ~$7M",
+  "rootCause": "The DebtManager.leverage function accepted an arbitrary market address parameter without verifying it was a legitimate, whitelisted Exactly market. The function also accepted a Permit struct naming a victim account, then set an internal _msgSender context to that victim before calling market.deposit(). The attacker deployed a FakeMarket contract impersonating a real market: its deposit function computed the victim's maximum collateral, added Uniswap V3 liquidity for a worthless fake token, then called DebtManager.crossDeleverage while the DebtManager's internal context still identified the victim — swapping the victim's real USDC collateral for the fake token and collecting the USDC via LP removal. After draining collateral for eight victims, the attacker additionally manipulated the exaUSDC share-to-asset conversion ratio downward through repeated borrow/repay cycles, making victim positions under-collateralized and liquidatable for further profit. Vulnerable code snippet: Attack Tx: 0xe8999fb57684856d637504f1f0082b69a3f7b34dd4e7597bea376c9466813585 Analysis: BlockSecTeam on X",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

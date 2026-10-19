@@ -39,7 +39,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Price Manipulation not confirmed. Lost: ~2.16 M BUSD",
+  "rootCause": "The MBU Token protocol's ERC1967 proxy deposit(address token, uint256 amount) function issues MBU tokens at a wildly miscalibrated exchange rate: depositing 0.001 WBNB mints approximately 30,000,000 MBU tokens. This massively disproportionate minting ratio, combined with the existence of a liquid MBU/BUSD trading pair on PancakeSwap holding substantial BUSD reserves, allowed an attacker to instantly mint a supply many orders of magnitude larger than the deposited value and dump it against the pool. The attacker wrapped 0.001 BNB into WBNB, deposited it into the vulnerable contract to receive 30M MBU, then called PancakeSwap's swapExactTokensForTokensSupportingFeeOnTransferTokens to exchange all 30M MBU for approximately $2.16M in BUSD, completely draining the trading pool. The entire exploit required only 1 BNB of starting capital, with 0.999 BNB paid to BlockRazor for MEV-protected transaction submission. Vulnerable code snippet: Attack Tx: 0x2a65254b41b42f39331a0bcc9f893518d6b106e80d9a476b8ca3816325f4a150 Analysis: Blockaid Alert",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

@@ -35,7 +35,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "business logic flaw. Lost: ~3.4 ETH (WIF token)",
+  "rootCause": "Double claimEarned, Each time the claimEarned function is called, the code iterates through all the stakes and accumulates the calculated _earned amount. However, after calculating the rewards, the already calculated rewards are not marked as claimed. As a result, the next time claimEarned is called, it will recalculate those already claimed rewards, allowing users to claim rewards multiple times. Vulnerable code snippet: Attack tx: https://etherscan.io/tx/0x58424115c6576b19cfb78b0b7ff00e0c13daa06d259f2a67210c112731519e09 Analysis: https://x.com/ChainAegis/status/1802550962977964139",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

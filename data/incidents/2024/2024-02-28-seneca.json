@@ -44,7 +44,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Arbitrary External Call Vulnerability. Lost: ~6M",
+  "rootCause": "The performoperations() in Seneca which uses the parameters passed in to choose to execute different function logic. When the user specifies action as 30, the function will choose to call the _call(). The attacker directly calls the performOperations function and constructs the following parameters. Actions is passed in the above 30, and the _call function is called. Vulnerable code snippet: Attack tx: https://phalcon.blocksec.com/explorer/tx/eth/0x23fcf9d4517f7cc39815b09b0a80c023ab2c8196c826c93b4100f2e26b701286 Analysis: https://twitter.com/Phalcon_xyz/status/1763045563040411876",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

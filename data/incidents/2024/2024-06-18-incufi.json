@@ -35,7 +35,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "business logic flaw. Lost: ~59K USD",
+  "rootCause": "The protocol distributes CommissionContractToken rewards to both 1st-layerand 2nd-layer sponsors upon staking. However, the attacker can register multiple self-controlledaccounts as sponsors and repeatedly earn rewards by staking and withdrawing the same principal. Since CommissionContractToken can be swapped 1:1 for contractToken (BUSD) via swapCommision(), the attacker can convert these “free” rewards into real value, draining funds from the protocol without incurring any net cost. Vulnerable code snippet: Attack tx: https://app.blocksec.com/explorer/tx/bsc/0x556419e0a6ee8e6de6b3679605f9f62ad013007419a1b55c9f56590a824bfb52 Analysis: The attacker first registers with 1st-layer sponser and 2nd-layer sponsor all possessed by him. tx: https://app.blocksec.com/explorer/tx/bsc/0x42e8b96b6e20da77bd054924913a852eaa3985a3b4f713ccef1c7f4c228114a9 The register function will record the referrer , in the STAKE function, rewards will be given to the referrer In the withdral function, the user could get his principal back: However, the rewarded CommissionContractToken could be collected to swap for BUSD via swapCommision with 1:1 ratio. The mechanism flaw allows the attacker to steal funds from the protocol.",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

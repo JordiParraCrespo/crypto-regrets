@@ -48,6 +48,10 @@
     {
       "source": "DeFiHackLabs explorer",
       "text": "The Feed Every Gorilla (FEG) protocol lost approximately $1–1.3 million in its third major hack, targeting the protocol's SmartBridge cross-chain component that relies on Wormhole for message passing. The root cause was a failure to validate the source address when receiving Wormhole bridge messages: the SmartBridge's relayer registration logic did not check whether the originating address on the source chain was actually authorized. This allowed an attacker to craft a malicious bridge message on one chain (e.g., Base) that caused the SmartBridge on Ethereum or BSC to register a withdrawal without a corresponding deposit on the source chain. By exploiting this missing input validation and absent access control on Wormhole message processing, the attacker withdrew FEG tokens from the bridge contract across Ethereum, BSC, and Base without ever depositing them — draining approximately $1.3 million before selling the tokens, which caused FEG's price to collapse by 99%. Attack Tx: 0x6c3cf48e9c8b22f60fc2b702b03f93926ee8624639b100fe851b757947e61759 Analysis: Explained: The Feed Every Gorilla (FEG) Hack (December 2024)"
+    },
+    {
+      "source": "SlowMist",
+      "text": "The FEG project suffered an attack resulting in a loss of approximately $1 million. Analysis suggests that the root cause of the incident appears to be a composability issue arising from the integration with the underlying Wormhole cross-chain bridge, which facilitates cross-chain message and token transfers."
     }
   ],
   "audit": null,
@@ -59,7 +63,8 @@
   "poc": null,
   "sources": [
     "defihacklabs",
-    "blocksec"
+    "blocksec",
+    "slowmist"
   ],
   "references": [
     {
@@ -81,6 +86,11 @@
       "source": "blocksec",
       "label": "x.com",
       "url": "https://x.com/Phalcon_xyz/status/1873634026444968034"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/FEGtoken/status/1873265905867866294"
     }
   ]
 }

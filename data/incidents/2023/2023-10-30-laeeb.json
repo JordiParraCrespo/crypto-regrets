@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Lack Slippage Protection. Lost: ~1.8 WBNB",
+  "rootCause": "The LaEeb token is a fee-on-transfer token, and its interaction with the PancakeSwap pair's skim() function let an attacker repeatedly extract value from the pool's balance. The attacker flash-loaned WBNB, swapped it for LaEeb, then in a loop transferred an enormous amount of LaEeb into the pair and immediately called Pair.skim(address(this)). Because skim() sends out the difference between the pair's actual token balance and its stored reserves, and the LaEeb transfer/fee accounting made the balance diverge from reserves, each skim returned more LaEeb than was effectively committed. The attacker then swapped the accumulated LaEeb back to WBNB using swapExactTokensForTokensSupportingFeeOnTransferTokens with amountOutMinimum = 0 (no slippage protection) and repaid the flash loan. Vulnerable code snippet: Attack Tx: https://app.blocksec.com/explorer/tx/bsc/0x0d13a61e9dc81cfae324d3d80e49830d9bbae300f760e016a15600889a896a1b Analysis: MetaSec_xyz on X",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

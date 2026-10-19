@@ -13,8 +13,8 @@
   "vulnClass": null,
   "vulnClassBy": null,
   "aiClass": {
-    "id": "single-function-reentrancy",
-    "confidence": 0.76
+    "id": "cross-function-reentrancy",
+    "confidence": 0.8
   },
   "technique": "Reentrancy",
   "classificationNote": null,
@@ -29,27 +29,47 @@
         "p": 1
       }
     ],
-    "flashLoan": 0.03,
+    "flashLoan": 0.92,
     "stateActor": 0.02,
-    "hasRootCause": 0.97
+    "hasRootCause": 0.98
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "On July 9, 2025, GMX V1 on Arbitrum suffered a $42 million loss from a reentrancy exploit in the GLP vault. The attacker used a smart contract as a position account in executeDecreaseOrder(), triggering a callback after an ETH refund. During the reentrant callback, the attacker manipulated open short positions to inflate protocol AUM, enabling GLP token redemption at an artificially high rate. All stolen funds were returned except for a $5 million bounty. The GLP vault could be exploited through a reentrancy vector in PositionManager.executeDecreaseOrder(), which refunded ETH to a smart contract account with no gas limit. The attacker manipulated proto…",
+  "rootCause": "GMX V1 tracks globalShortAveragePrice for each index token, which is used to compute the unrealized PnL of all global short positions and therefore feeds into the GLP pool's AUM (and the GLP share price). The exploit abused a reentrancy window in the position-keeper execution flow: when an ETH position is decreased and ETH/native is sent back to the attacker, the attacker's fallback() re-enters GMX (via the order callbacks gmxPositionCallback/fallback) and opens/manipulates a BTC global short through vault_.increasePosition(...) and createDecreasePosition(...) while globalShortAveragePrice is in an inconsistent (mid-update) state. This corrupts the stored globalShortAveragePrice for BTC, which makes GMX believe global shorts have a huge unrealized profit, artificially deflating getAumInUsdg and thus the GLP price. The attacker then mints GLP cheaply (mintAndStakeGlp) and redeems it (unstakeAndRedeemGlp) for every backing token (WETH, BTC, USDC, USDe, LINK, UNI, USDT, FRAX, DAI), draining the GLP vault. Funded by a USDC flash loan and repeated in a loop to extract maximal value. The root cause is that the global short average price accounting can be reentered/manipulated during position close callbacks, breaking the GLP AUM/share-price invariant. Vulnerable code snippet: Attack Tx: https://app.blocksec.com/explorer/tx/arbitrum/0x03182d3f0956a91c4e4c8f225bbc7975f9434fab042228c7acdc5ec9a32626ef Analysis: deeberiroz / blocksec tx trace",
   "descriptions": [
     {
       "source": "RevertIQ",
       "text": "On July 9, 2025, GMX V1 on Arbitrum suffered a $42 million loss from a reentrancy exploit in the GLP vault. The attacker used a smart contract as a position account in executeDecreaseOrder(), triggering a callback after an ETH refund. During the reentrant callback, the attacker manipulated open short positions to inflate protocol AUM, enabling GLP token redemption at an artificially high rate. All stolen funds were returned except for a $5 million bounty. The GLP vault could be exploited through a reentrancy vector in PositionManager.executeDecreaseOrder(), which refunded ETH to a smart contract account with no gas limit. The attacker manipulated proto…"
+    },
+    {
+      "source": "DeFiHackLabs",
+      "text": "Share price manipulation. Lost: 41M USD"
+    },
+    {
+      "source": "REKT",
+      "text": "$42 million appeared to vanish from GMX V1 on July 9 via cross-contract reentrancy exploit introduced by a 2022 bug fix. Attacker manipulated globalShortAveragePrices to inflate GLP pricing, but funds were later recovered in coordinated disclosure - $5M bounty paid."
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "GMX V1 tracks globalShortAveragePrice for each index token, which is used to compute the unrealized PnL of all global short positions and therefore feeds into the GLP pool's AUM (and the GLP share price). The exploit abused a reentrancy window in the position-keeper execution flow: when an ETH position is decreased and ETH/native is sent back to the attacker, the attacker's fallback() re-enters GMX (via the order callbacks gmxPositionCallback/fallback) and opens/manipulates a BTC global short through vault_.increasePosition(...) and createDecreasePosition(...) while globalShortAveragePrice is in an inconsistent (mid-update) state. This corrupts the stored globalShortAveragePrice for BTC, which makes GMX believe global shorts have a huge unrealized profit, artificially deflating getAumInUsdg and thus the GLP price. The attacker then mints GLP cheaply (mintAndStakeGlp) and redeems it (unstakeAndRedeemGlp) for every backing token (WETH, BTC, USDC, USDe, LINK, UNI, USDT, FRAX, DAI), draining the GLP vault. Funded by a USDC flash loan and repeated in a loop to extract maximal value. The root cause is that the global short average price accounting can be reentered/manipulated during position close callbacks, breaking the GLP AUM/share-price invariant. Vulnerable code snippet: Attack Tx: https://app.blocksec.com/explorer/tx/arbitrum/0x03182d3f0956a91c4e4c8f225bbc7975f9434fab042228c7acdc5ec9a32626ef Analysis: deeberiroz / blocksec tx trace"
+    },
+    {
+      "source": "SlowMist",
+      "text": "On July 9, according to monitoring by MistTrack’s MistEye security system, the well-known decentralized trading platform GMX (@GMX_IO) suffered an attack, resulting in asset losses exceeding $42 million. Analysis indicates that the core of this attack lies in the exploitation of two features: the use of leverage when the Keeper system executes orders, and the update mechanism where the global average price adjusts during shorting operations but does not update when closing short positions. Leveraging these mechanics, the attacker conducted a reentrancy attack to create large short positions, manipulating the global short average price and the size of the global short position.…"
     }
   ],
   "audit": null,
   "txHashes": [
     "0x03182d3f0956a91c4e4c8f225bbc7975f9434fab042228c7acdc5ec9a32626ef"
   ],
-  "poc": null,
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-07/gmx_exp.sol",
   "sources": [
     "defillama",
-    "revertiq"
+    "revertiq",
+    "defihacklabs",
+    "rekt",
+    "blocksec",
+    "slowmist"
   ],
   "references": [
     {
@@ -71,6 +91,41 @@
       "source": "revertiq",
       "label": "xn--defiintel-y79d.com",
       "url": "https://defi‑intel.com/incidents/gmx‑exploit‑2025/"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-07/gmx_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/GMX_IO/status/1943336664102756471"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: GMX - Rekt",
+      "url": "https://rekt.news/gmx-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "app.blocksec.com",
+      "url": "https://app.blocksec.com/explorer/tx/arbitrum/0x03182d3f0956a91c4e4c8f225bbc7975f9434fab042228c7acdc5ec9a32626ef"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x03182d3f0956a91c4e4c8f225bbc7975f9434fab042228c7acdc5ec9a32626ef"
+    },
+    {
+      "source": "blocksec",
+      "label": "x.com",
+      "url": "https://x.com/BlockSecTeam/status/1942990338731229379"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/1942949653231841352"
     }
   ]
 }

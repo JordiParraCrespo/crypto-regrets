@@ -39,7 +39,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Logic Flaw. Lost: 37.6K",
+  "rootCause": "The Mosca contract exploit was caused by a logical inconsistency between the join function (intended for staking) and the withdrawFiat function. The join function allowed a user's balance to accumulate based on their previous balance with each call. By calling join seven times successively in a single transaction, the attacker artificially inflated their stakable balance. The withdrawFiat function, however, simply subtracted the user-specified withdrawal amount from their recorded balance and transferred that amount, without validating if the accumulated balance accurately reflected actual deposits. This mismatch allowed the attacker to withdraw funds exceeding their initial deposits by exploiting the compounded balance from the repeated join calls. The core vulnerability was the lack of proper accounting and validation between the staking input logic and the withdrawal logic, enabling the artificial inflation of withdrawable amounts. Vulnerable code snippet: Attack tx: https://bscscan.com/tx/0xf13d281d4aa95f1aca457bd17f2531581b0ce918c90905d65934c9e67f6ae0ec Analysis: https://blog.verichains.io/p/unveiling-the-flawed-logic-in-the",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

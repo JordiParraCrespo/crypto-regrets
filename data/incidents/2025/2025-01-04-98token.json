@@ -35,7 +35,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Unprotected public function. Lost: 28K USDT",
+  "rootCause": "The vulnerability was an unprotected public function, swapTokensForTokens(address[],uint256,uint256,address). This function allowed any external caller to initiate a token swap using parameters they controlled. The attacker exploited this by calling this public function, specifying a path to swap the contract's entire balance of the token and directing the output to their own address . The absence of any access control modifiers on this critical function allowed for unauthorized use and the subsequent draining of of tokens. Vulnerable code snippet: Attack tx: https://app.blocksec.com/explorer/tx/bsc/0x61da5b502a62d7e9038d73e31ceb3935050430a7f9b7e29b9b3200db3095f91d Analysis:",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

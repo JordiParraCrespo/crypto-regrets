@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "business logic flaw. Lost: $~28K USD",
+  "rootCause": "The UPS token was exploited due to a flawed transfer implementation. When tokens are transferred to the Pancake pair, they are burned at the pair and the \"skim\" function is called. This caused the UPS reserve to shrink significantly, allowing the hacker to drain BUSD from the pair using just a few UPS tokens. Vulnerable code snippet: Attack tx: 0xd03702e17171a32464 | Phalcon Explorer Analysis: Root cause: Vulnerable code snippet: Attack tx: Analysis:",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

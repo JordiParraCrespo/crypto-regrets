@@ -35,7 +35,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "precission-loss. Lost: ~0.2 BNB",
+  "rootCause": "Binemon's BIN token exposes a public sweepTokenForMarketing() function with no access control, intended as an admin-only routine that swaps the token's accumulated balance for marketing. Because it is permissionless, the attacker called it repeatedly in a tight loop, each call pushing the contract's large BIN holdings into the PancakeSwap pool and distorting the reserves. This drove the BIN/WBNB price down so the attacker could accumulate cheap BIN, then after honest users bought in (raising the price), sold the BIN back via swapExactTokensForTokensSupportingFeeOnTransferTokens for profit. Vulnerable code snippet: Attack Tx: https://app.blocksec.com/explorer/tx/bsc/0x1999bb5c11a8d8bfa7620fc5cc37f5bc59c1a99d7a9250a8d6076c93bbdbeb5f",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

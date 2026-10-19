@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "No input validation. Lost: ~1BNB",
+  "rootCause": "The root cause of the attack is that the function register can be repeatedly invoked by the same account. Vulnerable code snippet: https://bscscan.com/address/0x4726010da871f4b57b5031e3ea48bde961f122aa#code Attack tx: https://bscscan.com/tx/0x5735026e5de6d1968ab5baef0cc436cc0a3f4de4ab735335c5b1bd31fa60c582 Analysis: 1. The attacker repeatedly invokes the register function to increase the GEM bonus 2. The attacker invokes addGems and upgradeVillage, to update GEM value and accumulate yield 1. The attacker invokes sellVillage to convert GEM to money 2. Then withdraw the money(BNB) via withdrawMoney https://twitter.com/AnciliaInc/status/1592658104394473472 https://twitter.com/BlockSecTeam/status/1592734292727455744",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

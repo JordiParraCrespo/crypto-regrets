@@ -39,7 +39,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Input Validation. Lost: 150k USD",
+  "rootCause": "insufficient parameter validation Vulnerable code snippet: https://bscscan.com/address/0x4edda16ab4f4cc46b160abc42763ba63885862a4#code Attack tx: https://app.blocksec.com/explorer/tx/bsc/0x49ca5e188c538b4f2efb45552f13309cc0dd1f3592eee54decfc9da54620c2ec Analysis: https://medium.com/neptune-mutual/taking-a-closer-look-at-the-yiedl-exploit-e31f04cea592 redeem function that allows users to exchange a specific number of shares they hold in an asset pool for a certain asset. The dataList parameter is used to make external calls to control asset exchange with information relating to transactions or other routing details. Due to a lack of validation in this parameter, the attacker was able to inject payloads that led to unintentioned interactions with the router contracts, leading to unauthorized asset transfers.",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

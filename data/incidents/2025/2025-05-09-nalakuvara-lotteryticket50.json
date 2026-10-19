@@ -35,7 +35,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Price Manipulation. Lost: ~ 105.5K USD",
+  "rootCause": "The LotteryTicketSwap50 contract priced ticket purchase (transferToken) and ticket destruction redemption (DestructionOfLotteryTickets) off the spot reserves of the Nalakuvara/USDC UniswapV2 pair, which the attacker controlled within the transaction. Using a 2.93M USDC UniswapV3 flashloan, the attacker dumped USDC into the V2 pair to swap out a huge amount of the Nalakuvara token, used it to buy LotteryTicket50 tickets at the manipulated price, swapped the Nalakuvara back, then redeemed (DestructionOfLotteryTickets) 130 times to extract USDC at the favorable manipulated rate before repaying the flashloan, profiting ~105,470 USDC. Root cause: redemption/swap pricing depended on a flashloan-manipulable AMM spot price with no oracle or invariant protection. Vulnerable code snippet: Attack Tx: https://basescan.org/tx/0x16a99aef4fab36c84ba4616668a03a5b37caa12e2fc48923dba4e711d2094699 Analysis: TenArmorAlert root cause",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

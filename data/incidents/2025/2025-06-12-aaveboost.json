@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Logic Flaw. Lost: 14.8K USD",
+  "rootCause": "The AaveBoost contract had a logic flaw in its proxyDeposit() function: it credited the caller (msg.sender / the supplied recipient) with deposit accounting / aToken positions backed by the underlying token already held in the AaveBoost contract, rather than requiring the caller to actually transfer in new funds. By repeatedly calling proxyDeposit(underlyingProxy, attacker, 0) in a loop (up to the contract's remaining balance / ~0.3e18 per call), the attacker accumulated deposit credit / aTokens against tokens that were never theirs. They then called AavePool.withdraw() to redeem that credit for the underlying token and transferred the proceeds out, draining the AaveBoost contract for ~$14.8K. Vulnerable code snippet: Attack Tx: https://app.blocksec.com/explorer/tx/eth/0xc4ef3b5e39d862ffcb8ff591fbb587f89d9d4ab56aec70cfb15831782239c0ce Analysis: CertiKAlert",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

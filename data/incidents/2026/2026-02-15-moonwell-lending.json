@@ -35,7 +35,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Faulty Oracle. Lost: 1.78M USD",
+  "rootCause": "Moonwell's Chainlink oracle adapter on Base (0xEC942bE8...) returned a stale / incorrect price for cbETH, causing the cbETH collateral backing a victim borrower's mWETH loan to be massively over-valued. With cbETH priced too high, the protocol viewed the victim's position as healthy/liquidatable on terms favorable to the liquidator. The attacker flash-borrowed WETH from an Aerodrome CL pool, called mWETH.liquidateBorrow(victim, amount, mcbETH) to seize the mcbETH collateral at the faulty oracle price, redeemed mcbETH for cbETH, and sold the cbETH on Aerodrome for WETH. Because the seized collateral (valued at the bad oracle price) exceeded what the liquidation actually cost, the attacker repaid the flashloan and pocketed the difference, leaving ~$1.78M of bad debt across the protocol. Root cause: reliance on an oracle feed that reported an inaccurate cbETH price. Vulnerable code snippet: Attack Tx: https://basescan.org/tx/0x2f4ff77c77ce2a52c80fcd59a4cac4b05f4285afe1f3b92118b0a004a325953c Analysis: https://forum.moonwell.fi/t/mip-x43-cbeth-oracle-incident-summary/2068",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

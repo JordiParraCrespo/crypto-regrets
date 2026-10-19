@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "rug pull. Lost: 69.6K USD",
+  "rootCause": "The IRYSAI token contract contained a privileged backdoor: the deployer/owner could call setTaxWallet() to designate an arbitrary address as the \"tax wallet\", and the token's transfer logic grants the tax wallet the ability to move tokens out of any account (including the PancakeSwap liquidity pair) without an allowance. The deployer first set the tax wallet to an attacker-controlled contract (the backdoor tx), then that contract called transferFrom(pair, attacker, ~99.99% of pair balance) to drain almost all IRYSAI from the liquidity pool, called sync() on the pair to update reserves, and swapped the stolen tokens out for ~107 BNB, a classic privileged rug pull (~$69.6K). Vulnerable code snippet: Attack Tx: https://bscscan.com/tx/0xe9a66bad8975f2a7b68c74992054c84d6d80ac4c543352e23bf23740b8858645 Analysis: TenArmorAlert",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

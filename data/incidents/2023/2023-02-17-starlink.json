@@ -39,7 +39,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Business Logic Flaw. Lost: ~$12k",
+  "rootCause": "Misconfiguration in \"transfer\" function Vulnerable code snippet: https://bscscan.com/address/0x518281f34dbf5b76e6cdd3908a6972e8ec49e345#code#L1135 StarlinkCoin contract used the \"_transfer\" function to transfer funds, which incurs a fee when funds come from the LP contract. The attacker used the \"skim\" method to directly transfer funds to the LP contract, and the fee was also deducted, causing a change in the proportion of the two tokens in the trading pair contract. The attacker then exchanged the tokens for a profit and left the contract. Attack tx: https://bscscan.com/tx/0x146586f05a4513136deab3557ad15df8f77ffbcdbd0dd0724bc66dbeab98a962 Analysis: https://twitter.com/NumenAlert/status/1626447469361102850 https://twitter.com/bbbb/status/1626392605264351235",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

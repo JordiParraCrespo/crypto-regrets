@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Business Logic Flaw. Lost: ~$80k",
+  "rootCause": "In transferFrom(), the victim contract will swap $USDT in the contract for $WGPT, thereby raising the price of $WGPT. The attacker calls transferFrom multiple times to deposit into the pair and withdraws it through the skim function, repeatedly increasing the price of $WGPT. Finally, the attacker profits by swapping the held $WGPT → $USDT. Attack TX https://bscscan.com/tx/0x258e53526e5a48feb1e4beadbf7ee53e07e816681ea297332533371032446bfd Analysis: https://twitter.com/Phalcon_xyz/status/1679042549946933248",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

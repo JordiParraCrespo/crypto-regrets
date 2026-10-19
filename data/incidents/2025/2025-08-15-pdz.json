@@ -39,7 +39,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Price Manipulation. Lost: 3.3 BNB",
+  "rootCause": "The TbBuild contract (0x6642...BDda) for the PDZ token lets a holder burn PDZ in exchange for a BNB reward, and computes that reward on the fly using uniswapRouter.getAmountsOut against the live PDZ/WBNB PancakeSwap pool. Because getAmountsOut reflects the instantaneous pool reserves, the reward is directly manipulable by moving the pool price within the same transaction. The attacker flash-swapped 10 WBNB from the pair, bought PDZ to inflate its pool price, then called burnToHolder (and receiveRewards) so the burn was valued at the manipulated high price, paying out an outsized BNB reward. After selling remaining PDZ and repaying the flash loan (10.25 WBNB), the attacker netted ~3.3 BNB. Vulnerable code snippet: Attack Tx: https://bscscan.com/tx/0x81fd00eab3434eac93bfdf919400ae5ca280acd891f95f47691bbe3cbf6f05a5 Analysis: tikkalaresearch on X",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

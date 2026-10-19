@@ -35,7 +35,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "flashloan price oracle manipulation. Lost: 50,000 USD",
+  "rootCause": "Incorrect price calculation Vulnerable code snippet: https://snowtrace.io/address/0xf955a6694c6f5629f5ecd514094b3bd450b59000#code#F1#L21 price calculation was based on the current wAvaxReserve price, usdcReserve price, and totalSupply taken on-chain from the TraderJoe Pool An exploiter was able to deploy a custom smart contract and that leveraged a $51M flash loan to manipulate the AVAX/USDC Trader Joe LP pool price for a single block resulting in the ability for the exploiter to mint 998,000NXUSD against ~$508k worth of collateral. LP price = (wavaxReserve * avaxPrice + usdcReserve * usdcPrice) / totalSupply Will this happen again? No, going forward TWAP calculations will be implemented along with other upgrades to pricing feeds for collateral assets that do not have Chainlink oracles. In addition, all other markets in the NXUSD protocol are based on Chainlink oracles except for the price of avCRV which is provided through the virtual price as well as support from Chainlink oracles for each underlying token (USDC, DAI, USDT).",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

@@ -35,7 +35,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Signature Replay. Lost: ~$295K",
+  "rootCause": "AROS gates its reward distribution behind admin-signed messages consumed by claimPrincipal(...) and claimYield(...), but the signature scheme is replayable / forgeable: the attacker supplies fixed (r,s,v) signatures to mint/withdraw large AROS principal and yield amounts to themselves. Backed by a long chain of V3 flash loans (Moolah, Balancer, Aave, Venus and ~25 Pancake/Uniswap V3 pools) for working capital, the attacker pumps the AROS/USDT pool, replays the signed claimPrincipal and claimYield calls to extract AROS, then dumps it back into USDT, draining the AROS/USDT LP for ~$295K. Root cause is missing nonce/binding validation on the claim signatures, allowing reuse of valid admin signatures to drain rewards. Vulnerable code snippet: Attack Tx: https://bscscan.com/tx/0xe89fe640ec5241edfca7d8dcae77a0a4270dee15e4bbd043fc60e393aabf41e1 Analysis: TenArmor",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

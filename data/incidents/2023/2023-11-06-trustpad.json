@@ -35,7 +35,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Lack of msg.sender address verification. Lost: ~$155K",
+  "rootCause": "- The function receiveUpPool has no access control or msg.sender validation, as a result, it could be called by anyone to manipulate the newlockstartTime. - By repeatedly calling receiveUpPool and withdraw , the attacker could keep claiming rewards. Vulnerable code snippet: - Function receiveUpPool: Here msg.sender could be different from account Attack tx: https://explorer.phalcon.xyz/tx/bsc/0x191a34e6c0780c3d1ab5c9bc04948e231d742b7d88e0e4f85568d57fcdc03182 Analysis: https://twitter.com/BeosinAlert/status/1721800306101793188",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

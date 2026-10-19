@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Liquidity Misclassification Fee Bypass. Lost: 35,041.11 USDT",
+  "rootCause": "DTXT is a fee-on-transfer token whose _transfer logic decides whether a transfer to the PancakeSwap pair is a sell (and thus subject to sell tax) or a liquidity addition by inspecting the pair's token balances/reserve state. The classification can be flipped: after a Moolah USDT flash loan, the attacker uses a pre-funded DTXT helper to add then remove DTXT/USDT liquidity, then transfers exactly 1 wei of USDT into the pair to skew the token0 balance relative to the stored reserves. This 1-wei nudge causes DTXT to misclassify a large subsequent DTXT transfer into the pair as a liquidity-add (fee-exempt) instead of a taxed sell, so the full untaxed DTXT lands in the pair. The attacker then directly calls pair.swap() against the stale reserves to extract USDT, repays the flash loan, and pockets ~35,041 USDT. Vulnerable code snippet: Attack Tx: https://bscscan.com/tx/0x07ba2ccf2b5c1aaca4c017af4fe87762a73ef7177f6ea8bb569367e908a0671d Analysis: https://x.com/audit_911/status/2063793931138347015",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

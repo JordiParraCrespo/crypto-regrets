@@ -39,7 +39,7 @@
   },
   "bridge": false,
   "language": "C++",
-  "rootCause": "A firmware vulnerability silently routed Coldcard's hardware RNG for a guessable software fallback, letting attackers brute-force seeds offline. No phishing, no malware. $130 million reported stolen so far, at least 15 attackers, most funds still untouched, nobody caught.",
+  "rootCause": "Coldcard hardware wallets (by Coinkite) suffered from a firmware bug (since March 2021 on certain versions) that generated seeds with insufficient entropy (~40 bits on Mk3, ~72 bits on newer models vs. the intended 128 bits). Attackers offline brute-forced predictable private keys and drained numerous single-signature Bitcoin addresses across multiple waves without ever accessing the devices, with cumulative losses exceeding $100 million and the incident ongoing.",
   "descriptions": [
     {
       "source": "REKT",

@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Wrong Price Calculation",
+  "rootCause": "The AIZPT Token contract incorrectly implemented price calculations for token purchases, using the Uniswap V2 quote function, which is unsuitable for determining trade prices as it reflects reserve ratios rather than actual market prices. This allowed the attacker to buy tokens at a low price using a flash loan of 8,000 BNB and sell them at a higher price via the sell function, which used the getAmountOut formula, yielding profits despite a 50% fee. The lack of proper price validation and failure to audit the integration of Uniswap V2 formulas enabled the attacker to manipulate prices and extract 34.88 BNB. Vulnerable code snippet: Attack tx: https://bscscan.com/tx/0x5e694707337cca979d18f9e45f40e81d6ca341ed342f1377f563e779a746460d Analysis: https://blog.verichains.io/p/aizpt-token-hack-analysis",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

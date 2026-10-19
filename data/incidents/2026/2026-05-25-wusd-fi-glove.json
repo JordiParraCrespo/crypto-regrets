@@ -39,7 +39,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "_englove Sybil Incentive Abuse. Lost: ~$200K USD (GLOVE emissions + LP drain)",
+  "rootCause": "WUSD pays a GLOVE reward inside wrap() via the internal _englove() routine, whose eligibility depends ONLY on msg.sender's current GLOVE balance (gloves = _MIN_GLOVABLE). There is no per-address claim ledger, no cooldown, and no identity binding, so any brand-new address holds 0 GLOVE and always qualifies for a fresh ~2 GLOVE mint when wrapping >= 100,000 WUSD. The minted GLOVE is creditless (soulbound) and vests into transferable GLOVE through unwrap() -> _deglove() proportional to global epochs elapsed; each 100,000 WUSD wrap both mints GLOVE and advances one epoch. The attacker used a Morpho USDT flash loan as working capital, deployed 80 fresh Sybil helper contracts per tx (each wrapping 100k to harvest ~2 GLOVE), pumped extra wrap/unwrap cycles to advance >=100 epochs for full vesting, then dumped each helper's credited GLOVE into the thin Uniswap V3 GLO/USDC and GLO/USDT pools, draining the stablecoin LPs (~11,702 USDC + 8,079 USDT per batch) for free protocol emissions. The only attacker cost was WUSD's 1% wrap fee. Vulnerable code snippet: Attack Tx: https://etherscan.io/tx/0x2051c1f8d43730c41cc353b5dffd8cc59f96cb1ca56fdce4b28fb127bdb37712 Analysis: ExVul",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

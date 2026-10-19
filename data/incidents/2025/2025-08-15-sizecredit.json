@@ -39,7 +39,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Access Control. Lost: 19.7k USD",
+  "rootCause": "Size Credit's LeverageUp helper (0xF4a2...6f14) exposes leverageUpWithSwap, which forwards a user-supplied SwapParams.data blob to an external swap/router call (the GenericRoute method) without validating its target or selector. The attacker crafted the data so that the generic-route call resolved to IERC20.transferFrom(victim, attacker, amount) on the PT-wstUSR token, manually patching an ABI offset byte (data[127] = 0x60) so the malformed encoding executed the embedded transferFrom. Since LeverageUp performs the call in its own trusted context, it pulled PT-wstUSR from any user (0x83eC...8290) who had approved the contract, draining ~19.7K USD. The mock functions in the PoC (riskConfig/oracle/getPrice/etc.) satisfy the contract's interface checks so the malicious swap path is reached. Vulnerable code snippet: Attack Tx: https://etherscan.io/tx/0xc7477d6a5c63b04d37a39038a28b4cbaa06beb167e390d55ad4a421dbe4067f8 Analysis: SuplabsYi on X",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

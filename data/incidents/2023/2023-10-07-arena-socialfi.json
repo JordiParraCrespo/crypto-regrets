@@ -14,7 +14,7 @@
   "vulnClassBy": null,
   "aiClass": {
     "id": "single-function-reentrancy",
-    "confidence": 0.97
+    "confidence": 0.92
   },
   "technique": "Reentrancy",
   "classificationNote": null,
@@ -29,25 +29,153 @@
         "p": 1
       }
     ],
-    "flashLoan": 0.06,
-    "stateActor": 0.03,
-    "hasRootCause": 0.1
+    "flashLoan": 0.07,
+    "stateActor": 0.02,
+    "hasRootCause": 0.34
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": null,
-  "descriptions": [],
+  "rootCause": "Analysis from Peckshield Vulnerable code snippet: Stars Arena: Shares | Address 0xa481b139a1a654ca19d2074f174f17d7534e8cec Details - Snowtrace Attack tx: Transaction Details Analysis: BlockSec on Twitter / X BlockSec Phalcon on Twitter / X PeckShield Inc. on Twitter / X",
+  "descriptions": [
+    {
+      "source": "DeFiHackLabs",
+      "text": "Reentrancy. Lost: ~$3M"
+    },
+    {
+      "source": "REKT",
+      "text": "In the arena, breaking things. A double-whammy led to Stars Arena being drained of almost $3M on Saturday. Ever heard the phrase ‘stop digging’?"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "Analysis from Peckshield Vulnerable code snippet: Stars Arena: Shares | Address 0xa481b139a1a654ca19d2074f174f17d7534e8cec Details - Snowtrace Attack tx: Transaction Details Analysis: BlockSec on Twitter / X BlockSec Phalcon on Twitter / X PeckShield Inc. on Twitter / X"
+    },
+    {
+      "source": "SlowMist",
+      "text": "According to SlowMist, Stars Arena appeared to have been stolen due to a major security breach in its smart contract. Currently, the hacker has transferred 266,103 AVAX to the address (0xa2Eb...ad7A). The address (0xa2Eb...ad7A) transferred 50.32 AVAX to FixedFloat on October 6. On October 12, Stars Arena tweeted that they have recovered approximately 90% of the lost funds. An agreement has been reached with the hacker to return the funds, with a 10 percent bounty and 1,000 AVAX lost in the cross-chain bridge. 266,104 AVAX were lost, and the hacker returned 239,493 AVAX in two transactions. 27,610 AVAX were paid as a bounty."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "Stars Arena, a social platform on Avalanche, was exploited via a reentrancy bug on October 7, 2023. The attacker drained over 266,100 AVAX (worth about $2.9,$3.0m) by manipulating share-price calculations through repeated contract calls, then distributed the funds across many wallets. The Stars Arena contract allowed reentrant calls during share purchases and sales. This enabled the attacker to modify internal variables (including price calculation weights) mid-transaction, inflating their withdrawal value and draining funds."
+    },
+    {
+      "source": "Web3 Is Going Great",
+      "text": "Stars Arena, an Avalanche-based dupe of the popular Friend.Tech project, suffered a serious exploit in which an attacker drained tokens priced at around $3 million. Avalanche co-founder and CEO Emin Gün Sirer drew widespread mockery when announcing that \"the amount lost is only $3m\", apparently not perceiving that $3 million is a massive sum to most people. He also didn't mention that it constituted almost the entire total TVL of the Stars Arena project, which was left with less than $1 in tokens following the attack. Stars Arena was fortunate, in that the hacker ultimately contacted them offering to make a deal. The attacker returned 90% of the funds, keeping $300,000 as a \" bounty \"."
+    }
+  ],
   "audit": null,
-  "txHashes": [],
-  "poc": null,
+  "txHashes": [
+    "0x4f37ffecdad598f53b8d5a2d9df98e3c00fbda4328585eb9947a412b5fe17ac5"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-10/StarsArena_exp.sol",
   "sources": [
-    "defillama"
+    "defillama",
+    "defihacklabs",
+    "rekt",
+    "blocksec",
+    "slowmist",
+    "revertiq",
+    "w3igg"
   ],
   "references": [
     {
       "source": "defillama",
       "label": "DefiLlama hacks",
       "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-10/StarsArena_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/BlockSecTeam/status/1710556926986342911"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/Phalcon_xyz/status/1710554341466395065"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/peckshield/status/1710555944269292009"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: Stars Arena - REKT",
+      "url": "https://rekt.news/stars-arena-rekt"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/peckshield/status/1710555944269292009"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "snowtrace.io",
+      "url": "https://snowtrace.io/address/0xa481b139a1a654ca19d2074f174f17d7534e8cec"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "snowtrace.io",
+      "url": "https://snowtrace.io/tx/0x4f37ffecdad598f53b8d5a2d9df98e3c00fbda4328585eb9947a412b5fe17ac5"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0x4f37ffecdad598f53b8d5a2d9df98e3c00fbda4328585eb9947a412b5fe17ac5"
+    },
+    {
+      "source": "blocksec",
+      "label": "github.com",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs?tab=readme-ov-file#20231007-starsarena---reentrancy"
+    },
+    {
+      "source": "slowmist",
+      "label": "twitter.com",
+      "url": "https://twitter.com/SlowMist_Team/status/1710548085343207599"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/stars-arena-3-0m-2023-10-07"
+    },
+    {
+      "source": "revertiq",
+      "label": "de.fi",
+      "url": "https://de.fi/blog/de-fi-rekt-report-20-7m-funds-lost-in-october-2023-top-defi-scams-and-exploits"
+    },
+    {
+      "source": "revertiq",
+      "label": "certik.com",
+      "url": "https://www.certik.com/blog/stars-arena-incident-analysis"
+    },
+    {
+      "source": "revertiq",
+      "label": "smartcontractshacking.com",
+      "url": "https://smartcontractshacking.com/hacks/stars-arena-hack-2023"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/arena-socialfi-2023-10-07"
+    },
+    {
+      "source": "w3igg",
+      "label": "Web3 Is Going Great",
+      "url": "https://www.web3isgoinggreat.com/?id=stars-arena-exploit"
+    },
+    {
+      "source": "w3igg",
+      "label": "coindesk.com",
+      "url": "https://www.coindesk.com/tech/2023/10/07/avalanche-social-app-stars-arena-drained-of-3m-in-avax-after-hack/"
+    },
+    {
+      "source": "w3igg",
+      "label": "twitter.com",
+      "url": "https://twitter.com/el33th4xor/status/1710617850807832910"
     }
   ]
 }

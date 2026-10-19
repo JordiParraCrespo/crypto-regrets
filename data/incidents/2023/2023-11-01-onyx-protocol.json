@@ -39,7 +39,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Precission Loss Vulnerability. Lost: ~$2M",
+  "rootCause": "Onyx is a Compound v2 fork that listed a brand-new oPEPE market with effectively empty supply. The attacker exploited the cToken exchange-rate formula exchangeRate = (cash + totalBorrows - totalReserves) / totalSupply: using a flash loan they minted oPEPE, redeemed totalSupply - 2 to leave only 2 wei of oPEPE outstanding, then donated a large amount of underlying PEPE directly to the oPEPE contract. With a near-zero denominator and inflated cash, the exchange rate (and thus the value of the 2 wei of collateral) became astronomically large. They entered the oPEPE market and borrowed nearly all liquidity out of every other market. Integer truncation in redeemUnderlying and liquidateCalculateSeizeTokens let them redeem their collateral back while keeping the borrowed assets. The root issue is the well-known empty-market precision/rounding flaw in Compound v2 forks that lack a minimum-liquidity / dead-shares guard. Vulnerable code snippet: Attack Tx: https://explorer.phalcon.xyz/tx/eth/0xf7c21600452939a81b599017ee24ee0dfd92aaaccd0a55d02819a7658a6ef635 Analysis: Phalcon_xyz analysis (Twitter)",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

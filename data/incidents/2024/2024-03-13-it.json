@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "business logic flaw. Lost: ~13k USDT",
+  "rootCause": "In the 'transfer' function, if sender is pair address (buy IT token), IT tokens are minted to pair in 'mintToPoolIfNeeded' function. Hacker exploited this. Also to make 'mintAmount' bigger, he transferred 2000 USDT into pair. Attack Tx: https://phalcon.blocksec.com/explorer/tx/bsc/0xb33057f57ce451aa8cbb65508d298fe3c627509cc64a394736dace2671b6dcfa Analysis:",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

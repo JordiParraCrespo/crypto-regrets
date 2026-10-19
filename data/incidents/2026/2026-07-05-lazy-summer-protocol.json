@@ -39,7 +39,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "FleetCommander NAV Inflation via Depegged xUSD. Lost: ~$6M (DAI + LVUSDC shares)",
+  "rootCause": "Donation-sensitive valuation in Ark integrations (MorphoV2VaultArk and SiloManagedVaultArk) allowed reported totalAssets to be inflated intra-transaction. Attacker accumulated deprecated vgUSDC at negligible cost, triggered vault reallocations that distorted downstream share pricing, deposited $64.8M to obtain inflated vault exposure, then redeemed $70.9M against inflated FleetCommander accounting. Attack Tx: https://etherscan.io/tx/0x0db528c44f23fc7fa4544684a2fab81096450a14aae8bc89f42cd0592d43da12 Source: https://twitter.com/CertiKAlert/status/2074043519422099514",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

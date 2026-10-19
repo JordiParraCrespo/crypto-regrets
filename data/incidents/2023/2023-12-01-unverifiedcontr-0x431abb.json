@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Business Logic Flaw. Lost: ~$500k",
+  "rootCause": "The root cause is a logic flaw in reward calculation. The victim contract is unverified, and after decompilation by Blocksec team, we obtained the following results: v4 is the token amount to be distributed, which can be increased through a flash loan, reducing the token balance of v0. The attacker first staked some tokens and executed a flash loan of BSC-USD from the pair, then claimed the reward within the flash loan callback. Since the BSC-USD amount in the pair decreases, the reward token amount is calculated incorrectly, allowing the attacker to take an excessive amount of tokens as a reward. Vulnerable code snippet: Attack tx: - Claim Transaction - Stake Transaction Analysis: BlockSec Phalcon on Twitter / X",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

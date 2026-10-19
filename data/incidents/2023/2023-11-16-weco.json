@@ -39,7 +39,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Business Logic Flaw. Lost: ~$18K",
+  "rootCause": "The WECO staking contract's deposit(amount, weeksLocked) function mis-handled its internal token accounting. The attacker deposited a large amount, then made many small repeated deposits which credited stake/reward bookkeeping in a way that did not properly reconcile against the tokens actually transferred in, effectively letting the depositor reclaim more WECOIN than they put in. The PoC seeds the attacker with WECOIN, deposits the full balance, then loops calling deposit(1 ether, 0) until the staking contract's WECOIN balance is drained. There is no guard ensuring credited balances stay consistent with the contract's real token holdings. Vulnerable code snippet: Attack Tx: https://app.blocksec.com/explorer/tx/bsc/0x2040a481c933b50ee31aba257c2041c48bb7a0b4bf4b4fad1ac165f19c4269e8 Analysis: MetaSec_xyz on X",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

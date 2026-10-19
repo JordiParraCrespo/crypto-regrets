@@ -39,7 +39,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "precision loss. Lost: ~$48M",
+  "rootCause": "- In the first swap, when calculating Ticks, there is *incorrect rounding direction during the reinvestment process*. Thus the tick could be manipulated, and _updateLiquidityAndCrossTick 0could be bypassed. - In the second swap, the _updateLiquidityAndCrossTick is being triggered to increase liquidity. However, since there is precision loss in the first swap, the liquidity is then double counted. Vulnerable code snippet: By blocksec team: Attack tx: 💡 https://phalcon.blocksec.com/explorer/tx/eth/0x485e08dc2b6a4b3aeadcb89c3d18a37666dc7d9424961a2091d6b3696792f0f3 Analysis 💡 https://blocksec.com/blog/yet-another-tragedy-of-precision-loss-an-in-depth-analysis-of-the-kyber-swap-incident-1",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

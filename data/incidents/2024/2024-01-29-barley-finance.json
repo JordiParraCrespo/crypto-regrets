@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Reentrancy. Lost: ~130K",
+  "rootCause": "The wBARL token's flash function transferred the borrowed BARL tokens and invoked an external callback on the recipient before verifying that the loan was repaid, and contained no reentrancy guard. During the callback the attacker called bond(BARL, balance) to deposit the borrowed BARL into wBARL and receive wBARL tokens — locking in the position before the flash loan settlement check. Because the bonded BARL refilled the contract's balance, the post-callback repayment check passed. The attacker iterated this pattern 20 times, accumulating wBARL on each round, then called debond to redeem all accumulated wBARL for BARL, obtaining far more BARL than was originally borrowed. The BARL was then swapped through Uniswap V3 to WETH. Vulnerable code snippet: Attack Tx: 0x995e880635f4a7462a420a58527023f946710167ea4c6c093d7d193062a33b01 Analysis: Barley Finance Exploit",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

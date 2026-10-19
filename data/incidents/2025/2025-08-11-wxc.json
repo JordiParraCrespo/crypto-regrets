@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Incorrect token burn mechanism. Lost: 37.5 WBNB",
+  "rootCause": "The WXC token (0x8087...643E) implements a custom transfer/burn mechanism tied to its PancakeSwap liquidity pool. The attacker took a flashloan of ~49 WBNB (from the Moolah proxy lender), used it to manipulate the WXC/WBNB pair, and abused WXC's incorrect token burn logic during the swap callback: by routing an oversized WXC amount (~74.96M tokens) through Cake_LP.swap and then selling via swapExactTokensForTokensSupportingFeeOnTransferTokens, the token's flawed burn-on-transfer accounting let the attacker extract more WBNB from the pool than was paid in. The proceeds repaid the flashloan, netting ~37.5 WBNB profit. Attack Tx: https://bscscan.com/tx/0x1397bc7f0d284f8e2e30d0a9edd0db1f3eb0dd284c75e30d226b02bf09ad068f Analysis: TenArmorAlert on X",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

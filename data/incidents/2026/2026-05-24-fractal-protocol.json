@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Business Logic Flaw. Lost: ~$13.7K",
+  "rootCause": "The Fractal vault prices its USDF share token (getTokenPrice/getMaxWithdrawalAmount) based on the vault's instantaneous USDC.e balance and epoch/period state, which the attacker manipulated within a single transaction. Using stacked flash loans (Aave + Balancer + six Uniswap V3/Algebra USDC.e pool flashes) the attacker temporarily inflated the vault's USDC.e balance, deposited 1,403,259 USDC.e to mint USDF at a favorable rate, forced period advancement via compute(), then performed a descending series of withdraw calls draining more USDC.e than was deposited. After repaying all flash loans the attacker netted ~$13.7K USDC.e profit. The root cause is that the vault's share price and max-withdrawal accounting rely on manipulable, flash-loan-inflatable balance/state read within one block, allowing a profitable deposit-then-withdraw round trip. Vulnerable code snippet: Attack Tx: https://arbiscan.io/tx/0x20db78913a51c3b3aece860ea142c240f3f8fa3b5bbf533a3d1d48eed857e10f Analysis: https://x.com/DefimonAlerts/status/2058619391776878967",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

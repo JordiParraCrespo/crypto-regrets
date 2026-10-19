@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Reflection token. Lost: ~32 WBNB",
+  "rootCause": "The attacker called the transfer() and deliver() functions to reduce the number of rSupply and tSupply. The value of rate is thus calculated less, increasing the number of reflected tokens in the pair, Finally directly call swap to withdraw $WBNB from the pair. Vulnerable code snippet: https://bscscan.com/address/0xb5a0Ce3Acd6eC557d39aFDcbC93B07a1e1a9e3fa#code Attack tx: https://bscscan.com/tx/0xa21692ffb561767a74a4cbd1b78ad48151d710efab723b1efa5f1e0147caab0a Analysis: https://twitter.com/BeosinAlert/status/1648520494516420608",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

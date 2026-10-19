@@ -39,7 +39,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Access Control. Lost: 12M USD",
+  "rootCause": "Cork Protocol's DS/CT (Depeg Swap / Cover Token) market creation logic failed to validate the assets passed into module/market initialization. The attacker abused CorkConfig.initializeModuleCore() and issueNewDs() to create a new, attacker-controlled market that reused a legitimate Cork-issued DS token (ds2) as if it were the redemption asset (RA), pairing it against WstETH. Because the protocol trusted attacker-supplied parameters and the Uniswap V4 CorkHook accepted attacker-driven swaps/exchange-rate callbacks, the attacker could mint/swap CT and DS tokens within the rigged market and then redeem them (returnRaWithCtDs, depositPsm) against the real PSM vault holding WstETH. By orchestrating swaps through the PoolManager unlock/unlockCallback flow with a self-implemented hook (beforeSwap, rate() returning attacker-chosen values), the attacker extracted ~$12M of WstETH from the protocol's liquidity. Vulnerable code snippet: Attack Tx: https://app.blocksec.com/explorer/tx/eth/0xfd89cdd0be468a564dd525b222b728386d7c6780cf7b2f90d2b54493be09f64d Analysis: SlowMist",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

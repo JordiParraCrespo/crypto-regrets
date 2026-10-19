@@ -39,7 +39,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "business logic flaw. Lost: 52 BNB",
+  "rootCause": "The harvest function will add liquidity to the pair contract, and deposit the LP token into the vault. Thus the user could get more LP tokens when they withdraw form the vault. By withdrawing tokens from the Pair contract, attacker could make profits. Vulnerable code snippet: Attack tx: https://bscscan.com/tx/0xbfb9b3b8a0d3c589a02f06c516b5c7b7569739edd00f9836645080f2148aefc7 Analysis: The harvest function will add liquidity to the pair contract, and deposit the LP token into the vault. When user call withdrawAll, they can get more LP tokens.",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

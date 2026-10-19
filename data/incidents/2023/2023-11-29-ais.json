@@ -39,7 +39,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Insufficient validation. Lost: ~$61k",
+  "rootCause": "There is no access control in AIS::setSwapPairs, allowing the attacker to set pairs to arbitrary addresses. The attacker sets Pancakeswap as a valid pair and transfers tokens to the pair through AIS::transfer, subsequently executing the Pancakeswap::skim operation to profit. Vulnerable code snippet: Attack tx: Analysis: BlockSec Phalcon on Twitter / X",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

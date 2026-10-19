@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "reentrancy. Lost: ~10k",
+  "rootCause": "In the function targetedPurchase(), an user could give an arbitrary swapParam which includes the field commands to 4. It then calls the UNIVERSAL_ROUTER.execute() function. According to the Uniswap Technical Reference, commands 4 is SWEEP and it will call the sweep() function. As pointed from the following figure, the sweep() function will send back ETH to the user contract and cause a re-entrancy issue. Vulnerable code snippet: %207d03daf3ed664eca9d847af4b9ce00dd/Untitled.png) %207d03daf3ed664eca9d847af4b9ce00dd/Untitled%201.png) Attack tx: https://etherscan.io/tx/0x5a63da39b5b83fccdd825fed0226f330f802e995b8e49e19fbdd246876c67e1f Analysis: https://twitter.com/AnciliaInc/status/1760718167582888148",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

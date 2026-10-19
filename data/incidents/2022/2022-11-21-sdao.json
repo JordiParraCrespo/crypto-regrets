@@ -39,7 +39,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Business Logic Flaw. Lost: $13k",
+  "rootCause": "sDAO contract have the following pitfalls: 1. missing target token validation or access control on withdrawTeam, as the result, attacker may manipulate the reward output 2. logic flaw on reward generation, the user can get reward in the same block when to == address(LPInstance) Vulnerable code snippet: Attack tx: https://bscscan.com/tx/0xb3ac111d294ea9dedfd99349304a9606df0b572d05da8cedf47ba169d10791ed Analysis: 1. The attacker borrowed $500 USDT from DPPOracle in a flash loan. 2. They converted half of the USDT into sDAO. 3. They added liquidity to the sDAO/USDT pool with half of the remaining USDT and the sDAO they had just converted. 4. They staked half of the LP tokens they received in the previous step. 5. They sent the remaining sDAO to the liquidity pool, which increased the totalStakeReward. 6. They called sDAO.withdrawTeam with LP tokens address as the target, which decreased the LPInstance.balanceOf(address(this)) and increased the getPerTokenReward. They also sent a small amount of LP token to the pool to avoid division by zero. 7. They invoked getReward and repaid the flash loan. https://twitter.com/8olidity/status/1594693686398316544 https://twitter.com/CertiKAlert/status/1594615286556393478",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

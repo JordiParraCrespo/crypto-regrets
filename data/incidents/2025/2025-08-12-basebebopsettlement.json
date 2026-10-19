@@ -35,7 +35,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Arbitrary External Call. Lost: 3,875.46 USD",
+  "rootCause": "Bebop's JamSettlement contract (0xbeb0...4ea6) exposes a settle(order, signature, interactions, hooksData, balanceRecipient) function that executes an arbitrary array of JamInteraction calls (target + calldata) as part of order settlement. The function failed to properly validate the order signature and did not restrict the interactions to the order's own tokens/amounts. The attacker submitted an order with themselves as taker/receiver/executor and an empty signature, then supplied interactions that were raw IERC20.transferFrom(victim, attacker, amount) calls against USDC. Because the settlement contract executes these interactions with its own context and trust, the attacker drained tokens from any account (0x0c06...bbf1, 0xe7Ee...b6Fd) that had previously granted allowance to the Bebop settlement/router, stealing ~21K USD. Vulnerable code snippet: Attack Tx: https://arbiscan.io/tx/0xe5f8fe69b38613a855dbcb499a2c4ecffe318c620a4c4117bd0e298213b7619d Analysis: SuplabsYi on X",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

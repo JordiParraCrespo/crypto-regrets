@@ -35,7 +35,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "unverified external call. Lost: ~ 18 eth",
+  "rootCause": "The function 0xba381f8f in the unverified MEV-related contract is unprotected—it lacks access control and can be invoked by any external address. This function likely initiates a swap operation, using the contract’s token balance. Vulnerable code snippet: Contract Unverified Attack tx: https://app.blocksec.com/explorer/tx/eth/0x998f1da472d927e74405b0aa1bbf5c1dbc50d74b39977bed3307ea2ada1f1d3f Analysis: The contract 0x00c409001c1900ddcda20000008e112417db003b has no access control over 0xba381f8f method and anyone can call this function. In the exploit: 1. The attacker calls 0xba381f8f, tricking the contract into interacting with a fake pair contract under their control. 2. The MEV contract deposits its token balance and performs a swapExactAmountIn. 3. The attacker-controlled contract receives the swapped tokens and drains the entire balance. As a result, all balance in 0x00c409001c1900ddcda20000008e112417db003b has been drained.",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

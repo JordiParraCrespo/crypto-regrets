@@ -44,7 +44,7 @@
   },
   "bridge": false,
   "language": null,
-  "rootCause": "Reentrancy. Lost: ~$400k",
+  "rootCause": "Arcadia Finance's vaultManagementAction() function delegated execution to an arbitrary actionHandler address (the ActionMultiCall contract) without a reentrancy guard and before any post-action solvency check. The attacker flash-loaned WETH and USDC from Aave V3, created two protocol vaults, opened trusted margin accounts, deposited the flash-loaned funds as collateral, and called doActionWithLeverage() to borrow nearly all assets from the WETH and USDC lending pools. The borrowed funds were routed through ActionMultiCall, which re-approved the vault and left tokens temporarily sitting in ActionMultiCall. The attacker then called vaultManagementAction() with crafted calldata instructing ActionMultiCall to approve a malicious helper contract and invoke helper.rekt(). Inside rekt(), the helper first drained the tokens held by ActionMultiCall, and then re-entered darcWETH.liquidateVault() against the now-empty (undercollateralized) vault — all before the outer health-factor check could execute — liquidating the vault and keeping the stolen assets. Vulnerable code snippet: Attack Tx: 0xca7c1a0fde444e1a68a8c2b8ae3fb76ec384d1f7ae9a50d26f8bfdd37c7a0afe Analysis: Phalcon_xyz Twitter thread",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

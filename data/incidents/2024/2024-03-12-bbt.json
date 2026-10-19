@@ -39,7 +39,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "business logic flaw. Lost: ~5.06 ETH",
+  "rootCause": "The mint function relies on _isAuthorizedAddress(msg.sender) for access control. However, the registry variable used within _isAuthorizedAddress can be arbitrarily modified via the setRegistry function, which lacks proper access control. Vulnerable code snippet: Attack tx: https://app.blocksec.com/explorer/tx/eth/0x4019890fe5a5bd527cd3b9f7ee6d94e55b331709b703317860d028745e33a8ca?line=4 Analysis: To mint BBT, the msg.sender must pass the _isAuthorizedAddress check: The check queries the registry to validate whether the caller matches a known contract role: However, the registry itself can be reassigned by *any* external caller through the unprotected setRegistry function: This allows an attacker to set a malicious registry contract that returns their own address for one of the expected roles, thereby bypassing the authorization check and minting an arbitrary amount of BBT.",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

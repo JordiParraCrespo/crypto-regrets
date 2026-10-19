@@ -39,7 +39,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Reentrancy. Lost: 350K",
+  "rootCause": "- The reentrancy in the function repayBorrowBehalf allows the attacker to manipulate the exchanged rate of ETH:sdrETH by borrowing against all of the assets held in the contract. Then he could redeem all the tokens to gain profits. Vulnerable code snippet: function repayBorrowBehalf(address borrower) external payable { uint256 received = msg.value; uint256 borrows = CEther(payable(this)).borrowBalanceCurrent(borrower); if (received > borrows) { // payable(msg.sender).transfer(received - borrows); (bool success, ) = msg.sender.call{value: received - borrows}(\"\"); require(success, \"Address: unable to send value, recipient may have reverted\"); } (uint256 err, ) = repayBorrowBehalfInternal(borrower, borrows); requireNoError(err, \"repayBorrowBehalf failed\"); } Attack tx: https://basescan.org/tx/0x619c44af9fedb8f5feea2dcae1da94b6d7e5e0e7f4f4a99352b6c4f5e43a4661 Analysis: https://medium.com/neptune-mutual/how-was-sumer-money-exploited-2c114ebffaa8",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

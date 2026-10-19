@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Business Logic Flaw. Lost: ~$110k",
+  "rootCause": "The root cause is in _airdrop() function, the airdrop address can be calculated and it could overwrite any balance of an address to a specific number. Attacker can overwrote the balance of the swap, causing the K change thus a big gain on the swap. The random seed is not randomized which is easy to construct 'to' and 'tAmount' here to get an arbitrary airdropAddress address and that address will be used for balance overwritten. Code Snippet： Attack TX: https://app.blocksec.com/explorer/tx/bsc/0x199c4b88cab6b4b495b9d91af98e746811dd8f82f43117c48205e6332db9f0e0?line=45&debugLine=45 Analysis: https://x.com/Phalcon_xyz/status/1681869807698984961",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

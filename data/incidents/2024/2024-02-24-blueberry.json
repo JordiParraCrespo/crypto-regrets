@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "logic flaw. Lost: ~1,400,000 USD",
+  "rootCause": "Prices were being pulled from the PriceOracleProxy which passes calls through to the CoreOracle that is used on the Blueberry Strategies side. This, however, is an incorrect use of the system because the CoreOracle always returns prices scaled to 18 decimals, thus causing assets that have less than 18 decimals to be undervalued significantly when being borrowed. Vulnerable code snippet: Attack tx: https://etherscan.io/tx/0xf0464b01d962f714eee9d4392b2494524d0e10ce3eb3723873afd1346b8b06e4 Analysis: https://twitter.com/blueberryFDN/status/1760865357236211964",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

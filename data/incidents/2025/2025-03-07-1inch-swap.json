@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Arbitrary Yul Calldata. Lost: 4.5M",
+  "rootCause": "The deprecated 1inch Fusion V1 settlement contract contained an EVM-level calldata corruption vulnerability in its _settleOrder function. The suffix pointer was calculated as ptr + interactionOffset + interactionLength, where interactionLength was attacker-supplied and treated as an unsigned integer. By setting interactionLength to a value equivalent to -512 in signed arithmetic, the attacker triggered pointer underflow, causing the suffix to be written to an earlier memory location — overwriting the resolver address field. This allowed the attacker to hijack the settlement callback and redirect it to an arbitrary target, specifically the TrustedVolumes market maker, which held substantial liquidity. The attacker forged an order to swap 6 wei USDT for 1,000,000 USDC with TrustedVolumes unknowingly footing the difference, draining approximately $5M (2.4M USDC and 1,276 WETH). The vulnerability affected only third-party resolvers still using the unsupported Fusion V1 contracts; 1inch's core protocol and end-user funds were not at risk. Funds were recovered after the attacker accepted a 10% bounty. Attack Tx: 0x04975648e0db631b0620759ca934861830472678dae82b4bed493f1e1e3ed03a Analysis: Yul Calldata Corruption — 1inch Postmortem (Decurity)",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

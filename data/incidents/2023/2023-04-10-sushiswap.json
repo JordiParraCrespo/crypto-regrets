@@ -38,7 +38,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Unchecked User Input. Lost: >$3.3M",
+  "rootCause": "Sushi RouteProcessor2 does not check user input route carefully. The root cause is that ProcessRoute does not perform any checks on the user-provided route parameter, allowing the attacker to exploit this issue by constructing a malicious route parameter that causes the contract to read a Pool created by the attacker. Vulnerable code snippet: https://etherscan.io/address/0x044b75f554b886A065b9567891e45c79542d7357#code#F1#L53 /// @notice Processes the route generated off-chain. Has a lock /// @param tokenIn Address of the input token /// @param amountIn Amount of the input token /// @param tokenOut Address of the output token /// @param amountOutMin Minimum amount of the output token /// @return amountOut Actual amount of the output token function processRoute( address tokenIn, uint256 amountIn, address tokenOut, uint256 amountOutMin, address to, bytes memory route ) external payable lock returns (uint256 amountOut) { return processRouteInternal(tokenIn, amountIn, tokenOut, amountOutMin, to, route); } Attack tx: Attack tx: https://www.notion.so https://library.dedaub.com/ethereum/tx/0x04b166e7b4ab5105a8e9c85f08f6346de1c66368687215b0e0b58d6e5002bc32 Analysis: https://twitter.com/peckshield/status/1644907207530774530 https://twitter.com/SlowMist_Team/status/1644936375924584449 https://twitter.com/AnciliaInc/status/1644925421006520320",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

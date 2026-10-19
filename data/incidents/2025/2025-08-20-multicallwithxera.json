@@ -39,7 +39,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Access Control. Lost: 17k USD",
+  "rootCause": "The Xera token contract derived the effective caller via a _msgSender() implementation that trusted a meta-transaction style sender encoding rather than the real msg.sender. When a call to Xera's transferFrom was routed through the canonical Multicall3 contract (0xcA11...CA11) using aggregate3, Xera resolved the spender/authorizer to the victim address embedded in the call context instead of the Multicall contract itself. Because the victim had previously approved the Multicall contract to spend its Xera, the attacker crafted a transferFrom(victim, cakeLP, 27.9M XERA) call inside aggregate3, which Xera incorrectly treated as authorized by the victim. The attacker then swapped the stolen Xera in the PancakeSwap LP for WBNB and unwrapped to BNB (~17k USD). Vulnerable code snippet: Attack Tx: https://bscscan.com/tx/0xed6fd61c1eb2858a1594616ddebaa414ad3b732dcdb26ac7833b46803c5c18db Analysis: https://x.com/TenArmorAlert/status/1958354933247590450",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

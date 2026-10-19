@@ -35,7 +35,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Lack of access control. Lost: ~20999 USD",
+  "rootCause": "The USDTStakingContract28 contract exposed a public tokenAllowAll(address asset, address allowee) function with no access control (no owner/admin check). Any external caller could invoke it to make the staking contract grant an unlimited ERC20 allowance for any asset to an arbitrary allowee. The attacker simply called Stake.tokenAllowAll(USDT, attackerContract) to authorize itself, then used transferFrom to pull the entire USDT balance of the staking contract to the attacker. There is no exploit of price, math, or reentrancy here — it is a pure privileged-function-exposed-publicly bug. Vulnerable code snippet: Attack Tx: https://app.blocksec.com/explorer/tx/eth/0xfc872bf5ca8f04b18b82041ec563e4abf2e31e1fc27d1ea5dee39bc8a79d2d06 Analysis: DecurityHQ on X",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

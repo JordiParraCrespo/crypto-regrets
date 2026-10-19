@@ -35,7 +35,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Logic Flaw. Lost: 97 stETH",
+  "rootCause": "The Idols NFT staking contract distributes stETH rewards to both the from and to addresses on every safeTransferFrom call without checking whether sender and receiver are the same address. By calling safeTransferFrom(address(this), address(this), tokenId), an attacker simultaneously claims rewards as both sender and receiver in a single operation without relinquishing the NFT, doubling the reward accumulation rate indefinitely. To bypass any Address.isContract() guard that would block a contract from holding the NFT, the attacker placed the entire exploit loop inside the attack contract's constructor: during construction extcodesize of the deploying address is still zero, causing it to appear as an EOA. The constructor looped 2,000 self-transfers, harvesting double stETH rewards on each iteration, then transferred all accumulated stETH and the NFT back to the attacker before self-destructing. The exploit was repeated approximately 15 times across multiple blocks, draining a total of approximately 97 stETH (~$340K). Vulnerable code snippet: Attack Tx: 0x5e989304b1fb61ea0652db4d0f9476b8882f27191c1f1d2841f8977cb8c5284c Analysis: TheIdolsNFT",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

@@ -35,7 +35,7 @@
   },
   "bridge": true,
   "language": "Solidity",
-  "rootCause": "Insufficient Validation. Lost: ~$628K",
+  "rootCause": "The Wrapped ADS (wADS) bridge token exposed a wrapTo(account, amount, from, txid) minting function callable by the bridge minter address, but the contract performed no on-chain validation that the supplied from/txid corresponded to a genuine, finalized native-chain lock/burn event. With the minter privilege (or via a compromised/abusable minter path), the attacker invoked wrapTo three times with fabricated native-chain from and txid values to mint ~120M wADS to themselves with no real backing deposit on the Adshares native chain. Because the minter's mint allowance was simply decremented without any cryptographic proof of the corresponding source-chain transaction, the bridge accepted forged mints, allowing ~$628K of value to be drained. Vulnerable code snippet: Attack Tx: https://etherscan.io/tx/0x8844b4ec371c4b13d7fac701b5d546a7c2fba12621a9596dd14b662b14408789 Analysis: https://x.com/DefimonAlerts/status/2055751467579936770",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

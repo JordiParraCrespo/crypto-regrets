@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "BOSS helper mint/burn and transfer-tax pool skew. Lost: 10,207.54 USDT",
+  "rootCause": "The BOSS token ships a privileged helper exposing permissionless userMint/userBurn that can mint and burn BOSS directly against the BOSS/USDT PancakeSwap pair's balance. With a Moolah USDT flash loan, the attacker uses userMint to seed liquidity, swaps the remaining USDT into BOSS (recipient = helper), then calls userBurn to collapse the pair's BOSS reserve down to 10 wei of dust while the pair's stored reserves and USDT side remain large. With the BOSS reserve artificially tiny, each loop transfers a fraction of BOSS into the pair and calls swap() to extract USDT at a wildly favorable rate. Repeating 155 times drains the pool of ~10,207 USDT. The root cause is the ability to externally mutate (burn) the pair's token reserve out-of-band from swaps, desynchronizing reserves from balances. Vulnerable code snippet: Attack Tx: https://bscscan.com/tx/0x96d1a0175eb4a82585db62a374518391f6b575a07c25c0e2874ca82400b830c7 Analysis: https://x.com/audit_911/status/2063819348305985748",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

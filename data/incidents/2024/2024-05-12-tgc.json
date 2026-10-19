@@ -39,7 +39,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Business Logic Flaw. Lost: $32K",
+  "rootCause": "The victim contract exposes a public function 0xc5d4d8c9that performs an arbitrage swap and then transfers all acquired BUSD to msg.sender. Due to the lack of access control, any external caller can trigger this function and drain the contract’s TGC tokens through repeated arbitrage execution. Vulnerable code snippet: Attack tx: https://app.blocksec.com/explorer/tx/bsc/0x12e8c24dec36a29fdd9b9d7a8b587b3abd2519089b6438c194e6e5eb357b68d8?line=1 Analysis: The 0xc5d4d8c9 function internally calls: After the swap, all received BUSD is forwarded to msg.sender, regardless of whether they are authorized or not. There is no validation, such as: - Ownership check - Role-based access - whitelisting of arbitrage executors As a result, the TGC token stored in the victim contract could be drained.",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

@@ -39,7 +39,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Flashloan Attack. Lost: $700,000",
+  "rootCause": "Incorrect access control Vulnerable code snippet: https://etherscan.io/address/0x051ebd717311350f1684f89335bed4abd083a2b6#code#L1419 The init() function in the pool creation contract could be called multiple times, leading to repeated initializations. The attackers took advantage of this and borrowed out the tokens in the liquidity pools using flash loans. The pool contract was then initialized again and counterfeit tokens created by the attackers were returned in lieu of the original tokens, bypassing the flash loan return check logic.",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

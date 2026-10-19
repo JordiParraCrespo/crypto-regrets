@@ -39,7 +39,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Instant Rewards, Unlocked. Lost: ~$6268",
+  "rootCause": "- The victim contract MinerPool requires extcodesize!=0(EOA check) before adding an address to lpRewardProcessor array to be eligible for rewards. - The victim contract MinerPool will distribute the rewards regardless of the LP holding time. The attacker leveraged substantial flash loans to borrow a significant amount of USDT and exchanged it for a large quantity of OKC tokens to add liquidity. Additionally, due to the absence of lock-up requirements for LP reward distribution in the OKC project, the hacker promptly withdrew liquidity after receiving rewards, thereby claiming the incentives intended for liquidity providers from the project. Vulnerable code snippet: (Screenshot from the detailed analysis) 1. The check of EOA could be bypassed during the initialization of the contract. 1. The reward is distributed regardless of the LP holding time. Attack tx: https://bscscan.com/tx/0xd85c603f71bb84437bc69b21d785f982f7630355573566fa365dbee4cd236f08 Analysis: https://lunaray.medium.com/okc-project-hack-analysis-0907312f519b",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

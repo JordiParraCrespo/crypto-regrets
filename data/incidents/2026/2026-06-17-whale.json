@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Transfer Accounting Reserve Desync. Lost: 3,460.41 USDT",
+  "rootCause": "WHALE's transfer pipeline contains custom hooks that stage LP credit, flush protocol-owned liquidity (POL), and settle hashrate rewards on transfers, but these side effects mishandle the WHALE/USDT Pancake pair's reserve accounting. Using a Moolah USDT flash loan plus a Pancake Infinity Vault lock/take to obtain transient USDT, the attacker performs a sequence of buys, LP mints, a PolVault.flushPol() re-entry into the pair, and zero-value transfers (whale.transfer(this,0), hashrate.transferFrom(pair, DEAD, 0)) that trigger the buggy accounting paths. This leaves the pair's actual WHALE balance higher than its tracked reserve, so the attacker can compute finalWhaleIn = whale.balanceOf(pair) - whaleReserve and swap that surplus out for USDT at no real cost. After repaying both the Vault lock and the Moolah loan, the attacker keeps ~3,460 USDT. Vulnerable code snippet: Attack Tx: https://bscscan.com/tx/0xf8f431b392a50eb997ecae2e35668d6dd4dc8568d002057600d2532e18f36d86 Analysis: audit_911",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

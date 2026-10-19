@@ -39,7 +39,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "ERC667 Reentrancy. Lost: $1.5 million",
+  "rootCause": "vars.userCollateralBalance was set on entry to this function; it calculated vars once at the beginning, to save gas. If it has changed somehow during this function, our *check* will generate incorrect results. if this user has deposited a bunch of this collateral during this function execution, but at the beginning of this function it was liquidating all of their collateral, then it will still turn off the collateral usage. Vulnerable code snippet: Attack tx: https://gnosisscan.io/tx/0xa262141abcf7c127b88b4042aee8bf601f4f3372c9471dbd75cb54e76524f18e Analysis: https://medium.com/agavefinance/agave-exploit-reentrancy-in-liquidation-call-51ae407bc56",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

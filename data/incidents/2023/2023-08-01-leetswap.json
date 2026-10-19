@@ -35,7 +35,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Access Control. Lost: ~$630K",
+  "rootCause": "This exploit was a result of incorrect access control, where the _transferFeesSupportingTaxTokens() function was incorrectly marked as public. This enabled the attacker to misuse the function to transfer tokens to LeetSwap's fee collection address, reducing axlUSD token liquidity and artificially inflating its price for their own gain. Vulnerable Code Snippet: Attack Transaction: https://basescan.org/tx/0xbb837d417b76dd237b4418e1695a50941a69259a1c4dee561ea57d982b9f10ec Analysis: https://twitter.com/BlockSecTeam/status/1686217464051539968 https://twitter.com/peckshield/status/1686209024587710464",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Logic Flaw. Lost: 1.8M USD",
+  "rootCause": "The Abracadabra Cauldron cook() function lets users batch actions. The exploit abuses the ACTION_REPAY (action 5) action combined with a no-op so that the solvency / borrow accounting was bypassed: the attacker was able to extract MIM (the protocol's BentoBox MIM share) from each Cauldron without leaving a corresponding solvent debt position. By looping over six Cauldrons and calling cook with a repay action crafted from each Cauldron's available BentoBox MIM balance (capped by borrowLimit), the attacker pulled out MIM shares, withdrew them from BentoBox to actual MIM, then routed MIM -> 3CRV (Curve) -> USDT -> WETH for ~1.7M USD. The core flaw is that the action sequence allowed state changes (MIM withdrawal) while the post-action insolvency/borrow check failed to catch the resulting under-collateralized state. Vulnerable code snippet: Attack Tx: https://etherscan.io/tx/0x842aae91c89a9e5043e64af34f53dc66daf0f033ad8afbf35ef0c93f99a9e5e6 Analysis: https://etherscan.io/address/0x46f54d434063e5f1a2b2cc6d9aaa657b1b9ff82c#code",
   "descriptions": [
     {
       "source": "DeFiHackLabs",
@@ -60,6 +60,10 @@
     {
       "source": "RevertIQ",
       "text": "On 2025-10-04, an attacker exploited Abracadabra's deprecated Ethereum CauldronV4 markets by borrowing MIM through cook() and then clearing the pending solvency check with a custom action. The linked exploit transaction drained 1,793,766.13 MIM and converted it into about 395.06 ETH. CauldronV4's batched cook() flow stored post-action safety in a mutable CookStatus struct. ACTION_BORROW set needsSolvencyCheck = true, but a later custom action path assigned the return value of _additionalCookAction(...) back to status, clearing that flag. The function then skipped the final _isSolvent(...) check and allowed MIM borrowing with recorded debt but no collateral."
+    },
+    {
+      "source": "SlowMist",
+      "text": "MIN Spell posted on X that the team discovered a security vulnerability affecting some deprecated V4 Cauldrons on the Ethereum mainnet. During the attack, the attacker minted 1.79 million MIM. Shortly afterward, the DAO Treasury identified and fixed the vulnerability, confirmed that no other Cauldrons or user funds were affected, and repurchased all impacted MIM from the market, fully offsetting the impact of the attack."
     }
   ],
   "audit": null,
@@ -73,7 +77,8 @@
     "defihacklabs",
     "rekt",
     "blocksec",
-    "revertiq"
+    "revertiq",
+    "slowmist"
   ],
   "references": [
     {
@@ -125,6 +130,11 @@
       "source": "revertiq",
       "label": "halborn.com",
       "url": "https://www.halborn.com/blog/post/explained-the-abracadabra-hack-october-2025"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/MIM_Spell/status/1975130787486831018"
     }
   ]
 }

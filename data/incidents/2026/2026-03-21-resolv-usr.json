@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "On March 22, Resolv Labs lost $25 million when a compromised private key handed an attacker unlimited USR minting power. No oracle check. No mint cap. 80 million tokens printed. Hardcoded oracles and automated liquidity kept feeding broken markets long after the damage was done.",
+  "rootCause": "The Resolv minting contract permitted a single externally owned account (SERVICE_ROLE) — rather than a multisig — to authorize swap completions via off-chain digital signatures, with no on-chain oracle price validation and no maximum mint limit per transaction. An attacker compromised Resolv's AWS Key Management Service (KMS) environment to obtain the privileged signing key. With this key in hand, the attacker deposited approximately $100,000–$200,000 USDC and called completeSwap with attacker-forged signatures, minting approximately 80 million USR stablecoins in two transactions (500× the expected ratio). The attacker converted the unbacked USR into wstUSR and then into ETH and other stablecoins, extracting roughly $25M in real value. The exploit caused USR to depeg to $0.0025 on Curve and triggered over $10M in bad debt at downstream lending protocols including Fluid/Instadapp. A subsequent contract upgrade on April 6, 2026 permanently burned 36.73M wstUSR/stUSR tokens held by the attacker, capping total losses to approximately $34M. Attack Tx: 0xfe37f2...33743 Analysis: Resolv Labs Statement Explained: The Resolv Hack (March 2026) – Halborn How a Compromised Key Minted $80M in USR – Blockaid",
   "descriptions": [
     {
       "source": "REKT",

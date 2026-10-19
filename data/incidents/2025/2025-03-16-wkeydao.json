@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "unprotected function. Lost: 737,000",
+  "rootCause": "The exploit was caused by incorrect operational security and parameter misconfiguration rather than a direct flaw in the smart contract's code logic. The designated operator of the contract, through the setSaleInfo function, had set a very low price for the wkeyDao tokens combined with a non-zero immediateReleaseTokens value. This misconfiguration, which occurred roughly 120 days prior to the attack, created an arbitrage opportunity. The attacker exploited this by repeatedly calling the buy function to purchase wkeyDao tokens at the artificially low price and immediately receiving them due to the immediateReleaseTokens setting. They then sold these tokens on PancakeSwap at the prevailing, much higher market price, profiting from the difference. Vulnerable code snippet:https://bscscan.com/address/0xc39c54868a4f842b02a99339f4a57a44efc310b8#code Attack tx: https://app.blocksec.com/explorer/tx/bsc/0xc9bccafdb0cd977556d1f88ac39bf8b455c0275ac1dd4b51d75950fb58bad4c8?line=12 Analysis: https://blog.verichains.io/p/webkeydao-hack-analysis",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

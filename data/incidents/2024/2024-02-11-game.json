@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Reentrancy && Business Logic Flaw. Lost: ~20 ETH",
+  "rootCause": "The exploit stemmed from a logic error in newBidEtherMin(), enabling a single attacker to place bids exceeding 5% of the last bid amount without validation. This flaw resulted in unintended addresses receiving the full last bid amount. Additionally, using \"call\" in _sendEther facilitated re-entrancy attacks, allowing the attacker to make unauthorized transfers Vulnerable code snippet: Attack tx: https://phalcon.blocksec.com/explorer/tx/eth/0x0eb8f8d148508e752d9643ccf49ac4cb0c21cbad346b5bbcf2d06974d31bd5c4 Analysis: https://twitter.com/AnciliaInc/status/1757533144033739116",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

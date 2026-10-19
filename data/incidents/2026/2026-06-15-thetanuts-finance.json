@@ -39,7 +39,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Index vault component-share accounting flaw. Lost: 105471.50 USDC",
+  "rootCause": "The Thetanuts index vault lets holders claim() a proportional basket of underlying component-vault shares (BTC/ETH/AVAX/BNB/MATIC USD vaults) for their index shares, and mint() new index shares by depositing component shares. The accounting is broken: an attacker can claim out the component shares and then re-mint replacement index shares while the component-vault transfer amounts pulled by mint stay at zero (the mint does not actually charge/transfer the component shares it should). The attacker flash-loans nearly the entire index-share balance from Aave's aToken, claims the component shares from the borrowed index shares, then loops mint() to fabricate enough index shares to repay the Aave flash loan - at no real cost. After repaying the loan, the claimed component vault shares (later converted to USDC via initWithdraw) plus residual shares are pure profit, ~105,471 USDC. Vulnerable code snippet: Attack Tx: https://etherscan.io/tx/0xbba9f138fe39503bfd1aa62932dbd6ab35d37d23d48e4b7bf2988a9d5dc39fec Analysis: https://x.com/PeckShieldAlert/status/2066540451126190312",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

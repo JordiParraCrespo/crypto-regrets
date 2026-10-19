@@ -35,7 +35,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "FlashLoan Attack. Lost: $24k",
+  "rootCause": "The design flaw in the reward distribution which allows the final reward exceed the invested amount. Vulnerable code snippet: https://bscscan.com/address/0x02d841b976298dcd37ed6cc59f75d9dd39a3690c#code Attack tx: https://bscscan.com/tx/0x824de0989f2ce3230866cb61d588153e5312151aebb1e905ad775864885cd418[Preparation] https://bscscan.com/tx/0xb83f9165952697f27b1c7f932bcece5dfa6f0d2f9f3c3be2bb325815bfd834ec[Attack] Analysis: 1. [Preparation]The attacker deployed 20 attack contracts and bound each of them sequentially 2. The attacker flashloaned 2.4M BUSD and sent to the last contract(0x21c473f) that was created in the previous step. 3. The account stake all USDT to the UEarnpool. As a result, inviters will receive some BUSD tokens as reward. 4. Then the account invoked claimTeamReward. 5. The rest account was repeated 16 times and did stake with 20,000 BUSD and invoked claimTeamReward to claim the team reward, which is 162K BUSD. The rewards and the rest of the amount will be sent back to the attacker. 6. repay the flashloan and finish the attack. https://twitter.com/CertiKAlert/status/1593094922160128000",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

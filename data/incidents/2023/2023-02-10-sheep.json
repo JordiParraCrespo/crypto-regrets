@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Reflection token. Lost: ~$3K",
+  "rootCause": "The pool balance can be manipulated due to pair addresses not _isExcluded addresses. Vulnerable code snippet: https://bscscan.com/address/0x0025b42bfc22cbba6c02d23d4ec2abfcf6e014d4#code#L523 https://bscscan.com/address/0x0025b42bfc22cbba6c02d23d4ec2abfcf6e014d4#code#L646 The attacker flash loaned some $WBNB, bought some Sheep tokens, and burned the tokens in the attack contract by repeatedly calling the burn function. This results in a decrease in _tTotal and a larger return value for _getrate, which led to a gradual decrease in the pool balance. The remaining tokens were then swapped for a large amount of WBNB at a high price. Attack tx: https://bscscan.com/tx/0x61293c6dd5211a98f1a26c9f6821146e12fb5e20c850ad3ed2528195c8d4c98e Analysis: https://twitter.com/BlockSecTeam/status/1623999717482045440 https://twitter.com/BlockSecTeam/status/1624077078852210691",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Price manipulation. Lost: ~$175K",
+  "rootCause": "- In the _withdrawFrom function, the value liabilityToBurn is determined by the asset.liability and asset.totalSupply. However, the actual exchange/swap process is using the oracle as price feed. This introduces inconsistency for arbitrage. - Attacker could deposit USDT token, swap them to USDCE using oracle price(however the liability is influenced), but during the withdraw process which uses asset liability, the attacker could get back more assets than the original deposit tokens. Vulnerable code snippet: Attack tx: https://arbiscan.io/tx/0x57c96e320a3b885fabd95dd476d43c0d0fb10500d940d9594d4a458471a87abe Analysis: https://twitter.com/AnciliaInc/status/1712676040471105870 https://twitter.com/CertiKAlert/status/1712707006979613097",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

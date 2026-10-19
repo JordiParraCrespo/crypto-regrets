@@ -36,7 +36,7 @@
   },
   "bridge": true,
   "language": "Solidity",
-  "rootCause": "Logic Flaw. Lost: >200k USD(plus a lot of STC, SRLTY, Mazi tokens)",
+  "rootCause": "lack of regulated access control. Vulnerable code snippet: https://etherscan.io/address/0x354cca2f55dde182d36fe34d673430e226a3cb8c#code Attack tx: // Attack Tx Step1(deposit) : https://etherscan.io/tx/0xe09d350d8574ac1728ab5797e3aa46841f6c97239940db010943f23ad4acf7ae // Attack Tx Step2(withdrawToken): https://etherscan.io/tx/0x903d88a92cbc0165a7f662305ac1bff97430dbcccaa0fe71e101e18aa9109c92 Analysis: When a user makes an external call to the listToken function of this exploited contract, if the base token matches the corresponding token, then without any prior verification of the token owner or the caller of the contract, anyone would be able to set the token owner to themselves. https://medium.com/neptune-mutual/understanding-the-xbridge-exploit-d3d56c0dc19c",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

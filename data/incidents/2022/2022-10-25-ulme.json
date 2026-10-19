@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Access Control. Lost: ~250k US$ which resulted in ~50k profit",
+  "rootCause": "buyMiner function in the contract UniverseGoldMountain (ULME) is public and could potentially enable price manipulation, it appears that the attacker is exploiting this vulnerability to their advantage. By leveraging the flashloan, the attacker can potentially manipulate the price of ULME tokens and benefit from the price changes in the process. Vulnerable code snippet: Attack tx: https://bscscan.com/tx/0xdb9a13bc970b97824e082782e838bdff0b76b30d268f1d66aac507f1d43ff4ed Analysis: 1. Utilize a Flashloan to borrow BUSD from the lending platform. 2. Execute a swap of the borrowed BUSD for ULME tokens via PancakeSwap. 3. Utilize pre-approved users who possess BUSD tokens to trigger the buyMiner function of the ULME token. 4. Employ indirect price manipulation to exchange ULME tokens back for BUSD. And this behavior will increase the ULME token again. 5. Repay the Flashloan and secure a profit of 50,646 BUSD as the profit. https://twitter.com/BlockSecTeam/status/1584839309781135361 https://twitter.com/BeosinAlert/status/1584888021299916801",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

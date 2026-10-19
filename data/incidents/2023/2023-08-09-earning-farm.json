@@ -35,7 +35,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Reentrancy. Lost: ~$286k",
+  "rootCause": "The Earning.Farm EFVault contract on Ethereum was vulnerable to reentrancy in its withdraw() function due to a logic flaw: the function transferred ETH to the caller before burning the corresponding ENF_ETHLEV share tokens, violating the Checks-Effects-Interactions pattern. Additionally, the inherited ERC20 methods lacked non-reentrant modifiers. The attacker used an 80,000 ETH flash loan to deposit ~320 ETH into the ENF_ETHLEV contract, then called withdraw(). Upon receiving the ETH callback — before the share balance was updated — the attacker re-entered the contract to override the share balance state and subsequently burned a small number of LP tokens to collect additional ETH. This cycle was repeated across nine transactions, extracting approximately 291 ETH (roughly $286K) from the protocol. Attack Tx: 0x6e6e556a5685980317cb2afdb628ed4a845b3cbd1c98bdaffd0561cb2c4790fa Analysis: How Was the Earning Farm Exploited? (Neptune Mutual)",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

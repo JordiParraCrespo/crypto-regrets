@@ -39,7 +39,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Incorrect dividends calculation. Lost: 5k USD",
+  "rootCause": "BankrollNetworkStack uses the same flawed dividend-accounting model as the other Bankroll forks: a global profitPerShare accumulator distributes deposited funds (here WBNB) pro-rata across token holders. The attacker abused donatePool() to push WBNB into the dividend pool, then bought a small position with buy(); because the contract credits dividends based on the post-donation profitPerShare without properly excluding the attacker's own freshly-bought shares from the donated amount, the attacker's myDividends() jumped far beyond their contribution. The exploit was flash-funded: a 2,000 WBNB PancakeSwap V2 flash swap financed donatePool(1000 ether) + buy(240 ether), after which the attacker sell()s and withdraw()s the inflated dividends, repays the loan, and keeps ~24.5 WBNB profit. Attack Tx: https://bscscan.com/tx/0x7226b3947c7e8651982e5bd777bca52d03ea31d19b515dec123595a4435ae22c Analysis: Phalcon post-mortem",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

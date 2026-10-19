@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "logic flaw. Lost: ~$19K",
+  "rootCause": "The attackers keep approving NFT token ID 1071 to themselves and burn the token. After the burn operation, they can retrieve the token through transferFrom and re-burn it repeatedly. During each operation, the attacker receives some $THEDAO tokens as a reward. Vulnerable code snippet: - transferFrom - Burn Attack tx: Analysis: MetaTrustAlert on Twitter / X",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

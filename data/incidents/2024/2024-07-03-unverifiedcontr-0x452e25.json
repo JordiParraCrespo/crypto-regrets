@@ -35,7 +35,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "lack-of-access-control. Lost: 27 ETH",
+  "rootCause": "The victim contract implemented the uniswapV3SwapCallback function without proper caller verification. In Uniswap V3's architecture, this callback should only be executed by legitimate Uniswap V3 pools during swap operations. The victim contract failed to validate that the caller was an authorized Uniswap pool, allowing any external address to directly call this function with arbitrary parameters. When called with specifically crafted parameters (identical positive delta values and encoded data containing WETH address), the function likely processed token transfers without validation Vulnerable code snippet: The contract is not verified on Etherscan. Attack tx: https://etherscan.io/tx/0x1194e1d6085885ce054a7ff8cd3cd0c3fa308ec87e4ccde8dd0549842fef4f1b Analysis: https://blog.blockmagnates.com/watch-your-back-while-you-want-to-do-aribitrage-with-uniswap-flashloan-f456e4f3e99d",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

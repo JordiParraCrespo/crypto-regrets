@@ -13,8 +13,8 @@
   "vulnClass": null,
   "vulnClassBy": null,
   "aiClass": {
-    "id": "balance-accounting-mismatch",
-    "confidence": 0.75
+    "id": "rounding-precision",
+    "confidence": 0.31
   },
   "technique": "Arithmetic Error",
   "classificationNote": null,
@@ -22,20 +22,24 @@
   "ai": {
     "model": "jev-1.13.0",
     "category": "accounting-math",
-    "confidence": 1,
+    "confidence": 0.99,
     "top": [
       {
         "category": "accounting-math",
-        "p": 1
+        "p": 0.99
+      },
+      {
+        "category": "logic-error",
+        "p": 0.01
       }
     ],
-    "flashLoan": 0.04,
-    "stateActor": 0.02,
-    "hasRootCause": 0.97
+    "flashLoan": 0.05,
+    "stateActor": 0.03,
+    "hasRootCause": 0.84
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "$1.4 million lost on TMXTribe due to a logic bug. The team wallets deployed contracts during the exploit, never paused, and continue deploying days later. Meanwhile, complete radio silence from the team. Logic bug or choreographed exit?",
+  "rootCause": "According to CertiK Alert, a vulnerability involving a contract related to TMX on Arbitrum has been detected, with estimated losses of around $1.4 million. During the exploit loop, the attacker minted and staked TMX LP tokens using USDT, then swapped USDT for USDG, unstaked, and sold even more USDG.",
   "descriptions": [
     {
       "source": "REKT",
@@ -44,6 +48,10 @@
     {
       "source": "RevertIQ",
       "text": "TMX TRIBE, a decentralized futures protocol on Arbitrum One, was exploited in January 2026 due to an arithmetic error in its share accounting logic. The protocol's AUM calculation failed to consider liabilities from minted USDG, allowing an attacker to redeem inflated LP tokens for more than the protocol's net equity. This error enabled repeated over-redemption, draining approximately $1.4 million. No evidence of recovery exists, and no official public postmortem was issued. A critical accounting flaw in the AUM calculation ignored USDG (debt) liabilities, causing GLP/TLP share price to be computed from gross assets only. As a result, redemptions could…"
+    },
+    {
+      "source": "SlowMist",
+      "text": "According to CertiK Alert, a vulnerability involving a contract related to TMX on Arbitrum has been detected, with estimated losses of around $1.4 million. During the exploit loop, the attacker minted and staked TMX LP tokens using USDT, then swapped USDT for USDG, unstaked, and sold even more USDG."
     }
   ],
   "audit": null,
@@ -55,7 +63,8 @@
   "sources": [
     "defillama",
     "rekt",
-    "revertiq"
+    "revertiq",
+    "slowmist"
   ],
   "references": [
     {
@@ -82,6 +91,11 @@
       "source": "revertiq",
       "label": "monitoringroom.com",
       "url": "https://monitoringroom.com/situation/crypto-hack/tmx-tribe"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/certikalert/status/2008360565010559045?s=46&t=DLwbX9Nw4QECiyZQ0av-fg"
     }
   ]
 }

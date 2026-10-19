@@ -35,7 +35,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Access Control. Lost: 4.9M USD",
+  "rootCause": "The ShezmuCollateralToken contract's mint() function had no access control whatsoever — no onlyOwner, no role check, no minter whitelist. Any external account could call it to mint an unlimited number of collateral tokens to any address. The attacker called mint(address(this), type(uint128).max - 1) to self-mint ~340 quadrillion collateral tokens at zero cost, then approved and deposited them into the ShezmuVault as collateral via addCollateral(). Because the vault accepted the minted tokens at face value with no on-chain supply cap or oracle-enforced price validation at deposit time, the attacker's position appeared massively over-collateralised and they were able to borrow() ~100M ShezUSD from the protocol's reserves, draining approximately $1.49M in real value. Vulnerable code snippet: Attack Tx: 0x39328ea4377a8887d3f6ce91b2f4c6b19a851e2fc5163e2f83bbc2fc136d0c71 Analysis: Decoding Shezmu's exploit (post-mortem)",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

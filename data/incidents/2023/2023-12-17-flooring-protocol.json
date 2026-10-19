@@ -39,7 +39,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Business Logic Flaw. Lost: ~$1,6M",
+  "rootCause": "The Floor Protocol ERC1967Proxy contract exposed an unprotected extMulticall function that allowed any external caller to batch-execute arbitrary low-level calls using the proxy's identity. Because the victim had previously approved the proxy to transfer their NFTs, the attacker leveraged extMulticall to enumerate all PPG tokens held by the victim and construct a batch of safeTransferFrom calls routing every token to the attacker's address — no ownership check or caller restriction existed on the multicall entry-point. Vulnerable code snippet: Attack Tx: 0xec8f6d8e114caf8425736e0a3d5be2f93bbea6c01a50a7eeb3d61d2634927b40 Analysis: Floor Protocol exploited — Bored Apes and Pudgy Penguins gone",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

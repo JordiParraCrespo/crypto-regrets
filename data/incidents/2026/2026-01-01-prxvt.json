@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Bussiness Logic Flaw. Lost: 32.8 ETH",
+  "rootCause": "The stPRXVT staking contract distributes rewards based on a staker's stPRXVT balance, but claimReward() does not reset / checkpoint that balance against the reward accounting before transferring out the staked principal+rewards. The attacker exploited this by repeatedly recycling the same staked position through fresh CREATE2-deployed helper contracts: each helper receives the entire stPRXVT balance, calls claimReward() to harvest earned() rewards as if it were a brand-new staker, and forwards everything back. Because the reward bookkeeping is keyed per-address and is not invalidated when stPRXVT tokens are moved between addresses, transferring the staked balance to a new address resets the earned() accrual, letting the attacker claim rewards an unbounded number of times in a single transaction (looping until gas runs out) and minting/draining far more PRXVT than legitimately accrued. Vulnerable code snippet: Attack Tx: https://skylens.certik.com/tx/base/0xf42a8fe556d5e4ab59b0b7675ccbcd1425e7e2a6a8e0c9775fc6cd7c48ff55a1 Analysis: Vulnerable Contract: https://basescan.org/address/0xdac30a5e2612206e2756836ed6764ec5817e6fff",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

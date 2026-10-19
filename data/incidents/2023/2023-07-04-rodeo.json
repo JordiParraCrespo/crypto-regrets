@@ -39,7 +39,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "TWAP Oracle Manipulation. Lost: ~$888k",
+  "rootCause": "Rodeo Finance relied on a Camelot V2 TWAP oracle to price the ETH-unshETH LP pool, but the oracle averaged only the last 4 price updates (each ~45 minutes apart), making it feasible to skew the average via a multi-block sandwich attack. Over several preparatory transactions the attacker bought large amounts of unshETH on the illiquid Camelot pool, inflating successive TWAP snapshots. With the oracle now reporting a grossly elevated unshETH price, the attacker called Investor.earn() on strategy 41, borrowing 400,000 USDC from the protocol's USDC pool and routing the proceeds through Camelot to purchase unshETH at the manipulated price. The position's health factor check passed because collateral was valued at the fake oracle price. The attacker then immediately swapped the obtained unshETH back to WETH and USDC at true market rates on Camelot and UniswapV3, pocketing the spread for a total profit of ~472 ETH (~$888K). Vulnerable code snippet: Attack Tx: 0xb1be5dee3852c818af742f5dd44def285b497ffc5c2eda0d893af542a09fb25a Analysis: Phalcon_xyz Twitter thread",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

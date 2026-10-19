@@ -39,7 +39,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "business logic flaw. Lost: ~9 ETH",
+  "rootCause": "The family() function enables anyone to burn the token balance of any arbitrary user without authorization. Internally, it calls the _*approve_*() function with account as both owner and spender, but without verifying the caller’s identity. This allows an attacker to reduce the token balance of critical addresses (e.g., a DEX pair) to near zero, enabling price manipulation and draining of liquidity pools via favorable swap conditions. Vulnerable code snippet: Attack tx: https://app.blocksec.com/explorer/tx/eth/0x6beb21b53f5b205c088570333ec875b720e333b49657f7026b01ed72b026851e?line=19 Analysis: The family function doesn’t authenticate the identity of msg.sender and owner. As a result, anyone can burn other’s token balance without their approval. The attacker call family(pair) several times, to reduce the token.balanceOf(pair) to a minimum amount, causing the price to be manipulated. Thus, he can drain the pair contract with a normal swap.",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

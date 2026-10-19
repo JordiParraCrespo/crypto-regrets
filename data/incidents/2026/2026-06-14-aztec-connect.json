@@ -43,7 +43,7 @@
   },
   "bridge": true,
   "language": "Solidity",
-  "rootCause": "numRealTxs Proof/Settlement Mismatch (permissionless RollupProcessorV3). Lost: ~$2.19M (this PoC reproduces the 908.99 ETH leg)",
+  "rootCause": "In the deprecated Aztec Connect RollupProcessorV3 (core/Decoder.sol), the numRealTxs field lives at proofData[0x11c0], OUTSIDE the 0..0x11c0 header region that the zk proof hashes/commits, so it is not bound by the proof. decodeProof() commits public inputs in FULL inner-rollup chunks of 32 slots (ceil(numRealTxs/32)), so any numRealTxs in [1..32] maps to the same single chunk and verifies all 32 slots' notes into L2 state. However processDepositsAndWithdrawals() settles EXACTLY numRealTxs txs (end = ptr + numRealTxs*256). By declaring numRealTxs = 1 while placing a real DEPOSIT in slot 1, the deposit's note is proven and minted into L2 state, but its L1 backing validation (decreasePendingDepositBalance + shield signature) is skipped, creating unbacked L2 balance that is later withdrawn for real assets. Because processRollup() is permissionless on the sunset V3, anyone can submit these rollups. The attacker chained 14 rollups to drain ~$2.19M including 908.99 ETH. The PoC's testBugIsOneField proves restoring numRealTxs=2 (honest count) with the identical proof makes settlement validate the deposit and revert with INSUFFICIENT_DEPOSIT. Vulnerable code snippet: Attack Tx: https://etherscan.io/tx/0x074ec9317d8336db37e8c348fbdd7515573ff4088239c77ab429f522509aeeb1 Analysis: https://www.cryptotimes.io/2026/06/15/aztec-exploit-drains-2-19m-from-dormant-privacy-protocol/",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

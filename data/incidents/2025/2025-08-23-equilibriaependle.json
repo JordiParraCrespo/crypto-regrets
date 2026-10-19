@@ -39,7 +39,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Reward Accounting Flaw. Lost: 62,661.57 USD",
+  "rootCause": "The Equilibria Finance ePENDLE auto-compounder on Ethereum was deployed with a business logic misconfiguration: the stk-ePENDLE staked token was not configured as non-transferable, contrary to the secure implementation already enforced on all other chains where the protocol operates. The design intent was that stk-ePENDLE positions would be locked post-stake to prevent reward gaming, but the Ethereum deployment omitted this critical constraint. The attacker exploited the gap using Balancer flash loans to acquire a large amount of ePENDLE, stake it to obtain stk-ePENDLE, and then rapidly transfer the staked tokens across multiple attacker-controlled addresses in rapid succession — each transfer triggered a reward claim, allowing the attacker to repeatedly harvest accumulated ETH rewards from the contract. Approximately 13.36 ETH (~$68K) in rewards were drained before the protocol identified and patched the issue. Equilibria updated the Ethereum stk-ePENDLE contract to match the non-transferable configuration of its other deployments and compensated affected users from the treasury. Attack Tx: 0x0a60d7fb1d459ebee1ddcd62d1a8fcb8faa9aa1ebbb3203f90bea7dd888af8aa Analysis: Equilibria Finance — Official Security Update",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

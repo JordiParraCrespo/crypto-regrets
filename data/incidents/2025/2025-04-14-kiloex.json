@@ -45,7 +45,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Oracle manipulation 101 - check your damn validation. KiloEx lost almost $7.5 million when their MinimalForwarder contract accepted any forged signature without verification. The attack hit Base, BNB Chain, opBNB, Taiko, and Manta simultaneously.",
+  "rootCause": "The KiloEx perpetual DEX deployed a MinimalForwarder contract to support gasless meta-transactions. Its execute() function correctly recovered the signer address via ecrecover from the provided ECDSA signature, but critically failed to verify that the recovered signer matched the from field in the forwarded transaction payload. This allowed an attacker to forge a transaction appearing to originate from a trusted Keeper address without possessing the Keeper's private key. With the Keeper role impersonated, the attacker called the privileged setPrices() function on KiloPriceFeed with arbitrary values — first setting ETH/USD to $100 to open a leveraged position cheaply, then setting it to $10,000 to close that position for an ~$3.1M profit in a single transaction. This pattern was repeated across Base, BNB Chain, and opBNB, draining a combined $8.4M before the platform was suspended. Attack Tx: 0xf0fcce0807a82041d050a60461e187f0e81a6f7fbda69bb600c04049d924e138 Analysis: KiloEx Security Incident Root Cause Analysis Post-Mortem Inside the $7.5M KiloEx Hack - Ackee Blockchain",
   "descriptions": [
     {
       "source": "REKT",

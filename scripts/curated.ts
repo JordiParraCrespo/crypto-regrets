@@ -295,4 +295,66 @@ export const CURATED: CuratedIncident[] = [
       'A bug in the Agave JIT program cache caused an infinite recompile loop when a legacy loader program was invoked, stalling block production for ~5 hours until validators upgraded and restarted.',
     references: [{ label: 'Solana post-mortem', url: 'https://solana.com/news/02-06-24-solana-mainnet-beta-outage-report' }],
   },
+
+  // ---- Cosmos EVM August 2026: one patched bug exploited on chains that had not upgraded.
+  {
+    name: 'Nesa',
+    date: '2026-08-24',
+    category: 'accounting-math',
+    vulnClass: 'integer-overflow',
+    technique: 'Cosmos EVM StateDB balance underflow (GHSA-7g4w-cg88-2cq2)',
+    chains: ['Nesa'],
+    amountUsd: null,
+    rootCause:
+      'Cosmos EVM\'s StateDB tracked only an account\'s spendable balance, while x/staking and the staking precompile let a vesting account delegate locked coins. Delegating more than the spendable balance made the write-back in StateDB.SubBalance underflow (unchecked uint256) to ~2^256. The fix had been on main since May but shipped in v0.6.2 / v0.7.2 only on 19 Aug; the chain was still on an unpatched version. On Nesa the attacker inflated a ~1.1M NES deposit and withdrew 257.7M NES (~25.8% of supply) to Ethereum via Hyperlane; thin liquidity limited net profit to roughly $60K-240K, so the nominal loss overstates what was realised.',
+    references: [
+      { label: 'Cosmos Labs post-mortem', url: 'https://github.com/cosmos/security/blob/main/communications/cosmos_evm_GHSA-7g4w-cg88-2cq2_post_mortem.md' },
+      { label: 'GHSA-7g4w-cg88-2cq2', url: 'https://github.com/cosmos/evm/security/advisories/GHSA-7g4w-cg88-2cq2' },
+    ],
+  },
+  {
+    name: 'KiiChain',
+    date: '2026-08-22',
+    category: 'accounting-math',
+    vulnClass: 'integer-overflow',
+    technique: 'Cosmos EVM StateDB balance underflow (GHSA-7g4w-cg88-2cq2)',
+    chains: ['KiiChain'],
+    amountUsd: null,
+    rootCause:
+      'Cosmos EVM\'s StateDB tracked only an account\'s spendable balance, while x/staking and the staking precompile let a vesting account delegate locked coins. Delegating more than the spendable balance made the write-back in StateDB.SubBalance underflow (unchecked uint256) to ~2^256. The fix had been on main since May but shipped in v0.6.2 / v0.7.2 only on 19 Aug; the chain was still on an unpatched version. Repeated 18 times on KiiChain: 148.3M KII taken, 67.6M bridged to BNB Chain via Hyperlane and sold for ~$1.61M USDT; ~80.7M was frozen on-chain.',
+    references: [
+      { label: 'Cosmos Labs post-mortem', url: 'https://github.com/cosmos/security/blob/main/communications/cosmos_evm_GHSA-7g4w-cg88-2cq2_post_mortem.md' },
+      { label: 'GHSA-7g4w-cg88-2cq2', url: 'https://github.com/cosmos/evm/security/advisories/GHSA-7g4w-cg88-2cq2' },
+    ],
+  },
+  {
+    name: 'TAC',
+    date: '2026-08-22',
+    category: 'accounting-math',
+    vulnClass: 'integer-overflow',
+    technique: 'Cosmos EVM StateDB balance underflow (GHSA-7g4w-cg88-2cq2)',
+    chains: ['TAC'],
+    amountUsd: null,
+    rootCause:
+      'Cosmos EVM\'s StateDB tracked only an account\'s spendable balance, while x/staking and the staking precompile let a vesting account delegate locked coins. Delegating more than the spendable balance made the write-back in StateDB.SubBalance underflow (unchecked uint256) to ~2^256. The fix had been on main since May but shipped in v0.6.2 / v0.7.2 only on 19 Aug; the chain was still on an unpatched version. On TAC, 2,985,651,403 TAC was pulled from bonded_tokens_pool in one transaction, bridged to BNB Chain via LayerZero OFT and ~1.21B sold for ~$950K USDT.',
+    references: [
+      { label: 'Cosmos Labs post-mortem', url: 'https://github.com/cosmos/security/blob/main/communications/cosmos_evm_GHSA-7g4w-cg88-2cq2_post_mortem.md' },
+      { label: 'GHSA-7g4w-cg88-2cq2', url: 'https://github.com/cosmos/evm/security/advisories/GHSA-7g4w-cg88-2cq2' },
+    ],
+  },
+  {
+    name: 'MANTRA Chain',
+    date: '2026-08-20',
+    category: 'accounting-math',
+    vulnClass: 'integer-overflow',
+    technique: 'Cosmos EVM StateDB balance underflow (GHSA-7g4w-cg88-2cq2)',
+    chains: ['MANTRA'],
+    amountUsd: null,
+    rootCause:
+      'Cosmos EVM\'s StateDB tracked only an account\'s spendable balance, while x/staking and the staking precompile let a vesting account delegate locked coins. Delegating more than the spendable balance made the write-back in StateDB.SubBalance underflow (unchecked uint256) to ~2^256. The fix had been on main since May but shipped in v0.6.2 / v0.7.2 only on 19 Aug; the chain was still on an unpatched version. On MANTRA, ~720.9M OM was taken from the burn address and a dormant genesis multisig in two attacks, the same evening a public fork PR described the exploit path.',
+    references: [
+      { label: 'Cosmos Labs post-mortem', url: 'https://github.com/cosmos/security/blob/main/communications/cosmos_evm_GHSA-7g4w-cg88-2cq2_post_mortem.md' },
+      { label: 'GHSA-7g4w-cg88-2cq2', url: 'https://github.com/cosmos/evm/security/advisories/GHSA-7g4w-cg88-2cq2' },
+    ],
+  },
 ];

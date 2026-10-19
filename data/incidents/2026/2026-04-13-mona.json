@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "reward-farming / BurnAddress accounting exploit!. Lost: ~60.95K USDT",
+  "rootCause": "MONA's node-staking vault (LisaVault) paid out a fixed referral split on every 220 USDT node purchase: 80 USDT to the vault reserve, 20 USDT converted to WBNB, 70 USDT to the Level-1 referrer and 50 USDT to the Level-2 referrer. The vault enforced a one-node-per-address limit, but that limit was trivially bypassed by deploying a fresh helper contract per node. The attacker pre-registered an attacker-controlled L2 referrer, then deployed 25 NodeBuyer proxy contracts that each bound the attack contract as their L1 referrer before buying a node, so the attacker captured both referral tiers (70 + 50 USDT) on each of its own purchases. Combined with an insider component where the vault deployer (who also owned ~100% of the MONA/USDT LP) had that LP redeemed to release ~66,450 USDT, the attack netted ~60,950 USDT. The MONA token's transfer restriction (only burn/join addresses) was worked around by leaving MONA with the owner and routing only USDT to the attacker. Vulnerable code snippet: Attack Tx: https://bscscan.com/tx/0x3a60e1b3a4b0736be4f31839bfd7abc8bfc53b93ddbd3702e77fbc64561a7ea4 Analysis: https://app.blocksec.com/phalcon/explorer/tx/bsc/0x3a60e1b3a4b0736be4f31839bfd7abc8bfc53b93ddbd3702e77fbc64561a7ea4",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

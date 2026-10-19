@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Lack of Slippage Protection. Lost: ~442k",
+  "rootCause": "The hack was caused by a critical flaw in the token's transfer function. This function was designed to automatically convert 5% of any transferred tokens into USDT and add them to the USDT-DCF liquidity pool on PancakeSwap. The vulnerability arose because every transfer to the liquidity pool triggered an immediate swap on PancakeSwap. This behavior allowed the attacker to manipulate the price of the DCT token by strategically buying DCF with borrowed USDT and transferring it to the liquidity pool. This artificially inflated the price of DCT. The attacker then capitalized on this inflated price by swapping DCT back into USDT, realizing a significant profit. An additional \"unnecessary burn function\" further exacerbated the liquidity drain. The core issue was the lack of safeguards in the transfer function's automatic liquidity provision mechanism, which made it susceptible to price manipulation Vulnerable code snippet: Attack tx: https://bscscan.com/tx/0xb375932951c271606360b6bf4287d080c5601f4f59452b0484ea6c856defd6fd Analysis: https://lunaray.medium.com/dcf-hack-analysis-dbcd3589c6fc",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

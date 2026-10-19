@@ -43,7 +43,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Business Logic Flaw & Access Control. Lost: $5.9k",
+  "rootCause": "Business Logic Flaw & Access Control The root cause of the issue is a flaw in the MBC contract's implementation. The contract incorrectly uses the addLiquidity() function and mistakenly exposes swapAndLiquifyStepv1() function, which uses the balance of the contract's address as the desired reserve amount for maintaining reserves. So attacker can call swapAndLiquifyStepV1, which will add a certain amount of MBC and BUSD to the pool to manipulate MBC price. Vulnerable code snippet: https://bscscan.com/address/0x4e87880a72f6896e7e0a635a5838ffc89b13bd17#code#L1263 Attack tx: https://phalcon.blocksec.com/tx/bsc/0xdc53a6b5bf8e2962cf0e0eada6451f10956f4c0845a3ce134ddb050365f15c86 Analysis: https://twitter.com/AnciliaInc/status/1597742575623888896 https://twitter.com/CertiKAlert/status/1597639717096460288",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

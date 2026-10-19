@@ -2,7 +2,7 @@
 
 A classified index of crypto hacks, exploits and base-layer failures from 2010 to today, built to learn the common failure patterns, and as groundwork for tooling that detects and fixes them.
 
-- **3,131 incidents** ($28.8B) merged from DefiLlama, DeFiHackLabs (README + explorer), REKT, SlowMist, BlockSec, RevertIQ, Blockchain Graveyard and SEAL 911 (Web3 Is Going Great used for enrichment), deduplicated and cross-linked
+- **3,093 incidents** ($27.1B) merged from DefiLlama, DeFiHackLabs (README + explorer), REKT, SlowMist, BlockSec, RevertIQ, Blockchain Graveyard and SEAL 911 (Web3 Is Going Great used for enrichment), deduplicated (a second pass folds same-event records with different names; see `data/consolidated.log`) and cross-linked
 - **Two-level taxonomy**: 17 failure patterns in 6 layers → **57 vulnerability classes** (integer overflow, unprotected initializer, spot-price oracle, signer blind-signing, dependency supply chain…), each with CWE/SWC, vulnerable vs fixed code (or missing vs fixed control), detection signals and remediation
 - **1,589 incidents traced to a class**, 860+ with a runnable Foundry PoC, 1,100+ with attack transactions
 - **176 client/SDK/compiler advisories** (Bitcoin Core, Geth, Cosmos, Vyper, OpenZeppelin…) plus curated base-layer incidents

@@ -39,7 +39,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "unsafecast. Lost: ~ 95.5 K (1.14015390 WBTC)",
+  "rootCause": "Alkimiya's SilicaPools collateralizedMint accepts a shares amount as a uint256 but later down-casts it to uint128 with an unsafe cast. By passing shares = uint256(type(uint128).max) + 2, the attacker made the collateral-accounting path (which used the full uint256 value) record a huge deposit, while the minted ERC1155 position used the truncated uint128(shares) value. The mismatch between the full-width value used for one calculation and the truncated value used for the share/redeem accounting let the attacker mint a position worth far more than the collateral actually supplied. Funded by a Morpho WBTC flash loan, the attacker minted, transferred, and then started/ended the pool and called redeemShort to extract ~1.14 WBTC (~$95.5K) of excess value. Vulnerable code snippet: Attack Tx: https://etherscan.io/tx/0x9b9a6dd05526a8a4b40e5e1a74a25df6ecccae6ee7bf045911ad89a1dd3f0814 Analysis: PoC author rotcivegaf on X/Twitter",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

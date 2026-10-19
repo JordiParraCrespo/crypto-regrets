@@ -39,7 +39,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "No Input Parameter Check. Lost: $70k(236 BNB)",
+  "rootCause": "When end_date is not 3, 6, 12, or 24, the value of duration[msg.sender] is set to the default value, which is 0; In the function _Check_reward, when the parameter durations is 0, the system will directly return total_percent, bypassing the system logic. Vulnerable code snippet: Attack tx: invest https://bscscan.com/tx/0x49bed801b9a9432728b1939951acaa8f2e874453d39c7d881a62c2c157aa7613 withdraw https://bscscan.com/tx/0xa916674fb8203fac6d78f5f9afc604be468a514aa61ea36c6d6ef26ecfbd0e97 Analysis: https://twitter.com/BlockSecTeam/status/1615232012834705408",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

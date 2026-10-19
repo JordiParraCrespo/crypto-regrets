@@ -35,7 +35,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Logic Flaw. Lost: 61k USD",
+  "rootCause": "Grizzifi (0x21ab...266b) is an investment/referral (\"HoneyPot\") scheme whose _incrementUplineTeamCount logic gates referral and milestone bonuses on each user's cumulative totalInvested value, which includes amounts that were later withdrawn, rather than on the user's currently active investment. The attacker deployed 30 attack contracts chained as a referral upline, had each deposit and immediately withdraw via harvestHoney, so every contract registered inflated totalInvested while holding no real active stake. They then called collectRefBonus across the chain to harvest referral/milestone bonuses far exceeding any genuine deposits, extracting ~61K USD. The flaw is using a never-decremented lifetime-invested counter as the basis for bonus eligibility. Vulnerable code snippet: Attack Tx: https://bscscan.com/tx/0x36438165d701c883fd9a03631ee0cdeec35a138153720006ab59264db7e075c1 Analysis: MetaTrustAlert on X",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

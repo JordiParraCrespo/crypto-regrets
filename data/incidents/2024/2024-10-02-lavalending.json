@@ -35,7 +35,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Price Manipulation. Lost: 1 USDC, 125795.6 cUSDC, 0,0067 WBTC, 2.25 WETH (~$130K USD)",
+  "rootCause": "The WETH-USDC LP lending pool relied on a Uniswap V3 pool (UniswapV3Pool) for price calculations, which was vulnerable to manipulation. The attacker used multiple flash loans (from AlgebraPool, Aave V3, SwapFlashLoan, and Balancer Vault) to acquire USDC and WETH, depositing them into the WETHUSDC_LP contract to mint LP tokens. Initially, the LP token price was low , allowing the attacker to deposit LP tokens as collateral and borrow assets (cUSDC, WBTC, WETH, USDC) from the LendingPool. The attacker then manipulated the Uniswap V3 pool price by executing swaps, increasing the LP token price. Vulnerable code snippet: The vulnerable contract is not verified on Arbiscan. https://arbiscan.io/address/0x6700b021a8bcfae25a2493d16d7078c928c13151 Attack tx: https://arbiscan.io/tx/0xb5cfa4ae4d6e459ba285fec7f31caf8885e2285a0b4ff62f66b43e280c947216 Analysis:",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

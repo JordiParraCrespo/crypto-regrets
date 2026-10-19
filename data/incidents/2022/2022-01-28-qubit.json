@@ -39,7 +39,7 @@
   },
   "bridge": true,
   "language": "Solidity",
-  "rootCause": "Bridge address(0).safeTransferFrom() does not revert. Lost: $80 million",
+  "rootCause": "Insufficient validation Vulnerable code snippet: QBridge https://etherscan.io/address/0x99309d2e7265528dc7c3067004cc4a90d37b7cc3#code#F1#L200 QBridgeHandler https://etherscan.io/address/0x80d1486ef600cc56d4df9ed33baf53c60d5a629b#code#F1#L122 safeTransferFrom() in SafeToken.sol does not revert when the token EOA. tokenAddress can be address(0) to pass all check to mint xETH. BTW: SafeERC20 supports target address is checked to verify it contains contract code. ex: https://github.com/polynetwork/eth-contracts/blob/master/contracts/libs/token/ERC20/SafeERC20.sol // A Solidity high level call has three parts: // 1. The target address is checked to verify it contains contract code // 2. The call itself is made, and success asserted // 3. The return value is decoded, which in turn checks the size of the returned data. // solhint-disable-next-line max-line-length",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

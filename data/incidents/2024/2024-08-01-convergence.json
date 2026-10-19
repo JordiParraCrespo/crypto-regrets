@@ -35,7 +35,7 @@
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": "Incorrect input validation. Lost: ~200K USD",
+  "rootCause": "A post-audit modification for gas optimisation removed a critical line of code in the CvxRewardDistributor contract’s claimMultipleStaking function, which failed to validate the claimContracts array. This allowed the attacker to inject a malicious contract with a matching function signature claimCvgCvxMultiple, tricking the contract into minting 58 million unauthorized CVG tokens, which were then swapped for other assets. Vulnerable code snippet: Attack tx: https://etherscan.io/tx/0x636be30e58acce0629b2bf975b5c3133840cd7d41ffc3b903720c528f01c65d9 Analysis: https://blockapex.medium.com/convergence-finance-hack-analysis-7f54f8e0c4ec",
   "descriptions": [
     {
       "source": "DeFiHackLabs",

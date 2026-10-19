@@ -13,8 +13,8 @@
   "vulnClass": null,
   "vulnClassBy": null,
   "aiClass": {
-    "id": "uninitialized-implementation",
-    "confidence": 0.33
+    "id": "access-misconfiguration",
+    "confidence": 0.69
   },
   "technique": "Proxy Upgrade Hijack",
   "classificationNote": null,
@@ -22,40 +22,123 @@
   "ai": {
     "model": "jev-1.13.0",
     "category": "access-control",
-    "confidence": 0.72,
+    "confidence": 0.74,
     "top": [
       {
         "category": "access-control",
-        "p": 0.74
+        "p": 0.76
       },
       {
-        "category": "governance",
-        "p": 0.25
+        "category": "logic-error",
+        "p": 0.13
       },
       {
-        "category": "key-compromise",
-        "p": 0.01
+        "category": "reentrancy",
+        "p": 0.09
       }
     ],
-    "flashLoan": 0.06,
-    "stateActor": 0.04,
-    "hasRootCause": 0.08
+    "flashLoan": 0.05,
+    "stateActor": 0.02,
+    "hasRootCause": 0.98
   },
   "bridge": false,
   "language": "Solidity",
-  "rootCause": null,
-  "descriptions": [],
+  "rootCause": "The SIR Vault uses EIP-1153 transient storage and writes an attacker-influenced value into transient SLOT 1 during mint (effectively tstore(1, amount)), where that slot is later read and interpreted as the address authorized to invoke the uniswapV3SwapCallback (the Uniswap V3 swap callback caller). The attacker first manipulated SLOT 1 so its value equaled a specific address (95759995883742311247042417521410689 == 0x00000000001271551295307acc16ba1e7e0d4281), then used the immutable CREATE2 factory to deploy an arbitrary-call contract at exactly that address. Because the vault trusted the value in the colliding transient slot as the legitimate callback caller, the attacker-controlled contract could call uniswapV3SwapCallback and have the vault transfer out all its USDC, then WBTC, then WETH (~$353.8K). The fake debt/collateral tokens (AttackerC_A/B) and the ordering loop were needed to drive the vault's pool initialization and pass its checks. Vulnerable code snippet: Attack Tx: https://etherscan.io/tx/0xa05f047ddfdad9126624c4496b5d4a59f961ee7c091e7b4e38cee86f1335736f Analysis: PoC author rotcivegaf on X/Twitter",
+  "descriptions": [
+    {
+      "source": "REKT",
+      "text": "An attacker exploited a transient storage collision to drain $355K from SIR Trading in a flawless mathematical heist. A single audit couldn't prevent the hack, where a vanity address bypassed security checks and wiped out four years of development in one swift transaction."
+    },
+    {
+      "source": "SlowMist",
+      "text": "According to the SlowMist MistEye security monitoring system, the leveraged trading project SIR.trading (@leveragesir) on the Ethereum chain has been attacked, resulting in a loss of over $300,000 in assets. The root cause of this hack is that the transiently stored value set using tstore in the function was not cleared after the function call ended. This allowed the attacker to exploit this characteristic by constructing specific malicious addresses to bypass permission checks and transfer tokens."
+    },
+    {
+      "source": "RevertIQ",
+      "text": "SIR Trading was exploited on Ethereum Mainnet on March 30, 2025, losing over $355,000. The attacker abused transient storage (EIP-1153) in the Vault contract to bypass pool verification, draining collateral through a crafted callback logic flaw. Transient storage slot reused for different purposes in the Vault contract allowed a crafted contract address to bypass Uniswap pool verification. The callback logic did not clear or re-validate the transient storage between operations, enabling the attacker to impersonate the legitimate pool."
+    },
+    {
+      "source": "DeFiHackLabs",
+      "text": "Storage SLOT1 collision. Lost: ~ 353.8 K (17814,86 USDC, 1,4085 WBTC, 119,87 WETH)"
+    },
+    {
+      "source": "DeFiHackLabs explorer",
+      "text": "The SIR Vault uses EIP-1153 transient storage and writes an attacker-influenced value into transient SLOT 1 during mint (effectively tstore(1, amount)), where that slot is later read and interpreted as the address authorized to invoke the uniswapV3SwapCallback (the Uniswap V3 swap callback caller). The attacker first manipulated SLOT 1 so its value equaled a specific address (95759995883742311247042417521410689 == 0x00000000001271551295307acc16ba1e7e0d4281), then used the immutable CREATE2 factory to deploy an arbitrary-call contract at exactly that address. Because the vault trusted the value in the colliding transient slot as the legitimate callback caller, the attacker-controlled contract could call uniswapV3SwapCallback and have the vault transfer out all its USDC, then WBTC, then WETH (~$353.8K). The fake debt/collateral tokens (AttackerC_A/B) and the ordering loop were needed to drive the vault's pool initialization and pass its checks. Vulnerable code snippet: Attack Tx: https://etherscan.io/tx/0xa05f047ddfdad9126624c4496b5d4a59f961ee7c091e7b4e38cee86f1335736f Analysis: PoC author rotcivegaf on X/Twitter"
+    }
+  ],
   "audit": null,
-  "txHashes": [],
-  "poc": null,
+  "txHashes": [
+    "0xa05f047ddfdad9126624c4496b5d4a59f961ee7c091e7b4e38cee86f1335736f"
+  ],
+  "poc": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-03/LeverageSIR_exp.sol",
   "sources": [
-    "defillama"
+    "defillama",
+    "rekt",
+    "slowmist",
+    "revertiq",
+    "defihacklabs",
+    "blocksec"
   ],
   "references": [
     {
       "source": "defillama",
       "label": "DefiLlama hacks",
       "url": "https://defillama.com/hacks"
+    },
+    {
+      "source": "rekt",
+      "label": "REKT: SIR Trading - Rekt",
+      "url": "https://rekt.news/sirtrading-rekt"
+    },
+    {
+      "source": "slowmist",
+      "label": "x.com",
+      "url": "https://x.com/SlowMist_Team/status/1906722264059674893"
+    },
+    {
+      "source": "revertiq",
+      "label": "RevertIQ",
+      "url": "https://revertiq.ai/hacks/sir-2025-03-30"
+    },
+    {
+      "source": "revertiq",
+      "label": "research.blockscope.co",
+      "url": "https://research.blockscope.co/sir-protocol-exploit"
+    },
+    {
+      "source": "revertiq",
+      "label": "docs.sir.trading",
+      "url": "https://docs.sir.trading/protocol-overview/user-risks/exploit-and-relaunch"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "DeFiHackLabs PoC",
+      "url": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2025-03/LeverageSIR_exp.sol"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "x.com",
+      "url": "https://x.com/TenArmorAlert/status/1906268185046745262"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "etherscan.io",
+      "url": "https://etherscan.io/tx/0xa05f047ddfdad9126624c4496b5d4a59f961ee7c091e7b4e38cee86f1335736f"
+    },
+    {
+      "source": "defihacklabs",
+      "label": "twitter.com",
+      "url": "https://twitter.com/rotcivegaf"
+    },
+    {
+      "source": "blocksec",
+      "label": "BlockSec",
+      "url": "https://blocksec.com/security-incident?hash=0xa05f047ddfdad9126624c4496b5d4a59f961ee7c091e7b4e38cee86f1335736f"
+    },
+    {
+      "source": "blocksec",
+      "label": "x.com",
+      "url": "https://x.com/DecurityHQ/status/1906270316935942350"
     }
   ]
 }
