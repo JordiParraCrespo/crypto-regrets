@@ -1,0 +1,39 @@
+---
+import Base from '../../layouts/Base.astro';
+import Bars from '../../components/Bars.astro';
+import { ecosystem, ECOSYSTEM_IDS, fmtUsd, href, sum, incidents } from '../../lib/data';
+import { CHAIN_FAMILIES } from '../../lib/chains';
+import { CATEGORIES } from '../../lib/taxonomy';
+const ecos = ECOSYSTEM_IDS.map((f) => ecosystem(f)).filter((e) => e.count >= 5).sort((a, b) => b.usd - a.usd);
+const total = sum(incidents);
+---
+<Base title="Ecosystems" description="Crypto security incidents by blockchain ecosystem: Ethereum, BNB Chain, Solana, Bitcoin, Cosmos and more.">
+  <section class="wrap head">
+    <p class="eyebrow">Ecosystems</p>
+    <h1 class="h-lg">Every chain fails<br />in its own way.</h1>
+    <p class="lede">The same index, split by blockchain ecosystem. Each page shows how losses evolved, which failure patterns are typical there compared with everywhere else, and the client and SDK advisories behind the chain.</p>
+  </section>
+  <section class="wrap section">
+    <div class="grid cols-3">
+      {ecos.map((e) => {
+        const top = e.lift[0];
+        return (
+          <a class="card card-sm eco" href={href(`/ecosystems/${e.id}`)}>
+            <div class="eco-head">
+              <h2 class="h-xs">{CHAIN_FAMILIES[e.id].name}</h2>
+              <span class="mono caption fog">{Math.round(e.shareOfAll * 100)}% of losses</span>
+            </div>
+            <p class="mono caption" style="margin:4px 0 16px"><span class="medium">{fmtUsd(e.usd)}</span> <span class="fog">· {e.count} incidents · median {fmtUsd(e.median)}</span></p>
+            <Bars data={e.series('count').filter((d) => d.year >= 2016)} height={56} compact label={`${CHAIN_FAMILIES[e.id].name}: incidents per year`} />
+            {top && top.ratio > 1.2 && <p class="caption steel" style="margin:12px 0 0">Distinctive: {CATEGORIES[top.c].name.toLowerCase()} ({top.ratio.toFixed(1)}× the rate elsewhere)</p>}
+          </a>
+        );
+      })}
+    </div>
+    <p class="caption fog" style="margin-top:16px">Ecosystems with at least 5 incidents. Incidents touching several ecosystems are grouped under multi-chain; chain-less exchange hacks are not an ecosystem.</p>
+  </section>
+</Base>
+<style>
+  .head { padding-top: 80px; display: grid; gap: 20px; }
+  .eco-head { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
+</style>

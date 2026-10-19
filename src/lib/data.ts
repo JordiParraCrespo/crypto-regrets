@@ -269,3 +269,84 @@ export const cosmosIncidents: CosmosIncident[] = z.array(cosmosIncidentSchema).p
   .sort((a, b) => b.date.localeCompare(a.date));
 export const cosmosAdvisories: CosmosAdvisory[] = z.array(cosmosAdvisorySchema).parse(pick('cosmos_advisories.json'))
   .sort((a, b) => (b.published ?? '').localeCompare(a.published ?? ''));
+
+// ------------------------------------------------------------------ ecosystems
+
+/** Families that get their own page (unknown / off-chain are not ecosystems). */
+export const ECOSYSTEM_IDS = FAMILY_IDS.filter((f) => f !== 'unknown' && f !== 'offchain');
+
+const median = (xs: number[]) => {
+  if (!xs.length) return 0;
+  const s = [...xs].sort((a, b) => a - b);
+  return s.length % 2 ? s[(s.length - 1) / 2] : (s[s.length / 2 - 1] + s[s.length / 2]) / 2;
+};
+
+/** Advisory projects relevant to each ecosystem (client, SDK, compiler, library). */
+const ECO_ADVISORY_PROJECTS: Partial<Record<ChainFamilyId, string[]>> = {
+  ethereum: ['Geth', 'Vyper', 'OpenZeppelin Contracts', 'web3.js', 'Besu'],
+  l2: ['Geth', 'Vyper', 'OpenZeppelin Contracts'],
+  'evm-other': ['Geth', 'Vyper', 'OpenZeppelin Contracts'],
+  bsc: ['Geth', 'OpenZeppelin Contracts'],
+  bitcoin: ['Bitcoin Core', 'btcd', 'Lightning (lnd)'],
+  cosmos: ['Cosmos', 'Evmos'],
+};
+
+export function ecosystem(f: ChainFamilyId) {
+  const xs = incidents.filter((i) => familyOf(i) === f);
+  const amounts = xs.map((i) => i.amountUsd ?? 0).filter((a) => a > 0);
+  const total = sum(xs);
+  const years = [...new Set(xs.map((i) => i.year))].sort((a, b) => a - b);
+  const fromYear = Math.max(years[0] ?? 2016, 2010);
+  const series = (metric: Metric) =>
+    YEARS.filter((y) => y >= fromYear).map((year) => {
+      const ys = xs.filter((i) => i.year === year);
+      return { year, value: metric === 'usd' ? sum(ys) : ys.length };
+    });
+
+  // Which patterns are over-represented here vs everywhere else (by incident count).
+  const others = incidents.filter((i) => familyOf(i) !== f);
+  const lift = CATEGORY_IDS.filter((c) => c !== 'unknown')
+    .map((c) => {
+      const here = xs.filter((i) => i.category === c).length;
+      const there = others.filter((i) => i.category === c).length;
+      const shareHere = here / Math.max(xs.length, 1);
+      const shareThere = there / Math.max(others.length, 1);
+      return { c, here, shareHere, shareThere, ratio: shareThere ? shareHere / shareThere : 0 };
+    })
+    .filter((x) => x.here >= 3)
+    .sort((a, b) => b.ratio - a.ratio);
+
+  const classCount = new Map<ClassId, number>();
+  for (const i of xs) if (i.vulnClass) classCount.set(i.vulnClass, (classCount.get(i.vulnClass) ?? 0) + 1);
+  const chainStats = new Map<string, { n: number; usd: number }>();
+  for (const i of xs) for (const c of i.chains) {
+    const s = chainStats.get(c) ?? { n: 0, usd: 0 };
+    s.n++;
+    s.usd += i.amountUsd ?? 0;
+    chainStats.set(c, s);
+  }
+  const layerShare = LAYER_ORDER.map((l) => ({
+    l,
+    here: xs.filter((i) => layerOf(i.category) === l).length / Math.max(xs.length, 1),
+    all: incidents.filter((i) => layerOf(i.category) === l).length / incidents.length,
+  }));
+  const projects = ECO_ADVISORY_PROJECTS[f] ?? [];
+  return {
+    id: f,
+    incidents: xs,
+    count: xs.length,
+    usd: total,
+    shareOfAll: total / Math.max(sum(incidents), 1),
+    median: median(amounts),
+    withPoc: xs.filter((i) => i.poc).length,
+    firstYear: years[0],
+    series,
+    lift,
+    classes: [...classCount].sort((a, b) => b[1] - a[1]),
+    chains: [...chainStats].sort((a, b) => b[1].usd - a[1].usd || b[1].n - a[1].n),
+    layerShare,
+    biggest: [...xs].sort((a, b) => (b.amountUsd ?? 0) - (a.amountUsd ?? 0)).slice(0, 10),
+    latest: xs.slice(0, 8),
+    advisories: advisories.filter((a) => projects.includes(a.project)),
+  };
+}

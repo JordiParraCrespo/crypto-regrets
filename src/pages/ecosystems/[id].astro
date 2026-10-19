@@ -1,0 +1,300 @@
+---
+import Base from '../../layouts/Base.astro';
+import Bars from '../../components/Bars.astro';
+import Heatmap from '../../components/Heatmap.astro';
+import Switch from '../../components/Switch.astro';
+import IncidentTable from '../../components/IncidentTable.astro';
+import CodeTabs from '../../components/CodeTabs.astro';
+import { ecosystem, ECOSYSTEM_IDS, fmtUsd, fmtDate, href, matrix, TREND_COLS, familyOf, CLASSES, LAYER_ORDER, cosmosAdvisories, cosmosIncidents } from '../../lib/data';
+import { CHAIN_FAMILIES, type ChainFamilyId } from '../../lib/chains';
+import { CATEGORIES, CATEGORY_IDS, LAYERS } from '../../lib/taxonomy';
+import { COSMOS_AREAS, COSMOS_CLASSES, COSMOS_CLASS_IDS, type CosmosClass } from '../../lib/cosmos';
+
+export function getStaticPaths() {
+  return ECOSYSTEM_IDS.filter((f) => ecosystem(f).count > 0).map((id) => ({ params: { id } }));
+}
+const id = Astro.params.id as ChainFamilyId;
+const fam = CHAIN_FAMILIES[id];
+const e = ecosystem(id);
+const pct = (x: number) => `${Math.round(x * 100)}%`;
+const cols = TREND_COLS.filter((c) => c === '≤2015' || Number(c) >= (e.firstYear ?? 2016) || Number(c) >= 2016);
+const patternRows = (metric: 'usd' | 'count') => {
+  const m = matrix((i) => (familyOf(i) === id && i.category !== 'unknown' ? i.category : null), metric);
+  return CATEGORY_IDS.filter((c): c is Exclude<typeof c, 'unknown'> => c !== 'unknown' && m.has(c))
+    .map((c) => ({ id: c, label: CATEGORIES[c].name, href: href(`/patterns/${c}`), values: m.get(c)! }))
+    .sort((a, b) => [...b.values.values()].reduce((s, v) => s + v, 0) - [...a.values.values()].reduce((s, v) => s + v, 0));
+};
+const over = e.lift.filter((x) => x.ratio >= 1.3).slice(0, 5);
+const under = [...e.lift].filter((x) => x.ratio > 0 && x.ratio <= 0.7).reverse().slice(0, 3);
+const maxClass = e.classes[0]?.[1] ?? 1;
+const maxChain = e.chains[0]?.[1].usd || 1;
+const isCosmos = id === 'cosmos';
+
+// ---- Cosmos-only aggregates (from the advisory and incident research datasets)
+const advYears = [...new Set(cosmosAdvisories.map((a) => a.published?.slice(0, 4)).filter(Boolean) as string[])].sort();
+const SEVERITIES = ['CRITICAL', 'HIGH', 'MODERATE', 'LOW'] as const;
+const sevRows = SEVERITIES.map((s) => ({
+  id: s,
+  label: s[0] + s.slice(1).toLowerCase(),
+  values: new Map(advYears.map((y) => [y, cosmosAdvisories.filter((a) => a.published?.startsWith(y) && (a.severity ?? '').toUpperCase() === s).length])),
+}));
+const projCount = new Map<string, number>();
+for (const a of cosmosAdvisories) projCount.set(a.project, (projCount.get(a.project) ?? 0) + 1);
+const projRows = [...projCount].sort((a, b) => b[1] - a[1]).slice(0, 12).map(([p]) => ({
+  id: p,
+  label: p,
+  values: new Map(advYears.map((y) => [y, cosmosAdvisories.filter((a) => a.project === p && a.published?.startsWith(y)).length])),
+}));
+const compCount = new Map<string, number>();
+for (const a of cosmosAdvisories.filter((a) => (a.published ?? '') >= '2024')) if (a.component) compCount.set(a.component, (compCount.get(a.component) ?? 0) + 1);
+const comps = [...compCount].sort((a, b) => b[1] - a[1]).slice(0, 10);
+const maxComp = comps[0]?.[1] ?? 1;
+const critByYear = advYears.map((y) => ({ y, total: cosmosAdvisories.filter((a) => a.published?.startsWith(y)).length, crit: cosmosAdvisories.filter((a) => a.published?.startsWith(y) && (a.severity ?? '').toUpperCase() === 'CRITICAL').length }));
+const lastYear = critByYear[critByYear.length - 1];
+const recentCritical = cosmosAdvisories.filter((a) => (a.severity ?? '').toUpperCase() === 'CRITICAL').slice(0, 8);
+const resCompCount = new Map<string, { n: number; usd: number }>();
+for (const i of cosmosIncidents) {
+  const k = i.component ?? 'unknown';
+  const v = resCompCount.get(k) ?? { n: 0, usd: 0 };
+  v.n++;
+  v.usd += i.lossUsd ?? 0;
+  resCompCount.set(k, v);
+}
+const resComps = [...resCompCount].sort((a, b) => b[1].n - a[1].n);
+const maxResComp = resComps[0]?.[1].n ?? 1;
+const cosmosByArea = Object.keys(COSMOS_AREAS).map((a) => ({ area: a as keyof typeof COSMOS_AREAS, ids: COSMOS_CLASS_IDS.filter((c) => COSMOS_CLASSES[c].area === a) }));
+const getClass = (c: (typeof COSMOS_CLASS_IDS)[number]): CosmosClass => COSMOS_CLASSES[c];
+---
+<Base title={fam.name} description={`${fam.name}: ${e.count} incidents, ${fmtUsd(e.usd)} lost. How security failures evolved, typical vulnerabilities and advisories.`}>
+  <section class="wrap head">
+    <p class="eyebrow"><a href={href('/ecosystems')}>Ecosystems</a> / {fam.name}</p>
+    <h1 class="h-lg">{fam.name}</h1>
+    <p class="lede">{fam.blurb}.</p>
+    {e.chains.length > 1 && <div class="chips">{e.chains.slice(0, 14).map(([c]) => <span class="pill">{c}</span>)}</div>}
+    <div class="grid cols-4 stats">
+      <div class="stat-inline"><div class="value">{e.count}</div><div class="label">incidents since {e.firstYear}</div></div>
+      <div class="stat-inline"><div class="value">{fmtUsd(e.usd)}</div><div class="label">lost · {pct(e.shareOfAll)} of all losses</div></div>
+      <div class="stat-inline"><div class="value">{fmtUsd(e.median)}</div><div class="label">median loss per incident</div></div>
+      <div class="stat-inline"><div class="value">{e.withPoc}</div><div class="label">with a runnable PoC</div></div>
+    </div>
+  </section>
+
+  <section class="wrap section">
+    <div class="section-head"><div><p class="eyebrow">Over time</p><h2 class="h-md" style="margin-top:8px">Losses and incidents per year</h2></div></div>
+    <Switch id="eco-years" labels={['$ lost', 'Incidents']}>
+      <div data-panel class="card"><Bars data={e.series('usd')} format="usd" height={220} label={`${fam.name}: amount lost per year`} /></div>
+      <div data-panel class="card"><Bars data={e.series('count')} height={220} label={`${fam.name}: incidents per year`} /></div>
+    </Switch>
+  </section>
+
+  <section class="wrap section">
+    <div class="section-head"><div><p class="eyebrow">What goes wrong here</p><h2 class="h-md" style="margin-top:8px">Typical failures</h2></div></div>
+    <div class="grid cols-2 split">
+      <div>
+        <h3 class="h-xs">Compared with other ecosystems</h3>
+        <p class="body-sm fog" style="margin:4px 0 16px">Share of incidents in each pattern here vs everywhere else.</p>
+        {over.length ? (
+          <ul class="rows">
+            {over.map((x) => (
+              <li class="lift">
+                <a class="medium" href={href(`/patterns/${x.c}`)}>{CATEGORIES[x.c].name}</a>
+                <span class="mono caption"><span class="medium">{x.ratio.toFixed(1)}×</span> <span class="fog">{pct(x.shareHere)} here vs {pct(x.shareThere)} elsewhere</span></span>
+              </li>
+            ))}
+          </ul>
+        ) : <p class="body-sm fog">No pattern stands out: the mix is close to the overall average.</p>}
+        {under.length > 0 && <p class="caption fog" style="margin-top:12px">Rarer than elsewhere: {under.map((x) => `${CATEGORIES[x.c].name.toLowerCase()} (${x.ratio.toFixed(1)}×)`).join(', ')}.</p>}
+      </div>
+      <div>
+        <h3 class="h-xs">Most common vulnerability classes</h3>
+        <p class="body-sm fog" style="margin:4px 0 16px">Incidents with enough detail to name a class.</p>
+        {e.classes.length ? (
+          <ol class="ranked">
+            {e.classes.slice(0, 8).map(([c, n]) => (
+              <li><a href={href(`/classes/${c}`)}><span class="row"><span class="body-sm medium">{CLASSES[c].name}</span><span class="mono caption fog">{n}</span></span><span class="meter"><span style={`width:${(n / maxClass) * 100}%`}></span></span></a></li>
+            ))}
+          </ol>
+        ) : <p class="body-sm fog">Not enough detail in public sources to name classes yet.</p>}
+      </div>
+    </div>
+    <div style="margin-top:48px">
+      <h3 class="h-xs" style="margin-bottom:12px">Where in the stack, here vs overall</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Layer</th><th style="width:38%">{fam.name}</th><th style="width:38%">All ecosystems</th></tr></thead>
+          <tbody>
+            {e.layerShare.map((x) => (
+              <tr>
+                <td class="body-sm">{LAYERS[x.l].name}</td>
+                <td><span class="bar-cell"><span class="meter"><span style={`width:${x.here * 100}%`}></span></span><span class="mono caption">{pct(x.here)}</span></span></td>
+                <td><span class="bar-cell"><span class="meter"><span style={`width:${x.all * 100}%;background:var(--color-pewter)`}></span></span><span class="mono caption fog">{pct(x.all)}</span></span></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap section">
+    <div class="section-head"><div><p class="eyebrow">Patterns over time</p><h2 class="h-md" style="margin-top:8px">What failed, when</h2></div></div>
+    <Switch id="eco-patterns" labels={['Incidents', '$ lost']}>
+      <div data-panel><Heatmap rows={patternRows('count')} cols={cols} format="count" caption={`Incidents per failure pattern and year in ${fam.name}.`} /></div>
+      <div data-panel><Heatmap rows={patternRows('usd')} cols={cols} format="usd" caption={`Amount lost per failure pattern and year in ${fam.name}.`} /></div>
+    </Switch>
+  </section>
+
+  {e.chains.length > 1 && (
+    <section class="wrap section">
+      <div class="section-head"><div><p class="eyebrow">Chains</p><h2 class="h-md" style="margin-top:8px">Losses by chain</h2></div></div>
+      <ol class="rows">
+        {e.chains.slice(0, 12).map(([c, s]) => (
+          <li class="chainrow">
+            <span class="medium">{c}</span>
+            <span class="meter"><span style={`width:${(s.usd / maxChain) * 100}%`}></span></span>
+            <span class="mono caption"><span class="medium">{fmtUsd(s.usd)}</span> <span class="fog">· {s.n}</span></span>
+          </li>
+        ))}
+      </ol>
+    </section>
+  )}
+
+  {isCosmos && (
+    <>
+      <section class="wrap section">
+        <div class="section-head"><div><p class="eyebrow">Security advisories</p><h2 class="h-md" style="margin-top:8px">The 2026 spike is in severity</h2>
+          <p class="lede">{cosmosAdvisories.length} advisories across the Cosmos stack (SDK, CometBFT, IBC-Go, Cosmos EVM / Evmos, CosmWasm, Osmosis…). {lastYear && `${lastYear.crit} of ${lastYear.total} advisories in ${lastYear.y} so far are critical,`} concentrated in the Cosmos EVM (precompiles, StateDB) and the CosmWasm VM.</p></div></div>
+        <div class="grid cols-2">
+          <div class="card">
+            <p class="body-sm medium" style="margin:0">Advisories per year</p>
+            <p class="caption fog" style="margin:0 0 20px">all severities</p>
+            <Bars data={critByYear.map((x) => ({ year: Number(x.y), value: x.total }))} height={160} label="Cosmos advisories per year" />
+          </div>
+          <div class="card">
+            <p class="body-sm medium" style="margin:0">Critical advisories per year</p>
+            <p class="caption fog" style="margin:0 0 20px">fund loss, chain halt or VM escape</p>
+            <Bars data={critByYear.map((x) => ({ year: Number(x.y), value: x.crit }))} height={160} label="Critical Cosmos advisories per year" />
+          </div>
+        </div>
+        <h3 class="h-sub" style="margin:48px 0 16px">Severity by year</h3>
+        <Heatmap rows={sevRows} cols={advYears} format="count" caption="Advisories by severity and publication year (GitHub Security Advisories, OSV, Cosmos ASA list, CosmWasm CWA)." />
+        <h3 class="h-sub" style="margin:48px 0 16px">Which project</h3>
+        <Heatmap rows={projRows} cols={advYears} format="count" caption="Advisories by project and year." />
+        <div class="grid cols-2 split" style="margin-top:48px">
+          <div>
+            <h3 class="h-xs">Most affected components since 2024</h3>
+            <ol class="ranked" style="margin-top:16px">
+              {comps.map(([c, n]) => <li><span class="row"><span class="body-sm medium mono">{c}</span><span class="mono caption fog">{n}</span></span><span class="meter"><span style={`width:${(n / maxComp) * 100}%`}></span></span></li>)}
+            </ol>
+          </div>
+          <div>
+            <h3 class="h-xs">Latest critical advisories</h3>
+            <ul class="rows" style="margin-top:16px">
+              {recentCritical.map((a) => (
+                <li><a class="medium body-sm" href={a.url ?? '#'}>{a.title}</a><div class="mono caption fog">{a.published} · {a.project} · {a.id}</div></li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {cosmosIncidents.length > 0 && (
+        <section class="wrap section">
+          <div class="section-head"><div><p class="eyebrow">Incident research</p><h2 class="h-md" style="margin-top:8px">Which component failed</h2><p class="lede">{cosmosIncidents.length} Cosmos incidents researched from post-mortems and advisories, tagged with the component that failed.</p></div></div>
+          <ol class="ranked">
+            {resComps.map(([c, v]) => <li><span class="row"><span class="body-sm medium mono">{c}</span><span class="mono caption fog">{v.n} incidents · {fmtUsd(v.usd)}</span></span><span class="meter"><span style={`width:${(v.n / maxResComp) * 100}%`}></span></span></li>)}
+          </ol>
+          <div class="table-wrap" style="margin-top:32px">
+            <table>
+              <thead><tr><th>Date</th><th>Incident</th><th class="hide-sm">Component</th><th class="hide-sm">Root cause</th><th class="num">Lost</th></tr></thead>
+              <tbody>
+                {cosmosIncidents.map((i) => (
+                  <tr>
+                    <td class="mono caption fog" style="white-space:nowrap">{i.date}</td>
+                    <td><span class="medium">{i.name}</span><div class="caption fog">{i.chain}</div>{i.sources[0] && <a class="caption link" href={i.sources[0]}>source</a>}</td>
+                    <td class="mono caption hide-sm">{i.component}</td>
+                    <td class="caption steel hide-sm" style="max-width:520px">{i.rootCause}</td>
+                    <td class="num">{fmtUsd(i.lossUsd ?? null)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      )}
+
+      <section class="wrap section">
+        <div class="section-head"><div><p class="eyebrow">For scanners</p><h2 class="h-md" style="margin-top:8px">Cosmos vulnerability classes</h2><p class="lede">{COSMOS_CLASS_IDS.length} classes specific to Cosmos SDK modules, IBC, CosmWasm and the Cosmos EVM. Each rule has a regex prefilter (finds candidates) and the condition an AST/taint check must confirm. Export: <a class="link" href={href('/api/cosmos-scanner-rules.json')}>cosmos-scanner-rules.json</a>.</p></div></div>
+        {cosmosByArea.map(({ area, ids }) => (
+          <div class="area">
+            <h3 class="h-sub">{COSMOS_AREAS[area].name}</h3>
+            <p class="body-sm fog" style="margin:4px 0 24px;max-width:70ch">{COSMOS_AREAS[area].blurb}</p>
+            {ids.map((cid) => {
+              const k = getClass(cid);
+              return (
+                <article class="cls" id={cid}>
+                  <div class="cls-text">
+                    <h4 class="h-xs">{k.name}</h4>
+                    <p class="body-sm steel" style="margin:6px 0 16px">{k.summary}</p>
+                    <p class="eyebrow" style="margin:0 0 6px">Scanner rules</p>
+                    <ul class="rules">
+                      {k.rules.map((r) => (
+                        <li>
+                          <span class="mono caption medium">{r.id}</span> <span class="pill pill-mono" style="padding:0 8px">{r.target}</span>
+                          {r.regex && <div class="mono caption fog re">{r.regex}</div>}
+                          <div class="caption steel">{r.confirm}</div>
+                        </li>
+                      ))}
+                    </ul>
+                    <p class="eyebrow" style="margin:16px 0 6px">Fix</p>
+                    <ul class="check">{k.fix.map((f) => <li>{f}</li>)}</ul>
+                    {k.seenIn.length > 0 && <p class="caption fog" style="margin:12px 0 0">Seen in: {k.seenIn.join(' · ')}</p>}
+                  </div>
+                  <div>{k.vulnerable && <CodeTabs id={`cosmos-${cid}`} vulnerable={k.vulnerable} fixed={k.fixed} />}</div>
+                </article>
+              );
+            })}
+          </div>
+        ))}
+      </section>
+    </>
+  )}
+
+  {!isCosmos && e.advisories.length > 0 && (
+    <section class="wrap section">
+      <div class="section-head"><div><p class="eyebrow">Client & library advisories</p><h2 class="h-md" style="margin-top:8px">Below the applications</h2></div><a class="btn btn-ghost" href={href('/infrastructure')}>All advisories →</a></div>
+      <ul class="rows">
+        {e.advisories.slice(0, 10).map((a) => <li><a class="medium body-sm" href={a.url}>{a.title}</a><div class="mono caption fog">{a.date ?? '—'} · {a.project} · {a.cve}{a.severity ? ` · ${a.severity}` : ''}</div></li>)}
+      </ul>
+    </section>
+  )}
+
+  <section class="wrap section">
+    <div class="section-head"><h2 class="h-sub">Largest incidents</h2><a class="btn btn-ghost" href={href('/hacks')}>Full index →</a></div>
+    <IncidentTable items={e.biggest} />
+  </section>
+  <section class="wrap section">
+    <h2 class="h-sub" style="margin-bottom:24px">Latest incidents</h2>
+    <IncidentTable items={e.latest} />
+  </section>
+</Base>
+<style>
+  .head { padding-top: 80px; display: grid; gap: 20px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .stats { margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--color-dove); }
+  .split { gap: 48px; align-items: start; }
+  .lift { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; align-items: baseline; }
+  .ranked { list-style: none; padding: 0; margin: 0; display: grid; gap: 14px; }
+  .ranked a, .ranked li { display: grid; gap: 6px; }
+  .ranked .row { display: flex; justify-content: space-between; gap: 12px; }
+  .bar-cell { display: grid; grid-template-columns: 1fr 44px; gap: 12px; align-items: center; }
+  .bar-cell .mono { text-align: right; }
+  .chainrow { display: grid; grid-template-columns: minmax(0, 12rem) 1fr 9rem; gap: 16px; align-items: center; }
+  .chainrow .mono { text-align: right; }
+  @media (max-width: 640px) { .chainrow { grid-template-columns: 1fr 7rem; } .chainrow .meter { grid-column: 1 / -1; grid-row: 2; } }
+  .area { margin-top: 56px; }
+  .cls { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 40px; padding: 32px 0; border-top: 1px solid var(--color-dove); }
+  @media (max-width: 960px) { .cls { grid-template-columns: minmax(0, 1fr); } }
+  .rules { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+  .re { overflow-wrap: anywhere; margin: 2px 0; }
+</style>

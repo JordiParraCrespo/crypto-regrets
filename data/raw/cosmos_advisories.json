@@ -1,0 +1,1763 @@
+[
+  {
+    "id": "GHSA-367m-g444-9mg3",
+    "aliases": [],
+    "project": "cosmos-evm",
+    "title": "Non-atomic StateDB commit",
+    "summary": "StateDB.Commit persists dirty accounts one at a time in lexicographic address order without rolling back earlier writes if a later one fails; the x/erc20 IBC refund callback swallows the resulting error so partial writes persist. An attacker can create a credit without a matching debit, producing spendable native balance. Fix stages writes in a scratch cache context and publishes them only after all writes succeed.",
+    "published": "2026-09-03",
+    "severity": "CRITICAL",
+    "cvss": null,
+    "affected": "cosmos/evm: >=0.6.0 <0.6.3, >=0.7.0 <0.7.3",
+    "component": "x/vm",
+    "impact": "fund-loss",
+    "url": "https://github.com/cosmos/evm/security/advisories/GHSA-367m-g444-9mg3",
+    "sources": [
+      "github-seed"
+    ]
+  },
+  {
+    "id": "GHSA-7g4w-cg88-2cq2",
+    "aliases": [],
+    "project": "cosmos-evm",
+    "title": "Balance underflow in EVM StateDB",
+    "summary": "The EVM StateDB tracks only an account's spendable balance. When a vesting account delegates more than its spendable balance through the staking precompile, the balance write-back subtracts the full amount without a check, an unchecked underflow that wraps the account balance to ~2^256. Chained with a second overflow on a victim account in a supply-neutral transaction, attackers extracted legitimate tokens (theft of funds) from six Cosmos EVM chains in Aug 2026 (~USD 5.7M). The fix adds an underflow guard; state-breaking, requires a coordinated upgrade.",
+    "published": "2026-08-28",
+    "severity": "CRITICAL",
+    "cvss": null,
+    "affected": "cosmos/evm: <0.6.2, >=0.7.0 <0.7.2",
+    "component": "x/vm",
+    "impact": "fund-loss",
+    "url": "https://github.com/cosmos/evm/security/advisories/GHSA-7g4w-cg88-2cq2",
+    "sources": [
+      "github-seed"
+    ]
+  },
+  {
+    "id": "CWA-2026-006",
+    "aliases": [],
+    "project": "wasmvm",
+    "title": "CWA-2026-006: Sandbox escape in the Wasmer Singlepass compiler",
+    "summary": "A code generation defect in the Wasmer Singlepass compiler, which wasmvm embeds to execute CosmWasm contracts, allows a specially crafted contract to escape the WebAssembly execution boundary and run controlled native instructions inside the node process. On an affected chain this permits unauthorized minting of native tokens and permanent loss of user funds. Exploitation requires an attacker to store and instantiate a contract they control. Where code upload access and instantiate default permission permit it, that is reachable by any ordinary funded account, with no governance action, privi…",
+    "published": "2026-07-14",
+    "severity": "CRITICAL",
+    "cvss": null,
+    "affected": "wasmd ≤ `v0.70.3`, ≤ `v0.61.14`, ≤ `v0.60.8`, ≤ `v0.54.9`; wasmvm ≤ `v3.0.7`, ≤ `v2.3.4`, ≤ `v2.2.8`",
+    "component": "wasm-vm",
+    "impact": "privilege-escalation",
+    "url": "https://github.com/CosmWasm/advisories/blob/main/CWAs/CWA-2026-006.md",
+    "sources": [
+      "cwa"
+    ]
+  },
+  {
+    "id": "CWA-2026-005",
+    "aliases": [],
+    "project": "wasmvm",
+    "title": "CWA-2026-005: Large number of locals in Wasm functions may stall the chain",
+    "summary": "Permissionless CosmWasm chains can be stalled by storing and executing malicious smart contracts having a large value of local variables defined in one or more Wasm functions.",
+    "published": "2026-06-17",
+    "severity": "HIGH",
+    "cvss": null,
+    "affected": "cosmwasm ≤ v2.2.8, v2.3.3, ≤ v3.0.7; wasmvm ≤ v2.2.7, v2.3.3, ≤ v3.0.6; wasmd ≤ v0.54.8, v0.60.7, ≤ v0.61.13, ≤ v0.70.2",
+    "component": "wasm-vm",
+    "impact": "chain-halt",
+    "url": "https://github.com/CosmWasm/advisories/blob/main/CWAs/CWA-2026-005.md",
+    "sources": [
+      "cwa"
+    ]
+  },
+  {
+    "id": "CWA-2026-004",
+    "aliases": [],
+    "project": "wasmvm",
+    "title": "CWA-2026-004: Chained overflows allow to bypass gas limits",
+    "summary": "Three chained integer overflows in the CosmWasm VM gas accounting layer allow a malicious or buggy chain backend to bypass gas limits entirely.",
+    "published": "2026-05-04",
+    "severity": "LOW",
+    "cvss": null,
+    "affected": "cosmwasm-vm ≤ v3.0.5; cosmwasm-vm ≤ v2.3.2; cosmwasm-vm ≤ v2.2.7",
+    "component": "wasm-vm",
+    "impact": "privilege-escalation",
+    "url": "https://github.com/CosmWasm/advisories/blob/main/CWAs/CWA-2026-004.md",
+    "sources": [
+      "cwa"
+    ]
+  },
+  {
+    "id": "CWA-2026-003",
+    "aliases": [],
+    "project": "wasmd",
+    "title": "CWA-2026-003: Delayed block production",
+    "summary": "This bug can allow an attacker to cause significant delays in block production.",
+    "published": "2026-04-02",
+    "severity": "MODERATE",
+    "cvss": null,
+    "affected": "wasmd ≤ v0.61.9; wasmd ≤ v0.60.8; wasmd ≤ v0.54.7",
+    "component": "x/wasm",
+    "impact": "dos",
+    "url": "https://github.com/CosmWasm/advisories/blob/main/CWAs/CWA-2026-003.md",
+    "sources": [
+      "cwa"
+    ]
+  },
+  {
+    "id": "CWA-2026-002",
+    "aliases": [],
+    "project": "wasmd",
+    "title": "CWA-2026-002: Malicious balance operations",
+    "summary": "This bug may allow malicious balance operations. To be affected, the chain need to be on wasmd v0.61.x and have IBCv2 enabled.",
+    "published": "2026-03-12",
+    "severity": "CRITICAL",
+    "cvss": null,
+    "affected": "wasmd ≥ v0.61.0, ≤ v0.61.8",
+    "component": "x/wasm",
+    "impact": "other",
+    "url": "https://github.com/CosmWasm/advisories/blob/main/CWAs/CWA-2026-002.md",
+    "sources": [
+      "cwa"
+    ]
+  },
+  {
+    "id": "GHSA-54gx-3cgr-7mfm",
+    "aliases": [
+      "ASA-2026-002",
+      "GO-2026-4677"
+    ],
+    "project": "cosmos-evm",
+    "title": "ASA-2026-002: Cosmos EVM: incorrect state handling during nested EVM execution paths",
+    "summary": "--- Security Advisory ASA-2026-002 Field Value --- --- Severity Critical Affected Component ICS20 Precompile Affected Versions Cosmos EVM implementations including the ICS20 precompile Patched Version v0.6.0 First Reported January 21, 2026 Public Disclosure March 2026 --- Introduction Recently, there was a vulnerability affecting a feature used by some chains built on the Cosmos EVM stack. Working together with ecosystem partners and affected teams, particularly Saga, B-Harvest, Mantra, Zellic and Sherlock, Cosmos Labs investigated the issue, coordinated mitigations, developed a permanent fix…",
+    "published": "2026-03-11",
+    "severity": "CRITICAL",
+    "cvss": null,
+    "affected": "cosmos/evm: <0.6.0",
+    "component": "precompile",
+    "impact": "fund-loss",
+    "url": "https://github.com/cosmos/evm/security/advisories/GHSA-54gx-3cgr-7mfm",
+    "sources": [
+      "osv:GHSA",
+      "osv:GO"
+    ]
+  },
+  {
+    "id": "CWA-2026-001",
+    "aliases": [],
+    "project": "wasmd",
+    "title": "CWA-2026-001: Node memory saturation",
+    "summary": "This bug can cause memory saturation which can lead to crashes of the node process.",
+    "published": "2026-02-03",
+    "severity": "MODERATE",
+    "cvss": null,
+    "affected": "wasmd v0.61.7; wasmd v0.60.4; wasmd v0.54.5; wasmvm v3.0.2; wasmvm v2.3.1; wasmvm v2.2.5",
+    "component": "x/wasm",
+    "impact": "dos",
+    "url": "https://github.com/CosmWasm/advisories/blob/main/CWAs/CWA-2026-001.md",
+    "sources": [
+      "cwa"
+    ]
+  },
+  {
+    "id": "GHSA-c32p-wcqj-j677",
+    "aliases": [
+      "CSA-2026-001",
+      "GO-2026-4361"
+    ],
+    "project": "cometbft",
+    "title": "CSA-2026-001: CometBFT has inconsistencies between how commit signatures are verified and how block time is derived",
+    "summary": "CSA-2026-001: Tachyon Description Description A consensus-level vulnerability was discovered in CometBFT's \"BFT Time\" implementation due to an inconsistency between how commit signatures are verified and how block time is derived. This breaks a core BFT Time guarantee: \"A faulty process cannot arbitrarily increase the Time value.\" Impact Downstream impact on chains affects any module, smart contract, or system that relies on the block timestamp. Patches The new CometBFT releases v0.38.21 and v0.37.18 fix this issue. The main unreleased branch is also patched. Workarounds There are no effectiv…",
+    "published": "2026-01-23",
+    "severity": "HIGH",
+    "cvss": null,
+    "affected": "cometbft/cometbft: >=0.38.0-alpha.1 <0.38.21; cometbft/cometbft: <0.37.18",
+    "component": "consensus",
+    "impact": "other",
+    "url": "https://github.com/cometbft/cometbft/security/advisories/GHSA-c32p-wcqj-j677",
+    "sources": [
+      "osv:GHSA",
+      "osv:GO"
+    ]
+  },
+  {
+    "id": "GHSA-8pfh-j44r-f654",
+    "aliases": [
+      "GO-2025-4041"
+    ],
+    "project": "cosmos-evm",
+    "title": "Cosmos EVM Vulnerability",
+    "summary": "Patches Patched in versions v0.3.1 , v0.4.2 , and in the v0.5.0 release. More information will be disclosed at a later point to ensure chains have time to safely upgrade. Workarounds No workarounds for chains that make use of static or dynamic precompiles. Upgrading is strongly recommended. Testing Tests are introduced in every affected version. Credits Special thanks to @yihuang for the help on this issue.",
+    "published": "2025-10-21",
+    "severity": "CRITICAL",
+    "cvss": null,
+    "affected": "cosmos/evm: >=0.3.0 <0.3.2; cosmos/evm: >=0.4.0 <0.4.2",
+    "component": "precompile",
+    "impact": "other",
+    "url": "https://github.com/cosmos/evm/security/advisories/GHSA-8pfh-j44r-f654",
+    "sources": [
+      "osv:GHSA",
+      "osv:GO"
+    ]
+  },
+  {
+    "id": "CWA-2025-007",
+    "aliases": [],
+    "project": "wasmd",
+    "title": "CWA-2025-007: Unbounded reply recursion causing stack overflow",
+    "summary": "A flaw in the reply handling logic allowed a contract to recursively trigger submessages from within its own reply handler without proper depth limitation. This could lead to unbounded recursion and eventually a stack overflow in the wasmd process, causing the node to crash. The issue does not directly lead to fund loss, but under certain conditions it could result in validator crashes and potential chain halt.",
+    "published": "2025-10-14",
+    "severity": "MODERATE",
+    "cvss": null,
+    "affected": "wasmd ≤`v0.61.5`, ≤`v0.60.1`, ≤`v0.54.2`",
+    "component": "x/wasm",
+    "impact": "dos",
+    "url": "https://github.com/CosmWasm/advisories/blob/main/CWAs/CWA-2025-007.md",
+    "sources": [
+      "cwa"
+    ]
+  },
+  {
+    "id": "GHSA-hrhf-2vcr-ghch",
+    "aliases": [
+      "ASA-2025-003",
+      "GO-2025-4025"
+    ],
+    "project": "cometbft",
+    "title": "ASA-2025-003: CometBFT's invalid BitArray handling can lead to network halt",
+    "summary": "Description A bug was discovered in CometBFT's handling of BitArray 's that have a mismatch between the BitArray 's expected number of Elems for the specified number of Bits . Additional validation was added to prevent processing BitArray 's in this invalid state, as well as guards to prevent panics on BitArray methods if one of these invalid states is processed. Impact BitArray 's are present in a number of messages received from peers. When handling these messages, insufficient validation was applied to prevent processing messages the aforementioned invalid state. In the worst case, nodes w…",
+    "published": "2025-10-14",
+    "severity": "HIGH",
+    "cvss": null,
+    "affected": "cometbft/cometbft: <0.37.16; cometbft/cometbft: >=0.38.0-alpha.1 <0.38.19",
+    "component": "p2p",
+    "impact": "chain-halt",
+    "url": "https://github.com/cometbft/cometbft/security/advisories/GHSA-hrhf-2vcr-ghch",
+    "sources": [
+      "osv:GHSA",
+      "osv:GO"
+    ]
+  },
+  {
+    "id": "GHSA-p22h-3m2v-cmgh",
+    "aliases": [
+      "GO-2025-3803",
+      "ISA-2025-005"
+    ],
+    "project": "cosmos-sdk",
+    "title": "ISA-2025-005: Cosmos SDK's Integer Overflow vulnerability in its Validator Rewards pool can cause a chain halt",
+    "summary": "Description Cosmos SDK chains in unpatched releases that use the x/distribution module are affected. Description An issue was discovered in the distribution module where a malicious deposit into the Validator Rewards pool would result in an integer overflow that would cause a chain halt. A malicious validator can interact with the distribution module to introduce this state. Patches Has the problem been patched? What versions should users upgrade to? The new Cosmos SDK release v0.50.14 and v0.53.3 fix this issue. There are no known workarounds for this issue. It is advised that chains apply t…",
+    "published": "2025-07-08",
+    "severity": "HIGH",
+    "cvss": null,
+    "affected": "cosmos/cosmos-sdk: <0.50.14; cosmos/cosmos-sdk: >=0.52.0-alpha.1 <0.53.3",
+    "component": "x/distribution",
+    "impact": "chain-halt",
+    "url": "https://github.com/cosmos/cosmos-sdk/security/advisories/GHSA-p22h-3m2v-cmgh",
+    "sources": [
+      "osv:GHSA",
+      "osv:GO"
+    ]
+  },
+  {
+    "id": "GHSA-79xg-q4qm-7v9w",
+    "aliases": [
+      "CWA-2025-006",
+      "GO-2025-3755"
+    ],
+    "project": "wasmd",
+    "title": "CWA-2025-006: wasmd's improper error handling may lead to IBC channel opening despite error",
+    "summary": "CWA-2025-006: Improper error handling may lead to IBC channel opening despite error Severity High (Considerable + Likely)[^1] - wasmd 0.60.0 - wasmd = 0.51.0 < 0.55.1 Patched versions: - wasmd 0.60.1, 0.55.1, 0.54.1, 0.53.3 Description of the bug A contract erroring during IBC channel opening does not prevent the channel from opening. Applying the patch The patch will be shipped in a wasmd release. You will also have to update libwasmvm if you build statically. If you already use the latest / close to latest wasmd, you can update more or less as follows: 1. Check the current wasmd version: go…",
+    "published": "2025-06-11",
+    "severity": "HIGH",
+    "cvss": null,
+    "affected": "CosmWasm/wasmd: >=0.60.0 <0.60.1; CosmWasm/wasmd: >=0.55.0 <0.55.1; CosmWasm/wasmd: >=0.54.0 <0.54.1; CosmWasm/wasmd: >=0.51.0 <0.53.3",
+    "component": "ibc-core",
+    "impact": "other",
+    "url": "https://github.com/CosmWasm/wasmd/security/advisories/GHSA-79xg-q4qm-7v9w",
+    "sources": [
+      "cwa",
+      "osv:GHSA",
+      "osv:GO"
+    ]
+  },
+  {
+    "id": "CWA-2025-004",
+    "aliases": [],
+    "project": "wasmd",
+    "title": "CWA-2025-004: Sub-context gas not consumed on non-OutOfGas panics",
+    "summary": "In very specific cases, a sub-message can avoid paying gas and end the transaction. To our knowledge, this cannot be used to consume more than the gas limit.",
+    "published": "2025-06-10",
+    "severity": "LOW",
+    "cvss": null,
+    "affected": "wasmd 0.60.0; wasmd >= 0.40.0 < 0.55.1; wasmd < 0.34.2",
+    "component": "x/wasm",
+    "impact": "dos",
+    "url": "https://github.com/CosmWasm/advisories/blob/main/CWAs/CWA-2025-004.md",
+    "sources": [
+      "cwa"
+    ]
+  },
+  {
+    "id": "CWA-2025-005",
+    "aliases": [],
+    "project": "wasmd",
+    "title": "CWA-2025-005: Missing contract setup cost for IBC entrypoints",
+    "summary": "The IBC entrypoints do not charge contract setup cost, potentially allowing a contract to cause more node work than it should be able to. The exact extent of the impact is unknown. Permissioned chains are most likely not affected.",
+    "published": "2025-06-10",
+    "severity": "MODERATE",
+    "cvss": null,
+    "affected": "wasmd 0.60.0; wasmd >= 0.40.0 < 0.55.1; wasmd < 0.34.2",
+    "component": "x/wasm",
+    "impact": "other",
+    "url": "https://github.com/CosmWasm/advisories/blob/main/CWAs/CWA-2025-005.md",
+    "sources": [
+      "cwa"
+    ]
+  },
+  {
+    "id": "GHSA-mjfq-3qr2-6g84",
+    "aliases": [
+      "GO-2025-3684"
+    ],
+    "project": "cosmos-evm",
+    "title": "Cosmos EVM Allows Partial Precompile State Writes",
+    "summary": "Impact Setting lower EVM call gas allows users to partially execute precompiles and error at specific points in the precompile code without reverting the partially written state. If executed on the distribution precompile when claiming funds, it could cause funds to be transferred to a user without resetting the claimable rewards to 0. The vulnerability could also be used to cause indeterministic execution by failing at other points in the code, halting validators. Any evmOS or Cosmos EVM chain using precompiles is affected. Patches The vulnerability was patched by wrapping each precompile ex…",
+    "published": "2025-05-14",
+    "severity": "HIGH",
+    "cvss": null,
+    "affected": "cosmos/evm: 1 listed versions",
+    "component": "precompile",
+    "impact": "chain-halt",
+    "url": "https://github.com/cosmos/evm/security/advisories/GHSA-mjfq-3qr2-6g84",
+    "sources": [
+      "osv:GHSA",
+      "osv:GO"
+    ]
+  },
+  {
+    "id": "GHSA-47ww-ff84-4jrg",
+    "aliases": [
+      "GO-2025-3516",
+      "ISA-2025-002"
+    ],
+    "project": "cosmos-sdk",
+    "title": "ISA-2025-002: Cosmos SDK: x/group can halt when erroring in EndBlocker",
+    "summary": "Cosmos SDK chains in unpatched releases that use the x/group module are affected. Description An issue was discovered in the groups module where malicious proposals would result in an errors triggered in the module's end blocker that could result in a chain halt. Any set of users that can interact with the groups module could introduce this state. Patches Has the problem been patched? What versions should users upgrade to? The new Cosmos SDK release v0.50.13 and v0.47.17 fix this issue. Testing Testing we have done to gain more confidence in this release: In addition to testing Cosmos SDK we…",
+    "published": "2025-03-12",
+    "severity": "HIGH",
+    "cvss": null,
+    "affected": "cosmos/cosmos-sdk: >=0.50.0-alpha.0 <0.50.13; cosmos/cosmos-sdk: <0.47.17",
+    "component": "x/group",
+    "impact": "chain-halt",
+    "url": "https://github.com/cosmos/cosmos-sdk/security/advisories/GHSA-47ww-ff84-4jrg",
+    "sources": [
+      "osv:GHSA",
+      "osv:GO"
+    ]
+  },
+  {
+    "id": "GHSA-4wf3-5qj9-368v",
+    "aliases": [
+      "GO-2025-3517",
+      "ISA-2025-001"
+    ],
+    "project": "ibc-go",
+    "title": "ISA-2025-001: IBC-Go: Non-deterministic JSON Unmarshalling of IBC Acknowledgement can result in a chain halt",
+    "summary": "Description An issue was discovered in IBC-Go's deserialization of acknowledgements that results in non-deterministic behavior which can halt a chain. Any user that can open an IBC channel can introduce this state to the chain. The following patch is in addition to the previous patch which now extends the same protection to all applications beyond transfer. Patches The new IBC-Go releases below address this issue: v7.10.0 v8.7.0 Workarounds To prevent this state from being introduced to a chain, it is possible to permission Channel Opening as a workaround. Notes on Re-Release This is an exten…",
+    "published": "2025-03-12",
+    "severity": "CRITICAL",
+    "cvss": null,
+    "affected": "cosmos/ibc-go: <7.10.0; cosmos/ibc-go/v8: >=8.0.0-alpha.1 <8.7.0; cosmos/ibc-go/v2: <7.10.0; cosmos/ibc-go/v3: <7.10.0; cosmos/ibc-go/v4: <7.10.0; cosmos/ibc-go/v5: <7.10.0; cosmos/ibc-go/v6: <7.10.0; cosmos/ibc-go/v7: <7.10.0",
+    "component": "ibc-core",
+    "impact": "chain-halt",
+    "url": "https://github.com/cosmos/ibc-go/security/advisories/GHSA-4wf3-5qj9-368v",
+    "sources": [
+      "osv:GHSA",
+      "osv:GO"
+    ]
+  },
+  {
+    "id": "CWA-2025-003",
+    "aliases": [],
+    "project": "wasmvm",
+    "title": "CWA-2025-003: Smart contract can cause consensus failures for some nodes",
+    "summary": "When running into it, the vulnerability will cause nodes running with the --trace flag to run into consensus failure. Running into this issue does not require a malicious contract and can happen by accident with non-malicious contracts. It can happen on both permissioned and permissionless chains.",
+    "published": "2025-03-03",
+    "severity": "LOW",
+    "cvss": null,
+    "affected": "wasmvm 2.2.2; wasmvm 2.1.5; wasmvm 2.0.6 (unsupported); wasmvm 1.5.8",
+    "component": "consensus",
+    "impact": "consensus-failure",
+    "url": "https://github.com/CosmWasm/advisories/blob/main/CWAs/CWA-2025-003.md",
+    "sources": [
+      "cwa"
+    ]
+  },
+  {
+    "id": "GHSA-jg6f-48ff-5xrw",
+    "aliases": [
+      "ASA-2025-004",
+      "GO-2025-3494"
+    ],
+    "project": "ibc-go",
+    "title": "ASA-2025-004: IBC-Go has Non-deterministic JSON Unmarshalling of IBC Acknowledgement",
+    "summary": "Description An issue was discovered in IBC-Go's deserialization of acknowledgements that results in non-deterministic behavior which can halt a chain. Any user that can open an IBC channel can introduce this state to the chain Patches The new IBC-Go releases below address this issue: v7.9.2 v8.6.1 Workarounds To prevent this state from being introduced to a chain, it is possible to permission Channel Opening as a workaround. Notes on Re-Release Is this state breaking? Probably not but it depends on your transfer middlewares This patch is not state breaking unless you depend on transfer middle…",
+    "published": "2025-02-28",
+    "severity": "CRITICAL",
+    "cvss": null,
+    "affected": "cosmos/ibc-go: all; cosmos/ibc-go/v2: all; cosmos/ibc-go/v3: all; cosmos/ibc-go/v4: all; cosmos/ibc-go/v5: all; cosmos/ibc-go/v6: all; cosmos/ibc-go/v7: <7.9.2; cosmos/ibc-go/v8: <8.6.1",
+    "component": "ibc-core",
+    "impact": "consensus-failure",
+    "url": "https://github.com/cosmos/ibc-go/security/advisories/GHSA-jg6f-48ff-5xrw",
+    "sources": [
+      "asa-list",
+      "osv:GHSA",
+      "osv:GO"
+    ]
+  },
+  {
+    "id": "GHSA-x5vx-95h7-rv4p",
+    "aliases": [
+      "ASA-2025-003",
+      "GO-2025-3476"
+    ],
+    "project": "cosmos-sdk",
+    "title": "ASA-2025-003: Cosmos SDK: Groups module can halt chain when handling a malicious proposal",
+    "summary": "Description An issue was discovered in the groups module where a malicious proposal would result in a division by zero, and subsequently halt a chain due to the resulting error. Any user that can interact with the groups module can introduce this state. Patches The new Cosmos SDK release v0.50.12 and v0.47.16 fix this issue. Workarounds There are no known workarounds for this issue. It is advised that chains apply the update. Timeline February 9, 2025, 5:18pm PST: Issue reported to the Cosmos Bug Bounty program February 9, 2025, 8:12am PST: Issue triaged by Amulet on-call, and distributed to…",
+    "published": "2025-02-20",
+    "severity": "HIGH",
+    "cvss": null,
+    "affected": "cosmos/cosmos-sdk: <0.47.16-ics-lsm; cosmos/cosmos-sdk: >=0.50.0-alpha.0 <0.50.12",
+    "component": "x/group",
+    "impact": "chain-halt",
+    "url": "https://github.com/cosmos/cosmos-sdk/security/advisories/GHSA-x5vx-95h7-rv4p",
+    "sources": [
+      "asa-list",
+      "osv:GHSA",
+      "osv:GO"
+    ]
+  },
+  {
+    "id": "GHSA-6fgm-x6ff-w78f",
+    "aliases": [
+      "GO-2025-3463"
+    ],
+    "project": "ibc-go",
+    "title": "Potential Denial-of-Service condition leading to temporary disability in IBC transfers to the native chain",
+    "summary": "Impact Chains using affected versions of Packet Forward Middleware in their IBC Transfer stack are vulnerable to an attack in which there is a potential denial of service. This affects IBC transfers for any asset which is being transferred between another chain and its native chain. We recommend upgrading as soon as possible. THIS IS A STATE BREAKING CHANGE Patches Versions 7.2.1 and 8.1.1 are patched. Workarounds N/A References N/A",
+    "published": "2025-02-12",
+    "severity": "MODERATE",
+    "cvss": null,
+    "affected": "cosmos/ibc-apps/middleware/packet-forward-middleware/v7: <7.2.1; cosmos/ibc-apps/middleware/packet-forward-middleware/v8: <8.1.1; cosmos/ibc-apps/middleware/packet-forward-middleware/v4: all; cosmos/ibc-apps/middleware/packet-forward-middleware/v5: all; cosmos/ibc-apps/middleware/packet-forward-middleware/v6: all",
+    "component": "ics20-transfer",
+    "impact": "dos",
+    "url": "https://github.com/cosmos/ibc-apps/security/advisories/GHSA-6fgm-x6ff-w78f",
+    "sources": [
+      "osv:GHSA",
+      "osv:GO"
+    ]
+  },
+  {
+    "id": "GHSA-23qp-3c2m-xx6w",
+    "aliases": [
+      "CWA-2025-001",
+      "GO-2025-3448"
+    ],
+    "project": "wasmvm",
+    "title": "CWA-2025-001: wasmvm: Malicious smart contract can crash the chain",
+    "summary": "CWA-2025-001 Severity Medium (Moderate + Likely)[^1] - wasmvm = 2.2.0, < 2.2.2 - wasmvm = 2.1.0, < 2.1.5 - wasmvm = 2.0.0, < 2.0.6 - wasmvm < 1.5.8 Patched versions: - wasmvm 1.5.8, 2.0.6, 2.1.5, 2.2.2 Description of the bug The vulnerability can be used to crash the chain. The underlying bug that causes this is present on both permissioned and premissionless chains, but it can only be triggered reliably with a malicious contract, so permissioned chains are much less likely to be affected. (We'll add more detail once chains had a chance to upgrade.) Patch - 1.5: https://github.com/CosmWasm/wa…",
+    "published": "2025-02-04",
+    "severity": "MODERATE",
+    "cvss": null,
+    "affected": "CosmWasm/wasmvm: <1.5.8; CosmWasm/wasmvm/v2: >=2.0.0 <2.0.6; CosmWasm/wasmvm/v2: >=2.1.0 <2.1.5; CosmWasm/wasmvm/v2: >=2.2.0 <2.2.2",
+    "component": "wasm-vm",
+    "impact": "dos",
+    "url": "https://github.com/CosmWasm/wasmvm/security/advisories/GHSA-23qp-3c2m-xx6w",
+    "sources": [
+      "cwa",
+      "osv:GHSA",
+      "osv:GO"
+    ]
+  },
+  {
+    "id": "GHSA-mx2j-7cmv-353c",
+    "aliases": [
+      "CWA-2025-002",
+      "GO-2025-3449"
+    ],
+    "project": "wasmvm",
+    "title": "CWA-2025-002: wasmvm: Malicious smart contract can slow down block production",
+    "summary": "CWA-2025-002 Severity Medium (Moderate + Likely)[^1] - wasmvm = 2.2.0, < 2.2.2 - wasmvm = 2.1.0, < 2.1.5 - wasmvm = 2.0.0, < 2.0.6 - wasmvm < 1.5.8 Patched versions: - wasmvm 1.5.8, 2.0.6, 2.1.5, 2.2.2 Description of the bug The vulnerability can be used to slow down block production. The attack requires a malicious contract, so permissioned chains are unlikely to be affected. (We'll add more detail once chains had a chance to upgrade.) Patch - 1.5: https://github.com/CosmWasm/cosmwasm/commit/2b7f2faa57a1efc8207455c37f87f1eee6035a27 - 2.0: https://github.com/CosmWasm/cosmwasm/commit/d6143b0af…",
+    "published": "2025-02-04",
+    "severity": "MODERATE",
+    "cvss": null,
+    "affected": "cosmwasm-vm: >=2.2.0 <2.2.1; cosmwasm-vm: >=2.1.0 <2.1.6; cosmwasm-vm: >=2.0.0 <2.0.9; cosmwasm-vm: <1.5.10; CosmWasm/wasmvm: >=0.1.0 <1.5.8; CosmWasm/wasmvm/v2: >=2.2.0 <2.2.2; CosmWasm/wasmvm/v2: >=2.1.0 <2.1.5; CosmWasm/wasmvm/v2: >=2.0.0 <2.0.6; CosmWasm/wasmvm: <0.0.0-20250204093451-1f4db20199b8; CosmWasm/wasmvm/v2: <2.0.0-20250204103256-d62c3b826a9d; CosmWasm/wasmvm: >=1.5.8-0 <1.5.8-0.20250",
+    "component": "wasm-vm",
+    "impact": "dos",
+    "url": "https://github.com/CosmWasm/wasmvm/security/advisories/GHSA-mx2j-7cmv-353c",
+    "sources": [
+      "cwa",
+      "osv:GHSA",
+      "osv:GO"
+    ]
+  },
+  {
+    "id": "GHSA-22qq-3xwm-r5x4",
+    "aliases": [
+      "ASA-2025-001",
+      "CVE-2025-24371",
+      "GO-2025-3442"
+    ],
+    "project": "cometbft",
+    "title": "ASA-2025-001: CometBFT allows a malicious peer to make node stuck in blocksync",
+    "summary": "[OUTDATED] Criticality: Medium (Considerable Impact; Possible Likelihood per ACMv1.2) Update of Criticality on 2026-03-06 : We've made a mistake and over-rated the criticality of this bug in our initial triage. We have calibrated our vulnerability rating internally and updated the criticality of this bug to be Informational (Negligible Impact, Possible Likelihood) Impact A malicious peer may be able to interfere with a node's ability to sync blocks with peers via the blocksync mechanism. In the blocksync protocol peers send their base and latest heights when they connect to a new node ( A ),…",
+    "published": "2025-02-03",
+    "severity": "MODERATE",
+    "cvss": null,
+    "affected": "cometbft/cometbft: >=1.0.0-alpha.1 <1.0.1; cometbft/cometbft: <0.38.17",
+    "component": "blocksync",
+    "impact": "other",
+    "url": "https://github.com/cometbft/cometbft/security/advisories/GHSA-22qq-3xwm-r5x4",
+    "sources": [
+      "asa-list",
+      "osv:GHSA",
+      "osv:GO"
+    ]
+  },
+  {
+    "id": "GHSA-r3r4-g7hq-pq4f",
+    "aliases": [
+      "ASA-2025-002",
+      "GO-2025-3443"
+    ],
+    "project": "cometbft",
+    "title": "ASA-2025-002: CometBFT allows a malicious peer to stall the network by disseminating seemingly valid block parts",
+    "summary": "Description A bug was identified in the CometBFT validation of block part indices and the corresponding proof part indices that can lead to incorrect processing and dissemination of invalid parts, which in turn could lead to a network halt. Additional validation was added to prevent this condition from happening. Patches The new CometBFT releases v1.0.1 and v0.38.17 fix this issue. Unreleased code in the main branch is patched as well. Workarounds There are no known workarounds for this issue. If a node is producing these malicious proofs, the only mitigation is to upgrade CometBFT. After upg…",
+    "published": "2025-02-03",
+    "severity": "HIGH",
+    "cvss": null,
+    "affected": "cometbft/cometbft: >=1.0.0-alpha.1 <1.0.1; cometbft/cometbft: <0.38.17",
+    "component": "p2p",
+    "impact": "chain-halt",
+    "url": "https://github.com/cometbft/cometbft/security/advisories/GHSA-r3r4-g7hq-pq4f",
+    "sources": [
+      "asa-list",
+      "osv:GHSA",
+      "osv:GO"
+    ]
+  },
+  {
+    "id": "GHSA-8wcc-m6j2-qxvm",
+    "aliases": [
+      "ASA-2024-012",
+      "ASA-2024-013",
+      "GO-2024-3339"
+    ],
+    "project": "cosmos-sdk",
+    "title": "ASA-2024-0012, ASA-2024-0013: CosmosSDK: Transaction decoding may result in a stack overflow or resource exhaustion",
+    "summary": "Summary ASA-2024-0012 ASA-2024-0013 Impact ASA-2024-0012 When decoding a maliciously formed packet with a deeply-nested structure, it may be possible for a stack overflow to occur and result in a network halt. This was addressed by adding a recursion limit while decoding the packet. ASA-2024-0013 Nested messages in a transaction can consume exponential cpu and memory on UnpackAny calls. The max tx bytes sets a limit for external TX but is not applied for internal messages emitted by wasm contracts or a malicious validator block. This may result in a node crashing due to resource exhaustion. T…",
+    "published": "2024-12-16",
+    "severity": "HIGH",
+    "cvss": null,
+    "affected": "cosmos/cosmos-sdk: >=0.50.0-alpha.0 <0.50.11; cosmos/cosmos-sdk: <0.47.15; cosmossdk.io/x/tx: <0.13.7",
+    "component": "baseapp",
+    "impact": "dos",
+    "url": "https://github.com/cosmos/cosmos-sdk/security/advisories/GHSA-8wcc-m6j2-qxvm",
+    "sources": [
+      "asa-list",
+      "osv:GHSA",
+      "osv:GO"
+    ]
+  },
+  {
+    "id": "GHSA-2q97-m5rc-p3gp",
+    "aliases": [
+      "CWA-2024-007"
+    ],
+    "project": "wasmvm",
+    "title": "CWA-2024-007: CosmWasm VM Incorrect metering",
+    "summary": "CWA-2024-007 Severity Medium (Moderate + Likely)[^1] - wasmvm = 2.1.0, < 2.1.3 - wasmvm = 2.0.0, < 2.0.4 - wasmvm < 1.5.5 - cosmwasm-vm = 2.1.0, < 2.1.4 - cosmwasm-vm = 2.0.0, < 2.0.7 - cosmwasm-vm < 1.5.8 Patched versions: - wasmvm 1.5.5, 2.0.4, 2.1.3 - cosmwasm-vm 1.5.8, 2.0.7, 2.1.4 Description of the bug (Blank for now. We'll add more detail once chains had a chance to upgrade.) Patch - 1.5: https://github.com/CosmWasm/cosmwasm/commit/16eabd681790508b13dac8e67f9e6e61045240ea - 2.0: https://github.com/CosmWasm/cosmwasm/commit/0e70bd83119b02f99a2c0397f0913e0803750fd9 - 2.1: https://github.c…",
+    "published": "2024-12-10",
+    "severity": "MODERATE",
+    "cvss": null,
+    "affected": "CosmWasm/wasmvm/v2: >=2.1.0 <2.1.3; CosmWasm/wasmvm/v2: >=2.0.0 <2.0.4; CosmWasm/wasmvm: <1.5.5; cosmwasm-vm: >=2.1.0 <2.1.4; cosmwasm-vm: >=2.0.0 <2.0.7; cosmwasm-vm: <1.5.8",
+    "component": "wasm-vm",
+    "impact": "dos",
+    "url": "https://github.com/CosmWasm/wasmvm/security/advisories/GHSA-2q97-m5rc-p3gp",
+    "sources": [
+      "cwa",
+      "osv:GHSA"
+    ]
+  },
+  {
+    "id": "GHSA-vmg2-r3xv-r3xf",
+    "aliases": [
+      "CWA-2024-009",
+      "GO-2024-3319"
+    ],
+    "project": "wasmd",
+    "title": "CWA-2024-009: Simulation of Wasmd message can cause crashing",
+    "summary": "CWA-2024-009 Severity Low (Marginal + Likely)[^1] - wasmd < 0.53.1 Patched versions: - wasmd 0.53.2 (please note that wasmd 0.53.1 is broken and must not be used) Description of the bug (Blank for now. We'll add more detail once chains had a chance to upgrade.) Mitigations Apart from upgrading, it is recommended to not open the gRPC and REST APIs of validator nodes to the public internet. Use isolated and resource-constrained environments for running separate public RPC nodes instead. These can then easily be thrown away and replaced with new instances in case of problems. Applying the patch…",
+    "published": "2024-12-10",
+    "severity": "LOW",
+    "cvss": null,
+    "affected": "CosmWasm/wasmd: <0.53.2",
+    "component": "rpc",
+    "impact": "dos",
+    "url": "https://github.com/CosmWasm/wasmd/security/advisories/GHSA-vmg2-r3xv-r3xf",
+    "sources": [
+      "cwa",
+      "osv:GHSA",
+      "osv:GO"
+    ]
+  },
+  {
+    "id": "GHSA-vmqh-5232-v43r",
+    "aliases": [
+      "CWA-2024-008"
+    ],
+    "project": "wasmvm",
+    "title": "CWA-2024-008: Panic in wasmvm can slow down block production",
+    "summary": "CWA-2024-008 Severity Medium (Moderate + Likely)[^1] - wasmvm = 2.1.0, < 2.1.3 - wasmvm = 2.0.0, < 2.0.4 - wasmvm < 1.5.5 - cosmwasm-vm = 2.1.0, < 2.1.4 - cosmwasm-vm = 2.0.0, < 2.0.7 - cosmwasm-vm < 1.5.8 Patched versions: - wasmvm 1.5.5, 2.0.4, 2.1.3 - cosmwasm-vm 1.5.8, 2.0.7, 2.1.4 Description of the bug (Blank for now. We'll add more detail once chains had a chance to upgrade.) Patch - 1.5: https://github.com/CosmWasm/cosmwasm/commit/edcdbc520d4f5521eed42de6e2869658278e91fd - 2.0: https://github.com/CosmWasm/cosmwasm/commit/f63429ca59eb44dd5d780c1572016581337091e4 - 2.1: https://github.c…",
+    "published": "2024-12-10",
+    "severity": "MODERATE",
+    "cvss": null,
+    "affected": "CosmWasm/wasmvm/v2: >=2.1.0 <2.1.3; CosmWasm/wasmvm/v2: >=2.0.0 <2.0.4; CosmWasm/wasmvm: <1.5.5; cosmwasm-vm: >=2.1.0 <2.1.4; cosmwasm-vm: >=2.0.0 <2.0.7; cosmwasm-vm: <1.5.8",
+    "component": "wasm-vm",
+    "impact": "dos",
+    "url": "https://github.com/CosmWasm/wasmvm/security/advisories/GHSA-vmqh-5232-v43r",
+    "sources": [
+      "cwa",
+      "osv:GHSA"
+    ]
+  },
+  {
+    "id": "GHSA-7225-m954-23v7",
+    "aliases": [
+      "ASA-2024-010",
+      "GO-2024-3279"
+    ],
+    "project": "cosmos-sdk",
+    "title": "ASA-2024-010: cosmossdk.io/math: Mismatched bit-length validation in sdk.Int and sdk.Dec can lead to panic",
+    "summary": "Impact The bit-length in sdk.Int and sdk.Dec are not aligned, which may present a possible panic condition when interacting with Dec types in an Int context. This issue was resolved by aligning the max size between the data types in the cosmossdk.io/math package. This issue impacts consumers of the cosmossdk.io/math, which includes popular modules including IBC-Go and tokenfactory (permissionless). If your chain interacts with APIs in the cosmossdk.io/math package, or utilizes a module that consumes this library, it is advised to update to the latest version at the time of the patch release b…",
+    "published": "2024-11-20",
+    "severity": "HIGH",
+    "cvss": null,
+    "affected": "cosmossdk.io/math: <1.4.0",
+    "component": "math",
+    "impact": "dos",
+    "url": "https://github.com/cosmos/cosmos-sdk/security/advisories/GHSA-7225-m954-23v7",
+    "sources": [
+      "asa-list",
+      "osv:GHSA",
+      "osv:GO"
+    ]
+  },
+  {
+    "id": "GHSA-p7mv-53f2-4cwj",
+    "aliases": [
+      "ASA-2024-011",
+      "GO-2024-3259"
+    ],
+    "project": "cometbft",
+    "title": "ASA-2024-011: CometBFT Vote Extensions: Panic when receiving a Pre-commit with an invalid data",
+    "summary": "Impact A CometBFT node running in a network with [vote extensions][abci-spec] enabled could produce an invalid Vote message and send it to its peers. The invalid field of the Vote message is the ValidatorIndex , which identifies the sender in the ValidatorSet running that height of consensus. This field is ordinarily verified in the processing of Vote messages, but it turns out that in the case of a Vote message of type Precommit and for a non- nil BlockID , a logic was introduced before this ordinary verification to handle the attached vote extension. This introduced logic (not present in re…",
+    "published": "2024-11-06",
+    "severity": "HIGH",
+    "cvss": null,
+    "affected": "cometbft/cometbft: >=0.38.0 <0.38.15",
+    "component": "abci/vote-extensions",
+    "impact": "dos",
+    "url": "https://github.com/cometbft/cometbft/security/advisories/GHSA-p7mv-53f2-4cwj",
+    "sources": [
+      "asa-list",
+      "osv:GHSA",
+      "osv:GO"
+    ]
+  },
+  {
+    "id": "GHSA-7q74-g774-7x3g",
+    "aliases": [
+      "GO-2024-3121"
+    ],
+    "project": "interchain-security",
+    "title": "Interchain Security: The signers of ICS messages do not need to match the provider address",
+    "summary": "Context ICS has the following four messages that enable validators on the provider chain to perform different actions: - MsgOptIn -- adds a validator to the consumer chain’s active set - MsgOptOut -- removes a validator from the consumer chain’s active set - MsgAssignConsumerKey -- changes the consensus key used for a validator’s operations on a consumer chain - MsgSetConsumerCommissionRate -- sets a validator’s consumer-specific commission rate Normally, only the respective validators are allowed to perform these actions. Issue The upgrade to SDK 0.50, introduced a signer field to these mess…",
+    "published": "2024-09-05",
+    "severity": "HIGH",
+    "cvss": null,
+    "affected": "cosmos/interchain-security/v5: >=5.1.0 <5.2.0; cosmos/interchain-security: all; cosmos/interchain-security/v2: all; cosmos/interchain-security/v3: all; cosmos/interchain-security/v4: all",
+    "component": "consensus",
+    "impact": "privilege-escalation",
+    "url": "https://github.com/cosmos/interchain-security/security/advisories/GHSA-7q74-g774-7x3g",
+    "sources": [
+      "osv:GHSA",
+      "osv:GO"
+    ]
+  },
+  {
+    "id": "GHSA-g5xx-c4hv-9ccc",
+    "aliases": [
+      "ASA-2024-009",
+      "GO-2024-3112"
+    ],
+    "project": "cometbft",
+    "title": "ASA-2024-009: CometBFT's state syncing validator from malicious node may lead to a chain split",
+    "summary": "Summary The state sync protocol retrieves a snapshot of the application and installs it in a fresh node. In order for this node to be ready to run consensus and block sync from the installed snapshot height, we also need to install a valid State in the node, which is the starting state from which it is able to validate new blocks and append them to the blockchain. The State object used by state sync is computed using the light client protocol, which retrieves information about committed blocks from at least two RPC endpoints. The light client protocol performs several state validations and, i…",
+    "published": "2024-09-03",
+    "severity": "LOW",
+    "cvss": 4.7,
+    "affected": "cometbft/cometbft/light: >=0.34.0 <0.34.34; cometbft/cometbft/light: >=0.37.0 <0.37.11; cometbft/cometbft/light: >=0.38.0 <0.38.12; cometbft/cometbft: >=0.37.0 <0.37.11; cometbft/cometbft: >=0.38.0 <0.38.12",
+    "component": "statesync",
+    "impact": "consensus-failure",
+    "url": "https://github.com/cometbft/cometbft/security/advisories/GHSA-g5xx-c4hv-9ccc",
+    "sources": [
+      "asa-list",
+      "osv:GHSA",
+      "osv:GO"
+    ]
+  },
+  {
+    "id": "GHSA-75qh-gg76-p2w4",
+    "aliases": [
+      "CWA-2023-004",
+      "GO-2024-3101",
+      "RUSTSEC-2024-0366"
+    ],
+    "project": "cosmwasm",
+    "title": "CWA-2023-004: Excessive number of function parameters in compiled Wasm",
+    "summary": "In a Wasm file, the signature of a function is stored separately and referenced in the function. This is demonstrated in the following example where you see 1. a function signature with two integers input and one integer output is defined 2. two functions referencing this signature are defined ( a+b and a-b ) 3. the two functions are exported under the names \"sum\" and \"diff\" This is harmless in Wasm bytecode, but once the function is compiled, signatures are inlined multiple times in the compiled code. Using a large signature that is referenced by a large number of functions, you get pretty m…",
+    "published": "2024-08-27",
+    "severity": "MODERATE",
+    "cvss": 5.3,
+    "affected": "cosmwasm-vm: <1.2.8; cosmwasm-vm: >=1.3.0 <1.3.4; cosmwasm-vm: >=1.4.0 <1.4.2; cosmwasm-vm: >=1.5.0 <1.5.1; CosmWasm/wasmvm: <1.2.5; CosmWasm/wasmvm: >=1.3.0 <1.3.1; CosmWasm/wasmvm: >=1.4.0 <1.4.2; CosmWasm/wasmvm: >=1.5.0 <1.5.1",
+    "component": "wasm-vm",
+    "impact": "dos",
+    "url": "https://github.com/advisories/GHSA-75qh-gg76-p2w4",
+    "sources": [
+      "cwa",
+      "osv:GHSA",
+      "osv:GO",
+      "osv:RUSTSEC"
+    ]
+  },
+  {
+    "id": "GHSA-fpgj-cr28-fvpx",
+    "aliases": [
+      "CWA-2024-006",
+      "GO-2024-3081"
+    ],
+    "project": "wasmd",
+    "title": "CWA-2024-006: wasmd non-deterministic module_query_safe query",
+    "summary": "Patched versions: wasmd 0.53.0 See CWA-2024-006 for more details.",
+    "published": "2024-08-21",
+    "severity": "MODERATE",
+    "cvss": null,
+    "affected": "CosmWasm/wasmd: >=0.52.0 <0.53.0",
+    "component": "x/wasm",
+    "impact": "consensus-failure",
+    "url": "https://github.com/CosmWasm/wasmd/security/advisories/GHSA-fpgj-cr28-fvpx",
+    "sources": [
+      "cwa",
+      "osv:GHSA",
+      "osv:GO"
+    ]
+  },
+  {
+    "id": "GHSA-g8w7-7vgg-x7xg",
+    "aliases": [
+      "CWA-2024-005",
+      "GO-2024-3082"
+    ],
+    "project": "wasmd",
+    "title": "CWA-2024-005: Stackoverflow in wasmd",
+    "summary": "Patched versions: wasmd 0.53.0, 0.46.0 See CWA-2024-005 for more details.",
+    "published": "2024-08-21",
+    "severity": "HIGH",
+    "cvss": 7.5,
+    "affected": "CosmWasm/wasmd: >=0.50.0 <0.53.0; CosmWasm/wasmd: <0.46.0",
+    "component": "x/wasm",
+    "impact": "other",
+    "url": "https://github.com/CosmWasm/wasmd/security/advisories/GHSA-g8w7-7vgg-x7xg",
+    "sources": [
+      "cwa",
+      "osv:GHSA",
+      "osv:GO"
+    ]
+  },
+  {
+    "id": "GHSA-83qr-9v2h-qxp4",
+    "aliases": [
+      "GO-2024-3068"
+    ],
+    "project": "gaia",
+    "title": "Missing check for the height of cryptographic equivocation evidence in github.com/cosmos/gaia",
+    "summary": "Missing check for the height of cryptographic equivocation evidence in github.com/cosmos/gaia",
+    "published": "2024-08-19",
+    "severity": null,
+    "cvss": null,
+    "affected": "cosmos/gaia/v14: >=14.2.0; cosmos/gaia/v15: all; cosmos/gaia/v16: all; cosmos/gaia/v17: <17.3.0",
+    "component": "x/slashing-evidence",
+    "impact": "other",
+    "url": "https://osv.dev/vulnerability/GO-2024-3068",
+    "sources": [
+      "osv:GO"
+    ]
+  },
+  {
+    "id": "GHSA-m3rh-cvr5-x6q4",
+    "aliases": [
+      "CWA-2024-003",
+      "GO-2024-3059"
+    ],
+    "project": "wasmd",
+    "title": "CWA-2024-003: CosmWasm wasmd has large address count in ValidateBasic",
+    "summary": "In multiple wasmd message types it was possible to add a large number of addresses which might lead to unexpected resource consumption in ValidateBasic . 1. The following message types call [assertValidAddresses] via func (a AccessConfig) ValidateBasic() error to ensure the addresses are in the correct format and do not contain duplicates. An attacker can provide many addresses in AccessConfig.Addresses and specify the AccessConfig.Permission as AccessTypeAnyOfAddresses . - [MsgStoreAndInstantiateContract] - [MsgStoreAndMigrateContract] - [MsgStoreCode] - [MsgUpdateInstantiateConfig] - [MsgUp…",
+    "published": "2024-08-08",
+    "severity": "MODERATE",
+    "cvss": 3.7,
+    "affected": "CosmWasm/wasmd: <0.52.0",
+    "component": "x/wasm",
+    "impact": "dos",
+    "url": "https://github.com/CosmWasm/wasmd/security/advisories/GHSA-m3rh-cvr5-x6q4",
+    "sources": [
+      "cwa",
+      "osv:GHSA",
+      "osv:GO"
+    ]
+  },
+  {
+    "id": "GHSA-rg2q-2jh9-447q",
+    "aliases": [
+      "CWA-2024-004",
+      "RUSTSEC-2024-0361"
+    ],
+    "project": "wasmvm",
+    "title": "CWA-2024-004: Gas mispricing in cosmwasm-vm",
+    "summary": "Patched versions: wasmvm 1.5.4, 2.0.3, 2.1.2 Some Wasm operations take significantly more gas than our benchmarks indicated. This can lead to missing the gas target we defined by a factor of ~10x. This means a malicious contract could take 10 times as much time to execute as expected, which can be used to temporarily DoS a chain. See CWA-2024-004 for more details.",
+    "published": "2024-08-08",
+    "severity": "MODERATE",
+    "cvss": 4.3,
+    "affected": "cosmwasm-vm: <1.5.6; cosmwasm-vm: >=2.0.0 <2.0.5; cosmwasm-vm: >=2.1.0 <2.1.2; CosmWasm/wasmvm/v2: >=2.1.0 <2.1.2; CosmWasm/wasmvm/v2: >=2.0.0 <2.0.3; CosmWasm/wasmvm: <1.5.4",
+    "component": "wasm-vm",
+    "impact": "dos",
+    "url": "https://github.com/CosmWasm/wasmvm/security/advisories/GHSA-rg2q-2jh9-447q",
+    "sources": [
+      "cwa",
+      "osv:GHSA",
+      "osv:RUSTSEC"
+    ]
+  },
+  {
+    "id": "GHSA-q6hg-6m9x-5g9c",
+    "aliases": [
+      "CVE-2024-39696",
+      "GO-2024-2974"
+    ],
+    "project": "evmos",
+    "title": "Evmos vulnerable to exploit of smart contract account and vesting",
+    "summary": "Summary This advisory board aims to describe two vulnerabilities found in the Evmos codebase: - Authorization check on the fundVestingAccount : unauthorized spend of funds. Details Authorization check on the fundVestingAccount With the current implementation, a user can create a vesting account with a 3rd party account (EOA or contract) as funder. Then, this user can create an authorization for the contract.CallerAddress, this is the authorization checked in the code. But the funds are taken from the funder address provided in the message. Consequently, the user can fund a vesting account wit…",
+    "published": "2024-07-10",
+    "severity": "HIGH",
+    "cvss": 8.8,
+    "affected": "evmos/evmos/v18: <19.0.0",
+    "component": "x/vesting",
+    "impact": "privilege-escalation",
+    "url": "https://github.com/evmos/evmos/security/advisories/GHSA-q6hg-6m9x-5g9c",
+    "sources": [
+      "osv:GHSA",
+      "osv:GO"
+    ]
+  },
+  {
+    "id": "GHSA-hg58-rf2h-6rr7",
+    "aliases": [
+      "ASA-2024-008",
+      "GO-2024-2951"
+    ],
+    "project": "cometbft",
+    "title": "ASA-2024-008: CometBFT is unstability during blocksync when syncing from malicious peer",
+    "summary": "Summary An issue was identified for nodes syncing on an existing network during blocksync in which a malicious peer could cause the syncing peer to panic, enter into a catastrophic invalid syncing state or get stuck in blocksync mode, never switching to consensus. It is recommended for all clients to adopt this patch so that blocksync functions as expected and is tolerant of malicious peers presenting invalid data in this situation. Nodes that are vulnerable to this state may experience a Denial of Service condition in which syncing will not work as expected when joining a network as a client…",
+    "published": "2024-06-28",
+    "severity": "MODERATE",
+    "cvss": null,
+    "affected": "cometbft/cometbft: >=0.37.0 <0.37.7; cometbft/cometbft: >=0.38.0 <0.38.8",
+    "component": "blocksync",
+    "impact": "dos",
+    "url": "https://github.com/cometbft/cometbft/security/advisories/GHSA-hg58-rf2h-6rr7",
+    "sources": [
+      "asa-list",
+      "osv:GHSA",
+      "osv:GO"
+    ]
+  },
+  {
+    "id": "GHSA-7hrh-v6wp-53vw",
+    "aliases": [
+      "CVE-2024-37154",
+      "GO-2024-2904"
+    ],
+    "project": "evmos",
+    "title": "Evmos allows unvested token delegations",
+    "summary": "Impact What kind of vulnerability is it? Who is impacted? At the moment, users are able to delegate tokens that have not yet been vested. This affects employees and grantees who have funds managed via ClawbackVestingAccount . Patches Has the problem been patched? What versions should users upgrade to? The PR linked to this advisory includes part of the fix. The remainder is in a second advisory on the Cosmos SDK fork. Workarounds Is there a way for users to fix or remediate the vulnerability without upgrading? There is no effective workaround to fix or remediate this issue without a new relea…",
+    "published": "2024-06-06",
+    "severity": "MODERATE",
+    "cvss": 5.3,
+    "affected": "evmos/evmos/v18: <=18.1.0; evmos/evmos/v17: <=17.0.1; evmos/evmos/v16: <=16.0.4; evmos/evmos/v15: <=15.0.0; evmos/evmos/v14: <=14.1.0; evmos/evmos/v13: <=13.0.2; evmos/evmos/v12: <=12.1.6; evmos/evmos/v11: <=11.0.2; evmos/evmos/v10: <=10.0.1; evmos/evmos/v9: <=9.1.0; evmos/evmos/v8: <=8.2.3; evmos/evmos/v7: <=7.0.0; evmos/evmos/v6: <=6.0.4",
+    "component": "x/staking",
+    "impact": "consensus-failure",
+    "url": "https://github.com/evmos/evmos/security/advisories/GHSA-7hrh-v6wp-53vw",
+    "sources": [
+      "osv:GHSA",
+      "osv:GO"
+    ]
+  },
+  {
+    "id": "GHSA-pxv8-qhrh-jc7v",
+    "aliases": [
+      "CVE-2024-32873",
+      "CVE-2024-37158",
+      "CVE-2024-37159",
+      "GO-2024-2891",
+      "GO-2024-2926",
+      "GO-2024-2927"
+    ],
+    "project": "evmos",
+    "title": "evmos allows transferring unvested tokens after delegations",
+    "summary": "Impact This advisory has been created to address the following vulnerabilities found in the Evmos codebase and affecting vesting accounts. Wrong spendable balance computation The spendable balance is not updated properly when delegating vested tokens. The following example help in describing the issue: - Given a clawback vesting account with a starting 15M vesting schedule. The initial spendable balance is 0 . - Time passes and 5M are vested. The spendable balance is now 5M . - The account delegate 5M . The spendable balance should be 0 , but returns 5M - The account can send 5M to another ac…",
+    "published": "2024-06-06",
+    "severity": "LOW",
+    "cvss": 3.5,
+    "affected": "evmos/evmos/v17: <18.0.0; evmos/evmos/v16: <18.0.0; evmos/evmos/v15: <18.0.0; evmos/evmos/v14: <18.0.0; evmos/evmos/v13: <18.0.0; evmos/evmos/v12: <18.0.0; evmos/evmos/v11: <18.0.0; evmos/evmos/v10: <18.0.0; evmos/evmos/v9: <18.0.0; evmos/evmos/v8: <18.0.0; evmos/evmos/v7: <18.0.0; evmos/evmos/v6: <18.0.0",
+    "component": "x/staking",
+    "impact": "privilege-escalation",
+    "url": "https://github.com/evmos/evmos/security/advisories/GHSA-pxv8-qhrh-jc7v",
+    "sources": [
+      "osv:GHSA",
+      "osv:GO"
+    ]
+  },
+  {
+    "id": "GHSA-xgr7-jgq3-mhmc",
+    "aliases": [
+      "CVE-2024-37153",
+      "GO-2024-2903"
+    ],
+    "project": "evmos",
+    "title": "Contract balance not updating correctly after interchain transaction",
+    "summary": "Summary Short summary of the problem. Make the impact and severity as clear as possible. For example: An unsafe deserialization vulnerability allows any unauthenticated user to execute arbitrary code on the server. Details We discovered a bug walking through how to liquid stake using Safe which itself is a contract. The bug only appears when there is a local state change together with an ICS20 transfer in the same function and uses the contract's balance, that is using the contract address as the sender parameter in an ICS20 transfer using the ICS20 precompile Proof of Concept Impact This is…",
+    "published": "2024-06-06",
+    "severity": "HIGH",
+    "cvss": 7.5,
+    "affected": "evmos/evmos/v18: <18.1.0; evmos/evmos/v17: <18.1.0; evmos/evmos/v16: <18.1.0; evmos/evmos/v15: <18.1.0; evmos/evmos/v14: <18.1.0; evmos/evmos/v13: <18.1.0; evmos/evmos/v12: <18.1.0; evmos/evmos/v11: <18.1.0; evmos/evmos/v10: <18.1.0; evmos/evmos/v9: <18.1.0; evmos/evmos/v8: <18.1.0; evmos/evmos/v7: <18.1.0; evmos/evmos/v6: <18.1.0",
+    "component": "ics20-transfer",
+    "impact": "privilege-escalation",
+    "url": "https://github.com/evmos/evmos/security/advisories/GHSA-xgr7-jgq3-mhmc",
+    "sources": [
+      "osv:GHSA",
+      "osv:GO"
+    ]
+  },
+  {
+    "id": "GHSA-r47q-464x-wx5x",
+    "aliases": [
+      "LSM-2024-001"
+    ],
+    "project": "gaia",
+    "title": "LSM-2024-001: LSM tokenization allows for potential slashing evasion when tokenizing redelegating shares",
+    "summary": "Liquid staking module tokenization of shares that are being redelegated allows potential slashing evasion.",
+    "published": "2024-06-05",
+    "severity": "MODERATE",
+    "cvss": null,
+    "affected": "cosmos/gaia (LSM fork of x/staking)",
+    "component": "x/slashing-evidence",
+    "impact": "other",
+    "url": "https://github.com/cosmos/gaia/security/advisories/GHSA-r47q-464x-wx5x",
+    "sources": [
+      "github-seed"
+    ]
+  },
+  {
+    "id": "GHSA-qjcv-rx3v-7mvj",
+    "aliases": [
+      "GO-2024-2874"
+    ],
+    "project": "ibc-go",
+    "title": "github.com/cosmos/ibc-go affected by IBC protocol \"Huckleberry\" vulnerability",
+    "summary": "The ibc-go module is affected by the Inter-Blockchain Communication (IBC) protocol \"Huckleberry\" vulnerability. The vulnerability allowed an attacker to send arbitrary transactions onto target chains and trigger arbitrary state transitions, including but not limited to, theft of funds. It was possible to exploit this vulnerability in specific situations involving relaying packets in which the source chain is also the final destination chain. Affected networks are those that allow for fee grant capabilities and use a native Relayer (e.g., Osmosis and Juno).",
+    "published": "2024-05-20",
+    "severity": "MODERATE",
+    "cvss": null,
+    "affected": "cosmos/ibc-go/v7: <7.0.1; cosmos/ibc-go/v6: <6.1.1; cosmos/ibc-go/v5: <5.2.1; cosmos/ibc-go/v5: >=5.3.0 <5.3.1; cosmos/ibc-go/v4: <4.1.3; cosmos/ibc-go/v4: >=4.2.0 <4.2.2; cosmos/ibc-go/v4: >=4.3.0 <4.3.1; cosmos/ibc-go/v4: >=4.4.0 <4.4.1; cosmos/ibc-go/v3: <=3.4.0; cosmos/ibc-go/v2: <=2.5.0; cosmos/ibc-go: <=1.5.0",
+    "component": "ibc-core",
+    "impact": "fund-loss",
+    "url": "https://github.com/advisories/GHSA-qjcv-rx3v-7mvj",
+    "sources": [
+      "osv:GHSA",
+      "osv:GO"
+    ]
+  },
+  {
+    "id": "GHSA-8724-5xmm-w5xq",
+    "aliases": [
+      "CVE-2024-58263",
+      "CWA-2024-002",
+      "RUSTSEC-2024-0338"
+    ],
+    "project": "cosmwasm",
+    "title": "CWA-2024-002: CosmWasm affected by arithmetic overflows",
+    "summary": "Some mathematical operations in cosmwasm-std use wrapping math instead of panicking on overflow for very big numbers. This can lead to wrong calculations in contracts that use these operations. Affected functions: - Uint{256,512}::pow / Int{256,512}::pow - Int{256,512}::neg (the unary negation operator - ). The only value that can overflow is Int{256,512}::MIN . Affected if overflow-checks = true is not set: - Uint{64,128}::pow / Int{64,128}::pow - Int{64,128}::neg (the unary negation operator - ). The only value that can overflow is Int{64,128}::MIN .",
+    "published": "2024-04-24",
+    "severity": "LOW",
+    "cvss": 3.7,
+    "affected": "cosmwasm-std: >=1.3.0 <1.4.4; cosmwasm-std: >=1.5.0 <1.5.4; cosmwasm-std: >=2.0.0 <2.0.2",
+    "component": "wasm-contract-api",
+    "impact": "dos",
+    "url": "https://github.com/advisories/GHSA-8724-5xmm-w5xq",
+    "sources": [
+      "cwa",
+      "osv:GHSA",
+      "osv:RUSTSEC"
+    ]
+  },
+  {
+    "id": "GHSA-m99c-q26r-m7m7",
+    "aliases": [
+      "GO-2024-2731"
+    ],
+    "project": "evmos",
+    "title": "Evmos vulnerable to unauthorized account creation with vesting module",
+    "summary": "Impact What kind of vulnerability is it? Who is impacted? Using the vesting module, a malicious attacker can create a new vesting account at a given address, before a contract is created on that address. Addresses of smart contracts deployed to the EVM are deterministic. Therefore, it would be possible for an attacker to front-run a contract creation and create a vesting account at that address. When an address has been initialized without any contract code deployed to it, it will not be possible to upload any afterwards. In the described attack, this would mean that a malicious actor could p…",
+    "published": "2024-04-17",
+    "severity": "MODERATE",
+    "cvss": null,
+    "affected": "evmos/evmos/v13/x/vesting: <=13.0.2; evmos/evmos/v13: <=13.0.2",
+    "component": "x/vesting",
+    "impact": "privilege-escalation",
+    "url": "https://github.com/evmos/evmos/security/advisories/GHSA-m99c-q26r-m7m7",
+    "sources": [
+      "osv:GHSA",
+      "osv:GO"
+    ]
+  },
+  {
+    "id": "GHSA-v6rw-hhgg-wc4x",
+    "aliases": [
+      "GO-2024-2732"
+    ],
+    "project": "evmos",
+    "title": "Evmos vulnerable to DOS and transaction fee expropiation through Authz exploit",
+    "summary": "Impact What kind of vulnerability is it? Who is impacted? An attacker can use this bug to bypass the block gas limit and gas payment completely to perform a full Denial-of-Service against the chain. Disclosure Evmos versions below v11.0.1 do not check for MsgEthereumTx messages that are nested under other messages. This allows a malicious actor to perform EVM transactions that do not meet the checks performed under newEthAnteHandler . This opens the possibility for the DOS of validators and consequently halt the chain through an infinite EVM execution. Additional details The attack scenario i…",
+    "published": "2024-04-17",
+    "severity": "CRITICAL",
+    "cvss": 9.1,
+    "affected": "evmos/evmos/v11: <12.0.0",
+    "component": "x/authz",
+    "impact": "dos",
+    "url": "https://github.com/evmos/evmos/security/advisories/GHSA-v6rw-hhgg-wc4x",
+    "sources": [
+      "osv:GHSA",
+      "osv:GO"
+    ]
+  },
+  {
+    "id": "GHSA-3fp5-2xwh-fxm6",
+    "aliases": [
+      "CVE-2024-32644",
+      "GO-2024-2715"
+    ],
+    "project": "evmos",
+    "title": "Evmos transaction execution not accounting for all state transition after interaction with precompiles",
+    "summary": "Context - stateObject : represents the state of an account and is used to store its updates during a state transition. This is accomplished using two in memory Storage variables: originStorage and dirtyStorage - StateDB : it is the general interface to retrieve accounts and holds a map of stateObjects. Impact An external contributor, @iczc, discovered a way to mint arbitrary tokens due to the possibility to have two different states not in sync during the execution of a transaction. The exploit is based on the fact that to sync the Cosmos SDK state and the EVM one, we rely on the stateDB.Comm…",
+    "published": "2024-04-10",
+    "severity": "CRITICAL",
+    "cvss": 9.1,
+    "affected": "evmos/evmos/v16: <17.0.0; evmos/evmos/v7: <=7.0.0; evmos/evmos/v6: <=6.0.4; evmos/evmos/v5: <=5.0.0; tharsis/evmos: <=1.1.3; tharsis/evmos/v2: <=2.0.2; tharsis/evmos/v3: <=3.0.3; tharsis/evmos/v4: <=4.0.2; tharsis/evmos/v5: <=5.0.1",
+    "component": "precompile",
+    "impact": "inflation",
+    "url": "https://github.com/evmos/evmos/security/advisories/GHSA-3fp5-2xwh-fxm6",
+    "sources": [
+      "osv:GHSA",
+      "osv:GO"
+    ]
+  },
+  {
+    "id": "GHSA-j496-crgh-34mx",
+    "aliases": [
+      "ASA-2024-007",
+      "GO-2024-2694"
+    ],
+    "project": "ibc-go",
+    "title": "ASA-2024-007: ibc-go: Potential Reentrancy using Timeout Callbacks in ibc-hooks",
+    "summary": "Summary Through the deployment and subsequent use of a malicious CosmWasm contract via IBC interactions, an attacker could potentially execute the same MsgTimeout inside the IBC hook for the OnTimeout callback before the packet commitment is deleted. On chains where ibc-hooks wraps ICS-20, this vulnerability may allow for the logic of the OnTimeout callback of the transfer application to be recursively executed, leading to a condition that may present the opportunity for the loss of funds from the escrow account or unexpected minting of tokens. Affected Configurations Chains which satisfy all…",
+    "published": "2024-04-05",
+    "severity": "CRITICAL",
+    "cvss": 9.1,
+    "affected": "cosmos/ibc-go/v4: <4.6.0; cosmos/ibc-go/v5: <5.4.0; cosmos/ibc-go/v6: <6.3.0; cosmos/ibc-go/v7: <7.4.0; cosmos/ibc-go/v8: <8.2.0; cosmos/ibc-go/v3: all; cosmos/ibc-go/v2: all; cosmos/ibc-go: all",
+    "component": "ibc-hooks",
+    "impact": "fund-loss",
+    "url": "https://github.com/cosmos/ibc-go/security/advisories/GHSA-j496-crgh-34mx",
+    "sources": [
+      "asa-list",
+      "osv:GHSA",
+      "osv:GO"
+    ]
+  },
+  {
+    "id": "GHSA-95rx-m9m5-m94v",
+    "aliases": [
+      "ASA-2024-006",
+      "GO-2024-2638"
+    ],
+    "project": "cosmos-sdk",
+    "title": "ASA-2024-006: ValidateVoteExtensions helper function in Cosmos SDK may allow incorrect voting power assumptions",
+    "summary": "ASA-2024-006: ValidateVoteExtensions helper function may allow incorrect voting power assumptions Impact : Elevation of Privilege Summary The default ValidateVoteExtensions helper function infers total voting power based off of the injected VoteExtension , which are injected by the proposer. If your chain utilizes the ValidateVoteExtensions helper in ProcessProposal , a dishonest proposer can potentially mutate voting power of each validator it includes in the injected VoteExtension , which could have potentially unexpected or negative consequences on modified state. Additional validation on…",
+    "published": "2024-03-12",
+    "severity": "HIGH",
+    "cvss": 7.1,
+    "affected": "cosmos/cosmos-sdk: >=0.50.0 <0.50.5",
+    "component": "abci/vote-extensions",
+    "impact": "privilege-escalation",
+    "url": "https://github.com/cosmos/cosmos-sdk/security/advisories/GHSA-95rx-m9m5-m94v",
+    "sources": [
+      "asa-list",
+      "osv:GHSA",
+      "osv:GO"
+    ]
+  },
+  {
+    "id": "GHSA-555p-m4v6-cqxv",
+    "aliases": [
+      "ASA-2024-004"
+    ],
+    "project": "cometbft",
+    "title": "ASA-2024-004: Default configuration param for Evidence may limit window of validity",
+    "summary": "ASA-2024-004: Default configuration param for Evidence may limit window of validity Summary A default configuration in CometBFT has been found to be small for common use cases, and may prevent the slashing mechanism from working in specific cases. The default values for EvidenceParams.MaxAgeNumBlocks and EvidenceParams.MaxAgeDuration consensus parameters may not be sufficient for common use cases to provide coverage for the entire unbonding period for a chain ( Staking.UnbondingTime ). If the conditions of both of these parameters are exceeded, evidence may be prematurely expired and consider…",
+    "published": "2024-02-28",
+    "severity": "LOW",
+    "cvss": null,
+    "affected": "cometbft/cometbft: <=0.38.5",
+    "component": "x/slashing-evidence",
+    "impact": "other",
+    "url": "https://github.com/cometbft/cometbft/security/advisories/GHSA-555p-m4v6-cqxv",
+    "sources": [
+      "asa-list",
+      "osv:GHSA"
+    ]
+  },
+  {
+    "id": "GHSA-86h5-xcpx-cfqc",
+    "aliases": [
+      "ASA-2024-005",
+      "GO-2024-2584"
+    ],
+    "project": "cosmos-sdk",
+    "title": "ASA-2024-005: Potential slashing evasion during re-delegation",
+    "summary": "ASA-2024-005: Potential slashing evasion during re-delegation Impact : Slashing Evasion Summary An issue was identified in the slashing mechanism that may allow for the evasion of slashing penalties during a slashing event. If a delegation contributed to byzantine behavior of a validator, and the validator has not yet been slashed, it may be possible for that delegation to evade a pending slashing penalty through re-delegation behavior. Additional validation logic was added to restrict this behavior. Next Steps for Impacted Parties If you are a chain developer on an affected version of the Co…",
+    "published": "2024-02-27",
+    "severity": "LOW",
+    "cvss": null,
+    "affected": "cosmos/cosmos-sdk: >=0.50.0 <0.50.5; cosmos/cosmos-sdk: <0.47.10",
+    "component": "x/slashing-evidence",
+    "impact": "other",
+    "url": "https://github.com/cosmos/cosmos-sdk/security/advisories/GHSA-86h5-xcpx-cfqc",
+    "sources": [
+      "asa-list",
+      "osv:GHSA",
+      "osv:GO"
+    ]
+  },
+  {
+    "id": "GHSA-2557-x9mg-76w8",
+    "aliases": [
+      "ASA-2024-002",
+      "GO-2024-2571"
+    ],
+    "project": "cosmos-sdk",
+    "title": "ASA-2024-002: Default `PrepareProposalHandler` may produce invalid proposals when used with default `SenderNonceMempool`",
+    "summary": "ASA-2024-002: Default PrepareProposalHandler may produce invalid proposals when used with default SenderNonceMempool Affected Versions: Cosmos SDK versions <= 0.50.3; <= 0.47.8 Affected Users: Chain developers, Validator and Node operators Impact : Denial of Service Summary When using the default PrepareProposalHandler and the default SenderNonceMempool , an issue was identified which may allow invalid blocks to be proposed when a single sender includes multiple transactions with non-sequential sequence numbers in certain conditions. If this state is reached, it can lead to a reduction in blo…",
+    "published": "2024-02-21",
+    "severity": "MODERATE",
+    "cvss": 5.3,
+    "affected": "cosmos/cosmos-sdk: >=0.50.0 <0.50.4; cosmos/cosmos-sdk: <0.47.9",
+    "component": "abci/vote-extensions",
+    "impact": "dos",
+    "url": "https://github.com/cosmos/cosmos-sdk/security/advisories/GHSA-2557-x9mg-76w8",
+    "sources": [
+      "asa-list",
+      "osv:GHSA",
+      "osv:GO"
+    ]
+  },
+  {
+    "id": "GHSA-4j93-fm92-rp4m",
+    "aliases": [
+      "ASA-2024-003",
+      "GO-2024-2572"
+    ],
+    "project": "cosmos-sdk",
+    "title": "ASA-2024-003: Missing `BlockedAddressed` Validation in Vesting Module",
+    "summary": "ASA-2024-003: Missing BlockedAddressed Validation in Vesting Module Impact : Denial of Service Description A vulnerability was identified in the x/auth/vesting module, which can allow a user to create a periodic vesting account on a blocked address, for example a non-initialized module account. Additional validation was added to prevent creation of a periodic vesting account in this scenario. If this case is triggered, there is the potential for a chain halt if the uninitialized account in question is called by GetModuleAccount in Begin / EndBlock of a module. This combination of an uninitial…",
+    "published": "2024-02-21",
+    "severity": "MODERATE",
+    "cvss": 6.5,
+    "affected": "cosmos/cosmos-sdk: >=0.50.0 <0.50.4; cosmos/cosmos-sdk: <0.47.9",
+    "component": "x/vesting",
+    "impact": "dos",
+    "url": "https://github.com/cosmos/cosmos-sdk/security/advisories/GHSA-4j93-fm92-rp4m",
+    "sources": [
+      "asa-list",
+      "osv:GHSA",
+      "osv:GO"
+    ]
+  },
+  {
+    "id": "GHSA-rr69-rxr6-8qwf",
+    "aliases": [
+      "CVE-2024-58264",
+      "CWA-2024-001",
+      "RUSTSEC-2024-0012"
+    ],
+    "project": "cosmwasm",
+    "title": "CWA-2024-001: serde-json-wasm stack overflow during recursive JSON parsing",
+    "summary": "When parsing untrusted, deeply nested JSON, the stack may overflow, possibly enabling a Denial of Service attack. This was fixed by adding a check for recursion depth.",
+    "published": "2024-02-09",
+    "severity": "HIGH",
+    "cvss": 7.5,
+    "affected": "serde-json-wasm: >=1.0.0 <1.0.1; serde-json-wasm: <0.5.2",
+    "component": "wasm-contract-api",
+    "impact": "dos",
+    "url": "https://github.com/advisories/GHSA-rr69-rxr6-8qwf",
+    "sources": [
+      "cwa",
+      "osv:GHSA",
+      "osv:RUSTSEC"
+    ]
+  },
+  {
+    "id": "GHSA-qr8r-m495-7hc4",
+    "aliases": [
+      "ASA-2024-001",
+      "GO-2024-2471"
+    ],
+    "project": "cometbft",
+    "title": "ASA-2024-001: Validation of `VoteExtensionsEnableHeight` can cause chain halt in Go package github.com/cometbft/cometbft",
+    "summary": "Summary A vulnerability in CometBFT’s validation logic for VoteExtensionsEnableHeight can result in a chain halt when triggered through a governance parameter change proposal on an ABCI2 Application Chain. If a parameter change proposal including a VoteExtensionsEnableHeight modification is passed, nodes running the affected versions may panic, halting the network. The CometBFT team addressed this issue by improving validation logic for the VoteExtensionsEnableHeight to correctly handle governance proposals addressing this parameter. Next Steps for Impacted Parties If you are a chain develope…",
+    "published": "2024-01-19",
+    "severity": "HIGH",
+    "cvss": null,
+    "affected": "cometbft/cometbft: >=0.38.0 <0.38.3",
+    "component": "abci/vote-extensions",
+    "impact": "chain-halt",
+    "url": "https://github.com/cometbft/cometbft/security/advisories/GHSA-qr8r-m495-7hc4",
+    "sources": [
+      "asa-list",
+      "osv:GHSA",
+      "osv:GO"
+    ]
+  },
+  {
+    "id": "GHSA-w6rp-vxj2-fjhr",
+    "aliases": [
+      "GO-2023-2156"
+    ],
+    "project": "ibc-go",
+    "title": "Cosmos packet-forward-middleware vulnerable to chain-halt",
+    "summary": "The Cosmos SDK is used for Inter-Blockchain Communication Protocol (IBC) applications and middleware. The packet-forward-middleware module is an IBC middleware module built for Cosmos blockchains utilizing the IBC protocol allowing routing of incoming IBC packets from a source chain to a destination chain. The packet-forward-middleware module is vulnerable to potential chain-halt due to error non-determinism. Patches Please patch at your earliest convenience by applying one of the following patch versions, respective to the chain's ibc-go major version: v4.1.1 v5.2.1 v6.1.1",
+    "published": "2023-10-26",
+    "severity": "HIGH",
+    "cvss": null,
+    "affected": "cosmos/ibc-apps/middleware/packet-forward-middleware/v4: <4.1.1; cosmos/ibc-apps/middleware/packet-forward-middleware/v5: <5.2.1; cosmos/ibc-apps/middleware/packet-forward-middleware/v6: <6.1.1",
+    "component": "pfm",
+    "impact": "chain-halt",
+    "url": "https://github.com/cosmos/ibc-apps/security/advisories/GHSA-w6rp-vxj2-fjhr",
+    "sources": [
+      "osv:GHSA",
+      "osv:GO"
+    ]
+  },
+  {
+    "id": "CWA-2023-003",
+    "aliases": [],
+    "project": "wasmd",
+    "title": "CWA-2023-003: Inefficient ListChannels query implementation",
+    "summary": "The original implementation of IbcQuery::ListChannels in wasmd looped over all channels of the chain and filtered out the relevant ones. This can be an expensive operation if there are a lot of channels on a chain. Since store access is gas metered, this eventually leads to an out of gas which causes the transaction to fail.",
+    "published": "2023-10-23",
+    "severity": "MODERATE",
+    "cvss": null,
+    "affected": "wasmd < 0.42.0",
+    "component": "x/wasm",
+    "impact": "other",
+    "url": "https://github.com/CosmWasm/advisories/blob/main/CWAs/CWA-2023-003.md",
+    "sources": [
+      "cwa"
+    ]
+  },
+  {
+    "id": "GHSA-hq58-p9mv-338c",
+    "aliases": [
+      "ASA-2023-002"
+    ],
+    "project": "cometbft",
+    "title": "ASA-2023-002: CometBFT's default for `BlockParams.MaxBytes` consensus parameter may increase block times and affect consensus participation",
+    "summary": "Amulet Security Advisory for CometBFT: ASA-2023-002 Summary A default configuration in CometBFT has been found to be large for common use cases, and may affect block times and consensus participation when fully utilized by chain participants. It is advised that chains consider their specific needs for their use case when setting the BlockParams.MaxBytes consensus parameter. Chains are encouraged to evaluate the impact of having proposed blocks with the maximum allowed block size, especially on bandwidth usage and block latency. Additionally, the timeout propose parameter should be computed us…",
+    "published": "2023-09-29",
+    "severity": "LOW",
+    "cvss": null,
+    "affected": "cometbft/cometbft: >=0.38.0 <0.38.6; cometbft/cometbft: >=0.37.0 <0.37.5; cometbft/cometbft: <0.34.32",
+    "component": "consensus",
+    "impact": "fund-loss",
+    "url": "https://github.com/cometbft/cometbft/security/advisories/GHSA-hq58-p9mv-338c",
+    "sources": [
+      "asa-list",
+      "osv:GHSA"
+    ]
+  },
+  {
+    "id": "GHSA-23px-mw2p-46qm",
+    "aliases": [
+      "ASA-2023-001"
+    ],
+    "project": "cosmos-sdk",
+    "title": "ASA-2023-001: Cosmos-SDK Cosmovisor component may be vulnerable to denial of service",
+    "summary": "Impact : DOS, potential RCE on node depending on configuration An issue has been identified on unsupported versions of Cosmovisor which may result in a Denial of Service or Remote Code Execution path depending on configuration for a node or validator using the vulnerable version to manage their node. If a validator is utilizing an affected version of Cosmovisor with DAEMON ALLOW DOWNLOAD BINARIES set to true, a non-default configuration, it may be possible for an attacker to trigger a Remote Code Execution path as well on the host. In this configuration it is recommended to immediately stop u…",
+    "published": "2023-09-06",
+    "severity": "MODERATE",
+    "cvss": null,
+    "affected": "cosmos/cosmos-sdk: <0.46",
+    "component": "cosmovisor",
+    "impact": "dos",
+    "url": "https://github.com/cosmos/cosmos-sdk/security/advisories/GHSA-23px-mw2p-46qm",
+    "sources": [
+      "asa-list",
+      "osv:GHSA"
+    ]
+  },
+  {
+    "id": "GHSA-j2cr-jc39-wpx5",
+    "aliases": [
+      "GHSA-w44m-8mv2-v78h",
+      "GO-2023-1861"
+    ],
+    "project": "cosmos-sdk",
+    "title": "Barberry Security Advisory - regarding x/auth periodic vesting accounts",
+    "summary": "Impact In PeriodicVestingAccount , defined in x/auth , an attacker can initialize a victim's account as a malicious vesting account, which allows deposits but does not allow withdrawals. When the user then deposits funds into their account, those funds are locked forever, and the user is not able to withdraw them. Patches \\ = v0.46.13 for Cosmos SDK v0.46.x \\ = v0.47.3 for Cosmos SDK v0.47.x If a network backported periodic vesting accounts to earlier versions of the SDK, those networks are affected too. Workarounds There is no workaround for this issue. Upgrade immediately. References Patche…",
+    "published": "2023-07-07",
+    "severity": "MODERATE",
+    "cvss": null,
+    "affected": "cosmos/cosmos-sdk: >=0.46.0 <0.46.13; cosmos/cosmos-sdk: >=0.47.0 <0.47.3",
+    "component": "x/vesting",
+    "impact": "other",
+    "url": "https://github.com/cosmos/cosmos-sdk/security/advisories/GHSA-j2cr-jc39-wpx5",
+    "sources": [
+      "osv:GHSA",
+      "osv:GO"
+    ]
+  },
+  {
+    "id": "GHSA-mvj3-qrqh-cjvr",
+    "aliases": [
+      "CVE-2023-34450",
+      "GO-2023-1882"
+    ],
+    "project": "cometbft",
+    "title": "CometBFT PeerState JSON serialization deadlock",
+    "summary": "Impact An internal modification to the way struct PeerState is serialized to JSON introduced a deadlock when new function MarshallJSON is called. This function can be called from two places: 1. Via logs Setting the consensus logging module to \"debug\" level (should not happen in production), and Setting the log output format to JSON 2. Via RPC dump consensus state Case 1 above, which should not be hit in production, will eventually hit the deadlock in most goroutines, effectively halting the node. In case 2, only the data structures related to the first peer will be deadlocked, together with t…",
+    "published": "2023-07-05",
+    "severity": "MODERATE",
+    "cvss": 5.3,
+    "affected": "cometbft/cometbft: >=0.34.28 <0.34.29; cometbft/cometbft: >=0.37.1 <0.37.2",
+    "component": "p2p",
+    "impact": "chain-halt",
+    "url": "https://github.com/cometbft/cometbft/security/advisories/GHSA-mvj3-qrqh-cjvr",
+    "sources": [
+      "osv:GHSA",
+      "osv:GO"
+    ]
+  },
+  {
+    "id": "GHSA-w24w-wp77-qffm",
+    "aliases": [
+      "CVE-2023-34451",
+      "GO-2023-1883"
+    ],
+    "project": "cometbft",
+    "title": "CometBFT may duplicate transactions in the mempool's data structures",
+    "summary": "Impact The mempool maintains two data structures to keep track of outstanding transactions: a list and a map. These two data structures are supposed to be in sync all the time in the sense that the map tracks the index (if any) of the transaction in the list. Unfortunately, it is possible to have them out of sync. When this happens, the list may contain several copies of the same transaction. Because the map tracks a single index, it is then no longer possible to remove all the copies of the transaction from the list. This happens even if the duplicated transaction is later committed in a blo…",
+    "published": "2023-07-05",
+    "severity": "HIGH",
+    "cvss": 8.2,
+    "affected": "cometbft/cometbft: <0.34.29; cometbft/cometbft: >=0.37.0 <0.37.2",
+    "component": "mempool",
+    "impact": "dos",
+    "url": "https://github.com/cometbft/cometbft/security/advisories/GHSA-w24w-wp77-qffm",
+    "sources": [
+      "osv:GHSA",
+      "osv:GO"
+    ]
+  },
+  {
+    "id": "GHSA-w5w5-2882-47pc",
+    "aliases": [
+      "GO-2023-1881"
+    ],
+    "project": "cosmos-sdk",
+    "title": "github.com/cosmos/cosmos-sdk's x/crisis does not charge ConstantFee",
+    "summary": "x/crisis does not charge ConstantFee Impact If a transaction is sent to the x/crisis module to check an invariant, the ConstantFee parameter of the chain is NOT charged. All versions of the x/crisis module are affected on all versions of the Cosmos SDK. Details The x/crisis module is supposed to allow anyone to halt a chain in the event of a violated invariant by sending a MsgVerifyInvariant with the name of the invariant. Processing this message takes extra processing power hence a ConstantFee was introduced on the chain that is charged as extra from the reporter for the extra computational…",
+    "published": "2023-06-30",
+    "severity": "LOW",
+    "cvss": null,
+    "affected": "cosmos/cosmos-sdk: <=0.50.0-alpha.1",
+    "component": "other",
+    "impact": "chain-halt",
+    "url": "https://github.com/cosmos/cosmos-sdk/security/advisories/GHSA-w5w5-2882-47pc",
+    "sources": [
+      "osv:GHSA",
+      "osv:GO"
+    ]
+  },
+  {
+    "id": "GO-2023-1860",
+    "aliases": [],
+    "project": "ibc-go",
+    "title": "IBC protocol \"Huckleberry\" vulnerability in github.com/cosmos/ibc-go",
+    "summary": "The ibc-go module is affected by the Inter-Blockchain Communication (IBC) protocol \"Huckleberry\" vulnerability.",
+    "published": "2023-06-15",
+    "severity": null,
+    "cvss": null,
+    "affected": "cosmos/ibc-go/v7: <7.0.1; cosmos/ibc-go/v6: <6.1.1; cosmos/ibc-go/v5: <5.2.1, >=5.3.0 <5.3.1; cosmos/ibc-go/v4: <4.1.3, >=4.2.0 <4.2.2, >=4.3.0 <4.3.1, >=4.4.0 <4.4.1",
+    "component": "other",
+    "impact": "other",
+    "url": "https://osv.dev/vulnerability/GO-2023-1860",
+    "sources": [
+      "osv:GO"
+    ]
+  },
+  {
+    "id": "GHSA-qfc5-6r3j-jj22",
+    "aliases": [
+      "GO-2023-1821"
+    ],
+    "project": "cosmos-sdk",
+    "title": "Go package github.com/cosmos/cosmos-sdk module x/crisis does NOT cause chain halt",
+    "summary": "x/crisis does NOT cause chain halt Impact If an invariant check fails on a Cosmos SDK network and a transaction is sent to the x/crisis module to halt the chain, the chain does not halt. All versions of the x/crisis module is affected on all versions of the Cosmos SDK. Details The x/crisis module is supposed to allow anyone to halt a chain in the event of a violated invariant by sending a MsgVerifyInvariant with the name of the invariant. Processing this message is supposed to cause the nodes to panic. However, because the panic is within a transaction, it is caught by the SDK’s built-in pani…",
+    "published": "2023-06-02",
+    "severity": "LOW",
+    "cvss": null,
+    "affected": "cosmos/cosmos-sdk: <=0.47.2",
+    "component": "other",
+    "impact": "chain-halt",
+    "url": "https://github.com/cosmos/cosmos-sdk/security/advisories/GHSA-qfc5-6r3j-jj22",
+    "sources": [
+      "osv:GHSA",
+      "osv:GO"
+    ]
+  },
+  {
+    "id": "CWA-2023-002",
+    "aliases": [],
+    "project": "wasmvm",
+    "title": "CWA-2023-002: Stack overflow crash (Codename Cherry)",
+    "summary": "The bug allows a recursive loop between guest and host using Wasm imports and exports, leading to a stack overflow crash of the VM. A malicious contract can implement exports such as extern \"C\" fn allocate(size: usize) - u32 differently than the standard library does. By calling a Wasm import such as addr validate in the allocate implementation, the loop looks like - contracts calls import addr validate - host calls export allocate - contracts calls import addr validate - host calls export allocate - contracts calls import addr validate - ... After approximately 140 recursions, the process cr…",
+    "published": "2023-04-17",
+    "severity": null,
+    "cvss": null,
+    "affected": "cosmwasm-vm < 1.0.1, < 1.1.10, < 1.2.4; wasmvm < 1.0.1, < 1.1.2, < 1.2.3",
+    "component": "wasm-vm",
+    "impact": "dos",
+    "url": "https://github.com/CosmWasm/advisories/blob/main/CWAs/CWA-2023-002.md",
+    "sources": [
+      "cwa"
+    ]
+  },
+  {
+    "id": "CWA-2023-001",
+    "aliases": [],
+    "project": "wasmvm",
+    "title": "CWA-2023-001: Potential overflow in cache statistics",
+    "summary": "By using unchecked increments in cache statistics it is possible to trigger an overflow after ~4 billion calls. Since cosmwasm-vm is compiled with overflow-checks = true in wasmvm, exceeding the uint32 range will lead to panics. For nodes that are accessible by clients, this can happen in case of excessive external calls. For nodes that only have cache hits as part of block production, it is unclear if the required numbers of calls can be reached. It might be possible for pinned contracts which have 0 instantiation cost by default.",
+    "published": "2023-04-12",
+    "severity": null,
+    "cvss": null,
+    "affected": "",
+    "component": "wasm-vm",
+    "impact": "dos",
+    "url": "https://github.com/CosmWasm/advisories/blob/main/CWAs/CWA-2023-001.md",
+    "sources": [
+      "cwa"
+    ]
+  },
+  {
+    "id": "CWA-2022-005",
+    "aliases": [],
+    "project": "wasmd",
+    "title": "CWA-2022-005: Denial of service through predictable contract addresses",
+    "summary": "Before wasmd 0.29.0, the contract instantiation errored if an account already existed at the contract address. Since contract addresses are predictable, this can be abused by attackers who create such accounts. Doing so makes the instantiation impossible. The attacker does not need to be the owner of the account they create. A BaseAccount can be created e.g. by sending tokens to an address via MsgSend. A ContinuousVestingAccount or DelayedVestingAccount can be created by sending a MsgCreateVestingAccount. Original report The original report [^1] was provided by Jorge and Shane from the Starga…",
+    "published": "2023-03-30",
+    "severity": null,
+    "cvss": null,
+    "affected": "",
+    "component": "x/vesting",
+    "impact": "dos",
+    "url": "https://github.com/CosmWasm/advisories/blob/main/CWAs/CWA-2022-005.md",
+    "sources": [
+      "cwa"
+    ]
+  },
+  {
+    "id": "GHSA-3fm3-m23v-5r46",
+    "aliases": [
+      "CVE-2019-25072",
+      "GO-2020-0037"
+    ],
+    "project": "cometbft",
+    "title": "Tendermint Client package vulnerable to Uncontrolled Resource Consumption",
+    "summary": "Due to support of Gzip compression in request bodies, as well as a lack of limiting response body sizes, a malicious server can cause a client to consume a significant amount of system resources, which may be used as a denial of service vector.",
+    "published": "2022-12-28",
+    "severity": "HIGH",
+    "cvss": 7.5,
+    "affected": "tendermint/tendermint: <0.31.1",
+    "component": "other",
+    "impact": "dos",
+    "url": "https://github.com/advisories/GHSA-3fm3-m23v-5r46",
+    "sources": [
+      "osv:GHSA",
+      "osv:GO"
+    ]
+  },
+  {
+    "id": "GHSA-p658-8693-mhvg",
+    "aliases": [
+      "CVE-2021-21271",
+      "GO-2022-1052"
+    ],
+    "project": "cometbft",
+    "title": "Tendermint Core vulnerable to Uncontrolled Resource Consumption",
+    "summary": "Description Tendermint Core v0.34.0 introduced a new way of handling evidence of misbehavior. As part of this, we added a new Timestamp field to Evidence structs. This timestamp would be calculated using the same algorithm that is used when a block is created and proposed. (This algorithm relies on the timestamp of the last commit from this specific block.) In Tendermint Core v0.34.0-v0.34.2, the consensus reactor is responsible for forming DuplicateVoteEvidence whenever double signs are observed. However, the current block is still “in flight” when it is being formed by the consensus reactor…",
+    "published": "2022-10-07",
+    "severity": "MODERATE",
+    "cvss": 6.5,
+    "affected": "tendermint/tendermint: >=0.34.0 <0.34.3",
+    "component": "ibc-core-client",
+    "impact": "dos",
+    "url": "https://github.com/tendermint/tendermint/security/advisories/GHSA-p658-8693-mhvg",
+    "sources": [
+      "osv:GHSA",
+      "osv:GO"
+    ]
+  },
+  {
+    "id": "GHSA-f92v-grc2-w2fg",
+    "aliases": [
+      "CVE-2022-35936",
+      "GO-2022-0760"
+    ],
+    "project": "evmos",
+    "title": "Ethermint vulnerable to DoS through unintended Contract Selfdestruct",
+    "summary": "Vulnerability Report Impact Smart contract applications that make use of the selfdestruct functionality and their end-users. Classification The vulnerability has been classified as high with a CVSS score of 8.2 . It has the potential to create a denial-of-service to all contracts that can invoke the selfdestruct function to destroy a smart contract. Users Impacted Due to the successfully coordinated security vulnerability disclosure, no smart contracts were impacted through the use of this vulnerability. Smart contract states and storage values are not affected by this vulnerability. User fun…",
+    "published": "2022-08-18",
+    "severity": "HIGH",
+    "cvss": 8.2,
+    "affected": "evmos/ethermint: <0.18.0; evmos/evmos: <7.0.0; crypto-org-chain/cronos: <0.7.1-rc2; Kava-Labs/kava: <0.18.0",
+    "component": "x/vm",
+    "impact": "dos",
+    "url": "https://github.com/evmos/ethermint/security/advisories/GHSA-f92v-grc2-w2fg",
+    "sources": [
+      "osv:GHSA",
+      "osv:GO"
+    ]
+  },
+  {
+    "id": "CWA-2022-004",
+    "aliases": [],
+    "project": "wasmd",
+    "title": "CWA-2022-004: Unlimited query stack",
+    "summary": "Patch expected: 2022-05-19 11:00 Berlin time<br Patched versions: wasmd 0.27.0 Patch announcement A issue in the CosmWasm stack has been discovered. This issue can potentially halt the chain . The patch is consensus breaking . The release is scheduled for Thursday, May 19th 2022 at 11am Berlin time. An update is recommended for all chains using CosmWasm. Patch https://github.com/CosmWasm/wasmd/pull/867 History - 2022-05-17: Patch release announced - 2022-05-19 10:58h Berlin time: wasmd 0.07.0 released",
+    "published": "2022-05-17",
+    "severity": null,
+    "cvss": null,
+    "affected": "",
+    "component": "consensus",
+    "impact": "chain-halt",
+    "url": "https://github.com/CosmWasm/advisories/blob/main/CWAs/CWA-2022-004.md",
+    "sources": [
+      "cwa"
+    ]
+  },
+  {
+    "id": "CWA-2022-003",
+    "aliases": [],
+    "project": "wasmd",
+    "title": "CWA-2022-003: Nondeterministic Stargate queries",
+    "summary": "Patch expected: 2022-04-21 11:00 Berlin time<br Patched versions: wasmd 0.26.0 Patch announcement A issue in the CosmWasm stack has been discovered. This issue can potentially halt the chain . The patch is potentially consensus breaking . The release is scheduled for Thursday, April 21st 2022 at 11am Berlin time. An update is recommended for all chains using CosmWasm. Patch https://github.com/CosmWasm/wasmd/pull/812 The patch is potentially consensus breaking and can be installed as a soft-fork. History - 2022-04-19: Patch release announced - 2022-04-21 11:10h Berlin time: wasmd 0.26.0 releas…",
+    "published": "2022-04-19",
+    "severity": null,
+    "cvss": null,
+    "affected": "",
+    "component": "consensus",
+    "impact": "consensus-failure",
+    "url": "https://github.com/CosmWasm/advisories/blob/main/CWAs/CWA-2022-003.md",
+    "sources": [
+      "cwa"
+    ]
+  },
+  {
+    "id": "CWA-2021-002",
+    "aliases": [],
+    "project": "cosmwasm",
+    "title": "CWA-2021-002",
+    "summary": "",
+    "published": "2022-04-04",
+    "severity": null,
+    "cvss": null,
+    "affected": "",
+    "component": "wasm-contract-api",
+    "impact": "other",
+    "url": "https://github.com/CosmWasm/advisories/blob/main/CWAs/CWA-2021-002.md",
+    "sources": [
+      "cwa"
+    ]
+  },
+  {
+    "id": "CWA-2022-001",
+    "aliases": [],
+    "project": "wasmd",
+    "title": "CWA-2022-001: Non-deterministic queries",
+    "summary": "CosmWasm allows contract developers to perform arbitrary queries to the node. Most of those queries access state. However, there are queries that access other node specific information such as node infos or the memory pool. Performing such queries leads to non-deterministic results and as a consequence can lead to consensus failures.",
+    "published": "2022-04-04",
+    "severity": null,
+    "cvss": null,
+    "affected": "",
+    "component": "consensus",
+    "impact": "consensus-failure",
+    "url": "https://github.com/CosmWasm/advisories/blob/main/CWAs/CWA-2022-001.md",
+    "sources": [
+      "cwa"
+    ]
+  },
+  {
+    "id": "CWA-2022-002",
+    "aliases": [],
+    "project": "wasmvm",
+    "title": "CWA-2022-002: Non-normalized bech32 casing in Addr type",
+    "summary": "Patch expected: 2022-04-06 11:00 Berlin time<br Patched versions: wasmvm 0.16.7 and 1.0.0-beta10 (cosmwasm-vm 0.16.7 and 1.0.0-beta8) Patch announcement A bug in the CosmWasm stack has been discovered. This bug can potentially lock funds and can potentially be used to bypass checks . Both 0.16 and 1.0 are equally affected. Both versions will receive a patch. Some older versions are probably affected as well but will not receive an update. The patch is consensus breaking . The release is scheduled for Wednesday, April 6th 2022 at 11am Berlin time. An update is recommended for all chains using…",
+    "published": "2022-04-04",
+    "severity": null,
+    "cvss": null,
+    "affected": "",
+    "component": "wasm-vm",
+    "impact": "privilege-escalation",
+    "url": "https://github.com/CosmWasm/advisories/blob/main/CWAs/CWA-2022-002.md",
+    "sources": [
+      "cwa"
+    ]
+  },
+  {
+    "id": "CWA-2021-001",
+    "aliases": [],
+    "project": "wasmvm",
+    "title": "CWA-2021-001: Logic error in none handling in copyAndDestroyUnmanagedVector",
+    "summary": "The C FFI type UnmanagedVector contains the fields is none , ptr (pointer) len (length) and cap (capacity). The type is intended to send binary data between Rust and Go. On the Go side, binary data is a byte slice []byte which is always nullable. I.e. the type can differentiate nil from an empty list of bytes. In order to preserve this nullability, the corresponding Rust type is Option<Vec<u8 . Now the UnmanagedVector type was created to translate between the two. Since we were not aware that a Rust vector's ptr is guaranteed to be non-null or this guarantee did not exists at the time, a bool…",
+    "published": "2022-02-10",
+    "severity": null,
+    "cvss": null,
+    "affected": "",
+    "component": "wasm-vm",
+    "impact": "dos",
+    "url": "https://github.com/CosmWasm/advisories/blob/main/CWAs/CWA-2021-001.md",
+    "sources": [
+      "cwa"
+    ]
+  },
+  {
+    "id": "CWA-2021-003",
+    "aliases": [],
+    "project": "wasmvm",
+    "title": "CWA-2021-003: Nondeterministic stacktrace in VmError",
+    "summary": "The bug is a non-determinism bug which can potential cause chain halts.",
+    "published": "2021-12-21",
+    "severity": null,
+    "cvss": null,
+    "affected": "",
+    "component": "wasm-vm",
+    "impact": "consensus-failure",
+    "url": "https://github.com/CosmWasm/advisories/blob/main/CWAs/CWA-2021-003.md",
+    "sources": [
+      "cwa"
+    ]
+  },
+  {
+    "id": "GHSA-6jqj-f58p-mrw3",
+    "aliases": [
+      "CVE-2020-15091",
+      "GO-2021-0090"
+    ],
+    "project": "cometbft",
+    "title": "Denial of Service in TenderMint",
+    "summary": "Description Denial of Service Tendermint 0.33.0 and above allow block proposers to include signatures for the wrong block. This may happen naturally if you start a network, have it run for some time and restart it without changing the chainID. (It is a misconfiguration to reuse chainIDs.) Correct block proposers will accidentally include signatures for the wrong block if they see these signatures, and then commits won't validate, making all proposed blocks invalid. A malicious validator (even with a minimal amount of stake) can use this vulnerability to completely halt the network. Tendermint…",
+    "published": "2021-12-20",
+    "severity": "MODERATE",
+    "cvss": 6.5,
+    "affected": "tendermint/tendermint: <0.33.6",
+    "component": "consensus",
+    "impact": "dos",
+    "url": "https://github.com/tendermint/tendermint/security/advisories/GHSA-6jqj-f58p-mrw3",
+    "sources": [
+      "osv:GHSA",
+      "osv:GO"
+    ]
+  },
+  {
+    "id": "GHSA-f3w5-v9xx-rp8p",
+    "aliases": [],
+    "project": "cometbft",
+    "title": "Signature verification failure in Tendermint",
+    "summary": "The root cause of this security vulnerability is in the Tendermint specification, and this advisory is a duplicate of https://github.com/tendermint/spec/security/advisories/GHSA-jqfc-687g-59pw. Impact Tendermint light clients running versions 0.34.0 to 0.34.8 are unable to detect and punish a new kind of attack. We’re calling this a “forward lunatic attack,” or FLA. The severity of this vulnerability is moderate . Note that an FLA cannot be successfully executed unless there are already ⅓+ Byzantine validators, and therefore outside of Tendermint’s security model; however, it is important to…",
+    "published": "2021-12-20",
+    "severity": "MODERATE",
+    "cvss": null,
+    "affected": "tendermint/tendermint: >=0.34.0 <0.34.9",
+    "component": "ante",
+    "impact": "fund-loss",
+    "url": "https://github.com/tendermint/tendermint/security/advisories/GHSA-f3w5-v9xx-rp8p",
+    "sources": [
+      "osv:GHSA"
+    ]
+  },
+  {
+    "id": "GHSA-2p6r-37p9-89p2",
+    "aliases": [
+      "CVE-2021-41135"
+    ],
+    "project": "cosmos-sdk",
+    "title": "Authz Module Non-Determinism",
+    "summary": "Impact Consensus failure for 0.43.x and 0.44.{0,1} users. Funds and balances are safe. Patches 0.44.2 Workarounds Manually patch the code. --- Full details posted in https://forum.cosmos.network/t/cosmos-sdk-vulnerability-retrospective-security-advisory-jackfruit-october-12-2021/5349.",
+    "published": "2021-10-21",
+    "severity": "MODERATE",
+    "cvss": 6.5,
+    "affected": "cosmos/cosmos-sdk: >=0.43.0 <0.44.2",
+    "component": "x/authz",
+    "impact": "consensus-failure",
+    "url": "https://github.com/cosmos/cosmos-sdk/security/advisories/GHSA-2p6r-37p9-89p2",
+    "sources": [
+      "osv:GHSA"
+    ]
+  },
+  {
+    "id": "GHSA-v24h-pjjv-mcp6",
+    "aliases": [
+      "CVE-2020-5303"
+    ],
+    "project": "cometbft",
+    "title": "Denial of service in Tendermint",
+    "summary": "Description Denial of Service 1 Tendermint 0.33.2 and earlier does not limit the number of P2P connection requests. For each p2p connection, Tendermint allocates XXX bytes. Even though this memory is garbage collected once the connection is terminated (due to duplicate IP or reaching a maximum number of inbound peers), temporary memory spikes can lead to OOM (Out-Of-Memory) exceptions. Tendermint 0.33.3 (and 0.32.10) limits the total number of P2P incoming connection requests to to p2p.max num inbound peers + len(p2p.unconditional peer ids) . Notes: - Tendermint does not rate limit P2P connec…",
+    "published": "2021-05-27",
+    "severity": "LOW",
+    "cvss": 3.1,
+    "affected": "tendermint/tendermint: >=0.33.0 <0.33.3; tendermint/tendermint: <0.31.12; tendermint/tendermint: >=0.32.0 <0.32.10",
+    "component": "p2p",
+    "impact": "dos",
+    "url": "https://github.com/tendermint/tendermint/security/advisories/GHSA-v24h-pjjv-mcp6",
+    "sources": [
+      "osv:GHSA"
+    ]
+  }
+]
